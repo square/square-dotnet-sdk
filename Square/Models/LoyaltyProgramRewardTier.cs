@@ -20,18 +20,18 @@ namespace Square.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyProgramRewardTier"/> class.
         /// </summary>
-        /// <param name="id">id.</param>
         /// <param name="points">points.</param>
+        /// <param name="id">id.</param>
         /// <param name="name">name.</param>
         /// <param name="definition">definition.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="pricingRuleReference">pricing_rule_reference.</param>
         public LoyaltyProgramRewardTier(
-            string id,
             int points,
-            string name,
-            Models.LoyaltyProgramRewardDefinition definition,
-            string createdAt,
+            string id = null,
+            string name = null,
+            Models.LoyaltyProgramRewardDefinition definition = null,
+            string createdAt = null,
             Models.CatalogObjectReference pricingRuleReference = null)
         {
             this.Id = id;
@@ -45,7 +45,7 @@ namespace Square.Models
         /// <summary>
         /// The Square-assigned ID of the reward tier.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Square.Models
         /// <summary>
         /// The name of the reward tier.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; }
 
         /// <summary>
@@ -65,13 +65,13 @@ namespace Square.Models
         /// are now defined using a catalog pricing rule and other catalog objects. For more information, see
         /// [Getting discount details for a reward tier](https://developer.squareup.com/docs/loyalty-api/loyalty-rewards#get-discount-details).
         /// </summary>
-        [JsonProperty("definition")]
+        [JsonProperty("definition", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyProgramRewardDefinition Definition { get; }
 
         /// <summary>
         /// The timestamp when the reward tier was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
@@ -144,11 +144,11 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.Id,
-                this.Points,
-                this.Name,
-                this.Definition,
-                this.CreatedAt)
+                this.Points)
+                .Id(this.Id)
+                .Name(this.Name)
+                .Definition(this.Definition)
+                .CreatedAt(this.CreatedAt)
                 .PricingRuleReference(this.PricingRuleReference);
             return builder;
         }
@@ -158,36 +158,17 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private string id;
             private int points;
+            private string id;
             private string name;
             private Models.LoyaltyProgramRewardDefinition definition;
             private string createdAt;
             private Models.CatalogObjectReference pricingRuleReference;
 
             public Builder(
-                string id,
-                int points,
-                string name,
-                Models.LoyaltyProgramRewardDefinition definition,
-                string createdAt)
+                int points)
             {
-                this.id = id;
                 this.points = points;
-                this.name = name;
-                this.definition = definition;
-                this.createdAt = createdAt;
-            }
-
-             /// <summary>
-             /// Id.
-             /// </summary>
-             /// <param name="id"> id. </param>
-             /// <returns> Builder. </returns>
-            public Builder Id(string id)
-            {
-                this.id = id;
-                return this;
             }
 
              /// <summary>
@@ -198,6 +179,17 @@ namespace Square.Models
             public Builder Points(int points)
             {
                 this.points = points;
+                return this;
+            }
+
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
+            public Builder Id(string id)
+            {
+                this.id = id;
                 return this;
             }
 
@@ -252,8 +244,8 @@ namespace Square.Models
             public LoyaltyProgramRewardTier Build()
             {
                 return new LoyaltyProgramRewardTier(
-                    this.id,
                     this.points,
+                    this.id,
                     this.name,
                     this.definition,
                     this.createdAt,

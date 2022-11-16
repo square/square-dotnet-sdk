@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Coordinates
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Coordinates"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             double? latitude = null,
             double? longitude = null)
         {
-            this.Latitude = latitude;
-            this.Longitude = longitude;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "latitude", false },
+                { "longitude", false }
+            };
+
+            if (latitude != null)
+            {
+                shouldSerialize["latitude"] = true;
+                this.Latitude = latitude;
+            }
+
+            if (longitude != null)
+            {
+                shouldSerialize["longitude"] = true;
+                this.Longitude = longitude;
+            }
+
+        }
+        internal Coordinates(Dictionary<string, bool> shouldSerialize,
+            double? latitude = null,
+            double? longitude = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Latitude = latitude;
+            Longitude = longitude;
         }
 
         /// <summary>
         /// The latitude of the coordinate expressed in degrees.
         /// </summary>
-        [JsonProperty("latitude", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("latitude")]
         public double? Latitude { get; }
 
         /// <summary>
         /// The longitude of the coordinate expressed in degrees.
         /// </summary>
-        [JsonProperty("longitude", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("longitude")]
         public double? Longitude { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Coordinates : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLatitude()
+        {
+            return this.shouldSerialize["latitude"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLongitude()
+        {
+            return this.shouldSerialize["longitude"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "latitude", false },
+                { "longitude", false },
+            };
+
             private double? latitude;
             private double? longitude;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Latitude(double? latitude)
             {
+                shouldSerialize["latitude"] = true;
                 this.latitude = latitude;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Longitude(double? longitude)
             {
+                shouldSerialize["longitude"] = true;
                 this.longitude = longitude;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLatitude()
+            {
+                this.shouldSerialize["latitude"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLongitude()
+            {
+                this.shouldSerialize["longitude"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> Coordinates. </returns>
             public Coordinates Build()
             {
-                return new Coordinates(
+                return new Coordinates(shouldSerialize,
                     this.latitude,
                     this.longitude);
             }

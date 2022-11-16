@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogIdMapping
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogIdMapping"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             string clientObjectId = null,
             string objectId = null)
         {
-            this.ClientObjectId = clientObjectId;
-            this.ObjectId = objectId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "client_object_id", false },
+                { "object_id", false }
+            };
+
+            if (clientObjectId != null)
+            {
+                shouldSerialize["client_object_id"] = true;
+                this.ClientObjectId = clientObjectId;
+            }
+
+            if (objectId != null)
+            {
+                shouldSerialize["object_id"] = true;
+                this.ObjectId = objectId;
+            }
+
+        }
+        internal CatalogIdMapping(Dictionary<string, bool> shouldSerialize,
+            string clientObjectId = null,
+            string objectId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ClientObjectId = clientObjectId;
+            ObjectId = objectId;
         }
 
         /// <summary>
         /// The client-supplied temporary `#`-prefixed ID for a new `CatalogObject`.
         /// </summary>
-        [JsonProperty("client_object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("client_object_id")]
         public string ClientObjectId { get; }
 
         /// <summary>
         /// The permanent ID for the CatalogObject created by the server.
         /// </summary>
-        [JsonProperty("object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("object_id")]
         public string ObjectId { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogIdMapping : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeClientObjectId()
+        {
+            return this.shouldSerialize["client_object_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeObjectId()
+        {
+            return this.shouldSerialize["object_id"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "client_object_id", false },
+                { "object_id", false },
+            };
+
             private string clientObjectId;
             private string objectId;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ClientObjectId(string clientObjectId)
             {
+                shouldSerialize["client_object_id"] = true;
                 this.clientObjectId = clientObjectId;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ObjectId(string objectId)
             {
+                shouldSerialize["object_id"] = true;
                 this.objectId = objectId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetClientObjectId()
+            {
+                this.shouldSerialize["client_object_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetObjectId()
+            {
+                this.shouldSerialize["object_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> CatalogIdMapping. </returns>
             public CatalogIdMapping Build()
             {
-                return new CatalogIdMapping(
+                return new CatalogIdMapping(shouldSerialize,
                     this.clientObjectId,
                     this.objectId);
             }

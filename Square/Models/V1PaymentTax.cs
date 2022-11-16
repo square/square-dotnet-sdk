@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1PaymentTax
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1PaymentTax"/> class.
         /// </summary>
@@ -34,24 +35,68 @@ namespace Square.Models
             string inclusionType = null,
             string feeId = null)
         {
-            this.Errors = errors;
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "errors", false },
+                { "name", false },
+                { "rate", false },
+                { "fee_id", false }
+            };
+
+            if (errors != null)
+            {
+                shouldSerialize["errors"] = true;
+                this.Errors = errors;
+            }
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.AppliedMoney = appliedMoney;
-            this.Rate = rate;
+            if (rate != null)
+            {
+                shouldSerialize["rate"] = true;
+                this.Rate = rate;
+            }
+
             this.InclusionType = inclusionType;
-            this.FeeId = feeId;
+            if (feeId != null)
+            {
+                shouldSerialize["fee_id"] = true;
+                this.FeeId = feeId;
+            }
+
+        }
+        internal V1PaymentTax(Dictionary<string, bool> shouldSerialize,
+            IList<Models.Error> errors = null,
+            string name = null,
+            Models.V1Money appliedMoney = null,
+            string rate = null,
+            string inclusionType = null,
+            string feeId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Errors = errors;
+            Name = name;
+            AppliedMoney = appliedMoney;
+            Rate = rate;
+            InclusionType = inclusionType;
+            FeeId = feeId;
         }
 
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("errors")]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
         /// The merchant-defined name of the tax.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -63,7 +108,7 @@ namespace Square.Models
         /// <summary>
         /// The rate of the tax, as a string representation of a decimal number. A value of 0.07 corresponds to a rate of 7%.
         /// </summary>
-        [JsonProperty("rate", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("rate")]
         public string Rate { get; }
 
         /// <summary>
@@ -75,7 +120,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the tax, if available. Taxes applied in older versions of Square Register might not have an ID.
         /// </summary>
-        [JsonProperty("fee_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fee_id")]
         public string FeeId { get; }
 
         /// <inheritdoc/>
@@ -86,6 +131,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1PaymentTax : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeErrors()
+        {
+            return this.shouldSerialize["errors"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRate()
+        {
+            return this.shouldSerialize["rate"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFeeId()
+        {
+            return this.shouldSerialize["fee_id"];
         }
 
         /// <inheritdoc/>
@@ -154,6 +235,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "errors", false },
+                { "name", false },
+                { "rate", false },
+                { "fee_id", false },
+            };
+
             private IList<Models.Error> errors;
             private string name;
             private Models.V1Money appliedMoney;
@@ -168,6 +257,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
+                shouldSerialize["errors"] = true;
                 this.errors = errors;
                 return this;
             }
@@ -179,6 +269,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -201,6 +292,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Rate(string rate)
             {
+                shouldSerialize["rate"] = true;
                 this.rate = rate;
                 return this;
             }
@@ -223,9 +315,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FeeId(string feeId)
             {
+                shouldSerialize["fee_id"] = true;
                 this.feeId = feeId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetErrors()
+            {
+                this.shouldSerialize["errors"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRate()
+            {
+                this.shouldSerialize["rate"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFeeId()
+            {
+                this.shouldSerialize["fee_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -233,7 +359,7 @@ namespace Square.Models
             /// <returns> V1PaymentTax. </returns>
             public V1PaymentTax Build()
             {
-                return new V1PaymentTax(
+                return new V1PaymentTax(shouldSerialize,
                     this.errors,
                     this.name,
                     this.appliedMoney,

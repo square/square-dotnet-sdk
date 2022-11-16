@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class QuantityRatio
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="QuantityRatio"/> class.
         /// </summary>
@@ -26,14 +27,38 @@ namespace Square.Models
             int? quantity = null,
             int? quantityDenominator = null)
         {
-            this.Quantity = quantity;
-            this.QuantityDenominator = quantityDenominator;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "quantity", false },
+                { "quantity_denominator", false }
+            };
+
+            if (quantity != null)
+            {
+                shouldSerialize["quantity"] = true;
+                this.Quantity = quantity;
+            }
+
+            if (quantityDenominator != null)
+            {
+                shouldSerialize["quantity_denominator"] = true;
+                this.QuantityDenominator = quantityDenominator;
+            }
+
+        }
+        internal QuantityRatio(Dictionary<string, bool> shouldSerialize,
+            int? quantity = null,
+            int? quantityDenominator = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Quantity = quantity;
+            QuantityDenominator = quantityDenominator;
         }
 
         /// <summary>
         /// The whole or fractional quantity as the numerator.
         /// </summary>
-        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("quantity")]
         public int? Quantity { get; }
 
         /// <summary>
@@ -42,7 +67,7 @@ namespace Square.Models
         /// When unspecified, the value is `1`. For example, when `quantity=3` and `quantity_donominator` is unspecified,
         /// the quantity ratio is `3` or `3/1`.
         /// </summary>
-        [JsonProperty("quantity_denominator", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("quantity_denominator")]
         public int? QuantityDenominator { get; }
 
         /// <inheritdoc/>
@@ -53,6 +78,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"QuantityRatio : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQuantity()
+        {
+            return this.shouldSerialize["quantity"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQuantityDenominator()
+        {
+            return this.shouldSerialize["quantity_denominator"];
         }
 
         /// <inheritdoc/>
@@ -109,6 +152,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "quantity", false },
+                { "quantity_denominator", false },
+            };
+
             private int? quantity;
             private int? quantityDenominator;
 
@@ -119,6 +168,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Quantity(int? quantity)
             {
+                shouldSerialize["quantity"] = true;
                 this.quantity = quantity;
                 return this;
             }
@@ -130,9 +180,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder QuantityDenominator(int? quantityDenominator)
             {
+                shouldSerialize["quantity_denominator"] = true;
                 this.quantityDenominator = quantityDenominator;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQuantity()
+            {
+                this.shouldSerialize["quantity"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQuantityDenominator()
+            {
+                this.shouldSerialize["quantity_denominator"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -140,7 +208,7 @@ namespace Square.Models
             /// <returns> QuantityRatio. </returns>
             public QuantityRatio Build()
             {
-                return new QuantityRatio(
+                return new QuantityRatio(shouldSerialize,
                     this.quantity,
                     this.quantityDenominator);
             }

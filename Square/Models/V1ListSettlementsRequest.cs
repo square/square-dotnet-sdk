@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1ListSettlementsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1ListSettlementsRequest"/> class.
         /// </summary>
@@ -34,12 +35,56 @@ namespace Square.Models
             string status = null,
             string batchToken = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "begin_time", false },
+                { "end_time", false },
+                { "limit", false },
+                { "batch_token", false }
+            };
+
             this.Order = order;
-            this.BeginTime = beginTime;
-            this.EndTime = endTime;
-            this.Limit = limit;
+            if (beginTime != null)
+            {
+                shouldSerialize["begin_time"] = true;
+                this.BeginTime = beginTime;
+            }
+
+            if (endTime != null)
+            {
+                shouldSerialize["end_time"] = true;
+                this.EndTime = endTime;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
             this.Status = status;
-            this.BatchToken = batchToken;
+            if (batchToken != null)
+            {
+                shouldSerialize["batch_token"] = true;
+                this.BatchToken = batchToken;
+            }
+
+        }
+        internal V1ListSettlementsRequest(Dictionary<string, bool> shouldSerialize,
+            string order = null,
+            string beginTime = null,
+            string endTime = null,
+            int? limit = null,
+            string status = null,
+            string batchToken = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Order = order;
+            BeginTime = beginTime;
+            EndTime = endTime;
+            Limit = limit;
+            Status = status;
+            BatchToken = batchToken;
         }
 
         /// <summary>
@@ -51,19 +96,19 @@ namespace Square.Models
         /// <summary>
         /// The beginning of the requested reporting period, in ISO 8601 format. If this value is before January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error. Default value: The current time minus one year.
         /// </summary>
-        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("begin_time")]
         public string BeginTime { get; }
 
         /// <summary>
         /// The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time.
         /// </summary>
-        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_time")]
         public string EndTime { get; }
 
         /// <summary>
         /// The maximum number of settlements to return in a single response. This value cannot exceed 200.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
@@ -76,7 +121,7 @@ namespace Square.Models
         /// A pagination cursor to retrieve the next set of results for your
         /// original query to the endpoint.
         /// </summary>
-        [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("batch_token")]
         public string BatchToken { get; }
 
         /// <inheritdoc/>
@@ -87,6 +132,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1ListSettlementsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBeginTime()
+        {
+            return this.shouldSerialize["begin_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndTime()
+        {
+            return this.shouldSerialize["end_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBatchToken()
+        {
+            return this.shouldSerialize["batch_token"];
         }
 
         /// <inheritdoc/>
@@ -155,6 +236,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "begin_time", false },
+                { "end_time", false },
+                { "limit", false },
+                { "batch_token", false },
+            };
+
             private string order;
             private string beginTime;
             private string endTime;
@@ -180,6 +269,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
+                shouldSerialize["begin_time"] = true;
                 this.beginTime = beginTime;
                 return this;
             }
@@ -191,6 +281,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndTime(string endTime)
             {
+                shouldSerialize["end_time"] = true;
                 this.endTime = endTime;
                 return this;
             }
@@ -202,6 +293,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -224,9 +316,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BatchToken(string batchToken)
             {
+                shouldSerialize["batch_token"] = true;
                 this.batchToken = batchToken;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBeginTime()
+            {
+                this.shouldSerialize["begin_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndTime()
+            {
+                this.shouldSerialize["end_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBatchToken()
+            {
+                this.shouldSerialize["batch_token"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -234,7 +360,7 @@ namespace Square.Models
             /// <returns> V1ListSettlementsRequest. </returns>
             public V1ListSettlementsRequest Build()
             {
-                return new V1ListSettlementsRequest(
+                return new V1ListSettlementsRequest(shouldSerialize,
                     this.order,
                     this.beginTime,
                     this.endTime,

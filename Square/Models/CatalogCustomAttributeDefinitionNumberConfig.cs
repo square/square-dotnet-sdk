@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogCustomAttributeDefinitionNumberConfig
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinitionNumberConfig"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public CatalogCustomAttributeDefinitionNumberConfig(
             int? precision = null)
         {
-            this.Precision = precision;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "precision", false }
+            };
+
+            if (precision != null)
+            {
+                shouldSerialize["precision"] = true;
+                this.Precision = precision;
+            }
+
+        }
+        internal CatalogCustomAttributeDefinitionNumberConfig(Dictionary<string, bool> shouldSerialize,
+            int? precision = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Precision = precision;
         }
 
         /// <summary>
@@ -36,7 +53,7 @@ namespace Square.Models
         /// - if the precision is 2, the quantity can be 0.01, 0.12, etc.
         /// Default: 5
         /// </summary>
-        [JsonProperty("precision", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("precision")]
         public int? Precision { get; }
 
         /// <inheritdoc/>
@@ -47,6 +64,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogCustomAttributeDefinitionNumberConfig : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePrecision()
+        {
+            return this.shouldSerialize["precision"];
         }
 
         /// <inheritdoc/>
@@ -100,6 +126,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "precision", false },
+            };
+
             private int? precision;
 
              /// <summary>
@@ -109,9 +140,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Precision(int? precision)
             {
+                shouldSerialize["precision"] = true;
                 this.precision = precision;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPrecision()
+            {
+                this.shouldSerialize["precision"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -119,7 +160,7 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeDefinitionNumberConfig. </returns>
             public CatalogCustomAttributeDefinitionNumberConfig Build()
             {
-                return new CatalogCustomAttributeDefinitionNumberConfig(
+                return new CatalogCustomAttributeDefinitionNumberConfig(shouldSerialize,
                     this.precision);
             }
         }

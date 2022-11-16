@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PaymentBalanceActivityTaxOnFeeDetail
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentBalanceActivityTaxOnFeeDetail"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             string paymentId = null,
             string taxRateDescription = null)
         {
-            this.PaymentId = paymentId;
-            this.TaxRateDescription = taxRateDescription;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payment_id", false },
+                { "tax_rate_description", false }
+            };
+
+            if (paymentId != null)
+            {
+                shouldSerialize["payment_id"] = true;
+                this.PaymentId = paymentId;
+            }
+
+            if (taxRateDescription != null)
+            {
+                shouldSerialize["tax_rate_description"] = true;
+                this.TaxRateDescription = taxRateDescription;
+            }
+
+        }
+        internal PaymentBalanceActivityTaxOnFeeDetail(Dictionary<string, bool> shouldSerialize,
+            string paymentId = null,
+            string taxRateDescription = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            PaymentId = paymentId;
+            TaxRateDescription = taxRateDescription;
         }
 
         /// <summary>
         /// The ID of the payment associated with this activity.
         /// </summary>
-        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_id")]
         public string PaymentId { get; }
 
         /// <summary>
         /// The description of the tax rate being applied. For example: "GST", "HST".
         /// </summary>
-        [JsonProperty("tax_rate_description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tax_rate_description")]
         public string TaxRateDescription { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PaymentBalanceActivityTaxOnFeeDetail : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentId()
+        {
+            return this.shouldSerialize["payment_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTaxRateDescription()
+        {
+            return this.shouldSerialize["tax_rate_description"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payment_id", false },
+                { "tax_rate_description", false },
+            };
+
             private string paymentId;
             private string taxRateDescription;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
+                shouldSerialize["payment_id"] = true;
                 this.paymentId = paymentId;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TaxRateDescription(string taxRateDescription)
             {
+                shouldSerialize["tax_rate_description"] = true;
                 this.taxRateDescription = taxRateDescription;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentId()
+            {
+                this.shouldSerialize["payment_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTaxRateDescription()
+            {
+                this.shouldSerialize["tax_rate_description"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> PaymentBalanceActivityTaxOnFeeDetail. </returns>
             public PaymentBalanceActivityTaxOnFeeDetail Build()
             {
-                return new PaymentBalanceActivityTaxOnFeeDetail(
+                return new PaymentBalanceActivityTaxOnFeeDetail(shouldSerialize,
                     this.paymentId,
                     this.taxRateDescription);
             }

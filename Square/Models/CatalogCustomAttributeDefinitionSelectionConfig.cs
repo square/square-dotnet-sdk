@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogCustomAttributeDefinitionSelectionConfig
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinitionSelectionConfig"/> class.
         /// </summary>
@@ -26,8 +27,32 @@ namespace Square.Models
             int? maxAllowedSelections = null,
             IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections = null)
         {
-            this.MaxAllowedSelections = maxAllowedSelections;
-            this.AllowedSelections = allowedSelections;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "max_allowed_selections", false },
+                { "allowed_selections", false }
+            };
+
+            if (maxAllowedSelections != null)
+            {
+                shouldSerialize["max_allowed_selections"] = true;
+                this.MaxAllowedSelections = maxAllowedSelections;
+            }
+
+            if (allowedSelections != null)
+            {
+                shouldSerialize["allowed_selections"] = true;
+                this.AllowedSelections = allowedSelections;
+            }
+
+        }
+        internal CatalogCustomAttributeDefinitionSelectionConfig(Dictionary<string, bool> shouldSerialize,
+            int? maxAllowedSelections = null,
+            IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            MaxAllowedSelections = maxAllowedSelections;
+            AllowedSelections = allowedSelections;
         }
 
         /// <summary>
@@ -36,14 +61,14 @@ namespace Square.Models
         /// affect existing custom attribute values on objects. Clients need to
         /// handle custom attributes with more selected values than allowed by this limit.
         /// </summary>
-        [JsonProperty("max_allowed_selections", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("max_allowed_selections")]
         public int? MaxAllowedSelections { get; }
 
         /// <summary>
         /// The set of valid `CatalogCustomAttributeSelections`. Up to a maximum of 100
         /// selections can be defined. Can be modified.
         /// </summary>
-        [JsonProperty("allowed_selections", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("allowed_selections")]
         public IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> AllowedSelections { get; }
 
         /// <inheritdoc/>
@@ -54,6 +79,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogCustomAttributeDefinitionSelectionConfig : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMaxAllowedSelections()
+        {
+            return this.shouldSerialize["max_allowed_selections"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAllowedSelections()
+        {
+            return this.shouldSerialize["allowed_selections"];
         }
 
         /// <inheritdoc/>
@@ -110,6 +153,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "max_allowed_selections", false },
+                { "allowed_selections", false },
+            };
+
             private int? maxAllowedSelections;
             private IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections;
 
@@ -120,6 +169,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MaxAllowedSelections(int? maxAllowedSelections)
             {
+                shouldSerialize["max_allowed_selections"] = true;
                 this.maxAllowedSelections = maxAllowedSelections;
                 return this;
             }
@@ -131,9 +181,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AllowedSelections(IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections)
             {
+                shouldSerialize["allowed_selections"] = true;
                 this.allowedSelections = allowedSelections;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMaxAllowedSelections()
+            {
+                this.shouldSerialize["max_allowed_selections"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAllowedSelections()
+            {
+                this.shouldSerialize["allowed_selections"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -141,7 +209,7 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeDefinitionSelectionConfig. </returns>
             public CatalogCustomAttributeDefinitionSelectionConfig Build()
             {
-                return new CatalogCustomAttributeDefinitionSelectionConfig(
+                return new CatalogCustomAttributeDefinitionSelectionConfig(shouldSerialize,
                     this.maxAllowedSelections,
                     this.allowedSelections);
             }

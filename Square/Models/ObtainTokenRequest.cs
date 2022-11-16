@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ObtainTokenRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ObtainTokenRequest"/> class.
         /// </summary>
@@ -42,16 +43,92 @@ namespace Square.Models
             bool? shortLived = null,
             string codeVerifier = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "client_secret", false },
+                { "code", false },
+                { "redirect_uri", false },
+                { "refresh_token", false },
+                { "migration_token", false },
+                { "scopes", false },
+                { "short_lived", false },
+                { "code_verifier", false }
+            };
+
             this.ClientId = clientId;
-            this.ClientSecret = clientSecret;
-            this.Code = code;
-            this.RedirectUri = redirectUri;
+            if (clientSecret != null)
+            {
+                shouldSerialize["client_secret"] = true;
+                this.ClientSecret = clientSecret;
+            }
+
+            if (code != null)
+            {
+                shouldSerialize["code"] = true;
+                this.Code = code;
+            }
+
+            if (redirectUri != null)
+            {
+                shouldSerialize["redirect_uri"] = true;
+                this.RedirectUri = redirectUri;
+            }
+
             this.GrantType = grantType;
-            this.RefreshToken = refreshToken;
-            this.MigrationToken = migrationToken;
-            this.Scopes = scopes;
-            this.ShortLived = shortLived;
-            this.CodeVerifier = codeVerifier;
+            if (refreshToken != null)
+            {
+                shouldSerialize["refresh_token"] = true;
+                this.RefreshToken = refreshToken;
+            }
+
+            if (migrationToken != null)
+            {
+                shouldSerialize["migration_token"] = true;
+                this.MigrationToken = migrationToken;
+            }
+
+            if (scopes != null)
+            {
+                shouldSerialize["scopes"] = true;
+                this.Scopes = scopes;
+            }
+
+            if (shortLived != null)
+            {
+                shouldSerialize["short_lived"] = true;
+                this.ShortLived = shortLived;
+            }
+
+            if (codeVerifier != null)
+            {
+                shouldSerialize["code_verifier"] = true;
+                this.CodeVerifier = codeVerifier;
+            }
+
+        }
+        internal ObtainTokenRequest(Dictionary<string, bool> shouldSerialize,
+            string clientId,
+            string grantType,
+            string clientSecret = null,
+            string code = null,
+            string redirectUri = null,
+            string refreshToken = null,
+            string migrationToken = null,
+            IList<string> scopes = null,
+            bool? shortLived = null,
+            string codeVerifier = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ClientId = clientId;
+            ClientSecret = clientSecret;
+            Code = code;
+            RedirectUri = redirectUri;
+            GrantType = grantType;
+            RefreshToken = refreshToken;
+            MigrationToken = migrationToken;
+            Scopes = scopes;
+            ShortLived = shortLived;
+            CodeVerifier = codeVerifier;
         }
 
         /// <summary>
@@ -66,7 +143,7 @@ namespace Square.Models
         /// in the [Developer Dashboard](https://developer.squareup.com/apps). This parameter is only required when you are not using the [OAuth PKCE (Proof Key for Code Exchange) flow](https://developer.squareup.com/docs/oauth-api/overview#pkce-flow).
         /// The PKCE flow requires a `code_verifier` instead of a `client_secret`.
         /// </summary>
-        [JsonProperty("client_secret", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("client_secret")]
         public string ClientSecret { get; }
 
         /// <summary>
@@ -74,13 +151,13 @@ namespace Square.Models
         /// This code is required if `grant_type` is set to `authorization_code` to indicate that
         /// the application wants to exchange an authorization code for an OAuth access token.
         /// </summary>
-        [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("code")]
         public string Code { get; }
 
         /// <summary>
         /// The redirect URL assigned in the OAuth page for your application in the [Developer Dashboard](https://developer.squareup.com/apps).
         /// </summary>
-        [JsonProperty("redirect_uri", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("redirect_uri")]
         public string RedirectUri { get; }
 
         /// <summary>
@@ -95,7 +172,7 @@ namespace Square.Models
         /// A valid refresh token is required if `grant_type` is set to `refresh_token`
         /// to indicate that the application wants a replacement for an expired OAuth access token.
         /// </summary>
-        [JsonProperty("refresh_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("refresh_token")]
         public string RefreshToken { get; }
 
         /// <summary>
@@ -105,7 +182,7 @@ namespace Square.Models
         /// OAuth access token. The response also returns a refresh token.
         /// For more information, see [Migrate to Using Refresh Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens).
         /// </summary>
-        [JsonProperty("migration_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("migration_token")]
         public string MigrationToken { get; }
 
         /// <summary>
@@ -115,21 +192,21 @@ namespace Square.Models
         /// that comprise the intersection between the requested list of permissions and those
         /// that belong to the provided refresh token.
         /// </summary>
-        [JsonProperty("scopes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("scopes")]
         public IList<string> Scopes { get; }
 
         /// <summary>
         /// A Boolean indicating a request for a short-lived access token.
         /// The short-lived access token returned in the response expires in 24 hours.
         /// </summary>
-        [JsonProperty("short_lived", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("short_lived")]
         public bool? ShortLived { get; }
 
         /// <summary>
         /// Must be provided when using PKCE OAuth flow. The `code_verifier` will be used to verify against the
         /// `code_challenge` associated with the `authorization_code`.
         /// </summary>
-        [JsonProperty("code_verifier", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("code_verifier")]
         public string CodeVerifier { get; }
 
         /// <inheritdoc/>
@@ -140,6 +217,78 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ObtainTokenRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeClientSecret()
+        {
+            return this.shouldSerialize["client_secret"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCode()
+        {
+            return this.shouldSerialize["code"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRedirectUri()
+        {
+            return this.shouldSerialize["redirect_uri"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRefreshToken()
+        {
+            return this.shouldSerialize["refresh_token"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMigrationToken()
+        {
+            return this.shouldSerialize["migration_token"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeScopes()
+        {
+            return this.shouldSerialize["scopes"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeShortLived()
+        {
+            return this.shouldSerialize["short_lived"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCodeVerifier()
+        {
+            return this.shouldSerialize["code_verifier"];
         }
 
         /// <inheritdoc/>
@@ -222,6 +371,18 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "client_secret", false },
+                { "code", false },
+                { "redirect_uri", false },
+                { "refresh_token", false },
+                { "migration_token", false },
+                { "scopes", false },
+                { "short_lived", false },
+                { "code_verifier", false },
+            };
+
             private string clientId;
             private string grantType;
             private string clientSecret;
@@ -270,6 +431,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ClientSecret(string clientSecret)
             {
+                shouldSerialize["client_secret"] = true;
                 this.clientSecret = clientSecret;
                 return this;
             }
@@ -281,6 +443,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Code(string code)
             {
+                shouldSerialize["code"] = true;
                 this.code = code;
                 return this;
             }
@@ -292,6 +455,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RedirectUri(string redirectUri)
             {
+                shouldSerialize["redirect_uri"] = true;
                 this.redirectUri = redirectUri;
                 return this;
             }
@@ -303,6 +467,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RefreshToken(string refreshToken)
             {
+                shouldSerialize["refresh_token"] = true;
                 this.refreshToken = refreshToken;
                 return this;
             }
@@ -314,6 +479,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MigrationToken(string migrationToken)
             {
+                shouldSerialize["migration_token"] = true;
                 this.migrationToken = migrationToken;
                 return this;
             }
@@ -325,6 +491,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Scopes(IList<string> scopes)
             {
+                shouldSerialize["scopes"] = true;
                 this.scopes = scopes;
                 return this;
             }
@@ -336,6 +503,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ShortLived(bool? shortLived)
             {
+                shouldSerialize["short_lived"] = true;
                 this.shortLived = shortLived;
                 return this;
             }
@@ -347,9 +515,75 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CodeVerifier(string codeVerifier)
             {
+                shouldSerialize["code_verifier"] = true;
                 this.codeVerifier = codeVerifier;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetClientSecret()
+            {
+                this.shouldSerialize["client_secret"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCode()
+            {
+                this.shouldSerialize["code"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRedirectUri()
+            {
+                this.shouldSerialize["redirect_uri"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRefreshToken()
+            {
+                this.shouldSerialize["refresh_token"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMigrationToken()
+            {
+                this.shouldSerialize["migration_token"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetScopes()
+            {
+                this.shouldSerialize["scopes"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetShortLived()
+            {
+                this.shouldSerialize["short_lived"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCodeVerifier()
+            {
+                this.shouldSerialize["code_verifier"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -357,7 +591,7 @@ namespace Square.Models
             /// <returns> ObtainTokenRequest. </returns>
             public ObtainTokenRequest Build()
             {
-                return new ObtainTokenRequest(
+                return new ObtainTokenRequest(shouldSerialize,
                     this.clientId,
                     this.grantType,
                     this.clientSecret,

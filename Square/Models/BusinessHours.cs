@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BusinessHours
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BusinessHours"/> class.
         /// </summary>
@@ -24,13 +25,29 @@ namespace Square.Models
         public BusinessHours(
             IList<Models.BusinessHoursPeriod> periods = null)
         {
-            this.Periods = periods;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "periods", false }
+            };
+
+            if (periods != null)
+            {
+                shouldSerialize["periods"] = true;
+                this.Periods = periods;
+            }
+
+        }
+        internal BusinessHours(Dictionary<string, bool> shouldSerialize,
+            IList<Models.BusinessHoursPeriod> periods = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Periods = periods;
         }
 
         /// <summary>
         /// The list of time periods during which the business is open. There can be at most 10 periods per day.
         /// </summary>
-        [JsonProperty("periods", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("periods")]
         public IList<Models.BusinessHoursPeriod> Periods { get; }
 
         /// <inheritdoc/>
@@ -41,6 +58,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BusinessHours : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePeriods()
+        {
+            return this.shouldSerialize["periods"];
         }
 
         /// <inheritdoc/>
@@ -94,6 +120,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "periods", false },
+            };
+
             private IList<Models.BusinessHoursPeriod> periods;
 
              /// <summary>
@@ -103,9 +134,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Periods(IList<Models.BusinessHoursPeriod> periods)
             {
+                shouldSerialize["periods"] = true;
                 this.periods = periods;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPeriods()
+            {
+                this.shouldSerialize["periods"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -113,7 +154,7 @@ namespace Square.Models
             /// <returns> BusinessHours. </returns>
             public BusinessHours Build()
             {
-                return new BusinessHours(
+                return new BusinessHours(shouldSerialize,
                     this.periods);
             }
         }

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DisputeEvidenceCreatedWebhookData
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DisputeEvidenceCreatedWebhookData"/> class.
         /// </summary>
@@ -28,15 +29,35 @@ namespace Square.Models
             string id = null,
             Models.DisputeEvidenceCreatedWebhookObject mObject = null)
         {
-            this.Type = type;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "type", false }
+            };
+
+            if (type != null)
+            {
+                shouldSerialize["type"] = true;
+                this.Type = type;
+            }
+
             this.Id = id;
             this.MObject = mObject;
+        }
+        internal DisputeEvidenceCreatedWebhookData(Dictionary<string, bool> shouldSerialize,
+            string type = null,
+            string id = null,
+            Models.DisputeEvidenceCreatedWebhookObject mObject = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Type = type;
+            Id = id;
+            MObject = mObject;
         }
 
         /// <summary>
         /// Name of the affected dispute's type.
         /// </summary>
-        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("type")]
         public string Type { get; }
 
         /// <summary>
@@ -59,6 +80,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DisputeEvidenceCreatedWebhookData : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeType()
+        {
+            return this.shouldSerialize["type"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +148,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "type", false },
+            };
+
             private string type;
             private string id;
             private Models.DisputeEvidenceCreatedWebhookObject mObject;
@@ -129,6 +164,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
+                shouldSerialize["type"] = true;
                 this.type = type;
                 return this;
             }
@@ -156,12 +192,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetType()
+            {
+                this.shouldSerialize["type"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> DisputeEvidenceCreatedWebhookData. </returns>
             public DisputeEvidenceCreatedWebhookData Build()
             {
-                return new DisputeEvidenceCreatedWebhookData(
+                return new DisputeEvidenceCreatedWebhookData(shouldSerialize,
                     this.type,
                     this.id,
                     this.mObject);

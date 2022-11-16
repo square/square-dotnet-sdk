@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class RetrieveCustomerCustomAttributeRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrieveCustomerCustomAttributeRequest"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             bool? withDefinition = null,
             int? version = null)
         {
-            this.WithDefinition = withDefinition;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "with_definition", false }
+            };
+
+            if (withDefinition != null)
+            {
+                shouldSerialize["with_definition"] = true;
+                this.WithDefinition = withDefinition;
+            }
+
             this.Version = version;
+        }
+        internal RetrieveCustomerCustomAttributeRequest(Dictionary<string, bool> shouldSerialize,
+            bool? withDefinition = null,
+            int? version = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            WithDefinition = withDefinition;
+            Version = version;
         }
 
         /// <summary>
@@ -35,7 +54,7 @@ namespace Square.Models
         /// the custom attribute. Set this parameter to `true` to get the name and description of the custom
         /// attribute, information about the data type, or other definition details. The default value is `false`.
         /// </summary>
-        [JsonProperty("with_definition", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("with_definition")]
         public bool? WithDefinition { get; }
 
         /// <summary>
@@ -55,6 +74,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"RetrieveCustomerCustomAttributeRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeWithDefinition()
+        {
+            return this.shouldSerialize["with_definition"];
         }
 
         /// <inheritdoc/>
@@ -111,6 +139,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "with_definition", false },
+            };
+
             private bool? withDefinition;
             private int? version;
 
@@ -121,6 +154,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder WithDefinition(bool? withDefinition)
             {
+                shouldSerialize["with_definition"] = true;
                 this.withDefinition = withDefinition;
                 return this;
             }
@@ -137,12 +171,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetWithDefinition()
+            {
+                this.shouldSerialize["with_definition"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> RetrieveCustomerCustomAttributeRequest. </returns>
             public RetrieveCustomerCustomAttributeRequest Build()
             {
-                return new RetrieveCustomerCustomAttributeRequest(
+                return new RetrieveCustomerCustomAttributeRequest(shouldSerialize,
                     this.withDefinition,
                     this.version);
             }

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class RetrieveSubscriptionRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrieveSubscriptionRequest"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public RetrieveSubscriptionRequest(
             string include = null)
         {
-            this.Include = include;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "include", false }
+            };
+
+            if (include != null)
+            {
+                shouldSerialize["include"] = true;
+                this.Include = include;
+            }
+
+        }
+        internal RetrieveSubscriptionRequest(Dictionary<string, bool> shouldSerialize,
+            string include = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Include = include;
         }
 
         /// <summary>
@@ -32,7 +49,7 @@ namespace Square.Models
         /// The supported query parameter values are:
         /// - `actions`: to include scheduled actions on the targeted subscription.
         /// </summary>
-        [JsonProperty("include", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("include")]
         public string Include { get; }
 
         /// <inheritdoc/>
@@ -43,6 +60,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"RetrieveSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeInclude()
+        {
+            return this.shouldSerialize["include"];
         }
 
         /// <inheritdoc/>
@@ -96,6 +122,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "include", false },
+            };
+
             private string include;
 
              /// <summary>
@@ -105,9 +136,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Include(string include)
             {
+                shouldSerialize["include"] = true;
                 this.include = include;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetInclude()
+            {
+                this.shouldSerialize["include"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -115,7 +156,7 @@ namespace Square.Models
             /// <returns> RetrieveSubscriptionRequest. </returns>
             public RetrieveSubscriptionRequest Build()
             {
-                return new RetrieveSubscriptionRequest(
+                return new RetrieveSubscriptionRequest(shouldSerialize,
                     this.include);
             }
         }

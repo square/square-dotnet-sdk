@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Customer
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Customer"/> class.
         /// </summary>
@@ -62,26 +63,146 @@ namespace Square.Models
             long? version = null,
             Models.CustomerTaxIds taxIds = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cards", false },
+                { "given_name", false },
+                { "family_name", false },
+                { "nickname", false },
+                { "company_name", false },
+                { "email_address", false },
+                { "phone_number", false },
+                { "birthday", false },
+                { "reference_id", false },
+                { "note", false },
+                { "group_ids", false },
+                { "segment_ids", false }
+            };
+
             this.Id = id;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
-            this.Cards = cards;
-            this.GivenName = givenName;
-            this.FamilyName = familyName;
-            this.Nickname = nickname;
-            this.CompanyName = companyName;
-            this.EmailAddress = emailAddress;
+            if (cards != null)
+            {
+                shouldSerialize["cards"] = true;
+                this.Cards = cards;
+            }
+
+            if (givenName != null)
+            {
+                shouldSerialize["given_name"] = true;
+                this.GivenName = givenName;
+            }
+
+            if (familyName != null)
+            {
+                shouldSerialize["family_name"] = true;
+                this.FamilyName = familyName;
+            }
+
+            if (nickname != null)
+            {
+                shouldSerialize["nickname"] = true;
+                this.Nickname = nickname;
+            }
+
+            if (companyName != null)
+            {
+                shouldSerialize["company_name"] = true;
+                this.CompanyName = companyName;
+            }
+
+            if (emailAddress != null)
+            {
+                shouldSerialize["email_address"] = true;
+                this.EmailAddress = emailAddress;
+            }
+
             this.Address = address;
-            this.PhoneNumber = phoneNumber;
-            this.Birthday = birthday;
-            this.ReferenceId = referenceId;
-            this.Note = note;
+            if (phoneNumber != null)
+            {
+                shouldSerialize["phone_number"] = true;
+                this.PhoneNumber = phoneNumber;
+            }
+
+            if (birthday != null)
+            {
+                shouldSerialize["birthday"] = true;
+                this.Birthday = birthday;
+            }
+
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
+            if (note != null)
+            {
+                shouldSerialize["note"] = true;
+                this.Note = note;
+            }
+
             this.Preferences = preferences;
             this.CreationSource = creationSource;
-            this.GroupIds = groupIds;
-            this.SegmentIds = segmentIds;
+            if (groupIds != null)
+            {
+                shouldSerialize["group_ids"] = true;
+                this.GroupIds = groupIds;
+            }
+
+            if (segmentIds != null)
+            {
+                shouldSerialize["segment_ids"] = true;
+                this.SegmentIds = segmentIds;
+            }
+
             this.Version = version;
             this.TaxIds = taxIds;
+        }
+        internal Customer(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string createdAt = null,
+            string updatedAt = null,
+            IList<Models.Card> cards = null,
+            string givenName = null,
+            string familyName = null,
+            string nickname = null,
+            string companyName = null,
+            string emailAddress = null,
+            Models.Address address = null,
+            string phoneNumber = null,
+            string birthday = null,
+            string referenceId = null,
+            string note = null,
+            Models.CustomerPreferences preferences = null,
+            string creationSource = null,
+            IList<string> groupIds = null,
+            IList<string> segmentIds = null,
+            long? version = null,
+            Models.CustomerTaxIds taxIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            Cards = cards;
+            GivenName = givenName;
+            FamilyName = familyName;
+            Nickname = nickname;
+            CompanyName = companyName;
+            EmailAddress = emailAddress;
+            Address = address;
+            PhoneNumber = phoneNumber;
+            Birthday = birthday;
+            ReferenceId = referenceId;
+            Note = note;
+            Preferences = preferences;
+            CreationSource = creationSource;
+            GroupIds = groupIds;
+            SegmentIds = segmentIds;
+            Version = version;
+            TaxIds = taxIds;
         }
 
         /// <summary>
@@ -110,37 +231,37 @@ namespace Square.Models
         /// or [ListGiftCards]($e/GiftCards/ListGiftCards) (for gift cards on file) and including the `customer_id` query parameter.
         /// For more information, see [Migration notes](https://developer.squareup.com/docs/customers-api/what-it-does#migrate-customer-cards).
         /// </summary>
-        [JsonProperty("cards", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cards")]
         public IList<Models.Card> Cards { get; }
 
         /// <summary>
         /// The given name (that is, the first name) associated with the customer profile.
         /// </summary>
-        [JsonProperty("given_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("given_name")]
         public string GivenName { get; }
 
         /// <summary>
         /// The family name (that is, the last name) associated with the customer profile.
         /// </summary>
-        [JsonProperty("family_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("family_name")]
         public string FamilyName { get; }
 
         /// <summary>
         /// A nickname for the customer profile.
         /// </summary>
-        [JsonProperty("nickname", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("nickname")]
         public string Nickname { get; }
 
         /// <summary>
         /// A business name associated with the customer profile.
         /// </summary>
-        [JsonProperty("company_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("company_name")]
         public string CompanyName { get; }
 
         /// <summary>
         /// The email address associated with the customer profile.
         /// </summary>
-        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("email_address")]
         public string EmailAddress { get; }
 
         /// <summary>
@@ -153,27 +274,27 @@ namespace Square.Models
         /// <summary>
         /// The phone number associated with the customer profile.
         /// </summary>
-        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("phone_number")]
         public string PhoneNumber { get; }
 
         /// <summary>
         /// The birthday associated with the customer profile, in `YYYY-MM-DD` format. For example, `1998-09-21`
         /// represents September 21, 1998, and `0000-09-21` represents September 21 (without a birth year).
         /// </summary>
-        [JsonProperty("birthday", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("birthday")]
         public string Birthday { get; }
 
         /// <summary>
         /// An optional second ID used to associate the customer profile with an
         /// entity in another system.
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
         /// A custom note associated with the customer profile.
         /// </summary>
-        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("note")]
         public string Note { get; }
 
         /// <summary>
@@ -191,13 +312,13 @@ namespace Square.Models
         /// <summary>
         /// The IDs of customer groups the customer belongs to.
         /// </summary>
-        [JsonProperty("group_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("group_ids")]
         public IList<string> GroupIds { get; }
 
         /// <summary>
         /// The IDs of segments the customer belongs to.
         /// </summary>
-        [JsonProperty("segment_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("segment_ids")]
         public IList<string> SegmentIds { get; }
 
         /// <summary>
@@ -221,6 +342,114 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Customer : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCards()
+        {
+            return this.shouldSerialize["cards"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeGivenName()
+        {
+            return this.shouldSerialize["given_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFamilyName()
+        {
+            return this.shouldSerialize["family_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNickname()
+        {
+            return this.shouldSerialize["nickname"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCompanyName()
+        {
+            return this.shouldSerialize["company_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmailAddress()
+        {
+            return this.shouldSerialize["email_address"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePhoneNumber()
+        {
+            return this.shouldSerialize["phone_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBirthday()
+        {
+            return this.shouldSerialize["birthday"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNote()
+        {
+            return this.shouldSerialize["note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeGroupIds()
+        {
+            return this.shouldSerialize["group_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSegmentIds()
+        {
+            return this.shouldSerialize["segment_ids"];
         }
 
         /// <inheritdoc/>
@@ -335,6 +564,22 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cards", false },
+                { "given_name", false },
+                { "family_name", false },
+                { "nickname", false },
+                { "company_name", false },
+                { "email_address", false },
+                { "phone_number", false },
+                { "birthday", false },
+                { "reference_id", false },
+                { "note", false },
+                { "group_ids", false },
+                { "segment_ids", false },
+            };
+
             private string id;
             private string createdAt;
             private string updatedAt;
@@ -396,6 +641,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cards(IList<Models.Card> cards)
             {
+                shouldSerialize["cards"] = true;
                 this.cards = cards;
                 return this;
             }
@@ -407,6 +653,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder GivenName(string givenName)
             {
+                shouldSerialize["given_name"] = true;
                 this.givenName = givenName;
                 return this;
             }
@@ -418,6 +665,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FamilyName(string familyName)
             {
+                shouldSerialize["family_name"] = true;
                 this.familyName = familyName;
                 return this;
             }
@@ -429,6 +677,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Nickname(string nickname)
             {
+                shouldSerialize["nickname"] = true;
                 this.nickname = nickname;
                 return this;
             }
@@ -440,6 +689,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CompanyName(string companyName)
             {
+                shouldSerialize["company_name"] = true;
                 this.companyName = companyName;
                 return this;
             }
@@ -451,6 +701,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmailAddress(string emailAddress)
             {
+                shouldSerialize["email_address"] = true;
                 this.emailAddress = emailAddress;
                 return this;
             }
@@ -473,6 +724,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
+                shouldSerialize["phone_number"] = true;
                 this.phoneNumber = phoneNumber;
                 return this;
             }
@@ -484,6 +736,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Birthday(string birthday)
             {
+                shouldSerialize["birthday"] = true;
                 this.birthday = birthday;
                 return this;
             }
@@ -495,6 +748,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -506,6 +760,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
+                shouldSerialize["note"] = true;
                 this.note = note;
                 return this;
             }
@@ -539,6 +794,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder GroupIds(IList<string> groupIds)
             {
+                shouldSerialize["group_ids"] = true;
                 this.groupIds = groupIds;
                 return this;
             }
@@ -550,6 +806,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SegmentIds(IList<string> segmentIds)
             {
+                shouldSerialize["segment_ids"] = true;
                 this.segmentIds = segmentIds;
                 return this;
             }
@@ -577,12 +834,109 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCards()
+            {
+                this.shouldSerialize["cards"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetGivenName()
+            {
+                this.shouldSerialize["given_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFamilyName()
+            {
+                this.shouldSerialize["family_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNickname()
+            {
+                this.shouldSerialize["nickname"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCompanyName()
+            {
+                this.shouldSerialize["company_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmailAddress()
+            {
+                this.shouldSerialize["email_address"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPhoneNumber()
+            {
+                this.shouldSerialize["phone_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBirthday()
+            {
+                this.shouldSerialize["birthday"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNote()
+            {
+                this.shouldSerialize["note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetGroupIds()
+            {
+                this.shouldSerialize["group_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSegmentIds()
+            {
+                this.shouldSerialize["segment_ids"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Customer. </returns>
             public Customer Build()
             {
-                return new Customer(
+                return new Customer(shouldSerialize,
                     this.id,
                     this.createdAt,
                     this.updatedAt,

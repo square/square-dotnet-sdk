@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Order
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Order"/> class.
         /// </summary>
@@ -84,23 +85,76 @@ namespace Square.Models
             IList<Models.OrderReward> rewards = null,
             Models.Money netAmountDueMoney = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reference_id", false },
+                { "customer_id", false },
+                { "line_items", false },
+                { "taxes", false },
+                { "discounts", false },
+                { "service_charges", false },
+                { "fulfillments", false },
+                { "metadata", false },
+                { "ticket_name", false }
+            };
+
             this.Id = id;
             this.LocationId = locationId;
-            this.ReferenceId = referenceId;
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
             this.Source = source;
-            this.CustomerId = customerId;
-            this.LineItems = lineItems;
-            this.Taxes = taxes;
-            this.Discounts = discounts;
-            this.ServiceCharges = serviceCharges;
-            this.Fulfillments = fulfillments;
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
+            }
+
+            if (lineItems != null)
+            {
+                shouldSerialize["line_items"] = true;
+                this.LineItems = lineItems;
+            }
+
+            if (taxes != null)
+            {
+                shouldSerialize["taxes"] = true;
+                this.Taxes = taxes;
+            }
+
+            if (discounts != null)
+            {
+                shouldSerialize["discounts"] = true;
+                this.Discounts = discounts;
+            }
+
+            if (serviceCharges != null)
+            {
+                shouldSerialize["service_charges"] = true;
+                this.ServiceCharges = serviceCharges;
+            }
+
+            if (fulfillments != null)
+            {
+                shouldSerialize["fulfillments"] = true;
+                this.Fulfillments = fulfillments;
+            }
+
             this.Returns = returns;
             this.ReturnAmounts = returnAmounts;
             this.NetAmounts = netAmounts;
             this.RoundingAdjustment = roundingAdjustment;
             this.Tenders = tenders;
             this.Refunds = refunds;
-            this.Metadata = metadata;
+            if (metadata != null)
+            {
+                shouldSerialize["metadata"] = true;
+                this.Metadata = metadata;
+            }
+
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.ClosedAt = closedAt;
@@ -111,10 +165,81 @@ namespace Square.Models
             this.TotalDiscountMoney = totalDiscountMoney;
             this.TotalTipMoney = totalTipMoney;
             this.TotalServiceChargeMoney = totalServiceChargeMoney;
-            this.TicketName = ticketName;
+            if (ticketName != null)
+            {
+                shouldSerialize["ticket_name"] = true;
+                this.TicketName = ticketName;
+            }
+
             this.PricingOptions = pricingOptions;
             this.Rewards = rewards;
             this.NetAmountDueMoney = netAmountDueMoney;
+        }
+        internal Order(Dictionary<string, bool> shouldSerialize,
+            string locationId,
+            string id = null,
+            string referenceId = null,
+            Models.OrderSource source = null,
+            string customerId = null,
+            IList<Models.OrderLineItem> lineItems = null,
+            IList<Models.OrderLineItemTax> taxes = null,
+            IList<Models.OrderLineItemDiscount> discounts = null,
+            IList<Models.OrderServiceCharge> serviceCharges = null,
+            IList<Models.Fulfillment> fulfillments = null,
+            IList<Models.OrderReturn> returns = null,
+            Models.OrderMoneyAmounts returnAmounts = null,
+            Models.OrderMoneyAmounts netAmounts = null,
+            Models.OrderRoundingAdjustment roundingAdjustment = null,
+            IList<Models.Tender> tenders = null,
+            IList<Models.Refund> refunds = null,
+            IDictionary<string, string> metadata = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string closedAt = null,
+            string state = null,
+            int? version = null,
+            Models.Money totalMoney = null,
+            Models.Money totalTaxMoney = null,
+            Models.Money totalDiscountMoney = null,
+            Models.Money totalTipMoney = null,
+            Models.Money totalServiceChargeMoney = null,
+            string ticketName = null,
+            Models.OrderPricingOptions pricingOptions = null,
+            IList<Models.OrderReward> rewards = null,
+            Models.Money netAmountDueMoney = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            LocationId = locationId;
+            ReferenceId = referenceId;
+            Source = source;
+            CustomerId = customerId;
+            LineItems = lineItems;
+            Taxes = taxes;
+            Discounts = discounts;
+            ServiceCharges = serviceCharges;
+            Fulfillments = fulfillments;
+            Returns = returns;
+            ReturnAmounts = returnAmounts;
+            NetAmounts = netAmounts;
+            RoundingAdjustment = roundingAdjustment;
+            Tenders = tenders;
+            Refunds = refunds;
+            Metadata = metadata;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            ClosedAt = closedAt;
+            State = state;
+            Version = version;
+            TotalMoney = totalMoney;
+            TotalTaxMoney = totalTaxMoney;
+            TotalDiscountMoney = totalDiscountMoney;
+            TotalTipMoney = totalTipMoney;
+            TotalServiceChargeMoney = totalServiceChargeMoney;
+            TicketName = ticketName;
+            PricingOptions = pricingOptions;
+            Rewards = rewards;
+            NetAmountDueMoney = netAmountDueMoney;
         }
 
         /// <summary>
@@ -133,7 +258,7 @@ namespace Square.Models
         /// A client-specified ID to associate an entity in another system
         /// with this order.
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
@@ -149,13 +274,13 @@ namespace Square.Models
         /// `customer_id` assigned to any underlying `Payment` objects is ignored and might result in the
         /// creation of new [instant profiles](https://developer.squareup.com/docs/customers-api/what-it-does#instant-profiles).
         /// </summary>
-        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
         /// The line items included in the order.
         /// </summary>
-        [JsonProperty("line_items", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("line_items")]
         public IList<Models.OrderLineItem> LineItems { get; }
 
         /// <summary>
@@ -168,7 +293,7 @@ namespace Square.Models
         /// `line_items.taxes` field results in an error. Use `line_items.applied_taxes`
         /// instead.
         /// </summary>
-        [JsonProperty("taxes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("taxes")]
         public IList<Models.OrderLineItemTax> Taxes { get; }
 
         /// <summary>
@@ -181,13 +306,13 @@ namespace Square.Models
         /// `line_items.discounts` field results in an error. Use `line_items.applied_discounts`
         /// instead.
         /// </summary>
-        [JsonProperty("discounts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("discounts")]
         public IList<Models.OrderLineItemDiscount> Discounts { get; }
 
         /// <summary>
         /// A list of service charges applied to the order.
         /// </summary>
-        [JsonProperty("service_charges", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("service_charges")]
         public IList<Models.OrderServiceCharge> ServiceCharges { get; }
 
         /// <summary>
@@ -195,7 +320,7 @@ namespace Square.Models
         /// Orders can only be created with at most one fulfillment. However, orders returned
         /// by the API might contain multiple fulfillments.
         /// </summary>
-        [JsonProperty("fulfillments", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fulfillments")]
         public IList<Models.Fulfillment> Fulfillments { get; }
 
         /// <summary>
@@ -252,7 +377,7 @@ namespace Square.Models
         /// application.
         /// For more information, see  [Metadata](https://developer.squareup.com/docs/build-basics/metadata).
         /// </summary>
-        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; }
 
         /// <summary>
@@ -283,7 +408,7 @@ namespace Square.Models
         /// The version number, which is incremented each time an update is committed to the order.
         /// Orders not created through the API do not include a version number and
         /// therefore cannot be updated.
-        /// [Read more about working with versions](https://developer.squareup.com/docs/orders-api/manage-orders#update-orders).
+        /// [Read more about working with versions](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders).
         /// </summary>
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }
@@ -347,7 +472,7 @@ namespace Square.Models
         /// A short-term identifier for the order (such as a customer first name,
         /// table number, or auto-generated order number that resets daily).
         /// </summary>
-        [JsonProperty("ticket_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ticket_name")]
         public string TicketName { get; }
 
         /// <summary>
@@ -383,6 +508,87 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Order : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLineItems()
+        {
+            return this.shouldSerialize["line_items"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTaxes()
+        {
+            return this.shouldSerialize["taxes"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDiscounts()
+        {
+            return this.shouldSerialize["discounts"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeServiceCharges()
+        {
+            return this.shouldSerialize["service_charges"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFulfillments()
+        {
+            return this.shouldSerialize["fulfillments"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMetadata()
+        {
+            return this.shouldSerialize["metadata"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTicketName()
+        {
+            return this.shouldSerialize["ticket_name"];
         }
 
         /// <inheritdoc/>
@@ -534,6 +740,19 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reference_id", false },
+                { "customer_id", false },
+                { "line_items", false },
+                { "taxes", false },
+                { "discounts", false },
+                { "service_charges", false },
+                { "fulfillments", false },
+                { "metadata", false },
+                { "ticket_name", false },
+            };
+
             private string locationId;
             private string id;
             private string referenceId;
@@ -601,6 +820,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -623,6 +843,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
+                shouldSerialize["customer_id"] = true;
                 this.customerId = customerId;
                 return this;
             }
@@ -634,6 +855,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LineItems(IList<Models.OrderLineItem> lineItems)
             {
+                shouldSerialize["line_items"] = true;
                 this.lineItems = lineItems;
                 return this;
             }
@@ -645,6 +867,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Taxes(IList<Models.OrderLineItemTax> taxes)
             {
+                shouldSerialize["taxes"] = true;
                 this.taxes = taxes;
                 return this;
             }
@@ -656,6 +879,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Discounts(IList<Models.OrderLineItemDiscount> discounts)
             {
+                shouldSerialize["discounts"] = true;
                 this.discounts = discounts;
                 return this;
             }
@@ -667,6 +891,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ServiceCharges(IList<Models.OrderServiceCharge> serviceCharges)
             {
+                shouldSerialize["service_charges"] = true;
                 this.serviceCharges = serviceCharges;
                 return this;
             }
@@ -678,6 +903,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Fulfillments(IList<Models.Fulfillment> fulfillments)
             {
+                shouldSerialize["fulfillments"] = true;
                 this.fulfillments = fulfillments;
                 return this;
             }
@@ -755,6 +981,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Metadata(IDictionary<string, string> metadata)
             {
+                shouldSerialize["metadata"] = true;
                 this.metadata = metadata;
                 return this;
             }
@@ -876,6 +1103,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TicketName(string ticketName)
             {
+                shouldSerialize["ticket_name"] = true;
                 this.ticketName = ticketName;
                 return this;
             }
@@ -914,12 +1142,85 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLineItems()
+            {
+                this.shouldSerialize["line_items"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTaxes()
+            {
+                this.shouldSerialize["taxes"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDiscounts()
+            {
+                this.shouldSerialize["discounts"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetServiceCharges()
+            {
+                this.shouldSerialize["service_charges"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFulfillments()
+            {
+                this.shouldSerialize["fulfillments"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMetadata()
+            {
+                this.shouldSerialize["metadata"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTicketName()
+            {
+                this.shouldSerialize["ticket_name"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Order. </returns>
             public Order Build()
             {
-                return new Order(
+                return new Order(shouldSerialize,
                     this.locationId,
                     this.id,
                     this.referenceId,

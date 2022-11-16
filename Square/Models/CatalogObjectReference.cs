@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogObjectReference
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogObjectReference"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             string objectId = null,
             long? catalogVersion = null)
         {
-            this.ObjectId = objectId;
-            this.CatalogVersion = catalogVersion;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "object_id", false },
+                { "catalog_version", false }
+            };
+
+            if (objectId != null)
+            {
+                shouldSerialize["object_id"] = true;
+                this.ObjectId = objectId;
+            }
+
+            if (catalogVersion != null)
+            {
+                shouldSerialize["catalog_version"] = true;
+                this.CatalogVersion = catalogVersion;
+            }
+
+        }
+        internal CatalogObjectReference(Dictionary<string, bool> shouldSerialize,
+            string objectId = null,
+            long? catalogVersion = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ObjectId = objectId;
+            CatalogVersion = catalogVersion;
         }
 
         /// <summary>
         /// The ID of the referenced object.
         /// </summary>
-        [JsonProperty("object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("object_id")]
         public string ObjectId { get; }
 
         /// <summary>
         /// The version of the object.
         /// </summary>
-        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_version")]
         public long? CatalogVersion { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogObjectReference : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeObjectId()
+        {
+            return this.shouldSerialize["object_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogVersion()
+        {
+            return this.shouldSerialize["catalog_version"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "object_id", false },
+                { "catalog_version", false },
+            };
+
             private string objectId;
             private long? catalogVersion;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ObjectId(string objectId)
             {
+                shouldSerialize["object_id"] = true;
                 this.objectId = objectId;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogVersion(long? catalogVersion)
             {
+                shouldSerialize["catalog_version"] = true;
                 this.catalogVersion = catalogVersion;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetObjectId()
+            {
+                this.shouldSerialize["object_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogVersion()
+            {
+                this.shouldSerialize["catalog_version"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> CatalogObjectReference. </returns>
             public CatalogObjectReference Build()
             {
-                return new CatalogObjectReference(
+                return new CatalogObjectReference(shouldSerialize,
                     this.objectId,
                     this.catalogVersion);
             }

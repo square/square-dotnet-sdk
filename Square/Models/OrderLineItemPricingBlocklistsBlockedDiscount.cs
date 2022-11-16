@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderLineItemPricingBlocklistsBlockedDiscount
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderLineItemPricingBlocklistsBlockedDiscount"/> class.
         /// </summary>
@@ -28,22 +29,54 @@ namespace Square.Models
             string discountUid = null,
             string discountCatalogObjectId = null)
         {
-            this.Uid = uid;
-            this.DiscountUid = discountUid;
-            this.DiscountCatalogObjectId = discountCatalogObjectId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "discount_uid", false },
+                { "discount_catalog_object_id", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
+            if (discountUid != null)
+            {
+                shouldSerialize["discount_uid"] = true;
+                this.DiscountUid = discountUid;
+            }
+
+            if (discountCatalogObjectId != null)
+            {
+                shouldSerialize["discount_catalog_object_id"] = true;
+                this.DiscountCatalogObjectId = discountCatalogObjectId;
+            }
+
+        }
+        internal OrderLineItemPricingBlocklistsBlockedDiscount(Dictionary<string, bool> shouldSerialize,
+            string uid = null,
+            string discountUid = null,
+            string discountCatalogObjectId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            DiscountUid = discountUid;
+            DiscountCatalogObjectId = discountCatalogObjectId;
         }
 
         /// <summary>
         /// A unique ID of the `BlockedDiscount` within the order.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
         /// The `uid` of the discount that should be blocked. Use this field to block
         /// ad hoc discounts. For catalog discounts, use the `discount_catalog_object_id` field.
         /// </summary>
-        [JsonProperty("discount_uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("discount_uid")]
         public string DiscountUid { get; }
 
         /// <summary>
@@ -51,7 +84,7 @@ namespace Square.Models
         /// Use this field to block catalog discounts. For ad hoc discounts, use the
         /// `discount_uid` field.
         /// </summary>
-        [JsonProperty("discount_catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("discount_catalog_object_id")]
         public string DiscountCatalogObjectId { get; }
 
         /// <inheritdoc/>
@@ -62,6 +95,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderLineItemPricingBlocklistsBlockedDiscount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDiscountUid()
+        {
+            return this.shouldSerialize["discount_uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDiscountCatalogObjectId()
+        {
+            return this.shouldSerialize["discount_catalog_object_id"];
         }
 
         /// <inheritdoc/>
@@ -121,6 +181,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "discount_uid", false },
+                { "discount_catalog_object_id", false },
+            };
+
             private string uid;
             private string discountUid;
             private string discountCatalogObjectId;
@@ -132,6 +199,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -143,6 +211,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DiscountUid(string discountUid)
             {
+                shouldSerialize["discount_uid"] = true;
                 this.discountUid = discountUid;
                 return this;
             }
@@ -154,9 +223,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DiscountCatalogObjectId(string discountCatalogObjectId)
             {
+                shouldSerialize["discount_catalog_object_id"] = true;
                 this.discountCatalogObjectId = discountCatalogObjectId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDiscountUid()
+            {
+                this.shouldSerialize["discount_uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDiscountCatalogObjectId()
+            {
+                this.shouldSerialize["discount_catalog_object_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -164,7 +259,7 @@ namespace Square.Models
             /// <returns> OrderLineItemPricingBlocklistsBlockedDiscount. </returns>
             public OrderLineItemPricingBlocklistsBlockedDiscount Build()
             {
-                return new OrderLineItemPricingBlocklistsBlockedDiscount(
+                return new OrderLineItemPricingBlocklistsBlockedDiscount(shouldSerialize,
                     this.uid,
                     this.discountUid,
                     this.discountCatalogObjectId);

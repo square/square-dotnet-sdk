@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderReturn
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderReturn"/> class.
         /// </summary>
@@ -38,33 +39,87 @@ namespace Square.Models
             Models.OrderRoundingAdjustment roundingAdjustment = null,
             Models.OrderMoneyAmounts returnAmounts = null)
         {
-            this.Uid = uid;
-            this.SourceOrderId = sourceOrderId;
-            this.ReturnLineItems = returnLineItems;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "source_order_id", false },
+                { "return_line_items", false },
+                { "return_taxes", false },
+                { "return_discounts", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
+            if (sourceOrderId != null)
+            {
+                shouldSerialize["source_order_id"] = true;
+                this.SourceOrderId = sourceOrderId;
+            }
+
+            if (returnLineItems != null)
+            {
+                shouldSerialize["return_line_items"] = true;
+                this.ReturnLineItems = returnLineItems;
+            }
+
             this.ReturnServiceCharges = returnServiceCharges;
-            this.ReturnTaxes = returnTaxes;
-            this.ReturnDiscounts = returnDiscounts;
+            if (returnTaxes != null)
+            {
+                shouldSerialize["return_taxes"] = true;
+                this.ReturnTaxes = returnTaxes;
+            }
+
+            if (returnDiscounts != null)
+            {
+                shouldSerialize["return_discounts"] = true;
+                this.ReturnDiscounts = returnDiscounts;
+            }
+
             this.RoundingAdjustment = roundingAdjustment;
             this.ReturnAmounts = returnAmounts;
+        }
+        internal OrderReturn(Dictionary<string, bool> shouldSerialize,
+            string uid = null,
+            string sourceOrderId = null,
+            IList<Models.OrderReturnLineItem> returnLineItems = null,
+            IList<Models.OrderReturnServiceCharge> returnServiceCharges = null,
+            IList<Models.OrderReturnTax> returnTaxes = null,
+            IList<Models.OrderReturnDiscount> returnDiscounts = null,
+            Models.OrderRoundingAdjustment roundingAdjustment = null,
+            Models.OrderMoneyAmounts returnAmounts = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            SourceOrderId = sourceOrderId;
+            ReturnLineItems = returnLineItems;
+            ReturnServiceCharges = returnServiceCharges;
+            ReturnTaxes = returnTaxes;
+            ReturnDiscounts = returnDiscounts;
+            RoundingAdjustment = roundingAdjustment;
+            ReturnAmounts = returnAmounts;
         }
 
         /// <summary>
         /// A unique ID that identifies the return only within this order.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
         /// An order that contains the original sale of these return line items. This is unset
         /// for unlinked returns.
         /// </summary>
-        [JsonProperty("source_order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("source_order_id")]
         public string SourceOrderId { get; }
 
         /// <summary>
         /// A collection of line items that are being returned.
         /// </summary>
-        [JsonProperty("return_line_items", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("return_line_items")]
         public IList<Models.OrderReturnLineItem> ReturnLineItems { get; }
 
         /// <summary>
@@ -78,7 +133,7 @@ namespace Square.Models
         /// applied tax amount to be returned. The taxes must reference a top-level tax ID from the source
         /// order.
         /// </summary>
-        [JsonProperty("return_taxes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("return_taxes")]
         public IList<Models.OrderReturnTax> ReturnTaxes { get; }
 
         /// <summary>
@@ -86,7 +141,7 @@ namespace Square.Models
         /// applied discount amount to be returned. The discounts must reference a top-level discount ID
         /// from the source order.
         /// </summary>
-        [JsonProperty("return_discounts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("return_discounts")]
         public IList<Models.OrderReturnDiscount> ReturnDiscounts { get; }
 
         /// <summary>
@@ -110,6 +165,51 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderReturn : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSourceOrderId()
+        {
+            return this.shouldSerialize["source_order_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReturnLineItems()
+        {
+            return this.shouldSerialize["return_line_items"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReturnTaxes()
+        {
+            return this.shouldSerialize["return_taxes"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReturnDiscounts()
+        {
+            return this.shouldSerialize["return_discounts"];
         }
 
         /// <inheritdoc/>
@@ -186,6 +286,15 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "source_order_id", false },
+                { "return_line_items", false },
+                { "return_taxes", false },
+                { "return_discounts", false },
+            };
+
             private string uid;
             private string sourceOrderId;
             private IList<Models.OrderReturnLineItem> returnLineItems;
@@ -202,6 +311,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -213,6 +323,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SourceOrderId(string sourceOrderId)
             {
+                shouldSerialize["source_order_id"] = true;
                 this.sourceOrderId = sourceOrderId;
                 return this;
             }
@@ -224,6 +335,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReturnLineItems(IList<Models.OrderReturnLineItem> returnLineItems)
             {
+                shouldSerialize["return_line_items"] = true;
                 this.returnLineItems = returnLineItems;
                 return this;
             }
@@ -246,6 +358,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReturnTaxes(IList<Models.OrderReturnTax> returnTaxes)
             {
+                shouldSerialize["return_taxes"] = true;
                 this.returnTaxes = returnTaxes;
                 return this;
             }
@@ -257,6 +370,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReturnDiscounts(IList<Models.OrderReturnDiscount> returnDiscounts)
             {
+                shouldSerialize["return_discounts"] = true;
                 this.returnDiscounts = returnDiscounts;
                 return this;
             }
@@ -284,12 +398,53 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSourceOrderId()
+            {
+                this.shouldSerialize["source_order_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReturnLineItems()
+            {
+                this.shouldSerialize["return_line_items"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReturnTaxes()
+            {
+                this.shouldSerialize["return_taxes"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReturnDiscounts()
+            {
+                this.shouldSerialize["return_discounts"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> OrderReturn. </returns>
             public OrderReturn Build()
             {
-                return new OrderReturn(
+                return new OrderReturn(shouldSerialize,
                     this.uid,
                     this.sourceOrderId,
                     this.returnLineItems,

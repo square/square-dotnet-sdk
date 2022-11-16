@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class StandardUnitDescriptionGroup
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="StandardUnitDescriptionGroup"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             IList<Models.StandardUnitDescription> standardUnitDescriptions = null,
             string languageCode = null)
         {
-            this.StandardUnitDescriptions = standardUnitDescriptions;
-            this.LanguageCode = languageCode;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "standard_unit_descriptions", false },
+                { "language_code", false }
+            };
+
+            if (standardUnitDescriptions != null)
+            {
+                shouldSerialize["standard_unit_descriptions"] = true;
+                this.StandardUnitDescriptions = standardUnitDescriptions;
+            }
+
+            if (languageCode != null)
+            {
+                shouldSerialize["language_code"] = true;
+                this.LanguageCode = languageCode;
+            }
+
+        }
+        internal StandardUnitDescriptionGroup(Dictionary<string, bool> shouldSerialize,
+            IList<Models.StandardUnitDescription> standardUnitDescriptions = null,
+            string languageCode = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            StandardUnitDescriptions = standardUnitDescriptions;
+            LanguageCode = languageCode;
         }
 
         /// <summary>
         /// List of standard (non-custom) measurement units in this description group.
         /// </summary>
-        [JsonProperty("standard_unit_descriptions", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("standard_unit_descriptions")]
         public IList<Models.StandardUnitDescription> StandardUnitDescriptions { get; }
 
         /// <summary>
         /// IETF language tag.
         /// </summary>
-        [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("language_code")]
         public string LanguageCode { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"StandardUnitDescriptionGroup : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStandardUnitDescriptions()
+        {
+            return this.shouldSerialize["standard_unit_descriptions"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLanguageCode()
+        {
+            return this.shouldSerialize["language_code"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "standard_unit_descriptions", false },
+                { "language_code", false },
+            };
+
             private IList<Models.StandardUnitDescription> standardUnitDescriptions;
             private string languageCode;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StandardUnitDescriptions(IList<Models.StandardUnitDescription> standardUnitDescriptions)
             {
+                shouldSerialize["standard_unit_descriptions"] = true;
                 this.standardUnitDescriptions = standardUnitDescriptions;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LanguageCode(string languageCode)
             {
+                shouldSerialize["language_code"] = true;
                 this.languageCode = languageCode;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStandardUnitDescriptions()
+            {
+                this.shouldSerialize["standard_unit_descriptions"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLanguageCode()
+            {
+                this.shouldSerialize["language_code"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> StandardUnitDescriptionGroup. </returns>
             public StandardUnitDescriptionGroup Build()
             {
-                return new StandardUnitDescriptionGroup(
+                return new StandardUnitDescriptionGroup(shouldSerialize,
                     this.standardUnitDescriptions,
                     this.languageCode);
             }

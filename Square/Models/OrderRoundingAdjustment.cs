@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderRoundingAdjustment
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderRoundingAdjustment"/> class.
         /// </summary>
@@ -28,21 +29,47 @@ namespace Square.Models
             string name = null,
             Models.Money amountMoney = null)
         {
-            this.Uid = uid;
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "name", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.AmountMoney = amountMoney;
+        }
+        internal OrderRoundingAdjustment(Dictionary<string, bool> shouldSerialize,
+            string uid = null,
+            string name = null,
+            Models.Money amountMoney = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            Name = name;
+            AmountMoney = amountMoney;
         }
 
         /// <summary>
         /// A unique ID that identifies the rounding adjustment only within this order.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
         /// The name of the rounding adjustment from the original sale order.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -64,6 +91,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderRoundingAdjustment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
         }
 
         /// <inheritdoc/>
@@ -123,6 +168,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "name", false },
+            };
+
             private string uid;
             private string name;
             private Models.Money amountMoney;
@@ -134,6 +185,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -145,6 +197,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -161,12 +214,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> OrderRoundingAdjustment. </returns>
             public OrderRoundingAdjustment Build()
             {
-                return new OrderRoundingAdjustment(
+                return new OrderRoundingAdjustment(shouldSerialize,
                     this.uid,
                     this.name,
                     this.amountMoney);

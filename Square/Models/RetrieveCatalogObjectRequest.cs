@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class RetrieveCatalogObjectRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrieveCatalogObjectRequest"/> class.
         /// </summary>
@@ -26,8 +27,32 @@ namespace Square.Models
             bool? includeRelatedObjects = null,
             long? catalogVersion = null)
         {
-            this.IncludeRelatedObjects = includeRelatedObjects;
-            this.CatalogVersion = catalogVersion;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "include_related_objects", false },
+                { "catalog_version", false }
+            };
+
+            if (includeRelatedObjects != null)
+            {
+                shouldSerialize["include_related_objects"] = true;
+                this.IncludeRelatedObjects = includeRelatedObjects;
+            }
+
+            if (catalogVersion != null)
+            {
+                shouldSerialize["catalog_version"] = true;
+                this.CatalogVersion = catalogVersion;
+            }
+
+        }
+        internal RetrieveCatalogObjectRequest(Dictionary<string, bool> shouldSerialize,
+            bool? includeRelatedObjects = null,
+            long? catalogVersion = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            IncludeRelatedObjects = includeRelatedObjects;
+            CatalogVersion = catalogVersion;
         }
 
         /// <summary>
@@ -44,7 +69,7 @@ namespace Square.Models
         /// the response.
         /// Default value: `false`
         /// </summary>
-        [JsonProperty("include_related_objects", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("include_related_objects")]
         public bool? IncludeRelatedObjects { get; }
 
         /// <summary>
@@ -53,7 +78,7 @@ namespace Square.Models
         /// in the version field of [CatalogObject]($m/CatalogObject)s. If not included, results will
         /// be from the current version of the catalog.
         /// </summary>
-        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_version")]
         public long? CatalogVersion { get; }
 
         /// <inheritdoc/>
@@ -64,6 +89,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"RetrieveCatalogObjectRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIncludeRelatedObjects()
+        {
+            return this.shouldSerialize["include_related_objects"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogVersion()
+        {
+            return this.shouldSerialize["catalog_version"];
         }
 
         /// <inheritdoc/>
@@ -120,6 +163,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "include_related_objects", false },
+                { "catalog_version", false },
+            };
+
             private bool? includeRelatedObjects;
             private long? catalogVersion;
 
@@ -130,6 +179,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IncludeRelatedObjects(bool? includeRelatedObjects)
             {
+                shouldSerialize["include_related_objects"] = true;
                 this.includeRelatedObjects = includeRelatedObjects;
                 return this;
             }
@@ -141,9 +191,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogVersion(long? catalogVersion)
             {
+                shouldSerialize["catalog_version"] = true;
                 this.catalogVersion = catalogVersion;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIncludeRelatedObjects()
+            {
+                this.shouldSerialize["include_related_objects"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogVersion()
+            {
+                this.shouldSerialize["catalog_version"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -151,7 +219,7 @@ namespace Square.Models
             /// <returns> RetrieveCatalogObjectRequest. </returns>
             public RetrieveCatalogObjectRequest Build()
             {
-                return new RetrieveCatalogObjectRequest(
+                return new RetrieveCatalogObjectRequest(shouldSerialize,
                     this.includeRelatedObjects,
                     this.catalogVersion);
             }

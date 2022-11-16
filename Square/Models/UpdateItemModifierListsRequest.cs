@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class UpdateItemModifierListsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateItemModifierListsRequest"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             IList<string> modifierListsToEnable = null,
             IList<string> modifierListsToDisable = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "modifier_lists_to_enable", false },
+                { "modifier_lists_to_disable", false }
+            };
+
             this.ItemIds = itemIds;
-            this.ModifierListsToEnable = modifierListsToEnable;
-            this.ModifierListsToDisable = modifierListsToDisable;
+            if (modifierListsToEnable != null)
+            {
+                shouldSerialize["modifier_lists_to_enable"] = true;
+                this.ModifierListsToEnable = modifierListsToEnable;
+            }
+
+            if (modifierListsToDisable != null)
+            {
+                shouldSerialize["modifier_lists_to_disable"] = true;
+                this.ModifierListsToDisable = modifierListsToDisable;
+            }
+
+        }
+        internal UpdateItemModifierListsRequest(Dictionary<string, bool> shouldSerialize,
+            IList<string> itemIds,
+            IList<string> modifierListsToEnable = null,
+            IList<string> modifierListsToDisable = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ItemIds = itemIds;
+            ModifierListsToEnable = modifierListsToEnable;
+            ModifierListsToDisable = modifierListsToDisable;
         }
 
         /// <summary>
@@ -43,14 +70,14 @@ namespace Square.Models
         /// The IDs of the CatalogModifierList objects to enable for the CatalogItem.
         /// At least one of `modifier_lists_to_enable` or `modifier_lists_to_disable` must be specified.
         /// </summary>
-        [JsonProperty("modifier_lists_to_enable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("modifier_lists_to_enable")]
         public IList<string> ModifierListsToEnable { get; }
 
         /// <summary>
         /// The IDs of the CatalogModifierList objects to disable for the CatalogItem.
         /// At least one of `modifier_lists_to_enable` or `modifier_lists_to_disable` must be specified.
         /// </summary>
-        [JsonProperty("modifier_lists_to_disable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("modifier_lists_to_disable")]
         public IList<string> ModifierListsToDisable { get; }
 
         /// <inheritdoc/>
@@ -61,6 +88,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"UpdateItemModifierListsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeModifierListsToEnable()
+        {
+            return this.shouldSerialize["modifier_lists_to_enable"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeModifierListsToDisable()
+        {
+            return this.shouldSerialize["modifier_lists_to_disable"];
         }
 
         /// <inheritdoc/>
@@ -120,6 +165,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "modifier_lists_to_enable", false },
+                { "modifier_lists_to_disable", false },
+            };
+
             private IList<string> itemIds;
             private IList<string> modifierListsToEnable;
             private IList<string> modifierListsToDisable;
@@ -148,6 +199,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ModifierListsToEnable(IList<string> modifierListsToEnable)
             {
+                shouldSerialize["modifier_lists_to_enable"] = true;
                 this.modifierListsToEnable = modifierListsToEnable;
                 return this;
             }
@@ -159,9 +211,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ModifierListsToDisable(IList<string> modifierListsToDisable)
             {
+                shouldSerialize["modifier_lists_to_disable"] = true;
                 this.modifierListsToDisable = modifierListsToDisable;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetModifierListsToEnable()
+            {
+                this.shouldSerialize["modifier_lists_to_enable"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetModifierListsToDisable()
+            {
+                this.shouldSerialize["modifier_lists_to_disable"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -169,7 +239,7 @@ namespace Square.Models
             /// <returns> UpdateItemModifierListsRequest. </returns>
             public UpdateItemModifierListsRequest Build()
             {
-                return new UpdateItemModifierListsRequest(
+                return new UpdateItemModifierListsRequest(shouldSerialize,
                     this.itemIds,
                     this.modifierListsToEnable,
                     this.modifierListsToDisable);

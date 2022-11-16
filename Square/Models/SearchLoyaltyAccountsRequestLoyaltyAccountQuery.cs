@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SearchLoyaltyAccountsRequestLoyaltyAccountQuery
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchLoyaltyAccountsRequestLoyaltyAccountQuery"/> class.
         /// </summary>
@@ -26,8 +27,32 @@ namespace Square.Models
             IList<Models.LoyaltyAccountMapping> mappings = null,
             IList<string> customerIds = null)
         {
-            this.Mappings = mappings;
-            this.CustomerIds = customerIds;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "mappings", false },
+                { "customer_ids", false }
+            };
+
+            if (mappings != null)
+            {
+                shouldSerialize["mappings"] = true;
+                this.Mappings = mappings;
+            }
+
+            if (customerIds != null)
+            {
+                shouldSerialize["customer_ids"] = true;
+                this.CustomerIds = customerIds;
+            }
+
+        }
+        internal SearchLoyaltyAccountsRequestLoyaltyAccountQuery(Dictionary<string, bool> shouldSerialize,
+            IList<Models.LoyaltyAccountMapping> mappings = null,
+            IList<string> customerIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Mappings = mappings;
+            CustomerIds = customerIds;
         }
 
         /// <summary>
@@ -35,7 +60,7 @@ namespace Square.Models
         /// This cannot be combined with `customer_ids`.
         /// Max: 30 mappings
         /// </summary>
-        [JsonProperty("mappings", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("mappings")]
         public IList<Models.LoyaltyAccountMapping> Mappings { get; }
 
         /// <summary>
@@ -43,7 +68,7 @@ namespace Square.Models
         /// This cannot be combined with `mappings`.
         /// Max: 30 customer IDs
         /// </summary>
-        [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_ids")]
         public IList<string> CustomerIds { get; }
 
         /// <inheritdoc/>
@@ -54,6 +79,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SearchLoyaltyAccountsRequestLoyaltyAccountQuery : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMappings()
+        {
+            return this.shouldSerialize["mappings"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerIds()
+        {
+            return this.shouldSerialize["customer_ids"];
         }
 
         /// <inheritdoc/>
@@ -110,6 +153,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "mappings", false },
+                { "customer_ids", false },
+            };
+
             private IList<Models.LoyaltyAccountMapping> mappings;
             private IList<string> customerIds;
 
@@ -120,6 +169,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Mappings(IList<Models.LoyaltyAccountMapping> mappings)
             {
+                shouldSerialize["mappings"] = true;
                 this.mappings = mappings;
                 return this;
             }
@@ -131,9 +181,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerIds(IList<string> customerIds)
             {
+                shouldSerialize["customer_ids"] = true;
                 this.customerIds = customerIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMappings()
+            {
+                this.shouldSerialize["mappings"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerIds()
+            {
+                this.shouldSerialize["customer_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -141,7 +209,7 @@ namespace Square.Models
             /// <returns> SearchLoyaltyAccountsRequestLoyaltyAccountQuery. </returns>
             public SearchLoyaltyAccountsRequestLoyaltyAccountQuery Build()
             {
-                return new SearchLoyaltyAccountsRequestLoyaltyAccountQuery(
+                return new SearchLoyaltyAccountsRequestLoyaltyAccountQuery(shouldSerialize,
                     this.mappings,
                     this.customerIds);
             }

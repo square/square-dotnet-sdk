@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class LoyaltyEventAccumulatePoints
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyEventAccumulatePoints"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             int? points = null,
             string orderId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "points", false },
+                { "order_id", false }
+            };
+
             this.LoyaltyProgramId = loyaltyProgramId;
-            this.Points = points;
-            this.OrderId = orderId;
+            if (points != null)
+            {
+                shouldSerialize["points"] = true;
+                this.Points = points;
+            }
+
+            if (orderId != null)
+            {
+                shouldSerialize["order_id"] = true;
+                this.OrderId = orderId;
+            }
+
+        }
+        internal LoyaltyEventAccumulatePoints(Dictionary<string, bool> shouldSerialize,
+            string loyaltyProgramId = null,
+            int? points = null,
+            string orderId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LoyaltyProgramId = loyaltyProgramId;
+            Points = points;
+            OrderId = orderId;
         }
 
         /// <summary>
@@ -42,14 +69,14 @@ namespace Square.Models
         /// <summary>
         /// The number of points accumulated by the event.
         /// </summary>
-        [JsonProperty("points", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("points")]
         public int? Points { get; }
 
         /// <summary>
         /// The ID of the [order]($m/Order) for which the buyer accumulated the points.
         /// This field is returned only if the Orders API is used to process orders.
         /// </summary>
-        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_id")]
         public string OrderId { get; }
 
         /// <inheritdoc/>
@@ -60,6 +87,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"LoyaltyEventAccumulatePoints : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePoints()
+        {
+            return this.shouldSerialize["points"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderId()
+        {
+            return this.shouldSerialize["order_id"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +164,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "points", false },
+                { "order_id", false },
+            };
+
             private string loyaltyProgramId;
             private int? points;
             private string orderId;
@@ -141,6 +192,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Points(int? points)
             {
+                shouldSerialize["points"] = true;
                 this.points = points;
                 return this;
             }
@@ -152,9 +204,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
+                shouldSerialize["order_id"] = true;
                 this.orderId = orderId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPoints()
+            {
+                this.shouldSerialize["points"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderId()
+            {
+                this.shouldSerialize["order_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -162,7 +232,7 @@ namespace Square.Models
             /// <returns> LoyaltyEventAccumulatePoints. </returns>
             public LoyaltyEventAccumulatePoints Build()
             {
-                return new LoyaltyEventAccumulatePoints(
+                return new LoyaltyEventAccumulatePoints(shouldSerialize,
                     this.loyaltyProgramId,
                     this.points,
                     this.orderId);

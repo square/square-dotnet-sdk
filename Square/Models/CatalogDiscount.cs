@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogDiscount
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogDiscount"/> class.
         /// </summary>
@@ -38,20 +39,68 @@ namespace Square.Models
             string modifyTaxBasis = null,
             Models.Money maximumAmountMoney = null)
         {
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "percentage", false },
+                { "pin_required", false },
+                { "label_color", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.DiscountType = discountType;
-            this.Percentage = percentage;
+            if (percentage != null)
+            {
+                shouldSerialize["percentage"] = true;
+                this.Percentage = percentage;
+            }
+
             this.AmountMoney = amountMoney;
-            this.PinRequired = pinRequired;
-            this.LabelColor = labelColor;
+            if (pinRequired != null)
+            {
+                shouldSerialize["pin_required"] = true;
+                this.PinRequired = pinRequired;
+            }
+
+            if (labelColor != null)
+            {
+                shouldSerialize["label_color"] = true;
+                this.LabelColor = labelColor;
+            }
+
             this.ModifyTaxBasis = modifyTaxBasis;
             this.MaximumAmountMoney = maximumAmountMoney;
+        }
+        internal CatalogDiscount(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            string discountType = null,
+            string percentage = null,
+            Models.Money amountMoney = null,
+            bool? pinRequired = null,
+            string labelColor = null,
+            string modifyTaxBasis = null,
+            Models.Money maximumAmountMoney = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            DiscountType = discountType;
+            Percentage = percentage;
+            AmountMoney = amountMoney;
+            PinRequired = pinRequired;
+            LabelColor = labelColor;
+            ModifyTaxBasis = modifyTaxBasis;
+            MaximumAmountMoney = maximumAmountMoney;
         }
 
         /// <summary>
         /// The discount name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -66,7 +115,7 @@ namespace Square.Models
         /// is `VARIABLE_PERCENTAGE`.
         /// Do not use this field for amount-based or variable discounts.
         /// </summary>
-        [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("percentage")]
         public string Percentage { get; }
 
         /// <summary>
@@ -84,13 +133,13 @@ namespace Square.Models
         /// Indicates whether a mobile staff member needs to enter their PIN to apply the
         /// discount to a payment in the Square Point of Sale app.
         /// </summary>
-        [JsonProperty("pin_required", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pin_required")]
         public bool? PinRequired { get; }
 
         /// <summary>
         /// The color of the discount display label in the Square Point of Sale app. This must be a valid hex color code.
         /// </summary>
-        [JsonProperty("label_color", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("label_color")]
         public string LabelColor { get; }
 
         /// <summary>
@@ -118,6 +167,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogDiscount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePercentage()
+        {
+            return this.shouldSerialize["percentage"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePinRequired()
+        {
+            return this.shouldSerialize["pin_required"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLabelColor()
+        {
+            return this.shouldSerialize["label_color"];
         }
 
         /// <inheritdoc/>
@@ -194,6 +279,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "percentage", false },
+                { "pin_required", false },
+                { "label_color", false },
+            };
+
             private string name;
             private string discountType;
             private string percentage;
@@ -210,6 +303,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -232,6 +326,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Percentage(string percentage)
             {
+                shouldSerialize["percentage"] = true;
                 this.percentage = percentage;
                 return this;
             }
@@ -254,6 +349,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PinRequired(bool? pinRequired)
             {
+                shouldSerialize["pin_required"] = true;
                 this.pinRequired = pinRequired;
                 return this;
             }
@@ -265,6 +361,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LabelColor(string labelColor)
             {
+                shouldSerialize["label_color"] = true;
                 this.labelColor = labelColor;
                 return this;
             }
@@ -292,12 +389,45 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPercentage()
+            {
+                this.shouldSerialize["percentage"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPinRequired()
+            {
+                this.shouldSerialize["pin_required"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLabelColor()
+            {
+                this.shouldSerialize["label_color"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CatalogDiscount. </returns>
             public CatalogDiscount Build()
             {
-                return new CatalogDiscount(
+                return new CatalogDiscount(shouldSerialize,
                     this.name,
                     this.discountType,
                     this.percentage,

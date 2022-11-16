@@ -492,7 +492,7 @@ namespace Square.Apis
         /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#sparse-order-objects).
         /// containing only the fields to update and the version to which the update is.
         /// being applied.
-        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation).
+        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#identifying-fields-to-delete).
         /// identifying the fields to clear.
         /// To pay for an order, see.
         /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).
@@ -518,7 +518,7 @@ namespace Square.Apis
         /// - The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#sparse-order-objects).
         /// containing only the fields to update and the version to which the update is.
         /// being applied.
-        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders#on-dot-notation).
+        /// - If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#identifying-fields-to-delete).
         /// identifying the fields to clear.
         /// To pay for an order, see.
         /// [Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TerminalRefundQuerySort
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TerminalRefundQuerySort"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public TerminalRefundQuerySort(
             string sortOrder = null)
         {
-            this.SortOrder = sortOrder;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "sort_order", false }
+            };
+
+            if (sortOrder != null)
+            {
+                shouldSerialize["sort_order"] = true;
+                this.SortOrder = sortOrder;
+            }
+
+        }
+        internal TerminalRefundQuerySort(Dictionary<string, bool> shouldSerialize,
+            string sortOrder = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            SortOrder = sortOrder;
         }
 
         /// <summary>
@@ -32,7 +49,7 @@ namespace Square.Models
         /// - `ASC` - Oldest to newest.
         /// - `DESC` - Newest to oldest (default).
         /// </summary>
-        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sort_order")]
         public string SortOrder { get; }
 
         /// <inheritdoc/>
@@ -43,6 +60,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TerminalRefundQuerySort : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSortOrder()
+        {
+            return this.shouldSerialize["sort_order"];
         }
 
         /// <inheritdoc/>
@@ -96,6 +122,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "sort_order", false },
+            };
+
             private string sortOrder;
 
              /// <summary>
@@ -105,9 +136,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SortOrder(string sortOrder)
             {
+                shouldSerialize["sort_order"] = true;
                 this.sortOrder = sortOrder;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSortOrder()
+            {
+                this.shouldSerialize["sort_order"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -115,7 +156,7 @@ namespace Square.Models
             /// <returns> TerminalRefundQuerySort. </returns>
             public TerminalRefundQuerySort Build()
             {
-                return new TerminalRefundQuerySort(
+                return new TerminalRefundQuerySort(shouldSerialize,
                     this.sortOrder);
             }
         }

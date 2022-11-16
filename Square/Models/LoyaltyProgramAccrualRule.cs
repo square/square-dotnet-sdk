@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class LoyaltyProgramAccrualRule
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyProgramAccrualRule"/> class.
         /// </summary>
@@ -34,12 +35,38 @@ namespace Square.Models
             Models.LoyaltyProgramAccrualRuleItemVariationData itemVariationData = null,
             Models.LoyaltyProgramAccrualRuleCategoryData categoryData = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "points", false }
+            };
+
             this.AccrualType = accrualType;
-            this.Points = points;
+            if (points != null)
+            {
+                shouldSerialize["points"] = true;
+                this.Points = points;
+            }
+
             this.VisitData = visitData;
             this.SpendData = spendData;
             this.ItemVariationData = itemVariationData;
             this.CategoryData = categoryData;
+        }
+        internal LoyaltyProgramAccrualRule(Dictionary<string, bool> shouldSerialize,
+            string accrualType,
+            int? points = null,
+            Models.LoyaltyProgramAccrualRuleVisitData visitData = null,
+            Models.LoyaltyProgramAccrualRuleSpendData spendData = null,
+            Models.LoyaltyProgramAccrualRuleItemVariationData itemVariationData = null,
+            Models.LoyaltyProgramAccrualRuleCategoryData categoryData = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AccrualType = accrualType;
+            Points = points;
+            VisitData = visitData;
+            SpendData = spendData;
+            ItemVariationData = itemVariationData;
+            CategoryData = categoryData;
         }
 
         /// <summary>
@@ -52,7 +79,7 @@ namespace Square.Models
         /// The number of points that
         /// buyers earn based on the `accrual_type`.
         /// </summary>
-        [JsonProperty("points", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("points")]
         public int? Points { get; }
 
         /// <summary>
@@ -87,6 +114,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"LoyaltyProgramAccrualRule : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePoints()
+        {
+            return this.shouldSerialize["points"];
         }
 
         /// <inheritdoc/>
@@ -155,6 +191,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "points", false },
+            };
+
             private string accrualType;
             private int? points;
             private Models.LoyaltyProgramAccrualRuleVisitData visitData;
@@ -186,6 +227,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Points(int? points)
             {
+                shouldSerialize["points"] = true;
                 this.points = points;
                 return this;
             }
@@ -235,12 +277,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPoints()
+            {
+                this.shouldSerialize["points"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> LoyaltyProgramAccrualRule. </returns>
             public LoyaltyProgramAccrualRule Build()
             {
-                return new LoyaltyProgramAccrualRule(
+                return new LoyaltyProgramAccrualRule(shouldSerialize,
                     this.accrualType,
                     this.points,
                     this.visitData,

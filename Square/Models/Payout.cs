@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Payout
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Payout"/> class.
         /// </summary>
@@ -44,6 +45,12 @@ namespace Square.Models
             IList<Models.PayoutFee> payoutFee = null,
             string arrivalDate = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payout_fee", false },
+                { "arrival_date", false }
+            };
+
             this.Id = id;
             this.Status = status;
             this.LocationId = locationId;
@@ -53,8 +60,44 @@ namespace Square.Models
             this.Destination = destination;
             this.Version = version;
             this.Type = type;
-            this.PayoutFee = payoutFee;
-            this.ArrivalDate = arrivalDate;
+            if (payoutFee != null)
+            {
+                shouldSerialize["payout_fee"] = true;
+                this.PayoutFee = payoutFee;
+            }
+
+            if (arrivalDate != null)
+            {
+                shouldSerialize["arrival_date"] = true;
+                this.ArrivalDate = arrivalDate;
+            }
+
+        }
+        internal Payout(Dictionary<string, bool> shouldSerialize,
+            string id,
+            string locationId,
+            string status = null,
+            string createdAt = null,
+            string updatedAt = null,
+            Models.Money amountMoney = null,
+            Models.Destination destination = null,
+            int? version = null,
+            string type = null,
+            IList<Models.PayoutFee> payoutFee = null,
+            string arrivalDate = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Status = status;
+            LocationId = locationId;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            AmountMoney = amountMoney;
+            Destination = destination;
+            Version = version;
+            Type = type;
+            PayoutFee = payoutFee;
+            ArrivalDate = arrivalDate;
         }
 
         /// <summary>
@@ -123,13 +166,13 @@ namespace Square.Models
         /// <summary>
         /// A list of transfer fees and any taxes on the fees assessed by Square for this payout.
         /// </summary>
-        [JsonProperty("payout_fee", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payout_fee")]
         public IList<Models.PayoutFee> PayoutFee { get; }
 
         /// <summary>
         /// The calendar date, in ISO 8601 format (YYYY-MM-DD), when the payout is due to arrive in the seller’s banking destination.
         /// </summary>
-        [JsonProperty("arrival_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("arrival_date")]
         public string ArrivalDate { get; }
 
         /// <inheritdoc/>
@@ -140,6 +183,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Payout : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePayoutFee()
+        {
+            return this.shouldSerialize["payout_fee"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeArrivalDate()
+        {
+            return this.shouldSerialize["arrival_date"];
         }
 
         /// <inheritdoc/>
@@ -225,6 +286,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payout_fee", false },
+                { "arrival_date", false },
+            };
+
             private string id;
             private string locationId;
             private string status;
@@ -351,6 +418,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PayoutFee(IList<Models.PayoutFee> payoutFee)
             {
+                shouldSerialize["payout_fee"] = true;
                 this.payoutFee = payoutFee;
                 return this;
             }
@@ -362,9 +430,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ArrivalDate(string arrivalDate)
             {
+                shouldSerialize["arrival_date"] = true;
                 this.arrivalDate = arrivalDate;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPayoutFee()
+            {
+                this.shouldSerialize["payout_fee"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetArrivalDate()
+            {
+                this.shouldSerialize["arrival_date"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -372,7 +458,7 @@ namespace Square.Models
             /// <returns> Payout. </returns>
             public Payout Build()
             {
-                return new Payout(
+                return new Payout(shouldSerialize,
                     this.id,
                     this.locationId,
                     this.status,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class LoyaltyEventAdjustPoints
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyEventAdjustPoints"/> class.
         /// </summary>
@@ -28,9 +29,29 @@ namespace Square.Models
             string loyaltyProgramId = null,
             string reason = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reason", false }
+            };
+
             this.LoyaltyProgramId = loyaltyProgramId;
             this.Points = points;
-            this.Reason = reason;
+            if (reason != null)
+            {
+                shouldSerialize["reason"] = true;
+                this.Reason = reason;
+            }
+
+        }
+        internal LoyaltyEventAdjustPoints(Dictionary<string, bool> shouldSerialize,
+            int points,
+            string loyaltyProgramId = null,
+            string reason = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LoyaltyProgramId = loyaltyProgramId;
+            Points = points;
+            Reason = reason;
         }
 
         /// <summary>
@@ -48,7 +69,7 @@ namespace Square.Models
         /// <summary>
         /// The reason for the adjustment of points.
         /// </summary>
-        [JsonProperty("reason", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reason")]
         public string Reason { get; }
 
         /// <inheritdoc/>
@@ -59,6 +80,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"LoyaltyEventAdjustPoints : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReason()
+        {
+            return this.shouldSerialize["reason"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +148,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reason", false },
+            };
+
             private int points;
             private string loyaltyProgramId;
             private string reason;
@@ -157,9 +192,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Reason(string reason)
             {
+                shouldSerialize["reason"] = true;
                 this.reason = reason;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReason()
+            {
+                this.shouldSerialize["reason"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -167,7 +212,7 @@ namespace Square.Models
             /// <returns> LoyaltyEventAdjustPoints. </returns>
             public LoyaltyEventAdjustPoints Build()
             {
-                return new LoyaltyEventAdjustPoints(
+                return new LoyaltyEventAdjustPoints(shouldSerialize,
                     this.points,
                     this.loyaltyProgramId,
                     this.reason);

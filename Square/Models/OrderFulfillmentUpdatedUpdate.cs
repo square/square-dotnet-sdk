@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderFulfillmentUpdatedUpdate
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderFulfillmentUpdatedUpdate"/> class.
         /// </summary>
@@ -28,15 +29,35 @@ namespace Square.Models
             string oldState = null,
             string newState = null)
         {
-            this.FulfillmentUid = fulfillmentUid;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "fulfillment_uid", false }
+            };
+
+            if (fulfillmentUid != null)
+            {
+                shouldSerialize["fulfillment_uid"] = true;
+                this.FulfillmentUid = fulfillmentUid;
+            }
+
             this.OldState = oldState;
             this.NewState = newState;
+        }
+        internal OrderFulfillmentUpdatedUpdate(Dictionary<string, bool> shouldSerialize,
+            string fulfillmentUid = null,
+            string oldState = null,
+            string newState = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            FulfillmentUid = fulfillmentUid;
+            OldState = oldState;
+            NewState = newState;
         }
 
         /// <summary>
         /// A unique ID that identifies the fulfillment only within this order.
         /// </summary>
-        [JsonProperty("fulfillment_uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fulfillment_uid")]
         public string FulfillmentUid { get; }
 
         /// <summary>
@@ -59,6 +80,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderFulfillmentUpdatedUpdate : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFulfillmentUid()
+        {
+            return this.shouldSerialize["fulfillment_uid"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +148,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "fulfillment_uid", false },
+            };
+
             private string fulfillmentUid;
             private string oldState;
             private string newState;
@@ -129,6 +164,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FulfillmentUid(string fulfillmentUid)
             {
+                shouldSerialize["fulfillment_uid"] = true;
                 this.fulfillmentUid = fulfillmentUid;
                 return this;
             }
@@ -156,12 +192,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFulfillmentUid()
+            {
+                this.shouldSerialize["fulfillment_uid"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> OrderFulfillmentUpdatedUpdate. </returns>
             public OrderFulfillmentUpdatedUpdate Build()
             {
-                return new OrderFulfillmentUpdatedUpdate(
+                return new OrderFulfillmentUpdatedUpdate(shouldSerialize,
                     this.fulfillmentUid,
                     this.oldState,
                     this.newState);

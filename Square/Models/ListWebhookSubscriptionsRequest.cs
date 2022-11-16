@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListWebhookSubscriptionsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListWebhookSubscriptionsRequest"/> class.
         /// </summary>
@@ -30,10 +31,44 @@ namespace Square.Models
             string sortOrder = null,
             int? limit = null)
         {
-            this.Cursor = cursor;
-            this.IncludeDisabled = includeDisabled;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "include_disabled", false },
+                { "limit", false }
+            };
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (includeDisabled != null)
+            {
+                shouldSerialize["include_disabled"] = true;
+                this.IncludeDisabled = includeDisabled;
+            }
+
             this.SortOrder = sortOrder;
-            this.Limit = limit;
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+        }
+        internal ListWebhookSubscriptionsRequest(Dictionary<string, bool> shouldSerialize,
+            string cursor = null,
+            bool? includeDisabled = null,
+            string sortOrder = null,
+            int? limit = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Cursor = cursor;
+            IncludeDisabled = includeDisabled;
+            SortOrder = sortOrder;
+            Limit = limit;
         }
 
         /// <summary>
@@ -41,14 +76,14 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for your original query.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
         /// Includes disabled [Subscription]($m/WebhookSubscription)s.
         /// By default, all enabled [Subscription]($m/WebhookSubscription)s are returned.
         /// </summary>
-        [JsonProperty("include_disabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("include_disabled")]
         public bool? IncludeDisabled { get; }
 
         /// <summary>
@@ -63,7 +98,7 @@ namespace Square.Models
         /// The default value of 100 is also the maximum allowed value.
         /// Default: 100
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <inheritdoc/>
@@ -74,6 +109,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListWebhookSubscriptionsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIncludeDisabled()
+        {
+            return this.shouldSerialize["include_disabled"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
         }
 
         /// <inheritdoc/>
@@ -136,6 +198,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "include_disabled", false },
+                { "limit", false },
+            };
+
             private string cursor;
             private bool? includeDisabled;
             private string sortOrder;
@@ -148,6 +217,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -159,6 +229,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IncludeDisabled(bool? includeDisabled)
             {
+                shouldSerialize["include_disabled"] = true;
                 this.includeDisabled = includeDisabled;
                 return this;
             }
@@ -181,9 +252,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIncludeDisabled()
+            {
+                this.shouldSerialize["include_disabled"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -191,7 +288,7 @@ namespace Square.Models
             /// <returns> ListWebhookSubscriptionsRequest. </returns>
             public ListWebhookSubscriptionsRequest Build()
             {
-                return new ListWebhookSubscriptionsRequest(
+                return new ListWebhookSubscriptionsRequest(shouldSerialize,
                     this.cursor,
                     this.includeDisabled,
                     this.sortOrder,

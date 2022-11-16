@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BatchRetrieveCatalogObjectsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BatchRetrieveCatalogObjectsRequest"/> class.
         /// </summary>
@@ -30,10 +31,44 @@ namespace Square.Models
             long? catalogVersion = null,
             bool? includeDeletedObjects = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "include_related_objects", false },
+                { "catalog_version", false },
+                { "include_deleted_objects", false }
+            };
+
             this.ObjectIds = objectIds;
-            this.IncludeRelatedObjects = includeRelatedObjects;
-            this.CatalogVersion = catalogVersion;
-            this.IncludeDeletedObjects = includeDeletedObjects;
+            if (includeRelatedObjects != null)
+            {
+                shouldSerialize["include_related_objects"] = true;
+                this.IncludeRelatedObjects = includeRelatedObjects;
+            }
+
+            if (catalogVersion != null)
+            {
+                shouldSerialize["catalog_version"] = true;
+                this.CatalogVersion = catalogVersion;
+            }
+
+            if (includeDeletedObjects != null)
+            {
+                shouldSerialize["include_deleted_objects"] = true;
+                this.IncludeDeletedObjects = includeDeletedObjects;
+            }
+
+        }
+        internal BatchRetrieveCatalogObjectsRequest(Dictionary<string, bool> shouldSerialize,
+            IList<string> objectIds,
+            bool? includeRelatedObjects = null,
+            long? catalogVersion = null,
+            bool? includeDeletedObjects = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ObjectIds = objectIds;
+            IncludeRelatedObjects = includeRelatedObjects;
+            CatalogVersion = catalogVersion;
+            IncludeDeletedObjects = includeDeletedObjects;
         }
 
         /// <summary>
@@ -56,7 +91,7 @@ namespace Square.Models
         /// the response.
         /// Default value: `false`
         /// </summary>
-        [JsonProperty("include_related_objects", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("include_related_objects")]
         public bool? IncludeRelatedObjects { get; }
 
         /// <summary>
@@ -65,13 +100,13 @@ namespace Square.Models
         /// the [CatalogObject]($m/CatalogObject)s' `version` attribute. If not included, results will
         /// be from the current version of the catalog.
         /// </summary>
-        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_version")]
         public long? CatalogVersion { get; }
 
         /// <summary>
         /// Indicates whether to include (`true`) or not (`false`) in the response deleted objects, namely, those with the `is_deleted` attribute set to `true`.
         /// </summary>
-        [JsonProperty("include_deleted_objects", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("include_deleted_objects")]
         public bool? IncludeDeletedObjects { get; }
 
         /// <inheritdoc/>
@@ -82,6 +117,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BatchRetrieveCatalogObjectsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIncludeRelatedObjects()
+        {
+            return this.shouldSerialize["include_related_objects"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogVersion()
+        {
+            return this.shouldSerialize["catalog_version"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIncludeDeletedObjects()
+        {
+            return this.shouldSerialize["include_deleted_objects"];
         }
 
         /// <inheritdoc/>
@@ -144,6 +206,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "include_related_objects", false },
+                { "catalog_version", false },
+                { "include_deleted_objects", false },
+            };
+
             private IList<string> objectIds;
             private bool? includeRelatedObjects;
             private long? catalogVersion;
@@ -173,6 +242,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IncludeRelatedObjects(bool? includeRelatedObjects)
             {
+                shouldSerialize["include_related_objects"] = true;
                 this.includeRelatedObjects = includeRelatedObjects;
                 return this;
             }
@@ -184,6 +254,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogVersion(long? catalogVersion)
             {
+                shouldSerialize["catalog_version"] = true;
                 this.catalogVersion = catalogVersion;
                 return this;
             }
@@ -195,9 +266,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IncludeDeletedObjects(bool? includeDeletedObjects)
             {
+                shouldSerialize["include_deleted_objects"] = true;
                 this.includeDeletedObjects = includeDeletedObjects;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIncludeRelatedObjects()
+            {
+                this.shouldSerialize["include_related_objects"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogVersion()
+            {
+                this.shouldSerialize["catalog_version"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIncludeDeletedObjects()
+            {
+                this.shouldSerialize["include_deleted_objects"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -205,7 +302,7 @@ namespace Square.Models
             /// <returns> BatchRetrieveCatalogObjectsRequest. </returns>
             public BatchRetrieveCatalogObjectsRequest Build()
             {
-                return new BatchRetrieveCatalogObjectsRequest(
+                return new BatchRetrieveCatalogObjectsRequest(shouldSerialize,
                     this.objectIds,
                     this.includeRelatedObjects,
                     this.catalogVersion,

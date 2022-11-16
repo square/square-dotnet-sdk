@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogProductSet
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogProductSet"/> class.
         /// </summary>
@@ -36,20 +37,84 @@ namespace Square.Models
             long? quantityMax = null,
             bool? allProducts = null)
         {
-            this.Name = name;
-            this.ProductIdsAny = productIdsAny;
-            this.ProductIdsAll = productIdsAll;
-            this.QuantityExact = quantityExact;
-            this.QuantityMin = quantityMin;
-            this.QuantityMax = quantityMax;
-            this.AllProducts = allProducts;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "product_ids_any", false },
+                { "product_ids_all", false },
+                { "quantity_exact", false },
+                { "quantity_min", false },
+                { "quantity_max", false },
+                { "all_products", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (productIdsAny != null)
+            {
+                shouldSerialize["product_ids_any"] = true;
+                this.ProductIdsAny = productIdsAny;
+            }
+
+            if (productIdsAll != null)
+            {
+                shouldSerialize["product_ids_all"] = true;
+                this.ProductIdsAll = productIdsAll;
+            }
+
+            if (quantityExact != null)
+            {
+                shouldSerialize["quantity_exact"] = true;
+                this.QuantityExact = quantityExact;
+            }
+
+            if (quantityMin != null)
+            {
+                shouldSerialize["quantity_min"] = true;
+                this.QuantityMin = quantityMin;
+            }
+
+            if (quantityMax != null)
+            {
+                shouldSerialize["quantity_max"] = true;
+                this.QuantityMax = quantityMax;
+            }
+
+            if (allProducts != null)
+            {
+                shouldSerialize["all_products"] = true;
+                this.AllProducts = allProducts;
+            }
+
+        }
+        internal CatalogProductSet(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            IList<string> productIdsAny = null,
+            IList<string> productIdsAll = null,
+            long? quantityExact = null,
+            long? quantityMin = null,
+            long? quantityMax = null,
+            bool? allProducts = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            ProductIdsAny = productIdsAny;
+            ProductIdsAll = productIdsAll;
+            QuantityExact = quantityExact;
+            QuantityMin = quantityMin;
+            QuantityMax = quantityMax;
+            AllProducts = allProducts;
         }
 
         /// <summary>
         /// User-defined name for the product set. For example, "Clearance Items"
         /// or "Winter Sale Items".
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -61,7 +126,7 @@ namespace Square.Models
         /// Only one of `product_ids_all`, `product_ids_any`, or `all_products` can be set.
         /// Max: 500 catalog object IDs.
         /// </summary>
-        [JsonProperty("product_ids_any", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("product_ids_any")]
         public IList<string> ProductIdsAny { get; }
 
         /// <summary>
@@ -70,7 +135,7 @@ namespace Square.Models
         /// Only one of `product_ids_all`, `product_ids_any`, or `all_products` can be set.
         /// Max: 500 catalog object IDs.
         /// </summary>
-        [JsonProperty("product_ids_all", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("product_ids_all")]
         public IList<string> ProductIdsAll { get; }
 
         /// <summary>
@@ -78,7 +143,7 @@ namespace Square.Models
         /// in the cart for the discount to apply.
         /// Cannot be combined with either `quantity_min` or `quantity_max`.
         /// </summary>
-        [JsonProperty("quantity_exact", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("quantity_exact")]
         public long? QuantityExact { get; }
 
         /// <summary>
@@ -86,21 +151,21 @@ namespace Square.Models
         /// in a cart for the discount to apply. See `quantity_exact`. Defaults to 0 if
         /// `quantity_exact`, `quantity_min` and `quantity_max` are all unspecified.
         /// </summary>
-        [JsonProperty("quantity_min", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("quantity_min")]
         public long? QuantityMin { get; }
 
         /// <summary>
         /// If set, the pricing rule will apply to a maximum of this many items from
         /// `products_any` or `products_all`.
         /// </summary>
-        [JsonProperty("quantity_max", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("quantity_max")]
         public long? QuantityMax { get; }
 
         /// <summary>
         /// If set to `true`, the product set will include every item in the catalog.
         /// Only one of `product_ids_all`, `product_ids_any`, or `all_products` can be set.
         /// </summary>
-        [JsonProperty("all_products", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("all_products")]
         public bool? AllProducts { get; }
 
         /// <inheritdoc/>
@@ -111,6 +176,69 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogProductSet : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeProductIdsAny()
+        {
+            return this.shouldSerialize["product_ids_any"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeProductIdsAll()
+        {
+            return this.shouldSerialize["product_ids_all"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQuantityExact()
+        {
+            return this.shouldSerialize["quantity_exact"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQuantityMin()
+        {
+            return this.shouldSerialize["quantity_min"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQuantityMax()
+        {
+            return this.shouldSerialize["quantity_max"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAllProducts()
+        {
+            return this.shouldSerialize["all_products"];
         }
 
         /// <inheritdoc/>
@@ -182,6 +310,17 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "product_ids_any", false },
+                { "product_ids_all", false },
+                { "quantity_exact", false },
+                { "quantity_min", false },
+                { "quantity_max", false },
+                { "all_products", false },
+            };
+
             private string name;
             private IList<string> productIdsAny;
             private IList<string> productIdsAll;
@@ -197,6 +336,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -208,6 +348,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ProductIdsAny(IList<string> productIdsAny)
             {
+                shouldSerialize["product_ids_any"] = true;
                 this.productIdsAny = productIdsAny;
                 return this;
             }
@@ -219,6 +360,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ProductIdsAll(IList<string> productIdsAll)
             {
+                shouldSerialize["product_ids_all"] = true;
                 this.productIdsAll = productIdsAll;
                 return this;
             }
@@ -230,6 +372,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder QuantityExact(long? quantityExact)
             {
+                shouldSerialize["quantity_exact"] = true;
                 this.quantityExact = quantityExact;
                 return this;
             }
@@ -241,6 +384,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder QuantityMin(long? quantityMin)
             {
+                shouldSerialize["quantity_min"] = true;
                 this.quantityMin = quantityMin;
                 return this;
             }
@@ -252,6 +396,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder QuantityMax(long? quantityMax)
             {
+                shouldSerialize["quantity_max"] = true;
                 this.quantityMax = quantityMax;
                 return this;
             }
@@ -263,9 +408,67 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AllProducts(bool? allProducts)
             {
+                shouldSerialize["all_products"] = true;
                 this.allProducts = allProducts;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetProductIdsAny()
+            {
+                this.shouldSerialize["product_ids_any"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetProductIdsAll()
+            {
+                this.shouldSerialize["product_ids_all"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQuantityExact()
+            {
+                this.shouldSerialize["quantity_exact"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQuantityMin()
+            {
+                this.shouldSerialize["quantity_min"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQuantityMax()
+            {
+                this.shouldSerialize["quantity_max"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAllProducts()
+            {
+                this.shouldSerialize["all_products"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -273,7 +476,7 @@ namespace Square.Models
             /// <returns> CatalogProductSet. </returns>
             public CatalogProductSet Build()
             {
-                return new CatalogProductSet(
+                return new CatalogProductSet(shouldSerialize,
                     this.name,
                     this.productIdsAny,
                     this.productIdsAll,

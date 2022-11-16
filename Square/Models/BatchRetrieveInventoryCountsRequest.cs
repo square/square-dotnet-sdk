@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BatchRetrieveInventoryCountsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BatchRetrieveInventoryCountsRequest"/> class.
         /// </summary>
@@ -34,26 +35,82 @@ namespace Square.Models
             IList<string> states = null,
             int? limit = null)
         {
-            this.CatalogObjectIds = catalogObjectIds;
-            this.LocationIds = locationIds;
-            this.UpdatedAfter = updatedAfter;
-            this.Cursor = cursor;
-            this.States = states;
-            this.Limit = limit;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "catalog_object_ids", false },
+                { "location_ids", false },
+                { "updated_after", false },
+                { "cursor", false },
+                { "states", false },
+                { "limit", false }
+            };
+
+            if (catalogObjectIds != null)
+            {
+                shouldSerialize["catalog_object_ids"] = true;
+                this.CatalogObjectIds = catalogObjectIds;
+            }
+
+            if (locationIds != null)
+            {
+                shouldSerialize["location_ids"] = true;
+                this.LocationIds = locationIds;
+            }
+
+            if (updatedAfter != null)
+            {
+                shouldSerialize["updated_after"] = true;
+                this.UpdatedAfter = updatedAfter;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (states != null)
+            {
+                shouldSerialize["states"] = true;
+                this.States = states;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+        }
+        internal BatchRetrieveInventoryCountsRequest(Dictionary<string, bool> shouldSerialize,
+            IList<string> catalogObjectIds = null,
+            IList<string> locationIds = null,
+            string updatedAfter = null,
+            string cursor = null,
+            IList<string> states = null,
+            int? limit = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            CatalogObjectIds = catalogObjectIds;
+            LocationIds = locationIds;
+            UpdatedAfter = updatedAfter;
+            Cursor = cursor;
+            States = states;
+            Limit = limit;
         }
 
         /// <summary>
         /// The filter to return results by `CatalogObject` ID.
         /// The filter is applicable only when set.  The default is null.
         /// </summary>
-        [JsonProperty("catalog_object_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_object_ids")]
         public IList<string> CatalogObjectIds { get; }
 
         /// <summary>
         /// The filter to return results by `Location` ID.
         /// This filter is applicable only when set. The default is null.
         /// </summary>
-        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
 
         /// <summary>
@@ -61,7 +118,7 @@ namespace Square.Models
         /// after the given time as specified in an RFC 3339 timestamp.
         /// The default value is the UNIX epoch of (`1970-01-01T00:00:00Z`).
         /// </summary>
-        [JsonProperty("updated_after", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("updated_after")]
         public string UpdatedAfter { get; }
 
         /// <summary>
@@ -69,7 +126,7 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for the original query.
         /// See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
@@ -77,13 +134,13 @@ namespace Square.Models
         /// Ignored are untracked states of `NONE`, `SOLD`, and `UNLINKED_RETURN`.
         /// The default is null.
         /// </summary>
-        [JsonProperty("states", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("states")]
         public IList<string> States { get; }
 
         /// <summary>
         /// The number of [records]($m/InventoryCount) to return.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <inheritdoc/>
@@ -94,6 +151,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BatchRetrieveInventoryCountsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogObjectIds()
+        {
+            return this.shouldSerialize["catalog_object_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationIds()
+        {
+            return this.shouldSerialize["location_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdatedAfter()
+        {
+            return this.shouldSerialize["updated_after"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStates()
+        {
+            return this.shouldSerialize["states"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
         }
 
         /// <inheritdoc/>
@@ -162,6 +273,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "catalog_object_ids", false },
+                { "location_ids", false },
+                { "updated_after", false },
+                { "cursor", false },
+                { "states", false },
+                { "limit", false },
+            };
+
             private IList<string> catalogObjectIds;
             private IList<string> locationIds;
             private string updatedAfter;
@@ -176,6 +297,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogObjectIds(IList<string> catalogObjectIds)
             {
+                shouldSerialize["catalog_object_ids"] = true;
                 this.catalogObjectIds = catalogObjectIds;
                 return this;
             }
@@ -187,6 +309,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
+                shouldSerialize["location_ids"] = true;
                 this.locationIds = locationIds;
                 return this;
             }
@@ -198,6 +321,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder UpdatedAfter(string updatedAfter)
             {
+                shouldSerialize["updated_after"] = true;
                 this.updatedAfter = updatedAfter;
                 return this;
             }
@@ -209,6 +333,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -220,6 +345,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder States(IList<string> states)
             {
+                shouldSerialize["states"] = true;
                 this.states = states;
                 return this;
             }
@@ -231,9 +357,59 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogObjectIds()
+            {
+                this.shouldSerialize["catalog_object_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationIds()
+            {
+                this.shouldSerialize["location_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUpdatedAfter()
+            {
+                this.shouldSerialize["updated_after"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStates()
+            {
+                this.shouldSerialize["states"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -241,7 +417,7 @@ namespace Square.Models
             /// <returns> BatchRetrieveInventoryCountsRequest. </returns>
             public BatchRetrieveInventoryCountsRequest Build()
             {
-                return new BatchRetrieveInventoryCountsRequest(
+                return new BatchRetrieveInventoryCountsRequest(shouldSerialize,
                     this.catalogObjectIds,
                     this.locationIds,
                     this.updatedAfter,

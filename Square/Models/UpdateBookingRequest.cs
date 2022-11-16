@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class UpdateBookingRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateBookingRequest"/> class.
         /// </summary>
@@ -26,14 +27,32 @@ namespace Square.Models
             Models.Booking booking,
             string idempotencyKey = null)
         {
-            this.IdempotencyKey = idempotencyKey;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false }
+            };
+
+            if (idempotencyKey != null)
+            {
+                shouldSerialize["idempotency_key"] = true;
+                this.IdempotencyKey = idempotencyKey;
+            }
+
             this.Booking = booking;
+        }
+        internal UpdateBookingRequest(Dictionary<string, bool> shouldSerialize,
+            Models.Booking booking,
+            string idempotencyKey = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            IdempotencyKey = idempotencyKey;
+            Booking = booking;
         }
 
         /// <summary>
         /// A unique key to make this request an idempotent operation.
         /// </summary>
-        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <summary>
@@ -51,6 +70,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"UpdateBookingRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIdempotencyKey()
+        {
+            return this.shouldSerialize["idempotency_key"];
         }
 
         /// <inheritdoc/>
@@ -107,6 +135,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false },
+            };
+
             private Models.Booking booking;
             private string idempotencyKey;
 
@@ -134,9 +167,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
+                shouldSerialize["idempotency_key"] = true;
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIdempotencyKey()
+            {
+                this.shouldSerialize["idempotency_key"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -144,7 +187,7 @@ namespace Square.Models
             /// <returns> UpdateBookingRequest. </returns>
             public UpdateBookingRequest Build()
             {
-                return new UpdateBookingRequest(
+                return new UpdateBookingRequest(shouldSerialize,
                     this.booking,
                     this.idempotencyKey);
             }

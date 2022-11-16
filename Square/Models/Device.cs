@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Device
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Device"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             string id = null,
             string name = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false }
+            };
+
             this.Id = id;
-            this.Name = name;
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+        }
+        internal Device(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string name = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Name = name;
         }
 
         /// <summary>
@@ -39,7 +58,7 @@ namespace Square.Models
         /// <summary>
         /// The device's merchant-specified name.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <inheritdoc/>
@@ -50,6 +69,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Device : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +134,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+            };
+
             private string id;
             private string name;
 
@@ -127,9 +160,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +180,7 @@ namespace Square.Models
             /// <returns> Device. </returns>
             public Device Build()
             {
-                return new Device(
+                return new Device(shouldSerialize,
                     this.id,
                     this.name);
             }

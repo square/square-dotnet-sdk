@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SearchTeamMembersFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchTeamMembersFilter"/> class.
         /// </summary>
@@ -28,16 +29,42 @@ namespace Square.Models
             string status = null,
             bool? isOwner = null)
         {
-            this.LocationIds = locationIds;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false },
+                { "is_owner", false }
+            };
+
+            if (locationIds != null)
+            {
+                shouldSerialize["location_ids"] = true;
+                this.LocationIds = locationIds;
+            }
+
             this.Status = status;
-            this.IsOwner = isOwner;
+            if (isOwner != null)
+            {
+                shouldSerialize["is_owner"] = true;
+                this.IsOwner = isOwner;
+            }
+
+        }
+        internal SearchTeamMembersFilter(Dictionary<string, bool> shouldSerialize,
+            IList<string> locationIds = null,
+            string status = null,
+            bool? isOwner = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationIds = locationIds;
+            Status = status;
+            IsOwner = isOwner;
         }
 
         /// <summary>
         /// When present, filters by team members assigned to the specified locations.
         /// When empty, includes team members assigned to any location.
         /// </summary>
-        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
 
         /// <summary>
@@ -49,7 +76,7 @@ namespace Square.Models
         /// <summary>
         /// When present and set to true, returns the team member who is the owner of the Square account.
         /// </summary>
-        [JsonProperty("is_owner", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_owner")]
         public bool? IsOwner { get; }
 
         /// <inheritdoc/>
@@ -60,6 +87,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SearchTeamMembersFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationIds()
+        {
+            return this.shouldSerialize["location_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsOwner()
+        {
+            return this.shouldSerialize["is_owner"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +164,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false },
+                { "is_owner", false },
+            };
+
             private IList<string> locationIds;
             private string status;
             private bool? isOwner;
@@ -130,6 +181,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
+                shouldSerialize["location_ids"] = true;
                 this.locationIds = locationIds;
                 return this;
             }
@@ -152,9 +204,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IsOwner(bool? isOwner)
             {
+                shouldSerialize["is_owner"] = true;
                 this.isOwner = isOwner;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationIds()
+            {
+                this.shouldSerialize["location_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsOwner()
+            {
+                this.shouldSerialize["is_owner"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -162,7 +232,7 @@ namespace Square.Models
             /// <returns> SearchTeamMembersFilter. </returns>
             public SearchTeamMembersFilter Build()
             {
-                return new SearchTeamMembersFilter(
+                return new SearchTeamMembersFilter(shouldSerialize,
                     this.locationIds,
                     this.status,
                     this.isOwner);

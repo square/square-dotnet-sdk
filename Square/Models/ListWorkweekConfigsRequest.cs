@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListWorkweekConfigsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListWorkweekConfigsRequest"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             int? limit = null,
             string cursor = null)
         {
-            this.Limit = limit;
-            this.Cursor = cursor;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "cursor", false }
+            };
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+        }
+        internal ListWorkweekConfigsRequest(Dictionary<string, bool> shouldSerialize,
+            int? limit = null,
+            string cursor = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Limit = limit;
+            Cursor = cursor;
         }
 
         /// <summary>
         /// The maximum number of `WorkweekConfigs` results to return per page.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
         /// A pointer to the next page of `WorkweekConfig` results to fetch.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListWorkweekConfigsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "cursor", false },
+            };
+
             private int? limit;
             private string cursor;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> ListWorkweekConfigsRequest. </returns>
             public ListWorkweekConfigsRequest Build()
             {
-                return new ListWorkweekConfigsRequest(
+                return new ListWorkweekConfigsRequest(shouldSerialize,
                     this.limit,
                     this.cursor);
             }

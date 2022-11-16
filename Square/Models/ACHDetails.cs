@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ACHDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ACHDetails"/> class.
         /// </summary>
@@ -28,28 +29,60 @@ namespace Square.Models
             string accountNumberSuffix = null,
             string accountType = null)
         {
-            this.RoutingNumber = routingNumber;
-            this.AccountNumberSuffix = accountNumberSuffix;
-            this.AccountType = accountType;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "routing_number", false },
+                { "account_number_suffix", false },
+                { "account_type", false }
+            };
+
+            if (routingNumber != null)
+            {
+                shouldSerialize["routing_number"] = true;
+                this.RoutingNumber = routingNumber;
+            }
+
+            if (accountNumberSuffix != null)
+            {
+                shouldSerialize["account_number_suffix"] = true;
+                this.AccountNumberSuffix = accountNumberSuffix;
+            }
+
+            if (accountType != null)
+            {
+                shouldSerialize["account_type"] = true;
+                this.AccountType = accountType;
+            }
+
+        }
+        internal ACHDetails(Dictionary<string, bool> shouldSerialize,
+            string routingNumber = null,
+            string accountNumberSuffix = null,
+            string accountType = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            RoutingNumber = routingNumber;
+            AccountNumberSuffix = accountNumberSuffix;
+            AccountType = accountType;
         }
 
         /// <summary>
         /// The routing number for the bank account.
         /// </summary>
-        [JsonProperty("routing_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("routing_number")]
         public string RoutingNumber { get; }
 
         /// <summary>
         /// The last few digits of the bank account number.
         /// </summary>
-        [JsonProperty("account_number_suffix", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("account_number_suffix")]
         public string AccountNumberSuffix { get; }
 
         /// <summary>
         /// The type of the bank account performing the transfer. The account type can be `CHECKING`,
         /// `SAVINGS`, or `UNKNOWN`.
         /// </summary>
-        [JsonProperty("account_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("account_type")]
         public string AccountType { get; }
 
         /// <inheritdoc/>
@@ -60,6 +93,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ACHDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRoutingNumber()
+        {
+            return this.shouldSerialize["routing_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAccountNumberSuffix()
+        {
+            return this.shouldSerialize["account_number_suffix"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAccountType()
+        {
+            return this.shouldSerialize["account_type"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +179,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "routing_number", false },
+                { "account_number_suffix", false },
+                { "account_type", false },
+            };
+
             private string routingNumber;
             private string accountNumberSuffix;
             private string accountType;
@@ -130,6 +197,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RoutingNumber(string routingNumber)
             {
+                shouldSerialize["routing_number"] = true;
                 this.routingNumber = routingNumber;
                 return this;
             }
@@ -141,6 +209,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AccountNumberSuffix(string accountNumberSuffix)
             {
+                shouldSerialize["account_number_suffix"] = true;
                 this.accountNumberSuffix = accountNumberSuffix;
                 return this;
             }
@@ -152,9 +221,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AccountType(string accountType)
             {
+                shouldSerialize["account_type"] = true;
                 this.accountType = accountType;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRoutingNumber()
+            {
+                this.shouldSerialize["routing_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAccountNumberSuffix()
+            {
+                this.shouldSerialize["account_number_suffix"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAccountType()
+            {
+                this.shouldSerialize["account_type"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -162,7 +257,7 @@ namespace Square.Models
             /// <returns> ACHDetails. </returns>
             public ACHDetails Build()
             {
-                return new ACHDetails(
+                return new ACHDetails(shouldSerialize,
                     this.routingNumber,
                     this.accountNumberSuffix,
                     this.accountType);

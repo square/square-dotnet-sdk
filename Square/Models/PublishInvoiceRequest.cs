@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PublishInvoiceRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PublishInvoiceRequest"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             int version,
             string idempotencyKey = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false }
+            };
+
             this.Version = version;
-            this.IdempotencyKey = idempotencyKey;
+            if (idempotencyKey != null)
+            {
+                shouldSerialize["idempotency_key"] = true;
+                this.IdempotencyKey = idempotencyKey;
+            }
+
+        }
+        internal PublishInvoiceRequest(Dictionary<string, bool> shouldSerialize,
+            int version,
+            string idempotencyKey = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Version = version;
+            IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
@@ -43,7 +62,7 @@ namespace Square.Models
         /// treats each request as independent.
         /// For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
         /// </summary>
-        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <inheritdoc/>
@@ -54,6 +73,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PublishInvoiceRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIdempotencyKey()
+        {
+            return this.shouldSerialize["idempotency_key"];
         }
 
         /// <inheritdoc/>
@@ -110,6 +138,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false },
+            };
+
             private int version;
             private string idempotencyKey;
 
@@ -137,9 +170,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
+                shouldSerialize["idempotency_key"] = true;
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIdempotencyKey()
+            {
+                this.shouldSerialize["idempotency_key"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -147,7 +190,7 @@ namespace Square.Models
             /// <returns> PublishInvoiceRequest. </returns>
             public PublishInvoiceRequest Build()
             {
-                return new PublishInvoiceRequest(
+                return new PublishInvoiceRequest(shouldSerialize,
                     this.version,
                     this.idempotencyKey);
             }

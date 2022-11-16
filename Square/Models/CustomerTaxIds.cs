@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CustomerTaxIds
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerTaxIds"/> class.
         /// </summary>
@@ -24,13 +25,29 @@ namespace Square.Models
         public CustomerTaxIds(
             string euVat = null)
         {
-            this.EuVat = euVat;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "eu_vat", false }
+            };
+
+            if (euVat != null)
+            {
+                shouldSerialize["eu_vat"] = true;
+                this.EuVat = euVat;
+            }
+
+        }
+        internal CustomerTaxIds(Dictionary<string, bool> shouldSerialize,
+            string euVat = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            EuVat = euVat;
         }
 
         /// <summary>
         /// The EU VAT identification number for the customer. For example, `IE3426675K`. The ID can contain alphanumeric characters only.
         /// </summary>
-        [JsonProperty("eu_vat", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("eu_vat")]
         public string EuVat { get; }
 
         /// <inheritdoc/>
@@ -41,6 +58,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CustomerTaxIds : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEuVat()
+        {
+            return this.shouldSerialize["eu_vat"];
         }
 
         /// <inheritdoc/>
@@ -94,6 +120,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "eu_vat", false },
+            };
+
             private string euVat;
 
              /// <summary>
@@ -103,9 +134,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EuVat(string euVat)
             {
+                shouldSerialize["eu_vat"] = true;
                 this.euVat = euVat;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEuVat()
+            {
+                this.shouldSerialize["eu_vat"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -113,7 +154,7 @@ namespace Square.Models
             /// <returns> CustomerTaxIds. </returns>
             public CustomerTaxIds Build()
             {
-                return new CustomerTaxIds(
+                return new CustomerTaxIds(shouldSerialize,
                     this.euVat);
             }
         }

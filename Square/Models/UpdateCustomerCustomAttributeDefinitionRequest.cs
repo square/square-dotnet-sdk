@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class UpdateCustomerCustomAttributeDefinitionRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="UpdateCustomerCustomAttributeDefinitionRequest"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             Models.CustomAttributeDefinition customAttributeDefinition,
             string idempotencyKey = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false }
+            };
+
             this.CustomAttributeDefinition = customAttributeDefinition;
-            this.IdempotencyKey = idempotencyKey;
+            if (idempotencyKey != null)
+            {
+                shouldSerialize["idempotency_key"] = true;
+                this.IdempotencyKey = idempotencyKey;
+            }
+
+        }
+        internal UpdateCustomerCustomAttributeDefinitionRequest(Dictionary<string, bool> shouldSerialize,
+            Models.CustomAttributeDefinition customAttributeDefinition,
+            string idempotencyKey = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            CustomAttributeDefinition = customAttributeDefinition;
+            IdempotencyKey = idempotencyKey;
         }
 
         /// <summary>
@@ -41,7 +60,7 @@ namespace Square.Models
         /// A unique identifier for this request, used to ensure idempotency. For more information,
         /// see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
         /// </summary>
-        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <inheritdoc/>
@@ -52,6 +71,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"UpdateCustomerCustomAttributeDefinitionRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIdempotencyKey()
+        {
+            return this.shouldSerialize["idempotency_key"];
         }
 
         /// <inheritdoc/>
@@ -108,6 +136,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false },
+            };
+
             private Models.CustomAttributeDefinition customAttributeDefinition;
             private string idempotencyKey;
 
@@ -135,9 +168,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
+                shouldSerialize["idempotency_key"] = true;
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIdempotencyKey()
+            {
+                this.shouldSerialize["idempotency_key"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -145,7 +188,7 @@ namespace Square.Models
             /// <returns> UpdateCustomerCustomAttributeDefinitionRequest. </returns>
             public UpdateCustomerCustomAttributeDefinitionRequest Build()
             {
-                return new UpdateCustomerCustomAttributeDefinitionRequest(
+                return new UpdateCustomerCustomAttributeDefinitionRequest(shouldSerialize,
                     this.customAttributeDefinition,
                     this.idempotencyKey);
             }

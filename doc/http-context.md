@@ -7,8 +7,8 @@ Represents the contextual information of HTTP request and response.
 
 | Name | Description | Type |
 |  --- | --- | --- |
-| Request | Gets the http request in the current context. | `HttpRequest` |
-| Response | Gets the http response in the current context. | `HttpResponse` |
+| Request | Gets the http request in the current context. | [`HttpRequest`](http-request.md) |
+| Response | Gets the http response in the current context. | [`HttpResponse`](http-response.md) |
 
 ## Constructors
 

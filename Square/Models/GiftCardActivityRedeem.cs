@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class GiftCardActivityRedeem
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="GiftCardActivityRedeem"/> class.
         /// </summary>
@@ -30,10 +31,32 @@ namespace Square.Models
             string referenceId = null,
             string status = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reference_id", false }
+            };
+
             this.AmountMoney = amountMoney;
             this.PaymentId = paymentId;
-            this.ReferenceId = referenceId;
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
             this.Status = status;
+        }
+        internal GiftCardActivityRedeem(Dictionary<string, bool> shouldSerialize,
+            Models.Money amountMoney,
+            string paymentId = null,
+            string referenceId = null,
+            string status = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AmountMoney = amountMoney;
+            PaymentId = paymentId;
+            ReferenceId = referenceId;
+            Status = status;
         }
 
         /// <summary>
@@ -59,7 +82,7 @@ namespace Square.Models
         /// Applications that use a custom payment processing system can use this field to track information
         /// related to an order or payment.
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
@@ -78,6 +101,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"GiftCardActivityRedeem : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
         }
 
         /// <inheritdoc/>
@@ -140,6 +172,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reference_id", false },
+            };
+
             private Models.Money amountMoney;
             private string paymentId;
             private string referenceId;
@@ -180,6 +217,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -196,12 +234,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> GiftCardActivityRedeem. </returns>
             public GiftCardActivityRedeem Build()
             {
-                return new GiftCardActivityRedeem(
+                return new GiftCardActivityRedeem(shouldSerialize,
                     this.amountMoney,
                     this.paymentId,
                     this.referenceId,

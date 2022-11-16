@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BusinessBookingProfile
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BusinessBookingProfile"/> class.
         /// </summary>
@@ -38,20 +39,68 @@ namespace Square.Models
             Models.BusinessAppointmentSettings businessAppointmentSettings = null,
             bool? supportSellerLevelWrites = null)
         {
-            this.SellerId = sellerId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "seller_id", false },
+                { "booking_enabled", false },
+                { "allow_user_cancel", false },
+                { "support_seller_level_writes", false }
+            };
+
+            if (sellerId != null)
+            {
+                shouldSerialize["seller_id"] = true;
+                this.SellerId = sellerId;
+            }
+
             this.CreatedAt = createdAt;
-            this.BookingEnabled = bookingEnabled;
+            if (bookingEnabled != null)
+            {
+                shouldSerialize["booking_enabled"] = true;
+                this.BookingEnabled = bookingEnabled;
+            }
+
             this.CustomerTimezoneChoice = customerTimezoneChoice;
             this.BookingPolicy = bookingPolicy;
-            this.AllowUserCancel = allowUserCancel;
+            if (allowUserCancel != null)
+            {
+                shouldSerialize["allow_user_cancel"] = true;
+                this.AllowUserCancel = allowUserCancel;
+            }
+
             this.BusinessAppointmentSettings = businessAppointmentSettings;
-            this.SupportSellerLevelWrites = supportSellerLevelWrites;
+            if (supportSellerLevelWrites != null)
+            {
+                shouldSerialize["support_seller_level_writes"] = true;
+                this.SupportSellerLevelWrites = supportSellerLevelWrites;
+            }
+
+        }
+        internal BusinessBookingProfile(Dictionary<string, bool> shouldSerialize,
+            string sellerId = null,
+            string createdAt = null,
+            bool? bookingEnabled = null,
+            string customerTimezoneChoice = null,
+            string bookingPolicy = null,
+            bool? allowUserCancel = null,
+            Models.BusinessAppointmentSettings businessAppointmentSettings = null,
+            bool? supportSellerLevelWrites = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            SellerId = sellerId;
+            CreatedAt = createdAt;
+            BookingEnabled = bookingEnabled;
+            CustomerTimezoneChoice = customerTimezoneChoice;
+            BookingPolicy = bookingPolicy;
+            AllowUserCancel = allowUserCancel;
+            BusinessAppointmentSettings = businessAppointmentSettings;
+            SupportSellerLevelWrites = supportSellerLevelWrites;
         }
 
         /// <summary>
         /// The ID of the seller, obtainable using the Merchants API.
         /// </summary>
-        [JsonProperty("seller_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("seller_id")]
         public string SellerId { get; }
 
         /// <summary>
@@ -63,7 +112,7 @@ namespace Square.Models
         /// <summary>
         /// Indicates whether the seller is open for booking.
         /// </summary>
-        [JsonProperty("booking_enabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("booking_enabled")]
         public bool? BookingEnabled { get; }
 
         /// <summary>
@@ -81,7 +130,7 @@ namespace Square.Models
         /// <summary>
         /// Indicates whether customers can cancel or reschedule their own bookings (`true`) or not (`false`).
         /// </summary>
-        [JsonProperty("allow_user_cancel", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("allow_user_cancel")]
         public bool? AllowUserCancel { get; }
 
         /// <summary>
@@ -93,7 +142,7 @@ namespace Square.Models
         /// <summary>
         /// Indicates whether the seller's subscription to Square Appointments supports creating, updating or canceling an appointment through the API (`true`) or not (`false`) using seller permission.
         /// </summary>
-        [JsonProperty("support_seller_level_writes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("support_seller_level_writes")]
         public bool? SupportSellerLevelWrites { get; }
 
         /// <inheritdoc/>
@@ -104,6 +153,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BusinessBookingProfile : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSellerId()
+        {
+            return this.shouldSerialize["seller_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBookingEnabled()
+        {
+            return this.shouldSerialize["booking_enabled"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAllowUserCancel()
+        {
+            return this.shouldSerialize["allow_user_cancel"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSupportSellerLevelWrites()
+        {
+            return this.shouldSerialize["support_seller_level_writes"];
         }
 
         /// <inheritdoc/>
@@ -180,6 +265,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "seller_id", false },
+                { "booking_enabled", false },
+                { "allow_user_cancel", false },
+                { "support_seller_level_writes", false },
+            };
+
             private string sellerId;
             private string createdAt;
             private bool? bookingEnabled;
@@ -196,6 +289,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SellerId(string sellerId)
             {
+                shouldSerialize["seller_id"] = true;
                 this.sellerId = sellerId;
                 return this;
             }
@@ -218,6 +312,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BookingEnabled(bool? bookingEnabled)
             {
+                shouldSerialize["booking_enabled"] = true;
                 this.bookingEnabled = bookingEnabled;
                 return this;
             }
@@ -251,6 +346,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AllowUserCancel(bool? allowUserCancel)
             {
+                shouldSerialize["allow_user_cancel"] = true;
                 this.allowUserCancel = allowUserCancel;
                 return this;
             }
@@ -273,9 +369,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SupportSellerLevelWrites(bool? supportSellerLevelWrites)
             {
+                shouldSerialize["support_seller_level_writes"] = true;
                 this.supportSellerLevelWrites = supportSellerLevelWrites;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSellerId()
+            {
+                this.shouldSerialize["seller_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBookingEnabled()
+            {
+                this.shouldSerialize["booking_enabled"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAllowUserCancel()
+            {
+                this.shouldSerialize["allow_user_cancel"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSupportSellerLevelWrites()
+            {
+                this.shouldSerialize["support_seller_level_writes"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -283,7 +413,7 @@ namespace Square.Models
             /// <returns> BusinessBookingProfile. </returns>
             public BusinessBookingProfile Build()
             {
-                return new BusinessBookingProfile(
+                return new BusinessBookingProfile(shouldSerialize,
                     this.sellerId,
                     this.createdAt,
                     this.bookingEnabled,

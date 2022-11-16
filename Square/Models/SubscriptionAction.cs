@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SubscriptionAction
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionAction"/> class.
         /// </summary>
@@ -30,10 +31,38 @@ namespace Square.Models
             string effectiveDate = null,
             string newPlanId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "effective_date", false },
+                { "new_plan_id", false }
+            };
+
             this.Id = id;
             this.Type = type;
-            this.EffectiveDate = effectiveDate;
-            this.NewPlanId = newPlanId;
+            if (effectiveDate != null)
+            {
+                shouldSerialize["effective_date"] = true;
+                this.EffectiveDate = effectiveDate;
+            }
+
+            if (newPlanId != null)
+            {
+                shouldSerialize["new_plan_id"] = true;
+                this.NewPlanId = newPlanId;
+            }
+
+        }
+        internal SubscriptionAction(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string type = null,
+            string effectiveDate = null,
+            string newPlanId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Type = type;
+            EffectiveDate = effectiveDate;
+            NewPlanId = newPlanId;
         }
 
         /// <summary>
@@ -51,13 +80,13 @@ namespace Square.Models
         /// <summary>
         /// The `YYYY-MM-DD`-formatted date when the action occurs on the subscription.
         /// </summary>
-        [JsonProperty("effective_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("effective_date")]
         public string EffectiveDate { get; }
 
         /// <summary>
         /// The target subscription plan a subscription switches to, for a `SWAP_PLAN` action.
         /// </summary>
-        [JsonProperty("new_plan_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("new_plan_id")]
         public string NewPlanId { get; }
 
         /// <inheritdoc/>
@@ -68,6 +97,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SubscriptionAction : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEffectiveDate()
+        {
+            return this.shouldSerialize["effective_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNewPlanId()
+        {
+            return this.shouldSerialize["new_plan_id"];
         }
 
         /// <inheritdoc/>
@@ -130,6 +177,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "effective_date", false },
+                { "new_plan_id", false },
+            };
+
             private string id;
             private string type;
             private string effectiveDate;
@@ -164,6 +217,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EffectiveDate(string effectiveDate)
             {
+                shouldSerialize["effective_date"] = true;
                 this.effectiveDate = effectiveDate;
                 return this;
             }
@@ -175,9 +229,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder NewPlanId(string newPlanId)
             {
+                shouldSerialize["new_plan_id"] = true;
                 this.newPlanId = newPlanId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEffectiveDate()
+            {
+                this.shouldSerialize["effective_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNewPlanId()
+            {
+                this.shouldSerialize["new_plan_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -185,7 +257,7 @@ namespace Square.Models
             /// <returns> SubscriptionAction. </returns>
             public SubscriptionAction Build()
             {
-                return new SubscriptionAction(
+                return new SubscriptionAction(shouldSerialize,
                     this.id,
                     this.type,
                     this.effectiveDate,

@@ -130,7 +130,7 @@ namespace Square.Apis
         /// </summary>
         private void UpdateUserAgent()
         {
-            internalUserAgent = "Square-DotNet-SDK/23.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+            internalUserAgent = "Square-DotNet-SDK/24.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
             string userAgentDetail = string.Empty;
 
             if (!string.IsNullOrEmpty(Config.UserAgentDetail))

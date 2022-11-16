@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DisputeEvidenceFile
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DisputeEvidenceFile"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             string filename = null,
             string filetype = null)
         {
-            this.Filename = filename;
-            this.Filetype = filetype;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "filename", false },
+                { "filetype", false }
+            };
+
+            if (filename != null)
+            {
+                shouldSerialize["filename"] = true;
+                this.Filename = filename;
+            }
+
+            if (filetype != null)
+            {
+                shouldSerialize["filetype"] = true;
+                this.Filetype = filetype;
+            }
+
+        }
+        internal DisputeEvidenceFile(Dictionary<string, bool> shouldSerialize,
+            string filename = null,
+            string filetype = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Filename = filename;
+            Filetype = filetype;
         }
 
         /// <summary>
         /// The file name including the file extension. For example: "receipt.tiff".
         /// </summary>
-        [JsonProperty("filename", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("filename")]
         public string Filename { get; }
 
         /// <summary>
         /// Dispute evidence files must be application/pdf, image/heic, image/heif, image/jpeg, image/png, or image/tiff formats.
         /// </summary>
-        [JsonProperty("filetype", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("filetype")]
         public string Filetype { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DisputeEvidenceFile : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFilename()
+        {
+            return this.shouldSerialize["filename"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFiletype()
+        {
+            return this.shouldSerialize["filetype"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "filename", false },
+                { "filetype", false },
+            };
+
             private string filename;
             private string filetype;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Filename(string filename)
             {
+                shouldSerialize["filename"] = true;
                 this.filename = filename;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Filetype(string filetype)
             {
+                shouldSerialize["filetype"] = true;
                 this.filetype = filetype;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFilename()
+            {
+                this.shouldSerialize["filename"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFiletype()
+            {
+                this.shouldSerialize["filetype"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> DisputeEvidenceFile. </returns>
             public DisputeEvidenceFile Build()
             {
-                return new DisputeEvidenceFile(
+                return new DisputeEvidenceFile(shouldSerialize,
                     this.filename,
                     this.filetype);
             }

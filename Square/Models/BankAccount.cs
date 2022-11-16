@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BankAccount
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BankAccount"/> class.
         /// </summary>
@@ -56,6 +57,16 @@ namespace Square.Models
             int? version = null,
             string bankName = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "secondary_bank_identification_number", false },
+                { "debit_mandate_reference_id", false },
+                { "reference_id", false },
+                { "location_id", false },
+                { "fingerprint", false },
+                { "bank_name", false }
+            };
+
             this.Id = id;
             this.AccountNumberSuffix = accountNumberSuffix;
             this.Country = country;
@@ -63,16 +74,84 @@ namespace Square.Models
             this.AccountType = accountType;
             this.HolderName = holderName;
             this.PrimaryBankIdentificationNumber = primaryBankIdentificationNumber;
-            this.SecondaryBankIdentificationNumber = secondaryBankIdentificationNumber;
-            this.DebitMandateReferenceId = debitMandateReferenceId;
-            this.ReferenceId = referenceId;
-            this.LocationId = locationId;
+            if (secondaryBankIdentificationNumber != null)
+            {
+                shouldSerialize["secondary_bank_identification_number"] = true;
+                this.SecondaryBankIdentificationNumber = secondaryBankIdentificationNumber;
+            }
+
+            if (debitMandateReferenceId != null)
+            {
+                shouldSerialize["debit_mandate_reference_id"] = true;
+                this.DebitMandateReferenceId = debitMandateReferenceId;
+            }
+
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
             this.Status = status;
             this.Creditable = creditable;
             this.Debitable = debitable;
-            this.Fingerprint = fingerprint;
+            if (fingerprint != null)
+            {
+                shouldSerialize["fingerprint"] = true;
+                this.Fingerprint = fingerprint;
+            }
+
             this.Version = version;
-            this.BankName = bankName;
+            if (bankName != null)
+            {
+                shouldSerialize["bank_name"] = true;
+                this.BankName = bankName;
+            }
+
+        }
+        internal BankAccount(Dictionary<string, bool> shouldSerialize,
+            string id,
+            string accountNumberSuffix,
+            string country,
+            string currency,
+            string accountType,
+            string holderName,
+            string primaryBankIdentificationNumber,
+            string status,
+            bool creditable,
+            bool debitable,
+            string secondaryBankIdentificationNumber = null,
+            string debitMandateReferenceId = null,
+            string referenceId = null,
+            string locationId = null,
+            string fingerprint = null,
+            int? version = null,
+            string bankName = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            AccountNumberSuffix = accountNumberSuffix;
+            Country = country;
+            Currency = currency;
+            AccountType = accountType;
+            HolderName = holderName;
+            PrimaryBankIdentificationNumber = primaryBankIdentificationNumber;
+            SecondaryBankIdentificationNumber = secondaryBankIdentificationNumber;
+            DebitMandateReferenceId = debitMandateReferenceId;
+            ReferenceId = referenceId;
+            LocationId = locationId;
+            Status = status;
+            Creditable = creditable;
+            Debitable = debitable;
+            Fingerprint = fingerprint;
+            Version = version;
+            BankName = bankName;
         }
 
         /// <summary>
@@ -125,27 +204,27 @@ namespace Square.Models
         /// Secondary identifier for the bank. For more information, see
         /// [Bank Accounts API](https://developer.squareup.com/docs/bank-accounts-api).
         /// </summary>
-        [JsonProperty("secondary_bank_identification_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("secondary_bank_identification_number")]
         public string SecondaryBankIdentificationNumber { get; }
 
         /// <summary>
         /// Reference identifier that will be displayed to UK bank account owners
         /// when collecting direct debit authorization. Only required for UK bank accounts.
         /// </summary>
-        [JsonProperty("debit_mandate_reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("debit_mandate_reference_id")]
         public string DebitMandateReferenceId { get; }
 
         /// <summary>
         /// Client-provided identifier for linking the banking account to an entity
         /// in a third-party system (for example, a bank account number or a user identifier).
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
         /// The location to which the bank account belongs.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -172,7 +251,7 @@ namespace Square.Models
         /// account information. The account fingerprint can be used to compare account
         /// entries and determine if the they represent the same real-world bank account.
         /// </summary>
-        [JsonProperty("fingerprint", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fingerprint")]
         public string Fingerprint { get; }
 
         /// <summary>
@@ -185,7 +264,7 @@ namespace Square.Models
         /// Read only. Name of actual financial institution.
         /// For example "Bank of America".
         /// </summary>
-        [JsonProperty("bank_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("bank_name")]
         public string BankName { get; }
 
         /// <inheritdoc/>
@@ -196,6 +275,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BankAccount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSecondaryBankIdentificationNumber()
+        {
+            return this.shouldSerialize["secondary_bank_identification_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDebitMandateReferenceId()
+        {
+            return this.shouldSerialize["debit_mandate_reference_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFingerprint()
+        {
+            return this.shouldSerialize["fingerprint"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBankName()
+        {
+            return this.shouldSerialize["bank_name"];
         }
 
         /// <inheritdoc/>
@@ -301,6 +434,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "secondary_bank_identification_number", false },
+                { "debit_mandate_reference_id", false },
+                { "reference_id", false },
+                { "location_id", false },
+                { "fingerprint", false },
+                { "bank_name", false },
+            };
+
             private string id;
             private string accountNumberSuffix;
             private string country;
@@ -460,6 +603,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SecondaryBankIdentificationNumber(string secondaryBankIdentificationNumber)
             {
+                shouldSerialize["secondary_bank_identification_number"] = true;
                 this.secondaryBankIdentificationNumber = secondaryBankIdentificationNumber;
                 return this;
             }
@@ -471,6 +615,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DebitMandateReferenceId(string debitMandateReferenceId)
             {
+                shouldSerialize["debit_mandate_reference_id"] = true;
                 this.debitMandateReferenceId = debitMandateReferenceId;
                 return this;
             }
@@ -482,6 +627,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -493,6 +639,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -504,6 +651,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Fingerprint(string fingerprint)
             {
+                shouldSerialize["fingerprint"] = true;
                 this.fingerprint = fingerprint;
                 return this;
             }
@@ -526,9 +674,59 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BankName(string bankName)
             {
+                shouldSerialize["bank_name"] = true;
                 this.bankName = bankName;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSecondaryBankIdentificationNumber()
+            {
+                this.shouldSerialize["secondary_bank_identification_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDebitMandateReferenceId()
+            {
+                this.shouldSerialize["debit_mandate_reference_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFingerprint()
+            {
+                this.shouldSerialize["fingerprint"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBankName()
+            {
+                this.shouldSerialize["bank_name"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -536,7 +734,7 @@ namespace Square.Models
             /// <returns> BankAccount. </returns>
             public BankAccount Build()
             {
-                return new BankAccount(
+                return new BankAccount(shouldSerialize,
                     this.id,
                     this.accountNumberSuffix,
                     this.country,

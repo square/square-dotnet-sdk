@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SearchVendorsRequestFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchVendorsRequestFilter"/> class.
         /// </summary>
@@ -26,21 +27,45 @@ namespace Square.Models
             IList<string> name = null,
             IList<string> status = null)
         {
-            this.Name = name;
-            this.Status = status;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "status", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (status != null)
+            {
+                shouldSerialize["status"] = true;
+                this.Status = status;
+            }
+
+        }
+        internal SearchVendorsRequestFilter(Dictionary<string, bool> shouldSerialize,
+            IList<string> name = null,
+            IList<string> status = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            Status = status;
         }
 
         /// <summary>
         /// The names of the [Vendor]($m/Vendor) objects to retrieve.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public IList<string> Name { get; }
 
         /// <summary>
         /// The statuses of the [Vendor]($m/Vendor) objects to retrieve.
         /// See [VendorStatus](#type-vendorstatus) for possible values
         /// </summary>
-        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("status")]
         public IList<string> Status { get; }
 
         /// <inheritdoc/>
@@ -51,6 +76,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SearchVendorsRequestFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatus()
+        {
+            return this.shouldSerialize["status"];
         }
 
         /// <inheritdoc/>
@@ -107,6 +150,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "status", false },
+            };
+
             private IList<string> name;
             private IList<string> status;
 
@@ -117,6 +166,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(IList<string> name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -128,9 +178,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Status(IList<string> status)
             {
+                shouldSerialize["status"] = true;
                 this.status = status;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatus()
+            {
+                this.shouldSerialize["status"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -138,7 +206,7 @@ namespace Square.Models
             /// <returns> SearchVendorsRequestFilter. </returns>
             public SearchVendorsRequestFilter Build()
             {
-                return new SearchVendorsRequestFilter(
+                return new SearchVendorsRequestFilter(shouldSerialize,
                     this.name,
                     this.status);
             }

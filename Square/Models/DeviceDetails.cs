@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DeviceDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DeviceDetails"/> class.
         /// </summary>
@@ -28,27 +29,59 @@ namespace Square.Models
             string deviceInstallationId = null,
             string deviceName = null)
         {
-            this.DeviceId = deviceId;
-            this.DeviceInstallationId = deviceInstallationId;
-            this.DeviceName = deviceName;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "device_id", false },
+                { "device_installation_id", false },
+                { "device_name", false }
+            };
+
+            if (deviceId != null)
+            {
+                shouldSerialize["device_id"] = true;
+                this.DeviceId = deviceId;
+            }
+
+            if (deviceInstallationId != null)
+            {
+                shouldSerialize["device_installation_id"] = true;
+                this.DeviceInstallationId = deviceInstallationId;
+            }
+
+            if (deviceName != null)
+            {
+                shouldSerialize["device_name"] = true;
+                this.DeviceName = deviceName;
+            }
+
+        }
+        internal DeviceDetails(Dictionary<string, bool> shouldSerialize,
+            string deviceId = null,
+            string deviceInstallationId = null,
+            string deviceName = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            DeviceId = deviceId;
+            DeviceInstallationId = deviceInstallationId;
+            DeviceName = deviceName;
         }
 
         /// <summary>
         /// The Square-issued ID of the device.
         /// </summary>
-        [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("device_id")]
         public string DeviceId { get; }
 
         /// <summary>
         /// The Square-issued installation ID for the device.
         /// </summary>
-        [JsonProperty("device_installation_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("device_installation_id")]
         public string DeviceInstallationId { get; }
 
         /// <summary>
         /// The name of the device set by the seller.
         /// </summary>
-        [JsonProperty("device_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("device_name")]
         public string DeviceName { get; }
 
         /// <inheritdoc/>
@@ -59,6 +92,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DeviceDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDeviceId()
+        {
+            return this.shouldSerialize["device_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDeviceInstallationId()
+        {
+            return this.shouldSerialize["device_installation_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDeviceName()
+        {
+            return this.shouldSerialize["device_name"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +178,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "device_id", false },
+                { "device_installation_id", false },
+                { "device_name", false },
+            };
+
             private string deviceId;
             private string deviceInstallationId;
             private string deviceName;
@@ -129,6 +196,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DeviceId(string deviceId)
             {
+                shouldSerialize["device_id"] = true;
                 this.deviceId = deviceId;
                 return this;
             }
@@ -140,6 +208,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DeviceInstallationId(string deviceInstallationId)
             {
+                shouldSerialize["device_installation_id"] = true;
                 this.deviceInstallationId = deviceInstallationId;
                 return this;
             }
@@ -151,9 +220,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DeviceName(string deviceName)
             {
+                shouldSerialize["device_name"] = true;
                 this.deviceName = deviceName;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDeviceId()
+            {
+                this.shouldSerialize["device_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDeviceInstallationId()
+            {
+                this.shouldSerialize["device_installation_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDeviceName()
+            {
+                this.shouldSerialize["device_name"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -161,7 +256,7 @@ namespace Square.Models
             /// <returns> DeviceDetails. </returns>
             public DeviceDetails Build()
             {
-                return new DeviceDetails(
+                return new DeviceDetails(shouldSerialize,
                     this.deviceId,
                     this.deviceInstallationId,
                     this.deviceName);

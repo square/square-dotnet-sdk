@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListPaymentRefundsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListPaymentRefundsRequest"/> class.
         /// </summary>
@@ -38,28 +39,100 @@ namespace Square.Models
             string sourceType = null,
             int? limit = null)
         {
-            this.BeginTime = beginTime;
-            this.EndTime = endTime;
-            this.SortOrder = sortOrder;
-            this.Cursor = cursor;
-            this.LocationId = locationId;
-            this.Status = status;
-            this.SourceType = sourceType;
-            this.Limit = limit;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "begin_time", false },
+                { "end_time", false },
+                { "sort_order", false },
+                { "cursor", false },
+                { "location_id", false },
+                { "status", false },
+                { "source_type", false },
+                { "limit", false }
+            };
+
+            if (beginTime != null)
+            {
+                shouldSerialize["begin_time"] = true;
+                this.BeginTime = beginTime;
+            }
+
+            if (endTime != null)
+            {
+                shouldSerialize["end_time"] = true;
+                this.EndTime = endTime;
+            }
+
+            if (sortOrder != null)
+            {
+                shouldSerialize["sort_order"] = true;
+                this.SortOrder = sortOrder;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (status != null)
+            {
+                shouldSerialize["status"] = true;
+                this.Status = status;
+            }
+
+            if (sourceType != null)
+            {
+                shouldSerialize["source_type"] = true;
+                this.SourceType = sourceType;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+        }
+        internal ListPaymentRefundsRequest(Dictionary<string, bool> shouldSerialize,
+            string beginTime = null,
+            string endTime = null,
+            string sortOrder = null,
+            string cursor = null,
+            string locationId = null,
+            string status = null,
+            string sourceType = null,
+            int? limit = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            BeginTime = beginTime;
+            EndTime = endTime;
+            SortOrder = sortOrder;
+            Cursor = cursor;
+            LocationId = locationId;
+            Status = status;
+            SourceType = sourceType;
+            Limit = limit;
         }
 
         /// <summary>
         /// The timestamp for the beginning of the requested reporting period, in RFC 3339 format.
         /// Default: The current time minus one year.
         /// </summary>
-        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("begin_time")]
         public string BeginTime { get; }
 
         /// <summary>
         /// The timestamp for the end of the requested reporting period, in RFC 3339 format.
         /// Default: The current time.
         /// </summary>
-        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_time")]
         public string EndTime { get; }
 
         /// <summary>
@@ -67,7 +140,7 @@ namespace Square.Models
         /// - `ASC` - Oldest to newest.
         /// - `DESC` - Newest to oldest (default).
         /// </summary>
-        [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sort_order")]
         public string SortOrder { get; }
 
         /// <summary>
@@ -75,14 +148,14 @@ namespace Square.Models
         /// Provide this cursor to retrieve the next set of results for the original query.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
         /// Limit results to the location supplied. By default, results are returned
         /// for all locations associated with the seller.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -90,7 +163,7 @@ namespace Square.Models
         /// For a list of refund status values, see [PaymentRefund]($m/PaymentRefund).
         /// Default: If omitted, refunds are returned regardless of their status.
         /// </summary>
-        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("status")]
         public string Status { get; }
 
         /// <summary>
@@ -100,7 +173,7 @@ namespace Square.Models
         /// [Take Payments](https://developer.squareup.com/docs/payments-api/take-payments).
         /// Default: If omitted, refunds are returned regardless of the source type.
         /// </summary>
-        [JsonProperty("source_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("source_type")]
         public string SourceType { get; }
 
         /// <summary>
@@ -109,7 +182,7 @@ namespace Square.Models
         /// If the supplied value is greater than 100, no more than 100 results are returned.
         /// Default: 100
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <inheritdoc/>
@@ -120,6 +193,78 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListPaymentRefundsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBeginTime()
+        {
+            return this.shouldSerialize["begin_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndTime()
+        {
+            return this.shouldSerialize["end_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSortOrder()
+        {
+            return this.shouldSerialize["sort_order"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatus()
+        {
+            return this.shouldSerialize["status"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSourceType()
+        {
+            return this.shouldSerialize["source_type"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
         }
 
         /// <inheritdoc/>
@@ -196,6 +341,18 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "begin_time", false },
+                { "end_time", false },
+                { "sort_order", false },
+                { "cursor", false },
+                { "location_id", false },
+                { "status", false },
+                { "source_type", false },
+                { "limit", false },
+            };
+
             private string beginTime;
             private string endTime;
             private string sortOrder;
@@ -212,6 +369,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
+                shouldSerialize["begin_time"] = true;
                 this.beginTime = beginTime;
                 return this;
             }
@@ -223,6 +381,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndTime(string endTime)
             {
+                shouldSerialize["end_time"] = true;
                 this.endTime = endTime;
                 return this;
             }
@@ -234,6 +393,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SortOrder(string sortOrder)
             {
+                shouldSerialize["sort_order"] = true;
                 this.sortOrder = sortOrder;
                 return this;
             }
@@ -245,6 +405,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -256,6 +417,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -267,6 +429,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
+                shouldSerialize["status"] = true;
                 this.status = status;
                 return this;
             }
@@ -278,6 +441,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SourceType(string sourceType)
             {
+                shouldSerialize["source_type"] = true;
                 this.sourceType = sourceType;
                 return this;
             }
@@ -289,9 +453,75 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBeginTime()
+            {
+                this.shouldSerialize["begin_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndTime()
+            {
+                this.shouldSerialize["end_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSortOrder()
+            {
+                this.shouldSerialize["sort_order"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatus()
+            {
+                this.shouldSerialize["status"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSourceType()
+            {
+                this.shouldSerialize["source_type"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -299,7 +529,7 @@ namespace Square.Models
             /// <returns> ListPaymentRefundsRequest. </returns>
             public ListPaymentRefundsRequest Build()
             {
-                return new ListPaymentRefundsRequest(
+                return new ListPaymentRefundsRequest(shouldSerialize,
                     this.beginTime,
                     this.endTime,
                     this.sortOrder,

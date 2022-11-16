@@ -7,6 +7,6 @@ IAuthManager adds the authenticaion layer to the http calls.
 
 | Name | Description | Return Type |
 |  --- | --- | --- |
-| `Apply(HttpRequest httpRequest)` | Add authentication information to the HTTP Request. | `HttpRequest` |
-| `ApplyAsync(HttpRequest httpRequest)` | Asynchronously add authentication information to the HTTP Request. | `Task<HttpRequest>` |
+| `Apply(HttpRequest httpRequest)` | Add authentication information to the HTTP Request. | [`HttpRequest`](http-request.md) |
+| `ApplyAsync(HttpRequest httpRequest)` | Asynchronously add authentication information to the HTTP Request. | `Task<`[`HttpRequest`](http-request.md)`>` |
 

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TeamMemberBookingProfile
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TeamMemberBookingProfile"/> class.
         /// </summary>
@@ -32,11 +33,35 @@ namespace Square.Models
             bool? isBookable = null,
             string profileImageUrl = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "is_bookable", false }
+            };
+
             this.TeamMemberId = teamMemberId;
             this.Description = description;
             this.DisplayName = displayName;
-            this.IsBookable = isBookable;
+            if (isBookable != null)
+            {
+                shouldSerialize["is_bookable"] = true;
+                this.IsBookable = isBookable;
+            }
+
             this.ProfileImageUrl = profileImageUrl;
+        }
+        internal TeamMemberBookingProfile(Dictionary<string, bool> shouldSerialize,
+            string teamMemberId = null,
+            string description = null,
+            string displayName = null,
+            bool? isBookable = null,
+            string profileImageUrl = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            TeamMemberId = teamMemberId;
+            Description = description;
+            DisplayName = displayName;
+            IsBookable = isBookable;
+            ProfileImageUrl = profileImageUrl;
         }
 
         /// <summary>
@@ -60,7 +85,7 @@ namespace Square.Models
         /// <summary>
         /// Indicates whether the team member can be booked through the Bookings API or the seller's online booking channel or site (`true) or not (`false`).
         /// </summary>
-        [JsonProperty("is_bookable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_bookable")]
         public bool? IsBookable { get; }
 
         /// <summary>
@@ -77,6 +102,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TeamMemberBookingProfile : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsBookable()
+        {
+            return this.shouldSerialize["is_bookable"];
         }
 
         /// <inheritdoc/>
@@ -142,6 +176,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "is_bookable", false },
+            };
+
             private string teamMemberId;
             private string description;
             private string displayName;
@@ -188,6 +227,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IsBookable(bool? isBookable)
             {
+                shouldSerialize["is_bookable"] = true;
                 this.isBookable = isBookable;
                 return this;
             }
@@ -204,12 +244,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsBookable()
+            {
+                this.shouldSerialize["is_bookable"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> TeamMemberBookingProfile. </returns>
             public TeamMemberBookingProfile Build()
             {
-                return new TeamMemberBookingProfile(
+                return new TeamMemberBookingProfile(shouldSerialize,
                     this.teamMemberId,
                     this.description,
                     this.displayName,

@@ -39,6 +39,11 @@ namespace Square
         IBookingsApi BookingsApi { get; }
 
         /// <summary>
+        /// Gets instance for IBookingCustomAttributesApi.
+        /// </summary>
+        IBookingCustomAttributesApi BookingCustomAttributesApi { get; }
+
+        /// <summary>
         /// Gets instance for ICardsApi.
         /// </summary>
         ICardsApi CardsApi { get; }
@@ -142,6 +147,11 @@ namespace Square
         /// Gets instance for IOrdersApi.
         /// </summary>
         IOrdersApi OrdersApi { get; }
+
+        /// <summary>
+        /// Gets instance for IOrderCustomAttributesApi.
+        /// </summary>
+        IOrderCustomAttributesApi OrderCustomAttributesApi { get; }
 
         /// <summary>
         /// Gets instance for IPaymentsApi.

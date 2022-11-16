@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PrePopulatedData
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PrePopulatedData"/> class.
         /// </summary>
@@ -28,21 +29,47 @@ namespace Square.Models
             string buyerPhoneNumber = null,
             Models.Address buyerAddress = null)
         {
-            this.BuyerEmail = buyerEmail;
-            this.BuyerPhoneNumber = buyerPhoneNumber;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "buyer_email", false },
+                { "buyer_phone_number", false }
+            };
+
+            if (buyerEmail != null)
+            {
+                shouldSerialize["buyer_email"] = true;
+                this.BuyerEmail = buyerEmail;
+            }
+
+            if (buyerPhoneNumber != null)
+            {
+                shouldSerialize["buyer_phone_number"] = true;
+                this.BuyerPhoneNumber = buyerPhoneNumber;
+            }
+
             this.BuyerAddress = buyerAddress;
+        }
+        internal PrePopulatedData(Dictionary<string, bool> shouldSerialize,
+            string buyerEmail = null,
+            string buyerPhoneNumber = null,
+            Models.Address buyerAddress = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            BuyerEmail = buyerEmail;
+            BuyerPhoneNumber = buyerPhoneNumber;
+            BuyerAddress = buyerAddress;
         }
 
         /// <summary>
         /// The buyer email to prepopulate in the payment form.
         /// </summary>
-        [JsonProperty("buyer_email", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buyer_email")]
         public string BuyerEmail { get; }
 
         /// <summary>
         /// The buyer phone number to prepopulate in the payment form.
         /// </summary>
-        [JsonProperty("buyer_phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buyer_phone_number")]
         public string BuyerPhoneNumber { get; }
 
         /// <summary>
@@ -60,6 +87,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PrePopulatedData : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyerEmail()
+        {
+            return this.shouldSerialize["buyer_email"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyerPhoneNumber()
+        {
+            return this.shouldSerialize["buyer_phone_number"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +164,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "buyer_email", false },
+                { "buyer_phone_number", false },
+            };
+
             private string buyerEmail;
             private string buyerPhoneNumber;
             private Models.Address buyerAddress;
@@ -130,6 +181,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyerEmail(string buyerEmail)
             {
+                shouldSerialize["buyer_email"] = true;
                 this.buyerEmail = buyerEmail;
                 return this;
             }
@@ -141,6 +193,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyerPhoneNumber(string buyerPhoneNumber)
             {
+                shouldSerialize["buyer_phone_number"] = true;
                 this.buyerPhoneNumber = buyerPhoneNumber;
                 return this;
             }
@@ -157,12 +210,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyerEmail()
+            {
+                this.shouldSerialize["buyer_email"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyerPhoneNumber()
+            {
+                this.shouldSerialize["buyer_phone_number"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> PrePopulatedData. </returns>
             public PrePopulatedData Build()
             {
-                return new PrePopulatedData(
+                return new PrePopulatedData(shouldSerialize,
                     this.buyerEmail,
                     this.buyerPhoneNumber,
                     this.buyerAddress);

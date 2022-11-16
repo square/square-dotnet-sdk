@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class RevokeTokenRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="RevokeTokenRequest"/> class.
         /// </summary>
@@ -30,31 +31,71 @@ namespace Square.Models
             string merchantId = null,
             bool? revokeOnlyAccessToken = null)
         {
-            this.ClientId = clientId;
-            this.AccessToken = accessToken;
-            this.MerchantId = merchantId;
-            this.RevokeOnlyAccessToken = revokeOnlyAccessToken;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "client_id", false },
+                { "access_token", false },
+                { "merchant_id", false },
+                { "revoke_only_access_token", false }
+            };
+
+            if (clientId != null)
+            {
+                shouldSerialize["client_id"] = true;
+                this.ClientId = clientId;
+            }
+
+            if (accessToken != null)
+            {
+                shouldSerialize["access_token"] = true;
+                this.AccessToken = accessToken;
+            }
+
+            if (merchantId != null)
+            {
+                shouldSerialize["merchant_id"] = true;
+                this.MerchantId = merchantId;
+            }
+
+            if (revokeOnlyAccessToken != null)
+            {
+                shouldSerialize["revoke_only_access_token"] = true;
+                this.RevokeOnlyAccessToken = revokeOnlyAccessToken;
+            }
+
+        }
+        internal RevokeTokenRequest(Dictionary<string, bool> shouldSerialize,
+            string clientId = null,
+            string accessToken = null,
+            string merchantId = null,
+            bool? revokeOnlyAccessToken = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ClientId = clientId;
+            AccessToken = accessToken;
+            MerchantId = merchantId;
+            RevokeOnlyAccessToken = revokeOnlyAccessToken;
         }
 
         /// <summary>
         /// The Square-issued ID for your application, which is available in the OAuth page in the
         /// [Developer Dashboard](https://developer.squareup.com/apps).
         /// </summary>
-        [JsonProperty("client_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("client_id")]
         public string ClientId { get; }
 
         /// <summary>
         /// The access token of the merchant whose token you want to revoke.
         /// Do not provide a value for `merchant_id` if you provide this parameter.
         /// </summary>
-        [JsonProperty("access_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("access_token")]
         public string AccessToken { get; }
 
         /// <summary>
         /// The ID of the merchant whose token you want to revoke.
         /// Do not provide a value for `access_token` if you provide this parameter.
         /// </summary>
-        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("merchant_id")]
         public string MerchantId { get; }
 
         /// <summary>
@@ -62,7 +103,7 @@ namespace Square.Models
         /// terminate the entire authorization.
         /// Default: `false`
         /// </summary>
-        [JsonProperty("revoke_only_access_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("revoke_only_access_token")]
         public bool? RevokeOnlyAccessToken { get; }
 
         /// <inheritdoc/>
@@ -73,6 +114,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"RevokeTokenRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeClientId()
+        {
+            return this.shouldSerialize["client_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAccessToken()
+        {
+            return this.shouldSerialize["access_token"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMerchantId()
+        {
+            return this.shouldSerialize["merchant_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRevokeOnlyAccessToken()
+        {
+            return this.shouldSerialize["revoke_only_access_token"];
         }
 
         /// <inheritdoc/>
@@ -135,6 +212,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "client_id", false },
+                { "access_token", false },
+                { "merchant_id", false },
+                { "revoke_only_access_token", false },
+            };
+
             private string clientId;
             private string accessToken;
             private string merchantId;
@@ -147,6 +232,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ClientId(string clientId)
             {
+                shouldSerialize["client_id"] = true;
                 this.clientId = clientId;
                 return this;
             }
@@ -158,6 +244,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AccessToken(string accessToken)
             {
+                shouldSerialize["access_token"] = true;
                 this.accessToken = accessToken;
                 return this;
             }
@@ -169,6 +256,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MerchantId(string merchantId)
             {
+                shouldSerialize["merchant_id"] = true;
                 this.merchantId = merchantId;
                 return this;
             }
@@ -180,9 +268,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RevokeOnlyAccessToken(bool? revokeOnlyAccessToken)
             {
+                shouldSerialize["revoke_only_access_token"] = true;
                 this.revokeOnlyAccessToken = revokeOnlyAccessToken;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetClientId()
+            {
+                this.shouldSerialize["client_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAccessToken()
+            {
+                this.shouldSerialize["access_token"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMerchantId()
+            {
+                this.shouldSerialize["merchant_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRevokeOnlyAccessToken()
+            {
+                this.shouldSerialize["revoke_only_access_token"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -190,7 +312,7 @@ namespace Square.Models
             /// <returns> RevokeTokenRequest. </returns>
             public RevokeTokenRequest Build()
             {
-                return new RevokeTokenRequest(
+                return new RevokeTokenRequest(shouldSerialize,
                     this.clientId,
                     this.accessToken,
                     this.merchantId,

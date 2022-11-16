@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Money
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Money"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             long? amount = null,
             string currency = null)
         {
-            this.Amount = amount;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "amount", false }
+            };
+
+            if (amount != null)
+            {
+                shouldSerialize["amount"] = true;
+                this.Amount = amount;
+            }
+
             this.Currency = currency;
+        }
+        internal Money(Dictionary<string, bool> shouldSerialize,
+            long? amount = null,
+            string currency = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Amount = amount;
+            Currency = currency;
         }
 
         /// <summary>
@@ -36,7 +55,7 @@ namespace Square.Models
         /// in cents. Monetary amounts can be positive or negative. See the specific
         /// field description to determine the meaning of the sign in a particular case.
         /// </summary>
-        [JsonProperty("amount", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("amount")]
         public long? Amount { get; }
 
         /// <summary>
@@ -54,6 +73,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Money : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAmount()
+        {
+            return this.shouldSerialize["amount"];
         }
 
         /// <inheritdoc/>
@@ -110,6 +138,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "amount", false },
+            };
+
             private long? amount;
             private string currency;
 
@@ -120,6 +153,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Amount(long? amount)
             {
+                shouldSerialize["amount"] = true;
                 this.amount = amount;
                 return this;
             }
@@ -136,12 +170,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAmount()
+            {
+                this.shouldSerialize["amount"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Money. </returns>
             public Money Build()
             {
-                return new Money(
+                return new Money(shouldSerialize,
                     this.amount,
                     this.currency);
             }

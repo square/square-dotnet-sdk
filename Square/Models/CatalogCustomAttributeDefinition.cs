@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogCustomAttributeDefinition
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinition"/> class.
         /// </summary>
@@ -46,9 +47,20 @@ namespace Square.Models
             int? customAttributeUsageCount = null,
             string key = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "description", false },
+                { "key", false }
+            };
+
             this.Type = type;
             this.Name = name;
-            this.Description = description;
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
             this.SourceApplication = sourceApplication;
             this.AllowedObjectTypes = allowedObjectTypes;
             this.SellerVisibility = sellerVisibility;
@@ -57,7 +69,40 @@ namespace Square.Models
             this.NumberConfig = numberConfig;
             this.SelectionConfig = selectionConfig;
             this.CustomAttributeUsageCount = customAttributeUsageCount;
-            this.Key = key;
+            if (key != null)
+            {
+                shouldSerialize["key"] = true;
+                this.Key = key;
+            }
+
+        }
+        internal CatalogCustomAttributeDefinition(Dictionary<string, bool> shouldSerialize,
+            string type,
+            string name,
+            IList<string> allowedObjectTypes,
+            string description = null,
+            Models.SourceApplication sourceApplication = null,
+            string sellerVisibility = null,
+            string appVisibility = null,
+            Models.CatalogCustomAttributeDefinitionStringConfig stringConfig = null,
+            Models.CatalogCustomAttributeDefinitionNumberConfig numberConfig = null,
+            Models.CatalogCustomAttributeDefinitionSelectionConfig selectionConfig = null,
+            int? customAttributeUsageCount = null,
+            string key = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Type = type;
+            Name = name;
+            Description = description;
+            SourceApplication = sourceApplication;
+            AllowedObjectTypes = allowedObjectTypes;
+            SellerVisibility = sellerVisibility;
+            AppVisibility = appVisibility;
+            StringConfig = stringConfig;
+            NumberConfig = numberConfig;
+            SelectionConfig = selectionConfig;
+            CustomAttributeUsageCount = customAttributeUsageCount;
+            Key = key;
         }
 
         /// <summary>
@@ -78,7 +123,7 @@ namespace Square.Models
         /// Seller-oriented description of the meaning of this Custom Attribute,
         /// any constraints that the seller should observe, etc. May be displayed as a tooltip in Square UIs.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
@@ -143,7 +188,7 @@ namespace Square.Models
         /// custom attribute definition has been created.
         /// Must be between 1 and 60 characters, and may only contain the characters `[a-zA-Z0-9_-]`.
         /// </summary>
-        [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("key")]
         public string Key { get; }
 
         /// <inheritdoc/>
@@ -154,6 +199,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogCustomAttributeDefinition : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeKey()
+        {
+            return this.shouldSerialize["key"];
         }
 
         /// <inheritdoc/>
@@ -242,6 +305,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "description", false },
+                { "key", false },
+            };
+
             private string type;
             private string name;
             private IList<string> allowedObjectTypes;
@@ -305,6 +374,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -393,9 +463,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Key(string key)
             {
+                shouldSerialize["key"] = true;
                 this.key = key;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetKey()
+            {
+                this.shouldSerialize["key"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -403,7 +491,7 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeDefinition. </returns>
             public CatalogCustomAttributeDefinition Build()
             {
-                return new CatalogCustomAttributeDefinition(
+                return new CatalogCustomAttributeDefinition(shouldSerialize,
                     this.type,
                     this.name,
                     this.allowedObjectTypes,

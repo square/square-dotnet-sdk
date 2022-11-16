@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderLineItemPricingBlocklists
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderLineItemPricingBlocklists"/> class.
         /// </summary>
@@ -26,8 +27,32 @@ namespace Square.Models
             IList<Models.OrderLineItemPricingBlocklistsBlockedDiscount> blockedDiscounts = null,
             IList<Models.OrderLineItemPricingBlocklistsBlockedTax> blockedTaxes = null)
         {
-            this.BlockedDiscounts = blockedDiscounts;
-            this.BlockedTaxes = blockedTaxes;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "blocked_discounts", false },
+                { "blocked_taxes", false }
+            };
+
+            if (blockedDiscounts != null)
+            {
+                shouldSerialize["blocked_discounts"] = true;
+                this.BlockedDiscounts = blockedDiscounts;
+            }
+
+            if (blockedTaxes != null)
+            {
+                shouldSerialize["blocked_taxes"] = true;
+                this.BlockedTaxes = blockedTaxes;
+            }
+
+        }
+        internal OrderLineItemPricingBlocklists(Dictionary<string, bool> shouldSerialize,
+            IList<Models.OrderLineItemPricingBlocklistsBlockedDiscount> blockedDiscounts = null,
+            IList<Models.OrderLineItemPricingBlocklistsBlockedTax> blockedTaxes = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            BlockedDiscounts = blockedDiscounts;
+            BlockedTaxes = blockedTaxes;
         }
 
         /// <summary>
@@ -35,7 +60,7 @@ namespace Square.Models
         /// Discounts can be blocked by the `discount_uid` (for ad hoc discounts) or
         /// the `discount_catalog_object_id` (for catalog discounts).
         /// </summary>
-        [JsonProperty("blocked_discounts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("blocked_discounts")]
         public IList<Models.OrderLineItemPricingBlocklistsBlockedDiscount> BlockedDiscounts { get; }
 
         /// <summary>
@@ -43,7 +68,7 @@ namespace Square.Models
         /// Taxes can be blocked by the `tax_uid` (for ad hoc taxes) or
         /// the `tax_catalog_object_id` (for catalog taxes).
         /// </summary>
-        [JsonProperty("blocked_taxes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("blocked_taxes")]
         public IList<Models.OrderLineItemPricingBlocklistsBlockedTax> BlockedTaxes { get; }
 
         /// <inheritdoc/>
@@ -54,6 +79,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderLineItemPricingBlocklists : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBlockedDiscounts()
+        {
+            return this.shouldSerialize["blocked_discounts"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBlockedTaxes()
+        {
+            return this.shouldSerialize["blocked_taxes"];
         }
 
         /// <inheritdoc/>
@@ -110,6 +153,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "blocked_discounts", false },
+                { "blocked_taxes", false },
+            };
+
             private IList<Models.OrderLineItemPricingBlocklistsBlockedDiscount> blockedDiscounts;
             private IList<Models.OrderLineItemPricingBlocklistsBlockedTax> blockedTaxes;
 
@@ -120,6 +169,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BlockedDiscounts(IList<Models.OrderLineItemPricingBlocklistsBlockedDiscount> blockedDiscounts)
             {
+                shouldSerialize["blocked_discounts"] = true;
                 this.blockedDiscounts = blockedDiscounts;
                 return this;
             }
@@ -131,9 +181,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BlockedTaxes(IList<Models.OrderLineItemPricingBlocklistsBlockedTax> blockedTaxes)
             {
+                shouldSerialize["blocked_taxes"] = true;
                 this.blockedTaxes = blockedTaxes;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBlockedDiscounts()
+            {
+                this.shouldSerialize["blocked_discounts"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBlockedTaxes()
+            {
+                this.shouldSerialize["blocked_taxes"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -141,7 +209,7 @@ namespace Square.Models
             /// <returns> OrderLineItemPricingBlocklists. </returns>
             public OrderLineItemPricingBlocklists Build()
             {
-                return new OrderLineItemPricingBlocklists(
+                return new OrderLineItemPricingBlocklists(shouldSerialize,
                     this.blockedDiscounts,
                     this.blockedTaxes);
             }

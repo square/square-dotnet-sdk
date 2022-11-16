@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class LoyaltyReward
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyReward"/> class.
         /// </summary>
@@ -40,15 +41,47 @@ namespace Square.Models
             string updatedAt = null,
             string redeemedAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "order_id", false }
+            };
+
             this.Id = id;
             this.Status = status;
             this.LoyaltyAccountId = loyaltyAccountId;
             this.RewardTierId = rewardTierId;
             this.Points = points;
-            this.OrderId = orderId;
+            if (orderId != null)
+            {
+                shouldSerialize["order_id"] = true;
+                this.OrderId = orderId;
+            }
+
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.RedeemedAt = redeemedAt;
+        }
+        internal LoyaltyReward(Dictionary<string, bool> shouldSerialize,
+            string loyaltyAccountId,
+            string rewardTierId,
+            string id = null,
+            string status = null,
+            int? points = null,
+            string orderId = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string redeemedAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Status = status;
+            LoyaltyAccountId = loyaltyAccountId;
+            RewardTierId = rewardTierId;
+            Points = points;
+            OrderId = orderId;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            RedeemedAt = redeemedAt;
         }
 
         /// <summary>
@@ -84,7 +117,7 @@ namespace Square.Models
         /// <summary>
         /// The Square-assigned ID of the [order]($m/Order) to which the reward is attached.
         /// </summary>
-        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_id")]
         public string OrderId { get; }
 
         /// <summary>
@@ -113,6 +146,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"LoyaltyReward : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderId()
+        {
+            return this.shouldSerialize["order_id"];
         }
 
         /// <inheritdoc/>
@@ -192,6 +234,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "order_id", false },
+            };
+
             private string loyaltyAccountId;
             private string rewardTierId;
             private string id;
@@ -272,6 +319,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
+                shouldSerialize["order_id"] = true;
                 this.orderId = orderId;
                 return this;
             }
@@ -310,12 +358,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderId()
+            {
+                this.shouldSerialize["order_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> LoyaltyReward. </returns>
             public LoyaltyReward Build()
             {
-                return new LoyaltyReward(
+                return new LoyaltyReward(shouldSerialize,
                     this.loyaltyAccountId,
                     this.rewardTierId,
                     this.id,

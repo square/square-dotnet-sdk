@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CashDrawerShift
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CashDrawerShift"/> class.
         /// </summary>
@@ -58,16 +59,68 @@ namespace Square.Models
             Models.Money closedCashMoney = null,
             Models.CashDrawerDevice device = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "opened_at", false },
+                { "ended_at", false },
+                { "closed_at", false },
+                { "employee_ids", false },
+                { "opening_employee_id", false },
+                { "ending_employee_id", false },
+                { "closing_employee_id", false },
+                { "description", false }
+            };
+
             this.Id = id;
             this.State = state;
-            this.OpenedAt = openedAt;
-            this.EndedAt = endedAt;
-            this.ClosedAt = closedAt;
-            this.EmployeeIds = employeeIds;
-            this.OpeningEmployeeId = openingEmployeeId;
-            this.EndingEmployeeId = endingEmployeeId;
-            this.ClosingEmployeeId = closingEmployeeId;
-            this.Description = description;
+            if (openedAt != null)
+            {
+                shouldSerialize["opened_at"] = true;
+                this.OpenedAt = openedAt;
+            }
+
+            if (endedAt != null)
+            {
+                shouldSerialize["ended_at"] = true;
+                this.EndedAt = endedAt;
+            }
+
+            if (closedAt != null)
+            {
+                shouldSerialize["closed_at"] = true;
+                this.ClosedAt = closedAt;
+            }
+
+            if (employeeIds != null)
+            {
+                shouldSerialize["employee_ids"] = true;
+                this.EmployeeIds = employeeIds;
+            }
+
+            if (openingEmployeeId != null)
+            {
+                shouldSerialize["opening_employee_id"] = true;
+                this.OpeningEmployeeId = openingEmployeeId;
+            }
+
+            if (endingEmployeeId != null)
+            {
+                shouldSerialize["ending_employee_id"] = true;
+                this.EndingEmployeeId = endingEmployeeId;
+            }
+
+            if (closingEmployeeId != null)
+            {
+                shouldSerialize["closing_employee_id"] = true;
+                this.ClosingEmployeeId = closingEmployeeId;
+            }
+
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
             this.OpenedCashMoney = openedCashMoney;
             this.CashPaymentMoney = cashPaymentMoney;
             this.CashRefundsMoney = cashRefundsMoney;
@@ -76,6 +129,46 @@ namespace Square.Models
             this.ExpectedCashMoney = expectedCashMoney;
             this.ClosedCashMoney = closedCashMoney;
             this.Device = device;
+        }
+        internal CashDrawerShift(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string state = null,
+            string openedAt = null,
+            string endedAt = null,
+            string closedAt = null,
+            IList<string> employeeIds = null,
+            string openingEmployeeId = null,
+            string endingEmployeeId = null,
+            string closingEmployeeId = null,
+            string description = null,
+            Models.Money openedCashMoney = null,
+            Models.Money cashPaymentMoney = null,
+            Models.Money cashRefundsMoney = null,
+            Models.Money cashPaidInMoney = null,
+            Models.Money cashPaidOutMoney = null,
+            Models.Money expectedCashMoney = null,
+            Models.Money closedCashMoney = null,
+            Models.CashDrawerDevice device = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            State = state;
+            OpenedAt = openedAt;
+            EndedAt = endedAt;
+            ClosedAt = closedAt;
+            EmployeeIds = employeeIds;
+            OpeningEmployeeId = openingEmployeeId;
+            EndingEmployeeId = endingEmployeeId;
+            ClosingEmployeeId = closingEmployeeId;
+            Description = description;
+            OpenedCashMoney = openedCashMoney;
+            CashPaymentMoney = cashPaymentMoney;
+            CashRefundsMoney = cashRefundsMoney;
+            CashPaidInMoney = cashPaidInMoney;
+            CashPaidOutMoney = cashPaidOutMoney;
+            ExpectedCashMoney = expectedCashMoney;
+            ClosedCashMoney = closedCashMoney;
+            Device = device;
         }
 
         /// <summary>
@@ -93,51 +186,51 @@ namespace Square.Models
         /// <summary>
         /// The time when the shift began, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("opened_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("opened_at")]
         public string OpenedAt { get; }
 
         /// <summary>
         /// The time when the shift ended, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("ended_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ended_at")]
         public string EndedAt { get; }
 
         /// <summary>
         /// The time when the shift was closed, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("closed_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("closed_at")]
         public string ClosedAt { get; }
 
         /// <summary>
         /// The IDs of all employees that were logged into Square Point of Sale at any
         /// point while the cash drawer shift was open.
         /// </summary>
-        [JsonProperty("employee_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("employee_ids")]
         public IList<string> EmployeeIds { get; }
 
         /// <summary>
         /// The ID of the employee that started the cash drawer shift.
         /// </summary>
-        [JsonProperty("opening_employee_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("opening_employee_id")]
         public string OpeningEmployeeId { get; }
 
         /// <summary>
         /// The ID of the employee that ended the cash drawer shift.
         /// </summary>
-        [JsonProperty("ending_employee_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ending_employee_id")]
         public string EndingEmployeeId { get; }
 
         /// <summary>
         /// The ID of the employee that closed the cash drawer shift by auditing
         /// the cash drawer contents.
         /// </summary>
-        [JsonProperty("closing_employee_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("closing_employee_id")]
         public string ClosingEmployeeId { get; }
 
         /// <summary>
         /// The free-form text description of a cash drawer by an employee.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
@@ -231,6 +324,78 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CashDrawerShift : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOpenedAt()
+        {
+            return this.shouldSerialize["opened_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndedAt()
+        {
+            return this.shouldSerialize["ended_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeClosedAt()
+        {
+            return this.shouldSerialize["closed_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmployeeIds()
+        {
+            return this.shouldSerialize["employee_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOpeningEmployeeId()
+        {
+            return this.shouldSerialize["opening_employee_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndingEmployeeId()
+        {
+            return this.shouldSerialize["ending_employee_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeClosingEmployeeId()
+        {
+            return this.shouldSerialize["closing_employee_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
         }
 
         /// <inheritdoc/>
@@ -339,6 +504,18 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "opened_at", false },
+                { "ended_at", false },
+                { "closed_at", false },
+                { "employee_ids", false },
+                { "opening_employee_id", false },
+                { "ending_employee_id", false },
+                { "closing_employee_id", false },
+                { "description", false },
+            };
+
             private string id;
             private string state;
             private string openedAt;
@@ -387,6 +564,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OpenedAt(string openedAt)
             {
+                shouldSerialize["opened_at"] = true;
                 this.openedAt = openedAt;
                 return this;
             }
@@ -398,6 +576,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndedAt(string endedAt)
             {
+                shouldSerialize["ended_at"] = true;
                 this.endedAt = endedAt;
                 return this;
             }
@@ -409,6 +588,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ClosedAt(string closedAt)
             {
+                shouldSerialize["closed_at"] = true;
                 this.closedAt = closedAt;
                 return this;
             }
@@ -420,6 +600,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmployeeIds(IList<string> employeeIds)
             {
+                shouldSerialize["employee_ids"] = true;
                 this.employeeIds = employeeIds;
                 return this;
             }
@@ -431,6 +612,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OpeningEmployeeId(string openingEmployeeId)
             {
+                shouldSerialize["opening_employee_id"] = true;
                 this.openingEmployeeId = openingEmployeeId;
                 return this;
             }
@@ -442,6 +624,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndingEmployeeId(string endingEmployeeId)
             {
+                shouldSerialize["ending_employee_id"] = true;
                 this.endingEmployeeId = endingEmployeeId;
                 return this;
             }
@@ -453,6 +636,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ClosingEmployeeId(string closingEmployeeId)
             {
+                shouldSerialize["closing_employee_id"] = true;
                 this.closingEmployeeId = closingEmployeeId;
                 return this;
             }
@@ -464,6 +648,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -557,12 +742,77 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOpenedAt()
+            {
+                this.shouldSerialize["opened_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndedAt()
+            {
+                this.shouldSerialize["ended_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetClosedAt()
+            {
+                this.shouldSerialize["closed_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmployeeIds()
+            {
+                this.shouldSerialize["employee_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOpeningEmployeeId()
+            {
+                this.shouldSerialize["opening_employee_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndingEmployeeId()
+            {
+                this.shouldSerialize["ending_employee_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetClosingEmployeeId()
+            {
+                this.shouldSerialize["closing_employee_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CashDrawerShift. </returns>
             public CashDrawerShift Build()
             {
-                return new CashDrawerShift(
+                return new CashDrawerShift(shouldSerialize,
                     this.id,
                     this.state,
                     this.openedAt,

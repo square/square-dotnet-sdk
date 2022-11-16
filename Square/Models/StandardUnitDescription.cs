@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class StandardUnitDescription
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="StandardUnitDescription"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             string name = null,
             string abbreviation = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "abbreviation", false }
+            };
+
             this.Unit = unit;
-            this.Name = name;
-            this.Abbreviation = abbreviation;
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (abbreviation != null)
+            {
+                shouldSerialize["abbreviation"] = true;
+                this.Abbreviation = abbreviation;
+            }
+
+        }
+        internal StandardUnitDescription(Dictionary<string, bool> shouldSerialize,
+            Models.MeasurementUnit unit = null,
+            string name = null,
+            string abbreviation = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Unit = unit;
+            Name = name;
+            Abbreviation = abbreviation;
         }
 
         /// <summary>
@@ -44,13 +71,13 @@ namespace Square.Models
         /// <summary>
         /// UI display name of the measurement unit. For example, 'Pound'.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// UI display abbreviation for the measurement unit. For example, 'lb'.
         /// </summary>
-        [JsonProperty("abbreviation", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("abbreviation")]
         public string Abbreviation { get; }
 
         /// <inheritdoc/>
@@ -61,6 +88,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"StandardUnitDescription : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAbbreviation()
+        {
+            return this.shouldSerialize["abbreviation"];
         }
 
         /// <inheritdoc/>
@@ -120,6 +165,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "abbreviation", false },
+            };
+
             private Models.MeasurementUnit unit;
             private string name;
             private string abbreviation;
@@ -142,6 +193,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -153,9 +205,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Abbreviation(string abbreviation)
             {
+                shouldSerialize["abbreviation"] = true;
                 this.abbreviation = abbreviation;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAbbreviation()
+            {
+                this.shouldSerialize["abbreviation"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -163,7 +233,7 @@ namespace Square.Models
             /// <returns> StandardUnitDescription. </returns>
             public StandardUnitDescription Build()
             {
-                return new StandardUnitDescription(
+                return new StandardUnitDescription(shouldSerialize,
                     this.unit,
                     this.name,
                     this.abbreviation);

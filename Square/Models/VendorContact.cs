@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class VendorContact
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="VendorContact"/> class.
         /// </summary>
@@ -34,12 +35,56 @@ namespace Square.Models
             string phoneNumber = null,
             bool? removed = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "email_address", false },
+                { "phone_number", false },
+                { "removed", false }
+            };
+
             this.Id = id;
-            this.Name = name;
-            this.EmailAddress = emailAddress;
-            this.PhoneNumber = phoneNumber;
-            this.Removed = removed;
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (emailAddress != null)
+            {
+                shouldSerialize["email_address"] = true;
+                this.EmailAddress = emailAddress;
+            }
+
+            if (phoneNumber != null)
+            {
+                shouldSerialize["phone_number"] = true;
+                this.PhoneNumber = phoneNumber;
+            }
+
+            if (removed != null)
+            {
+                shouldSerialize["removed"] = true;
+                this.Removed = removed;
+            }
+
             this.Ordinal = ordinal;
+        }
+        internal VendorContact(Dictionary<string, bool> shouldSerialize,
+            int ordinal,
+            string id = null,
+            string name = null,
+            string emailAddress = null,
+            string phoneNumber = null,
+            bool? removed = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Name = name;
+            EmailAddress = emailAddress;
+            PhoneNumber = phoneNumber;
+            Removed = removed;
+            Ordinal = ordinal;
         }
 
         /// <summary>
@@ -53,25 +98,25 @@ namespace Square.Models
         /// The name of the [VendorContact]($m/VendorContact).
         /// This field is required when attempting to create a [Vendor]($m/Vendor).
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// The email address of the [VendorContact]($m/VendorContact).
         /// </summary>
-        [JsonProperty("email_address", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("email_address")]
         public string EmailAddress { get; }
 
         /// <summary>
         /// The phone number of the [VendorContact]($m/VendorContact).
         /// </summary>
-        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("phone_number")]
         public string PhoneNumber { get; }
 
         /// <summary>
         /// The state of the [VendorContact]($m/VendorContact).
         /// </summary>
-        [JsonProperty("removed", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("removed")]
         public bool? Removed { get; }
 
         /// <summary>
@@ -88,6 +133,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"VendorContact : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmailAddress()
+        {
+            return this.shouldSerialize["email_address"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePhoneNumber()
+        {
+            return this.shouldSerialize["phone_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRemoved()
+        {
+            return this.shouldSerialize["removed"];
         }
 
         /// <inheritdoc/>
@@ -156,6 +237,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "email_address", false },
+                { "phone_number", false },
+                { "removed", false },
+            };
+
             private int ordinal;
             private string id;
             private string name;
@@ -198,6 +287,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -209,6 +299,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmailAddress(string emailAddress)
             {
+                shouldSerialize["email_address"] = true;
                 this.emailAddress = emailAddress;
                 return this;
             }
@@ -220,6 +311,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
+                shouldSerialize["phone_number"] = true;
                 this.phoneNumber = phoneNumber;
                 return this;
             }
@@ -231,9 +323,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Removed(bool? removed)
             {
+                shouldSerialize["removed"] = true;
                 this.removed = removed;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmailAddress()
+            {
+                this.shouldSerialize["email_address"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPhoneNumber()
+            {
+                this.shouldSerialize["phone_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRemoved()
+            {
+                this.shouldSerialize["removed"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -241,7 +367,7 @@ namespace Square.Models
             /// <returns> VendorContact. </returns>
             public VendorContact Build()
             {
-                return new VendorContact(
+                return new VendorContact(shouldSerialize,
                     this.ordinal,
                     this.id,
                     this.name,

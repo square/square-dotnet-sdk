@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1UpdateOrderRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1UpdateOrderRequest"/> class.
         /// </summary>
@@ -32,11 +33,53 @@ namespace Square.Models
             string refundedNote = null,
             string canceledNote = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "shipped_tracking_number", false },
+                { "completed_note", false },
+                { "refunded_note", false },
+                { "canceled_note", false }
+            };
+
             this.Action = action;
-            this.ShippedTrackingNumber = shippedTrackingNumber;
-            this.CompletedNote = completedNote;
-            this.RefundedNote = refundedNote;
-            this.CanceledNote = canceledNote;
+            if (shippedTrackingNumber != null)
+            {
+                shouldSerialize["shipped_tracking_number"] = true;
+                this.ShippedTrackingNumber = shippedTrackingNumber;
+            }
+
+            if (completedNote != null)
+            {
+                shouldSerialize["completed_note"] = true;
+                this.CompletedNote = completedNote;
+            }
+
+            if (refundedNote != null)
+            {
+                shouldSerialize["refunded_note"] = true;
+                this.RefundedNote = refundedNote;
+            }
+
+            if (canceledNote != null)
+            {
+                shouldSerialize["canceled_note"] = true;
+                this.CanceledNote = canceledNote;
+            }
+
+        }
+        internal V1UpdateOrderRequest(Dictionary<string, bool> shouldSerialize,
+            string action,
+            string shippedTrackingNumber = null,
+            string completedNote = null,
+            string refundedNote = null,
+            string canceledNote = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Action = action;
+            ShippedTrackingNumber = shippedTrackingNumber;
+            CompletedNote = completedNote;
+            RefundedNote = refundedNote;
+            CanceledNote = canceledNote;
         }
 
         /// <summary>
@@ -48,25 +91,25 @@ namespace Square.Models
         /// <summary>
         /// The tracking number of the shipment associated with the order. Only valid if action is COMPLETE.
         /// </summary>
-        [JsonProperty("shipped_tracking_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("shipped_tracking_number")]
         public string ShippedTrackingNumber { get; }
 
         /// <summary>
         /// A merchant-specified note about the completion of the order. Only valid if action is COMPLETE.
         /// </summary>
-        [JsonProperty("completed_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("completed_note")]
         public string CompletedNote { get; }
 
         /// <summary>
         /// A merchant-specified note about the refunding of the order. Only valid if action is REFUND.
         /// </summary>
-        [JsonProperty("refunded_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("refunded_note")]
         public string RefundedNote { get; }
 
         /// <summary>
         /// A merchant-specified note about the canceling of the order. Only valid if action is CANCEL.
         /// </summary>
-        [JsonProperty("canceled_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("canceled_note")]
         public string CanceledNote { get; }
 
         /// <inheritdoc/>
@@ -77,6 +120,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1UpdateOrderRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeShippedTrackingNumber()
+        {
+            return this.shouldSerialize["shipped_tracking_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCompletedNote()
+        {
+            return this.shouldSerialize["completed_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRefundedNote()
+        {
+            return this.shouldSerialize["refunded_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCanceledNote()
+        {
+            return this.shouldSerialize["canceled_note"];
         }
 
         /// <inheritdoc/>
@@ -142,6 +221,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "shipped_tracking_number", false },
+                { "completed_note", false },
+                { "refunded_note", false },
+                { "canceled_note", false },
+            };
+
             private string action;
             private string shippedTrackingNumber;
             private string completedNote;
@@ -172,6 +259,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ShippedTrackingNumber(string shippedTrackingNumber)
             {
+                shouldSerialize["shipped_tracking_number"] = true;
                 this.shippedTrackingNumber = shippedTrackingNumber;
                 return this;
             }
@@ -183,6 +271,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CompletedNote(string completedNote)
             {
+                shouldSerialize["completed_note"] = true;
                 this.completedNote = completedNote;
                 return this;
             }
@@ -194,6 +283,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RefundedNote(string refundedNote)
             {
+                shouldSerialize["refunded_note"] = true;
                 this.refundedNote = refundedNote;
                 return this;
             }
@@ -205,9 +295,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CanceledNote(string canceledNote)
             {
+                shouldSerialize["canceled_note"] = true;
                 this.canceledNote = canceledNote;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetShippedTrackingNumber()
+            {
+                this.shouldSerialize["shipped_tracking_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCompletedNote()
+            {
+                this.shouldSerialize["completed_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRefundedNote()
+            {
+                this.shouldSerialize["refunded_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCanceledNote()
+            {
+                this.shouldSerialize["canceled_note"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -215,7 +339,7 @@ namespace Square.Models
             /// <returns> V1UpdateOrderRequest. </returns>
             public V1UpdateOrderRequest Build()
             {
-                return new V1UpdateOrderRequest(
+                return new V1UpdateOrderRequest(shouldSerialize,
                     this.action,
                     this.shippedTrackingNumber,
                     this.completedNote,

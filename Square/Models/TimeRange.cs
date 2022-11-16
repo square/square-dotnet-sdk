@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TimeRange
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TimeRange"/> class.
         /// </summary>
@@ -26,22 +27,46 @@ namespace Square.Models
             string startAt = null,
             string endAt = null)
         {
-            this.StartAt = startAt;
-            this.EndAt = endAt;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_at", false },
+                { "end_at", false }
+            };
+
+            if (startAt != null)
+            {
+                shouldSerialize["start_at"] = true;
+                this.StartAt = startAt;
+            }
+
+            if (endAt != null)
+            {
+                shouldSerialize["end_at"] = true;
+                this.EndAt = endAt;
+            }
+
+        }
+        internal TimeRange(Dictionary<string, bool> shouldSerialize,
+            string startAt = null,
+            string endAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            StartAt = startAt;
+            EndAt = endAt;
         }
 
         /// <summary>
         /// A datetime value in RFC 3339 format indicating when the time range
         /// starts.
         /// </summary>
-        [JsonProperty("start_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("start_at")]
         public string StartAt { get; }
 
         /// <summary>
         /// A datetime value in RFC 3339 format indicating when the time range
         /// ends.
         /// </summary>
-        [JsonProperty("end_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_at")]
         public string EndAt { get; }
 
         /// <inheritdoc/>
@@ -52,6 +77,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TimeRange : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStartAt()
+        {
+            return this.shouldSerialize["start_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndAt()
+        {
+            return this.shouldSerialize["end_at"];
         }
 
         /// <inheritdoc/>
@@ -108,6 +151,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_at", false },
+                { "end_at", false },
+            };
+
             private string startAt;
             private string endAt;
 
@@ -118,6 +167,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StartAt(string startAt)
             {
+                shouldSerialize["start_at"] = true;
                 this.startAt = startAt;
                 return this;
             }
@@ -129,9 +179,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndAt(string endAt)
             {
+                shouldSerialize["end_at"] = true;
                 this.endAt = endAt;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStartAt()
+            {
+                this.shouldSerialize["start_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndAt()
+            {
+                this.shouldSerialize["end_at"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -139,7 +207,7 @@ namespace Square.Models
             /// <returns> TimeRange. </returns>
             public TimeRange Build()
             {
-                return new TimeRange(
+                return new TimeRange(shouldSerialize,
                     this.startAt,
                     this.endAt);
             }

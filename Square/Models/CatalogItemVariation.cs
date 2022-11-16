@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogItemVariation
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogItemVariation"/> class.
         /// </summary>
@@ -64,45 +65,191 @@ namespace Square.Models
             IList<string> teamMemberIds = null,
             Models.CatalogStockConversion stockableConversion = null)
         {
-            this.ItemId = itemId;
-            this.Name = name;
-            this.Sku = sku;
-            this.Upc = upc;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "item_id", false },
+                { "name", false },
+                { "sku", false },
+                { "upc", false },
+                { "location_overrides", false },
+                { "track_inventory", false },
+                { "inventory_alert_threshold", false },
+                { "user_data", false },
+                { "service_duration", false },
+                { "available_for_booking", false },
+                { "item_option_values", false },
+                { "measurement_unit_id", false },
+                { "sellable", false },
+                { "stockable", false },
+                { "image_ids", false },
+                { "team_member_ids", false }
+            };
+
+            if (itemId != null)
+            {
+                shouldSerialize["item_id"] = true;
+                this.ItemId = itemId;
+            }
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (sku != null)
+            {
+                shouldSerialize["sku"] = true;
+                this.Sku = sku;
+            }
+
+            if (upc != null)
+            {
+                shouldSerialize["upc"] = true;
+                this.Upc = upc;
+            }
+
             this.Ordinal = ordinal;
             this.PricingType = pricingType;
             this.PriceMoney = priceMoney;
-            this.LocationOverrides = locationOverrides;
-            this.TrackInventory = trackInventory;
+            if (locationOverrides != null)
+            {
+                shouldSerialize["location_overrides"] = true;
+                this.LocationOverrides = locationOverrides;
+            }
+
+            if (trackInventory != null)
+            {
+                shouldSerialize["track_inventory"] = true;
+                this.TrackInventory = trackInventory;
+            }
+
             this.InventoryAlertType = inventoryAlertType;
-            this.InventoryAlertThreshold = inventoryAlertThreshold;
-            this.UserData = userData;
-            this.ServiceDuration = serviceDuration;
-            this.AvailableForBooking = availableForBooking;
-            this.ItemOptionValues = itemOptionValues;
-            this.MeasurementUnitId = measurementUnitId;
-            this.Sellable = sellable;
-            this.Stockable = stockable;
-            this.ImageIds = imageIds;
-            this.TeamMemberIds = teamMemberIds;
+            if (inventoryAlertThreshold != null)
+            {
+                shouldSerialize["inventory_alert_threshold"] = true;
+                this.InventoryAlertThreshold = inventoryAlertThreshold;
+            }
+
+            if (userData != null)
+            {
+                shouldSerialize["user_data"] = true;
+                this.UserData = userData;
+            }
+
+            if (serviceDuration != null)
+            {
+                shouldSerialize["service_duration"] = true;
+                this.ServiceDuration = serviceDuration;
+            }
+
+            if (availableForBooking != null)
+            {
+                shouldSerialize["available_for_booking"] = true;
+                this.AvailableForBooking = availableForBooking;
+            }
+
+            if (itemOptionValues != null)
+            {
+                shouldSerialize["item_option_values"] = true;
+                this.ItemOptionValues = itemOptionValues;
+            }
+
+            if (measurementUnitId != null)
+            {
+                shouldSerialize["measurement_unit_id"] = true;
+                this.MeasurementUnitId = measurementUnitId;
+            }
+
+            if (sellable != null)
+            {
+                shouldSerialize["sellable"] = true;
+                this.Sellable = sellable;
+            }
+
+            if (stockable != null)
+            {
+                shouldSerialize["stockable"] = true;
+                this.Stockable = stockable;
+            }
+
+            if (imageIds != null)
+            {
+                shouldSerialize["image_ids"] = true;
+                this.ImageIds = imageIds;
+            }
+
+            if (teamMemberIds != null)
+            {
+                shouldSerialize["team_member_ids"] = true;
+                this.TeamMemberIds = teamMemberIds;
+            }
+
             this.StockableConversion = stockableConversion;
+        }
+        internal CatalogItemVariation(Dictionary<string, bool> shouldSerialize,
+            string itemId = null,
+            string name = null,
+            string sku = null,
+            string upc = null,
+            int? ordinal = null,
+            string pricingType = null,
+            Models.Money priceMoney = null,
+            IList<Models.ItemVariationLocationOverrides> locationOverrides = null,
+            bool? trackInventory = null,
+            string inventoryAlertType = null,
+            long? inventoryAlertThreshold = null,
+            string userData = null,
+            long? serviceDuration = null,
+            bool? availableForBooking = null,
+            IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues = null,
+            string measurementUnitId = null,
+            bool? sellable = null,
+            bool? stockable = null,
+            IList<string> imageIds = null,
+            IList<string> teamMemberIds = null,
+            Models.CatalogStockConversion stockableConversion = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ItemId = itemId;
+            Name = name;
+            Sku = sku;
+            Upc = upc;
+            Ordinal = ordinal;
+            PricingType = pricingType;
+            PriceMoney = priceMoney;
+            LocationOverrides = locationOverrides;
+            TrackInventory = trackInventory;
+            InventoryAlertType = inventoryAlertType;
+            InventoryAlertThreshold = inventoryAlertThreshold;
+            UserData = userData;
+            ServiceDuration = serviceDuration;
+            AvailableForBooking = availableForBooking;
+            ItemOptionValues = itemOptionValues;
+            MeasurementUnitId = measurementUnitId;
+            Sellable = sellable;
+            Stockable = stockable;
+            ImageIds = imageIds;
+            TeamMemberIds = teamMemberIds;
+            StockableConversion = stockableConversion;
         }
 
         /// <summary>
         /// The ID of the `CatalogItem` associated with this item variation.
         /// </summary>
-        [JsonProperty("item_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_id")]
         public string ItemId { get; }
 
         /// <summary>
         /// The item variation's name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// The item variation's SKU, if any. This is a searchable attribute for use in applicable query filters.
         /// </summary>
-        [JsonProperty("sku", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sku")]
         public string Sku { get; }
 
         /// <summary>
@@ -112,7 +259,7 @@ namespace Square.Models
         /// to this attribute using the API, the value is not editable on the Seller Dashboard, Square Point of Sale or Retail Point of Sale apps
         /// unless it is updated to fit the expected format.
         /// </summary>
-        [JsonProperty("upc", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("upc")]
         public string Upc { get; }
 
         /// <summary>
@@ -143,13 +290,13 @@ namespace Square.Models
         /// <summary>
         /// Per-location price and inventory overrides.
         /// </summary>
-        [JsonProperty("location_overrides", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_overrides")]
         public IList<Models.ItemVariationLocationOverrides> LocationOverrides { get; }
 
         /// <summary>
         /// If `true`, inventory tracking is active for the variation.
         /// </summary>
-        [JsonProperty("track_inventory", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("track_inventory")]
         public bool? TrackInventory { get; }
 
         /// <summary>
@@ -163,13 +310,13 @@ namespace Square.Models
         /// is `LOW_QUANTITY`, the variation displays an alert in the merchant dashboard.
         /// This value is always an integer.
         /// </summary>
-        [JsonProperty("inventory_alert_threshold", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("inventory_alert_threshold")]
         public long? InventoryAlertThreshold { get; }
 
         /// <summary>
         /// Arbitrary user metadata to associate with the item variation. This attribute value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("user_data", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("user_data")]
         public string UserData { get; }
 
         /// <summary>
@@ -178,21 +325,21 @@ namespace Square.Models
         /// example, a 30 minute appointment would have the value `1800000`, which is equal to
         /// 30 (minutes) * 60 (seconds per minute) * 1000 (milliseconds per second).
         /// </summary>
-        [JsonProperty("service_duration", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("service_duration")]
         public long? ServiceDuration { get; }
 
         /// <summary>
         /// If the `CatalogItem` that owns this item variation is of type
         /// `APPOINTMENTS_SERVICE`, a bool representing whether this service is available for booking.
         /// </summary>
-        [JsonProperty("available_for_booking", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("available_for_booking")]
         public bool? AvailableForBooking { get; }
 
         /// <summary>
         /// List of item option values associated with this item variation. Listed
         /// in the same order as the item options of the parent item.
         /// </summary>
-        [JsonProperty("item_option_values", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_option_values")]
         public IList<Models.CatalogItemOptionValueForItemVariation> ItemOptionValues { get; }
 
         /// <summary>
@@ -200,7 +347,7 @@ namespace Square.Models
         /// sold of this item variation. If left unset, the item will be sold in
         /// whole quantities.
         /// </summary>
-        [JsonProperty("measurement_unit_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("measurement_unit_id")]
         public string MeasurementUnitId { get; }
 
         /// <summary>
@@ -208,7 +355,7 @@ namespace Square.Models
         /// the number of units available for sale. When a variation is both stockable and sellable,
         /// its sellable inventory count can be smaller than or equal to its stockable count.
         /// </summary>
-        [JsonProperty("sellable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sellable")]
         public bool? Sellable { get; }
 
         /// <summary>
@@ -216,21 +363,21 @@ namespace Square.Models
         /// When a variation is both stockable and sellable, the inventory count of a stockable variation keeps track of the number of units of this variation in stock
         /// and is not an indicator of the number of units of the variation that can be sold.
         /// </summary>
-        [JsonProperty("stockable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("stockable")]
         public bool? Stockable { get; }
 
         /// <summary>
         /// The IDs of images associated with this `CatalogItemVariation` instance.
         /// These images will be shown to customers in Square Online Store.
         /// </summary>
-        [JsonProperty("image_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("image_ids")]
         public IList<string> ImageIds { get; }
 
         /// <summary>
         /// Tokens of employees that can perform the service represented by this variation. Only valid for
         /// variations of type `APPOINTMENTS_SERVICE`.
         /// </summary>
-        [JsonProperty("team_member_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("team_member_ids")]
         public IList<string> TeamMemberIds { get; }
 
         /// <summary>
@@ -249,6 +396,150 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogItemVariation : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemId()
+        {
+            return this.shouldSerialize["item_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSku()
+        {
+            return this.shouldSerialize["sku"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpc()
+        {
+            return this.shouldSerialize["upc"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationOverrides()
+        {
+            return this.shouldSerialize["location_overrides"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTrackInventory()
+        {
+            return this.shouldSerialize["track_inventory"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeInventoryAlertThreshold()
+        {
+            return this.shouldSerialize["inventory_alert_threshold"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUserData()
+        {
+            return this.shouldSerialize["user_data"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeServiceDuration()
+        {
+            return this.shouldSerialize["service_duration"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAvailableForBooking()
+        {
+            return this.shouldSerialize["available_for_booking"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemOptionValues()
+        {
+            return this.shouldSerialize["item_option_values"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMeasurementUnitId()
+        {
+            return this.shouldSerialize["measurement_unit_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSellable()
+        {
+            return this.shouldSerialize["sellable"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStockable()
+        {
+            return this.shouldSerialize["stockable"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeImageIds()
+        {
+            return this.shouldSerialize["image_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTeamMemberIds()
+        {
+            return this.shouldSerialize["team_member_ids"];
         }
 
         /// <inheritdoc/>
@@ -366,6 +657,26 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "item_id", false },
+                { "name", false },
+                { "sku", false },
+                { "upc", false },
+                { "location_overrides", false },
+                { "track_inventory", false },
+                { "inventory_alert_threshold", false },
+                { "user_data", false },
+                { "service_duration", false },
+                { "available_for_booking", false },
+                { "item_option_values", false },
+                { "measurement_unit_id", false },
+                { "sellable", false },
+                { "stockable", false },
+                { "image_ids", false },
+                { "team_member_ids", false },
+            };
+
             private string itemId;
             private string name;
             private string sku;
@@ -395,6 +706,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemId(string itemId)
             {
+                shouldSerialize["item_id"] = true;
                 this.itemId = itemId;
                 return this;
             }
@@ -406,6 +718,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -417,6 +730,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Sku(string sku)
             {
+                shouldSerialize["sku"] = true;
                 this.sku = sku;
                 return this;
             }
@@ -428,6 +742,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Upc(string upc)
             {
+                shouldSerialize["upc"] = true;
                 this.upc = upc;
                 return this;
             }
@@ -472,6 +787,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationOverrides(IList<Models.ItemVariationLocationOverrides> locationOverrides)
             {
+                shouldSerialize["location_overrides"] = true;
                 this.locationOverrides = locationOverrides;
                 return this;
             }
@@ -483,6 +799,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TrackInventory(bool? trackInventory)
             {
+                shouldSerialize["track_inventory"] = true;
                 this.trackInventory = trackInventory;
                 return this;
             }
@@ -505,6 +822,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder InventoryAlertThreshold(long? inventoryAlertThreshold)
             {
+                shouldSerialize["inventory_alert_threshold"] = true;
                 this.inventoryAlertThreshold = inventoryAlertThreshold;
                 return this;
             }
@@ -516,6 +834,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder UserData(string userData)
             {
+                shouldSerialize["user_data"] = true;
                 this.userData = userData;
                 return this;
             }
@@ -527,6 +846,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ServiceDuration(long? serviceDuration)
             {
+                shouldSerialize["service_duration"] = true;
                 this.serviceDuration = serviceDuration;
                 return this;
             }
@@ -538,6 +858,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AvailableForBooking(bool? availableForBooking)
             {
+                shouldSerialize["available_for_booking"] = true;
                 this.availableForBooking = availableForBooking;
                 return this;
             }
@@ -549,6 +870,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemOptionValues(IList<Models.CatalogItemOptionValueForItemVariation> itemOptionValues)
             {
+                shouldSerialize["item_option_values"] = true;
                 this.itemOptionValues = itemOptionValues;
                 return this;
             }
@@ -560,6 +882,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MeasurementUnitId(string measurementUnitId)
             {
+                shouldSerialize["measurement_unit_id"] = true;
                 this.measurementUnitId = measurementUnitId;
                 return this;
             }
@@ -571,6 +894,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Sellable(bool? sellable)
             {
+                shouldSerialize["sellable"] = true;
                 this.sellable = sellable;
                 return this;
             }
@@ -582,6 +906,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Stockable(bool? stockable)
             {
+                shouldSerialize["stockable"] = true;
                 this.stockable = stockable;
                 return this;
             }
@@ -593,6 +918,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ImageIds(IList<string> imageIds)
             {
+                shouldSerialize["image_ids"] = true;
                 this.imageIds = imageIds;
                 return this;
             }
@@ -604,6 +930,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TeamMemberIds(IList<string> teamMemberIds)
             {
+                shouldSerialize["team_member_ids"] = true;
                 this.teamMemberIds = teamMemberIds;
                 return this;
             }
@@ -620,12 +947,141 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemId()
+            {
+                this.shouldSerialize["item_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSku()
+            {
+                this.shouldSerialize["sku"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUpc()
+            {
+                this.shouldSerialize["upc"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationOverrides()
+            {
+                this.shouldSerialize["location_overrides"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTrackInventory()
+            {
+                this.shouldSerialize["track_inventory"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetInventoryAlertThreshold()
+            {
+                this.shouldSerialize["inventory_alert_threshold"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUserData()
+            {
+                this.shouldSerialize["user_data"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetServiceDuration()
+            {
+                this.shouldSerialize["service_duration"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAvailableForBooking()
+            {
+                this.shouldSerialize["available_for_booking"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemOptionValues()
+            {
+                this.shouldSerialize["item_option_values"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMeasurementUnitId()
+            {
+                this.shouldSerialize["measurement_unit_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSellable()
+            {
+                this.shouldSerialize["sellable"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStockable()
+            {
+                this.shouldSerialize["stockable"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetImageIds()
+            {
+                this.shouldSerialize["image_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTeamMemberIds()
+            {
+                this.shouldSerialize["team_member_ids"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CatalogItemVariation. </returns>
             public CatalogItemVariation Build()
             {
-                return new CatalogItemVariation(
+                return new CatalogItemVariation(shouldSerialize,
                     this.itemId,
                     this.name,
                     this.sku,

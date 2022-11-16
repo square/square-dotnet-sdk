@@ -29,6 +29,9 @@ namespace Square.Apis
         /// `BatchDeleteCatalogObjects` succeeds even if only a portion of the targeted.
         /// IDs can be deleted. The response will only include IDs that were.
         /// actually deleted.
+        /// To ensure consistency, only one delete request is processed at a time per seller account.  .
+        /// While one (batch or non-batch) delete request is being processed, other (batched and non-batched) .
+        /// delete requests are rejected with the `429` error code.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchDeleteCatalogObjectsResponse response from the API call.</returns>
@@ -45,6 +48,9 @@ namespace Square.Apis
         /// `BatchDeleteCatalogObjects` succeeds even if only a portion of the targeted.
         /// IDs can be deleted. The response will only include IDs that were.
         /// actually deleted.
+        /// To ensure consistency, only one delete request is processed at a time per seller account.  .
+        /// While one (batch or non-batch) delete request is being processed, other (batched and non-batched) .
+        /// delete requests are rejected with the `429` error code.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -91,6 +97,9 @@ namespace Square.Apis
         /// batches will be processed in order as long as the total object count for the.
         /// request (items, variations, modifier lists, discounts, and taxes) is no more.
         /// than 10,000.
+        /// To ensure consistency, only one update request is processed at a time per seller account.  .
+        /// While one (batch or non-batch) update request is being processed, other (batched and non-batched) .
+        /// update requests are rejected with the `429` error code.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.BatchUpsertCatalogObjectsResponse response from the API call.</returns>
@@ -107,6 +116,9 @@ namespace Square.Apis
         /// batches will be processed in order as long as the total object count for the.
         /// request (items, variations, modifier lists, discounts, and taxes) is no more.
         /// than 10,000.
+        /// To ensure consistency, only one update request is processed at a time per seller account.  .
+        /// While one (batch or non-batch) update request is being processed, other (batched and non-batched) .
+        /// update requests are rejected with the `429` error code.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -200,7 +212,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. The page size is currently set to be 100. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve.  The valid values are defined in the [CatalogObjectType]($m/CatalogObjectType) enum, for example, `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.  If this is unspecified, the operation returns objects of all the top level types at the version of the Square API used to make the request. Object types that are nested onto other object types are not included in the defaults.  At the current API version the default object types are: ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST,  PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT, SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS..</param>
-        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute.  If not included, results will be from the current version of the catalog..</param>
+        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response. This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute.  If not included, results will be from the current version of the catalog..</param>
         /// <returns>Returns the Models.ListCatalogResponse response from the API call.</returns>
         Models.ListCatalogResponse ListCatalog(
                 string cursor = null,
@@ -217,7 +229,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="cursor">Optional parameter: The pagination cursor returned in the previous response. Leave unset for an initial request. The page size is currently set to be 100. See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
         /// <param name="types">Optional parameter: An optional case-insensitive, comma-separated list of object types to retrieve.  The valid values are defined in the [CatalogObjectType]($m/CatalogObjectType) enum, for example, `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`, `MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.  If this is unspecified, the operation returns objects of all the top level types at the version of the Square API used to make the request. Object types that are nested onto other object types are not included in the defaults.  At the current API version the default object types are: ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST,  PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT, SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS..</param>
-        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response.  This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute.  If not included, results will be from the current version of the catalog..</param>
+        /// <param name="catalogVersion">Optional parameter: The specific version of the catalog objects to be included in the response. This allows you to retrieve historical versions of objects. The specified version value is matched against the [CatalogObject]($m/CatalogObject)s' `version` attribute.  If not included, results will be from the current version of the catalog..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListCatalogResponse response from the API call.</returns>
         Task<Models.ListCatalogResponse> ListCatalogAsync(
@@ -227,7 +239,10 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Creates or updates the target [CatalogObject]($m/CatalogObject).
+        /// Creates a new or updates the specified [CatalogObject]($m/CatalogObject).
+        /// To ensure consistency, only one update request is processed at a time per seller account.  .
+        /// While one (batch or non-batch) update request is being processed, other (batched and non-batched) .
+        /// update requests are rejected with the `429` error code.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UpsertCatalogObjectResponse response from the API call.</returns>
@@ -235,7 +250,10 @@ namespace Square.Apis
                 Models.UpsertCatalogObjectRequest body);
 
         /// <summary>
-        /// Creates or updates the target [CatalogObject]($m/CatalogObject).
+        /// Creates a new or updates the specified [CatalogObject]($m/CatalogObject).
+        /// To ensure consistency, only one update request is processed at a time per seller account.  .
+        /// While one (batch or non-batch) update request is being processed, other (batched and non-batched) .
+        /// update requests are rejected with the `429` error code.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -251,6 +269,9 @@ namespace Square.Apis
         /// are also deleted. For example, deleting a [CatalogItem]($m/CatalogItem).
         /// will also delete all of its.
         /// [CatalogItemVariation]($m/CatalogItemVariation) children.
+        /// To ensure consistency, only one delete request is processed at a time per seller account.  .
+        /// While one (batch or non-batch) delete request is being processed, other (batched and non-batched) .
+        /// delete requests are rejected with the `429` error code.
         /// </summary>
         /// <param name="objectId">Required parameter: The ID of the catalog object to be deleted. When an object is deleted, other objects in the graph that depend on that object will be deleted as well (for example, deleting a catalog item will delete its catalog item variations)..</param>
         /// <returns>Returns the Models.DeleteCatalogObjectResponse response from the API call.</returns>
@@ -264,6 +285,9 @@ namespace Square.Apis
         /// are also deleted. For example, deleting a [CatalogItem]($m/CatalogItem).
         /// will also delete all of its.
         /// [CatalogItemVariation]($m/CatalogItemVariation) children.
+        /// To ensure consistency, only one delete request is processed at a time per seller account.  .
+        /// While one (batch or non-batch) delete request is being processed, other (batched and non-batched) .
+        /// delete requests are rejected with the `429` error code.
         /// </summary>
         /// <param name="objectId">Required parameter: The ID of the catalog object to be deleted. When an object is deleted, other objects in the graph that depend on that object will be deleted as well (for example, deleting a catalog item will delete its catalog item variations)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

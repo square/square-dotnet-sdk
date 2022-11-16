@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogQuickAmount
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogQuickAmount"/> class.
         /// </summary>
@@ -30,10 +31,38 @@ namespace Square.Models
             long? score = null,
             long? ordinal = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "score", false },
+                { "ordinal", false }
+            };
+
             this.Type = type;
             this.Amount = amount;
-            this.Score = score;
-            this.Ordinal = ordinal;
+            if (score != null)
+            {
+                shouldSerialize["score"] = true;
+                this.Score = score;
+            }
+
+            if (ordinal != null)
+            {
+                shouldSerialize["ordinal"] = true;
+                this.Ordinal = ordinal;
+            }
+
+        }
+        internal CatalogQuickAmount(Dictionary<string, bool> shouldSerialize,
+            string type,
+            Models.Money amount,
+            long? score = null,
+            long? ordinal = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Type = type;
+            Amount = amount;
+            Score = score;
+            Ordinal = ordinal;
         }
 
         /// <summary>
@@ -57,13 +86,13 @@ namespace Square.Models
         /// Describes the ranking of the Quick Amount provided by machine learning model, in the range [0, 100].
         /// MANUAL type amount will always have score = 100.
         /// </summary>
-        [JsonProperty("score", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("score")]
         public long? Score { get; }
 
         /// <summary>
         /// The order in which this Quick Amount should be displayed.
         /// </summary>
-        [JsonProperty("ordinal", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("ordinal")]
         public long? Ordinal { get; }
 
         /// <inheritdoc/>
@@ -74,6 +103,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogQuickAmount : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeScore()
+        {
+            return this.shouldSerialize["score"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrdinal()
+        {
+            return this.shouldSerialize["ordinal"];
         }
 
         /// <inheritdoc/>
@@ -136,6 +183,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "score", false },
+                { "ordinal", false },
+            };
+
             private string type;
             private Models.Money amount;
             private long? score;
@@ -178,6 +231,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Score(long? score)
             {
+                shouldSerialize["score"] = true;
                 this.score = score;
                 return this;
             }
@@ -189,9 +243,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Ordinal(long? ordinal)
             {
+                shouldSerialize["ordinal"] = true;
                 this.ordinal = ordinal;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetScore()
+            {
+                this.shouldSerialize["score"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrdinal()
+            {
+                this.shouldSerialize["ordinal"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -199,7 +271,7 @@ namespace Square.Models
             /// <returns> CatalogQuickAmount. </returns>
             public CatalogQuickAmount Build()
             {
-                return new CatalogQuickAmount(
+                return new CatalogQuickAmount(shouldSerialize,
                     this.type,
                     this.amount,
                     this.score,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TerminalActionQueryFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TerminalActionQueryFilter"/> class.
         /// </summary>
@@ -30,17 +31,45 @@ namespace Square.Models
             string status = null,
             string type = null)
         {
-            this.DeviceId = deviceId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "device_id", false },
+                { "status", false }
+            };
+
+            if (deviceId != null)
+            {
+                shouldSerialize["device_id"] = true;
+                this.DeviceId = deviceId;
+            }
+
             this.CreatedAt = createdAt;
-            this.Status = status;
+            if (status != null)
+            {
+                shouldSerialize["status"] = true;
+                this.Status = status;
+            }
+
             this.Type = type;
+        }
+        internal TerminalActionQueryFilter(Dictionary<string, bool> shouldSerialize,
+            string deviceId = null,
+            Models.TimeRange createdAt = null,
+            string status = null,
+            string type = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            DeviceId = deviceId;
+            CreatedAt = createdAt;
+            Status = status;
+            Type = type;
         }
 
         /// <summary>
         /// `TerminalAction`s associated with a specific device. If no device is specified then all
         /// `TerminalAction`s for the merchant will be displayed.
         /// </summary>
-        [JsonProperty("device_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("device_id")]
         public string DeviceId { get; }
 
         /// <summary>
@@ -57,7 +86,7 @@ namespace Square.Models
         /// Filter results with the desired status of the `TerminalAction`
         /// Options: `PENDING`, `IN_PROGRESS`, `CANCEL_REQUESTED`, `CANCELED`, `COMPLETED`
         /// </summary>
-        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("status")]
         public string Status { get; }
 
         /// <summary>
@@ -74,6 +103,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TerminalActionQueryFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDeviceId()
+        {
+            return this.shouldSerialize["device_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatus()
+        {
+            return this.shouldSerialize["status"];
         }
 
         /// <inheritdoc/>
@@ -136,6 +183,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "device_id", false },
+                { "status", false },
+            };
+
             private string deviceId;
             private Models.TimeRange createdAt;
             private string status;
@@ -148,6 +201,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DeviceId(string deviceId)
             {
+                shouldSerialize["device_id"] = true;
                 this.deviceId = deviceId;
                 return this;
             }
@@ -170,6 +224,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Status(string status)
             {
+                shouldSerialize["status"] = true;
                 this.status = status;
                 return this;
             }
@@ -186,12 +241,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDeviceId()
+            {
+                this.shouldSerialize["device_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatus()
+            {
+                this.shouldSerialize["status"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> TerminalActionQueryFilter. </returns>
             public TerminalActionQueryFilter Build()
             {
-                return new TerminalActionQueryFilter(
+                return new TerminalActionQueryFilter(shouldSerialize,
                     this.deviceId,
                     this.createdAt,
                     this.status,

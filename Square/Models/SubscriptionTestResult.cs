@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SubscriptionTestResult
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionTestResult"/> class.
         /// </summary>
@@ -32,11 +33,41 @@ namespace Square.Models
             string createdAt = null,
             string updatedAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "status_code", false },
+                { "payload", false }
+            };
+
             this.Id = id;
-            this.StatusCode = statusCode;
-            this.Payload = payload;
+            if (statusCode != null)
+            {
+                shouldSerialize["status_code"] = true;
+                this.StatusCode = statusCode;
+            }
+
+            if (payload != null)
+            {
+                shouldSerialize["payload"] = true;
+                this.Payload = payload;
+            }
+
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+        }
+        internal SubscriptionTestResult(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            int? statusCode = null,
+            string payload = null,
+            string createdAt = null,
+            string updatedAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            StatusCode = statusCode;
+            Payload = payload;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -48,13 +79,13 @@ namespace Square.Models
         /// <summary>
         /// The status code returned by the subscription notification URL.
         /// </summary>
-        [JsonProperty("status_code", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("status_code")]
         public int? StatusCode { get; }
 
         /// <summary>
         /// An object containing the payload of the test event. For example, a `payment.created` event.
         /// </summary>
-        [JsonProperty("payload", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payload")]
         public string Payload { get; }
 
         /// <summary>
@@ -79,6 +110,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SubscriptionTestResult : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatusCode()
+        {
+            return this.shouldSerialize["status_code"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePayload()
+        {
+            return this.shouldSerialize["payload"];
         }
 
         /// <inheritdoc/>
@@ -144,6 +193,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "status_code", false },
+                { "payload", false },
+            };
+
             private string id;
             private int? statusCode;
             private string payload;
@@ -168,6 +223,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StatusCode(int? statusCode)
             {
+                shouldSerialize["status_code"] = true;
                 this.statusCode = statusCode;
                 return this;
             }
@@ -179,6 +235,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Payload(string payload)
             {
+                shouldSerialize["payload"] = true;
                 this.payload = payload;
                 return this;
             }
@@ -206,12 +263,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatusCode()
+            {
+                this.shouldSerialize["status_code"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPayload()
+            {
+                this.shouldSerialize["payload"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> SubscriptionTestResult. </returns>
             public SubscriptionTestResult Build()
             {
-                return new SubscriptionTestResult(
+                return new SubscriptionTestResult(shouldSerialize,
                     this.id,
                     this.statusCode,
                     this.payload,

@@ -52,6 +52,7 @@ namespace Square
         private readonly Lazy<IApplePayApi> applePay;
         private readonly Lazy<IBankAccountsApi> bankAccounts;
         private readonly Lazy<IBookingsApi> bookings;
+        private readonly Lazy<IBookingCustomAttributesApi> bookingCustomAttributes;
         private readonly Lazy<ICardsApi> cards;
         private readonly Lazy<ICashDrawersApi> cashDrawers;
         private readonly Lazy<ICatalogApi> catalog;
@@ -73,6 +74,7 @@ namespace Square
         private readonly Lazy<ILoyaltyApi> loyalty;
         private readonly Lazy<IMerchantsApi> merchants;
         private readonly Lazy<IOrdersApi> orders;
+        private readonly Lazy<IOrderCustomAttributesApi> orderCustomAttributes;
         private readonly Lazy<IPaymentsApi> payments;
         private readonly Lazy<IPayoutsApi> payouts;
         private readonly Lazy<IRefundsApi> refunds;
@@ -118,6 +120,8 @@ namespace Square
                 () => new BankAccountsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.bookings = new Lazy<IBookingsApi>(
                 () => new BookingsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.bookingCustomAttributes = new Lazy<IBookingCustomAttributesApi>(
+                () => new BookingCustomAttributesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.cards = new Lazy<ICardsApi>(
                 () => new CardsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.cashDrawers = new Lazy<ICashDrawersApi>(
@@ -160,6 +164,8 @@ namespace Square
                 () => new MerchantsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.orders = new Lazy<IOrdersApi>(
                 () => new OrdersApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.orderCustomAttributes = new Lazy<IOrderCustomAttributesApi>(
+                () => new OrderCustomAttributesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.payments = new Lazy<IPaymentsApi>(
                 () => new PaymentsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.payouts = new Lazy<IPayoutsApi>(
@@ -223,6 +229,11 @@ namespace Square
         /// Gets BookingsApi.
         /// </summary>
         public IBookingsApi BookingsApi => this.bookings.Value;
+
+        /// <summary>
+        /// Gets BookingCustomAttributesApi.
+        /// </summary>
+        public IBookingCustomAttributesApi BookingCustomAttributesApi => this.bookingCustomAttributes.Value;
 
         /// <summary>
         /// Gets CardsApi.
@@ -330,6 +341,11 @@ namespace Square
         public IOrdersApi OrdersApi => this.orders.Value;
 
         /// <summary>
+        /// Gets OrderCustomAttributesApi.
+        /// </summary>
+        public IOrderCustomAttributesApi OrderCustomAttributesApi => this.orderCustomAttributes.Value;
+
+        /// <summary>
         /// Gets PaymentsApi.
         /// </summary>
         public IPaymentsApi PaymentsApi => this.payments.Value;
@@ -387,7 +403,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "23.0.0";
+        public string SdkVersion => "24.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -544,7 +560,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2022-10-19";
+            private string squareVersion = "2022-11-16";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";

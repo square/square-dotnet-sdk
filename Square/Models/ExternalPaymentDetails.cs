@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ExternalPaymentDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ExternalPaymentDetails"/> class.
         /// </summary>
@@ -30,10 +31,32 @@ namespace Square.Models
             string sourceId = null,
             Models.Money sourceFeeMoney = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "source_id", false }
+            };
+
             this.Type = type;
             this.Source = source;
-            this.SourceId = sourceId;
+            if (sourceId != null)
+            {
+                shouldSerialize["source_id"] = true;
+                this.SourceId = sourceId;
+            }
+
             this.SourceFeeMoney = sourceFeeMoney;
+        }
+        internal ExternalPaymentDetails(Dictionary<string, bool> shouldSerialize,
+            string type,
+            string source,
+            string sourceId = null,
+            Models.Money sourceFeeMoney = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Type = type;
+            Source = source;
+            SourceId = sourceId;
+            SourceFeeMoney = sourceFeeMoney;
         }
 
         /// <summary>
@@ -64,7 +87,7 @@ namespace Square.Models
         /// <summary>
         /// An ID to associate the payment to its originating source.
         /// </summary>
-        [JsonProperty("source_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("source_id")]
         public string SourceId { get; }
 
         /// <summary>
@@ -86,6 +109,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ExternalPaymentDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSourceId()
+        {
+            return this.shouldSerialize["source_id"];
         }
 
         /// <inheritdoc/>
@@ -148,6 +180,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "source_id", false },
+            };
+
             private string type;
             private string source;
             private string sourceId;
@@ -190,6 +227,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SourceId(string sourceId)
             {
+                shouldSerialize["source_id"] = true;
                 this.sourceId = sourceId;
                 return this;
             }
@@ -206,12 +244,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSourceId()
+            {
+                this.shouldSerialize["source_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> ExternalPaymentDetails. </returns>
             public ExternalPaymentDetails Build()
             {
-                return new ExternalPaymentDetails(
+                return new ExternalPaymentDetails(shouldSerialize,
                     this.type,
                     this.source,
                     this.sourceId,

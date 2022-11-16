@@ -18,6 +18,7 @@ namespace Square.Models
     /// </summary>
     public class V1Settlement
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1Settlement"/> class.
         /// </summary>
@@ -35,12 +36,50 @@ namespace Square.Models
             string bankAccountId = null,
             IList<Models.V1SettlementEntry> entries = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "initiated_at", false },
+                { "bank_account_id", false },
+                { "entries", false }
+            };
+
             this.Id = id;
             this.Status = status;
             this.TotalMoney = totalMoney;
-            this.InitiatedAt = initiatedAt;
-            this.BankAccountId = bankAccountId;
-            this.Entries = entries;
+            if (initiatedAt != null)
+            {
+                shouldSerialize["initiated_at"] = true;
+                this.InitiatedAt = initiatedAt;
+            }
+
+            if (bankAccountId != null)
+            {
+                shouldSerialize["bank_account_id"] = true;
+                this.BankAccountId = bankAccountId;
+            }
+
+            if (entries != null)
+            {
+                shouldSerialize["entries"] = true;
+                this.Entries = entries;
+            }
+
+        }
+        internal V1Settlement(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string status = null,
+            Models.V1Money totalMoney = null,
+            string initiatedAt = null,
+            string bankAccountId = null,
+            IList<Models.V1SettlementEntry> entries = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Status = status;
+            TotalMoney = totalMoney;
+            InitiatedAt = initiatedAt;
+            BankAccountId = bankAccountId;
+            Entries = entries;
         }
 
         /// <summary>
@@ -70,19 +109,19 @@ namespace Square.Models
         /// <summary>
         /// The time when the settlement was submitted for deposit or withdrawal, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("initiated_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("initiated_at")]
         public string InitiatedAt { get; }
 
         /// <summary>
         /// The Square-issued unique identifier for the bank account associated with the settlement.
         /// </summary>
-        [JsonProperty("bank_account_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("bank_account_id")]
         public string BankAccountId { get; }
 
         /// <summary>
         /// The entries included in this settlement.
         /// </summary>
-        [JsonProperty("entries", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("entries")]
         public IList<Models.V1SettlementEntry> Entries { get; }
 
         /// <inheritdoc/>
@@ -93,6 +132,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1Settlement : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeInitiatedAt()
+        {
+            return this.shouldSerialize["initiated_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBankAccountId()
+        {
+            return this.shouldSerialize["bank_account_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEntries()
+        {
+            return this.shouldSerialize["entries"];
         }
 
         /// <inheritdoc/>
@@ -167,6 +233,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "initiated_at", false },
+                { "bank_account_id", false },
+                { "entries", false },
+            };
+
             private string id;
             private string status;
             private Models.V1Money totalMoney;
@@ -214,6 +287,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder InitiatedAt(string initiatedAt)
             {
+                shouldSerialize["initiated_at"] = true;
                 this.initiatedAt = initiatedAt;
                 return this;
             }
@@ -225,6 +299,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BankAccountId(string bankAccountId)
             {
+                shouldSerialize["bank_account_id"] = true;
                 this.bankAccountId = bankAccountId;
                 return this;
             }
@@ -236,9 +311,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Entries(IList<Models.V1SettlementEntry> entries)
             {
+                shouldSerialize["entries"] = true;
                 this.entries = entries;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetInitiatedAt()
+            {
+                this.shouldSerialize["initiated_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBankAccountId()
+            {
+                this.shouldSerialize["bank_account_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEntries()
+            {
+                this.shouldSerialize["entries"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -246,7 +347,7 @@ namespace Square.Models
             /// <returns> V1Settlement. </returns>
             public V1Settlement Build()
             {
-                return new V1Settlement(
+                return new V1Settlement(shouldSerialize,
                     this.id,
                     this.status,
                     this.totalMoney,

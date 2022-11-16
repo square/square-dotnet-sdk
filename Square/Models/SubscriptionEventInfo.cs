@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SubscriptionEventInfo
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionEventInfo"/> class.
         /// </summary>
@@ -26,14 +27,32 @@ namespace Square.Models
             string detail = null,
             string code = null)
         {
-            this.Detail = detail;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "detail", false }
+            };
+
+            if (detail != null)
+            {
+                shouldSerialize["detail"] = true;
+                this.Detail = detail;
+            }
+
             this.Code = code;
+        }
+        internal SubscriptionEventInfo(Dictionary<string, bool> shouldSerialize,
+            string detail = null,
+            string code = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Detail = detail;
+            Code = code;
         }
 
         /// <summary>
         /// A human-readable explanation for the event.
         /// </summary>
-        [JsonProperty("detail", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("detail")]
         public string Detail { get; }
 
         /// <summary>
@@ -50,6 +69,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SubscriptionEventInfo : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDetail()
+        {
+            return this.shouldSerialize["detail"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +134,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "detail", false },
+            };
+
             private string detail;
             private string code;
 
@@ -116,6 +149,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Detail(string detail)
             {
+                shouldSerialize["detail"] = true;
                 this.detail = detail;
                 return this;
             }
@@ -132,12 +166,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDetail()
+            {
+                this.shouldSerialize["detail"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> SubscriptionEventInfo. </returns>
             public SubscriptionEventInfo Build()
             {
-                return new SubscriptionEventInfo(
+                return new SubscriptionEventInfo(shouldSerialize,
                     this.detail,
                     this.code);
             }

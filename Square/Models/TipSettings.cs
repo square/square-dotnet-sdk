@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class TipSettings
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="TipSettings"/> class.
         /// </summary>
@@ -32,37 +33,85 @@ namespace Square.Models
             IList<int> tipPercentages = null,
             bool? smartTipping = null)
         {
-            this.AllowTipping = allowTipping;
-            this.SeparateTipScreen = separateTipScreen;
-            this.CustomTipField = customTipField;
-            this.TipPercentages = tipPercentages;
-            this.SmartTipping = smartTipping;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "allow_tipping", false },
+                { "separate_tip_screen", false },
+                { "custom_tip_field", false },
+                { "tip_percentages", false },
+                { "smart_tipping", false }
+            };
+
+            if (allowTipping != null)
+            {
+                shouldSerialize["allow_tipping"] = true;
+                this.AllowTipping = allowTipping;
+            }
+
+            if (separateTipScreen != null)
+            {
+                shouldSerialize["separate_tip_screen"] = true;
+                this.SeparateTipScreen = separateTipScreen;
+            }
+
+            if (customTipField != null)
+            {
+                shouldSerialize["custom_tip_field"] = true;
+                this.CustomTipField = customTipField;
+            }
+
+            if (tipPercentages != null)
+            {
+                shouldSerialize["tip_percentages"] = true;
+                this.TipPercentages = tipPercentages;
+            }
+
+            if (smartTipping != null)
+            {
+                shouldSerialize["smart_tipping"] = true;
+                this.SmartTipping = smartTipping;
+            }
+
+        }
+        internal TipSettings(Dictionary<string, bool> shouldSerialize,
+            bool? allowTipping = null,
+            bool? separateTipScreen = null,
+            bool? customTipField = null,
+            IList<int> tipPercentages = null,
+            bool? smartTipping = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AllowTipping = allowTipping;
+            SeparateTipScreen = separateTipScreen;
+            CustomTipField = customTipField;
+            TipPercentages = tipPercentages;
+            SmartTipping = smartTipping;
         }
 
         /// <summary>
         /// Indicates whether tipping is enabled for this checkout. Defaults to false.
         /// </summary>
-        [JsonProperty("allow_tipping", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("allow_tipping")]
         public bool? AllowTipping { get; }
 
         /// <summary>
         /// Indicates whether tip options should be presented on the screen before presenting
         /// the signature screen during card payment. Defaults to false.
         /// </summary>
-        [JsonProperty("separate_tip_screen", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("separate_tip_screen")]
         public bool? SeparateTipScreen { get; }
 
         /// <summary>
         /// Indicates whether custom tip amounts are allowed during the checkout flow. Defaults to false.
         /// </summary>
-        [JsonProperty("custom_tip_field", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("custom_tip_field")]
         public bool? CustomTipField { get; }
 
         /// <summary>
         /// A list of tip percentages that should be presented during the checkout flow, specified as
         /// up to 3 non-negative integers from 0 to 100 (inclusive). Defaults to 15, 20, and 25.
         /// </summary>
-        [JsonProperty("tip_percentages", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tip_percentages")]
         public IList<int> TipPercentages { get; }
 
         /// <summary>
@@ -74,7 +123,7 @@ namespace Square.Models
         /// Defaults to false.
         /// To learn more about smart tipping, see [Accept Tips with the Square App](https://squareup.com/help/us/en/article/5069-accept-tips-with-the-square-app).
         /// </summary>
-        [JsonProperty("smart_tipping", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("smart_tipping")]
         public bool? SmartTipping { get; }
 
         /// <inheritdoc/>
@@ -85,6 +134,51 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"TipSettings : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAllowTipping()
+        {
+            return this.shouldSerialize["allow_tipping"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSeparateTipScreen()
+        {
+            return this.shouldSerialize["separate_tip_screen"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomTipField()
+        {
+            return this.shouldSerialize["custom_tip_field"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTipPercentages()
+        {
+            return this.shouldSerialize["tip_percentages"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSmartTipping()
+        {
+            return this.shouldSerialize["smart_tipping"];
         }
 
         /// <inheritdoc/>
@@ -150,6 +244,15 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "allow_tipping", false },
+                { "separate_tip_screen", false },
+                { "custom_tip_field", false },
+                { "tip_percentages", false },
+                { "smart_tipping", false },
+            };
+
             private bool? allowTipping;
             private bool? separateTipScreen;
             private bool? customTipField;
@@ -163,6 +266,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AllowTipping(bool? allowTipping)
             {
+                shouldSerialize["allow_tipping"] = true;
                 this.allowTipping = allowTipping;
                 return this;
             }
@@ -174,6 +278,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SeparateTipScreen(bool? separateTipScreen)
             {
+                shouldSerialize["separate_tip_screen"] = true;
                 this.separateTipScreen = separateTipScreen;
                 return this;
             }
@@ -185,6 +290,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomTipField(bool? customTipField)
             {
+                shouldSerialize["custom_tip_field"] = true;
                 this.customTipField = customTipField;
                 return this;
             }
@@ -196,6 +302,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TipPercentages(IList<int> tipPercentages)
             {
+                shouldSerialize["tip_percentages"] = true;
                 this.tipPercentages = tipPercentages;
                 return this;
             }
@@ -207,9 +314,51 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SmartTipping(bool? smartTipping)
             {
+                shouldSerialize["smart_tipping"] = true;
                 this.smartTipping = smartTipping;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAllowTipping()
+            {
+                this.shouldSerialize["allow_tipping"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSeparateTipScreen()
+            {
+                this.shouldSerialize["separate_tip_screen"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomTipField()
+            {
+                this.shouldSerialize["custom_tip_field"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTipPercentages()
+            {
+                this.shouldSerialize["tip_percentages"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSmartTipping()
+            {
+                this.shouldSerialize["smart_tipping"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -217,7 +366,7 @@ namespace Square.Models
             /// <returns> TipSettings. </returns>
             public TipSettings Build()
             {
-                return new TipSettings(
+                return new TipSettings(shouldSerialize,
                     this.allowTipping,
                     this.separateTipScreen,
                     this.customTipField,

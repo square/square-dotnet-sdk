@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListBookingsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListBookingsRequest"/> class.
         /// </summary>
@@ -34,48 +35,104 @@ namespace Square.Models
             string startAtMin = null,
             string startAtMax = null)
         {
-            this.Limit = limit;
-            this.Cursor = cursor;
-            this.TeamMemberId = teamMemberId;
-            this.LocationId = locationId;
-            this.StartAtMin = startAtMin;
-            this.StartAtMax = startAtMax;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "cursor", false },
+                { "team_member_id", false },
+                { "location_id", false },
+                { "start_at_min", false },
+                { "start_at_max", false }
+            };
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (teamMemberId != null)
+            {
+                shouldSerialize["team_member_id"] = true;
+                this.TeamMemberId = teamMemberId;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (startAtMin != null)
+            {
+                shouldSerialize["start_at_min"] = true;
+                this.StartAtMin = startAtMin;
+            }
+
+            if (startAtMax != null)
+            {
+                shouldSerialize["start_at_max"] = true;
+                this.StartAtMax = startAtMax;
+            }
+
+        }
+        internal ListBookingsRequest(Dictionary<string, bool> shouldSerialize,
+            int? limit = null,
+            string cursor = null,
+            string teamMemberId = null,
+            string locationId = null,
+            string startAtMin = null,
+            string startAtMax = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Limit = limit;
+            Cursor = cursor;
+            TeamMemberId = teamMemberId;
+            LocationId = locationId;
+            StartAtMin = startAtMin;
+            StartAtMax = startAtMax;
         }
 
         /// <summary>
         /// The maximum number of results per page to return in a paged response.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
         /// The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
         /// The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved.
         /// </summary>
-        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }
 
         /// <summary>
         /// The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
         /// The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used.
         /// </summary>
-        [JsonProperty("start_at_min", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("start_at_min")]
         public string StartAtMin { get; }
 
         /// <summary>
         /// The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used.
         /// </summary>
-        [JsonProperty("start_at_max", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("start_at_max")]
         public string StartAtMax { get; }
 
         /// <inheritdoc/>
@@ -86,6 +143,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListBookingsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTeamMemberId()
+        {
+            return this.shouldSerialize["team_member_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStartAtMin()
+        {
+            return this.shouldSerialize["start_at_min"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStartAtMax()
+        {
+            return this.shouldSerialize["start_at_max"];
         }
 
         /// <inheritdoc/>
@@ -154,6 +265,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "cursor", false },
+                { "team_member_id", false },
+                { "location_id", false },
+                { "start_at_min", false },
+                { "start_at_max", false },
+            };
+
             private int? limit;
             private string cursor;
             private string teamMemberId;
@@ -168,6 +289,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -179,6 +301,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -190,6 +313,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TeamMemberId(string teamMemberId)
             {
+                shouldSerialize["team_member_id"] = true;
                 this.teamMemberId = teamMemberId;
                 return this;
             }
@@ -201,6 +325,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -212,6 +337,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StartAtMin(string startAtMin)
             {
+                shouldSerialize["start_at_min"] = true;
                 this.startAtMin = startAtMin;
                 return this;
             }
@@ -223,9 +349,59 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StartAtMax(string startAtMax)
             {
+                shouldSerialize["start_at_max"] = true;
                 this.startAtMax = startAtMax;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTeamMemberId()
+            {
+                this.shouldSerialize["team_member_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStartAtMin()
+            {
+                this.shouldSerialize["start_at_min"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStartAtMax()
+            {
+                this.shouldSerialize["start_at_max"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -233,7 +409,7 @@ namespace Square.Models
             /// <returns> ListBookingsRequest. </returns>
             public ListBookingsRequest Build()
             {
-                return new ListBookingsRequest(
+                return new ListBookingsRequest(shouldSerialize,
                     this.limit,
                     this.cursor,
                     this.teamMemberId,

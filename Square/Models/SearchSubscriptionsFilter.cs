@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SearchSubscriptionsFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchSubscriptionsFilter"/> class.
         /// </summary>
@@ -28,27 +29,59 @@ namespace Square.Models
             IList<string> locationIds = null,
             IList<string> sourceNames = null)
         {
-            this.CustomerIds = customerIds;
-            this.LocationIds = locationIds;
-            this.SourceNames = sourceNames;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_ids", false },
+                { "location_ids", false },
+                { "source_names", false }
+            };
+
+            if (customerIds != null)
+            {
+                shouldSerialize["customer_ids"] = true;
+                this.CustomerIds = customerIds;
+            }
+
+            if (locationIds != null)
+            {
+                shouldSerialize["location_ids"] = true;
+                this.LocationIds = locationIds;
+            }
+
+            if (sourceNames != null)
+            {
+                shouldSerialize["source_names"] = true;
+                this.SourceNames = sourceNames;
+            }
+
+        }
+        internal SearchSubscriptionsFilter(Dictionary<string, bool> shouldSerialize,
+            IList<string> customerIds = null,
+            IList<string> locationIds = null,
+            IList<string> sourceNames = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            CustomerIds = customerIds;
+            LocationIds = locationIds;
+            SourceNames = sourceNames;
         }
 
         /// <summary>
         /// A filter to select subscriptions based on the subscribing customer IDs.
         /// </summary>
-        [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_ids")]
         public IList<string> CustomerIds { get; }
 
         /// <summary>
         /// A filter to select subscriptions based on the location.
         /// </summary>
-        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
 
         /// <summary>
         /// A filter to select subscriptions based on the source application.
         /// </summary>
-        [JsonProperty("source_names", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("source_names")]
         public IList<string> SourceNames { get; }
 
         /// <inheritdoc/>
@@ -59,6 +92,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SearchSubscriptionsFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerIds()
+        {
+            return this.shouldSerialize["customer_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationIds()
+        {
+            return this.shouldSerialize["location_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSourceNames()
+        {
+            return this.shouldSerialize["source_names"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +178,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_ids", false },
+                { "location_ids", false },
+                { "source_names", false },
+            };
+
             private IList<string> customerIds;
             private IList<string> locationIds;
             private IList<string> sourceNames;
@@ -129,6 +196,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerIds(IList<string> customerIds)
             {
+                shouldSerialize["customer_ids"] = true;
                 this.customerIds = customerIds;
                 return this;
             }
@@ -140,6 +208,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
+                shouldSerialize["location_ids"] = true;
                 this.locationIds = locationIds;
                 return this;
             }
@@ -151,9 +220,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SourceNames(IList<string> sourceNames)
             {
+                shouldSerialize["source_names"] = true;
                 this.sourceNames = sourceNames;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerIds()
+            {
+                this.shouldSerialize["customer_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationIds()
+            {
+                this.shouldSerialize["location_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSourceNames()
+            {
+                this.shouldSerialize["source_names"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -161,7 +256,7 @@ namespace Square.Models
             /// <returns> SearchSubscriptionsFilter. </returns>
             public SearchSubscriptionsFilter Build()
             {
-                return new SearchSubscriptionsFilter(
+                return new SearchSubscriptionsFilter(shouldSerialize,
                     this.customerIds,
                     this.locationIds,
                     this.sourceNames);

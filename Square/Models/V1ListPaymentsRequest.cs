@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class V1ListPaymentsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1ListPaymentsRequest"/> class.
         /// </summary>
@@ -34,12 +35,62 @@ namespace Square.Models
             string batchToken = null,
             bool? includePartial = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "begin_time", false },
+                { "end_time", false },
+                { "limit", false },
+                { "batch_token", false },
+                { "include_partial", false }
+            };
+
             this.Order = order;
-            this.BeginTime = beginTime;
-            this.EndTime = endTime;
-            this.Limit = limit;
-            this.BatchToken = batchToken;
-            this.IncludePartial = includePartial;
+            if (beginTime != null)
+            {
+                shouldSerialize["begin_time"] = true;
+                this.BeginTime = beginTime;
+            }
+
+            if (endTime != null)
+            {
+                shouldSerialize["end_time"] = true;
+                this.EndTime = endTime;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (batchToken != null)
+            {
+                shouldSerialize["batch_token"] = true;
+                this.BatchToken = batchToken;
+            }
+
+            if (includePartial != null)
+            {
+                shouldSerialize["include_partial"] = true;
+                this.IncludePartial = includePartial;
+            }
+
+        }
+        internal V1ListPaymentsRequest(Dictionary<string, bool> shouldSerialize,
+            string order = null,
+            string beginTime = null,
+            string endTime = null,
+            int? limit = null,
+            string batchToken = null,
+            bool? includePartial = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Order = order;
+            BeginTime = beginTime;
+            EndTime = endTime;
+            Limit = limit;
+            BatchToken = batchToken;
+            IncludePartial = includePartial;
         }
 
         /// <summary>
@@ -51,32 +102,32 @@ namespace Square.Models
         /// <summary>
         /// The beginning of the requested reporting period, in ISO 8601 format. If this value is before January 1, 2013 (2013-01-01T00:00:00Z), this endpoint returns an error. Default value: The current time minus one year.
         /// </summary>
-        [JsonProperty("begin_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("begin_time")]
         public string BeginTime { get; }
 
         /// <summary>
         /// The end of the requested reporting period, in ISO 8601 format. If this value is more than one year greater than begin_time, this endpoint returns an error. Default value: The current time.
         /// </summary>
-        [JsonProperty("end_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_time")]
         public string EndTime { get; }
 
         /// <summary>
         /// The maximum number of payments to return in a single response. This value cannot exceed 200.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
         /// A pagination cursor to retrieve the next set of results for your
         /// original query to the endpoint.
         /// </summary>
-        [JsonProperty("batch_token", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("batch_token")]
         public string BatchToken { get; }
 
         /// <summary>
         /// Indicates whether or not to include partial payments in the response. Partial payments will have the tenders collected so far, but the itemizations will be empty until the payment is completed.
         /// </summary>
-        [JsonProperty("include_partial", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("include_partial")]
         public bool? IncludePartial { get; }
 
         /// <inheritdoc/>
@@ -87,6 +138,51 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1ListPaymentsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBeginTime()
+        {
+            return this.shouldSerialize["begin_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndTime()
+        {
+            return this.shouldSerialize["end_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBatchToken()
+        {
+            return this.shouldSerialize["batch_token"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIncludePartial()
+        {
+            return this.shouldSerialize["include_partial"];
         }
 
         /// <inheritdoc/>
@@ -155,6 +251,15 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "begin_time", false },
+                { "end_time", false },
+                { "limit", false },
+                { "batch_token", false },
+                { "include_partial", false },
+            };
+
             private string order;
             private string beginTime;
             private string endTime;
@@ -180,6 +285,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BeginTime(string beginTime)
             {
+                shouldSerialize["begin_time"] = true;
                 this.beginTime = beginTime;
                 return this;
             }
@@ -191,6 +297,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndTime(string endTime)
             {
+                shouldSerialize["end_time"] = true;
                 this.endTime = endTime;
                 return this;
             }
@@ -202,6 +309,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -213,6 +321,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BatchToken(string batchToken)
             {
+                shouldSerialize["batch_token"] = true;
                 this.batchToken = batchToken;
                 return this;
             }
@@ -224,9 +333,51 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IncludePartial(bool? includePartial)
             {
+                shouldSerialize["include_partial"] = true;
                 this.includePartial = includePartial;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBeginTime()
+            {
+                this.shouldSerialize["begin_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndTime()
+            {
+                this.shouldSerialize["end_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBatchToken()
+            {
+                this.shouldSerialize["batch_token"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIncludePartial()
+            {
+                this.shouldSerialize["include_partial"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -234,7 +385,7 @@ namespace Square.Models
             /// <returns> V1ListPaymentsRequest. </returns>
             public V1ListPaymentsRequest Build()
             {
-                return new V1ListPaymentsRequest(
+                return new V1ListPaymentsRequest(shouldSerialize,
                     this.order,
                     this.beginTime,
                     this.endTime,

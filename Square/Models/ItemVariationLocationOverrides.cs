@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ItemVariationLocationOverrides
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemVariationLocationOverrides"/> class.
         /// </summary>
@@ -38,20 +39,62 @@ namespace Square.Models
             bool? soldOut = null,
             string soldOutValidUntil = null)
         {
-            this.LocationId = locationId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "track_inventory", false },
+                { "inventory_alert_threshold", false }
+            };
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
             this.PriceMoney = priceMoney;
             this.PricingType = pricingType;
-            this.TrackInventory = trackInventory;
+            if (trackInventory != null)
+            {
+                shouldSerialize["track_inventory"] = true;
+                this.TrackInventory = trackInventory;
+            }
+
             this.InventoryAlertType = inventoryAlertType;
-            this.InventoryAlertThreshold = inventoryAlertThreshold;
+            if (inventoryAlertThreshold != null)
+            {
+                shouldSerialize["inventory_alert_threshold"] = true;
+                this.InventoryAlertThreshold = inventoryAlertThreshold;
+            }
+
             this.SoldOut = soldOut;
             this.SoldOutValidUntil = soldOutValidUntil;
+        }
+        internal ItemVariationLocationOverrides(Dictionary<string, bool> shouldSerialize,
+            string locationId = null,
+            Models.Money priceMoney = null,
+            string pricingType = null,
+            bool? trackInventory = null,
+            string inventoryAlertType = null,
+            long? inventoryAlertThreshold = null,
+            bool? soldOut = null,
+            string soldOutValidUntil = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationId = locationId;
+            PriceMoney = priceMoney;
+            PricingType = pricingType;
+            TrackInventory = trackInventory;
+            InventoryAlertType = inventoryAlertType;
+            InventoryAlertThreshold = inventoryAlertThreshold;
+            SoldOut = soldOut;
+            SoldOutValidUntil = soldOutValidUntil;
         }
 
         /// <summary>
         /// The ID of the `Location`. This can include locations that are deactivated.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -74,7 +117,7 @@ namespace Square.Models
         /// <summary>
         /// If `true`, inventory tracking is active for the `CatalogItemVariation` at this `Location`.
         /// </summary>
-        [JsonProperty("track_inventory", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("track_inventory")]
         public bool? TrackInventory { get; }
 
         /// <summary>
@@ -88,7 +131,7 @@ namespace Square.Models
         /// is `LOW_QUANTITY`, the variation displays an alert in the merchant dashboard.
         /// This value is always an integer.
         /// </summary>
-        [JsonProperty("inventory_alert_threshold", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("inventory_alert_threshold")]
         public long? InventoryAlertThreshold { get; }
 
         /// <summary>
@@ -118,6 +161,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ItemVariationLocationOverrides : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTrackInventory()
+        {
+            return this.shouldSerialize["track_inventory"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeInventoryAlertThreshold()
+        {
+            return this.shouldSerialize["inventory_alert_threshold"];
         }
 
         /// <inheritdoc/>
@@ -194,6 +264,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "track_inventory", false },
+                { "inventory_alert_threshold", false },
+            };
+
             private string locationId;
             private Models.Money priceMoney;
             private string pricingType;
@@ -210,6 +287,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -243,6 +321,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TrackInventory(bool? trackInventory)
             {
+                shouldSerialize["track_inventory"] = true;
                 this.trackInventory = trackInventory;
                 return this;
             }
@@ -265,6 +344,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder InventoryAlertThreshold(long? inventoryAlertThreshold)
             {
+                shouldSerialize["inventory_alert_threshold"] = true;
                 this.inventoryAlertThreshold = inventoryAlertThreshold;
                 return this;
             }
@@ -292,12 +372,37 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTrackInventory()
+            {
+                this.shouldSerialize["track_inventory"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetInventoryAlertThreshold()
+            {
+                this.shouldSerialize["inventory_alert_threshold"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> ItemVariationLocationOverrides. </returns>
             public ItemVariationLocationOverrides Build()
             {
-                return new ItemVariationLocationOverrides(
+                return new ItemVariationLocationOverrides(shouldSerialize,
                     this.locationId,
                     this.priceMoney,
                     this.pricingType,

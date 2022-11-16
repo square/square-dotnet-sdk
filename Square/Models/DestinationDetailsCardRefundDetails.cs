@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DestinationDetailsCardRefundDetails
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DestinationDetailsCardRefundDetails"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             Models.Card card = null,
             string entryMethod = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "entry_method", false }
+            };
+
             this.Card = card;
-            this.EntryMethod = entryMethod;
+            if (entryMethod != null)
+            {
+                shouldSerialize["entry_method"] = true;
+                this.EntryMethod = entryMethod;
+            }
+
+        }
+        internal DestinationDetailsCardRefundDetails(Dictionary<string, bool> shouldSerialize,
+            Models.Card card = null,
+            string entryMethod = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Card = card;
+            EntryMethod = entryMethod;
         }
 
         /// <summary>
@@ -41,7 +60,7 @@ namespace Square.Models
         /// The method used to enter the card's details for the refund. The method can be
         /// `KEYED`, `SWIPED`, `EMV`, `ON_FILE`, or `CONTACTLESS`.
         /// </summary>
-        [JsonProperty("entry_method", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("entry_method")]
         public string EntryMethod { get; }
 
         /// <inheritdoc/>
@@ -52,6 +71,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DestinationDetailsCardRefundDetails : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEntryMethod()
+        {
+            return this.shouldSerialize["entry_method"];
         }
 
         /// <inheritdoc/>
@@ -108,6 +136,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "entry_method", false },
+            };
+
             private Models.Card card;
             private string entryMethod;
 
@@ -129,9 +162,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EntryMethod(string entryMethod)
             {
+                shouldSerialize["entry_method"] = true;
                 this.entryMethod = entryMethod;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEntryMethod()
+            {
+                this.shouldSerialize["entry_method"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -139,7 +182,7 @@ namespace Square.Models
             /// <returns> DestinationDetailsCardRefundDetails. </returns>
             public DestinationDetailsCardRefundDetails Build()
             {
-                return new DestinationDetailsCardRefundDetails(
+                return new DestinationDetailsCardRefundDetails(shouldSerialize,
                     this.card,
                     this.entryMethod);
             }

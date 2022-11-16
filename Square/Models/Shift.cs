@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Shift
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Shift"/> class.
         /// </summary>
@@ -48,19 +49,89 @@ namespace Square.Models
             string updatedAt = null,
             string teamMemberId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "employee_id", false },
+                { "location_id", false },
+                { "timezone", false },
+                { "end_at", false },
+                { "breaks", false },
+                { "team_member_id", false }
+            };
+
             this.Id = id;
-            this.EmployeeId = employeeId;
-            this.LocationId = locationId;
-            this.Timezone = timezone;
+            if (employeeId != null)
+            {
+                shouldSerialize["employee_id"] = true;
+                this.EmployeeId = employeeId;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (timezone != null)
+            {
+                shouldSerialize["timezone"] = true;
+                this.Timezone = timezone;
+            }
+
             this.StartAt = startAt;
-            this.EndAt = endAt;
+            if (endAt != null)
+            {
+                shouldSerialize["end_at"] = true;
+                this.EndAt = endAt;
+            }
+
             this.Wage = wage;
-            this.Breaks = breaks;
+            if (breaks != null)
+            {
+                shouldSerialize["breaks"] = true;
+                this.Breaks = breaks;
+            }
+
             this.Status = status;
             this.Version = version;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
-            this.TeamMemberId = teamMemberId;
+            if (teamMemberId != null)
+            {
+                shouldSerialize["team_member_id"] = true;
+                this.TeamMemberId = teamMemberId;
+            }
+
+        }
+        internal Shift(Dictionary<string, bool> shouldSerialize,
+            string startAt,
+            string id = null,
+            string employeeId = null,
+            string locationId = null,
+            string timezone = null,
+            string endAt = null,
+            Models.ShiftWage wage = null,
+            IList<Models.Break> breaks = null,
+            string status = null,
+            int? version = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string teamMemberId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            EmployeeId = employeeId;
+            LocationId = locationId;
+            Timezone = timezone;
+            StartAt = startAt;
+            EndAt = endAt;
+            Wage = wage;
+            Breaks = breaks;
+            Status = status;
+            Version = version;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            TeamMemberId = teamMemberId;
         }
 
         /// <summary>
@@ -72,14 +143,14 @@ namespace Square.Models
         /// <summary>
         /// The ID of the employee this shift belongs to. DEPRECATED at version 2020-08-26. Use `team_member_id` instead.
         /// </summary>
-        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("employee_id")]
         public string EmployeeId { get; }
 
         /// <summary>
         /// The ID of the location this shift occurred at. The location should be based on
         /// where the employee clocked in.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
@@ -87,7 +158,7 @@ namespace Square.Models
         /// on the `location_id`. Format: the IANA timezone database identifier for the
         /// location timezone.
         /// </summary>
-        [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("timezone")]
         public string Timezone { get; }
 
         /// <summary>
@@ -101,7 +172,7 @@ namespace Square.Models
         /// RFC 3339; shifted to the timezone + offset. Precision up to the minute is
         /// respected; seconds are truncated.
         /// </summary>
-        [JsonProperty("end_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_at")]
         public string EndAt { get; }
 
         /// <summary>
@@ -113,7 +184,7 @@ namespace Square.Models
         /// <summary>
         /// A list of all the paid or unpaid breaks that were taken during this shift.
         /// </summary>
-        [JsonProperty("breaks", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("breaks")]
         public IList<Models.Break> Breaks { get; }
 
         /// <summary>
@@ -146,7 +217,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the team member this shift belongs to. Replaced `employee_id` at version "2020-08-26".
         /// </summary>
-        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }
 
         /// <inheritdoc/>
@@ -157,6 +228,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Shift : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmployeeId()
+        {
+            return this.shouldSerialize["employee_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTimezone()
+        {
+            return this.shouldSerialize["timezone"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndAt()
+        {
+            return this.shouldSerialize["end_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBreaks()
+        {
+            return this.shouldSerialize["breaks"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTeamMemberId()
+        {
+            return this.shouldSerialize["team_member_id"];
         }
 
         /// <inheritdoc/>
@@ -248,6 +373,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "employee_id", false },
+                { "location_id", false },
+                { "timezone", false },
+                { "end_at", false },
+                { "breaks", false },
+                { "team_member_id", false },
+            };
+
             private string startAt;
             private string id;
             private string employeeId;
@@ -297,6 +432,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
+                shouldSerialize["employee_id"] = true;
                 this.employeeId = employeeId;
                 return this;
             }
@@ -308,6 +444,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -319,6 +456,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Timezone(string timezone)
             {
+                shouldSerialize["timezone"] = true;
                 this.timezone = timezone;
                 return this;
             }
@@ -330,6 +468,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndAt(string endAt)
             {
+                shouldSerialize["end_at"] = true;
                 this.endAt = endAt;
                 return this;
             }
@@ -352,6 +491,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Breaks(IList<Models.Break> breaks)
             {
+                shouldSerialize["breaks"] = true;
                 this.breaks = breaks;
                 return this;
             }
@@ -407,9 +547,59 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TeamMemberId(string teamMemberId)
             {
+                shouldSerialize["team_member_id"] = true;
                 this.teamMemberId = teamMemberId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmployeeId()
+            {
+                this.shouldSerialize["employee_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTimezone()
+            {
+                this.shouldSerialize["timezone"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndAt()
+            {
+                this.shouldSerialize["end_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBreaks()
+            {
+                this.shouldSerialize["breaks"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTeamMemberId()
+            {
+                this.shouldSerialize["team_member_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -417,7 +607,7 @@ namespace Square.Models
             /// <returns> Shift. </returns>
             public Shift Build()
             {
-                return new Shift(
+                return new Shift(shouldSerialize,
                     this.startAt,
                     this.id,
                     this.employeeId,

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CustomerCreationSourceFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomerCreationSourceFilter"/> class.
         /// </summary>
@@ -26,15 +27,33 @@ namespace Square.Models
             IList<string> values = null,
             string rule = null)
         {
-            this.Values = values;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "values", false }
+            };
+
+            if (values != null)
+            {
+                shouldSerialize["values"] = true;
+                this.Values = values;
+            }
+
             this.Rule = rule;
+        }
+        internal CustomerCreationSourceFilter(Dictionary<string, bool> shouldSerialize,
+            IList<string> values = null,
+            string rule = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Values = values;
+            Rule = rule;
         }
 
         /// <summary>
         /// The list of creation sources used as filtering criteria.
         /// See [CustomerCreationSource](#type-customercreationsource) for possible values
         /// </summary>
-        [JsonProperty("values", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("values")]
         public IList<string> Values { get; }
 
         /// <summary>
@@ -52,6 +71,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CustomerCreationSourceFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeValues()
+        {
+            return this.shouldSerialize["values"];
         }
 
         /// <inheritdoc/>
@@ -108,6 +136,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "values", false },
+            };
+
             private IList<string> values;
             private string rule;
 
@@ -118,6 +151,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Values(IList<string> values)
             {
+                shouldSerialize["values"] = true;
                 this.values = values;
                 return this;
             }
@@ -134,12 +168,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetValues()
+            {
+                this.shouldSerialize["values"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CustomerCreationSourceFilter. </returns>
             public CustomerCreationSourceFilter Build()
             {
-                return new CustomerCreationSourceFilter(
+                return new CustomerCreationSourceFilter(shouldSerialize,
                     this.values,
                     this.rule);
             }

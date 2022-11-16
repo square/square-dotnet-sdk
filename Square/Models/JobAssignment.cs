@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class JobAssignment
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="JobAssignment"/> class.
         /// </summary>
@@ -32,11 +33,35 @@ namespace Square.Models
             Models.Money annualRate = null,
             int? weeklyHours = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "weekly_hours", false }
+            };
+
             this.JobTitle = jobTitle;
             this.PayType = payType;
             this.HourlyRate = hourlyRate;
             this.AnnualRate = annualRate;
-            this.WeeklyHours = weeklyHours;
+            if (weeklyHours != null)
+            {
+                shouldSerialize["weekly_hours"] = true;
+                this.WeeklyHours = weeklyHours;
+            }
+
+        }
+        internal JobAssignment(Dictionary<string, bool> shouldSerialize,
+            string jobTitle,
+            string payType,
+            Models.Money hourlyRate = null,
+            Models.Money annualRate = null,
+            int? weeklyHours = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            JobTitle = jobTitle;
+            PayType = payType;
+            HourlyRate = hourlyRate;
+            AnnualRate = annualRate;
+            WeeklyHours = weeklyHours;
         }
 
         /// <summary>
@@ -76,7 +101,7 @@ namespace Square.Models
         /// <summary>
         /// The planned hours per week for the job. Set if the job `PayType` is `SALARY`.
         /// </summary>
-        [JsonProperty("weekly_hours", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("weekly_hours")]
         public int? WeeklyHours { get; }
 
         /// <inheritdoc/>
@@ -87,6 +112,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"JobAssignment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeWeeklyHours()
+        {
+            return this.shouldSerialize["weekly_hours"];
         }
 
         /// <inheritdoc/>
@@ -152,6 +186,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "weekly_hours", false },
+            };
+
             private string jobTitle;
             private string payType;
             private Models.Money hourlyRate;
@@ -217,9 +256,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder WeeklyHours(int? weeklyHours)
             {
+                shouldSerialize["weekly_hours"] = true;
                 this.weeklyHours = weeklyHours;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetWeeklyHours()
+            {
+                this.shouldSerialize["weekly_hours"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -227,7 +276,7 @@ namespace Square.Models
             /// <returns> JobAssignment. </returns>
             public JobAssignment Build()
             {
-                return new JobAssignment(
+                return new JobAssignment(shouldSerialize,
                     this.jobTitle,
                     this.payType,
                     this.hourlyRate,

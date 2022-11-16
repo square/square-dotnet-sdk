@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogItem
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogItem"/> class.
         /// </summary>
@@ -58,30 +59,170 @@ namespace Square.Models
             string descriptionHtml = null,
             string descriptionPlaintext = null)
         {
-            this.Name = name;
-            this.Description = description;
-            this.Abbreviation = abbreviation;
-            this.LabelColor = labelColor;
-            this.AvailableOnline = availableOnline;
-            this.AvailableForPickup = availableForPickup;
-            this.AvailableElectronically = availableElectronically;
-            this.CategoryId = categoryId;
-            this.TaxIds = taxIds;
-            this.ModifierListInfo = modifierListInfo;
-            this.Variations = variations;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "description", false },
+                { "abbreviation", false },
+                { "label_color", false },
+                { "available_online", false },
+                { "available_for_pickup", false },
+                { "available_electronically", false },
+                { "category_id", false },
+                { "tax_ids", false },
+                { "modifier_list_info", false },
+                { "variations", false },
+                { "skip_modifier_screen", false },
+                { "item_options", false },
+                { "image_ids", false },
+                { "sort_name", false },
+                { "description_html", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
+            if (abbreviation != null)
+            {
+                shouldSerialize["abbreviation"] = true;
+                this.Abbreviation = abbreviation;
+            }
+
+            if (labelColor != null)
+            {
+                shouldSerialize["label_color"] = true;
+                this.LabelColor = labelColor;
+            }
+
+            if (availableOnline != null)
+            {
+                shouldSerialize["available_online"] = true;
+                this.AvailableOnline = availableOnline;
+            }
+
+            if (availableForPickup != null)
+            {
+                shouldSerialize["available_for_pickup"] = true;
+                this.AvailableForPickup = availableForPickup;
+            }
+
+            if (availableElectronically != null)
+            {
+                shouldSerialize["available_electronically"] = true;
+                this.AvailableElectronically = availableElectronically;
+            }
+
+            if (categoryId != null)
+            {
+                shouldSerialize["category_id"] = true;
+                this.CategoryId = categoryId;
+            }
+
+            if (taxIds != null)
+            {
+                shouldSerialize["tax_ids"] = true;
+                this.TaxIds = taxIds;
+            }
+
+            if (modifierListInfo != null)
+            {
+                shouldSerialize["modifier_list_info"] = true;
+                this.ModifierListInfo = modifierListInfo;
+            }
+
+            if (variations != null)
+            {
+                shouldSerialize["variations"] = true;
+                this.Variations = variations;
+            }
+
             this.ProductType = productType;
-            this.SkipModifierScreen = skipModifierScreen;
-            this.ItemOptions = itemOptions;
-            this.ImageIds = imageIds;
-            this.SortName = sortName;
-            this.DescriptionHtml = descriptionHtml;
+            if (skipModifierScreen != null)
+            {
+                shouldSerialize["skip_modifier_screen"] = true;
+                this.SkipModifierScreen = skipModifierScreen;
+            }
+
+            if (itemOptions != null)
+            {
+                shouldSerialize["item_options"] = true;
+                this.ItemOptions = itemOptions;
+            }
+
+            if (imageIds != null)
+            {
+                shouldSerialize["image_ids"] = true;
+                this.ImageIds = imageIds;
+            }
+
+            if (sortName != null)
+            {
+                shouldSerialize["sort_name"] = true;
+                this.SortName = sortName;
+            }
+
+            if (descriptionHtml != null)
+            {
+                shouldSerialize["description_html"] = true;
+                this.DescriptionHtml = descriptionHtml;
+            }
+
             this.DescriptionPlaintext = descriptionPlaintext;
+        }
+        internal CatalogItem(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            string description = null,
+            string abbreviation = null,
+            string labelColor = null,
+            bool? availableOnline = null,
+            bool? availableForPickup = null,
+            bool? availableElectronically = null,
+            string categoryId = null,
+            IList<string> taxIds = null,
+            IList<Models.CatalogItemModifierListInfo> modifierListInfo = null,
+            IList<Models.CatalogObject> variations = null,
+            string productType = null,
+            bool? skipModifierScreen = null,
+            IList<Models.CatalogItemOptionForItem> itemOptions = null,
+            IList<string> imageIds = null,
+            string sortName = null,
+            string descriptionHtml = null,
+            string descriptionPlaintext = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            Description = description;
+            Abbreviation = abbreviation;
+            LabelColor = labelColor;
+            AvailableOnline = availableOnline;
+            AvailableForPickup = availableForPickup;
+            AvailableElectronically = availableElectronically;
+            CategoryId = categoryId;
+            TaxIds = taxIds;
+            ModifierListInfo = modifierListInfo;
+            Variations = variations;
+            ProductType = productType;
+            SkipModifierScreen = skipModifierScreen;
+            ItemOptions = itemOptions;
+            ImageIds = imageIds;
+            SortName = sortName;
+            DescriptionHtml = descriptionHtml;
+            DescriptionPlaintext = descriptionPlaintext;
         }
 
         /// <summary>
         /// The item's name. This is a searchable attribute for use in applicable query filters, its value must not be empty, and the length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -92,44 +233,44 @@ namespace Square.Models
         /// except for when you use an early version before Square API 2022-07-20 and `description_html` is set to blank, setting the `description` value to null
         /// does not nullify `description_html`.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
         /// The text of the item's display label in the Square Point of Sale app. Only up to the first five characters of the string are used.
         /// This attribute is searchable, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("abbreviation", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("abbreviation")]
         public string Abbreviation { get; }
 
         /// <summary>
         /// The color of the item's display label in the Square Point of Sale app. This must be a valid hex color code.
         /// </summary>
-        [JsonProperty("label_color", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("label_color")]
         public string LabelColor { get; }
 
         /// <summary>
         /// If `true`, the item can be added to shipping orders from the merchant's online store.
         /// </summary>
-        [JsonProperty("available_online", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("available_online")]
         public bool? AvailableOnline { get; }
 
         /// <summary>
         /// If `true`, the item can be added to pickup orders from the merchant's online store.
         /// </summary>
-        [JsonProperty("available_for_pickup", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("available_for_pickup")]
         public bool? AvailableForPickup { get; }
 
         /// <summary>
         /// If `true`, the item can be added to electronically fulfilled orders from the merchant's online store.
         /// </summary>
-        [JsonProperty("available_electronically", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("available_electronically")]
         public bool? AvailableElectronically { get; }
 
         /// <summary>
         /// The ID of the item's category, if any.
         /// </summary>
-        [JsonProperty("category_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("category_id")]
         public string CategoryId { get; }
 
         /// <summary>
@@ -137,7 +278,7 @@ namespace Square.Models
         /// this item. When updating an item, any taxes listed here will be added to the item.
         /// Taxes may also be added to or deleted from an item using `UpdateItemTaxes`.
         /// </summary>
-        [JsonProperty("tax_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("tax_ids")]
         public IList<string> TaxIds { get; }
 
         /// <summary>
@@ -146,14 +287,14 @@ namespace Square.Models
         /// and max limits that are specific to this item. Modifier lists
         /// may also be added to or deleted from an item using `UpdateItemModifierLists`.
         /// </summary>
-        [JsonProperty("modifier_list_info", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("modifier_list_info")]
         public IList<Models.CatalogItemModifierListInfo> ModifierListInfo { get; }
 
         /// <summary>
         /// A list of [CatalogItemVariation]($m/CatalogItemVariation) objects for this item. An item must have
         /// at least one variation.
         /// </summary>
-        [JsonProperty("variations", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("variations")]
         public IList<Models.CatalogObject> Variations { get; }
 
         /// <summary>
@@ -170,7 +311,7 @@ namespace Square.Models
         /// modifiers, and merchants can edit modifiers by drilling down onto the item's details.
         /// Third-party clients are encouraged to implement similar behaviors.
         /// </summary>
-        [JsonProperty("skip_modifier_screen", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("skip_modifier_screen")]
         public bool? SkipModifierScreen { get; }
 
         /// <summary>
@@ -178,7 +319,7 @@ namespace Square.Models
         /// variations in a specified order.
         /// Maximum: 6 item options.
         /// </summary>
-        [JsonProperty("item_options", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("item_options")]
         public IList<Models.CatalogItemOptionForItem> ItemOptions { get; }
 
         /// <summary>
@@ -186,14 +327,14 @@ namespace Square.Models
         /// These images will be shown to customers in Square Online Store.
         /// The first image will show up as the icon for this item in POS.
         /// </summary>
-        [JsonProperty("image_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("image_ids")]
         public IList<string> ImageIds { get; }
 
         /// <summary>
         /// A name to sort the item by. If this name is unspecified, namely, the `sort_name` field is absent, the regular `name` field is used for sorting.
         /// It is currently supported for sellers of the Japanese locale only.
         /// </summary>
-        [JsonProperty("sort_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sort_name")]
         public string SortName { get; }
 
         /// <summary>
@@ -219,7 +360,7 @@ namespace Square.Models
         /// - `rel`: Relationship between link's target and source
         /// - `target`: Place to open the linked document
         /// </summary>
-        [JsonProperty("description_html", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description_html")]
         public string DescriptionHtml { get; }
 
         /// <summary>
@@ -236,6 +377,150 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogItem : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAbbreviation()
+        {
+            return this.shouldSerialize["abbreviation"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLabelColor()
+        {
+            return this.shouldSerialize["label_color"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAvailableOnline()
+        {
+            return this.shouldSerialize["available_online"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAvailableForPickup()
+        {
+            return this.shouldSerialize["available_for_pickup"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAvailableElectronically()
+        {
+            return this.shouldSerialize["available_electronically"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCategoryId()
+        {
+            return this.shouldSerialize["category_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTaxIds()
+        {
+            return this.shouldSerialize["tax_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeModifierListInfo()
+        {
+            return this.shouldSerialize["modifier_list_info"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeVariations()
+        {
+            return this.shouldSerialize["variations"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSkipModifierScreen()
+        {
+            return this.shouldSerialize["skip_modifier_screen"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeItemOptions()
+        {
+            return this.shouldSerialize["item_options"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeImageIds()
+        {
+            return this.shouldSerialize["image_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSortName()
+        {
+            return this.shouldSerialize["sort_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescriptionHtml()
+        {
+            return this.shouldSerialize["description_html"];
         }
 
         /// <inheritdoc/>
@@ -344,6 +629,26 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "description", false },
+                { "abbreviation", false },
+                { "label_color", false },
+                { "available_online", false },
+                { "available_for_pickup", false },
+                { "available_electronically", false },
+                { "category_id", false },
+                { "tax_ids", false },
+                { "modifier_list_info", false },
+                { "variations", false },
+                { "skip_modifier_screen", false },
+                { "item_options", false },
+                { "image_ids", false },
+                { "sort_name", false },
+                { "description_html", false },
+            };
+
             private string name;
             private string description;
             private string abbreviation;
@@ -370,6 +675,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -381,6 +687,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -392,6 +699,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Abbreviation(string abbreviation)
             {
+                shouldSerialize["abbreviation"] = true;
                 this.abbreviation = abbreviation;
                 return this;
             }
@@ -403,6 +711,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LabelColor(string labelColor)
             {
+                shouldSerialize["label_color"] = true;
                 this.labelColor = labelColor;
                 return this;
             }
@@ -414,6 +723,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AvailableOnline(bool? availableOnline)
             {
+                shouldSerialize["available_online"] = true;
                 this.availableOnline = availableOnline;
                 return this;
             }
@@ -425,6 +735,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AvailableForPickup(bool? availableForPickup)
             {
+                shouldSerialize["available_for_pickup"] = true;
                 this.availableForPickup = availableForPickup;
                 return this;
             }
@@ -436,6 +747,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AvailableElectronically(bool? availableElectronically)
             {
+                shouldSerialize["available_electronically"] = true;
                 this.availableElectronically = availableElectronically;
                 return this;
             }
@@ -447,6 +759,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CategoryId(string categoryId)
             {
+                shouldSerialize["category_id"] = true;
                 this.categoryId = categoryId;
                 return this;
             }
@@ -458,6 +771,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TaxIds(IList<string> taxIds)
             {
+                shouldSerialize["tax_ids"] = true;
                 this.taxIds = taxIds;
                 return this;
             }
@@ -469,6 +783,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ModifierListInfo(IList<Models.CatalogItemModifierListInfo> modifierListInfo)
             {
+                shouldSerialize["modifier_list_info"] = true;
                 this.modifierListInfo = modifierListInfo;
                 return this;
             }
@@ -480,6 +795,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Variations(IList<Models.CatalogObject> variations)
             {
+                shouldSerialize["variations"] = true;
                 this.variations = variations;
                 return this;
             }
@@ -502,6 +818,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SkipModifierScreen(bool? skipModifierScreen)
             {
+                shouldSerialize["skip_modifier_screen"] = true;
                 this.skipModifierScreen = skipModifierScreen;
                 return this;
             }
@@ -513,6 +830,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ItemOptions(IList<Models.CatalogItemOptionForItem> itemOptions)
             {
+                shouldSerialize["item_options"] = true;
                 this.itemOptions = itemOptions;
                 return this;
             }
@@ -524,6 +842,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ImageIds(IList<string> imageIds)
             {
+                shouldSerialize["image_ids"] = true;
                 this.imageIds = imageIds;
                 return this;
             }
@@ -535,6 +854,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SortName(string sortName)
             {
+                shouldSerialize["sort_name"] = true;
                 this.sortName = sortName;
                 return this;
             }
@@ -546,6 +866,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DescriptionHtml(string descriptionHtml)
             {
+                shouldSerialize["description_html"] = true;
                 this.descriptionHtml = descriptionHtml;
                 return this;
             }
@@ -562,12 +883,141 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAbbreviation()
+            {
+                this.shouldSerialize["abbreviation"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLabelColor()
+            {
+                this.shouldSerialize["label_color"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAvailableOnline()
+            {
+                this.shouldSerialize["available_online"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAvailableForPickup()
+            {
+                this.shouldSerialize["available_for_pickup"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAvailableElectronically()
+            {
+                this.shouldSerialize["available_electronically"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCategoryId()
+            {
+                this.shouldSerialize["category_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTaxIds()
+            {
+                this.shouldSerialize["tax_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetModifierListInfo()
+            {
+                this.shouldSerialize["modifier_list_info"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetVariations()
+            {
+                this.shouldSerialize["variations"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSkipModifierScreen()
+            {
+                this.shouldSerialize["skip_modifier_screen"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetItemOptions()
+            {
+                this.shouldSerialize["item_options"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetImageIds()
+            {
+                this.shouldSerialize["image_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSortName()
+            {
+                this.shouldSerialize["sort_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescriptionHtml()
+            {
+                this.shouldSerialize["description_html"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CatalogItem. </returns>
             public CatalogItem Build()
             {
-                return new CatalogItem(
+                return new CatalogItem(shouldSerialize,
                     this.name,
                     this.description,
                     this.abbreviation,

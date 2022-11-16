@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PaymentBalanceActivityDisputeDetail
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentBalanceActivityDisputeDetail"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             string paymentId = null,
             string disputeId = null)
         {
-            this.PaymentId = paymentId;
-            this.DisputeId = disputeId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payment_id", false },
+                { "dispute_id", false }
+            };
+
+            if (paymentId != null)
+            {
+                shouldSerialize["payment_id"] = true;
+                this.PaymentId = paymentId;
+            }
+
+            if (disputeId != null)
+            {
+                shouldSerialize["dispute_id"] = true;
+                this.DisputeId = disputeId;
+            }
+
+        }
+        internal PaymentBalanceActivityDisputeDetail(Dictionary<string, bool> shouldSerialize,
+            string paymentId = null,
+            string disputeId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            PaymentId = paymentId;
+            DisputeId = disputeId;
         }
 
         /// <summary>
         /// The ID of the payment associated with this activity.
         /// </summary>
-        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_id")]
         public string PaymentId { get; }
 
         /// <summary>
         /// The ID of the dispute associated with this activity.
         /// </summary>
-        [JsonProperty("dispute_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("dispute_id")]
         public string DisputeId { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PaymentBalanceActivityDisputeDetail : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentId()
+        {
+            return this.shouldSerialize["payment_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDisputeId()
+        {
+            return this.shouldSerialize["dispute_id"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "payment_id", false },
+                { "dispute_id", false },
+            };
+
             private string paymentId;
             private string disputeId;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
+                shouldSerialize["payment_id"] = true;
                 this.paymentId = paymentId;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder DisputeId(string disputeId)
             {
+                shouldSerialize["dispute_id"] = true;
                 this.disputeId = disputeId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentId()
+            {
+                this.shouldSerialize["payment_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDisputeId()
+            {
+                this.shouldSerialize["dispute_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> PaymentBalanceActivityDisputeDetail. </returns>
             public PaymentBalanceActivityDisputeDetail Build()
             {
-                return new PaymentBalanceActivityDisputeDetail(
+                return new PaymentBalanceActivityDisputeDetail(shouldSerialize,
                     this.paymentId,
                     this.disputeId);
             }

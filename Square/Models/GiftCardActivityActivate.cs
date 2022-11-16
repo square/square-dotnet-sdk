@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class GiftCardActivityActivate
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="GiftCardActivityActivate"/> class.
         /// </summary>
@@ -32,11 +33,53 @@ namespace Square.Models
             string referenceId = null,
             IList<string> buyerPaymentInstrumentIds = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "order_id", false },
+                { "line_item_uid", false },
+                { "reference_id", false },
+                { "buyer_payment_instrument_ids", false }
+            };
+
             this.AmountMoney = amountMoney;
-            this.OrderId = orderId;
-            this.LineItemUid = lineItemUid;
-            this.ReferenceId = referenceId;
-            this.BuyerPaymentInstrumentIds = buyerPaymentInstrumentIds;
+            if (orderId != null)
+            {
+                shouldSerialize["order_id"] = true;
+                this.OrderId = orderId;
+            }
+
+            if (lineItemUid != null)
+            {
+                shouldSerialize["line_item_uid"] = true;
+                this.LineItemUid = lineItemUid;
+            }
+
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
+            if (buyerPaymentInstrumentIds != null)
+            {
+                shouldSerialize["buyer_payment_instrument_ids"] = true;
+                this.BuyerPaymentInstrumentIds = buyerPaymentInstrumentIds;
+            }
+
+        }
+        internal GiftCardActivityActivate(Dictionary<string, bool> shouldSerialize,
+            Models.Money amountMoney = null,
+            string orderId = null,
+            string lineItemUid = null,
+            string referenceId = null,
+            IList<string> buyerPaymentInstrumentIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AmountMoney = amountMoney;
+            OrderId = orderId;
+            LineItemUid = lineItemUid;
+            ReferenceId = referenceId;
+            BuyerPaymentInstrumentIds = buyerPaymentInstrumentIds;
         }
 
         /// <summary>
@@ -55,7 +98,7 @@ namespace Square.Models
         /// Applications that use the Square Orders API to process orders must specify the order ID
         /// [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) request.
         /// </summary>
-        [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_id")]
         public string OrderId { get; }
 
         /// <summary>
@@ -63,7 +106,7 @@ namespace Square.Models
         /// Applications that use the Square Orders API to process orders must specify the line item UID
         /// in the [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) request.
         /// </summary>
-        [JsonProperty("line_item_uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("line_item_uid")]
         public string LineItemUid { get; }
 
         /// <summary>
@@ -71,7 +114,7 @@ namespace Square.Models
         /// Applications that use a custom order processing system can use this field to track information
         /// related to an order or payment.
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
@@ -83,7 +126,7 @@ namespace Square.Models
         /// For applications that use the Square Orders API to process payments, Square has the necessary
         /// instrument IDs to perform compliance checks.
         /// </summary>
-        [JsonProperty("buyer_payment_instrument_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buyer_payment_instrument_ids")]
         public IList<string> BuyerPaymentInstrumentIds { get; }
 
         /// <inheritdoc/>
@@ -94,6 +137,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"GiftCardActivityActivate : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderId()
+        {
+            return this.shouldSerialize["order_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLineItemUid()
+        {
+            return this.shouldSerialize["line_item_uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyerPaymentInstrumentIds()
+        {
+            return this.shouldSerialize["buyer_payment_instrument_ids"];
         }
 
         /// <inheritdoc/>
@@ -159,6 +238,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "order_id", false },
+                { "line_item_uid", false },
+                { "reference_id", false },
+                { "buyer_payment_instrument_ids", false },
+            };
+
             private Models.Money amountMoney;
             private string orderId;
             private string lineItemUid;
@@ -183,6 +270,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderId(string orderId)
             {
+                shouldSerialize["order_id"] = true;
                 this.orderId = orderId;
                 return this;
             }
@@ -194,6 +282,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LineItemUid(string lineItemUid)
             {
+                shouldSerialize["line_item_uid"] = true;
                 this.lineItemUid = lineItemUid;
                 return this;
             }
@@ -205,6 +294,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -216,9 +306,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyerPaymentInstrumentIds(IList<string> buyerPaymentInstrumentIds)
             {
+                shouldSerialize["buyer_payment_instrument_ids"] = true;
                 this.buyerPaymentInstrumentIds = buyerPaymentInstrumentIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderId()
+            {
+                this.shouldSerialize["order_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLineItemUid()
+            {
+                this.shouldSerialize["line_item_uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyerPaymentInstrumentIds()
+            {
+                this.shouldSerialize["buyer_payment_instrument_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -226,7 +350,7 @@ namespace Square.Models
             /// <returns> GiftCardActivityActivate. </returns>
             public GiftCardActivityActivate Build()
             {
-                return new GiftCardActivityActivate(
+                return new GiftCardActivityActivate(shouldSerialize,
                     this.amountMoney,
                     this.orderId,
                     this.lineItemUid,

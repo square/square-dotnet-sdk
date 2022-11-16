@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListCashDrawerShiftEventsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCashDrawerShiftEventsRequest"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             int? limit = null,
             string cursor = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "cursor", false }
+            };
+
             this.LocationId = locationId;
-            this.Limit = limit;
-            this.Cursor = cursor;
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+        }
+        internal ListCashDrawerShiftEventsRequest(Dictionary<string, bool> shouldSerialize,
+            string locationId,
+            int? limit = null,
+            string cursor = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationId = locationId;
+            Limit = limit;
+            Cursor = cursor;
         }
 
         /// <summary>
@@ -43,13 +70,13 @@ namespace Square.Models
         /// Number of resources to be returned in a page of results (200 by
         /// default, 1000 max).
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
         /// Opaque cursor for fetching the next page of results.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <inheritdoc/>
@@ -60,6 +87,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListCashDrawerShiftEventsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +164,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "limit", false },
+                { "cursor", false },
+            };
+
             private string locationId;
             private int? limit;
             private string cursor;
@@ -147,6 +198,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -158,9 +210,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -168,7 +238,7 @@ namespace Square.Models
             /// <returns> ListCashDrawerShiftEventsRequest. </returns>
             public ListCashDrawerShiftEventsRequest Build()
             {
-                return new ListCashDrawerShiftEventsRequest(
+                return new ListCashDrawerShiftEventsRequest(shouldSerialize,
                     this.locationId,
                     this.limit,
                     this.cursor);

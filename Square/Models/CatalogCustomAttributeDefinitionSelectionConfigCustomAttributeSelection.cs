@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection"/> class.
         /// </summary>
@@ -26,14 +27,32 @@ namespace Square.Models
             string name,
             string uid = null)
         {
-            this.Uid = uid;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
             this.Name = name;
+        }
+        internal CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(Dictionary<string, bool> shouldSerialize,
+            string name,
+            string uid = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            Name = name;
         }
 
         /// <summary>
         /// Unique ID set by Square.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
@@ -50,6 +69,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +134,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+            };
+
             private string name;
             private string uid;
 
@@ -133,9 +166,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -143,7 +186,7 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection. </returns>
             public CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection Build()
             {
-                return new CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(
+                return new CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(shouldSerialize,
                     this.name,
                     this.uid);
             }

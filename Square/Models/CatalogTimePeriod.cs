@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogTimePeriod
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogTimePeriod"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public CatalogTimePeriod(
             string mEvent = null)
         {
-            this.MEvent = mEvent;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "event", false }
+            };
+
+            if (mEvent != null)
+            {
+                shouldSerialize["event"] = true;
+                this.MEvent = mEvent;
+            }
+
+        }
+        internal CatalogTimePeriod(Dictionary<string, bool> shouldSerialize,
+            string mEvent = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            MEvent = mEvent;
         }
 
         /// <summary>
@@ -41,7 +58,7 @@ namespace Square.Models
         /// and `END:VEVENT` is not required in the request. The response will always
         /// include them.
         /// </summary>
-        [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("event")]
         public string MEvent { get; }
 
         /// <inheritdoc/>
@@ -52,6 +69,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogTimePeriod : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEvent()
+        {
+            return this.shouldSerialize["event"];
         }
 
         /// <inheritdoc/>
@@ -105,6 +131,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "event", false },
+            };
+
             private string mEvent;
 
              /// <summary>
@@ -114,9 +145,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MEvent(string mEvent)
             {
+                shouldSerialize["event"] = true;
                 this.mEvent = mEvent;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEvent()
+            {
+                this.shouldSerialize["event"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -124,7 +165,7 @@ namespace Square.Models
             /// <returns> CatalogTimePeriod. </returns>
             public CatalogTimePeriod Build()
             {
-                return new CatalogTimePeriod(
+                return new CatalogTimePeriod(shouldSerialize,
                     this.mEvent);
             }
         }

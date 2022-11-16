@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DeviceCheckoutOptions
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DeviceCheckoutOptions"/> class.
         /// </summary>
@@ -32,11 +33,47 @@ namespace Square.Models
             Models.TipSettings tipSettings = null,
             bool? showItemizedCart = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "skip_receipt_screen", false },
+                { "collect_signature", false },
+                { "show_itemized_cart", false }
+            };
+
             this.DeviceId = deviceId;
-            this.SkipReceiptScreen = skipReceiptScreen;
-            this.CollectSignature = collectSignature;
+            if (skipReceiptScreen != null)
+            {
+                shouldSerialize["skip_receipt_screen"] = true;
+                this.SkipReceiptScreen = skipReceiptScreen;
+            }
+
+            if (collectSignature != null)
+            {
+                shouldSerialize["collect_signature"] = true;
+                this.CollectSignature = collectSignature;
+            }
+
             this.TipSettings = tipSettings;
-            this.ShowItemizedCart = showItemizedCart;
+            if (showItemizedCart != null)
+            {
+                shouldSerialize["show_itemized_cart"] = true;
+                this.ShowItemizedCart = showItemizedCart;
+            }
+
+        }
+        internal DeviceCheckoutOptions(Dictionary<string, bool> shouldSerialize,
+            string deviceId,
+            bool? skipReceiptScreen = null,
+            bool? collectSignature = null,
+            Models.TipSettings tipSettings = null,
+            bool? showItemizedCart = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            DeviceId = deviceId;
+            SkipReceiptScreen = skipReceiptScreen;
+            CollectSignature = collectSignature;
+            TipSettings = tipSettings;
+            ShowItemizedCart = showItemizedCart;
         }
 
         /// <summary>
@@ -50,13 +87,13 @@ namespace Square.Models
         /// <summary>
         /// Instructs the device to skip the receipt screen. Defaults to false.
         /// </summary>
-        [JsonProperty("skip_receipt_screen", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("skip_receipt_screen")]
         public bool? SkipReceiptScreen { get; }
 
         /// <summary>
         /// Indicates that signature collection is desired during checkout. Defaults to false.
         /// </summary>
-        [JsonProperty("collect_signature", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("collect_signature")]
         public bool? CollectSignature { get; }
 
         /// <summary>
@@ -69,7 +106,7 @@ namespace Square.Models
         /// Show the itemization screen prior to taking a payment. This field is only meaningful when the
         /// checkout includes an order ID. Defaults to true.
         /// </summary>
-        [JsonProperty("show_itemized_cart", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("show_itemized_cart")]
         public bool? ShowItemizedCart { get; }
 
         /// <inheritdoc/>
@@ -80,6 +117,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DeviceCheckoutOptions : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSkipReceiptScreen()
+        {
+            return this.shouldSerialize["skip_receipt_screen"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCollectSignature()
+        {
+            return this.shouldSerialize["collect_signature"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeShowItemizedCart()
+        {
+            return this.shouldSerialize["show_itemized_cart"];
         }
 
         /// <inheritdoc/>
@@ -145,6 +209,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "skip_receipt_screen", false },
+                { "collect_signature", false },
+                { "show_itemized_cart", false },
+            };
+
             private string deviceId;
             private bool? skipReceiptScreen;
             private bool? collectSignature;
@@ -175,6 +246,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SkipReceiptScreen(bool? skipReceiptScreen)
             {
+                shouldSerialize["skip_receipt_screen"] = true;
                 this.skipReceiptScreen = skipReceiptScreen;
                 return this;
             }
@@ -186,6 +258,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CollectSignature(bool? collectSignature)
             {
+                shouldSerialize["collect_signature"] = true;
                 this.collectSignature = collectSignature;
                 return this;
             }
@@ -208,9 +281,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ShowItemizedCart(bool? showItemizedCart)
             {
+                shouldSerialize["show_itemized_cart"] = true;
                 this.showItemizedCart = showItemizedCart;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSkipReceiptScreen()
+            {
+                this.shouldSerialize["skip_receipt_screen"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCollectSignature()
+            {
+                this.shouldSerialize["collect_signature"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetShowItemizedCart()
+            {
+                this.shouldSerialize["show_itemized_cart"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -218,7 +317,7 @@ namespace Square.Models
             /// <returns> DeviceCheckoutOptions. </returns>
             public DeviceCheckoutOptions Build()
             {
-                return new DeviceCheckoutOptions(
+                return new DeviceCheckoutOptions(shouldSerialize,
                     this.deviceId,
                     this.skipReceiptScreen,
                     this.collectSignature,

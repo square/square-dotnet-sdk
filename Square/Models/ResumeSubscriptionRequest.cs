@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ResumeSubscriptionRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ResumeSubscriptionRequest"/> class.
         /// </summary>
@@ -26,14 +27,32 @@ namespace Square.Models
             string resumeEffectiveDate = null,
             string resumeChangeTiming = null)
         {
-            this.ResumeEffectiveDate = resumeEffectiveDate;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "resume_effective_date", false }
+            };
+
+            if (resumeEffectiveDate != null)
+            {
+                shouldSerialize["resume_effective_date"] = true;
+                this.ResumeEffectiveDate = resumeEffectiveDate;
+            }
+
             this.ResumeChangeTiming = resumeChangeTiming;
+        }
+        internal ResumeSubscriptionRequest(Dictionary<string, bool> shouldSerialize,
+            string resumeEffectiveDate = null,
+            string resumeChangeTiming = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            ResumeEffectiveDate = resumeEffectiveDate;
+            ResumeChangeTiming = resumeChangeTiming;
         }
 
         /// <summary>
         /// The `YYYY-MM-DD`-formatted date when the subscription reactivated.
         /// </summary>
-        [JsonProperty("resume_effective_date", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("resume_effective_date")]
         public string ResumeEffectiveDate { get; }
 
         /// <summary>
@@ -50,6 +69,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ResumeSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeResumeEffectiveDate()
+        {
+            return this.shouldSerialize["resume_effective_date"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +134,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "resume_effective_date", false },
+            };
+
             private string resumeEffectiveDate;
             private string resumeChangeTiming;
 
@@ -116,6 +149,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ResumeEffectiveDate(string resumeEffectiveDate)
             {
+                shouldSerialize["resume_effective_date"] = true;
                 this.resumeEffectiveDate = resumeEffectiveDate;
                 return this;
             }
@@ -132,12 +166,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetResumeEffectiveDate()
+            {
+                this.shouldSerialize["resume_effective_date"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> ResumeSubscriptionRequest. </returns>
             public ResumeSubscriptionRequest Build()
             {
-                return new ResumeSubscriptionRequest(
+                return new ResumeSubscriptionRequest(shouldSerialize,
                     this.resumeEffectiveDate,
                     this.resumeChangeTiming);
             }

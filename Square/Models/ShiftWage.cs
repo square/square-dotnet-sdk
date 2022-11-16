@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ShiftWage
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ShiftWage"/> class.
         /// </summary>
@@ -26,15 +27,33 @@ namespace Square.Models
             string title = null,
             Models.Money hourlyRate = null)
         {
-            this.Title = title;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "title", false }
+            };
+
+            if (title != null)
+            {
+                shouldSerialize["title"] = true;
+                this.Title = title;
+            }
+
             this.HourlyRate = hourlyRate;
+        }
+        internal ShiftWage(Dictionary<string, bool> shouldSerialize,
+            string title = null,
+            Models.Money hourlyRate = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Title = title;
+            HourlyRate = hourlyRate;
         }
 
         /// <summary>
         /// The name of the job performed during this shift. Square
         /// labor-reporting UIs might group shifts together by title.
         /// </summary>
-        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("title")]
         public string Title { get; }
 
         /// <summary>
@@ -56,6 +75,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ShiftWage : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTitle()
+        {
+            return this.shouldSerialize["title"];
         }
 
         /// <inheritdoc/>
@@ -112,6 +140,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "title", false },
+            };
+
             private string title;
             private Models.Money hourlyRate;
 
@@ -122,6 +155,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Title(string title)
             {
+                shouldSerialize["title"] = true;
                 this.title = title;
                 return this;
             }
@@ -138,12 +172,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTitle()
+            {
+                this.shouldSerialize["title"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> ShiftWage. </returns>
             public ShiftWage Build()
             {
-                return new ShiftWage(
+                return new ShiftWage(shouldSerialize,
                     this.title,
                     this.hourlyRate);
             }

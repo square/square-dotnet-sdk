@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Merchant
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Merchant"/> class.
         /// </summary>
@@ -38,14 +39,56 @@ namespace Square.Models
             string mainLocationId = null,
             string createdAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "business_name", false },
+                { "language_code", false },
+                { "main_location_id", false }
+            };
+
             this.Id = id;
-            this.BusinessName = businessName;
+            if (businessName != null)
+            {
+                shouldSerialize["business_name"] = true;
+                this.BusinessName = businessName;
+            }
+
             this.Country = country;
-            this.LanguageCode = languageCode;
+            if (languageCode != null)
+            {
+                shouldSerialize["language_code"] = true;
+                this.LanguageCode = languageCode;
+            }
+
             this.Currency = currency;
             this.Status = status;
-            this.MainLocationId = mainLocationId;
+            if (mainLocationId != null)
+            {
+                shouldSerialize["main_location_id"] = true;
+                this.MainLocationId = mainLocationId;
+            }
+
             this.CreatedAt = createdAt;
+        }
+        internal Merchant(Dictionary<string, bool> shouldSerialize,
+            string country,
+            string id = null,
+            string businessName = null,
+            string languageCode = null,
+            string currency = null,
+            string status = null,
+            string mainLocationId = null,
+            string createdAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            BusinessName = businessName;
+            Country = country;
+            LanguageCode = languageCode;
+            Currency = currency;
+            Status = status;
+            MainLocationId = mainLocationId;
+            CreatedAt = createdAt;
         }
 
         /// <summary>
@@ -57,7 +100,7 @@ namespace Square.Models
         /// <summary>
         /// The name of the merchant's overall business.
         /// </summary>
-        [JsonProperty("business_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("business_name")]
         public string BusinessName { get; }
 
         /// <summary>
@@ -70,7 +113,7 @@ namespace Square.Models
         /// <summary>
         /// The code indicating the [language preferences](https://developer.squareup.com/docs/build-basics/general-considerations/language-preferences) of the merchant, in [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A). For example, `en-US` or `fr-CA`.
         /// </summary>
-        [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("language_code")]
         public string LanguageCode { get; }
 
         /// <summary>
@@ -89,7 +132,7 @@ namespace Square.Models
         /// <summary>
         /// The ID of the [main `Location`](https://developer.squareup.com/docs/locations-api#about-the-main-location) for this merchant.
         /// </summary>
-        [JsonProperty("main_location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("main_location_id")]
         public string MainLocationId { get; }
 
         /// <summary>
@@ -107,6 +150,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Merchant : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBusinessName()
+        {
+            return this.shouldSerialize["business_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLanguageCode()
+        {
+            return this.shouldSerialize["language_code"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMainLocationId()
+        {
+            return this.shouldSerialize["main_location_id"];
         }
 
         /// <inheritdoc/>
@@ -183,6 +253,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "business_name", false },
+                { "language_code", false },
+                { "main_location_id", false },
+            };
+
             private string country;
             private string id;
             private string businessName;
@@ -227,6 +304,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BusinessName(string businessName)
             {
+                shouldSerialize["business_name"] = true;
                 this.businessName = businessName;
                 return this;
             }
@@ -238,6 +316,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LanguageCode(string languageCode)
             {
+                shouldSerialize["language_code"] = true;
                 this.languageCode = languageCode;
                 return this;
             }
@@ -271,6 +350,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MainLocationId(string mainLocationId)
             {
+                shouldSerialize["main_location_id"] = true;
                 this.mainLocationId = mainLocationId;
                 return this;
             }
@@ -287,12 +367,37 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBusinessName()
+            {
+                this.shouldSerialize["business_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLanguageCode()
+            {
+                this.shouldSerialize["language_code"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMainLocationId()
+            {
+                this.shouldSerialize["main_location_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Merchant. </returns>
             public Merchant Build()
             {
-                return new Merchant(
+                return new Merchant(shouldSerialize,
                     this.country,
                     this.id,
                     this.businessName,

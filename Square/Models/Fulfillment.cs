@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Fulfillment
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Fulfillment"/> class.
         /// </summary>
@@ -28,6 +29,7 @@ namespace Square.Models
         /// <param name="metadata">metadata.</param>
         /// <param name="pickupDetails">pickup_details.</param>
         /// <param name="shipmentDetails">shipment_details.</param>
+        /// <param name="deliveryDetails">delivery_details.</param>
         public Fulfillment(
             string uid = null,
             string type = null,
@@ -36,22 +38,62 @@ namespace Square.Models
             IList<Models.FulfillmentFulfillmentEntry> entries = null,
             IDictionary<string, string> metadata = null,
             Models.FulfillmentPickupDetails pickupDetails = null,
-            Models.FulfillmentShipmentDetails shipmentDetails = null)
+            Models.FulfillmentShipmentDetails shipmentDetails = null,
+            Models.FulfillmentDeliveryDetails deliveryDetails = null)
         {
-            this.Uid = uid;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "metadata", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
             this.Type = type;
             this.State = state;
             this.LineItemApplication = lineItemApplication;
             this.Entries = entries;
-            this.Metadata = metadata;
+            if (metadata != null)
+            {
+                shouldSerialize["metadata"] = true;
+                this.Metadata = metadata;
+            }
+
             this.PickupDetails = pickupDetails;
             this.ShipmentDetails = shipmentDetails;
+            this.DeliveryDetails = deliveryDetails;
+        }
+        internal Fulfillment(Dictionary<string, bool> shouldSerialize,
+            string uid = null,
+            string type = null,
+            string state = null,
+            string lineItemApplication = null,
+            IList<Models.FulfillmentFulfillmentEntry> entries = null,
+            IDictionary<string, string> metadata = null,
+            Models.FulfillmentPickupDetails pickupDetails = null,
+            Models.FulfillmentShipmentDetails shipmentDetails = null,
+            Models.FulfillmentDeliveryDetails deliveryDetails = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            Type = type;
+            State = state;
+            LineItemApplication = lineItemApplication;
+            Entries = entries;
+            Metadata = metadata;
+            PickupDetails = pickupDetails;
+            ShipmentDetails = shipmentDetails;
+            DeliveryDetails = deliveryDetails;
         }
 
         /// <summary>
         /// A unique ID that identifies the fulfillment only within this order.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
@@ -102,7 +144,7 @@ namespace Square.Models
         /// application.
         /// For more information, see [Metadata](https://developer.squareup.com/docs/build-basics/metadata).
         /// </summary>
-        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("metadata")]
         public IDictionary<string, string> Metadata { get; }
 
         /// <summary>
@@ -117,6 +159,12 @@ namespace Square.Models
         [JsonProperty("shipment_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.FulfillmentShipmentDetails ShipmentDetails { get; }
 
+        /// <summary>
+        /// Describes delivery details of an order fulfillment.
+        /// </summary>
+        [JsonProperty("delivery_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.FulfillmentDeliveryDetails DeliveryDetails { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -125,6 +173,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Fulfillment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMetadata()
+        {
+            return this.shouldSerialize["metadata"];
         }
 
         /// <inheritdoc/>
@@ -148,16 +214,17 @@ namespace Square.Models
                 ((this.Entries == null && other.Entries == null) || (this.Entries?.Equals(other.Entries) == true)) &&
                 ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
                 ((this.PickupDetails == null && other.PickupDetails == null) || (this.PickupDetails?.Equals(other.PickupDetails) == true)) &&
-                ((this.ShipmentDetails == null && other.ShipmentDetails == null) || (this.ShipmentDetails?.Equals(other.ShipmentDetails) == true));
+                ((this.ShipmentDetails == null && other.ShipmentDetails == null) || (this.ShipmentDetails?.Equals(other.ShipmentDetails) == true)) &&
+                ((this.DeliveryDetails == null && other.DeliveryDetails == null) || (this.DeliveryDetails?.Equals(other.DeliveryDetails) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -646439899;
+            int hashCode = -789701842;
             hashCode = HashCode.Combine(this.Uid, this.Type, this.State, this.LineItemApplication, this.Entries, this.Metadata, this.PickupDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.ShipmentDetails);
+            hashCode = HashCode.Combine(hashCode, this.ShipmentDetails, this.DeliveryDetails);
 
             return hashCode;
         }
@@ -176,6 +243,7 @@ namespace Square.Models
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
             toStringOutput.Add($"this.PickupDetails = {(this.PickupDetails == null ? "null" : this.PickupDetails.ToString())}");
             toStringOutput.Add($"this.ShipmentDetails = {(this.ShipmentDetails == null ? "null" : this.ShipmentDetails.ToString())}");
+            toStringOutput.Add($"this.DeliveryDetails = {(this.DeliveryDetails == null ? "null" : this.DeliveryDetails.ToString())}");
         }
 
         /// <summary>
@@ -192,7 +260,8 @@ namespace Square.Models
                 .Entries(this.Entries)
                 .Metadata(this.Metadata)
                 .PickupDetails(this.PickupDetails)
-                .ShipmentDetails(this.ShipmentDetails);
+                .ShipmentDetails(this.ShipmentDetails)
+                .DeliveryDetails(this.DeliveryDetails);
             return builder;
         }
 
@@ -201,6 +270,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "metadata", false },
+            };
+
             private string uid;
             private string type;
             private string state;
@@ -209,6 +284,7 @@ namespace Square.Models
             private IDictionary<string, string> metadata;
             private Models.FulfillmentPickupDetails pickupDetails;
             private Models.FulfillmentShipmentDetails shipmentDetails;
+            private Models.FulfillmentDeliveryDetails deliveryDetails;
 
              /// <summary>
              /// Uid.
@@ -217,6 +293,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -272,6 +349,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Metadata(IDictionary<string, string> metadata)
             {
+                shouldSerialize["metadata"] = true;
                 this.metadata = metadata;
                 return this;
             }
@@ -298,13 +376,41 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// DeliveryDetails.
+             /// </summary>
+             /// <param name="deliveryDetails"> deliveryDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder DeliveryDetails(Models.FulfillmentDeliveryDetails deliveryDetails)
+            {
+                this.deliveryDetails = deliveryDetails;
+                return this;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMetadata()
+            {
+                this.shouldSerialize["metadata"] = false;
+            }
+
+
             /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Fulfillment. </returns>
             public Fulfillment Build()
             {
-                return new Fulfillment(
+                return new Fulfillment(shouldSerialize,
                     this.uid,
                     this.type,
                     this.state,
@@ -312,7 +418,8 @@ namespace Square.Models
                     this.entries,
                     this.metadata,
                     this.pickupDetails,
-                    this.shipmentDetails);
+                    this.shipmentDetails,
+                    this.deliveryDetails);
             }
         }
     }

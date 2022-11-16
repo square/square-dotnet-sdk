@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ProcessingFee
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ProcessingFee"/> class.
         /// </summary>
@@ -28,21 +29,47 @@ namespace Square.Models
             string type = null,
             Models.Money amountMoney = null)
         {
-            this.EffectiveAt = effectiveAt;
-            this.Type = type;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "effective_at", false },
+                { "type", false }
+            };
+
+            if (effectiveAt != null)
+            {
+                shouldSerialize["effective_at"] = true;
+                this.EffectiveAt = effectiveAt;
+            }
+
+            if (type != null)
+            {
+                shouldSerialize["type"] = true;
+                this.Type = type;
+            }
+
             this.AmountMoney = amountMoney;
+        }
+        internal ProcessingFee(Dictionary<string, bool> shouldSerialize,
+            string effectiveAt = null,
+            string type = null,
+            Models.Money amountMoney = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            EffectiveAt = effectiveAt;
+            Type = type;
+            AmountMoney = amountMoney;
         }
 
         /// <summary>
         /// The timestamp of when the fee takes effect, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("effective_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("effective_at")]
         public string EffectiveAt { get; }
 
         /// <summary>
         /// The type of fee assessed or adjusted. The fee type can be `INITIAL` or `ADJUSTMENT`.
         /// </summary>
-        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("type")]
         public string Type { get; }
 
         /// <summary>
@@ -64,6 +91,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ProcessingFee : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEffectiveAt()
+        {
+            return this.shouldSerialize["effective_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeType()
+        {
+            return this.shouldSerialize["type"];
         }
 
         /// <inheritdoc/>
@@ -123,6 +168,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "effective_at", false },
+                { "type", false },
+            };
+
             private string effectiveAt;
             private string type;
             private Models.Money amountMoney;
@@ -134,6 +185,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EffectiveAt(string effectiveAt)
             {
+                shouldSerialize["effective_at"] = true;
                 this.effectiveAt = effectiveAt;
                 return this;
             }
@@ -145,6 +197,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
+                shouldSerialize["type"] = true;
                 this.type = type;
                 return this;
             }
@@ -161,12 +214,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEffectiveAt()
+            {
+                this.shouldSerialize["effective_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetType()
+            {
+                this.shouldSerialize["type"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> ProcessingFee. </returns>
             public ProcessingFee Build()
             {
-                return new ProcessingFee(
+                return new ProcessingFee(shouldSerialize,
                     this.effectiveAt,
                     this.type,
                     this.amountMoney);

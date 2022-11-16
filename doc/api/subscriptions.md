@@ -200,7 +200,16 @@ UpdateSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
+var bodySubscriptionPriceOverrideMoney = new Money.Builder()
+    .Amount(2000L)
+    .Currency("USD")
+    .Build();
+var bodySubscription = new Subscription.Builder()
+    .PriceOverrideMoney(bodySubscriptionPriceOverrideMoney)
+    .Version(1594155459464L)
+    .Build();
 var body = new UpdateSubscriptionRequest.Builder()
+    .Subscription(bodySubscription)
     .Build();
 
 try

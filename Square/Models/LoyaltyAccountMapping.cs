@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class LoyaltyAccountMapping
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyAccountMapping"/> class.
         /// </summary>
@@ -28,9 +29,29 @@ namespace Square.Models
             string createdAt = null,
             string phoneNumber = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "phone_number", false }
+            };
+
             this.Id = id;
             this.CreatedAt = createdAt;
-            this.PhoneNumber = phoneNumber;
+            if (phoneNumber != null)
+            {
+                shouldSerialize["phone_number"] = true;
+                this.PhoneNumber = phoneNumber;
+            }
+
+        }
+        internal LoyaltyAccountMapping(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string createdAt = null,
+            string phoneNumber = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            CreatedAt = createdAt;
+            PhoneNumber = phoneNumber;
         }
 
         /// <summary>
@@ -48,7 +69,7 @@ namespace Square.Models
         /// <summary>
         /// The phone number of the buyer, in E.164 format. For example, "+14155551111".
         /// </summary>
-        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("phone_number")]
         public string PhoneNumber { get; }
 
         /// <inheritdoc/>
@@ -59,6 +80,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"LoyaltyAccountMapping : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePhoneNumber()
+        {
+            return this.shouldSerialize["phone_number"];
         }
 
         /// <inheritdoc/>
@@ -118,6 +148,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "phone_number", false },
+            };
+
             private string id;
             private string createdAt;
             private string phoneNumber;
@@ -151,9 +186,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
+                shouldSerialize["phone_number"] = true;
                 this.phoneNumber = phoneNumber;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPhoneNumber()
+            {
+                this.shouldSerialize["phone_number"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -161,7 +206,7 @@ namespace Square.Models
             /// <returns> LoyaltyAccountMapping. </returns>
             public LoyaltyAccountMapping Build()
             {
-                return new LoyaltyAccountMapping(
+                return new LoyaltyAccountMapping(shouldSerialize,
                     this.id,
                     this.createdAt,
                     this.phoneNumber);

@@ -18,6 +18,7 @@ namespace Square.Models
     /// </summary>
     public class V1Order
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="V1Order"/> class.
         /// </summary>
@@ -73,11 +74,49 @@ namespace Square.Models
             string btcReceiveAddress = null,
             double? btcPriceSatoshi = null)
         {
-            this.Errors = errors;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "errors", false },
+                { "buyer_email", false },
+                { "recipient_name", false },
+                { "recipient_phone_number", false },
+                { "expires_at", false },
+                { "payment_id", false },
+                { "buyer_note", false },
+                { "completed_note", false },
+                { "refunded_note", false },
+                { "canceled_note", false },
+                { "order_history", false },
+                { "promo_code", false },
+                { "btc_receive_address", false },
+                { "btc_price_satoshi", false }
+            };
+
+            if (errors != null)
+            {
+                shouldSerialize["errors"] = true;
+                this.Errors = errors;
+            }
+
             this.Id = id;
-            this.BuyerEmail = buyerEmail;
-            this.RecipientName = recipientName;
-            this.RecipientPhoneNumber = recipientPhoneNumber;
+            if (buyerEmail != null)
+            {
+                shouldSerialize["buyer_email"] = true;
+                this.BuyerEmail = buyerEmail;
+            }
+
+            if (recipientName != null)
+            {
+                shouldSerialize["recipient_name"] = true;
+                this.RecipientName = recipientName;
+            }
+
+            if (recipientPhoneNumber != null)
+            {
+                shouldSerialize["recipient_phone_number"] = true;
+                this.RecipientPhoneNumber = recipientPhoneNumber;
+            }
+
             this.State = state;
             this.ShippingAddress = shippingAddress;
             this.SubtotalMoney = subtotalMoney;
@@ -87,17 +126,121 @@ namespace Square.Models
             this.TotalDiscountMoney = totalDiscountMoney;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
-            this.ExpiresAt = expiresAt;
-            this.PaymentId = paymentId;
-            this.BuyerNote = buyerNote;
-            this.CompletedNote = completedNote;
-            this.RefundedNote = refundedNote;
-            this.CanceledNote = canceledNote;
+            if (expiresAt != null)
+            {
+                shouldSerialize["expires_at"] = true;
+                this.ExpiresAt = expiresAt;
+            }
+
+            if (paymentId != null)
+            {
+                shouldSerialize["payment_id"] = true;
+                this.PaymentId = paymentId;
+            }
+
+            if (buyerNote != null)
+            {
+                shouldSerialize["buyer_note"] = true;
+                this.BuyerNote = buyerNote;
+            }
+
+            if (completedNote != null)
+            {
+                shouldSerialize["completed_note"] = true;
+                this.CompletedNote = completedNote;
+            }
+
+            if (refundedNote != null)
+            {
+                shouldSerialize["refunded_note"] = true;
+                this.RefundedNote = refundedNote;
+            }
+
+            if (canceledNote != null)
+            {
+                shouldSerialize["canceled_note"] = true;
+                this.CanceledNote = canceledNote;
+            }
+
             this.Tender = tender;
-            this.OrderHistory = orderHistory;
-            this.PromoCode = promoCode;
-            this.BtcReceiveAddress = btcReceiveAddress;
-            this.BtcPriceSatoshi = btcPriceSatoshi;
+            if (orderHistory != null)
+            {
+                shouldSerialize["order_history"] = true;
+                this.OrderHistory = orderHistory;
+            }
+
+            if (promoCode != null)
+            {
+                shouldSerialize["promo_code"] = true;
+                this.PromoCode = promoCode;
+            }
+
+            if (btcReceiveAddress != null)
+            {
+                shouldSerialize["btc_receive_address"] = true;
+                this.BtcReceiveAddress = btcReceiveAddress;
+            }
+
+            if (btcPriceSatoshi != null)
+            {
+                shouldSerialize["btc_price_satoshi"] = true;
+                this.BtcPriceSatoshi = btcPriceSatoshi;
+            }
+
+        }
+        internal V1Order(Dictionary<string, bool> shouldSerialize,
+            IList<Models.Error> errors = null,
+            string id = null,
+            string buyerEmail = null,
+            string recipientName = null,
+            string recipientPhoneNumber = null,
+            string state = null,
+            Models.Address shippingAddress = null,
+            Models.V1Money subtotalMoney = null,
+            Models.V1Money totalShippingMoney = null,
+            Models.V1Money totalTaxMoney = null,
+            Models.V1Money totalPriceMoney = null,
+            Models.V1Money totalDiscountMoney = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string expiresAt = null,
+            string paymentId = null,
+            string buyerNote = null,
+            string completedNote = null,
+            string refundedNote = null,
+            string canceledNote = null,
+            Models.V1Tender tender = null,
+            IList<Models.V1OrderHistoryEntry> orderHistory = null,
+            string promoCode = null,
+            string btcReceiveAddress = null,
+            double? btcPriceSatoshi = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Errors = errors;
+            Id = id;
+            BuyerEmail = buyerEmail;
+            RecipientName = recipientName;
+            RecipientPhoneNumber = recipientPhoneNumber;
+            State = state;
+            ShippingAddress = shippingAddress;
+            SubtotalMoney = subtotalMoney;
+            TotalShippingMoney = totalShippingMoney;
+            TotalTaxMoney = totalTaxMoney;
+            TotalPriceMoney = totalPriceMoney;
+            TotalDiscountMoney = totalDiscountMoney;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            ExpiresAt = expiresAt;
+            PaymentId = paymentId;
+            BuyerNote = buyerNote;
+            CompletedNote = completedNote;
+            RefundedNote = refundedNote;
+            CanceledNote = canceledNote;
+            Tender = tender;
+            OrderHistory = orderHistory;
+            PromoCode = promoCode;
+            BtcReceiveAddress = btcReceiveAddress;
+            BtcPriceSatoshi = btcPriceSatoshi;
         }
 
         /// <summary>
@@ -109,7 +252,7 @@ namespace Square.Models
         /// <summary>
         /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("errors")]
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
@@ -121,19 +264,19 @@ namespace Square.Models
         /// <summary>
         /// The email address of the order's buyer.
         /// </summary>
-        [JsonProperty("buyer_email", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buyer_email")]
         public string BuyerEmail { get; }
 
         /// <summary>
         /// The name of the order's buyer.
         /// </summary>
-        [JsonProperty("recipient_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("recipient_name")]
         public string RecipientName { get; }
 
         /// <summary>
         /// The phone number to use for the order's delivery.
         /// </summary>
-        [JsonProperty("recipient_phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("recipient_phone_number")]
         public string RecipientPhoneNumber { get; }
 
         /// <summary>
@@ -194,37 +337,37 @@ namespace Square.Models
         /// <summary>
         /// The time when the order expires if no action is taken, in ISO 8601 format.
         /// </summary>
-        [JsonProperty("expires_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("expires_at")]
         public string ExpiresAt { get; }
 
         /// <summary>
         /// The unique identifier of the payment associated with the order.
         /// </summary>
-        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_id")]
         public string PaymentId { get; }
 
         /// <summary>
         /// A note provided by the buyer when the order was created, if any.
         /// </summary>
-        [JsonProperty("buyer_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("buyer_note")]
         public string BuyerNote { get; }
 
         /// <summary>
         /// A note provided by the merchant when the order's state was set to COMPLETED, if any
         /// </summary>
-        [JsonProperty("completed_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("completed_note")]
         public string CompletedNote { get; }
 
         /// <summary>
         /// A note provided by the merchant when the order's state was set to REFUNDED, if any.
         /// </summary>
-        [JsonProperty("refunded_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("refunded_note")]
         public string RefundedNote { get; }
 
         /// <summary>
         /// A note provided by the merchant when the order's state was set to CANCELED, if any.
         /// </summary>
-        [JsonProperty("canceled_note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("canceled_note")]
         public string CanceledNote { get; }
 
         /// <summary>
@@ -252,25 +395,25 @@ namespace Square.Models
         /// <summary>
         /// The history of actions associated with the order.
         /// </summary>
-        [JsonProperty("order_history", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("order_history")]
         public IList<Models.V1OrderHistoryEntry> OrderHistory { get; }
 
         /// <summary>
         /// The promo code provided by the buyer, if any.
         /// </summary>
-        [JsonProperty("promo_code", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("promo_code")]
         public string PromoCode { get; }
 
         /// <summary>
         /// For Bitcoin transactions, the address that the buyer sent Bitcoin to.
         /// </summary>
-        [JsonProperty("btc_receive_address", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("btc_receive_address")]
         public string BtcReceiveAddress { get; }
 
         /// <summary>
         /// For Bitcoin transactions, the price of the buyer's order in satoshi (100 million satoshi equals 1 BTC).
         /// </summary>
-        [JsonProperty("btc_price_satoshi", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("btc_price_satoshi")]
         public double? BtcPriceSatoshi { get; }
 
         /// <inheritdoc/>
@@ -281,6 +424,132 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"V1Order : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeErrors()
+        {
+            return this.shouldSerialize["errors"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyerEmail()
+        {
+            return this.shouldSerialize["buyer_email"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRecipientName()
+        {
+            return this.shouldSerialize["recipient_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRecipientPhoneNumber()
+        {
+            return this.shouldSerialize["recipient_phone_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeExpiresAt()
+        {
+            return this.shouldSerialize["expires_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentId()
+        {
+            return this.shouldSerialize["payment_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBuyerNote()
+        {
+            return this.shouldSerialize["buyer_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCompletedNote()
+        {
+            return this.shouldSerialize["completed_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRefundedNote()
+        {
+            return this.shouldSerialize["refunded_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCanceledNote()
+        {
+            return this.shouldSerialize["canceled_note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrderHistory()
+        {
+            return this.shouldSerialize["order_history"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePromoCode()
+        {
+            return this.shouldSerialize["promo_code"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBtcReceiveAddress()
+        {
+            return this.shouldSerialize["btc_receive_address"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBtcPriceSatoshi()
+        {
+            return this.shouldSerialize["btc_price_satoshi"];
         }
 
         /// <inheritdoc/>
@@ -418,6 +687,24 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "errors", false },
+                { "buyer_email", false },
+                { "recipient_name", false },
+                { "recipient_phone_number", false },
+                { "expires_at", false },
+                { "payment_id", false },
+                { "buyer_note", false },
+                { "completed_note", false },
+                { "refunded_note", false },
+                { "canceled_note", false },
+                { "order_history", false },
+                { "promo_code", false },
+                { "btc_receive_address", false },
+                { "btc_price_satoshi", false },
+            };
+
             private IList<Models.Error> errors;
             private string id;
             private string buyerEmail;
@@ -451,6 +738,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Errors(IList<Models.Error> errors)
             {
+                shouldSerialize["errors"] = true;
                 this.errors = errors;
                 return this;
             }
@@ -473,6 +761,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyerEmail(string buyerEmail)
             {
+                shouldSerialize["buyer_email"] = true;
                 this.buyerEmail = buyerEmail;
                 return this;
             }
@@ -484,6 +773,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RecipientName(string recipientName)
             {
+                shouldSerialize["recipient_name"] = true;
                 this.recipientName = recipientName;
                 return this;
             }
@@ -495,6 +785,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RecipientPhoneNumber(string recipientPhoneNumber)
             {
+                shouldSerialize["recipient_phone_number"] = true;
                 this.recipientPhoneNumber = recipientPhoneNumber;
                 return this;
             }
@@ -605,6 +896,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ExpiresAt(string expiresAt)
             {
+                shouldSerialize["expires_at"] = true;
                 this.expiresAt = expiresAt;
                 return this;
             }
@@ -616,6 +908,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
+                shouldSerialize["payment_id"] = true;
                 this.paymentId = paymentId;
                 return this;
             }
@@ -627,6 +920,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BuyerNote(string buyerNote)
             {
+                shouldSerialize["buyer_note"] = true;
                 this.buyerNote = buyerNote;
                 return this;
             }
@@ -638,6 +932,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CompletedNote(string completedNote)
             {
+                shouldSerialize["completed_note"] = true;
                 this.completedNote = completedNote;
                 return this;
             }
@@ -649,6 +944,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RefundedNote(string refundedNote)
             {
+                shouldSerialize["refunded_note"] = true;
                 this.refundedNote = refundedNote;
                 return this;
             }
@@ -660,6 +956,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CanceledNote(string canceledNote)
             {
+                shouldSerialize["canceled_note"] = true;
                 this.canceledNote = canceledNote;
                 return this;
             }
@@ -682,6 +979,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OrderHistory(IList<Models.V1OrderHistoryEntry> orderHistory)
             {
+                shouldSerialize["order_history"] = true;
                 this.orderHistory = orderHistory;
                 return this;
             }
@@ -693,6 +991,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PromoCode(string promoCode)
             {
+                shouldSerialize["promo_code"] = true;
                 this.promoCode = promoCode;
                 return this;
             }
@@ -704,6 +1003,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BtcReceiveAddress(string btcReceiveAddress)
             {
+                shouldSerialize["btc_receive_address"] = true;
                 this.btcReceiveAddress = btcReceiveAddress;
                 return this;
             }
@@ -715,9 +1015,123 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BtcPriceSatoshi(double? btcPriceSatoshi)
             {
+                shouldSerialize["btc_price_satoshi"] = true;
                 this.btcPriceSatoshi = btcPriceSatoshi;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetErrors()
+            {
+                this.shouldSerialize["errors"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyerEmail()
+            {
+                this.shouldSerialize["buyer_email"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRecipientName()
+            {
+                this.shouldSerialize["recipient_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRecipientPhoneNumber()
+            {
+                this.shouldSerialize["recipient_phone_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetExpiresAt()
+            {
+                this.shouldSerialize["expires_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentId()
+            {
+                this.shouldSerialize["payment_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBuyerNote()
+            {
+                this.shouldSerialize["buyer_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCompletedNote()
+            {
+                this.shouldSerialize["completed_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRefundedNote()
+            {
+                this.shouldSerialize["refunded_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCanceledNote()
+            {
+                this.shouldSerialize["canceled_note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrderHistory()
+            {
+                this.shouldSerialize["order_history"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPromoCode()
+            {
+                this.shouldSerialize["promo_code"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBtcReceiveAddress()
+            {
+                this.shouldSerialize["btc_receive_address"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBtcPriceSatoshi()
+            {
+                this.shouldSerialize["btc_price_satoshi"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -725,7 +1139,7 @@ namespace Square.Models
             /// <returns> V1Order. </returns>
             public V1Order Build()
             {
-                return new V1Order(
+                return new V1Order(shouldSerialize,
                     this.errors,
                     this.id,
                     this.buyerEmail,

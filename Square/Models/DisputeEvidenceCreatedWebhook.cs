@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DisputeEvidenceCreatedWebhook
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DisputeEvidenceCreatedWebhook"/> class.
         /// </summary>
@@ -34,36 +35,80 @@ namespace Square.Models
             string createdAt = null,
             Models.DisputeEvidenceCreatedWebhookData data = null)
         {
-            this.MerchantId = merchantId;
-            this.LocationId = locationId;
-            this.Type = type;
-            this.EventId = eventId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "merchant_id", false },
+                { "location_id", false },
+                { "type", false },
+                { "event_id", false }
+            };
+
+            if (merchantId != null)
+            {
+                shouldSerialize["merchant_id"] = true;
+                this.MerchantId = merchantId;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (type != null)
+            {
+                shouldSerialize["type"] = true;
+                this.Type = type;
+            }
+
+            if (eventId != null)
+            {
+                shouldSerialize["event_id"] = true;
+                this.EventId = eventId;
+            }
+
             this.CreatedAt = createdAt;
             this.Data = data;
+        }
+        internal DisputeEvidenceCreatedWebhook(Dictionary<string, bool> shouldSerialize,
+            string merchantId = null,
+            string locationId = null,
+            string type = null,
+            string eventId = null,
+            string createdAt = null,
+            Models.DisputeEvidenceCreatedWebhookData data = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            MerchantId = merchantId;
+            LocationId = locationId;
+            Type = type;
+            EventId = eventId;
+            CreatedAt = createdAt;
+            Data = data;
         }
 
         /// <summary>
         /// The ID of the target merchant associated with the event.
         /// </summary>
-        [JsonProperty("merchant_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("merchant_id")]
         public string MerchantId { get; }
 
         /// <summary>
         /// The ID of the target location associated with the event.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
         /// The type of event this represents.
         /// </summary>
-        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("type")]
         public string Type { get; }
 
         /// <summary>
         /// A unique ID for the webhook event.
         /// </summary>
-        [JsonProperty("event_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("event_id")]
         public string EventId { get; }
 
         /// <summary>
@@ -86,6 +131,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DisputeEvidenceCreatedWebhook : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMerchantId()
+        {
+            return this.shouldSerialize["merchant_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeType()
+        {
+            return this.shouldSerialize["type"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEventId()
+        {
+            return this.shouldSerialize["event_id"];
         }
 
         /// <inheritdoc/>
@@ -154,6 +235,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "merchant_id", false },
+                { "location_id", false },
+                { "type", false },
+                { "event_id", false },
+            };
+
             private string merchantId;
             private string locationId;
             private string type;
@@ -168,6 +257,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder MerchantId(string merchantId)
             {
+                shouldSerialize["merchant_id"] = true;
                 this.merchantId = merchantId;
                 return this;
             }
@@ -179,6 +269,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -190,6 +281,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Type(string type)
             {
+                shouldSerialize["type"] = true;
                 this.type = type;
                 return this;
             }
@@ -201,6 +293,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EventId(string eventId)
             {
+                shouldSerialize["event_id"] = true;
                 this.eventId = eventId;
                 return this;
             }
@@ -228,12 +321,45 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMerchantId()
+            {
+                this.shouldSerialize["merchant_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetType()
+            {
+                this.shouldSerialize["type"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEventId()
+            {
+                this.shouldSerialize["event_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> DisputeEvidenceCreatedWebhook. </returns>
             public DisputeEvidenceCreatedWebhook Build()
             {
-                return new DisputeEvidenceCreatedWebhook(
+                return new DisputeEvidenceCreatedWebhook(shouldSerialize,
                     this.merchantId,
                     this.locationId,
                     this.type,

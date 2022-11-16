@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Location
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Location"/> class.
         /// </summary>
@@ -76,33 +77,167 @@ namespace Square.Models
             string fullFormatLogoUrl = null,
             Models.TaxIds taxIds = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "timezone", false },
+                { "language_code", false },
+                { "phone_number", false },
+                { "business_name", false },
+                { "website_url", false },
+                { "business_email", false },
+                { "description", false },
+                { "twitter_username", false },
+                { "instagram_username", false },
+                { "facebook_url", false },
+                { "mcc", false }
+            };
+
             this.Id = id;
-            this.Name = name;
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.Address = address;
-            this.Timezone = timezone;
+            if (timezone != null)
+            {
+                shouldSerialize["timezone"] = true;
+                this.Timezone = timezone;
+            }
+
             this.Capabilities = capabilities;
             this.Status = status;
             this.CreatedAt = createdAt;
             this.MerchantId = merchantId;
             this.Country = country;
-            this.LanguageCode = languageCode;
+            if (languageCode != null)
+            {
+                shouldSerialize["language_code"] = true;
+                this.LanguageCode = languageCode;
+            }
+
             this.Currency = currency;
-            this.PhoneNumber = phoneNumber;
-            this.BusinessName = businessName;
+            if (phoneNumber != null)
+            {
+                shouldSerialize["phone_number"] = true;
+                this.PhoneNumber = phoneNumber;
+            }
+
+            if (businessName != null)
+            {
+                shouldSerialize["business_name"] = true;
+                this.BusinessName = businessName;
+            }
+
             this.Type = type;
-            this.WebsiteUrl = websiteUrl;
+            if (websiteUrl != null)
+            {
+                shouldSerialize["website_url"] = true;
+                this.WebsiteUrl = websiteUrl;
+            }
+
             this.BusinessHours = businessHours;
-            this.BusinessEmail = businessEmail;
-            this.Description = description;
-            this.TwitterUsername = twitterUsername;
-            this.InstagramUsername = instagramUsername;
-            this.FacebookUrl = facebookUrl;
+            if (businessEmail != null)
+            {
+                shouldSerialize["business_email"] = true;
+                this.BusinessEmail = businessEmail;
+            }
+
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
+            if (twitterUsername != null)
+            {
+                shouldSerialize["twitter_username"] = true;
+                this.TwitterUsername = twitterUsername;
+            }
+
+            if (instagramUsername != null)
+            {
+                shouldSerialize["instagram_username"] = true;
+                this.InstagramUsername = instagramUsername;
+            }
+
+            if (facebookUrl != null)
+            {
+                shouldSerialize["facebook_url"] = true;
+                this.FacebookUrl = facebookUrl;
+            }
+
             this.Coordinates = coordinates;
             this.LogoUrl = logoUrl;
             this.PosBackgroundUrl = posBackgroundUrl;
-            this.Mcc = mcc;
+            if (mcc != null)
+            {
+                shouldSerialize["mcc"] = true;
+                this.Mcc = mcc;
+            }
+
             this.FullFormatLogoUrl = fullFormatLogoUrl;
             this.TaxIds = taxIds;
+        }
+        internal Location(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string name = null,
+            Models.Address address = null,
+            string timezone = null,
+            IList<string> capabilities = null,
+            string status = null,
+            string createdAt = null,
+            string merchantId = null,
+            string country = null,
+            string languageCode = null,
+            string currency = null,
+            string phoneNumber = null,
+            string businessName = null,
+            string type = null,
+            string websiteUrl = null,
+            Models.BusinessHours businessHours = null,
+            string businessEmail = null,
+            string description = null,
+            string twitterUsername = null,
+            string instagramUsername = null,
+            string facebookUrl = null,
+            Models.Coordinates coordinates = null,
+            string logoUrl = null,
+            string posBackgroundUrl = null,
+            string mcc = null,
+            string fullFormatLogoUrl = null,
+            Models.TaxIds taxIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Name = name;
+            Address = address;
+            Timezone = timezone;
+            Capabilities = capabilities;
+            Status = status;
+            CreatedAt = createdAt;
+            MerchantId = merchantId;
+            Country = country;
+            LanguageCode = languageCode;
+            Currency = currency;
+            PhoneNumber = phoneNumber;
+            BusinessName = businessName;
+            Type = type;
+            WebsiteUrl = websiteUrl;
+            BusinessHours = businessHours;
+            BusinessEmail = businessEmail;
+            Description = description;
+            TwitterUsername = twitterUsername;
+            InstagramUsername = instagramUsername;
+            FacebookUrl = facebookUrl;
+            Coordinates = coordinates;
+            LogoUrl = logoUrl;
+            PosBackgroundUrl = posBackgroundUrl;
+            Mcc = mcc;
+            FullFormatLogoUrl = fullFormatLogoUrl;
+            TaxIds = taxIds;
         }
 
         /// <summary>
@@ -116,7 +251,7 @@ namespace Square.Models
         /// This information appears in the Seller Dashboard as the nickname.
         /// A location name must be unique within a seller account.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -130,7 +265,7 @@ namespace Square.Models
         /// The [IANA time zone](https://www.iana.org/time-zones) identifier for
         /// the time zone of the location. For example, `America/Los_Angeles`.
         /// </summary>
-        [JsonProperty("timezone", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("timezone")]
         public string Timezone { get; }
 
         /// <summary>
@@ -172,7 +307,7 @@ namespace Square.Models
         /// [BCP 47 format](https://tools.ietf.org/html/bcp47#appendix-A).
         /// For more information, see [Language Preferences](https://developer.squareup.com/docs/build-basics/general-considerations/language-preferences).
         /// </summary>
-        [JsonProperty("language_code", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("language_code")]
         public string LanguageCode { get; }
 
         /// <summary>
@@ -185,13 +320,13 @@ namespace Square.Models
         /// <summary>
         /// The phone number of the location. For example, `+1 855-700-6000`.
         /// </summary>
-        [JsonProperty("phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("phone_number")]
         public string PhoneNumber { get; }
 
         /// <summary>
         /// The name of the location's overall business. This name is present on receipts and other customer-facing branding.
         /// </summary>
-        [JsonProperty("business_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("business_name")]
         public string BusinessName { get; }
 
         /// <summary>
@@ -203,7 +338,7 @@ namespace Square.Models
         /// <summary>
         /// The website URL of the location.  For example, `https://squareup.com`.
         /// </summary>
-        [JsonProperty("website_url", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("website_url")]
         public string WebsiteUrl { get; }
 
         /// <summary>
@@ -215,31 +350,31 @@ namespace Square.Models
         /// <summary>
         /// The email address of the location. This can be unique to the location and is not always the email address for the business owner or administrator.
         /// </summary>
-        [JsonProperty("business_email", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("business_email")]
         public string BusinessEmail { get; }
 
         /// <summary>
         /// The description of the location. For example, `Main Street location`.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
         /// The Twitter username of the location without the '@' symbol. For example, `Square`.
         /// </summary>
-        [JsonProperty("twitter_username", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("twitter_username")]
         public string TwitterUsername { get; }
 
         /// <summary>
         /// The Instagram username of the location without the '@' symbol. For example, `square`.
         /// </summary>
-        [JsonProperty("instagram_username", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("instagram_username")]
         public string InstagramUsername { get; }
 
         /// <summary>
         /// The Facebook profile URL of the location. The URL should begin with 'facebook.com/'. For example, `https://www.facebook.com/square`.
         /// </summary>
-        [JsonProperty("facebook_url", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("facebook_url")]
         public string FacebookUrl { get; }
 
         /// <summary>
@@ -267,7 +402,7 @@ namespace Square.Models
         /// The [merchant category code (MCC)](https://developer.squareup.com/docs/locations-api#initialize-a-merchant-category-code) of the location as standardized by ISO 18245.
         /// For example, `5045`, for a location that sells computer goods and software.
         /// </summary>
-        [JsonProperty("mcc", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("mcc")]
         public string Mcc { get; }
 
         /// <summary>
@@ -292,6 +427,114 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Location : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTimezone()
+        {
+            return this.shouldSerialize["timezone"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLanguageCode()
+        {
+            return this.shouldSerialize["language_code"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePhoneNumber()
+        {
+            return this.shouldSerialize["phone_number"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBusinessName()
+        {
+            return this.shouldSerialize["business_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeWebsiteUrl()
+        {
+            return this.shouldSerialize["website_url"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBusinessEmail()
+        {
+            return this.shouldSerialize["business_email"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTwitterUsername()
+        {
+            return this.shouldSerialize["twitter_username"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeInstagramUsername()
+        {
+            return this.shouldSerialize["instagram_username"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFacebookUrl()
+        {
+            return this.shouldSerialize["facebook_url"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMcc()
+        {
+            return this.shouldSerialize["mcc"];
         }
 
         /// <inheritdoc/>
@@ -429,6 +672,22 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "timezone", false },
+                { "language_code", false },
+                { "phone_number", false },
+                { "business_name", false },
+                { "website_url", false },
+                { "business_email", false },
+                { "description", false },
+                { "twitter_username", false },
+                { "instagram_username", false },
+                { "facebook_url", false },
+                { "mcc", false },
+            };
+
             private string id;
             private string name;
             private Models.Address address;
@@ -475,6 +734,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -497,6 +757,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Timezone(string timezone)
             {
+                shouldSerialize["timezone"] = true;
                 this.timezone = timezone;
                 return this;
             }
@@ -563,6 +824,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LanguageCode(string languageCode)
             {
+                shouldSerialize["language_code"] = true;
                 this.languageCode = languageCode;
                 return this;
             }
@@ -585,6 +847,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PhoneNumber(string phoneNumber)
             {
+                shouldSerialize["phone_number"] = true;
                 this.phoneNumber = phoneNumber;
                 return this;
             }
@@ -596,6 +859,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BusinessName(string businessName)
             {
+                shouldSerialize["business_name"] = true;
                 this.businessName = businessName;
                 return this;
             }
@@ -618,6 +882,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder WebsiteUrl(string websiteUrl)
             {
+                shouldSerialize["website_url"] = true;
                 this.websiteUrl = websiteUrl;
                 return this;
             }
@@ -640,6 +905,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BusinessEmail(string businessEmail)
             {
+                shouldSerialize["business_email"] = true;
                 this.businessEmail = businessEmail;
                 return this;
             }
@@ -651,6 +917,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -662,6 +929,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TwitterUsername(string twitterUsername)
             {
+                shouldSerialize["twitter_username"] = true;
                 this.twitterUsername = twitterUsername;
                 return this;
             }
@@ -673,6 +941,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder InstagramUsername(string instagramUsername)
             {
+                shouldSerialize["instagram_username"] = true;
                 this.instagramUsername = instagramUsername;
                 return this;
             }
@@ -684,6 +953,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FacebookUrl(string facebookUrl)
             {
+                shouldSerialize["facebook_url"] = true;
                 this.facebookUrl = facebookUrl;
                 return this;
             }
@@ -728,6 +998,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Mcc(string mcc)
             {
+                shouldSerialize["mcc"] = true;
                 this.mcc = mcc;
                 return this;
             }
@@ -755,12 +1026,109 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTimezone()
+            {
+                this.shouldSerialize["timezone"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLanguageCode()
+            {
+                this.shouldSerialize["language_code"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPhoneNumber()
+            {
+                this.shouldSerialize["phone_number"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBusinessName()
+            {
+                this.shouldSerialize["business_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetWebsiteUrl()
+            {
+                this.shouldSerialize["website_url"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBusinessEmail()
+            {
+                this.shouldSerialize["business_email"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTwitterUsername()
+            {
+                this.shouldSerialize["twitter_username"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetInstagramUsername()
+            {
+                this.shouldSerialize["instagram_username"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFacebookUrl()
+            {
+                this.shouldSerialize["facebook_url"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMcc()
+            {
+                this.shouldSerialize["mcc"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> Location. </returns>
             public Location Build()
             {
-                return new Location(
+                return new Location(shouldSerialize,
                     this.id,
                     this.name,
                     this.address,

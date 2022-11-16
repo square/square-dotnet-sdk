@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class PaymentLinkRelatedResources
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="PaymentLinkRelatedResources"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             IList<Models.Order> orders = null,
             IList<Models.CatalogObject> subscriptionPlans = null)
         {
-            this.Orders = orders;
-            this.SubscriptionPlans = subscriptionPlans;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "orders", false },
+                { "subscription_plans", false }
+            };
+
+            if (orders != null)
+            {
+                shouldSerialize["orders"] = true;
+                this.Orders = orders;
+            }
+
+            if (subscriptionPlans != null)
+            {
+                shouldSerialize["subscription_plans"] = true;
+                this.SubscriptionPlans = subscriptionPlans;
+            }
+
+        }
+        internal PaymentLinkRelatedResources(Dictionary<string, bool> shouldSerialize,
+            IList<Models.Order> orders = null,
+            IList<Models.CatalogObject> subscriptionPlans = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Orders = orders;
+            SubscriptionPlans = subscriptionPlans;
         }
 
         /// <summary>
         /// The order associated with the payment link.
         /// </summary>
-        [JsonProperty("orders", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("orders")]
         public IList<Models.Order> Orders { get; }
 
         /// <summary>
         /// The subscription plan associated with the payment link.
         /// </summary>
-        [JsonProperty("subscription_plans", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("subscription_plans")]
         public IList<Models.CatalogObject> SubscriptionPlans { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"PaymentLinkRelatedResources : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrders()
+        {
+            return this.shouldSerialize["orders"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSubscriptionPlans()
+        {
+            return this.shouldSerialize["subscription_plans"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "orders", false },
+                { "subscription_plans", false },
+            };
+
             private IList<Models.Order> orders;
             private IList<Models.CatalogObject> subscriptionPlans;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Orders(IList<Models.Order> orders)
             {
+                shouldSerialize["orders"] = true;
                 this.orders = orders;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SubscriptionPlans(IList<Models.CatalogObject> subscriptionPlans)
             {
+                shouldSerialize["subscription_plans"] = true;
                 this.subscriptionPlans = subscriptionPlans;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrders()
+            {
+                this.shouldSerialize["orders"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSubscriptionPlans()
+            {
+                this.shouldSerialize["subscription_plans"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> PaymentLinkRelatedResources. </returns>
             public PaymentLinkRelatedResources Build()
             {
-                return new PaymentLinkRelatedResources(
+                return new PaymentLinkRelatedResources(shouldSerialize,
                     this.orders,
                     this.subscriptionPlans);
             }

@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogTax
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogTax"/> class.
         /// </summary>
@@ -34,18 +35,62 @@ namespace Square.Models
             bool? appliesToCustomAmounts = null,
             bool? enabled = null)
         {
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "percentage", false },
+                { "applies_to_custom_amounts", false },
+                { "enabled", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.CalculationPhase = calculationPhase;
             this.InclusionType = inclusionType;
-            this.Percentage = percentage;
-            this.AppliesToCustomAmounts = appliesToCustomAmounts;
-            this.Enabled = enabled;
+            if (percentage != null)
+            {
+                shouldSerialize["percentage"] = true;
+                this.Percentage = percentage;
+            }
+
+            if (appliesToCustomAmounts != null)
+            {
+                shouldSerialize["applies_to_custom_amounts"] = true;
+                this.AppliesToCustomAmounts = appliesToCustomAmounts;
+            }
+
+            if (enabled != null)
+            {
+                shouldSerialize["enabled"] = true;
+                this.Enabled = enabled;
+            }
+
+        }
+        internal CatalogTax(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            string calculationPhase = null,
+            string inclusionType = null,
+            string percentage = null,
+            bool? appliesToCustomAmounts = null,
+            bool? enabled = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            CalculationPhase = calculationPhase;
+            InclusionType = inclusionType;
+            Percentage = percentage;
+            AppliesToCustomAmounts = appliesToCustomAmounts;
+            Enabled = enabled;
         }
 
         /// <summary>
         /// The tax's name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -64,20 +109,20 @@ namespace Square.Models
         /// The percentage of the tax in decimal form, using a `'.'` as the decimal separator and without a `'%'` sign.
         /// A value of `7.5` corresponds to 7.5%. For a location-specific tax rate, contact the tax authority of the location or a tax consultant.
         /// </summary>
-        [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("percentage")]
         public string Percentage { get; }
 
         /// <summary>
         /// If `true`, the fee applies to custom amounts entered into the Square Point of Sale
         /// app that are not associated with a particular `CatalogItem`.
         /// </summary>
-        [JsonProperty("applies_to_custom_amounts", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("applies_to_custom_amounts")]
         public bool? AppliesToCustomAmounts { get; }
 
         /// <summary>
         /// A Boolean flag to indicate whether the tax is displayed as enabled (`true`) in the Square Point of Sale app or not (`false`).
         /// </summary>
-        [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("enabled")]
         public bool? Enabled { get; }
 
         /// <inheritdoc/>
@@ -88,6 +133,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogTax : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePercentage()
+        {
+            return this.shouldSerialize["percentage"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAppliesToCustomAmounts()
+        {
+            return this.shouldSerialize["applies_to_custom_amounts"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEnabled()
+        {
+            return this.shouldSerialize["enabled"];
         }
 
         /// <inheritdoc/>
@@ -156,6 +237,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "percentage", false },
+                { "applies_to_custom_amounts", false },
+                { "enabled", false },
+            };
+
             private string name;
             private string calculationPhase;
             private string inclusionType;
@@ -170,6 +259,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -203,6 +293,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Percentage(string percentage)
             {
+                shouldSerialize["percentage"] = true;
                 this.percentage = percentage;
                 return this;
             }
@@ -214,6 +305,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AppliesToCustomAmounts(bool? appliesToCustomAmounts)
             {
+                shouldSerialize["applies_to_custom_amounts"] = true;
                 this.appliesToCustomAmounts = appliesToCustomAmounts;
                 return this;
             }
@@ -225,9 +317,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Enabled(bool? enabled)
             {
+                shouldSerialize["enabled"] = true;
                 this.enabled = enabled;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPercentage()
+            {
+                this.shouldSerialize["percentage"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAppliesToCustomAmounts()
+            {
+                this.shouldSerialize["applies_to_custom_amounts"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEnabled()
+            {
+                this.shouldSerialize["enabled"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -235,7 +361,7 @@ namespace Square.Models
             /// <returns> CatalogTax. </returns>
             public CatalogTax Build()
             {
-                return new CatalogTax(
+                return new CatalogTax(shouldSerialize,
                     this.name,
                     this.calculationPhase,
                     this.inclusionType,

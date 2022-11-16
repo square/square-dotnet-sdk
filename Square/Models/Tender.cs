@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Tender
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Tender"/> class.
         /// </summary>
@@ -50,20 +51,92 @@ namespace Square.Models
             IList<Models.AdditionalRecipient> additionalRecipients = null,
             string paymentId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "transaction_id", false },
+                { "note", false },
+                { "customer_id", false },
+                { "additional_recipients", false },
+                { "payment_id", false }
+            };
+
             this.Id = id;
-            this.LocationId = locationId;
-            this.TransactionId = transactionId;
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+            if (transactionId != null)
+            {
+                shouldSerialize["transaction_id"] = true;
+                this.TransactionId = transactionId;
+            }
+
             this.CreatedAt = createdAt;
-            this.Note = note;
+            if (note != null)
+            {
+                shouldSerialize["note"] = true;
+                this.Note = note;
+            }
+
             this.AmountMoney = amountMoney;
             this.TipMoney = tipMoney;
             this.ProcessingFeeMoney = processingFeeMoney;
-            this.CustomerId = customerId;
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
+            }
+
             this.Type = type;
             this.CardDetails = cardDetails;
             this.CashDetails = cashDetails;
-            this.AdditionalRecipients = additionalRecipients;
-            this.PaymentId = paymentId;
+            if (additionalRecipients != null)
+            {
+                shouldSerialize["additional_recipients"] = true;
+                this.AdditionalRecipients = additionalRecipients;
+            }
+
+            if (paymentId != null)
+            {
+                shouldSerialize["payment_id"] = true;
+                this.PaymentId = paymentId;
+            }
+
+        }
+        internal Tender(Dictionary<string, bool> shouldSerialize,
+            string type,
+            string id = null,
+            string locationId = null,
+            string transactionId = null,
+            string createdAt = null,
+            string note = null,
+            Models.Money amountMoney = null,
+            Models.Money tipMoney = null,
+            Models.Money processingFeeMoney = null,
+            string customerId = null,
+            Models.TenderCardDetails cardDetails = null,
+            Models.TenderCashDetails cashDetails = null,
+            IList<Models.AdditionalRecipient> additionalRecipients = null,
+            string paymentId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            LocationId = locationId;
+            TransactionId = transactionId;
+            CreatedAt = createdAt;
+            Note = note;
+            AmountMoney = amountMoney;
+            TipMoney = tipMoney;
+            ProcessingFeeMoney = processingFeeMoney;
+            CustomerId = customerId;
+            Type = type;
+            CardDetails = cardDetails;
+            CashDetails = cashDetails;
+            AdditionalRecipients = additionalRecipients;
+            PaymentId = paymentId;
         }
 
         /// <summary>
@@ -75,13 +148,13 @@ namespace Square.Models
         /// <summary>
         /// The ID of the transaction's associated location.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
         /// The ID of the tender's associated transaction.
         /// </summary>
-        [JsonProperty("transaction_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("transaction_id")]
         public string TransactionId { get; }
 
         /// <summary>
@@ -93,7 +166,7 @@ namespace Square.Models
         /// <summary>
         /// An optional note associated with the tender at the time of payment.
         /// </summary>
-        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("note")]
         public string Note { get; }
 
         /// <summary>
@@ -133,7 +206,7 @@ namespace Square.Models
         /// If the tender is associated with a customer or represents a customer's card on file,
         /// this is the ID of the associated customer.
         /// </summary>
-        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
@@ -158,14 +231,14 @@ namespace Square.Models
         /// Additional recipients (other than the merchant) receiving a portion of this tender.
         /// For example, fees assessed on the purchase by a third party integration.
         /// </summary>
-        [JsonProperty("additional_recipients", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("additional_recipients")]
         public IList<Models.AdditionalRecipient> AdditionalRecipients { get; }
 
         /// <summary>
         /// The ID of the [Payment]($m/Payment) that corresponds to this tender.
         /// This value is only present for payments created with the v2 Payments API.
         /// </summary>
-        [JsonProperty("payment_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("payment_id")]
         public string PaymentId { get; }
 
         /// <inheritdoc/>
@@ -176,6 +249,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Tender : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTransactionId()
+        {
+            return this.shouldSerialize["transaction_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNote()
+        {
+            return this.shouldSerialize["note"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAdditionalRecipients()
+        {
+            return this.shouldSerialize["additional_recipients"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePaymentId()
+        {
+            return this.shouldSerialize["payment_id"];
         }
 
         /// <inheritdoc/>
@@ -270,6 +397,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_id", false },
+                { "transaction_id", false },
+                { "note", false },
+                { "customer_id", false },
+                { "additional_recipients", false },
+                { "payment_id", false },
+            };
+
             private string type;
             private string id;
             private string locationId;
@@ -320,6 +457,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
@@ -331,6 +469,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TransactionId(string transactionId)
             {
+                shouldSerialize["transaction_id"] = true;
                 this.transactionId = transactionId;
                 return this;
             }
@@ -353,6 +492,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Note(string note)
             {
+                shouldSerialize["note"] = true;
                 this.note = note;
                 return this;
             }
@@ -397,6 +537,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
+                shouldSerialize["customer_id"] = true;
                 this.customerId = customerId;
                 return this;
             }
@@ -430,6 +571,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AdditionalRecipients(IList<Models.AdditionalRecipient> additionalRecipients)
             {
+                shouldSerialize["additional_recipients"] = true;
                 this.additionalRecipients = additionalRecipients;
                 return this;
             }
@@ -441,9 +583,59 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PaymentId(string paymentId)
             {
+                shouldSerialize["payment_id"] = true;
                 this.paymentId = paymentId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTransactionId()
+            {
+                this.shouldSerialize["transaction_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNote()
+            {
+                this.shouldSerialize["note"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAdditionalRecipients()
+            {
+                this.shouldSerialize["additional_recipients"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPaymentId()
+            {
+                this.shouldSerialize["payment_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -451,7 +643,7 @@ namespace Square.Models
             /// <returns> Tender. </returns>
             public Tender Build()
             {
-                return new Tender(
+                return new Tender(shouldSerialize,
                     this.type,
                     this.id,
                     this.locationId,

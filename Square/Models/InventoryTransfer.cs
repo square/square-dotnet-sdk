@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class InventoryTransfer
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="InventoryTransfer"/> class.
         /// </summary>
@@ -48,19 +49,107 @@ namespace Square.Models
             string employeeId = null,
             string teamMemberId = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reference_id", false },
+                { "from_location_id", false },
+                { "to_location_id", false },
+                { "catalog_object_id", false },
+                { "catalog_object_type", false },
+                { "quantity", false },
+                { "occurred_at", false },
+                { "employee_id", false },
+                { "team_member_id", false }
+            };
+
             this.Id = id;
-            this.ReferenceId = referenceId;
+            if (referenceId != null)
+            {
+                shouldSerialize["reference_id"] = true;
+                this.ReferenceId = referenceId;
+            }
+
             this.State = state;
-            this.FromLocationId = fromLocationId;
-            this.ToLocationId = toLocationId;
-            this.CatalogObjectId = catalogObjectId;
-            this.CatalogObjectType = catalogObjectType;
-            this.Quantity = quantity;
-            this.OccurredAt = occurredAt;
+            if (fromLocationId != null)
+            {
+                shouldSerialize["from_location_id"] = true;
+                this.FromLocationId = fromLocationId;
+            }
+
+            if (toLocationId != null)
+            {
+                shouldSerialize["to_location_id"] = true;
+                this.ToLocationId = toLocationId;
+            }
+
+            if (catalogObjectId != null)
+            {
+                shouldSerialize["catalog_object_id"] = true;
+                this.CatalogObjectId = catalogObjectId;
+            }
+
+            if (catalogObjectType != null)
+            {
+                shouldSerialize["catalog_object_type"] = true;
+                this.CatalogObjectType = catalogObjectType;
+            }
+
+            if (quantity != null)
+            {
+                shouldSerialize["quantity"] = true;
+                this.Quantity = quantity;
+            }
+
+            if (occurredAt != null)
+            {
+                shouldSerialize["occurred_at"] = true;
+                this.OccurredAt = occurredAt;
+            }
+
             this.CreatedAt = createdAt;
             this.Source = source;
-            this.EmployeeId = employeeId;
-            this.TeamMemberId = teamMemberId;
+            if (employeeId != null)
+            {
+                shouldSerialize["employee_id"] = true;
+                this.EmployeeId = employeeId;
+            }
+
+            if (teamMemberId != null)
+            {
+                shouldSerialize["team_member_id"] = true;
+                this.TeamMemberId = teamMemberId;
+            }
+
+        }
+        internal InventoryTransfer(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string referenceId = null,
+            string state = null,
+            string fromLocationId = null,
+            string toLocationId = null,
+            string catalogObjectId = null,
+            string catalogObjectType = null,
+            string quantity = null,
+            string occurredAt = null,
+            string createdAt = null,
+            Models.SourceApplication source = null,
+            string employeeId = null,
+            string teamMemberId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            ReferenceId = referenceId;
+            State = state;
+            FromLocationId = fromLocationId;
+            ToLocationId = toLocationId;
+            CatalogObjectId = catalogObjectId;
+            CatalogObjectType = catalogObjectType;
+            Quantity = quantity;
+            OccurredAt = occurredAt;
+            CreatedAt = createdAt;
+            Source = source;
+            EmployeeId = employeeId;
+            TeamMemberId = teamMemberId;
         }
 
         /// <summary>
@@ -74,7 +163,7 @@ namespace Square.Models
         /// An optional ID provided by the application to tie the
         /// `InventoryTransfer` to an external system.
         /// </summary>
-        [JsonProperty("reference_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reference_id")]
         public string ReferenceId { get; }
 
         /// <summary>
@@ -87,21 +176,21 @@ namespace Square.Models
         /// The Square-generated ID of the [Location]($m/Location) where the related
         /// quantity of items was tracked before the transfer.
         /// </summary>
-        [JsonProperty("from_location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("from_location_id")]
         public string FromLocationId { get; }
 
         /// <summary>
         /// The Square-generated ID of the [Location]($m/Location) where the related
         /// quantity of items was tracked after the transfer.
         /// </summary>
-        [JsonProperty("to_location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("to_location_id")]
         public string ToLocationId { get; }
 
         /// <summary>
         /// The Square-generated ID of the
         /// [CatalogObject]($m/CatalogObject) being tracked.
         /// </summary>
-        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
 
         /// <summary>
@@ -109,14 +198,14 @@ namespace Square.Models
         /// The Inventory API supports setting and reading the `"catalog_object_type": "ITEM_VARIATION"` field value.
         /// In addition, it can also read the `"catalog_object_type": "ITEM"` field value that is set by the Square Restaurants app.
         /// </summary>
-        [JsonProperty("catalog_object_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_object_type")]
         public string CatalogObjectType { get; }
 
         /// <summary>
         /// The number of items affected by the transfer as a decimal string.
         /// Can support up to 5 digits after the decimal point.
         /// </summary>
-        [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("quantity")]
         public string Quantity { get; }
 
         /// <summary>
@@ -125,7 +214,7 @@ namespace Square.Models
         /// cannot be older than 24 hours or in the future relative to the time of the
         /// request.
         /// </summary>
-        [JsonProperty("occurred_at", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("occurred_at")]
         public string OccurredAt { get; }
 
         /// <summary>
@@ -145,14 +234,14 @@ namespace Square.Models
         /// The Square-generated ID of the [Employee]($m/Employee) responsible for the
         /// inventory transfer.
         /// </summary>
-        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("employee_id")]
         public string EmployeeId { get; }
 
         /// <summary>
         /// The Square-generated ID of the [Team Member]($m/TeamMember) responsible for the
         /// inventory transfer.
         /// </summary>
-        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }
 
         /// <inheritdoc/>
@@ -163,6 +252,87 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"InventoryTransfer : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeReferenceId()
+        {
+            return this.shouldSerialize["reference_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFromLocationId()
+        {
+            return this.shouldSerialize["from_location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeToLocationId()
+        {
+            return this.shouldSerialize["to_location_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogObjectId()
+        {
+            return this.shouldSerialize["catalog_object_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogObjectType()
+        {
+            return this.shouldSerialize["catalog_object_type"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQuantity()
+        {
+            return this.shouldSerialize["quantity"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOccurredAt()
+        {
+            return this.shouldSerialize["occurred_at"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmployeeId()
+        {
+            return this.shouldSerialize["employee_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTeamMemberId()
+        {
+            return this.shouldSerialize["team_member_id"];
         }
 
         /// <inheritdoc/>
@@ -254,6 +424,19 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "reference_id", false },
+                { "from_location_id", false },
+                { "to_location_id", false },
+                { "catalog_object_id", false },
+                { "catalog_object_type", false },
+                { "quantity", false },
+                { "occurred_at", false },
+                { "employee_id", false },
+                { "team_member_id", false },
+            };
+
             private string id;
             private string referenceId;
             private string state;
@@ -286,6 +469,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReferenceId(string referenceId)
             {
+                shouldSerialize["reference_id"] = true;
                 this.referenceId = referenceId;
                 return this;
             }
@@ -308,6 +492,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FromLocationId(string fromLocationId)
             {
+                shouldSerialize["from_location_id"] = true;
                 this.fromLocationId = fromLocationId;
                 return this;
             }
@@ -319,6 +504,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ToLocationId(string toLocationId)
             {
+                shouldSerialize["to_location_id"] = true;
                 this.toLocationId = toLocationId;
                 return this;
             }
@@ -330,6 +516,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
+                shouldSerialize["catalog_object_id"] = true;
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
@@ -341,6 +528,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogObjectType(string catalogObjectType)
             {
+                shouldSerialize["catalog_object_type"] = true;
                 this.catalogObjectType = catalogObjectType;
                 return this;
             }
@@ -352,6 +540,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Quantity(string quantity)
             {
+                shouldSerialize["quantity"] = true;
                 this.quantity = quantity;
                 return this;
             }
@@ -363,6 +552,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder OccurredAt(string occurredAt)
             {
+                shouldSerialize["occurred_at"] = true;
                 this.occurredAt = occurredAt;
                 return this;
             }
@@ -396,6 +586,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
+                shouldSerialize["employee_id"] = true;
                 this.employeeId = employeeId;
                 return this;
             }
@@ -407,9 +598,83 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TeamMemberId(string teamMemberId)
             {
+                shouldSerialize["team_member_id"] = true;
                 this.teamMemberId = teamMemberId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetReferenceId()
+            {
+                this.shouldSerialize["reference_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFromLocationId()
+            {
+                this.shouldSerialize["from_location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetToLocationId()
+            {
+                this.shouldSerialize["to_location_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogObjectId()
+            {
+                this.shouldSerialize["catalog_object_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogObjectType()
+            {
+                this.shouldSerialize["catalog_object_type"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQuantity()
+            {
+                this.shouldSerialize["quantity"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOccurredAt()
+            {
+                this.shouldSerialize["occurred_at"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmployeeId()
+            {
+                this.shouldSerialize["employee_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTeamMemberId()
+            {
+                this.shouldSerialize["team_member_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -417,7 +682,7 @@ namespace Square.Models
             /// <returns> InventoryTransfer. </returns>
             public InventoryTransfer Build()
             {
-                return new InventoryTransfer(
+                return new InventoryTransfer(shouldSerialize,
                     this.id,
                     this.referenceId,
                     this.state,

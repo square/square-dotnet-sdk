@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderReturnTax
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderReturnTax"/> class.
         /// </summary>
@@ -40,45 +41,107 @@ namespace Square.Models
             Models.Money appliedMoney = null,
             string scope = null)
         {
-            this.Uid = uid;
-            this.SourceTaxUid = sourceTaxUid;
-            this.CatalogObjectId = catalogObjectId;
-            this.CatalogVersion = catalogVersion;
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "source_tax_uid", false },
+                { "catalog_object_id", false },
+                { "catalog_version", false },
+                { "name", false },
+                { "percentage", false }
+            };
+
+            if (uid != null)
+            {
+                shouldSerialize["uid"] = true;
+                this.Uid = uid;
+            }
+
+            if (sourceTaxUid != null)
+            {
+                shouldSerialize["source_tax_uid"] = true;
+                this.SourceTaxUid = sourceTaxUid;
+            }
+
+            if (catalogObjectId != null)
+            {
+                shouldSerialize["catalog_object_id"] = true;
+                this.CatalogObjectId = catalogObjectId;
+            }
+
+            if (catalogVersion != null)
+            {
+                shouldSerialize["catalog_version"] = true;
+                this.CatalogVersion = catalogVersion;
+            }
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
             this.Type = type;
-            this.Percentage = percentage;
+            if (percentage != null)
+            {
+                shouldSerialize["percentage"] = true;
+                this.Percentage = percentage;
+            }
+
             this.AppliedMoney = appliedMoney;
             this.Scope = scope;
+        }
+        internal OrderReturnTax(Dictionary<string, bool> shouldSerialize,
+            string uid = null,
+            string sourceTaxUid = null,
+            string catalogObjectId = null,
+            long? catalogVersion = null,
+            string name = null,
+            string type = null,
+            string percentage = null,
+            Models.Money appliedMoney = null,
+            string scope = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            SourceTaxUid = sourceTaxUid;
+            CatalogObjectId = catalogObjectId;
+            CatalogVersion = catalogVersion;
+            Name = name;
+            Type = type;
+            Percentage = percentage;
+            AppliedMoney = appliedMoney;
+            Scope = scope;
         }
 
         /// <summary>
         /// A unique ID that identifies the returned tax only within this order.
         /// </summary>
-        [JsonProperty("uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("uid")]
         public string Uid { get; }
 
         /// <summary>
         /// The tax `uid` from the order that contains the original tax charge.
         /// </summary>
-        [JsonProperty("source_tax_uid", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("source_tax_uid")]
         public string SourceTaxUid { get; }
 
         /// <summary>
         /// The catalog object ID referencing [CatalogTax]($m/CatalogTax).
         /// </summary>
-        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
 
         /// <summary>
         /// The version of the catalog object that this tax references.
         /// </summary>
-        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_version")]
         public long? CatalogVersion { get; }
 
         /// <summary>
         /// The tax's name.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -91,7 +154,7 @@ namespace Square.Models
         /// The percentage of the tax, as a string representation of a decimal number.
         /// For example, a value of `"7.25"` corresponds to a percentage of 7.25%.
         /// </summary>
-        [JsonProperty("percentage", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("percentage")]
         public string Percentage { get; }
 
         /// <summary>
@@ -119,6 +182,60 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderReturnTax : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUid()
+        {
+            return this.shouldSerialize["uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSourceTaxUid()
+        {
+            return this.shouldSerialize["source_tax_uid"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogObjectId()
+        {
+            return this.shouldSerialize["catalog_object_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogVersion()
+        {
+            return this.shouldSerialize["catalog_version"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePercentage()
+        {
+            return this.shouldSerialize["percentage"];
         }
 
         /// <inheritdoc/>
@@ -198,6 +315,16 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "uid", false },
+                { "source_tax_uid", false },
+                { "catalog_object_id", false },
+                { "catalog_version", false },
+                { "name", false },
+                { "percentage", false },
+            };
+
             private string uid;
             private string sourceTaxUid;
             private string catalogObjectId;
@@ -215,6 +342,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Uid(string uid)
             {
+                shouldSerialize["uid"] = true;
                 this.uid = uid;
                 return this;
             }
@@ -226,6 +354,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SourceTaxUid(string sourceTaxUid)
             {
+                shouldSerialize["source_tax_uid"] = true;
                 this.sourceTaxUid = sourceTaxUid;
                 return this;
             }
@@ -237,6 +366,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
+                shouldSerialize["catalog_object_id"] = true;
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
@@ -248,6 +378,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogVersion(long? catalogVersion)
             {
+                shouldSerialize["catalog_version"] = true;
                 this.catalogVersion = catalogVersion;
                 return this;
             }
@@ -259,6 +390,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -281,6 +413,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Percentage(string percentage)
             {
+                shouldSerialize["percentage"] = true;
                 this.percentage = percentage;
                 return this;
             }
@@ -308,12 +441,61 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUid()
+            {
+                this.shouldSerialize["uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSourceTaxUid()
+            {
+                this.shouldSerialize["source_tax_uid"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogObjectId()
+            {
+                this.shouldSerialize["catalog_object_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogVersion()
+            {
+                this.shouldSerialize["catalog_version"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPercentage()
+            {
+                this.shouldSerialize["percentage"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> OrderReturnTax. </returns>
             public OrderReturnTax Build()
             {
-                return new OrderReturnTax(
+                return new OrderReturnTax(shouldSerialize,
                     this.uid,
                     this.sourceTaxUid,
                     this.catalogObjectId,

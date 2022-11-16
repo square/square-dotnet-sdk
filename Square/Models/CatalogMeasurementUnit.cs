@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogMeasurementUnit
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogMeasurementUnit"/> class.
         /// </summary>
@@ -26,8 +27,26 @@ namespace Square.Models
             Models.MeasurementUnit measurementUnit = null,
             int? precision = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "precision", false }
+            };
+
             this.MeasurementUnit = measurementUnit;
-            this.Precision = precision;
+            if (precision != null)
+            {
+                shouldSerialize["precision"] = true;
+                this.Precision = precision;
+            }
+
+        }
+        internal CatalogMeasurementUnit(Dictionary<string, bool> shouldSerialize,
+            Models.MeasurementUnit measurementUnit = null,
+            int? precision = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            MeasurementUnit = measurementUnit;
+            Precision = precision;
         }
 
         /// <summary>
@@ -47,7 +66,7 @@ namespace Square.Models
         /// - if the precision is 2, the quantity can be 0.01, 0.12, etc.
         /// Default: 3
         /// </summary>
-        [JsonProperty("precision", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("precision")]
         public int? Precision { get; }
 
         /// <inheritdoc/>
@@ -58,6 +77,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogMeasurementUnit : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePrecision()
+        {
+            return this.shouldSerialize["precision"];
         }
 
         /// <inheritdoc/>
@@ -114,6 +142,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "precision", false },
+            };
+
             private Models.MeasurementUnit measurementUnit;
             private int? precision;
 
@@ -135,9 +168,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Precision(int? precision)
             {
+                shouldSerialize["precision"] = true;
                 this.precision = precision;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPrecision()
+            {
+                this.shouldSerialize["precision"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -145,7 +188,7 @@ namespace Square.Models
             /// <returns> CatalogMeasurementUnit. </returns>
             public CatalogMeasurementUnit Build()
             {
-                return new CatalogMeasurementUnit(
+                return new CatalogMeasurementUnit(shouldSerialize,
                     this.measurementUnit,
                     this.precision);
             }

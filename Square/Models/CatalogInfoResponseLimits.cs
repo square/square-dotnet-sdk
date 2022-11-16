@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogInfoResponseLimits
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogInfoResponseLimits"/> class.
         /// </summary>
@@ -44,94 +45,190 @@ namespace Square.Models
             int? updateItemModifierListsMaxModifierListsToEnable = null,
             int? updateItemModifierListsMaxModifierListsToDisable = null)
         {
-            this.BatchUpsertMaxObjectsPerBatch = batchUpsertMaxObjectsPerBatch;
-            this.BatchUpsertMaxTotalObjects = batchUpsertMaxTotalObjects;
-            this.BatchRetrieveMaxObjectIds = batchRetrieveMaxObjectIds;
-            this.SearchMaxPageLimit = searchMaxPageLimit;
-            this.BatchDeleteMaxObjectIds = batchDeleteMaxObjectIds;
-            this.UpdateItemTaxesMaxItemIds = updateItemTaxesMaxItemIds;
-            this.UpdateItemTaxesMaxTaxesToEnable = updateItemTaxesMaxTaxesToEnable;
-            this.UpdateItemTaxesMaxTaxesToDisable = updateItemTaxesMaxTaxesToDisable;
-            this.UpdateItemModifierListsMaxItemIds = updateItemModifierListsMaxItemIds;
-            this.UpdateItemModifierListsMaxModifierListsToEnable = updateItemModifierListsMaxModifierListsToEnable;
-            this.UpdateItemModifierListsMaxModifierListsToDisable = updateItemModifierListsMaxModifierListsToDisable;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "batch_upsert_max_objects_per_batch", false },
+                { "batch_upsert_max_total_objects", false },
+                { "batch_retrieve_max_object_ids", false },
+                { "search_max_page_limit", false },
+                { "batch_delete_max_object_ids", false },
+                { "update_item_taxes_max_item_ids", false },
+                { "update_item_taxes_max_taxes_to_enable", false },
+                { "update_item_taxes_max_taxes_to_disable", false },
+                { "update_item_modifier_lists_max_item_ids", false },
+                { "update_item_modifier_lists_max_modifier_lists_to_enable", false },
+                { "update_item_modifier_lists_max_modifier_lists_to_disable", false }
+            };
+
+            if (batchUpsertMaxObjectsPerBatch != null)
+            {
+                shouldSerialize["batch_upsert_max_objects_per_batch"] = true;
+                this.BatchUpsertMaxObjectsPerBatch = batchUpsertMaxObjectsPerBatch;
+            }
+
+            if (batchUpsertMaxTotalObjects != null)
+            {
+                shouldSerialize["batch_upsert_max_total_objects"] = true;
+                this.BatchUpsertMaxTotalObjects = batchUpsertMaxTotalObjects;
+            }
+
+            if (batchRetrieveMaxObjectIds != null)
+            {
+                shouldSerialize["batch_retrieve_max_object_ids"] = true;
+                this.BatchRetrieveMaxObjectIds = batchRetrieveMaxObjectIds;
+            }
+
+            if (searchMaxPageLimit != null)
+            {
+                shouldSerialize["search_max_page_limit"] = true;
+                this.SearchMaxPageLimit = searchMaxPageLimit;
+            }
+
+            if (batchDeleteMaxObjectIds != null)
+            {
+                shouldSerialize["batch_delete_max_object_ids"] = true;
+                this.BatchDeleteMaxObjectIds = batchDeleteMaxObjectIds;
+            }
+
+            if (updateItemTaxesMaxItemIds != null)
+            {
+                shouldSerialize["update_item_taxes_max_item_ids"] = true;
+                this.UpdateItemTaxesMaxItemIds = updateItemTaxesMaxItemIds;
+            }
+
+            if (updateItemTaxesMaxTaxesToEnable != null)
+            {
+                shouldSerialize["update_item_taxes_max_taxes_to_enable"] = true;
+                this.UpdateItemTaxesMaxTaxesToEnable = updateItemTaxesMaxTaxesToEnable;
+            }
+
+            if (updateItemTaxesMaxTaxesToDisable != null)
+            {
+                shouldSerialize["update_item_taxes_max_taxes_to_disable"] = true;
+                this.UpdateItemTaxesMaxTaxesToDisable = updateItemTaxesMaxTaxesToDisable;
+            }
+
+            if (updateItemModifierListsMaxItemIds != null)
+            {
+                shouldSerialize["update_item_modifier_lists_max_item_ids"] = true;
+                this.UpdateItemModifierListsMaxItemIds = updateItemModifierListsMaxItemIds;
+            }
+
+            if (updateItemModifierListsMaxModifierListsToEnable != null)
+            {
+                shouldSerialize["update_item_modifier_lists_max_modifier_lists_to_enable"] = true;
+                this.UpdateItemModifierListsMaxModifierListsToEnable = updateItemModifierListsMaxModifierListsToEnable;
+            }
+
+            if (updateItemModifierListsMaxModifierListsToDisable != null)
+            {
+                shouldSerialize["update_item_modifier_lists_max_modifier_lists_to_disable"] = true;
+                this.UpdateItemModifierListsMaxModifierListsToDisable = updateItemModifierListsMaxModifierListsToDisable;
+            }
+
+        }
+        internal CatalogInfoResponseLimits(Dictionary<string, bool> shouldSerialize,
+            int? batchUpsertMaxObjectsPerBatch = null,
+            int? batchUpsertMaxTotalObjects = null,
+            int? batchRetrieveMaxObjectIds = null,
+            int? searchMaxPageLimit = null,
+            int? batchDeleteMaxObjectIds = null,
+            int? updateItemTaxesMaxItemIds = null,
+            int? updateItemTaxesMaxTaxesToEnable = null,
+            int? updateItemTaxesMaxTaxesToDisable = null,
+            int? updateItemModifierListsMaxItemIds = null,
+            int? updateItemModifierListsMaxModifierListsToEnable = null,
+            int? updateItemModifierListsMaxModifierListsToDisable = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            BatchUpsertMaxObjectsPerBatch = batchUpsertMaxObjectsPerBatch;
+            BatchUpsertMaxTotalObjects = batchUpsertMaxTotalObjects;
+            BatchRetrieveMaxObjectIds = batchRetrieveMaxObjectIds;
+            SearchMaxPageLimit = searchMaxPageLimit;
+            BatchDeleteMaxObjectIds = batchDeleteMaxObjectIds;
+            UpdateItemTaxesMaxItemIds = updateItemTaxesMaxItemIds;
+            UpdateItemTaxesMaxTaxesToEnable = updateItemTaxesMaxTaxesToEnable;
+            UpdateItemTaxesMaxTaxesToDisable = updateItemTaxesMaxTaxesToDisable;
+            UpdateItemModifierListsMaxItemIds = updateItemModifierListsMaxItemIds;
+            UpdateItemModifierListsMaxModifierListsToEnable = updateItemModifierListsMaxModifierListsToEnable;
+            UpdateItemModifierListsMaxModifierListsToDisable = updateItemModifierListsMaxModifierListsToDisable;
         }
 
         /// <summary>
         /// The maximum number of objects that may appear within a single batch in a
         /// `/v2/catalog/batch-upsert` request.
         /// </summary>
-        [JsonProperty("batch_upsert_max_objects_per_batch", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("batch_upsert_max_objects_per_batch")]
         public int? BatchUpsertMaxObjectsPerBatch { get; }
 
         /// <summary>
         /// The maximum number of objects that may appear across all batches in a
         /// `/v2/catalog/batch-upsert` request.
         /// </summary>
-        [JsonProperty("batch_upsert_max_total_objects", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("batch_upsert_max_total_objects")]
         public int? BatchUpsertMaxTotalObjects { get; }
 
         /// <summary>
         /// The maximum number of object IDs that may appear in a `/v2/catalog/batch-retrieve`
         /// request.
         /// </summary>
-        [JsonProperty("batch_retrieve_max_object_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("batch_retrieve_max_object_ids")]
         public int? BatchRetrieveMaxObjectIds { get; }
 
         /// <summary>
         /// The maximum number of results that may be returned in a page of a
         /// `/v2/catalog/search` response.
         /// </summary>
-        [JsonProperty("search_max_page_limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("search_max_page_limit")]
         public int? SearchMaxPageLimit { get; }
 
         /// <summary>
         /// The maximum number of object IDs that may be included in a single
         /// `/v2/catalog/batch-delete` request.
         /// </summary>
-        [JsonProperty("batch_delete_max_object_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("batch_delete_max_object_ids")]
         public int? BatchDeleteMaxObjectIds { get; }
 
         /// <summary>
         /// The maximum number of item IDs that may be included in a single
         /// `/v2/catalog/update-item-taxes` request.
         /// </summary>
-        [JsonProperty("update_item_taxes_max_item_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("update_item_taxes_max_item_ids")]
         public int? UpdateItemTaxesMaxItemIds { get; }
 
         /// <summary>
         /// The maximum number of tax IDs to be enabled that may be included in a single
         /// `/v2/catalog/update-item-taxes` request.
         /// </summary>
-        [JsonProperty("update_item_taxes_max_taxes_to_enable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("update_item_taxes_max_taxes_to_enable")]
         public int? UpdateItemTaxesMaxTaxesToEnable { get; }
 
         /// <summary>
         /// The maximum number of tax IDs to be disabled that may be included in a single
         /// `/v2/catalog/update-item-taxes` request.
         /// </summary>
-        [JsonProperty("update_item_taxes_max_taxes_to_disable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("update_item_taxes_max_taxes_to_disable")]
         public int? UpdateItemTaxesMaxTaxesToDisable { get; }
 
         /// <summary>
         /// The maximum number of item IDs that may be included in a single
         /// `/v2/catalog/update-item-modifier-lists` request.
         /// </summary>
-        [JsonProperty("update_item_modifier_lists_max_item_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("update_item_modifier_lists_max_item_ids")]
         public int? UpdateItemModifierListsMaxItemIds { get; }
 
         /// <summary>
         /// The maximum number of modifier list IDs to be enabled that may be included in
         /// a single `/v2/catalog/update-item-modifier-lists` request.
         /// </summary>
-        [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_enable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_enable")]
         public int? UpdateItemModifierListsMaxModifierListsToEnable { get; }
 
         /// <summary>
         /// The maximum number of modifier list IDs to be disabled that may be included in
         /// a single `/v2/catalog/update-item-modifier-lists` request.
         /// </summary>
-        [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_disable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("update_item_modifier_lists_max_modifier_lists_to_disable")]
         public int? UpdateItemModifierListsMaxModifierListsToDisable { get; }
 
         /// <inheritdoc/>
@@ -142,6 +239,105 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogInfoResponseLimits : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBatchUpsertMaxObjectsPerBatch()
+        {
+            return this.shouldSerialize["batch_upsert_max_objects_per_batch"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBatchUpsertMaxTotalObjects()
+        {
+            return this.shouldSerialize["batch_upsert_max_total_objects"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBatchRetrieveMaxObjectIds()
+        {
+            return this.shouldSerialize["batch_retrieve_max_object_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSearchMaxPageLimit()
+        {
+            return this.shouldSerialize["search_max_page_limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBatchDeleteMaxObjectIds()
+        {
+            return this.shouldSerialize["batch_delete_max_object_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdateItemTaxesMaxItemIds()
+        {
+            return this.shouldSerialize["update_item_taxes_max_item_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdateItemTaxesMaxTaxesToEnable()
+        {
+            return this.shouldSerialize["update_item_taxes_max_taxes_to_enable"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdateItemTaxesMaxTaxesToDisable()
+        {
+            return this.shouldSerialize["update_item_taxes_max_taxes_to_disable"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdateItemModifierListsMaxItemIds()
+        {
+            return this.shouldSerialize["update_item_modifier_lists_max_item_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdateItemModifierListsMaxModifierListsToEnable()
+        {
+            return this.shouldSerialize["update_item_modifier_lists_max_modifier_lists_to_enable"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdateItemModifierListsMaxModifierListsToDisable()
+        {
+            return this.shouldSerialize["update_item_modifier_lists_max_modifier_lists_to_disable"];
         }
 
         /// <inheritdoc/>
@@ -227,6 +423,21 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "batch_upsert_max_objects_per_batch", false },
+                { "batch_upsert_max_total_objects", false },
+                { "batch_retrieve_max_object_ids", false },
+                { "search_max_page_limit", false },
+                { "batch_delete_max_object_ids", false },
+                { "update_item_taxes_max_item_ids", false },
+                { "update_item_taxes_max_taxes_to_enable", false },
+                { "update_item_taxes_max_taxes_to_disable", false },
+                { "update_item_modifier_lists_max_item_ids", false },
+                { "update_item_modifier_lists_max_modifier_lists_to_enable", false },
+                { "update_item_modifier_lists_max_modifier_lists_to_disable", false },
+            };
+
             private int? batchUpsertMaxObjectsPerBatch;
             private int? batchUpsertMaxTotalObjects;
             private int? batchRetrieveMaxObjectIds;
@@ -246,6 +457,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BatchUpsertMaxObjectsPerBatch(int? batchUpsertMaxObjectsPerBatch)
             {
+                shouldSerialize["batch_upsert_max_objects_per_batch"] = true;
                 this.batchUpsertMaxObjectsPerBatch = batchUpsertMaxObjectsPerBatch;
                 return this;
             }
@@ -257,6 +469,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BatchUpsertMaxTotalObjects(int? batchUpsertMaxTotalObjects)
             {
+                shouldSerialize["batch_upsert_max_total_objects"] = true;
                 this.batchUpsertMaxTotalObjects = batchUpsertMaxTotalObjects;
                 return this;
             }
@@ -268,6 +481,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BatchRetrieveMaxObjectIds(int? batchRetrieveMaxObjectIds)
             {
+                shouldSerialize["batch_retrieve_max_object_ids"] = true;
                 this.batchRetrieveMaxObjectIds = batchRetrieveMaxObjectIds;
                 return this;
             }
@@ -279,6 +493,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder SearchMaxPageLimit(int? searchMaxPageLimit)
             {
+                shouldSerialize["search_max_page_limit"] = true;
                 this.searchMaxPageLimit = searchMaxPageLimit;
                 return this;
             }
@@ -290,6 +505,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BatchDeleteMaxObjectIds(int? batchDeleteMaxObjectIds)
             {
+                shouldSerialize["batch_delete_max_object_ids"] = true;
                 this.batchDeleteMaxObjectIds = batchDeleteMaxObjectIds;
                 return this;
             }
@@ -301,6 +517,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder UpdateItemTaxesMaxItemIds(int? updateItemTaxesMaxItemIds)
             {
+                shouldSerialize["update_item_taxes_max_item_ids"] = true;
                 this.updateItemTaxesMaxItemIds = updateItemTaxesMaxItemIds;
                 return this;
             }
@@ -312,6 +529,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder UpdateItemTaxesMaxTaxesToEnable(int? updateItemTaxesMaxTaxesToEnable)
             {
+                shouldSerialize["update_item_taxes_max_taxes_to_enable"] = true;
                 this.updateItemTaxesMaxTaxesToEnable = updateItemTaxesMaxTaxesToEnable;
                 return this;
             }
@@ -323,6 +541,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder UpdateItemTaxesMaxTaxesToDisable(int? updateItemTaxesMaxTaxesToDisable)
             {
+                shouldSerialize["update_item_taxes_max_taxes_to_disable"] = true;
                 this.updateItemTaxesMaxTaxesToDisable = updateItemTaxesMaxTaxesToDisable;
                 return this;
             }
@@ -334,6 +553,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder UpdateItemModifierListsMaxItemIds(int? updateItemModifierListsMaxItemIds)
             {
+                shouldSerialize["update_item_modifier_lists_max_item_ids"] = true;
                 this.updateItemModifierListsMaxItemIds = updateItemModifierListsMaxItemIds;
                 return this;
             }
@@ -345,6 +565,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder UpdateItemModifierListsMaxModifierListsToEnable(int? updateItemModifierListsMaxModifierListsToEnable)
             {
+                shouldSerialize["update_item_modifier_lists_max_modifier_lists_to_enable"] = true;
                 this.updateItemModifierListsMaxModifierListsToEnable = updateItemModifierListsMaxModifierListsToEnable;
                 return this;
             }
@@ -356,9 +577,99 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder UpdateItemModifierListsMaxModifierListsToDisable(int? updateItemModifierListsMaxModifierListsToDisable)
             {
+                shouldSerialize["update_item_modifier_lists_max_modifier_lists_to_disable"] = true;
                 this.updateItemModifierListsMaxModifierListsToDisable = updateItemModifierListsMaxModifierListsToDisable;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBatchUpsertMaxObjectsPerBatch()
+            {
+                this.shouldSerialize["batch_upsert_max_objects_per_batch"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBatchUpsertMaxTotalObjects()
+            {
+                this.shouldSerialize["batch_upsert_max_total_objects"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBatchRetrieveMaxObjectIds()
+            {
+                this.shouldSerialize["batch_retrieve_max_object_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSearchMaxPageLimit()
+            {
+                this.shouldSerialize["search_max_page_limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBatchDeleteMaxObjectIds()
+            {
+                this.shouldSerialize["batch_delete_max_object_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUpdateItemTaxesMaxItemIds()
+            {
+                this.shouldSerialize["update_item_taxes_max_item_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUpdateItemTaxesMaxTaxesToEnable()
+            {
+                this.shouldSerialize["update_item_taxes_max_taxes_to_enable"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUpdateItemTaxesMaxTaxesToDisable()
+            {
+                this.shouldSerialize["update_item_taxes_max_taxes_to_disable"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUpdateItemModifierListsMaxItemIds()
+            {
+                this.shouldSerialize["update_item_modifier_lists_max_item_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUpdateItemModifierListsMaxModifierListsToEnable()
+            {
+                this.shouldSerialize["update_item_modifier_lists_max_modifier_lists_to_enable"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetUpdateItemModifierListsMaxModifierListsToDisable()
+            {
+                this.shouldSerialize["update_item_modifier_lists_max_modifier_lists_to_disable"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -366,7 +677,7 @@ namespace Square.Models
             /// <returns> CatalogInfoResponseLimits. </returns>
             public CatalogInfoResponseLimits Build()
             {
-                return new CatalogInfoResponseLimits(
+                return new CatalogInfoResponseLimits(shouldSerialize,
                     this.batchUpsertMaxObjectsPerBatch,
                     this.batchUpsertMaxTotalObjects,
                     this.batchRetrieveMaxObjectIds,

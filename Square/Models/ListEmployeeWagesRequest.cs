@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListEmployeeWagesRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListEmployeeWagesRequest"/> class.
         /// </summary>
@@ -28,28 +29,60 @@ namespace Square.Models
             int? limit = null,
             string cursor = null)
         {
-            this.EmployeeId = employeeId;
-            this.Limit = limit;
-            this.Cursor = cursor;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "employee_id", false },
+                { "limit", false },
+                { "cursor", false }
+            };
+
+            if (employeeId != null)
+            {
+                shouldSerialize["employee_id"] = true;
+                this.EmployeeId = employeeId;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+        }
+        internal ListEmployeeWagesRequest(Dictionary<string, bool> shouldSerialize,
+            string employeeId = null,
+            int? limit = null,
+            string cursor = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            EmployeeId = employeeId;
+            Limit = limit;
+            Cursor = cursor;
         }
 
         /// <summary>
         /// Filter the returned wages to only those that are associated with the specified employee.
         /// </summary>
-        [JsonProperty("employee_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("employee_id")]
         public string EmployeeId { get; }
 
         /// <summary>
         /// The maximum number of `EmployeeWage` results to return per page. The number can range between
         /// 1 and 200. The default is 200.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
         /// A pointer to the next page of `EmployeeWage` results to fetch.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <inheritdoc/>
@@ -60,6 +93,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListEmployeeWagesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEmployeeId()
+        {
+            return this.shouldSerialize["employee_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +179,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "employee_id", false },
+                { "limit", false },
+                { "cursor", false },
+            };
+
             private string employeeId;
             private int? limit;
             private string cursor;
@@ -130,6 +197,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EmployeeId(string employeeId)
             {
+                shouldSerialize["employee_id"] = true;
                 this.employeeId = employeeId;
                 return this;
             }
@@ -141,6 +209,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -152,9 +221,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEmployeeId()
+            {
+                this.shouldSerialize["employee_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -162,7 +257,7 @@ namespace Square.Models
             /// <returns> ListEmployeeWagesRequest. </returns>
             public ListEmployeeWagesRequest Build()
             {
-                return new ListEmployeeWagesRequest(
+                return new ListEmployeeWagesRequest(shouldSerialize,
                     this.employeeId,
                     this.limit,
                     this.cursor);

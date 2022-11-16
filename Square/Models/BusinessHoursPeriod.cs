@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class BusinessHoursPeriod
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="BusinessHoursPeriod"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             string startLocalTime = null,
             string endLocalTime = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_local_time", false },
+                { "end_local_time", false }
+            };
+
             this.DayOfWeek = dayOfWeek;
-            this.StartLocalTime = startLocalTime;
-            this.EndLocalTime = endLocalTime;
+            if (startLocalTime != null)
+            {
+                shouldSerialize["start_local_time"] = true;
+                this.StartLocalTime = startLocalTime;
+            }
+
+            if (endLocalTime != null)
+            {
+                shouldSerialize["end_local_time"] = true;
+                this.EndLocalTime = endLocalTime;
+            }
+
+        }
+        internal BusinessHoursPeriod(Dictionary<string, bool> shouldSerialize,
+            string dayOfWeek = null,
+            string startLocalTime = null,
+            string endLocalTime = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            DayOfWeek = dayOfWeek;
+            StartLocalTime = startLocalTime;
+            EndLocalTime = endLocalTime;
         }
 
         /// <summary>
@@ -44,7 +71,7 @@ namespace Square.Models
         /// RFC 3339 format. For example, `8:30:00` for a period starting at 8:30 in the morning.
         /// Note that the seconds value is always :00, but it is appended for conformance to the RFC.
         /// </summary>
-        [JsonProperty("start_local_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("start_local_time")]
         public string StartLocalTime { get; }
 
         /// <summary>
@@ -52,7 +79,7 @@ namespace Square.Models
         /// RFC 3339 format. For example, `21:00:00` for a period ending at 9:00 in the evening.
         /// Note that the seconds value is always :00, but it is appended for conformance to the RFC.
         /// </summary>
-        [JsonProperty("end_local_time", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("end_local_time")]
         public string EndLocalTime { get; }
 
         /// <inheritdoc/>
@@ -63,6 +90,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"BusinessHoursPeriod : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStartLocalTime()
+        {
+            return this.shouldSerialize["start_local_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndLocalTime()
+        {
+            return this.shouldSerialize["end_local_time"];
         }
 
         /// <inheritdoc/>
@@ -122,6 +167,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "start_local_time", false },
+                { "end_local_time", false },
+            };
+
             private string dayOfWeek;
             private string startLocalTime;
             private string endLocalTime;
@@ -144,6 +195,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder StartLocalTime(string startLocalTime)
             {
+                shouldSerialize["start_local_time"] = true;
                 this.startLocalTime = startLocalTime;
                 return this;
             }
@@ -155,9 +207,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EndLocalTime(string endLocalTime)
             {
+                shouldSerialize["end_local_time"] = true;
                 this.endLocalTime = endLocalTime;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStartLocalTime()
+            {
+                this.shouldSerialize["start_local_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndLocalTime()
+            {
+                this.shouldSerialize["end_local_time"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -165,7 +235,7 @@ namespace Square.Models
             /// <returns> BusinessHoursPeriod. </returns>
             public BusinessHoursPeriod Build()
             {
-                return new BusinessHoursPeriod(
+                return new BusinessHoursPeriod(shouldSerialize,
                     this.dayOfWeek,
                     this.startLocalTime,
                     this.endLocalTime);

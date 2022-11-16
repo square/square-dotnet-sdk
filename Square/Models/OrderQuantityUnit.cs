@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class OrderQuantityUnit
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderQuantityUnit"/> class.
         /// </summary>
@@ -30,10 +31,44 @@ namespace Square.Models
             string catalogObjectId = null,
             long? catalogVersion = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "precision", false },
+                { "catalog_object_id", false },
+                { "catalog_version", false }
+            };
+
             this.MeasurementUnit = measurementUnit;
-            this.Precision = precision;
-            this.CatalogObjectId = catalogObjectId;
-            this.CatalogVersion = catalogVersion;
+            if (precision != null)
+            {
+                shouldSerialize["precision"] = true;
+                this.Precision = precision;
+            }
+
+            if (catalogObjectId != null)
+            {
+                shouldSerialize["catalog_object_id"] = true;
+                this.CatalogObjectId = catalogObjectId;
+            }
+
+            if (catalogVersion != null)
+            {
+                shouldSerialize["catalog_version"] = true;
+                this.CatalogVersion = catalogVersion;
+            }
+
+        }
+        internal OrderQuantityUnit(Dictionary<string, bool> shouldSerialize,
+            Models.MeasurementUnit measurementUnit = null,
+            int? precision = null,
+            string catalogObjectId = null,
+            long? catalogVersion = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            MeasurementUnit = measurementUnit;
+            Precision = precision;
+            CatalogObjectId = catalogObjectId;
+            CatalogVersion = catalogVersion;
         }
 
         /// <summary>
@@ -50,7 +85,7 @@ namespace Square.Models
         /// For example, a precision of 1 allows quantities such as `"1.0"` and `"1.1"`, but not `"1.01"`.
         /// Min: 0. Max: 5.
         /// </summary>
-        [JsonProperty("precision", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("precision")]
         public int? Precision { get; }
 
         /// <summary>
@@ -58,14 +93,14 @@ namespace Square.Models
         /// [CatalogMeasurementUnit]($m/CatalogMeasurementUnit).
         /// This field is set when this is a catalog-backed measurement unit.
         /// </summary>
-        [JsonProperty("catalog_object_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
 
         /// <summary>
         /// The version of the catalog object that this measurement unit references.
         /// This field is set when this is a catalog-backed measurement unit.
         /// </summary>
-        [JsonProperty("catalog_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("catalog_version")]
         public long? CatalogVersion { get; }
 
         /// <inheritdoc/>
@@ -76,6 +111,33 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"OrderQuantityUnit : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePrecision()
+        {
+            return this.shouldSerialize["precision"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogObjectId()
+        {
+            return this.shouldSerialize["catalog_object_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCatalogVersion()
+        {
+            return this.shouldSerialize["catalog_version"];
         }
 
         /// <inheritdoc/>
@@ -138,6 +200,13 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "precision", false },
+                { "catalog_object_id", false },
+                { "catalog_version", false },
+            };
+
             private Models.MeasurementUnit measurementUnit;
             private int? precision;
             private string catalogObjectId;
@@ -161,6 +230,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Precision(int? precision)
             {
+                shouldSerialize["precision"] = true;
                 this.precision = precision;
                 return this;
             }
@@ -172,6 +242,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogObjectId(string catalogObjectId)
             {
+                shouldSerialize["catalog_object_id"] = true;
                 this.catalogObjectId = catalogObjectId;
                 return this;
             }
@@ -183,9 +254,35 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CatalogVersion(long? catalogVersion)
             {
+                shouldSerialize["catalog_version"] = true;
                 this.catalogVersion = catalogVersion;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPrecision()
+            {
+                this.shouldSerialize["precision"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogObjectId()
+            {
+                this.shouldSerialize["catalog_object_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCatalogVersion()
+            {
+                this.shouldSerialize["catalog_version"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -193,7 +290,7 @@ namespace Square.Models
             /// <returns> OrderQuantityUnit. </returns>
             public OrderQuantityUnit Build()
             {
-                return new OrderQuantityUnit(
+                return new OrderQuantityUnit(shouldSerialize,
                     this.measurementUnit,
                     this.precision,
                     this.catalogObjectId,

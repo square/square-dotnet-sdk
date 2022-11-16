@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogCategory
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogCategory"/> class.
         /// </summary>
@@ -26,21 +27,45 @@ namespace Square.Models
             string name = null,
             IList<string> imageIds = null)
         {
-            this.Name = name;
-            this.ImageIds = imageIds;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "image_ids", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (imageIds != null)
+            {
+                shouldSerialize["image_ids"] = true;
+                this.ImageIds = imageIds;
+            }
+
+        }
+        internal CatalogCategory(Dictionary<string, bool> shouldSerialize,
+            string name = null,
+            IList<string> imageIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
+            ImageIds = imageIds;
         }
 
         /// <summary>
         /// The category name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// The IDs of images associated with this `CatalogCategory` instance.
         /// Currently these images are not displayed by Square, but are free to be displayed in 3rd party applications.
         /// </summary>
-        [JsonProperty("image_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("image_ids")]
         public IList<string> ImageIds { get; }
 
         /// <inheritdoc/>
@@ -51,6 +76,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogCategory : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeImageIds()
+        {
+            return this.shouldSerialize["image_ids"];
         }
 
         /// <inheritdoc/>
@@ -107,6 +150,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "image_ids", false },
+            };
+
             private string name;
             private IList<string> imageIds;
 
@@ -117,6 +166,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -128,9 +178,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ImageIds(IList<string> imageIds)
             {
+                shouldSerialize["image_ids"] = true;
                 this.imageIds = imageIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetImageIds()
+            {
+                this.shouldSerialize["image_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -138,7 +206,7 @@ namespace Square.Models
             /// <returns> CatalogCategory. </returns>
             public CatalogCategory Build()
             {
-                return new CatalogCategory(
+                return new CatalogCategory(shouldSerialize,
                     this.name,
                     this.imageIds);
             }

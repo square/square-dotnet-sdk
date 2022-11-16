@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CustomAttributeDefinition
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomAttributeDefinition"/> class.
         /// </summary>
@@ -38,14 +39,62 @@ namespace Square.Models
             string updatedAt = null,
             string createdAt = null)
         {
-            this.Key = key;
-            this.Schema = schema;
-            this.Name = name;
-            this.Description = description;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "key", false },
+                { "schema", false },
+                { "name", false },
+                { "description", false }
+            };
+
+            if (key != null)
+            {
+                shouldSerialize["key"] = true;
+                this.Key = key;
+            }
+
+            if (schema != null)
+            {
+                shouldSerialize["schema"] = true;
+                this.Schema = schema;
+            }
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (description != null)
+            {
+                shouldSerialize["description"] = true;
+                this.Description = description;
+            }
+
             this.Visibility = visibility;
             this.Version = version;
             this.UpdatedAt = updatedAt;
             this.CreatedAt = createdAt;
+        }
+        internal CustomAttributeDefinition(Dictionary<string, bool> shouldSerialize,
+            string key = null,
+            JsonObject schema = null,
+            string name = null,
+            string description = null,
+            string visibility = null,
+            int? version = null,
+            string updatedAt = null,
+            string createdAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Key = key;
+            Schema = schema;
+            Name = name;
+            Description = description;
+            Visibility = visibility;
+            Version = version;
+            UpdatedAt = updatedAt;
+            CreatedAt = createdAt;
         }
 
         /// <summary>
@@ -63,14 +112,14 @@ namespace Square.Models
         /// after the custom attribute definition is created. This field is required when creating
         /// a definition and must be unique per application, seller, and resource type.
         /// </summary>
-        [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("key")]
         public string Key { get; }
 
         /// <summary>
         /// The JSON schema for the custom attribute definition, which determines the data type of the corresponding custom attributes. For more information,
         /// see [Custom Attributes Overview](https://developer.squareup.com/docs/devtools/customattributes/overview). This field is required when creating a definition.
         /// </summary>
-        [JsonProperty("schema", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("schema")]
         public JsonObject Schema { get; }
 
         /// <summary>
@@ -78,7 +127,7 @@ namespace Square.Models
         /// be unique within the seller and application pair. This field is required if the
         /// `visibility` field is `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
@@ -86,7 +135,7 @@ namespace Square.Models
         /// that the seller should observe. May be displayed as a tooltip in Square UIs. This field is
         /// required if the `visibility` field is `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("description")]
         public string Description { get; }
 
         /// <summary>
@@ -132,6 +181,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CustomAttributeDefinition : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeKey()
+        {
+            return this.shouldSerialize["key"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSchema()
+        {
+            return this.shouldSerialize["schema"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeDescription()
+        {
+            return this.shouldSerialize["description"];
         }
 
         /// <inheritdoc/>
@@ -208,6 +293,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "key", false },
+                { "schema", false },
+                { "name", false },
+                { "description", false },
+            };
+
             private string key;
             private JsonObject schema;
             private string name;
@@ -224,6 +317,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Key(string key)
             {
+                shouldSerialize["key"] = true;
                 this.key = key;
                 return this;
             }
@@ -235,6 +329,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Schema(JsonObject schema)
             {
+                shouldSerialize["schema"] = true;
                 this.schema = schema;
                 return this;
             }
@@ -246,6 +341,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -257,6 +353,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Description(string description)
             {
+                shouldSerialize["description"] = true;
                 this.description = description;
                 return this;
             }
@@ -306,12 +403,45 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetKey()
+            {
+                this.shouldSerialize["key"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSchema()
+            {
+                this.shouldSerialize["schema"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetDescription()
+            {
+                this.shouldSerialize["description"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CustomAttributeDefinition. </returns>
             public CustomAttributeDefinition Build()
             {
-                return new CustomAttributeDefinition(
+                return new CustomAttributeDefinition(shouldSerialize,
                     this.key,
                     this.schema,
                     this.name,

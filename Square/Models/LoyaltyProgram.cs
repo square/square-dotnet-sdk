@@ -17,51 +17,84 @@ namespace Square.Models
     /// </summary>
     public class LoyaltyProgram
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyProgram"/> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="status">status.</param>
         /// <param name="rewardTiers">reward_tiers.</param>
         /// <param name="terminology">terminology.</param>
-        /// <param name="createdAt">created_at.</param>
-        /// <param name="updatedAt">updated_at.</param>
         /// <param name="accrualRules">accrual_rules.</param>
+        /// <param name="id">id.</param>
+        /// <param name="status">status.</param>
         /// <param name="expirationPolicy">expiration_policy.</param>
         /// <param name="locationIds">location_ids.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
         public LoyaltyProgram(
-            string id,
-            string status,
             IList<Models.LoyaltyProgramRewardTier> rewardTiers,
             Models.LoyaltyProgramTerminology terminology,
-            string createdAt,
-            string updatedAt,
             IList<Models.LoyaltyProgramAccrualRule> accrualRules,
+            string id = null,
+            string status = null,
             Models.LoyaltyProgramExpirationPolicy expirationPolicy = null,
-            IList<string> locationIds = null)
+            IList<string> locationIds = null,
+            string createdAt = null,
+            string updatedAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false }
+            };
+
             this.Id = id;
             this.Status = status;
             this.RewardTiers = rewardTiers;
             this.ExpirationPolicy = expirationPolicy;
             this.Terminology = terminology;
-            this.LocationIds = locationIds;
+            if (locationIds != null)
+            {
+                shouldSerialize["location_ids"] = true;
+                this.LocationIds = locationIds;
+            }
+
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.AccrualRules = accrualRules;
+        }
+        internal LoyaltyProgram(Dictionary<string, bool> shouldSerialize,
+            IList<Models.LoyaltyProgramRewardTier> rewardTiers,
+            Models.LoyaltyProgramTerminology terminology,
+            IList<Models.LoyaltyProgramAccrualRule> accrualRules,
+            string id = null,
+            string status = null,
+            Models.LoyaltyProgramExpirationPolicy expirationPolicy = null,
+            IList<string> locationIds = null,
+            string createdAt = null,
+            string updatedAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Status = status;
+            RewardTiers = rewardTiers;
+            ExpirationPolicy = expirationPolicy;
+            Terminology = terminology;
+            LocationIds = locationIds;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            AccrualRules = accrualRules;
         }
 
         /// <summary>
         /// The Square-assigned ID of the loyalty program. Updates to
         /// the loyalty program do not modify the identifier.
         /// </summary>
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// Indicates whether the program is currently active.
         /// </summary>
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string Status { get; }
 
         /// <summary>
@@ -85,19 +118,19 @@ namespace Square.Models
         /// <summary>
         /// The [locations]($m/Location) at which the program is active.
         /// </summary>
-        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
 
         /// <summary>
         /// The timestamp when the program was created, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("created_at")]
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// The timestamp when the reward was last updated, in RFC 3339 format.
         /// </summary>
-        [JsonProperty("updated_at")]
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
@@ -116,6 +149,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"LoyaltyProgram : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationIds()
+        {
+            return this.shouldSerialize["location_ids"];
         }
 
         /// <inheritdoc/>
@@ -178,15 +220,15 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.Id,
-                this.Status,
                 this.RewardTiers,
                 this.Terminology,
-                this.CreatedAt,
-                this.UpdatedAt,
                 this.AccrualRules)
+                .Id(this.Id)
+                .Status(this.Status)
                 .ExpirationPolicy(this.ExpirationPolicy)
-                .LocationIds(this.LocationIds);
+                .LocationIds(this.LocationIds)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt);
             return builder;
         }
 
@@ -195,54 +237,29 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private string id;
-            private string status;
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false },
+            };
+
             private IList<Models.LoyaltyProgramRewardTier> rewardTiers;
             private Models.LoyaltyProgramTerminology terminology;
-            private string createdAt;
-            private string updatedAt;
             private IList<Models.LoyaltyProgramAccrualRule> accrualRules;
+            private string id;
+            private string status;
             private Models.LoyaltyProgramExpirationPolicy expirationPolicy;
             private IList<string> locationIds;
+            private string createdAt;
+            private string updatedAt;
 
             public Builder(
-                string id,
-                string status,
                 IList<Models.LoyaltyProgramRewardTier> rewardTiers,
                 Models.LoyaltyProgramTerminology terminology,
-                string createdAt,
-                string updatedAt,
                 IList<Models.LoyaltyProgramAccrualRule> accrualRules)
             {
-                this.id = id;
-                this.status = status;
                 this.rewardTiers = rewardTiers;
                 this.terminology = terminology;
-                this.createdAt = createdAt;
-                this.updatedAt = updatedAt;
                 this.accrualRules = accrualRules;
-            }
-
-             /// <summary>
-             /// Id.
-             /// </summary>
-             /// <param name="id"> id. </param>
-             /// <returns> Builder. </returns>
-            public Builder Id(string id)
-            {
-                this.id = id;
-                return this;
-            }
-
-             /// <summary>
-             /// Status.
-             /// </summary>
-             /// <param name="status"> status. </param>
-             /// <returns> Builder. </returns>
-            public Builder Status(string status)
-            {
-                this.status = status;
-                return this;
             }
 
              /// <summary>
@@ -268,28 +285,6 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// CreatedAt.
-             /// </summary>
-             /// <param name="createdAt"> createdAt. </param>
-             /// <returns> Builder. </returns>
-            public Builder CreatedAt(string createdAt)
-            {
-                this.createdAt = createdAt;
-                return this;
-            }
-
-             /// <summary>
-             /// UpdatedAt.
-             /// </summary>
-             /// <param name="updatedAt"> updatedAt. </param>
-             /// <returns> Builder. </returns>
-            public Builder UpdatedAt(string updatedAt)
-            {
-                this.updatedAt = updatedAt;
-                return this;
-            }
-
-             /// <summary>
              /// AccrualRules.
              /// </summary>
              /// <param name="accrualRules"> accrualRules. </param>
@@ -297,6 +292,28 @@ namespace Square.Models
             public Builder AccrualRules(IList<Models.LoyaltyProgramAccrualRule> accrualRules)
             {
                 this.accrualRules = accrualRules;
+                return this;
+            }
+
+             /// <summary>
+             /// Id.
+             /// </summary>
+             /// <param name="id"> id. </param>
+             /// <returns> Builder. </returns>
+            public Builder Id(string id)
+            {
+                this.id = id;
+                return this;
+            }
+
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
+            public Builder Status(string status)
+            {
+                this.status = status;
                 return this;
             }
 
@@ -318,9 +335,41 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationIds(IList<string> locationIds)
             {
+                shouldSerialize["location_ids"] = true;
                 this.locationIds = locationIds;
                 return this;
             }
+
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
+            public Builder CreatedAt(string createdAt)
+            {
+                this.createdAt = createdAt;
+                return this;
+            }
+
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
+            public Builder UpdatedAt(string updatedAt)
+            {
+                this.updatedAt = updatedAt;
+                return this;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationIds()
+            {
+                this.shouldSerialize["location_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -328,16 +377,16 @@ namespace Square.Models
             /// <returns> LoyaltyProgram. </returns>
             public LoyaltyProgram Build()
             {
-                return new LoyaltyProgram(
-                    this.id,
-                    this.status,
+                return new LoyaltyProgram(shouldSerialize,
                     this.rewardTiers,
                     this.terminology,
-                    this.createdAt,
-                    this.updatedAt,
                     this.accrualRules,
+                    this.id,
+                    this.status,
                     this.expirationPolicy,
-                    this.locationIds);
+                    this.locationIds,
+                    this.createdAt,
+                    this.updatedAt);
             }
         }
     }

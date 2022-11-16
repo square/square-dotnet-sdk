@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class InvoicePaymentReminder
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoicePaymentReminder"/> class.
         /// </summary>
@@ -32,11 +33,41 @@ namespace Square.Models
             string status = null,
             string sentAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "relative_scheduled_days", false },
+                { "message", false }
+            };
+
             this.Uid = uid;
-            this.RelativeScheduledDays = relativeScheduledDays;
-            this.Message = message;
+            if (relativeScheduledDays != null)
+            {
+                shouldSerialize["relative_scheduled_days"] = true;
+                this.RelativeScheduledDays = relativeScheduledDays;
+            }
+
+            if (message != null)
+            {
+                shouldSerialize["message"] = true;
+                this.Message = message;
+            }
+
             this.Status = status;
             this.SentAt = sentAt;
+        }
+        internal InvoicePaymentReminder(Dictionary<string, bool> shouldSerialize,
+            string uid = null,
+            int? relativeScheduledDays = null,
+            string message = null,
+            string status = null,
+            string sentAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Uid = uid;
+            RelativeScheduledDays = relativeScheduledDays;
+            Message = message;
+            Status = status;
+            SentAt = sentAt;
         }
 
         /// <summary>
@@ -51,13 +82,13 @@ namespace Square.Models
         /// the payment request `due_date` when the reminder is sent. For example, -3 indicates that
         /// the reminder should be sent 3 days before the payment request `due_date`.
         /// </summary>
-        [JsonProperty("relative_scheduled_days", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("relative_scheduled_days")]
         public int? RelativeScheduledDays { get; }
 
         /// <summary>
         /// The reminder message.
         /// </summary>
-        [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("message")]
         public string Message { get; }
 
         /// <summary>
@@ -80,6 +111,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"InvoicePaymentReminder : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRelativeScheduledDays()
+        {
+            return this.shouldSerialize["relative_scheduled_days"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMessage()
+        {
+            return this.shouldSerialize["message"];
         }
 
         /// <inheritdoc/>
@@ -145,6 +194,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "relative_scheduled_days", false },
+                { "message", false },
+            };
+
             private string uid;
             private int? relativeScheduledDays;
             private string message;
@@ -169,6 +224,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder RelativeScheduledDays(int? relativeScheduledDays)
             {
+                shouldSerialize["relative_scheduled_days"] = true;
                 this.relativeScheduledDays = relativeScheduledDays;
                 return this;
             }
@@ -180,6 +236,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Message(string message)
             {
+                shouldSerialize["message"] = true;
                 this.message = message;
                 return this;
             }
@@ -207,12 +264,29 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRelativeScheduledDays()
+            {
+                this.shouldSerialize["relative_scheduled_days"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetMessage()
+            {
+                this.shouldSerialize["message"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> InvoicePaymentReminder. </returns>
             public InvoicePaymentReminder Build()
             {
-                return new InvoicePaymentReminder(
+                return new InvoicePaymentReminder(shouldSerialize,
                     this.uid,
                     this.relativeScheduledDays,
                     this.message,

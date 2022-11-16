@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CatalogQuerySortedAttribute
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CatalogQuerySortedAttribute"/> class.
         /// </summary>
@@ -28,9 +29,29 @@ namespace Square.Models
             string initialAttributeValue = null,
             string sortOrder = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "initial_attribute_value", false }
+            };
+
             this.AttributeName = attributeName;
-            this.InitialAttributeValue = initialAttributeValue;
+            if (initialAttributeValue != null)
+            {
+                shouldSerialize["initial_attribute_value"] = true;
+                this.InitialAttributeValue = initialAttributeValue;
+            }
+
             this.SortOrder = sortOrder;
+        }
+        internal CatalogQuerySortedAttribute(Dictionary<string, bool> shouldSerialize,
+            string attributeName,
+            string initialAttributeValue = null,
+            string sortOrder = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AttributeName = attributeName;
+            InitialAttributeValue = initialAttributeValue;
+            SortOrder = sortOrder;
         }
 
         /// <summary>
@@ -44,7 +65,7 @@ namespace Square.Models
         /// objects with this value or greater, while descending sorts will return only objects with this value
         /// or less. If unset, start at the beginning (for ascending sorts) or end (for descending sorts).
         /// </summary>
-        [JsonProperty("initial_attribute_value", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("initial_attribute_value")]
         public string InitialAttributeValue { get; }
 
         /// <summary>
@@ -61,6 +82,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CatalogQuerySortedAttribute : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeInitialAttributeValue()
+        {
+            return this.shouldSerialize["initial_attribute_value"];
         }
 
         /// <inheritdoc/>
@@ -120,6 +150,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "initial_attribute_value", false },
+            };
+
             private string attributeName;
             private string initialAttributeValue;
             private string sortOrder;
@@ -148,6 +183,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder InitialAttributeValue(string initialAttributeValue)
             {
+                shouldSerialize["initial_attribute_value"] = true;
                 this.initialAttributeValue = initialAttributeValue;
                 return this;
             }
@@ -164,12 +200,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetInitialAttributeValue()
+            {
+                this.shouldSerialize["initial_attribute_value"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> CatalogQuerySortedAttribute. </returns>
             public CatalogQuerySortedAttribute Build()
             {
-                return new CatalogQuerySortedAttribute(
+                return new CatalogQuerySortedAttribute(shouldSerialize,
                     this.attributeName,
                     this.initialAttributeValue,
                     this.sortOrder);

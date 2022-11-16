@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class RetrieveInventoryCountRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrieveInventoryCountRequest"/> class.
         /// </summary>
@@ -26,15 +27,39 @@ namespace Square.Models
             string locationIds = null,
             string cursor = null)
         {
-            this.LocationIds = locationIds;
-            this.Cursor = cursor;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false },
+                { "cursor", false }
+            };
+
+            if (locationIds != null)
+            {
+                shouldSerialize["location_ids"] = true;
+                this.LocationIds = locationIds;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+        }
+        internal RetrieveInventoryCountRequest(Dictionary<string, bool> shouldSerialize,
+            string locationIds = null,
+            string cursor = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationIds = locationIds;
+            Cursor = cursor;
         }
 
         /// <summary>
         /// The [Location]($m/Location) IDs to look up as a comma-separated
         /// list. An empty list queries all locations.
         /// </summary>
-        [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_ids")]
         public string LocationIds { get; }
 
         /// <summary>
@@ -42,7 +67,7 @@ namespace Square.Models
         /// Provide this to retrieve the next set of results for the original query.
         /// See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <inheritdoc/>
@@ -53,6 +78,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"RetrieveInventoryCountRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationIds()
+        {
+            return this.shouldSerialize["location_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
         }
 
         /// <inheritdoc/>
@@ -109,6 +152,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "location_ids", false },
+                { "cursor", false },
+            };
+
             private string locationIds;
             private string cursor;
 
@@ -119,6 +168,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationIds(string locationIds)
             {
+                shouldSerialize["location_ids"] = true;
                 this.locationIds = locationIds;
                 return this;
             }
@@ -130,9 +180,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationIds()
+            {
+                this.shouldSerialize["location_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -140,7 +208,7 @@ namespace Square.Models
             /// <returns> RetrieveInventoryCountRequest. </returns>
             public RetrieveInventoryCountRequest Build()
             {
-                return new RetrieveInventoryCountRequest(
+                return new RetrieveInventoryCountRequest(shouldSerialize,
                     this.locationIds,
                     this.cursor);
             }

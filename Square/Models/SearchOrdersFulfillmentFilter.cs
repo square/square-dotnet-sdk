@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SearchOrdersFulfillmentFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchOrdersFulfillmentFilter"/> class.
         /// </summary>
@@ -26,8 +27,32 @@ namespace Square.Models
             IList<string> fulfillmentTypes = null,
             IList<string> fulfillmentStates = null)
         {
-            this.FulfillmentTypes = fulfillmentTypes;
-            this.FulfillmentStates = fulfillmentStates;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "fulfillment_types", false },
+                { "fulfillment_states", false }
+            };
+
+            if (fulfillmentTypes != null)
+            {
+                shouldSerialize["fulfillment_types"] = true;
+                this.FulfillmentTypes = fulfillmentTypes;
+            }
+
+            if (fulfillmentStates != null)
+            {
+                shouldSerialize["fulfillment_states"] = true;
+                this.FulfillmentStates = fulfillmentStates;
+            }
+
+        }
+        internal SearchOrdersFulfillmentFilter(Dictionary<string, bool> shouldSerialize,
+            IList<string> fulfillmentTypes = null,
+            IList<string> fulfillmentStates = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            FulfillmentTypes = fulfillmentTypes;
+            FulfillmentStates = fulfillmentStates;
         }
 
         /// <summary>
@@ -36,7 +61,7 @@ namespace Square.Models
         /// listed in this field.
         /// See [FulfillmentType](#type-fulfillmenttype) for possible values
         /// </summary>
-        [JsonProperty("fulfillment_types", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fulfillment_types")]
         public IList<string> FulfillmentTypes { get; }
 
         /// <summary>
@@ -45,7 +70,7 @@ namespace Square.Models
         /// fulfillment states listed in this field.
         /// See [FulfillmentState](#type-fulfillmentstate) for possible values
         /// </summary>
-        [JsonProperty("fulfillment_states", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("fulfillment_states")]
         public IList<string> FulfillmentStates { get; }
 
         /// <inheritdoc/>
@@ -56,6 +81,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SearchOrdersFulfillmentFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFulfillmentTypes()
+        {
+            return this.shouldSerialize["fulfillment_types"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFulfillmentStates()
+        {
+            return this.shouldSerialize["fulfillment_states"];
         }
 
         /// <inheritdoc/>
@@ -112,6 +155,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "fulfillment_types", false },
+                { "fulfillment_states", false },
+            };
+
             private IList<string> fulfillmentTypes;
             private IList<string> fulfillmentStates;
 
@@ -122,6 +171,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FulfillmentTypes(IList<string> fulfillmentTypes)
             {
+                shouldSerialize["fulfillment_types"] = true;
                 this.fulfillmentTypes = fulfillmentTypes;
                 return this;
             }
@@ -133,9 +183,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FulfillmentStates(IList<string> fulfillmentStates)
             {
+                shouldSerialize["fulfillment_states"] = true;
                 this.fulfillmentStates = fulfillmentStates;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFulfillmentTypes()
+            {
+                this.shouldSerialize["fulfillment_types"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFulfillmentStates()
+            {
+                this.shouldSerialize["fulfillment_states"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -143,7 +211,7 @@ namespace Square.Models
             /// <returns> SearchOrdersFulfillmentFilter. </returns>
             public SearchOrdersFulfillmentFilter Build()
             {
-                return new SearchOrdersFulfillmentFilter(
+                return new SearchOrdersFulfillmentFilter(shouldSerialize,
                     this.fulfillmentTypes,
                     this.fulfillmentStates);
             }

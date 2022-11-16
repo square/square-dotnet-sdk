@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class InvoiceRecipient
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoiceRecipient"/> class.
         /// </summary>
@@ -38,7 +39,17 @@ namespace Square.Models
             string companyName = null,
             Models.InvoiceRecipientTaxIds taxIds = null)
         {
-            this.CustomerId = customerId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_id", false }
+            };
+
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
+            }
+
             this.GivenName = givenName;
             this.FamilyName = familyName;
             this.EmailAddress = emailAddress;
@@ -47,12 +58,32 @@ namespace Square.Models
             this.CompanyName = companyName;
             this.TaxIds = taxIds;
         }
+        internal InvoiceRecipient(Dictionary<string, bool> shouldSerialize,
+            string customerId = null,
+            string givenName = null,
+            string familyName = null,
+            string emailAddress = null,
+            Models.Address address = null,
+            string phoneNumber = null,
+            string companyName = null,
+            Models.InvoiceRecipientTaxIds taxIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            CustomerId = customerId;
+            GivenName = givenName;
+            FamilyName = familyName;
+            EmailAddress = emailAddress;
+            Address = address;
+            PhoneNumber = phoneNumber;
+            CompanyName = companyName;
+            TaxIds = taxIds;
+        }
 
         /// <summary>
         /// The ID of the customer. This is the customer profile ID that
         /// you provide when creating a draft invoice.
         /// </summary>
-        [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
@@ -108,6 +139,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"InvoiceRecipient : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
         }
 
         /// <inheritdoc/>
@@ -184,6 +224,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_id", false },
+            };
+
             private string customerId;
             private string givenName;
             private string familyName;
@@ -200,6 +245,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerId(string customerId)
             {
+                shouldSerialize["customer_id"] = true;
                 this.customerId = customerId;
                 return this;
             }
@@ -282,12 +328,21 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> InvoiceRecipient. </returns>
             public InvoiceRecipient Build()
             {
-                return new InvoiceRecipient(
+                return new InvoiceRecipient(shouldSerialize,
                     this.customerId,
                     this.givenName,
                     this.familyName,

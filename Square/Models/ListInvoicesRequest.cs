@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListInvoicesRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListInvoicesRequest"/> class.
         /// </summary>
@@ -28,9 +29,35 @@ namespace Square.Models
             string cursor = null,
             int? limit = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "limit", false }
+            };
+
             this.LocationId = locationId;
-            this.Cursor = cursor;
-            this.Limit = limit;
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+        }
+        internal ListInvoicesRequest(Dictionary<string, bool> shouldSerialize,
+            string locationId,
+            string cursor = null,
+            int? limit = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            LocationId = locationId;
+            Cursor = cursor;
+            Limit = limit;
         }
 
         /// <summary>
@@ -44,14 +71,14 @@ namespace Square.Models
         /// Provide this cursor to retrieve the next set of results for your original query.
         /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
         /// The maximum number of invoices to return (200 is the maximum `limit`).
         /// If not provided, the server uses a default limit of 100 invoices.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <inheritdoc/>
@@ -62,6 +89,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListInvoicesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
         }
 
         /// <inheritdoc/>
@@ -121,6 +166,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "cursor", false },
+                { "limit", false },
+            };
+
             private string locationId;
             private string cursor;
             private int? limit;
@@ -149,6 +200,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -160,9 +212,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -170,7 +240,7 @@ namespace Square.Models
             /// <returns> ListInvoicesRequest. </returns>
             public ListInvoicesRequest Build()
             {
-                return new ListInvoicesRequest(
+                return new ListInvoicesRequest(shouldSerialize,
                     this.locationId,
                     this.cursor,
                     this.limit);

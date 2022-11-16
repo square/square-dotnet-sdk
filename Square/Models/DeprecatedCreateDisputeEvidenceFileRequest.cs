@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class DeprecatedCreateDisputeEvidenceFileRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="DeprecatedCreateDisputeEvidenceFileRequest"/> class.
         /// </summary>
@@ -28,9 +29,29 @@ namespace Square.Models
             string evidenceType = null,
             string contentType = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "content_type", false }
+            };
+
             this.IdempotencyKey = idempotencyKey;
             this.EvidenceType = evidenceType;
-            this.ContentType = contentType;
+            if (contentType != null)
+            {
+                shouldSerialize["content_type"] = true;
+                this.ContentType = contentType;
+            }
+
+        }
+        internal DeprecatedCreateDisputeEvidenceFileRequest(Dictionary<string, bool> shouldSerialize,
+            string idempotencyKey,
+            string evidenceType = null,
+            string contentType = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            IdempotencyKey = idempotencyKey;
+            EvidenceType = evidenceType;
+            ContentType = contentType;
         }
 
         /// <summary>
@@ -49,7 +70,7 @@ namespace Square.Models
         /// The MIME type of the uploaded file.
         /// The type can be image/heic, image/heif, image/jpeg, application/pdf, image/png, or image/tiff.
         /// </summary>
-        [JsonProperty("content_type", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("content_type")]
         public string ContentType { get; }
 
         /// <inheritdoc/>
@@ -60,6 +81,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"DeprecatedCreateDisputeEvidenceFileRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeContentType()
+        {
+            return this.shouldSerialize["content_type"];
         }
 
         /// <inheritdoc/>
@@ -119,6 +149,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "content_type", false },
+            };
+
             private string idempotencyKey;
             private string evidenceType;
             private string contentType;
@@ -158,9 +193,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ContentType(string contentType)
             {
+                shouldSerialize["content_type"] = true;
                 this.contentType = contentType;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetContentType()
+            {
+                this.shouldSerialize["content_type"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -168,7 +213,7 @@ namespace Square.Models
             /// <returns> DeprecatedCreateDisputeEvidenceFileRequest. </returns>
             public DeprecatedCreateDisputeEvidenceFileRequest Build()
             {
-                return new DeprecatedCreateDisputeEvidenceFileRequest(
+                return new DeprecatedCreateDisputeEvidenceFileRequest(shouldSerialize,
                     this.idempotencyKey,
                     this.evidenceType,
                     this.contentType);

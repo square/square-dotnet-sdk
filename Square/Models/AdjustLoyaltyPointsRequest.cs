@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class AdjustLoyaltyPointsRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="AdjustLoyaltyPointsRequest"/> class.
         /// </summary>
@@ -28,9 +29,29 @@ namespace Square.Models
             Models.LoyaltyEventAdjustPoints adjustPoints,
             bool? allowNegativeBalance = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "allow_negative_balance", false }
+            };
+
             this.IdempotencyKey = idempotencyKey;
             this.AdjustPoints = adjustPoints;
-            this.AllowNegativeBalance = allowNegativeBalance;
+            if (allowNegativeBalance != null)
+            {
+                shouldSerialize["allow_negative_balance"] = true;
+                this.AllowNegativeBalance = allowNegativeBalance;
+            }
+
+        }
+        internal AdjustLoyaltyPointsRequest(Dictionary<string, bool> shouldSerialize,
+            string idempotencyKey,
+            Models.LoyaltyEventAdjustPoints adjustPoints,
+            bool? allowNegativeBalance = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            IdempotencyKey = idempotencyKey;
+            AdjustPoints = adjustPoints;
+            AllowNegativeBalance = allowNegativeBalance;
         }
 
         /// <summary>
@@ -51,7 +72,7 @@ namespace Square.Models
         /// balance is allowed when subtracting points. If `false`, Square returns a `BAD_REQUEST` error when subtracting
         /// the specified number of points would result in a negative balance. The default value is `false`.
         /// </summary>
-        [JsonProperty("allow_negative_balance", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("allow_negative_balance")]
         public bool? AllowNegativeBalance { get; }
 
         /// <inheritdoc/>
@@ -62,6 +83,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"AdjustLoyaltyPointsRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAllowNegativeBalance()
+        {
+            return this.shouldSerialize["allow_negative_balance"];
         }
 
         /// <inheritdoc/>
@@ -121,6 +151,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "allow_negative_balance", false },
+            };
+
             private string idempotencyKey;
             private Models.LoyaltyEventAdjustPoints adjustPoints;
             private bool? allowNegativeBalance;
@@ -162,9 +197,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AllowNegativeBalance(bool? allowNegativeBalance)
             {
+                shouldSerialize["allow_negative_balance"] = true;
                 this.allowNegativeBalance = allowNegativeBalance;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAllowNegativeBalance()
+            {
+                this.shouldSerialize["allow_negative_balance"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -172,7 +217,7 @@ namespace Square.Models
             /// <returns> AdjustLoyaltyPointsRequest. </returns>
             public AdjustLoyaltyPointsRequest Build()
             {
-                return new AdjustLoyaltyPointsRequest(
+                return new AdjustLoyaltyPointsRequest(shouldSerialize,
                     this.idempotencyKey,
                     this.adjustPoints,
                     this.allowNegativeBalance);

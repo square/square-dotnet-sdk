@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class ListTeamMemberBookingProfilesRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="ListTeamMemberBookingProfilesRequest"/> class.
         /// </summary>
@@ -30,34 +31,74 @@ namespace Square.Models
             string cursor = null,
             string locationId = null)
         {
-            this.BookableOnly = bookableOnly;
-            this.Limit = limit;
-            this.Cursor = cursor;
-            this.LocationId = locationId;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "bookable_only", false },
+                { "limit", false },
+                { "cursor", false },
+                { "location_id", false }
+            };
+
+            if (bookableOnly != null)
+            {
+                shouldSerialize["bookable_only"] = true;
+                this.BookableOnly = bookableOnly;
+            }
+
+            if (limit != null)
+            {
+                shouldSerialize["limit"] = true;
+                this.Limit = limit;
+            }
+
+            if (cursor != null)
+            {
+                shouldSerialize["cursor"] = true;
+                this.Cursor = cursor;
+            }
+
+            if (locationId != null)
+            {
+                shouldSerialize["location_id"] = true;
+                this.LocationId = locationId;
+            }
+
+        }
+        internal ListTeamMemberBookingProfilesRequest(Dictionary<string, bool> shouldSerialize,
+            bool? bookableOnly = null,
+            int? limit = null,
+            string cursor = null,
+            string locationId = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            BookableOnly = bookableOnly;
+            Limit = limit;
+            Cursor = cursor;
+            LocationId = locationId;
         }
 
         /// <summary>
         /// Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`).
         /// </summary>
-        [JsonProperty("bookable_only", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("bookable_only")]
         public bool? BookableOnly { get; }
 
         /// <summary>
         /// The maximum number of results to return in a paged response.
         /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("limit")]
         public int? Limit { get; }
 
         /// <summary>
         /// The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results.
         /// </summary>
-        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
         /// Indicates whether to include only team members enabled at the given location in the returned result.
         /// </summary>
-        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <inheritdoc/>
@@ -68,6 +109,42 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"ListTeamMemberBookingProfilesRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBookableOnly()
+        {
+            return this.shouldSerialize["bookable_only"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLimit()
+        {
+            return this.shouldSerialize["limit"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCursor()
+        {
+            return this.shouldSerialize["cursor"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocationId()
+        {
+            return this.shouldSerialize["location_id"];
         }
 
         /// <inheritdoc/>
@@ -130,6 +207,14 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "bookable_only", false },
+                { "limit", false },
+                { "cursor", false },
+                { "location_id", false },
+            };
+
             private bool? bookableOnly;
             private int? limit;
             private string cursor;
@@ -142,6 +227,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BookableOnly(bool? bookableOnly)
             {
+                shouldSerialize["bookable_only"] = true;
                 this.bookableOnly = bookableOnly;
                 return this;
             }
@@ -153,6 +239,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Limit(int? limit)
             {
+                shouldSerialize["limit"] = true;
                 this.limit = limit;
                 return this;
             }
@@ -164,6 +251,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Cursor(string cursor)
             {
+                shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
                 return this;
             }
@@ -175,9 +263,43 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LocationId(string locationId)
             {
+                shouldSerialize["location_id"] = true;
                 this.locationId = locationId;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBookableOnly()
+            {
+                this.shouldSerialize["bookable_only"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLimit()
+            {
+                this.shouldSerialize["limit"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCursor()
+            {
+                this.shouldSerialize["cursor"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocationId()
+            {
+                this.shouldSerialize["location_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -185,7 +307,7 @@ namespace Square.Models
             /// <returns> ListTeamMemberBookingProfilesRequest. </returns>
             public ListTeamMemberBookingProfilesRequest Build()
             {
-                return new ListTeamMemberBookingProfilesRequest(
+                return new ListTeamMemberBookingProfilesRequest(shouldSerialize,
                     this.bookableOnly,
                     this.limit,
                     this.cursor,

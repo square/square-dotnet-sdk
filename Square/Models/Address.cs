@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class Address
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="Address"/> class.
         /// </summary>
@@ -50,20 +51,134 @@ namespace Square.Models
             string firstName = null,
             string lastName = null)
         {
-            this.AddressLine1 = addressLine1;
-            this.AddressLine2 = addressLine2;
-            this.AddressLine3 = addressLine3;
-            this.Locality = locality;
-            this.Sublocality = sublocality;
-            this.Sublocality2 = sublocality2;
-            this.Sublocality3 = sublocality3;
-            this.AdministrativeDistrictLevel1 = administrativeDistrictLevel1;
-            this.AdministrativeDistrictLevel2 = administrativeDistrictLevel2;
-            this.AdministrativeDistrictLevel3 = administrativeDistrictLevel3;
-            this.PostalCode = postalCode;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "address_line_1", false },
+                { "address_line_2", false },
+                { "address_line_3", false },
+                { "locality", false },
+                { "sublocality", false },
+                { "sublocality_2", false },
+                { "sublocality_3", false },
+                { "administrative_district_level_1", false },
+                { "administrative_district_level_2", false },
+                { "administrative_district_level_3", false },
+                { "postal_code", false },
+                { "first_name", false },
+                { "last_name", false }
+            };
+
+            if (addressLine1 != null)
+            {
+                shouldSerialize["address_line_1"] = true;
+                this.AddressLine1 = addressLine1;
+            }
+
+            if (addressLine2 != null)
+            {
+                shouldSerialize["address_line_2"] = true;
+                this.AddressLine2 = addressLine2;
+            }
+
+            if (addressLine3 != null)
+            {
+                shouldSerialize["address_line_3"] = true;
+                this.AddressLine3 = addressLine3;
+            }
+
+            if (locality != null)
+            {
+                shouldSerialize["locality"] = true;
+                this.Locality = locality;
+            }
+
+            if (sublocality != null)
+            {
+                shouldSerialize["sublocality"] = true;
+                this.Sublocality = sublocality;
+            }
+
+            if (sublocality2 != null)
+            {
+                shouldSerialize["sublocality_2"] = true;
+                this.Sublocality2 = sublocality2;
+            }
+
+            if (sublocality3 != null)
+            {
+                shouldSerialize["sublocality_3"] = true;
+                this.Sublocality3 = sublocality3;
+            }
+
+            if (administrativeDistrictLevel1 != null)
+            {
+                shouldSerialize["administrative_district_level_1"] = true;
+                this.AdministrativeDistrictLevel1 = administrativeDistrictLevel1;
+            }
+
+            if (administrativeDistrictLevel2 != null)
+            {
+                shouldSerialize["administrative_district_level_2"] = true;
+                this.AdministrativeDistrictLevel2 = administrativeDistrictLevel2;
+            }
+
+            if (administrativeDistrictLevel3 != null)
+            {
+                shouldSerialize["administrative_district_level_3"] = true;
+                this.AdministrativeDistrictLevel3 = administrativeDistrictLevel3;
+            }
+
+            if (postalCode != null)
+            {
+                shouldSerialize["postal_code"] = true;
+                this.PostalCode = postalCode;
+            }
+
             this.Country = country;
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            if (firstName != null)
+            {
+                shouldSerialize["first_name"] = true;
+                this.FirstName = firstName;
+            }
+
+            if (lastName != null)
+            {
+                shouldSerialize["last_name"] = true;
+                this.LastName = lastName;
+            }
+
+        }
+        internal Address(Dictionary<string, bool> shouldSerialize,
+            string addressLine1 = null,
+            string addressLine2 = null,
+            string addressLine3 = null,
+            string locality = null,
+            string sublocality = null,
+            string sublocality2 = null,
+            string sublocality3 = null,
+            string administrativeDistrictLevel1 = null,
+            string administrativeDistrictLevel2 = null,
+            string administrativeDistrictLevel3 = null,
+            string postalCode = null,
+            string country = null,
+            string firstName = null,
+            string lastName = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            AddressLine1 = addressLine1;
+            AddressLine2 = addressLine2;
+            AddressLine3 = addressLine3;
+            Locality = locality;
+            Sublocality = sublocality;
+            Sublocality2 = sublocality2;
+            Sublocality3 = sublocality3;
+            AdministrativeDistrictLevel1 = administrativeDistrictLevel1;
+            AdministrativeDistrictLevel2 = administrativeDistrictLevel2;
+            AdministrativeDistrictLevel3 = administrativeDistrictLevel3;
+            PostalCode = postalCode;
+            Country = country;
+            FirstName = firstName;
+            LastName = lastName;
         }
 
         /// <summary>
@@ -73,70 +188,70 @@ namespace Square.Models
         /// provide less specific details like city, state/province, or country (these
         /// details are provided in other fields).
         /// </summary>
-        [JsonProperty("address_line_1", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("address_line_1")]
         public string AddressLine1 { get; }
 
         /// <summary>
         /// The second line of the address, if any.
         /// </summary>
-        [JsonProperty("address_line_2", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("address_line_2")]
         public string AddressLine2 { get; }
 
         /// <summary>
         /// The third line of the address, if any.
         /// </summary>
-        [JsonProperty("address_line_3", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("address_line_3")]
         public string AddressLine3 { get; }
 
         /// <summary>
         /// The city or town of the address. For a full list of field meanings by country, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
         /// </summary>
-        [JsonProperty("locality", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("locality")]
         public string Locality { get; }
 
         /// <summary>
         /// A civil region within the address's `locality`, if any.
         /// </summary>
-        [JsonProperty("sublocality", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sublocality")]
         public string Sublocality { get; }
 
         /// <summary>
         /// A civil region within the address's `sublocality`, if any.
         /// </summary>
-        [JsonProperty("sublocality_2", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sublocality_2")]
         public string Sublocality2 { get; }
 
         /// <summary>
         /// A civil region within the address's `sublocality_2`, if any.
         /// </summary>
-        [JsonProperty("sublocality_3", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("sublocality_3")]
         public string Sublocality3 { get; }
 
         /// <summary>
         /// A civil entity within the address's country. In the US, this
         /// is the state. For a full list of field meanings by country, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
         /// </summary>
-        [JsonProperty("administrative_district_level_1", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("administrative_district_level_1")]
         public string AdministrativeDistrictLevel1 { get; }
 
         /// <summary>
         /// A civil entity within the address's `administrative_district_level_1`.
         /// In the US, this is the county.
         /// </summary>
-        [JsonProperty("administrative_district_level_2", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("administrative_district_level_2")]
         public string AdministrativeDistrictLevel2 { get; }
 
         /// <summary>
         /// A civil entity within the address's `administrative_district_level_2`,
         /// if any.
         /// </summary>
-        [JsonProperty("administrative_district_level_3", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("administrative_district_level_3")]
         public string AdministrativeDistrictLevel3 { get; }
 
         /// <summary>
         /// The address's postal code. For a full list of field meanings by country, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
         /// </summary>
-        [JsonProperty("postal_code", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("postal_code")]
         public string PostalCode { get; }
 
         /// <summary>
@@ -149,13 +264,13 @@ namespace Square.Models
         /// <summary>
         /// Optional first name when it's representing recipient.
         /// </summary>
-        [JsonProperty("first_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("first_name")]
         public string FirstName { get; }
 
         /// <summary>
         /// Optional last name when it's representing recipient.
         /// </summary>
-        [JsonProperty("last_name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("last_name")]
         public string LastName { get; }
 
         /// <inheritdoc/>
@@ -166,6 +281,123 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"Address : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAddressLine1()
+        {
+            return this.shouldSerialize["address_line_1"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAddressLine2()
+        {
+            return this.shouldSerialize["address_line_2"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAddressLine3()
+        {
+            return this.shouldSerialize["address_line_3"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLocality()
+        {
+            return this.shouldSerialize["locality"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSublocality()
+        {
+            return this.shouldSerialize["sublocality"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSublocality2()
+        {
+            return this.shouldSerialize["sublocality_2"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSublocality3()
+        {
+            return this.shouldSerialize["sublocality_3"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAdministrativeDistrictLevel1()
+        {
+            return this.shouldSerialize["administrative_district_level_1"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAdministrativeDistrictLevel2()
+        {
+            return this.shouldSerialize["administrative_district_level_2"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAdministrativeDistrictLevel3()
+        {
+            return this.shouldSerialize["administrative_district_level_3"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePostalCode()
+        {
+            return this.shouldSerialize["postal_code"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeFirstName()
+        {
+            return this.shouldSerialize["first_name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeLastName()
+        {
+            return this.shouldSerialize["last_name"];
         }
 
         /// <inheritdoc/>
@@ -260,6 +492,23 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "address_line_1", false },
+                { "address_line_2", false },
+                { "address_line_3", false },
+                { "locality", false },
+                { "sublocality", false },
+                { "sublocality_2", false },
+                { "sublocality_3", false },
+                { "administrative_district_level_1", false },
+                { "administrative_district_level_2", false },
+                { "administrative_district_level_3", false },
+                { "postal_code", false },
+                { "first_name", false },
+                { "last_name", false },
+            };
+
             private string addressLine1;
             private string addressLine2;
             private string addressLine3;
@@ -282,6 +531,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AddressLine1(string addressLine1)
             {
+                shouldSerialize["address_line_1"] = true;
                 this.addressLine1 = addressLine1;
                 return this;
             }
@@ -293,6 +543,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AddressLine2(string addressLine2)
             {
+                shouldSerialize["address_line_2"] = true;
                 this.addressLine2 = addressLine2;
                 return this;
             }
@@ -304,6 +555,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AddressLine3(string addressLine3)
             {
+                shouldSerialize["address_line_3"] = true;
                 this.addressLine3 = addressLine3;
                 return this;
             }
@@ -315,6 +567,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Locality(string locality)
             {
+                shouldSerialize["locality"] = true;
                 this.locality = locality;
                 return this;
             }
@@ -326,6 +579,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Sublocality(string sublocality)
             {
+                shouldSerialize["sublocality"] = true;
                 this.sublocality = sublocality;
                 return this;
             }
@@ -337,6 +591,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Sublocality2(string sublocality2)
             {
+                shouldSerialize["sublocality_2"] = true;
                 this.sublocality2 = sublocality2;
                 return this;
             }
@@ -348,6 +603,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Sublocality3(string sublocality3)
             {
+                shouldSerialize["sublocality_3"] = true;
                 this.sublocality3 = sublocality3;
                 return this;
             }
@@ -359,6 +615,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AdministrativeDistrictLevel1(string administrativeDistrictLevel1)
             {
+                shouldSerialize["administrative_district_level_1"] = true;
                 this.administrativeDistrictLevel1 = administrativeDistrictLevel1;
                 return this;
             }
@@ -370,6 +627,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AdministrativeDistrictLevel2(string administrativeDistrictLevel2)
             {
+                shouldSerialize["administrative_district_level_2"] = true;
                 this.administrativeDistrictLevel2 = administrativeDistrictLevel2;
                 return this;
             }
@@ -381,6 +639,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder AdministrativeDistrictLevel3(string administrativeDistrictLevel3)
             {
+                shouldSerialize["administrative_district_level_3"] = true;
                 this.administrativeDistrictLevel3 = administrativeDistrictLevel3;
                 return this;
             }
@@ -392,6 +651,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder PostalCode(string postalCode)
             {
+                shouldSerialize["postal_code"] = true;
                 this.postalCode = postalCode;
                 return this;
             }
@@ -414,6 +674,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder FirstName(string firstName)
             {
+                shouldSerialize["first_name"] = true;
                 this.firstName = firstName;
                 return this;
             }
@@ -425,9 +686,115 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder LastName(string lastName)
             {
+                shouldSerialize["last_name"] = true;
                 this.lastName = lastName;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAddressLine1()
+            {
+                this.shouldSerialize["address_line_1"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAddressLine2()
+            {
+                this.shouldSerialize["address_line_2"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAddressLine3()
+            {
+                this.shouldSerialize["address_line_3"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLocality()
+            {
+                this.shouldSerialize["locality"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSublocality()
+            {
+                this.shouldSerialize["sublocality"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSublocality2()
+            {
+                this.shouldSerialize["sublocality_2"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetSublocality3()
+            {
+                this.shouldSerialize["sublocality_3"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAdministrativeDistrictLevel1()
+            {
+                this.shouldSerialize["administrative_district_level_1"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAdministrativeDistrictLevel2()
+            {
+                this.shouldSerialize["administrative_district_level_2"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAdministrativeDistrictLevel3()
+            {
+                this.shouldSerialize["administrative_district_level_3"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPostalCode()
+            {
+                this.shouldSerialize["postal_code"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetFirstName()
+            {
+                this.shouldSerialize["first_name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetLastName()
+            {
+                this.shouldSerialize["last_name"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -435,7 +802,7 @@ namespace Square.Models
             /// <returns> Address. </returns>
             public Address Build()
             {
-                return new Address(
+                return new Address(shouldSerialize,
                     this.addressLine1,
                     this.addressLine2,
                     this.addressLine3,

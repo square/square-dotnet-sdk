@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class CancelBookingRequest
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="CancelBookingRequest"/> class.
         /// </summary>
@@ -26,20 +27,44 @@ namespace Square.Models
             string idempotencyKey = null,
             int? bookingVersion = null)
         {
-            this.IdempotencyKey = idempotencyKey;
-            this.BookingVersion = bookingVersion;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false },
+                { "booking_version", false }
+            };
+
+            if (idempotencyKey != null)
+            {
+                shouldSerialize["idempotency_key"] = true;
+                this.IdempotencyKey = idempotencyKey;
+            }
+
+            if (bookingVersion != null)
+            {
+                shouldSerialize["booking_version"] = true;
+                this.BookingVersion = bookingVersion;
+            }
+
+        }
+        internal CancelBookingRequest(Dictionary<string, bool> shouldSerialize,
+            string idempotencyKey = null,
+            int? bookingVersion = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            IdempotencyKey = idempotencyKey;
+            BookingVersion = bookingVersion;
         }
 
         /// <summary>
         /// A unique key to make this request an idempotent operation.
         /// </summary>
-        [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
 
         /// <summary>
         /// The revision number for the booking used for optimistic concurrency.
         /// </summary>
-        [JsonProperty("booking_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("booking_version")]
         public int? BookingVersion { get; }
 
         /// <inheritdoc/>
@@ -50,6 +75,24 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CancelBookingRequest : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIdempotencyKey()
+        {
+            return this.shouldSerialize["idempotency_key"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeBookingVersion()
+        {
+            return this.shouldSerialize["booking_version"];
         }
 
         /// <inheritdoc/>
@@ -106,6 +149,12 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "idempotency_key", false },
+                { "booking_version", false },
+            };
+
             private string idempotencyKey;
             private int? bookingVersion;
 
@@ -116,6 +165,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder IdempotencyKey(string idempotencyKey)
             {
+                shouldSerialize["idempotency_key"] = true;
                 this.idempotencyKey = idempotencyKey;
                 return this;
             }
@@ -127,9 +177,27 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder BookingVersion(int? bookingVersion)
             {
+                shouldSerialize["booking_version"] = true;
                 this.bookingVersion = bookingVersion;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIdempotencyKey()
+            {
+                this.shouldSerialize["idempotency_key"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetBookingVersion()
+            {
+                this.shouldSerialize["booking_version"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -137,7 +205,7 @@ namespace Square.Models
             /// <returns> CancelBookingRequest. </returns>
             public CancelBookingRequest Build()
             {
-                return new CancelBookingRequest(
+                return new CancelBookingRequest(shouldSerialize,
                     this.idempotencyKey,
                     this.bookingVersion);
             }

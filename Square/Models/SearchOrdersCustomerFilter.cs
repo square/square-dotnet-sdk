@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SearchOrdersCustomerFilter
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SearchOrdersCustomerFilter"/> class.
         /// </summary>
@@ -24,14 +25,30 @@ namespace Square.Models
         public SearchOrdersCustomerFilter(
             IList<string> customerIds = null)
         {
-            this.CustomerIds = customerIds;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_ids", false }
+            };
+
+            if (customerIds != null)
+            {
+                shouldSerialize["customer_ids"] = true;
+                this.CustomerIds = customerIds;
+            }
+
+        }
+        internal SearchOrdersCustomerFilter(Dictionary<string, bool> shouldSerialize,
+            IList<string> customerIds = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            CustomerIds = customerIds;
         }
 
         /// <summary>
         /// A list of customer IDs to filter by.
         /// Max: 10 customer IDs.
         /// </summary>
-        [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("customer_ids")]
         public IList<string> CustomerIds { get; }
 
         /// <inheritdoc/>
@@ -42,6 +59,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SearchOrdersCustomerFilter : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerIds()
+        {
+            return this.shouldSerialize["customer_ids"];
         }
 
         /// <inheritdoc/>
@@ -95,6 +121,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "customer_ids", false },
+            };
+
             private IList<string> customerIds;
 
              /// <summary>
@@ -104,9 +135,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder CustomerIds(IList<string> customerIds)
             {
+                shouldSerialize["customer_ids"] = true;
                 this.customerIds = customerIds;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCustomerIds()
+            {
+                this.shouldSerialize["customer_ids"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -114,7 +155,7 @@ namespace Square.Models
             /// <returns> SearchOrdersCustomerFilter. </returns>
             public SearchOrdersCustomerFilter Build()
             {
-                return new SearchOrdersCustomerFilter(
+                return new SearchOrdersCustomerFilter(shouldSerialize,
                     this.customerIds);
             }
         }

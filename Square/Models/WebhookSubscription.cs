@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class WebhookSubscription
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="WebhookSubscription"/> class.
         /// </summary>
@@ -40,15 +41,71 @@ namespace Square.Models
             string createdAt = null,
             string updatedAt = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "enabled", false },
+                { "event_types", false },
+                { "notification_url", false },
+                { "api_version", false }
+            };
+
             this.Id = id;
-            this.Name = name;
-            this.Enabled = enabled;
-            this.EventTypes = eventTypes;
-            this.NotificationUrl = notificationUrl;
-            this.ApiVersion = apiVersion;
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+            if (enabled != null)
+            {
+                shouldSerialize["enabled"] = true;
+                this.Enabled = enabled;
+            }
+
+            if (eventTypes != null)
+            {
+                shouldSerialize["event_types"] = true;
+                this.EventTypes = eventTypes;
+            }
+
+            if (notificationUrl != null)
+            {
+                shouldSerialize["notification_url"] = true;
+                this.NotificationUrl = notificationUrl;
+            }
+
+            if (apiVersion != null)
+            {
+                shouldSerialize["api_version"] = true;
+                this.ApiVersion = apiVersion;
+            }
+
             this.SignatureKey = signatureKey;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+        }
+        internal WebhookSubscription(Dictionary<string, bool> shouldSerialize,
+            string id = null,
+            string name = null,
+            bool? enabled = null,
+            IList<string> eventTypes = null,
+            string notificationUrl = null,
+            string apiVersion = null,
+            string signatureKey = null,
+            string createdAt = null,
+            string updatedAt = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            Name = name;
+            Enabled = enabled;
+            EventTypes = eventTypes;
+            NotificationUrl = notificationUrl;
+            ApiVersion = apiVersion;
+            SignatureKey = signatureKey;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -60,25 +117,25 @@ namespace Square.Models
         /// <summary>
         /// The name of this subscription.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
         /// Indicates whether the subscription is enabled (`true`) or not (`false`).
         /// </summary>
-        [JsonProperty("enabled", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("enabled")]
         public bool? Enabled { get; }
 
         /// <summary>
         /// The event types associated with this subscription.
         /// </summary>
-        [JsonProperty("event_types", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("event_types")]
         public IList<string> EventTypes { get; }
 
         /// <summary>
         /// The URL to which webhooks are sent.
         /// </summary>
-        [JsonProperty("notification_url", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("notification_url")]
         public string NotificationUrl { get; }
 
         /// <summary>
@@ -86,7 +143,7 @@ namespace Square.Models
         /// This field is optional for `CreateWebhookSubscription`.
         /// The value defaults to the API version used by the application.
         /// </summary>
-        [JsonProperty("api_version", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("api_version")]
         public string ApiVersion { get; }
 
         /// <summary>
@@ -116,6 +173,51 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"WebhookSubscription : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEnabled()
+        {
+            return this.shouldSerialize["enabled"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEventTypes()
+        {
+            return this.shouldSerialize["event_types"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNotificationUrl()
+        {
+            return this.shouldSerialize["notification_url"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeApiVersion()
+        {
+            return this.shouldSerialize["api_version"];
         }
 
         /// <inheritdoc/>
@@ -195,6 +297,15 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+                { "enabled", false },
+                { "event_types", false },
+                { "notification_url", false },
+                { "api_version", false },
+            };
+
             private string id;
             private string name;
             private bool? enabled;
@@ -223,6 +334,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
@@ -234,6 +346,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Enabled(bool? enabled)
             {
+                shouldSerialize["enabled"] = true;
                 this.enabled = enabled;
                 return this;
             }
@@ -245,6 +358,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder EventTypes(IList<string> eventTypes)
             {
+                shouldSerialize["event_types"] = true;
                 this.eventTypes = eventTypes;
                 return this;
             }
@@ -256,6 +370,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder NotificationUrl(string notificationUrl)
             {
+                shouldSerialize["notification_url"] = true;
                 this.notificationUrl = notificationUrl;
                 return this;
             }
@@ -267,6 +382,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ApiVersion(string apiVersion)
             {
+                shouldSerialize["api_version"] = true;
                 this.apiVersion = apiVersion;
                 return this;
             }
@@ -305,12 +421,53 @@ namespace Square.Models
             }
 
             /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEnabled()
+            {
+                this.shouldSerialize["enabled"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEventTypes()
+            {
+                this.shouldSerialize["event_types"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNotificationUrl()
+            {
+                this.shouldSerialize["notification_url"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetApiVersion()
+            {
+                this.shouldSerialize["api_version"] = false;
+            }
+
+
+            /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> WebhookSubscription. </returns>
             public WebhookSubscription Build()
             {
-                return new WebhookSubscription(
+                return new WebhookSubscription(shouldSerialize,
                     this.id,
                     this.name,
                     this.enabled,
