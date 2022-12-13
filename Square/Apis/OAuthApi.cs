@@ -328,5 +328,84 @@ namespace Square.Apis
             responseModel.Context = context;
             return responseModel;
         }
+
+        /// <summary>
+        /// Returns information about an [OAuth access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-an-oauth-access-token) or an application’s [personal access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-a-personal-access-token).
+        /// Add the access token to the Authorization header of the request.
+        /// __Important:__ The `Authorization` header you provide to this endpoint must have the following format:.
+        /// ```.
+        /// Authorization: Bearer ACCESS_TOKEN.
+        /// ```.
+        /// where `ACCESS_TOKEN` is a.
+        /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
+        /// If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
+        /// </summary>
+        /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
+        /// <returns>Returns the Models.RetrieveTokenStatusResponse response from the API call.</returns>
+        public Models.RetrieveTokenStatusResponse RetrieveTokenStatus(
+                string authorization)
+        {
+            Task<Models.RetrieveTokenStatusResponse> t = this.RetrieveTokenStatusAsync(authorization);
+            ApiHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Returns information about an [OAuth access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-an-oauth-access-token) or an application’s [personal access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-a-personal-access-token).
+        /// Add the access token to the Authorization header of the request.
+        /// __Important:__ The `Authorization` header you provide to this endpoint must have the following format:.
+        /// ```.
+        /// Authorization: Bearer ACCESS_TOKEN.
+        /// ```.
+        /// where `ACCESS_TOKEN` is a.
+        /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
+        /// If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
+        /// </summary>
+        /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveTokenStatusResponse response from the API call.</returns>
+        public async Task<Models.RetrieveTokenStatusResponse> RetrieveTokenStatusAsync(
+                string authorization,
+                CancellationToken cancellationToken = default)
+        {
+            // the base uri for api requests.
+            string baseUri = this.Config.GetBaseUri();
+
+            // prepare query string for API call.
+            StringBuilder queryBuilder = new StringBuilder(baseUri);
+            queryBuilder.Append("/oauth2/token/status");
+
+            // append request with appropriate headers and parameters
+            var headers = new Dictionary<string, string>()
+            {
+                { "user-agent", this.UserAgent },
+                { "accept", "application/json" },
+                { "Authorization", authorization },
+                { "Square-Version", this.Config.SquareVersion },
+            };
+
+            // prepare the API call request to fetch the response.
+            HttpRequest httpRequest = this.GetClientInstance().Post(queryBuilder.ToString(), headers, null);
+
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
+            }
+
+            // invoke request and get response.
+            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
+            HttpContext context = new HttpContext(httpRequest, response);
+            if (this.HttpCallBack != null)
+            {
+                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
+            }
+
+            // handle errors defined at the API level.
+            this.ValidateResponse(response, context);
+
+            var responseModel = ApiHelper.JsonDeserialize<Models.RetrieveTokenStatusResponse>(response.Body);
+            responseModel.Context = context;
+            return responseModel;
+        }
     }
 }

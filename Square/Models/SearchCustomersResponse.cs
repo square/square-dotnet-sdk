@@ -47,7 +47,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// An array of `Customer` objects that match a query.
+        /// The customer profiles that match the search query. If any search condition is not met, the result is an empty object (`{}`).
         /// </summary>
         [JsonProperty("customers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Customer> Customers { get; }

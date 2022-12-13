@@ -50,8 +50,7 @@ namespace Square.Models
         public long? Limit { get; }
 
         /// <summary>
-        /// Represents a query (including filtering criteria, sorting criteria, or both) used to search
-        /// for customer profiles.
+        /// Represents filtering and sorting criteria for a [SearchCustomers]($e/Customers/SearchCustomers) request.
         /// </summary>
         [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerQuery Query { get; }

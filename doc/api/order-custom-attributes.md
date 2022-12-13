@@ -89,9 +89,14 @@ CreateOrderCustomAttributeDefinitionAsync(
 
 ```csharp
 var bodyCustomAttributeDefinition = new CustomAttributeDefinition.Builder()
+    .Key("cover-count")
+    .Name("Cover count")
+    .Description("The number of people seated at a table")
+    .Visibility("VISIBILITY_READ_WRITE_VALUES")
     .Build();
 var body = new CreateOrderCustomAttributeDefinitionRequest.Builder(
         bodyCustomAttributeDefinition)
+    .IdempotencyKey("IDEMPOTENCY_KEY")
     .Build();
 
 try
@@ -202,14 +207,13 @@ UpdateOrderCustomAttributeDefinitionAsync(
 ```csharp
 string key = "key0";
 var bodyCustomAttributeDefinition = new CustomAttributeDefinition.Builder()
-    .Key("wayne-test-15")
-    .Name("wayne-test-15")
-    .Description("updated")
-    .Visibility("VISIBILITY_READ_WRITE_VALUES")
-    .Version(2)
+    .Key("cover-count")
+    .Visibility("VISIBILITY_READ_ONLY")
+    .Version(1)
     .Build();
 var body = new UpdateOrderCustomAttributeDefinitionRequest.Builder(
         bodyCustomAttributeDefinition)
+    .IdempotencyKey("IDEMPOTENCY_KEY")
     .Build();
 
 try
@@ -267,11 +271,6 @@ var bodyValues1 = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribut
         null)
     .Build();
 bodyValues.Add("",bodyValues1);
-
-var bodyValues2 = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
-        null)
-    .Build();
-bodyValues.Add("",bodyValues2);
 
 var body = new BulkDeleteOrderCustomAttributesRequest.Builder(
         bodyValues)

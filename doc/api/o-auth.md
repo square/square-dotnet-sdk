@@ -13,6 +13,7 @@ IOAuthApi oAuthApi = client.OAuthApi;
 * [Renew Token](../../doc/api/o-auth.md#renew-token)
 * [Revoke Token](../../doc/api/o-auth.md#revoke-token)
 * [Obtain Token](../../doc/api/o-auth.md#obtain-token)
+* [Retrieve Token Status](../../doc/api/o-auth.md#retrieve-token-status)
 
 
 # Renew Token
@@ -182,6 +183,53 @@ var body = new ObtainTokenRequest.Builder(
 try
 {
     ObtainTokenResponse result = await oAuthApi.ObtainTokenAsync(body);
+}
+catch (ApiException e){};
+```
+
+
+# Retrieve Token Status
+
+Returns information about an [OAuth access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-an-oauth-access-token) or an application’s [personal access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-a-personal-access-token).
+
+Add the access token to the Authorization header of the request.
+
+__Important:__ The `Authorization` header you provide to this endpoint must have the following format:
+
+```
+Authorization: Bearer ACCESS_TOKEN
+```
+
+where `ACCESS_TOKEN` is a
+[valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
+
+If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
+
+:information_source: **Note** This endpoint does not require authentication.
+
+```csharp
+RetrieveTokenStatusAsync(
+    string authorization)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `authorization` | `string` | Header, Required | Client APPLICATION_SECRET |
+
+## Response Type
+
+[`Task<Models.RetrieveTokenStatusResponse>`](../../doc/models/retrieve-token-status-response.md)
+
+## Example Usage
+
+```csharp
+string authorization = "Client CLIENT_SECRET";
+
+try
+{
+    RetrieveTokenStatusResponse result = await oAuthApi.RetrieveTokenStatusAsync(authorization);
 }
 catch (ApiException e){};
 ```

@@ -21,34 +21,41 @@ namespace Square.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="LoyaltyProgram"/> class.
         /// </summary>
-        /// <param name="rewardTiers">reward_tiers.</param>
-        /// <param name="terminology">terminology.</param>
-        /// <param name="accrualRules">accrual_rules.</param>
         /// <param name="id">id.</param>
         /// <param name="status">status.</param>
+        /// <param name="rewardTiers">reward_tiers.</param>
         /// <param name="expirationPolicy">expiration_policy.</param>
+        /// <param name="terminology">terminology.</param>
         /// <param name="locationIds">location_ids.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="updatedAt">updated_at.</param>
+        /// <param name="accrualRules">accrual_rules.</param>
         public LoyaltyProgram(
-            IList<Models.LoyaltyProgramRewardTier> rewardTiers,
-            Models.LoyaltyProgramTerminology terminology,
-            IList<Models.LoyaltyProgramAccrualRule> accrualRules,
             string id = null,
             string status = null,
+            IList<Models.LoyaltyProgramRewardTier> rewardTiers = null,
             Models.LoyaltyProgramExpirationPolicy expirationPolicy = null,
+            Models.LoyaltyProgramTerminology terminology = null,
             IList<string> locationIds = null,
             string createdAt = null,
-            string updatedAt = null)
+            string updatedAt = null,
+            IList<Models.LoyaltyProgramAccrualRule> accrualRules = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
-                { "location_ids", false }
+                { "reward_tiers", false },
+                { "location_ids", false },
+                { "accrual_rules", false }
             };
 
             this.Id = id;
             this.Status = status;
-            this.RewardTiers = rewardTiers;
+            if (rewardTiers != null)
+            {
+                shouldSerialize["reward_tiers"] = true;
+                this.RewardTiers = rewardTiers;
+            }
+
             this.ExpirationPolicy = expirationPolicy;
             this.Terminology = terminology;
             if (locationIds != null)
@@ -59,18 +66,23 @@ namespace Square.Models
 
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
-            this.AccrualRules = accrualRules;
+            if (accrualRules != null)
+            {
+                shouldSerialize["accrual_rules"] = true;
+                this.AccrualRules = accrualRules;
+            }
+
         }
         internal LoyaltyProgram(Dictionary<string, bool> shouldSerialize,
-            IList<Models.LoyaltyProgramRewardTier> rewardTiers,
-            Models.LoyaltyProgramTerminology terminology,
-            IList<Models.LoyaltyProgramAccrualRule> accrualRules,
             string id = null,
             string status = null,
+            IList<Models.LoyaltyProgramRewardTier> rewardTiers = null,
             Models.LoyaltyProgramExpirationPolicy expirationPolicy = null,
+            Models.LoyaltyProgramTerminology terminology = null,
             IList<string> locationIds = null,
             string createdAt = null,
-            string updatedAt = null)
+            string updatedAt = null,
+            IList<Models.LoyaltyProgramAccrualRule> accrualRules = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -112,7 +124,7 @@ namespace Square.Models
         /// <summary>
         /// Represents the naming used for loyalty points.
         /// </summary>
-        [JsonProperty("terminology")]
+        [JsonProperty("terminology", NullValueHandling = NullValueHandling.Ignore)]
         public Models.LoyaltyProgramTerminology Terminology { get; }
 
         /// <summary>
@@ -155,9 +167,27 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeRewardTiers()
+        {
+            return this.shouldSerialize["reward_tiers"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
         public bool ShouldSerializeLocationIds()
         {
             return this.shouldSerialize["location_ids"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAccrualRules()
+        {
+            return this.shouldSerialize["accrual_rules"];
         }
 
         /// <inheritdoc/>
@@ -219,16 +249,16 @@ namespace Square.Models
         /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder(
-                this.RewardTiers,
-                this.Terminology,
-                this.AccrualRules)
+            var builder = new Builder()
                 .Id(this.Id)
                 .Status(this.Status)
+                .RewardTiers(this.RewardTiers)
                 .ExpirationPolicy(this.ExpirationPolicy)
+                .Terminology(this.Terminology)
                 .LocationIds(this.LocationIds)
                 .CreatedAt(this.CreatedAt)
-                .UpdatedAt(this.UpdatedAt);
+                .UpdatedAt(this.UpdatedAt)
+                .AccrualRules(this.AccrualRules);
             return builder;
         }
 
@@ -239,61 +269,20 @@ namespace Square.Models
         {
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
+                { "reward_tiers", false },
                 { "location_ids", false },
+                { "accrual_rules", false },
             };
 
-            private IList<Models.LoyaltyProgramRewardTier> rewardTiers;
-            private Models.LoyaltyProgramTerminology terminology;
-            private IList<Models.LoyaltyProgramAccrualRule> accrualRules;
             private string id;
             private string status;
+            private IList<Models.LoyaltyProgramRewardTier> rewardTiers;
             private Models.LoyaltyProgramExpirationPolicy expirationPolicy;
+            private Models.LoyaltyProgramTerminology terminology;
             private IList<string> locationIds;
             private string createdAt;
             private string updatedAt;
-
-            public Builder(
-                IList<Models.LoyaltyProgramRewardTier> rewardTiers,
-                Models.LoyaltyProgramTerminology terminology,
-                IList<Models.LoyaltyProgramAccrualRule> accrualRules)
-            {
-                this.rewardTiers = rewardTiers;
-                this.terminology = terminology;
-                this.accrualRules = accrualRules;
-            }
-
-             /// <summary>
-             /// RewardTiers.
-             /// </summary>
-             /// <param name="rewardTiers"> rewardTiers. </param>
-             /// <returns> Builder. </returns>
-            public Builder RewardTiers(IList<Models.LoyaltyProgramRewardTier> rewardTiers)
-            {
-                this.rewardTiers = rewardTiers;
-                return this;
-            }
-
-             /// <summary>
-             /// Terminology.
-             /// </summary>
-             /// <param name="terminology"> terminology. </param>
-             /// <returns> Builder. </returns>
-            public Builder Terminology(Models.LoyaltyProgramTerminology terminology)
-            {
-                this.terminology = terminology;
-                return this;
-            }
-
-             /// <summary>
-             /// AccrualRules.
-             /// </summary>
-             /// <param name="accrualRules"> accrualRules. </param>
-             /// <returns> Builder. </returns>
-            public Builder AccrualRules(IList<Models.LoyaltyProgramAccrualRule> accrualRules)
-            {
-                this.accrualRules = accrualRules;
-                return this;
-            }
+            private IList<Models.LoyaltyProgramAccrualRule> accrualRules;
 
              /// <summary>
              /// Id.
@@ -318,6 +307,18 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// RewardTiers.
+             /// </summary>
+             /// <param name="rewardTiers"> rewardTiers. </param>
+             /// <returns> Builder. </returns>
+            public Builder RewardTiers(IList<Models.LoyaltyProgramRewardTier> rewardTiers)
+            {
+                shouldSerialize["reward_tiers"] = true;
+                this.rewardTiers = rewardTiers;
+                return this;
+            }
+
+             /// <summary>
              /// ExpirationPolicy.
              /// </summary>
              /// <param name="expirationPolicy"> expirationPolicy. </param>
@@ -325,6 +326,17 @@ namespace Square.Models
             public Builder ExpirationPolicy(Models.LoyaltyProgramExpirationPolicy expirationPolicy)
             {
                 this.expirationPolicy = expirationPolicy;
+                return this;
+            }
+
+             /// <summary>
+             /// Terminology.
+             /// </summary>
+             /// <param name="terminology"> terminology. </param>
+             /// <returns> Builder. </returns>
+            public Builder Terminology(Models.LoyaltyProgramTerminology terminology)
+            {
+                this.terminology = terminology;
                 return this;
             }
 
@@ -362,12 +374,40 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AccrualRules.
+             /// </summary>
+             /// <param name="accrualRules"> accrualRules. </param>
+             /// <returns> Builder. </returns>
+            public Builder AccrualRules(IList<Models.LoyaltyProgramAccrualRule> accrualRules)
+            {
+                shouldSerialize["accrual_rules"] = true;
+                this.accrualRules = accrualRules;
+                return this;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetRewardTiers()
+            {
+                this.shouldSerialize["reward_tiers"] = false;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
             public void UnsetLocationIds()
             {
                 this.shouldSerialize["location_ids"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAccrualRules()
+            {
+                this.shouldSerialize["accrual_rules"] = false;
             }
 
 
@@ -378,15 +418,15 @@ namespace Square.Models
             public LoyaltyProgram Build()
             {
                 return new LoyaltyProgram(shouldSerialize,
-                    this.rewardTiers,
-                    this.terminology,
-                    this.accrualRules,
                     this.id,
                     this.status,
+                    this.rewardTiers,
                     this.expirationPolicy,
+                    this.terminology,
                     this.locationIds,
                     this.createdAt,
-                    this.updatedAt);
+                    this.updatedAt,
+                    this.accrualRules);
             }
         }
     }
