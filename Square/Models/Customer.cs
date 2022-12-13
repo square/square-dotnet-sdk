@@ -310,13 +310,13 @@ namespace Square.Models
         public string CreationSource { get; }
 
         /// <summary>
-        /// The IDs of customer groups the customer belongs to.
+        /// The IDs of [customer groups]($m/CustomerGroup) the customer belongs to.
         /// </summary>
         [JsonProperty("group_ids")]
         public IList<string> GroupIds { get; }
 
         /// <summary>
-        /// The IDs of segments the customer belongs to.
+        /// The IDs of [customer segments]($m/CustomerSegment) the customer belongs to.
         /// </summary>
         [JsonProperty("segment_ids")]
         public IList<string> SegmentIds { get; }

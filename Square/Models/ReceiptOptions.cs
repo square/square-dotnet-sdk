@@ -68,6 +68,7 @@ namespace Square.Models
 
         /// <summary>
         /// Instructs the device to print the receipt without displaying the receipt selection screen.
+        /// Requires `printer_enabled` set to true.
         /// Defaults to false.
         /// </summary>
         [JsonProperty("print_only")]

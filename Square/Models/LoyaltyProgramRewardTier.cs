@@ -21,18 +21,18 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="LoyaltyProgramRewardTier"/> class.
         /// </summary>
         /// <param name="points">points.</param>
+        /// <param name="pricingRuleReference">pricing_rule_reference.</param>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
         /// <param name="definition">definition.</param>
         /// <param name="createdAt">created_at.</param>
-        /// <param name="pricingRuleReference">pricing_rule_reference.</param>
         public LoyaltyProgramRewardTier(
             int points,
+            Models.CatalogObjectReference pricingRuleReference,
             string id = null,
             string name = null,
             Models.LoyaltyProgramRewardDefinition definition = null,
-            string createdAt = null,
-            Models.CatalogObjectReference pricingRuleReference = null)
+            string createdAt = null)
         {
             this.Id = id;
             this.Points = points;
@@ -79,7 +79,7 @@ namespace Square.Models
         /// used as an entry point into a graph of catalog objects, where the objects exist
         /// at a specific version.
         /// </summary>
-        [JsonProperty("pricing_rule_reference", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pricing_rule_reference")]
         public Models.CatalogObjectReference PricingRuleReference { get; }
 
         /// <inheritdoc/>
@@ -144,12 +144,12 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.Points)
+                this.Points,
+                this.PricingRuleReference)
                 .Id(this.Id)
                 .Name(this.Name)
                 .Definition(this.Definition)
-                .CreatedAt(this.CreatedAt)
-                .PricingRuleReference(this.PricingRuleReference);
+                .CreatedAt(this.CreatedAt);
             return builder;
         }
 
@@ -159,16 +159,18 @@ namespace Square.Models
         public class Builder
         {
             private int points;
+            private Models.CatalogObjectReference pricingRuleReference;
             private string id;
             private string name;
             private Models.LoyaltyProgramRewardDefinition definition;
             private string createdAt;
-            private Models.CatalogObjectReference pricingRuleReference;
 
             public Builder(
-                int points)
+                int points,
+                Models.CatalogObjectReference pricingRuleReference)
             {
                 this.points = points;
+                this.pricingRuleReference = pricingRuleReference;
             }
 
              /// <summary>
@@ -179,6 +181,17 @@ namespace Square.Models
             public Builder Points(int points)
             {
                 this.points = points;
+                return this;
+            }
+
+             /// <summary>
+             /// PricingRuleReference.
+             /// </summary>
+             /// <param name="pricingRuleReference"> pricingRuleReference. </param>
+             /// <returns> Builder. </returns>
+            public Builder PricingRuleReference(Models.CatalogObjectReference pricingRuleReference)
+            {
+                this.pricingRuleReference = pricingRuleReference;
                 return this;
             }
 
@@ -226,17 +239,6 @@ namespace Square.Models
                 return this;
             }
 
-             /// <summary>
-             /// PricingRuleReference.
-             /// </summary>
-             /// <param name="pricingRuleReference"> pricingRuleReference. </param>
-             /// <returns> Builder. </returns>
-            public Builder PricingRuleReference(Models.CatalogObjectReference pricingRuleReference)
-            {
-                this.pricingRuleReference = pricingRuleReference;
-                return this;
-            }
-
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -245,11 +247,11 @@ namespace Square.Models
             {
                 return new LoyaltyProgramRewardTier(
                     this.points,
+                    this.pricingRuleReference,
                     this.id,
                     this.name,
                     this.definition,
-                    this.createdAt,
-                    this.pricingRuleReference);
+                    this.createdAt);
             }
         }
     }
