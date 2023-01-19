@@ -41,6 +41,8 @@ namespace Square.Models
         /// <param name="blockActivityDetails">block_activity_details.</param>
         /// <param name="unblockActivityDetails">unblock_activity_details.</param>
         /// <param name="importReversalActivityDetails">import_reversal_activity_details.</param>
+        /// <param name="transferBalanceToActivityDetails">transfer_balance_to_activity_details.</param>
+        /// <param name="transferBalanceFromActivityDetails">transfer_balance_from_activity_details.</param>
         public GiftCardActivity(
             string type,
             string locationId,
@@ -61,7 +63,9 @@ namespace Square.Models
             Models.GiftCardActivityImport importActivityDetails = null,
             Models.GiftCardActivityBlock blockActivityDetails = null,
             Models.GiftCardActivityUnblock unblockActivityDetails = null,
-            Models.GiftCardActivityImportReversal importReversalActivityDetails = null)
+            Models.GiftCardActivityImportReversal importReversalActivityDetails = null,
+            Models.GiftCardActivityTransferBalanceTo transferBalanceToActivityDetails = null,
+            Models.GiftCardActivityTransferBalanceFrom transferBalanceFromActivityDetails = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -99,6 +103,8 @@ namespace Square.Models
             this.BlockActivityDetails = blockActivityDetails;
             this.UnblockActivityDetails = unblockActivityDetails;
             this.ImportReversalActivityDetails = importReversalActivityDetails;
+            this.TransferBalanceToActivityDetails = transferBalanceToActivityDetails;
+            this.TransferBalanceFromActivityDetails = transferBalanceFromActivityDetails;
         }
         internal GiftCardActivity(Dictionary<string, bool> shouldSerialize,
             string type,
@@ -120,7 +126,9 @@ namespace Square.Models
             Models.GiftCardActivityImport importActivityDetails = null,
             Models.GiftCardActivityBlock blockActivityDetails = null,
             Models.GiftCardActivityUnblock unblockActivityDetails = null,
-            Models.GiftCardActivityImportReversal importReversalActivityDetails = null)
+            Models.GiftCardActivityImportReversal importReversalActivityDetails = null,
+            Models.GiftCardActivityTransferBalanceTo transferBalanceToActivityDetails = null,
+            Models.GiftCardActivityTransferBalanceFrom transferBalanceFromActivityDetails = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -143,6 +151,8 @@ namespace Square.Models
             BlockActivityDetails = blockActivityDetails;
             UnblockActivityDetails = unblockActivityDetails;
             ImportReversalActivityDetails = importReversalActivityDetails;
+            TransferBalanceToActivityDetails = transferBalanceToActivityDetails;
+            TransferBalanceFromActivityDetails = transferBalanceFromActivityDetails;
         }
 
         /// <summary>
@@ -274,6 +284,18 @@ namespace Square.Models
         [JsonProperty("import_reversal_activity_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.GiftCardActivityImportReversal ImportReversalActivityDetails { get; }
 
+        /// <summary>
+        /// Represents details about a `TRANSFER_BALANCE_TO` [gift card activity type]($m/GiftCardActivityType).
+        /// </summary>
+        [JsonProperty("transfer_balance_to_activity_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.GiftCardActivityTransferBalanceTo TransferBalanceToActivityDetails { get; }
+
+        /// <summary>
+        /// Represents details about a `TRANSFER_BALANCE_FROM` [gift card activity type]($m/GiftCardActivityType).
+        /// </summary>
+        [JsonProperty("transfer_balance_from_activity_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.GiftCardActivityTransferBalanceFrom TransferBalanceFromActivityDetails { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -335,18 +357,22 @@ namespace Square.Models
                 ((this.ImportActivityDetails == null && other.ImportActivityDetails == null) || (this.ImportActivityDetails?.Equals(other.ImportActivityDetails) == true)) &&
                 ((this.BlockActivityDetails == null && other.BlockActivityDetails == null) || (this.BlockActivityDetails?.Equals(other.BlockActivityDetails) == true)) &&
                 ((this.UnblockActivityDetails == null && other.UnblockActivityDetails == null) || (this.UnblockActivityDetails?.Equals(other.UnblockActivityDetails) == true)) &&
-                ((this.ImportReversalActivityDetails == null && other.ImportReversalActivityDetails == null) || (this.ImportReversalActivityDetails?.Equals(other.ImportReversalActivityDetails) == true));
+                ((this.ImportReversalActivityDetails == null && other.ImportReversalActivityDetails == null) || (this.ImportReversalActivityDetails?.Equals(other.ImportReversalActivityDetails) == true)) &&
+                ((this.TransferBalanceToActivityDetails == null && other.TransferBalanceToActivityDetails == null) || (this.TransferBalanceToActivityDetails?.Equals(other.TransferBalanceToActivityDetails) == true)) &&
+                ((this.TransferBalanceFromActivityDetails == null && other.TransferBalanceFromActivityDetails == null) || (this.TransferBalanceFromActivityDetails?.Equals(other.TransferBalanceFromActivityDetails) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -110440547;
+            int hashCode = -1715056739;
             hashCode = HashCode.Combine(this.Id, this.Type, this.LocationId, this.CreatedAt, this.GiftCardId, this.GiftCardGan, this.GiftCardBalanceMoney);
 
             hashCode = HashCode.Combine(hashCode, this.LoadActivityDetails, this.ActivateActivityDetails, this.RedeemActivityDetails, this.ClearBalanceActivityDetails, this.DeactivateActivityDetails, this.AdjustIncrementActivityDetails, this.AdjustDecrementActivityDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.RefundActivityDetails, this.UnlinkedActivityRefundActivityDetails, this.ImportActivityDetails, this.BlockActivityDetails, this.UnblockActivityDetails, this.ImportReversalActivityDetails);
+            hashCode = HashCode.Combine(hashCode, this.RefundActivityDetails, this.UnlinkedActivityRefundActivityDetails, this.ImportActivityDetails, this.BlockActivityDetails, this.UnblockActivityDetails, this.ImportReversalActivityDetails, this.TransferBalanceToActivityDetails);
+
+            hashCode = HashCode.Combine(hashCode, this.TransferBalanceFromActivityDetails);
 
             return hashCode;
         }
@@ -377,6 +403,8 @@ namespace Square.Models
             toStringOutput.Add($"this.BlockActivityDetails = {(this.BlockActivityDetails == null ? "null" : this.BlockActivityDetails.ToString())}");
             toStringOutput.Add($"this.UnblockActivityDetails = {(this.UnblockActivityDetails == null ? "null" : this.UnblockActivityDetails.ToString())}");
             toStringOutput.Add($"this.ImportReversalActivityDetails = {(this.ImportReversalActivityDetails == null ? "null" : this.ImportReversalActivityDetails.ToString())}");
+            toStringOutput.Add($"this.TransferBalanceToActivityDetails = {(this.TransferBalanceToActivityDetails == null ? "null" : this.TransferBalanceToActivityDetails.ToString())}");
+            toStringOutput.Add($"this.TransferBalanceFromActivityDetails = {(this.TransferBalanceFromActivityDetails == null ? "null" : this.TransferBalanceFromActivityDetails.ToString())}");
         }
 
         /// <summary>
@@ -405,7 +433,9 @@ namespace Square.Models
                 .ImportActivityDetails(this.ImportActivityDetails)
                 .BlockActivityDetails(this.BlockActivityDetails)
                 .UnblockActivityDetails(this.UnblockActivityDetails)
-                .ImportReversalActivityDetails(this.ImportReversalActivityDetails);
+                .ImportReversalActivityDetails(this.ImportReversalActivityDetails)
+                .TransferBalanceToActivityDetails(this.TransferBalanceToActivityDetails)
+                .TransferBalanceFromActivityDetails(this.TransferBalanceFromActivityDetails);
             return builder;
         }
 
@@ -440,6 +470,8 @@ namespace Square.Models
             private Models.GiftCardActivityBlock blockActivityDetails;
             private Models.GiftCardActivityUnblock unblockActivityDetails;
             private Models.GiftCardActivityImportReversal importReversalActivityDetails;
+            private Models.GiftCardActivityTransferBalanceTo transferBalanceToActivityDetails;
+            private Models.GiftCardActivityTransferBalanceFrom transferBalanceFromActivityDetails;
 
             public Builder(
                 string type,
@@ -671,6 +703,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TransferBalanceToActivityDetails.
+             /// </summary>
+             /// <param name="transferBalanceToActivityDetails"> transferBalanceToActivityDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder TransferBalanceToActivityDetails(Models.GiftCardActivityTransferBalanceTo transferBalanceToActivityDetails)
+            {
+                this.transferBalanceToActivityDetails = transferBalanceToActivityDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// TransferBalanceFromActivityDetails.
+             /// </summary>
+             /// <param name="transferBalanceFromActivityDetails"> transferBalanceFromActivityDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder TransferBalanceFromActivityDetails(Models.GiftCardActivityTransferBalanceFrom transferBalanceFromActivityDetails)
+            {
+                this.transferBalanceFromActivityDetails = transferBalanceFromActivityDetails;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -714,7 +768,9 @@ namespace Square.Models
                     this.importActivityDetails,
                     this.blockActivityDetails,
                     this.unblockActivityDetails,
-                    this.importReversalActivityDetails);
+                    this.importReversalActivityDetails,
+                    this.transferBalanceToActivityDetails,
+                    this.transferBalanceFromActivityDetails);
             }
         }
     }

@@ -70,6 +70,7 @@ namespace Square.Models
         /// <summary>
         /// Format: RFC-3339 P[n]Y[n]M[n]DT[n]H[n]M[n]S. The expected length of
         /// this break. Precision less than minutes is truncated.
+        /// Example for break expected duration of 15 minutes: T15M
         /// </summary>
         [JsonProperty("expected_duration")]
         public string ExpectedDuration { get; }

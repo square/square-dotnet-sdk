@@ -69,6 +69,7 @@ namespace Square
         private readonly Lazy<IInvoicesApi> invoices;
         private readonly Lazy<ILaborApi> labor;
         private readonly Lazy<ILocationsApi> locations;
+        private readonly Lazy<ILocationCustomAttributesApi> locationCustomAttributes;
         private readonly Lazy<ICheckoutApi> checkout;
         private readonly Lazy<ITransactionsApi> transactions;
         private readonly Lazy<ILoyaltyApi> loyalty;
@@ -154,6 +155,8 @@ namespace Square
                 () => new LaborApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.locations = new Lazy<ILocationsApi>(
                 () => new LocationsApi(this, this.httpClient, this.authManagers, this.httpCallBack));
+            this.locationCustomAttributes = new Lazy<ILocationCustomAttributesApi>(
+                () => new LocationCustomAttributesApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.checkout = new Lazy<ICheckoutApi>(
                 () => new CheckoutApi(this, this.httpClient, this.authManagers, this.httpCallBack));
             this.transactions = new Lazy<ITransactionsApi>(
@@ -316,6 +319,11 @@ namespace Square
         public ILocationsApi LocationsApi => this.locations.Value;
 
         /// <summary>
+        /// Gets LocationCustomAttributesApi.
+        /// </summary>
+        public ILocationCustomAttributesApi LocationCustomAttributesApi => this.locationCustomAttributes.Value;
+
+        /// <summary>
         /// Gets CheckoutApi.
         /// </summary>
         public ICheckoutApi CheckoutApi => this.checkout.Value;
@@ -403,7 +411,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "25.0.0";
+        public string SdkVersion => "25.1.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -560,7 +568,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2022-12-14";
+            private string squareVersion = "2023-01-19";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
