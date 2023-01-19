@@ -124,6 +124,11 @@ namespace Square
         ILocationsApi LocationsApi { get; }
 
         /// <summary>
+        /// Gets instance for ILocationCustomAttributesApi.
+        /// </summary>
+        ILocationCustomAttributesApi LocationCustomAttributesApi { get; }
+
+        /// <summary>
         /// Gets instance for ICheckoutApi.
         /// </summary>
         ICheckoutApi CheckoutApi { get; }
