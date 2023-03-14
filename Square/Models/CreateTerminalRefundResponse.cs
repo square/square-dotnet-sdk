@@ -91,7 +91,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal CreateTerminalRefundResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

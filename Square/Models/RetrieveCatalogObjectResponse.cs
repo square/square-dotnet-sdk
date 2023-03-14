@@ -106,7 +106,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal RetrieveCatalogObjectResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

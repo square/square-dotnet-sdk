@@ -4,13 +4,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Square</AssemblyName>
-    <Version>25.1.0.0</Version>
+    <Version>25.2.0.0</Version>
     <Authors>Square Developer Platform</Authors>
     <Owners>Square Developer Platform</Owners>
     <Product>Square</Product>
     <Copyright>Copyright ©  2019</Copyright>
-    <AssemblyVersion>25.1.0.0</AssemblyVersion>
-    <FileVersion>25.1.0.0</FileVersion>
+    <AssemblyVersion>25.2.0.0</AssemblyVersion>
+    <FileVersion>25.2.0.0</FileVersion>
     <Description>.NET client library for the Square API</Description>
     <LangVersion>7.3</LangVersion>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -20,10 +20,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include= "APIMatic.Core" Version= "0.2.*" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Polly" Version="7.2.1" />
-    <PackageReference Include="System.Collections.Immutable" Version="1.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
         <_Parameter1>Square.Tests</_Parameter1>

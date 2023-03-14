@@ -46,11 +46,11 @@ var bodyVendors = new Dictionary<string, Vendor>();
 
 var bodyVendors0 = new Vendor.Builder()
     .Build();
-bodyVendors.Add("",bodyVendors0);
+bodyVendors.Add("key0",bodyVendors0);
 
 var bodyVendors1 = new Vendor.Builder()
     .Build();
-bodyVendors.Add("",bodyVendors1);
+bodyVendors.Add("key1",bodyVendors1);
 
 var body = new BulkCreateVendorsRequest.Builder(
         bodyVendors)
@@ -130,14 +130,14 @@ var bodyVendors0Vendor = new Vendor.Builder()
 var bodyVendors0 = new UpdateVendorRequest.Builder(
         bodyVendors0Vendor)
     .Build();
-bodyVendors.Add("",bodyVendors0);
+bodyVendors.Add("key0",bodyVendors0);
 
 var bodyVendors1Vendor = new Vendor.Builder()
     .Build();
 var bodyVendors1 = new UpdateVendorRequest.Builder(
         bodyVendors1Vendor)
     .Build();
-bodyVendors.Add("",bodyVendors1);
+bodyVendors.Add("key1",bodyVendors1);
 
 var body = new BulkUpdateVendorsRequest.Builder(
         bodyVendors)

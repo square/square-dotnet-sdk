@@ -75,7 +75,7 @@ CreateDeviceCodeAsync(
 
 ```csharp
 var bodyDeviceCode = new DeviceCode.Builder(
-        null)
+        "TERMINAL_API")
     .Name("Counter 1")
     .LocationId("B5E4484SHHNYH")
     .Build();

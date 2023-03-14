@@ -250,15 +250,15 @@ var bodyValues = new Dictionary<string, BulkDeleteLocationCustomAttributesReques
 
 var bodyValues0 = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
     .Build();
-bodyValues.Add("",bodyValues0);
+bodyValues.Add("id1",bodyValues0);
 
 var bodyValues1 = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
     .Build();
-bodyValues.Add("",bodyValues1);
+bodyValues.Add("id2",bodyValues1);
 
 var bodyValues2 = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
     .Build();
-bodyValues.Add("",bodyValues2);
+bodyValues.Add("id3",bodyValues2);
 
 var body = new BulkDeleteLocationCustomAttributesRequest.Builder(
         bodyValues)
@@ -309,18 +309,18 @@ var bodyValues = new Dictionary<string, BulkUpsertLocationCustomAttributesReques
 var bodyValues0CustomAttribute = new CustomAttribute.Builder()
     .Build();
 var bodyValues0 = new BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
-        null,
+        "location_id8",
         bodyValues0CustomAttribute)
     .Build();
-bodyValues.Add("",bodyValues0);
+bodyValues.Add("key0",bodyValues0);
 
 var bodyValues1CustomAttribute = new CustomAttribute.Builder()
     .Build();
 var bodyValues1 = new BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
-        null,
+        "location_id9",
         bodyValues1CustomAttribute)
     .Build();
-bodyValues.Add("",bodyValues1);
+bodyValues.Add("key1",bodyValues1);
 
 var body = new BulkUpsertLocationCustomAttributesRequest.Builder(
         bodyValues)

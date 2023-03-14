@@ -272,18 +272,18 @@ var bodyValues = new Dictionary<string, BulkUpsertCustomerCustomAttributesReques
 var bodyValues0CustomAttribute = new CustomAttribute.Builder()
     .Build();
 var bodyValues0 = new BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
-        null,
+        "customer_id2",
         bodyValues0CustomAttribute)
     .Build();
-bodyValues.Add("",bodyValues0);
+bodyValues.Add("key0",bodyValues0);
 
 var bodyValues1CustomAttribute = new CustomAttribute.Builder()
     .Build();
 var bodyValues1 = new BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
-        null,
+        "customer_id3",
         bodyValues1CustomAttribute)
     .Build();
-bodyValues.Add("",bodyValues1);
+bodyValues.Add("key1",bodyValues1);
 
 var body = new BulkUpsertCustomerCustomAttributesRequest.Builder(
         bodyValues)

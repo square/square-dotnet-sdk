@@ -129,7 +129,7 @@ namespace Square.Models
 
         /// <summary>
         /// The ownership type of the bank account performing the transfer.
-        /// The type can be `INDIVIDUAL`, `COMPANY`, or `UNKNOWN`.
+        /// The type can be `INDIVIDUAL`, `COMPANY`, or `ACCOUNT_TYPE_UNKNOWN`.
         /// </summary>
         [JsonProperty("account_ownership_type")]
         public string AccountOwnershipType { get; }
@@ -272,7 +272,6 @@ namespace Square.Models
 
             return hashCode;
         }
-  
         /// <summary>
         /// ToString overload.
         /// </summary>

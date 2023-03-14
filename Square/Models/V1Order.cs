@@ -613,7 +613,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal V1Order ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

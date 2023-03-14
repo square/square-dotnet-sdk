@@ -5,9 +5,9 @@ namespace Square
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Types;
     using NUnit.Framework;
     using Square;
-    using Square.Helpers;
     using Square.Http.Client;
     using Square.Models;
 
@@ -25,7 +25,7 @@ namespace Square
         /// <summary>
         /// Gets HttpCallBackHandler.
         /// </summary>
-        internal HttpCallBack HttpCallBackHandler { get; private set; }
+        internal HttpCallBack HttpCallBack { get; private set; } = new HttpCallBack();
 
         /// <summary>
         /// Gets SquareClient Client.
@@ -39,9 +39,8 @@ namespace Square
         public void SetUp()
         {
             SquareClient config = SquareClient.CreateFromEnvironment();
-            this.HttpCallBackHandler = new HttpCallBack();
             this.Client = config.ToBuilder()
-                .HttpCallBack(this.HttpCallBackHandler)
+                .HttpCallBack(HttpCallBack)
                 .Build();
         }
     }

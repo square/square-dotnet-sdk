@@ -252,16 +252,16 @@ var bodyValues = new Dictionary<string, BookingCustomAttributeDeleteRequest>();
 
 
 var bodyValues0 = new BookingCustomAttributeDeleteRequest.Builder(
-        null,
-        null)
+        "booking_id8",
+        "key4")
     .Build();
-bodyValues.Add("",bodyValues0);
+bodyValues.Add("key0",bodyValues0);
 
 var bodyValues1 = new BookingCustomAttributeDeleteRequest.Builder(
-        null,
-        null)
+        "booking_id9",
+        "key5")
     .Build();
-bodyValues.Add("",bodyValues1);
+bodyValues.Add("key1",bodyValues1);
 
 var body = new BulkDeleteBookingCustomAttributesRequest.Builder(
         bodyValues)
@@ -309,18 +309,18 @@ var bodyValues = new Dictionary<string, BookingCustomAttributeUpsertRequest>();
 var bodyValues0CustomAttribute = new CustomAttribute.Builder()
     .Build();
 var bodyValues0 = new BookingCustomAttributeUpsertRequest.Builder(
-        null,
+        "booking_id8",
         bodyValues0CustomAttribute)
     .Build();
-bodyValues.Add("",bodyValues0);
+bodyValues.Add("key0",bodyValues0);
 
 var bodyValues1CustomAttribute = new CustomAttribute.Builder()
     .Build();
 var bodyValues1 = new BookingCustomAttributeUpsertRequest.Builder(
-        null,
+        "booking_id9",
         bodyValues1CustomAttribute)
     .Build();
-bodyValues.Add("",bodyValues1);
+bodyValues.Add("key1",bodyValues1);
 
 var body = new BulkUpsertBookingCustomAttributesRequest.Builder(
         bodyValues)

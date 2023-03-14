@@ -9,14 +9,16 @@ namespace Square.Apis
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+    using APIMatic.Core;
+    using APIMatic.Core.Types;
+    using APIMatic.Core.Utilities;
+    using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
     using Square.Authentication;
     using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Request.Configuration;
-    using Square.Http.Response;
     using Square.Utilities;
+    using System.Net.Http;
 
     /// <summary>
     /// V1TransactionsApi.
@@ -26,14 +28,7 @@ namespace Square.Apis
         /// <summary>
         /// Initializes a new instance of the <see cref="V1TransactionsApi"/> class.
         /// </summary>
-        /// <param name="config"> config instance. </param>
-        /// <param name="httpClient"> httpClient. </param>
-        /// <param name="authManagers"> authManager. </param>
-        /// <param name="httpCallBack"> httpCallBack. </param>
-        internal V1TransactionsApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null)
-            : base(config, httpClient, authManagers, httpCallBack)
-        {
-        }
+        internal V1TransactionsApi(GlobalConfiguration globalConfiguration) : base(globalConfiguration) { }
 
         /// <summary>
         /// Provides summary information for a merchant's online store orders.
@@ -49,11 +44,7 @@ namespace Square.Apis
                 string order = null,
                 int? limit = null,
                 string batchToken = null)
-        {
-            Task<List<Models.V1Order>> t = this.V1ListOrdersAsync(locationId, order, limit, batchToken);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(V1ListOrdersAsync(locationId, order, limit, batchToken));
 
         /// <summary>
         /// Provides summary information for a merchant's online store orders.
@@ -71,61 +62,23 @@ namespace Square.Apis
                 int? limit = null,
                 string batchToken = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v1/{location_id}/orders");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-            });
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "order", order },
-                { "limit", limit },
-                { "batch_token", batchToken },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModels = ApiHelper.JsonDeserialize<List<Models.V1Order>>(response.Body);
-            responseModels.ForEach(r => r.Context = context);
-            return responseModels;
-        }
+            => await CreateApiCall<List<Models.V1Order>>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v1/{location_id}/orders")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Query(_query => _query.Setup("order", order))
+                      .Query(_query => _query.Setup("limit", limit))
+                      .Query(_query => _query.Setup("batch_token", batchToken))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => 
+                  {
+                      _result.ForEach(model => model.ContextSetter(_context));
+                      return _result;
+                  })
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<List<Models.V1Order>>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Provides comprehensive information for a single online store order, including the order's history.
@@ -137,11 +90,7 @@ namespace Square.Apis
         public Models.V1Order V1RetrieveOrder(
                 string locationId,
                 string orderId)
-        {
-            Task<Models.V1Order> t = this.V1RetrieveOrderAsync(locationId, orderId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(V1RetrieveOrderAsync(locationId, orderId));
 
         /// <summary>
         /// Provides comprehensive information for a single online store order, including the order's history.
@@ -155,54 +104,17 @@ namespace Square.Apis
                 string locationId,
                 string orderId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v1/{location_id}/orders/{order_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-                { "order_id", orderId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.V1Order>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.V1Order>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v1/{location_id}/orders/{order_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Template(_template => _template.Setup("order_id", orderId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Order>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:.
@@ -216,11 +128,7 @@ namespace Square.Apis
                 string locationId,
                 string orderId,
                 Models.V1UpdateOrderRequest body)
-        {
-            Task<Models.V1Order> t = this.V1UpdateOrderAsync(locationId, orderId, body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(V1UpdateOrderAsync(locationId, orderId, body));
 
         /// <summary>
         /// Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:.
@@ -236,58 +144,19 @@ namespace Square.Apis
                 string orderId,
                 Models.V1UpdateOrderRequest body,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v1/{location_id}/orders/{order_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-                { "order_id", orderId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // append body params.
-            var bodyText = ApiHelper.JsonSerialize(body);
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().PutBody(queryBuilder.ToString(), headers, bodyText);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.V1Order>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.V1Order>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Put, "/v1/{location_id}/orders/{order_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Template(_template => _template.Setup("order_id", orderId))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Order>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Provides summary information for all payments taken for a given.
@@ -318,11 +187,7 @@ namespace Square.Apis
                 int? limit = null,
                 string batchToken = null,
                 bool? includePartial = false)
-        {
-            Task<List<Models.V1Payment>> t = this.V1ListPaymentsAsync(locationId, order, beginTime, endTime, limit, batchToken, includePartial);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(V1ListPaymentsAsync(locationId, order, beginTime, endTime, limit, batchToken, includePartial));
 
         /// <summary>
         /// Provides summary information for all payments taken for a given.
@@ -355,64 +220,26 @@ namespace Square.Apis
                 string batchToken = null,
                 bool? includePartial = false,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v1/{location_id}/payments");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-            });
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "order", order },
-                { "begin_time", beginTime },
-                { "end_time", endTime },
-                { "limit", limit },
-                { "batch_token", batchToken },
-                { "include_partial", (includePartial != null) ? includePartial : false },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModels = ApiHelper.JsonDeserialize<List<Models.V1Payment>>(response.Body);
-            responseModels.ForEach(r => r.Context = context);
-            return responseModels;
-        }
+            => await CreateApiCall<List<Models.V1Payment>>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v1/{location_id}/payments")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Query(_query => _query.Setup("order", order))
+                      .Query(_query => _query.Setup("begin_time", beginTime))
+                      .Query(_query => _query.Setup("end_time", endTime))
+                      .Query(_query => _query.Setup("limit", limit))
+                      .Query(_query => _query.Setup("batch_token", batchToken))
+                      .Query(_query => _query.Setup("include_partial", (includePartial != null) ? includePartial : false))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => 
+                  {
+                      _result.ForEach(model => model.ContextSetter(_context));
+                      return _result;
+                  })
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<List<Models.V1Payment>>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Provides comprehensive information for a single payment.
@@ -424,11 +251,7 @@ namespace Square.Apis
         public Models.V1Payment V1RetrievePayment(
                 string locationId,
                 string paymentId)
-        {
-            Task<Models.V1Payment> t = this.V1RetrievePaymentAsync(locationId, paymentId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(V1RetrievePaymentAsync(locationId, paymentId));
 
         /// <summary>
         /// Provides comprehensive information for a single payment.
@@ -442,54 +265,17 @@ namespace Square.Apis
                 string locationId,
                 string paymentId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v1/{location_id}/payments/{payment_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-                { "payment_id", paymentId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.V1Payment>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.V1Payment>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v1/{location_id}/payments/{payment_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Template(_template => _template.Setup("payment_id", paymentId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Payment>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Provides the details for all refunds initiated by a merchant or any of the merchant's mobile staff during a date range. Date ranges cannot exceed one year in length.
@@ -509,11 +295,7 @@ namespace Square.Apis
                 string endTime = null,
                 int? limit = null,
                 string batchToken = null)
-        {
-            Task<List<Models.V1Refund>> t = this.V1ListRefundsAsync(locationId, order, beginTime, endTime, limit, batchToken);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(V1ListRefundsAsync(locationId, order, beginTime, endTime, limit, batchToken));
 
         /// <summary>
         /// Provides the details for all refunds initiated by a merchant or any of the merchant's mobile staff during a date range. Date ranges cannot exceed one year in length.
@@ -535,63 +317,25 @@ namespace Square.Apis
                 int? limit = null,
                 string batchToken = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v1/{location_id}/refunds");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-            });
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "order", order },
-                { "begin_time", beginTime },
-                { "end_time", endTime },
-                { "limit", limit },
-                { "batch_token", batchToken },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModels = ApiHelper.JsonDeserialize<List<Models.V1Refund>>(response.Body);
-            responseModels.ForEach(r => r.Context = context);
-            return responseModels;
-        }
+            => await CreateApiCall<List<Models.V1Refund>>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v1/{location_id}/refunds")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Query(_query => _query.Setup("order", order))
+                      .Query(_query => _query.Setup("begin_time", beginTime))
+                      .Query(_query => _query.Setup("end_time", endTime))
+                      .Query(_query => _query.Setup("limit", limit))
+                      .Query(_query => _query.Setup("batch_token", batchToken))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => 
+                  {
+                      _result.ForEach(model => model.ContextSetter(_context));
+                      return _result;
+                  })
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<List<Models.V1Refund>>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Issues a refund for a previously processed payment. You must issue.
@@ -612,11 +356,7 @@ namespace Square.Apis
         public Models.V1Refund V1CreateRefund(
                 string locationId,
                 Models.V1CreateRefundRequest body)
-        {
-            Task<Models.V1Refund> t = this.V1CreateRefundAsync(locationId, body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(V1CreateRefundAsync(locationId, body));
 
         /// <summary>
         /// Issues a refund for a previously processed payment. You must issue.
@@ -639,57 +379,18 @@ namespace Square.Apis
                 string locationId,
                 Models.V1CreateRefundRequest body,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v1/{location_id}/refunds");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // append body params.
-            var bodyText = ApiHelper.JsonSerialize(body);
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.V1Refund>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.V1Refund>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v1/{location_id}/refunds")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Refund>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Provides summary information for all deposits and withdrawals.
@@ -715,11 +416,7 @@ namespace Square.Apis
                 int? limit = null,
                 string status = null,
                 string batchToken = null)
-        {
-            Task<List<Models.V1Settlement>> t = this.V1ListSettlementsAsync(locationId, order, beginTime, endTime, limit, status, batchToken);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(V1ListSettlementsAsync(locationId, order, beginTime, endTime, limit, status, batchToken));
 
         /// <summary>
         /// Provides summary information for all deposits and withdrawals.
@@ -747,64 +444,26 @@ namespace Square.Apis
                 string status = null,
                 string batchToken = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v1/{location_id}/settlements");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-            });
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "order", order },
-                { "begin_time", beginTime },
-                { "end_time", endTime },
-                { "limit", limit },
-                { "status", status },
-                { "batch_token", batchToken },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModels = ApiHelper.JsonDeserialize<List<Models.V1Settlement>>(response.Body);
-            responseModels.ForEach(r => r.Context = context);
-            return responseModels;
-        }
+            => await CreateApiCall<List<Models.V1Settlement>>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v1/{location_id}/settlements")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Query(_query => _query.Setup("order", order))
+                      .Query(_query => _query.Setup("begin_time", beginTime))
+                      .Query(_query => _query.Setup("end_time", endTime))
+                      .Query(_query => _query.Setup("limit", limit))
+                      .Query(_query => _query.Setup("status", status))
+                      .Query(_query => _query.Setup("batch_token", batchToken))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => 
+                  {
+                      _result.ForEach(model => model.ContextSetter(_context));
+                      return _result;
+                  })
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<List<Models.V1Settlement>>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Provides comprehensive information for a single settlement.
@@ -829,11 +488,7 @@ namespace Square.Apis
         public Models.V1Settlement V1RetrieveSettlement(
                 string locationId,
                 string settlementId)
-        {
-            Task<Models.V1Settlement> t = this.V1RetrieveSettlementAsync(locationId, settlementId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(V1RetrieveSettlementAsync(locationId, settlementId));
 
         /// <summary>
         /// Provides comprehensive information for a single settlement.
@@ -860,53 +515,16 @@ namespace Square.Apis
                 string locationId,
                 string settlementId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v1/{location_id}/settlements/{settlement_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-                { "settlement_id", settlementId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.V1Settlement>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.V1Settlement>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v1/{location_id}/settlements/{settlement_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Template(_template => _template.Setup("settlement_id", settlementId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Settlement>(_response)))
+              .ExecuteAsync(cancellationToken);
     }
 }

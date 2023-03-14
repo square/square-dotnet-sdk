@@ -155,7 +155,6 @@ namespace Square.Models
 
             return hashCode;
         }
-  
         /// <summary>
         /// ToString overload.
         /// </summary>

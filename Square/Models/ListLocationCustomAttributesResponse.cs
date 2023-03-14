@@ -105,7 +105,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal ListLocationCustomAttributesResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

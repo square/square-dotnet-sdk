@@ -420,7 +420,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal V1Refund ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

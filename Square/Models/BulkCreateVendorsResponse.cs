@@ -94,7 +94,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal BulkCreateVendorsResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

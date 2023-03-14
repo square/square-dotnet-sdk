@@ -81,7 +81,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal RemoveGroupFromCustomerResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

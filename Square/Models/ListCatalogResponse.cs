@@ -102,7 +102,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal ListCatalogResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
