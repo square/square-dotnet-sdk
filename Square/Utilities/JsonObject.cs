@@ -4,24 +4,13 @@ namespace Square.Utilities
     using System;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using APIMatic.Core.Types.Sdk;
 
     [JsonConverter(typeof(JsonObjectSerializer))]
-    public class JsonObject
+    public class JsonObject : CoreJsonObject
     {
-        private readonly JToken json;
-
         private JsonObject(JObject json)
-        {
-            this.json = json;
-        }
-
-        /// <summary>
-        /// Return current JSON string.
-        /// </summary>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(json, Formatting.None);
-        }
+            : base(json) { }
 
         /// <summary>
         /// Creates the JSON Object instance with the provided JSON string.
@@ -44,14 +33,6 @@ namespace Square.Utilities
         internal static JsonObject FromJObject(JObject json)
         {
             return new JsonObject(json);
-        }
-
-        /// <summary>
-        /// Getter for the stored JSON.
-        /// </summary>
-        public JToken GetStoredObject()
-        {
-            return json;
         }
     }
 

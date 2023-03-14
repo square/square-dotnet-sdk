@@ -9,14 +9,16 @@ namespace Square.Apis
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+    using APIMatic.Core;
+    using APIMatic.Core.Types;
+    using APIMatic.Core.Utilities;
+    using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
     using Square.Authentication;
     using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Request.Configuration;
-    using Square.Http.Response;
     using Square.Utilities;
+    using System.Net.Http;
 
     /// <summary>
     /// SitesApi.
@@ -26,14 +28,7 @@ namespace Square.Apis
         /// <summary>
         /// Initializes a new instance of the <see cref="SitesApi"/> class.
         /// </summary>
-        /// <param name="config"> config instance. </param>
-        /// <param name="httpClient"> httpClient. </param>
-        /// <param name="authManagers"> authManager. </param>
-        /// <param name="httpCallBack"> httpCallBack. </param>
-        internal SitesApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null)
-            : base(config, httpClient, authManagers, httpCallBack)
-        {
-        }
+        internal SitesApi(GlobalConfiguration globalConfiguration) : base(globalConfiguration) { }
 
         /// <summary>
         /// Lists the Square Online sites that belong to a seller. Sites are listed in descending order by the `created_at` date.
@@ -41,11 +36,7 @@ namespace Square.Apis
         /// </summary>
         /// <returns>Returns the Models.ListSitesResponse response from the API call.</returns>
         public Models.ListSitesResponse ListSites()
-        {
-            Task<Models.ListSitesResponse> t = this.ListSitesAsync();
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(ListSitesAsync());
 
         /// <summary>
         /// Lists the Square Online sites that belong to a seller. Sites are listed in descending order by the `created_at` date.
@@ -54,46 +45,13 @@ namespace Square.Apis
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListSitesResponse response from the API call.</returns>
         public async Task<Models.ListSitesResponse> ListSitesAsync(CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/sites");
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.ListSitesResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.ListSitesResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/sites")
+                  .WithAuth("global"))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListSitesResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
     }
 }

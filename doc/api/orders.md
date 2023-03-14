@@ -50,14 +50,9 @@ CreateOrderAsync(
 ```csharp
 var bodyOrderLineItems = new List<OrderLineItem>();
 
-var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
-    .Amount(1599L)
-    .Currency("USD")
-    .Build();
 var bodyOrderLineItems0 = new OrderLineItem.Builder(
         "1")
     .Name("New York Strip Steak")
-    .BasePriceMoney(bodyOrderLineItems0BasePriceMoney)
     .Build();
 bodyOrderLineItems.Add(bodyOrderLineItems0);
 
@@ -110,14 +105,9 @@ var bodyOrderDiscounts1 = new OrderLineItemDiscount.Builder()
     .Build();
 bodyOrderDiscounts.Add(bodyOrderDiscounts1);
 
-var bodyOrderDiscounts2AmountMoney = new Money.Builder()
-    .Amount(100L)
-    .Currency("USD")
-    .Build();
 var bodyOrderDiscounts2 = new OrderLineItemDiscount.Builder()
     .Uid("one-dollar-off")
     .Name("Sale - $1.00 off")
-    .AmountMoney(bodyOrderDiscounts2AmountMoney)
     .Scope("LINE_ITEM")
     .Build();
 bodyOrderDiscounts.Add(bodyOrderDiscounts2);
@@ -206,25 +196,15 @@ CalculateOrderAsync(
 ```csharp
 var bodyOrderLineItems = new List<OrderLineItem>();
 
-var bodyOrderLineItems0BasePriceMoney = new Money.Builder()
-    .Amount(500L)
-    .Currency("USD")
-    .Build();
 var bodyOrderLineItems0 = new OrderLineItem.Builder(
         "1")
     .Name("Item 1")
-    .BasePriceMoney(bodyOrderLineItems0BasePriceMoney)
     .Build();
 bodyOrderLineItems.Add(bodyOrderLineItems0);
 
-var bodyOrderLineItems1BasePriceMoney = new Money.Builder()
-    .Amount(300L)
-    .Currency("USD")
-    .Build();
 var bodyOrderLineItems1 = new OrderLineItem.Builder(
         "2")
     .Name("Item 2")
-    .BasePriceMoney(bodyOrderLineItems1BasePriceMoney)
     .Build();
 bodyOrderLineItems.Add(bodyOrderLineItems1);
 

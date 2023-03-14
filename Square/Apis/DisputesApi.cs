@@ -9,14 +9,16 @@ namespace Square.Apis
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+    using APIMatic.Core;
+    using APIMatic.Core.Types;
+    using APIMatic.Core.Utilities;
+    using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
     using Square.Authentication;
     using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Request.Configuration;
-    using Square.Http.Response;
     using Square.Utilities;
+    using System.Net.Http;
 
     /// <summary>
     /// DisputesApi.
@@ -26,14 +28,7 @@ namespace Square.Apis
         /// <summary>
         /// Initializes a new instance of the <see cref="DisputesApi"/> class.
         /// </summary>
-        /// <param name="config"> config instance. </param>
-        /// <param name="httpClient"> httpClient. </param>
-        /// <param name="authManagers"> authManager. </param>
-        /// <param name="httpCallBack"> httpCallBack. </param>
-        internal DisputesApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null)
-            : base(config, httpClient, authManagers, httpCallBack)
-        {
-        }
+        internal DisputesApi(GlobalConfiguration globalConfiguration) : base(globalConfiguration) { }
 
         /// <summary>
         /// Returns a list of disputes associated with a particular account.
@@ -46,11 +41,7 @@ namespace Square.Apis
                 string cursor = null,
                 string states = null,
                 string locationId = null)
-        {
-            Task<Models.ListDisputesResponse> t = this.ListDisputesAsync(cursor, states, locationId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(ListDisputesAsync(cursor, states, locationId));
 
         /// <summary>
         /// Returns a list of disputes associated with a particular account.
@@ -65,55 +56,18 @@ namespace Square.Apis
                 string states = null,
                 string locationId = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes");
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "cursor", cursor },
-                { "states", states },
-                { "location_id", locationId },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.ListDisputesResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.ListDisputesResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/disputes")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Query(_query => _query.Setup("cursor", cursor))
+                      .Query(_query => _query.Setup("states", states))
+                      .Query(_query => _query.Setup("location_id", locationId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListDisputesResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Returns details about a specific dispute.
@@ -122,11 +76,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.RetrieveDisputeResponse response from the API call.</returns>
         public Models.RetrieveDisputeResponse RetrieveDispute(
                 string disputeId)
-        {
-            Task<Models.RetrieveDisputeResponse> t = this.RetrieveDisputeAsync(disputeId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(RetrieveDisputeAsync(disputeId));
 
         /// <summary>
         /// Returns details about a specific dispute.
@@ -137,53 +87,16 @@ namespace Square.Apis
         public async Task<Models.RetrieveDisputeResponse> RetrieveDisputeAsync(
                 string disputeId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.RetrieveDisputeResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.RetrieveDisputeResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/disputes/{dispute_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("dispute_id", disputeId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveDisputeResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Accepts the loss on a dispute. Square returns the disputed amount to the cardholder and.
@@ -195,11 +108,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.AcceptDisputeResponse response from the API call.</returns>
         public Models.AcceptDisputeResponse AcceptDispute(
                 string disputeId)
-        {
-            Task<Models.AcceptDisputeResponse> t = this.AcceptDisputeAsync(disputeId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(AcceptDisputeAsync(disputeId));
 
         /// <summary>
         /// Accepts the loss on a dispute. Square returns the disputed amount to the cardholder and.
@@ -213,53 +122,16 @@ namespace Square.Apis
         public async Task<Models.AcceptDisputeResponse> AcceptDisputeAsync(
                 string disputeId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/accept");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Post(queryBuilder.ToString(), headers, null);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.AcceptDisputeResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.AcceptDisputeResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/disputes/{dispute_id}/accept")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("dispute_id", disputeId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.AcceptDisputeResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Returns a list of evidence associated with a dispute.
@@ -270,11 +142,7 @@ namespace Square.Apis
         public Models.ListDisputeEvidenceResponse ListDisputeEvidence(
                 string disputeId,
                 string cursor = null)
-        {
-            Task<Models.ListDisputeEvidenceResponse> t = this.ListDisputeEvidenceAsync(disputeId, cursor);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(ListDisputeEvidenceAsync(disputeId, cursor));
 
         /// <summary>
         /// Returns a list of evidence associated with a dispute.
@@ -287,59 +155,17 @@ namespace Square.Apis
                 string disputeId,
                 string cursor = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-            });
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "cursor", cursor },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.ListDisputeEvidenceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.ListDisputeEvidenceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/disputes/{dispute_id}/evidence")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("dispute_id", disputeId))
+                      .Query(_query => _query.Setup("cursor", cursor))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListDisputeEvidenceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Uploads a file to use as evidence in a dispute challenge. The endpoint accepts HTTP.
@@ -353,11 +179,7 @@ namespace Square.Apis
                 string disputeId,
                 Models.CreateDisputeEvidenceFileRequest request = null,
                 FileStreamInfo imageFile = null)
-        {
-            Task<Models.CreateDisputeEvidenceFileResponse> t = this.CreateDisputeEvidenceFileAsync(disputeId, request, imageFile);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(CreateDisputeEvidenceFileAsync(disputeId, request, imageFile));
 
         /// <summary>
         /// Uploads a file to use as evidence in a dispute challenge. The endpoint accepts HTTP.
@@ -373,81 +195,18 @@ namespace Square.Apis
                 Models.CreateDisputeEvidenceFileRequest request = null,
                 FileStreamInfo imageFile = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence-files");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            var requestHeaders = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "Content-Type", new[]
-                    {
-                        "application/json; charset=utf-8",
-                    }
-                },
-            };
-
-            var imageFileHeaders = new Dictionary<string, IReadOnlyCollection<string>>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "Content-Type", new[]
-                    {
-                        string.IsNullOrEmpty(imageFile.ContentType) ? "image/jpeg" : imageFile.ContentType,
-                    }
-                },
-            };
-
-            // append form/field parameters.
-            var fields = new List<KeyValuePair<string, object>>()
-            {
-                new KeyValuePair<string, object>("image_file", CreateFileMultipartContent(imageFile, imageFileHeaders)),
-            };
-            fields.Add(new KeyValuePair<string, object>("request", CreateJsonEncodedMultipartContent(request, requestHeaders)));
-
-            // remove null parameters.
-            fields = fields.Where(kvp => kvp.Value != null).ToList();
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Post(queryBuilder.ToString(), headers, fields);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.CreateDisputeEvidenceFileResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.CreateDisputeEvidenceFileResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/disputes/{dispute_id}/evidence-files")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("dispute_id", disputeId))
+                      .Form(_form => _form.EncodingHeader("Content-Type", "application/json; charset=utf-8").Setup("request", request))
+                      .Form(_form => _form.EncodingHeader("Content-Type", string.IsNullOrEmpty(imageFile.ContentType) ? "image/jpeg" : imageFile.ContentType).Setup("image_file", imageFile))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateDisputeEvidenceFileResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Uploads text to use as evidence for a dispute challenge.
@@ -458,11 +217,7 @@ namespace Square.Apis
         public Models.CreateDisputeEvidenceTextResponse CreateDisputeEvidenceText(
                 string disputeId,
                 Models.CreateDisputeEvidenceTextRequest body)
-        {
-            Task<Models.CreateDisputeEvidenceTextResponse> t = this.CreateDisputeEvidenceTextAsync(disputeId, body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(CreateDisputeEvidenceTextAsync(disputeId, body));
 
         /// <summary>
         /// Uploads text to use as evidence for a dispute challenge.
@@ -475,57 +230,18 @@ namespace Square.Apis
                 string disputeId,
                 Models.CreateDisputeEvidenceTextRequest body,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence-text");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // append body params.
-            var bodyText = ApiHelper.JsonSerialize(body);
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.CreateDisputeEvidenceTextResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.CreateDisputeEvidenceTextResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/disputes/{dispute_id}/evidence-text")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Template(_template => _template.Setup("dispute_id", disputeId))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateDisputeEvidenceTextResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Removes specified evidence from a dispute.
@@ -537,11 +253,7 @@ namespace Square.Apis
         public Models.DeleteDisputeEvidenceResponse DeleteDisputeEvidence(
                 string disputeId,
                 string evidenceId)
-        {
-            Task<Models.DeleteDisputeEvidenceResponse> t = this.DeleteDisputeEvidenceAsync(disputeId, evidenceId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(DeleteDisputeEvidenceAsync(disputeId, evidenceId));
 
         /// <summary>
         /// Removes specified evidence from a dispute.
@@ -555,54 +267,17 @@ namespace Square.Apis
                 string disputeId,
                 string evidenceId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence/{evidence_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-                { "evidence_id", evidenceId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Delete(queryBuilder.ToString(), headers, null);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.DeleteDisputeEvidenceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.DeleteDisputeEvidenceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Delete, "/v2/disputes/{dispute_id}/evidence/{evidence_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("dispute_id", disputeId))
+                      .Template(_template => _template.Setup("evidence_id", evidenceId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DeleteDisputeEvidenceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Returns the metadata for the evidence specified in the request URL path.
@@ -614,11 +289,7 @@ namespace Square.Apis
         public Models.RetrieveDisputeEvidenceResponse RetrieveDisputeEvidence(
                 string disputeId,
                 string evidenceId)
-        {
-            Task<Models.RetrieveDisputeEvidenceResponse> t = this.RetrieveDisputeEvidenceAsync(disputeId, evidenceId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(RetrieveDisputeEvidenceAsync(disputeId, evidenceId));
 
         /// <summary>
         /// Returns the metadata for the evidence specified in the request URL path.
@@ -632,54 +303,17 @@ namespace Square.Apis
                 string disputeId,
                 string evidenceId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/evidence/{evidence_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-                { "evidence_id", evidenceId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.RetrieveDisputeEvidenceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.RetrieveDisputeEvidenceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/disputes/{dispute_id}/evidence/{evidence_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("dispute_id", disputeId))
+                      .Template(_template => _template.Setup("evidence_id", evidenceId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveDisputeEvidenceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Submits evidence to the cardholder's bank.
@@ -693,11 +327,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.SubmitEvidenceResponse response from the API call.</returns>
         public Models.SubmitEvidenceResponse SubmitEvidence(
                 string disputeId)
-        {
-            Task<Models.SubmitEvidenceResponse> t = this.SubmitEvidenceAsync(disputeId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(SubmitEvidenceAsync(disputeId));
 
         /// <summary>
         /// Submits evidence to the cardholder's bank.
@@ -713,52 +343,15 @@ namespace Square.Apis
         public async Task<Models.SubmitEvidenceResponse> SubmitEvidenceAsync(
                 string disputeId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/disputes/{dispute_id}/submit-evidence");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "dispute_id", disputeId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Post(queryBuilder.ToString(), headers, null);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.SubmitEvidenceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.SubmitEvidenceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/disputes/{dispute_id}/submit-evidence")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("dispute_id", disputeId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.SubmitEvidenceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
     }
 }

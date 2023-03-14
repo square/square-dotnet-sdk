@@ -9,14 +9,16 @@ namespace Square.Apis
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+    using APIMatic.Core;
+    using APIMatic.Core.Types;
+    using APIMatic.Core.Utilities;
+    using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
     using Square.Authentication;
     using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Request.Configuration;
-    using Square.Http.Response;
     using Square.Utilities;
+    using System.Net.Http;
 
     /// <summary>
     /// InvoicesApi.
@@ -26,14 +28,7 @@ namespace Square.Apis
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoicesApi"/> class.
         /// </summary>
-        /// <param name="config"> config instance. </param>
-        /// <param name="httpClient"> httpClient. </param>
-        /// <param name="authManagers"> authManager. </param>
-        /// <param name="httpCallBack"> httpCallBack. </param>
-        internal InvoicesApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null)
-            : base(config, httpClient, authManagers, httpCallBack)
-        {
-        }
+        internal InvoicesApi(GlobalConfiguration globalConfiguration) : base(globalConfiguration) { }
 
         /// <summary>
         /// Returns a list of invoices for a given location. The response .
@@ -48,11 +43,7 @@ namespace Square.Apis
                 string locationId,
                 string cursor = null,
                 int? limit = null)
-        {
-            Task<Models.ListInvoicesResponse> t = this.ListInvoicesAsync(locationId, cursor, limit);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(ListInvoicesAsync(locationId, cursor, limit));
 
         /// <summary>
         /// Returns a list of invoices for a given location. The response .
@@ -69,55 +60,18 @@ namespace Square.Apis
                 string cursor = null,
                 int? limit = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/invoices");
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "location_id", locationId },
-                { "cursor", cursor },
-                { "limit", limit },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.ListInvoicesResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.ListInvoicesResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/invoices")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Query(_query => _query.Setup("location_id", locationId))
+                      .Query(_query => _query.Setup("cursor", cursor))
+                      .Query(_query => _query.Setup("limit", limit))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListInvoicesResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Creates a draft [invoice]($m/Invoice) .
@@ -129,11 +83,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.CreateInvoiceResponse response from the API call.</returns>
         public Models.CreateInvoiceResponse CreateInvoice(
                 Models.CreateInvoiceRequest body)
-        {
-            Task<Models.CreateInvoiceResponse> t = this.CreateInvoiceAsync(body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(CreateInvoiceAsync(body));
 
         /// <summary>
         /// Creates a draft [invoice]($m/Invoice) .
@@ -147,51 +97,17 @@ namespace Square.Apis
         public async Task<Models.CreateInvoiceResponse> CreateInvoiceAsync(
                 Models.CreateInvoiceRequest body,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/invoices");
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // append body params.
-            var bodyText = ApiHelper.JsonSerialize(body);
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.CreateInvoiceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.CreateInvoiceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/invoices")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateInvoiceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Searches for invoices from a location specified in .
@@ -205,11 +121,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.SearchInvoicesResponse response from the API call.</returns>
         public Models.SearchInvoicesResponse SearchInvoices(
                 Models.SearchInvoicesRequest body)
-        {
-            Task<Models.SearchInvoicesResponse> t = this.SearchInvoicesAsync(body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(SearchInvoicesAsync(body));
 
         /// <summary>
         /// Searches for invoices from a location specified in .
@@ -225,51 +137,17 @@ namespace Square.Apis
         public async Task<Models.SearchInvoicesResponse> SearchInvoicesAsync(
                 Models.SearchInvoicesRequest body,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/invoices/search");
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // append body params.
-            var bodyText = ApiHelper.JsonSerialize(body);
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.SearchInvoicesResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.SearchInvoicesResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/invoices/search")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.SearchInvoicesResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Deletes the specified invoice. When an invoice is deleted, the .
@@ -282,11 +160,7 @@ namespace Square.Apis
         public Models.DeleteInvoiceResponse DeleteInvoice(
                 string invoiceId,
                 int? version = null)
-        {
-            Task<Models.DeleteInvoiceResponse> t = this.DeleteInvoiceAsync(invoiceId, version);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(DeleteInvoiceAsync(invoiceId, version));
 
         /// <summary>
         /// Deletes the specified invoice. When an invoice is deleted, the .
@@ -301,59 +175,17 @@ namespace Square.Apis
                 string invoiceId,
                 int? version = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/invoices/{invoice_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "invoice_id", invoiceId },
-            });
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "version", version },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Delete(queryBuilder.ToString(), headers, null, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.DeleteInvoiceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.DeleteInvoiceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Delete, "/v2/invoices/{invoice_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("invoice_id", invoiceId))
+                      .Query(_query => _query.Setup("version", version))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DeleteInvoiceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Retrieves an invoice by invoice ID.
@@ -362,11 +194,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.GetInvoiceResponse response from the API call.</returns>
         public Models.GetInvoiceResponse GetInvoice(
                 string invoiceId)
-        {
-            Task<Models.GetInvoiceResponse> t = this.GetInvoiceAsync(invoiceId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(GetInvoiceAsync(invoiceId));
 
         /// <summary>
         /// Retrieves an invoice by invoice ID.
@@ -377,53 +205,16 @@ namespace Square.Apis
         public async Task<Models.GetInvoiceResponse> GetInvoiceAsync(
                 string invoiceId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/invoices/{invoice_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "invoice_id", invoiceId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.GetInvoiceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.GetInvoiceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/invoices/{invoice_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("invoice_id", invoiceId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.GetInvoiceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Updates an invoice by modifying fields, clearing fields, or both. For most updates, you can use a sparse .
@@ -437,11 +228,7 @@ namespace Square.Apis
         public Models.UpdateInvoiceResponse UpdateInvoice(
                 string invoiceId,
                 Models.UpdateInvoiceRequest body)
-        {
-            Task<Models.UpdateInvoiceResponse> t = this.UpdateInvoiceAsync(invoiceId, body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(UpdateInvoiceAsync(invoiceId, body));
 
         /// <summary>
         /// Updates an invoice by modifying fields, clearing fields, or both. For most updates, you can use a sparse .
@@ -457,57 +244,18 @@ namespace Square.Apis
                 string invoiceId,
                 Models.UpdateInvoiceRequest body,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/invoices/{invoice_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "invoice_id", invoiceId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // append body params.
-            var bodyText = ApiHelper.JsonSerialize(body);
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().PutBody(queryBuilder.ToString(), headers, bodyText);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.UpdateInvoiceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.UpdateInvoiceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Put, "/v2/invoices/{invoice_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Template(_template => _template.Setup("invoice_id", invoiceId))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.UpdateInvoiceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Cancels an invoice. The seller cannot collect payments for .
@@ -520,11 +268,7 @@ namespace Square.Apis
         public Models.CancelInvoiceResponse CancelInvoice(
                 string invoiceId,
                 Models.CancelInvoiceRequest body)
-        {
-            Task<Models.CancelInvoiceResponse> t = this.CancelInvoiceAsync(invoiceId, body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(CancelInvoiceAsync(invoiceId, body));
 
         /// <summary>
         /// Cancels an invoice. The seller cannot collect payments for .
@@ -539,57 +283,18 @@ namespace Square.Apis
                 string invoiceId,
                 Models.CancelInvoiceRequest body,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/invoices/{invoice_id}/cancel");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "invoice_id", invoiceId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // append body params.
-            var bodyText = ApiHelper.JsonSerialize(body);
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.CancelInvoiceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.CancelInvoiceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/invoices/{invoice_id}/cancel")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Template(_template => _template.Setup("invoice_id", invoiceId))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CancelInvoiceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Publishes the specified draft invoice. .
@@ -608,11 +313,7 @@ namespace Square.Apis
         public Models.PublishInvoiceResponse PublishInvoice(
                 string invoiceId,
                 Models.PublishInvoiceRequest body)
-        {
-            Task<Models.PublishInvoiceResponse> t = this.PublishInvoiceAsync(invoiceId, body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(PublishInvoiceAsync(invoiceId, body));
 
         /// <summary>
         /// Publishes the specified draft invoice. .
@@ -633,56 +334,17 @@ namespace Square.Apis
                 string invoiceId,
                 Models.PublishInvoiceRequest body,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/invoices/{invoice_id}/publish");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "invoice_id", invoiceId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // append body params.
-            var bodyText = ApiHelper.JsonSerialize(body);
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.PublishInvoiceResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.PublishInvoiceResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/invoices/{invoice_id}/publish")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Template(_template => _template.Setup("invoice_id", invoiceId))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.PublishInvoiceResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
     }
 }

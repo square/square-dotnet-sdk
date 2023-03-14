@@ -9,14 +9,16 @@ namespace Square.Apis
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+    using APIMatic.Core;
+    using APIMatic.Core.Types;
+    using APIMatic.Core.Utilities;
+    using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
     using Square.Authentication;
     using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Request.Configuration;
-    using Square.Http.Response;
     using Square.Utilities;
+    using System.Net.Http;
 
     /// <summary>
     /// CardsApi.
@@ -26,14 +28,7 @@ namespace Square.Apis
         /// <summary>
         /// Initializes a new instance of the <see cref="CardsApi"/> class.
         /// </summary>
-        /// <param name="config"> config instance. </param>
-        /// <param name="httpClient"> httpClient. </param>
-        /// <param name="authManagers"> authManager. </param>
-        /// <param name="httpCallBack"> httpCallBack. </param>
-        internal CardsApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null)
-            : base(config, httpClient, authManagers, httpCallBack)
-        {
-        }
+        internal CardsApi(GlobalConfiguration globalConfiguration) : base(globalConfiguration) { }
 
         /// <summary>
         /// Retrieves a list of cards owned by the account making the request.
@@ -51,11 +46,7 @@ namespace Square.Apis
                 bool? includeDisabled = false,
                 string referenceId = null,
                 string sortOrder = null)
-        {
-            Task<Models.ListCardsResponse> t = this.ListCardsAsync(cursor, customerId, includeDisabled, referenceId, sortOrder);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(ListCardsAsync(cursor, customerId, includeDisabled, referenceId, sortOrder));
 
         /// <summary>
         /// Retrieves a list of cards owned by the account making the request.
@@ -75,57 +66,20 @@ namespace Square.Apis
                 string referenceId = null,
                 string sortOrder = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/cards");
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "cursor", cursor },
-                { "customer_id", customerId },
-                { "include_disabled", (includeDisabled != null) ? includeDisabled : false },
-                { "reference_id", referenceId },
-                { "sort_order", sortOrder },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.ListCardsResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.ListCardsResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/cards")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Query(_query => _query.Setup("cursor", cursor))
+                      .Query(_query => _query.Setup("customer_id", customerId))
+                      .Query(_query => _query.Setup("include_disabled", (includeDisabled != null) ? includeDisabled : false))
+                      .Query(_query => _query.Setup("reference_id", referenceId))
+                      .Query(_query => _query.Setup("sort_order", sortOrder))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListCardsResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Adds a card on file to an existing merchant.
@@ -134,11 +88,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.CreateCardResponse response from the API call.</returns>
         public Models.CreateCardResponse CreateCard(
                 Models.CreateCardRequest body)
-        {
-            Task<Models.CreateCardResponse> t = this.CreateCardAsync(body);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(CreateCardAsync(body));
 
         /// <summary>
         /// Adds a card on file to an existing merchant.
@@ -149,51 +99,17 @@ namespace Square.Apis
         public async Task<Models.CreateCardResponse> CreateCardAsync(
                 Models.CreateCardRequest body,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/cards");
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Content-Type", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // append body params.
-            var bodyText = ApiHelper.JsonSerialize(body);
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().PostBody(queryBuilder.ToString(), headers, bodyText);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.CreateCardResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.CreateCardResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/cards")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateCardResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Retrieves details for a specific Card.
@@ -202,11 +118,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.RetrieveCardResponse response from the API call.</returns>
         public Models.RetrieveCardResponse RetrieveCard(
                 string cardId)
-        {
-            Task<Models.RetrieveCardResponse> t = this.RetrieveCardAsync(cardId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(RetrieveCardAsync(cardId));
 
         /// <summary>
         /// Retrieves details for a specific Card.
@@ -217,53 +129,16 @@ namespace Square.Apis
         public async Task<Models.RetrieveCardResponse> RetrieveCardAsync(
                 string cardId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/cards/{card_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "card_id", cardId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.RetrieveCardResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.RetrieveCardResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/cards/{card_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("card_id", cardId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveCardResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Disables the card, preventing any further updates or charges.
@@ -273,11 +148,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.DisableCardResponse response from the API call.</returns>
         public Models.DisableCardResponse DisableCard(
                 string cardId)
-        {
-            Task<Models.DisableCardResponse> t = this.DisableCardAsync(cardId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(DisableCardAsync(cardId));
 
         /// <summary>
         /// Disables the card, preventing any further updates or charges.
@@ -289,52 +160,15 @@ namespace Square.Apis
         public async Task<Models.DisableCardResponse> DisableCardAsync(
                 string cardId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/cards/{card_id}/disable");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "card_id", cardId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Post(queryBuilder.ToString(), headers, null);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.DisableCardResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.DisableCardResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/cards/{card_id}/disable")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("card_id", cardId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DisableCardResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
     }
 }

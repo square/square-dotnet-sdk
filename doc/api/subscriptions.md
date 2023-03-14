@@ -53,8 +53,6 @@ var bodyPriceOverrideMoney = new Money.Builder()
     .Amount(100L)
     .Currency("USD")
     .Build();
-var bodySource = new SubscriptionSource.Builder()
-    .Build();
 var body = new CreateSubscriptionRequest.Builder(
         "S8GWD5R9QB376",
         "6JHXF3B2CW3YKHDV4XEM674H",
@@ -65,7 +63,6 @@ var body = new CreateSubscriptionRequest.Builder(
     .PriceOverrideMoney(bodyPriceOverrideMoney)
     .CardId("ccof:qy5x8hHGYsgLrp4Q4GB")
     .Timezone("America/Los_Angeles")
-    .Source(bodySource)
     .Build();
 
 try

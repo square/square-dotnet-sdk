@@ -93,7 +93,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal CreateShiftResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

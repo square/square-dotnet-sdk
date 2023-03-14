@@ -92,7 +92,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal UpsertOrderCustomAttributeResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

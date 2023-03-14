@@ -9,14 +9,16 @@ namespace Square.Apis
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+    using APIMatic.Core;
+    using APIMatic.Core.Types;
+    using APIMatic.Core.Utilities;
+    using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
     using Square.Authentication;
     using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Request.Configuration;
-    using Square.Http.Response;
     using Square.Utilities;
+    using System.Net.Http;
 
     /// <summary>
     /// BankAccountsApi.
@@ -26,14 +28,7 @@ namespace Square.Apis
         /// <summary>
         /// Initializes a new instance of the <see cref="BankAccountsApi"/> class.
         /// </summary>
-        /// <param name="config"> config instance. </param>
-        /// <param name="httpClient"> httpClient. </param>
-        /// <param name="authManagers"> authManager. </param>
-        /// <param name="httpCallBack"> httpCallBack. </param>
-        internal BankAccountsApi(IConfiguration config, IHttpClient httpClient, IDictionary<string, IAuthManager> authManagers, HttpCallBack httpCallBack = null)
-            : base(config, httpClient, authManagers, httpCallBack)
-        {
-        }
+        internal BankAccountsApi(GlobalConfiguration globalConfiguration) : base(globalConfiguration) { }
 
         /// <summary>
         /// Returns a list of [BankAccount]($m/BankAccount) objects linked to a Square account.
@@ -46,11 +41,7 @@ namespace Square.Apis
                 string cursor = null,
                 int? limit = null,
                 string locationId = null)
-        {
-            Task<Models.ListBankAccountsResponse> t = this.ListBankAccountsAsync(cursor, limit, locationId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(ListBankAccountsAsync(cursor, limit, locationId));
 
         /// <summary>
         /// Returns a list of [BankAccount]($m/BankAccount) objects linked to a Square account.
@@ -65,55 +56,18 @@ namespace Square.Apis
                 int? limit = null,
                 string locationId = null,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/bank-accounts");
-
-            // prepare specfied query parameters.
-            var queryParams = new Dictionary<string, object>()
-            {
-                { "cursor", cursor },
-                { "limit", limit },
-                { "location_id", locationId },
-            };
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers, queryParameters: queryParams);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.ListBankAccountsResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.ListBankAccountsResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/bank-accounts")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Query(_query => _query.Setup("cursor", cursor))
+                      .Query(_query => _query.Setup("limit", limit))
+                      .Query(_query => _query.Setup("location_id", locationId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListBankAccountsResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Returns details of a [BankAccount]($m/BankAccount) identified by V1 bank account ID.
@@ -122,11 +76,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.GetBankAccountByV1IdResponse response from the API call.</returns>
         public Models.GetBankAccountByV1IdResponse GetBankAccountByV1Id(
                 string v1BankAccountId)
-        {
-            Task<Models.GetBankAccountByV1IdResponse> t = this.GetBankAccountByV1IdAsync(v1BankAccountId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(GetBankAccountByV1IdAsync(v1BankAccountId));
 
         /// <summary>
         /// Returns details of a [BankAccount]($m/BankAccount) identified by V1 bank account ID.
@@ -137,53 +87,16 @@ namespace Square.Apis
         public async Task<Models.GetBankAccountByV1IdResponse> GetBankAccountByV1IdAsync(
                 string v1BankAccountId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/bank-accounts/by-v1-id/{v1_bank_account_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "v1_bank_account_id", v1BankAccountId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.GetBankAccountByV1IdResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.GetBankAccountByV1IdResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/bank-accounts/by-v1-id/{v1_bank_account_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("v1_bank_account_id", v1BankAccountId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.GetBankAccountByV1IdResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
 
         /// <summary>
         /// Returns details of a [BankAccount]($m/BankAccount).
@@ -193,11 +106,7 @@ namespace Square.Apis
         /// <returns>Returns the Models.GetBankAccountResponse response from the API call.</returns>
         public Models.GetBankAccountResponse GetBankAccount(
                 string bankAccountId)
-        {
-            Task<Models.GetBankAccountResponse> t = this.GetBankAccountAsync(bankAccountId);
-            ApiHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
+            => CoreHelper.RunTask(GetBankAccountAsync(bankAccountId));
 
         /// <summary>
         /// Returns details of a [BankAccount]($m/BankAccount).
@@ -209,52 +118,15 @@ namespace Square.Apis
         public async Task<Models.GetBankAccountResponse> GetBankAccountAsync(
                 string bankAccountId,
                 CancellationToken cancellationToken = default)
-        {
-            // the base uri for api requests.
-            string baseUri = this.Config.GetBaseUri();
-
-            // prepare query string for API call.
-            StringBuilder queryBuilder = new StringBuilder(baseUri);
-            queryBuilder.Append("/v2/bank-accounts/{bank_account_id}");
-
-            // process optional template parameters.
-            ApiHelper.AppendUrlWithTemplateParameters(queryBuilder, new Dictionary<string, object>()
-            {
-                { "bank_account_id", bankAccountId },
-            });
-
-            // append request with appropriate headers and parameters
-            var headers = new Dictionary<string, string>()
-            {
-                { "user-agent", this.UserAgent },
-                { "accept", "application/json" },
-                { "Square-Version", this.Config.SquareVersion },
-            };
-
-            // prepare the API call request to fetch the response.
-            HttpRequest httpRequest = this.GetClientInstance().Get(queryBuilder.ToString(), headers);
-
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnBeforeHttpRequestEventHandler(this.GetClientInstance(), httpRequest);
-            }
-
-            httpRequest = await this.AuthManagers["global"].ApplyAsync(httpRequest).ConfigureAwait(false);
-
-            // invoke request and get response.
-            HttpStringResponse response = await this.GetClientInstance().ExecuteAsStringAsync(httpRequest, cancellationToken: cancellationToken).ConfigureAwait(false);
-            HttpContext context = new HttpContext(httpRequest, response);
-            if (this.HttpCallBack != null)
-            {
-                this.HttpCallBack.OnAfterHttpResponseEventHandler(this.GetClientInstance(), response);
-            }
-
-            // handle errors defined at the API level.
-            this.ValidateResponse(response, context);
-
-            var responseModel = ApiHelper.JsonDeserialize<Models.GetBankAccountResponse>(response.Body);
-            responseModel.Context = context;
-            return responseModel;
-        }
+            => await CreateApiCall<Models.GetBankAccountResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/bank-accounts/{bank_account_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("bank_account_id", bankAccountId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.GetBankAccountResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
     }
 }

@@ -95,7 +95,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal UpdateOrderResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

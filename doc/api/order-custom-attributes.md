@@ -263,14 +263,16 @@ var bodyValues = new Dictionary<string, BulkDeleteOrderCustomAttributesRequestDe
 
 
 var bodyValues0 = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
-        null)
+        "7BbXGEIWNldxAzrtGf9GPVZTwZ4F")
+    .Key("cover-count")
     .Build();
-bodyValues.Add("",bodyValues0);
+bodyValues.Add("cover-count",bodyValues0);
 
 var bodyValues1 = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
-        null)
+        "7BbXGEIWNldxAzrtGf9GPVZTwZ4F")
+    .Key("table-number")
     .Build();
-bodyValues.Add("",bodyValues1);
+bodyValues.Add("table-number",bodyValues1);
 
 var body = new BulkDeleteOrderCustomAttributesRequest.Builder(
         bodyValues)
@@ -326,17 +328,17 @@ var bodyValues0CustomAttribute = new CustomAttribute.Builder()
     .Build();
 var bodyValues0 = new BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
         bodyValues0CustomAttribute,
-        null)
+        "order_id2")
     .Build();
-bodyValues.Add("",bodyValues0);
+bodyValues.Add("key0",bodyValues0);
 
 var bodyValues1CustomAttribute = new CustomAttribute.Builder()
     .Build();
 var bodyValues1 = new BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
         bodyValues1CustomAttribute,
-        null)
+        "order_id1")
     .Build();
-bodyValues.Add("",bodyValues1);
+bodyValues.Add("key1",bodyValues1);
 
 var body = new BulkUpsertOrderCustomAttributesRequest.Builder(
         bodyValues)

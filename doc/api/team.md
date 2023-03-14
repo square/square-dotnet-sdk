@@ -107,13 +107,41 @@ BulkCreateTeamMembersAsync(
 var bodyTeamMembers = new Dictionary<string, CreateTeamMemberRequest>();
 
 
+var bodyTeamMembers0TeamMemberAssignedLocationsLocationIds = new IList<string>();
+bodyTeamMembers0TeamMemberAssignedLocationsLocationIds.Add("YSGH2WBKG94QZ");
+bodyTeamMembers0TeamMemberAssignedLocationsLocationIds.Add("GA2Y9HSJ8KRYT");
+var bodyTeamMembers0TeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
+    .AssignmentType("EXPLICIT_LOCATIONS")
+    .LocationIds(bodyTeamMembers0TeamMemberAssignedLocationsLocationIds)
+    .Build();
+var bodyTeamMembers0TeamMember = new TeamMember.Builder()
+    .ReferenceId("reference_id_1")
+    .GivenName("Joe")
+    .FamilyName("Doe")
+    .EmailAddress("joe_doe@gmail.com")
+    .PhoneNumber("+14159283333")
+    .AssignedLocations(bodyTeamMembers0TeamMemberAssignedLocations)
+    .Build();
 var bodyTeamMembers0 = new CreateTeamMemberRequest.Builder()
+    .TeamMember(bodyTeamMembers0TeamMember)
     .Build();
-bodyTeamMembers.Add("",bodyTeamMembers0);
+bodyTeamMembers.Add("idempotency-key-1",bodyTeamMembers0);
 
-var bodyTeamMembers1 = new CreateTeamMemberRequest.Builder()
+var bodyTeamMembers1TeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
+    .AssignmentType("ALL_CURRENT_AND_FUTURE_LOCATIONS")
     .Build();
-bodyTeamMembers.Add("",bodyTeamMembers1);
+var bodyTeamMembers1TeamMember = new TeamMember.Builder()
+    .ReferenceId("reference_id_2")
+    .GivenName("Jane")
+    .FamilyName("Smith")
+    .EmailAddress("jane_smith@gmail.com")
+    .PhoneNumber("+14159223334")
+    .AssignedLocations(bodyTeamMembers1TeamMemberAssignedLocations)
+    .Build();
+var bodyTeamMembers1 = new CreateTeamMemberRequest.Builder()
+    .TeamMember(bodyTeamMembers1TeamMember)
+    .Build();
+bodyTeamMembers.Add("idempotency-key-2",bodyTeamMembers1);
 
 var body = new BulkCreateTeamMembersRequest.Builder(
         bodyTeamMembers)
@@ -156,13 +184,45 @@ BulkUpdateTeamMembersAsync(
 var bodyTeamMembers = new Dictionary<string, UpdateTeamMemberRequest>();
 
 
+var bodyTeamMembers0TeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
+    .AssignmentType("ALL_CURRENT_AND_FUTURE_LOCATIONS")
+    .Build();
+var bodyTeamMembers0TeamMember = new TeamMember.Builder()
+    .ReferenceId("reference_id_2")
+    .IsOwner(false)
+    .Status("ACTIVE")
+    .GivenName("Jane")
+    .FamilyName("Smith")
+    .EmailAddress("jane_smith@gmail.com")
+    .PhoneNumber("+14159223334")
+    .AssignedLocations(bodyTeamMembers0TeamMemberAssignedLocations)
+    .Build();
 var bodyTeamMembers0 = new UpdateTeamMemberRequest.Builder()
+    .TeamMember(bodyTeamMembers0TeamMember)
     .Build();
-bodyTeamMembers.Add("",bodyTeamMembers0);
+bodyTeamMembers.Add("AFMwA08kR-MIF-3Vs0OE",bodyTeamMembers0);
 
-var bodyTeamMembers1 = new UpdateTeamMemberRequest.Builder()
+var bodyTeamMembers1TeamMemberAssignedLocationsLocationIds = new IList<string>();
+bodyTeamMembers1TeamMemberAssignedLocationsLocationIds.Add("YSGH2WBKG94QZ");
+bodyTeamMembers1TeamMemberAssignedLocationsLocationIds.Add("GA2Y9HSJ8KRYT");
+var bodyTeamMembers1TeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
+    .AssignmentType("EXPLICIT_LOCATIONS")
+    .LocationIds(bodyTeamMembers1TeamMemberAssignedLocationsLocationIds)
     .Build();
-bodyTeamMembers.Add("",bodyTeamMembers1);
+var bodyTeamMembers1TeamMember = new TeamMember.Builder()
+    .ReferenceId("reference_id_1")
+    .IsOwner(false)
+    .Status("ACTIVE")
+    .GivenName("Joe")
+    .FamilyName("Doe")
+    .EmailAddress("joe_doe@gmail.com")
+    .PhoneNumber("+14159283333")
+    .AssignedLocations(bodyTeamMembers1TeamMemberAssignedLocations)
+    .Build();
+var bodyTeamMembers1 = new UpdateTeamMemberRequest.Builder()
+    .TeamMember(bodyTeamMembers1TeamMember)
+    .Build();
+bodyTeamMembers.Add("fpgteZNMaf0qOK-a4t6P",bodyTeamMembers1);
 
 var body = new BulkUpdateTeamMembersRequest.Builder(
         bodyTeamMembers)

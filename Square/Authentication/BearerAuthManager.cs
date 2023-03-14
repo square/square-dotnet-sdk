@@ -4,11 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Square.Http.Request;
+using APIMatic.Core.Authentication;
 
 /// <summary>
 /// BearerAuthManager.
 /// </summary>
-internal class BearerAuthManager : IBearerAuthCredentials, IAuthManager
+internal class BearerAuthManager : AuthManager, IBearerAuthCredentials
 {
         /// <summary>
         /// Initializes a new instance of the <see cref="BearerAuthManager"/> class.
@@ -17,6 +18,8 @@ internal class BearerAuthManager : IBearerAuthCredentials, IAuthManager
         public BearerAuthManager(string accessToken)
         {
             this.AccessToken = accessToken;
+            Parameters(paramBuilder => paramBuilder
+                .Header(header => header.Setup("Authorization", "Bearer " + this.AccessToken)));
         }
 
         /// <summary>
@@ -34,26 +37,5 @@ internal class BearerAuthManager : IBearerAuthCredentials, IAuthManager
             return accessToken.Equals(this.AccessToken);
         }
 
-        /// <summary>
-        /// Adds authentication to the given HttpRequest.
-        /// </summary>
-        /// <param name="httpRequest">Http Request.</param>
-        /// <returns>Returns the httpRequest after adding authentication.</returns>
-        public HttpRequest Apply(HttpRequest httpRequest)
-        {
-            httpRequest.Headers["Authorization"] = "Bearer " + this.AccessToken;
-            return httpRequest;
-        }
-
-        /// <summary>
-        /// Adds authentication to the given HttpRequest.
-        /// </summary>
-        /// <param name="httpRequest">Http Request.</param>
-        /// <returns>Returns the httpRequest after adding authentication.</returns>
-        public Task<HttpRequest> ApplyAsync(HttpRequest httpRequest)
-        {
-            httpRequest.Headers["Authorization"] = "Bearer " + this.AccessToken;
-            return Task.FromResult(httpRequest);
-        }
     }
 }

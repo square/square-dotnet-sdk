@@ -68,38 +68,23 @@ var bodyOrderOrderLineItems0AppliedDiscounts0 = new OrderLineItemAppliedDiscount
     .Build();
 bodyOrderOrderLineItems0AppliedDiscounts.Add(bodyOrderOrderLineItems0AppliedDiscounts0);
 
-var bodyOrderOrderLineItems0BasePriceMoney = new Money.Builder()
-    .Amount(1500L)
-    .Currency("USD")
-    .Build();
 var bodyOrderOrderLineItems0 = new OrderLineItem.Builder(
         "2")
     .Name("Printed T Shirt")
     .AppliedTaxes(bodyOrderOrderLineItems0AppliedTaxes)
     .AppliedDiscounts(bodyOrderOrderLineItems0AppliedDiscounts)
-    .BasePriceMoney(bodyOrderOrderLineItems0BasePriceMoney)
     .Build();
 bodyOrderOrderLineItems.Add(bodyOrderOrderLineItems0);
 
-var bodyOrderOrderLineItems1BasePriceMoney = new Money.Builder()
-    .Amount(2500L)
-    .Currency("USD")
-    .Build();
 var bodyOrderOrderLineItems1 = new OrderLineItem.Builder(
         "1")
     .Name("Slim Jeans")
-    .BasePriceMoney(bodyOrderOrderLineItems1BasePriceMoney)
     .Build();
 bodyOrderOrderLineItems.Add(bodyOrderOrderLineItems1);
 
-var bodyOrderOrderLineItems2BasePriceMoney = new Money.Builder()
-    .Amount(3500L)
-    .Currency("USD")
-    .Build();
 var bodyOrderOrderLineItems2 = new OrderLineItem.Builder(
         "3")
     .Name("Woven Sweater")
-    .BasePriceMoney(bodyOrderOrderLineItems2BasePriceMoney)
     .Build();
 bodyOrderOrderLineItems.Add(bodyOrderOrderLineItems2);
 
@@ -115,14 +100,9 @@ bodyOrderOrderTaxes.Add(bodyOrderOrderTaxes0);
 
 var bodyOrderOrderDiscounts = new List<OrderLineItemDiscount>();
 
-var bodyOrderOrderDiscounts0AmountMoney = new Money.Builder()
-    .Amount(100L)
-    .Currency("USD")
-    .Build();
 var bodyOrderOrderDiscounts0 = new OrderLineItemDiscount.Builder()
     .Uid("56ae1696-z1e3-9328-af6d-f1e04d947gd4")
     .Type("FIXED_AMOUNT")
-    .AmountMoney(bodyOrderOrderDiscounts0AmountMoney)
     .Scope("LINE_ITEM")
     .Build();
 bodyOrderOrderDiscounts.Add(bodyOrderOrderDiscounts0);

@@ -1,19 +1,16 @@
 namespace Square.Utilities
 {
     using System;
-    using System.Collections.Generic;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using APIMatic.Core.Types.Sdk;
+    using System.Collections.Generic;
 
     [JsonConverter(typeof(JsonValueSerializer))]
-    public class JsonValue
+    public class JsonValue : CoreJsonValue
     {
-        private readonly object value;
-
         private JsonValue(object value)
-        {
-            this.value = value;
-        }
+            : base(value) { }
 
         /// <summary>
         /// Creates the JSON Value instance with the provided string value.
@@ -76,22 +73,6 @@ namespace Square.Utilities
         public static JsonValue FromArray<T>(List<T> values)
         {
             return new JsonValue(values);
-        }
-
-        /// <summary>
-        /// Getter for the stored object.
-        /// </summary>
-        public object GetStoredObject()
-        {
-            return value;
-        }
-
-        /// <summary>
-        /// Converts current value into string.
-        /// </summary>
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(value, Formatting.None);
         }
     }
 

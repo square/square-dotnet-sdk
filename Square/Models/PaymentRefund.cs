@@ -180,7 +180,8 @@ namespace Square.Models
 
         /// <summary>
         /// The destination type for this refund.
-        /// Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `CASH`, or `EXTERNAL`.
+        /// Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `BUY_NOW_PAY_LATER`, `CASH`, and
+        /// `EXTERNAL`.
         /// </summary>
         [JsonProperty("destination_type")]
         public string DestinationType { get; }
@@ -371,7 +372,6 @@ namespace Square.Models
 
             return hashCode;
         }
-  
         /// <summary>
         /// ToString overload.
         /// </summary>

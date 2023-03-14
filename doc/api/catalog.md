@@ -477,15 +477,10 @@ var bodyMObjectItemDataVariations0 = new CatalogObject.Builder(
     .Build();
 bodyMObjectItemDataVariations.Add(bodyMObjectItemDataVariations0);
 
-var bodyMObjectItemDataVariations1ItemVariationDataPriceMoney = new Money.Builder()
-    .Amount(400L)
-    .Currency("USD")
-    .Build();
 var bodyMObjectItemDataVariations1ItemVariationData = new CatalogItemVariation.Builder()
     .ItemId("#Cocoa")
     .Name("Large")
     .PricingType("FIXED_PRICING")
-    .PriceMoney(bodyMObjectItemDataVariations1ItemVariationDataPriceMoney)
     .Build();
 var bodyMObjectItemDataVariations1 = new CatalogObject.Builder(
         "ITEM_VARIATION",

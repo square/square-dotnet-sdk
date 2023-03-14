@@ -81,7 +81,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal DeleteShiftResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

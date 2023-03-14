@@ -92,7 +92,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal RetrieveLoyaltyRewardResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

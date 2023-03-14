@@ -104,7 +104,12 @@ namespace Square.Models
 
             return hashCode;
         }
-  
+        internal SearchInvoicesResponse ContextSetter(HttpContext context)
+        {
+            this.Context = context;
+            return this;
+        }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

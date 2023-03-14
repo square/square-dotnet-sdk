@@ -5,12 +5,12 @@ namespace Square
     using System.Globalization;
     using System.IO;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities;
     using Newtonsoft.Json.Converters;
     using NUnit.Framework;
     using Square;
     using Square.Apis;
     using Square.Exceptions;
-    using Square.Helpers;
     using Square.Http.Client;
     using Square.Http.Response;
     using Square.Utilities;
@@ -54,7 +54,7 @@ namespace Square
             }
 
             // Test response code
-            Assert.AreEqual(200, this.HttpCallBackHandler.Response.StatusCode, "Status should be 200");
+            Assert.AreEqual(200, HttpCallBack.Response.StatusCode, "Status should be 200");
         }
     }
 }

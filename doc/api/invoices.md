@@ -193,7 +193,7 @@ var bodyQueryFilter = new InvoiceFilter.Builder(
     .CustomerIds(bodyQueryFilterCustomerIds)
     .Build();
 var bodyQuerySort = new InvoiceSort.Builder(
-        null)
+        "INVOICE_SORT_DATE")
     .Order("DESC")
     .Build();
 var bodyQuery = new InvoiceQuery.Builder(
