@@ -207,8 +207,8 @@ namespace Square.Models
 
         /// <summary>
         /// A unique Square-assigned ID for the customer profile.
-        /// If you need this ID for an API request, use the ID returned when you created the customer profile or call the [SearchCustomers]($e/Customers/SearchCustomers)
-        /// or [ListCustomers]($e/Customers/ListCustomers) endpoint.
+        /// If you need this ID for an API request, use the ID returned when you created the customer profile or call the [SearchCustomers](api-endpoint:Customers-SearchCustomers)
+        /// or [ListCustomers](api-endpoint:Customers-ListCustomers) endpoint.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
@@ -227,8 +227,8 @@ namespace Square.Models
 
         /// <summary>
         /// Payment details of the credit, debit, and gift cards stored on file for the customer profile.
-        /// DEPRECATED at version 2021-06-16. Replaced by calling [ListCards]($e/Cards/ListCards) (for credit and debit cards on file)
-        /// or [ListGiftCards]($e/GiftCards/ListGiftCards) (for gift cards on file) and including the `customer_id` query parameter.
+        /// DEPRECATED at version 2021-06-16. Replaced by calling [ListCards](api-endpoint:Cards-ListCards) (for credit and debit cards on file)
+        /// or [ListGiftCards](api-endpoint:GiftCards-ListGiftCards) (for gift cards on file) and including the `customer_id` query parameter.
         /// For more information, see [Migration notes](https://developer.squareup.com/docs/customers-api/what-it-does#migrate-customer-cards).
         /// </summary>
         [JsonProperty("cards")]
@@ -310,13 +310,13 @@ namespace Square.Models
         public string CreationSource { get; }
 
         /// <summary>
-        /// The IDs of [customer groups]($m/CustomerGroup) the customer belongs to.
+        /// The IDs of [customer groups](entity:CustomerGroup) the customer belongs to.
         /// </summary>
         [JsonProperty("group_ids")]
         public IList<string> GroupIds { get; }
 
         /// <summary>
-        /// The IDs of [customer segments]($m/CustomerSegment) the customer belongs to.
+        /// The IDs of [customer segments](entity:CustomerSegment) the customer belongs to.
         /// </summary>
         [JsonProperty("segment_ids")]
         public IList<string> SegmentIds { get; }

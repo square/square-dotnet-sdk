@@ -65,7 +65,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the [TeamMember]($m/TeamMember) object for the team member associated with the booking profile.
+        /// The ID of the [TeamMember](entity:TeamMember) object for the team member associated with the booking profile.
         /// </summary>
         [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }

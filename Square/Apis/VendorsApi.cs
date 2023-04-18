@@ -183,7 +183,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves the vendor of a specified [Vendor]($m/Vendor) ID.
         /// </summary>
-        /// <param name="vendorId">Required parameter: ID of the [Vendor]($m/Vendor) to retrieve..</param>
+        /// <param name="vendorId">Required parameter: ID of the [Vendor](entity:Vendor) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveVendorResponse response from the API call.</returns>
         public Models.RetrieveVendorResponse RetrieveVendor(
                 string vendorId)
@@ -192,7 +192,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves the vendor of a specified [Vendor]($m/Vendor) ID.
         /// </summary>
-        /// <param name="vendorId">Required parameter: ID of the [Vendor]($m/Vendor) to retrieve..</param>
+        /// <param name="vendorId">Required parameter: ID of the [Vendor](entity:Vendor) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveVendorResponse response from the API call.</returns>
         public async Task<Models.RetrieveVendorResponse> RetrieveVendorAsync(

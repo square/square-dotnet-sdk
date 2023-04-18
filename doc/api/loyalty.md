@@ -52,23 +52,28 @@ CreateLoyaltyAccountAsync(
 ## Example Usage
 
 ```csharp
-var bodyLoyaltyAccountMapping = new LoyaltyAccountMapping.Builder()
-    .PhoneNumber("+14155551234")
-    .Build();
-var bodyLoyaltyAccount = new LoyaltyAccount.Builder(
-        "d619f755-2d17-41f3-990d-c04ecedd64dd")
-    .Mapping(bodyLoyaltyAccountMapping)
-    .Build();
-var body = new CreateLoyaltyAccountRequest.Builder(
-        bodyLoyaltyAccount,
-        "ec78c477-b1c3-4899-a209-a4e71337c996")
-    .Build();
+Models.CreateLoyaltyAccountRequest body = new Models.CreateLoyaltyAccountRequest.Builder(
+    new Models.LoyaltyAccount.Builder(
+        "d619f755-2d17-41f3-990d-c04ecedd64dd"
+    )
+    .Mapping(
+        new Models.LoyaltyAccountMapping.Builder()
+        .PhoneNumber("+14155551234")
+        .Build())
+    .Build(),
+    "ec78c477-b1c3-4899-a209-a4e71337c996"
+)
+.Build();
 
 try
 {
     CreateLoyaltyAccountResponse result = await loyaltyApi.CreateLoyaltyAccountAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -98,26 +103,29 @@ SearchLoyaltyAccountsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryMappings = new List<LoyaltyAccountMapping>();
-
-var bodyQueryMappings0 = new LoyaltyAccountMapping.Builder()
-    .PhoneNumber("+14155551234")
-    .Build();
-bodyQueryMappings.Add(bodyQueryMappings0);
-
-var bodyQuery = new SearchLoyaltyAccountsRequestLoyaltyAccountQuery.Builder()
-    .Mappings(bodyQueryMappings)
-    .Build();
-var body = new SearchLoyaltyAccountsRequest.Builder()
-    .Query(bodyQuery)
-    .Limit(10)
-    .Build();
+Models.SearchLoyaltyAccountsRequest body = new Models.SearchLoyaltyAccountsRequest.Builder()
+.Query(
+    new Models.SearchLoyaltyAccountsRequestLoyaltyAccountQuery.Builder()
+    .Mappings(
+        new List<Models.LoyaltyAccountMapping>
+        {
+            new Models.LoyaltyAccountMapping.Builder()
+            .PhoneNumber("+14155551234")
+            .Build(),
+        })
+    .Build())
+.Limit(10)
+.Build();
 
 try
 {
     SearchLoyaltyAccountsResponse result = await loyaltyApi.SearchLoyaltyAccountsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -134,7 +142,7 @@ RetrieveLoyaltyAccountAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountId` | `string` | Template, Required | The ID of the [loyalty account](../../doc/models/loyalty-account.md) to retrieve. |
+| `accountId` | `string` | Template, Required | The ID of the [loyalty account](entity:LoyaltyAccount) to retrieve. |
 
 ## Response Type
 
@@ -144,12 +152,15 @@ RetrieveLoyaltyAccountAsync(
 
 ```csharp
 string accountId = "account_id2";
-
 try
 {
     RetrieveLoyaltyAccountResponse result = await loyaltyApi.RetrieveLoyaltyAccountAsync(accountId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -180,7 +191,7 @@ AccumulateLoyaltyPointsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountId` | `string` | Template, Required | The ID of the target [loyalty account](../../doc/models/loyalty-account.md). |
+| `accountId` | `string` | Template, Required | The ID of the target [loyalty account](entity:LoyaltyAccount). |
 | `body` | [`Models.AccumulateLoyaltyPointsRequest`](../../doc/models/accumulate-loyalty-points-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -191,20 +202,24 @@ AccumulateLoyaltyPointsAsync(
 
 ```csharp
 string accountId = "account_id2";
-var bodyAccumulatePoints = new LoyaltyEventAccumulatePoints.Builder()
+Models.AccumulateLoyaltyPointsRequest body = new Models.AccumulateLoyaltyPointsRequest.Builder(
+    new Models.LoyaltyEventAccumulatePoints.Builder()
     .OrderId("RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY")
-    .Build();
-var body = new AccumulateLoyaltyPointsRequest.Builder(
-        bodyAccumulatePoints,
-        "58b90739-c3e8-4b11-85f7-e636d48d72cb",
-        "P034NEENMD09F")
-    .Build();
+    .Build(),
+    "58b90739-c3e8-4b11-85f7-e636d48d72cb",
+    "P034NEENMD09F"
+)
+.Build();
 
 try
 {
     AccumulateLoyaltyPointsResponse result = await loyaltyApi.AccumulateLoyaltyPointsAsync(accountId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -226,7 +241,7 @@ AdjustLoyaltyPointsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `accountId` | `string` | Template, Required | The ID of the target [loyalty account](../../doc/models/loyalty-account.md). |
+| `accountId` | `string` | Template, Required | The ID of the target [loyalty account](entity:LoyaltyAccount). |
 | `body` | [`Models.AdjustLoyaltyPointsRequest`](../../doc/models/adjust-loyalty-points-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -237,20 +252,25 @@ AdjustLoyaltyPointsAsync(
 
 ```csharp
 string accountId = "account_id2";
-var bodyAdjustPoints = new LoyaltyEventAdjustPoints.Builder(
-        10)
+Models.AdjustLoyaltyPointsRequest body = new Models.AdjustLoyaltyPointsRequest.Builder(
+    "bc29a517-3dc9-450e-aa76-fae39ee849d1",
+    new Models.LoyaltyEventAdjustPoints.Builder(
+        10
+    )
     .Reason("Complimentary points")
-    .Build();
-var body = new AdjustLoyaltyPointsRequest.Builder(
-        "bc29a517-3dc9-450e-aa76-fae39ee849d1",
-        bodyAdjustPoints)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     AdjustLoyaltyPointsResponse result = await loyaltyApi.AdjustLoyaltyPointsAsync(accountId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -283,25 +303,30 @@ SearchLoyaltyEventsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterOrderFilter = new LoyaltyEventOrderFilter.Builder(
-        "PyATxhYLfsMqpVkcKJITPydgEYfZY")
-    .Build();
-var bodyQueryFilter = new LoyaltyEventFilter.Builder()
-    .OrderFilter(bodyQueryFilterOrderFilter)
-    .Build();
-var bodyQuery = new LoyaltyEventQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Build();
-var body = new SearchLoyaltyEventsRequest.Builder()
-    .Query(bodyQuery)
-    .Limit(30)
-    .Build();
+Models.SearchLoyaltyEventsRequest body = new Models.SearchLoyaltyEventsRequest.Builder()
+.Query(
+    new Models.LoyaltyEventQuery.Builder()
+    .Filter(
+        new Models.LoyaltyEventFilter.Builder()
+        .OrderFilter(
+            new Models.LoyaltyEventOrderFilter.Builder(
+                "PyATxhYLfsMqpVkcKJITPydgEYfZY"
+            )
+            .Build())
+        .Build())
+    .Build())
+.Limit(30)
+.Build();
 
 try
 {
     SearchLoyaltyEventsResponse result = await loyaltyApi.SearchLoyaltyEventsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -312,7 +337,7 @@ catch (ApiException e){};
 Returns a list of loyalty programs in the seller's account.
 Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
 
-Replaced with [RetrieveLoyaltyProgram](../../doc/api/loyalty.md#retrieve-loyalty-program) when used with the keyword `main`.
+Replaced with [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) when used with the keyword `main`.
 
 ```csharp
 ListLoyaltyProgramsAsync()
@@ -329,7 +354,11 @@ try
 {
     ListLoyaltyProgramsResponse result = await loyaltyApi.ListLoyaltyProgramsAsync();
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -358,12 +387,15 @@ RetrieveLoyaltyProgramAsync(
 
 ```csharp
 string programId = "program_id0";
-
 try
 {
     RetrieveLoyaltyProgramResponse result = await loyaltyApi.RetrieveLoyaltyProgramAsync(programId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -395,7 +427,7 @@ CalculateLoyaltyPointsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `programId` | `string` | Template, Required | The ID of the [loyalty program](../../doc/models/loyalty-program.md), which defines the rules for accruing points. |
+| `programId` | `string` | Template, Required | The ID of the [loyalty program](entity:LoyaltyProgram), which defines the rules for accruing points. |
 | `body` | [`Models.CalculateLoyaltyPointsRequest`](../../doc/models/calculate-loyalty-points-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -406,16 +438,20 @@ CalculateLoyaltyPointsAsync(
 
 ```csharp
 string programId = "program_id0";
-var body = new CalculateLoyaltyPointsRequest.Builder()
-    .OrderId("RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY")
-    .LoyaltyAccountId("79b807d2-d786-46a9-933b-918028d7a8c5")
-    .Build();
+Models.CalculateLoyaltyPointsRequest body = new Models.CalculateLoyaltyPointsRequest.Builder()
+.OrderId("RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY")
+.LoyaltyAccountId("79b807d2-d786-46a9-933b-918028d7a8c5")
+.Build();
 
 try
 {
     CalculateLoyaltyPointsResponse result = await loyaltyApi.CalculateLoyaltyPointsAsync(programId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -436,7 +472,7 @@ ListLoyaltyPromotionsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `programId` | `string` | Template, Required | The ID of the base [loyalty program](../../doc/models/loyalty-program.md). To get the program ID,<br>call [RetrieveLoyaltyProgram](../../doc/api/loyalty.md#retrieve-loyalty-program) using the `main` keyword. |
+| `programId` | `string` | Template, Required | The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID,<br>call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword. |
 | `status` | [`string`](../../doc/models/loyalty-promotion-status.md) | Query, Optional | The status to filter the results by. If a status is provided, only loyalty promotions<br>with the specified status are returned. Otherwise, all loyalty promotions associated with<br>the loyalty program are returned. |
 | `cursor` | `string` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a single paged response.<br>The minimum value is 1 and the maximum value is 30. The default value is 30.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
@@ -449,12 +485,15 @@ ListLoyaltyPromotionsAsync(
 
 ```csharp
 string programId = "program_id0";
-
 try
 {
     ListLoyaltyPromotionsResponse result = await loyaltyApi.ListLoyaltyPromotionsAsync(programId, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -477,7 +516,7 @@ CreateLoyaltyPromotionAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `programId` | `string` | Template, Required | The ID of the [loyalty program](../../doc/models/loyalty-program.md) to associate with the promotion.<br>To get the program ID, call [RetrieveLoyaltyProgram](../../doc/api/loyalty.md#retrieve-loyalty-program)<br>using the `main` keyword. |
+| `programId` | `string` | Template, Required | The ID of the [loyalty program](entity:LoyaltyProgram) to associate with the promotion.<br>To get the program ID, call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram)<br>using the `main` keyword. |
 | `body` | [`Models.CreateLoyaltyPromotionRequest`](../../doc/models/create-loyalty-promotion-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -488,46 +527,56 @@ CreateLoyaltyPromotionAsync(
 
 ```csharp
 string programId = "program_id0";
-var bodyLoyaltyPromotionIncentivePointsMultiplierData = new LoyaltyPromotionIncentivePointsMultiplierData.Builder(
-        3)
-    .Build();
-var bodyLoyaltyPromotionIncentive = new LoyaltyPromotionIncentive.Builder(
-        "POINTS_MULTIPLIER")
-    .PointsMultiplierData(bodyLoyaltyPromotionIncentivePointsMultiplierData)
-    .Build();
-var bodyLoyaltyPromotionAvailableTimeTimePeriods = new IList<string>();
-bodyLoyaltyPromotionAvailableTimeTimePeriods.Add("BEGIN:VEVENT\\nDTSTART:20220816T160000\\nDURATION:PT2H\\nRRULE:FREQ=WEEKLY;BYDAY=TU\\nEND:VEVENT");
-var bodyLoyaltyPromotionAvailableTime = new LoyaltyPromotionAvailableTimeData.Builder(
-        bodyLoyaltyPromotionAvailableTimeTimePeriods)
-    .Build();
-var bodyLoyaltyPromotionTriggerLimit = new LoyaltyPromotionTriggerLimit.Builder(
-        1)
-    .Interval("DAY")
-    .Build();
-var bodyLoyaltyPromotionMinimumSpendAmountMoney = new Money.Builder()
-    .Amount(2000L)
-    .Currency("USD")
-    .Build();
-var bodyLoyaltyPromotionQualifyingCategoryIds = new IList<string>();
-bodyLoyaltyPromotionQualifyingCategoryIds.Add("XTQPYLR3IIU9C44VRCB3XD12");
-var bodyLoyaltyPromotion = new LoyaltyPromotion.Builder(
+Models.CreateLoyaltyPromotionRequest body = new Models.CreateLoyaltyPromotionRequest.Builder(
+    new Models.LoyaltyPromotion.Builder(
         "Tuesday Happy Hour Promo",
-        bodyLoyaltyPromotionIncentive,
-        bodyLoyaltyPromotionAvailableTime)
-    .TriggerLimit(bodyLoyaltyPromotionTriggerLimit)
-    .MinimumSpendAmountMoney(bodyLoyaltyPromotionMinimumSpendAmountMoney)
-    .QualifyingCategoryIds(bodyLoyaltyPromotionQualifyingCategoryIds)
-    .Build();
-var body = new CreateLoyaltyPromotionRequest.Builder(
-        bodyLoyaltyPromotion,
-        "ec78c477-b1c3-4899-a209-a4e71337c996")
-    .Build();
+        new Models.LoyaltyPromotionIncentive.Builder(
+            "POINTS_MULTIPLIER"
+        )
+        .PointsMultiplierData(
+            new Models.LoyaltyPromotionIncentivePointsMultiplierData.Builder(
+                3
+            )
+            .Build())
+        .Build(),
+        new Models.LoyaltyPromotionAvailableTimeData.Builder(
+            new List<string>
+            {
+                "BEGIN:VEVENT\\nDTSTART:20220816T160000\\nDURATION:PT2H\\nRRULE:FREQ=WEEKLY;BYDAY=TU\\nEND:VEVENT",
+            }
+        )
+        .Build()
+    )
+    .TriggerLimit(
+        new Models.LoyaltyPromotionTriggerLimit.Builder(
+            1
+        )
+        .Interval("DAY")
+        .Build())
+    .MinimumSpendAmountMoney(
+        new Models.Money.Builder()
+        .Amount(2000L)
+        .Currency("USD")
+        .Build())
+    .QualifyingCategoryIds(
+        new List<string>
+        {
+            "XTQPYLR3IIU9C44VRCB3XD12",
+        })
+    .Build(),
+    "ec78c477-b1c3-4899-a209-a4e71337c996"
+)
+.Build();
 
 try
 {
     CreateLoyaltyPromotionResponse result = await loyaltyApi.CreateLoyaltyPromotionAsync(programId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -545,8 +594,8 @@ RetrieveLoyaltyPromotionAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `promotionId` | `string` | Template, Required | The ID of the [loyalty promotion](../../doc/models/loyalty-promotion.md) to retrieve. |
-| `programId` | `string` | Template, Required | The ID of the base [loyalty program](../../doc/models/loyalty-program.md). To get the program ID,<br>call [RetrieveLoyaltyProgram](../../doc/api/loyalty.md#retrieve-loyalty-program) using the `main` keyword. |
+| `promotionId` | `string` | Template, Required | The ID of the [loyalty promotion](entity:LoyaltyPromotion) to retrieve. |
+| `programId` | `string` | Template, Required | The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID,<br>call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword. |
 
 ## Response Type
 
@@ -557,12 +606,15 @@ RetrieveLoyaltyPromotionAsync(
 ```csharp
 string promotionId = "promotion_id0";
 string programId = "program_id0";
-
 try
 {
     RetrieveLoyaltyPromotionResponse result = await loyaltyApi.RetrieveLoyaltyPromotionAsync(promotionId, programId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -585,8 +637,8 @@ CancelLoyaltyPromotionAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `promotionId` | `string` | Template, Required | The ID of the [loyalty promotion](../../doc/models/loyalty-promotion.md) to cancel. You can cancel a<br>promotion that has an `ACTIVE` or `SCHEDULED` status. |
-| `programId` | `string` | Template, Required | The ID of the base [loyalty program](../../doc/models/loyalty-program.md). |
+| `promotionId` | `string` | Template, Required | The ID of the [loyalty promotion](entity:LoyaltyPromotion) to cancel. You can cancel a<br>promotion that has an `ACTIVE` or `SCHEDULED` status. |
+| `programId` | `string` | Template, Required | The ID of the base [loyalty program](entity:LoyaltyProgram). |
 
 ## Response Type
 
@@ -597,12 +649,15 @@ CancelLoyaltyPromotionAsync(
 ```csharp
 string promotionId = "promotion_id0";
 string programId = "program_id0";
-
 try
 {
     CancelLoyaltyPromotionResponse result = await loyaltyApi.CancelLoyaltyPromotionAsync(promotionId, programId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -635,21 +690,26 @@ CreateLoyaltyRewardAsync(
 ## Example Usage
 
 ```csharp
-var bodyReward = new LoyaltyReward.Builder(
+Models.CreateLoyaltyRewardRequest body = new Models.CreateLoyaltyRewardRequest.Builder(
+    new Models.LoyaltyReward.Builder(
         "5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd",
-        "e1b39225-9da5-43d1-a5db-782cdd8ad94f")
+        "e1b39225-9da5-43d1-a5db-782cdd8ad94f"
+    )
     .OrderId("RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY")
-    .Build();
-var body = new CreateLoyaltyRewardRequest.Builder(
-        bodyReward,
-        "18c2e5ea-a620-4b1f-ad60-7b167285e451")
-    .Build();
+    .Build(),
+    "18c2e5ea-a620-4b1f-ad60-7b167285e451"
+)
+.Build();
 
 try
 {
     CreateLoyaltyRewardResponse result = await loyaltyApi.CreateLoyaltyRewardAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -681,19 +741,24 @@ SearchLoyaltyRewardsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQuery = new SearchLoyaltyRewardsRequestLoyaltyRewardQuery.Builder(
-        "5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd")
-    .Build();
-var body = new SearchLoyaltyRewardsRequest.Builder()
-    .Query(bodyQuery)
-    .Limit(10)
-    .Build();
+Models.SearchLoyaltyRewardsRequest body = new Models.SearchLoyaltyRewardsRequest.Builder()
+.Query(
+    new Models.SearchLoyaltyRewardsRequestLoyaltyRewardQuery.Builder(
+        "5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd"
+    )
+    .Build())
+.Limit(10)
+.Build();
 
 try
 {
     SearchLoyaltyRewardsResponse result = await loyaltyApi.SearchLoyaltyRewardsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -718,7 +783,7 @@ DeleteLoyaltyRewardAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](../../doc/models/loyalty-reward.md) to delete. |
+| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](entity:LoyaltyReward) to delete. |
 
 ## Response Type
 
@@ -728,12 +793,15 @@ DeleteLoyaltyRewardAsync(
 
 ```csharp
 string rewardId = "reward_id4";
-
 try
 {
     DeleteLoyaltyRewardResponse result = await loyaltyApi.DeleteLoyaltyRewardAsync(rewardId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -750,7 +818,7 @@ RetrieveLoyaltyRewardAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](../../doc/models/loyalty-reward.md) to retrieve. |
+| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](entity:LoyaltyReward) to retrieve. |
 
 ## Response Type
 
@@ -760,12 +828,15 @@ RetrieveLoyaltyRewardAsync(
 
 ```csharp
 string rewardId = "reward_id4";
-
 try
 {
     RetrieveLoyaltyRewardResponse result = await loyaltyApi.RetrieveLoyaltyRewardAsync(rewardId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -793,7 +864,7 @@ RedeemLoyaltyRewardAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](../../doc/models/loyalty-reward.md) to redeem. |
+| `rewardId` | `string` | Template, Required | The ID of the [loyalty reward](entity:LoyaltyReward) to redeem. |
 | `body` | [`Models.RedeemLoyaltyRewardRequest`](../../doc/models/redeem-loyalty-reward-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -804,15 +875,20 @@ RedeemLoyaltyRewardAsync(
 
 ```csharp
 string rewardId = "reward_id4";
-var body = new RedeemLoyaltyRewardRequest.Builder(
-        "98adc7f7-6963-473b-b29c-f3c9cdd7d994",
-        "P034NEENMD09F")
-    .Build();
+Models.RedeemLoyaltyRewardRequest body = new Models.RedeemLoyaltyRewardRequest.Builder(
+    "98adc7f7-6963-473b-b29c-f3c9cdd7d994",
+    "P034NEENMD09F"
+)
+.Build();
 
 try
 {
     RedeemLoyaltyRewardResponse result = await loyaltyApi.RedeemLoyaltyRewardAsync(rewardId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

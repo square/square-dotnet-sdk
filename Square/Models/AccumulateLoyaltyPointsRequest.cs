@@ -47,7 +47,7 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// The [location]($m/Location) where the purchase was made.
+        /// The [location](entity:Location) where the purchase was made.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }

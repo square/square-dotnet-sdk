@@ -56,13 +56,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The names of the [Vendor]($m/Vendor) objects to retrieve.
+        /// The names of the [Vendor](entity:Vendor) objects to retrieve.
         /// </summary>
         [JsonProperty("name")]
         public IList<string> Name { get; }
 
         /// <summary>
-        /// The statuses of the [Vendor]($m/Vendor) objects to retrieve.
+        /// The statuses of the [Vendor](entity:Vendor) objects to retrieve.
         /// See [VendorStatus](#type-vendorstatus) for possible values
         /// </summary>
         [JsonProperty("status")]

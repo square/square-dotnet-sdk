@@ -235,7 +235,7 @@ namespace Square.Models
         public IList<Models.AdditionalRecipient> AdditionalRecipients { get; }
 
         /// <summary>
-        /// The ID of the [Payment]($m/Payment) that corresponds to this tender.
+        /// The ID of the [Payment](entity:Payment) that corresponds to this tender.
         /// This value is only present for payments created with the v2 Payments API.
         /// </summary>
         [JsonProperty("payment_id")]

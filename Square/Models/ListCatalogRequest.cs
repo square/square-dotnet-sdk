@@ -69,14 +69,14 @@ namespace Square.Models
         /// <summary>
         /// The pagination cursor returned in the previous response. Leave unset for an initial request.
         /// The page size is currently set to be 100.
-        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
+        /// See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information.
         /// </summary>
         [JsonProperty("cursor")]
         public string Cursor { get; }
 
         /// <summary>
         /// An optional case-insensitive, comma-separated list of object types to retrieve.
-        /// The valid values are defined in the [CatalogObjectType]($m/CatalogObjectType) enum, for example,
+        /// The valid values are defined in the [CatalogObjectType](entity:CatalogObjectType) enum, for example,
         /// `ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,
         /// `MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.
         /// If this is unspecified, the operation returns objects of all the top level types at the version

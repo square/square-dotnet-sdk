@@ -116,7 +116,7 @@ namespace Square.Models
         public string Uid { get; }
 
         /// <summary>
-        /// The catalog object ID referencing [CatalogModifier]($m/CatalogModifier).
+        /// The catalog object ID referencing [CatalogModifier](entity:CatalogModifier).
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }

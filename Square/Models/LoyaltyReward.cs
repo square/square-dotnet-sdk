@@ -97,13 +97,13 @@ namespace Square.Models
         public string Status { get; }
 
         /// <summary>
-        /// The Square-assigned ID of the [loyalty account]($m/LoyaltyAccount) to which the reward belongs.
+        /// The Square-assigned ID of the [loyalty account](entity:LoyaltyAccount) to which the reward belongs.
         /// </summary>
         [JsonProperty("loyalty_account_id")]
         public string LoyaltyAccountId { get; }
 
         /// <summary>
-        /// The Square-assigned ID of the [reward tier]($m/LoyaltyProgramRewardTier) used to create the reward.
+        /// The Square-assigned ID of the [reward tier](entity:LoyaltyProgramRewardTier) used to create the reward.
         /// </summary>
         [JsonProperty("reward_tier_id")]
         public string RewardTierId { get; }
@@ -115,7 +115,7 @@ namespace Square.Models
         public int? Points { get; }
 
         /// <summary>
-        /// The Square-assigned ID of the [order]($m/Order) to which the reward is attached.
+        /// The Square-assigned ID of the [order](entity:Order) to which the reward is attached.
         /// </summary>
         [JsonProperty("order_id")]
         public string OrderId { get; }

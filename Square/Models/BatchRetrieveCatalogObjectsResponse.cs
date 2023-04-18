@@ -47,13 +47,13 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// A list of [CatalogObject]($m/CatalogObject)s returned.
+        /// A list of [CatalogObject](entity:CatalogObject)s returned.
         /// </summary>
         [JsonProperty("objects", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> Objects { get; }
 
         /// <summary>
-        /// A list of [CatalogObject]($m/CatalogObject)s referenced by the object in the `objects` field.
+        /// A list of [CatalogObject](entity:CatalogObject)s referenced by the object in the `objects` field.
         /// </summary>
         [JsonProperty("related_objects", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CatalogObject> RelatedObjects { get; }

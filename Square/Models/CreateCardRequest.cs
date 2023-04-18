@@ -40,7 +40,7 @@ namespace Square.Models
         /// A unique string that identifies this CreateCard request. Keys can be
         /// any valid string and must be unique for every request.
         /// Max: 45 characters
-        /// See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.
+        /// See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency) for more information.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }

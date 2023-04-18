@@ -234,10 +234,10 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// The ID of the [order]($m/Order) for which the invoice is created.
+        /// The ID of the [order](entity:Order) for which the invoice is created.
         /// This field is required when creating an invoice, and the order must be in the `OPEN` state.
         /// To view the line items and other information for the associated order, call the
-        /// [RetrieveOrder]($e/Orders/RetrieveOrder) endpoint using the order ID.
+        /// [RetrieveOrder](api-endpoint:Orders-RetrieveOrder) endpoint using the order ID.
         /// </summary>
         [JsonProperty("order_id")]
         public string OrderId { get; }
@@ -369,7 +369,7 @@ namespace Square.Models
         public IList<Models.InvoiceCustomField> CustomFields { get; }
 
         /// <summary>
-        /// The ID of the [subscription]($m/Subscription) associated with the invoice.
+        /// The ID of the [subscription](entity:Subscription) associated with the invoice.
         /// This field is present only on subscription billing invoices.
         /// </summary>
         [JsonProperty("subscription_id", NullValueHandling = NullValueHandling.Ignore)]

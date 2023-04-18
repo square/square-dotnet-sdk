@@ -56,7 +56,11 @@ try
 {
     ListLocationCustomAttributeDefinitionsResponse result = await locationCustomAttributesApi.ListLocationCustomAttributeDefinitionsAsync(null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -88,21 +92,25 @@ CreateLocationCustomAttributeDefinitionAsync(
 ## Example Usage
 
 ```csharp
-var bodyCustomAttributeDefinition = new CustomAttributeDefinition.Builder()
+Models.CreateLocationCustomAttributeDefinitionRequest body = new Models.CreateLocationCustomAttributeDefinitionRequest.Builder(
+    new Models.CustomAttributeDefinition.Builder()
     .Key("bestseller")
     .Name("Bestseller")
     .Description("Bestselling item at location")
     .Visibility("VISIBILITY_READ_WRITE_VALUES")
-    .Build();
-var body = new CreateLocationCustomAttributeDefinitionRequest.Builder(
-        bodyCustomAttributeDefinition)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     CreateLocationCustomAttributeDefinitionResponse result = await locationCustomAttributesApi.CreateLocationCustomAttributeDefinitionAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -132,12 +140,15 @@ DeleteLocationCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-
 try
 {
     DeleteLocationCustomAttributeDefinitionResponse result = await locationCustomAttributesApi.DeleteLocationCustomAttributeDefinitionAsync(key);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -168,12 +179,15 @@ RetrieveLocationCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-
 try
 {
     RetrieveLocationCustomAttributeDefinitionResponse result = await locationCustomAttributesApi.RetrieveLocationCustomAttributeDefinitionAsync(key, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -205,19 +219,23 @@ UpdateLocationCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-var bodyCustomAttributeDefinition = new CustomAttributeDefinition.Builder()
+Models.UpdateLocationCustomAttributeDefinitionRequest body = new Models.UpdateLocationCustomAttributeDefinitionRequest.Builder(
+    new Models.CustomAttributeDefinition.Builder()
     .Description("Update the description as desired.")
     .Visibility("VISIBILITY_READ_ONLY")
-    .Build();
-var body = new UpdateLocationCustomAttributeDefinitionRequest.Builder(
-        bodyCustomAttributeDefinition)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     UpdateLocationCustomAttributeDefinitionResponse result = await locationCustomAttributesApi.UpdateLocationCustomAttributeDefinitionAsync(key, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -245,30 +263,28 @@ BulkDeleteLocationCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-var bodyValues = new Dictionary<string, BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest>();
-
-
-var bodyValues0 = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
-    .Build();
-bodyValues.Add("id1",bodyValues0);
-
-var bodyValues1 = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
-    .Build();
-bodyValues.Add("id2",bodyValues1);
-
-var bodyValues2 = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
-    .Build();
-bodyValues.Add("id3",bodyValues2);
-
-var body = new BulkDeleteLocationCustomAttributesRequest.Builder(
-        bodyValues)
-    .Build();
+Models.BulkDeleteLocationCustomAttributesRequest body = new Models.BulkDeleteLocationCustomAttributesRequest.Builder(
+    new Dictionary<string, Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest>
+    {
+        ["id1"] = new Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
+        .Build(),
+        ["id2"] = new Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
+        .Build(),
+        ["id3"] = new Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BulkDeleteLocationCustomAttributesResponse result = await locationCustomAttributesApi.BulkDeleteLocationCustomAttributesAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -303,34 +319,34 @@ BulkUpsertLocationCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-var bodyValues = new Dictionary<string, BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest>();
-
-
-var bodyValues0CustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var bodyValues0 = new BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
-        "location_id8",
-        bodyValues0CustomAttribute)
-    .Build();
-bodyValues.Add("key0",bodyValues0);
-
-var bodyValues1CustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var bodyValues1 = new BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
-        "location_id9",
-        bodyValues1CustomAttribute)
-    .Build();
-bodyValues.Add("key1",bodyValues1);
-
-var body = new BulkUpsertLocationCustomAttributesRequest.Builder(
-        bodyValues)
-    .Build();
+Models.BulkUpsertLocationCustomAttributesRequest body = new Models.BulkUpsertLocationCustomAttributesRequest.Builder(
+    new Dictionary<string, Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest>
+    {
+        ["key0"] = new Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
+            "location_id8",
+            new Models.CustomAttribute.Builder()
+            .Build()
+        )
+        .Build(),
+        ["key1"] = new Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
+            "location_id9",
+            new Models.CustomAttribute.Builder()
+            .Build()
+        )
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BulkUpsertLocationCustomAttributesResponse result = await locationCustomAttributesApi.BulkUpsertLocationCustomAttributesAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -356,11 +372,11 @@ ListLocationCustomAttributesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `locationId` | `string` | Template, Required | The ID of the target [location](../../doc/models/location.md). |
+| `locationId` | `string` | Template, Required | The ID of the target [location](entity:Location). |
 | `visibilityFilter` | [`string`](../../doc/models/visibility-filter.md) | Query, Optional | Filters the `CustomAttributeDefinition` results by their `visibility` values. |
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `cursor` | `string` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request. For more<br>information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](../../doc/models/custom-attribute-definition.md) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -371,12 +387,15 @@ ListLocationCustomAttributesAsync(
 ```csharp
 string locationId = "location_id4";
 bool? withDefinitions = false;
-
 try
 {
     ListLocationCustomAttributesResponse result = await locationCustomAttributesApi.ListLocationCustomAttributesAsync(locationId, null, null, null, withDefinitions);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -396,7 +415,7 @@ DeleteLocationCustomAttributeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `locationId` | `string` | Template, Required | The ID of the target [location](../../doc/models/location.md). |
+| `locationId` | `string` | Template, Required | The ID of the target [location](entity:Location). |
 | `key` | `string` | Template, Required | The key of the custom attribute to delete. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
 
 ## Response Type
@@ -408,12 +427,15 @@ DeleteLocationCustomAttributeAsync(
 ```csharp
 string locationId = "location_id4";
 string key = "key0";
-
 try
 {
     DeleteLocationCustomAttributeResponse result = await locationCustomAttributesApi.DeleteLocationCustomAttributeAsync(locationId, key);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -437,9 +459,9 @@ RetrieveLocationCustomAttributeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `locationId` | `string` | Template, Required | The ID of the target [location](../../doc/models/location.md). |
+| `locationId` | `string` | Template, Required | The ID of the target [location](entity:Location). |
 | `key` | `string` | Template, Required | The key of the custom attribute to retrieve. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
-| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](../../doc/models/custom-attribute-definition.md) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 | `version` | `int?` | Query, Optional | The current version of the custom attribute, which is used for strongly consistent reads to<br>guarantee that you receive the most up-to-date data. When included in the request, Square<br>returns the specified version or a higher version if one exists. If the specified version is<br>higher than the current version, Square returns a `BAD_REQUEST` error. |
 
 ## Response Type
@@ -452,12 +474,15 @@ RetrieveLocationCustomAttributeAsync(
 string locationId = "location_id4";
 string key = "key0";
 bool? withDefinition = false;
-
 try
 {
     RetrieveLocationCustomAttributeResponse result = await locationCustomAttributesApi.RetrieveLocationCustomAttributeAsync(locationId, key, withDefinition, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -481,7 +506,7 @@ UpsertLocationCustomAttributeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `locationId` | `string` | Template, Required | The ID of the target [location](../../doc/models/location.md). |
+| `locationId` | `string` | Template, Required | The ID of the target [location](entity:Location). |
 | `key` | `string` | Template, Required | The key of the custom attribute to create or update. This key must match the `key` of a<br>custom attribute definition in the Square seller account. If the requesting application is not<br>the definition owner, you must use the qualified key. |
 | `body` | [`Models.UpsertLocationCustomAttributeRequest`](../../doc/models/upsert-location-custom-attribute-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
@@ -494,16 +519,20 @@ UpsertLocationCustomAttributeAsync(
 ```csharp
 string locationId = "location_id4";
 string key = "key0";
-var bodyCustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var body = new UpsertLocationCustomAttributeRequest.Builder(
-        bodyCustomAttribute)
-    .Build();
+Models.UpsertLocationCustomAttributeRequest body = new Models.UpsertLocationCustomAttributeRequest.Builder(
+    new Models.CustomAttribute.Builder()
+    .Build()
+)
+.Build();
 
 try
 {
     UpsertLocationCustomAttributeResponse result = await locationCustomAttributesApi.UpsertLocationCustomAttributeAsync(locationId, key, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

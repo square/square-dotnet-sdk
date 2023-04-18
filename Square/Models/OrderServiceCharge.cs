@@ -35,6 +35,8 @@ namespace Square.Models
         /// <param name="appliedTaxes">applied_taxes.</param>
         /// <param name="metadata">metadata.</param>
         /// <param name="type">type.</param>
+        /// <param name="treatmentType">treatment_type.</param>
+        /// <param name="scope">scope.</param>
         public OrderServiceCharge(
             string uid = null,
             string name = null,
@@ -49,7 +51,9 @@ namespace Square.Models
             bool? taxable = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
             IDictionary<string, string> metadata = null,
-            string type = null)
+            string type = null,
+            string treatmentType = null,
+            string scope = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -117,6 +121,8 @@ namespace Square.Models
             }
 
             this.Type = type;
+            this.TreatmentType = treatmentType;
+            this.Scope = scope;
         }
         internal OrderServiceCharge(Dictionary<string, bool> shouldSerialize,
             string uid = null,
@@ -132,7 +138,9 @@ namespace Square.Models
             bool? taxable = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
             IDictionary<string, string> metadata = null,
-            string type = null)
+            string type = null,
+            string treatmentType = null,
+            string scope = null)
         {
             this.shouldSerialize = shouldSerialize;
             Uid = uid;
@@ -149,6 +157,8 @@ namespace Square.Models
             AppliedTaxes = appliedTaxes;
             Metadata = metadata;
             Type = type;
+            TreatmentType = treatmentType;
+            Scope = scope;
         }
 
         /// <summary>
@@ -164,7 +174,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// The catalog object ID referencing the service charge [CatalogObject]($m/CatalogObject).
+        /// The catalog object ID referencing the service charge [CatalogObject](entity:CatalogObject).
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
@@ -282,6 +292,20 @@ namespace Square.Models
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; }
 
+        /// <summary>
+        /// Indicates whether the service charge will be treated as a value-holding line item or
+        /// apportioned toward a line item.
+        /// </summary>
+        [JsonProperty("treatment_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string TreatmentType { get; }
+
+        /// <summary>
+        /// Indicates whether this is a line-item or order-level apportioned
+        /// service charge.
+        /// </summary>
+        [JsonProperty("scope", NullValueHandling = NullValueHandling.Ignore)]
+        public string Scope { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -391,16 +415,20 @@ namespace Square.Models
                 ((this.Taxable == null && other.Taxable == null) || (this.Taxable?.Equals(other.Taxable) == true)) &&
                 ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
                 ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true));
+                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.TreatmentType == null && other.TreatmentType == null) || (this.TreatmentType?.Equals(other.TreatmentType) == true)) &&
+                ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -131914007;
+            int hashCode = -634854156;
             hashCode = HashCode.Combine(this.Uid, this.Name, this.CatalogObjectId, this.CatalogVersion, this.Percentage, this.AmountMoney, this.AppliedMoney);
 
             hashCode = HashCode.Combine(hashCode, this.TotalMoney, this.TotalTaxMoney, this.CalculationPhase, this.Taxable, this.AppliedTaxes, this.Metadata, this.Type);
+
+            hashCode = HashCode.Combine(hashCode, this.TreatmentType, this.Scope);
 
             return hashCode;
         }
@@ -424,6 +452,8 @@ namespace Square.Models
             toStringOutput.Add($"this.AppliedTaxes = {(this.AppliedTaxes == null ? "null" : $"[{string.Join(", ", this.AppliedTaxes)} ]")}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.TreatmentType = {(this.TreatmentType == null ? "null" : this.TreatmentType.ToString())}");
+            toStringOutput.Add($"this.Scope = {(this.Scope == null ? "null" : this.Scope.ToString())}");
         }
 
         /// <summary>
@@ -446,7 +476,9 @@ namespace Square.Models
                 .Taxable(this.Taxable)
                 .AppliedTaxes(this.AppliedTaxes)
                 .Metadata(this.Metadata)
-                .Type(this.Type);
+                .Type(this.Type)
+                .TreatmentType(this.TreatmentType)
+                .Scope(this.Scope);
             return builder;
         }
 
@@ -481,6 +513,8 @@ namespace Square.Models
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
             private IDictionary<string, string> metadata;
             private string type;
+            private string treatmentType;
+            private string scope;
 
              /// <summary>
              /// Uid.
@@ -644,6 +678,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TreatmentType.
+             /// </summary>
+             /// <param name="treatmentType"> treatmentType. </param>
+             /// <returns> Builder. </returns>
+            public Builder TreatmentType(string treatmentType)
+            {
+                this.treatmentType = treatmentType;
+                return this;
+            }
+
+             /// <summary>
+             /// Scope.
+             /// </summary>
+             /// <param name="scope"> scope. </param>
+             /// <returns> Builder. </returns>
+            public Builder Scope(string scope)
+            {
+                this.scope = scope;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -729,7 +785,9 @@ namespace Square.Models
                     this.taxable,
                     this.appliedTaxes,
                     this.metadata,
-                    this.type);
+                    this.type,
+                    this.treatmentType,
+                    this.scope);
             }
         }
     }

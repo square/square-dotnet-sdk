@@ -49,7 +49,11 @@ try
 {
     ListMerchantsResponse result = await merchantsApi.ListMerchantsAsync(null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -76,11 +80,14 @@ RetrieveMerchantAsync(
 
 ```csharp
 string merchantId = "merchant_id0";
-
 try
 {
     RetrieveMerchantResponse result = await merchantsApi.RetrieveMerchantAsync(merchantId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

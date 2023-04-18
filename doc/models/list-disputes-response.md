@@ -13,7 +13,7 @@ Defines fields in a `ListDisputes` response.
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
 | `Disputes` | [`IList<Models.Dispute>`](../../doc/models/dispute.md) | Optional | The list of disputes. |
-| `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request.<br>If unset, this is the final response. For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
+| `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request.<br>If unset, this is the final response. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 
 ## Example (as JSON)
 

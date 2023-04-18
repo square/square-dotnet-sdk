@@ -150,7 +150,7 @@ namespace Square.Models
         public IList<Models.Refund> Refunds { get; }
 
         /// <summary>
-        /// If the transaction was created with the [Charge]($e/Transactions/Charge)
+        /// If the transaction was created with the [Charge](api-endpoint:Transactions-Charge)
         /// endpoint, this value is the same as the value provided for the `reference_id`
         /// parameter in the request to that endpoint. Otherwise, it is not set.
         /// </summary>

@@ -24,10 +24,12 @@ namespace Square.Models
         /// <param name="autocomplete">autocomplete.</param>
         /// <param name="delayDuration">delay_duration.</param>
         /// <param name="acceptPartialAuthorization">accept_partial_authorization.</param>
+        /// <param name="delayAction">delay_action.</param>
         public PaymentOptions(
             bool? autocomplete = null,
             string delayDuration = null,
-            bool? acceptPartialAuthorization = null)
+            bool? acceptPartialAuthorization = null,
+            string delayAction = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -54,16 +56,19 @@ namespace Square.Models
                 this.AcceptPartialAuthorization = acceptPartialAuthorization;
             }
 
+            this.DelayAction = delayAction;
         }
         internal PaymentOptions(Dictionary<string, bool> shouldSerialize,
             bool? autocomplete = null,
             string delayDuration = null,
-            bool? acceptPartialAuthorization = null)
+            bool? acceptPartialAuthorization = null,
+            string delayAction = null)
         {
             this.shouldSerialize = shouldSerialize;
             Autocomplete = autocomplete;
             DelayDuration = delayDuration;
             AcceptPartialAuthorization = acceptPartialAuthorization;
+            DelayAction = delayAction;
         }
 
         /// <summary>
@@ -76,7 +81,7 @@ namespace Square.Models
         /// <summary>
         /// The duration of time after the payment's creation when Square automatically cancels the
         /// payment. This automatic cancellation applies only to payments that do not reach a terminal state
-        /// (COMPLETED, CANCELED, or FAILED) before the `delay_duration` time period.
+        /// (COMPLETED or CANCELED) before the `delay_duration` time period.
         /// This parameter should be specified as a time duration, in RFC 3339 format, with a minimum value
         /// of 1 minute.
         /// Note: This feature is only supported for card payments. This parameter can only be set for a delayed
@@ -102,6 +107,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("accept_partial_authorization")]
         public bool? AcceptPartialAuthorization { get; }
+
+        /// <summary>
+        /// Describes the action to be applied to a delayed capture payment when the delay_duration
+        /// has elapsed.
+        /// </summary>
+        [JsonProperty("delay_action", NullValueHandling = NullValueHandling.Ignore)]
+        public string DelayAction { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -156,14 +168,15 @@ namespace Square.Models
             return obj is PaymentOptions other &&
                 ((this.Autocomplete == null && other.Autocomplete == null) || (this.Autocomplete?.Equals(other.Autocomplete) == true)) &&
                 ((this.DelayDuration == null && other.DelayDuration == null) || (this.DelayDuration?.Equals(other.DelayDuration) == true)) &&
-                ((this.AcceptPartialAuthorization == null && other.AcceptPartialAuthorization == null) || (this.AcceptPartialAuthorization?.Equals(other.AcceptPartialAuthorization) == true));
+                ((this.AcceptPartialAuthorization == null && other.AcceptPartialAuthorization == null) || (this.AcceptPartialAuthorization?.Equals(other.AcceptPartialAuthorization) == true)) &&
+                ((this.DelayAction == null && other.DelayAction == null) || (this.DelayAction?.Equals(other.DelayAction) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 530475117;
-            hashCode = HashCode.Combine(this.Autocomplete, this.DelayDuration, this.AcceptPartialAuthorization);
+            int hashCode = 56745792;
+            hashCode = HashCode.Combine(this.Autocomplete, this.DelayDuration, this.AcceptPartialAuthorization, this.DelayAction);
 
             return hashCode;
         }
@@ -176,6 +189,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Autocomplete = {(this.Autocomplete == null ? "null" : this.Autocomplete.ToString())}");
             toStringOutput.Add($"this.DelayDuration = {(this.DelayDuration == null ? "null" : this.DelayDuration == string.Empty ? "" : this.DelayDuration)}");
             toStringOutput.Add($"this.AcceptPartialAuthorization = {(this.AcceptPartialAuthorization == null ? "null" : this.AcceptPartialAuthorization.ToString())}");
+            toStringOutput.Add($"this.DelayAction = {(this.DelayAction == null ? "null" : this.DelayAction.ToString())}");
         }
 
         /// <summary>
@@ -187,7 +201,8 @@ namespace Square.Models
             var builder = new Builder()
                 .Autocomplete(this.Autocomplete)
                 .DelayDuration(this.DelayDuration)
-                .AcceptPartialAuthorization(this.AcceptPartialAuthorization);
+                .AcceptPartialAuthorization(this.AcceptPartialAuthorization)
+                .DelayAction(this.DelayAction);
             return builder;
         }
 
@@ -206,6 +221,7 @@ namespace Square.Models
             private bool? autocomplete;
             private string delayDuration;
             private bool? acceptPartialAuthorization;
+            private string delayAction;
 
              /// <summary>
              /// Autocomplete.
@@ -243,6 +259,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// DelayAction.
+             /// </summary>
+             /// <param name="delayAction"> delayAction. </param>
+             /// <returns> Builder. </returns>
+            public Builder DelayAction(string delayAction)
+            {
+                this.delayAction = delayAction;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -277,7 +304,8 @@ namespace Square.Models
                 return new PaymentOptions(shouldSerialize,
                     this.autocomplete,
                     this.delayDuration,
-                    this.acceptPartialAuthorization);
+                    this.acceptPartialAuthorization,
+                    this.delayAction);
             }
         }
     }

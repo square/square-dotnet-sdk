@@ -47,7 +47,7 @@ namespace Square.Models
 
         /// <summary>
         /// The pagination cursor returned in the previous response. Leave unset for an initial request.
-        /// See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information.
+        /// See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information.
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
@@ -61,6 +61,9 @@ namespace Square.Models
         /// ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST,
         /// PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,
         /// SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS.
+        /// Note that if you wish for the query to return objects belonging to nested types (i.e., COMPONENT, IMAGE,
+        /// ITEM_OPTION_VAL, ITEM_VARIATION, or MODIFIER), you must explicitly include all the types of interest
+        /// in this field.
         /// </summary>
         [JsonProperty("object_types", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> ObjectTypes { get; }

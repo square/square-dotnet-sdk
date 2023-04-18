@@ -42,12 +42,15 @@ DeleteSnippetAsync(
 
 ```csharp
 string siteId = "site_id6";
-
 try
 {
     DeleteSnippetResponse result = await snippetsApi.DeleteSnippetAsync(siteId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -78,12 +81,15 @@ RetrieveSnippetAsync(
 
 ```csharp
 string siteId = "site_id6";
-
 try
 {
     RetrieveSnippetResponse result = await snippetsApi.RetrieveSnippetAsync(siteId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -117,17 +123,22 @@ UpsertSnippetAsync(
 
 ```csharp
 string siteId = "site_id6";
-var bodySnippet = new Snippet.Builder(
-        "<script>var js = 1;</script>")
-    .Build();
-var body = new UpsertSnippetRequest.Builder(
-        bodySnippet)
-    .Build();
+Models.UpsertSnippetRequest body = new Models.UpsertSnippetRequest.Builder(
+    new Models.Snippet.Builder(
+        "<script>var js = 1;</script>"
+    )
+    .Build()
+)
+.Build();
 
 try
 {
     UpsertSnippetResponse result = await snippetsApi.UpsertSnippetAsync(siteId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

@@ -58,7 +58,11 @@ try
 {
     ListBreakTypesResponse result = await laborApi.ListBreakTypesAsync(null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -97,22 +101,27 @@ CreateBreakTypeAsync(
 ## Example Usage
 
 ```csharp
-var bodyBreakType = new BreakType.Builder(
+Models.CreateBreakTypeRequest body = new Models.CreateBreakTypeRequest.Builder(
+    new Models.BreakType.Builder(
         "CGJN03P1D08GF",
         "Lunch Break",
         "PT30M",
-        true)
-    .Build();
-var body = new CreateBreakTypeRequest.Builder(
-        bodyBreakType)
-    .IdempotencyKey("PAD3NG5KSN2GL")
-    .Build();
+        true
+    )
+    .Build()
+)
+.IdempotencyKey("PAD3NG5KSN2GL")
+.Build();
 
 try
 {
     CreateBreakTypeResponse result = await laborApi.CreateBreakTypeAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -141,12 +150,15 @@ DeleteBreakTypeAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     DeleteBreakTypeResponse result = await laborApi.DeleteBreakTypeAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -173,12 +185,15 @@ GetBreakTypeAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     GetBreakTypeResponse result = await laborApi.GetBreakTypeAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -207,22 +222,27 @@ UpdateBreakTypeAsync(
 
 ```csharp
 string id = "id0";
-var bodyBreakType = new BreakType.Builder(
+Models.UpdateBreakTypeRequest body = new Models.UpdateBreakTypeRequest.Builder(
+    new Models.BreakType.Builder(
         "26M7H24AZ9N6R",
         "Lunch",
         "PT50M",
-        true)
+        true
+    )
     .Version(1)
-    .Build();
-var body = new UpdateBreakTypeRequest.Builder(
-        bodyBreakType)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     UpdateBreakTypeResponse result = await laborApi.UpdateBreakTypeAsync(id, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -258,7 +278,11 @@ try
 {
     ListEmployeeWagesResponse result = await laborApi.ListEmployeeWagesAsync(null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -287,12 +311,15 @@ GetEmployeeWageAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     GetEmployeeWageResponse result = await laborApi.GetEmployeeWageAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -336,44 +363,49 @@ CreateShiftAsync(
 ## Example Usage
 
 ```csharp
-var bodyShiftWageHourlyRate = new Money.Builder()
-    .Amount(1100L)
-    .Currency("USD")
-    .Build();
-var bodyShiftWage = new ShiftWage.Builder()
-    .Title("Barista")
-    .HourlyRate(bodyShiftWageHourlyRate)
-    .Build();
-var bodyShiftBreaks = new List<Break>();
-
-var bodyShiftBreaks0 = new Break.Builder(
-        "2019-01-25T11:11:00+00:00",
-        "REGS1EQR1TPZ5",
-        "Tea Break",
-        "PT5M",
-        true)
-    .EndAt("2019-01-25T11:16:00+00:00")
-    .Build();
-bodyShiftBreaks.Add(bodyShiftBreaks0);
-
-var bodyShift = new Shift.Builder(
-        "2019-01-25T08:11:00+00:00")
+Models.CreateShiftRequest body = new Models.CreateShiftRequest.Builder(
+    new Models.Shift.Builder(
+        "2019-01-25T08:11:00+00:00"
+    )
     .LocationId("PAA1RJZZKXBFG")
     .EndAt("2019-01-25T18:11:00+00:00")
-    .Wage(bodyShiftWage)
-    .Breaks(bodyShiftBreaks)
+    .Wage(
+        new Models.ShiftWage.Builder()
+        .Title("Barista")
+        .HourlyRate(
+            new Models.Money.Builder()
+            .Amount(1100L)
+            .Currency("USD")
+            .Build())
+        .Build())
+    .Breaks(
+        new List<Models.Break>
+        {
+            new Models.Break.Builder(
+                "2019-01-25T11:11:00+00:00",
+                "REGS1EQR1TPZ5",
+                "Tea Break",
+                "PT5M",
+                true
+            )
+            .EndAt("2019-01-25T11:16:00+00:00")
+            .Build(),
+        })
     .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
-    .Build();
-var body = new CreateShiftRequest.Builder(
-        bodyShift)
-    .IdempotencyKey("HIDSNG5KS478L")
-    .Build();
+    .Build()
+)
+.IdempotencyKey("HIDSNG5KS478L")
+.Build();
 
 try
 {
     CreateShiftResponse result = await laborApi.CreateShiftAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -414,31 +446,35 @@ SearchShiftsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterWorkdayDateRange = new DateRange.Builder()
-    .StartDate("2019-01-20")
-    .EndDate("2019-02-03")
-    .Build();
-var bodyQueryFilterWorkday = new ShiftWorkday.Builder()
-    .DateRange(bodyQueryFilterWorkdayDateRange)
-    .MatchShiftsBy("START_AT")
-    .DefaultTimezone("America/Los_Angeles")
-    .Build();
-var bodyQueryFilter = new ShiftFilter.Builder()
-    .Workday(bodyQueryFilterWorkday)
-    .Build();
-var bodyQuery = new ShiftQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Build();
-var body = new SearchShiftsRequest.Builder()
-    .Query(bodyQuery)
-    .Limit(100)
-    .Build();
+Models.SearchShiftsRequest body = new Models.SearchShiftsRequest.Builder()
+.Query(
+    new Models.ShiftQuery.Builder()
+    .Filter(
+        new Models.ShiftFilter.Builder()
+        .Workday(
+            new Models.ShiftWorkday.Builder()
+            .DateRange(
+                new Models.DateRange.Builder()
+                .StartDate("2019-01-20")
+                .EndDate("2019-02-03")
+                .Build())
+            .MatchShiftsBy("START_AT")
+            .DefaultTimezone("America/Los_Angeles")
+            .Build())
+        .Build())
+    .Build())
+.Limit(100)
+.Build();
 
 try
 {
     SearchShiftsResponse result = await laborApi.SearchShiftsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -465,12 +501,15 @@ DeleteShiftAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     DeleteShiftResponse result = await laborApi.DeleteShiftAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -497,12 +536,15 @@ GetShiftAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     GetShiftResponse result = await laborApi.GetShiftAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -537,45 +579,50 @@ UpdateShiftAsync(
 
 ```csharp
 string id = "id0";
-var bodyShiftWageHourlyRate = new Money.Builder()
-    .Amount(1500L)
-    .Currency("USD")
-    .Build();
-var bodyShiftWage = new ShiftWage.Builder()
-    .Title("Bartender")
-    .HourlyRate(bodyShiftWageHourlyRate)
-    .Build();
-var bodyShiftBreaks = new List<Break>();
-
-var bodyShiftBreaks0 = new Break.Builder(
-        "2019-01-25T11:11:00+00:00",
-        "REGS1EQR1TPZ5",
-        "Tea Break",
-        "PT5M",
-        true)
-    .Id("X7GAQYVVRRG6P")
-    .EndAt("2019-01-25T11:16:00+00:00")
-    .Build();
-bodyShiftBreaks.Add(bodyShiftBreaks0);
-
-var bodyShift = new Shift.Builder(
-        "2019-01-25T08:11:00+00:00")
+Models.UpdateShiftRequest body = new Models.UpdateShiftRequest.Builder(
+    new Models.Shift.Builder(
+        "2019-01-25T08:11:00+00:00"
+    )
     .LocationId("PAA1RJZZKXBFG")
     .EndAt("2019-01-25T18:11:00+00:00")
-    .Wage(bodyShiftWage)
-    .Breaks(bodyShiftBreaks)
+    .Wage(
+        new Models.ShiftWage.Builder()
+        .Title("Bartender")
+        .HourlyRate(
+            new Models.Money.Builder()
+            .Amount(1500L)
+            .Currency("USD")
+            .Build())
+        .Build())
+    .Breaks(
+        new List<Models.Break>
+        {
+            new Models.Break.Builder(
+                "2019-01-25T11:11:00+00:00",
+                "REGS1EQR1TPZ5",
+                "Tea Break",
+                "PT5M",
+                true
+            )
+            .Id("X7GAQYVVRRG6P")
+            .EndAt("2019-01-25T11:16:00+00:00")
+            .Build(),
+        })
     .Version(1)
     .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
-    .Build();
-var body = new UpdateShiftRequest.Builder(
-        bodyShift)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     UpdateShiftResponse result = await laborApi.UpdateShiftAsync(id, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -609,7 +656,11 @@ try
 {
     ListTeamMemberWagesResponse result = await laborApi.ListTeamMemberWagesAsync(null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -636,12 +687,15 @@ GetTeamMemberWageAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     GetTeamMemberWageResponse result = await laborApi.GetTeamMemberWageAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -673,7 +727,11 @@ try
 {
     ListWorkweekConfigsResponse result = await laborApi.ListWorkweekConfigsAsync(null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -702,19 +760,24 @@ UpdateWorkweekConfigAsync(
 
 ```csharp
 string id = "id0";
-var bodyWorkweekConfig = new WorkweekConfig.Builder(
+Models.UpdateWorkweekConfigRequest body = new Models.UpdateWorkweekConfigRequest.Builder(
+    new Models.WorkweekConfig.Builder(
         "MON",
-        "10:00")
+        "10:00"
+    )
     .Version(10)
-    .Build();
-var body = new UpdateWorkweekConfigRequest.Builder(
-        bodyWorkweekConfig)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     UpdateWorkweekConfigResponse result = await laborApi.UpdateWorkweekConfigAsync(id, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

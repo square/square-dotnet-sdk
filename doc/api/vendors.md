@@ -41,26 +41,26 @@ BulkCreateVendorsAsync(
 ## Example Usage
 
 ```csharp
-var bodyVendors = new Dictionary<string, Vendor>();
-
-
-var bodyVendors0 = new Vendor.Builder()
-    .Build();
-bodyVendors.Add("key0",bodyVendors0);
-
-var bodyVendors1 = new Vendor.Builder()
-    .Build();
-bodyVendors.Add("key1",bodyVendors1);
-
-var body = new BulkCreateVendorsRequest.Builder(
-        bodyVendors)
-    .Build();
+Models.BulkCreateVendorsRequest body = new Models.BulkCreateVendorsRequest.Builder(
+    new Dictionary<string, Models.Vendor>
+    {
+        ["key0"] = new Models.Vendor.Builder()
+        .Build(),
+        ["key1"] = new Models.Vendor.Builder()
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BulkCreateVendorsResponse result = await vendorsApi.BulkCreateVendorsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -86,17 +86,23 @@ BulkRetrieveVendorsAsync(
 ## Example Usage
 
 ```csharp
-var bodyVendorIds = new IList<string>();
-bodyVendorIds.Add("INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4");
-var body = new BulkRetrieveVendorsRequest.Builder()
-    .VendorIds(bodyVendorIds)
-    .Build();
+Models.BulkRetrieveVendorsRequest body = new Models.BulkRetrieveVendorsRequest.Builder()
+.VendorIds(
+    new List<string>
+    {
+        "INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4",
+    })
+.Build();
 
 try
 {
     BulkRetrieveVendorsResponse result = await vendorsApi.BulkRetrieveVendorsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -122,32 +128,32 @@ BulkUpdateVendorsAsync(
 ## Example Usage
 
 ```csharp
-var bodyVendors = new Dictionary<string, UpdateVendorRequest>();
-
-
-var bodyVendors0Vendor = new Vendor.Builder()
-    .Build();
-var bodyVendors0 = new UpdateVendorRequest.Builder(
-        bodyVendors0Vendor)
-    .Build();
-bodyVendors.Add("key0",bodyVendors0);
-
-var bodyVendors1Vendor = new Vendor.Builder()
-    .Build();
-var bodyVendors1 = new UpdateVendorRequest.Builder(
-        bodyVendors1Vendor)
-    .Build();
-bodyVendors.Add("key1",bodyVendors1);
-
-var body = new BulkUpdateVendorsRequest.Builder(
-        bodyVendors)
-    .Build();
+Models.BulkUpdateVendorsRequest body = new Models.BulkUpdateVendorsRequest.Builder(
+    new Dictionary<string, Models.UpdateVendorRequest>
+    {
+        ["key0"] = new Models.UpdateVendorRequest.Builder(
+            new Models.Vendor.Builder()
+            .Build()
+        )
+        .Build(),
+        ["key1"] = new Models.UpdateVendorRequest.Builder(
+            new Models.Vendor.Builder()
+            .Build()
+        )
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BulkUpdateVendorsResponse result = await vendorsApi.BulkUpdateVendorsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -173,15 +179,20 @@ CreateVendorAsync(
 ## Example Usage
 
 ```csharp
-var body = new CreateVendorRequest.Builder(
-        "idempotency_key2")
-    .Build();
+Models.CreateVendorRequest body = new Models.CreateVendorRequest.Builder(
+    "idempotency_key2"
+)
+.Build();
 
 try
 {
     CreateVendorResponse result = await vendorsApi.CreateVendorAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -207,14 +218,18 @@ SearchVendorsAsync(
 ## Example Usage
 
 ```csharp
-var body = new SearchVendorsRequest.Builder()
-    .Build();
+Models.SearchVendorsRequest body = new Models.SearchVendorsRequest.Builder()
+.Build();
 
 try
 {
     SearchVendorsResponse result = await vendorsApi.SearchVendorsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -231,7 +246,7 @@ RetrieveVendorAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `vendorId` | `string` | Template, Required | ID of the [Vendor](../../doc/models/vendor.md) to retrieve. |
+| `vendorId` | `string` | Template, Required | ID of the [Vendor](entity:Vendor) to retrieve. |
 
 ## Response Type
 
@@ -241,12 +256,15 @@ RetrieveVendorAsync(
 
 ```csharp
 string vendorId = "vendor_id8";
-
 try
 {
     RetrieveVendorResponse result = await vendorsApi.RetrieveVendorAsync(vendorId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -274,22 +292,26 @@ UpdateVendorAsync(
 ## Example Usage
 
 ```csharp
-var bodyVendor = new Vendor.Builder()
+Models.UpdateVendorRequest body = new Models.UpdateVendorRequest.Builder(
+    new Models.Vendor.Builder()
     .Id("INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4")
     .Name("Jack's Chicken Shack")
     .Version(1)
     .Status("ACTIVE")
-    .Build();
-var body = new UpdateVendorRequest.Builder(
-        bodyVendor)
-    .IdempotencyKey("8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe")
-    .Build();
-string vendorId = "vendor_id8";
+    .Build()
+)
+.IdempotencyKey("8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe")
+.Build();
 
+string vendorId = "vendor_id8";
 try
 {
     UpdateVendorResponse result = await vendorsApi.UpdateVendorAsync(body, vendorId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

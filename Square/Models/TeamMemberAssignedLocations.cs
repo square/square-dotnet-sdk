@@ -56,7 +56,7 @@ namespace Square.Models
         public string AssignmentType { get; }
 
         /// <summary>
-        /// The locations that the team member is assigned to.
+        /// The explicit locations that the team member is assigned to.
         /// </summary>
         [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }

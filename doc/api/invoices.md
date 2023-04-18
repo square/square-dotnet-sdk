@@ -49,12 +49,15 @@ ListInvoicesAsync(
 
 ```csharp
 string locationId = "location_id4";
-
 try
 {
     ListInvoicesResponse result = await invoicesApi.ListInvoicesAsync(locationId, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -84,75 +87,74 @@ CreateInvoiceAsync(
 ## Example Usage
 
 ```csharp
-var bodyInvoicePrimaryRecipient = new InvoiceRecipient.Builder()
-    .CustomerId("JDKYHBWT1D4F8MFH63DBMEN8Y4")
-    .Build();
-var bodyInvoicePaymentRequests = new List<InvoicePaymentRequest>();
-
-var bodyInvoicePaymentRequests0Reminders = new List<InvoicePaymentReminder>();
-
-var bodyInvoicePaymentRequests0Reminders0 = new InvoicePaymentReminder.Builder()
-    .RelativeScheduledDays(-1)
-    .Message("Your invoice is due tomorrow")
-    .Build();
-bodyInvoicePaymentRequests0Reminders.Add(bodyInvoicePaymentRequests0Reminders0);
-
-var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
-    .RequestType("BALANCE")
-    .DueDate("2030-01-24")
-    .TippingEnabled(true)
-    .AutomaticPaymentSource("NONE")
-    .Reminders(bodyInvoicePaymentRequests0Reminders)
-    .Build();
-bodyInvoicePaymentRequests.Add(bodyInvoicePaymentRequests0);
-
-var bodyInvoiceAcceptedPaymentMethods = new InvoiceAcceptedPaymentMethods.Builder()
-    .Card(true)
-    .SquareGiftCard(false)
-    .BankAccount(false)
-    .BuyNowPayLater(false)
-    .Build();
-var bodyInvoiceCustomFields = new List<InvoiceCustomField>();
-
-var bodyInvoiceCustomFields0 = new InvoiceCustomField.Builder()
-    .Label("Event Reference Number")
-    .MValue("Ref. #1234")
-    .Placement("ABOVE_LINE_ITEMS")
-    .Build();
-bodyInvoiceCustomFields.Add(bodyInvoiceCustomFields0);
-
-var bodyInvoiceCustomFields1 = new InvoiceCustomField.Builder()
-    .Label("Terms of Service")
-    .MValue("The terms of service are...")
-    .Placement("BELOW_LINE_ITEMS")
-    .Build();
-bodyInvoiceCustomFields.Add(bodyInvoiceCustomFields1);
-
-var bodyInvoice = new Invoice.Builder()
+Models.CreateInvoiceRequest body = new Models.CreateInvoiceRequest.Builder(
+    new Models.Invoice.Builder()
     .LocationId("ES0RJRZYEC39A")
     .OrderId("CAISENgvlJ6jLWAzERDzjyHVybY")
-    .PrimaryRecipient(bodyInvoicePrimaryRecipient)
-    .PaymentRequests(bodyInvoicePaymentRequests)
+    .PrimaryRecipient(
+        new Models.InvoiceRecipient.Builder()
+        .CustomerId("JDKYHBWT1D4F8MFH63DBMEN8Y4")
+        .Build())
+    .PaymentRequests(
+        new List<Models.InvoicePaymentRequest>
+        {
+            new Models.InvoicePaymentRequest.Builder()
+            .RequestType("BALANCE")
+            .DueDate("2030-01-24")
+            .TippingEnabled(true)
+            .AutomaticPaymentSource("NONE")
+            .Reminders(
+                new List<Models.InvoicePaymentReminder>
+                {
+                    new Models.InvoicePaymentReminder.Builder()
+                    .RelativeScheduledDays(-1)
+                    .Message("Your invoice is due tomorrow")
+                    .Build(),
+                })
+            .Build(),
+        })
     .DeliveryMethod("EMAIL")
     .InvoiceNumber("inv-100")
     .Title("Event Planning Services")
     .Description("We appreciate your business!")
     .ScheduledAt("2030-01-13T10:00:00Z")
-    .AcceptedPaymentMethods(bodyInvoiceAcceptedPaymentMethods)
-    .CustomFields(bodyInvoiceCustomFields)
+    .AcceptedPaymentMethods(
+        new Models.InvoiceAcceptedPaymentMethods.Builder()
+        .Card(true)
+        .SquareGiftCard(false)
+        .BankAccount(false)
+        .BuyNowPayLater(false)
+        .Build())
+    .CustomFields(
+        new List<Models.InvoiceCustomField>
+        {
+            new Models.InvoiceCustomField.Builder()
+            .Label("Event Reference Number")
+            .MValue("Ref. #1234")
+            .Placement("ABOVE_LINE_ITEMS")
+            .Build(),
+            new Models.InvoiceCustomField.Builder()
+            .Label("Terms of Service")
+            .MValue("The terms of service are...")
+            .Placement("BELOW_LINE_ITEMS")
+            .Build(),
+        })
     .SaleOrServiceDate("2030-01-24")
     .StorePaymentMethodEnabled(false)
-    .Build();
-var body = new CreateInvoiceRequest.Builder(
-        bodyInvoice)
-    .IdempotencyKey("ce3748f9-5fc1-4762-aa12-aae5e843f1f4")
-    .Build();
+    .Build()
+)
+.IdempotencyKey("ce3748f9-5fc1-4762-aa12-aae5e843f1f4")
+.Build();
 
 try
 {
     CreateInvoiceResponse result = await invoicesApi.CreateInvoiceAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -184,31 +186,40 @@ SearchInvoicesAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterLocationIds = new IList<string>();
-bodyQueryFilterLocationIds.Add("ES0RJRZYEC39A");
-var bodyQueryFilterCustomerIds = new IList<string>();
-bodyQueryFilterCustomerIds.Add("JDKYHBWT1D4F8MFH63DBMEN8Y4");
-var bodyQueryFilter = new InvoiceFilter.Builder(
-        bodyQueryFilterLocationIds)
-    .CustomerIds(bodyQueryFilterCustomerIds)
-    .Build();
-var bodyQuerySort = new InvoiceSort.Builder(
-        "INVOICE_SORT_DATE")
-    .Order("DESC")
-    .Build();
-var bodyQuery = new InvoiceQuery.Builder(
-        bodyQueryFilter)
-    .Sort(bodyQuerySort)
-    .Build();
-var body = new SearchInvoicesRequest.Builder(
-        bodyQuery)
-    .Build();
+Models.SearchInvoicesRequest body = new Models.SearchInvoicesRequest.Builder(
+    new Models.InvoiceQuery.Builder(
+        new Models.InvoiceFilter.Builder(
+            new List<string>
+            {
+                "ES0RJRZYEC39A",
+            }
+        )
+        .CustomerIds(
+            new List<string>
+            {
+                "JDKYHBWT1D4F8MFH63DBMEN8Y4",
+            })
+        .Build()
+    )
+    .Sort(
+        new Models.InvoiceSort.Builder(
+            "INVOICE_SORT_DATE"
+        )
+        .Order("DESC")
+        .Build())
+    .Build()
+)
+.Build();
 
 try
 {
     SearchInvoicesResponse result = await invoicesApi.SearchInvoicesAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -229,7 +240,7 @@ DeleteInvoiceAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `invoiceId` | `string` | Template, Required | The ID of the invoice to delete. |
-| `version` | `int?` | Query, Optional | The version of the [invoice](../../doc/models/invoice.md) to delete.<br>If you do not know the version, you can call [GetInvoice](../../doc/api/invoices.md#get-invoice) or<br>[ListInvoices](../../doc/api/invoices.md#list-invoices). |
+| `version` | `int?` | Query, Optional | The version of the [invoice](entity:Invoice) to delete.<br>If you do not know the version, you can call [GetInvoice](api-endpoint:Invoices-GetInvoice) or<br>[ListInvoices](api-endpoint:Invoices-ListInvoices). |
 
 ## Response Type
 
@@ -239,12 +250,15 @@ DeleteInvoiceAsync(
 
 ```csharp
 string invoiceId = "invoice_id0";
-
 try
 {
     DeleteInvoiceResponse result = await invoicesApi.DeleteInvoiceAsync(invoiceId, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -271,12 +285,15 @@ GetInvoiceAsync(
 
 ```csharp
 string invoiceId = "invoice_id0";
-
 try
 {
     GetInvoiceResponse result = await invoicesApi.GetInvoiceAsync(invoiceId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -308,31 +325,36 @@ UpdateInvoiceAsync(
 
 ```csharp
 string invoiceId = "invoice_id0";
-var bodyInvoicePaymentRequests = new List<InvoicePaymentRequest>();
-
-var bodyInvoicePaymentRequests0 = new InvoicePaymentRequest.Builder()
-    .Uid("2da7964f-f3d2-4f43-81e8-5aa220bf3355")
-    .TippingEnabled(false)
-    .Build();
-bodyInvoicePaymentRequests.Add(bodyInvoicePaymentRequests0);
-
-var bodyInvoice = new Invoice.Builder()
+Models.UpdateInvoiceRequest body = new Models.UpdateInvoiceRequest.Builder(
+    new Models.Invoice.Builder()
     .Version(1)
-    .PaymentRequests(bodyInvoicePaymentRequests)
-    .Build();
-var bodyFieldsToClear = new IList<string>();
-bodyFieldsToClear.Add("payments_requests[2da7964f-f3d2-4f43-81e8-5aa220bf3355].reminders");
-var body = new UpdateInvoiceRequest.Builder(
-        bodyInvoice)
-    .IdempotencyKey("4ee82288-0910-499e-ab4c-5d0071dad1be")
-    .FieldsToClear(bodyFieldsToClear)
-    .Build();
+    .PaymentRequests(
+        new List<Models.InvoicePaymentRequest>
+        {
+            new Models.InvoicePaymentRequest.Builder()
+            .Uid("2da7964f-f3d2-4f43-81e8-5aa220bf3355")
+            .TippingEnabled(false)
+            .Build(),
+        })
+    .Build()
+)
+.IdempotencyKey("4ee82288-0910-499e-ab4c-5d0071dad1be")
+.FieldsToClear(
+    new List<string>
+    {
+        "payments_requests[2da7964f-f3d2-4f43-81e8-5aa220bf3355].reminders",
+    })
+.Build();
 
 try
 {
     UpdateInvoiceResponse result = await invoicesApi.UpdateInvoiceAsync(invoiceId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -353,7 +375,7 @@ CancelInvoiceAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `invoiceId` | `string` | Template, Required | The ID of the [invoice](../../doc/models/invoice.md) to cancel. |
+| `invoiceId` | `string` | Template, Required | The ID of the [invoice](entity:Invoice) to cancel. |
 | `body` | [`Models.CancelInvoiceRequest`](../../doc/models/cancel-invoice-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -364,15 +386,20 @@ CancelInvoiceAsync(
 
 ```csharp
 string invoiceId = "invoice_id0";
-var body = new CancelInvoiceRequest.Builder(
-        0)
-    .Build();
+Models.CancelInvoiceRequest body = new Models.CancelInvoiceRequest.Builder(
+    0
+)
+.Build();
 
 try
 {
     CancelInvoiceResponse result = await invoicesApi.CancelInvoiceAsync(invoiceId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -411,15 +438,20 @@ PublishInvoiceAsync(
 
 ```csharp
 string invoiceId = "invoice_id0";
-var body = new PublishInvoiceRequest.Builder(
-        1)
-    .IdempotencyKey("32da42d0-1997-41b0-826b-f09464fc2c2e")
-    .Build();
+Models.PublishInvoiceRequest body = new Models.PublishInvoiceRequest.Builder(
+    1
+)
+.IdempotencyKey("32da42d0-1997-41b0-826b-f09464fc2c2e")
+.Build();
 
 try
 {
     PublishInvoiceResponse result = await invoicesApi.PublishInvoiceAsync(invoiceId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

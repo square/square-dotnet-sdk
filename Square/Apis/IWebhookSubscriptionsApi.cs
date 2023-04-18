@@ -41,8 +41,8 @@ namespace Square.Apis
         /// Lists all webhook subscriptions owned by your application.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
-        /// <param name="includeDisabled">Optional parameter: Includes disabled [Subscription]($m/WebhookSubscription)s. By default, all enabled [Subscription]($m/WebhookSubscription)s are returned..</param>
-        /// <param name="sortOrder">Optional parameter: Sorts the returned list by when the [Subscription]($m/WebhookSubscription) was created with the specified order. This field defaults to ASC..</param>
+        /// <param name="includeDisabled">Optional parameter: Includes disabled [Subscription](entity:WebhookSubscription)s. By default, all enabled [Subscription](entity:WebhookSubscription)s are returned..</param>
+        /// <param name="sortOrder">Optional parameter: Sorts the returned list by when the [Subscription](entity:WebhookSubscription) was created with the specified order. This field defaults to ASC..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page. The default value of 100 is also the maximum allowed value.  Default: 100.</param>
         /// <returns>Returns the Models.ListWebhookSubscriptionsResponse response from the API call.</returns>
         Models.ListWebhookSubscriptionsResponse ListWebhookSubscriptions(
@@ -55,8 +55,8 @@ namespace Square.Apis
         /// Lists all webhook subscriptions owned by your application.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>
-        /// <param name="includeDisabled">Optional parameter: Includes disabled [Subscription]($m/WebhookSubscription)s. By default, all enabled [Subscription]($m/WebhookSubscription)s are returned..</param>
-        /// <param name="sortOrder">Optional parameter: Sorts the returned list by when the [Subscription]($m/WebhookSubscription) was created with the specified order. This field defaults to ASC..</param>
+        /// <param name="includeDisabled">Optional parameter: Includes disabled [Subscription](entity:WebhookSubscription)s. By default, all enabled [Subscription](entity:WebhookSubscription)s are returned..</param>
+        /// <param name="sortOrder">Optional parameter: Sorts the returned list by when the [Subscription](entity:WebhookSubscription) was created with the specified order. This field defaults to ASC..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page. The default value of 100 is also the maximum allowed value.  Default: 100.</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListWebhookSubscriptionsResponse response from the API call.</returns>
@@ -88,7 +88,7 @@ namespace Square.Apis
         /// <summary>
         /// Deletes a webhook subscription.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to delete..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to delete..</param>
         /// <returns>Returns the Models.DeleteWebhookSubscriptionResponse response from the API call.</returns>
         Models.DeleteWebhookSubscriptionResponse DeleteWebhookSubscription(
                 string subscriptionId);
@@ -96,7 +96,7 @@ namespace Square.Apis
         /// <summary>
         /// Deletes a webhook subscription.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to delete..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to delete..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.DeleteWebhookSubscriptionResponse response from the API call.</returns>
         Task<Models.DeleteWebhookSubscriptionResponse> DeleteWebhookSubscriptionAsync(
@@ -106,7 +106,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a webhook subscription identified by its ID.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to retrieve..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveWebhookSubscriptionResponse response from the API call.</returns>
         Models.RetrieveWebhookSubscriptionResponse RetrieveWebhookSubscription(
                 string subscriptionId);
@@ -114,7 +114,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a webhook subscription identified by its ID.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to retrieve..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveWebhookSubscriptionResponse response from the API call.</returns>
         Task<Models.RetrieveWebhookSubscriptionResponse> RetrieveWebhookSubscriptionAsync(
@@ -124,7 +124,7 @@ namespace Square.Apis
         /// <summary>
         /// Updates a webhook subscription.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to update..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UpdateWebhookSubscriptionResponse response from the API call.</returns>
         Models.UpdateWebhookSubscriptionResponse UpdateWebhookSubscription(
@@ -134,7 +134,7 @@ namespace Square.Apis
         /// <summary>
         /// Updates a webhook subscription.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to update..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.UpdateWebhookSubscriptionResponse response from the API call.</returns>
@@ -146,7 +146,7 @@ namespace Square.Apis
         /// <summary>
         /// Updates a webhook subscription by replacing the existing signature key with a new one.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to update..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UpdateWebhookSubscriptionSignatureKeyResponse response from the API call.</returns>
         Models.UpdateWebhookSubscriptionSignatureKeyResponse UpdateWebhookSubscriptionSignatureKey(
@@ -156,7 +156,7 @@ namespace Square.Apis
         /// <summary>
         /// Updates a webhook subscription by replacing the existing signature key with a new one.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to update..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.UpdateWebhookSubscriptionSignatureKeyResponse response from the API call.</returns>
@@ -168,7 +168,7 @@ namespace Square.Apis
         /// <summary>
         /// Tests a webhook subscription by sending a test event to the notification URL.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to test..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to test..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.TestWebhookSubscriptionResponse response from the API call.</returns>
         Models.TestWebhookSubscriptionResponse TestWebhookSubscription(
@@ -178,7 +178,7 @@ namespace Square.Apis
         /// <summary>
         /// Tests a webhook subscription by sending a test event to the notification URL.
         /// </summary>
-        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription]($m/WebhookSubscription) to test..</param>
+        /// <param name="subscriptionId">Required parameter: [REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to test..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.TestWebhookSubscriptionResponse response from the API call.</returns>

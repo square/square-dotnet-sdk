@@ -135,7 +135,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square-generated ID of the payment request in an [invoice]($m/Invoice).
+        /// The Square-generated ID of the payment request in an [invoice](entity:Invoice).
         /// </summary>
         [JsonProperty("uid")]
         public string Uid { get; }
@@ -207,7 +207,7 @@ namespace Square.Models
 
         /// <summary>
         /// The ID of the credit or debit card on file to charge for the payment request. To get the cards on file for a customer,
-        /// call [ListCards]($e/Cards/ListCards) and include the `customer_id` of the invoice recipient.
+        /// call [ListCards](api-endpoint:Cards-ListCards) and include the `customer_id` of the invoice recipient.
         /// </summary>
         [JsonProperty("card_id")]
         public string CardId { get; }

@@ -93,13 +93,13 @@ namespace Square.Models
         public int? DurationMinutes { get; }
 
         /// <summary>
-        /// The ID of the [CatalogItemVariation]($m/CatalogItemVariation) object representing the service booked in this segment.
+        /// The ID of the [CatalogItemVariation](entity:CatalogItemVariation) object representing the service booked in this segment.
         /// </summary>
         [JsonProperty("service_variation_id")]
         public string ServiceVariationId { get; }
 
         /// <summary>
-        /// The ID of the [TeamMember]($m/TeamMember) object representing the team member booked in this segment.
+        /// The ID of the [TeamMember](entity:TeamMember) object representing the team member booked in this segment.
         /// </summary>
         [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }

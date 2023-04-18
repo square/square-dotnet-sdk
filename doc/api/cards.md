@@ -34,7 +34,7 @@ ListCardsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
+| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for your original query.<br><br>See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information. |
 | `customerId` | `string` | Query, Optional | Limit results to cards associated with the customer supplied.<br>By default, all cards owned by the merchant are returned. |
 | `includeDisabled` | `bool?` | Query, Optional | Includes disabled cards.<br>By default, all enabled cards owned by the merchant are returned.<br>**Default**: `false` |
 | `referenceId` | `string` | Query, Optional | Limit results to cards associated with the reference_id supplied. |
@@ -48,12 +48,15 @@ ListCardsAsync(
 
 ```csharp
 bool? includeDisabled = false;
-
 try
 {
     ListCardsResponse result = await cardsApi.ListCardsAsync(null, null, includeDisabled, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -79,31 +82,35 @@ CreateCardAsync(
 ## Example Usage
 
 ```csharp
-var bodyCardBillingAddress = new Address.Builder()
-    .AddressLine1("500 Electric Ave")
-    .AddressLine2("Suite 600")
-    .Locality("New York")
-    .AdministrativeDistrictLevel1("NY")
-    .PostalCode("10003")
-    .Country("US")
-    .Build();
-var bodyCard = new Card.Builder()
+Models.CreateCardRequest body = new Models.CreateCardRequest.Builder(
+    "4935a656-a929-4792-b97c-8848be85c27c",
+    "cnon:uIbfJXhXETSP197M3GB",
+    new Models.Card.Builder()
     .CardholderName("Amelia Earhart")
-    .BillingAddress(bodyCardBillingAddress)
+    .BillingAddress(
+        new Models.Address.Builder()
+        .AddressLine1("500 Electric Ave")
+        .AddressLine2("Suite 600")
+        .Locality("New York")
+        .AdministrativeDistrictLevel1("NY")
+        .PostalCode("10003")
+        .Country("US")
+        .Build())
     .CustomerId("VDKXEEKPJN48QDG3BGGFAK05P8")
     .ReferenceId("user-id-1")
-    .Build();
-var body = new CreateCardRequest.Builder(
-        "4935a656-a929-4792-b97c-8848be85c27c",
-        "cnon:uIbfJXhXETSP197M3GB",
-        bodyCard)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     CreateCardResponse result = await cardsApi.CreateCardAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -130,12 +137,15 @@ RetrieveCardAsync(
 
 ```csharp
 string cardId = "card_id4";
-
 try
 {
     RetrieveCardResponse result = await cardsApi.RetrieveCardAsync(cardId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -163,11 +173,14 @@ DisableCardAsync(
 
 ```csharp
 string cardId = "card_id4";
-
 try
 {
     DisableCardResponse result = await cardsApi.DisableCardAsync(cardId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

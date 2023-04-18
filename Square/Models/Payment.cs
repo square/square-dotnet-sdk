@@ -466,7 +466,7 @@ namespace Square.Models
         public string EmployeeId { get; }
 
         /// <summary>
-        /// An optional ID of the [TeamMember]($m/TeamMember) associated with taking the payment.
+        /// An optional ID of the [TeamMember](entity:TeamMember) associated with taking the payment.
         /// </summary>
         [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }

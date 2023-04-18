@@ -186,25 +186,25 @@ namespace Square.Models
         public string StartAt { get; }
 
         /// <summary>
-        /// The ID of the [Location]($m/Location) object representing the location where the booked service is provided. Once set when the booking is created, its value cannot be changed.
+        /// The ID of the [Location](entity:Location) object representing the location where the booked service is provided. Once set when the booking is created, its value cannot be changed.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }
 
         /// <summary>
-        /// The ID of the [Customer]($m/Customer) object representing the customer receiving the booked service.
+        /// The ID of the [Customer](entity:Customer) object representing the customer receiving the booked service.
         /// </summary>
         [JsonProperty("customer_id")]
         public string CustomerId { get; }
 
         /// <summary>
-        /// The free-text field for the customer to supply notes about the booking. For example, the note can be preferences that cannot be expressed by supported attributes of a relevant [CatalogObject]($m/CatalogObject) instance.
+        /// The free-text field for the customer to supply notes about the booking. For example, the note can be preferences that cannot be expressed by supported attributes of a relevant [CatalogObject](entity:CatalogObject) instance.
         /// </summary>
         [JsonProperty("customer_note")]
         public string CustomerNote { get; }
 
         /// <summary>
-        /// The free-text field for the seller to supply notes about the booking. For example, the note can be preferences that cannot be expressed by supported attributes of a specific [CatalogObject]($m/CatalogObject) instance.
+        /// The free-text field for the seller to supply notes about the booking. For example, the note can be preferences that cannot be expressed by supported attributes of a specific [CatalogObject](entity:CatalogObject) instance.
         /// This field should not be visible to customers.
         /// </summary>
         [JsonProperty("seller_note")]

@@ -155,7 +155,7 @@ namespace Square.Apis
         /// invoice (you cannot delete a published invoice, including one that is scheduled for processing).
         /// </summary>
         /// <param name="invoiceId">Required parameter: The ID of the invoice to delete..</param>
-        /// <param name="version">Optional parameter: The version of the [invoice]($m/Invoice) to delete. If you do not know the version, you can call [GetInvoice]($e/Invoices/GetInvoice) or  [ListInvoices]($e/Invoices/ListInvoices)..</param>
+        /// <param name="version">Optional parameter: The version of the [invoice](entity:Invoice) to delete. If you do not know the version, you can call [GetInvoice](api-endpoint:Invoices-GetInvoice) or  [ListInvoices](api-endpoint:Invoices-ListInvoices)..</param>
         /// <returns>Returns the Models.DeleteInvoiceResponse response from the API call.</returns>
         public Models.DeleteInvoiceResponse DeleteInvoice(
                 string invoiceId,
@@ -168,7 +168,7 @@ namespace Square.Apis
         /// invoice (you cannot delete a published invoice, including one that is scheduled for processing).
         /// </summary>
         /// <param name="invoiceId">Required parameter: The ID of the invoice to delete..</param>
-        /// <param name="version">Optional parameter: The version of the [invoice]($m/Invoice) to delete. If you do not know the version, you can call [GetInvoice]($e/Invoices/GetInvoice) or  [ListInvoices]($e/Invoices/ListInvoices)..</param>
+        /// <param name="version">Optional parameter: The version of the [invoice](entity:Invoice) to delete. If you do not know the version, you can call [GetInvoice](api-endpoint:Invoices-GetInvoice) or  [ListInvoices](api-endpoint:Invoices-ListInvoices)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.DeleteInvoiceResponse response from the API call.</returns>
         public async Task<Models.DeleteInvoiceResponse> DeleteInvoiceAsync(
@@ -262,7 +262,7 @@ namespace Square.Apis
         /// the canceled invoice.
         /// You cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
         /// </summary>
-        /// <param name="invoiceId">Required parameter: The ID of the [invoice]($m/Invoice) to cancel..</param>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to cancel..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CancelInvoiceResponse response from the API call.</returns>
         public Models.CancelInvoiceResponse CancelInvoice(
@@ -275,7 +275,7 @@ namespace Square.Apis
         /// the canceled invoice.
         /// You cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.
         /// </summary>
-        /// <param name="invoiceId">Required parameter: The ID of the [invoice]($m/Invoice) to cancel..</param>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to cancel..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CancelInvoiceResponse response from the API call.</returns>

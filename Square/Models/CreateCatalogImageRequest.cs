@@ -39,7 +39,7 @@ namespace Square.Models
         /// <summary>
         /// A unique string that identifies this CreateCatalogImage request.
         /// Keys can be any valid string but must be unique for every CreateCatalogImage request.
-        /// See [Idempotency keys](https://developer.squareup.com/docs/basics/api101/idempotency) for more information.
+        /// See [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency) for more information.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }

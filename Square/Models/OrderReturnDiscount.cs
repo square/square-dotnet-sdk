@@ -132,7 +132,7 @@ namespace Square.Models
         public string SourceDiscountUid { get; }
 
         /// <summary>
-        /// The catalog object ID referencing [CatalogDiscount]($m/CatalogDiscount).
+        /// The catalog object ID referencing [CatalogDiscount](entity:CatalogDiscount).
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }

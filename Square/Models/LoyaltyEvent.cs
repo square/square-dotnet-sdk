@@ -115,13 +115,13 @@ namespace Square.Models
         public Models.LoyaltyEventAdjustPoints AdjustPoints { get; }
 
         /// <summary>
-        /// The ID of the [loyalty account]($m/LoyaltyAccount) associated with the event.
+        /// The ID of the [loyalty account](entity:LoyaltyAccount) associated with the event.
         /// </summary>
         [JsonProperty("loyalty_account_id")]
         public string LoyaltyAccountId { get; }
 
         /// <summary>
-        /// The ID of the [location]($m/Location) where the event occurred.
+        /// The ID of the [location](entity:Location) where the event occurred.
         /// </summary>
         [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LocationId { get; }

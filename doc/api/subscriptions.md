@@ -49,27 +49,35 @@ CreateSubscriptionAsync(
 ## Example Usage
 
 ```csharp
-var bodyPriceOverrideMoney = new Money.Builder()
+Models.CreateSubscriptionRequest body = new Models.CreateSubscriptionRequest.Builder(
+    "S8GWD5R9QB376",
+    "6JHXF3B2CW3YKHDV4XEM674H",
+    "CHFGVKYY8RSV93M5KCYTG4PN0G"
+)
+.IdempotencyKey("8193148c-9586-11e6-99f9-28cfe92138cf")
+.StartDate("2021-10-20")
+.TaxPercentage("5")
+.PriceOverrideMoney(
+    new Models.Money.Builder()
     .Amount(100L)
     .Currency("USD")
-    .Build();
-var body = new CreateSubscriptionRequest.Builder(
-        "S8GWD5R9QB376",
-        "6JHXF3B2CW3YKHDV4XEM674H",
-        "CHFGVKYY8RSV93M5KCYTG4PN0G")
-    .IdempotencyKey("8193148c-9586-11e6-99f9-28cfe92138cf")
-    .StartDate("2021-10-20")
-    .TaxPercentage("5")
-    .PriceOverrideMoney(bodyPriceOverrideMoney)
-    .CardId("ccof:qy5x8hHGYsgLrp4Q4GB")
-    .Timezone("America/Los_Angeles")
-    .Build();
+    .Build())
+.CardId("ccof:qy5x8hHGYsgLrp4Q4GB")
+.Timezone("America/Los_Angeles")
+.Source(
+    new Models.SubscriptionSource.Builder()
+    .Build())
+.Build();
 
 try
 {
     CreateSubscriptionResponse result = await subscriptionsApi.CreateSubscriptionAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -111,29 +119,39 @@ SearchSubscriptionsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterCustomerIds = new IList<string>();
-bodyQueryFilterCustomerIds.Add("CHFGVKYY8RSV93M5KCYTG4PN0G");
-var bodyQueryFilterLocationIds = new IList<string>();
-bodyQueryFilterLocationIds.Add("S8GWD5R9QB376");
-var bodyQueryFilterSourceNames = new IList<string>();
-bodyQueryFilterSourceNames.Add("My App");
-var bodyQueryFilter = new SearchSubscriptionsFilter.Builder()
-    .CustomerIds(bodyQueryFilterCustomerIds)
-    .LocationIds(bodyQueryFilterLocationIds)
-    .SourceNames(bodyQueryFilterSourceNames)
-    .Build();
-var bodyQuery = new SearchSubscriptionsQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Build();
-var body = new SearchSubscriptionsRequest.Builder()
-    .Query(bodyQuery)
-    .Build();
+Models.SearchSubscriptionsRequest body = new Models.SearchSubscriptionsRequest.Builder()
+.Query(
+    new Models.SearchSubscriptionsQuery.Builder()
+    .Filter(
+        new Models.SearchSubscriptionsFilter.Builder()
+        .CustomerIds(
+            new List<string>
+            {
+                "CHFGVKYY8RSV93M5KCYTG4PN0G",
+            })
+        .LocationIds(
+            new List<string>
+            {
+                "S8GWD5R9QB376",
+            })
+        .SourceNames(
+            new List<string>
+            {
+                "My App",
+            })
+        .Build())
+    .Build())
+.Build();
 
 try
 {
     SearchSubscriptionsResponse result = await subscriptionsApi.SearchSubscriptionsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -162,12 +180,15 @@ RetrieveSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-
 try
 {
     RetrieveSubscriptionResponse result = await subscriptionsApi.RetrieveSubscriptionAsync(subscriptionId, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -197,23 +218,27 @@ UpdateSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-var bodySubscriptionPriceOverrideMoney = new Money.Builder()
-    .Amount(2000L)
-    .Currency("USD")
-    .Build();
-var bodySubscription = new Subscription.Builder()
-    .PriceOverrideMoney(bodySubscriptionPriceOverrideMoney)
+Models.UpdateSubscriptionRequest body = new Models.UpdateSubscriptionRequest.Builder()
+.Subscription(
+    new Models.Subscription.Builder()
+    .PriceOverrideMoney(
+        new Models.Money.Builder()
+        .Amount(2000L)
+        .Currency("USD")
+        .Build())
     .Version(1594155459464L)
-    .Build();
-var body = new UpdateSubscriptionRequest.Builder()
-    .Subscription(bodySubscription)
-    .Build();
+    .Build())
+.Build();
 
 try
 {
     UpdateSubscriptionResponse result = await subscriptionsApi.UpdateSubscriptionAsync(subscriptionId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -243,12 +268,15 @@ DeleteSubscriptionActionAsync(
 ```csharp
 string subscriptionId = "subscription_id0";
 string actionId = "action_id6";
-
 try
 {
     DeleteSubscriptionActionResponse result = await subscriptionsApi.DeleteSubscriptionActionAsync(subscriptionId, actionId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -277,12 +305,15 @@ CancelSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-
 try
 {
     CancelSubscriptionResponse result = await subscriptionsApi.CancelSubscriptionAsync(subscriptionId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -313,12 +344,15 @@ ListSubscriptionEventsAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-
 try
 {
     ListSubscriptionEventsResponse result = await subscriptionsApi.ListSubscriptionEventsAsync(subscriptionId, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -347,14 +381,18 @@ PauseSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-var body = new PauseSubscriptionRequest.Builder()
-    .Build();
+Models.PauseSubscriptionRequest body = new Models.PauseSubscriptionRequest.Builder()
+.Build();
 
 try
 {
     PauseSubscriptionResponse result = await subscriptionsApi.PauseSubscriptionAsync(subscriptionId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -383,14 +421,18 @@ ResumeSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-var body = new ResumeSubscriptionRequest.Builder()
-    .Build();
+Models.ResumeSubscriptionRequest body = new Models.ResumeSubscriptionRequest.Builder()
+.Build();
 
 try
 {
     ResumeSubscriptionResponse result = await subscriptionsApi.ResumeSubscriptionAsync(subscriptionId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -419,14 +461,19 @@ SwapPlanAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-var body = new SwapPlanRequest.Builder(
-        null)
-    .Build();
+Models.SwapPlanRequest body = new Models.SwapPlanRequest.Builder(
+    null
+)
+.Build();
 
 try
 {
     SwapPlanResponse result = await subscriptionsApi.SwapPlanAsync(subscriptionId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

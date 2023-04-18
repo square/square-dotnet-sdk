@@ -50,7 +50,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The version of the [invoice]($m/Invoice) to publish.
+        /// The version of the [invoice](entity:Invoice) to publish.
         /// This must match the current version of the invoice; otherwise, the request is rejected.
         /// </summary>
         [JsonProperty("version")]

@@ -56,7 +56,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// A list of SubscriptionPhase containing the [SubscriptionPhase]($m/SubscriptionPhase) for this plan.
+        /// A list of SubscriptionPhase containing the [SubscriptionPhase](entity:SubscriptionPhase) for this plan.
         /// This field it required. Not including this field will throw a REQUIRED_FIELD_MISSING error
         /// </summary>
         [JsonProperty("phases")]

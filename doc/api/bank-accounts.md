@@ -45,7 +45,11 @@ try
 {
     ListBankAccountsResponse result = await bankAccountsApi.ListBankAccountsAsync(null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -72,12 +76,15 @@ GetBankAccountByV1IdAsync(
 
 ```csharp
 string v1BankAccountId = "v1_bank_account_id8";
-
 try
 {
     GetBankAccountByV1IdResponse result = await bankAccountsApi.GetBankAccountByV1IdAsync(v1BankAccountId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -105,11 +112,14 @@ GetBankAccountAsync(
 
 ```csharp
 string bankAccountId = "bank_account_id0";
-
 try
 {
     GetBankAccountResponse result = await bankAccountsApi.GetBankAccountAsync(bankAccountId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

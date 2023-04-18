@@ -94,13 +94,13 @@ namespace Square.Models
 
         /// <summary>
         /// The Square-generated ID of the
-        /// [CatalogObject]($m/CatalogObject) being tracked.
+        /// [CatalogObject](entity:CatalogObject) being tracked.
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
 
         /// <summary>
-        /// The [type]($m/CatalogObjectType) of the [CatalogObject]($m/CatalogObject) being tracked.
+        /// The [type](entity:CatalogObjectType) of the [CatalogObject](entity:CatalogObject) being tracked.
         /// The Inventory API supports setting and reading the `"catalog_object_type": "ITEM_VARIATION"` field value.
         /// In addition, it can also read the `"catalog_object_type": "ITEM"` field value that is set by the Square Restaurants app.
         /// </summary>
@@ -114,7 +114,7 @@ namespace Square.Models
         public string State { get; }
 
         /// <summary>
-        /// The Square-generated ID of the [Location]($m/Location) where the related
+        /// The Square-generated ID of the [Location](entity:Location) where the related
         /// quantity of items is being tracked.
         /// </summary>
         [JsonProperty("location_id")]

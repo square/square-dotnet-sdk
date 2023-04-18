@@ -45,7 +45,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// IDs of the [Vendor]($m/Vendor) objects to retrieve.
+        /// IDs of the [Vendor](entity:Vendor) objects to retrieve.
         /// </summary>
         [JsonProperty("vendor_ids")]
         public IList<string> VendorIds { get; }

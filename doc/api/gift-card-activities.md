@@ -38,7 +38,7 @@ ListGiftCardActivitiesAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `giftCardId` | `string` | Query, Optional | If a gift card ID is provided, the endpoint returns activities related<br>to the specified gift card. Otherwise, the endpoint returns all gift card activities for<br>the seller. |
-| `type` | `string` | Query, Optional | If a [type](../../doc/models/gift-card-activity-type.md) is provided, the endpoint returns gift card activities of the specified type.<br>Otherwise, the endpoint returns all types of gift card activities. |
+| `type` | `string` | Query, Optional | If a [type](entity:GiftCardActivityType) is provided, the endpoint returns gift card activities of the specified type.<br>Otherwise, the endpoint returns all types of gift card activities. |
 | `locationId` | `string` | Query, Optional | If a location ID is provided, the endpoint returns gift card activities for the specified location.<br>Otherwise, the endpoint returns gift card activities for all locations. |
 | `beginTime` | `string` | Query, Optional | The timestamp for the beginning of the reporting period, in RFC 3339 format.<br>This start time is inclusive. The default value is the current time minus one year. |
 | `endTime` | `string` | Query, Optional | The timestamp for the end of the reporting period, in RFC 3339 format.<br>This end time is inclusive. The default value is the current time. |
@@ -57,7 +57,11 @@ try
 {
     ListGiftCardActivitiesResponse result = await giftCardActivitiesApi.ListGiftCardActivitiesAsync(null, null, null, null, null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -85,25 +89,30 @@ CreateGiftCardActivityAsync(
 ## Example Usage
 
 ```csharp
-var bodyGiftCardActivityActivateActivityDetails = new GiftCardActivityActivate.Builder()
-    .OrderId("jJNGHm4gLI6XkFbwtiSLqK72KkAZY")
-    .LineItemUid("eIWl7X0nMuO9Ewbh0ChIx")
-    .Build();
-var bodyGiftCardActivity = new GiftCardActivity.Builder(
+Models.CreateGiftCardActivityRequest body = new Models.CreateGiftCardActivityRequest.Builder(
+    "U16kfr-kA70er-q4Rsym-7U7NnY",
+    new Models.GiftCardActivity.Builder(
         "ACTIVATE",
-        "81FN9BNFZTKS4")
+        "81FN9BNFZTKS4"
+    )
     .GiftCardId("gftc:6d55a72470d940c6ba09c0ab8ad08d20")
-    .ActivateActivityDetails(bodyGiftCardActivityActivateActivityDetails)
-    .Build();
-var body = new CreateGiftCardActivityRequest.Builder(
-        "U16kfr-kA70er-q4Rsym-7U7NnY",
-        bodyGiftCardActivity)
-    .Build();
+    .ActivateActivityDetails(
+        new Models.GiftCardActivityActivate.Builder()
+        .OrderId("jJNGHm4gLI6XkFbwtiSLqK72KkAZY")
+        .LineItemUid("eIWl7X0nMuO9Ewbh0ChIx")
+        .Build())
+    .Build()
+)
+.Build();
 
 try
 {
     CreateGiftCardActivityResponse result = await giftCardActivitiesApi.CreateGiftCardActivityAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

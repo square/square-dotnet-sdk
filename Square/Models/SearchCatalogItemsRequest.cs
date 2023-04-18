@@ -105,7 +105,7 @@ namespace Square.Models
         /// <summary>
         /// The customer-attribute filter to return items or item variations matching the specified
         /// custom attribute expressions. A maximum number of 10 custom attribute expressions are supported in
-        /// a single call to the [SearchCatalogItems]($e/Catalog/SearchCatalogItems) endpoint.
+        /// a single call to the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems) endpoint.
         /// </summary>
         [JsonProperty("custom_attribute_filters", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CustomAttributeFilter> CustomAttributeFilters { get; }

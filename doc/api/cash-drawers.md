@@ -49,12 +49,15 @@ ListCashDrawerShiftsAsync(
 
 ```csharp
 string locationId = "location_id4";
-
 try
 {
     ListCashDrawerShiftsResponse result = await cashDrawersApi.ListCashDrawerShiftsAsync(locationId, null, null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -85,12 +88,15 @@ RetrieveCashDrawerShiftAsync(
 ```csharp
 string locationId = "location_id4";
 string shiftId = "shift_id0";
-
 try
 {
     RetrieveCashDrawerShiftResponse result = await cashDrawersApi.RetrieveCashDrawerShiftAsync(locationId, shiftId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -124,11 +130,14 @@ ListCashDrawerShiftEventsAsync(
 ```csharp
 string locationId = "location_id4";
 string shiftId = "shift_id0";
-
 try
 {
     ListCashDrawerShiftEventsResponse result = await cashDrawersApi.ListCashDrawerShiftEventsAsync(locationId, shiftId, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

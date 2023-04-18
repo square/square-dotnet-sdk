@@ -38,7 +38,7 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// The ID of the [location]($m/Location) where the reward is redeemed.
+        /// The ID of the [location](entity:Location) where the reward is redeemed.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }

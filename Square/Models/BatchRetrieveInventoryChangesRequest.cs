@@ -175,7 +175,7 @@ namespace Square.Models
         public string Cursor { get; }
 
         /// <summary>
-        /// The number of [records]($m/InventoryChange) to return.
+        /// The number of [records](entity:InventoryChange) to return.
         /// </summary>
         [JsonProperty("limit")]
         public int? Limit { get; }

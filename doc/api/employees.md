@@ -48,7 +48,11 @@ try
 {
     ListEmployeesResponse result = await employeesApi.ListEmployeesAsync(null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -77,11 +81,14 @@ RetrieveEmployeeAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     RetrieveEmployeeResponse result = await employeesApi.RetrieveEmployeeAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

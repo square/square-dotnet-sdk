@@ -42,14 +42,18 @@ CreateMobileAuthorizationCodeAsync(
 ## Example Usage
 
 ```csharp
-var body = new CreateMobileAuthorizationCodeRequest.Builder()
-    .LocationId("YOUR_LOCATION_ID")
-    .Build();
+Models.CreateMobileAuthorizationCodeRequest body = new Models.CreateMobileAuthorizationCodeRequest.Builder()
+.LocationId("YOUR_LOCATION_ID")
+.Build();
 
 try
 {
     CreateMobileAuthorizationCodeResponse result = await mobileAuthorizationApi.CreateMobileAuthorizationCodeAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

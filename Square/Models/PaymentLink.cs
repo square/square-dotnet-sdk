@@ -28,6 +28,7 @@ namespace Square.Models
         /// <param name="checkoutOptions">checkout_options.</param>
         /// <param name="prePopulatedData">pre_populated_data.</param>
         /// <param name="url">url.</param>
+        /// <param name="longUrl">long_url.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="updatedAt">updated_at.</param>
         /// <param name="paymentNote">payment_note.</param>
@@ -39,6 +40,7 @@ namespace Square.Models
             Models.CheckoutOptions checkoutOptions = null,
             Models.PrePopulatedData prePopulatedData = null,
             string url = null,
+            string longUrl = null,
             string createdAt = null,
             string updatedAt = null,
             string paymentNote = null)
@@ -61,6 +63,7 @@ namespace Square.Models
             this.CheckoutOptions = checkoutOptions;
             this.PrePopulatedData = prePopulatedData;
             this.Url = url;
+            this.LongUrl = longUrl;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             if (paymentNote != null)
@@ -78,6 +81,7 @@ namespace Square.Models
             Models.CheckoutOptions checkoutOptions = null,
             Models.PrePopulatedData prePopulatedData = null,
             string url = null,
+            string longUrl = null,
             string createdAt = null,
             string updatedAt = null,
             string paymentNote = null)
@@ -90,6 +94,7 @@ namespace Square.Models
             CheckoutOptions = checkoutOptions;
             PrePopulatedData = prePopulatedData;
             Url = url;
+            LongUrl = longUrl;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
             PaymentNote = paymentNote;
@@ -135,10 +140,16 @@ namespace Square.Models
         public Models.PrePopulatedData PrePopulatedData { get; }
 
         /// <summary>
-        /// The URL of the payment link.
+        /// The shortened URL of the payment link.
         /// </summary>
         [JsonProperty("url", NullValueHandling = NullValueHandling.Ignore)]
         public string Url { get; }
+
+        /// <summary>
+        /// The long URL of the payment link.
+        /// </summary>
+        [JsonProperty("long_url", NullValueHandling = NullValueHandling.Ignore)]
+        public string LongUrl { get; }
 
         /// <summary>
         /// The timestamp when the payment link was created, in RFC 3339 format.
@@ -208,6 +219,7 @@ namespace Square.Models
                 ((this.CheckoutOptions == null && other.CheckoutOptions == null) || (this.CheckoutOptions?.Equals(other.CheckoutOptions) == true)) &&
                 ((this.PrePopulatedData == null && other.PrePopulatedData == null) || (this.PrePopulatedData?.Equals(other.PrePopulatedData) == true)) &&
                 ((this.Url == null && other.Url == null) || (this.Url?.Equals(other.Url) == true)) &&
+                ((this.LongUrl == null && other.LongUrl == null) || (this.LongUrl?.Equals(other.LongUrl) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.PaymentNote == null && other.PaymentNote == null) || (this.PaymentNote?.Equals(other.PaymentNote) == true));
@@ -216,10 +228,10 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1350174743;
+            int hashCode = 766737082;
             hashCode = HashCode.Combine(this.Id, this.Version, this.Description, this.OrderId, this.CheckoutOptions, this.PrePopulatedData, this.Url);
 
-            hashCode = HashCode.Combine(hashCode, this.CreatedAt, this.UpdatedAt, this.PaymentNote);
+            hashCode = HashCode.Combine(hashCode, this.LongUrl, this.CreatedAt, this.UpdatedAt, this.PaymentNote);
 
             return hashCode;
         }
@@ -236,6 +248,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CheckoutOptions = {(this.CheckoutOptions == null ? "null" : this.CheckoutOptions.ToString())}");
             toStringOutput.Add($"this.PrePopulatedData = {(this.PrePopulatedData == null ? "null" : this.PrePopulatedData.ToString())}");
             toStringOutput.Add($"this.Url = {(this.Url == null ? "null" : this.Url == string.Empty ? "" : this.Url)}");
+            toStringOutput.Add($"this.LongUrl = {(this.LongUrl == null ? "null" : this.LongUrl == string.Empty ? "" : this.LongUrl)}");
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
             toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
             toStringOutput.Add($"this.PaymentNote = {(this.PaymentNote == null ? "null" : this.PaymentNote == string.Empty ? "" : this.PaymentNote)}");
@@ -255,6 +268,7 @@ namespace Square.Models
                 .CheckoutOptions(this.CheckoutOptions)
                 .PrePopulatedData(this.PrePopulatedData)
                 .Url(this.Url)
+                .LongUrl(this.LongUrl)
                 .CreatedAt(this.CreatedAt)
                 .UpdatedAt(this.UpdatedAt)
                 .PaymentNote(this.PaymentNote);
@@ -279,6 +293,7 @@ namespace Square.Models
             private Models.CheckoutOptions checkoutOptions;
             private Models.PrePopulatedData prePopulatedData;
             private string url;
+            private string longUrl;
             private string createdAt;
             private string updatedAt;
             private string paymentNote;
@@ -368,6 +383,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// LongUrl.
+             /// </summary>
+             /// <param name="longUrl"> longUrl. </param>
+             /// <returns> Builder. </returns>
+            public Builder LongUrl(string longUrl)
+            {
+                this.longUrl = longUrl;
+                return this;
+            }
+
+             /// <summary>
              /// CreatedAt.
              /// </summary>
              /// <param name="createdAt"> createdAt. </param>
@@ -432,6 +458,7 @@ namespace Square.Models
                     this.checkoutOptions,
                     this.prePopulatedData,
                     this.url,
+                    this.longUrl,
                     this.createdAt,
                     this.updatedAt,
                     this.paymentNote);

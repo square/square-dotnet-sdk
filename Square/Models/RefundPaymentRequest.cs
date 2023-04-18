@@ -202,7 +202,7 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// The [Customer]($m/Customer) ID of the customer associated with the refund.
+        /// The [Customer](entity:Customer) ID of the customer associated with the refund.
         /// This is required if the `destination_id` refers to a card on file created using the Cards
         /// API. Only allowed when `unlinked=true`.
         /// </summary>
@@ -225,7 +225,7 @@ namespace Square.Models
         public string PaymentVersionToken { get; }
 
         /// <summary>
-        /// An optional [TeamMember]($m/TeamMember) ID to associate with this refund.
+        /// An optional [TeamMember](entity:TeamMember) ID to associate with this refund.
         /// </summary>
         [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }

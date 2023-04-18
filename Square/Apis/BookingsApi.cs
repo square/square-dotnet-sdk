@@ -91,8 +91,8 @@ namespace Square.Apis
         /// <summary>
         /// Creates a booking.
         /// The required input must include the following:.
-        /// - `Booking.location_id`,.
-        /// - `Booking.start_at`,.
+        /// - `Booking.location_id`.
+        /// - `Booking.start_at`.
         /// - `Booking.team_member_id`.
         /// - `Booking.AppointmentSegment.service_variation_id`.
         /// - `Booking.AppointmentSegment.service_variation_version`.
@@ -110,8 +110,8 @@ namespace Square.Apis
         /// <summary>
         /// Creates a booking.
         /// The required input must include the following:.
-        /// - `Booking.location_id`,.
-        /// - `Booking.start_at`,.
+        /// - `Booking.location_id`.
+        /// - `Booking.start_at`.
         /// - `Booking.team_member_id`.
         /// - `Booking.AppointmentSegment.service_variation_id`.
         /// - `Booking.AppointmentSegment.service_variation_version`.
@@ -272,7 +272,7 @@ namespace Square.Apis
         /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
         /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-retrieved booking..</param>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](entity:Booking) object representing the to-be-retrieved booking..</param>
         /// <returns>Returns the Models.RetrieveBookingResponse response from the API call.</returns>
         public Models.RetrieveBookingResponse RetrieveBooking(
                 string bookingId)
@@ -283,7 +283,7 @@ namespace Square.Apis
         /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
         /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-retrieved booking..</param>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](entity:Booking) object representing the to-be-retrieved booking..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveBookingResponse response from the API call.</returns>
         public async Task<Models.RetrieveBookingResponse> RetrieveBookingAsync(
@@ -307,7 +307,7 @@ namespace Square.Apis
         /// For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*.
         /// or *Appointments Premium*.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-updated booking..</param>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](entity:Booking) object representing the to-be-updated booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UpdateBookingResponse response from the API call.</returns>
         public Models.UpdateBookingResponse UpdateBooking(
@@ -322,7 +322,7 @@ namespace Square.Apis
         /// For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*.
         /// or *Appointments Premium*.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-updated booking..</param>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](entity:Booking) object representing the to-be-updated booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.UpdateBookingResponse response from the API call.</returns>
@@ -350,7 +350,7 @@ namespace Square.Apis
         /// For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*.
         /// or *Appointments Premium*.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-cancelled booking..</param>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](entity:Booking) object representing the to-be-cancelled booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CancelBookingResponse response from the API call.</returns>
         public Models.CancelBookingResponse CancelBooking(
@@ -365,7 +365,7 @@ namespace Square.Apis
         /// For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*.
         /// or *Appointments Premium*.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the [Booking]($m/Booking) object representing the to-be-cancelled booking..</param>
+        /// <param name="bookingId">Required parameter: The ID of the [Booking](entity:Booking) object representing the to-be-cancelled booking..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CancelBookingResponse response from the API call.</returns>

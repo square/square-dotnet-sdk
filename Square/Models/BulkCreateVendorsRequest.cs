@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// Specifies a set of new [Vendor]($m/Vendor) objects as represented by a collection of idempotency-key/`Vendor`-object pairs.
+        /// Specifies a set of new [Vendor](entity:Vendor) objects as represented by a collection of idempotency-key/`Vendor`-object pairs.
         /// </summary>
         [JsonProperty("vendors")]
         public IDictionary<string, Models.Vendor> Vendors { get; }

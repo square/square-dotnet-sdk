@@ -16,7 +16,7 @@ present.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `Subscriptions` | [`IList<Models.WebhookSubscription>`](../../doc/models/webhook-subscription.md) | Optional | The requested list of [Subscription](../../doc/models/webhook-subscription.md)s. |
+| `Subscriptions` | [`IList<Models.WebhookSubscription>`](../../doc/models/webhook-subscription.md) | Optional | The requested list of [Subscription](entity:WebhookSubscription)s. |
 | `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request. If empty,<br>this is the final response.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
 
 ## Example (as JSON)

@@ -34,7 +34,7 @@ namespace Square.Apis
         /// Retrieves a list of cards owned by the account making the request.
         /// A max of 25 cards will be returned.
         /// </summary>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information..</param>
         /// <param name="customerId">Optional parameter: Limit results to cards associated with the customer supplied. By default, all cards owned by the merchant are returned..</param>
         /// <param name="includeDisabled">Optional parameter: Includes disabled cards. By default, all enabled cards owned by the merchant are returned..</param>
         /// <param name="referenceId">Optional parameter: Limit results to cards associated with the reference_id supplied..</param>
@@ -52,7 +52,7 @@ namespace Square.Apis
         /// Retrieves a list of cards owned by the account making the request.
         /// A max of 25 cards will be returned.
         /// </summary>
-        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information..</param>
+        /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for your original query.  See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information..</param>
         /// <param name="customerId">Optional parameter: Limit results to cards associated with the customer supplied. By default, all cards owned by the merchant are returned..</param>
         /// <param name="includeDisabled">Optional parameter: Includes disabled cards. By default, all enabled cards owned by the merchant are returned..</param>
         /// <param name="referenceId">Optional parameter: Limit results to cards associated with the reference_id supplied..</param>

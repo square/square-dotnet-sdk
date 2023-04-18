@@ -48,87 +48,90 @@ CreateOrderAsync(
 ## Example Usage
 
 ```csharp
-var bodyOrderLineItems = new List<OrderLineItem>();
-
-var bodyOrderLineItems0 = new OrderLineItem.Builder(
-        "1")
-    .Name("New York Strip Steak")
-    .Build();
-bodyOrderLineItems.Add(bodyOrderLineItems0);
-
-var bodyOrderLineItems1Modifiers = new List<OrderLineItemModifier>();
-
-var bodyOrderLineItems1Modifiers0 = new OrderLineItemModifier.Builder()
-    .CatalogObjectId("CHQX7Y4KY6N5KINJKZCFURPZ")
-    .Build();
-bodyOrderLineItems1Modifiers.Add(bodyOrderLineItems1Modifiers0);
-
-var bodyOrderLineItems1AppliedDiscounts = new List<OrderLineItemAppliedDiscount>();
-
-var bodyOrderLineItems1AppliedDiscounts0 = new OrderLineItemAppliedDiscount.Builder(
-        "one-dollar-off")
-    .Build();
-bodyOrderLineItems1AppliedDiscounts.Add(bodyOrderLineItems1AppliedDiscounts0);
-
-var bodyOrderLineItems1 = new OrderLineItem.Builder(
-        "2")
-    .CatalogObjectId("BEMYCSMIJL46OCDV4KYIKXIB")
-    .Modifiers(bodyOrderLineItems1Modifiers)
-    .AppliedDiscounts(bodyOrderLineItems1AppliedDiscounts)
-    .Build();
-bodyOrderLineItems.Add(bodyOrderLineItems1);
-
-var bodyOrderTaxes = new List<OrderLineItemTax>();
-
-var bodyOrderTaxes0 = new OrderLineItemTax.Builder()
-    .Uid("state-sales-tax")
-    .Name("State Sales Tax")
-    .Percentage("9")
-    .Scope("ORDER")
-    .Build();
-bodyOrderTaxes.Add(bodyOrderTaxes0);
-
-var bodyOrderDiscounts = new List<OrderLineItemDiscount>();
-
-var bodyOrderDiscounts0 = new OrderLineItemDiscount.Builder()
-    .Uid("labor-day-sale")
-    .Name("Labor Day Sale")
-    .Percentage("5")
-    .Scope("ORDER")
-    .Build();
-bodyOrderDiscounts.Add(bodyOrderDiscounts0);
-
-var bodyOrderDiscounts1 = new OrderLineItemDiscount.Builder()
-    .Uid("membership-discount")
-    .CatalogObjectId("DB7L55ZH2BGWI4H23ULIWOQ7")
-    .Scope("ORDER")
-    .Build();
-bodyOrderDiscounts.Add(bodyOrderDiscounts1);
-
-var bodyOrderDiscounts2 = new OrderLineItemDiscount.Builder()
-    .Uid("one-dollar-off")
-    .Name("Sale - $1.00 off")
-    .Scope("LINE_ITEM")
-    .Build();
-bodyOrderDiscounts.Add(bodyOrderDiscounts2);
-
-var bodyOrder = new Order.Builder(
-        "057P5VYJ4A5X1")
+Models.CreateOrderRequest body = new Models.CreateOrderRequest.Builder()
+.Order(
+    new Models.Order.Builder(
+        "057P5VYJ4A5X1"
+    )
     .ReferenceId("my-order-001")
-    .LineItems(bodyOrderLineItems)
-    .Taxes(bodyOrderTaxes)
-    .Discounts(bodyOrderDiscounts)
-    .Build();
-var body = new CreateOrderRequest.Builder()
-    .Order(bodyOrder)
-    .IdempotencyKey("8193148c-9586-11e6-99f9-28cfe92138cf")
-    .Build();
+    .LineItems(
+        new List<Models.OrderLineItem>
+        {
+            new Models.OrderLineItem.Builder(
+                "1"
+            )
+            .Name("New York Strip Steak")
+            .BasePriceMoney(
+                new Models.Money.Builder()
+                .Build())
+            .Build(),
+            new Models.OrderLineItem.Builder(
+                "2"
+            )
+            .CatalogObjectId("BEMYCSMIJL46OCDV4KYIKXIB")
+            .Modifiers(
+                new List<Models.OrderLineItemModifier>
+                {
+                    new Models.OrderLineItemModifier.Builder()
+                    .CatalogObjectId("CHQX7Y4KY6N5KINJKZCFURPZ")
+                    .Build(),
+                })
+            .AppliedDiscounts(
+                new List<Models.OrderLineItemAppliedDiscount>
+                {
+                    new Models.OrderLineItemAppliedDiscount.Builder(
+                        "one-dollar-off"
+                    )
+                    .Build(),
+                })
+            .Build(),
+        })
+    .Taxes(
+        new List<Models.OrderLineItemTax>
+        {
+            new Models.OrderLineItemTax.Builder()
+            .Uid("state-sales-tax")
+            .Name("State Sales Tax")
+            .Percentage("9")
+            .Scope("ORDER")
+            .Build(),
+        })
+    .Discounts(
+        new List<Models.OrderLineItemDiscount>
+        {
+            new Models.OrderLineItemDiscount.Builder()
+            .Uid("labor-day-sale")
+            .Name("Labor Day Sale")
+            .Percentage("5")
+            .Scope("ORDER")
+            .Build(),
+            new Models.OrderLineItemDiscount.Builder()
+            .Uid("membership-discount")
+            .CatalogObjectId("DB7L55ZH2BGWI4H23ULIWOQ7")
+            .Scope("ORDER")
+            .Build(),
+            new Models.OrderLineItemDiscount.Builder()
+            .Uid("one-dollar-off")
+            .Name("Sale - $1.00 off")
+            .AmountMoney(
+                new Models.Money.Builder()
+                .Build())
+            .Scope("LINE_ITEM")
+            .Build(),
+        })
+    .Build())
+.IdempotencyKey("8193148c-9586-11e6-99f9-28cfe92138cf")
+.Build();
 
 try
 {
     CreateOrderResponse result = await ordersApi.CreateOrderAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -156,19 +159,25 @@ BatchRetrieveOrdersAsync(
 ## Example Usage
 
 ```csharp
-var bodyOrderIds = new IList<string>();
-bodyOrderIds.Add("CAISEM82RcpmcFBM0TfOyiHV3es");
-bodyOrderIds.Add("CAISENgvlJ6jLWAzERDzjyHVybY");
-var body = new BatchRetrieveOrdersRequest.Builder(
-        bodyOrderIds)
-    .LocationId("057P5VYJ4A5X1")
-    .Build();
+Models.BatchRetrieveOrdersRequest body = new Models.BatchRetrieveOrdersRequest.Builder(
+    new List<string>
+    {
+        "CAISEM82RcpmcFBM0TfOyiHV3es",
+        "CAISENgvlJ6jLWAzERDzjyHVybY",
+    }
+)
+.LocationId("057P5VYJ4A5X1")
+.Build();
 
 try
 {
     BatchRetrieveOrdersResponse result = await ordersApi.BatchRetrieveOrdersAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -194,43 +203,52 @@ CalculateOrderAsync(
 ## Example Usage
 
 ```csharp
-var bodyOrderLineItems = new List<OrderLineItem>();
-
-var bodyOrderLineItems0 = new OrderLineItem.Builder(
-        "1")
-    .Name("Item 1")
-    .Build();
-bodyOrderLineItems.Add(bodyOrderLineItems0);
-
-var bodyOrderLineItems1 = new OrderLineItem.Builder(
-        "2")
-    .Name("Item 2")
-    .Build();
-bodyOrderLineItems.Add(bodyOrderLineItems1);
-
-var bodyOrderDiscounts = new List<OrderLineItemDiscount>();
-
-var bodyOrderDiscounts0 = new OrderLineItemDiscount.Builder()
-    .Name("50% Off")
-    .Percentage("50")
-    .Scope("ORDER")
-    .Build();
-bodyOrderDiscounts.Add(bodyOrderDiscounts0);
-
-var bodyOrder = new Order.Builder(
-        "D7AVYMEAPJ3A3")
-    .LineItems(bodyOrderLineItems)
-    .Discounts(bodyOrderDiscounts)
-    .Build();
-var body = new CalculateOrderRequest.Builder(
-        bodyOrder)
-    .Build();
+Models.CalculateOrderRequest body = new Models.CalculateOrderRequest.Builder(
+    new Models.Order.Builder(
+        "D7AVYMEAPJ3A3"
+    )
+    .LineItems(
+        new List<Models.OrderLineItem>
+        {
+            new Models.OrderLineItem.Builder(
+                "1"
+            )
+            .Name("Item 1")
+            .BasePriceMoney(
+                new Models.Money.Builder()
+                .Build())
+            .Build(),
+            new Models.OrderLineItem.Builder(
+                "2"
+            )
+            .Name("Item 2")
+            .BasePriceMoney(
+                new Models.Money.Builder()
+                .Build())
+            .Build(),
+        })
+    .Discounts(
+        new List<Models.OrderLineItemDiscount>
+        {
+            new Models.OrderLineItemDiscount.Builder()
+            .Name("50% Off")
+            .Percentage("50")
+            .Scope("ORDER")
+            .Build(),
+        })
+    .Build()
+)
+.Build();
 
 try
 {
     CalculateOrderResponse result = await ordersApi.CalculateOrderAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -257,17 +275,22 @@ CloneOrderAsync(
 ## Example Usage
 
 ```csharp
-var body = new CloneOrderRequest.Builder(
-        "ZAISEM52YcpmcWAzERDOyiWS123")
-    .Version(3)
-    .IdempotencyKey("UNIQUE_STRING")
-    .Build();
+Models.CloneOrderRequest body = new Models.CloneOrderRequest.Builder(
+    "ZAISEM52YcpmcWAzERDOyiWS123"
+)
+.Version(3)
+.IdempotencyKey("UNIQUE_STRING")
+.Build();
 
 try
 {
     CloneOrderResponse result = await ordersApi.CloneOrderAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -309,45 +332,52 @@ SearchOrdersAsync(
 ## Example Usage
 
 ```csharp
-var bodyLocationIds = new IList<string>();
-bodyLocationIds.Add("057P5VYJ4A5X1");
-bodyLocationIds.Add("18YC4JDH91E1H");
-var bodyQueryFilterStateFilterStates = new IList<string>();
-bodyQueryFilterStateFilterStates.Add("COMPLETED");
-var bodyQueryFilterStateFilter = new SearchOrdersStateFilter.Builder(
-        bodyQueryFilterStateFilterStates)
-    .Build();
-var bodyQueryFilterDateTimeFilterClosedAt = new TimeRange.Builder()
-    .StartAt("2018-03-03T20:00:00+00:00")
-    .EndAt("2019-03-04T21:54:45+00:00")
-    .Build();
-var bodyQueryFilterDateTimeFilter = new SearchOrdersDateTimeFilter.Builder()
-    .ClosedAt(bodyQueryFilterDateTimeFilterClosedAt)
-    .Build();
-var bodyQueryFilter = new SearchOrdersFilter.Builder()
-    .StateFilter(bodyQueryFilterStateFilter)
-    .DateTimeFilter(bodyQueryFilterDateTimeFilter)
-    .Build();
-var bodyQuerySort = new SearchOrdersSort.Builder(
-        "CLOSED_AT")
-    .SortOrder("DESC")
-    .Build();
-var bodyQuery = new SearchOrdersQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Sort(bodyQuerySort)
-    .Build();
-var body = new SearchOrdersRequest.Builder()
-    .LocationIds(bodyLocationIds)
-    .Query(bodyQuery)
-    .Limit(3)
-    .ReturnEntries(true)
-    .Build();
+Models.SearchOrdersRequest body = new Models.SearchOrdersRequest.Builder()
+.LocationIds(
+    new List<string>
+    {
+        "057P5VYJ4A5X1",
+        "18YC4JDH91E1H",
+    })
+.Query(
+    new Models.SearchOrdersQuery.Builder()
+    .Filter(
+        new Models.SearchOrdersFilter.Builder()
+        .StateFilter(
+            new Models.SearchOrdersStateFilter.Builder(
+                new List<string>
+                {
+                    "COMPLETED",
+                }
+            )
+            .Build())
+        .DateTimeFilter(
+            new Models.SearchOrdersDateTimeFilter.Builder()
+            .ClosedAt(
+                new Models.TimeRange.Builder()
+                .Build())
+            .Build())
+        .Build())
+    .Sort(
+        new Models.SearchOrdersSort.Builder(
+            "CLOSED_AT"
+        )
+        .SortOrder("DESC")
+        .Build())
+    .Build())
+.Limit(3)
+.ReturnEntries(true)
+.Build();
 
 try
 {
     SearchOrdersResponse result = await ordersApi.SearchOrdersAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -374,12 +404,15 @@ RetrieveOrderAsync(
 
 ```csharp
 string orderId = "order_id6";
-
 try
 {
     RetrieveOrderResponse result = await ordersApi.RetrieveOrderAsync(orderId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -422,14 +455,18 @@ UpdateOrderAsync(
 
 ```csharp
 string orderId = "order_id6";
-var body = new UpdateOrderRequest.Builder()
-    .Build();
+Models.UpdateOrderRequest body = new Models.UpdateOrderRequest.Builder()
+.Build();
 
 try
 {
     UpdateOrderResponse result = await ordersApi.UpdateOrderAsync(orderId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -471,18 +508,25 @@ PayOrderAsync(
 
 ```csharp
 string orderId = "order_id6";
-var bodyPaymentIds = new IList<string>();
-bodyPaymentIds.Add("EnZdNAlWCmfh6Mt5FMNST1o7taB");
-bodyPaymentIds.Add("0LRiVlbXVwe8ozu4KbZxd12mvaB");
-var body = new PayOrderRequest.Builder(
-        "c043a359-7ad9-4136-82a9-c3f1d66dcbff")
-    .PaymentIds(bodyPaymentIds)
-    .Build();
+Models.PayOrderRequest body = new Models.PayOrderRequest.Builder(
+    "c043a359-7ad9-4136-82a9-c3f1d66dcbff"
+)
+.PaymentIds(
+    new List<string>
+    {
+        "EnZdNAlWCmfh6Mt5FMNST1o7taB",
+        "0LRiVlbXVwe8ozu4KbZxd12mvaB",
+    })
+.Build();
 
 try
 {
     PayOrderResponse result = await ordersApi.PayOrderAsync(orderId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

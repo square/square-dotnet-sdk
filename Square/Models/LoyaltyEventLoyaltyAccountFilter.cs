@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the [loyalty account]($m/LoyaltyAccount) associated with loyalty events.
+        /// The ID of the [loyalty account](entity:LoyaltyAccount) associated with loyalty events.
         /// </summary>
         [JsonProperty("loyalty_account_id")]
         public string LoyaltyAccountId { get; }

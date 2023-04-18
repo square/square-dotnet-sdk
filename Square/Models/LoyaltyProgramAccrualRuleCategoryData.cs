@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the `CATEGORY` [catalog object]($m/CatalogObject) that buyers can purchase to earn
+        /// The ID of the `CATEGORY` [catalog object](entity:CatalogObject) that buyers can purchase to earn
         /// points.
         /// </summary>
         [JsonProperty("category_id")]

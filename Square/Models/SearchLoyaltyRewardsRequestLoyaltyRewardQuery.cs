@@ -31,7 +31,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the [loyalty account]($m/LoyaltyAccount) to which the loyalty reward belongs.
+        /// The ID of the [loyalty account](entity:LoyaltyAccount) to which the loyalty reward belongs.
         /// </summary>
         [JsonProperty("loyalty_account_id")]
         public string LoyaltyAccountId { get; }

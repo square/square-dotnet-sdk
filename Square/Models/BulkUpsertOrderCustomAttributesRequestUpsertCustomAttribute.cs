@@ -69,7 +69,7 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// The ID of the target [order]($m/Order).
+        /// The ID of the target [order](entity:Order).
         /// </summary>
         [JsonProperty("order_id")]
         public string OrderId { get; }
