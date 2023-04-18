@@ -34,13 +34,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the [loyalty program]($m/LoyaltyProgram).
+        /// The ID of the [loyalty program](entity:LoyaltyProgram).
         /// </summary>
         [JsonProperty("loyalty_program_id")]
         public string LoyaltyProgramId { get; }
 
         /// <summary>
-        /// The ID of the deleted [loyalty reward]($m/LoyaltyReward).
+        /// The ID of the deleted [loyalty reward](entity:LoyaltyReward).
         /// This field is returned only if the event source is `LOYALTY_API`.
         /// </summary>
         [JsonProperty("reward_id", NullValueHandling = NullValueHandling.Ignore)]

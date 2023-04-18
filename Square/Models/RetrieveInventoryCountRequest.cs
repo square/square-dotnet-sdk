@@ -56,7 +56,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The [Location]($m/Location) IDs to look up as a comma-separated
+        /// The [Location](entity:Location) IDs to look up as a comma-separated
         /// list. An empty list queries all locations.
         /// </summary>
         [JsonProperty("location_ids")]

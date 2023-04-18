@@ -133,8 +133,8 @@ namespace Square.Models
         public Models.SourceApplication SourceApplication { get; }
 
         /// <summary>
-        /// The set of Catalog Object Types that this Custom Attribute may be applied to.
-        /// Currently, only `ITEM` and `ITEM_VARIATION` are allowed. At least one type must be included.
+        /// The set of `CatalogObject` types that this custom atttribute may be applied to.
+        /// Currently, only `ITEM`, `ITEM_VARIATION`, and `MODIFIER` are allowed. At least one type must be included.
         /// See [CatalogObjectType](#type-catalogobjecttype) for possible values
         /// </summary>
         [JsonProperty("allowed_object_types")]

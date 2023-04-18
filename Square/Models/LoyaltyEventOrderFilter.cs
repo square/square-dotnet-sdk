@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the [order]($m/Order) associated with the event.
+        /// The ID of the [order](entity:Order) associated with the event.
         /// </summary>
         [JsonProperty("order_id")]
         public string OrderId { get; }

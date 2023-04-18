@@ -80,8 +80,8 @@ namespace Square.Models
         public string Cursor { get; }
 
         /// <summary>
-        /// Includes disabled [Subscription]($m/WebhookSubscription)s.
-        /// By default, all enabled [Subscription]($m/WebhookSubscription)s are returned.
+        /// Includes disabled [Subscription](entity:WebhookSubscription)s.
+        /// By default, all enabled [Subscription](entity:WebhookSubscription)s are returned.
         /// </summary>
         [JsonProperty("include_disabled")]
         public bool? IncludeDisabled { get; }

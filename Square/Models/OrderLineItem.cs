@@ -34,6 +34,7 @@ namespace Square.Models
         /// <param name="modifiers">modifiers.</param>
         /// <param name="appliedTaxes">applied_taxes.</param>
         /// <param name="appliedDiscounts">applied_discounts.</param>
+        /// <param name="appliedServiceCharges">applied_service_charges.</param>
         /// <param name="basePriceMoney">base_price_money.</param>
         /// <param name="variationTotalPriceMoney">variation_total_price_money.</param>
         /// <param name="grossSalesMoney">gross_sales_money.</param>
@@ -41,6 +42,7 @@ namespace Square.Models
         /// <param name="totalDiscountMoney">total_discount_money.</param>
         /// <param name="totalMoney">total_money.</param>
         /// <param name="pricingBlocklists">pricing_blocklists.</param>
+        /// <param name="totalServiceChargeMoney">total_service_charge_money.</param>
         public OrderLineItem(
             string quantity,
             string uid = null,
@@ -55,13 +57,15 @@ namespace Square.Models
             IList<Models.OrderLineItemModifier> modifiers = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
             IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = null,
+            IList<Models.OrderLineItemAppliedServiceCharge> appliedServiceCharges = null,
             Models.Money basePriceMoney = null,
             Models.Money variationTotalPriceMoney = null,
             Models.Money grossSalesMoney = null,
             Models.Money totalTaxMoney = null,
             Models.Money totalDiscountMoney = null,
             Models.Money totalMoney = null,
-            Models.OrderLineItemPricingBlocklists pricingBlocklists = null)
+            Models.OrderLineItemPricingBlocklists pricingBlocklists = null,
+            Models.Money totalServiceChargeMoney = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -74,7 +78,8 @@ namespace Square.Models
                 { "metadata", false },
                 { "modifiers", false },
                 { "applied_taxes", false },
-                { "applied_discounts", false }
+                { "applied_discounts", false },
+                { "applied_service_charges", false }
             };
 
             if (uid != null)
@@ -140,6 +145,12 @@ namespace Square.Models
                 this.AppliedDiscounts = appliedDiscounts;
             }
 
+            if (appliedServiceCharges != null)
+            {
+                shouldSerialize["applied_service_charges"] = true;
+                this.AppliedServiceCharges = appliedServiceCharges;
+            }
+
             this.BasePriceMoney = basePriceMoney;
             this.VariationTotalPriceMoney = variationTotalPriceMoney;
             this.GrossSalesMoney = grossSalesMoney;
@@ -147,6 +158,7 @@ namespace Square.Models
             this.TotalDiscountMoney = totalDiscountMoney;
             this.TotalMoney = totalMoney;
             this.PricingBlocklists = pricingBlocklists;
+            this.TotalServiceChargeMoney = totalServiceChargeMoney;
         }
         internal OrderLineItem(Dictionary<string, bool> shouldSerialize,
             string quantity,
@@ -162,13 +174,15 @@ namespace Square.Models
             IList<Models.OrderLineItemModifier> modifiers = null,
             IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
             IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts = null,
+            IList<Models.OrderLineItemAppliedServiceCharge> appliedServiceCharges = null,
             Models.Money basePriceMoney = null,
             Models.Money variationTotalPriceMoney = null,
             Models.Money grossSalesMoney = null,
             Models.Money totalTaxMoney = null,
             Models.Money totalDiscountMoney = null,
             Models.Money totalMoney = null,
-            Models.OrderLineItemPricingBlocklists pricingBlocklists = null)
+            Models.OrderLineItemPricingBlocklists pricingBlocklists = null,
+            Models.Money totalServiceChargeMoney = null)
         {
             this.shouldSerialize = shouldSerialize;
             Uid = uid;
@@ -184,6 +198,7 @@ namespace Square.Models
             Modifiers = modifiers;
             AppliedTaxes = appliedTaxes;
             AppliedDiscounts = appliedDiscounts;
+            AppliedServiceCharges = appliedServiceCharges;
             BasePriceMoney = basePriceMoney;
             VariationTotalPriceMoney = variationTotalPriceMoney;
             GrossSalesMoney = grossSalesMoney;
@@ -191,6 +206,7 @@ namespace Square.Models
             TotalDiscountMoney = totalDiscountMoney;
             TotalMoney = totalMoney;
             PricingBlocklists = pricingBlocklists;
+            TotalServiceChargeMoney = totalServiceChargeMoney;
         }
 
         /// <summary>
@@ -230,7 +246,7 @@ namespace Square.Models
         public string Note { get; }
 
         /// <summary>
-        /// The [CatalogItemVariation]($m/CatalogItemVariation) ID applied to this line item.
+        /// The [CatalogItemVariation](entity:CatalogItemVariation) ID applied to this line item.
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
@@ -272,7 +288,7 @@ namespace Square.Models
         public IDictionary<string, string> Metadata { get; }
 
         /// <summary>
-        /// The [CatalogModifier]($m/CatalogModifier)s applied to this line item.
+        /// The [CatalogModifier](entity:CatalogModifier)s applied to this line item.
         /// </summary>
         [JsonProperty("modifiers")]
         public IList<Models.OrderLineItemModifier> Modifiers { get; }
@@ -304,6 +320,16 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("applied_discounts")]
         public IList<Models.OrderLineItemAppliedDiscount> AppliedDiscounts { get; }
+
+        /// <summary>
+        /// The list of references to service charges applied to this line item. Each
+        /// `OrderLineItemAppliedServiceCharge` has a `service_charge_id` that references the `uid` of a
+        /// top-level `OrderServiceCharge` applied to the line item. On reads, the amount applied is
+        /// populated.
+        /// To change the amount of a service charge, modify the referenced top-level service charge.
+        /// </summary>
+        [JsonProperty("applied_service_charges")]
+        public IList<Models.OrderLineItemAppliedServiceCharge> AppliedServiceCharges { get; }
 
         /// <summary>
         /// Represents an amount of money. `Money` fields can be signed or unsigned.
@@ -378,6 +404,17 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("pricing_blocklists", NullValueHandling = NullValueHandling.Ignore)]
         public Models.OrderLineItemPricingBlocklists PricingBlocklists { get; }
+
+        /// <summary>
+        /// Represents an amount of money. `Money` fields can be signed or unsigned.
+        /// Fields that do not explicitly define whether they are signed or unsigned are
+        /// considered unsigned and can only hold positive amounts. For signed fields, the
+        /// sign of the value indicates the purpose of the money transfer. See
+        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
+        /// for more information.
+        /// </summary>
+        [JsonProperty("total_service_charge_money", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Money TotalServiceChargeMoney { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -479,6 +516,15 @@ namespace Square.Models
             return this.shouldSerialize["applied_discounts"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAppliedServiceCharges()
+        {
+            return this.shouldSerialize["applied_service_charges"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -506,24 +552,28 @@ namespace Square.Models
                 ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true)) &&
                 ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
                 ((this.AppliedDiscounts == null && other.AppliedDiscounts == null) || (this.AppliedDiscounts?.Equals(other.AppliedDiscounts) == true)) &&
+                ((this.AppliedServiceCharges == null && other.AppliedServiceCharges == null) || (this.AppliedServiceCharges?.Equals(other.AppliedServiceCharges) == true)) &&
                 ((this.BasePriceMoney == null && other.BasePriceMoney == null) || (this.BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
                 ((this.VariationTotalPriceMoney == null && other.VariationTotalPriceMoney == null) || (this.VariationTotalPriceMoney?.Equals(other.VariationTotalPriceMoney) == true)) &&
                 ((this.GrossSalesMoney == null && other.GrossSalesMoney == null) || (this.GrossSalesMoney?.Equals(other.GrossSalesMoney) == true)) &&
                 ((this.TotalTaxMoney == null && other.TotalTaxMoney == null) || (this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
                 ((this.TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
                 ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((this.PricingBlocklists == null && other.PricingBlocklists == null) || (this.PricingBlocklists?.Equals(other.PricingBlocklists) == true));
+                ((this.PricingBlocklists == null && other.PricingBlocklists == null) || (this.PricingBlocklists?.Equals(other.PricingBlocklists) == true)) &&
+                ((this.TotalServiceChargeMoney == null && other.TotalServiceChargeMoney == null) || (this.TotalServiceChargeMoney?.Equals(other.TotalServiceChargeMoney) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -269037292;
+            int hashCode = -144442363;
             hashCode = HashCode.Combine(this.Uid, this.Name, this.Quantity, this.QuantityUnit, this.Note, this.CatalogObjectId, this.CatalogVersion);
 
-            hashCode = HashCode.Combine(hashCode, this.VariationName, this.ItemType, this.Metadata, this.Modifiers, this.AppliedTaxes, this.AppliedDiscounts, this.BasePriceMoney);
+            hashCode = HashCode.Combine(hashCode, this.VariationName, this.ItemType, this.Metadata, this.Modifiers, this.AppliedTaxes, this.AppliedDiscounts, this.AppliedServiceCharges);
 
-            hashCode = HashCode.Combine(hashCode, this.VariationTotalPriceMoney, this.GrossSalesMoney, this.TotalTaxMoney, this.TotalDiscountMoney, this.TotalMoney, this.PricingBlocklists);
+            hashCode = HashCode.Combine(hashCode, this.BasePriceMoney, this.VariationTotalPriceMoney, this.GrossSalesMoney, this.TotalTaxMoney, this.TotalDiscountMoney, this.TotalMoney, this.PricingBlocklists);
+
+            hashCode = HashCode.Combine(hashCode, this.TotalServiceChargeMoney);
 
             return hashCode;
         }
@@ -546,6 +596,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Modifiers = {(this.Modifiers == null ? "null" : $"[{string.Join(", ", this.Modifiers)} ]")}");
             toStringOutput.Add($"this.AppliedTaxes = {(this.AppliedTaxes == null ? "null" : $"[{string.Join(", ", this.AppliedTaxes)} ]")}");
             toStringOutput.Add($"this.AppliedDiscounts = {(this.AppliedDiscounts == null ? "null" : $"[{string.Join(", ", this.AppliedDiscounts)} ]")}");
+            toStringOutput.Add($"this.AppliedServiceCharges = {(this.AppliedServiceCharges == null ? "null" : $"[{string.Join(", ", this.AppliedServiceCharges)} ]")}");
             toStringOutput.Add($"this.BasePriceMoney = {(this.BasePriceMoney == null ? "null" : this.BasePriceMoney.ToString())}");
             toStringOutput.Add($"this.VariationTotalPriceMoney = {(this.VariationTotalPriceMoney == null ? "null" : this.VariationTotalPriceMoney.ToString())}");
             toStringOutput.Add($"this.GrossSalesMoney = {(this.GrossSalesMoney == null ? "null" : this.GrossSalesMoney.ToString())}");
@@ -553,6 +604,7 @@ namespace Square.Models
             toStringOutput.Add($"this.TotalDiscountMoney = {(this.TotalDiscountMoney == null ? "null" : this.TotalDiscountMoney.ToString())}");
             toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
             toStringOutput.Add($"this.PricingBlocklists = {(this.PricingBlocklists == null ? "null" : this.PricingBlocklists.ToString())}");
+            toStringOutput.Add($"this.TotalServiceChargeMoney = {(this.TotalServiceChargeMoney == null ? "null" : this.TotalServiceChargeMoney.ToString())}");
         }
 
         /// <summary>
@@ -575,13 +627,15 @@ namespace Square.Models
                 .Modifiers(this.Modifiers)
                 .AppliedTaxes(this.AppliedTaxes)
                 .AppliedDiscounts(this.AppliedDiscounts)
+                .AppliedServiceCharges(this.AppliedServiceCharges)
                 .BasePriceMoney(this.BasePriceMoney)
                 .VariationTotalPriceMoney(this.VariationTotalPriceMoney)
                 .GrossSalesMoney(this.GrossSalesMoney)
                 .TotalTaxMoney(this.TotalTaxMoney)
                 .TotalDiscountMoney(this.TotalDiscountMoney)
                 .TotalMoney(this.TotalMoney)
-                .PricingBlocklists(this.PricingBlocklists);
+                .PricingBlocklists(this.PricingBlocklists)
+                .TotalServiceChargeMoney(this.TotalServiceChargeMoney);
             return builder;
         }
 
@@ -602,6 +656,7 @@ namespace Square.Models
                 { "modifiers", false },
                 { "applied_taxes", false },
                 { "applied_discounts", false },
+                { "applied_service_charges", false },
             };
 
             private string quantity;
@@ -617,6 +672,7 @@ namespace Square.Models
             private IList<Models.OrderLineItemModifier> modifiers;
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
             private IList<Models.OrderLineItemAppliedDiscount> appliedDiscounts;
+            private IList<Models.OrderLineItemAppliedServiceCharge> appliedServiceCharges;
             private Models.Money basePriceMoney;
             private Models.Money variationTotalPriceMoney;
             private Models.Money grossSalesMoney;
@@ -624,6 +680,7 @@ namespace Square.Models
             private Models.Money totalDiscountMoney;
             private Models.Money totalMoney;
             private Models.OrderLineItemPricingBlocklists pricingBlocklists;
+            private Models.Money totalServiceChargeMoney;
 
             public Builder(
                 string quantity)
@@ -785,6 +842,18 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// AppliedServiceCharges.
+             /// </summary>
+             /// <param name="appliedServiceCharges"> appliedServiceCharges. </param>
+             /// <returns> Builder. </returns>
+            public Builder AppliedServiceCharges(IList<Models.OrderLineItemAppliedServiceCharge> appliedServiceCharges)
+            {
+                shouldSerialize["applied_service_charges"] = true;
+                this.appliedServiceCharges = appliedServiceCharges;
+                return this;
+            }
+
+             /// <summary>
              /// BasePriceMoney.
              /// </summary>
              /// <param name="basePriceMoney"> basePriceMoney. </param>
@@ -858,6 +927,17 @@ namespace Square.Models
             public Builder PricingBlocklists(Models.OrderLineItemPricingBlocklists pricingBlocklists)
             {
                 this.pricingBlocklists = pricingBlocklists;
+                return this;
+            }
+
+             /// <summary>
+             /// TotalServiceChargeMoney.
+             /// </summary>
+             /// <param name="totalServiceChargeMoney"> totalServiceChargeMoney. </param>
+             /// <returns> Builder. </returns>
+            public Builder TotalServiceChargeMoney(Models.Money totalServiceChargeMoney)
+            {
+                this.totalServiceChargeMoney = totalServiceChargeMoney;
                 return this;
             }
 
@@ -941,6 +1021,14 @@ namespace Square.Models
                 this.shouldSerialize["applied_discounts"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAppliedServiceCharges()
+            {
+                this.shouldSerialize["applied_service_charges"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -962,13 +1050,15 @@ namespace Square.Models
                     this.modifiers,
                     this.appliedTaxes,
                     this.appliedDiscounts,
+                    this.appliedServiceCharges,
                     this.basePriceMoney,
                     this.variationTotalPriceMoney,
                     this.grossSalesMoney,
                     this.totalTaxMoney,
                     this.totalDiscountMoney,
                     this.totalMoney,
-                    this.pricingBlocklists);
+                    this.pricingBlocklists,
+                    this.totalServiceChargeMoney);
             }
         }
     }

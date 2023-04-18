@@ -65,16 +65,20 @@ RenewTokenAsync(
 
 ```csharp
 string clientId = "client_id8";
-var body = new RenewTokenRequest.Builder()
-    .AccessToken("ACCESS_TOKEN")
-    .Build();
-string authorization = "Client CLIENT_SECRET";
+Models.RenewTokenRequest body = new Models.RenewTokenRequest.Builder()
+.AccessToken("ACCESS_TOKEN")
+.Build();
 
+string authorization = "Client CLIENT_SECRET";
 try
 {
     RenewTokenResponse result = await oAuthApi.RenewTokenAsync(clientId, body, authorization);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -119,17 +123,21 @@ RevokeTokenAsync(
 ## Example Usage
 
 ```csharp
-var body = new RevokeTokenRequest.Builder()
-    .ClientId("CLIENT_ID")
-    .AccessToken("ACCESS_TOKEN")
-    .Build();
-string authorization = "Client CLIENT_SECRET";
+Models.RevokeTokenRequest body = new Models.RevokeTokenRequest.Builder()
+.ClientId("CLIENT_ID")
+.AccessToken("ACCESS_TOKEN")
+.Build();
 
+string authorization = "Client CLIENT_SECRET";
 try
 {
     RevokeTokenResponse result = await oAuthApi.RevokeTokenAsync(body, authorization);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -173,18 +181,23 @@ ObtainTokenAsync(
 ## Example Usage
 
 ```csharp
-var body = new ObtainTokenRequest.Builder(
-        "APPLICATION_ID",
-        "authorization_code")
-    .ClientSecret("APPLICATION_SECRET")
-    .Code("CODE_FROM_AUTHORIZE")
-    .Build();
+Models.ObtainTokenRequest body = new Models.ObtainTokenRequest.Builder(
+    "APPLICATION_ID",
+    "authorization_code"
+)
+.ClientSecret("APPLICATION_SECRET")
+.Code("CODE_FROM_AUTHORIZE")
+.Build();
 
 try
 {
     ObtainTokenResponse result = await oAuthApi.ObtainTokenAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -226,11 +239,14 @@ RetrieveTokenStatusAsync(
 
 ```csharp
 string authorization = "Client CLIENT_SECRET";
-
 try
 {
     RetrieveTokenStatusResponse result = await oAuthApi.RetrieveTokenStatusAsync(authorization);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

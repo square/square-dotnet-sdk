@@ -37,8 +37,8 @@ ListGiftCardsAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `type` | `string` | Query, Optional | If a [type](../../doc/models/gift-card-type.md) is provided, the endpoint returns gift cards of the specified type.<br>Otherwise, the endpoint returns gift cards of all types. |
-| `state` | `string` | Query, Optional | If a [state](../../doc/models/gift-card-status.md) is provided, the endpoint returns the gift cards in the specified state.<br>Otherwise, the endpoint returns the gift cards of all states. |
+| `type` | `string` | Query, Optional | If a [type](entity:GiftCardType) is provided, the endpoint returns gift cards of the specified type.<br>Otherwise, the endpoint returns gift cards of all types. |
+| `state` | `string` | Query, Optional | If a [state](entity:GiftCardStatus) is provided, the endpoint returns the gift cards in the specified state.<br>Otherwise, the endpoint returns the gift cards of all states. |
 | `limit` | `int?` | Query, Optional | If a limit is provided, the endpoint returns only the specified number of results per page.<br>The maximum value is 50. The default value is 30.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>If a cursor is not provided, the endpoint returns the first page of the results.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `customerId` | `string` | Query, Optional | If a customer ID is provided, the endpoint returns only the gift cards linked to the specified customer. |
@@ -54,7 +54,11 @@ try
 {
     ListGiftCardsResponse result = await giftCardsApi.ListGiftCardsAsync(null, null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -82,20 +86,25 @@ CreateGiftCardAsync(
 ## Example Usage
 
 ```csharp
-var bodyGiftCard = new GiftCard.Builder(
-        "DIGITAL")
-    .Build();
-var body = new CreateGiftCardRequest.Builder(
-        "NC9Tm69EjbjtConu",
-        "81FN9BNFZTKS4",
-        bodyGiftCard)
-    .Build();
+Models.CreateGiftCardRequest body = new Models.CreateGiftCardRequest.Builder(
+    "NC9Tm69EjbjtConu",
+    "81FN9BNFZTKS4",
+    new Models.GiftCard.Builder(
+        "DIGITAL"
+    )
+    .Build()
+)
+.Build();
 
 try
 {
     CreateGiftCardResponse result = await giftCardsApi.CreateGiftCardAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -121,15 +130,20 @@ RetrieveGiftCardFromGANAsync(
 ## Example Usage
 
 ```csharp
-var body = new RetrieveGiftCardFromGANRequest.Builder(
-        "7783320001001635")
-    .Build();
+Models.RetrieveGiftCardFromGANRequest body = new Models.RetrieveGiftCardFromGANRequest.Builder(
+    "7783320001001635"
+)
+.Build();
 
 try
 {
     RetrieveGiftCardFromGANResponse result = await giftCardsApi.RetrieveGiftCardFromGANAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -155,15 +169,20 @@ RetrieveGiftCardFromNonceAsync(
 ## Example Usage
 
 ```csharp
-var body = new RetrieveGiftCardFromNonceRequest.Builder(
-        "cnon:7783322135245171")
-    .Build();
+Models.RetrieveGiftCardFromNonceRequest body = new Models.RetrieveGiftCardFromNonceRequest.Builder(
+    "cnon:7783322135245171"
+)
+.Build();
 
 try
 {
     RetrieveGiftCardFromNonceResponse result = await giftCardsApi.RetrieveGiftCardFromNonceAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -192,15 +211,20 @@ LinkCustomerToGiftCardAsync(
 
 ```csharp
 string giftCardId = "gift_card_id8";
-var body = new LinkCustomerToGiftCardRequest.Builder(
-        "GKY0FZ3V717AH8Q2D821PNT2ZW")
-    .Build();
+Models.LinkCustomerToGiftCardRequest body = new Models.LinkCustomerToGiftCardRequest.Builder(
+    "GKY0FZ3V717AH8Q2D821PNT2ZW"
+)
+.Build();
 
 try
 {
     LinkCustomerToGiftCardResponse result = await giftCardsApi.LinkCustomerToGiftCardAsync(giftCardId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -229,15 +253,20 @@ UnlinkCustomerFromGiftCardAsync(
 
 ```csharp
 string giftCardId = "gift_card_id8";
-var body = new UnlinkCustomerFromGiftCardRequest.Builder(
-        "GKY0FZ3V717AH8Q2D821PNT2ZW")
-    .Build();
+Models.UnlinkCustomerFromGiftCardRequest body = new Models.UnlinkCustomerFromGiftCardRequest.Builder(
+    "GKY0FZ3V717AH8Q2D821PNT2ZW"
+)
+.Build();
 
 try
 {
     UnlinkCustomerFromGiftCardResponse result = await giftCardsApi.UnlinkCustomerFromGiftCardAsync(giftCardId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -264,11 +293,14 @@ RetrieveGiftCardAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     RetrieveGiftCardResponse result = await giftCardsApi.RetrieveGiftCardAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

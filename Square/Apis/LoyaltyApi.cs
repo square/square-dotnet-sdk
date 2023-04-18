@@ -61,8 +61,8 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Searches for loyalty accounts in a loyalty program.  .
-        /// You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.  .
+        /// Searches for loyalty accounts in a loyalty program.
+        /// You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.
         /// Search results are sorted by `created_at` in ascending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -72,8 +72,8 @@ namespace Square.Apis
             => CoreHelper.RunTask(SearchLoyaltyAccountsAsync(body));
 
         /// <summary>
-        /// Searches for loyalty accounts in a loyalty program.  .
-        /// You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.  .
+        /// Searches for loyalty accounts in a loyalty program.
+        /// You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.
         /// Search results are sorted by `created_at` in ascending order.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -97,7 +97,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a loyalty account.
         /// </summary>
-        /// <param name="accountId">Required parameter: The ID of the [loyalty account]($m/LoyaltyAccount) to retrieve..</param>
+        /// <param name="accountId">Required parameter: The ID of the [loyalty account](entity:LoyaltyAccount) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveLoyaltyAccountResponse response from the API call.</returns>
         public Models.RetrieveLoyaltyAccountResponse RetrieveLoyaltyAccount(
                 string accountId)
@@ -106,7 +106,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a loyalty account.
         /// </summary>
-        /// <param name="accountId">Required parameter: The ID of the [loyalty account]($m/LoyaltyAccount) to retrieve..</param>
+        /// <param name="accountId">Required parameter: The ID of the [loyalty account](entity:LoyaltyAccount) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveLoyaltyAccountResponse response from the API call.</returns>
         public async Task<Models.RetrieveLoyaltyAccountResponse> RetrieveLoyaltyAccountAsync(
@@ -137,7 +137,7 @@ namespace Square.Apis
         /// to compute the points earned from the base loyalty program. For information about computing points earned from a loyalty promotion, see.
         /// [Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).
         /// </summary>
-        /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
+        /// <param name="accountId">Required parameter: The ID of the target [loyalty account](entity:LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.AccumulateLoyaltyPointsResponse response from the API call.</returns>
         public Models.AccumulateLoyaltyPointsResponse AccumulateLoyaltyPoints(
@@ -159,7 +159,7 @@ namespace Square.Apis
         /// to compute the points earned from the base loyalty program. For information about computing points earned from a loyalty promotion, see.
         /// [Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).
         /// </summary>
-        /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
+        /// <param name="accountId">Required parameter: The ID of the target [loyalty account](entity:LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.AccumulateLoyaltyPointsResponse response from the API call.</returns>
@@ -181,12 +181,12 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Adds points to or subtracts points from a buyer's account. .
-        /// Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call .
-        /// [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints) .
+        /// Adds points to or subtracts points from a buyer's account.
+        /// Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call.
+        /// [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints).
         /// to add points when a buyer pays for the purchase.
         /// </summary>
-        /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
+        /// <param name="accountId">Required parameter: The ID of the target [loyalty account](entity:LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.AdjustLoyaltyPointsResponse response from the API call.</returns>
         public Models.AdjustLoyaltyPointsResponse AdjustLoyaltyPoints(
@@ -195,12 +195,12 @@ namespace Square.Apis
             => CoreHelper.RunTask(AdjustLoyaltyPointsAsync(accountId, body));
 
         /// <summary>
-        /// Adds points to or subtracts points from a buyer's account. .
-        /// Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call .
-        /// [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints) .
+        /// Adds points to or subtracts points from a buyer's account.
+        /// Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call.
+        /// [AccumulateLoyaltyPoints]($e/Loyalty/AccumulateLoyaltyPoints).
         /// to add points when a buyer pays for the purchase.
         /// </summary>
-        /// <param name="accountId">Required parameter: The ID of the target [loyalty account]($m/LoyaltyAccount)..</param>
+        /// <param name="accountId">Required parameter: The ID of the target [loyalty account](entity:LoyaltyAccount)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.AdjustLoyaltyPointsResponse response from the API call.</returns>
@@ -223,9 +223,9 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for loyalty events.
-        /// A Square loyalty program maintains a ledger of events that occur during the lifetime of a .
-        /// buyer's loyalty account. Each change in the point balance .
-        /// (for example, points earned, points redeemed, and points expired) is .
+        /// A Square loyalty program maintains a ledger of events that occur during the lifetime of a.
+        /// buyer's loyalty account. Each change in the point balance.
+        /// (for example, points earned, points redeemed, and points expired) is.
         /// recorded in the ledger. Using this endpoint, you can search the ledger for events.
         /// Search results are sorted by `created_at` in descending order.
         /// </summary>
@@ -237,9 +237,9 @@ namespace Square.Apis
 
         /// <summary>
         /// Searches for loyalty events.
-        /// A Square loyalty program maintains a ledger of events that occur during the lifetime of a .
-        /// buyer's loyalty account. Each change in the point balance .
-        /// (for example, points earned, points redeemed, and points expired) is .
+        /// A Square loyalty program maintains a ledger of events that occur during the lifetime of a.
+        /// buyer's loyalty account. Each change in the point balance.
+        /// (for example, points earned, points redeemed, and points expired) is.
         /// recorded in the ledger. Using this endpoint, you can search the ledger for events.
         /// Search results are sorted by `created_at` in descending order.
         /// </summary>
@@ -264,7 +264,7 @@ namespace Square.Apis
         /// <summary>
         /// Returns a list of loyalty programs in the seller's account.
         /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
-        /// Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) when used with the keyword `main`.
+        /// Replaced with [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) when used with the keyword `main`.
         /// </summary>
         /// <returns>Returns the Models.ListLoyaltyProgramsResponse response from the API call.</returns>
         [Obsolete]
@@ -274,7 +274,7 @@ namespace Square.Apis
         /// <summary>
         /// Returns a list of loyalty programs in the seller's account.
         /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
-        /// Replaced with [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) when used with the keyword `main`.
+        /// Replaced with [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) when used with the keyword `main`.
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListLoyaltyProgramsResponse response from the API call.</returns>
@@ -290,7 +290,7 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`. .
+        /// Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`.
         /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
         /// </summary>
         /// <param name="programId">Required parameter: The ID of the loyalty program or the keyword `main`. Either value can be used to retrieve the single loyalty program that belongs to the seller..</param>
@@ -300,7 +300,7 @@ namespace Square.Apis
             => CoreHelper.RunTask(RetrieveLoyaltyProgramAsync(programId));
 
         /// <summary>
-        /// Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`. .
+        /// Retrieves the loyalty program in a seller's account, specified by the program ID or the keyword `main`.
         /// Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
         /// </summary>
         /// <param name="programId">Required parameter: The ID of the loyalty program or the keyword `main`. Either value can be used to retrieve the single loyalty program that belongs to the seller..</param>
@@ -335,7 +335,7 @@ namespace Square.Apis
         /// to calculate whether the purchase also qualifies for promotion points. For more information, see.
         /// [Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).
         /// </summary>
-        /// <param name="programId">Required parameter: The ID of the [loyalty program]($m/LoyaltyProgram), which defines the rules for accruing points..</param>
+        /// <param name="programId">Required parameter: The ID of the [loyalty program](entity:LoyaltyProgram), which defines the rules for accruing points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CalculateLoyaltyPointsResponse response from the API call.</returns>
         public Models.CalculateLoyaltyPointsResponse CalculateLoyaltyPoints(
@@ -358,7 +358,7 @@ namespace Square.Apis
         /// to calculate whether the purchase also qualifies for promotion points. For more information, see.
         /// [Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).
         /// </summary>
-        /// <param name="programId">Required parameter: The ID of the [loyalty program]($m/LoyaltyProgram), which defines the rules for accruing points..</param>
+        /// <param name="programId">Required parameter: The ID of the [loyalty program](entity:LoyaltyProgram), which defines the rules for accruing points..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CalculateLoyaltyPointsResponse response from the API call.</returns>
@@ -383,7 +383,7 @@ namespace Square.Apis
         /// Lists the loyalty promotions associated with a [loyalty program]($m/LoyaltyProgram).
         /// Results are sorted by the `created_at` date in descending order (newest to oldest).
         /// </summary>
-        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword..</param>
         /// <param name="status">Optional parameter: The status to filter the results by. If a status is provided, only loyalty promotions with the specified status are returned. Otherwise, all loyalty promotions associated with the loyalty program are returned..</param>
         /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. The minimum value is 1 and the maximum value is 30. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
@@ -399,7 +399,7 @@ namespace Square.Apis
         /// Lists the loyalty promotions associated with a [loyalty program]($m/LoyaltyProgram).
         /// Results are sorted by the `created_at` date in descending order (newest to oldest).
         /// </summary>
-        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword..</param>
         /// <param name="status">Optional parameter: The status to filter the results by. If a status is provided, only loyalty promotions with the specified status are returned. Otherwise, all loyalty promotions associated with the loyalty program are returned..</param>
         /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. The minimum value is 1 and the maximum value is 30. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
@@ -432,7 +432,7 @@ namespace Square.Apis
         /// `available_time` setting. A loyalty program can have a maximum of 10 loyalty promotions with an.
         /// `ACTIVE` or `SCHEDULED` status.
         /// </summary>
-        /// <param name="programId">Required parameter: The ID of the [loyalty program]($m/LoyaltyProgram) to associate with the promotion. To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="programId">Required parameter: The ID of the [loyalty program](entity:LoyaltyProgram) to associate with the promotion. To get the program ID, call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateLoyaltyPromotionResponse response from the API call.</returns>
         public Models.CreateLoyaltyPromotionResponse CreateLoyaltyPromotion(
@@ -447,7 +447,7 @@ namespace Square.Apis
         /// `available_time` setting. A loyalty program can have a maximum of 10 loyalty promotions with an.
         /// `ACTIVE` or `SCHEDULED` status.
         /// </summary>
-        /// <param name="programId">Required parameter: The ID of the [loyalty program]($m/LoyaltyProgram) to associate with the promotion. To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="programId">Required parameter: The ID of the [loyalty program](entity:LoyaltyProgram) to associate with the promotion. To get the program ID, call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CreateLoyaltyPromotionResponse response from the API call.</returns>
@@ -471,8 +471,8 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a loyalty promotion.
         /// </summary>
-        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion]($m/LoyaltyPromotion) to retrieve..</param>
-        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion](entity:LoyaltyPromotion) to retrieve..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword..</param>
         /// <returns>Returns the Models.RetrieveLoyaltyPromotionResponse response from the API call.</returns>
         public Models.RetrieveLoyaltyPromotionResponse RetrieveLoyaltyPromotion(
                 string promotionId,
@@ -482,8 +482,8 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a loyalty promotion.
         /// </summary>
-        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion]($m/LoyaltyPromotion) to retrieve..</param>
-        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram]($e/Loyalty/RetrieveLoyaltyProgram) using the `main` keyword..</param>
+        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion](entity:LoyaltyPromotion) to retrieve..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID, call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveLoyaltyPromotionResponse response from the API call.</returns>
         public async Task<Models.RetrieveLoyaltyPromotionResponse> RetrieveLoyaltyPromotionAsync(
@@ -509,8 +509,8 @@ namespace Square.Apis
         /// you create a new one.
         /// This endpoint sets the loyalty promotion to the `CANCELED` state.
         /// </summary>
-        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion]($m/LoyaltyPromotion) to cancel. You can cancel a promotion that has an `ACTIVE` or `SCHEDULED` status..</param>
-        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram)..</param>
+        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion](entity:LoyaltyPromotion) to cancel. You can cancel a promotion that has an `ACTIVE` or `SCHEDULED` status..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program](entity:LoyaltyProgram)..</param>
         /// <returns>Returns the Models.CancelLoyaltyPromotionResponse response from the API call.</returns>
         public Models.CancelLoyaltyPromotionResponse CancelLoyaltyPromotion(
                 string promotionId,
@@ -524,8 +524,8 @@ namespace Square.Apis
         /// you create a new one.
         /// This endpoint sets the loyalty promotion to the `CANCELED` state.
         /// </summary>
-        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion]($m/LoyaltyPromotion) to cancel. You can cancel a promotion that has an `ACTIVE` or `SCHEDULED` status..</param>
-        /// <param name="programId">Required parameter: The ID of the base [loyalty program]($m/LoyaltyProgram)..</param>
+        /// <param name="promotionId">Required parameter: The ID of the [loyalty promotion](entity:LoyaltyPromotion) to cancel. You can cancel a promotion that has an `ACTIVE` or `SCHEDULED` status..</param>
+        /// <param name="programId">Required parameter: The ID of the base [loyalty program](entity:LoyaltyProgram)..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CancelLoyaltyPromotionResponse response from the API call.</returns>
         public async Task<Models.CancelLoyaltyPromotionResponse> CancelLoyaltyPromotionAsync(
@@ -546,10 +546,10 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a loyalty reward. In the process, the endpoint does following:.
-        /// - Uses the `reward_tier_id` in the request to determine the number of points .
-        /// to lock for this reward. .
-        /// - If the request includes `order_id`, it adds the reward and related discount to the order. .
-        /// After a reward is created, the points are locked and .
+        /// - Uses the `reward_tier_id` in the request to determine the number of points.
+        /// to lock for this reward.
+        /// - If the request includes `order_id`, it adds the reward and related discount to the order.
+        /// After a reward is created, the points are locked and.
         /// not available for the buyer to redeem another reward.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -560,10 +560,10 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a loyalty reward. In the process, the endpoint does following:.
-        /// - Uses the `reward_tier_id` in the request to determine the number of points .
-        /// to lock for this reward. .
-        /// - If the request includes `order_id`, it adds the reward and related discount to the order. .
-        /// After a reward is created, the points are locked and .
+        /// - Uses the `reward_tier_id` in the request to determine the number of points.
+        /// to lock for this reward.
+        /// - If the request includes `order_id`, it adds the reward and related discount to the order.
+        /// After a reward is created, the points are locked and.
         /// not available for the buyer to redeem another reward.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -585,9 +585,9 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Searches for loyalty rewards. This endpoint accepts a request with no query filters and returns results for all loyalty accounts. .
+        /// Searches for loyalty rewards. This endpoint accepts a request with no query filters and returns results for all loyalty accounts.
         /// If you include a `query` object, `loyalty_account_id` is required and `status` is  optional.
-        /// If you know a reward ID, use the .
+        /// If you know a reward ID, use the.
         /// [RetrieveLoyaltyReward]($e/Loyalty/RetrieveLoyaltyReward) endpoint.
         /// Search results are sorted by `updated_at` in descending order.
         /// </summary>
@@ -598,9 +598,9 @@ namespace Square.Apis
             => CoreHelper.RunTask(SearchLoyaltyRewardsAsync(body));
 
         /// <summary>
-        /// Searches for loyalty rewards. This endpoint accepts a request with no query filters and returns results for all loyalty accounts. .
+        /// Searches for loyalty rewards. This endpoint accepts a request with no query filters and returns results for all loyalty accounts.
         /// If you include a `query` object, `loyalty_account_id` is required and `status` is  optional.
-        /// If you know a reward ID, use the .
+        /// If you know a reward ID, use the.
         /// [RetrieveLoyaltyReward]($e/Loyalty/RetrieveLoyaltyReward) endpoint.
         /// Search results are sorted by `updated_at` in descending order.
         /// </summary>
@@ -625,13 +625,13 @@ namespace Square.Apis
         /// <summary>
         /// Deletes a loyalty reward by doing the following:.
         /// - Returns the loyalty points back to the loyalty account.
-        /// - If an order ID was specified when the reward was created .
-        /// (see [CreateLoyaltyReward]($e/Loyalty/CreateLoyaltyReward)), .
-        /// it updates the order by removing the reward and related .
+        /// - If an order ID was specified when the reward was created.
+        /// (see [CreateLoyaltyReward]($e/Loyalty/CreateLoyaltyReward)),.
+        /// it updates the order by removing the reward and related.
         /// discounts.
         /// You cannot delete a reward that has reached the terminal state (REDEEMED).
         /// </summary>
-        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to delete..</param>
+        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](entity:LoyaltyReward) to delete..</param>
         /// <returns>Returns the Models.DeleteLoyaltyRewardResponse response from the API call.</returns>
         public Models.DeleteLoyaltyRewardResponse DeleteLoyaltyReward(
                 string rewardId)
@@ -640,13 +640,13 @@ namespace Square.Apis
         /// <summary>
         /// Deletes a loyalty reward by doing the following:.
         /// - Returns the loyalty points back to the loyalty account.
-        /// - If an order ID was specified when the reward was created .
-        /// (see [CreateLoyaltyReward]($e/Loyalty/CreateLoyaltyReward)), .
-        /// it updates the order by removing the reward and related .
+        /// - If an order ID was specified when the reward was created.
+        /// (see [CreateLoyaltyReward]($e/Loyalty/CreateLoyaltyReward)),.
+        /// it updates the order by removing the reward and related.
         /// discounts.
         /// You cannot delete a reward that has reached the terminal state (REDEEMED).
         /// </summary>
-        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to delete..</param>
+        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](entity:LoyaltyReward) to delete..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.DeleteLoyaltyRewardResponse response from the API call.</returns>
         public async Task<Models.DeleteLoyaltyRewardResponse> DeleteLoyaltyRewardAsync(
@@ -666,7 +666,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a loyalty reward.
         /// </summary>
-        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to retrieve..</param>
+        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](entity:LoyaltyReward) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveLoyaltyRewardResponse response from the API call.</returns>
         public Models.RetrieveLoyaltyRewardResponse RetrieveLoyaltyReward(
                 string rewardId)
@@ -675,7 +675,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a loyalty reward.
         /// </summary>
-        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to retrieve..</param>
+        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](entity:LoyaltyReward) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveLoyaltyRewardResponse response from the API call.</returns>
         public async Task<Models.RetrieveLoyaltyRewardResponse> RetrieveLoyaltyRewardAsync(
@@ -694,15 +694,15 @@ namespace Square.Apis
 
         /// <summary>
         /// Redeems a loyalty reward.
-        /// The endpoint sets the reward to the `REDEEMED` terminal state. .
-        /// If you are using your own order processing system (not using the .
-        /// Orders API), you call this endpoint after the buyer paid for the .
+        /// The endpoint sets the reward to the `REDEEMED` terminal state.
+        /// If you are using your own order processing system (not using the.
+        /// Orders API), you call this endpoint after the buyer paid for the.
         /// purchase.
-        /// After the reward reaches the terminal state, it cannot be deleted. .
-        /// In other words, points used for the reward cannot be returned .
+        /// After the reward reaches the terminal state, it cannot be deleted.
+        /// In other words, points used for the reward cannot be returned.
         /// to the account.
         /// </summary>
-        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to redeem..</param>
+        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](entity:LoyaltyReward) to redeem..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.RedeemLoyaltyRewardResponse response from the API call.</returns>
         public Models.RedeemLoyaltyRewardResponse RedeemLoyaltyReward(
@@ -712,15 +712,15 @@ namespace Square.Apis
 
         /// <summary>
         /// Redeems a loyalty reward.
-        /// The endpoint sets the reward to the `REDEEMED` terminal state. .
-        /// If you are using your own order processing system (not using the .
-        /// Orders API), you call this endpoint after the buyer paid for the .
+        /// The endpoint sets the reward to the `REDEEMED` terminal state.
+        /// If you are using your own order processing system (not using the.
+        /// Orders API), you call this endpoint after the buyer paid for the.
         /// purchase.
-        /// After the reward reaches the terminal state, it cannot be deleted. .
-        /// In other words, points used for the reward cannot be returned .
+        /// After the reward reaches the terminal state, it cannot be deleted.
+        /// In other words, points used for the reward cannot be returned.
         /// to the account.
         /// </summary>
-        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward]($m/LoyaltyReward) to redeem..</param>
+        /// <param name="rewardId">Required parameter: The ID of the [loyalty reward](entity:LoyaltyReward) to redeem..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RedeemLoyaltyRewardResponse response from the API call.</returns>

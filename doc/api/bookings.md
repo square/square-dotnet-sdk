@@ -60,7 +60,11 @@ try
 {
     ListBookingsResponse result = await bookingsApi.ListBookingsAsync(null, null, null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -70,8 +74,8 @@ Creates a booking.
 
 The required input must include the following:
 
-- `Booking.location_id`,
-- `Booking.start_at`,
+- `Booking.location_id`
+- `Booking.start_at`
 - `Booking.team_member_id`
 - `Booking.AppointmentSegment.service_variation_id`
 - `Booking.AppointmentSegment.service_variation_version`
@@ -100,17 +104,21 @@ CreateBookingAsync(
 ## Example Usage
 
 ```csharp
-var bodyBooking = new Booking.Builder()
-    .Build();
-var body = new CreateBookingRequest.Builder(
-        bodyBooking)
-    .Build();
+Models.CreateBookingRequest body = new Models.CreateBookingRequest.Builder(
+    new Models.Booking.Builder()
+    .Build()
+)
+.Build();
 
 try
 {
     CreateBookingResponse result = await bookingsApi.CreateBookingAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -139,23 +147,27 @@ SearchAvailabilityAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterStartAtRange = new TimeRange.Builder()
-    .Build();
-var bodyQueryFilter = new SearchAvailabilityFilter.Builder(
-        bodyQueryFilterStartAtRange)
-    .Build();
-var bodyQuery = new SearchAvailabilityQuery.Builder(
-        bodyQueryFilter)
-    .Build();
-var body = new SearchAvailabilityRequest.Builder(
-        bodyQuery)
-    .Build();
+Models.SearchAvailabilityRequest body = new Models.SearchAvailabilityRequest.Builder(
+    new Models.SearchAvailabilityQuery.Builder(
+        new Models.SearchAvailabilityFilter.Builder(
+            new Models.TimeRange.Builder()
+            .Build()
+        )
+        .Build()
+    )
+    .Build()
+)
+.Build();
 
 try
 {
     SearchAvailabilityResponse result = await bookingsApi.SearchAvailabilityAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -178,7 +190,11 @@ try
 {
     RetrieveBusinessBookingProfileResponse result = await bookingsApi.RetrieveBusinessBookingProfileAsync();
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -211,12 +227,15 @@ ListTeamMemberBookingProfilesAsync(
 
 ```csharp
 bool? bookableOnly = false;
-
 try
 {
     ListTeamMemberBookingProfilesResponse result = await bookingsApi.ListTeamMemberBookingProfilesAsync(bookableOnly, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -243,12 +262,15 @@ RetrieveTeamMemberBookingProfileAsync(
 
 ```csharp
 string teamMemberId = "team_member_id0";
-
 try
 {
     RetrieveTeamMemberBookingProfileResponse result = await bookingsApi.RetrieveTeamMemberBookingProfileAsync(teamMemberId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -268,7 +290,7 @@ RetrieveBookingAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookingId` | `string` | Template, Required | The ID of the [Booking](../../doc/models/booking.md) object representing the to-be-retrieved booking. |
+| `bookingId` | `string` | Template, Required | The ID of the [Booking](entity:Booking) object representing the to-be-retrieved booking. |
 
 ## Response Type
 
@@ -278,12 +300,15 @@ RetrieveBookingAsync(
 
 ```csharp
 string bookingId = "booking_id4";
-
 try
 {
     RetrieveBookingResponse result = await bookingsApi.RetrieveBookingAsync(bookingId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -307,7 +332,7 @@ UpdateBookingAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookingId` | `string` | Template, Required | The ID of the [Booking](../../doc/models/booking.md) object representing the to-be-updated booking. |
+| `bookingId` | `string` | Template, Required | The ID of the [Booking](entity:Booking) object representing the to-be-updated booking. |
 | `body` | [`Models.UpdateBookingRequest`](../../doc/models/update-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -318,17 +343,21 @@ UpdateBookingAsync(
 
 ```csharp
 string bookingId = "booking_id4";
-var bodyBooking = new Booking.Builder()
-    .Build();
-var body = new UpdateBookingRequest.Builder(
-        bodyBooking)
-    .Build();
+Models.UpdateBookingRequest body = new Models.UpdateBookingRequest.Builder(
+    new Models.Booking.Builder()
+    .Build()
+)
+.Build();
 
 try
 {
     UpdateBookingResponse result = await bookingsApi.UpdateBookingAsync(bookingId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -352,7 +381,7 @@ CancelBookingAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookingId` | `string` | Template, Required | The ID of the [Booking](../../doc/models/booking.md) object representing the to-be-cancelled booking. |
+| `bookingId` | `string` | Template, Required | The ID of the [Booking](entity:Booking) object representing the to-be-cancelled booking. |
 | `body` | [`Models.CancelBookingRequest`](../../doc/models/cancel-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
@@ -363,13 +392,17 @@ CancelBookingAsync(
 
 ```csharp
 string bookingId = "booking_id4";
-var body = new CancelBookingRequest.Builder()
-    .Build();
+Models.CancelBookingRequest body = new Models.CancelBookingRequest.Builder()
+.Build();
 
 try
 {
     CancelBookingResponse result = await bookingsApi.CancelBookingAsync(bookingId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

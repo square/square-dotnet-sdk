@@ -31,10 +31,10 @@ namespace Square.Apis
         internal InventoryApi(GlobalConfiguration globalConfiguration) : base(globalConfiguration) { }
 
         /// <summary>
-        /// Deprecated version of [RetrieveInventoryAdjustment]($e/Inventory/RetrieveInventoryAdjustment) after the endpoint URL.
+        /// Deprecated version of [RetrieveInventoryAdjustment](api-endpoint:Inventory-RetrieveInventoryAdjustment) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
-        /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
+        /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryAdjustmentResponse response from the API call.</returns>
         [Obsolete]
         public Models.RetrieveInventoryAdjustmentResponse DeprecatedRetrieveInventoryAdjustment(
@@ -42,10 +42,10 @@ namespace Square.Apis
             => CoreHelper.RunTask(DeprecatedRetrieveInventoryAdjustmentAsync(adjustmentId));
 
         /// <summary>
-        /// Deprecated version of [RetrieveInventoryAdjustment]($e/Inventory/RetrieveInventoryAdjustment) after the endpoint URL.
+        /// Deprecated version of [RetrieveInventoryAdjustment](api-endpoint:Inventory-RetrieveInventoryAdjustment) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
-        /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
+        /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveInventoryAdjustmentResponse response from the API call.</returns>
         [Obsolete]
@@ -67,7 +67,7 @@ namespace Square.Apis
         /// Returns the [InventoryAdjustment]($m/InventoryAdjustment) object.
         /// with the provided `adjustment_id`.
         /// </summary>
-        /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
+        /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryAdjustmentResponse response from the API call.</returns>
         public Models.RetrieveInventoryAdjustmentResponse RetrieveInventoryAdjustment(
                 string adjustmentId)
@@ -77,7 +77,7 @@ namespace Square.Apis
         /// Returns the [InventoryAdjustment]($m/InventoryAdjustment) object.
         /// with the provided `adjustment_id`.
         /// </summary>
-        /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment]($m/InventoryAdjustment) to retrieve..</param>
+        /// <param name="adjustmentId">Required parameter: ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveInventoryAdjustmentResponse response from the API call.</returns>
         public async Task<Models.RetrieveInventoryAdjustmentResponse> RetrieveInventoryAdjustmentAsync(
@@ -95,7 +95,7 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Deprecated version of [BatchChangeInventory]($e/Inventory/BatchChangeInventory) after the endpoint URL.
+        /// Deprecated version of [BatchChangeInventory](api-endpoint:Inventory-BatchChangeInventory) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -106,7 +106,7 @@ namespace Square.Apis
             => CoreHelper.RunTask(DeprecatedBatchChangeInventoryAsync(body));
 
         /// <summary>
-        /// Deprecated version of [BatchChangeInventory]($e/Inventory/BatchChangeInventory) after the endpoint URL.
+        /// Deprecated version of [BatchChangeInventory](api-endpoint:Inventory-BatchChangeInventory) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -129,7 +129,7 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Deprecated version of [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) after the endpoint URL.
+        /// Deprecated version of [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -140,7 +140,7 @@ namespace Square.Apis
             => CoreHelper.RunTask(DeprecatedBatchRetrieveInventoryChangesAsync(body));
 
         /// <summary>
-        /// Deprecated version of [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges) after the endpoint URL.
+        /// Deprecated version of [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -163,7 +163,7 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Deprecated version of [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts) after the endpoint URL.
+        /// Deprecated version of [BatchRetrieveInventoryCounts](api-endpoint:Inventory-BatchRetrieveInventoryCounts) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -174,7 +174,7 @@ namespace Square.Apis
             => CoreHelper.RunTask(DeprecatedBatchRetrieveInventoryCountsAsync(body));
 
         /// <summary>
-        /// Deprecated version of [BatchRetrieveInventoryCounts]($e/Inventory/BatchRetrieveInventoryCounts) after the endpoint URL.
+        /// Deprecated version of [BatchRetrieveInventoryCounts](api-endpoint:Inventory-BatchRetrieveInventoryCounts) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -319,10 +319,10 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Deprecated version of [RetrieveInventoryPhysicalCount]($e/Inventory/RetrieveInventoryPhysicalCount) after the endpoint URL.
+        /// Deprecated version of [RetrieveInventoryPhysicalCount](api-endpoint:Inventory-RetrieveInventoryPhysicalCount) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
-        /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
+        /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryPhysicalCountResponse response from the API call.</returns>
         [Obsolete]
         public Models.RetrieveInventoryPhysicalCountResponse DeprecatedRetrieveInventoryPhysicalCount(
@@ -330,10 +330,10 @@ namespace Square.Apis
             => CoreHelper.RunTask(DeprecatedRetrieveInventoryPhysicalCountAsync(physicalCountId));
 
         /// <summary>
-        /// Deprecated version of [RetrieveInventoryPhysicalCount]($e/Inventory/RetrieveInventoryPhysicalCount) after the endpoint URL.
+        /// Deprecated version of [RetrieveInventoryPhysicalCount](api-endpoint:Inventory-RetrieveInventoryPhysicalCount) after the endpoint URL.
         /// is updated to conform to the standard convention.
         /// </summary>
-        /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
+        /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveInventoryPhysicalCountResponse response from the API call.</returns>
         [Obsolete]
@@ -355,7 +355,7 @@ namespace Square.Apis
         /// Returns the [InventoryPhysicalCount]($m/InventoryPhysicalCount).
         /// object with the provided `physical_count_id`.
         /// </summary>
-        /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
+        /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryPhysicalCountResponse response from the API call.</returns>
         public Models.RetrieveInventoryPhysicalCountResponse RetrieveInventoryPhysicalCount(
                 string physicalCountId)
@@ -365,7 +365,7 @@ namespace Square.Apis
         /// Returns the [InventoryPhysicalCount]($m/InventoryPhysicalCount).
         /// object with the provided `physical_count_id`.
         /// </summary>
-        /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount]($m/InventoryPhysicalCount) to retrieve..</param>
+        /// <param name="physicalCountId">Required parameter: ID of the [InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveInventoryPhysicalCountResponse response from the API call.</returns>
         public async Task<Models.RetrieveInventoryPhysicalCountResponse> RetrieveInventoryPhysicalCountAsync(
@@ -386,7 +386,7 @@ namespace Square.Apis
         /// Returns the [InventoryTransfer]($m/InventoryTransfer) object.
         /// with the provided `transfer_id`.
         /// </summary>
-        /// <param name="transferId">Required parameter: ID of the [InventoryTransfer]($m/InventoryTransfer) to retrieve..</param>
+        /// <param name="transferId">Required parameter: ID of the [InventoryTransfer](entity:InventoryTransfer) to retrieve..</param>
         /// <returns>Returns the Models.RetrieveInventoryTransferResponse response from the API call.</returns>
         public Models.RetrieveInventoryTransferResponse RetrieveInventoryTransfer(
                 string transferId)
@@ -396,7 +396,7 @@ namespace Square.Apis
         /// Returns the [InventoryTransfer]($m/InventoryTransfer) object.
         /// with the provided `transfer_id`.
         /// </summary>
-        /// <param name="transferId">Required parameter: ID of the [InventoryTransfer]($m/InventoryTransfer) to retrieve..</param>
+        /// <param name="transferId">Required parameter: ID of the [InventoryTransfer](entity:InventoryTransfer) to retrieve..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveInventoryTransferResponse response from the API call.</returns>
         public async Task<Models.RetrieveInventoryTransferResponse> RetrieveInventoryTransferAsync(
@@ -419,8 +419,8 @@ namespace Square.Apis
         /// [Location]($m/Location)s. Responses are paginated and unsorted.
         /// For more sophisticated queries, use a batch endpoint.
         /// </summary>
-        /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject]($m/CatalogObject) to retrieve..</param>
-        /// <param name="locationIds">Optional parameter: The [Location]($m/Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
+        /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject](entity:CatalogObject) to retrieve..</param>
+        /// <param name="locationIds">Optional parameter: The [Location](entity:Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information..</param>
         /// <returns>Returns the Models.RetrieveInventoryCountResponse response from the API call.</returns>
         public Models.RetrieveInventoryCountResponse RetrieveInventoryCount(
@@ -435,8 +435,8 @@ namespace Square.Apis
         /// [Location]($m/Location)s. Responses are paginated and unsorted.
         /// For more sophisticated queries, use a batch endpoint.
         /// </summary>
-        /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject]($m/CatalogObject) to retrieve..</param>
-        /// <param name="locationIds">Optional parameter: The [Location]($m/Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
+        /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject](entity:CatalogObject) to retrieve..</param>
+        /// <param name="locationIds">Optional parameter: The [Location](entity:Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveInventoryCountResponse response from the API call.</returns>
@@ -460,9 +460,9 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns a set of physical counts and inventory adjustments for the.
-        /// provided [CatalogObject]($m/CatalogObject) at the requested.
-        /// [Location]($m/Location)s.
-        /// You can achieve the same result by calling [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges).
+        /// provided [CatalogObject](entity:CatalogObject) at the requested.
+        /// [Location](entity:Location)s.
+        /// You can achieve the same result by calling [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges).
         /// and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID.
         /// Results are paginated and sorted in descending order according to their.
         /// `occurred_at` timestamp (newest first).
@@ -470,8 +470,8 @@ namespace Square.Apis
         /// used to display recent changes for a specific item. For more.
         /// sophisticated queries, use a batch endpoint.
         /// </summary>
-        /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject]($m/CatalogObject) to retrieve..</param>
-        /// <param name="locationIds">Optional parameter: The [Location]($m/Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
+        /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject](entity:CatalogObject) to retrieve..</param>
+        /// <param name="locationIds">Optional parameter: The [Location](entity:Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information..</param>
         /// <returns>Returns the Models.RetrieveInventoryChangesResponse response from the API call.</returns>
         [Obsolete]
@@ -483,9 +483,9 @@ namespace Square.Apis
 
         /// <summary>
         /// Returns a set of physical counts and inventory adjustments for the.
-        /// provided [CatalogObject]($m/CatalogObject) at the requested.
-        /// [Location]($m/Location)s.
-        /// You can achieve the same result by calling [BatchRetrieveInventoryChanges]($e/Inventory/BatchRetrieveInventoryChanges).
+        /// provided [CatalogObject](entity:CatalogObject) at the requested.
+        /// [Location](entity:Location)s.
+        /// You can achieve the same result by calling [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges).
         /// and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID.
         /// Results are paginated and sorted in descending order according to their.
         /// `occurred_at` timestamp (newest first).
@@ -493,8 +493,8 @@ namespace Square.Apis
         /// used to display recent changes for a specific item. For more.
         /// sophisticated queries, use a batch endpoint.
         /// </summary>
-        /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject]($m/CatalogObject) to retrieve..</param>
-        /// <param name="locationIds">Optional parameter: The [Location]($m/Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
+        /// <param name="catalogObjectId">Required parameter: ID of the [CatalogObject](entity:CatalogObject) to retrieve..</param>
+        /// <param name="locationIds">Optional parameter: The [Location](entity:Location) IDs to look up as a comma-separated list. An empty list queries all locations..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this to retrieve the next set of results for the original query.  See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveInventoryChangesResponse response from the API call.</returns>

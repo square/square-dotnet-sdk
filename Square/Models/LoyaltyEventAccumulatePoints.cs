@@ -61,7 +61,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the [loyalty program]($m/LoyaltyProgram).
+        /// The ID of the [loyalty program](entity:LoyaltyProgram).
         /// </summary>
         [JsonProperty("loyalty_program_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LoyaltyProgramId { get; }
@@ -73,7 +73,7 @@ namespace Square.Models
         public int? Points { get; }
 
         /// <summary>
-        /// The ID of the [order]($m/Order) for which the buyer accumulated the points.
+        /// The ID of the [order](entity:Order) for which the buyer accumulated the points.
         /// This field is returned only if the Orders API is used to process orders.
         /// </summary>
         [JsonProperty("order_id")]

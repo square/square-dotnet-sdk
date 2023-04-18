@@ -30,6 +30,10 @@ try
 {
     ListSitesResponse result = await sitesApi.ListSitesAsync();
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

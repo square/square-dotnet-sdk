@@ -34,7 +34,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the [booking]($m/Booking) associated with the custom attribute.
+        /// The ID of the [booking](entity:Booking) associated with the custom attribute.
         /// </summary>
         [JsonProperty("booking_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BookingId { get; }

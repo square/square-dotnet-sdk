@@ -168,7 +168,7 @@ namespace Square.Models
         public string Type { get; }
 
         /// <summary>
-        /// The ID of the [business location]($m/Location) where the activity occurred.
+        /// The ID of the [business location](entity:Location) where the activity occurred.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }

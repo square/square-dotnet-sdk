@@ -28,7 +28,7 @@ payment processing workflow hosted on connect.squareup.com.
 
 NOTE: The Checkout API has been updated with new features.
 For more information, see [Checkout API highlights](https://developer.squareup.com/docs/checkout-api#checkout-api-highlights).
-We recommend that you use the new [CreatePaymentLink](../../doc/api/checkout.md#create-payment-link) 
+We recommend that you use the new [CreatePaymentLink](api-endpoint:Checkout-CreatePaymentLink) 
 endpoint in place of this previously released endpoint.
 
 ```csharp
@@ -52,74 +52,90 @@ CreateCheckoutAsync(
 
 ```csharp
 string locationId = "location_id4";
-var bodyOrderOrderLineItems = new List<OrderLineItem>();
-
-var bodyOrderOrderLineItems0AppliedTaxes = new List<OrderLineItemAppliedTax>();
-
-var bodyOrderOrderLineItems0AppliedTaxes0 = new OrderLineItemAppliedTax.Builder(
-        "38ze1696-z1e3-5628-af6d-f1e04d947fg3")
-    .Build();
-bodyOrderOrderLineItems0AppliedTaxes.Add(bodyOrderOrderLineItems0AppliedTaxes0);
-
-var bodyOrderOrderLineItems0AppliedDiscounts = new List<OrderLineItemAppliedDiscount>();
-
-var bodyOrderOrderLineItems0AppliedDiscounts0 = new OrderLineItemAppliedDiscount.Builder(
-        "56ae1696-z1e3-9328-af6d-f1e04d947gd4")
-    .Build();
-bodyOrderOrderLineItems0AppliedDiscounts.Add(bodyOrderOrderLineItems0AppliedDiscounts0);
-
-var bodyOrderOrderLineItems0 = new OrderLineItem.Builder(
-        "2")
-    .Name("Printed T Shirt")
-    .AppliedTaxes(bodyOrderOrderLineItems0AppliedTaxes)
-    .AppliedDiscounts(bodyOrderOrderLineItems0AppliedDiscounts)
-    .Build();
-bodyOrderOrderLineItems.Add(bodyOrderOrderLineItems0);
-
-var bodyOrderOrderLineItems1 = new OrderLineItem.Builder(
-        "1")
-    .Name("Slim Jeans")
-    .Build();
-bodyOrderOrderLineItems.Add(bodyOrderOrderLineItems1);
-
-var bodyOrderOrderLineItems2 = new OrderLineItem.Builder(
-        "3")
-    .Name("Woven Sweater")
-    .Build();
-bodyOrderOrderLineItems.Add(bodyOrderOrderLineItems2);
-
-var bodyOrderOrderTaxes = new List<OrderLineItemTax>();
-
-var bodyOrderOrderTaxes0 = new OrderLineItemTax.Builder()
-    .Uid("38ze1696-z1e3-5628-af6d-f1e04d947fg3")
-    .Type("INCLUSIVE")
-    .Percentage("7.75")
-    .Scope("LINE_ITEM")
-    .Build();
-bodyOrderOrderTaxes.Add(bodyOrderOrderTaxes0);
-
-var bodyOrderOrderDiscounts = new List<OrderLineItemDiscount>();
-
-var bodyOrderOrderDiscounts0 = new OrderLineItemDiscount.Builder()
-    .Uid("56ae1696-z1e3-9328-af6d-f1e04d947gd4")
-    .Type("FIXED_AMOUNT")
-    .Scope("LINE_ITEM")
-    .Build();
-bodyOrderOrderDiscounts.Add(bodyOrderOrderDiscounts0);
-
-var bodyOrderOrder = new Order.Builder(
-        "location_id")
-    .ReferenceId("reference_id")
-    .CustomerId("customer_id")
-    .LineItems(bodyOrderOrderLineItems)
-    .Taxes(bodyOrderOrderTaxes)
-    .Discounts(bodyOrderOrderDiscounts)
-    .Build();
-var bodyOrder = new CreateOrderRequest.Builder()
-    .Order(bodyOrderOrder)
+Models.CreateCheckoutRequest body = new Models.CreateCheckoutRequest.Builder(
+    "86ae1696-b1e3-4328-af6d-f1e04d947ad6",
+    new Models.CreateOrderRequest.Builder()
+    .Order(
+        new Models.Order.Builder(
+            "location_id"
+        )
+        .ReferenceId("reference_id")
+        .CustomerId("customer_id")
+        .LineItems(
+            new List<Models.OrderLineItem>
+            {
+                new Models.OrderLineItem.Builder(
+                    "2"
+                )
+                .Name("Printed T Shirt")
+                .AppliedTaxes(
+                    new List<Models.OrderLineItemAppliedTax>
+                    {
+                        new Models.OrderLineItemAppliedTax.Builder(
+                            "38ze1696-z1e3-5628-af6d-f1e04d947fg3"
+                        )
+                        .Build(),
+                    })
+                .AppliedDiscounts(
+                    new List<Models.OrderLineItemAppliedDiscount>
+                    {
+                        new Models.OrderLineItemAppliedDiscount.Builder(
+                            "56ae1696-z1e3-9328-af6d-f1e04d947gd4"
+                        )
+                        .Build(),
+                    })
+                .BasePriceMoney(
+                    new Models.Money.Builder()
+                    .Build())
+                .Build(),
+                new Models.OrderLineItem.Builder(
+                    "1"
+                )
+                .Name("Slim Jeans")
+                .BasePriceMoney(
+                    new Models.Money.Builder()
+                    .Build())
+                .Build(),
+                new Models.OrderLineItem.Builder(
+                    "3"
+                )
+                .Name("Woven Sweater")
+                .BasePriceMoney(
+                    new Models.Money.Builder()
+                    .Build())
+                .Build(),
+            })
+        .Taxes(
+            new List<Models.OrderLineItemTax>
+            {
+                new Models.OrderLineItemTax.Builder()
+                .Uid("38ze1696-z1e3-5628-af6d-f1e04d947fg3")
+                .Type("INCLUSIVE")
+                .Percentage("7.75")
+                .Scope("LINE_ITEM")
+                .Build(),
+            })
+        .Discounts(
+            new List<Models.OrderLineItemDiscount>
+            {
+                new Models.OrderLineItemDiscount.Builder()
+                .Uid("56ae1696-z1e3-9328-af6d-f1e04d947gd4")
+                .Type("FIXED_AMOUNT")
+                .AmountMoney(
+                    new Models.Money.Builder()
+                    .Build())
+                .Scope("LINE_ITEM")
+                .Build(),
+            })
+        .Build())
     .IdempotencyKey("12ae1696-z1e3-4328-af6d-f1e04d947gd4")
-    .Build();
-var bodyPrePopulateShippingAddress = new Address.Builder()
+    .Build()
+)
+.AskForShippingAddress(true)
+.MerchantSupportEmail("merchant+support@website.com")
+.PrePopulateBuyerEmail("example@email.com")
+.PrePopulateShippingAddress(
+    new Models.Address.Builder()
     .AddressLine1("1455 Market St.")
     .AddressLine2("Suite 600")
     .Locality("San Francisco")
@@ -128,36 +144,32 @@ var bodyPrePopulateShippingAddress = new Address.Builder()
     .Country("US")
     .FirstName("Jane")
     .LastName("Doe")
-    .Build();
-var bodyAdditionalRecipients = new List<ChargeRequestAdditionalRecipient>();
-
-var bodyAdditionalRecipients0AmountMoney = new Money.Builder()
-    .Amount(60L)
-    .Currency("USD")
-    .Build();
-var bodyAdditionalRecipients0 = new ChargeRequestAdditionalRecipient.Builder(
-        "057P5VYJ4A5X1",
-        "Application fees",
-        bodyAdditionalRecipients0AmountMoney)
-    .Build();
-bodyAdditionalRecipients.Add(bodyAdditionalRecipients0);
-
-var body = new CreateCheckoutRequest.Builder(
-        "86ae1696-b1e3-4328-af6d-f1e04d947ad6",
-        bodyOrder)
-    .AskForShippingAddress(true)
-    .MerchantSupportEmail("merchant+support@website.com")
-    .PrePopulateBuyerEmail("example@email.com")
-    .PrePopulateShippingAddress(bodyPrePopulateShippingAddress)
-    .RedirectUrl("https://merchant.website.com/order-confirm")
-    .AdditionalRecipients(bodyAdditionalRecipients)
-    .Build();
+    .Build())
+.RedirectUrl("https://merchant.website.com/order-confirm")
+.AdditionalRecipients(
+    new List<Models.ChargeRequestAdditionalRecipient>
+    {
+        new Models.ChargeRequestAdditionalRecipient.Builder(
+            "057P5VYJ4A5X1",
+            "Application fees",
+            new Models.Money.Builder()
+            .Amount(60L)
+            .Currency("USD")
+            .Build()
+        )
+        .Build(),
+    })
+.Build();
 
 try
 {
     CreateCheckoutResponse result = await checkoutApi.CreateCheckoutAsync(locationId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -189,7 +201,11 @@ try
 {
     ListPaymentLinksResponse result = await checkoutApi.ListPaymentLinksAsync(null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -215,25 +231,29 @@ CreatePaymentLinkAsync(
 ## Example Usage
 
 ```csharp
-var bodyQuickPayPriceMoney = new Money.Builder()
-    .Amount(10000L)
-    .Currency("USD")
-    .Build();
-var bodyQuickPay = new QuickPay.Builder(
+Models.CreatePaymentLinkRequest body = new Models.CreatePaymentLinkRequest.Builder()
+.IdempotencyKey("cd9e25dc-d9f2-4430-aedb-61605070e95f")
+.QuickPay(
+    new Models.QuickPay.Builder(
         "Auto Detailing",
-        bodyQuickPayPriceMoney,
-        "A9Y43N9ABXZBP")
-    .Build();
-var body = new CreatePaymentLinkRequest.Builder()
-    .IdempotencyKey("cd9e25dc-d9f2-4430-aedb-61605070e95f")
-    .QuickPay(bodyQuickPay)
-    .Build();
+        new Models.Money.Builder()
+        .Amount(10000L)
+        .Currency("USD")
+        .Build(),
+        "A9Y43N9ABXZBP"
+    )
+    .Build())
+.Build();
 
 try
 {
     CreatePaymentLinkResponse result = await checkoutApi.CreatePaymentLinkAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -260,12 +280,15 @@ DeletePaymentLinkAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     DeletePaymentLinkResponse result = await checkoutApi.DeletePaymentLinkAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -292,12 +315,15 @@ RetrievePaymentLinkAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     RetrievePaymentLinkResponse result = await checkoutApi.RetrievePaymentLinkAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -328,21 +354,26 @@ UpdatePaymentLinkAsync(
 
 ```csharp
 string id = "id0";
-var bodyPaymentLinkCheckoutOptions = new CheckoutOptions.Builder()
-    .AskForShippingAddress(true)
-    .Build();
-var bodyPaymentLink = new PaymentLink.Builder(
-        1)
-    .CheckoutOptions(bodyPaymentLinkCheckoutOptions)
-    .Build();
-var body = new UpdatePaymentLinkRequest.Builder(
-        bodyPaymentLink)
-    .Build();
+Models.UpdatePaymentLinkRequest body = new Models.UpdatePaymentLinkRequest.Builder(
+    new Models.PaymentLink.Builder(
+        1
+    )
+    .CheckoutOptions(
+        new Models.CheckoutOptions.Builder()
+        .AskForShippingAddress(true)
+        .Build())
+    .Build()
+)
+.Build();
 
 try
 {
     UpdatePaymentLinkResponse result = await checkoutApi.UpdatePaymentLinkAsync(id, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

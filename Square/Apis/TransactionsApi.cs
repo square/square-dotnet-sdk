@@ -124,7 +124,7 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Captures a transaction that was created with the [Charge]($e/Transactions/Charge).
+        /// Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge).
         /// endpoint with a `delay_capture` value of `true`.
         /// See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture).
         /// for more information.
@@ -139,7 +139,7 @@ namespace Square.Apis
             => CoreHelper.RunTask(CaptureTransactionAsync(locationId, transactionId));
 
         /// <summary>
-        /// Captures a transaction that was created with the [Charge]($e/Transactions/Charge).
+        /// Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge).
         /// endpoint with a `delay_capture` value of `true`.
         /// See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture).
         /// for more information.
@@ -166,7 +166,7 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// Cancels a transaction that was created with the [Charge]($e/Transactions/Charge).
+        /// Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge).
         /// endpoint with a `delay_capture` value of `true`.
         /// See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture).
         /// for more information.
@@ -181,7 +181,7 @@ namespace Square.Apis
             => CoreHelper.RunTask(VoidTransactionAsync(locationId, transactionId));
 
         /// <summary>
-        /// Cancels a transaction that was created with the [Charge]($e/Transactions/Charge).
+        /// Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge).
         /// endpoint with a `delay_capture` value of `true`.
         /// See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture).
         /// for more information.

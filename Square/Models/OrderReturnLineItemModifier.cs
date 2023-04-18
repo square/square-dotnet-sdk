@@ -28,6 +28,7 @@ namespace Square.Models
         /// <param name="name">name.</param>
         /// <param name="basePriceMoney">base_price_money.</param>
         /// <param name="totalPriceMoney">total_price_money.</param>
+        /// <param name="quantity">quantity.</param>
         public OrderReturnLineItemModifier(
             string uid = null,
             string sourceModifierUid = null,
@@ -35,7 +36,8 @@ namespace Square.Models
             long? catalogVersion = null,
             string name = null,
             Models.Money basePriceMoney = null,
-            Models.Money totalPriceMoney = null)
+            Models.Money totalPriceMoney = null,
+            string quantity = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -43,7 +45,8 @@ namespace Square.Models
                 { "source_modifier_uid", false },
                 { "catalog_object_id", false },
                 { "catalog_version", false },
-                { "name", false }
+                { "name", false },
+                { "quantity", false }
             };
 
             if (uid != null)
@@ -78,6 +81,12 @@ namespace Square.Models
 
             this.BasePriceMoney = basePriceMoney;
             this.TotalPriceMoney = totalPriceMoney;
+            if (quantity != null)
+            {
+                shouldSerialize["quantity"] = true;
+                this.Quantity = quantity;
+            }
+
         }
         internal OrderReturnLineItemModifier(Dictionary<string, bool> shouldSerialize,
             string uid = null,
@@ -86,7 +95,8 @@ namespace Square.Models
             long? catalogVersion = null,
             string name = null,
             Models.Money basePriceMoney = null,
-            Models.Money totalPriceMoney = null)
+            Models.Money totalPriceMoney = null,
+            string quantity = null)
         {
             this.shouldSerialize = shouldSerialize;
             Uid = uid;
@@ -96,6 +106,7 @@ namespace Square.Models
             Name = name;
             BasePriceMoney = basePriceMoney;
             TotalPriceMoney = totalPriceMoney;
+            Quantity = quantity;
         }
 
         /// <summary>
@@ -112,7 +123,7 @@ namespace Square.Models
         public string SourceModifierUid { get; }
 
         /// <summary>
-        /// The catalog object ID referencing [CatalogModifier]($m/CatalogModifier).
+        /// The catalog object ID referencing [CatalogModifier](entity:CatalogModifier).
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
@@ -150,6 +161,18 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("total_price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money TotalPriceMoney { get; }
+
+        /// <summary>
+        /// The quantity of the line item modifier. The modifier quantity can be 0 or more.
+        /// For example, suppose a restaurant offers a cheeseburger on the menu. When a buyer orders
+        /// this item, the restaurant records the purchase by creating an `Order` object with a line item
+        /// for a burger. The line item includes a line item modifier: the name is cheese and the quantity
+        /// is 1. The buyer has the option to order extra cheese (or no cheese). If the buyer chooses
+        /// the extra cheese option, the modifier quantity increases to 2. If the buyer does not want
+        /// any cheese, the modifier quantity is set to 0.
+        /// </summary>
+        [JsonProperty("quantity")]
+        public string Quantity { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -206,6 +229,15 @@ namespace Square.Models
             return this.shouldSerialize["name"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeQuantity()
+        {
+            return this.shouldSerialize["quantity"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -226,14 +258,17 @@ namespace Square.Models
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.BasePriceMoney == null && other.BasePriceMoney == null) || (this.BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
-                ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true));
+                ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
+                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1205555538;
+            int hashCode = -1048986708;
             hashCode = HashCode.Combine(this.Uid, this.SourceModifierUid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.BasePriceMoney, this.TotalPriceMoney);
+
+            hashCode = HashCode.Combine(hashCode, this.Quantity);
 
             return hashCode;
         }
@@ -250,6 +285,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
             toStringOutput.Add($"this.BasePriceMoney = {(this.BasePriceMoney == null ? "null" : this.BasePriceMoney.ToString())}");
             toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
+            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity == string.Empty ? "" : this.Quantity)}");
         }
 
         /// <summary>
@@ -265,7 +301,8 @@ namespace Square.Models
                 .CatalogVersion(this.CatalogVersion)
                 .Name(this.Name)
                 .BasePriceMoney(this.BasePriceMoney)
-                .TotalPriceMoney(this.TotalPriceMoney);
+                .TotalPriceMoney(this.TotalPriceMoney)
+                .Quantity(this.Quantity);
             return builder;
         }
 
@@ -281,6 +318,7 @@ namespace Square.Models
                 { "catalog_object_id", false },
                 { "catalog_version", false },
                 { "name", false },
+                { "quantity", false },
             };
 
             private string uid;
@@ -290,6 +328,7 @@ namespace Square.Models
             private string name;
             private Models.Money basePriceMoney;
             private Models.Money totalPriceMoney;
+            private string quantity;
 
              /// <summary>
              /// Uid.
@@ -373,6 +412,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Quantity.
+             /// </summary>
+             /// <param name="quantity"> quantity. </param>
+             /// <returns> Builder. </returns>
+            public Builder Quantity(string quantity)
+            {
+                shouldSerialize["quantity"] = true;
+                this.quantity = quantity;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -413,6 +464,14 @@ namespace Square.Models
                 this.shouldSerialize["name"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetQuantity()
+            {
+                this.shouldSerialize["quantity"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -427,7 +486,8 @@ namespace Square.Models
                     this.catalogVersion,
                     this.name,
                     this.basePriceMoney,
-                    this.totalPriceMoney);
+                    this.totalPriceMoney,
+                    this.quantity);
             }
         }
     }

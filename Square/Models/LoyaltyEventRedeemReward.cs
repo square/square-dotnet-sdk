@@ -34,20 +34,20 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the [loyalty program]($m/LoyaltyProgram).
+        /// The ID of the [loyalty program](entity:LoyaltyProgram).
         /// </summary>
         [JsonProperty("loyalty_program_id")]
         public string LoyaltyProgramId { get; }
 
         /// <summary>
-        /// The ID of the redeemed [loyalty reward]($m/LoyaltyReward).
+        /// The ID of the redeemed [loyalty reward](entity:LoyaltyReward).
         /// This field is returned only if the event source is `LOYALTY_API`.
         /// </summary>
         [JsonProperty("reward_id", NullValueHandling = NullValueHandling.Ignore)]
         public string RewardId { get; }
 
         /// <summary>
-        /// The ID of the [order]($m/Order) that redeemed the reward.
+        /// The ID of the [order](entity:Order) that redeemed the reward.
         /// This field is returned only if the Orders API is used to process orders.
         /// </summary>
         [JsonProperty("order_id", NullValueHandling = NullValueHandling.Ignore)]

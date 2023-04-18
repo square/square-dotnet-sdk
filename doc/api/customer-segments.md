@@ -42,7 +42,11 @@ try
 {
     ListCustomerSegmentsResponse result = await customerSegmentsApi.ListCustomerSegmentsAsync(null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -69,11 +73,14 @@ RetrieveCustomerSegmentAsync(
 
 ```csharp
 string segmentId = "segment_id4";
-
 try
 {
     RetrieveCustomerSegmentResponse result = await customerSegmentsApi.RetrieveCustomerSegmentAsync(segmentId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

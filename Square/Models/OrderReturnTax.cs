@@ -127,7 +127,7 @@ namespace Square.Models
         public string SourceTaxUid { get; }
 
         /// <summary>
-        /// The catalog object ID referencing [CatalogTax]($m/CatalogTax).
+        /// The catalog object ID referencing [CatalogTax](entity:CatalogTax).
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }

@@ -61,18 +61,24 @@ BatchDeleteCatalogObjectsAsync(
 ## Example Usage
 
 ```csharp
-var bodyObjectIds = new IList<string>();
-bodyObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
-bodyObjectIds.Add("AA27W3M2GGTF3H6AVPNB77CK");
-var body = new BatchDeleteCatalogObjectsRequest.Builder()
-    .ObjectIds(bodyObjectIds)
-    .Build();
+Models.BatchDeleteCatalogObjectsRequest body = new Models.BatchDeleteCatalogObjectsRequest.Builder()
+.ObjectIds(
+    new List<string>
+    {
+        "W62UWFY35CWMYGVWK6TWJDNI",
+        "AA27W3M2GGTF3H6AVPNB77CK",
+    })
+.Build();
 
 try
 {
     BatchDeleteCatalogObjectsResponse result = await catalogApi.BatchDeleteCatalogObjectsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -103,19 +109,25 @@ BatchRetrieveCatalogObjectsAsync(
 ## Example Usage
 
 ```csharp
-var bodyObjectIds = new IList<string>();
-bodyObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
-bodyObjectIds.Add("AA27W3M2GGTF3H6AVPNB77CK");
-var body = new BatchRetrieveCatalogObjectsRequest.Builder(
-        bodyObjectIds)
-    .IncludeRelatedObjects(true)
-    .Build();
+Models.BatchRetrieveCatalogObjectsRequest body = new Models.BatchRetrieveCatalogObjectsRequest.Builder(
+    new List<string>
+    {
+        "W62UWFY35CWMYGVWK6TWJDNI",
+        "AA27W3M2GGTF3H6AVPNB77CK",
+    }
+)
+.IncludeRelatedObjects(true)
+.Build();
 
 try
 {
     BatchRetrieveCatalogObjectsResponse result = await catalogApi.BatchRetrieveCatalogObjectsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -153,129 +165,147 @@ BatchUpsertCatalogObjectsAsync(
 ## Example Usage
 
 ```csharp
-var bodyBatches = new List<CatalogObjectBatch>();
-
-var bodyBatches0Objects = new List<CatalogObject>();
-
-var bodyBatches0Objects0ItemDataTaxIds = new IList<string>();
-bodyBatches0Objects0ItemDataTaxIds.Add("#SalesTax");
-var bodyBatches0Objects0ItemDataVariations = new List<CatalogObject>();
-
-var bodyBatches0Objects0ItemDataVariations0ItemVariationData = new CatalogItemVariation.Builder()
-    .ItemId("#Tea")
-    .Name("Mug")
-    .PricingType("FIXED_PRICING")
-    .Build();
-var bodyBatches0Objects0ItemDataVariations0 = new CatalogObject.Builder(
-        "ITEM_VARIATION",
-        "#Tea_Mug")
-    .PresentAtAllLocations(true)
-    .ItemVariationData(bodyBatches0Objects0ItemDataVariations0ItemVariationData)
-    .Build();
-bodyBatches0Objects0ItemDataVariations.Add(bodyBatches0Objects0ItemDataVariations0);
-
-var bodyBatches0Objects0ItemData = new CatalogItem.Builder()
-    .Name("Tea")
-    .CategoryId("#Beverages")
-    .TaxIds(bodyBatches0Objects0ItemDataTaxIds)
-    .Variations(bodyBatches0Objects0ItemDataVariations)
-    .DescriptionHtml("<p><strong>Hot</strong> Leaf Juice</p>")
-    .Build();
-var bodyBatches0Objects0 = new CatalogObject.Builder(
-        "ITEM",
-        "#Tea")
-    .PresentAtAllLocations(true)
-    .ItemData(bodyBatches0Objects0ItemData)
-    .Build();
-bodyBatches0Objects.Add(bodyBatches0Objects0);
-
-var bodyBatches0Objects1ItemDataTaxIds = new IList<string>();
-bodyBatches0Objects1ItemDataTaxIds.Add("#SalesTax");
-var bodyBatches0Objects1ItemDataVariations = new List<CatalogObject>();
-
-var bodyBatches0Objects1ItemDataVariations0ItemVariationData = new CatalogItemVariation.Builder()
-    .ItemId("#Coffee")
-    .Name("Regular")
-    .PricingType("FIXED_PRICING")
-    .Build();
-var bodyBatches0Objects1ItemDataVariations0 = new CatalogObject.Builder(
-        "ITEM_VARIATION",
-        "#Coffee_Regular")
-    .PresentAtAllLocations(true)
-    .ItemVariationData(bodyBatches0Objects1ItemDataVariations0ItemVariationData)
-    .Build();
-bodyBatches0Objects1ItemDataVariations.Add(bodyBatches0Objects1ItemDataVariations0);
-
-var bodyBatches0Objects1ItemDataVariations1ItemVariationData = new CatalogItemVariation.Builder()
-    .ItemId("#Coffee")
-    .Name("Large")
-    .PricingType("FIXED_PRICING")
-    .Build();
-var bodyBatches0Objects1ItemDataVariations1 = new CatalogObject.Builder(
-        "ITEM_VARIATION",
-        "#Coffee_Large")
-    .PresentAtAllLocations(true)
-    .ItemVariationData(bodyBatches0Objects1ItemDataVariations1ItemVariationData)
-    .Build();
-bodyBatches0Objects1ItemDataVariations.Add(bodyBatches0Objects1ItemDataVariations1);
-
-var bodyBatches0Objects1ItemData = new CatalogItem.Builder()
-    .Name("Coffee")
-    .CategoryId("#Beverages")
-    .TaxIds(bodyBatches0Objects1ItemDataTaxIds)
-    .Variations(bodyBatches0Objects1ItemDataVariations)
-    .DescriptionHtml("<p>Hot <em>Bean Juice</em></p>")
-    .Build();
-var bodyBatches0Objects1 = new CatalogObject.Builder(
-        "ITEM",
-        "#Coffee")
-    .PresentAtAllLocations(true)
-    .ItemData(bodyBatches0Objects1ItemData)
-    .Build();
-bodyBatches0Objects.Add(bodyBatches0Objects1);
-
-var bodyBatches0Objects2CategoryData = new CatalogCategory.Builder()
-    .Name("Beverages")
-    .Build();
-var bodyBatches0Objects2 = new CatalogObject.Builder(
-        "CATEGORY",
-        "#Beverages")
-    .PresentAtAllLocations(true)
-    .CategoryData(bodyBatches0Objects2CategoryData)
-    .Build();
-bodyBatches0Objects.Add(bodyBatches0Objects2);
-
-var bodyBatches0Objects3TaxData = new CatalogTax.Builder()
-    .Name("Sales Tax")
-    .CalculationPhase("TAX_SUBTOTAL_PHASE")
-    .InclusionType("ADDITIVE")
-    .Percentage("5.0")
-    .AppliesToCustomAmounts(true)
-    .Enabled(true)
-    .Build();
-var bodyBatches0Objects3 = new CatalogObject.Builder(
-        "TAX",
-        "#SalesTax")
-    .PresentAtAllLocations(true)
-    .TaxData(bodyBatches0Objects3TaxData)
-    .Build();
-bodyBatches0Objects.Add(bodyBatches0Objects3);
-
-var bodyBatches0 = new CatalogObjectBatch.Builder(
-        bodyBatches0Objects)
-    .Build();
-bodyBatches.Add(bodyBatches0);
-
-var body = new BatchUpsertCatalogObjectsRequest.Builder(
-        "789ff020-f723-43a9-b4b5-43b5dc1fa3dc",
-        bodyBatches)
-    .Build();
+Models.BatchUpsertCatalogObjectsRequest body = new Models.BatchUpsertCatalogObjectsRequest.Builder(
+    "789ff020-f723-43a9-b4b5-43b5dc1fa3dc",
+    new List<Models.CatalogObjectBatch>
+    {
+        new Models.CatalogObjectBatch.Builder(
+            new List<Models.CatalogObject>
+            {
+                new Models.CatalogObject.Builder(
+                    "ITEM",
+                    "#Tea"
+                )
+                .PresentAtAllLocations(true)
+                .ItemData(
+                    new Models.CatalogItem.Builder()
+                    .Name("Tea")
+                    .CategoryId("#Beverages")
+                    .TaxIds(
+                        new List<string>
+                        {
+                            "#SalesTax",
+                        })
+                    .Variations(
+                        new List<Models.CatalogObject>
+                        {
+                            new Models.CatalogObject.Builder(
+                                "ITEM_VARIATION",
+                                "#Tea_Mug"
+                            )
+                            .PresentAtAllLocations(true)
+                            .ItemVariationData(
+                                new Models.CatalogItemVariation.Builder()
+                                .ItemId("#Tea")
+                                .Name("Mug")
+                                .PricingType("FIXED_PRICING")
+                                .PriceMoney(
+                                    new Models.Money.Builder()
+                                    .Amount(150L)
+                                    .Currency("USD")
+                                    .Build())
+                                .Build())
+                            .Build(),
+                        })
+                    .DescriptionHtml("<p><strong>Hot</strong> Leaf Juice</p>")
+                    .Build())
+                .Build(),
+                new Models.CatalogObject.Builder(
+                    "ITEM",
+                    "#Coffee"
+                )
+                .PresentAtAllLocations(true)
+                .ItemData(
+                    new Models.CatalogItem.Builder()
+                    .Name("Coffee")
+                    .CategoryId("#Beverages")
+                    .TaxIds(
+                        new List<string>
+                        {
+                            "#SalesTax",
+                        })
+                    .Variations(
+                        new List<Models.CatalogObject>
+                        {
+                            new Models.CatalogObject.Builder(
+                                "ITEM_VARIATION",
+                                "#Coffee_Regular"
+                            )
+                            .PresentAtAllLocations(true)
+                            .ItemVariationData(
+                                new Models.CatalogItemVariation.Builder()
+                                .ItemId("#Coffee")
+                                .Name("Regular")
+                                .PricingType("FIXED_PRICING")
+                                .PriceMoney(
+                                    new Models.Money.Builder()
+                                    .Amount(250L)
+                                    .Currency("USD")
+                                    .Build())
+                                .Build())
+                            .Build(),
+                            new Models.CatalogObject.Builder(
+                                "ITEM_VARIATION",
+                                "#Coffee_Large"
+                            )
+                            .PresentAtAllLocations(true)
+                            .ItemVariationData(
+                                new Models.CatalogItemVariation.Builder()
+                                .ItemId("#Coffee")
+                                .Name("Large")
+                                .PricingType("FIXED_PRICING")
+                                .PriceMoney(
+                                    new Models.Money.Builder()
+                                    .Amount(350L)
+                                    .Currency("USD")
+                                    .Build())
+                                .Build())
+                            .Build(),
+                        })
+                    .DescriptionHtml("<p>Hot <em>Bean Juice</em></p>")
+                    .Build())
+                .Build(),
+                new Models.CatalogObject.Builder(
+                    "CATEGORY",
+                    "#Beverages"
+                )
+                .PresentAtAllLocations(true)
+                .CategoryData(
+                    new Models.CatalogCategory.Builder()
+                    .Name("Beverages")
+                    .Build())
+                .Build(),
+                new Models.CatalogObject.Builder(
+                    "TAX",
+                    "#SalesTax"
+                )
+                .PresentAtAllLocations(true)
+                .TaxData(
+                    new Models.CatalogTax.Builder()
+                    .Name("Sales Tax")
+                    .CalculationPhase("TAX_SUBTOTAL_PHASE")
+                    .InclusionType("ADDITIVE")
+                    .Percentage("5.0")
+                    .AppliesToCustomAmounts(true)
+                    .Enabled(true)
+                    .Build())
+                .Build(),
+            }
+        )
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BatchUpsertCatalogObjectsResponse result = await catalogApi.BatchUpsertCatalogObjectsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -308,25 +338,30 @@ CreateCatalogImageAsync(
 ## Example Usage
 
 ```csharp
-var requestImageImageData = new CatalogImage.Builder()
-    .Caption("A picture of a cup of coffee")
-    .Build();
-var requestImage = new CatalogObject.Builder(
+Models.CreateCatalogImageRequest request = new Models.CreateCatalogImageRequest.Builder(
+    "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
+    new Models.CatalogObject.Builder(
         "IMAGE",
-        "#TEMP_ID")
-    .ImageData(requestImageImageData)
-    .Build();
-var request = new CreateCatalogImageRequest.Builder(
-        "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
-        requestImage)
-    .ObjectId("ND6EA5AAJEO5WL3JNNIAQA32")
-    .Build();
+        "#TEMP_ID"
+    )
+    .ImageData(
+        new Models.CatalogImage.Builder()
+        .Caption("A picture of a cup of coffee")
+        .Build())
+    .Build()
+)
+.ObjectId("ND6EA5AAJEO5WL3JNNIAQA32")
+.Build();
 
 try
 {
     CreateCatalogImageResponse result = await catalogApi.CreateCatalogImageAsync(request, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -360,15 +395,20 @@ UpdateCatalogImageAsync(
 
 ```csharp
 string imageId = "image_id4";
-var request = new UpdateCatalogImageRequest.Builder(
-        "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86")
-    .Build();
+Models.UpdateCatalogImageRequest request = new Models.UpdateCatalogImageRequest.Builder(
+    "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86"
+)
+.Build();
 
 try
 {
     UpdateCatalogImageResponse result = await catalogApi.UpdateCatalogImageAsync(imageId, request, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -392,7 +432,11 @@ try
 {
     CatalogInfoResponse result = await catalogApi.CatalogInfoAsync();
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -418,8 +462,8 @@ ListCatalogAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `string` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](https://developer.squareup.com/docs/basics/api101/pagination) for more information. |
-| `types` | `string` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](../../doc/models/catalog-object-type.md) enum, for example,<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.<br><br>If this is unspecified, the operation returns objects of all the top level types at the version<br>of the Square API used to make the request. Object types that are nested onto other object types<br>are not included in the defaults.<br><br>At the current API version the default object types are:<br>ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST,<br>PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,<br>SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS. |
+| `cursor` | `string` | Query, Optional | The pagination cursor returned in the previous response. Leave unset for an initial request.<br>The page size is currently set to be 100.<br>See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information. |
+| `types` | `string` | Query, Optional | An optional case-insensitive, comma-separated list of object types to retrieve.<br><br>The valid values are defined in the [CatalogObjectType](entity:CatalogObjectType) enum, for example,<br>`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,<br>`MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.<br><br>If this is unspecified, the operation returns objects of all the top level types at the version<br>of the Square API used to make the request. Object types that are nested onto other object types<br>are not included in the defaults.<br><br>At the current API version the default object types are:<br>ITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST,<br>PRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,<br>SUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS. |
 | `catalogVersion` | `long?` | Query, Optional | The specific version of the catalog objects to be included in the response.<br>This allows you to retrieve historical versions of objects. The specified version value is matched against<br>the [CatalogObject](../../doc/models/catalog-object.md)s' `version` attribute.  If not included, results will be from the<br>current version of the catalog. |
 
 ## Response Type
@@ -433,7 +477,11 @@ try
 {
     ListCatalogResponse result = await catalogApi.ListCatalogAsync(null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -463,53 +511,62 @@ UpsertCatalogObjectAsync(
 ## Example Usage
 
 ```csharp
-var bodyMObjectItemDataVariations = new List<CatalogObject>();
-
-var bodyMObjectItemDataVariations0ItemVariationData = new CatalogItemVariation.Builder()
-    .ItemId("#Cocoa")
-    .Name("Small")
-    .PricingType("VARIABLE_PRICING")
-    .Build();
-var bodyMObjectItemDataVariations0 = new CatalogObject.Builder(
-        "ITEM_VARIATION",
-        "#Small")
-    .ItemVariationData(bodyMObjectItemDataVariations0ItemVariationData)
-    .Build();
-bodyMObjectItemDataVariations.Add(bodyMObjectItemDataVariations0);
-
-var bodyMObjectItemDataVariations1ItemVariationData = new CatalogItemVariation.Builder()
-    .ItemId("#Cocoa")
-    .Name("Large")
-    .PricingType("FIXED_PRICING")
-    .Build();
-var bodyMObjectItemDataVariations1 = new CatalogObject.Builder(
-        "ITEM_VARIATION",
-        "#Large")
-    .ItemVariationData(bodyMObjectItemDataVariations1ItemVariationData)
-    .Build();
-bodyMObjectItemDataVariations.Add(bodyMObjectItemDataVariations1);
-
-var bodyMObjectItemData = new CatalogItem.Builder()
-    .Name("Cocoa")
-    .Abbreviation("Ch")
-    .Variations(bodyMObjectItemDataVariations)
-    .DescriptionHtml("<p><strong>Hot</strong> Chocolate</p>")
-    .Build();
-var bodyMObject = new CatalogObject.Builder(
+Models.UpsertCatalogObjectRequest body = new Models.UpsertCatalogObjectRequest.Builder(
+    "af3d1afc-7212-4300-b463-0bfc5314a5ae",
+    new Models.CatalogObject.Builder(
         "ITEM",
-        "#Cocoa")
-    .ItemData(bodyMObjectItemData)
-    .Build();
-var body = new UpsertCatalogObjectRequest.Builder(
-        "af3d1afc-7212-4300-b463-0bfc5314a5ae",
-        bodyMObject)
-    .Build();
+        "#Cocoa"
+    )
+    .ItemData(
+        new Models.CatalogItem.Builder()
+        .Name("Cocoa")
+        .Abbreviation("Ch")
+        .Variations(
+            new List<Models.CatalogObject>
+            {
+                new Models.CatalogObject.Builder(
+                    "ITEM_VARIATION",
+                    "#Small"
+                )
+                .ItemVariationData(
+                    new Models.CatalogItemVariation.Builder()
+                    .ItemId("#Cocoa")
+                    .Name("Small")
+                    .PricingType("VARIABLE_PRICING")
+                    .Build())
+                .Build(),
+                new Models.CatalogObject.Builder(
+                    "ITEM_VARIATION",
+                    "#Large"
+                )
+                .ItemVariationData(
+                    new Models.CatalogItemVariation.Builder()
+                    .ItemId("#Cocoa")
+                    .Name("Large")
+                    .PricingType("FIXED_PRICING")
+                    .PriceMoney(
+                        new Models.Money.Builder()
+                        .Amount(400L)
+                        .Currency("USD")
+                        .Build())
+                    .Build())
+                .Build(),
+            })
+        .DescriptionHtml("<p><strong>Hot</strong> Chocolate</p>")
+        .Build())
+    .Build()
+)
+.Build();
 
 try
 {
     UpsertCatalogObjectResponse result = await catalogApi.UpsertCatalogObjectAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -545,12 +602,15 @@ DeleteCatalogObjectAsync(
 
 ```csharp
 string objectId = "object_id8";
-
 try
 {
     DeleteCatalogObjectResponse result = await catalogApi.DeleteCatalogObjectAsync(objectId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -588,12 +648,15 @@ RetrieveCatalogObjectAsync(
 ```csharp
 string objectId = "object_id8";
 bool? includeRelatedObjects = false;
-
 try
 {
     RetrieveCatalogObjectResponse result = await catalogApi.RetrieveCatalogObjectAsync(objectId, includeRelatedObjects, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -628,26 +691,33 @@ SearchCatalogObjectsAsync(
 ## Example Usage
 
 ```csharp
-var bodyObjectTypes = new IList<string>();
-bodyObjectTypes.Add("ITEM");
-var bodyQueryPrefixQuery = new CatalogQueryPrefix.Builder(
-        "name",
-        "tea")
-    .Build();
-var bodyQuery = new CatalogQuery.Builder()
-    .PrefixQuery(bodyQueryPrefixQuery)
-    .Build();
-var body = new SearchCatalogObjectsRequest.Builder()
-    .ObjectTypes(bodyObjectTypes)
-    .Query(bodyQuery)
-    .Limit(100)
-    .Build();
+Models.SearchCatalogObjectsRequest body = new Models.SearchCatalogObjectsRequest.Builder()
+.ObjectTypes(
+    new List<string>
+    {
+        "ITEM",
+    })
+.Query(
+    new Models.CatalogQuery.Builder()
+    .PrefixQuery(
+        new Models.CatalogQueryPrefix.Builder(
+            "name",
+            "tea"
+        )
+        .Build())
+    .Build())
+.Limit(100)
+.Build();
 
 try
 {
     SearchCatalogObjectsResponse result = await catalogApi.SearchCatalogObjectsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -682,60 +752,65 @@ SearchCatalogItemsAsync(
 ## Example Usage
 
 ```csharp
-var bodyCategoryIds = new IList<string>();
-bodyCategoryIds.Add("WINE_CATEGORY_ID");
-var bodyStockLevels = new IList<string>();
-bodyStockLevels.Add("OUT");
-bodyStockLevels.Add("LOW");
-var bodyEnabledLocationIds = new IList<string>();
-bodyEnabledLocationIds.Add("ATL_LOCATION_ID");
-var bodyProductTypes = new IList<string>();
-bodyProductTypes.Add("REGULAR");
-var bodyCustomAttributeFilters = new List<CustomAttributeFilter>();
-
-var bodyCustomAttributeFilters0 = new CustomAttributeFilter.Builder()
-    .CustomAttributeDefinitionId("VEGAN_DEFINITION_ID")
-    .BoolFilter(true)
-    .Build();
-bodyCustomAttributeFilters.Add(bodyCustomAttributeFilters0);
-
-var bodyCustomAttributeFilters1 = new CustomAttributeFilter.Builder()
-    .CustomAttributeDefinitionId("BRAND_DEFINITION_ID")
-    .StringFilter("Dark Horse")
-    .Build();
-bodyCustomAttributeFilters.Add(bodyCustomAttributeFilters1);
-
-var bodyCustomAttributeFilters2NumberFilter = new Range.Builder()
-    .Min("2017")
-    .Max("2018")
-    .Build();
-var bodyCustomAttributeFilters2 = new CustomAttributeFilter.Builder()
-    .Key("VINTAGE")
-    .NumberFilter(bodyCustomAttributeFilters2NumberFilter)
-    .Build();
-bodyCustomAttributeFilters.Add(bodyCustomAttributeFilters2);
-
-var bodyCustomAttributeFilters3 = new CustomAttributeFilter.Builder()
-    .CustomAttributeDefinitionId("VARIETAL_DEFINITION_ID")
-    .Build();
-bodyCustomAttributeFilters.Add(bodyCustomAttributeFilters3);
-
-var body = new SearchCatalogItemsRequest.Builder()
-    .TextFilter("red")
-    .CategoryIds(bodyCategoryIds)
-    .StockLevels(bodyStockLevels)
-    .EnabledLocationIds(bodyEnabledLocationIds)
-    .Limit(100)
-    .SortOrder("ASC")
-    .ProductTypes(bodyProductTypes)
-    .CustomAttributeFilters(bodyCustomAttributeFilters)
-    .Build();
+Models.SearchCatalogItemsRequest body = new Models.SearchCatalogItemsRequest.Builder()
+.TextFilter("red")
+.CategoryIds(
+    new List<string>
+    {
+        "WINE_CATEGORY_ID",
+    })
+.StockLevels(
+    new List<string>
+    {
+        "OUT",
+        "LOW",
+    })
+.EnabledLocationIds(
+    new List<string>
+    {
+        "ATL_LOCATION_ID",
+    })
+.Limit(100)
+.SortOrder("ASC")
+.ProductTypes(
+    new List<string>
+    {
+        "REGULAR",
+    })
+.CustomAttributeFilters(
+    new List<Models.CustomAttributeFilter>
+    {
+        new Models.CustomAttributeFilter.Builder()
+        .CustomAttributeDefinitionId("VEGAN_DEFINITION_ID")
+        .BoolFilter(true)
+        .Build(),
+        new Models.CustomAttributeFilter.Builder()
+        .CustomAttributeDefinitionId("BRAND_DEFINITION_ID")
+        .StringFilter("Dark Horse")
+        .Build(),
+        new Models.CustomAttributeFilter.Builder()
+        .Key("VINTAGE")
+        .NumberFilter(
+            new Models.Range.Builder()
+            .Min("2017")
+            .Max("2018")
+            .Build())
+        .Build(),
+        new Models.CustomAttributeFilter.Builder()
+        .CustomAttributeDefinitionId("VARIETAL_DEFINITION_ID")
+        .Build(),
+    })
+.Build();
 
 try
 {
     SearchCatalogItemsResponse result = await catalogApi.SearchCatalogItemsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -763,25 +838,35 @@ UpdateItemModifierListsAsync(
 ## Example Usage
 
 ```csharp
-var bodyItemIds = new IList<string>();
-bodyItemIds.Add("H42BRLUJ5KTZTTMPVSLFAACQ");
-bodyItemIds.Add("2JXOBJIHCWBQ4NZ3RIXQGJA6");
-var bodyModifierListsToEnable = new IList<string>();
-bodyModifierListsToEnable.Add("H42BRLUJ5KTZTTMPVSLFAACQ");
-bodyModifierListsToEnable.Add("2JXOBJIHCWBQ4NZ3RIXQGJA6");
-var bodyModifierListsToDisable = new IList<string>();
-bodyModifierListsToDisable.Add("7WRC16CJZDVLSNDQ35PP6YAD");
-var body = new UpdateItemModifierListsRequest.Builder(
-        bodyItemIds)
-    .ModifierListsToEnable(bodyModifierListsToEnable)
-    .ModifierListsToDisable(bodyModifierListsToDisable)
-    .Build();
+Models.UpdateItemModifierListsRequest body = new Models.UpdateItemModifierListsRequest.Builder(
+    new List<string>
+    {
+        "H42BRLUJ5KTZTTMPVSLFAACQ",
+        "2JXOBJIHCWBQ4NZ3RIXQGJA6",
+    }
+)
+.ModifierListsToEnable(
+    new List<string>
+    {
+        "H42BRLUJ5KTZTTMPVSLFAACQ",
+        "2JXOBJIHCWBQ4NZ3RIXQGJA6",
+    })
+.ModifierListsToDisable(
+    new List<string>
+    {
+        "7WRC16CJZDVLSNDQ35PP6YAD",
+    })
+.Build();
 
 try
 {
     UpdateItemModifierListsResponse result = await catalogApi.UpdateItemModifierListsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -809,23 +894,33 @@ UpdateItemTaxesAsync(
 ## Example Usage
 
 ```csharp
-var bodyItemIds = new IList<string>();
-bodyItemIds.Add("H42BRLUJ5KTZTTMPVSLFAACQ");
-bodyItemIds.Add("2JXOBJIHCWBQ4NZ3RIXQGJA6");
-var bodyTaxesToEnable = new IList<string>();
-bodyTaxesToEnable.Add("4WRCNHCJZDVLSNDQ35PP6YAD");
-var bodyTaxesToDisable = new IList<string>();
-bodyTaxesToDisable.Add("AQCEGCEBBQONINDOHRGZISEX");
-var body = new UpdateItemTaxesRequest.Builder(
-        bodyItemIds)
-    .TaxesToEnable(bodyTaxesToEnable)
-    .TaxesToDisable(bodyTaxesToDisable)
-    .Build();
+Models.UpdateItemTaxesRequest body = new Models.UpdateItemTaxesRequest.Builder(
+    new List<string>
+    {
+        "H42BRLUJ5KTZTTMPVSLFAACQ",
+        "2JXOBJIHCWBQ4NZ3RIXQGJA6",
+    }
+)
+.TaxesToEnable(
+    new List<string>
+    {
+        "4WRCNHCJZDVLSNDQ35PP6YAD",
+    })
+.TaxesToDisable(
+    new List<string>
+    {
+        "AQCEGCEBBQONINDOHRGZISEX",
+    })
+.Build();
 
 try
 {
     UpdateItemTaxesResponse result = await catalogApi.UpdateItemTaxesAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

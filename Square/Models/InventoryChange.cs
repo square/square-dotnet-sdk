@@ -79,7 +79,7 @@ namespace Square.Models
         public Models.CatalogMeasurementUnit MeasurementUnit { get; }
 
         /// <summary>
-        /// The ID of the [CatalogMeasurementUnit]($m/CatalogMeasurementUnit) object representing the catalog measurement unit associated with the inventory change.
+        /// The ID of the [CatalogMeasurementUnit](entity:CatalogMeasurementUnit) object representing the catalog measurement unit associated with the inventory change.
         /// </summary>
         [JsonProperty("measurement_unit_id", NullValueHandling = NullValueHandling.Ignore)]
         public string MeasurementUnitId { get; }

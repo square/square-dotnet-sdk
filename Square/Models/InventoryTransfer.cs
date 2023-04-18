@@ -173,14 +173,14 @@ namespace Square.Models
         public string State { get; }
 
         /// <summary>
-        /// The Square-generated ID of the [Location]($m/Location) where the related
+        /// The Square-generated ID of the [Location](entity:Location) where the related
         /// quantity of items was tracked before the transfer.
         /// </summary>
         [JsonProperty("from_location_id")]
         public string FromLocationId { get; }
 
         /// <summary>
-        /// The Square-generated ID of the [Location]($m/Location) where the related
+        /// The Square-generated ID of the [Location](entity:Location) where the related
         /// quantity of items was tracked after the transfer.
         /// </summary>
         [JsonProperty("to_location_id")]
@@ -188,13 +188,13 @@ namespace Square.Models
 
         /// <summary>
         /// The Square-generated ID of the
-        /// [CatalogObject]($m/CatalogObject) being tracked.
+        /// [CatalogObject](entity:CatalogObject) being tracked.
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
 
         /// <summary>
-        /// The [type]($m/CatalogObjectType) of the [CatalogObject]($m/CatalogObject) being tracked.
+        /// The [type](entity:CatalogObjectType) of the [CatalogObject](entity:CatalogObject) being tracked.
         /// The Inventory API supports setting and reading the `"catalog_object_type": "ITEM_VARIATION"` field value.
         /// In addition, it can also read the `"catalog_object_type": "ITEM"` field value that is set by the Square Restaurants app.
         /// </summary>
@@ -231,14 +231,14 @@ namespace Square.Models
         public Models.SourceApplication Source { get; }
 
         /// <summary>
-        /// The Square-generated ID of the [Employee]($m/Employee) responsible for the
+        /// The Square-generated ID of the [Employee](entity:Employee) responsible for the
         /// inventory transfer.
         /// </summary>
         [JsonProperty("employee_id")]
         public string EmployeeId { get; }
 
         /// <summary>
-        /// The Square-generated ID of the [Team Member]($m/TeamMember) responsible for the
+        /// The Square-generated ID of the [Team Member](entity:TeamMember) responsible for the
         /// inventory transfer.
         /// </summary>
         [JsonProperty("team_member_id")]

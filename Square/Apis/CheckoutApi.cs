@@ -36,7 +36,7 @@ namespace Square.Apis
         /// payment processing workflow hosted on connect.squareup.com. .
         /// NOTE: The Checkout API has been updated with new features. .
         /// For more information, see [Checkout API highlights](https://developer.squareup.com/docs/checkout-api#checkout-api-highlights).
-        /// We recommend that you use the new [CreatePaymentLink]($e/Checkout/CreatePaymentLink) .
+        /// We recommend that you use the new [CreatePaymentLink](api-endpoint:Checkout-CreatePaymentLink) .
         /// endpoint in place of this previously released endpoint.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the business location to associate the checkout with..</param>
@@ -54,7 +54,7 @@ namespace Square.Apis
         /// payment processing workflow hosted on connect.squareup.com. .
         /// NOTE: The Checkout API has been updated with new features. .
         /// For more information, see [Checkout API highlights](https://developer.squareup.com/docs/checkout-api#checkout-api-highlights).
-        /// We recommend that you use the new [CreatePaymentLink]($e/Checkout/CreatePaymentLink) .
+        /// We recommend that you use the new [CreatePaymentLink](api-endpoint:Checkout-CreatePaymentLink) .
         /// endpoint in place of this previously released endpoint.
         /// </summary>
         /// <param name="locationId">Required parameter: The ID of the business location to associate the checkout with..</param>

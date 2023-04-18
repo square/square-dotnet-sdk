@@ -45,7 +45,7 @@ namespace Square.Models
         public CreatePaymentRequest(
             string sourceId,
             string idempotencyKey,
-            Models.Money amountMoney,
+            Models.Money amountMoney = null,
             Models.Money tipMoney = null,
             Models.Money appFeeMoney = null,
             string delayDuration = null,
@@ -120,7 +120,7 @@ namespace Square.Models
         /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
         /// for more information.
         /// </summary>
-        [JsonProperty("amount_money")]
+        [JsonProperty("amount_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AmountMoney { get; }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Square.Models
         public string OrderId { get; }
 
         /// <summary>
-        /// The [Customer]($m/Customer) ID of the customer associated with the payment.
+        /// The [Customer](entity:Customer) ID of the customer associated with the payment.
         /// This is required if the `source_id` refers to a card on file created using the Cards API.
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -200,7 +200,7 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// An optional [TeamMember]($m/TeamMember) ID to associate with
+        /// An optional [TeamMember](entity:TeamMember) ID to associate with
         /// this payment.
         /// </summary>
         [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
@@ -388,8 +388,8 @@ namespace Square.Models
         {
             var builder = new Builder(
                 this.SourceId,
-                this.IdempotencyKey,
-                this.AmountMoney)
+                this.IdempotencyKey)
+                .AmountMoney(this.AmountMoney)
                 .TipMoney(this.TipMoney)
                 .AppFeeMoney(this.AppFeeMoney)
                 .DelayDuration(this.DelayDuration)
@@ -442,12 +442,10 @@ namespace Square.Models
 
             public Builder(
                 string sourceId,
-                string idempotencyKey,
-                Models.Money amountMoney)
+                string idempotencyKey)
             {
                 this.sourceId = sourceId;
                 this.idempotencyKey = idempotencyKey;
-                this.amountMoney = amountMoney;
             }
 
              /// <summary>

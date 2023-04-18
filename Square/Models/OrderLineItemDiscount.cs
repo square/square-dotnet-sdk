@@ -136,7 +136,7 @@ namespace Square.Models
         public string Uid { get; }
 
         /// <summary>
-        /// The catalog object ID referencing [CatalogDiscount]($m/CatalogDiscount).
+        /// The catalog object ID referencing [CatalogDiscount](entity:CatalogDiscount).
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
@@ -224,7 +224,7 @@ namespace Square.Models
         public IList<string> RewardIds { get; }
 
         /// <summary>
-        /// The object ID of a [pricing rule]($m/CatalogPricingRule) to be applied
+        /// The object ID of a [pricing rule](entity:CatalogPricingRule) to be applied
         /// automatically to this discount. The specification and application of the discounts, to
         /// which a `pricing_rule_id` is assigned, are completely controlled by the corresponding
         /// pricing rule.

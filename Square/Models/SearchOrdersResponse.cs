@@ -44,7 +44,7 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// A list of [OrderEntries]($m/OrderEntry) that fit the query
+        /// A list of [OrderEntries](entity:OrderEntry) that fit the query
         /// conditions. The list is populated only if `return_entries` is set to `true` in the request.
         /// </summary>
         [JsonProperty("order_entries", NullValueHandling = NullValueHandling.Ignore)]
@@ -52,7 +52,7 @@ namespace Square.Models
 
         /// <summary>
         /// A list of
-        /// [Order]($m/Order) objects that match the query conditions. The list is populated only if
+        /// [Order](entity:Order) objects that match the query conditions. The list is populated only if
         /// `return_entries` is set to `false` in the request.
         /// </summary>
         [JsonProperty("orders", NullValueHandling = NullValueHandling.Ignore)]
@@ -61,13 +61,13 @@ namespace Square.Models
         /// <summary>
         /// The pagination cursor to be used in a subsequent request. If unset,
         /// this is the final response.
-        /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
 
         /// <summary>
-        /// [Errors]($m/Error) encountered during the search.
+        /// [Errors](entity:Error) encountered during the search.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }

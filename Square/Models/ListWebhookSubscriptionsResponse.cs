@@ -47,7 +47,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// The requested list of [Subscription]($m/WebhookSubscription)s.
+        /// The requested list of [Subscription](entity:WebhookSubscription)s.
         /// </summary>
         [JsonProperty("subscriptions", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.WebhookSubscription> Subscriptions { get; }

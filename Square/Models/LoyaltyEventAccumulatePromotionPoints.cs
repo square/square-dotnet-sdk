@@ -37,13 +37,13 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square-assigned ID of the [loyalty program]($m/LoyaltyProgram).
+        /// The Square-assigned ID of the [loyalty program](entity:LoyaltyProgram).
         /// </summary>
         [JsonProperty("loyalty_program_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LoyaltyProgramId { get; }
 
         /// <summary>
-        /// The Square-assigned ID of the [loyalty promotion]($m/LoyaltyPromotion).
+        /// The Square-assigned ID of the [loyalty promotion](entity:LoyaltyPromotion).
         /// </summary>
         [JsonProperty("loyalty_promotion_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LoyaltyPromotionId { get; }
@@ -55,7 +55,7 @@ namespace Square.Models
         public int Points { get; }
 
         /// <summary>
-        /// The ID of the [order]($m/Order) for which the buyer earned the promotion points.
+        /// The ID of the [order](entity:Order) for which the buyer earned the promotion points.
         /// Only applications that use the Orders API to process orders can trigger this event.
         /// </summary>
         [JsonProperty("order_id")]

@@ -28,7 +28,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The [location]($m/Location) IDs for loyalty events to query.
+        /// The [location](entity:Location) IDs for loyalty events to query.
         /// If multiple values are specified, the endpoint uses
         /// a logical OR to combine them.
         /// </summary>

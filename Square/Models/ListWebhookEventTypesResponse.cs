@@ -53,7 +53,7 @@ namespace Square.Models
         public IList<string> EventTypes { get; }
 
         /// <summary>
-        /// Contains the metadata of a webhook event type. For more information, see [EventTypeMetadata]($m/EventTypeMetadata).
+        /// Contains the metadata of a webhook event type. For more information, see [EventTypeMetadata](entity:EventTypeMetadata).
         /// </summary>
         [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.EventTypeMetadata> Metadata { get; }

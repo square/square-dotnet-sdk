@@ -46,26 +46,31 @@ CreateTerminalActionAsync(
 ## Example Usage
 
 ```csharp
-var bodyActionSaveCardOptions = new SaveCardOptions.Builder(
-        "{{CUSTOMER_ID}}")
-    .ReferenceId("user-id-1")
-    .Build();
-var bodyAction = new TerminalAction.Builder()
+Models.CreateTerminalActionRequest body = new Models.CreateTerminalActionRequest.Builder(
+    "thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e",
+    new Models.TerminalAction.Builder()
     .DeviceId("{{DEVICE_ID}}")
     .DeadlineDuration("PT5M")
     .Type("SAVE_CARD")
-    .SaveCardOptions(bodyActionSaveCardOptions)
-    .Build();
-var body = new CreateTerminalActionRequest.Builder(
-        "thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e",
-        bodyAction)
-    .Build();
+    .SaveCardOptions(
+        new Models.SaveCardOptions.Builder(
+            "{{CUSTOMER_ID}}"
+        )
+        .ReferenceId("user-id-1")
+        .Build())
+    .Build()
+)
+.Build();
 
 try
 {
     CreateTerminalActionResponse result = await terminalApi.CreateTerminalActionAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -91,29 +96,33 @@ SearchTerminalActionsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterCreatedAt = new TimeRange.Builder()
-    .StartAt("2022-04-01T00:00:00Z")
-    .Build();
-var bodyQueryFilter = new TerminalActionQueryFilter.Builder()
-    .CreatedAt(bodyQueryFilterCreatedAt)
-    .Build();
-var bodyQuerySort = new TerminalActionQuerySort.Builder()
-    .SortOrder("DESC")
-    .Build();
-var bodyQuery = new TerminalActionQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Sort(bodyQuerySort)
-    .Build();
-var body = new SearchTerminalActionsRequest.Builder()
-    .Query(bodyQuery)
-    .Limit(2)
-    .Build();
+Models.SearchTerminalActionsRequest body = new Models.SearchTerminalActionsRequest.Builder()
+.Query(
+    new Models.TerminalActionQuery.Builder()
+    .Filter(
+        new Models.TerminalActionQueryFilter.Builder()
+        .CreatedAt(
+            new Models.TimeRange.Builder()
+            .StartAt("2022-04-01T00:00:00Z")
+            .Build())
+        .Build())
+    .Sort(
+        new Models.TerminalActionQuerySort.Builder()
+        .SortOrder("DESC")
+        .Build())
+    .Build())
+.Limit(2)
+.Build();
 
 try
 {
     SearchTerminalActionsResponse result = await terminalApi.SearchTerminalActionsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -140,12 +149,15 @@ GetTerminalActionAsync(
 
 ```csharp
 string actionId = "action_id6";
-
 try
 {
     GetTerminalActionResponse result = await terminalApi.GetTerminalActionAsync(actionId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -172,12 +184,15 @@ CancelTerminalActionAsync(
 
 ```csharp
 string actionId = "action_id6";
-
 try
 {
     CancelTerminalActionResponse result = await terminalApi.CancelTerminalActionAsync(actionId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -204,29 +219,33 @@ CreateTerminalCheckoutAsync(
 ## Example Usage
 
 ```csharp
-var bodyCheckoutAmountMoney = new Money.Builder()
-    .Amount(2610L)
-    .Currency("USD")
-    .Build();
-var bodyCheckoutDeviceOptions = new DeviceCheckoutOptions.Builder(
-        "dbb5d83a-7838-11ea-bc55-0242ac130003")
-    .Build();
-var bodyCheckout = new TerminalCheckout.Builder(
-        bodyCheckoutAmountMoney,
-        bodyCheckoutDeviceOptions)
+Models.CreateTerminalCheckoutRequest body = new Models.CreateTerminalCheckoutRequest.Builder(
+    "28a0c3bc-7839-11ea-bc55-0242ac130003",
+    new Models.TerminalCheckout.Builder(
+        new Models.Money.Builder()
+        .Amount(2610L)
+        .Currency("USD")
+        .Build(),
+        new Models.DeviceCheckoutOptions.Builder(
+            "dbb5d83a-7838-11ea-bc55-0242ac130003"
+        )
+        .Build()
+    )
     .ReferenceId("id11572")
     .Note("A brief note")
-    .Build();
-var body = new CreateTerminalCheckoutRequest.Builder(
-        "28a0c3bc-7839-11ea-bc55-0242ac130003",
-        bodyCheckout)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     CreateTerminalCheckoutResponse result = await terminalApi.CreateTerminalCheckoutAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -252,22 +271,26 @@ SearchTerminalCheckoutsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilter = new TerminalCheckoutQueryFilter.Builder()
-    .Status("COMPLETED")
-    .Build();
-var bodyQuery = new TerminalCheckoutQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Build();
-var body = new SearchTerminalCheckoutsRequest.Builder()
-    .Query(bodyQuery)
-    .Limit(2)
-    .Build();
+Models.SearchTerminalCheckoutsRequest body = new Models.SearchTerminalCheckoutsRequest.Builder()
+.Query(
+    new Models.TerminalCheckoutQuery.Builder()
+    .Filter(
+        new Models.TerminalCheckoutQueryFilter.Builder()
+        .Status("COMPLETED")
+        .Build())
+    .Build())
+.Limit(2)
+.Build();
 
 try
 {
     SearchTerminalCheckoutsResponse result = await terminalApi.SearchTerminalCheckoutsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -294,12 +317,15 @@ GetTerminalCheckoutAsync(
 
 ```csharp
 string checkoutId = "checkout_id8";
-
 try
 {
     GetTerminalCheckoutResponse result = await terminalApi.GetTerminalCheckoutAsync(checkoutId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -326,12 +352,15 @@ CancelTerminalCheckoutAsync(
 
 ```csharp
 string checkoutId = "checkout_id8";
-
 try
 {
     CancelTerminalCheckoutResponse result = await terminalApi.CancelTerminalCheckoutAsync(checkoutId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -357,26 +386,31 @@ CreateTerminalRefundAsync(
 ## Example Usage
 
 ```csharp
-var bodyRefundAmountMoney = new Money.Builder()
-    .Amount(111L)
-    .Currency("CAD")
-    .Build();
-var bodyRefund = new TerminalRefund.Builder(
+Models.CreateTerminalRefundRequest body = new Models.CreateTerminalRefundRequest.Builder(
+    "402a640b-b26f-401f-b406-46f839590c04"
+)
+.Refund(
+    new Models.TerminalRefund.Builder(
         "5O5OvgkcNUhl7JBuINflcjKqUzXZY",
-        bodyRefundAmountMoney,
+        new Models.Money.Builder()
+        .Amount(111L)
+        .Currency("CAD")
+        .Build(),
         "Returning items",
-        "f72dfb8e-4d65-4e56-aade-ec3fb8d33291")
-    .Build();
-var body = new CreateTerminalRefundRequest.Builder(
-        "402a640b-b26f-401f-b406-46f839590c04")
-    .Refund(bodyRefund)
-    .Build();
+        "f72dfb8e-4d65-4e56-aade-ec3fb8d33291"
+    )
+    .Build())
+.Build();
 
 try
 {
     CreateTerminalRefundResponse result = await terminalApi.CreateTerminalRefundAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -402,22 +436,26 @@ SearchTerminalRefundsAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilter = new TerminalRefundQueryFilter.Builder()
-    .Status("COMPLETED")
-    .Build();
-var bodyQuery = new TerminalRefundQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Build();
-var body = new SearchTerminalRefundsRequest.Builder()
-    .Query(bodyQuery)
-    .Limit(1)
-    .Build();
+Models.SearchTerminalRefundsRequest body = new Models.SearchTerminalRefundsRequest.Builder()
+.Query(
+    new Models.TerminalRefundQuery.Builder()
+    .Filter(
+        new Models.TerminalRefundQueryFilter.Builder()
+        .Status("COMPLETED")
+        .Build())
+    .Build())
+.Limit(1)
+.Build();
 
 try
 {
     SearchTerminalRefundsResponse result = await terminalApi.SearchTerminalRefundsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -444,12 +482,15 @@ GetTerminalRefundAsync(
 
 ```csharp
 string terminalRefundId = "terminal_refund_id0";
-
 try
 {
     GetTerminalRefundResponse result = await terminalApi.GetTerminalRefundAsync(terminalRefundId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -476,11 +517,14 @@ CancelTerminalRefundAsync(
 
 ```csharp
 string terminalRefundId = "terminal_refund_id0";
-
 try
 {
     CancelTerminalRefundResponse result = await terminalApi.CancelTerminalRefundAsync(terminalRefundId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

@@ -44,7 +44,7 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// A set of [CreateVendorResponse]($m/CreateVendorResponse) objects encapsulating successfully created [Vendor]($m/Vendor)
+        /// A set of [CreateVendorResponse](entity:CreateVendorResponse) objects encapsulating successfully created [Vendor](entity:Vendor)
         /// objects or error responses for failed attempts. The set is represented by
         /// a collection of idempotency-key/`Vendor`-object or idempotency-key/error-object pairs. The idempotency keys correspond to those specified
         /// in the input.

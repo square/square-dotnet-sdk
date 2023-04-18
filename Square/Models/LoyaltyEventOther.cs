@@ -31,7 +31,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square-assigned ID of the [loyalty program]($m/LoyaltyProgram).
+        /// The Square-assigned ID of the [loyalty program](entity:LoyaltyProgram).
         /// </summary>
         [JsonProperty("loyalty_program_id")]
         public string LoyaltyProgramId { get; }

@@ -41,14 +41,19 @@ RegisterDomainAsync(
 ## Example Usage
 
 ```csharp
-var body = new RegisterDomainRequest.Builder(
-        "example.com")
-    .Build();
+Models.RegisterDomainRequest body = new Models.RegisterDomainRequest.Builder(
+    "example.com"
+)
+.Build();
 
 try
 {
     RegisterDomainResponse result = await applePayApi.RegisterDomainAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

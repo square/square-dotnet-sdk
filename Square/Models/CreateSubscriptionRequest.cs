@@ -82,7 +82,7 @@ namespace Square.Models
         public string PlanId { get; }
 
         /// <summary>
-        /// The ID of the [customer]($m/Customer) subscribing to the subscription plan.
+        /// The ID of the [customer](entity:Customer) subscribing to the subscription plan.
         /// </summary>
         [JsonProperty("customer_id")]
         public string CustomerId { get; }
@@ -127,7 +127,7 @@ namespace Square.Models
         public Models.Money PriceOverrideMoney { get; }
 
         /// <summary>
-        /// The ID of the [subscriber's]($m/Customer) [card]($m/Card) to charge.
+        /// The ID of the [subscriber's](entity:Customer) [card](entity:Card) to charge.
         /// If it is not specified, the subscriber receives an invoice via email. For an example to
         /// create a customer profile for a subscriber and add a card on file, see [Subscriptions Walkthrough](https://developer.squareup.com/docs/subscriptions-api/walkthrough).
         /// </summary>

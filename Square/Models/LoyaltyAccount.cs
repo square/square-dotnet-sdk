@@ -108,7 +108,7 @@ namespace Square.Models
         public string Id { get; }
 
         /// <summary>
-        /// The Square-assigned ID of the [loyalty program]($m/LoyaltyProgram) to which the account belongs.
+        /// The Square-assigned ID of the [loyalty program](entity:LoyaltyProgram) to which the account belongs.
         /// </summary>
         [JsonProperty("program_id")]
         public string ProgramId { get; }
@@ -127,7 +127,7 @@ namespace Square.Models
         public int? LifetimePoints { get; }
 
         /// <summary>
-        /// The Square-assigned ID of the [customer]($m/Customer) that is associated with the account.
+        /// The Square-assigned ID of the [customer](entity:Customer) that is associated with the account.
         /// </summary>
         [JsonProperty("customer_id")]
         public string CustomerId { get; }

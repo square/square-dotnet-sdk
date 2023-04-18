@@ -45,7 +45,11 @@ try
 {
     ListCustomerGroupsResponse result = await customerGroupsApi.ListCustomerGroupsAsync(null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -73,18 +77,23 @@ CreateCustomerGroupAsync(
 ## Example Usage
 
 ```csharp
-var bodyGroup = new CustomerGroup.Builder(
-        "Loyal Customers")
-    .Build();
-var body = new CreateCustomerGroupRequest.Builder(
-        bodyGroup)
-    .Build();
+Models.CreateCustomerGroupRequest body = new Models.CreateCustomerGroupRequest.Builder(
+    new Models.CustomerGroup.Builder(
+        "Loyal Customers"
+    )
+    .Build()
+)
+.Build();
 
 try
 {
     CreateCustomerGroupResponse result = await customerGroupsApi.CreateCustomerGroupAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -111,12 +120,15 @@ DeleteCustomerGroupAsync(
 
 ```csharp
 string groupId = "group_id0";
-
 try
 {
     DeleteCustomerGroupResponse result = await customerGroupsApi.DeleteCustomerGroupAsync(groupId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -143,12 +155,15 @@ RetrieveCustomerGroupAsync(
 
 ```csharp
 string groupId = "group_id0";
-
 try
 {
     RetrieveCustomerGroupResponse result = await customerGroupsApi.RetrieveCustomerGroupAsync(groupId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -177,17 +192,22 @@ UpdateCustomerGroupAsync(
 
 ```csharp
 string groupId = "group_id0";
-var bodyGroup = new CustomerGroup.Builder(
-        "Loyal Customers")
-    .Build();
-var body = new UpdateCustomerGroupRequest.Builder(
-        bodyGroup)
-    .Build();
+Models.UpdateCustomerGroupRequest body = new Models.UpdateCustomerGroupRequest.Builder(
+    new Models.CustomerGroup.Builder(
+        "Loyal Customers"
+    )
+    .Build()
+)
+.Build();
 
 try
 {
     UpdateCustomerGroupResponse result = await customerGroupsApi.UpdateCustomerGroupAsync(groupId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

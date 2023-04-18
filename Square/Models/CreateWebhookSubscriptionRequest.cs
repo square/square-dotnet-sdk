@@ -31,7 +31,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A unique string that identifies the [CreateWebhookSubscription]($e/WebhookSubscriptions/CreateWebhookSubscription) request.
+        /// A unique string that identifies the [CreateWebhookSubscription](api-endpoint:WebhookSubscriptions-CreateWebhookSubscription) request.
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }

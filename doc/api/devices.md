@@ -47,7 +47,11 @@ try
 {
     ListDeviceCodesResponse result = await devicesApi.ListDeviceCodesAsync(null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -74,21 +78,26 @@ CreateDeviceCodeAsync(
 ## Example Usage
 
 ```csharp
-var bodyDeviceCode = new DeviceCode.Builder(
-        "TERMINAL_API")
+Models.CreateDeviceCodeRequest body = new Models.CreateDeviceCodeRequest.Builder(
+    "01bb00a6-0c86-4770-94ed-f5fca973cd56",
+    new Models.DeviceCode.Builder(
+        "TERMINAL_API"
+    )
     .Name("Counter 1")
     .LocationId("B5E4484SHHNYH")
-    .Build();
-var body = new CreateDeviceCodeRequest.Builder(
-        "01bb00a6-0c86-4770-94ed-f5fca973cd56",
-        bodyDeviceCode)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     CreateDeviceCodeResponse result = await devicesApi.CreateDeviceCodeAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -115,11 +124,14 @@ GetDeviceCodeAsync(
 
 ```csharp
 string id = "id0";
-
 try
 {
     GetDeviceCodeResponse result = await devicesApi.GetDeviceCodeAsync(id);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

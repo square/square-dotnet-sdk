@@ -58,7 +58,11 @@ try
 {
     ListCustomersResponse result = await customersApi.ListCustomersAsync(null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -93,29 +97,33 @@ CreateCustomerAsync(
 ## Example Usage
 
 ```csharp
-var bodyAddress = new Address.Builder()
+Models.CreateCustomerRequest body = new Models.CreateCustomerRequest.Builder()
+.GivenName("Amelia")
+.FamilyName("Earhart")
+.EmailAddress("Amelia.Earhart@example.com")
+.Address(
+    new Models.Address.Builder()
     .AddressLine1("500 Electric Ave")
     .AddressLine2("Suite 600")
     .Locality("New York")
     .AdministrativeDistrictLevel1("NY")
     .PostalCode("10003")
     .Country("US")
-    .Build();
-var body = new CreateCustomerRequest.Builder()
-    .GivenName("Amelia")
-    .FamilyName("Earhart")
-    .EmailAddress("Amelia.Earhart@example.com")
-    .Address(bodyAddress)
-    .PhoneNumber("+1-212-555-4240")
-    .ReferenceId("YOUR_REFERENCE_ID")
-    .Note("a customer")
-    .Build();
+    .Build())
+.PhoneNumber("+1-212-555-4240")
+.ReferenceId("YOUR_REFERENCE_ID")
+.Note("a customer")
+.Build();
 
 try
 {
     CreateCustomerResponse result = await customersApi.CreateCustomerAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -149,48 +157,56 @@ SearchCustomersAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterCreationSourceValues = new IList<string>();
-bodyQueryFilterCreationSourceValues.Add("THIRD_PARTY");
-var bodyQueryFilterCreationSource = new CustomerCreationSourceFilter.Builder()
-    .Values(bodyQueryFilterCreationSourceValues)
-    .Rule("INCLUDE")
-    .Build();
-var bodyQueryFilterCreatedAt = new TimeRange.Builder()
-    .StartAt("2018-01-01T00:00:00+00:00")
-    .EndAt("2018-02-01T00:00:00+00:00")
-    .Build();
-var bodyQueryFilterEmailAddress = new CustomerTextFilter.Builder()
-    .Fuzzy("example.com")
-    .Build();
-var bodyQueryFilterGroupIdsAll = new IList<string>();
-bodyQueryFilterGroupIdsAll.Add("545AXB44B4XXWMVQ4W8SBT3HHF");
-var bodyQueryFilterGroupIds = new FilterValue.Builder()
-    .All(bodyQueryFilterGroupIdsAll)
-    .Build();
-var bodyQueryFilter = new CustomerFilter.Builder()
-    .CreationSource(bodyQueryFilterCreationSource)
-    .CreatedAt(bodyQueryFilterCreatedAt)
-    .EmailAddress(bodyQueryFilterEmailAddress)
-    .GroupIds(bodyQueryFilterGroupIds)
-    .Build();
-var bodyQuerySort = new CustomerSort.Builder()
-    .Field("CREATED_AT")
-    .Order("ASC")
-    .Build();
-var bodyQuery = new CustomerQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Sort(bodyQuerySort)
-    .Build();
-var body = new SearchCustomersRequest.Builder()
-    .Limit(2L)
-    .Query(bodyQuery)
-    .Build();
+Models.SearchCustomersRequest body = new Models.SearchCustomersRequest.Builder()
+.Limit(2L)
+.Query(
+    new Models.CustomerQuery.Builder()
+    .Filter(
+        new Models.CustomerFilter.Builder()
+        .CreationSource(
+            new Models.CustomerCreationSourceFilter.Builder()
+            .Values(
+                new List<string>
+                {
+                    "THIRD_PARTY",
+                })
+            .Rule("INCLUDE")
+            .Build())
+        .CreatedAt(
+            new Models.TimeRange.Builder()
+            .StartAt("2018-01-01T00:00:00+00:00")
+            .EndAt("2018-02-01T00:00:00+00:00")
+            .Build())
+        .EmailAddress(
+            new Models.CustomerTextFilter.Builder()
+            .Fuzzy("example.com")
+            .Build())
+        .GroupIds(
+            new Models.FilterValue.Builder()
+            .All(
+                new List<string>
+                {
+                    "545AXB44B4XXWMVQ4W8SBT3HHF",
+                })
+            .Build())
+        .Build())
+    .Sort(
+        new Models.CustomerSort.Builder()
+        .Field("CREATED_AT")
+        .Order("ASC")
+        .Build())
+    .Build())
+.Build();
 
 try
 {
     SearchCustomersResponse result = await customersApi.SearchCustomersAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -224,12 +240,15 @@ DeleteCustomerAsync(
 
 ```csharp
 string customerId = "customer_id8";
-
 try
 {
     DeleteCustomerResponse result = await customersApi.DeleteCustomerAsync(customerId, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -256,12 +275,15 @@ RetrieveCustomerAsync(
 
 ```csharp
 string customerId = "customer_id8";
-
 try
 {
     RetrieveCustomerResponse result = await customersApi.RetrieveCustomerAsync(customerId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -299,18 +321,22 @@ UpdateCustomerAsync(
 
 ```csharp
 string customerId = "customer_id8";
-var body = new UpdateCustomerRequest.Builder()
-    .EmailAddress("New.Amelia.Earhart@example.com")
-    .PhoneNumber("")
-    .Note("updated customer note")
-    .Version(2L)
-    .Build();
+Models.UpdateCustomerRequest body = new Models.UpdateCustomerRequest.Builder()
+.EmailAddress("New.Amelia.Earhart@example.com")
+.PhoneNumber("")
+.Note("updated customer note")
+.Version(2L)
+.Build();
 
 try
 {
     UpdateCustomerResponse result = await customersApi.UpdateCustomerAsync(customerId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -345,25 +371,30 @@ CreateCustomerCardAsync(
 
 ```csharp
 string customerId = "customer_id8";
-var bodyBillingAddress = new Address.Builder()
+Models.CreateCustomerCardRequest body = new Models.CreateCustomerCardRequest.Builder(
+    "YOUR_CARD_NONCE"
+)
+.BillingAddress(
+    new Models.Address.Builder()
     .AddressLine1("500 Electric Ave")
     .AddressLine2("Suite 600")
     .Locality("New York")
     .AdministrativeDistrictLevel1("NY")
     .PostalCode("10003")
     .Country("US")
-    .Build();
-var body = new CreateCustomerCardRequest.Builder(
-        "YOUR_CARD_NONCE")
-    .BillingAddress(bodyBillingAddress)
-    .CardholderName("Amelia Earhart")
-    .Build();
+    .Build())
+.CardholderName("Amelia Earhart")
+.Build();
 
 try
 {
     CreateCustomerCardResponse result = await customersApi.CreateCustomerCardAsync(customerId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -395,12 +426,15 @@ DeleteCustomerCardAsync(
 ```csharp
 string customerId = "customer_id8";
 string cardId = "card_id4";
-
 try
 {
     DeleteCustomerCardResponse result = await customersApi.DeleteCustomerCardAsync(customerId, cardId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -433,12 +467,15 @@ RemoveGroupFromCustomerAsync(
 ```csharp
 string customerId = "customer_id8";
 string groupId = "group_id0";
-
 try
 {
     RemoveGroupFromCustomerResponse result = await customersApi.RemoveGroupFromCustomerAsync(customerId, groupId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -471,11 +508,14 @@ AddGroupToCustomerAsync(
 ```csharp
 string customerId = "customer_id8";
 string groupId = "group_id0";
-
 try
 {
     AddGroupToCustomerResponse result = await customersApi.AddGroupToCustomerAsync(customerId, groupId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

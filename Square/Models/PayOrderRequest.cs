@@ -76,7 +76,7 @@ namespace Square.Models
         public int? OrderVersion { get; }
 
         /// <summary>
-        /// The IDs of the [payments]($m/Payment) to collect.
+        /// The IDs of the [payments](entity:Payment) to collect.
         /// The payment total must match the order total.
         /// </summary>
         [JsonProperty("payment_ids")]

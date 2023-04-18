@@ -29,7 +29,7 @@ IInventoryApi inventoryApi = client.InventoryApi;
 
 **This endpoint is deprecated.**
 
-Deprecated version of [RetrieveInventoryAdjustment](../../doc/api/inventory.md#retrieve-inventory-adjustment) after the endpoint URL
+Deprecated version of [RetrieveInventoryAdjustment](api-endpoint:Inventory-RetrieveInventoryAdjustment) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```csharp
@@ -41,7 +41,7 @@ DeprecatedRetrieveInventoryAdjustmentAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `adjustmentId` | `string` | Template, Required | ID of the [InventoryAdjustment](../../doc/models/inventory-adjustment.md) to retrieve. |
+| `adjustmentId` | `string` | Template, Required | ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve. |
 
 ## Response Type
 
@@ -51,12 +51,15 @@ DeprecatedRetrieveInventoryAdjustmentAsync(
 
 ```csharp
 string adjustmentId = "adjustment_id0";
-
 try
 {
     RetrieveInventoryAdjustmentResponse result = await inventoryApi.DeprecatedRetrieveInventoryAdjustmentAsync(adjustmentId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -74,7 +77,7 @@ RetrieveInventoryAdjustmentAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `adjustmentId` | `string` | Template, Required | ID of the [InventoryAdjustment](../../doc/models/inventory-adjustment.md) to retrieve. |
+| `adjustmentId` | `string` | Template, Required | ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve. |
 
 ## Response Type
 
@@ -84,12 +87,15 @@ RetrieveInventoryAdjustmentAsync(
 
 ```csharp
 string adjustmentId = "adjustment_id0";
-
 try
 {
     RetrieveInventoryAdjustmentResponse result = await inventoryApi.RetrieveInventoryAdjustmentAsync(adjustmentId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -97,7 +103,7 @@ catch (ApiException e){};
 
 **This endpoint is deprecated.**
 
-Deprecated version of [BatchChangeInventory](../../doc/api/inventory.md#batch-change-inventory) after the endpoint URL
+Deprecated version of [BatchChangeInventory](api-endpoint:Inventory-BatchChangeInventory) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```csharp
@@ -118,34 +124,38 @@ DeprecatedBatchChangeInventoryAsync(
 ## Example Usage
 
 ```csharp
-var bodyChanges = new List<InventoryChange>();
-
-var bodyChanges0PhysicalCount = new InventoryPhysicalCount.Builder()
-    .ReferenceId("1536bfbf-efed-48bf-b17d-a197141b2a92")
-    .CatalogObjectId("W62UWFY35CWMYGVWK6TWJDNI")
-    .State("IN_STOCK")
-    .LocationId("C6W5YS5QM06F5")
-    .Quantity("53")
-    .TeamMemberId("LRK57NSQ5X7PUD05")
-    .OccurredAt("2016-11-16T22:25:24.878Z")
-    .Build();
-var bodyChanges0 = new InventoryChange.Builder()
-    .Type("PHYSICAL_COUNT")
-    .PhysicalCount(bodyChanges0PhysicalCount)
-    .Build();
-bodyChanges.Add(bodyChanges0);
-
-var body = new BatchChangeInventoryRequest.Builder(
-        "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe")
-    .Changes(bodyChanges)
-    .IgnoreUnchangedCounts(true)
-    .Build();
+Models.BatchChangeInventoryRequest body = new Models.BatchChangeInventoryRequest.Builder(
+    "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe"
+)
+.Changes(
+    new List<Models.InventoryChange>
+    {
+        new Models.InventoryChange.Builder()
+        .Type("PHYSICAL_COUNT")
+        .PhysicalCount(
+            new Models.InventoryPhysicalCount.Builder()
+            .ReferenceId("1536bfbf-efed-48bf-b17d-a197141b2a92")
+            .CatalogObjectId("W62UWFY35CWMYGVWK6TWJDNI")
+            .State("IN_STOCK")
+            .LocationId("C6W5YS5QM06F5")
+            .Quantity("53")
+            .TeamMemberId("LRK57NSQ5X7PUD05")
+            .OccurredAt("2016-11-16T22:25:24.878Z")
+            .Build())
+        .Build(),
+    })
+.IgnoreUnchangedCounts(true)
+.Build();
 
 try
 {
     BatchChangeInventoryResponse result = await inventoryApi.DeprecatedBatchChangeInventoryAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -153,7 +163,7 @@ catch (ApiException e){};
 
 **This endpoint is deprecated.**
 
-Deprecated version of [BatchRetrieveInventoryChanges](../../doc/api/inventory.md#batch-retrieve-inventory-changes) after the endpoint URL
+Deprecated version of [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```csharp
@@ -174,28 +184,40 @@ DeprecatedBatchRetrieveInventoryChangesAsync(
 ## Example Usage
 
 ```csharp
-var bodyCatalogObjectIds = new IList<string>();
-bodyCatalogObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
-var bodyLocationIds = new IList<string>();
-bodyLocationIds.Add("C6W5YS5QM06F5");
-var bodyTypes = new IList<string>();
-bodyTypes.Add("PHYSICAL_COUNT");
-var bodyStates = new IList<string>();
-bodyStates.Add("IN_STOCK");
-var body = new BatchRetrieveInventoryChangesRequest.Builder()
-    .CatalogObjectIds(bodyCatalogObjectIds)
-    .LocationIds(bodyLocationIds)
-    .Types(bodyTypes)
-    .States(bodyStates)
-    .UpdatedAfter("2016-11-01T00:00:00Z")
-    .UpdatedBefore("2016-12-01T00:00:00Z")
-    .Build();
+Models.BatchRetrieveInventoryChangesRequest body = new Models.BatchRetrieveInventoryChangesRequest.Builder()
+.CatalogObjectIds(
+    new List<string>
+    {
+        "W62UWFY35CWMYGVWK6TWJDNI",
+    })
+.LocationIds(
+    new List<string>
+    {
+        "C6W5YS5QM06F5",
+    })
+.Types(
+    new List<string>
+    {
+        "PHYSICAL_COUNT",
+    })
+.States(
+    new List<string>
+    {
+        "IN_STOCK",
+    })
+.UpdatedAfter("2016-11-01T00:00:00Z")
+.UpdatedBefore("2016-12-01T00:00:00Z")
+.Build();
 
 try
 {
     BatchRetrieveInventoryChangesResponse result = await inventoryApi.DeprecatedBatchRetrieveInventoryChangesAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -203,7 +225,7 @@ catch (ApiException e){};
 
 **This endpoint is deprecated.**
 
-Deprecated version of [BatchRetrieveInventoryCounts](../../doc/api/inventory.md#batch-retrieve-inventory-counts) after the endpoint URL
+Deprecated version of [BatchRetrieveInventoryCounts](api-endpoint:Inventory-BatchRetrieveInventoryCounts) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```csharp
@@ -224,21 +246,29 @@ DeprecatedBatchRetrieveInventoryCountsAsync(
 ## Example Usage
 
 ```csharp
-var bodyCatalogObjectIds = new IList<string>();
-bodyCatalogObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
-var bodyLocationIds = new IList<string>();
-bodyLocationIds.Add("59TNP9SA8VGDA");
-var body = new BatchRetrieveInventoryCountsRequest.Builder()
-    .CatalogObjectIds(bodyCatalogObjectIds)
-    .LocationIds(bodyLocationIds)
-    .UpdatedAfter("2016-11-16T00:00:00Z")
-    .Build();
+Models.BatchRetrieveInventoryCountsRequest body = new Models.BatchRetrieveInventoryCountsRequest.Builder()
+.CatalogObjectIds(
+    new List<string>
+    {
+        "W62UWFY35CWMYGVWK6TWJDNI",
+    })
+.LocationIds(
+    new List<string>
+    {
+        "59TNP9SA8VGDA",
+    })
+.UpdatedAfter("2016-11-16T00:00:00Z")
+.Build();
 
 try
 {
     BatchRetrieveInventoryCountsResponse result = await inventoryApi.DeprecatedBatchRetrieveInventoryCountsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -268,34 +298,38 @@ BatchChangeInventoryAsync(
 ## Example Usage
 
 ```csharp
-var bodyChanges = new List<InventoryChange>();
-
-var bodyChanges0PhysicalCount = new InventoryPhysicalCount.Builder()
-    .ReferenceId("1536bfbf-efed-48bf-b17d-a197141b2a92")
-    .CatalogObjectId("W62UWFY35CWMYGVWK6TWJDNI")
-    .State("IN_STOCK")
-    .LocationId("C6W5YS5QM06F5")
-    .Quantity("53")
-    .TeamMemberId("LRK57NSQ5X7PUD05")
-    .OccurredAt("2016-11-16T22:25:24.878Z")
-    .Build();
-var bodyChanges0 = new InventoryChange.Builder()
-    .Type("PHYSICAL_COUNT")
-    .PhysicalCount(bodyChanges0PhysicalCount)
-    .Build();
-bodyChanges.Add(bodyChanges0);
-
-var body = new BatchChangeInventoryRequest.Builder(
-        "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe")
-    .Changes(bodyChanges)
-    .IgnoreUnchangedCounts(true)
-    .Build();
+Models.BatchChangeInventoryRequest body = new Models.BatchChangeInventoryRequest.Builder(
+    "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe"
+)
+.Changes(
+    new List<Models.InventoryChange>
+    {
+        new Models.InventoryChange.Builder()
+        .Type("PHYSICAL_COUNT")
+        .PhysicalCount(
+            new Models.InventoryPhysicalCount.Builder()
+            .ReferenceId("1536bfbf-efed-48bf-b17d-a197141b2a92")
+            .CatalogObjectId("W62UWFY35CWMYGVWK6TWJDNI")
+            .State("IN_STOCK")
+            .LocationId("C6W5YS5QM06F5")
+            .Quantity("53")
+            .TeamMemberId("LRK57NSQ5X7PUD05")
+            .OccurredAt("2016-11-16T22:25:24.878Z")
+            .Build())
+        .Build(),
+    })
+.IgnoreUnchangedCounts(true)
+.Build();
 
 try
 {
     BatchChangeInventoryResponse result = await inventoryApi.BatchChangeInventoryAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -328,28 +362,40 @@ BatchRetrieveInventoryChangesAsync(
 ## Example Usage
 
 ```csharp
-var bodyCatalogObjectIds = new IList<string>();
-bodyCatalogObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
-var bodyLocationIds = new IList<string>();
-bodyLocationIds.Add("C6W5YS5QM06F5");
-var bodyTypes = new IList<string>();
-bodyTypes.Add("PHYSICAL_COUNT");
-var bodyStates = new IList<string>();
-bodyStates.Add("IN_STOCK");
-var body = new BatchRetrieveInventoryChangesRequest.Builder()
-    .CatalogObjectIds(bodyCatalogObjectIds)
-    .LocationIds(bodyLocationIds)
-    .Types(bodyTypes)
-    .States(bodyStates)
-    .UpdatedAfter("2016-11-01T00:00:00Z")
-    .UpdatedBefore("2016-12-01T00:00:00Z")
-    .Build();
+Models.BatchRetrieveInventoryChangesRequest body = new Models.BatchRetrieveInventoryChangesRequest.Builder()
+.CatalogObjectIds(
+    new List<string>
+    {
+        "W62UWFY35CWMYGVWK6TWJDNI",
+    })
+.LocationIds(
+    new List<string>
+    {
+        "C6W5YS5QM06F5",
+    })
+.Types(
+    new List<string>
+    {
+        "PHYSICAL_COUNT",
+    })
+.States(
+    new List<string>
+    {
+        "IN_STOCK",
+    })
+.UpdatedAfter("2016-11-01T00:00:00Z")
+.UpdatedBefore("2016-12-01T00:00:00Z")
+.Build();
 
 try
 {
     BatchRetrieveInventoryChangesResponse result = await inventoryApi.BatchRetrieveInventoryChangesAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -385,21 +431,29 @@ BatchRetrieveInventoryCountsAsync(
 ## Example Usage
 
 ```csharp
-var bodyCatalogObjectIds = new IList<string>();
-bodyCatalogObjectIds.Add("W62UWFY35CWMYGVWK6TWJDNI");
-var bodyLocationIds = new IList<string>();
-bodyLocationIds.Add("59TNP9SA8VGDA");
-var body = new BatchRetrieveInventoryCountsRequest.Builder()
-    .CatalogObjectIds(bodyCatalogObjectIds)
-    .LocationIds(bodyLocationIds)
-    .UpdatedAfter("2016-11-16T00:00:00Z")
-    .Build();
+Models.BatchRetrieveInventoryCountsRequest body = new Models.BatchRetrieveInventoryCountsRequest.Builder()
+.CatalogObjectIds(
+    new List<string>
+    {
+        "W62UWFY35CWMYGVWK6TWJDNI",
+    })
+.LocationIds(
+    new List<string>
+    {
+        "59TNP9SA8VGDA",
+    })
+.UpdatedAfter("2016-11-16T00:00:00Z")
+.Build();
 
 try
 {
     BatchRetrieveInventoryCountsResponse result = await inventoryApi.BatchRetrieveInventoryCountsAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -407,7 +461,7 @@ catch (ApiException e){};
 
 **This endpoint is deprecated.**
 
-Deprecated version of [RetrieveInventoryPhysicalCount](../../doc/api/inventory.md#retrieve-inventory-physical-count) after the endpoint URL
+Deprecated version of [RetrieveInventoryPhysicalCount](api-endpoint:Inventory-RetrieveInventoryPhysicalCount) after the endpoint URL
 is updated to conform to the standard convention.
 
 ```csharp
@@ -419,7 +473,7 @@ DeprecatedRetrieveInventoryPhysicalCountAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `physicalCountId` | `string` | Template, Required | ID of the<br>[InventoryPhysicalCount](../../doc/models/inventory-physical-count.md) to retrieve. |
+| `physicalCountId` | `string` | Template, Required | ID of the<br>[InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve. |
 
 ## Response Type
 
@@ -429,12 +483,15 @@ DeprecatedRetrieveInventoryPhysicalCountAsync(
 
 ```csharp
 string physicalCountId = "physical_count_id2";
-
 try
 {
     RetrieveInventoryPhysicalCountResponse result = await inventoryApi.DeprecatedRetrieveInventoryPhysicalCountAsync(physicalCountId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -452,7 +509,7 @@ RetrieveInventoryPhysicalCountAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `physicalCountId` | `string` | Template, Required | ID of the<br>[InventoryPhysicalCount](../../doc/models/inventory-physical-count.md) to retrieve. |
+| `physicalCountId` | `string` | Template, Required | ID of the<br>[InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve. |
 
 ## Response Type
 
@@ -462,12 +519,15 @@ RetrieveInventoryPhysicalCountAsync(
 
 ```csharp
 string physicalCountId = "physical_count_id2";
-
 try
 {
     RetrieveInventoryPhysicalCountResponse result = await inventoryApi.RetrieveInventoryPhysicalCountAsync(physicalCountId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -485,7 +545,7 @@ RetrieveInventoryTransferAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `transferId` | `string` | Template, Required | ID of the [InventoryTransfer](../../doc/models/inventory-transfer.md) to retrieve. |
+| `transferId` | `string` | Template, Required | ID of the [InventoryTransfer](entity:InventoryTransfer) to retrieve. |
 
 ## Response Type
 
@@ -495,12 +555,15 @@ RetrieveInventoryTransferAsync(
 
 ```csharp
 string transferId = "transfer_id6";
-
 try
 {
     RetrieveInventoryTransferResponse result = await inventoryApi.RetrieveInventoryTransferAsync(transferId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -522,8 +585,8 @@ RetrieveInventoryCountAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `catalogObjectId` | `string` | Template, Required | ID of the [CatalogObject](../../doc/models/catalog-object.md) to retrieve. |
-| `locationIds` | `string` | Query, Optional | The [Location](../../doc/models/location.md) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
+| `catalogObjectId` | `string` | Template, Required | ID of the [CatalogObject](entity:CatalogObject) to retrieve. |
+| `locationIds` | `string` | Query, Optional | The [Location](entity:Location) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
 | `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information. |
 
 ## Response Type
@@ -534,12 +597,15 @@ RetrieveInventoryCountAsync(
 
 ```csharp
 string catalogObjectId = "catalog_object_id6";
-
 try
 {
     RetrieveInventoryCountResponse result = await inventoryApi.RetrieveInventoryCountAsync(catalogObjectId, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -548,10 +614,10 @@ catch (ApiException e){};
 **This endpoint is deprecated.**
 
 Returns a set of physical counts and inventory adjustments for the
-provided [CatalogObject](../../doc/models/catalog-object.md) at the requested
-[Location](../../doc/models/location.md)s.
+provided [CatalogObject](entity:CatalogObject) at the requested
+[Location](entity:Location)s.
 
-You can achieve the same result by calling [BatchRetrieveInventoryChanges](../../doc/api/inventory.md#batch-retrieve-inventory-changes)
+You can achieve the same result by calling [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges)
 and having the `catalog_object_ids` list contain a single element of the `CatalogObject` ID.
 
 Results are paginated and sorted in descending order according to their
@@ -572,8 +638,8 @@ RetrieveInventoryChangesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `catalogObjectId` | `string` | Template, Required | ID of the [CatalogObject](../../doc/models/catalog-object.md) to retrieve. |
-| `locationIds` | `string` | Query, Optional | The [Location](../../doc/models/location.md) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
+| `catalogObjectId` | `string` | Template, Required | ID of the [CatalogObject](entity:CatalogObject) to retrieve. |
+| `locationIds` | `string` | Query, Optional | The [Location](entity:Location) IDs to look up as a comma-separated<br>list. An empty list queries all locations. |
 | `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this to retrieve the next set of results for the original query.<br><br>See the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information. |
 
 ## Response Type
@@ -584,11 +650,14 @@ RetrieveInventoryChangesAsync(
 
 ```csharp
 string catalogObjectId = "catalog_object_id6";
-
 try
 {
     RetrieveInventoryChangesResponse result = await inventoryApi.RetrieveInventoryChangesAsync(catalogObjectId, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

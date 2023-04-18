@@ -49,7 +49,7 @@ namespace Square.Models
 
         /// <summary>
         /// The ID of the tender to refund.
-        /// A [`Transaction`]($m/Transaction) has one or more `tenders` (i.e., methods
+        /// A [`Transaction`](entity:Transaction) has one or more `tenders` (i.e., methods
         /// of payment) associated with it, and you refund each tender separately with
         /// the Connect API.
         /// </summary>

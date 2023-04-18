@@ -58,7 +58,11 @@ try
 {
     ListOrderCustomAttributeDefinitionsResponse result = await orderCustomAttributesApi.ListOrderCustomAttributeDefinitionsAsync(null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -88,22 +92,26 @@ CreateOrderCustomAttributeDefinitionAsync(
 ## Example Usage
 
 ```csharp
-var bodyCustomAttributeDefinition = new CustomAttributeDefinition.Builder()
+Models.CreateOrderCustomAttributeDefinitionRequest body = new Models.CreateOrderCustomAttributeDefinitionRequest.Builder(
+    new Models.CustomAttributeDefinition.Builder()
     .Key("cover-count")
     .Name("Cover count")
     .Description("The number of people seated at a table")
     .Visibility("VISIBILITY_READ_WRITE_VALUES")
-    .Build();
-var body = new CreateOrderCustomAttributeDefinitionRequest.Builder(
-        bodyCustomAttributeDefinition)
-    .IdempotencyKey("IDEMPOTENCY_KEY")
-    .Build();
+    .Build()
+)
+.IdempotencyKey("IDEMPOTENCY_KEY")
+.Build();
 
 try
 {
     CreateOrderCustomAttributeDefinitionResponse result = await orderCustomAttributesApi.CreateOrderCustomAttributeDefinitionAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -132,12 +140,15 @@ DeleteOrderCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-
 try
 {
     DeleteOrderCustomAttributeDefinitionResponse result = await orderCustomAttributesApi.DeleteOrderCustomAttributeDefinitionAsync(key);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -170,12 +181,15 @@ RetrieveOrderCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-
 try
 {
     RetrieveOrderCustomAttributeDefinitionResponse result = await orderCustomAttributesApi.RetrieveOrderCustomAttributeDefinitionAsync(key, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -206,21 +220,25 @@ UpdateOrderCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-var bodyCustomAttributeDefinition = new CustomAttributeDefinition.Builder()
+Models.UpdateOrderCustomAttributeDefinitionRequest body = new Models.UpdateOrderCustomAttributeDefinitionRequest.Builder(
+    new Models.CustomAttributeDefinition.Builder()
     .Key("cover-count")
     .Visibility("VISIBILITY_READ_ONLY")
     .Version(1)
-    .Build();
-var body = new UpdateOrderCustomAttributeDefinitionRequest.Builder(
-        bodyCustomAttributeDefinition)
-    .IdempotencyKey("IDEMPOTENCY_KEY")
-    .Build();
+    .Build()
+)
+.IdempotencyKey("IDEMPOTENCY_KEY")
+.Build();
 
 try
 {
     UpdateOrderCustomAttributeDefinitionResponse result = await orderCustomAttributesApi.UpdateOrderCustomAttributeDefinitionAsync(key, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -259,30 +277,32 @@ BulkDeleteOrderCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-var bodyValues = new Dictionary<string, BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute>();
-
-
-var bodyValues0 = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
-        "7BbXGEIWNldxAzrtGf9GPVZTwZ4F")
-    .Key("cover-count")
-    .Build();
-bodyValues.Add("cover-count",bodyValues0);
-
-var bodyValues1 = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
-        "7BbXGEIWNldxAzrtGf9GPVZTwZ4F")
-    .Key("table-number")
-    .Build();
-bodyValues.Add("table-number",bodyValues1);
-
-var body = new BulkDeleteOrderCustomAttributesRequest.Builder(
-        bodyValues)
-    .Build();
+Models.BulkDeleteOrderCustomAttributesRequest body = new Models.BulkDeleteOrderCustomAttributesRequest.Builder(
+    new Dictionary<string, Models.BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute>
+    {
+        ["cover-count"] = new Models.BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
+            "7BbXGEIWNldxAzrtGf9GPVZTwZ4F"
+        )
+        .Key("cover-count")
+        .Build(),
+        ["table-number"] = new Models.BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
+            "7BbXGEIWNldxAzrtGf9GPVZTwZ4F"
+        )
+        .Key("table-number")
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BulkDeleteOrderCustomAttributesResponse result = await orderCustomAttributesApi.BulkDeleteOrderCustomAttributesAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -321,34 +341,34 @@ BulkUpsertOrderCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-var bodyValues = new Dictionary<string, BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute>();
-
-
-var bodyValues0CustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var bodyValues0 = new BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
-        bodyValues0CustomAttribute,
-        "order_id2")
-    .Build();
-bodyValues.Add("key0",bodyValues0);
-
-var bodyValues1CustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var bodyValues1 = new BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
-        bodyValues1CustomAttribute,
-        "order_id1")
-    .Build();
-bodyValues.Add("key1",bodyValues1);
-
-var body = new BulkUpsertOrderCustomAttributesRequest.Builder(
-        bodyValues)
-    .Build();
+Models.BulkUpsertOrderCustomAttributesRequest body = new Models.BulkUpsertOrderCustomAttributesRequest.Builder(
+    new Dictionary<string, Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute>
+    {
+        ["key0"] = new Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
+            new Models.CustomAttribute.Builder()
+            .Build(),
+            "order_id2"
+        )
+        .Build(),
+        ["key1"] = new Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
+            new Models.CustomAttribute.Builder()
+            .Build(),
+            "order_id1"
+        )
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BulkUpsertOrderCustomAttributesResponse result = await orderCustomAttributesApi.BulkUpsertOrderCustomAttributesAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -376,11 +396,11 @@ ListOrderCustomAttributesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `orderId` | `string` | Template, Required | The ID of the target [order](../../doc/models/order.md). |
+| `orderId` | `string` | Template, Required | The ID of the target [order](entity:Order). |
 | `visibilityFilter` | [`string`](../../doc/models/visibility-filter.md) | Query, Optional | Requests that all of the custom attributes be returned, or only those that are read-only or read-write. |
 | `cursor` | `string` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](../../doc/models/custom-attribute-definition.md) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -391,12 +411,15 @@ ListOrderCustomAttributesAsync(
 ```csharp
 string orderId = "order_id6";
 bool? withDefinitions = false;
-
 try
 {
     ListOrderCustomAttributesResponse result = await orderCustomAttributesApi.ListOrderCustomAttributesAsync(orderId, null, null, null, withDefinitions);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -418,7 +441,7 @@ DeleteOrderCustomAttributeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `orderId` | `string` | Template, Required | The ID of the target [order](../../doc/models/order.md). |
+| `orderId` | `string` | Template, Required | The ID of the target [order](entity:Order). |
 | `customAttributeKey` | `string` | Template, Required | The key of the custom attribute to delete.  This key must match the key of an<br>existing custom attribute definition. |
 
 ## Response Type
@@ -430,12 +453,15 @@ DeleteOrderCustomAttributeAsync(
 ```csharp
 string orderId = "order_id6";
 string customAttributeKey = "custom_attribute_key2";
-
 try
 {
     DeleteOrderCustomAttributeResponse result = await orderCustomAttributesApi.DeleteOrderCustomAttributeAsync(orderId, customAttributeKey);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -462,10 +488,10 @@ RetrieveOrderCustomAttributeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `orderId` | `string` | Template, Required | The ID of the target [order](../../doc/models/order.md). |
+| `orderId` | `string` | Template, Required | The ID of the target [order](entity:Order). |
 | `customAttributeKey` | `string` | Template, Required | The key of the custom attribute to retrieve.  This key must match the key of an<br>existing custom attribute definition. |
 | `version` | `int?` | Query, Optional | To enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency)<br>control, include this optional field and specify the current version of the custom attribute. |
-| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](../../doc/models/custom-attribute-definition.md) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -477,12 +503,15 @@ RetrieveOrderCustomAttributeAsync(
 string orderId = "order_id6";
 string customAttributeKey = "custom_attribute_key2";
 bool? withDefinition = false;
-
 try
 {
     RetrieveOrderCustomAttributeResponse result = await orderCustomAttributesApi.RetrieveOrderCustomAttributeAsync(orderId, customAttributeKey, null, withDefinition);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -509,7 +538,7 @@ UpsertOrderCustomAttributeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `orderId` | `string` | Template, Required | The ID of the target [order](../../doc/models/order.md). |
+| `orderId` | `string` | Template, Required | The ID of the target [order](entity:Order). |
 | `customAttributeKey` | `string` | Template, Required | The key of the custom attribute to create or update.  This key must match the key<br>of an existing custom attribute definition. |
 | `body` | [`Models.UpsertOrderCustomAttributeRequest`](../../doc/models/upsert-order-custom-attribute-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
@@ -522,16 +551,20 @@ UpsertOrderCustomAttributeAsync(
 ```csharp
 string orderId = "order_id6";
 string customAttributeKey = "custom_attribute_key2";
-var bodyCustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var body = new UpsertOrderCustomAttributeRequest.Builder(
-        bodyCustomAttribute)
-    .Build();
+Models.UpsertOrderCustomAttributeRequest body = new Models.UpsertOrderCustomAttributeRequest.Builder(
+    new Models.CustomAttribute.Builder()
+    .Build()
+)
+.Build();
 
 try
 {
     UpsertOrderCustomAttributeResponse result = await orderCustomAttributesApi.UpsertOrderCustomAttributeAsync(orderId, customAttributeKey, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

@@ -54,12 +54,15 @@ ListTransactionsAsync(
 
 ```csharp
 string locationId = "location_id4";
-
 try
 {
     ListTransactionsResponse result = await transactionsApi.ListTransactionsAsync(locationId, null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -91,12 +94,15 @@ RetrieveTransactionAsync(
 ```csharp
 string locationId = "location_id4";
 string transactionId = "transaction_id8";
-
 try
 {
     RetrieveTransactionResponse result = await transactionsApi.RetrieveTransactionAsync(locationId, transactionId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -104,7 +110,7 @@ catch (ApiException e){};
 
 **This endpoint is deprecated.**
 
-Captures a transaction that was created with the [Charge]($e/Transactions/Charge)
+Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
 endpoint with a `delay_capture` value of `true`.
 
 See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
@@ -132,12 +138,15 @@ CaptureTransactionAsync(
 ```csharp
 string locationId = "location_id4";
 string transactionId = "transaction_id8";
-
 try
 {
     CaptureTransactionResponse result = await transactionsApi.CaptureTransactionAsync(locationId, transactionId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -145,7 +154,7 @@ catch (ApiException e){};
 
 **This endpoint is deprecated.**
 
-Cancels a transaction that was created with the [Charge]($e/Transactions/Charge)
+Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
 endpoint with a `delay_capture` value of `true`.
 
 See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
@@ -173,11 +182,14 @@ VoidTransactionAsync(
 ```csharp
 string locationId = "location_id4";
 string transactionId = "transaction_id8";
-
 try
 {
     VoidTransactionResponse result = await transactionsApi.VoidTransactionAsync(locationId, transactionId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

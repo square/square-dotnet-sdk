@@ -36,7 +36,11 @@ try
 {
     ListLocationsResponse result = await locationsApi.ListLocationsAsync();
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -68,26 +72,30 @@ CreateLocationAsync(
 ## Example Usage
 
 ```csharp
-var bodyLocationAddress = new Address.Builder()
-    .AddressLine1("1234 Peachtree St. NE")
-    .Locality("Atlanta")
-    .AdministrativeDistrictLevel1("GA")
-    .PostalCode("30309")
-    .Build();
-var bodyLocation = new Location.Builder()
+Models.CreateLocationRequest body = new Models.CreateLocationRequest.Builder()
+.Location(
+    new Models.Location.Builder()
     .Name("Midtown")
-    .Address(bodyLocationAddress)
+    .Address(
+        new Models.Address.Builder()
+        .AddressLine1("1234 Peachtree St. NE")
+        .Locality("Atlanta")
+        .AdministrativeDistrictLevel1("GA")
+        .PostalCode("30309")
+        .Build())
     .Description("Midtown Atlanta store")
-    .Build();
-var body = new CreateLocationRequest.Builder()
-    .Location(bodyLocation)
-    .Build();
+    .Build())
+.Build();
 
 try
 {
     CreateLocationResponse result = await locationsApi.CreateLocationAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -115,12 +123,15 @@ RetrieveLocationAsync(
 
 ```csharp
 string locationId = "location_id4";
-
 try
 {
     RetrieveLocationResponse result = await locationsApi.RetrieveLocationAsync(locationId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -149,44 +160,43 @@ UpdateLocationAsync(
 
 ```csharp
 string locationId = "location_id4";
-var bodyLocationBusinessHoursPeriods = new List<BusinessHoursPeriod>();
-
-var bodyLocationBusinessHoursPeriods0 = new BusinessHoursPeriod.Builder()
-    .DayOfWeek("FRI")
-    .StartLocalTime("07:00")
-    .EndLocalTime("18:00")
-    .Build();
-bodyLocationBusinessHoursPeriods.Add(bodyLocationBusinessHoursPeriods0);
-
-var bodyLocationBusinessHoursPeriods1 = new BusinessHoursPeriod.Builder()
-    .DayOfWeek("SAT")
-    .StartLocalTime("07:00")
-    .EndLocalTime("18:00")
-    .Build();
-bodyLocationBusinessHoursPeriods.Add(bodyLocationBusinessHoursPeriods1);
-
-var bodyLocationBusinessHoursPeriods2 = new BusinessHoursPeriod.Builder()
-    .DayOfWeek("SUN")
-    .StartLocalTime("09:00")
-    .EndLocalTime("15:00")
-    .Build();
-bodyLocationBusinessHoursPeriods.Add(bodyLocationBusinessHoursPeriods2);
-
-var bodyLocationBusinessHours = new BusinessHours.Builder()
-    .Periods(bodyLocationBusinessHoursPeriods)
-    .Build();
-var bodyLocation = new Location.Builder()
-    .BusinessHours(bodyLocationBusinessHours)
+Models.UpdateLocationRequest body = new Models.UpdateLocationRequest.Builder()
+.Location(
+    new Models.Location.Builder()
+    .BusinessHours(
+        new Models.BusinessHours.Builder()
+        .Periods(
+            new List<Models.BusinessHoursPeriod>
+            {
+                new Models.BusinessHoursPeriod.Builder()
+                .DayOfWeek("FRI")
+                .StartLocalTime("07:00")
+                .EndLocalTime("18:00")
+                .Build(),
+                new Models.BusinessHoursPeriod.Builder()
+                .DayOfWeek("SAT")
+                .StartLocalTime("07:00")
+                .EndLocalTime("18:00")
+                .Build(),
+                new Models.BusinessHoursPeriod.Builder()
+                .DayOfWeek("SUN")
+                .StartLocalTime("09:00")
+                .EndLocalTime("15:00")
+                .Build(),
+            })
+        .Build())
     .Description("Midtown Atlanta store - Open weekends")
-    .Build();
-var body = new UpdateLocationRequest.Builder()
-    .Location(bodyLocation)
-    .Build();
+    .Build())
+.Build();
 
 try
 {
     UpdateLocationResponse result = await locationsApi.UpdateLocationAsync(locationId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

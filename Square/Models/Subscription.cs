@@ -155,13 +155,13 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// The ID of the subscribed-to [subscription plan]($m/CatalogSubscriptionPlan).
+        /// The ID of the subscribed-to [subscription plan](entity:CatalogSubscriptionPlan).
         /// </summary>
         [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
 
         /// <summary>
-        /// The ID of the subscribing [customer]($m/Customer) profile.
+        /// The ID of the subscribing [customer](entity:Customer) profile.
         /// </summary>
         [JsonProperty("customer_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CustomerId { get; }
@@ -210,7 +210,7 @@ namespace Square.Models
         public string TaxPercentage { get; }
 
         /// <summary>
-        /// The IDs of the [invoices]($m/Invoice) created for the
+        /// The IDs of the [invoices](entity:Invoice) created for the
         /// subscription, listed in order when the invoices were created
         /// (newest invoices appear first).
         /// </summary>
@@ -243,7 +243,7 @@ namespace Square.Models
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The ID of the [subscriber's]($m/Customer) [card]($m/Card)
+        /// The ID of the [subscriber's](entity:Customer) [card](entity:Card)
         /// used to charge for the subscription.
         /// </summary>
         [JsonProperty("card_id")]

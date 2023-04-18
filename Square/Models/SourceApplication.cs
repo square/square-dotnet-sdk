@@ -68,7 +68,7 @@ namespace Square.Models
 
         /// <summary>
         /// __Read only__ The Square-assigned ID of the application. This field is used only if the
-        /// [product]($m/Product) type is `EXTERNAL_API`.
+        /// [product](entity:Product) type is `EXTERNAL_API`.
         /// </summary>
         [JsonProperty("application_id")]
         public string ApplicationId { get; }

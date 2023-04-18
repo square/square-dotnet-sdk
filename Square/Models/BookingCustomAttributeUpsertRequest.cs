@@ -55,7 +55,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the target [booking]($m/Booking).
+        /// The ID of the target [booking](entity:Booking).
         /// </summary>
         [JsonProperty("booking_id")]
         public string BookingId { get; }

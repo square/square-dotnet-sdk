@@ -108,29 +108,29 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A unique Square-generated ID for the [Vendor]($m/Vendor).
-        /// This field is required when attempting to update a [Vendor]($m/Vendor).
+        /// A unique Square-generated ID for the [Vendor](entity:Vendor).
+        /// This field is required when attempting to update a [Vendor](entity:Vendor).
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
         /// An RFC 3339-formatted timestamp that indicates when the
-        /// [Vendor]($m/Vendor) was created.
+        /// [Vendor](entity:Vendor) was created.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
         /// An RFC 3339-formatted timestamp that indicates when the
-        /// [Vendor]($m/Vendor) was last updated.
+        /// [Vendor](entity:Vendor) was last updated.
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
 
         /// <summary>
-        /// The name of the [Vendor]($m/Vendor).
-        /// This field is required when attempting to create or update a [Vendor]($m/Vendor).
+        /// The name of the [Vendor](entity:Vendor).
+        /// This field is required when attempting to create or update a [Vendor](entity:Vendor).
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }
@@ -143,25 +143,25 @@ namespace Square.Models
         public Models.Address Address { get; }
 
         /// <summary>
-        /// The contacts of the [Vendor]($m/Vendor).
+        /// The contacts of the [Vendor](entity:Vendor).
         /// </summary>
         [JsonProperty("contacts")]
         public IList<Models.VendorContact> Contacts { get; }
 
         /// <summary>
-        /// The account number of the [Vendor]($m/Vendor).
+        /// The account number of the [Vendor](entity:Vendor).
         /// </summary>
         [JsonProperty("account_number")]
         public string AccountNumber { get; }
 
         /// <summary>
-        /// A note detailing information about the [Vendor]($m/Vendor).
+        /// A note detailing information about the [Vendor](entity:Vendor).
         /// </summary>
         [JsonProperty("note")]
         public string Note { get; }
 
         /// <summary>
-        /// The version of the [Vendor]($m/Vendor).
+        /// The version of the [Vendor](entity:Vendor).
         /// </summary>
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }

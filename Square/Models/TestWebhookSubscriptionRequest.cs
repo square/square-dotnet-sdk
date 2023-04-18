@@ -45,8 +45,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The event type that will be used to test the [Subscription]($m/WebhookSubscription). The event type must be
-        /// contained in the list of event types in the [Subscription]($m/WebhookSubscription).
+        /// The event type that will be used to test the [Subscription](entity:WebhookSubscription). The event type must be
+        /// contained in the list of event types in the [Subscription](entity:WebhookSubscription).
         /// </summary>
         [JsonProperty("event_type")]
         public string EventType { get; }

@@ -34,6 +34,8 @@ namespace Square.Models
         /// <param name="calculationPhase">calculation_phase.</param>
         /// <param name="taxable">taxable.</param>
         /// <param name="appliedTaxes">applied_taxes.</param>
+        /// <param name="treatmentType">treatment_type.</param>
+        /// <param name="scope">scope.</param>
         public OrderReturnServiceCharge(
             string uid = null,
             string sourceServiceChargeUid = null,
@@ -47,7 +49,9 @@ namespace Square.Models
             Models.Money totalTaxMoney = null,
             string calculationPhase = null,
             bool? taxable = null,
-            IList<Models.OrderLineItemAppliedTax> appliedTaxes = null)
+            IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
+            string treatmentType = null,
+            string scope = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -114,6 +118,8 @@ namespace Square.Models
                 this.AppliedTaxes = appliedTaxes;
             }
 
+            this.TreatmentType = treatmentType;
+            this.Scope = scope;
         }
         internal OrderReturnServiceCharge(Dictionary<string, bool> shouldSerialize,
             string uid = null,
@@ -128,7 +134,9 @@ namespace Square.Models
             Models.Money totalTaxMoney = null,
             string calculationPhase = null,
             bool? taxable = null,
-            IList<Models.OrderLineItemAppliedTax> appliedTaxes = null)
+            IList<Models.OrderLineItemAppliedTax> appliedTaxes = null,
+            string treatmentType = null,
+            string scope = null)
         {
             this.shouldSerialize = shouldSerialize;
             Uid = uid;
@@ -144,6 +152,8 @@ namespace Square.Models
             CalculationPhase = calculationPhase;
             Taxable = taxable;
             AppliedTaxes = appliedTaxes;
+            TreatmentType = treatmentType;
+            Scope = scope;
         }
 
         /// <summary>
@@ -167,7 +177,7 @@ namespace Square.Models
         public string Name { get; }
 
         /// <summary>
-        /// The catalog object ID of the associated [OrderServiceCharge]($m/OrderServiceCharge).
+        /// The catalog object ID of the associated [OrderServiceCharge](entity:OrderServiceCharge).
         /// </summary>
         [JsonProperty("catalog_object_id")]
         public string CatalogObjectId { get; }
@@ -255,6 +265,20 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("applied_taxes")]
         public IList<Models.OrderLineItemAppliedTax> AppliedTaxes { get; }
+
+        /// <summary>
+        /// Indicates whether the service charge will be treated as a value-holding line item or
+        /// apportioned toward a line item.
+        /// </summary>
+        [JsonProperty("treatment_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string TreatmentType { get; }
+
+        /// <summary>
+        /// Indicates whether this is a line-item or order-level apportioned
+        /// service charge.
+        /// </summary>
+        [JsonProperty("scope", NullValueHandling = NullValueHandling.Ignore)]
+        public string Scope { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -364,16 +388,20 @@ namespace Square.Models
                 ((this.TotalTaxMoney == null && other.TotalTaxMoney == null) || (this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
                 ((this.CalculationPhase == null && other.CalculationPhase == null) || (this.CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
                 ((this.Taxable == null && other.Taxable == null) || (this.Taxable?.Equals(other.Taxable) == true)) &&
-                ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true));
+                ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
+                ((this.TreatmentType == null && other.TreatmentType == null) || (this.TreatmentType?.Equals(other.TreatmentType) == true)) &&
+                ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -704882254;
+            int hashCode = 802596311;
             hashCode = HashCode.Combine(this.Uid, this.SourceServiceChargeUid, this.Name, this.CatalogObjectId, this.CatalogVersion, this.Percentage, this.AmountMoney);
 
-            hashCode = HashCode.Combine(hashCode, this.AppliedMoney, this.TotalMoney, this.TotalTaxMoney, this.CalculationPhase, this.Taxable, this.AppliedTaxes);
+            hashCode = HashCode.Combine(hashCode, this.AppliedMoney, this.TotalMoney, this.TotalTaxMoney, this.CalculationPhase, this.Taxable, this.AppliedTaxes, this.TreatmentType);
+
+            hashCode = HashCode.Combine(hashCode, this.Scope);
 
             return hashCode;
         }
@@ -396,6 +424,8 @@ namespace Square.Models
             toStringOutput.Add($"this.CalculationPhase = {(this.CalculationPhase == null ? "null" : this.CalculationPhase.ToString())}");
             toStringOutput.Add($"this.Taxable = {(this.Taxable == null ? "null" : this.Taxable.ToString())}");
             toStringOutput.Add($"this.AppliedTaxes = {(this.AppliedTaxes == null ? "null" : $"[{string.Join(", ", this.AppliedTaxes)} ]")}");
+            toStringOutput.Add($"this.TreatmentType = {(this.TreatmentType == null ? "null" : this.TreatmentType.ToString())}");
+            toStringOutput.Add($"this.Scope = {(this.Scope == null ? "null" : this.Scope.ToString())}");
         }
 
         /// <summary>
@@ -417,7 +447,9 @@ namespace Square.Models
                 .TotalTaxMoney(this.TotalTaxMoney)
                 .CalculationPhase(this.CalculationPhase)
                 .Taxable(this.Taxable)
-                .AppliedTaxes(this.AppliedTaxes);
+                .AppliedTaxes(this.AppliedTaxes)
+                .TreatmentType(this.TreatmentType)
+                .Scope(this.Scope);
             return builder;
         }
 
@@ -451,6 +483,8 @@ namespace Square.Models
             private string calculationPhase;
             private bool? taxable;
             private IList<Models.OrderLineItemAppliedTax> appliedTaxes;
+            private string treatmentType;
+            private string scope;
 
              /// <summary>
              /// Uid.
@@ -603,6 +637,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TreatmentType.
+             /// </summary>
+             /// <param name="treatmentType"> treatmentType. </param>
+             /// <returns> Builder. </returns>
+            public Builder TreatmentType(string treatmentType)
+            {
+                this.treatmentType = treatmentType;
+                return this;
+            }
+
+             /// <summary>
+             /// Scope.
+             /// </summary>
+             /// <param name="scope"> scope. </param>
+             /// <returns> Builder. </returns>
+            public Builder Scope(string scope)
+            {
+                this.scope = scope;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -687,7 +743,9 @@ namespace Square.Models
                     this.totalTaxMoney,
                     this.calculationPhase,
                     this.taxable,
-                    this.appliedTaxes);
+                    this.appliedTaxes,
+                    this.treatmentType,
+                    this.scope);
             }
         }
     }

@@ -55,7 +55,11 @@ try
 {
     ListCustomerCustomAttributeDefinitionsResponse result = await customerCustomAttributesApi.ListCustomerCustomAttributeDefinitionsAsync(null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -91,21 +95,25 @@ CreateCustomerCustomAttributeDefinitionAsync(
 ## Example Usage
 
 ```csharp
-var bodyCustomAttributeDefinition = new CustomAttributeDefinition.Builder()
+Models.CreateCustomerCustomAttributeDefinitionRequest body = new Models.CreateCustomerCustomAttributeDefinitionRequest.Builder(
+    new Models.CustomAttributeDefinition.Builder()
     .Key("favoritemovie")
     .Name("Favorite Movie")
     .Description("The favorite movie of the customer.")
     .Visibility("VISIBILITY_HIDDEN")
-    .Build();
-var body = new CreateCustomerCustomAttributeDefinitionRequest.Builder(
-        bodyCustomAttributeDefinition)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     CreateCustomerCustomAttributeDefinitionResponse result = await customerCustomAttributesApi.CreateCustomerCustomAttributeDefinitionAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -137,12 +145,15 @@ DeleteCustomerCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-
 try
 {
     DeleteCustomerCustomAttributeDefinitionResponse result = await customerCustomAttributesApi.DeleteCustomerCustomAttributeDefinitionAsync(key);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -175,12 +186,15 @@ RetrieveCustomerCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-
 try
 {
     RetrieveCustomerCustomAttributeDefinitionResponse result = await customerCustomAttributesApi.RetrieveCustomerCustomAttributeDefinitionAsync(key, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -215,19 +229,23 @@ UpdateCustomerCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-var bodyCustomAttributeDefinition = new CustomAttributeDefinition.Builder()
+Models.UpdateCustomerCustomAttributeDefinitionRequest body = new Models.UpdateCustomerCustomAttributeDefinitionRequest.Builder(
+    new Models.CustomAttributeDefinition.Builder()
     .Description("Update the description as desired.")
     .Visibility("VISIBILITY_READ_ONLY")
-    .Build();
-var body = new UpdateCustomerCustomAttributeDefinitionRequest.Builder(
-        bodyCustomAttributeDefinition)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     UpdateCustomerCustomAttributeDefinitionResponse result = await customerCustomAttributesApi.UpdateCustomerCustomAttributeDefinitionAsync(key, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -266,34 +284,34 @@ BulkUpsertCustomerCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-var bodyValues = new Dictionary<string, BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest>();
-
-
-var bodyValues0CustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var bodyValues0 = new BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
-        "customer_id2",
-        bodyValues0CustomAttribute)
-    .Build();
-bodyValues.Add("key0",bodyValues0);
-
-var bodyValues1CustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var bodyValues1 = new BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
-        "customer_id3",
-        bodyValues1CustomAttribute)
-    .Build();
-bodyValues.Add("key1",bodyValues1);
-
-var body = new BulkUpsertCustomerCustomAttributesRequest.Builder(
-        bodyValues)
-    .Build();
+Models.BulkUpsertCustomerCustomAttributesRequest body = new Models.BulkUpsertCustomerCustomAttributesRequest.Builder(
+    new Dictionary<string, Models.BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest>
+    {
+        ["key0"] = new Models.BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
+            "customer_id2",
+            new Models.CustomAttribute.Builder()
+            .Build()
+        )
+        .Build(),
+        ["key1"] = new Models.BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
+            "customer_id3",
+            new Models.CustomAttribute.Builder()
+            .Build()
+        )
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BulkUpsertCustomerCustomAttributesResponse result = await customerCustomAttributesApi.BulkUpsertCustomerCustomAttributesAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -320,10 +338,10 @@ ListCustomerCustomAttributesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `customerId` | `string` | Template, Required | The ID of the target [customer profile](../../doc/models/customer.md). |
+| `customerId` | `string` | Template, Required | The ID of the target [customer profile](entity:Customer). |
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `cursor` | `string` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request. For more<br>information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](../../doc/models/custom-attribute-definition.md) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -334,12 +352,15 @@ ListCustomerCustomAttributesAsync(
 ```csharp
 string customerId = "customer_id8";
 bool? withDefinitions = false;
-
 try
 {
     ListCustomerCustomAttributesResponse result = await customerCustomAttributesApi.ListCustomerCustomAttributesAsync(customerId, null, null, withDefinitions);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -361,7 +382,7 @@ DeleteCustomerCustomAttributeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `customerId` | `string` | Template, Required | The ID of the target [customer profile](../../doc/models/customer.md). |
+| `customerId` | `string` | Template, Required | The ID of the target [customer profile](entity:Customer). |
 | `key` | `string` | Template, Required | The key of the custom attribute to delete. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
 
 ## Response Type
@@ -373,12 +394,15 @@ DeleteCustomerCustomAttributeAsync(
 ```csharp
 string customerId = "customer_id8";
 string key = "key0";
-
 try
 {
     DeleteCustomerCustomAttributeResponse result = await customerCustomAttributesApi.DeleteCustomerCustomAttributeAsync(customerId, key);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -405,9 +429,9 @@ RetrieveCustomerCustomAttributeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `customerId` | `string` | Template, Required | The ID of the target [customer profile](../../doc/models/customer.md). |
+| `customerId` | `string` | Template, Required | The ID of the target [customer profile](entity:Customer). |
 | `key` | `string` | Template, Required | The key of the custom attribute to retrieve. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
-| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](../../doc/models/custom-attribute-definition.md) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
+| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 | `version` | `int?` | Query, Optional | The current version of the custom attribute, which is used for strongly consistent reads to<br>guarantee that you receive the most up-to-date data. When included in the request, Square<br>returns the specified version or a higher version if one exists. If the specified version is<br>higher than the current version, Square returns a `BAD_REQUEST` error. |
 
 ## Response Type
@@ -420,12 +444,15 @@ RetrieveCustomerCustomAttributeAsync(
 string customerId = "customer_id8";
 string key = "key0";
 bool? withDefinition = false;
-
 try
 {
     RetrieveCustomerCustomAttributeResponse result = await customerCustomAttributesApi.RetrieveCustomerCustomAttributeAsync(customerId, key, withDefinition, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -452,7 +479,7 @@ UpsertCustomerCustomAttributeAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `customerId` | `string` | Template, Required | The ID of the target [customer profile](../../doc/models/customer.md). |
+| `customerId` | `string` | Template, Required | The ID of the target [customer profile](entity:Customer). |
 | `key` | `string` | Template, Required | The key of the custom attribute to create or update. This key must match the `key` of a<br>custom attribute definition in the Square seller account. If the requesting application is not<br>the definition owner, you must use the qualified key. |
 | `body` | [`Models.UpsertCustomerCustomAttributeRequest`](../../doc/models/upsert-customer-custom-attribute-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
@@ -465,16 +492,20 @@ UpsertCustomerCustomAttributeAsync(
 ```csharp
 string customerId = "customer_id8";
 string key = "key0";
-var bodyCustomAttribute = new CustomAttribute.Builder()
-    .Build();
-var body = new UpsertCustomerCustomAttributeRequest.Builder(
-        bodyCustomAttribute)
-    .Build();
+Models.UpsertCustomerCustomAttributeRequest body = new Models.UpsertCustomerCustomAttributeRequest.Builder(
+    new Models.CustomAttribute.Builder()
+    .Build()
+)
+.Build();
 
 try
 {
     UpsertCustomerCustomAttributeResponse result = await customerCustomAttributesApi.UpsertCustomerCustomAttributeAsync(customerId, key, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

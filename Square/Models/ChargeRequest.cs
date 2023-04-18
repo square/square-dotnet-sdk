@@ -209,8 +209,8 @@ namespace Square.Models
         /// <summary>
         /// If `true`, the request will only perform an Auth on the provided
         /// card. You can then later perform either a Capture (with the
-        /// [CaptureTransaction]($e/Transactions/CaptureTransaction) endpoint) or a Void
-        /// (with the [VoidTransaction]($e/Transactions/VoidTransaction) endpoint).
+        /// [CaptureTransaction](api-endpoint:Transactions-CaptureTransaction) endpoint) or a Void
+        /// (with the [VoidTransaction](api-endpoint:Transactions-VoidTransaction) endpoint).
         /// Default value: `false`
         /// </summary>
         [JsonProperty("delay_capture")]

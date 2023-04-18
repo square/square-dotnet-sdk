@@ -122,21 +122,23 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The timestamp for the beginning of the requested reporting period, in RFC 3339 format.
+        /// Indicates the start of the time range to retrieve each PaymentRefund` for, in RFC 3339
+        /// format.  The range is determined using the `created_at` field for each `PaymentRefund`.
         /// Default: The current time minus one year.
         /// </summary>
         [JsonProperty("begin_time")]
         public string BeginTime { get; }
 
         /// <summary>
-        /// The timestamp for the end of the requested reporting period, in RFC 3339 format.
+        /// Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339
+        /// format.  The range is determined using the `created_at` field for each `PaymentRefund`.
         /// Default: The current time.
         /// </summary>
         [JsonProperty("end_time")]
         public string EndTime { get; }
 
         /// <summary>
-        /// The order in which results are listed:
+        /// The order in which results are listed by `PaymentRefund.created_at`:
         /// - `ASC` - Oldest to newest.
         /// - `DESC` - Newest to oldest (default).
         /// </summary>
@@ -146,7 +148,7 @@ namespace Square.Models
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
         /// Provide this cursor to retrieve the next set of results for the original query.
-        /// For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination).
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).
         /// </summary>
         [JsonProperty("cursor")]
         public string Cursor { get; }
@@ -160,7 +162,7 @@ namespace Square.Models
 
         /// <summary>
         /// If provided, only refunds with the given status are returned.
-        /// For a list of refund status values, see [PaymentRefund]($m/PaymentRefund).
+        /// For a list of refund status values, see [PaymentRefund](entity:PaymentRefund).
         /// Default: If omitted, refunds are returned regardless of their status.
         /// </summary>
         [JsonProperty("status")]

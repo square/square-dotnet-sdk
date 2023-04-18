@@ -55,7 +55,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the target [customer profile]($m/Customer).
+        /// The ID of the target [customer profile](entity:Customer).
         /// </summary>
         [JsonProperty("customer_id")]
         public string CustomerId { get; }

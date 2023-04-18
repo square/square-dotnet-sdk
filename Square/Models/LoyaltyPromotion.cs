@@ -171,7 +171,7 @@ namespace Square.Models
         public string UpdatedAt { get; }
 
         /// <summary>
-        /// The ID of the [loyalty program]($m/LoyaltyProgram) associated with the promotion.
+        /// The ID of the [loyalty program](entity:LoyaltyProgram) associated with the promotion.
         /// </summary>
         [JsonProperty("loyalty_program_id", NullValueHandling = NullValueHandling.Ignore)]
         public string LoyaltyProgramId { get; }
@@ -188,7 +188,7 @@ namespace Square.Models
         public Models.Money MinimumSpendAmountMoney { get; }
 
         /// <summary>
-        /// The IDs of any qualifying `ITEM_VARIATION` [catalog objects]($m/CatalogObject). If specified,
+        /// The IDs of any qualifying `ITEM_VARIATION` [catalog objects](entity:CatalogObject). If specified,
         /// the purchase must include at least one of these items to qualify for the promotion.
         /// This option is valid only if the base loyalty program uses a `VISIT` or `SPEND` accrual rule.
         /// With `SPEND` accrual rules, make sure that qualifying promotional items are not excluded.
@@ -198,7 +198,7 @@ namespace Square.Models
         public IList<string> QualifyingItemVariationIds { get; }
 
         /// <summary>
-        /// The IDs of any qualifying `CATEGORY` [catalog objects]($m/CatalogObject). If specified,
+        /// The IDs of any qualifying `CATEGORY` [catalog objects](entity:CatalogObject). If specified,
         /// the purchase must include at least one item from one of these categories to qualify for the promotion.
         /// This option is valid only if the base loyalty program uses a `VISIT` or `SPEND` accrual rule.
         /// With `SPEND` accrual rules, make sure that qualifying promotional items are not excluded.

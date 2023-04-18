@@ -329,11 +329,11 @@ namespace Square.Apis
         /// visible to the requesting application, including those that are owned by other applications.
         /// and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        /// <param name="orderId">Required parameter: The ID of the target [order]($m/Order)..</param>
+        /// <param name="orderId">Required parameter: The ID of the target [order](entity:Order)..</param>
         /// <param name="visibilityFilter">Optional parameter: Requests that all of the custom attributes be returned, or only those that are read-only or read-write..</param>
         /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint.  Provide this cursor to retrieve the next page of results for your original request.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. This limit is advisory.  The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.  The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="withDefinitions">Optional parameter: Indicates whether to return the [custom attribute definition]($m/CustomAttributeDefinition) in the `definition` field of each custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,  information about the data type, or other definition details. The default value is `false`..</param>
+        /// <param name="withDefinitions">Optional parameter: Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,  information about the data type, or other definition details. The default value is `false`..</param>
         /// <returns>Returns the Models.ListOrderCustomAttributesResponse response from the API call.</returns>
         public Models.ListOrderCustomAttributesResponse ListOrderCustomAttributes(
                 string orderId,
@@ -351,11 +351,11 @@ namespace Square.Apis
         /// visible to the requesting application, including those that are owned by other applications.
         /// and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        /// <param name="orderId">Required parameter: The ID of the target [order]($m/Order)..</param>
+        /// <param name="orderId">Required parameter: The ID of the target [order](entity:Order)..</param>
         /// <param name="visibilityFilter">Optional parameter: Requests that all of the custom attributes be returned, or only those that are read-only or read-write..</param>
         /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint.  Provide this cursor to retrieve the next page of results for your original request.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. This limit is advisory.  The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.  The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
-        /// <param name="withDefinitions">Optional parameter: Indicates whether to return the [custom attribute definition]($m/CustomAttributeDefinition) in the `definition` field of each custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,  information about the data type, or other definition details. The default value is `false`..</param>
+        /// <param name="withDefinitions">Optional parameter: Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,  information about the data type, or other definition details. The default value is `false`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListOrderCustomAttributesResponse response from the API call.</returns>
         public async Task<Models.ListOrderCustomAttributesResponse> ListOrderCustomAttributesAsync(
@@ -386,7 +386,7 @@ namespace Square.Apis
         /// `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
         /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        /// <param name="orderId">Required parameter: The ID of the target [order]($m/Order)..</param>
+        /// <param name="orderId">Required parameter: The ID of the target [order](entity:Order)..</param>
         /// <param name="customAttributeKey">Required parameter: The key of the custom attribute to delete.  This key must match the key of an existing custom attribute definition..</param>
         /// <returns>Returns the Models.DeleteOrderCustomAttributeResponse response from the API call.</returns>
         public Models.DeleteOrderCustomAttributeResponse DeleteOrderCustomAttribute(
@@ -400,7 +400,7 @@ namespace Square.Apis
         /// `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
         /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        /// <param name="orderId">Required parameter: The ID of the target [order]($m/Order)..</param>
+        /// <param name="orderId">Required parameter: The ID of the target [order](entity:Order)..</param>
         /// <param name="customAttributeKey">Required parameter: The key of the custom attribute to delete.  This key must match the key of an existing custom attribute definition..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.DeleteOrderCustomAttributeResponse response from the API call.</returns>
@@ -428,10 +428,10 @@ namespace Square.Apis
         /// `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
         /// also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        /// <param name="orderId">Required parameter: The ID of the target [order]($m/Order)..</param>
+        /// <param name="orderId">Required parameter: The ID of the target [order](entity:Order)..</param>
         /// <param name="customAttributeKey">Required parameter: The key of the custom attribute to retrieve.  This key must match the key of an existing custom attribute definition..</param>
         /// <param name="version">Optional parameter: To enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control, include this optional field and specify the current version of the custom attribute..</param>
-        /// <param name="withDefinition">Optional parameter: Indicates whether to return the [custom attribute definition]($m/CustomAttributeDefinition) in the `definition` field of each  custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,  information about the data type, or other definition details. The default value is `false`..</param>
+        /// <param name="withDefinition">Optional parameter: Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each  custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,  information about the data type, or other definition details. The default value is `false`..</param>
         /// <returns>Returns the Models.RetrieveOrderCustomAttributeResponse response from the API call.</returns>
         public Models.RetrieveOrderCustomAttributeResponse RetrieveOrderCustomAttribute(
                 string orderId,
@@ -448,10 +448,10 @@ namespace Square.Apis
         /// `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
         /// also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        /// <param name="orderId">Required parameter: The ID of the target [order]($m/Order)..</param>
+        /// <param name="orderId">Required parameter: The ID of the target [order](entity:Order)..</param>
         /// <param name="customAttributeKey">Required parameter: The key of the custom attribute to retrieve.  This key must match the key of an existing custom attribute definition..</param>
         /// <param name="version">Optional parameter: To enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control, include this optional field and specify the current version of the custom attribute..</param>
-        /// <param name="withDefinition">Optional parameter: Indicates whether to return the [custom attribute definition]($m/CustomAttributeDefinition) in the `definition` field of each  custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,  information about the data type, or other definition details. The default value is `false`..</param>
+        /// <param name="withDefinition">Optional parameter: Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each  custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,  information about the data type, or other definition details. The default value is `false`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveOrderCustomAttributeResponse response from the API call.</returns>
         public async Task<Models.RetrieveOrderCustomAttributeResponse> RetrieveOrderCustomAttributeAsync(
@@ -483,7 +483,7 @@ namespace Square.Apis
         /// must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
         /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        /// <param name="orderId">Required parameter: The ID of the target [order]($m/Order)..</param>
+        /// <param name="orderId">Required parameter: The ID of the target [order](entity:Order)..</param>
         /// <param name="customAttributeKey">Required parameter: The key of the custom attribute to create or update.  This key must match the key  of an existing custom attribute definition..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UpsertOrderCustomAttributeResponse response from the API call.</returns>
@@ -502,7 +502,7 @@ namespace Square.Apis
         /// must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
         /// (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
         /// </summary>
-        /// <param name="orderId">Required parameter: The ID of the target [order]($m/Order)..</param>
+        /// <param name="orderId">Required parameter: The ID of the target [order](entity:Order)..</param>
         /// <param name="customAttributeKey">Required parameter: The key of the custom attribute to create or update.  This key must match the key  of an existing custom attribute definition..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

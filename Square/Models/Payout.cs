@@ -149,7 +149,7 @@ namespace Square.Models
 
         /// <summary>
         /// The version number, which is incremented each time an update is made to this payout record.
-        /// The version number helps developers receive event notifications or feeds out of order.
+        /// The version number helps developers receive event notifications or feeds out of order.
         /// </summary>
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
         public int? Version { get; }

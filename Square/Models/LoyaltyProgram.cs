@@ -128,7 +128,7 @@ namespace Square.Models
         public Models.LoyaltyProgramTerminology Terminology { get; }
 
         /// <summary>
-        /// The [locations]($m/Location) at which the program is active.
+        /// The [locations](entity:Location) at which the program is active.
         /// </summary>
         [JsonProperty("location_ids")]
         public IList<string> LocationIds { get; }
@@ -147,8 +147,8 @@ namespace Square.Models
 
         /// <summary>
         /// Defines how buyers can earn loyalty points from the base loyalty program.
-        /// To check for associated [loyalty promotions]($m/LoyaltyPromotion) that enable
-        /// buyers to earn extra points, call [ListLoyaltyPromotions]($e/Loyalty/ListLoyaltyPromotions).
+        /// To check for associated [loyalty promotions](entity:LoyaltyPromotion) that enable
+        /// buyers to earn extra points, call [ListLoyaltyPromotions](api-endpoint:Loyalty-ListLoyaltyPromotions).
         /// </summary>
         [JsonProperty("accrual_rules")]
         public IList<Models.LoyaltyProgramAccrualRule> AccrualRules { get; }

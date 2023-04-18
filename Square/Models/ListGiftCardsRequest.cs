@@ -89,14 +89,14 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// If a [type]($m/GiftCardType) is provided, the endpoint returns gift cards of the specified type.
+        /// If a [type](entity:GiftCardType) is provided, the endpoint returns gift cards of the specified type.
         /// Otherwise, the endpoint returns gift cards of all types.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
 
         /// <summary>
-        /// If a [state]($m/GiftCardStatus) is provided, the endpoint returns the gift cards in the specified state.
+        /// If a [state](entity:GiftCardStatus) is provided, the endpoint returns the gift cards in the specified state.
         /// Otherwise, the endpoint returns the gift cards of all states.
         /// </summary>
         [JsonProperty("state")]

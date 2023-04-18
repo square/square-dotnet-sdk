@@ -90,7 +90,7 @@ namespace Square.Models
 
         /// <summary>
         /// The catalog object ID referencing the
-        /// [CatalogMeasurementUnit]($m/CatalogMeasurementUnit).
+        /// [CatalogMeasurementUnit](entity:CatalogMeasurementUnit).
         /// This field is set when this is a catalog-backed measurement unit.
         /// </summary>
         [JsonProperty("catalog_object_id")]

@@ -55,7 +55,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The ID of the target [location]($m/Location).
+        /// The ID of the target [location](entity:Location).
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }

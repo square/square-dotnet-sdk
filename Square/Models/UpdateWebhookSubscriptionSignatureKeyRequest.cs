@@ -45,7 +45,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// A unique string that identifies the [UpdateWebhookSubscriptionSignatureKey]($e/WebhookSubscriptions/UpdateWebhookSubscriptionSignatureKey) request.
+        /// A unique string that identifies the [UpdateWebhookSubscriptionSignatureKey](api-endpoint:WebhookSubscriptions-UpdateWebhookSubscriptionSignatureKey) request.
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }

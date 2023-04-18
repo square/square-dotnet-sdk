@@ -37,8 +37,11 @@ namespace Square.Models
         /// <param name="appId">app_id.</param>
         /// <param name="locationId">location_id.</param>
         /// <param name="paymentType">payment_type.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
         /// <param name="customerId">customer_id.</param>
         /// <param name="appFeeMoney">app_fee_money.</param>
+        /// <param name="statementDescriptionIdentifier">statement_description_identifier.</param>
+        /// <param name="tipMoney">tip_money.</param>
         public TerminalCheckout(
             Models.Money amountMoney,
             Models.DeviceCheckoutOptions deviceOptions,
@@ -56,8 +59,11 @@ namespace Square.Models
             string appId = null,
             string locationId = null,
             string paymentType = null,
+            string teamMemberId = null,
             string customerId = null,
-            Models.Money appFeeMoney = null)
+            Models.Money appFeeMoney = null,
+            string statementDescriptionIdentifier = null,
+            Models.Money tipMoney = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -65,7 +71,9 @@ namespace Square.Models
                 { "note", false },
                 { "order_id", false },
                 { "deadline_duration", false },
-                { "customer_id", false }
+                { "team_member_id", false },
+                { "customer_id", false },
+                { "statement_description_identifier", false }
             };
 
             this.Id = id;
@@ -104,6 +112,12 @@ namespace Square.Models
             this.AppId = appId;
             this.LocationId = locationId;
             this.PaymentType = paymentType;
+            if (teamMemberId != null)
+            {
+                shouldSerialize["team_member_id"] = true;
+                this.TeamMemberId = teamMemberId;
+            }
+
             if (customerId != null)
             {
                 shouldSerialize["customer_id"] = true;
@@ -111,6 +125,13 @@ namespace Square.Models
             }
 
             this.AppFeeMoney = appFeeMoney;
+            if (statementDescriptionIdentifier != null)
+            {
+                shouldSerialize["statement_description_identifier"] = true;
+                this.StatementDescriptionIdentifier = statementDescriptionIdentifier;
+            }
+
+            this.TipMoney = tipMoney;
         }
         internal TerminalCheckout(Dictionary<string, bool> shouldSerialize,
             Models.Money amountMoney,
@@ -129,8 +150,11 @@ namespace Square.Models
             string appId = null,
             string locationId = null,
             string paymentType = null,
+            string teamMemberId = null,
             string customerId = null,
-            Models.Money appFeeMoney = null)
+            Models.Money appFeeMoney = null,
+            string statementDescriptionIdentifier = null,
+            Models.Money tipMoney = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -149,8 +173,11 @@ namespace Square.Models
             AppId = appId;
             LocationId = locationId;
             PaymentType = paymentType;
+            TeamMemberId = teamMemberId;
             CustomerId = customerId;
             AppFeeMoney = appFeeMoney;
+            StatementDescriptionIdentifier = statementDescriptionIdentifier;
+            TipMoney = tipMoney;
         }
 
         /// <summary>
@@ -264,6 +291,12 @@ namespace Square.Models
         public string PaymentType { get; }
 
         /// <summary>
+        /// An optional ID of the team member associated with creating the checkout.
+        /// </summary>
+        [JsonProperty("team_member_id")]
+        public string TeamMemberId { get; }
+
+        /// <summary>
         /// An optional ID of the customer associated with the checkout.
         /// </summary>
         [JsonProperty("customer_id")]
@@ -279,6 +312,25 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("app_fee_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money AppFeeMoney { get; }
+
+        /// <summary>
+        /// Optional additional payment information to include on the customer's card statement as
+        /// part of the statement description. This can be, for example, an invoice number, ticket number,
+        /// or short description that uniquely identifies the purchase. Supported only in the US.
+        /// </summary>
+        [JsonProperty("statement_description_identifier")]
+        public string StatementDescriptionIdentifier { get; }
+
+        /// <summary>
+        /// Represents an amount of money. `Money` fields can be signed or unsigned.
+        /// Fields that do not explicitly define whether they are signed or unsigned are
+        /// considered unsigned and can only hold positive amounts. For signed fields, the
+        /// sign of the value indicates the purpose of the money transfer. See
+        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
+        /// for more information.
+        /// </summary>
+        [JsonProperty("tip_money", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Money TipMoney { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -330,9 +382,27 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTeamMemberId()
+        {
+            return this.shouldSerialize["team_member_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
         public bool ShouldSerializeCustomerId()
         {
             return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeStatementDescriptionIdentifier()
+        {
+            return this.shouldSerialize["statement_description_identifier"];
         }
 
         /// <inheritdoc/>
@@ -365,19 +435,22 @@ namespace Square.Models
                 ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.PaymentType == null && other.PaymentType == null) || (this.PaymentType?.Equals(other.PaymentType) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true));
+                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
+                ((this.StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (this.StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true)) &&
+                ((this.TipMoney == null && other.TipMoney == null) || (this.TipMoney?.Equals(other.TipMoney) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -262904942;
+            int hashCode = -250194258;
             hashCode = HashCode.Combine(this.Id, this.AmountMoney, this.ReferenceId, this.Note, this.OrderId, this.PaymentOptions, this.DeviceOptions);
 
             hashCode = HashCode.Combine(hashCode, this.DeadlineDuration, this.Status, this.CancelReason, this.PaymentIds, this.CreatedAt, this.UpdatedAt, this.AppId);
 
-            hashCode = HashCode.Combine(hashCode, this.LocationId, this.PaymentType, this.CustomerId, this.AppFeeMoney);
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.PaymentType, this.TeamMemberId, this.CustomerId, this.AppFeeMoney, this.StatementDescriptionIdentifier, this.TipMoney);
 
             return hashCode;
         }
@@ -403,8 +476,11 @@ namespace Square.Models
             toStringOutput.Add($"this.AppId = {(this.AppId == null ? "null" : this.AppId == string.Empty ? "" : this.AppId)}");
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
             toStringOutput.Add($"this.PaymentType = {(this.PaymentType == null ? "null" : this.PaymentType.ToString())}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
             toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
             toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
+            toStringOutput.Add($"this.StatementDescriptionIdentifier = {(this.StatementDescriptionIdentifier == null ? "null" : this.StatementDescriptionIdentifier == string.Empty ? "" : this.StatementDescriptionIdentifier)}");
+            toStringOutput.Add($"this.TipMoney = {(this.TipMoney == null ? "null" : this.TipMoney.ToString())}");
         }
 
         /// <summary>
@@ -430,8 +506,11 @@ namespace Square.Models
                 .AppId(this.AppId)
                 .LocationId(this.LocationId)
                 .PaymentType(this.PaymentType)
+                .TeamMemberId(this.TeamMemberId)
                 .CustomerId(this.CustomerId)
-                .AppFeeMoney(this.AppFeeMoney);
+                .AppFeeMoney(this.AppFeeMoney)
+                .StatementDescriptionIdentifier(this.StatementDescriptionIdentifier)
+                .TipMoney(this.TipMoney);
             return builder;
         }
 
@@ -446,7 +525,9 @@ namespace Square.Models
                 { "note", false },
                 { "order_id", false },
                 { "deadline_duration", false },
+                { "team_member_id", false },
                 { "customer_id", false },
+                { "statement_description_identifier", false },
             };
 
             private Models.Money amountMoney;
@@ -465,8 +546,11 @@ namespace Square.Models
             private string appId;
             private string locationId;
             private string paymentType;
+            private string teamMemberId;
             private string customerId;
             private Models.Money appFeeMoney;
+            private string statementDescriptionIdentifier;
+            private Models.Money tipMoney;
 
             public Builder(
                 Models.Money amountMoney,
@@ -657,6 +741,18 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberId(string teamMemberId)
+            {
+                shouldSerialize["team_member_id"] = true;
+                this.teamMemberId = teamMemberId;
+                return this;
+            }
+
+             /// <summary>
              /// CustomerId.
              /// </summary>
              /// <param name="customerId"> customerId. </param>
@@ -676,6 +772,29 @@ namespace Square.Models
             public Builder AppFeeMoney(Models.Money appFeeMoney)
             {
                 this.appFeeMoney = appFeeMoney;
+                return this;
+            }
+
+             /// <summary>
+             /// StatementDescriptionIdentifier.
+             /// </summary>
+             /// <param name="statementDescriptionIdentifier"> statementDescriptionIdentifier. </param>
+             /// <returns> Builder. </returns>
+            public Builder StatementDescriptionIdentifier(string statementDescriptionIdentifier)
+            {
+                shouldSerialize["statement_description_identifier"] = true;
+                this.statementDescriptionIdentifier = statementDescriptionIdentifier;
+                return this;
+            }
+
+             /// <summary>
+             /// TipMoney.
+             /// </summary>
+             /// <param name="tipMoney"> tipMoney. </param>
+             /// <returns> Builder. </returns>
+            public Builder TipMoney(Models.Money tipMoney)
+            {
+                this.tipMoney = tipMoney;
                 return this;
             }
 
@@ -714,9 +833,25 @@ namespace Square.Models
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
+            public void UnsetTeamMemberId()
+            {
+                this.shouldSerialize["team_member_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
             public void UnsetCustomerId()
             {
                 this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetStatementDescriptionIdentifier()
+            {
+                this.shouldSerialize["statement_description_identifier"] = false;
             }
 
 
@@ -743,8 +878,11 @@ namespace Square.Models
                     this.appId,
                     this.locationId,
                     this.paymentType,
+                    this.teamMemberId,
                     this.customerId,
-                    this.appFeeMoney);
+                    this.appFeeMoney,
+                    this.statementDescriptionIdentifier,
+                    this.tipMoney);
             }
         }
     }

@@ -17,7 +17,7 @@ present.
 |  --- | --- | --- | --- |
 | `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
 | `EventTypes` | `IList<string>` | Optional | The list of event types. |
-| `Metadata` | [`IList<Models.EventTypeMetadata>`](../../doc/models/event-type-metadata.md) | Optional | Contains the metadata of a webhook event type. For more information, see [EventTypeMetadata](../../doc/models/event-type-metadata.md). |
+| `Metadata` | [`IList<Models.EventTypeMetadata>`](../../doc/models/event-type-metadata.md) | Optional | Contains the metadata of a webhook event type. For more information, see [EventTypeMetadata](entity:EventTypeMetadata). |
 
 ## Example (as JSON)
 

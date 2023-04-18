@@ -270,7 +270,7 @@ namespace Square.Models
 
         /// <summary>
         /// The Square features that are enabled for the location.
-        /// See [LocationCapability]($m/LocationCapability) for possible values.
+        /// See [LocationCapability](entity:LocationCapability) for possible values.
         /// See [LocationCapability](#type-locationcapability) for possible values
         /// </summary>
         [JsonProperty("capabilities", NullValueHandling = NullValueHandling.Ignore)]

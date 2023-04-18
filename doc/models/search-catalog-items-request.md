@@ -19,7 +19,7 @@ Defines the request body for the [SearchCatalogItems](../../doc/api/catalog.md#s
 | `Limit` | `int?` | Optional | The maximum number of results to return per page. The default value is 100.<br>**Constraints**: `<= 100` |
 | `SortOrder` | [`string`](../../doc/models/sort-order.md) | Optional | The order (e.g., chronological or alphabetical) in which results from a request are returned. |
 | `ProductTypes` | [`IList<string>`](../../doc/models/catalog-item-product-type.md) | Optional | The product types query expression to return items or item variations having the specified product types. |
-| `CustomAttributeFilters` | [`IList<Models.CustomAttributeFilter>`](../../doc/models/custom-attribute-filter.md) | Optional | The customer-attribute filter to return items or item variations matching the specified<br>custom attribute expressions. A maximum number of 10 custom attribute expressions are supported in<br>a single call to the [SearchCatalogItems](../../doc/api/catalog.md#search-catalog-items) endpoint. |
+| `CustomAttributeFilters` | [`IList<Models.CustomAttributeFilter>`](../../doc/models/custom-attribute-filter.md) | Optional | The customer-attribute filter to return items or item variations matching the specified<br>custom attribute expressions. A maximum number of 10 custom attribute expressions are supported in<br>a single call to the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems) endpoint. |
 
 ## Example (as JSON)
 

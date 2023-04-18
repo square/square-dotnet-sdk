@@ -48,32 +48,38 @@ CreateTeamMemberAsync(
 ## Example Usage
 
 ```csharp
-var bodyTeamMemberAssignedLocationsLocationIds = new IList<string>();
-bodyTeamMemberAssignedLocationsLocationIds.Add("YSGH2WBKG94QZ");
-bodyTeamMemberAssignedLocationsLocationIds.Add("GA2Y9HSJ8KRYT");
-var bodyTeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
-    .AssignmentType("EXPLICIT_LOCATIONS")
-    .LocationIds(bodyTeamMemberAssignedLocationsLocationIds)
-    .Build();
-var bodyTeamMember = new TeamMember.Builder()
+Models.CreateTeamMemberRequest body = new Models.CreateTeamMemberRequest.Builder()
+.IdempotencyKey("idempotency-key-0")
+.TeamMember(
+    new Models.TeamMember.Builder()
     .ReferenceId("reference_id_1")
     .Status("ACTIVE")
     .GivenName("Joe")
     .FamilyName("Doe")
     .EmailAddress("joe_doe@gmail.com")
     .PhoneNumber("+14159283333")
-    .AssignedLocations(bodyTeamMemberAssignedLocations)
-    .Build();
-var body = new CreateTeamMemberRequest.Builder()
-    .IdempotencyKey("idempotency-key-0")
-    .TeamMember(bodyTeamMember)
-    .Build();
+    .AssignedLocations(
+        new Models.TeamMemberAssignedLocations.Builder()
+        .AssignmentType("EXPLICIT_LOCATIONS")
+        .LocationIds(
+            new List<string>
+            {
+                "YSGH2WBKG94QZ",
+                "GA2Y9HSJ8KRYT",
+            })
+        .Build())
+    .Build())
+.Build();
 
 try
 {
     CreateTeamMemberResponse result = await teamApi.CreateTeamMemberAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -104,54 +110,56 @@ BulkCreateTeamMembersAsync(
 ## Example Usage
 
 ```csharp
-var bodyTeamMembers = new Dictionary<string, CreateTeamMemberRequest>();
-
-
-var bodyTeamMembers0TeamMemberAssignedLocationsLocationIds = new IList<string>();
-bodyTeamMembers0TeamMemberAssignedLocationsLocationIds.Add("YSGH2WBKG94QZ");
-bodyTeamMembers0TeamMemberAssignedLocationsLocationIds.Add("GA2Y9HSJ8KRYT");
-var bodyTeamMembers0TeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
-    .AssignmentType("EXPLICIT_LOCATIONS")
-    .LocationIds(bodyTeamMembers0TeamMemberAssignedLocationsLocationIds)
-    .Build();
-var bodyTeamMembers0TeamMember = new TeamMember.Builder()
-    .ReferenceId("reference_id_1")
-    .GivenName("Joe")
-    .FamilyName("Doe")
-    .EmailAddress("joe_doe@gmail.com")
-    .PhoneNumber("+14159283333")
-    .AssignedLocations(bodyTeamMembers0TeamMemberAssignedLocations)
-    .Build();
-var bodyTeamMembers0 = new CreateTeamMemberRequest.Builder()
-    .TeamMember(bodyTeamMembers0TeamMember)
-    .Build();
-bodyTeamMembers.Add("idempotency-key-1",bodyTeamMembers0);
-
-var bodyTeamMembers1TeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
-    .AssignmentType("ALL_CURRENT_AND_FUTURE_LOCATIONS")
-    .Build();
-var bodyTeamMembers1TeamMember = new TeamMember.Builder()
-    .ReferenceId("reference_id_2")
-    .GivenName("Jane")
-    .FamilyName("Smith")
-    .EmailAddress("jane_smith@gmail.com")
-    .PhoneNumber("+14159223334")
-    .AssignedLocations(bodyTeamMembers1TeamMemberAssignedLocations)
-    .Build();
-var bodyTeamMembers1 = new CreateTeamMemberRequest.Builder()
-    .TeamMember(bodyTeamMembers1TeamMember)
-    .Build();
-bodyTeamMembers.Add("idempotency-key-2",bodyTeamMembers1);
-
-var body = new BulkCreateTeamMembersRequest.Builder(
-        bodyTeamMembers)
-    .Build();
+Models.BulkCreateTeamMembersRequest body = new Models.BulkCreateTeamMembersRequest.Builder(
+    new Dictionary<string, Models.CreateTeamMemberRequest>
+    {
+        ["idempotency-key-1"] = new Models.CreateTeamMemberRequest.Builder()
+        .TeamMember(
+            new Models.TeamMember.Builder()
+            .ReferenceId("reference_id_1")
+            .GivenName("Joe")
+            .FamilyName("Doe")
+            .EmailAddress("joe_doe@gmail.com")
+            .PhoneNumber("+14159283333")
+            .AssignedLocations(
+                new Models.TeamMemberAssignedLocations.Builder()
+                .AssignmentType("EXPLICIT_LOCATIONS")
+                .LocationIds(
+                    new List<string>
+                    {
+                        "YSGH2WBKG94QZ",
+                        "GA2Y9HSJ8KRYT",
+                    })
+                .Build())
+            .Build())
+        .Build(),
+        ["idempotency-key-2"] = new Models.CreateTeamMemberRequest.Builder()
+        .TeamMember(
+            new Models.TeamMember.Builder()
+            .ReferenceId("reference_id_2")
+            .GivenName("Jane")
+            .FamilyName("Smith")
+            .EmailAddress("jane_smith@gmail.com")
+            .PhoneNumber("+14159223334")
+            .AssignedLocations(
+                new Models.TeamMemberAssignedLocations.Builder()
+                .AssignmentType("ALL_CURRENT_AND_FUTURE_LOCATIONS")
+                .Build())
+            .Build())
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BulkCreateTeamMembersResponse result = await teamApi.BulkCreateTeamMembersAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -181,58 +189,60 @@ BulkUpdateTeamMembersAsync(
 ## Example Usage
 
 ```csharp
-var bodyTeamMembers = new Dictionary<string, UpdateTeamMemberRequest>();
-
-
-var bodyTeamMembers0TeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
-    .AssignmentType("ALL_CURRENT_AND_FUTURE_LOCATIONS")
-    .Build();
-var bodyTeamMembers0TeamMember = new TeamMember.Builder()
-    .ReferenceId("reference_id_2")
-    .IsOwner(false)
-    .Status("ACTIVE")
-    .GivenName("Jane")
-    .FamilyName("Smith")
-    .EmailAddress("jane_smith@gmail.com")
-    .PhoneNumber("+14159223334")
-    .AssignedLocations(bodyTeamMembers0TeamMemberAssignedLocations)
-    .Build();
-var bodyTeamMembers0 = new UpdateTeamMemberRequest.Builder()
-    .TeamMember(bodyTeamMembers0TeamMember)
-    .Build();
-bodyTeamMembers.Add("AFMwA08kR-MIF-3Vs0OE",bodyTeamMembers0);
-
-var bodyTeamMembers1TeamMemberAssignedLocationsLocationIds = new IList<string>();
-bodyTeamMembers1TeamMemberAssignedLocationsLocationIds.Add("YSGH2WBKG94QZ");
-bodyTeamMembers1TeamMemberAssignedLocationsLocationIds.Add("GA2Y9HSJ8KRYT");
-var bodyTeamMembers1TeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
-    .AssignmentType("EXPLICIT_LOCATIONS")
-    .LocationIds(bodyTeamMembers1TeamMemberAssignedLocationsLocationIds)
-    .Build();
-var bodyTeamMembers1TeamMember = new TeamMember.Builder()
-    .ReferenceId("reference_id_1")
-    .IsOwner(false)
-    .Status("ACTIVE")
-    .GivenName("Joe")
-    .FamilyName("Doe")
-    .EmailAddress("joe_doe@gmail.com")
-    .PhoneNumber("+14159283333")
-    .AssignedLocations(bodyTeamMembers1TeamMemberAssignedLocations)
-    .Build();
-var bodyTeamMembers1 = new UpdateTeamMemberRequest.Builder()
-    .TeamMember(bodyTeamMembers1TeamMember)
-    .Build();
-bodyTeamMembers.Add("fpgteZNMaf0qOK-a4t6P",bodyTeamMembers1);
-
-var body = new BulkUpdateTeamMembersRequest.Builder(
-        bodyTeamMembers)
-    .Build();
+Models.BulkUpdateTeamMembersRequest body = new Models.BulkUpdateTeamMembersRequest.Builder(
+    new Dictionary<string, Models.UpdateTeamMemberRequest>
+    {
+        ["AFMwA08kR-MIF-3Vs0OE"] = new Models.UpdateTeamMemberRequest.Builder()
+        .TeamMember(
+            new Models.TeamMember.Builder()
+            .ReferenceId("reference_id_2")
+            .IsOwner(false)
+            .Status("ACTIVE")
+            .GivenName("Jane")
+            .FamilyName("Smith")
+            .EmailAddress("jane_smith@gmail.com")
+            .PhoneNumber("+14159223334")
+            .AssignedLocations(
+                new Models.TeamMemberAssignedLocations.Builder()
+                .AssignmentType("ALL_CURRENT_AND_FUTURE_LOCATIONS")
+                .Build())
+            .Build())
+        .Build(),
+        ["fpgteZNMaf0qOK-a4t6P"] = new Models.UpdateTeamMemberRequest.Builder()
+        .TeamMember(
+            new Models.TeamMember.Builder()
+            .ReferenceId("reference_id_1")
+            .IsOwner(false)
+            .Status("ACTIVE")
+            .GivenName("Joe")
+            .FamilyName("Doe")
+            .EmailAddress("joe_doe@gmail.com")
+            .PhoneNumber("+14159283333")
+            .AssignedLocations(
+                new Models.TeamMemberAssignedLocations.Builder()
+                .AssignmentType("EXPLICIT_LOCATIONS")
+                .LocationIds(
+                    new List<string>
+                    {
+                        "YSGH2WBKG94QZ",
+                        "GA2Y9HSJ8KRYT",
+                    })
+                .Build())
+            .Build())
+        .Build(),
+    }
+)
+.Build();
 
 try
 {
     BulkUpdateTeamMembersResponse result = await teamApi.BulkUpdateTeamMembersAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -262,25 +272,31 @@ SearchTeamMembersAsync(
 ## Example Usage
 
 ```csharp
-var bodyQueryFilterLocationIds = new IList<string>();
-bodyQueryFilterLocationIds.Add("0G5P3VGACMMQZ");
-var bodyQueryFilter = new SearchTeamMembersFilter.Builder()
-    .LocationIds(bodyQueryFilterLocationIds)
-    .Status("ACTIVE")
-    .Build();
-var bodyQuery = new SearchTeamMembersQuery.Builder()
-    .Filter(bodyQueryFilter)
-    .Build();
-var body = new SearchTeamMembersRequest.Builder()
-    .Query(bodyQuery)
-    .Limit(10)
-    .Build();
+Models.SearchTeamMembersRequest body = new Models.SearchTeamMembersRequest.Builder()
+.Query(
+    new Models.SearchTeamMembersQuery.Builder()
+    .Filter(
+        new Models.SearchTeamMembersFilter.Builder()
+        .LocationIds(
+            new List<string>
+            {
+                "0G5P3VGACMMQZ",
+            })
+        .Status("ACTIVE")
+        .Build())
+    .Build())
+.Limit(10)
+.Build();
 
 try
 {
     SearchTeamMembersResponse result = await teamApi.SearchTeamMembersAsync(body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -308,12 +324,15 @@ RetrieveTeamMemberAsync(
 
 ```csharp
 string teamMemberId = "team_member_id0";
-
 try
 {
     RetrieveTeamMemberResponse result = await teamApi.RetrieveTeamMemberAsync(teamMemberId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -343,31 +362,37 @@ UpdateTeamMemberAsync(
 
 ```csharp
 string teamMemberId = "team_member_id0";
-var bodyTeamMemberAssignedLocationsLocationIds = new IList<string>();
-bodyTeamMemberAssignedLocationsLocationIds.Add("YSGH2WBKG94QZ");
-bodyTeamMemberAssignedLocationsLocationIds.Add("GA2Y9HSJ8KRYT");
-var bodyTeamMemberAssignedLocations = new TeamMemberAssignedLocations.Builder()
-    .AssignmentType("EXPLICIT_LOCATIONS")
-    .LocationIds(bodyTeamMemberAssignedLocationsLocationIds)
-    .Build();
-var bodyTeamMember = new TeamMember.Builder()
+Models.UpdateTeamMemberRequest body = new Models.UpdateTeamMemberRequest.Builder()
+.TeamMember(
+    new Models.TeamMember.Builder()
     .ReferenceId("reference_id_1")
     .Status("ACTIVE")
     .GivenName("Joe")
     .FamilyName("Doe")
     .EmailAddress("joe_doe@gmail.com")
     .PhoneNumber("+14159283333")
-    .AssignedLocations(bodyTeamMemberAssignedLocations)
-    .Build();
-var body = new UpdateTeamMemberRequest.Builder()
-    .TeamMember(bodyTeamMember)
-    .Build();
+    .AssignedLocations(
+        new Models.TeamMemberAssignedLocations.Builder()
+        .AssignmentType("EXPLICIT_LOCATIONS")
+        .LocationIds(
+            new List<string>
+            {
+                "YSGH2WBKG94QZ",
+                "GA2Y9HSJ8KRYT",
+            })
+        .Build())
+    .Build())
+.Build();
 
 try
 {
     UpdateTeamMemberResponse result = await teamApi.UpdateTeamMemberAsync(teamMemberId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -396,12 +421,15 @@ RetrieveWageSettingAsync(
 
 ```csharp
 string teamMemberId = "team_member_id0";
-
 try
 {
     RetrieveWageSettingResponse result = await teamApi.RetrieveWageSettingAsync(teamMemberId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -434,43 +462,46 @@ UpdateWageSettingAsync(
 
 ```csharp
 string teamMemberId = "team_member_id0";
-var bodyWageSettingJobAssignments = new List<JobAssignment>();
-
-var bodyWageSettingJobAssignments0AnnualRate = new Money.Builder()
-    .Amount(3000000L)
-    .Currency("USD")
-    .Build();
-var bodyWageSettingJobAssignments0 = new JobAssignment.Builder(
-        "Manager",
-        "SALARY")
-    .AnnualRate(bodyWageSettingJobAssignments0AnnualRate)
-    .WeeklyHours(40)
-    .Build();
-bodyWageSettingJobAssignments.Add(bodyWageSettingJobAssignments0);
-
-var bodyWageSettingJobAssignments1HourlyRate = new Money.Builder()
-    .Amount(1200L)
-    .Currency("USD")
-    .Build();
-var bodyWageSettingJobAssignments1 = new JobAssignment.Builder(
-        "Cashier",
-        "HOURLY")
-    .HourlyRate(bodyWageSettingJobAssignments1HourlyRate)
-    .Build();
-bodyWageSettingJobAssignments.Add(bodyWageSettingJobAssignments1);
-
-var bodyWageSetting = new WageSetting.Builder()
-    .JobAssignments(bodyWageSettingJobAssignments)
+Models.UpdateWageSettingRequest body = new Models.UpdateWageSettingRequest.Builder(
+    new Models.WageSetting.Builder()
+    .JobAssignments(
+        new List<Models.JobAssignment>
+        {
+            new Models.JobAssignment.Builder(
+                "Manager",
+                "SALARY"
+            )
+            .AnnualRate(
+                new Models.Money.Builder()
+                .Amount(3000000L)
+                .Currency("USD")
+                .Build())
+            .WeeklyHours(40)
+            .Build(),
+            new Models.JobAssignment.Builder(
+                "Cashier",
+                "HOURLY"
+            )
+            .HourlyRate(
+                new Models.Money.Builder()
+                .Amount(1200L)
+                .Currency("USD")
+                .Build())
+            .Build(),
+        })
     .IsOvertimeExempt(true)
-    .Build();
-var body = new UpdateWageSettingRequest.Builder(
-        bodyWageSetting)
-    .Build();
+    .Build()
+)
+.Build();
 
 try
 {
     UpdateWageSettingResponse result = await teamApi.UpdateWageSettingAsync(teamMemberId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

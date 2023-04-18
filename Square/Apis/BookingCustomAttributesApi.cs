@@ -305,10 +305,10 @@ namespace Square.Apis
         /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
         /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the target [booking]($m/Booking)..</param>
+        /// <param name="bookingId">Required parameter: The ID of the target [booking](entity:Booking)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. This limit is advisory. The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100. The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
-        /// <param name="withDefinitions">Optional parameter: Indicates whether to return the [custom attribute definition]($m/CustomAttributeDefinition) in the `definition` field of each custom attribute. Set this parameter to `true` to get the name and description of each custom attribute, information about the data type, or other definition details. The default value is `false`..</param>
+        /// <param name="withDefinitions">Optional parameter: Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each custom attribute. Set this parameter to `true` to get the name and description of each custom attribute, information about the data type, or other definition details. The default value is `false`..</param>
         /// <returns>Returns the Models.ListBookingCustomAttributesResponse response from the API call.</returns>
         public Models.ListBookingCustomAttributesResponse ListBookingCustomAttributes(
                 string bookingId,
@@ -322,10 +322,10 @@ namespace Square.Apis
         /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
         /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the target [booking]($m/Booking)..</param>
+        /// <param name="bookingId">Required parameter: The ID of the target [booking](entity:Booking)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single paged response. This limit is advisory. The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100. The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="cursor">Optional parameter: The cursor returned in the paged response from the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
-        /// <param name="withDefinitions">Optional parameter: Indicates whether to return the [custom attribute definition]($m/CustomAttributeDefinition) in the `definition` field of each custom attribute. Set this parameter to `true` to get the name and description of each custom attribute, information about the data type, or other definition details. The default value is `false`..</param>
+        /// <param name="withDefinitions">Optional parameter: Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each custom attribute. Set this parameter to `true` to get the name and description of each custom attribute, information about the data type, or other definition details. The default value is `false`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListBookingCustomAttributesResponse response from the API call.</returns>
         public async Task<Models.ListBookingCustomAttributesResponse> ListBookingCustomAttributesAsync(
@@ -355,7 +355,7 @@ namespace Square.Apis
         /// For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*.
         /// or *Appointments Premium*.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the target [booking]($m/Booking)..</param>
+        /// <param name="bookingId">Required parameter: The ID of the target [booking](entity:Booking)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to delete. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
         /// <returns>Returns the Models.DeleteBookingCustomAttributeResponse response from the API call.</returns>
         public Models.DeleteBookingCustomAttributeResponse DeleteBookingCustomAttribute(
@@ -370,7 +370,7 @@ namespace Square.Apis
         /// For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*.
         /// or *Appointments Premium*.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the target [booking]($m/Booking)..</param>
+        /// <param name="bookingId">Required parameter: The ID of the target [booking](entity:Booking)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to delete. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.DeleteBookingCustomAttributeResponse response from the API call.</returns>
@@ -395,9 +395,9 @@ namespace Square.Apis
         /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
         /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the target [booking]($m/Booking)..</param>
+        /// <param name="bookingId">Required parameter: The ID of the target [booking](entity:Booking)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to retrieve. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
-        /// <param name="withDefinition">Optional parameter: Indicates whether to return the [custom attribute definition]($m/CustomAttributeDefinition) in the `definition` field of the custom attribute. Set this parameter to `true` to get the name and description of the custom attribute, information about the data type, or other definition details. The default value is `false`..</param>
+        /// <param name="withDefinition">Optional parameter: Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of the custom attribute. Set this parameter to `true` to get the name and description of the custom attribute, information about the data type, or other definition details. The default value is `false`..</param>
         /// <param name="version">Optional parameter: The current version of the custom attribute, which is used for strongly consistent reads to guarantee that you receive the most up-to-date data. When included in the request, Square returns the specified version or a higher version if one exists. If the specified version is higher than the current version, Square returns a `BAD_REQUEST` error..</param>
         /// <returns>Returns the Models.RetrieveBookingCustomAttributeResponse response from the API call.</returns>
         public Models.RetrieveBookingCustomAttributeResponse RetrieveBookingCustomAttribute(
@@ -412,9 +412,9 @@ namespace Square.Apis
         /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
         /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the target [booking]($m/Booking)..</param>
+        /// <param name="bookingId">Required parameter: The ID of the target [booking](entity:Booking)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to retrieve. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
-        /// <param name="withDefinition">Optional parameter: Indicates whether to return the [custom attribute definition]($m/CustomAttributeDefinition) in the `definition` field of the custom attribute. Set this parameter to `true` to get the name and description of the custom attribute, information about the data type, or other definition details. The default value is `false`..</param>
+        /// <param name="withDefinition">Optional parameter: Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of the custom attribute. Set this parameter to `true` to get the name and description of the custom attribute, information about the data type, or other definition details. The default value is `false`..</param>
         /// <param name="version">Optional parameter: The current version of the custom attribute, which is used for strongly consistent reads to guarantee that you receive the most up-to-date data. When included in the request, Square returns the specified version or a higher version if one exists. If the specified version is higher than the current version, Square returns a `BAD_REQUEST` error..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveBookingCustomAttributeResponse response from the API call.</returns>
@@ -445,7 +445,7 @@ namespace Square.Apis
         /// For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*.
         /// or *Appointments Premium*.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the target [booking]($m/Booking)..</param>
+        /// <param name="bookingId">Required parameter: The ID of the target [booking](entity:Booking)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to create or update. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.UpsertBookingCustomAttributeResponse response from the API call.</returns>
@@ -462,7 +462,7 @@ namespace Square.Apis
         /// For calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*.
         /// or *Appointments Premium*.
         /// </summary>
-        /// <param name="bookingId">Required parameter: The ID of the target [booking]($m/Booking)..</param>
+        /// <param name="bookingId">Required parameter: The ID of the target [booking](entity:Booking)..</param>
         /// <param name="key">Required parameter: The key of the custom attribute to create or update. This key must match the `key` of a custom attribute definition in the Square seller account. If the requesting application is not the definition owner, you must use the qualified key..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

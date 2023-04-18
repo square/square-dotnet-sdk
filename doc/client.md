@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2023-03-15"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2023-04-19"` |
 | `CustomUrl` | `string` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `"https://connect.squareup.com"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(60)` |
@@ -17,7 +17,7 @@ The API client can be initialized as follows:
 ```csharp
 Square.SquareClient client = new Square.SquareClient.Builder()
     .AccessToken("AccessToken")
-    .SquareVersion("2023-03-15")
+    .SquareVersion("2023-04-19")
     .Environment(Square.Environment.Production)
     .CustomUrl("https://connect.squareup.com")
     .Build();
@@ -26,35 +26,37 @@ Square.SquareClient client = new Square.SquareClient.Builder()
 ## Make Calls with the API Client
 
 ```csharp
+using Square.Apis;
+using Square.Exceptions;
+using Square.Models;
+using Square.Utilities;
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
 
-using Square;
-using Square.Models;
-using Square.Apis;
-using Square.Utilities;
-using Square.Exceptions;
-
 namespace Testing
 {
-    class Program
+    public class Program
     {
-        static async Task Main(string[] args)
+        public static async Task Main()
         {
             SquareClient client = new SquareClient.Builder()
                 .AccessToken("AccessToken")
-                .SquareVersion("2023-03-15")
+                .SquareVersion("2023-04-19")
                 .Build();
+
             ILocationsApi locationsApi = client.LocationsApi;
-            
+
             try
             {
                 ListLocationsResponse result = await locationsApi.ListLocationsAsync();
             }
-            catch (ApiException e){};
+            catch (ApiException e)
+            {
+                // TODO: Handle exception here
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

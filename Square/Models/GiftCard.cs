@@ -133,7 +133,7 @@ namespace Square.Models
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The IDs of the [customer profiles]($m/Customer) to whom this gift card is linked.
+        /// The IDs of the [customer profiles](entity:Customer) to whom this gift card is linked.
         /// </summary>
         [JsonProperty("customer_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> CustomerIds { get; }

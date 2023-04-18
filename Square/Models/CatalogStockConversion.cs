@@ -34,11 +34,11 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// References to the stockable [CatalogItemVariation]($m/CatalogItemVariation)
+        /// References to the stockable [CatalogItemVariation](entity:CatalogItemVariation)
         /// for this stock conversion. Selling, receiving or recounting the non-stockable `CatalogItemVariation`
         /// defined with a stock conversion results in adjustments of this stockable `CatalogItemVariation`.
         /// This immutable field must reference a stockable `CatalogItemVariation`
-        /// that shares the parent [CatalogItem]($m/CatalogItem) of the converted `CatalogItemVariation.`
+        /// that shares the parent [CatalogItem](entity:CatalogItem) of the converted `CatalogItemVariation.`
         /// </summary>
         [JsonProperty("stockable_item_variation_id")]
         public string StockableItemVariationId { get; }
@@ -53,7 +53,7 @@ namespace Square.Models
         public string StockableQuantity { get; }
 
         /// <summary>
-        /// The converted equivalent quantity of the non-stockable [CatalogItemVariation]($m/CatalogItemVariation)
+        /// The converted equivalent quantity of the non-stockable [CatalogItemVariation](entity:CatalogItemVariation)
         /// in its measurement unit. The `stockable_quantity` value and this `nonstockable_quantity` value together
         /// define the conversion ratio between stockable item variation and the non-stockable item variation.
         /// It accepts a decimal number in a string format that can take up to 10 digits before the decimal point

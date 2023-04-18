@@ -36,7 +36,7 @@ ListDisputesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination). |
+| `cursor` | `string` | Query, Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `states` | [`string`](../../doc/models/dispute-state.md) | Query, Optional | The dispute states used to filter the result. If not specified, the endpoint returns all disputes. |
 | `locationId` | `string` | Query, Optional | The ID of the location for which to return a list of disputes.<br>If not specified, the endpoint returns disputes associated with all locations. |
 
@@ -51,7 +51,11 @@ try
 {
     ListDisputesResponse result = await disputesApi.ListDisputesAsync(null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -78,12 +82,15 @@ RetrieveDisputeAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
-
 try
 {
     RetrieveDisputeResponse result = await disputesApi.RetrieveDisputeAsync(disputeId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -114,12 +121,15 @@ AcceptDisputeAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
-
 try
 {
     AcceptDisputeResponse result = await disputesApi.AcceptDisputeAsync(disputeId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -148,12 +158,15 @@ ListDisputeEvidenceAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
-
 try
 {
     ListDisputeEvidenceResponse result = await disputesApi.ListDisputeEvidenceAsync(disputeId, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -185,12 +198,15 @@ CreateDisputeEvidenceFileAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
-
 try
 {
     CreateDisputeEvidenceFileResponse result = await disputesApi.CreateDisputeEvidenceFileAsync(disputeId, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -219,17 +235,22 @@ CreateDisputeEvidenceTextAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
-var body = new CreateDisputeEvidenceTextRequest.Builder(
-        "ed3ee3933d946f1514d505d173c82648",
-        "1Z8888888888888888")
-    .EvidenceType("TRACKING_NUMBER")
-    .Build();
+Models.CreateDisputeEvidenceTextRequest body = new Models.CreateDisputeEvidenceTextRequest.Builder(
+    "ed3ee3933d946f1514d505d173c82648",
+    "1Z8888888888888888"
+)
+.EvidenceType("TRACKING_NUMBER")
+.Build();
 
 try
 {
     CreateDisputeEvidenceTextResponse result = await disputesApi.CreateDisputeEvidenceTextAsync(disputeId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -260,12 +281,15 @@ DeleteDisputeEvidenceAsync(
 ```csharp
 string disputeId = "dispute_id2";
 string evidenceId = "evidence_id2";
-
 try
 {
     DeleteDisputeEvidenceResponse result = await disputesApi.DeleteDisputeEvidenceAsync(disputeId, evidenceId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -297,12 +321,15 @@ RetrieveDisputeEvidenceAsync(
 ```csharp
 string disputeId = "dispute_id2";
 string evidenceId = "evidence_id2";
-
 try
 {
     RetrieveDisputeEvidenceResponse result = await disputesApi.RetrieveDisputeEvidenceAsync(disputeId, evidenceId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -335,11 +362,14 @@ SubmitEvidenceAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
-
 try
 {
     SubmitEvidenceResponse result = await disputesApi.SubmitEvidenceAsync(disputeId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 

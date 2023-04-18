@@ -52,12 +52,15 @@ V1ListOrdersAsync(
 
 ```csharp
 string locationId = "location_id4";
-
 try
 {
     List<V1Order> result = await v1TransactionsApi.V1ListOrdersAsync(locationId, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -89,12 +92,15 @@ V1RetrieveOrderAsync(
 ```csharp
 string locationId = "location_id4";
 string orderId = "order_id6";
-
 try
 {
     V1Order result = await v1TransactionsApi.V1RetrieveOrderAsync(locationId, orderId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -128,15 +134,20 @@ V1UpdateOrderAsync(
 ```csharp
 string locationId = "location_id4";
 string orderId = "order_id6";
-var body = new V1UpdateOrderRequest.Builder(
-        "REFUND")
-    .Build();
+Models.V1UpdateOrderRequest body = new Models.V1UpdateOrderRequest.Builder(
+    "REFUND"
+)
+.Build();
 
 try
 {
     V1Order result = await v1TransactionsApi.V1UpdateOrderAsync(locationId, orderId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -188,12 +199,15 @@ V1ListPaymentsAsync(
 ```csharp
 string locationId = "location_id4";
 bool? includePartial = false;
-
 try
 {
     List<V1Payment> result = await v1TransactionsApi.V1ListPaymentsAsync(locationId, null, null, null, null, null, includePartial);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -225,12 +239,15 @@ V1RetrievePaymentAsync(
 ```csharp
 string locationId = "location_id4";
 string paymentId = "payment_id0";
-
 try
 {
     V1Payment result = await v1TransactionsApi.V1RetrievePaymentAsync(locationId, paymentId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -269,12 +286,15 @@ V1ListRefundsAsync(
 
 ```csharp
 string locationId = "location_id4";
-
 try
 {
     List<V1Refund> result = await v1TransactionsApi.V1ListRefundsAsync(locationId, null, null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -316,17 +336,22 @@ V1CreateRefundAsync(
 
 ```csharp
 string locationId = "location_id4";
-var body = new V1CreateRefundRequest.Builder(
-        "payment_id6",
-        "FULL",
-        "reason8")
-    .Build();
+Models.V1CreateRefundRequest body = new Models.V1CreateRefundRequest.Builder(
+    "payment_id6",
+    "FULL",
+    "reason8"
+)
+.Build();
 
 try
 {
     V1Refund result = await v1TransactionsApi.V1CreateRefundAsync(locationId, body);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -372,12 +397,15 @@ V1ListSettlementsAsync(
 
 ```csharp
 string locationId = "location_id4";
-
 try
 {
     List<V1Settlement> result = await v1TransactionsApi.V1ListSettlementsAsync(locationId, null, null, null, null, null, null);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
 
@@ -425,11 +453,14 @@ V1RetrieveSettlementAsync(
 ```csharp
 string locationId = "location_id4";
 string settlementId = "settlement_id0";
-
 try
 {
     V1Settlement result = await v1TransactionsApi.V1RetrieveSettlementAsync(locationId, settlementId);
 }
-catch (ApiException e){};
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
 ```
 
