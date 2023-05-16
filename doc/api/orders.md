@@ -63,6 +63,8 @@ Models.CreateOrderRequest body = new Models.CreateOrderRequest.Builder()
             .Name("New York Strip Steak")
             .BasePriceMoney(
                 new Models.Money.Builder()
+                .Amount(1599L)
+                .Currency("USD")
                 .Build())
             .Build(),
             new Models.OrderLineItem.Builder(
@@ -115,6 +117,8 @@ Models.CreateOrderRequest body = new Models.CreateOrderRequest.Builder()
             .Name("Sale - $1.00 off")
             .AmountMoney(
                 new Models.Money.Builder()
+                .Amount(100L)
+                .Currency("USD")
                 .Build())
             .Scope("LINE_ITEM")
             .Build(),
@@ -216,6 +220,8 @@ Models.CalculateOrderRequest body = new Models.CalculateOrderRequest.Builder(
             .Name("Item 1")
             .BasePriceMoney(
                 new Models.Money.Builder()
+                .Amount(500L)
+                .Currency("USD")
                 .Build())
             .Build(),
             new Models.OrderLineItem.Builder(
@@ -224,6 +230,8 @@ Models.CalculateOrderRequest body = new Models.CalculateOrderRequest.Builder(
             .Name("Item 2")
             .BasePriceMoney(
                 new Models.Money.Builder()
+                .Amount(300L)
+                .Currency("USD")
                 .Build())
             .Build(),
         })
@@ -355,6 +363,8 @@ Models.SearchOrdersRequest body = new Models.SearchOrdersRequest.Builder()
             new Models.SearchOrdersDateTimeFilter.Builder()
             .ClosedAt(
                 new Models.TimeRange.Builder()
+                .StartAt("2018-03-03T20:00:00+00:00")
+                .EndAt("2019-03-04T21:54:45+00:00")
                 .Build())
             .Build())
         .Build())

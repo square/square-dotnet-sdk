@@ -104,9 +104,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyProgramRewardTier other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is LoyaltyProgramRewardTier other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 this.Points.Equals(other.Points) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Definition == null && other.Definition == null) || (this.Definition?.Equals(other.Definition) == true)) &&

@@ -72,9 +72,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveInventoryTransferResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is RetrieveInventoryTransferResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Transfer == null && other.Transfer == null) || (this.Transfer?.Equals(other.Transfer) == true));
         }

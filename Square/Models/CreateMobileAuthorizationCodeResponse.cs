@@ -83,9 +83,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CreateMobileAuthorizationCodeResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is CreateMobileAuthorizationCodeResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.AuthorizationCode == null && other.AuthorizationCode == null) || (this.AuthorizationCode?.Equals(other.AuthorizationCode) == true)) &&
                 ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
                 ((this.Error == null && other.Error == null) || (this.Error?.Equals(other.Error) == true));

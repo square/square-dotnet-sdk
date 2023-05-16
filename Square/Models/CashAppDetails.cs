@@ -119,9 +119,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CashAppDetails other &&
-                ((this.BuyerFullName == null && other.BuyerFullName == null) || (this.BuyerFullName?.Equals(other.BuyerFullName) == true)) &&
+            return obj is CashAppDetails other &&                ((this.BuyerFullName == null && other.BuyerFullName == null) || (this.BuyerFullName?.Equals(other.BuyerFullName) == true)) &&
                 ((this.BuyerCountryCode == null && other.BuyerCountryCode == null) || (this.BuyerCountryCode?.Equals(other.BuyerCountryCode) == true)) &&
                 ((this.BuyerCashtag == null && other.BuyerCashtag == null) || (this.BuyerCashtag?.Equals(other.BuyerCashtag) == true));
         }

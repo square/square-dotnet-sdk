@@ -83,9 +83,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BatchDeleteCatalogObjectsRequest other &&
-                ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true));
+            return obj is BatchDeleteCatalogObjectsRequest other &&                ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true));
         }
         
         /// <inheritdoc/>

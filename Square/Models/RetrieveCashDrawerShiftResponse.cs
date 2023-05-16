@@ -74,9 +74,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveCashDrawerShiftResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is RetrieveCashDrawerShiftResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.CashDrawerShift == null && other.CashDrawerShift == null) || (this.CashDrawerShift?.Equals(other.CashDrawerShift) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }

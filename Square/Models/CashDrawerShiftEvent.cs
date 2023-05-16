@@ -22,32 +22,25 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="CashDrawerShiftEvent"/> class.
         /// </summary>
         /// <param name="id">id.</param>
-        /// <param name="employeeId">employee_id.</param>
         /// <param name="eventType">event_type.</param>
         /// <param name="eventMoney">event_money.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="description">description.</param>
+        /// <param name="teamMemberId">team_member_id.</param>
         public CashDrawerShiftEvent(
             string id = null,
-            string employeeId = null,
             string eventType = null,
             Models.Money eventMoney = null,
             string createdAt = null,
-            string description = null)
+            string description = null,
+            string teamMemberId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
-                { "employee_id", false },
                 { "description", false }
             };
 
             this.Id = id;
-            if (employeeId != null)
-            {
-                shouldSerialize["employee_id"] = true;
-                this.EmployeeId = employeeId;
-            }
-
             this.EventType = eventType;
             this.EventMoney = eventMoney;
             this.CreatedAt = createdAt;
@@ -57,22 +50,23 @@ namespace Square.Models
                 this.Description = description;
             }
 
+            this.TeamMemberId = teamMemberId;
         }
         internal CashDrawerShiftEvent(Dictionary<string, bool> shouldSerialize,
             string id = null,
-            string employeeId = null,
             string eventType = null,
             Models.Money eventMoney = null,
             string createdAt = null,
-            string description = null)
+            string description = null,
+            string teamMemberId = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
-            EmployeeId = employeeId;
             EventType = eventType;
             EventMoney = eventMoney;
             CreatedAt = createdAt;
             Description = description;
+            TeamMemberId = teamMemberId;
         }
 
         /// <summary>
@@ -80,12 +74,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
-
-        /// <summary>
-        /// The ID of the employee that created the event.
-        /// </summary>
-        [JsonProperty("employee_id")]
-        public string EmployeeId { get; }
 
         /// <summary>
         /// The types of events on a CashDrawerShift.
@@ -107,7 +95,7 @@ namespace Square.Models
         public Models.Money EventMoney { get; }
 
         /// <summary>
-        /// The event time in ISO 8601 format.
+        /// The event time in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
@@ -119,6 +107,12 @@ namespace Square.Models
         [JsonProperty("description")]
         public string Description { get; }
 
+        /// <summary>
+        /// The ID of the team member that created the event.
+        /// </summary>
+        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamMemberId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -127,15 +121,6 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"CashDrawerShiftEvent : ({string.Join(", ", toStringOutput)})";
-        }
-
-        /// <summary>
-        /// Checks if the field should be serialized or not.
-        /// </summary>
-        /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeEmployeeId()
-        {
-            return this.shouldSerialize["employee_id"];
         }
 
         /// <summary>
@@ -159,21 +144,19 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CashDrawerShiftEvent other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
+            return obj is CashDrawerShiftEvent other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.EventType == null && other.EventType == null) || (this.EventType?.Equals(other.EventType) == true)) &&
                 ((this.EventMoney == null && other.EventMoney == null) || (this.EventMoney?.Equals(other.EventMoney) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true));
+                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1056052778;
-            hashCode = HashCode.Combine(this.Id, this.EmployeeId, this.EventType, this.EventMoney, this.CreatedAt, this.Description);
+            int hashCode = 1698426286;
+            hashCode = HashCode.Combine(this.Id, this.EventType, this.EventMoney, this.CreatedAt, this.Description, this.TeamMemberId);
 
             return hashCode;
         }
@@ -184,11 +167,11 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
             toStringOutput.Add($"this.EventType = {(this.EventType == null ? "null" : this.EventType.ToString())}");
             toStringOutput.Add($"this.EventMoney = {(this.EventMoney == null ? "null" : this.EventMoney.ToString())}");
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
             toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
         }
 
         /// <summary>
@@ -199,11 +182,11 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Id(this.Id)
-                .EmployeeId(this.EmployeeId)
                 .EventType(this.EventType)
                 .EventMoney(this.EventMoney)
                 .CreatedAt(this.CreatedAt)
-                .Description(this.Description);
+                .Description(this.Description)
+                .TeamMemberId(this.TeamMemberId);
             return builder;
         }
 
@@ -214,16 +197,15 @@ namespace Square.Models
         {
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
-                { "employee_id", false },
                 { "description", false },
             };
 
             private string id;
-            private string employeeId;
             private string eventType;
             private Models.Money eventMoney;
             private string createdAt;
             private string description;
+            private string teamMemberId;
 
              /// <summary>
              /// Id.
@@ -233,18 +215,6 @@ namespace Square.Models
             public Builder Id(string id)
             {
                 this.id = id;
-                return this;
-            }
-
-             /// <summary>
-             /// EmployeeId.
-             /// </summary>
-             /// <param name="employeeId"> employeeId. </param>
-             /// <returns> Builder. </returns>
-            public Builder EmployeeId(string employeeId)
-            {
-                shouldSerialize["employee_id"] = true;
-                this.employeeId = employeeId;
                 return this;
             }
 
@@ -293,12 +263,15 @@ namespace Square.Models
                 return this;
             }
 
-            /// <summary>
-            /// Marks the field to not be serailized.
-            /// </summary>
-            public void UnsetEmployeeId()
+             /// <summary>
+             /// TeamMemberId.
+             /// </summary>
+             /// <param name="teamMemberId"> teamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberId(string teamMemberId)
             {
-                this.shouldSerialize["employee_id"] = false;
+                this.teamMemberId = teamMemberId;
+                return this;
             }
 
             /// <summary>
@@ -318,11 +291,11 @@ namespace Square.Models
             {
                 return new CashDrawerShiftEvent(shouldSerialize,
                     this.id,
-                    this.employeeId,
                     this.eventType,
                     this.eventMoney,
                     this.createdAt,
-                    this.description);
+                    this.description,
+                    this.teamMemberId);
             }
         }
     }

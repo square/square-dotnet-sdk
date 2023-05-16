@@ -255,9 +255,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TeamMember other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is TeamMember other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.IsOwner == null && other.IsOwner == null) || (this.IsOwner?.Equals(other.IsOwner) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&

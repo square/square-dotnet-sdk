@@ -82,9 +82,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderSource other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
+            return obj is OrderSource other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
         }
         
         /// <inheritdoc/>

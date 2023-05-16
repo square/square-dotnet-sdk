@@ -66,9 +66,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CreateTerminalCheckoutRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is CreateTerminalCheckoutRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.Checkout == null && other.Checkout == null) || (this.Checkout?.Equals(other.Checkout) == true));
         }
         

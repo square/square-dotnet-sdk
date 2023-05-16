@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateWorkweekConfigRequest other &&
-                ((this.WorkweekConfig == null && other.WorkweekConfig == null) || (this.WorkweekConfig?.Equals(other.WorkweekConfig) == true));
+            return obj is UpdateWorkweekConfigRequest other &&                ((this.WorkweekConfig == null && other.WorkweekConfig == null) || (this.WorkweekConfig?.Equals(other.WorkweekConfig) == true));
         }
         
         /// <inheritdoc/>

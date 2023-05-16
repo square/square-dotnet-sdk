@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TerminalActionQuerySort other &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
+            return obj is TerminalActionQuerySort other &&                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }
         
         /// <inheritdoc/>

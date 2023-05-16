@@ -13,19 +13,19 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// SquareEventData.
+    /// EventData.
     /// </summary>
-    public class SquareEventData
+    public class EventData
     {
         private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
-        /// Initializes a new instance of the <see cref="SquareEventData"/> class.
+        /// Initializes a new instance of the <see cref="EventData"/> class.
         /// </summary>
         /// <param name="type">type.</param>
         /// <param name="id">id.</param>
         /// <param name="deleted">deleted.</param>
         /// <param name="mObject">object.</param>
-        public SquareEventData(
+        public EventData(
             string type = null,
             string id = null,
             bool? deleted = null,
@@ -58,7 +58,7 @@ namespace Square.Models
             }
 
         }
-        internal SquareEventData(Dictionary<string, bool> shouldSerialize,
+        internal EventData(Dictionary<string, bool> shouldSerialize,
             string type = null,
             string id = null,
             bool? deleted = null,
@@ -102,7 +102,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"SquareEventData : ({string.Join(", ", toStringOutput)})";
+            return $"EventData : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <summary>
@@ -144,9 +144,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SquareEventData other &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+            return obj is EventData other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.Deleted == null && other.Deleted == null) || (this.Deleted?.Equals(other.Deleted) == true)) &&
                 ((this.MObject == null && other.MObject == null) || (this.MObject?.Equals(other.MObject) == true));
@@ -155,7 +153,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 554410150;
+            int hashCode = -1328601859;
             hashCode = HashCode.Combine(this.Type, this.Id, this.Deleted, this.MObject);
 
             return hashCode;
@@ -278,10 +276,10 @@ namespace Square.Models
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> SquareEventData. </returns>
-            public SquareEventData Build()
+            /// <returns> EventData. </returns>
+            public EventData Build()
             {
-                return new SquareEventData(shouldSerialize,
+                return new EventData(shouldSerialize,
                     this.type,
                     this.id,
                     this.deleted,

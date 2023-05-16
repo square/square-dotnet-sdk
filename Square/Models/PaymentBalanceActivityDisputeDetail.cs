@@ -107,9 +107,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is PaymentBalanceActivityDisputeDetail other &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+            return obj is PaymentBalanceActivityDisputeDetail other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
                 ((this.DisputeId == null && other.DisputeId == null) || (this.DisputeId?.Equals(other.DisputeId) == true));
         }
         

@@ -119,9 +119,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogQuickAmountsSettings other &&
-                ((this.Option == null && other.Option == null) || (this.Option?.Equals(other.Option) == true)) &&
+            return obj is CatalogQuickAmountsSettings other &&                ((this.Option == null && other.Option == null) || (this.Option?.Equals(other.Option) == true)) &&
                 ((this.EligibleForAutoAmounts == null && other.EligibleForAutoAmounts == null) || (this.EligibleForAutoAmounts?.Equals(other.EligibleForAutoAmounts) == true)) &&
                 ((this.Amounts == null && other.Amounts == null) || (this.Amounts?.Equals(other.Amounts) == true));
         }

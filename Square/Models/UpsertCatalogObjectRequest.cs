@@ -76,9 +76,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpsertCatalogObjectRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is UpsertCatalogObjectRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.MObject == null && other.MObject == null) || (this.MObject?.Equals(other.MObject) == true));
         }
         

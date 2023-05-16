@@ -74,9 +74,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyPromotionIncentive other &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+            return obj is LoyaltyPromotionIncentive other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.PointsMultiplierData == null && other.PointsMultiplierData == null) || (this.PointsMultiplierData?.Equals(other.PointsMultiplierData) == true)) &&
                 ((this.PointsAdditionData == null && other.PointsAdditionData == null) || (this.PointsAdditionData?.Equals(other.PointsAdditionData) == true));
         }

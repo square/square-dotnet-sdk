@@ -122,9 +122,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BusinessHoursPeriod other &&
-                ((this.DayOfWeek == null && other.DayOfWeek == null) || (this.DayOfWeek?.Equals(other.DayOfWeek) == true)) &&
+            return obj is BusinessHoursPeriod other &&                ((this.DayOfWeek == null && other.DayOfWeek == null) || (this.DayOfWeek?.Equals(other.DayOfWeek) == true)) &&
                 ((this.StartLocalTime == null && other.StartLocalTime == null) || (this.StartLocalTime?.Equals(other.StartLocalTime) == true)) &&
                 ((this.EndLocalTime == null && other.EndLocalTime == null) || (this.EndLocalTime?.Equals(other.EndLocalTime) == true));
         }

@@ -125,9 +125,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BreakType other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is BreakType other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.BreakName == null && other.BreakName == null) || (this.BreakName?.Equals(other.BreakName) == true)) &&
                 ((this.ExpectedDuration == null && other.ExpectedDuration == null) || (this.ExpectedDuration?.Equals(other.ExpectedDuration) == true)) &&

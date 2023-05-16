@@ -159,9 +159,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListTeamMemberBookingProfilesRequest other &&
-                ((this.BookableOnly == null && other.BookableOnly == null) || (this.BookableOnly?.Equals(other.BookableOnly) == true)) &&
+            return obj is ListTeamMemberBookingProfilesRequest other &&                ((this.BookableOnly == null && other.BookableOnly == null) || (this.BookableOnly?.Equals(other.BookableOnly) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));

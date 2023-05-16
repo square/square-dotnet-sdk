@@ -82,9 +82,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SwapPlanResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is SwapPlanResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Subscription == null && other.Subscription == null) || (this.Subscription?.Equals(other.Subscription) == true)) &&
                 ((this.Actions == null && other.Actions == null) || (this.Actions?.Equals(other.Actions) == true));

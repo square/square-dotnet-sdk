@@ -133,9 +133,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CardPaymentTimeline other &&
-                ((this.AuthorizedAt == null && other.AuthorizedAt == null) || (this.AuthorizedAt?.Equals(other.AuthorizedAt) == true)) &&
+            return obj is CardPaymentTimeline other &&                ((this.AuthorizedAt == null && other.AuthorizedAt == null) || (this.AuthorizedAt?.Equals(other.AuthorizedAt) == true)) &&
                 ((this.CapturedAt == null && other.CapturedAt == null) || (this.CapturedAt?.Equals(other.CapturedAt) == true)) &&
                 ((this.VoidedAt == null && other.VoidedAt == null) || (this.VoidedAt?.Equals(other.VoidedAt) == true));
         }

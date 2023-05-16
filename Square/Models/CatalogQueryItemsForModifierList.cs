@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogQueryItemsForModifierList other &&
-                ((this.ModifierListIds == null && other.ModifierListIds == null) || (this.ModifierListIds?.Equals(other.ModifierListIds) == true));
+            return obj is CatalogQueryItemsForModifierList other &&                ((this.ModifierListIds == null && other.ModifierListIds == null) || (this.ModifierListIds?.Equals(other.ModifierListIds) == true));
         }
         
         /// <inheritdoc/>

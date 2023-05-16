@@ -159,9 +159,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is AcceptedPaymentMethods other &&
-                ((this.ApplePay == null && other.ApplePay == null) || (this.ApplePay?.Equals(other.ApplePay) == true)) &&
+            return obj is AcceptedPaymentMethods other &&                ((this.ApplePay == null && other.ApplePay == null) || (this.ApplePay?.Equals(other.ApplePay) == true)) &&
                 ((this.GooglePay == null && other.GooglePay == null) || (this.GooglePay?.Equals(other.GooglePay) == true)) &&
                 ((this.CashAppPay == null && other.CashAppPay == null) || (this.CashAppPay?.Equals(other.CashAppPay) == true)) &&
                 ((this.AfterpayClearpay == null && other.AfterpayClearpay == null) || (this.AfterpayClearpay?.Equals(other.AfterpayClearpay) == true));

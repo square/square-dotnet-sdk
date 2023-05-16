@@ -464,9 +464,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Customer other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is Customer other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.Cards == null && other.Cards == null) || (this.Cards?.Equals(other.Cards) == true)) &&

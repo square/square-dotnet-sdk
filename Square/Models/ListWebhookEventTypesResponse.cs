@@ -80,9 +80,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListWebhookEventTypesResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is ListWebhookEventTypesResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.EventTypes == null && other.EventTypes == null) || (this.EventTypes?.Equals(other.EventTypes) == true)) &&
                 ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true));

@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveCashDrawerShiftRequest other &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
+            return obj is RetrieveCashDrawerShiftRequest other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
         
         /// <inheritdoc/>

@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateWebhookSubscriptionRequest other &&
-                ((this.Subscription == null && other.Subscription == null) || (this.Subscription?.Equals(other.Subscription) == true));
+            return obj is UpdateWebhookSubscriptionRequest other &&                ((this.Subscription == null && other.Subscription == null) || (this.Subscription?.Equals(other.Subscription) == true));
         }
         
         /// <inheritdoc/>

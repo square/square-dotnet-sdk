@@ -113,9 +113,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchOrdersFulfillmentFilter other &&
-                ((this.FulfillmentTypes == null && other.FulfillmentTypes == null) || (this.FulfillmentTypes?.Equals(other.FulfillmentTypes) == true)) &&
+            return obj is SearchOrdersFulfillmentFilter other &&                ((this.FulfillmentTypes == null && other.FulfillmentTypes == null) || (this.FulfillmentTypes?.Equals(other.FulfillmentTypes) == true)) &&
                 ((this.FulfillmentStates == null && other.FulfillmentStates == null) || (this.FulfillmentStates?.Equals(other.FulfillmentStates) == true));
         }
         

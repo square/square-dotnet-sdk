@@ -21,17 +21,17 @@ namespace Square.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="ListCashDrawerShiftsResponse"/> class.
         /// </summary>
-        /// <param name="items">items.</param>
         /// <param name="cursor">cursor.</param>
         /// <param name="errors">errors.</param>
+        /// <param name="cashDrawerShifts">cash_drawer_shifts.</param>
         public ListCashDrawerShiftsResponse(
-            IList<Models.CashDrawerShiftSummary> items = null,
             string cursor = null,
-            IList<Models.Error> errors = null)
+            IList<Models.Error> errors = null,
+            IList<Models.CashDrawerShiftSummary> cashDrawerShifts = null)
         {
-            this.Items = items;
             this.Cursor = cursor;
             this.Errors = errors;
+            this.CashDrawerShifts = cashDrawerShifts;
         }
 
         /// <summary>
@@ -39,13 +39,6 @@ namespace Square.Models
         /// </summary>
         [JsonIgnore]
         public HttpContext Context { get; internal set; }
-
-        /// <summary>
-        /// A collection of CashDrawerShiftSummary objects for shifts that match
-        /// the query.
-        /// </summary>
-        [JsonProperty("items", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<Models.CashDrawerShiftSummary> Items { get; }
 
         /// <summary>
         /// Opaque cursor for fetching the next page of results. Cursor is not
@@ -59,6 +52,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
+
+        /// <summary>
+        /// A collection of CashDrawerShiftSummary objects for shifts that match
+        /// the query.
+        /// </summary>
+        [JsonProperty("cash_drawer_shifts", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.CashDrawerShiftSummary> CashDrawerShifts { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -82,24 +82,22 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListCashDrawerShiftsResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Items == null && other.Items == null) || (this.Items?.Equals(other.Items) == true)) &&
+            return obj is ListCashDrawerShiftsResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.CashDrawerShifts == null && other.CashDrawerShifts == null) || (this.CashDrawerShifts?.Equals(other.CashDrawerShifts) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1182732100;
+            int hashCode = 84684055;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Items, this.Cursor, this.Errors);
+            hashCode = HashCode.Combine(this.Cursor, this.Errors, this.CashDrawerShifts);
 
             return hashCode;
         }
@@ -115,9 +113,9 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Items = {(this.Items == null ? "null" : $"[{string.Join(", ", this.Items)} ]")}");
             toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.CashDrawerShifts = {(this.CashDrawerShifts == null ? "null" : $"[{string.Join(", ", this.CashDrawerShifts)} ]")}");
         }
 
         /// <summary>
@@ -127,9 +125,9 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .Items(this.Items)
                 .Cursor(this.Cursor)
-                .Errors(this.Errors);
+                .Errors(this.Errors)
+                .CashDrawerShifts(this.CashDrawerShifts);
             return builder;
         }
 
@@ -138,20 +136,9 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private IList<Models.CashDrawerShiftSummary> items;
             private string cursor;
             private IList<Models.Error> errors;
-
-             /// <summary>
-             /// Items.
-             /// </summary>
-             /// <param name="items"> items. </param>
-             /// <returns> Builder. </returns>
-            public Builder Items(IList<Models.CashDrawerShiftSummary> items)
-            {
-                this.items = items;
-                return this;
-            }
+            private IList<Models.CashDrawerShiftSummary> cashDrawerShifts;
 
              /// <summary>
              /// Cursor.
@@ -175,6 +162,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CashDrawerShifts.
+             /// </summary>
+             /// <param name="cashDrawerShifts"> cashDrawerShifts. </param>
+             /// <returns> Builder. </returns>
+            public Builder CashDrawerShifts(IList<Models.CashDrawerShiftSummary> cashDrawerShifts)
+            {
+                this.cashDrawerShifts = cashDrawerShifts;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -182,9 +180,9 @@ namespace Square.Models
             public ListCashDrawerShiftsResponse Build()
             {
                 return new ListCashDrawerShiftsResponse(
-                    this.items,
                     this.cursor,
-                    this.errors);
+                    this.errors,
+                    this.cashDrawerShifts);
             }
         }
     }

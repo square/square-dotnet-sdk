@@ -180,9 +180,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderFulfillmentUpdated other &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+            return obj is OrderFulfillmentUpdated other &&                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&

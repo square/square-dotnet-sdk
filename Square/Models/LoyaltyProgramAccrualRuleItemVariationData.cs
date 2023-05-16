@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyProgramAccrualRuleItemVariationData other &&
-                ((this.ItemVariationId == null && other.ItemVariationId == null) || (this.ItemVariationId?.Equals(other.ItemVariationId) == true));
+            return obj is LoyaltyProgramAccrualRuleItemVariationData other &&                ((this.ItemVariationId == null && other.ItemVariationId == null) || (this.ItemVariationId?.Equals(other.ItemVariationId) == true));
         }
         
         /// <inheritdoc/>

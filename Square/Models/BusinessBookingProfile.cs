@@ -203,9 +203,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BusinessBookingProfile other &&
-                ((this.SellerId == null && other.SellerId == null) || (this.SellerId?.Equals(other.SellerId) == true)) &&
+            return obj is BusinessBookingProfile other &&                ((this.SellerId == null && other.SellerId == null) || (this.SellerId?.Equals(other.SellerId) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.BookingEnabled == null && other.BookingEnabled == null) || (this.BookingEnabled?.Equals(other.BookingEnabled) == true)) &&
                 ((this.CustomerTimezoneChoice == null && other.CustomerTimezoneChoice == null) || (this.CustomerTimezoneChoice?.Equals(other.CustomerTimezoneChoice) == true)) &&

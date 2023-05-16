@@ -65,9 +65,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogQuerySet other &&
-                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
+            return obj is CatalogQuerySet other &&                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
                 ((this.AttributeValues == null && other.AttributeValues == null) || (this.AttributeValues?.Equals(other.AttributeValues) == true));
         }
         

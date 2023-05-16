@@ -57,9 +57,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BulkDeleteBookingCustomAttributesRequest other &&
-                ((this.Values == null && other.Values == null) || (this.Values?.Equals(other.Values) == true));
+            return obj is BulkDeleteBookingCustomAttributesRequest other &&                ((this.Values == null && other.Values == null) || (this.Values?.Equals(other.Values) == true));
         }
         
         /// <inheritdoc/>

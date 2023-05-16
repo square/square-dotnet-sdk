@@ -77,9 +77,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchLoyaltyRewardsRequest other &&
-                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
+            return obj is SearchLoyaltyRewardsRequest other &&                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }

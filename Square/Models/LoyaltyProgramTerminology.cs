@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyProgramTerminology other &&
-                ((this.One == null && other.One == null) || (this.One?.Equals(other.One) == true)) &&
+            return obj is LoyaltyProgramTerminology other &&                ((this.One == null && other.One == null) || (this.One?.Equals(other.One) == true)) &&
                 ((this.Other == null && other.Other == null) || (this.Other?.Equals(other.Other) == true));
         }
         

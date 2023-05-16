@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateWageSettingRequest other &&
-                ((this.WageSetting == null && other.WageSetting == null) || (this.WageSetting?.Equals(other.WageSetting) == true));
+            return obj is UpdateWageSettingRequest other &&                ((this.WageSetting == null && other.WageSetting == null) || (this.WageSetting?.Equals(other.WageSetting) == true));
         }
         
         /// <inheritdoc/>

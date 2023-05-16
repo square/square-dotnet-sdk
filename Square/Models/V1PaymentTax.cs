@@ -181,9 +181,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1PaymentTax other &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+            return obj is V1PaymentTax other &&                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
                 ((this.Rate == null && other.Rate == null) || (this.Rate?.Equals(other.Rate) == true)) &&

@@ -303,9 +303,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ObtainTokenRequest other &&
-                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
+            return obj is ObtainTokenRequest other &&                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
                 ((this.ClientSecret == null && other.ClientSecret == null) || (this.ClientSecret?.Equals(other.ClientSecret) == true)) &&
                 ((this.Code == null && other.Code == null) || (this.Code?.Equals(other.Code) == true)) &&
                 ((this.RedirectUri == null && other.RedirectUri == null) || (this.RedirectUri?.Equals(other.RedirectUri) == true)) &&

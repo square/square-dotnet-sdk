@@ -107,9 +107,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListWorkweekConfigsRequest other &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+            return obj is ListWorkweekConfigsRequest other &&                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
         

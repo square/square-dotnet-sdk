@@ -499,9 +499,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderReturnLineItem other &&
-                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+            return obj is OrderReturnLineItem other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.SourceLineItemUid == null && other.SourceLineItemUid == null) || (this.SourceLineItemUid?.Equals(other.SourceLineItemUid) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&

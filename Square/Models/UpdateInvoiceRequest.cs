@@ -71,7 +71,7 @@ namespace Square.Models
         /// A unique string that identifies the `UpdateInvoice` request. If you do not
         /// provide `idempotency_key` (or provide an empty string as the value), the endpoint
         /// treats each request as independent.
-        /// For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -123,9 +123,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateInvoiceRequest other &&
-                ((this.Invoice == null && other.Invoice == null) || (this.Invoice?.Equals(other.Invoice) == true)) &&
+            return obj is UpdateInvoiceRequest other &&                ((this.Invoice == null && other.Invoice == null) || (this.Invoice?.Equals(other.Invoice) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.FieldsToClear == null && other.FieldsToClear == null) || (this.FieldsToClear?.Equals(other.FieldsToClear) == true));
         }

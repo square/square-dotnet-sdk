@@ -49,7 +49,7 @@ namespace Square.Models
         /// <summary>
         /// A pagination cursor returned by a previous call to this endpoint.
         /// Provide this cursor to retrieve the next set of results for your original query.
-        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
@@ -76,9 +76,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchInvoicesRequest other &&
-                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
+            return obj is SearchInvoicesRequest other &&                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }

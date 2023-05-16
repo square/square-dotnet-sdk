@@ -84,9 +84,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListBookingCustomAttributesResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is ListBookingCustomAttributesResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.CustomAttributes == null && other.CustomAttributes == null) || (this.CustomAttributes?.Equals(other.CustomAttributes) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));

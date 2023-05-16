@@ -142,9 +142,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SubscriptionTestResult other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is SubscriptionTestResult other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.StatusCode == null && other.StatusCode == null) || (this.StatusCode?.Equals(other.StatusCode) == true)) &&
                 ((this.Payload == null && other.Payload == null) || (this.Payload?.Equals(other.Payload) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&

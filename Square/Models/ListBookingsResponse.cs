@@ -80,9 +80,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListBookingsResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is ListBookingsResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Bookings == null && other.Bookings == null) || (this.Bookings?.Equals(other.Bookings) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));

@@ -67,9 +67,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ChargeResponse other &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+            return obj is ChargeResponse other &&                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Transaction == null && other.Transaction == null) || (this.Transaction?.Equals(other.Transaction) == true));
         }
         

@@ -250,9 +250,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BankAccountPaymentDetails other &&
-                ((this.BankName == null && other.BankName == null) || (this.BankName?.Equals(other.BankName) == true)) &&
+            return obj is BankAccountPaymentDetails other &&                ((this.BankName == null && other.BankName == null) || (this.BankName?.Equals(other.BankName) == true)) &&
                 ((this.TransferType == null && other.TransferType == null) || (this.TransferType?.Equals(other.TransferType) == true)) &&
                 ((this.AccountOwnershipType == null && other.AccountOwnershipType == null) || (this.AccountOwnershipType?.Equals(other.AccountOwnershipType) == true)) &&
                 ((this.Fingerprint == null && other.Fingerprint == null) || (this.Fingerprint?.Equals(other.Fingerprint) == true)) &&

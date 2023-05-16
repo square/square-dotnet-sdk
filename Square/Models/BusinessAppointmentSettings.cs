@@ -340,9 +340,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BusinessAppointmentSettings other &&
-                ((this.LocationTypes == null && other.LocationTypes == null) || (this.LocationTypes?.Equals(other.LocationTypes) == true)) &&
+            return obj is BusinessAppointmentSettings other &&                ((this.LocationTypes == null && other.LocationTypes == null) || (this.LocationTypes?.Equals(other.LocationTypes) == true)) &&
                 ((this.AlignmentTime == null && other.AlignmentTime == null) || (this.AlignmentTime?.Equals(other.AlignmentTime) == true)) &&
                 ((this.MinBookingLeadTimeSeconds == null && other.MinBookingLeadTimeSeconds == null) || (this.MinBookingLeadTimeSeconds?.Equals(other.MinBookingLeadTimeSeconds) == true)) &&
                 ((this.MaxBookingLeadTimeSeconds == null && other.MaxBookingLeadTimeSeconds == null) || (this.MaxBookingLeadTimeSeconds?.Equals(other.MaxBookingLeadTimeSeconds) == true)) &&

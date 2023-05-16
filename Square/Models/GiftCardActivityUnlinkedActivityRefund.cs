@@ -108,9 +108,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is GiftCardActivityUnlinkedActivityRefund other &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+            return obj is GiftCardActivityUnlinkedActivityRefund other &&                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
         }

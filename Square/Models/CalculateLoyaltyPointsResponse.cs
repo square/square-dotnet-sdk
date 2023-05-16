@@ -82,9 +82,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CalculateLoyaltyPointsResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is CalculateLoyaltyPointsResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Points == null && other.Points == null) || (this.Points?.Equals(other.Points) == true)) &&
                 ((this.PromotionPoints == null && other.PromotionPoints == null) || (this.PromotionPoints?.Equals(other.PromotionPoints) == true));

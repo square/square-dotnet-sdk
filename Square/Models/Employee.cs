@@ -257,9 +257,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Employee other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is Employee other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.FirstName == null && other.FirstName == null) || (this.FirstName?.Equals(other.FirstName) == true)) &&
                 ((this.LastName == null && other.LastName == null) || (this.LastName?.Equals(other.LastName) == true)) &&
                 ((this.Email == null && other.Email == null) || (this.Email?.Equals(other.Email) == true)) &&

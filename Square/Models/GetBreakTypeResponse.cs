@@ -72,9 +72,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is GetBreakTypeResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is GetBreakTypeResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.BreakType == null && other.BreakType == null) || (this.BreakType?.Equals(other.BreakType) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }

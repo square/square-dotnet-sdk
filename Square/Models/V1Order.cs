@@ -564,9 +564,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1Order other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is V1Order other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.BuyerEmail == null && other.BuyerEmail == null) || (this.BuyerEmail?.Equals(other.BuyerEmail) == true)) &&

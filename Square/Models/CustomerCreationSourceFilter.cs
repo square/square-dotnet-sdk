@@ -94,9 +94,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomerCreationSourceFilter other &&
-                ((this.Values == null && other.Values == null) || (this.Values?.Equals(other.Values) == true)) &&
+            return obj is CustomerCreationSourceFilter other &&                ((this.Values == null && other.Values == null) || (this.Values?.Equals(other.Values) == true)) &&
                 ((this.Rule == null && other.Rule == null) || (this.Rule?.Equals(other.Rule) == true));
         }
         

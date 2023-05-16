@@ -602,9 +602,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Order other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is Order other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&

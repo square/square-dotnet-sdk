@@ -58,9 +58,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyPromotionIncentivePointsAdditionData other &&
-                this.PointsAddition.Equals(other.PointsAddition);
+            return obj is LoyaltyPromotionIncentivePointsAdditionData other &&                this.PointsAddition.Equals(other.PointsAddition);
         }
         
         /// <inheritdoc/>

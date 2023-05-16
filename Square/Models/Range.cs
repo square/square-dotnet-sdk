@@ -109,9 +109,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Range other &&
-                ((this.Min == null && other.Min == null) || (this.Min?.Equals(other.Min) == true)) &&
+            return obj is Range other &&                ((this.Min == null && other.Min == null) || (this.Min?.Equals(other.Min) == true)) &&
                 ((this.Max == null && other.Max == null) || (this.Max?.Equals(other.Max) == true));
         }
         

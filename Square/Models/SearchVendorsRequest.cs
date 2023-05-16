@@ -23,17 +23,14 @@ namespace Square.Models
         /// <param name="filter">filter.</param>
         /// <param name="sort">sort.</param>
         /// <param name="cursor">cursor.</param>
-        /// <param name="limit">limit.</param>
         public SearchVendorsRequest(
             Models.SearchVendorsRequestFilter filter = null,
             Models.SearchVendorsRequestSort sort = null,
-            string cursor = null,
-            long? limit = null)
+            string cursor = null)
         {
             this.Filter = filter;
             this.Sort = sort;
             this.Cursor = cursor;
-            this.Limit = limit;
         }
 
         /// <summary>
@@ -55,12 +52,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
-
-        /// <summary>
-        /// Limit on how many vendors will be returned by the search.
-        /// </summary>
-        [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
-        public long? Limit { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -84,19 +75,16 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchVendorsRequest other &&
-                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true)) &&
+            return obj is SearchVendorsRequest other &&                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true)) &&
                 ((this.Sort == null && other.Sort == null) || (this.Sort?.Equals(other.Sort) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1868915375;
-            hashCode = HashCode.Combine(this.Filter, this.Sort, this.Cursor, this.Limit);
+            int hashCode = 820396067;
+            hashCode = HashCode.Combine(this.Filter, this.Sort, this.Cursor);
 
             return hashCode;
         }
@@ -109,7 +97,6 @@ namespace Square.Models
             toStringOutput.Add($"this.Filter = {(this.Filter == null ? "null" : this.Filter.ToString())}");
             toStringOutput.Add($"this.Sort = {(this.Sort == null ? "null" : this.Sort.ToString())}");
             toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
-            toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
         }
 
         /// <summary>
@@ -121,8 +108,7 @@ namespace Square.Models
             var builder = new Builder()
                 .Filter(this.Filter)
                 .Sort(this.Sort)
-                .Cursor(this.Cursor)
-                .Limit(this.Limit);
+                .Cursor(this.Cursor);
             return builder;
         }
 
@@ -134,7 +120,6 @@ namespace Square.Models
             private Models.SearchVendorsRequestFilter filter;
             private Models.SearchVendorsRequestSort sort;
             private string cursor;
-            private long? limit;
 
              /// <summary>
              /// Filter.
@@ -169,17 +154,6 @@ namespace Square.Models
                 return this;
             }
 
-             /// <summary>
-             /// Limit.
-             /// </summary>
-             /// <param name="limit"> limit. </param>
-             /// <returns> Builder. </returns>
-            public Builder Limit(long? limit)
-            {
-                this.limit = limit;
-                return this;
-            }
-
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -189,8 +163,7 @@ namespace Square.Models
                 return new SearchVendorsRequest(
                     this.filter,
                     this.sort,
-                    this.cursor,
-                    this.limit);
+                    this.cursor);
             }
         }
     }

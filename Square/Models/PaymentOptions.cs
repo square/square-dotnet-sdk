@@ -164,9 +164,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is PaymentOptions other &&
-                ((this.Autocomplete == null && other.Autocomplete == null) || (this.Autocomplete?.Equals(other.Autocomplete) == true)) &&
+            return obj is PaymentOptions other &&                ((this.Autocomplete == null && other.Autocomplete == null) || (this.Autocomplete?.Equals(other.Autocomplete) == true)) &&
                 ((this.DelayDuration == null && other.DelayDuration == null) || (this.DelayDuration?.Equals(other.DelayDuration) == true)) &&
                 ((this.AcceptPartialAuthorization == null && other.AcceptPartialAuthorization == null) || (this.AcceptPartialAuthorization?.Equals(other.AcceptPartialAuthorization) == true)) &&
                 ((this.DelayAction == null && other.DelayAction == null) || (this.DelayAction?.Equals(other.DelayAction) == true));

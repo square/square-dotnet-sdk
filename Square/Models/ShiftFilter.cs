@@ -186,9 +186,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ShiftFilter other &&
-                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+            return obj is ShiftFilter other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
                 ((this.EmployeeIds == null && other.EmployeeIds == null) || (this.EmployeeIds?.Equals(other.EmployeeIds) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.Start == null && other.Start == null) || (this.Start?.Equals(other.Start) == true)) &&

@@ -111,9 +111,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogCustomAttributeDefinitionSelectionConfig other &&
-                ((this.MaxAllowedSelections == null && other.MaxAllowedSelections == null) || (this.MaxAllowedSelections?.Equals(other.MaxAllowedSelections) == true)) &&
+            return obj is CatalogCustomAttributeDefinitionSelectionConfig other &&                ((this.MaxAllowedSelections == null && other.MaxAllowedSelections == null) || (this.MaxAllowedSelections?.Equals(other.MaxAllowedSelections) == true)) &&
                 ((this.AllowedSelections == null && other.AllowedSelections == null) || (this.AllowedSelections?.Equals(other.AllowedSelections) == true));
         }
         

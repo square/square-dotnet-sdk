@@ -94,9 +94,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchOrdersResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is SearchOrdersResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.OrderEntries == null && other.OrderEntries == null) || (this.OrderEntries?.Equals(other.OrderEntries) == true)) &&
                 ((this.Orders == null && other.Orders == null) || (this.Orders?.Equals(other.Orders) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&

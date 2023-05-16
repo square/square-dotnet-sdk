@@ -83,9 +83,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListGiftCardsResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is ListGiftCardsResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.GiftCards == null && other.GiftCards == null) || (this.GiftCards?.Equals(other.GiftCards) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));

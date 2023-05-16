@@ -134,9 +134,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is FilterValue other &&
-                ((this.All == null && other.All == null) || (this.All?.Equals(other.All) == true)) &&
+            return obj is FilterValue other &&                ((this.All == null && other.All == null) || (this.All?.Equals(other.All) == true)) &&
                 ((this.Any == null && other.Any == null) || (this.Any?.Equals(other.Any) == true)) &&
                 ((this.None == null && other.None == null) || (this.None?.Equals(other.None) == true));
         }

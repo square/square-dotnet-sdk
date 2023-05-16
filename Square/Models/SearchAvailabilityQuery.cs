@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchAvailabilityQuery other &&
-                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true));
+            return obj is SearchAvailabilityQuery other &&                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true));
         }
         
         /// <inheritdoc/>

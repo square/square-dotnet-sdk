@@ -67,9 +67,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CreateTeamMemberRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is CreateTeamMemberRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.TeamMember == null && other.TeamMember == null) || (this.TeamMember?.Equals(other.TeamMember) == true));
         }
         

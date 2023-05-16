@@ -107,9 +107,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogItemOptionValueForItemVariation other &&
-                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
+            return obj is CatalogItemOptionValueForItemVariation other &&                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
                 ((this.ItemOptionValueId == null && other.ItemOptionValueId == null) || (this.ItemOptionValueId?.Equals(other.ItemOptionValueId) == true));
         }
         

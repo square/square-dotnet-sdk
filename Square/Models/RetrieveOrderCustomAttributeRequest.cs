@@ -95,9 +95,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveOrderCustomAttributeRequest other &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
+            return obj is RetrieveOrderCustomAttributeRequest other &&                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.WithDefinition == null && other.WithDefinition == null) || (this.WithDefinition?.Equals(other.WithDefinition) == true));
         }
         

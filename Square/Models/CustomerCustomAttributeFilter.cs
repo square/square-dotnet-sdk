@@ -79,9 +79,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomerCustomAttributeFilter other &&
-                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
+            return obj is CustomerCustomAttributeFilter other &&                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
                 ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
         }

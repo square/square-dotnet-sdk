@@ -20,11 +20,11 @@ namespace Square.Apis
     public interface IMerchantsApi
     {
         /// <summary>
-        /// Provides details about the merchant associated with a given access token. .
-        /// The access token used to connect your application to a Square seller is associated .
-        /// with a single merchant. That means that `ListMerchants` returns a list .
-        /// with a single `Merchant` object. You can specify your personal access token .
-        /// to get your own merchant information or specify an OAuth token to get the .
+        /// Provides details about the merchant associated with a given access token.
+        /// The access token used to connect your application to a Square seller is associated.
+        /// with a single merchant. That means that `ListMerchants` returns a list.
+        /// with a single `Merchant` object. You can specify your personal access token.
+        /// to get your own merchant information or specify an OAuth token to get the.
         /// information for the merchant that granted your application access.
         /// If you know the merchant ID, you can also use the [RetrieveMerchant]($e/Merchants/RetrieveMerchant).
         /// endpoint to retrieve the merchant information.
@@ -35,11 +35,11 @@ namespace Square.Apis
                 int? cursor = null);
 
         /// <summary>
-        /// Provides details about the merchant associated with a given access token. .
-        /// The access token used to connect your application to a Square seller is associated .
-        /// with a single merchant. That means that `ListMerchants` returns a list .
-        /// with a single `Merchant` object. You can specify your personal access token .
-        /// to get your own merchant information or specify an OAuth token to get the .
+        /// Provides details about the merchant associated with a given access token.
+        /// The access token used to connect your application to a Square seller is associated.
+        /// with a single merchant. That means that `ListMerchants` returns a list.
+        /// with a single `Merchant` object. You can specify your personal access token.
+        /// to get your own merchant information or specify an OAuth token to get the.
         /// information for the merchant that granted your application access.
         /// If you know the merchant ID, you can also use the [RetrieveMerchant]($e/Merchants/RetrieveMerchant).
         /// endpoint to retrieve the merchant information.

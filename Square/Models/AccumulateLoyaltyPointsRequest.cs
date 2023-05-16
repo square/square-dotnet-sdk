@@ -74,9 +74,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is AccumulateLoyaltyPointsRequest other &&
-                ((this.AccumulatePoints == null && other.AccumulatePoints == null) || (this.AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&
+            return obj is AccumulateLoyaltyPointsRequest other &&                ((this.AccumulatePoints == null && other.AccumulatePoints == null) || (this.AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }

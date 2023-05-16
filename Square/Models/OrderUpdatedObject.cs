@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderUpdatedObject other &&
-                ((this.OrderUpdated == null && other.OrderUpdated == null) || (this.OrderUpdated?.Equals(other.OrderUpdated) == true));
+            return obj is OrderUpdatedObject other &&                ((this.OrderUpdated == null && other.OrderUpdated == null) || (this.OrderUpdated?.Equals(other.OrderUpdated) == true));
         }
         
         /// <inheritdoc/>

@@ -87,9 +87,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogCustomAttributeDefinitionNumberConfig other &&
-                ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true));
+            return obj is CatalogCustomAttributeDefinitionNumberConfig other &&                ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true));
         }
         
         /// <inheritdoc/>

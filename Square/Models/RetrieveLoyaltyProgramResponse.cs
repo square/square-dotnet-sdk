@@ -73,9 +73,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveLoyaltyProgramResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is RetrieveLoyaltyProgramResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Program == null && other.Program == null) || (this.Program?.Equals(other.Program) == true));
         }

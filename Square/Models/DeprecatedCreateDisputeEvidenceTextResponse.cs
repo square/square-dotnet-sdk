@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DeprecatedCreateDisputeEvidenceTextResponse other &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+            return obj is DeprecatedCreateDisputeEvidenceTextResponse other &&                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Evidence == null && other.Evidence == null) || (this.Evidence?.Equals(other.Evidence) == true));
         }
         

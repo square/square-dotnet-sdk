@@ -267,9 +267,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderReturnDiscount other &&
-                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+            return obj is OrderReturnDiscount other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.SourceDiscountUid == null && other.SourceDiscountUid == null) || (this.SourceDiscountUid?.Equals(other.SourceDiscountUid) == true)) &&
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&

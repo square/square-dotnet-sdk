@@ -341,9 +341,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is PaymentRefund other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is PaymentRefund other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.Unlinked == null && other.Unlinked == null) || (this.Unlinked?.Equals(other.Unlinked) == true)) &&

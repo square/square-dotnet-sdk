@@ -107,9 +107,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogV1Id other &&
-                ((this.CatalogV1IdProp == null && other.CatalogV1IdProp == null) || (this.CatalogV1IdProp?.Equals(other.CatalogV1IdProp) == true)) &&
+            return obj is CatalogV1Id other &&                ((this.CatalogV1IdProp == null && other.CatalogV1IdProp == null) || (this.CatalogV1IdProp?.Equals(other.CatalogV1IdProp) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
         

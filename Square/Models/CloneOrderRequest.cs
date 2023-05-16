@@ -74,7 +74,7 @@ namespace Square.Models
         /// you can reattempt the call with the same idempotency key without
         /// worrying about creating duplicate cloned orders.
         /// The originally cloned order is returned.
-        /// For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -110,9 +110,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CloneOrderRequest other &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+            return obj is CloneOrderRequest other &&                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }

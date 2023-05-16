@@ -81,9 +81,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RenewTokenRequest other &&
-                ((this.AccessToken == null && other.AccessToken == null) || (this.AccessToken?.Equals(other.AccessToken) == true));
+            return obj is RenewTokenRequest other &&                ((this.AccessToken == null && other.AccessToken == null) || (this.AccessToken?.Equals(other.AccessToken) == true));
         }
         
         /// <inheritdoc/>

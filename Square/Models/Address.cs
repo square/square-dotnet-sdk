@@ -412,9 +412,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Address other &&
-                ((this.AddressLine1 == null && other.AddressLine1 == null) || (this.AddressLine1?.Equals(other.AddressLine1) == true)) &&
+            return obj is Address other &&                ((this.AddressLine1 == null && other.AddressLine1 == null) || (this.AddressLine1?.Equals(other.AddressLine1) == true)) &&
                 ((this.AddressLine2 == null && other.AddressLine2 == null) || (this.AddressLine2?.Equals(other.AddressLine2) == true)) &&
                 ((this.AddressLine3 == null && other.AddressLine3 == null) || (this.AddressLine3?.Equals(other.AddressLine3) == true)) &&
                 ((this.Locality == null && other.Locality == null) || (this.Locality?.Equals(other.Locality) == true)) &&

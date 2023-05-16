@@ -107,9 +107,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ShiftWorkday other &&
-                ((this.DateRange == null && other.DateRange == null) || (this.DateRange?.Equals(other.DateRange) == true)) &&
+            return obj is ShiftWorkday other &&                ((this.DateRange == null && other.DateRange == null) || (this.DateRange?.Equals(other.DateRange) == true)) &&
                 ((this.MatchShiftsBy == null && other.MatchShiftsBy == null) || (this.MatchShiftsBy?.Equals(other.MatchShiftsBy) == true)) &&
                 ((this.DefaultTimezone == null && other.DefaultTimezone == null) || (this.DefaultTimezone?.Equals(other.DefaultTimezone) == true));
         }

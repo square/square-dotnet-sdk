@@ -13,13 +13,13 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// SquareEvent.
+    /// Event.
     /// </summary>
-    public class SquareEvent
+    public class Event
     {
         private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
-        /// Initializes a new instance of the <see cref="SquareEvent"/> class.
+        /// Initializes a new instance of the <see cref="Event"/> class.
         /// </summary>
         /// <param name="merchantId">merchant_id.</param>
         /// <param name="locationId">location_id.</param>
@@ -27,13 +27,13 @@ namespace Square.Models
         /// <param name="eventId">event_id.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="data">data.</param>
-        public SquareEvent(
+        public Event(
             string merchantId = null,
             string locationId = null,
             string type = null,
             string eventId = null,
             string createdAt = null,
-            Models.SquareEventData data = null)
+            Models.EventData data = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -70,13 +70,13 @@ namespace Square.Models
             this.CreatedAt = createdAt;
             this.Data = data;
         }
-        internal SquareEvent(Dictionary<string, bool> shouldSerialize,
+        internal Event(Dictionary<string, bool> shouldSerialize,
             string merchantId = null,
             string locationId = null,
             string type = null,
             string eventId = null,
             string createdAt = null,
-            Models.SquareEventData data = null)
+            Models.EventData data = null)
         {
             this.shouldSerialize = shouldSerialize;
             MerchantId = merchantId;
@@ -121,7 +121,7 @@ namespace Square.Models
         /// Gets or sets Data.
         /// </summary>
         [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.SquareEventData Data { get; }
+        public Models.EventData Data { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -130,7 +130,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"SquareEvent : ({string.Join(", ", toStringOutput)})";
+            return $"Event : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <summary>
@@ -181,9 +181,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SquareEvent other &&
-                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
+            return obj is Event other &&                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.EventId == null && other.EventId == null) || (this.EventId?.Equals(other.EventId) == true)) &&
@@ -194,7 +192,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 106860178;
+            int hashCode = 1541969600;
             hashCode = HashCode.Combine(this.MerchantId, this.LocationId, this.Type, this.EventId, this.CreatedAt, this.Data);
 
             return hashCode;
@@ -247,7 +245,7 @@ namespace Square.Models
             private string type;
             private string eventId;
             private string createdAt;
-            private Models.SquareEventData data;
+            private Models.EventData data;
 
              /// <summary>
              /// MerchantId.
@@ -313,7 +311,7 @@ namespace Square.Models
              /// </summary>
              /// <param name="data"> data. </param>
              /// <returns> Builder. </returns>
-            public Builder Data(Models.SquareEventData data)
+            public Builder Data(Models.EventData data)
             {
                 this.data = data;
                 return this;
@@ -355,10 +353,10 @@ namespace Square.Models
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> SquareEvent. </returns>
-            public SquareEvent Build()
+            /// <returns> Event. </returns>
+            public Event Build()
             {
-                return new SquareEvent(shouldSerialize,
+                return new Event(shouldSerialize,
                     this.merchantId,
                     this.locationId,
                     this.type,

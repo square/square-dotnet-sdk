@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is InvoiceSort other &&
-                ((this.Field == null && other.Field == null) || (this.Field?.Equals(other.Field) == true)) &&
+            return obj is InvoiceSort other &&                ((this.Field == null && other.Field == null) || (this.Field?.Equals(other.Field) == true)) &&
                 ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true));
         }
         

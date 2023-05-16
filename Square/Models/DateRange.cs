@@ -111,9 +111,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DateRange other &&
-                ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
+            return obj is DateRange other &&                ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
                 ((this.EndDate == null && other.EndDate == null) || (this.EndDate?.Equals(other.EndDate) == true));
         }
         

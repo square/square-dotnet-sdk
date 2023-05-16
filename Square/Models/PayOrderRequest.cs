@@ -122,9 +122,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is PayOrderRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is PayOrderRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.OrderVersion == null && other.OrderVersion == null) || (this.OrderVersion?.Equals(other.OrderVersion) == true)) &&
                 ((this.PaymentIds == null && other.PaymentIds == null) || (this.PaymentIds?.Equals(other.PaymentIds) == true));
         }

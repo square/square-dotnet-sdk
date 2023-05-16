@@ -247,9 +247,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyPromotion other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is LoyaltyPromotion other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Incentive == null && other.Incentive == null) || (this.Incentive?.Equals(other.Incentive) == true)) &&
                 ((this.AvailableTime == null && other.AvailableTime == null) || (this.AvailableTime?.Equals(other.AvailableTime) == true)) &&

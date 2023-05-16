@@ -106,9 +106,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is InventoryChange other &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+            return obj is InventoryChange other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.PhysicalCount == null && other.PhysicalCount == null) || (this.PhysicalCount?.Equals(other.PhysicalCount) == true)) &&
                 ((this.Adjustment == null && other.Adjustment == null) || (this.Adjustment?.Equals(other.Adjustment) == true)) &&
                 ((this.Transfer == null && other.Transfer == null) || (this.Transfer?.Equals(other.Transfer) == true)) &&

@@ -101,9 +101,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchOrdersRequest other &&
-                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+            return obj is SearchOrdersRequest other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&

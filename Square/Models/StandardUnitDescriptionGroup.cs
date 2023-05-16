@@ -107,9 +107,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is StandardUnitDescriptionGroup other &&
-                ((this.StandardUnitDescriptions == null && other.StandardUnitDescriptions == null) || (this.StandardUnitDescriptions?.Equals(other.StandardUnitDescriptions) == true)) &&
+            return obj is StandardUnitDescriptionGroup other &&                ((this.StandardUnitDescriptions == null && other.StandardUnitDescriptions == null) || (this.StandardUnitDescriptions?.Equals(other.StandardUnitDescriptions) == true)) &&
                 ((this.LanguageCode == null && other.LanguageCode == null) || (this.LanguageCode?.Equals(other.LanguageCode) == true));
         }
         

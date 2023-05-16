@@ -71,9 +71,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is GetTerminalRefundResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is GetTerminalRefundResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Refund == null && other.Refund == null) || (this.Refund?.Equals(other.Refund) == true));
         }

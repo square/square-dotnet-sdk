@@ -152,9 +152,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderQuantityUnit other &&
-                ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
+            return obj is OrderQuantityUnit other &&                ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
                 ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true)) &&
                 ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));

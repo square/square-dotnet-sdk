@@ -72,9 +72,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TestWebhookSubscriptionResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is TestWebhookSubscriptionResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.SubscriptionTestResult == null && other.SubscriptionTestResult == null) || (this.SubscriptionTestResult?.Equals(other.SubscriptionTestResult) == true));
         }

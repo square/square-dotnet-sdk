@@ -85,9 +85,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Error other &&
-                ((this.Category == null && other.Category == null) || (this.Category?.Equals(other.Category) == true)) &&
+            return obj is Error other &&                ((this.Category == null && other.Category == null) || (this.Category?.Equals(other.Category) == true)) &&
                 ((this.Code == null && other.Code == null) || (this.Code?.Equals(other.Code) == true)) &&
                 ((this.Detail == null && other.Detail == null) || (this.Detail?.Equals(other.Detail) == true)) &&
                 ((this.Field == null && other.Field == null) || (this.Field?.Equals(other.Field) == true));

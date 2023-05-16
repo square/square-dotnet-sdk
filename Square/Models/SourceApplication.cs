@@ -120,9 +120,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SourceApplication other &&
-                ((this.Product == null && other.Product == null) || (this.Product?.Equals(other.Product) == true)) &&
+            return obj is SourceApplication other &&                ((this.Product == null && other.Product == null) || (this.Product?.Equals(other.Product) == true)) &&
                 ((this.ApplicationId == null && other.ApplicationId == null) || (this.ApplicationId?.Equals(other.ApplicationId) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
         }

@@ -94,9 +94,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1Money other &&
-                ((this.Amount == null && other.Amount == null) || (this.Amount?.Equals(other.Amount) == true)) &&
+            return obj is V1Money other &&                ((this.Amount == null && other.Amount == null) || (this.Amount?.Equals(other.Amount) == true)) &&
                 ((this.CurrencyCode == null && other.CurrencyCode == null) || (this.CurrencyCode?.Equals(other.CurrencyCode) == true));
         }
         

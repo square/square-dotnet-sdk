@@ -26,10 +26,6 @@ namespace Square.Models
         /// <param name="openedAt">opened_at.</param>
         /// <param name="endedAt">ended_at.</param>
         /// <param name="closedAt">closed_at.</param>
-        /// <param name="employeeIds">employee_ids.</param>
-        /// <param name="openingEmployeeId">opening_employee_id.</param>
-        /// <param name="endingEmployeeId">ending_employee_id.</param>
-        /// <param name="closingEmployeeId">closing_employee_id.</param>
         /// <param name="description">description.</param>
         /// <param name="openedCashMoney">opened_cash_money.</param>
         /// <param name="cashPaymentMoney">cash_payment_money.</param>
@@ -39,16 +35,19 @@ namespace Square.Models
         /// <param name="expectedCashMoney">expected_cash_money.</param>
         /// <param name="closedCashMoney">closed_cash_money.</param>
         /// <param name="device">device.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="locationId">location_id.</param>
+        /// <param name="teamMemberIds">team_member_ids.</param>
+        /// <param name="openingTeamMemberId">opening_team_member_id.</param>
+        /// <param name="endingTeamMemberId">ending_team_member_id.</param>
+        /// <param name="closingTeamMemberId">closing_team_member_id.</param>
         public CashDrawerShift(
             string id = null,
             string state = null,
             string openedAt = null,
             string endedAt = null,
             string closedAt = null,
-            IList<string> employeeIds = null,
-            string openingEmployeeId = null,
-            string endingEmployeeId = null,
-            string closingEmployeeId = null,
             string description = null,
             Models.Money openedCashMoney = null,
             Models.Money cashPaymentMoney = null,
@@ -57,17 +56,20 @@ namespace Square.Models
             Models.Money cashPaidOutMoney = null,
             Models.Money expectedCashMoney = null,
             Models.Money closedCashMoney = null,
-            Models.CashDrawerDevice device = null)
+            Models.CashDrawerDevice device = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string locationId = null,
+            IList<string> teamMemberIds = null,
+            string openingTeamMemberId = null,
+            string endingTeamMemberId = null,
+            string closingTeamMemberId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "opened_at", false },
                 { "ended_at", false },
                 { "closed_at", false },
-                { "employee_ids", false },
-                { "opening_employee_id", false },
-                { "ending_employee_id", false },
-                { "closing_employee_id", false },
                 { "description", false }
             };
 
@@ -91,30 +93,6 @@ namespace Square.Models
                 this.ClosedAt = closedAt;
             }
 
-            if (employeeIds != null)
-            {
-                shouldSerialize["employee_ids"] = true;
-                this.EmployeeIds = employeeIds;
-            }
-
-            if (openingEmployeeId != null)
-            {
-                shouldSerialize["opening_employee_id"] = true;
-                this.OpeningEmployeeId = openingEmployeeId;
-            }
-
-            if (endingEmployeeId != null)
-            {
-                shouldSerialize["ending_employee_id"] = true;
-                this.EndingEmployeeId = endingEmployeeId;
-            }
-
-            if (closingEmployeeId != null)
-            {
-                shouldSerialize["closing_employee_id"] = true;
-                this.ClosingEmployeeId = closingEmployeeId;
-            }
-
             if (description != null)
             {
                 shouldSerialize["description"] = true;
@@ -129,6 +107,13 @@ namespace Square.Models
             this.ExpectedCashMoney = expectedCashMoney;
             this.ClosedCashMoney = closedCashMoney;
             this.Device = device;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.LocationId = locationId;
+            this.TeamMemberIds = teamMemberIds;
+            this.OpeningTeamMemberId = openingTeamMemberId;
+            this.EndingTeamMemberId = endingTeamMemberId;
+            this.ClosingTeamMemberId = closingTeamMemberId;
         }
         internal CashDrawerShift(Dictionary<string, bool> shouldSerialize,
             string id = null,
@@ -136,10 +121,6 @@ namespace Square.Models
             string openedAt = null,
             string endedAt = null,
             string closedAt = null,
-            IList<string> employeeIds = null,
-            string openingEmployeeId = null,
-            string endingEmployeeId = null,
-            string closingEmployeeId = null,
             string description = null,
             Models.Money openedCashMoney = null,
             Models.Money cashPaymentMoney = null,
@@ -148,7 +129,14 @@ namespace Square.Models
             Models.Money cashPaidOutMoney = null,
             Models.Money expectedCashMoney = null,
             Models.Money closedCashMoney = null,
-            Models.CashDrawerDevice device = null)
+            Models.CashDrawerDevice device = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string locationId = null,
+            IList<string> teamMemberIds = null,
+            string openingTeamMemberId = null,
+            string endingTeamMemberId = null,
+            string closingTeamMemberId = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -156,10 +144,6 @@ namespace Square.Models
             OpenedAt = openedAt;
             EndedAt = endedAt;
             ClosedAt = closedAt;
-            EmployeeIds = employeeIds;
-            OpeningEmployeeId = openingEmployeeId;
-            EndingEmployeeId = endingEmployeeId;
-            ClosingEmployeeId = closingEmployeeId;
             Description = description;
             OpenedCashMoney = openedCashMoney;
             CashPaymentMoney = cashPaymentMoney;
@@ -169,6 +153,13 @@ namespace Square.Models
             ExpectedCashMoney = expectedCashMoney;
             ClosedCashMoney = closedCashMoney;
             Device = device;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            LocationId = locationId;
+            TeamMemberIds = teamMemberIds;
+            OpeningTeamMemberId = openingTeamMemberId;
+            EndingTeamMemberId = endingTeamMemberId;
+            ClosingTeamMemberId = closingTeamMemberId;
         }
 
         /// <summary>
@@ -200,32 +191,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("closed_at")]
         public string ClosedAt { get; }
-
-        /// <summary>
-        /// The IDs of all employees that were logged into Square Point of Sale at any
-        /// point while the cash drawer shift was open.
-        /// </summary>
-        [JsonProperty("employee_ids")]
-        public IList<string> EmployeeIds { get; }
-
-        /// <summary>
-        /// The ID of the employee that started the cash drawer shift.
-        /// </summary>
-        [JsonProperty("opening_employee_id")]
-        public string OpeningEmployeeId { get; }
-
-        /// <summary>
-        /// The ID of the employee that ended the cash drawer shift.
-        /// </summary>
-        [JsonProperty("ending_employee_id")]
-        public string EndingEmployeeId { get; }
-
-        /// <summary>
-        /// The ID of the employee that closed the cash drawer shift by auditing
-        /// the cash drawer contents.
-        /// </summary>
-        [JsonProperty("closing_employee_id")]
-        public string ClosingEmployeeId { get; }
 
         /// <summary>
         /// The free-form text description of a cash drawer by an employee.
@@ -316,6 +281,50 @@ namespace Square.Models
         [JsonProperty("device", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CashDrawerDevice Device { get; }
 
+        /// <summary>
+        /// The shift start time in RFC 3339 format.
+        /// </summary>
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
+        public string CreatedAt { get; }
+
+        /// <summary>
+        /// The shift updated at time in RFC 3339 format.
+        /// </summary>
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
+        public string UpdatedAt { get; }
+
+        /// <summary>
+        /// The ID of the location the cash drawer shift belongs to.
+        /// </summary>
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string LocationId { get; }
+
+        /// <summary>
+        /// The IDs of all team members that were logged into Square Point of Sale at any
+        /// point while the cash drawer shift was open.
+        /// </summary>
+        [JsonProperty("team_member_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> TeamMemberIds { get; }
+
+        /// <summary>
+        /// The ID of the team member that started the cash drawer shift.
+        /// </summary>
+        [JsonProperty("opening_team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string OpeningTeamMemberId { get; }
+
+        /// <summary>
+        /// The ID of the team member that ended the cash drawer shift.
+        /// </summary>
+        [JsonProperty("ending_team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string EndingTeamMemberId { get; }
+
+        /// <summary>
+        /// The ID of the team member that closed the cash drawer shift by auditing
+        /// the cash drawer contents.
+        /// </summary>
+        [JsonProperty("closing_team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string ClosingTeamMemberId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -357,42 +366,6 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeEmployeeIds()
-        {
-            return this.shouldSerialize["employee_ids"];
-        }
-
-        /// <summary>
-        /// Checks if the field should be serialized or not.
-        /// </summary>
-        /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeOpeningEmployeeId()
-        {
-            return this.shouldSerialize["opening_employee_id"];
-        }
-
-        /// <summary>
-        /// Checks if the field should be serialized or not.
-        /// </summary>
-        /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeEndingEmployeeId()
-        {
-            return this.shouldSerialize["ending_employee_id"];
-        }
-
-        /// <summary>
-        /// Checks if the field should be serialized or not.
-        /// </summary>
-        /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeClosingEmployeeId()
-        {
-            return this.shouldSerialize["closing_employee_id"];
-        }
-
-        /// <summary>
-        /// Checks if the field should be serialized or not.
-        /// </summary>
-        /// <returns>A boolean weather the field should be serialized or not.</returns>
         public bool ShouldSerializeDescription()
         {
             return this.shouldSerialize["description"];
@@ -410,17 +383,11 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CashDrawerShift other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is CashDrawerShift other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
                 ((this.OpenedAt == null && other.OpenedAt == null) || (this.OpenedAt?.Equals(other.OpenedAt) == true)) &&
                 ((this.EndedAt == null && other.EndedAt == null) || (this.EndedAt?.Equals(other.EndedAt) == true)) &&
                 ((this.ClosedAt == null && other.ClosedAt == null) || (this.ClosedAt?.Equals(other.ClosedAt) == true)) &&
-                ((this.EmployeeIds == null && other.EmployeeIds == null) || (this.EmployeeIds?.Equals(other.EmployeeIds) == true)) &&
-                ((this.OpeningEmployeeId == null && other.OpeningEmployeeId == null) || (this.OpeningEmployeeId?.Equals(other.OpeningEmployeeId) == true)) &&
-                ((this.EndingEmployeeId == null && other.EndingEmployeeId == null) || (this.EndingEmployeeId?.Equals(other.EndingEmployeeId) == true)) &&
-                ((this.ClosingEmployeeId == null && other.ClosingEmployeeId == null) || (this.ClosingEmployeeId?.Equals(other.ClosingEmployeeId) == true)) &&
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.OpenedCashMoney == null && other.OpenedCashMoney == null) || (this.OpenedCashMoney?.Equals(other.OpenedCashMoney) == true)) &&
                 ((this.CashPaymentMoney == null && other.CashPaymentMoney == null) || (this.CashPaymentMoney?.Equals(other.CashPaymentMoney) == true)) &&
@@ -429,18 +396,25 @@ namespace Square.Models
                 ((this.CashPaidOutMoney == null && other.CashPaidOutMoney == null) || (this.CashPaidOutMoney?.Equals(other.CashPaidOutMoney) == true)) &&
                 ((this.ExpectedCashMoney == null && other.ExpectedCashMoney == null) || (this.ExpectedCashMoney?.Equals(other.ExpectedCashMoney) == true)) &&
                 ((this.ClosedCashMoney == null && other.ClosedCashMoney == null) || (this.ClosedCashMoney?.Equals(other.ClosedCashMoney) == true)) &&
-                ((this.Device == null && other.Device == null) || (this.Device?.Equals(other.Device) == true));
+                ((this.Device == null && other.Device == null) || (this.Device?.Equals(other.Device) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+                ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true)) &&
+                ((this.OpeningTeamMemberId == null && other.OpeningTeamMemberId == null) || (this.OpeningTeamMemberId?.Equals(other.OpeningTeamMemberId) == true)) &&
+                ((this.EndingTeamMemberId == null && other.EndingTeamMemberId == null) || (this.EndingTeamMemberId?.Equals(other.EndingTeamMemberId) == true)) &&
+                ((this.ClosingTeamMemberId == null && other.ClosingTeamMemberId == null) || (this.ClosingTeamMemberId?.Equals(other.ClosingTeamMemberId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -498109440;
-            hashCode = HashCode.Combine(this.Id, this.State, this.OpenedAt, this.EndedAt, this.ClosedAt, this.EmployeeIds, this.OpeningEmployeeId);
+            int hashCode = 1388764759;
+            hashCode = HashCode.Combine(this.Id, this.State, this.OpenedAt, this.EndedAt, this.ClosedAt, this.Description, this.OpenedCashMoney);
 
-            hashCode = HashCode.Combine(hashCode, this.EndingEmployeeId, this.ClosingEmployeeId, this.Description, this.OpenedCashMoney, this.CashPaymentMoney, this.CashRefundsMoney, this.CashPaidInMoney);
+            hashCode = HashCode.Combine(hashCode, this.CashPaymentMoney, this.CashRefundsMoney, this.CashPaidInMoney, this.CashPaidOutMoney, this.ExpectedCashMoney, this.ClosedCashMoney, this.Device);
 
-            hashCode = HashCode.Combine(hashCode, this.CashPaidOutMoney, this.ExpectedCashMoney, this.ClosedCashMoney, this.Device);
+            hashCode = HashCode.Combine(hashCode, this.CreatedAt, this.UpdatedAt, this.LocationId, this.TeamMemberIds, this.OpeningTeamMemberId, this.EndingTeamMemberId, this.ClosingTeamMemberId);
 
             return hashCode;
         }
@@ -455,10 +429,6 @@ namespace Square.Models
             toStringOutput.Add($"this.OpenedAt = {(this.OpenedAt == null ? "null" : this.OpenedAt == string.Empty ? "" : this.OpenedAt)}");
             toStringOutput.Add($"this.EndedAt = {(this.EndedAt == null ? "null" : this.EndedAt == string.Empty ? "" : this.EndedAt)}");
             toStringOutput.Add($"this.ClosedAt = {(this.ClosedAt == null ? "null" : this.ClosedAt == string.Empty ? "" : this.ClosedAt)}");
-            toStringOutput.Add($"this.EmployeeIds = {(this.EmployeeIds == null ? "null" : $"[{string.Join(", ", this.EmployeeIds)} ]")}");
-            toStringOutput.Add($"this.OpeningEmployeeId = {(this.OpeningEmployeeId == null ? "null" : this.OpeningEmployeeId == string.Empty ? "" : this.OpeningEmployeeId)}");
-            toStringOutput.Add($"this.EndingEmployeeId = {(this.EndingEmployeeId == null ? "null" : this.EndingEmployeeId == string.Empty ? "" : this.EndingEmployeeId)}");
-            toStringOutput.Add($"this.ClosingEmployeeId = {(this.ClosingEmployeeId == null ? "null" : this.ClosingEmployeeId == string.Empty ? "" : this.ClosingEmployeeId)}");
             toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
             toStringOutput.Add($"this.OpenedCashMoney = {(this.OpenedCashMoney == null ? "null" : this.OpenedCashMoney.ToString())}");
             toStringOutput.Add($"this.CashPaymentMoney = {(this.CashPaymentMoney == null ? "null" : this.CashPaymentMoney.ToString())}");
@@ -468,6 +438,13 @@ namespace Square.Models
             toStringOutput.Add($"this.ExpectedCashMoney = {(this.ExpectedCashMoney == null ? "null" : this.ExpectedCashMoney.ToString())}");
             toStringOutput.Add($"this.ClosedCashMoney = {(this.ClosedCashMoney == null ? "null" : this.ClosedCashMoney.ToString())}");
             toStringOutput.Add($"this.Device = {(this.Device == null ? "null" : this.Device.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.TeamMemberIds = {(this.TeamMemberIds == null ? "null" : $"[{string.Join(", ", this.TeamMemberIds)} ]")}");
+            toStringOutput.Add($"this.OpeningTeamMemberId = {(this.OpeningTeamMemberId == null ? "null" : this.OpeningTeamMemberId == string.Empty ? "" : this.OpeningTeamMemberId)}");
+            toStringOutput.Add($"this.EndingTeamMemberId = {(this.EndingTeamMemberId == null ? "null" : this.EndingTeamMemberId == string.Empty ? "" : this.EndingTeamMemberId)}");
+            toStringOutput.Add($"this.ClosingTeamMemberId = {(this.ClosingTeamMemberId == null ? "null" : this.ClosingTeamMemberId == string.Empty ? "" : this.ClosingTeamMemberId)}");
         }
 
         /// <summary>
@@ -482,10 +459,6 @@ namespace Square.Models
                 .OpenedAt(this.OpenedAt)
                 .EndedAt(this.EndedAt)
                 .ClosedAt(this.ClosedAt)
-                .EmployeeIds(this.EmployeeIds)
-                .OpeningEmployeeId(this.OpeningEmployeeId)
-                .EndingEmployeeId(this.EndingEmployeeId)
-                .ClosingEmployeeId(this.ClosingEmployeeId)
                 .Description(this.Description)
                 .OpenedCashMoney(this.OpenedCashMoney)
                 .CashPaymentMoney(this.CashPaymentMoney)
@@ -494,7 +467,14 @@ namespace Square.Models
                 .CashPaidOutMoney(this.CashPaidOutMoney)
                 .ExpectedCashMoney(this.ExpectedCashMoney)
                 .ClosedCashMoney(this.ClosedCashMoney)
-                .Device(this.Device);
+                .Device(this.Device)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .LocationId(this.LocationId)
+                .TeamMemberIds(this.TeamMemberIds)
+                .OpeningTeamMemberId(this.OpeningTeamMemberId)
+                .EndingTeamMemberId(this.EndingTeamMemberId)
+                .ClosingTeamMemberId(this.ClosingTeamMemberId);
             return builder;
         }
 
@@ -508,10 +488,6 @@ namespace Square.Models
                 { "opened_at", false },
                 { "ended_at", false },
                 { "closed_at", false },
-                { "employee_ids", false },
-                { "opening_employee_id", false },
-                { "ending_employee_id", false },
-                { "closing_employee_id", false },
                 { "description", false },
             };
 
@@ -520,10 +496,6 @@ namespace Square.Models
             private string openedAt;
             private string endedAt;
             private string closedAt;
-            private IList<string> employeeIds;
-            private string openingEmployeeId;
-            private string endingEmployeeId;
-            private string closingEmployeeId;
             private string description;
             private Models.Money openedCashMoney;
             private Models.Money cashPaymentMoney;
@@ -533,6 +505,13 @@ namespace Square.Models
             private Models.Money expectedCashMoney;
             private Models.Money closedCashMoney;
             private Models.CashDrawerDevice device;
+            private string createdAt;
+            private string updatedAt;
+            private string locationId;
+            private IList<string> teamMemberIds;
+            private string openingTeamMemberId;
+            private string endingTeamMemberId;
+            private string closingTeamMemberId;
 
              /// <summary>
              /// Id.
@@ -589,54 +568,6 @@ namespace Square.Models
             {
                 shouldSerialize["closed_at"] = true;
                 this.closedAt = closedAt;
-                return this;
-            }
-
-             /// <summary>
-             /// EmployeeIds.
-             /// </summary>
-             /// <param name="employeeIds"> employeeIds. </param>
-             /// <returns> Builder. </returns>
-            public Builder EmployeeIds(IList<string> employeeIds)
-            {
-                shouldSerialize["employee_ids"] = true;
-                this.employeeIds = employeeIds;
-                return this;
-            }
-
-             /// <summary>
-             /// OpeningEmployeeId.
-             /// </summary>
-             /// <param name="openingEmployeeId"> openingEmployeeId. </param>
-             /// <returns> Builder. </returns>
-            public Builder OpeningEmployeeId(string openingEmployeeId)
-            {
-                shouldSerialize["opening_employee_id"] = true;
-                this.openingEmployeeId = openingEmployeeId;
-                return this;
-            }
-
-             /// <summary>
-             /// EndingEmployeeId.
-             /// </summary>
-             /// <param name="endingEmployeeId"> endingEmployeeId. </param>
-             /// <returns> Builder. </returns>
-            public Builder EndingEmployeeId(string endingEmployeeId)
-            {
-                shouldSerialize["ending_employee_id"] = true;
-                this.endingEmployeeId = endingEmployeeId;
-                return this;
-            }
-
-             /// <summary>
-             /// ClosingEmployeeId.
-             /// </summary>
-             /// <param name="closingEmployeeId"> closingEmployeeId. </param>
-             /// <returns> Builder. </returns>
-            public Builder ClosingEmployeeId(string closingEmployeeId)
-            {
-                shouldSerialize["closing_employee_id"] = true;
-                this.closingEmployeeId = closingEmployeeId;
                 return this;
             }
 
@@ -740,6 +671,83 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
+            public Builder CreatedAt(string createdAt)
+            {
+                this.createdAt = createdAt;
+                return this;
+            }
+
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
+            public Builder UpdatedAt(string updatedAt)
+            {
+                this.updatedAt = updatedAt;
+                return this;
+            }
+
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
+            public Builder LocationId(string locationId)
+            {
+                this.locationId = locationId;
+                return this;
+            }
+
+             /// <summary>
+             /// TeamMemberIds.
+             /// </summary>
+             /// <param name="teamMemberIds"> teamMemberIds. </param>
+             /// <returns> Builder. </returns>
+            public Builder TeamMemberIds(IList<string> teamMemberIds)
+            {
+                this.teamMemberIds = teamMemberIds;
+                return this;
+            }
+
+             /// <summary>
+             /// OpeningTeamMemberId.
+             /// </summary>
+             /// <param name="openingTeamMemberId"> openingTeamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder OpeningTeamMemberId(string openingTeamMemberId)
+            {
+                this.openingTeamMemberId = openingTeamMemberId;
+                return this;
+            }
+
+             /// <summary>
+             /// EndingTeamMemberId.
+             /// </summary>
+             /// <param name="endingTeamMemberId"> endingTeamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder EndingTeamMemberId(string endingTeamMemberId)
+            {
+                this.endingTeamMemberId = endingTeamMemberId;
+                return this;
+            }
+
+             /// <summary>
+             /// ClosingTeamMemberId.
+             /// </summary>
+             /// <param name="closingTeamMemberId"> closingTeamMemberId. </param>
+             /// <returns> Builder. </returns>
+            public Builder ClosingTeamMemberId(string closingTeamMemberId)
+            {
+                this.closingTeamMemberId = closingTeamMemberId;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -767,38 +775,6 @@ namespace Square.Models
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
-            public void UnsetEmployeeIds()
-            {
-                this.shouldSerialize["employee_ids"] = false;
-            }
-
-            /// <summary>
-            /// Marks the field to not be serailized.
-            /// </summary>
-            public void UnsetOpeningEmployeeId()
-            {
-                this.shouldSerialize["opening_employee_id"] = false;
-            }
-
-            /// <summary>
-            /// Marks the field to not be serailized.
-            /// </summary>
-            public void UnsetEndingEmployeeId()
-            {
-                this.shouldSerialize["ending_employee_id"] = false;
-            }
-
-            /// <summary>
-            /// Marks the field to not be serailized.
-            /// </summary>
-            public void UnsetClosingEmployeeId()
-            {
-                this.shouldSerialize["closing_employee_id"] = false;
-            }
-
-            /// <summary>
-            /// Marks the field to not be serailized.
-            /// </summary>
             public void UnsetDescription()
             {
                 this.shouldSerialize["description"] = false;
@@ -817,10 +793,6 @@ namespace Square.Models
                     this.openedAt,
                     this.endedAt,
                     this.closedAt,
-                    this.employeeIds,
-                    this.openingEmployeeId,
-                    this.endingEmployeeId,
-                    this.closingEmployeeId,
                     this.description,
                     this.openedCashMoney,
                     this.cashPaymentMoney,
@@ -829,7 +801,14 @@ namespace Square.Models
                     this.cashPaidOutMoney,
                     this.expectedCashMoney,
                     this.closedCashMoney,
-                    this.device);
+                    this.device,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.locationId,
+                    this.teamMemberIds,
+                    this.openingTeamMemberId,
+                    this.endingTeamMemberId,
+                    this.closingTeamMemberId);
             }
         }
     }

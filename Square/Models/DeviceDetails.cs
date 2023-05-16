@@ -133,9 +133,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DeviceDetails other &&
-                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
+            return obj is DeviceDetails other &&                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
                 ((this.DeviceInstallationId == null && other.DeviceInstallationId == null) || (this.DeviceInstallationId?.Equals(other.DeviceInstallationId) == true)) &&
                 ((this.DeviceName == null && other.DeviceName == null) || (this.DeviceName?.Equals(other.DeviceName) == true));
         }

@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchLoyaltyRewardsRequestLoyaltyRewardQuery other &&
-                ((this.LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
+            return obj is SearchLoyaltyRewardsRequestLoyaltyRewardQuery other &&                ((this.LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }
         

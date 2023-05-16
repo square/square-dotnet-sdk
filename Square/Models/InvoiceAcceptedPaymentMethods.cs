@@ -90,8 +90,7 @@ namespace Square.Models
         public bool? SquareGiftCard { get; }
 
         /// <summary>
-        /// Indicates whether bank transfer payments are accepted. The default value is `false`.
-        /// This option is allowed only for invoices that have a single payment request of the `BALANCE` type.
+        /// Indicates whether ACH bank transfer payments are accepted. The default value is `false`.
         /// </summary>
         [JsonProperty("bank_account")]
         public bool? BankAccount { get; }
@@ -165,9 +164,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is InvoiceAcceptedPaymentMethods other &&
-                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
+            return obj is InvoiceAcceptedPaymentMethods other &&                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
                 ((this.SquareGiftCard == null && other.SquareGiftCard == null) || (this.SquareGiftCard?.Equals(other.SquareGiftCard) == true)) &&
                 ((this.BankAccount == null && other.BankAccount == null) || (this.BankAccount?.Equals(other.BankAccount) == true)) &&
                 ((this.BuyNowPayLater == null && other.BuyNowPayLater == null) || (this.BuyNowPayLater?.Equals(other.BuyNowPayLater) == true));

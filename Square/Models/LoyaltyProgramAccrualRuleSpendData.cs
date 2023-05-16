@@ -139,9 +139,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyProgramAccrualRuleSpendData other &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+            return obj is LoyaltyProgramAccrualRuleSpendData other &&                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.ExcludedCategoryIds == null && other.ExcludedCategoryIds == null) || (this.ExcludedCategoryIds?.Equals(other.ExcludedCategoryIds) == true)) &&
                 ((this.ExcludedItemVariationIds == null && other.ExcludedItemVariationIds == null) || (this.ExcludedItemVariationIds?.Equals(other.ExcludedItemVariationIds) == true)) &&
                 ((this.TaxMode == null && other.TaxMode == null) || (this.TaxMode?.Equals(other.TaxMode) == true));

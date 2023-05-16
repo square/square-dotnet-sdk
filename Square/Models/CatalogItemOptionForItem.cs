@@ -81,9 +81,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogItemOptionForItem other &&
-                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true));
+            return obj is CatalogItemOptionForItem other &&                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true));
         }
         
         /// <inheritdoc/>

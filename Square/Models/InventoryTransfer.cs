@@ -347,9 +347,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is InventoryTransfer other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is InventoryTransfer other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
                 ((this.FromLocationId == null && other.FromLocationId == null) || (this.FromLocationId?.Equals(other.FromLocationId) == true)) &&

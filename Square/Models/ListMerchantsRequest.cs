@@ -81,9 +81,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListMerchantsRequest other &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+            return obj is ListMerchantsRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
         
         /// <inheritdoc/>

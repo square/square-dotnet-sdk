@@ -100,9 +100,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CalculateOrderRequest other &&
-                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+            return obj is CalculateOrderRequest other &&                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
                 ((this.ProposedRewards == null && other.ProposedRewards == null) || (this.ProposedRewards?.Equals(other.ProposedRewards) == true));
         }
         

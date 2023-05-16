@@ -86,6 +86,8 @@ Models.CreateCheckoutRequest body = new Models.CreateCheckoutRequest.Builder(
                     })
                 .BasePriceMoney(
                     new Models.Money.Builder()
+                    .Amount(1500L)
+                    .Currency("USD")
                     .Build())
                 .Build(),
                 new Models.OrderLineItem.Builder(
@@ -94,6 +96,8 @@ Models.CreateCheckoutRequest body = new Models.CreateCheckoutRequest.Builder(
                 .Name("Slim Jeans")
                 .BasePriceMoney(
                     new Models.Money.Builder()
+                    .Amount(2500L)
+                    .Currency("USD")
                     .Build())
                 .Build(),
                 new Models.OrderLineItem.Builder(
@@ -102,6 +106,8 @@ Models.CreateCheckoutRequest body = new Models.CreateCheckoutRequest.Builder(
                 .Name("Woven Sweater")
                 .BasePriceMoney(
                     new Models.Money.Builder()
+                    .Amount(3500L)
+                    .Currency("USD")
                     .Build())
                 .Build(),
             })
@@ -123,6 +129,8 @@ Models.CreateCheckoutRequest body = new Models.CreateCheckoutRequest.Builder(
                 .Type("FIXED_AMOUNT")
                 .AmountMoney(
                     new Models.Money.Builder()
+                    .Amount(100L)
+                    .Currency("USD")
                     .Build())
                 .Scope("LINE_ITEM")
                 .Build(),

@@ -176,9 +176,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is PauseSubscriptionRequest other &&
-                ((this.PauseEffectiveDate == null && other.PauseEffectiveDate == null) || (this.PauseEffectiveDate?.Equals(other.PauseEffectiveDate) == true)) &&
+            return obj is PauseSubscriptionRequest other &&                ((this.PauseEffectiveDate == null && other.PauseEffectiveDate == null) || (this.PauseEffectiveDate?.Equals(other.PauseEffectiveDate) == true)) &&
                 ((this.PauseCycleDuration == null && other.PauseCycleDuration == null) || (this.PauseCycleDuration?.Equals(other.PauseCycleDuration) == true)) &&
                 ((this.ResumeEffectiveDate == null && other.ResumeEffectiveDate == null) || (this.ResumeEffectiveDate?.Equals(other.ResumeEffectiveDate) == true)) &&
                 ((this.ResumeChangeTiming == null && other.ResumeChangeTiming == null) || (this.ResumeChangeTiming?.Equals(other.ResumeChangeTiming) == true)) &&

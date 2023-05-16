@@ -97,9 +97,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveBookingCustomAttributeRequest other &&
-                ((this.WithDefinition == null && other.WithDefinition == null) || (this.WithDefinition?.Equals(other.WithDefinition) == true)) &&
+            return obj is RetrieveBookingCustomAttributeRequest other &&                ((this.WithDefinition == null && other.WithDefinition == null) || (this.WithDefinition?.Equals(other.WithDefinition) == true)) &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
         }
         

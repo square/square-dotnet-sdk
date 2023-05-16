@@ -108,9 +108,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogCategory other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is CatalogCategory other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true));
         }
         

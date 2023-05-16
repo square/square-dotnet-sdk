@@ -80,9 +80,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogInfoResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is CatalogInfoResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Limits == null && other.Limits == null) || (this.Limits?.Equals(other.Limits) == true)) &&
                 ((this.StandardUnitDescriptionGroup == null && other.StandardUnitDescriptionGroup == null) || (this.StandardUnitDescriptionGroup?.Equals(other.StandardUnitDescriptionGroup) == true));

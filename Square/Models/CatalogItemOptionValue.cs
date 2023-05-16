@@ -188,9 +188,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogItemOptionValue other &&
-                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
+            return obj is CatalogItemOptionValue other &&                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.Color == null && other.Color == null) || (this.Color?.Equals(other.Color) == true)) &&

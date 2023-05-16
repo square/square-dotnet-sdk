@@ -65,9 +65,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute other &&
-                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
+            return obj is BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute other &&                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
                 ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
         }
         

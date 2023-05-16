@@ -67,9 +67,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SegmentFilter other &&
-                ((this.ServiceVariationId == null && other.ServiceVariationId == null) || (this.ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
+            return obj is SegmentFilter other &&                ((this.ServiceVariationId == null && other.ServiceVariationId == null) || (this.ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
                 ((this.TeamMemberIdFilter == null && other.TeamMemberIdFilter == null) || (this.TeamMemberIdFilter?.Equals(other.TeamMemberIdFilter) == true));
         }
         

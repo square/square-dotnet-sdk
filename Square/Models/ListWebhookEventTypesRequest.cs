@@ -81,9 +81,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListWebhookEventTypesRequest other &&
-                ((this.ApiVersion == null && other.ApiVersion == null) || (this.ApiVersion?.Equals(other.ApiVersion) == true));
+            return obj is ListWebhookEventTypesRequest other &&                ((this.ApiVersion == null && other.ApiVersion == null) || (this.ApiVersion?.Equals(other.ApiVersion) == true));
         }
         
         /// <inheritdoc/>

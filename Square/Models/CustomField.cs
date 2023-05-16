@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomField other &&
-                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true));
+            return obj is CustomField other &&                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true));
         }
         
         /// <inheritdoc/>

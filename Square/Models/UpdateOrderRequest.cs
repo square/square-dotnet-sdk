@@ -84,7 +84,7 @@ namespace Square.Models
         /// you can reattempt it with the same idempotency key without
         /// worrying about creating duplicate updates to the order.
         /// The latest order version is returned.
-        /// For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -129,9 +129,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateOrderRequest other &&
-                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+            return obj is UpdateOrderRequest other &&                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
                 ((this.FieldsToClear == null && other.FieldsToClear == null) || (this.FieldsToClear?.Equals(other.FieldsToClear) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }

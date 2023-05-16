@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyProgramExpirationPolicy other &&
-                ((this.ExpirationDuration == null && other.ExpirationDuration == null) || (this.ExpirationDuration?.Equals(other.ExpirationDuration) == true));
+            return obj is LoyaltyProgramExpirationPolicy other &&                ((this.ExpirationDuration == null && other.ExpirationDuration == null) || (this.ExpirationDuration?.Equals(other.ExpirationDuration) == true));
         }
         
         /// <inheritdoc/>

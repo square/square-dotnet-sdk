@@ -72,9 +72,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CreateCheckoutResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is CreateCheckoutResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Checkout == null && other.Checkout == null) || (this.Checkout?.Equals(other.Checkout) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }

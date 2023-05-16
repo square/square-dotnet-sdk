@@ -66,6 +66,7 @@ Models.CreateSubscriptionRequest body = new Models.CreateSubscriptionRequest.Bui
 .Timezone("America/Los_Angeles")
 .Source(
     new Models.SubscriptionSource.Builder()
+    .Name("My App")
     .Build())
 .Build();
 
@@ -221,12 +222,6 @@ string subscriptionId = "subscription_id0";
 Models.UpdateSubscriptionRequest body = new Models.UpdateSubscriptionRequest.Builder()
 .Subscription(
     new Models.Subscription.Builder()
-    .PriceOverrideMoney(
-        new Models.Money.Builder()
-        .Amount(2000L)
-        .Currency("USD")
-        .Build())
-    .Version(1594155459464L)
     .Build())
 .Build();
 

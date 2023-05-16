@@ -111,9 +111,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchLoyaltyAccountsRequestLoyaltyAccountQuery other &&
-                ((this.Mappings == null && other.Mappings == null) || (this.Mappings?.Equals(other.Mappings) == true)) &&
+            return obj is SearchLoyaltyAccountsRequestLoyaltyAccountQuery other &&                ((this.Mappings == null && other.Mappings == null) || (this.Mappings?.Equals(other.Mappings) == true)) &&
                 ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
         }
         

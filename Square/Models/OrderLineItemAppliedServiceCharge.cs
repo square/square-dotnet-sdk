@@ -111,9 +111,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderLineItemAppliedServiceCharge other &&
-                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+            return obj is OrderLineItemAppliedServiceCharge other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.ServiceChargeUid == null && other.ServiceChargeUid == null) || (this.ServiceChargeUid?.Equals(other.ServiceChargeUid) == true)) &&
                 ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true));
         }

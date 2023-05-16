@@ -143,9 +143,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is GiftCardActivityRefund other &&
-                ((this.RedeemActivityId == null && other.RedeemActivityId == null) || (this.RedeemActivityId?.Equals(other.RedeemActivityId) == true)) &&
+            return obj is GiftCardActivityRefund other &&                ((this.RedeemActivityId == null && other.RedeemActivityId == null) || (this.RedeemActivityId?.Equals(other.RedeemActivityId) == true)) &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));

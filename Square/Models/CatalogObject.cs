@@ -341,7 +341,7 @@ namespace Square.Models
         public Models.CatalogModifierList ModifierListData { get; }
 
         /// <summary>
-        /// A modifier applicable to items at the time of sale.
+        /// A modifier applicable to items at the time of sale. An example of a modifier is a Cheese add-on to a Burger item.
         /// </summary>
         [JsonProperty("modifier_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogModifier ModifierData { get; }
@@ -500,9 +500,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogObject other &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+            return obj is CatalogObject other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&

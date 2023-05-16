@@ -206,9 +206,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomAttributeFilter other &&
-                ((this.CustomAttributeDefinitionId == null && other.CustomAttributeDefinitionId == null) || (this.CustomAttributeDefinitionId?.Equals(other.CustomAttributeDefinitionId) == true)) &&
+            return obj is CustomAttributeFilter other &&                ((this.CustomAttributeDefinitionId == null && other.CustomAttributeDefinitionId == null) || (this.CustomAttributeDefinitionId?.Equals(other.CustomAttributeDefinitionId) == true)) &&
                 ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
                 ((this.StringFilter == null && other.StringFilter == null) || (this.StringFilter?.Equals(other.StringFilter) == true)) &&
                 ((this.NumberFilter == null && other.NumberFilter == null) || (this.NumberFilter?.Equals(other.NumberFilter) == true)) &&

@@ -134,9 +134,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TeamMemberWage other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is TeamMemberWage other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
                 ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true));

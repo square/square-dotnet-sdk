@@ -74,9 +74,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveInventoryPhysicalCountResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is RetrieveInventoryPhysicalCountResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Count == null && other.Count == null) || (this.Count?.Equals(other.Count) == true));
         }

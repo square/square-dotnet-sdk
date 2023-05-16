@@ -119,9 +119,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1ListOrdersRequest other &&
-                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+            return obj is V1ListOrdersRequest other &&                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.BatchToken == null && other.BatchToken == null) || (this.BatchToken?.Equals(other.BatchToken) == true));
         }

@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BulkCreateTeamMembersRequest other &&
-                ((this.TeamMembers == null && other.TeamMembers == null) || (this.TeamMembers?.Equals(other.TeamMembers) == true));
+            return obj is BulkCreateTeamMembersRequest other &&                ((this.TeamMembers == null && other.TeamMembers == null) || (this.TeamMembers?.Equals(other.TeamMembers) == true));
         }
         
         /// <inheritdoc/>

@@ -86,9 +86,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BatchUpsertCatalogObjectsRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is BatchUpsertCatalogObjectsRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.Batches == null && other.Batches == null) || (this.Batches?.Equals(other.Batches) == true));
         }
         

@@ -118,9 +118,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogQueryRange other &&
-                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
+            return obj is CatalogQueryRange other &&                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
                 ((this.AttributeMinValue == null && other.AttributeMinValue == null) || (this.AttributeMinValue?.Equals(other.AttributeMinValue) == true)) &&
                 ((this.AttributeMaxValue == null && other.AttributeMaxValue == null) || (this.AttributeMaxValue?.Equals(other.AttributeMaxValue) == true));
         }

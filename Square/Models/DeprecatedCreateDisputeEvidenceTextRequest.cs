@@ -73,9 +73,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DeprecatedCreateDisputeEvidenceTextRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is DeprecatedCreateDisputeEvidenceTextRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.EvidenceType == null && other.EvidenceType == null) || (this.EvidenceType?.Equals(other.EvidenceType) == true)) &&
                 ((this.EvidenceText == null && other.EvidenceText == null) || (this.EvidenceText?.Equals(other.EvidenceText) == true));
         }

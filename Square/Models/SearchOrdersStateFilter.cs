@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchOrdersStateFilter other &&
-                ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true));
+            return obj is SearchOrdersStateFilter other &&                ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true));
         }
         
         /// <inheritdoc/>

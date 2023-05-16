@@ -83,9 +83,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchOrdersSourceFilter other &&
-                ((this.SourceNames == null && other.SourceNames == null) || (this.SourceNames?.Equals(other.SourceNames) == true));
+            return obj is SearchOrdersSourceFilter other &&                ((this.SourceNames == null && other.SourceNames == null) || (this.SourceNames?.Equals(other.SourceNames) == true));
         }
         
         /// <inheritdoc/>

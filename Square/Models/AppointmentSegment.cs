@@ -177,9 +177,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is AppointmentSegment other &&
-                ((this.DurationMinutes == null && other.DurationMinutes == null) || (this.DurationMinutes?.Equals(other.DurationMinutes) == true)) &&
+            return obj is AppointmentSegment other &&                ((this.DurationMinutes == null && other.DurationMinutes == null) || (this.DurationMinutes?.Equals(other.DurationMinutes) == true)) &&
                 ((this.ServiceVariationId == null && other.ServiceVariationId == null) || (this.ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
                 ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.ServiceVariationVersion == null && other.ServiceVariationVersion == null) || (this.ServiceVariationVersion?.Equals(other.ServiceVariationVersion) == true)) &&

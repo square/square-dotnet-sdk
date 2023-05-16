@@ -100,9 +100,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogMeasurementUnit other &&
-                ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
+            return obj is CatalogMeasurementUnit other &&                ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
                 ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true));
         }
         

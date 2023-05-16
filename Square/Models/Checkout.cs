@@ -280,9 +280,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Checkout other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is Checkout other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.CheckoutPageUrl == null && other.CheckoutPageUrl == null) || (this.CheckoutPageUrl?.Equals(other.CheckoutPageUrl) == true)) &&
                 ((this.AskForShippingAddress == null && other.AskForShippingAddress == null) || (this.AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
                 ((this.MerchantSupportEmail == null && other.MerchantSupportEmail == null) || (this.MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true)) &&

@@ -73,9 +73,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateShiftResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is UpdateShiftResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Shift == null && other.Shift == null) || (this.Shift?.Equals(other.Shift) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }

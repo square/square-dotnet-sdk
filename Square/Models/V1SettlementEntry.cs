@@ -114,9 +114,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1SettlementEntry other &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+            return obj is V1SettlementEntry other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.FeeMoney == null && other.FeeMoney == null) || (this.FeeMoney?.Equals(other.FeeMoney) == true));

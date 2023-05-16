@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest other &&
-                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true));
+            return obj is BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest other &&                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true));
         }
         
         /// <inheritdoc/>

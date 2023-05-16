@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateBreakTypeRequest other &&
-                ((this.BreakType == null && other.BreakType == null) || (this.BreakType?.Equals(other.BreakType) == true));
+            return obj is UpdateBreakTypeRequest other &&                ((this.BreakType == null && other.BreakType == null) || (this.BreakType?.Equals(other.BreakType) == true));
         }
         
         /// <inheritdoc/>

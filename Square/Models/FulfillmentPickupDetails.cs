@@ -402,9 +402,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is FulfillmentPickupDetails other &&
-                ((this.Recipient == null && other.Recipient == null) || (this.Recipient?.Equals(other.Recipient) == true)) &&
+            return obj is FulfillmentPickupDetails other &&                ((this.Recipient == null && other.Recipient == null) || (this.Recipient?.Equals(other.Recipient) == true)) &&
                 ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
                 ((this.AutoCompleteDuration == null && other.AutoCompleteDuration == null) || (this.AutoCompleteDuration?.Equals(other.AutoCompleteDuration) == true)) &&
                 ((this.ScheduleType == null && other.ScheduleType == null) || (this.ScheduleType?.Equals(other.ScheduleType) == true)) &&

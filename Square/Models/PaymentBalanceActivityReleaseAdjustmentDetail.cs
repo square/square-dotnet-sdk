@@ -81,9 +81,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is PaymentBalanceActivityReleaseAdjustmentDetail other &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
+            return obj is PaymentBalanceActivityReleaseAdjustmentDetail other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
         }
         
         /// <inheritdoc/>

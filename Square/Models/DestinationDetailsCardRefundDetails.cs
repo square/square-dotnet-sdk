@@ -94,9 +94,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DestinationDetailsCardRefundDetails other &&
-                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
+            return obj is DestinationDetailsCardRefundDetails other &&                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
                 ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true));
         }
         

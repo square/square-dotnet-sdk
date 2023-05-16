@@ -166,9 +166,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Site other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is Site other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.SiteTitle == null && other.SiteTitle == null) || (this.SiteTitle?.Equals(other.SiteTitle) == true)) &&
                 ((this.Domain == null && other.Domain == null) || (this.Domain?.Equals(other.Domain) == true)) &&
                 ((this.IsPublished == null && other.IsPublished == null) || (this.IsPublished?.Equals(other.IsPublished) == true)) &&

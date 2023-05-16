@@ -71,9 +71,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveEmployeeResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is RetrieveEmployeeResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Employee == null && other.Employee == null) || (this.Employee?.Equals(other.Employee) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }

@@ -81,9 +81,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomerTaxIds other &&
-                ((this.EuVat == null && other.EuVat == null) || (this.EuVat?.Equals(other.EuVat) == true));
+            return obj is CustomerTaxIds other &&                ((this.EuVat == null && other.EuVat == null) || (this.EuVat?.Equals(other.EuVat) == true));
         }
         
         /// <inheritdoc/>

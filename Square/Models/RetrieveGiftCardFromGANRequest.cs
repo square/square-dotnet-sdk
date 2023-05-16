@@ -57,9 +57,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveGiftCardFromGANRequest other &&
-                ((this.Gan == null && other.Gan == null) || (this.Gan?.Equals(other.Gan) == true));
+            return obj is RetrieveGiftCardFromGANRequest other &&                ((this.Gan == null && other.Gan == null) || (this.Gan?.Equals(other.Gan) == true));
         }
         
         /// <inheritdoc/>

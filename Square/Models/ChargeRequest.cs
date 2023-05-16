@@ -401,9 +401,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ChargeRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is ChargeRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.CardNonce == null && other.CardNonce == null) || (this.CardNonce?.Equals(other.CardNonce) == true)) &&
                 ((this.CustomerCardId == null && other.CustomerCardId == null) || (this.CustomerCardId?.Equals(other.CustomerCardId) == true)) &&

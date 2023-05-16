@@ -352,9 +352,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogInfoResponseLimits other &&
-                ((this.BatchUpsertMaxObjectsPerBatch == null && other.BatchUpsertMaxObjectsPerBatch == null) || (this.BatchUpsertMaxObjectsPerBatch?.Equals(other.BatchUpsertMaxObjectsPerBatch) == true)) &&
+            return obj is CatalogInfoResponseLimits other &&                ((this.BatchUpsertMaxObjectsPerBatch == null && other.BatchUpsertMaxObjectsPerBatch == null) || (this.BatchUpsertMaxObjectsPerBatch?.Equals(other.BatchUpsertMaxObjectsPerBatch) == true)) &&
                 ((this.BatchUpsertMaxTotalObjects == null && other.BatchUpsertMaxTotalObjects == null) || (this.BatchUpsertMaxTotalObjects?.Equals(other.BatchUpsertMaxTotalObjects) == true)) &&
                 ((this.BatchRetrieveMaxObjectIds == null && other.BatchRetrieveMaxObjectIds == null) || (this.BatchRetrieveMaxObjectIds?.Equals(other.BatchRetrieveMaxObjectIds) == true)) &&
                 ((this.SearchMaxPageLimit == null && other.SearchMaxPageLimit == null) || (this.SearchMaxPageLimit?.Equals(other.SearchMaxPageLimit) == true)) &&

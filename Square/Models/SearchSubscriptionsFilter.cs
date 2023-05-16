@@ -133,9 +133,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchSubscriptionsFilter other &&
-                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true)) &&
+            return obj is SearchSubscriptionsFilter other &&                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true)) &&
                 ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
                 ((this.SourceNames == null && other.SourceNames == null) || (this.SourceNames?.Equals(other.SourceNames) == true));
         }

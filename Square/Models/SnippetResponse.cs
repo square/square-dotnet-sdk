@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SnippetResponse other &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+            return obj is SnippetResponse other &&                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Snippet == null && other.Snippet == null) || (this.Snippet?.Equals(other.Snippet) == true));
         }
         

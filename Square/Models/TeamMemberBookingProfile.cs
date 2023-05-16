@@ -125,9 +125,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TeamMemberBookingProfile other &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
+            return obj is TeamMemberBookingProfile other &&                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.DisplayName == null && other.DisplayName == null) || (this.DisplayName?.Equals(other.DisplayName) == true)) &&
                 ((this.IsBookable == null && other.IsBookable == null) || (this.IsBookable?.Equals(other.IsBookable) == true)) &&

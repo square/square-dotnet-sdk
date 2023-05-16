@@ -60,9 +60,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is GiftCardActivityImportReversal other &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true));
+            return obj is GiftCardActivityImportReversal other &&                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true));
         }
         
         /// <inheritdoc/>

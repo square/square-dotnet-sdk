@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogObjectBatch other &&
-                ((this.Objects == null && other.Objects == null) || (this.Objects?.Equals(other.Objects) == true));
+            return obj is CatalogObjectBatch other &&                ((this.Objects == null && other.Objects == null) || (this.Objects?.Equals(other.Objects) == true));
         }
         
         /// <inheritdoc/>

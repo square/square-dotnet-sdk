@@ -165,9 +165,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TaxIds other &&
-                ((this.EuVat == null && other.EuVat == null) || (this.EuVat?.Equals(other.EuVat) == true)) &&
+            return obj is TaxIds other &&                ((this.EuVat == null && other.EuVat == null) || (this.EuVat?.Equals(other.EuVat) == true)) &&
                 ((this.FrSiret == null && other.FrSiret == null) || (this.FrSiret?.Equals(other.FrSiret) == true)) &&
                 ((this.FrNaf == null && other.FrNaf == null) || (this.FrNaf?.Equals(other.FrNaf) == true)) &&
                 ((this.EsNif == null && other.EsNif == null) || (this.EsNif?.Equals(other.EsNif) == true));

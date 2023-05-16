@@ -93,9 +93,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogSubscriptionPlan other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is CatalogSubscriptionPlan other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true));
         }
         

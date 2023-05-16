@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderReward other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is OrderReward other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.RewardTierId == null && other.RewardTierId == null) || (this.RewardTierId?.Equals(other.RewardTierId) == true));
         }
         

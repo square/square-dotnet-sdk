@@ -276,9 +276,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListGiftCardActivitiesRequest other &&
-                ((this.GiftCardId == null && other.GiftCardId == null) || (this.GiftCardId?.Equals(other.GiftCardId) == true)) &&
+            return obj is ListGiftCardActivitiesRequest other &&                ((this.GiftCardId == null && other.GiftCardId == null) || (this.GiftCardId?.Equals(other.GiftCardId) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&

@@ -66,9 +66,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomerQuery other &&
-                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true)) &&
+            return obj is CustomerQuery other &&                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true)) &&
                 ((this.Sort == null && other.Sort == null) || (this.Sort?.Equals(other.Sort) == true));
         }
         

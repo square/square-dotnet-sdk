@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RiskEvaluation other &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+            return obj is RiskEvaluation other &&                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.RiskLevel == null && other.RiskLevel == null) || (this.RiskLevel?.Equals(other.RiskLevel) == true));
         }
         

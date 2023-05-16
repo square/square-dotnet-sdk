@@ -69,9 +69,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is GiftCardActivityAdjustDecrement other &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
+            return obj is GiftCardActivityAdjustDecrement other &&                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true));
         }
         

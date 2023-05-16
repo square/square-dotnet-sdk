@@ -136,9 +136,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderLineItemPricingBlocklistsBlockedDiscount other &&
-                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+            return obj is OrderLineItemPricingBlocklistsBlockedDiscount other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.DiscountUid == null && other.DiscountUid == null) || (this.DiscountUid?.Equals(other.DiscountUid) == true)) &&
                 ((this.DiscountCatalogObjectId == null && other.DiscountCatalogObjectId == null) || (this.DiscountCatalogObjectId?.Equals(other.DiscountCatalogObjectId) == true));
         }

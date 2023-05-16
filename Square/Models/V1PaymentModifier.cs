@@ -118,9 +118,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1PaymentModifier other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is V1PaymentModifier other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
                 ((this.ModifierOptionId == null && other.ModifierOptionId == null) || (this.ModifierOptionId?.Equals(other.ModifierOptionId) == true));
         }

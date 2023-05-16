@@ -119,9 +119,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchTeamMembersFilter other &&
-                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+            return obj is SearchTeamMembersFilter other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.IsOwner == null && other.IsOwner == null) || (this.IsOwner?.Equals(other.IsOwner) == true));
         }

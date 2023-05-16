@@ -110,9 +110,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomerTextFilter other &&
-                ((this.Exact == null && other.Exact == null) || (this.Exact?.Equals(other.Exact) == true)) &&
+            return obj is CustomerTextFilter other &&                ((this.Exact == null && other.Exact == null) || (this.Exact?.Equals(other.Exact) == true)) &&
                 ((this.Fuzzy == null && other.Fuzzy == null) || (this.Fuzzy?.Equals(other.Fuzzy) == true));
         }
         

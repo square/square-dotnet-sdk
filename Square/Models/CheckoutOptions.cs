@@ -250,9 +250,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CheckoutOptions other &&
-                ((this.AllowTipping == null && other.AllowTipping == null) || (this.AllowTipping?.Equals(other.AllowTipping) == true)) &&
+            return obj is CheckoutOptions other &&                ((this.AllowTipping == null && other.AllowTipping == null) || (this.AllowTipping?.Equals(other.AllowTipping) == true)) &&
                 ((this.CustomFields == null && other.CustomFields == null) || (this.CustomFields?.Equals(other.CustomFields) == true)) &&
                 ((this.SubscriptionPlanId == null && other.SubscriptionPlanId == null) || (this.SubscriptionPlanId?.Equals(other.SubscriptionPlanId) == true)) &&
                 ((this.RedirectUrl == null && other.RedirectUrl == null) || (this.RedirectUrl?.Equals(other.RedirectUrl) == true)) &&

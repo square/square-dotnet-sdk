@@ -93,9 +93,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateBookingRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is UpdateBookingRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.Booking == null && other.Booking == null) || (this.Booking?.Equals(other.Booking) == true));
         }
         

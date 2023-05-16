@@ -111,9 +111,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderLineItemPricingBlocklists other &&
-                ((this.BlockedDiscounts == null && other.BlockedDiscounts == null) || (this.BlockedDiscounts?.Equals(other.BlockedDiscounts) == true)) &&
+            return obj is OrderLineItemPricingBlocklists other &&                ((this.BlockedDiscounts == null && other.BlockedDiscounts == null) || (this.BlockedDiscounts?.Equals(other.BlockedDiscounts) == true)) &&
                 ((this.BlockedTaxes == null && other.BlockedTaxes == null) || (this.BlockedTaxes?.Equals(other.BlockedTaxes) == true));
         }
         
