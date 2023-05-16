@@ -119,9 +119,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is PrePopulatedData other &&
-                ((this.BuyerEmail == null && other.BuyerEmail == null) || (this.BuyerEmail?.Equals(other.BuyerEmail) == true)) &&
+            return obj is PrePopulatedData other &&                ((this.BuyerEmail == null && other.BuyerEmail == null) || (this.BuyerEmail?.Equals(other.BuyerEmail) == true)) &&
                 ((this.BuyerPhoneNumber == null && other.BuyerPhoneNumber == null) || (this.BuyerPhoneNumber?.Equals(other.BuyerPhoneNumber) == true)) &&
                 ((this.BuyerAddress == null && other.BuyerAddress == null) || (this.BuyerAddress?.Equals(other.BuyerAddress) == true));
         }

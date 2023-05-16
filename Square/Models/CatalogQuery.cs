@@ -137,9 +137,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogQuery other &&
-                ((this.SortedAttributeQuery == null && other.SortedAttributeQuery == null) || (this.SortedAttributeQuery?.Equals(other.SortedAttributeQuery) == true)) &&
+            return obj is CatalogQuery other &&                ((this.SortedAttributeQuery == null && other.SortedAttributeQuery == null) || (this.SortedAttributeQuery?.Equals(other.SortedAttributeQuery) == true)) &&
                 ((this.ExactQuery == null && other.ExactQuery == null) || (this.ExactQuery?.Equals(other.ExactQuery) == true)) &&
                 ((this.SetQuery == null && other.SetQuery == null) || (this.SetQuery?.Equals(other.SetQuery) == true)) &&
                 ((this.PrefixQuery == null && other.PrefixQuery == null) || (this.PrefixQuery?.Equals(other.PrefixQuery) == true)) &&

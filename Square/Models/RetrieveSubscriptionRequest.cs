@@ -83,9 +83,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveSubscriptionRequest other &&
-                ((this.Include == null && other.Include == null) || (this.Include?.Equals(other.Include) == true));
+            return obj is RetrieveSubscriptionRequest other &&                ((this.Include == null && other.Include == null) || (this.Include?.Equals(other.Include) == true));
         }
         
         /// <inheritdoc/>

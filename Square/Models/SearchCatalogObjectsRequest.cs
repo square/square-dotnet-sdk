@@ -156,9 +156,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchCatalogObjectsRequest other &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+            return obj is SearchCatalogObjectsRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.ObjectTypes == null && other.ObjectTypes == null) || (this.ObjectTypes?.Equals(other.ObjectTypes) == true)) &&
                 ((this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true)) &&
                 ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&

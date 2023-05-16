@@ -94,9 +94,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateCustomerCustomAttributeDefinitionRequest other &&
-                ((this.CustomAttributeDefinition == null && other.CustomAttributeDefinition == null) || (this.CustomAttributeDefinition?.Equals(other.CustomAttributeDefinition) == true)) &&
+            return obj is UpdateCustomerCustomAttributeDefinitionRequest other &&                ((this.CustomAttributeDefinition == null && other.CustomAttributeDefinition == null) || (this.CustomAttributeDefinition?.Equals(other.CustomAttributeDefinition) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
         

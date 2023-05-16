@@ -131,9 +131,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CalculateLoyaltyPointsRequest other &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
+            return obj is CalculateLoyaltyPointsRequest other &&                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
                 ((this.TransactionAmountMoney == null && other.TransactionAmountMoney == null) || (this.TransactionAmountMoney?.Equals(other.TransactionAmountMoney) == true)) &&
                 ((this.LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true));
         }

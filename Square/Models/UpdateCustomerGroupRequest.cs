@@ -57,9 +57,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateCustomerGroupRequest other &&
-                ((this.MGroup == null && other.MGroup == null) || (this.MGroup?.Equals(other.MGroup) == true));
+            return obj is UpdateCustomerGroupRequest other &&                ((this.MGroup == null && other.MGroup == null) || (this.MGroup?.Equals(other.MGroup) == true));
         }
         
         /// <inheritdoc/>

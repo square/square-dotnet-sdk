@@ -110,9 +110,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveInventoryChangesRequest other &&
-                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+            return obj is RetrieveInventoryChangesRequest other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
         }
         

@@ -82,9 +82,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchOrdersCustomerFilter other &&
-                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
+            return obj is SearchOrdersCustomerFilter other &&                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
         }
         
         /// <inheritdoc/>

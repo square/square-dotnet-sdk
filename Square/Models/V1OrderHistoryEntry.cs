@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1OrderHistoryEntry other &&
-                ((this.Action == null && other.Action == null) || (this.Action?.Equals(other.Action) == true)) &&
+            return obj is V1OrderHistoryEntry other &&                ((this.Action == null && other.Action == null) || (this.Action?.Equals(other.Action) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
         }
         

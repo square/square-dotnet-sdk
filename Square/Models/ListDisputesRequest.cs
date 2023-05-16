@@ -137,9 +137,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListDisputesRequest other &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+            return obj is ListDisputesRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }

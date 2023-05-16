@@ -107,9 +107,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogIdMapping other &&
-                ((this.ClientObjectId == null && other.ClientObjectId == null) || (this.ClientObjectId?.Equals(other.ClientObjectId) == true)) &&
+            return obj is CatalogIdMapping other &&                ((this.ClientObjectId == null && other.ClientObjectId == null) || (this.ClientObjectId?.Equals(other.ClientObjectId) == true)) &&
                 ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true));
         }
         

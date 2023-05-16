@@ -103,9 +103,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderFulfillmentUpdatedUpdate other &&
-                ((this.FulfillmentUid == null && other.FulfillmentUid == null) || (this.FulfillmentUid?.Equals(other.FulfillmentUid) == true)) &&
+            return obj is OrderFulfillmentUpdatedUpdate other &&                ((this.FulfillmentUid == null && other.FulfillmentUid == null) || (this.FulfillmentUid?.Equals(other.FulfillmentUid) == true)) &&
                 ((this.OldState == null && other.OldState == null) || (this.OldState?.Equals(other.OldState) == true)) &&
                 ((this.NewState == null && other.NewState == null) || (this.NewState?.Equals(other.NewState) == true));
         }

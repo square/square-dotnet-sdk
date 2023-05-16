@@ -108,9 +108,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchVendorsRequestFilter other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is SearchVendorsRequestFilter other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }
         

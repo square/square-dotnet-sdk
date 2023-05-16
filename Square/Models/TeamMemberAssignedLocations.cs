@@ -92,9 +92,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TeamMemberAssignedLocations other &&
-                ((this.AssignmentType == null && other.AssignmentType == null) || (this.AssignmentType?.Equals(other.AssignmentType) == true)) &&
+            return obj is TeamMemberAssignedLocations other &&                ((this.AssignmentType == null && other.AssignmentType == null) || (this.AssignmentType?.Equals(other.AssignmentType) == true)) &&
                 ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true));
         }
         

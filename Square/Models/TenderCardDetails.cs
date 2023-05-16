@@ -74,9 +74,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TenderCardDetails other &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+            return obj is TenderCardDetails other &&                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
                 ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true));
         }

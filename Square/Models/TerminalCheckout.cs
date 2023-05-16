@@ -417,9 +417,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TerminalCheckout other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is TerminalCheckout other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
                 ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&

@@ -125,9 +125,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListPayoutEntriesRequest other &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
+            return obj is ListPayoutEntriesRequest other &&                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
         }

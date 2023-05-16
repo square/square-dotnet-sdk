@@ -153,9 +153,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchAvailabilityFilter other &&
-                ((this.StartAtRange == null && other.StartAtRange == null) || (this.StartAtRange?.Equals(other.StartAtRange) == true)) &&
+            return obj is SearchAvailabilityFilter other &&                ((this.StartAtRange == null && other.StartAtRange == null) || (this.StartAtRange?.Equals(other.StartAtRange) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.SegmentFilters == null && other.SegmentFilters == null) || (this.SegmentFilters?.Equals(other.SegmentFilters) == true)) &&
                 ((this.BookingId == null && other.BookingId == null) || (this.BookingId?.Equals(other.BookingId) == true));

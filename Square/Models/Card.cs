@@ -325,9 +325,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Card other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is Card other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.CardBrand == null && other.CardBrand == null) || (this.CardBrand?.Equals(other.CardBrand) == true)) &&
                 ((this.Last4 == null && other.Last4 == null) || (this.Last4?.Equals(other.Last4) == true)) &&
                 ((this.ExpMonth == null && other.ExpMonth == null) || (this.ExpMonth?.Equals(other.ExpMonth) == true)) &&

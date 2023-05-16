@@ -121,9 +121,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CreatePaymentLinkRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is CreatePaymentLinkRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.QuickPay == null && other.QuickPay == null) || (this.QuickPay?.Equals(other.QuickPay) == true)) &&
                 ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&

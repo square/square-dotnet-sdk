@@ -121,9 +121,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ReceiptOptions other &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
+            return obj is ReceiptOptions other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
                 ((this.PrintOnly == null && other.PrintOnly == null) || (this.PrintOnly?.Equals(other.PrintOnly) == true)) &&
                 ((this.IsDuplicate == null && other.IsDuplicate == null) || (this.IsDuplicate?.Equals(other.IsDuplicate) == true));
         }

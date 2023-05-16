@@ -82,9 +82,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomerCustomAttributeFilters other &&
-                ((this.Filters == null && other.Filters == null) || (this.Filters?.Equals(other.Filters) == true));
+            return obj is CustomerCustomAttributeFilters other &&                ((this.Filters == null && other.Filters == null) || (this.Filters?.Equals(other.Filters) == true));
         }
         
         /// <inheritdoc/>

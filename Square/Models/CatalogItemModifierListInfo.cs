@@ -170,9 +170,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogItemModifierListInfo other &&
-                ((this.ModifierListId == null && other.ModifierListId == null) || (this.ModifierListId?.Equals(other.ModifierListId) == true)) &&
+            return obj is CatalogItemModifierListInfo other &&                ((this.ModifierListId == null && other.ModifierListId == null) || (this.ModifierListId?.Equals(other.ModifierListId) == true)) &&
                 ((this.ModifierOverrides == null && other.ModifierOverrides == null) || (this.ModifierOverrides?.Equals(other.ModifierOverrides) == true)) &&
                 ((this.MinSelectedModifiers == null && other.MinSelectedModifiers == null) || (this.MinSelectedModifiers?.Equals(other.MinSelectedModifiers) == true)) &&
                 ((this.MaxSelectedModifiers == null && other.MaxSelectedModifiers == null) || (this.MaxSelectedModifiers?.Equals(other.MaxSelectedModifiers) == true)) &&

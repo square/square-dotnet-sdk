@@ -58,9 +58,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyPromotionIncentivePointsMultiplierData other &&
-                this.PointsMultiplier.Equals(other.PointsMultiplier);
+            return obj is LoyaltyPromotionIncentivePointsMultiplierData other &&                this.PointsMultiplier.Equals(other.PointsMultiplier);
         }
         
         /// <inheritdoc/>

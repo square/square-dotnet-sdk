@@ -75,9 +75,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BookingCreatorDetails other &&
-                ((this.CreatorType == null && other.CreatorType == null) || (this.CreatorType?.Equals(other.CreatorType) == true)) &&
+            return obj is BookingCreatorDetails other &&                ((this.CreatorType == null && other.CreatorType == null) || (this.CreatorType?.Equals(other.CreatorType) == true)) &&
                 ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true));
         }

@@ -66,9 +66,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdatePaymentRequest other &&
-                ((this.Payment == null && other.Payment == null) || (this.Payment?.Equals(other.Payment) == true)) &&
+            return obj is UpdatePaymentRequest other &&                ((this.Payment == null && other.Payment == null) || (this.Payment?.Equals(other.Payment) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
         

@@ -67,9 +67,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomerAddressFilter other &&
-                ((this.PostalCode == null && other.PostalCode == null) || (this.PostalCode?.Equals(other.PostalCode) == true)) &&
+            return obj is CustomerAddressFilter other &&                ((this.PostalCode == null && other.PostalCode == null) || (this.PostalCode?.Equals(other.PostalCode) == true)) &&
                 ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true));
         }
         

@@ -148,9 +148,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListCatalogRequest other &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+            return obj is ListCatalogRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Types == null && other.Types == null) || (this.Types?.Equals(other.Types) == true)) &&
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
         }

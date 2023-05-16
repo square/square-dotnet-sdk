@@ -98,9 +98,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ShiftWage other &&
-                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
+            return obj is ShiftWage other &&                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
                 ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true));
         }
         

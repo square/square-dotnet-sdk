@@ -92,9 +92,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogTimePeriod other &&
-                ((this.MEvent == null && other.MEvent == null) || (this.MEvent?.Equals(other.MEvent) == true));
+            return obj is CatalogTimePeriod other &&                ((this.MEvent == null && other.MEvent == null) || (this.MEvent?.Equals(other.MEvent) == true));
         }
         
         /// <inheritdoc/>

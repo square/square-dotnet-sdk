@@ -58,7 +58,7 @@ namespace Square.Models
 
         /// <summary>
         /// A unique identifier for this request, used to ensure idempotency.
-        /// For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -94,9 +94,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateOrderCustomAttributeDefinitionRequest other &&
-                ((this.CustomAttributeDefinition == null && other.CustomAttributeDefinition == null) || (this.CustomAttributeDefinition?.Equals(other.CustomAttributeDefinition) == true)) &&
+            return obj is UpdateOrderCustomAttributeDefinitionRequest other &&                ((this.CustomAttributeDefinition == null && other.CustomAttributeDefinition == null) || (this.CustomAttributeDefinition?.Equals(other.CustomAttributeDefinition) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
         

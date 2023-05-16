@@ -205,9 +205,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderFulfillment other &&
-                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+            return obj is OrderFulfillment other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
                 ((this.LineItemApplication == null && other.LineItemApplication == null) || (this.LineItemApplication?.Equals(other.LineItemApplication) == true)) &&

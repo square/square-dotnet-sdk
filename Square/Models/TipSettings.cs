@@ -193,9 +193,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TipSettings other &&
-                ((this.AllowTipping == null && other.AllowTipping == null) || (this.AllowTipping?.Equals(other.AllowTipping) == true)) &&
+            return obj is TipSettings other &&                ((this.AllowTipping == null && other.AllowTipping == null) || (this.AllowTipping?.Equals(other.AllowTipping) == true)) &&
                 ((this.SeparateTipScreen == null && other.SeparateTipScreen == null) || (this.SeparateTipScreen?.Equals(other.SeparateTipScreen) == true)) &&
                 ((this.CustomTipField == null && other.CustomTipField == null) || (this.CustomTipField?.Equals(other.CustomTipField) == true)) &&
                 ((this.TipPercentages == null && other.TipPercentages == null) || (this.TipPercentages?.Equals(other.TipPercentages) == true)) &&

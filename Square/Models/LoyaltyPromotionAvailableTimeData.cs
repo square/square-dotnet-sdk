@@ -84,9 +84,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyPromotionAvailableTimeData other &&
-                ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
+            return obj is LoyaltyPromotionAvailableTimeData other &&                ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
                 ((this.EndDate == null && other.EndDate == null) || (this.EndDate?.Equals(other.EndDate) == true)) &&
                 ((this.TimePeriods == null && other.TimePeriods == null) || (this.TimePeriods?.Equals(other.TimePeriods) == true));
         }

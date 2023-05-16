@@ -82,9 +82,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TestWebhookSubscriptionRequest other &&
-                ((this.EventType == null && other.EventType == null) || (this.EventType?.Equals(other.EventType) == true));
+            return obj is TestWebhookSubscriptionRequest other &&                ((this.EventType == null && other.EventType == null) || (this.EventType?.Equals(other.EventType) == true));
         }
         
         /// <inheritdoc/>

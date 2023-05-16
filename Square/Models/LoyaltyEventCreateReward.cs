@@ -74,9 +74,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyEventCreateReward other &&
-                ((this.LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
+            return obj is LoyaltyEventCreateReward other &&                ((this.LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
                 ((this.RewardId == null && other.RewardId == null) || (this.RewardId?.Equals(other.RewardId) == true)) &&
                 this.Points.Equals(other.Points);
         }

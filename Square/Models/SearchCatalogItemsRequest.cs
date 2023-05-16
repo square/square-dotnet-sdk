@@ -132,9 +132,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchCatalogItemsRequest other &&
-                ((this.TextFilter == null && other.TextFilter == null) || (this.TextFilter?.Equals(other.TextFilter) == true)) &&
+            return obj is SearchCatalogItemsRequest other &&                ((this.TextFilter == null && other.TextFilter == null) || (this.TextFilter?.Equals(other.TextFilter) == true)) &&
                 ((this.CategoryIds == null && other.CategoryIds == null) || (this.CategoryIds?.Equals(other.CategoryIds) == true)) &&
                 ((this.StockLevels == null && other.StockLevels == null) || (this.StockLevels?.Equals(other.StockLevels) == true)) &&
                 ((this.EnabledLocationIds == null && other.EnabledLocationIds == null) || (this.EnabledLocationIds?.Equals(other.EnabledLocationIds) == true)) &&

@@ -71,9 +71,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is AcceptDisputeResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is AcceptDisputeResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Dispute == null && other.Dispute == null) || (this.Dispute?.Equals(other.Dispute) == true));
         }

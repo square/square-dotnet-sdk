@@ -158,9 +158,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DeviceCheckoutOptions other &&
-                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
+            return obj is DeviceCheckoutOptions other &&                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
                 ((this.SkipReceiptScreen == null && other.SkipReceiptScreen == null) || (this.SkipReceiptScreen?.Equals(other.SkipReceiptScreen) == true)) &&
                 ((this.CollectSignature == null && other.CollectSignature == null) || (this.CollectSignature?.Equals(other.CollectSignature) == true)) &&
                 ((this.TipSettings == null && other.TipSettings == null) || (this.TipSettings?.Equals(other.TipSettings) == true)) &&

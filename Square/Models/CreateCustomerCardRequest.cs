@@ -90,9 +90,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CreateCustomerCardRequest other &&
-                ((this.CardNonce == null && other.CardNonce == null) || (this.CardNonce?.Equals(other.CardNonce) == true)) &&
+            return obj is CreateCustomerCardRequest other &&                ((this.CardNonce == null && other.CardNonce == null) || (this.CardNonce?.Equals(other.CardNonce) == true)) &&
                 ((this.BillingAddress == null && other.BillingAddress == null) || (this.BillingAddress?.Equals(other.BillingAddress) == true)) &&
                 ((this.CardholderName == null && other.CardholderName == null) || (this.CardholderName?.Equals(other.CardholderName) == true)) &&
                 ((this.VerificationToken == null && other.VerificationToken == null) || (this.VerificationToken?.Equals(other.VerificationToken) == true));

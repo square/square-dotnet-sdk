@@ -184,9 +184,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomAttribute other &&
-                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
+            return obj is CustomAttribute other &&                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
                 ((this.MValue == null && other.MValue == null) || (this.MValue?.Equals(other.MValue) == true)) &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.Visibility == null && other.Visibility == null) || (this.Visibility?.Equals(other.Visibility) == true)) &&

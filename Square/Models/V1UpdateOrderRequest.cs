@@ -170,9 +170,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1UpdateOrderRequest other &&
-                ((this.Action == null && other.Action == null) || (this.Action?.Equals(other.Action) == true)) &&
+            return obj is V1UpdateOrderRequest other &&                ((this.Action == null && other.Action == null) || (this.Action?.Equals(other.Action) == true)) &&
                 ((this.ShippedTrackingNumber == null && other.ShippedTrackingNumber == null) || (this.ShippedTrackingNumber?.Equals(other.ShippedTrackingNumber) == true)) &&
                 ((this.CompletedNote == null && other.CompletedNote == null) || (this.CompletedNote?.Equals(other.CompletedNote) == true)) &&
                 ((this.RefundedNote == null && other.RefundedNote == null) || (this.RefundedNote?.Equals(other.RefundedNote) == true)) &&

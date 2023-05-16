@@ -172,9 +172,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyEvent other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is LoyaltyEvent other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.AccumulatePoints == null && other.AccumulatePoints == null) || (this.AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&

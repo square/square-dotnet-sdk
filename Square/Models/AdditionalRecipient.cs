@@ -134,9 +134,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is AdditionalRecipient other &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+            return obj is AdditionalRecipient other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
                 ((this.ReceivableId == null && other.ReceivableId == null) || (this.ReceivableId?.Equals(other.ReceivableId) == true));

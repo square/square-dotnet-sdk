@@ -95,9 +95,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is InvoiceFilter other &&
-                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
+            return obj is InvoiceFilter other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
                 ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
         }
         

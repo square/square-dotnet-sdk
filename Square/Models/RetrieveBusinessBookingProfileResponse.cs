@@ -71,9 +71,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveBusinessBookingProfileResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is RetrieveBusinessBookingProfileResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.BusinessBookingProfile == null && other.BusinessBookingProfile == null) || (this.BusinessBookingProfile?.Equals(other.BusinessBookingProfile) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }

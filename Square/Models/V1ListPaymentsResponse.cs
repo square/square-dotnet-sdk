@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1ListPaymentsResponse other &&
-                ((this.Items == null && other.Items == null) || (this.Items?.Equals(other.Items) == true));
+            return obj is V1ListPaymentsResponse other &&                ((this.Items == null && other.Items == null) || (this.Items?.Equals(other.Items) == true));
         }
         
         /// <inheritdoc/>

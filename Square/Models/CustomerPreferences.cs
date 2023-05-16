@@ -81,9 +81,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomerPreferences other &&
-                ((this.EmailUnsubscribed == null && other.EmailUnsubscribed == null) || (this.EmailUnsubscribed?.Equals(other.EmailUnsubscribed) == true));
+            return obj is CustomerPreferences other &&                ((this.EmailUnsubscribed == null && other.EmailUnsubscribed == null) || (this.EmailUnsubscribed?.Equals(other.EmailUnsubscribed) == true));
         }
         
         /// <inheritdoc/>

@@ -265,9 +265,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Transaction other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is Transaction other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.Tenders == null && other.Tenders == null) || (this.Tenders?.Equals(other.Tenders) == true)) &&

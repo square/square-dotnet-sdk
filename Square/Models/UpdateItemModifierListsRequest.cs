@@ -120,9 +120,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateItemModifierListsRequest other &&
-                ((this.ItemIds == null && other.ItemIds == null) || (this.ItemIds?.Equals(other.ItemIds) == true)) &&
+            return obj is UpdateItemModifierListsRequest other &&                ((this.ItemIds == null && other.ItemIds == null) || (this.ItemIds?.Equals(other.ItemIds) == true)) &&
                 ((this.ModifierListsToEnable == null && other.ModifierListsToEnable == null) || (this.ModifierListsToEnable?.Equals(other.ModifierListsToEnable) == true)) &&
                 ((this.ModifierListsToDisable == null && other.ModifierListsToDisable == null) || (this.ModifierListsToDisable?.Equals(other.ModifierListsToDisable) == true));
         }

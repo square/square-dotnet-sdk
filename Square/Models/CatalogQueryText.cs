@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogQueryText other &&
-                ((this.Keywords == null && other.Keywords == null) || (this.Keywords?.Equals(other.Keywords) == true));
+            return obj is CatalogQueryText other &&                ((this.Keywords == null && other.Keywords == null) || (this.Keywords?.Equals(other.Keywords) == true));
         }
         
         /// <inheritdoc/>

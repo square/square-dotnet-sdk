@@ -119,9 +119,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DigitalWalletDetails other &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+            return obj is DigitalWalletDetails other &&                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.Brand == null && other.Brand == null) || (this.Brand?.Equals(other.Brand) == true)) &&
                 ((this.CashAppDetails == null && other.CashAppDetails == null) || (this.CashAppDetails?.Equals(other.CashAppDetails) == true));
         }

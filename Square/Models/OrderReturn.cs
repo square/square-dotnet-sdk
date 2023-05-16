@@ -224,9 +224,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderReturn other &&
-                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+            return obj is OrderReturn other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.SourceOrderId == null && other.SourceOrderId == null) || (this.SourceOrderId?.Equals(other.SourceOrderId) == true)) &&
                 ((this.ReturnLineItems == null && other.ReturnLineItems == null) || (this.ReturnLineItems?.Equals(other.ReturnLineItems) == true)) &&
                 ((this.ReturnServiceCharges == null && other.ReturnServiceCharges == null) || (this.ReturnServiceCharges?.Equals(other.ReturnServiceCharges) == true)) &&

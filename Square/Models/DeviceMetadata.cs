@@ -371,9 +371,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DeviceMetadata other &&
-                ((this.BatteryPercentage == null && other.BatteryPercentage == null) || (this.BatteryPercentage?.Equals(other.BatteryPercentage) == true)) &&
+            return obj is DeviceMetadata other &&                ((this.BatteryPercentage == null && other.BatteryPercentage == null) || (this.BatteryPercentage?.Equals(other.BatteryPercentage) == true)) &&
                 ((this.ChargingState == null && other.ChargingState == null) || (this.ChargingState?.Equals(other.ChargingState) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&

@@ -107,9 +107,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DisputeEvidenceFile other &&
-                ((this.Filename == null && other.Filename == null) || (this.Filename?.Equals(other.Filename) == true)) &&
+            return obj is DisputeEvidenceFile other &&                ((this.Filename == null && other.Filename == null) || (this.Filename?.Equals(other.Filename) == true)) &&
                 ((this.Filetype == null && other.Filetype == null) || (this.Filetype?.Equals(other.Filetype) == true));
         }
         

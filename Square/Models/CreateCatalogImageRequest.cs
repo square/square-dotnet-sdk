@@ -94,9 +94,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CreateCatalogImageRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is CreateCatalogImageRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true)) &&
                 ((this.Image == null && other.Image == null) || (this.Image?.Equals(other.Image) == true)) &&
                 ((this.IsPrimary == null && other.IsPrimary == null) || (this.IsPrimary?.Equals(other.IsPrimary) == true));

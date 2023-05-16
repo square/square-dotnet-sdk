@@ -85,9 +85,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogCustomAttributeDefinitionStringConfig other &&
-                ((this.EnforceUniqueness == null && other.EnforceUniqueness == null) || (this.EnforceUniqueness?.Equals(other.EnforceUniqueness) == true));
+            return obj is CatalogCustomAttributeDefinitionStringConfig other &&                ((this.EnforceUniqueness == null && other.EnforceUniqueness == null) || (this.EnforceUniqueness?.Equals(other.EnforceUniqueness) == true));
         }
         
         /// <inheritdoc/>

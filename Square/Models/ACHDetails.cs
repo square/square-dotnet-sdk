@@ -134,9 +134,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ACHDetails other &&
-                ((this.RoutingNumber == null && other.RoutingNumber == null) || (this.RoutingNumber?.Equals(other.RoutingNumber) == true)) &&
+            return obj is ACHDetails other &&                ((this.RoutingNumber == null && other.RoutingNumber == null) || (this.RoutingNumber?.Equals(other.RoutingNumber) == true)) &&
                 ((this.AccountNumberSuffix == null && other.AccountNumberSuffix == null) || (this.AccountNumberSuffix?.Equals(other.AccountNumberSuffix) == true)) &&
                 ((this.AccountType == null && other.AccountType == null) || (this.AccountType?.Equals(other.AccountType) == true));
         }

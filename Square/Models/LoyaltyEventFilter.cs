@@ -91,9 +91,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyEventFilter other &&
-                ((this.LoyaltyAccountFilter == null && other.LoyaltyAccountFilter == null) || (this.LoyaltyAccountFilter?.Equals(other.LoyaltyAccountFilter) == true)) &&
+            return obj is LoyaltyEventFilter other &&                ((this.LoyaltyAccountFilter == null && other.LoyaltyAccountFilter == null) || (this.LoyaltyAccountFilter?.Equals(other.LoyaltyAccountFilter) == true)) &&
                 ((this.TypeFilter == null && other.TypeFilter == null) || (this.TypeFilter?.Equals(other.TypeFilter) == true)) &&
                 ((this.DateTimeFilter == null && other.DateTimeFilter == null) || (this.DateTimeFilter?.Equals(other.DateTimeFilter) == true)) &&
                 ((this.LocationFilter == null && other.LocationFilter == null) || (this.LocationFilter?.Equals(other.LocationFilter) == true)) &&

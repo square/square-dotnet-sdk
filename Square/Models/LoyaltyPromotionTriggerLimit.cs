@@ -65,9 +65,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyPromotionTriggerLimit other &&
-                this.Times.Equals(other.Times) &&
+            return obj is LoyaltyPromotionTriggerLimit other &&                this.Times.Equals(other.Times) &&
                 ((this.Interval == null && other.Interval == null) || (this.Interval?.Equals(other.Interval) == true));
         }
         

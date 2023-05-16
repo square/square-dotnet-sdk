@@ -150,9 +150,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListLocationCustomAttributesRequest other &&
-                ((this.VisibilityFilter == null && other.VisibilityFilter == null) || (this.VisibilityFilter?.Equals(other.VisibilityFilter) == true)) &&
+            return obj is ListLocationCustomAttributesRequest other &&                ((this.VisibilityFilter == null && other.VisibilityFilter == null) || (this.VisibilityFilter?.Equals(other.VisibilityFilter) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.WithDefinitions == null && other.WithDefinitions == null) || (this.WithDefinitions?.Equals(other.WithDefinitions) == true));

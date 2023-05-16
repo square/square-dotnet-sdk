@@ -121,9 +121,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveCatalogObjectRequest other &&
-                ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
+            return obj is RetrieveCatalogObjectRequest other &&                ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
         }
         

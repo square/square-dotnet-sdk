@@ -125,9 +125,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BatchChangeInventoryRequest other &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
+            return obj is BatchChangeInventoryRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.Changes == null && other.Changes == null) || (this.Changes?.Equals(other.Changes) == true)) &&
                 ((this.IgnoreUnchangedCounts == null && other.IgnoreUnchangedCounts == null) || (this.IgnoreUnchangedCounts?.Equals(other.IgnoreUnchangedCounts) == true));
         }

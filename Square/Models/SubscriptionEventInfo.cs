@@ -92,9 +92,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SubscriptionEventInfo other &&
-                ((this.Detail == null && other.Detail == null) || (this.Detail?.Equals(other.Detail) == true)) &&
+            return obj is SubscriptionEventInfo other &&                ((this.Detail == null && other.Detail == null) || (this.Detail?.Equals(other.Detail) == true)) &&
                 ((this.Code == null && other.Code == null) || (this.Code?.Equals(other.Code) == true));
         }
         

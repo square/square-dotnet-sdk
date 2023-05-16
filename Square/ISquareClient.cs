@@ -149,6 +149,11 @@ namespace Square
         IMerchantsApi MerchantsApi { get; }
 
         /// <summary>
+        /// Gets instance for IMerchantCustomAttributesApi.
+        /// </summary>
+        IMerchantCustomAttributesApi MerchantCustomAttributesApi { get; }
+
+        /// <summary>
         /// Gets instance for IOrdersApi.
         /// </summary>
         IOrdersApi OrdersApi { get; }

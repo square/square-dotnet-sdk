@@ -105,9 +105,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogQuerySortedAttribute other &&
-                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
+            return obj is CatalogQuerySortedAttribute other &&                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
                 ((this.InitialAttributeValue == null && other.InitialAttributeValue == null) || (this.InitialAttributeValue?.Equals(other.InitialAttributeValue) == true)) &&
                 ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }

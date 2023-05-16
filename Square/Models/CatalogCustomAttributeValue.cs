@@ -221,9 +221,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogCustomAttributeValue other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is CatalogCustomAttributeValue other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.StringValue == null && other.StringValue == null) || (this.StringValue?.Equals(other.StringValue) == true)) &&
                 ((this.CustomAttributeDefinitionId == null && other.CustomAttributeDefinitionId == null) || (this.CustomAttributeDefinitionId?.Equals(other.CustomAttributeDefinitionId) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&

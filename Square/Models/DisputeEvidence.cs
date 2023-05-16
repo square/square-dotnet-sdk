@@ -192,9 +192,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DisputeEvidence other &&
-                ((this.EvidenceId == null && other.EvidenceId == null) || (this.EvidenceId?.Equals(other.EvidenceId) == true)) &&
+            return obj is DisputeEvidence other &&                ((this.EvidenceId == null && other.EvidenceId == null) || (this.EvidenceId?.Equals(other.EvidenceId) == true)) &&
                 ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.DisputeId == null && other.DisputeId == null) || (this.DisputeId?.Equals(other.DisputeId) == true)) &&
                 ((this.EvidenceFile == null && other.EvidenceFile == null) || (this.EvidenceFile?.Equals(other.EvidenceFile) == true)) &&

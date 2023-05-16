@@ -174,9 +174,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListCardsRequest other &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+            return obj is ListCardsRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
                 ((this.IncludeDisabled == null && other.IncludeDisabled == null) || (this.IncludeDisabled?.Equals(other.IncludeDisabled) == true)) &&
                 ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&

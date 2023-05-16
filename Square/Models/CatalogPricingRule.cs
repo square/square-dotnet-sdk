@@ -391,9 +391,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogPricingRule other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is CatalogPricingRule other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.TimePeriodIds == null && other.TimePeriodIds == null) || (this.TimePeriodIds?.Equals(other.TimePeriodIds) == true)) &&
                 ((this.DiscountId == null && other.DiscountId == null) || (this.DiscountId?.Equals(other.DiscountId) == true)) &&
                 ((this.MatchProductsId == null && other.MatchProductsId == null) || (this.MatchProductsId?.Equals(other.MatchProductsId) == true)) &&

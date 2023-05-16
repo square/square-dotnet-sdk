@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SwapPlanRequest other &&
-                ((this.NewPlanId == null && other.NewPlanId == null) || (this.NewPlanId?.Equals(other.NewPlanId) == true));
+            return obj is SwapPlanRequest other &&                ((this.NewPlanId == null && other.NewPlanId == null) || (this.NewPlanId?.Equals(other.NewPlanId) == true));
         }
         
         /// <inheritdoc/>

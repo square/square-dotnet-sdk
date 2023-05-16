@@ -231,9 +231,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomAttributeDefinition other &&
-                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
+            return obj is CustomAttributeDefinition other &&                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
                 ((this.Schema == null && other.Schema == null) || (this.Schema?.Equals(other.Schema) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&

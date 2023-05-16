@@ -116,9 +116,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderMoneyAmounts other &&
-                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
+            return obj is OrderMoneyAmounts other &&                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
                 ((this.TaxMoney == null && other.TaxMoney == null) || (this.TaxMoney?.Equals(other.TaxMoney) == true)) &&
                 ((this.DiscountMoney == null && other.DiscountMoney == null) || (this.DiscountMoney?.Equals(other.DiscountMoney) == true)) &&
                 ((this.TipMoney == null && other.TipMoney == null) || (this.TipMoney?.Equals(other.TipMoney) == true)) &&

@@ -119,9 +119,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is InvoiceCustomField other &&
-                ((this.Label == null && other.Label == null) || (this.Label?.Equals(other.Label) == true)) &&
+            return obj is InvoiceCustomField other &&                ((this.Label == null && other.Label == null) || (this.Label?.Equals(other.Label) == true)) &&
                 ((this.MValue == null && other.MValue == null) || (this.MValue?.Equals(other.MValue) == true)) &&
                 ((this.Placement == null && other.Placement == null) || (this.Placement?.Equals(other.Placement) == true));
         }

@@ -121,9 +121,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateItemTaxesRequest other &&
-                ((this.ItemIds == null && other.ItemIds == null) || (this.ItemIds?.Equals(other.ItemIds) == true)) &&
+            return obj is UpdateItemTaxesRequest other &&                ((this.ItemIds == null && other.ItemIds == null) || (this.ItemIds?.Equals(other.ItemIds) == true)) &&
                 ((this.TaxesToEnable == null && other.TaxesToEnable == null) || (this.TaxesToEnable?.Equals(other.TaxesToEnable) == true)) &&
                 ((this.TaxesToDisable == null && other.TaxesToDisable == null) || (this.TaxesToDisable?.Equals(other.TaxesToDisable) == true));
         }

@@ -172,9 +172,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CustomerCustomAttributeFilterValue other &&
-                ((this.Email == null && other.Email == null) || (this.Email?.Equals(other.Email) == true)) &&
+            return obj is CustomerCustomAttributeFilterValue other &&                ((this.Email == null && other.Email == null) || (this.Email?.Equals(other.Email) == true)) &&
                 ((this.Phone == null && other.Phone == null) || (this.Phone?.Equals(other.Phone) == true)) &&
                 ((this.Text == null && other.Text == null) || (this.Text?.Equals(other.Text) == true)) &&
                 ((this.Selection == null && other.Selection == null) || (this.Selection?.Equals(other.Selection) == true)) &&

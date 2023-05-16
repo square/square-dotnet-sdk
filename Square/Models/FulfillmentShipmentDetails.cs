@@ -371,9 +371,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is FulfillmentShipmentDetails other &&
-                ((this.Recipient == null && other.Recipient == null) || (this.Recipient?.Equals(other.Recipient) == true)) &&
+            return obj is FulfillmentShipmentDetails other &&                ((this.Recipient == null && other.Recipient == null) || (this.Recipient?.Equals(other.Recipient) == true)) &&
                 ((this.Carrier == null && other.Carrier == null) || (this.Carrier?.Equals(other.Carrier) == true)) &&
                 ((this.ShippingNote == null && other.ShippingNote == null) || (this.ShippingNote?.Equals(other.ShippingNote) == true)) &&
                 ((this.ShippingType == null && other.ShippingType == null) || (this.ShippingType?.Equals(other.ShippingType) == true)) &&

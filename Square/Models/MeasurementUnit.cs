@@ -118,9 +118,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is MeasurementUnit other &&
-                ((this.CustomUnit == null && other.CustomUnit == null) || (this.CustomUnit?.Equals(other.CustomUnit) == true)) &&
+            return obj is MeasurementUnit other &&                ((this.CustomUnit == null && other.CustomUnit == null) || (this.CustomUnit?.Equals(other.CustomUnit) == true)) &&
                 ((this.AreaUnit == null && other.AreaUnit == null) || (this.AreaUnit?.Equals(other.AreaUnit) == true)) &&
                 ((this.LengthUnit == null && other.LengthUnit == null) || (this.LengthUnit?.Equals(other.LengthUnit) == true)) &&
                 ((this.VolumeUnit == null && other.VolumeUnit == null) || (this.VolumeUnit?.Equals(other.VolumeUnit) == true)) &&

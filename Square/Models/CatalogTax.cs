@@ -27,20 +27,23 @@ namespace Square.Models
         /// <param name="percentage">percentage.</param>
         /// <param name="appliesToCustomAmounts">applies_to_custom_amounts.</param>
         /// <param name="enabled">enabled.</param>
+        /// <param name="appliesToProductSetId">applies_to_product_set_id.</param>
         public CatalogTax(
             string name = null,
             string calculationPhase = null,
             string inclusionType = null,
             string percentage = null,
             bool? appliesToCustomAmounts = null,
-            bool? enabled = null)
+            bool? enabled = null,
+            string appliesToProductSetId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "name", false },
                 { "percentage", false },
                 { "applies_to_custom_amounts", false },
-                { "enabled", false }
+                { "enabled", false },
+                { "applies_to_product_set_id", false }
             };
 
             if (name != null)
@@ -69,6 +72,12 @@ namespace Square.Models
                 this.Enabled = enabled;
             }
 
+            if (appliesToProductSetId != null)
+            {
+                shouldSerialize["applies_to_product_set_id"] = true;
+                this.AppliesToProductSetId = appliesToProductSetId;
+            }
+
         }
         internal CatalogTax(Dictionary<string, bool> shouldSerialize,
             string name = null,
@@ -76,7 +85,8 @@ namespace Square.Models
             string inclusionType = null,
             string percentage = null,
             bool? appliesToCustomAmounts = null,
-            bool? enabled = null)
+            bool? enabled = null,
+            string appliesToProductSetId = null)
         {
             this.shouldSerialize = shouldSerialize;
             Name = name;
@@ -85,6 +95,7 @@ namespace Square.Models
             Percentage = percentage;
             AppliesToCustomAmounts = appliesToCustomAmounts;
             Enabled = enabled;
+            AppliesToProductSetId = appliesToProductSetId;
         }
 
         /// <summary>
@@ -124,6 +135,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; }
+
+        /// <summary>
+        /// The ID of a `CatalogProductSet` object. If set, the tax is applicable to all products in the product set.
+        /// </summary>
+        [JsonProperty("applies_to_product_set_id")]
+        public string AppliesToProductSetId { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -171,6 +188,15 @@ namespace Square.Models
             return this.shouldSerialize["enabled"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAppliesToProductSetId()
+        {
+            return this.shouldSerialize["applies_to_product_set_id"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -183,21 +209,20 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogTax other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is CatalogTax other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.CalculationPhase == null && other.CalculationPhase == null) || (this.CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
                 ((this.InclusionType == null && other.InclusionType == null) || (this.InclusionType?.Equals(other.InclusionType) == true)) &&
                 ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
                 ((this.AppliesToCustomAmounts == null && other.AppliesToCustomAmounts == null) || (this.AppliesToCustomAmounts?.Equals(other.AppliesToCustomAmounts) == true)) &&
-                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true));
+                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true)) &&
+                ((this.AppliesToProductSetId == null && other.AppliesToProductSetId == null) || (this.AppliesToProductSetId?.Equals(other.AppliesToProductSetId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 29476180;
-            hashCode = HashCode.Combine(this.Name, this.CalculationPhase, this.InclusionType, this.Percentage, this.AppliesToCustomAmounts, this.Enabled);
+            int hashCode = -36050816;
+            hashCode = HashCode.Combine(this.Name, this.CalculationPhase, this.InclusionType, this.Percentage, this.AppliesToCustomAmounts, this.Enabled, this.AppliesToProductSetId);
 
             return hashCode;
         }
@@ -213,6 +238,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage == string.Empty ? "" : this.Percentage)}");
             toStringOutput.Add($"this.AppliesToCustomAmounts = {(this.AppliesToCustomAmounts == null ? "null" : this.AppliesToCustomAmounts.ToString())}");
             toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
+            toStringOutput.Add($"this.AppliesToProductSetId = {(this.AppliesToProductSetId == null ? "null" : this.AppliesToProductSetId == string.Empty ? "" : this.AppliesToProductSetId)}");
         }
 
         /// <summary>
@@ -227,7 +253,8 @@ namespace Square.Models
                 .InclusionType(this.InclusionType)
                 .Percentage(this.Percentage)
                 .AppliesToCustomAmounts(this.AppliesToCustomAmounts)
-                .Enabled(this.Enabled);
+                .Enabled(this.Enabled)
+                .AppliesToProductSetId(this.AppliesToProductSetId);
             return builder;
         }
 
@@ -242,6 +269,7 @@ namespace Square.Models
                 { "percentage", false },
                 { "applies_to_custom_amounts", false },
                 { "enabled", false },
+                { "applies_to_product_set_id", false },
             };
 
             private string name;
@@ -250,6 +278,7 @@ namespace Square.Models
             private string percentage;
             private bool? appliesToCustomAmounts;
             private bool? enabled;
+            private string appliesToProductSetId;
 
              /// <summary>
              /// Name.
@@ -321,6 +350,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AppliesToProductSetId.
+             /// </summary>
+             /// <param name="appliesToProductSetId"> appliesToProductSetId. </param>
+             /// <returns> Builder. </returns>
+            public Builder AppliesToProductSetId(string appliesToProductSetId)
+            {
+                shouldSerialize["applies_to_product_set_id"] = true;
+                this.appliesToProductSetId = appliesToProductSetId;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -353,6 +394,14 @@ namespace Square.Models
                 this.shouldSerialize["enabled"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAppliesToProductSetId()
+            {
+                this.shouldSerialize["applies_to_product_set_id"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -366,7 +415,8 @@ namespace Square.Models
                     this.inclusionType,
                     this.percentage,
                     this.appliesToCustomAmounts,
-                    this.enabled);
+                    this.enabled,
+                    this.appliesToProductSetId);
             }
         }
     }

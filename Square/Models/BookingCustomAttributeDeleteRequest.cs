@@ -66,9 +66,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BookingCustomAttributeDeleteRequest other &&
-                ((this.BookingId == null && other.BookingId == null) || (this.BookingId?.Equals(other.BookingId) == true)) &&
+            return obj is BookingCustomAttributeDeleteRequest other &&                ((this.BookingId == null && other.BookingId == null) || (this.BookingId?.Equals(other.BookingId) == true)) &&
                 ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true));
         }
         

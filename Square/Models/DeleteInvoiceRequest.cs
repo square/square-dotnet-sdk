@@ -57,9 +57,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is DeleteInvoiceRequest other &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
+            return obj is DeleteInvoiceRequest other &&                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
         }
         
         /// <inheritdoc/>

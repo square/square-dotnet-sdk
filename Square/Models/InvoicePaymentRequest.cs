@@ -327,9 +327,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is InvoicePaymentRequest other &&
-                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+            return obj is InvoicePaymentRequest other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.RequestMethod == null && other.RequestMethod == null) || (this.RequestMethod?.Equals(other.RequestMethod) == true)) &&
                 ((this.RequestType == null && other.RequestType == null) || (this.RequestType?.Equals(other.RequestType) == true)) &&
                 ((this.DueDate == null && other.DueDate == null) || (this.DueDate?.Equals(other.DueDate) == true)) &&

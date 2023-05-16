@@ -83,9 +83,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is InventoryAdjustmentGroup other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is InventoryAdjustmentGroup other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.RootAdjustmentId == null && other.RootAdjustmentId == null) || (this.RootAdjustmentId?.Equals(other.RootAdjustmentId) == true)) &&
                 ((this.FromState == null && other.FromState == null) || (this.FromState?.Equals(other.FromState) == true)) &&
                 ((this.ToState == null && other.ToState == null) || (this.ToState?.Equals(other.ToState) == true));

@@ -109,9 +109,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderFulfillmentPickupDetailsCurbsidePickupDetails other &&
-                ((this.CurbsideDetails == null && other.CurbsideDetails == null) || (this.CurbsideDetails?.Equals(other.CurbsideDetails) == true)) &&
+            return obj is OrderFulfillmentPickupDetailsCurbsidePickupDetails other &&                ((this.CurbsideDetails == null && other.CurbsideDetails == null) || (this.CurbsideDetails?.Equals(other.CurbsideDetails) == true)) &&
                 ((this.BuyerArrivedAt == null && other.BuyerArrivedAt == null) || (this.BuyerArrivedAt?.Equals(other.BuyerArrivedAt) == true));
         }
         

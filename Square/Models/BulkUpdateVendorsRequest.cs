@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BulkUpdateVendorsRequest other &&
-                ((this.Vendors == null && other.Vendors == null) || (this.Vendors?.Equals(other.Vendors) == true));
+            return obj is BulkUpdateVendorsRequest other &&                ((this.Vendors == null && other.Vendors == null) || (this.Vendors?.Equals(other.Vendors) == true));
         }
         
         /// <inheritdoc/>

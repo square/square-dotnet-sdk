@@ -81,9 +81,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BusinessHours other &&
-                ((this.Periods == null && other.Periods == null) || (this.Periods?.Equals(other.Periods) == true));
+            return obj is BusinessHours other &&                ((this.Periods == null && other.Periods == null) || (this.Periods?.Equals(other.Periods) == true));
         }
         
         /// <inheritdoc/>

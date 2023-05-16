@@ -110,9 +110,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is QuantityRatio other &&
-                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
+            return obj is QuantityRatio other &&                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
                 ((this.QuantityDenominator == null && other.QuantityDenominator == null) || (this.QuantityDenominator?.Equals(other.QuantityDenominator) == true));
         }
         

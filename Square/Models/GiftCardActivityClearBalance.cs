@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is GiftCardActivityClearBalance other &&
-                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true));
+            return obj is GiftCardActivityClearBalance other &&                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true));
         }
         
         /// <inheritdoc/>

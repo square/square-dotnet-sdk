@@ -97,9 +97,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ShippingFee other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is ShippingFee other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Charge == null && other.Charge == null) || (this.Charge?.Equals(other.Charge) == true));
         }
         

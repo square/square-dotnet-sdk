@@ -57,9 +57,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SubscriptionSource other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
+            return obj is SubscriptionSource other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
         }
         
         /// <inheritdoc/>

@@ -80,9 +80,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BatchRetrieveCatalogObjectsResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is BatchRetrieveCatalogObjectsResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Objects == null && other.Objects == null) || (this.Objects?.Equals(other.Objects) == true)) &&
                 ((this.RelatedObjects == null && other.RelatedObjects == null) || (this.RelatedObjects?.Equals(other.RelatedObjects) == true));

@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchOrdersSort other &&
-                ((this.SortField == null && other.SortField == null) || (this.SortField?.Equals(other.SortField) == true)) &&
+            return obj is SearchOrdersSort other &&                ((this.SortField == null && other.SortField == null) || (this.SortField?.Equals(other.SortField) == true)) &&
                 ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
         }
         

@@ -84,9 +84,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogStockConversion other &&
-                ((this.StockableItemVariationId == null && other.StockableItemVariationId == null) || (this.StockableItemVariationId?.Equals(other.StockableItemVariationId) == true)) &&
+            return obj is CatalogStockConversion other &&                ((this.StockableItemVariationId == null && other.StockableItemVariationId == null) || (this.StockableItemVariationId?.Equals(other.StockableItemVariationId) == true)) &&
                 ((this.StockableQuantity == null && other.StockableQuantity == null) || (this.StockableQuantity?.Equals(other.StockableQuantity) == true)) &&
                 ((this.NonstockableQuantity == null && other.NonstockableQuantity == null) || (this.NonstockableQuantity?.Equals(other.NonstockableQuantity) == true));
         }

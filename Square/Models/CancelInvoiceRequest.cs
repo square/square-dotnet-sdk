@@ -57,9 +57,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CancelInvoiceRequest other &&
-                this.Version.Equals(other.Version);
+            return obj is CancelInvoiceRequest other &&                this.Version.Equals(other.Version);
         }
         
         /// <inheritdoc/>

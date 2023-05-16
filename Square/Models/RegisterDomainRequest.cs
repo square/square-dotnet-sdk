@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RegisterDomainRequest other &&
-                ((this.DomainName == null && other.DomainName == null) || (this.DomainName?.Equals(other.DomainName) == true));
+            return obj is RegisterDomainRequest other &&                ((this.DomainName == null && other.DomainName == null) || (this.DomainName?.Equals(other.DomainName) == true));
         }
         
         /// <inheritdoc/>

@@ -85,9 +85,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpsertCatalogObjectResponse other &&
-                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+            return obj is UpsertCatalogObjectResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.CatalogObject == null && other.CatalogObject == null) || (this.CatalogObject?.Equals(other.CatalogObject) == true)) &&
                 ((this.IdMappings == null && other.IdMappings == null) || (this.IdMappings?.Equals(other.IdMappings) == true));

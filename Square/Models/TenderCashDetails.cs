@@ -74,9 +74,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TenderCashDetails other &&
-                ((this.BuyerTenderedMoney == null && other.BuyerTenderedMoney == null) || (this.BuyerTenderedMoney?.Equals(other.BuyerTenderedMoney) == true)) &&
+            return obj is TenderCashDetails other &&                ((this.BuyerTenderedMoney == null && other.BuyerTenderedMoney == null) || (this.BuyerTenderedMoney?.Equals(other.BuyerTenderedMoney) == true)) &&
                 ((this.ChangeBackMoney == null && other.ChangeBackMoney == null) || (this.ChangeBackMoney?.Equals(other.ChangeBackMoney) == true));
         }
         

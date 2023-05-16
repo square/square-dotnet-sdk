@@ -158,9 +158,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BatchRetrieveCatalogObjectsRequest other &&
-                ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true)) &&
+            return obj is BatchRetrieveCatalogObjectsRequest other &&                ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true)) &&
                 ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
                 ((this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true));

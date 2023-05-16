@@ -143,9 +143,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is InvoicePaymentReminder other &&
-                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+            return obj is InvoicePaymentReminder other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.RelativeScheduledDays == null && other.RelativeScheduledDays == null) || (this.RelativeScheduledDays?.Equals(other.RelativeScheduledDays) == true)) &&
                 ((this.Message == null && other.Message == null) || (this.Message?.Equals(other.Message) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&

@@ -132,9 +132,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ExternalPaymentDetails other &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+            return obj is ExternalPaymentDetails other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
                 ((this.SourceId == null && other.SourceId == null) || (this.SourceId?.Equals(other.SourceId) == true)) &&
                 ((this.SourceFeeMoney == null && other.SourceFeeMoney == null) || (this.SourceFeeMoney?.Equals(other.SourceFeeMoney) == true));

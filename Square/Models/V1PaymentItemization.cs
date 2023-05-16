@@ -314,9 +314,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1PaymentItemization other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is V1PaymentItemization other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
                 ((this.ItemizationType == null && other.ItemizationType == null) || (this.ItemizationType?.Equals(other.ItemizationType) == true)) &&
                 ((this.ItemDetail == null && other.ItemDetail == null) || (this.ItemDetail?.Equals(other.ItemDetail) == true)) &&

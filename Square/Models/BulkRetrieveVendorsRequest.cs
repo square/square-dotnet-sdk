@@ -81,9 +81,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BulkRetrieveVendorsRequest other &&
-                ((this.VendorIds == null && other.VendorIds == null) || (this.VendorIds?.Equals(other.VendorIds) == true));
+            return obj is BulkRetrieveVendorsRequest other &&                ((this.VendorIds == null && other.VendorIds == null) || (this.VendorIds?.Equals(other.VendorIds) == true));
         }
         
         /// <inheritdoc/>

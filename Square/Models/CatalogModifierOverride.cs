@@ -92,9 +92,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogModifierOverride other &&
-                ((this.ModifierId == null && other.ModifierId == null) || (this.ModifierId?.Equals(other.ModifierId) == true)) &&
+            return obj is CatalogModifierOverride other &&                ((this.ModifierId == null && other.ModifierId == null) || (this.ModifierId?.Equals(other.ModifierId) == true)) &&
                 ((this.OnByDefault == null && other.OnByDefault == null) || (this.OnByDefault?.Equals(other.OnByDefault) == true));
         }
         

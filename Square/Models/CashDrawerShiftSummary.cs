@@ -30,6 +30,9 @@ namespace Square.Models
         /// <param name="openedCashMoney">opened_cash_money.</param>
         /// <param name="expectedCashMoney">expected_cash_money.</param>
         /// <param name="closedCashMoney">closed_cash_money.</param>
+        /// <param name="createdAt">created_at.</param>
+        /// <param name="updatedAt">updated_at.</param>
+        /// <param name="locationId">location_id.</param>
         public CashDrawerShiftSummary(
             string id = null,
             string state = null,
@@ -39,7 +42,10 @@ namespace Square.Models
             string description = null,
             Models.Money openedCashMoney = null,
             Models.Money expectedCashMoney = null,
-            Models.Money closedCashMoney = null)
+            Models.Money closedCashMoney = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string locationId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -78,6 +84,9 @@ namespace Square.Models
             this.OpenedCashMoney = openedCashMoney;
             this.ExpectedCashMoney = expectedCashMoney;
             this.ClosedCashMoney = closedCashMoney;
+            this.CreatedAt = createdAt;
+            this.UpdatedAt = updatedAt;
+            this.LocationId = locationId;
         }
         internal CashDrawerShiftSummary(Dictionary<string, bool> shouldSerialize,
             string id = null,
@@ -88,7 +97,10 @@ namespace Square.Models
             string description = null,
             Models.Money openedCashMoney = null,
             Models.Money expectedCashMoney = null,
-            Models.Money closedCashMoney = null)
+            Models.Money closedCashMoney = null,
+            string createdAt = null,
+            string updatedAt = null,
+            string locationId = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -100,6 +112,9 @@ namespace Square.Models
             OpenedCashMoney = openedCashMoney;
             ExpectedCashMoney = expectedCashMoney;
             ClosedCashMoney = closedCashMoney;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+            LocationId = locationId;
         }
 
         /// <summary>
@@ -171,6 +186,24 @@ namespace Square.Models
         [JsonProperty("closed_cash_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money ClosedCashMoney { get; }
 
+        /// <summary>
+        /// The shift start time in RFC 3339 format.
+        /// </summary>
+        [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
+        public string CreatedAt { get; }
+
+        /// <summary>
+        /// The shift updated at time in RFC 3339 format.
+        /// </summary>
+        [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
+        public string UpdatedAt { get; }
+
+        /// <summary>
+        /// The ID of the location the cash drawer shift belongs to.
+        /// </summary>
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string LocationId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -229,9 +262,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CashDrawerShiftSummary other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is CashDrawerShiftSummary other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
                 ((this.OpenedAt == null && other.OpenedAt == null) || (this.OpenedAt?.Equals(other.OpenedAt) == true)) &&
                 ((this.EndedAt == null && other.EndedAt == null) || (this.EndedAt?.Equals(other.EndedAt) == true)) &&
@@ -239,16 +270,19 @@ namespace Square.Models
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.OpenedCashMoney == null && other.OpenedCashMoney == null) || (this.OpenedCashMoney?.Equals(other.OpenedCashMoney) == true)) &&
                 ((this.ExpectedCashMoney == null && other.ExpectedCashMoney == null) || (this.ExpectedCashMoney?.Equals(other.ExpectedCashMoney) == true)) &&
-                ((this.ClosedCashMoney == null && other.ClosedCashMoney == null) || (this.ClosedCashMoney?.Equals(other.ClosedCashMoney) == true));
+                ((this.ClosedCashMoney == null && other.ClosedCashMoney == null) || (this.ClosedCashMoney?.Equals(other.ClosedCashMoney) == true)) &&
+                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
+                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -323366853;
+            int hashCode = -639368416;
             hashCode = HashCode.Combine(this.Id, this.State, this.OpenedAt, this.EndedAt, this.ClosedAt, this.Description, this.OpenedCashMoney);
 
-            hashCode = HashCode.Combine(hashCode, this.ExpectedCashMoney, this.ClosedCashMoney);
+            hashCode = HashCode.Combine(hashCode, this.ExpectedCashMoney, this.ClosedCashMoney, this.CreatedAt, this.UpdatedAt, this.LocationId);
 
             return hashCode;
         }
@@ -267,6 +301,9 @@ namespace Square.Models
             toStringOutput.Add($"this.OpenedCashMoney = {(this.OpenedCashMoney == null ? "null" : this.OpenedCashMoney.ToString())}");
             toStringOutput.Add($"this.ExpectedCashMoney = {(this.ExpectedCashMoney == null ? "null" : this.ExpectedCashMoney.ToString())}");
             toStringOutput.Add($"this.ClosedCashMoney = {(this.ClosedCashMoney == null ? "null" : this.ClosedCashMoney.ToString())}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
         }
 
         /// <summary>
@@ -284,7 +321,10 @@ namespace Square.Models
                 .Description(this.Description)
                 .OpenedCashMoney(this.OpenedCashMoney)
                 .ExpectedCashMoney(this.ExpectedCashMoney)
-                .ClosedCashMoney(this.ClosedCashMoney);
+                .ClosedCashMoney(this.ClosedCashMoney)
+                .CreatedAt(this.CreatedAt)
+                .UpdatedAt(this.UpdatedAt)
+                .LocationId(this.LocationId);
             return builder;
         }
 
@@ -310,6 +350,9 @@ namespace Square.Models
             private Models.Money openedCashMoney;
             private Models.Money expectedCashMoney;
             private Models.Money closedCashMoney;
+            private string createdAt;
+            private string updatedAt;
+            private string locationId;
 
              /// <summary>
              /// Id.
@@ -414,6 +457,39 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CreatedAt.
+             /// </summary>
+             /// <param name="createdAt"> createdAt. </param>
+             /// <returns> Builder. </returns>
+            public Builder CreatedAt(string createdAt)
+            {
+                this.createdAt = createdAt;
+                return this;
+            }
+
+             /// <summary>
+             /// UpdatedAt.
+             /// </summary>
+             /// <param name="updatedAt"> updatedAt. </param>
+             /// <returns> Builder. </returns>
+            public Builder UpdatedAt(string updatedAt)
+            {
+                this.updatedAt = updatedAt;
+                return this;
+            }
+
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
+            public Builder LocationId(string locationId)
+            {
+                this.locationId = locationId;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -462,7 +538,10 @@ namespace Square.Models
                     this.description,
                     this.openedCashMoney,
                     this.expectedCashMoney,
-                    this.closedCashMoney);
+                    this.closedCashMoney,
+                    this.createdAt,
+                    this.updatedAt,
+                    this.locationId);
             }
         }
     }

@@ -73,9 +73,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is EventTypeMetadata other &&
-                ((this.EventType == null && other.EventType == null) || (this.EventType?.Equals(other.EventType) == true)) &&
+            return obj is EventTypeMetadata other &&                ((this.EventType == null && other.EventType == null) || (this.EventType?.Equals(other.EventType) == true)) &&
                 ((this.ApiVersionIntroduced == null && other.ApiVersionIntroduced == null) || (this.ApiVersionIntroduced?.Equals(other.ApiVersionIntroduced) == true)) &&
                 ((this.ReleaseStatus == null && other.ReleaseStatus == null) || (this.ReleaseStatus?.Equals(other.ReleaseStatus) == true));
         }

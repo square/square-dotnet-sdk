@@ -91,9 +91,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SubscriptionEvent other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is SubscriptionEvent other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.SubscriptionEventType == null && other.SubscriptionEventType == null) || (this.SubscriptionEventType?.Equals(other.SubscriptionEventType) == true)) &&
                 ((this.EffectiveDate == null && other.EffectiveDate == null) || (this.EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
                 ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true)) &&

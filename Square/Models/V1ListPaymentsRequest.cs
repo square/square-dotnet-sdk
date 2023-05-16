@@ -197,9 +197,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1ListPaymentsRequest other &&
-                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+            return obj is V1ListPaymentsRequest other &&                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
                 ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
                 ((this.EndTime == null && other.EndTime == null) || (this.EndTime?.Equals(other.EndTime) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&

@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogQueryPrefix other &&
-                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
+            return obj is CatalogQueryPrefix other &&                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
                 ((this.AttributePrefix == null && other.AttributePrefix == null) || (this.AttributePrefix?.Equals(other.AttributePrefix) == true));
         }
         

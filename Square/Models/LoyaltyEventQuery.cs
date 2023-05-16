@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyEventQuery other &&
-                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true));
+            return obj is LoyaltyEventQuery other &&                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true));
         }
         
         /// <inheritdoc/>

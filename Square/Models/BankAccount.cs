@@ -343,9 +343,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BankAccount other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is BankAccount other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.AccountNumberSuffix == null && other.AccountNumberSuffix == null) || (this.AccountNumberSuffix?.Equals(other.AccountNumberSuffix) == true)) &&
                 ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
                 ((this.Currency == null && other.Currency == null) || (this.Currency?.Equals(other.Currency) == true)) &&

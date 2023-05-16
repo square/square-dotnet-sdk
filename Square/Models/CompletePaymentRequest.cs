@@ -83,9 +83,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CompletePaymentRequest other &&
-                ((this.VersionToken == null && other.VersionToken == null) || (this.VersionToken?.Equals(other.VersionToken) == true));
+            return obj is CompletePaymentRequest other &&                ((this.VersionToken == null && other.VersionToken == null) || (this.VersionToken?.Equals(other.VersionToken) == true));
         }
         
         /// <inheritdoc/>

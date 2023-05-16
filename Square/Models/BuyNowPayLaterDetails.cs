@@ -104,9 +104,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BuyNowPayLaterDetails other &&
-                ((this.Brand == null && other.Brand == null) || (this.Brand?.Equals(other.Brand) == true)) &&
+            return obj is BuyNowPayLaterDetails other &&                ((this.Brand == null && other.Brand == null) || (this.Brand?.Equals(other.Brand) == true)) &&
                 ((this.AfterpayDetails == null && other.AfterpayDetails == null) || (this.AfterpayDetails?.Equals(other.AfterpayDetails) == true)) &&
                 ((this.ClearpayDetails == null && other.ClearpayDetails == null) || (this.ClearpayDetails?.Equals(other.ClearpayDetails) == true));
         }

@@ -164,9 +164,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RevokeTokenRequest other &&
-                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
+            return obj is RevokeTokenRequest other &&                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
                 ((this.AccessToken == null && other.AccessToken == null) || (this.AccessToken?.Equals(other.AccessToken) == true)) &&
                 ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
                 ((this.RevokeOnlyAccessToken == null && other.RevokeOnlyAccessToken == null) || (this.RevokeOnlyAccessToken?.Equals(other.RevokeOnlyAccessToken) == true));

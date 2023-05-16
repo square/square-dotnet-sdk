@@ -61,9 +61,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchTeamMembersQuery other &&
-                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true));
+            return obj is SearchTeamMembersQuery other &&                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true));
         }
         
         /// <inheritdoc/>

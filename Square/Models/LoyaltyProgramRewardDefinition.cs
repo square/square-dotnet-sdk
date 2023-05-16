@@ -118,9 +118,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyProgramRewardDefinition other &&
-                ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true)) &&
+            return obj is LoyaltyProgramRewardDefinition other &&                ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true)) &&
                 ((this.DiscountType == null && other.DiscountType == null) || (this.DiscountType?.Equals(other.DiscountType) == true)) &&
                 ((this.PercentageDiscount == null && other.PercentageDiscount == null) || (this.PercentageDiscount?.Equals(other.PercentageDiscount) == true)) &&
                 ((this.CatalogObjectIds == null && other.CatalogObjectIds == null) || (this.CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&

@@ -93,9 +93,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BatchRetrieveOrdersRequest other &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
+            return obj is BatchRetrieveOrdersRequest other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.OrderIds == null && other.OrderIds == null) || (this.OrderIds?.Equals(other.OrderIds) == true));
         }
         

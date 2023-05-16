@@ -169,9 +169,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is GiftCard other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is GiftCard other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.GanSource == null && other.GanSource == null) || (this.GanSource?.Equals(other.GanSource) == true)) &&
                 ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&

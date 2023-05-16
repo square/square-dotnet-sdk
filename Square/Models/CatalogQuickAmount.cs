@@ -135,9 +135,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogQuickAmount other &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+            return obj is CatalogQuickAmount other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.Amount == null && other.Amount == null) || (this.Amount?.Equals(other.Amount) == true)) &&
                 ((this.Score == null && other.Score == null) || (this.Score?.Equals(other.Score) == true)) &&
                 ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));

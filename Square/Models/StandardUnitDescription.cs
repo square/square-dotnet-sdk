@@ -120,9 +120,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is StandardUnitDescription other &&
-                ((this.Unit == null && other.Unit == null) || (this.Unit?.Equals(other.Unit) == true)) &&
+            return obj is StandardUnitDescription other &&                ((this.Unit == null && other.Unit == null) || (this.Unit?.Equals(other.Unit) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Abbreviation == null && other.Abbreviation == null) || (this.Abbreviation?.Equals(other.Abbreviation) == true));
         }

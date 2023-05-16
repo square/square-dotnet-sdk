@@ -105,9 +105,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is WorkweekConfig other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is WorkweekConfig other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.StartOfWeek == null && other.StartOfWeek == null) || (this.StartOfWeek?.Equals(other.StartOfWeek) == true)) &&
                 ((this.StartOfDayLocalTime == null && other.StartOfDayLocalTime == null) || (this.StartOfDayLocalTime?.Equals(other.StartOfDayLocalTime) == true)) &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&

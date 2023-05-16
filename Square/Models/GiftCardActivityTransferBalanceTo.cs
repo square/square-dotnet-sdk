@@ -69,9 +69,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is GiftCardActivityTransferBalanceTo other &&
-                ((this.TransferFromGiftCardId == null && other.TransferFromGiftCardId == null) || (this.TransferFromGiftCardId?.Equals(other.TransferFromGiftCardId) == true)) &&
+            return obj is GiftCardActivityTransferBalanceTo other &&                ((this.TransferFromGiftCardId == null && other.TransferFromGiftCardId == null) || (this.TransferFromGiftCardId?.Equals(other.TransferFromGiftCardId) == true)) &&
                 ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true));
         }
         

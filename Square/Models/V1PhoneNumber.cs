@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is V1PhoneNumber other &&
-                ((this.CallingCode == null && other.CallingCode == null) || (this.CallingCode?.Equals(other.CallingCode) == true)) &&
+            return obj is V1PhoneNumber other &&                ((this.CallingCode == null && other.CallingCode == null) || (this.CallingCode?.Equals(other.CallingCode) == true)) &&
                 ((this.Number == null && other.Number == null) || (this.Number?.Equals(other.Number) == true));
         }
         

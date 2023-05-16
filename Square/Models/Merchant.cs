@@ -191,9 +191,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Merchant other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is Merchant other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.BusinessName == null && other.BusinessName == null) || (this.BusinessName?.Equals(other.BusinessName) == true)) &&
                 ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
                 ((this.LanguageCode == null && other.LanguageCode == null) || (this.LanguageCode?.Equals(other.LanguageCode) == true)) &&

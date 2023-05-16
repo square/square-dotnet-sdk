@@ -173,9 +173,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is WageSetting other &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
+            return obj is WageSetting other &&                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.JobAssignments == null && other.JobAssignments == null) || (this.JobAssignments?.Equals(other.JobAssignments) == true)) &&
                 ((this.IsOvertimeExempt == null && other.IsOvertimeExempt == null) || (this.IsOvertimeExempt?.Equals(other.IsOvertimeExempt) == true)) &&
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&

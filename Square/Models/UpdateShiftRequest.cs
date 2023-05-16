@@ -57,9 +57,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateShiftRequest other &&
-                ((this.Shift == null && other.Shift == null) || (this.Shift?.Equals(other.Shift) == true));
+            return obj is UpdateShiftRequest other &&                ((this.Shift == null && other.Shift == null) || (this.Shift?.Equals(other.Shift) == true));
         }
         
         /// <inheritdoc/>

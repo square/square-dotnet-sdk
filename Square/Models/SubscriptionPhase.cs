@@ -160,9 +160,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SubscriptionPhase other &&
-                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
+            return obj is SubscriptionPhase other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
                 ((this.Cadence == null && other.Cadence == null) || (this.Cadence?.Equals(other.Cadence) == true)) &&
                 ((this.Periods == null && other.Periods == null) || (this.Periods?.Equals(other.Periods) == true)) &&
                 ((this.RecurringPriceMoney == null && other.RecurringPriceMoney == null) || (this.RecurringPriceMoney?.Equals(other.RecurringPriceMoney) == true)) &&

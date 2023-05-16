@@ -253,9 +253,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogProductSet other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is CatalogProductSet other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.ProductIdsAny == null && other.ProductIdsAny == null) || (this.ProductIdsAny?.Equals(other.ProductIdsAny) == true)) &&
                 ((this.ProductIdsAll == null && other.ProductIdsAll == null) || (this.ProductIdsAll?.Equals(other.ProductIdsAll) == true)) &&
                 ((this.QuantityExact == null && other.QuantityExact == null) || (this.QuantityExact?.Equals(other.QuantityExact) == true)) &&

@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderCreatedObject other &&
-                ((this.OrderCreated == null && other.OrderCreated == null) || (this.OrderCreated?.Equals(other.OrderCreated) == true));
+            return obj is OrderCreatedObject other &&                ((this.OrderCreated == null && other.OrderCreated == null) || (this.OrderCreated?.Equals(other.OrderCreated) == true));
         }
         
         /// <inheritdoc/>

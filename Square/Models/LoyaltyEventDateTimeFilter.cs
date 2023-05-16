@@ -59,9 +59,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyEventDateTimeFilter other &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
+            return obj is LoyaltyEventDateTimeFilter other &&                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
         }
         
         /// <inheritdoc/>

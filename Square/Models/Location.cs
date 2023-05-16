@@ -324,7 +324,7 @@ namespace Square.Models
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// The name of the location's overall business. This name is present on receipts and other customer-facing branding.
+        /// The name of the location's overall business. This name is present on receipts and other customer-facing branding, and can be changed no more than three times in a twelve-month period.
         /// </summary>
         [JsonProperty("business_name")]
         public string BusinessName { get; }
@@ -549,9 +549,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is Location other &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
+            return obj is Location other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true)) &&
                 ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&

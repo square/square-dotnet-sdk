@@ -166,9 +166,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogImage other &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
+            return obj is CatalogImage other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Url == null && other.Url == null) || (this.Url?.Equals(other.Url) == true)) &&
                 ((this.Caption == null && other.Caption == null) || (this.Caption?.Equals(other.Caption) == true)) &&
                 ((this.PhotoStudioOrderId == null && other.PhotoStudioOrderId == null) || (this.PhotoStudioOrderId?.Equals(other.PhotoStudioOrderId) == true));

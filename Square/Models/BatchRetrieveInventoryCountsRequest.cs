@@ -219,9 +219,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is BatchRetrieveInventoryCountsRequest other &&
-                ((this.CatalogObjectIds == null && other.CatalogObjectIds == null) || (this.CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&
+            return obj is BatchRetrieveInventoryCountsRequest other &&                ((this.CatalogObjectIds == null && other.CatalogObjectIds == null) || (this.CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&
                 ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
                 ((this.UpdatedAfter == null && other.UpdatedAfter == null) || (this.UpdatedAfter?.Equals(other.UpdatedAfter) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&

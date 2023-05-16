@@ -46,7 +46,7 @@ namespace Square.Models
         /// If you are unsure whether a particular order was created successfully,
         /// you can try it again with the same idempotency key without
         /// worrying about creating duplicate orders.
-        /// For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
@@ -73,9 +73,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CreateOrderRequest other &&
-                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
+            return obj is CreateOrderRequest other &&                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
                 ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
         }
         

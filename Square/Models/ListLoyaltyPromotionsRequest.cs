@@ -122,9 +122,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ListLoyaltyPromotionsRequest other &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
+            return obj is ListLoyaltyPromotionsRequest other &&                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
         }

@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UpdateLocationRequest other &&
-                ((this.Location == null && other.Location == null) || (this.Location?.Equals(other.Location) == true));
+            return obj is UpdateLocationRequest other &&                ((this.Location == null && other.Location == null) || (this.Location?.Equals(other.Location) == true));
         }
         
         /// <inheritdoc/>

@@ -55,9 +55,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is UnlinkCustomerFromGiftCardRequest other &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true));
+            return obj is UnlinkCustomerFromGiftCardRequest other &&                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true));
         }
         
         /// <inheritdoc/>

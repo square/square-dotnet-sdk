@@ -70,9 +70,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyProgramAccrualRuleVisitData other &&
-                ((this.MinimumAmountMoney == null && other.MinimumAmountMoney == null) || (this.MinimumAmountMoney?.Equals(other.MinimumAmountMoney) == true)) &&
+            return obj is LoyaltyProgramAccrualRuleVisitData other &&                ((this.MinimumAmountMoney == null && other.MinimumAmountMoney == null) || (this.MinimumAmountMoney?.Equals(other.MinimumAmountMoney) == true)) &&
                 ((this.TaxMode == null && other.TaxMode == null) || (this.TaxMode?.Equals(other.TaxMode) == true));
         }
         

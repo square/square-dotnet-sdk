@@ -107,9 +107,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is PaymentLinkRelatedResources other &&
-                ((this.Orders == null && other.Orders == null) || (this.Orders?.Equals(other.Orders) == true)) &&
+            return obj is PaymentLinkRelatedResources other &&                ((this.Orders == null && other.Orders == null) || (this.Orders?.Equals(other.Orders) == true)) &&
                 ((this.SubscriptionPlans == null && other.SubscriptionPlans == null) || (this.SubscriptionPlans?.Equals(other.SubscriptionPlans) == true));
         }
         

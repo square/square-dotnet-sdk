@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyProgramAccrualRuleCategoryData other &&
-                ((this.CategoryId == null && other.CategoryId == null) || (this.CategoryId?.Equals(other.CategoryId) == true));
+            return obj is LoyaltyProgramAccrualRuleCategoryData other &&                ((this.CategoryId == null && other.CategoryId == null) || (this.CategoryId?.Equals(other.CategoryId) == true));
         }
         
         /// <inheritdoc/>

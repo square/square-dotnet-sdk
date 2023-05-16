@@ -104,9 +104,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is SearchOrdersFilter other &&
-                ((this.StateFilter == null && other.StateFilter == null) || (this.StateFilter?.Equals(other.StateFilter) == true)) &&
+            return obj is SearchOrdersFilter other &&                ((this.StateFilter == null && other.StateFilter == null) || (this.StateFilter?.Equals(other.StateFilter) == true)) &&
                 ((this.DateTimeFilter == null && other.DateTimeFilter == null) || (this.DateTimeFilter?.Equals(other.DateTimeFilter) == true)) &&
                 ((this.FulfillmentFilter == null && other.FulfillmentFilter == null) || (this.FulfillmentFilter?.Equals(other.FulfillmentFilter) == true)) &&
                 ((this.SourceFilter == null && other.SourceFilter == null) || (this.SourceFilter?.Equals(other.SourceFilter) == true)) &&

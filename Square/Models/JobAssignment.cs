@@ -135,9 +135,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is JobAssignment other &&
-                ((this.JobTitle == null && other.JobTitle == null) || (this.JobTitle?.Equals(other.JobTitle) == true)) &&
+            return obj is JobAssignment other &&                ((this.JobTitle == null && other.JobTitle == null) || (this.JobTitle?.Equals(other.JobTitle) == true)) &&
                 ((this.PayType == null && other.PayType == null) || (this.PayType?.Equals(other.PayType) == true)) &&
                 ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true)) &&
                 ((this.AnnualRate == null && other.AnnualRate == null) || (this.AnnualRate?.Equals(other.AnnualRate) == true)) &&

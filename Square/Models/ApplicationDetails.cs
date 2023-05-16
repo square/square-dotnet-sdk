@@ -98,9 +98,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is ApplicationDetails other &&
-                ((this.SquareProduct == null && other.SquareProduct == null) || (this.SquareProduct?.Equals(other.SquareProduct) == true)) &&
+            return obj is ApplicationDetails other &&                ((this.SquareProduct == null && other.SquareProduct == null) || (this.SquareProduct?.Equals(other.SquareProduct) == true)) &&
                 ((this.ApplicationId == null && other.ApplicationId == null) || (this.ApplicationId?.Equals(other.ApplicationId) == true));
         }
         

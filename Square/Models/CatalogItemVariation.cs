@@ -581,9 +581,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is CatalogItemVariation other &&
-                ((this.ItemId == null && other.ItemId == null) || (this.ItemId?.Equals(other.ItemId) == true)) &&
+            return obj is CatalogItemVariation other &&                ((this.ItemId == null && other.ItemId == null) || (this.ItemId?.Equals(other.ItemId) == true)) &&
                 ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
                 ((this.Sku == null && other.Sku == null) || (this.Sku?.Equals(other.Sku) == true)) &&
                 ((this.Upc == null && other.Upc == null) || (this.Upc?.Equals(other.Upc) == true)) &&

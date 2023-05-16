@@ -64,9 +64,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is LoyaltyAccountExpiringPointDeadline other &&
-                this.Points.Equals(other.Points) &&
+            return obj is LoyaltyAccountExpiringPointDeadline other &&                this.Points.Equals(other.Points) &&
                 ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true));
         }
         

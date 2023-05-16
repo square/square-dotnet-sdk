@@ -109,9 +109,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is OrderPricingOptions other &&
-                ((this.AutoApplyDiscounts == null && other.AutoApplyDiscounts == null) || (this.AutoApplyDiscounts?.Equals(other.AutoApplyDiscounts) == true)) &&
+            return obj is OrderPricingOptions other &&                ((this.AutoApplyDiscounts == null && other.AutoApplyDiscounts == null) || (this.AutoApplyDiscounts?.Equals(other.AutoApplyDiscounts) == true)) &&
                 ((this.AutoApplyTaxes == null && other.AutoApplyTaxes == null) || (this.AutoApplyTaxes?.Equals(other.AutoApplyTaxes) == true));
         }
         

@@ -43,7 +43,7 @@ namespace Square
         };
 
         private readonly GlobalConfiguration globalConfiguration;
-        private const string userAgent = "Square-DotNet-SDK/26.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+        private const string userAgent = "Square-DotNet-SDK/27.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
         private readonly HttpCallBack httpCallBack;
         private readonly BearerAuthManager bearerAuthManager;
         private readonly IDictionary<string, List<string>> additionalHeaders;
@@ -75,6 +75,7 @@ namespace Square
         private readonly Lazy<ITransactionsApi> transactions;
         private readonly Lazy<ILoyaltyApi> loyalty;
         private readonly Lazy<IMerchantsApi> merchants;
+        private readonly Lazy<IMerchantCustomAttributesApi> merchantCustomAttributes;
         private readonly Lazy<IOrdersApi> orders;
         private readonly Lazy<IOrderCustomAttributesApi> orderCustomAttributes;
         private readonly Lazy<IPaymentsApi> payments;
@@ -177,6 +178,8 @@ namespace Square
                 () => new LoyaltyApi(globalConfiguration));
             this.merchants = new Lazy<IMerchantsApi>(
                 () => new MerchantsApi(globalConfiguration));
+            this.merchantCustomAttributes = new Lazy<IMerchantCustomAttributesApi>(
+                () => new MerchantCustomAttributesApi(globalConfiguration));
             this.orders = new Lazy<IOrdersApi>(
                 () => new OrdersApi(globalConfiguration));
             this.orderCustomAttributes = new Lazy<IOrderCustomAttributesApi>(
@@ -344,6 +347,11 @@ namespace Square
         public IMerchantsApi MerchantsApi => this.merchants.Value;
 
         /// <summary>
+        /// Gets MerchantCustomAttributesApi.
+        /// </summary>
+        public IMerchantCustomAttributesApi MerchantCustomAttributesApi => this.merchantCustomAttributes.Value;
+
+        /// <summary>
         /// Gets OrdersApi.
         /// </summary>
         public IOrdersApi OrdersApi => this.orders.Value;
@@ -411,7 +419,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "26.0.0";
+        public string SdkVersion => "27.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -558,7 +566,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2023-04-19";
+            private string squareVersion = "2023-05-17";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";

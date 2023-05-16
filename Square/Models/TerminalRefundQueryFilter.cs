@@ -124,9 +124,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is TerminalRefundQueryFilter other &&
-                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
+            return obj is TerminalRefundQueryFilter other &&                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }

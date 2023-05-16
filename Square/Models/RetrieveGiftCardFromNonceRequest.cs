@@ -56,9 +56,7 @@ namespace Square.Models
             {
                 return true;
             }
-
-            return obj is RetrieveGiftCardFromNonceRequest other &&
-                ((this.Nonce == null && other.Nonce == null) || (this.Nonce?.Equals(other.Nonce) == true));
+            return obj is RetrieveGiftCardFromNonceRequest other &&                ((this.Nonce == null && other.Nonce == null) || (this.Nonce?.Equals(other.Nonce) == true));
         }
         
         /// <inheritdoc/>
