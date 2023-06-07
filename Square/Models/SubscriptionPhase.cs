@@ -26,12 +26,14 @@ namespace Square.Models
         /// <param name="periods">periods.</param>
         /// <param name="recurringPriceMoney">recurring_price_money.</param>
         /// <param name="ordinal">ordinal.</param>
+        /// <param name="pricing">pricing.</param>
         public SubscriptionPhase(
             string cadence,
             string uid = null,
             int? periods = null,
             Models.Money recurringPriceMoney = null,
-            long? ordinal = null)
+            long? ordinal = null,
+            Models.SubscriptionPricing pricing = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -60,13 +62,15 @@ namespace Square.Models
                 this.Ordinal = ordinal;
             }
 
+            this.Pricing = pricing;
         }
         internal SubscriptionPhase(Dictionary<string, bool> shouldSerialize,
             string cadence,
             string uid = null,
             int? periods = null,
             Models.Money recurringPriceMoney = null,
-            long? ordinal = null)
+            long? ordinal = null,
+            Models.SubscriptionPricing pricing = null)
         {
             this.shouldSerialize = shouldSerialize;
             Uid = uid;
@@ -74,6 +78,7 @@ namespace Square.Models
             Periods = periods;
             RecurringPriceMoney = recurringPriceMoney;
             Ordinal = ordinal;
+            Pricing = pricing;
         }
 
         /// <summary>
@@ -110,6 +115,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("ordinal")]
         public long? Ordinal { get; }
+
+        /// <summary>
+        /// Describes the pricing for the subscription.
+        /// </summary>
+        [JsonProperty("pricing", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.SubscriptionPricing Pricing { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -164,14 +175,15 @@ namespace Square.Models
                 ((this.Cadence == null && other.Cadence == null) || (this.Cadence?.Equals(other.Cadence) == true)) &&
                 ((this.Periods == null && other.Periods == null) || (this.Periods?.Equals(other.Periods) == true)) &&
                 ((this.RecurringPriceMoney == null && other.RecurringPriceMoney == null) || (this.RecurringPriceMoney?.Equals(other.RecurringPriceMoney) == true)) &&
-                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
+                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
+                ((this.Pricing == null && other.Pricing == null) || (this.Pricing?.Equals(other.Pricing) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 718353637;
-            hashCode = HashCode.Combine(this.Uid, this.Cadence, this.Periods, this.RecurringPriceMoney, this.Ordinal);
+            int hashCode = 1288354424;
+            hashCode = HashCode.Combine(this.Uid, this.Cadence, this.Periods, this.RecurringPriceMoney, this.Ordinal, this.Pricing);
 
             return hashCode;
         }
@@ -186,6 +198,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Periods = {(this.Periods == null ? "null" : this.Periods.ToString())}");
             toStringOutput.Add($"this.RecurringPriceMoney = {(this.RecurringPriceMoney == null ? "null" : this.RecurringPriceMoney.ToString())}");
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
+            toStringOutput.Add($"this.Pricing = {(this.Pricing == null ? "null" : this.Pricing.ToString())}");
         }
 
         /// <summary>
@@ -199,7 +212,8 @@ namespace Square.Models
                 .Uid(this.Uid)
                 .Periods(this.Periods)
                 .RecurringPriceMoney(this.RecurringPriceMoney)
-                .Ordinal(this.Ordinal);
+                .Ordinal(this.Ordinal)
+                .Pricing(this.Pricing);
             return builder;
         }
 
@@ -220,6 +234,7 @@ namespace Square.Models
             private int? periods;
             private Models.Money recurringPriceMoney;
             private long? ordinal;
+            private Models.SubscriptionPricing pricing;
 
             public Builder(
                 string cadence)
@@ -285,6 +300,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Pricing.
+             /// </summary>
+             /// <param name="pricing"> pricing. </param>
+             /// <returns> Builder. </returns>
+            public Builder Pricing(Models.SubscriptionPricing pricing)
+            {
+                this.pricing = pricing;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -321,7 +347,8 @@ namespace Square.Models
                     this.uid,
                     this.periods,
                     this.recurringPriceMoney,
-                    this.ordinal);
+                    this.ordinal,
+                    this.pricing);
             }
         }
     }

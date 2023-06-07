@@ -18,6 +18,8 @@
 | `AcceptedPaymentMethods` | [`Models.AcceptedPaymentMethods`](../../doc/models/accepted-payment-methods.md) | Optional | - |
 | `AppFeeMoney` | [`Models.Money`](../../doc/models/money.md) | Optional | Represents an amount of money. `Money` fields can be signed or unsigned.<br>Fields that do not explicitly define whether they are signed or unsigned are<br>considered unsigned and can only hold positive amounts. For signed fields, the<br>sign of the value indicates the purpose of the money transfer. See<br>[Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)<br>for more information. |
 | `ShippingFee` | [`Models.ShippingFee`](../../doc/models/shipping-fee.md) | Optional | - |
+| `EnableCoupon` | `bool?` | Optional | Indicates whether to include the `Add coupon` section for the buyer to provide a Square marketing coupon in the payment form. |
+| `EnableLoyalty` | `bool?` | Optional | Indicates whether to include the `REWARDS` section for the buyer to opt in to loyalty, redeem rewards in the payment form, or both. |
 
 ## Example (as JSON)
 

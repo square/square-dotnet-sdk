@@ -21,9 +21,10 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="CreateSubscriptionRequest"/> class.
         /// </summary>
         /// <param name="locationId">location_id.</param>
-        /// <param name="planId">plan_id.</param>
         /// <param name="customerId">customer_id.</param>
         /// <param name="idempotencyKey">idempotency_key.</param>
+        /// <param name="planId">plan_id.</param>
+        /// <param name="planVariationId">plan_variation_id.</param>
         /// <param name="startDate">start_date.</param>
         /// <param name="canceledDate">canceled_date.</param>
         /// <param name="taxPercentage">tax_percentage.</param>
@@ -31,22 +32,26 @@ namespace Square.Models
         /// <param name="cardId">card_id.</param>
         /// <param name="timezone">timezone.</param>
         /// <param name="source">source.</param>
+        /// <param name="phases">phases.</param>
         public CreateSubscriptionRequest(
             string locationId,
-            string planId,
             string customerId,
             string idempotencyKey = null,
+            string planId = null,
+            string planVariationId = null,
             string startDate = null,
             string canceledDate = null,
             string taxPercentage = null,
             Models.Money priceOverrideMoney = null,
             string cardId = null,
             string timezone = null,
-            Models.SubscriptionSource source = null)
+            Models.SubscriptionSource source = null,
+            IList<Models.Phase> phases = null)
         {
             this.IdempotencyKey = idempotencyKey;
             this.LocationId = locationId;
             this.PlanId = planId;
+            this.PlanVariationId = planVariationId;
             this.CustomerId = customerId;
             this.StartDate = startDate;
             this.CanceledDate = canceledDate;
@@ -55,13 +60,14 @@ namespace Square.Models
             this.CardId = cardId;
             this.Timezone = timezone;
             this.Source = source;
+            this.Phases = phases;
         }
 
         /// <summary>
         /// A unique string that identifies this `CreateSubscription` request.
         /// If you do not provide a unique string (or provide an empty string as the value),
         /// the endpoint treats each request as independent.
-        /// For more information, see [Idempotency keys](https://developer.squareup.com/docs/working-with-apis/idempotency).
+        /// For more information, see [Idempotency keys](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key", NullValueHandling = NullValueHandling.Ignore)]
         public string IdempotencyKey { get; }
@@ -73,16 +79,23 @@ namespace Square.Models
         public string LocationId { get; }
 
         /// <summary>
-        /// The ID of the subscription plan created using the Catalog API.
+        /// The ID of the [subscription plan](https://developer.squareup.com/docs/subscriptions-api/plans-and-variations) created using the Catalog API.
+        /// Deprecated in favour of `plan_variation_id`.
         /// For more information, see
         /// [Set Up and Manage a Subscription Plan](https://developer.squareup.com/docs/subscriptions-api/setup-plan) and
         /// [Subscriptions Walkthrough](https://developer.squareup.com/docs/subscriptions-api/walkthrough).
         /// </summary>
-        [JsonProperty("plan_id")]
+        [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
         public string PlanId { get; }
 
         /// <summary>
-        /// The ID of the [customer](entity:Customer) subscribing to the subscription plan.
+        /// The ID of the [subscription plan variation](https://developer.squareup.com/docs/subscriptions-api/plans-and-variations#plan-variations) created using the Catalog API.
+        /// </summary>
+        [JsonProperty("plan_variation_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string PlanVariationId { get; }
+
+        /// <summary>
+        /// The ID of the [customer](entity:Customer) subscribing to the subscription plan variation.
         /// </summary>
         [JsonProperty("customer_id")]
         public string CustomerId { get; }
@@ -96,7 +109,7 @@ namespace Square.Models
 
         /// <summary>
         /// The `YYYY-MM-DD`-formatted date when the newly created subscription is scheduled for cancellation.
-        /// This date overrides the cancellation date set in the plan configuration.
+        /// This date overrides the cancellation date set in the plan variation configuration.
         /// If the cancellation date is earlier than the end date of a subscription cycle, the subscription stops
         /// at the canceled date and the subscriber is sent a prorated invoice at the beginning of the canceled cycle.
         /// When the subscription plan of the newly created subscription has a fixed number of cycles and the `canceled_date`
@@ -128,8 +141,7 @@ namespace Square.Models
 
         /// <summary>
         /// The ID of the [subscriber's](entity:Customer) [card](entity:Card) to charge.
-        /// If it is not specified, the subscriber receives an invoice via email. For an example to
-        /// create a customer profile for a subscriber and add a card on file, see [Subscriptions Walkthrough](https://developer.squareup.com/docs/subscriptions-api/walkthrough).
+        /// If it is not specified, the subscriber receives an invoice via email with a link to pay for their subscription.
         /// </summary>
         [JsonProperty("card_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CardId { get; }
@@ -148,6 +160,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SubscriptionSource Source { get; }
+
+        /// <summary>
+        /// array of phases for this subscription
+        /// </summary>
+        [JsonProperty("phases", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.Phase> Phases { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -174,6 +192,7 @@ namespace Square.Models
             return obj is CreateSubscriptionRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true)) &&
+                ((this.PlanVariationId == null && other.PlanVariationId == null) || (this.PlanVariationId?.Equals(other.PlanVariationId) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
                 ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
                 ((this.CanceledDate == null && other.CanceledDate == null) || (this.CanceledDate?.Equals(other.CanceledDate) == true)) &&
@@ -181,16 +200,17 @@ namespace Square.Models
                 ((this.PriceOverrideMoney == null && other.PriceOverrideMoney == null) || (this.PriceOverrideMoney?.Equals(other.PriceOverrideMoney) == true)) &&
                 ((this.CardId == null && other.CardId == null) || (this.CardId?.Equals(other.CardId) == true)) &&
                 ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true));
+                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
+                ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 907953300;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.LocationId, this.PlanId, this.CustomerId, this.StartDate, this.CanceledDate, this.TaxPercentage);
+            int hashCode = 1523700510;
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.LocationId, this.PlanId, this.PlanVariationId, this.CustomerId, this.StartDate, this.CanceledDate);
 
-            hashCode = HashCode.Combine(hashCode, this.PriceOverrideMoney, this.CardId, this.Timezone, this.Source);
+            hashCode = HashCode.Combine(hashCode, this.TaxPercentage, this.PriceOverrideMoney, this.CardId, this.Timezone, this.Source, this.Phases);
 
             return hashCode;
         }
@@ -203,6 +223,7 @@ namespace Square.Models
             toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
             toStringOutput.Add($"this.PlanId = {(this.PlanId == null ? "null" : this.PlanId == string.Empty ? "" : this.PlanId)}");
+            toStringOutput.Add($"this.PlanVariationId = {(this.PlanVariationId == null ? "null" : this.PlanVariationId == string.Empty ? "" : this.PlanVariationId)}");
             toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
             toStringOutput.Add($"this.StartDate = {(this.StartDate == null ? "null" : this.StartDate == string.Empty ? "" : this.StartDate)}");
             toStringOutput.Add($"this.CanceledDate = {(this.CanceledDate == null ? "null" : this.CanceledDate == string.Empty ? "" : this.CanceledDate)}");
@@ -211,6 +232,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId == string.Empty ? "" : this.CardId)}");
             toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone == string.Empty ? "" : this.Timezone)}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
+            toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
         }
 
         /// <summary>
@@ -221,16 +243,18 @@ namespace Square.Models
         {
             var builder = new Builder(
                 this.LocationId,
-                this.PlanId,
                 this.CustomerId)
                 .IdempotencyKey(this.IdempotencyKey)
+                .PlanId(this.PlanId)
+                .PlanVariationId(this.PlanVariationId)
                 .StartDate(this.StartDate)
                 .CanceledDate(this.CanceledDate)
                 .TaxPercentage(this.TaxPercentage)
                 .PriceOverrideMoney(this.PriceOverrideMoney)
                 .CardId(this.CardId)
                 .Timezone(this.Timezone)
-                .Source(this.Source);
+                .Source(this.Source)
+                .Phases(this.Phases);
             return builder;
         }
 
@@ -240,9 +264,10 @@ namespace Square.Models
         public class Builder
         {
             private string locationId;
-            private string planId;
             private string customerId;
             private string idempotencyKey;
+            private string planId;
+            private string planVariationId;
             private string startDate;
             private string canceledDate;
             private string taxPercentage;
@@ -250,14 +275,13 @@ namespace Square.Models
             private string cardId;
             private string timezone;
             private Models.SubscriptionSource source;
+            private IList<Models.Phase> phases;
 
             public Builder(
                 string locationId,
-                string planId,
                 string customerId)
             {
                 this.locationId = locationId;
-                this.planId = planId;
                 this.customerId = customerId;
             }
 
@@ -269,17 +293,6 @@ namespace Square.Models
             public Builder LocationId(string locationId)
             {
                 this.locationId = locationId;
-                return this;
-            }
-
-             /// <summary>
-             /// PlanId.
-             /// </summary>
-             /// <param name="planId"> planId. </param>
-             /// <returns> Builder. </returns>
-            public Builder PlanId(string planId)
-            {
-                this.planId = planId;
                 return this;
             }
 
@@ -302,6 +315,28 @@ namespace Square.Models
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
+                return this;
+            }
+
+             /// <summary>
+             /// PlanId.
+             /// </summary>
+             /// <param name="planId"> planId. </param>
+             /// <returns> Builder. </returns>
+            public Builder PlanId(string planId)
+            {
+                this.planId = planId;
+                return this;
+            }
+
+             /// <summary>
+             /// PlanVariationId.
+             /// </summary>
+             /// <param name="planVariationId"> planVariationId. </param>
+             /// <returns> Builder. </returns>
+            public Builder PlanVariationId(string planVariationId)
+            {
+                this.planVariationId = planVariationId;
                 return this;
             }
 
@@ -382,6 +417,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Phases.
+             /// </summary>
+             /// <param name="phases"> phases. </param>
+             /// <returns> Builder. </returns>
+            public Builder Phases(IList<Models.Phase> phases)
+            {
+                this.phases = phases;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -390,16 +436,18 @@ namespace Square.Models
             {
                 return new CreateSubscriptionRequest(
                     this.locationId,
-                    this.planId,
                     this.customerId,
                     this.idempotencyKey,
+                    this.planId,
+                    this.planVariationId,
                     this.startDate,
                     this.canceledDate,
                     this.taxPercentage,
                     this.priceOverrideMoney,
                     this.cardId,
                     this.timezone,
-                    this.source);
+                    this.source,
+                    this.phases);
             }
         }
     }

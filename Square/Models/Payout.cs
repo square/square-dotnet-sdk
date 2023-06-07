@@ -32,6 +32,7 @@ namespace Square.Models
         /// <param name="type">type.</param>
         /// <param name="payoutFee">payout_fee.</param>
         /// <param name="arrivalDate">arrival_date.</param>
+        /// <param name="endToEndId">end_to_end_id.</param>
         public Payout(
             string id,
             string locationId,
@@ -43,12 +44,14 @@ namespace Square.Models
             int? version = null,
             string type = null,
             IList<Models.PayoutFee> payoutFee = null,
-            string arrivalDate = null)
+            string arrivalDate = null,
+            string endToEndId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "payout_fee", false },
-                { "arrival_date", false }
+                { "arrival_date", false },
+                { "end_to_end_id", false }
             };
 
             this.Id = id;
@@ -72,6 +75,12 @@ namespace Square.Models
                 this.ArrivalDate = arrivalDate;
             }
 
+            if (endToEndId != null)
+            {
+                shouldSerialize["end_to_end_id"] = true;
+                this.EndToEndId = endToEndId;
+            }
+
         }
         internal Payout(Dictionary<string, bool> shouldSerialize,
             string id,
@@ -84,7 +93,8 @@ namespace Square.Models
             int? version = null,
             string type = null,
             IList<Models.PayoutFee> payoutFee = null,
-            string arrivalDate = null)
+            string arrivalDate = null,
+            string endToEndId = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -98,6 +108,7 @@ namespace Square.Models
             Type = type;
             PayoutFee = payoutFee;
             ArrivalDate = arrivalDate;
+            EndToEndId = endToEndId;
         }
 
         /// <summary>
@@ -175,6 +186,12 @@ namespace Square.Models
         [JsonProperty("arrival_date")]
         public string ArrivalDate { get; }
 
+        /// <summary>
+        /// A unique ID for each `Payout` object that might also appear on the seller’s bank statement. You can use this ID to automate the process of reconciling each payout with the corresponding line item on the bank statement.
+        /// </summary>
+        [JsonProperty("end_to_end_id")]
+        public string EndToEndId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -203,6 +220,15 @@ namespace Square.Models
             return this.shouldSerialize["arrival_date"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEndToEndId()
+        {
+            return this.shouldSerialize["end_to_end_id"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -225,16 +251,17 @@ namespace Square.Models
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.PayoutFee == null && other.PayoutFee == null) || (this.PayoutFee?.Equals(other.PayoutFee) == true)) &&
-                ((this.ArrivalDate == null && other.ArrivalDate == null) || (this.ArrivalDate?.Equals(other.ArrivalDate) == true));
+                ((this.ArrivalDate == null && other.ArrivalDate == null) || (this.ArrivalDate?.Equals(other.ArrivalDate) == true)) &&
+                ((this.EndToEndId == null && other.EndToEndId == null) || (this.EndToEndId?.Equals(other.EndToEndId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 198657879;
+            int hashCode = -602201937;
             hashCode = HashCode.Combine(this.Id, this.Status, this.LocationId, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.Destination);
 
-            hashCode = HashCode.Combine(hashCode, this.Version, this.Type, this.PayoutFee, this.ArrivalDate);
+            hashCode = HashCode.Combine(hashCode, this.Version, this.Type, this.PayoutFee, this.ArrivalDate, this.EndToEndId);
 
             return hashCode;
         }
@@ -255,6 +282,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.PayoutFee = {(this.PayoutFee == null ? "null" : $"[{string.Join(", ", this.PayoutFee)} ]")}");
             toStringOutput.Add($"this.ArrivalDate = {(this.ArrivalDate == null ? "null" : this.ArrivalDate == string.Empty ? "" : this.ArrivalDate)}");
+            toStringOutput.Add($"this.EndToEndId = {(this.EndToEndId == null ? "null" : this.EndToEndId == string.Empty ? "" : this.EndToEndId)}");
         }
 
         /// <summary>
@@ -274,7 +302,8 @@ namespace Square.Models
                 .Version(this.Version)
                 .Type(this.Type)
                 .PayoutFee(this.PayoutFee)
-                .ArrivalDate(this.ArrivalDate);
+                .ArrivalDate(this.ArrivalDate)
+                .EndToEndId(this.EndToEndId);
             return builder;
         }
 
@@ -287,6 +316,7 @@ namespace Square.Models
             {
                 { "payout_fee", false },
                 { "arrival_date", false },
+                { "end_to_end_id", false },
             };
 
             private string id;
@@ -300,6 +330,7 @@ namespace Square.Models
             private string type;
             private IList<Models.PayoutFee> payoutFee;
             private string arrivalDate;
+            private string endToEndId;
 
             public Builder(
                 string id,
@@ -432,6 +463,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// EndToEndId.
+             /// </summary>
+             /// <param name="endToEndId"> endToEndId. </param>
+             /// <returns> Builder. </returns>
+            public Builder EndToEndId(string endToEndId)
+            {
+                shouldSerialize["end_to_end_id"] = true;
+                this.endToEndId = endToEndId;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -446,6 +489,14 @@ namespace Square.Models
             public void UnsetArrivalDate()
             {
                 this.shouldSerialize["arrival_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEndToEndId()
+            {
+                this.shouldSerialize["end_to_end_id"] = false;
             }
 
 
@@ -466,7 +517,8 @@ namespace Square.Models
                     this.version,
                     this.type,
                     this.payoutFee,
-                    this.arrivalDate);
+                    this.arrivalDate,
+                    this.endToEndId);
             }
         }
     }

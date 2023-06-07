@@ -17,26 +17,56 @@ namespace Square.Models
     /// </summary>
     public class SubscriptionEvent
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionEvent"/> class.
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="subscriptionEventType">subscription_event_type.</param>
         /// <param name="effectiveDate">effective_date.</param>
-        /// <param name="planId">plan_id.</param>
+        /// <param name="planVariationId">plan_variation_id.</param>
         /// <param name="info">info.</param>
+        /// <param name="phases">phases.</param>
         public SubscriptionEvent(
             string id,
             string subscriptionEventType,
             string effectiveDate,
-            string planId,
-            Models.SubscriptionEventInfo info = null)
+            string planVariationId,
+            Models.SubscriptionEventInfo info = null,
+            IList<Models.Phase> phases = null)
         {
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "phases", false }
+            };
+
             this.Id = id;
             this.SubscriptionEventType = subscriptionEventType;
             this.EffectiveDate = effectiveDate;
-            this.PlanId = planId;
             this.Info = info;
+            if (phases != null)
+            {
+                shouldSerialize["phases"] = true;
+                this.Phases = phases;
+            }
+
+            this.PlanVariationId = planVariationId;
+        }
+        internal SubscriptionEvent(Dictionary<string, bool> shouldSerialize,
+            string id,
+            string subscriptionEventType,
+            string effectiveDate,
+            string planVariationId,
+            Models.SubscriptionEventInfo info = null,
+            IList<Models.Phase> phases = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Id = id;
+            SubscriptionEventType = subscriptionEventType;
+            EffectiveDate = effectiveDate;
+            Info = info;
+            Phases = phases;
+            PlanVariationId = planVariationId;
         }
 
         /// <summary>
@@ -58,16 +88,22 @@ namespace Square.Models
         public string EffectiveDate { get; }
 
         /// <summary>
-        /// The ID of the subscription plan associated with the subscription.
-        /// </summary>
-        [JsonProperty("plan_id")]
-        public string PlanId { get; }
-
-        /// <summary>
         /// Provides information about the subscription event.
         /// </summary>
         [JsonProperty("info", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SubscriptionEventInfo Info { get; }
+
+        /// <summary>
+        /// A list of Phases, to pass phase-specific information used in the swap.
+        /// </summary>
+        [JsonProperty("phases")]
+        public IList<Models.Phase> Phases { get; }
+
+        /// <summary>
+        /// The ID of the subscription plan variation associated with the subscription.
+        /// </summary>
+        [JsonProperty("plan_variation_id")]
+        public string PlanVariationId { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -77,6 +113,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SubscriptionEvent : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializePhases()
+        {
+            return this.shouldSerialize["phases"];
         }
 
         /// <inheritdoc/>
@@ -94,15 +139,16 @@ namespace Square.Models
             return obj is SubscriptionEvent other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.SubscriptionEventType == null && other.SubscriptionEventType == null) || (this.SubscriptionEventType?.Equals(other.SubscriptionEventType) == true)) &&
                 ((this.EffectiveDate == null && other.EffectiveDate == null) || (this.EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
-                ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true)) &&
-                ((this.Info == null && other.Info == null) || (this.Info?.Equals(other.Info) == true));
+                ((this.Info == null && other.Info == null) || (this.Info?.Equals(other.Info) == true)) &&
+                ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true)) &&
+                ((this.PlanVariationId == null && other.PlanVariationId == null) || (this.PlanVariationId?.Equals(other.PlanVariationId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1280044689;
-            hashCode = HashCode.Combine(this.Id, this.SubscriptionEventType, this.EffectiveDate, this.PlanId, this.Info);
+            int hashCode = -1284324137;
+            hashCode = HashCode.Combine(this.Id, this.SubscriptionEventType, this.EffectiveDate, this.Info, this.Phases, this.PlanVariationId);
 
             return hashCode;
         }
@@ -115,8 +161,9 @@ namespace Square.Models
             toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
             toStringOutput.Add($"this.SubscriptionEventType = {(this.SubscriptionEventType == null ? "null" : this.SubscriptionEventType.ToString())}");
             toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate == string.Empty ? "" : this.EffectiveDate)}");
-            toStringOutput.Add($"this.PlanId = {(this.PlanId == null ? "null" : this.PlanId == string.Empty ? "" : this.PlanId)}");
             toStringOutput.Add($"this.Info = {(this.Info == null ? "null" : this.Info.ToString())}");
+            toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
+            toStringOutput.Add($"this.PlanVariationId = {(this.PlanVariationId == null ? "null" : this.PlanVariationId == string.Empty ? "" : this.PlanVariationId)}");
         }
 
         /// <summary>
@@ -129,8 +176,9 @@ namespace Square.Models
                 this.Id,
                 this.SubscriptionEventType,
                 this.EffectiveDate,
-                this.PlanId)
-                .Info(this.Info);
+                this.PlanVariationId)
+                .Info(this.Info)
+                .Phases(this.Phases);
             return builder;
         }
 
@@ -139,22 +187,28 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "phases", false },
+            };
+
             private string id;
             private string subscriptionEventType;
             private string effectiveDate;
-            private string planId;
+            private string planVariationId;
             private Models.SubscriptionEventInfo info;
+            private IList<Models.Phase> phases;
 
             public Builder(
                 string id,
                 string subscriptionEventType,
                 string effectiveDate,
-                string planId)
+                string planVariationId)
             {
                 this.id = id;
                 this.subscriptionEventType = subscriptionEventType;
                 this.effectiveDate = effectiveDate;
-                this.planId = planId;
+                this.planVariationId = planVariationId;
             }
 
              /// <summary>
@@ -191,13 +245,13 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// PlanId.
+             /// PlanVariationId.
              /// </summary>
-             /// <param name="planId"> planId. </param>
+             /// <param name="planVariationId"> planVariationId. </param>
              /// <returns> Builder. </returns>
-            public Builder PlanId(string planId)
+            public Builder PlanVariationId(string planVariationId)
             {
-                this.planId = planId;
+                this.planVariationId = planVariationId;
                 return this;
             }
 
@@ -212,18 +266,40 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Phases.
+             /// </summary>
+             /// <param name="phases"> phases. </param>
+             /// <returns> Builder. </returns>
+            public Builder Phases(IList<Models.Phase> phases)
+            {
+                shouldSerialize["phases"] = true;
+                this.phases = phases;
+                return this;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetPhases()
+            {
+                this.shouldSerialize["phases"] = false;
+            }
+
+
             /// <summary>
             /// Builds class object.
             /// </summary>
             /// <returns> SubscriptionEvent. </returns>
             public SubscriptionEvent Build()
             {
-                return new SubscriptionEvent(
+                return new SubscriptionEvent(shouldSerialize,
                     this.id,
                     this.subscriptionEventType,
                     this.effectiveDate,
-                    this.planId,
-                    this.info);
+                    this.planVariationId,
+                    this.info,
+                    this.phases);
             }
         }
     }

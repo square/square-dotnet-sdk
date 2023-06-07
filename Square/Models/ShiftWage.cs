@@ -23,9 +23,11 @@ namespace Square.Models
         /// </summary>
         /// <param name="title">title.</param>
         /// <param name="hourlyRate">hourly_rate.</param>
+        /// <param name="jobId">job_id.</param>
         public ShiftWage(
             string title = null,
-            Models.Money hourlyRate = null)
+            Models.Money hourlyRate = null,
+            string jobId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -39,19 +41,21 @@ namespace Square.Models
             }
 
             this.HourlyRate = hourlyRate;
+            this.JobId = jobId;
         }
         internal ShiftWage(Dictionary<string, bool> shouldSerialize,
             string title = null,
-            Models.Money hourlyRate = null)
+            Models.Money hourlyRate = null,
+            string jobId = null)
         {
             this.shouldSerialize = shouldSerialize;
             Title = title;
             HourlyRate = hourlyRate;
+            JobId = jobId;
         }
 
         /// <summary>
-        /// The name of the job performed during this shift. Square
-        /// labor-reporting UIs might group shifts together by title.
+        /// The name of the job performed during this shift.
         /// </summary>
         [JsonProperty("title")]
         public string Title { get; }
@@ -66,6 +70,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("hourly_rate", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money HourlyRate { get; }
+
+        /// <summary>
+        /// The id of the job performed during this shift. Square
+        /// labor-reporting UIs might group shifts together by id. This cannot be used to retrieve the job.
+        /// </summary>
+        [JsonProperty("job_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string JobId { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -99,14 +110,15 @@ namespace Square.Models
                 return true;
             }
             return obj is ShiftWage other &&                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
-                ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true));
+                ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true)) &&
+                ((this.JobId == null && other.JobId == null) || (this.JobId?.Equals(other.JobId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1598945307;
-            hashCode = HashCode.Combine(this.Title, this.HourlyRate);
+            int hashCode = 6779659;
+            hashCode = HashCode.Combine(this.Title, this.HourlyRate, this.JobId);
 
             return hashCode;
         }
@@ -118,6 +130,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title == string.Empty ? "" : this.Title)}");
             toStringOutput.Add($"this.HourlyRate = {(this.HourlyRate == null ? "null" : this.HourlyRate.ToString())}");
+            toStringOutput.Add($"this.JobId = {(this.JobId == null ? "null" : this.JobId == string.Empty ? "" : this.JobId)}");
         }
 
         /// <summary>
@@ -128,7 +141,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Title(this.Title)
-                .HourlyRate(this.HourlyRate);
+                .HourlyRate(this.HourlyRate)
+                .JobId(this.JobId);
             return builder;
         }
 
@@ -144,6 +158,7 @@ namespace Square.Models
 
             private string title;
             private Models.Money hourlyRate;
+            private string jobId;
 
              /// <summary>
              /// Title.
@@ -168,6 +183,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// JobId.
+             /// </summary>
+             /// <param name="jobId"> jobId. </param>
+             /// <returns> Builder. </returns>
+            public Builder JobId(string jobId)
+            {
+                this.jobId = jobId;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -185,7 +211,8 @@ namespace Square.Models
             {
                 return new ShiftWage(shouldSerialize,
                     this.title,
-                    this.hourlyRate);
+                    this.hourlyRate,
+                    this.jobId);
             }
         }
     }

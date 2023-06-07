@@ -58,7 +58,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`..</param>
         /// <returns>Returns the Models.GetTerminalActionResponse response from the API call.</returns>
         Models.GetTerminalActionResponse GetTerminalAction(
                 string actionId);
@@ -66,7 +66,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.GetTerminalActionResponse response from the API call.</returns>
         Task<Models.GetTerminalActionResponse> GetTerminalActionAsync(
@@ -76,7 +76,7 @@ namespace Square.Apis
         /// <summary>
         /// Cancels a Terminal action request if the status of the request permits it.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`..</param>
         /// <returns>Returns the Models.CancelTerminalActionResponse response from the API call.</returns>
         Models.CancelTerminalActionResponse CancelTerminalAction(
                 string actionId);
@@ -84,10 +84,30 @@ namespace Square.Apis
         /// <summary>
         /// Cancels a Terminal action request if the status of the request permits it.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CancelTerminalActionResponse response from the API call.</returns>
         Task<Models.CancelTerminalActionResponse> CancelTerminalActionAsync(
+                string actionId,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Dismisses a Terminal action request if the status and type of the request permits it.
+        /// See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/advanced-features/custom-workflows/link-and-dismiss-actions) for more details.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the `TerminalAction` associated with the waiting dialog to be dismissed..</param>
+        /// <returns>Returns the Models.DismissTerminalActionResponse response from the API call.</returns>
+        Models.DismissTerminalActionResponse DismissTerminalAction(
+                string actionId);
+
+        /// <summary>
+        /// Dismisses a Terminal action request if the status and type of the request permits it.
+        /// See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/advanced-features/custom-workflows/link-and-dismiss-actions) for more details.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the `TerminalAction` associated with the waiting dialog to be dismissed..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DismissTerminalActionResponse response from the API call.</returns>
+        Task<Models.DismissTerminalActionResponse> DismissTerminalActionAsync(
                 string actionId,
                 CancellationToken cancellationToken = default);
 

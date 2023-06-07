@@ -2,7 +2,7 @@
 # Retrieve Token Status Response
 
 Defines the fields that are included in the response body of
-a request to the `RetrieveTokenStatus` endpoint
+a request to the `RetrieveTokenStatus` endpoint.
 
 ## Structure
 
@@ -13,7 +13,7 @@ a request to the `RetrieveTokenStatus` endpoint
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Scopes` | `IList<string>` | Optional | The list of scopes associated with an access token. |
-| `ExpiresAt` | `string` | Optional | The date and time when the `access_token` expires, in RFC 3339 format. Empty if token never expires. |
+| `ExpiresAt` | `string` | Optional | The date and time when the `access_token` expires, in RFC 3339 format. Empty if the token never expires. |
 | `ClientId` | `string` | Optional | The Square-issued application ID associated with the access token. This is the same application ID used to obtain the token.<br>**Constraints**: *Maximum Length*: `191` |
 | `MerchantId` | `string` | Optional | The ID of the authorizing merchant's business.<br>**Constraints**: *Minimum Length*: `8`, *Maximum Length*: `191` |
 | `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |

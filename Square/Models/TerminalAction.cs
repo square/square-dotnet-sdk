@@ -30,9 +30,16 @@ namespace Square.Models
         /// <param name="updatedAt">updated_at.</param>
         /// <param name="appId">app_id.</param>
         /// <param name="type">type.</param>
+        /// <param name="qrCodeOptions">qr_code_options.</param>
         /// <param name="saveCardOptions">save_card_options.</param>
+        /// <param name="signatureOptions">signature_options.</param>
+        /// <param name="confirmationOptions">confirmation_options.</param>
         /// <param name="receiptOptions">receipt_options.</param>
+        /// <param name="dataCollectionOptions">data_collection_options.</param>
+        /// <param name="selectOptions">select_options.</param>
         /// <param name="deviceMetadata">device_metadata.</param>
+        /// <param name="awaitNextAction">await_next_action.</param>
+        /// <param name="awaitNextActionDuration">await_next_action_duration.</param>
         public TerminalAction(
             string id = null,
             string deviceId = null,
@@ -43,14 +50,23 @@ namespace Square.Models
             string updatedAt = null,
             string appId = null,
             string type = null,
+            Models.QrCodeOptions qrCodeOptions = null,
             Models.SaveCardOptions saveCardOptions = null,
+            Models.SignatureOptions signatureOptions = null,
+            Models.ConfirmationOptions confirmationOptions = null,
             Models.ReceiptOptions receiptOptions = null,
-            Models.DeviceMetadata deviceMetadata = null)
+            Models.DataCollectionOptions dataCollectionOptions = null,
+            Models.SelectOptions selectOptions = null,
+            Models.DeviceMetadata deviceMetadata = null,
+            bool? awaitNextAction = null,
+            string awaitNextActionDuration = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "device_id", false },
-                { "deadline_duration", false }
+                { "deadline_duration", false },
+                { "await_next_action", false },
+                { "await_next_action_duration", false }
             };
 
             this.Id = id;
@@ -72,9 +88,26 @@ namespace Square.Models
             this.UpdatedAt = updatedAt;
             this.AppId = appId;
             this.Type = type;
+            this.QrCodeOptions = qrCodeOptions;
             this.SaveCardOptions = saveCardOptions;
+            this.SignatureOptions = signatureOptions;
+            this.ConfirmationOptions = confirmationOptions;
             this.ReceiptOptions = receiptOptions;
+            this.DataCollectionOptions = dataCollectionOptions;
+            this.SelectOptions = selectOptions;
             this.DeviceMetadata = deviceMetadata;
+            if (awaitNextAction != null)
+            {
+                shouldSerialize["await_next_action"] = true;
+                this.AwaitNextAction = awaitNextAction;
+            }
+
+            if (awaitNextActionDuration != null)
+            {
+                shouldSerialize["await_next_action_duration"] = true;
+                this.AwaitNextActionDuration = awaitNextActionDuration;
+            }
+
         }
         internal TerminalAction(Dictionary<string, bool> shouldSerialize,
             string id = null,
@@ -86,9 +119,16 @@ namespace Square.Models
             string updatedAt = null,
             string appId = null,
             string type = null,
+            Models.QrCodeOptions qrCodeOptions = null,
             Models.SaveCardOptions saveCardOptions = null,
+            Models.SignatureOptions signatureOptions = null,
+            Models.ConfirmationOptions confirmationOptions = null,
             Models.ReceiptOptions receiptOptions = null,
-            Models.DeviceMetadata deviceMetadata = null)
+            Models.DataCollectionOptions dataCollectionOptions = null,
+            Models.SelectOptions selectOptions = null,
+            Models.DeviceMetadata deviceMetadata = null,
+            bool? awaitNextAction = null,
+            string awaitNextActionDuration = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -100,9 +140,16 @@ namespace Square.Models
             UpdatedAt = updatedAt;
             AppId = appId;
             Type = type;
+            QrCodeOptions = qrCodeOptions;
             SaveCardOptions = saveCardOptions;
+            SignatureOptions = signatureOptions;
+            ConfirmationOptions = confirmationOptions;
             ReceiptOptions = receiptOptions;
+            DataCollectionOptions = dataCollectionOptions;
+            SelectOptions = selectOptions;
             DeviceMetadata = deviceMetadata;
+            AwaitNextAction = awaitNextAction;
+            AwaitNextActionDuration = awaitNextActionDuration;
         }
 
         /// <summary>
@@ -166,10 +213,28 @@ namespace Square.Models
         public string Type { get; }
 
         /// <summary>
+        /// Fields to describe the action that displays QR-Codes.
+        /// </summary>
+        [JsonProperty("qr_code_options", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.QrCodeOptions QrCodeOptions { get; }
+
+        /// <summary>
         /// Describes save-card action fields.
         /// </summary>
         [JsonProperty("save_card_options", NullValueHandling = NullValueHandling.Ignore)]
         public Models.SaveCardOptions SaveCardOptions { get; }
+
+        /// <summary>
+        /// Gets or sets SignatureOptions.
+        /// </summary>
+        [JsonProperty("signature_options", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.SignatureOptions SignatureOptions { get; }
+
+        /// <summary>
+        /// Gets or sets ConfirmationOptions.
+        /// </summary>
+        [JsonProperty("confirmation_options", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.ConfirmationOptions ConfirmationOptions { get; }
 
         /// <summary>
         /// Describes receipt action fields.
@@ -178,10 +243,39 @@ namespace Square.Models
         public Models.ReceiptOptions ReceiptOptions { get; }
 
         /// <summary>
+        /// Gets or sets DataCollectionOptions.
+        /// </summary>
+        [JsonProperty("data_collection_options", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.DataCollectionOptions DataCollectionOptions { get; }
+
+        /// <summary>
+        /// Gets or sets SelectOptions.
+        /// </summary>
+        [JsonProperty("select_options", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.SelectOptions SelectOptions { get; }
+
+        /// <summary>
         /// Gets or sets DeviceMetadata.
         /// </summary>
         [JsonProperty("device_metadata", NullValueHandling = NullValueHandling.Ignore)]
         public Models.DeviceMetadata DeviceMetadata { get; }
+
+        /// <summary>
+        /// Indicates the action will be linked to another action and requires a waiting dialog to be
+        /// displayed instead of returning to the idle screen on completion of the action.
+        /// Only supported on SIGNATURE, CONFIRMATION, DATA_COLLECTION, and SELECT types.
+        /// </summary>
+        [JsonProperty("await_next_action")]
+        public bool? AwaitNextAction { get; }
+
+        /// <summary>
+        /// The timeout duration of the waiting dialog as an RFC 3339 duration, after which the
+        /// waiting dialog will no longer be displayed and the Terminal will return to the idle screen.
+        /// Default: 5 minutes from when the waiting dialog is displayed
+        /// Maximum: 5 minutes
+        /// </summary>
+        [JsonProperty("await_next_action_duration")]
+        public string AwaitNextActionDuration { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -211,6 +305,24 @@ namespace Square.Models
             return this.shouldSerialize["deadline_duration"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAwaitNextAction()
+        {
+            return this.shouldSerialize["await_next_action"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAwaitNextActionDuration()
+        {
+            return this.shouldSerialize["await_next_action_duration"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -232,18 +344,27 @@ namespace Square.Models
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
+                ((this.QrCodeOptions == null && other.QrCodeOptions == null) || (this.QrCodeOptions?.Equals(other.QrCodeOptions) == true)) &&
                 ((this.SaveCardOptions == null && other.SaveCardOptions == null) || (this.SaveCardOptions?.Equals(other.SaveCardOptions) == true)) &&
+                ((this.SignatureOptions == null && other.SignatureOptions == null) || (this.SignatureOptions?.Equals(other.SignatureOptions) == true)) &&
+                ((this.ConfirmationOptions == null && other.ConfirmationOptions == null) || (this.ConfirmationOptions?.Equals(other.ConfirmationOptions) == true)) &&
                 ((this.ReceiptOptions == null && other.ReceiptOptions == null) || (this.ReceiptOptions?.Equals(other.ReceiptOptions) == true)) &&
-                ((this.DeviceMetadata == null && other.DeviceMetadata == null) || (this.DeviceMetadata?.Equals(other.DeviceMetadata) == true));
+                ((this.DataCollectionOptions == null && other.DataCollectionOptions == null) || (this.DataCollectionOptions?.Equals(other.DataCollectionOptions) == true)) &&
+                ((this.SelectOptions == null && other.SelectOptions == null) || (this.SelectOptions?.Equals(other.SelectOptions) == true)) &&
+                ((this.DeviceMetadata == null && other.DeviceMetadata == null) || (this.DeviceMetadata?.Equals(other.DeviceMetadata) == true)) &&
+                ((this.AwaitNextAction == null && other.AwaitNextAction == null) || (this.AwaitNextAction?.Equals(other.AwaitNextAction) == true)) &&
+                ((this.AwaitNextActionDuration == null && other.AwaitNextActionDuration == null) || (this.AwaitNextActionDuration?.Equals(other.AwaitNextActionDuration) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 195206616;
+            int hashCode = -1561481896;
             hashCode = HashCode.Combine(this.Id, this.DeviceId, this.DeadlineDuration, this.Status, this.CancelReason, this.CreatedAt, this.UpdatedAt);
 
-            hashCode = HashCode.Combine(hashCode, this.AppId, this.Type, this.SaveCardOptions, this.ReceiptOptions, this.DeviceMetadata);
+            hashCode = HashCode.Combine(hashCode, this.AppId, this.Type, this.QrCodeOptions, this.SaveCardOptions, this.SignatureOptions, this.ConfirmationOptions, this.ReceiptOptions);
+
+            hashCode = HashCode.Combine(hashCode, this.DataCollectionOptions, this.SelectOptions, this.DeviceMetadata, this.AwaitNextAction, this.AwaitNextActionDuration);
 
             return hashCode;
         }
@@ -262,9 +383,16 @@ namespace Square.Models
             toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
             toStringOutput.Add($"this.AppId = {(this.AppId == null ? "null" : this.AppId == string.Empty ? "" : this.AppId)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
+            toStringOutput.Add($"this.QrCodeOptions = {(this.QrCodeOptions == null ? "null" : this.QrCodeOptions.ToString())}");
             toStringOutput.Add($"this.SaveCardOptions = {(this.SaveCardOptions == null ? "null" : this.SaveCardOptions.ToString())}");
+            toStringOutput.Add($"this.SignatureOptions = {(this.SignatureOptions == null ? "null" : this.SignatureOptions.ToString())}");
+            toStringOutput.Add($"this.ConfirmationOptions = {(this.ConfirmationOptions == null ? "null" : this.ConfirmationOptions.ToString())}");
             toStringOutput.Add($"this.ReceiptOptions = {(this.ReceiptOptions == null ? "null" : this.ReceiptOptions.ToString())}");
+            toStringOutput.Add($"this.DataCollectionOptions = {(this.DataCollectionOptions == null ? "null" : this.DataCollectionOptions.ToString())}");
+            toStringOutput.Add($"this.SelectOptions = {(this.SelectOptions == null ? "null" : this.SelectOptions.ToString())}");
             toStringOutput.Add($"this.DeviceMetadata = {(this.DeviceMetadata == null ? "null" : this.DeviceMetadata.ToString())}");
+            toStringOutput.Add($"this.AwaitNextAction = {(this.AwaitNextAction == null ? "null" : this.AwaitNextAction.ToString())}");
+            toStringOutput.Add($"this.AwaitNextActionDuration = {(this.AwaitNextActionDuration == null ? "null" : this.AwaitNextActionDuration == string.Empty ? "" : this.AwaitNextActionDuration)}");
         }
 
         /// <summary>
@@ -283,9 +411,16 @@ namespace Square.Models
                 .UpdatedAt(this.UpdatedAt)
                 .AppId(this.AppId)
                 .Type(this.Type)
+                .QrCodeOptions(this.QrCodeOptions)
                 .SaveCardOptions(this.SaveCardOptions)
+                .SignatureOptions(this.SignatureOptions)
+                .ConfirmationOptions(this.ConfirmationOptions)
                 .ReceiptOptions(this.ReceiptOptions)
-                .DeviceMetadata(this.DeviceMetadata);
+                .DataCollectionOptions(this.DataCollectionOptions)
+                .SelectOptions(this.SelectOptions)
+                .DeviceMetadata(this.DeviceMetadata)
+                .AwaitNextAction(this.AwaitNextAction)
+                .AwaitNextActionDuration(this.AwaitNextActionDuration);
             return builder;
         }
 
@@ -298,6 +433,8 @@ namespace Square.Models
             {
                 { "device_id", false },
                 { "deadline_duration", false },
+                { "await_next_action", false },
+                { "await_next_action_duration", false },
             };
 
             private string id;
@@ -309,9 +446,16 @@ namespace Square.Models
             private string updatedAt;
             private string appId;
             private string type;
+            private Models.QrCodeOptions qrCodeOptions;
             private Models.SaveCardOptions saveCardOptions;
+            private Models.SignatureOptions signatureOptions;
+            private Models.ConfirmationOptions confirmationOptions;
             private Models.ReceiptOptions receiptOptions;
+            private Models.DataCollectionOptions dataCollectionOptions;
+            private Models.SelectOptions selectOptions;
             private Models.DeviceMetadata deviceMetadata;
+            private bool? awaitNextAction;
+            private string awaitNextActionDuration;
 
              /// <summary>
              /// Id.
@@ -415,6 +559,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// QrCodeOptions.
+             /// </summary>
+             /// <param name="qrCodeOptions"> qrCodeOptions. </param>
+             /// <returns> Builder. </returns>
+            public Builder QrCodeOptions(Models.QrCodeOptions qrCodeOptions)
+            {
+                this.qrCodeOptions = qrCodeOptions;
+                return this;
+            }
+
+             /// <summary>
              /// SaveCardOptions.
              /// </summary>
              /// <param name="saveCardOptions"> saveCardOptions. </param>
@@ -422,6 +577,28 @@ namespace Square.Models
             public Builder SaveCardOptions(Models.SaveCardOptions saveCardOptions)
             {
                 this.saveCardOptions = saveCardOptions;
+                return this;
+            }
+
+             /// <summary>
+             /// SignatureOptions.
+             /// </summary>
+             /// <param name="signatureOptions"> signatureOptions. </param>
+             /// <returns> Builder. </returns>
+            public Builder SignatureOptions(Models.SignatureOptions signatureOptions)
+            {
+                this.signatureOptions = signatureOptions;
+                return this;
+            }
+
+             /// <summary>
+             /// ConfirmationOptions.
+             /// </summary>
+             /// <param name="confirmationOptions"> confirmationOptions. </param>
+             /// <returns> Builder. </returns>
+            public Builder ConfirmationOptions(Models.ConfirmationOptions confirmationOptions)
+            {
+                this.confirmationOptions = confirmationOptions;
                 return this;
             }
 
@@ -437,6 +614,28 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// DataCollectionOptions.
+             /// </summary>
+             /// <param name="dataCollectionOptions"> dataCollectionOptions. </param>
+             /// <returns> Builder. </returns>
+            public Builder DataCollectionOptions(Models.DataCollectionOptions dataCollectionOptions)
+            {
+                this.dataCollectionOptions = dataCollectionOptions;
+                return this;
+            }
+
+             /// <summary>
+             /// SelectOptions.
+             /// </summary>
+             /// <param name="selectOptions"> selectOptions. </param>
+             /// <returns> Builder. </returns>
+            public Builder SelectOptions(Models.SelectOptions selectOptions)
+            {
+                this.selectOptions = selectOptions;
+                return this;
+            }
+
+             /// <summary>
              /// DeviceMetadata.
              /// </summary>
              /// <param name="deviceMetadata"> deviceMetadata. </param>
@@ -444,6 +643,30 @@ namespace Square.Models
             public Builder DeviceMetadata(Models.DeviceMetadata deviceMetadata)
             {
                 this.deviceMetadata = deviceMetadata;
+                return this;
+            }
+
+             /// <summary>
+             /// AwaitNextAction.
+             /// </summary>
+             /// <param name="awaitNextAction"> awaitNextAction. </param>
+             /// <returns> Builder. </returns>
+            public Builder AwaitNextAction(bool? awaitNextAction)
+            {
+                shouldSerialize["await_next_action"] = true;
+                this.awaitNextAction = awaitNextAction;
+                return this;
+            }
+
+             /// <summary>
+             /// AwaitNextActionDuration.
+             /// </summary>
+             /// <param name="awaitNextActionDuration"> awaitNextActionDuration. </param>
+             /// <returns> Builder. </returns>
+            public Builder AwaitNextActionDuration(string awaitNextActionDuration)
+            {
+                shouldSerialize["await_next_action_duration"] = true;
+                this.awaitNextActionDuration = awaitNextActionDuration;
                 return this;
             }
 
@@ -463,6 +686,22 @@ namespace Square.Models
                 this.shouldSerialize["deadline_duration"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAwaitNextAction()
+            {
+                this.shouldSerialize["await_next_action"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAwaitNextActionDuration()
+            {
+                this.shouldSerialize["await_next_action_duration"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -480,9 +719,16 @@ namespace Square.Models
                     this.updatedAt,
                     this.appId,
                     this.type,
+                    this.qrCodeOptions,
                     this.saveCardOptions,
+                    this.signatureOptions,
+                    this.confirmationOptions,
                     this.receiptOptions,
-                    this.deviceMetadata);
+                    this.dataCollectionOptions,
+                    this.selectOptions,
+                    this.deviceMetadata,
+                    this.awaitNextAction,
+                    this.awaitNextActionDuration);
             }
         }
     }

@@ -132,16 +132,19 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square-issued ID of your application, which is available in the OAuth page in the
+        /// The Square-issued ID of your application, which is available on the **OAuth** page in the
         /// [Developer Dashboard](https://developer.squareup.com/apps).
         /// </summary>
         [JsonProperty("client_id")]
         public string ClientId { get; }
 
         /// <summary>
-        /// The Square-issued application secret for your application, which is available in the OAuth page
-        /// in the [Developer Dashboard](https://developer.squareup.com/apps). This parameter is only required when you are not using the [OAuth PKCE (Proof Key for Code Exchange) flow](https://developer.squareup.com/docs/oauth-api/overview#pkce-flow).
-        /// The PKCE flow requires a `code_verifier` instead of a `client_secret`.
+        /// The Square-issued application secret for your application, which is available on the **OAuth** page
+        /// in the [Developer Dashboard](https://developer.squareup.com/apps). This parameter is only required when
+        /// you're not using the [OAuth PKCE (Proof Key for Code Exchange) flow](https://developer.squareup.com/docs/oauth-api/overview#pkce-flow).
+        /// The PKCE flow requires a `code_verifier` instead of a `client_secret` when `grant_type` is set to `authorization_code`.
+        /// If `grant_type` is set to `refresh_token` and the `refresh_token` is obtained uaing PKCE, the PKCE flow only requires `client_id`, 
+        /// `grant_type`, and `refresh_token`.
         /// </summary>
         [JsonProperty("client_secret")]
         public string ClientSecret { get; }
@@ -155,7 +158,7 @@ namespace Square.Models
         public string Code { get; }
 
         /// <summary>
-        /// The redirect URL assigned in the OAuth page for your application in the [Developer Dashboard](https://developer.squareup.com/apps).
+        /// The redirect URL assigned on the **OAuth** page for your application in the [Developer Dashboard](https://developer.squareup.com/apps).
         /// </summary>
         [JsonProperty("redirect_uri")]
         public string RedirectUri { get; }
@@ -203,7 +206,7 @@ namespace Square.Models
         public bool? ShortLived { get; }
 
         /// <summary>
-        /// Must be provided when using PKCE OAuth flow. The `code_verifier` will be used to verify against the
+        /// Must be provided when using the PKCE OAuth flow if `grant_type` is set to `authorization_code`. The `code_verifier` is used to verify against the
         /// `code_challenge` associated with the `authorization_code`.
         /// </summary>
         [JsonProperty("code_verifier")]

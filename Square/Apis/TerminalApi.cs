@@ -93,7 +93,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`..</param>
         /// <returns>Returns the Models.GetTerminalActionResponse response from the API call.</returns>
         public Models.GetTerminalActionResponse GetTerminalAction(
                 string actionId)
@@ -102,7 +102,7 @@ namespace Square.Apis
         /// <summary>
         /// Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.GetTerminalActionResponse response from the API call.</returns>
         public async Task<Models.GetTerminalActionResponse> GetTerminalActionAsync(
@@ -122,7 +122,7 @@ namespace Square.Apis
         /// <summary>
         /// Cancels a Terminal action request if the status of the request permits it.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`..</param>
         /// <returns>Returns the Models.CancelTerminalActionResponse response from the API call.</returns>
         public Models.CancelTerminalActionResponse CancelTerminalAction(
                 string actionId)
@@ -131,7 +131,7 @@ namespace Square.Apis
         /// <summary>
         /// Cancels a Terminal action request if the status of the request permits it.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`.</param>
+        /// <param name="actionId">Required parameter: Unique ID for the desired `TerminalAction`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.CancelTerminalActionResponse response from the API call.</returns>
         public async Task<Models.CancelTerminalActionResponse> CancelTerminalActionAsync(
@@ -146,6 +146,37 @@ namespace Square.Apis
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context))
                   .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CancelTerminalActionResponse>(_response)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
+        /// Dismisses a Terminal action request if the status and type of the request permits it.
+        /// See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/advanced-features/custom-workflows/link-and-dismiss-actions) for more details.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the `TerminalAction` associated with the waiting dialog to be dismissed..</param>
+        /// <returns>Returns the Models.DismissTerminalActionResponse response from the API call.</returns>
+        public Models.DismissTerminalActionResponse DismissTerminalAction(
+                string actionId)
+            => CoreHelper.RunTask(DismissTerminalActionAsync(actionId));
+
+        /// <summary>
+        /// Dismisses a Terminal action request if the status and type of the request permits it.
+        /// See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/advanced-features/custom-workflows/link-and-dismiss-actions) for more details.
+        /// </summary>
+        /// <param name="actionId">Required parameter: Unique ID for the `TerminalAction` associated with the waiting dialog to be dismissed..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DismissTerminalActionResponse response from the API call.</returns>
+        public async Task<Models.DismissTerminalActionResponse> DismissTerminalActionAsync(
+                string actionId,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.DismissTerminalActionResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/terminals/actions/{action_id}/dismiss")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("action_id", actionId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
+                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DismissTerminalActionResponse>(_response)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>

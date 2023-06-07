@@ -78,7 +78,7 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The Square-issued ID for your application, which is available in the OAuth page in the
+        /// The Square-issued ID for your application, which is available on the **OAuth** page in the
         /// [Developer Dashboard](https://developer.squareup.com/apps).
         /// </summary>
         [JsonProperty("client_id")]

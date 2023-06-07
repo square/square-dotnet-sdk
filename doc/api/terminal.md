@@ -14,6 +14,7 @@ ITerminalApi terminalApi = client.TerminalApi;
 * [Search Terminal Actions](../../doc/api/terminal.md#search-terminal-actions)
 * [Get Terminal Action](../../doc/api/terminal.md#get-terminal-action)
 * [Cancel Terminal Action](../../doc/api/terminal.md#cancel-terminal-action)
+* [Dismiss Terminal Action](../../doc/api/terminal.md#dismiss-terminal-action)
 * [Create Terminal Checkout](../../doc/api/terminal.md#create-terminal-checkout)
 * [Search Terminal Checkouts](../../doc/api/terminal.md#search-terminal-checkouts)
 * [Get Terminal Checkout](../../doc/api/terminal.md#get-terminal-checkout)
@@ -139,7 +140,7 @@ GetTerminalActionAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `actionId` | `string` | Template, Required | Unique ID for the desired `TerminalAction` |
+| `actionId` | `string` | Template, Required | Unique ID for the desired `TerminalAction`. |
 
 ## Response Type
 
@@ -174,7 +175,7 @@ CancelTerminalActionAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `actionId` | `string` | Template, Required | Unique ID for the desired `TerminalAction` |
+| `actionId` | `string` | Template, Required | Unique ID for the desired `TerminalAction`. |
 
 ## Response Type
 
@@ -187,6 +188,43 @@ string actionId = "action_id6";
 try
 {
     CancelTerminalActionResponse result = await terminalApi.CancelTerminalActionAsync(actionId);
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Dismiss Terminal Action
+
+Dismisses a Terminal action request if the status and type of the request permits it.
+
+See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/advanced-features/custom-workflows/link-and-dismiss-actions) for more details.
+
+```csharp
+DismissTerminalActionAsync(
+    string actionId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `actionId` | `string` | Template, Required | Unique ID for the `TerminalAction` associated with the waiting dialog to be dismissed. |
+
+## Response Type
+
+[`Task<Models.DismissTerminalActionResponse>`](../../doc/models/dismiss-terminal-action-response.md)
+
+## Example Usage
+
+```csharp
+string actionId = "action_id6";
+try
+{
+    DismissTerminalActionResponse result = await terminalApi.DismissTerminalActionAsync(actionId);
 }
 catch (ApiException e)
 {

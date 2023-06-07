@@ -32,10 +32,10 @@ namespace Square.Apis
         /// ```.
         /// Authorization: Client APPLICATION_SECRET.
         /// ```.
-        /// Replace `APPLICATION_SECRET` with the application secret on the Credentials.
+        /// Replace `APPLICATION_SECRET` with the application secret on the **Credentials**.
         /// page in the [Developer Dashboard](https://developer.squareup.com/apps).
         /// </summary>
-        /// <param name="clientId">Required parameter: Your application ID, which is available in the OAuth page in the [Developer Dashboard](https://developer.squareup.com/apps)..</param>
+        /// <param name="clientId">Required parameter: Your application ID, which is available on the **OAuth** page in the [Developer Dashboard](https://developer.squareup.com/apps)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
         /// <returns>Returns the Models.RenewTokenResponse response from the API call.</returns>
@@ -58,10 +58,10 @@ namespace Square.Apis
         /// ```.
         /// Authorization: Client APPLICATION_SECRET.
         /// ```.
-        /// Replace `APPLICATION_SECRET` with the application secret on the Credentials.
+        /// Replace `APPLICATION_SECRET` with the application secret on the **Credentials**.
         /// page in the [Developer Dashboard](https://developer.squareup.com/apps).
         /// </summary>
-        /// <param name="clientId">Required parameter: Your application ID, which is available in the OAuth page in the [Developer Dashboard](https://developer.squareup.com/apps)..</param>
+        /// <param name="clientId">Required parameter: Your application ID, which is available on the **OAuth** page in the [Developer Dashboard](https://developer.squareup.com/apps)..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -84,8 +84,8 @@ namespace Square.Apis
         /// ```.
         /// Authorization: Client APPLICATION_SECRET.
         /// ```.
-        /// Replace `APPLICATION_SECRET` with the application secret on the OAuth.
-        /// page for your application on the Developer Dashboard.
+        /// Replace `APPLICATION_SECRET` with the application secret on the **OAuth**.
+        /// page for your application in the Developer Dashboard.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
@@ -105,8 +105,8 @@ namespace Square.Apis
         /// ```.
         /// Authorization: Client APPLICATION_SECRET.
         /// ```.
-        /// Replace `APPLICATION_SECRET` with the application secret on the OAuth.
-        /// page for your application on the Developer Dashboard.
+        /// Replace `APPLICATION_SECRET` with the application secret on the **OAuth**.
+        /// page for your application in the Developer Dashboard.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
@@ -124,7 +124,7 @@ namespace Square.Apis
         /// The `grant_type` parameter specifies the type of OAuth request. If .
         /// `grant_type` is `authorization_code`, you must include the authorization .
         /// code you received when a seller granted you authorization. If `grant_type` .
-        /// is `refresh_token`, you must provide a valid refresh token. If you are using .
+        /// is `refresh_token`, you must provide a valid refresh token. If you're using .
         /// an old version of the Square APIs (prior to March 13, 2019), `grant_type` .
         /// can be `migration_token` and you must provide a valid migration token.
         /// You can use the `scopes` parameter to limit the set of permissions granted .
@@ -145,7 +145,7 @@ namespace Square.Apis
         /// The `grant_type` parameter specifies the type of OAuth request. If .
         /// `grant_type` is `authorization_code`, you must include the authorization .
         /// code you received when a seller granted you authorization. If `grant_type` .
-        /// is `refresh_token`, you must provide a valid refresh token. If you are using .
+        /// is `refresh_token`, you must provide a valid refresh token. If you're using .
         /// an old version of the Square APIs (prior to March 13, 2019), `grant_type` .
         /// can be `migration_token` and you must provide a valid migration token.
         /// You can use the `scopes` parameter to limit the set of permissions granted .

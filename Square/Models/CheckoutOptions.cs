@@ -30,6 +30,8 @@ namespace Square.Models
         /// <param name="acceptedPaymentMethods">accepted_payment_methods.</param>
         /// <param name="appFeeMoney">app_fee_money.</param>
         /// <param name="shippingFee">shipping_fee.</param>
+        /// <param name="enableCoupon">enable_coupon.</param>
+        /// <param name="enableLoyalty">enable_loyalty.</param>
         public CheckoutOptions(
             bool? allowTipping = null,
             IList<Models.CustomField> customFields = null,
@@ -39,7 +41,9 @@ namespace Square.Models
             bool? askForShippingAddress = null,
             Models.AcceptedPaymentMethods acceptedPaymentMethods = null,
             Models.Money appFeeMoney = null,
-            Models.ShippingFee shippingFee = null)
+            Models.ShippingFee shippingFee = null,
+            bool? enableCoupon = null,
+            bool? enableLoyalty = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -48,7 +52,9 @@ namespace Square.Models
                 { "subscription_plan_id", false },
                 { "redirect_url", false },
                 { "merchant_support_email", false },
-                { "ask_for_shipping_address", false }
+                { "ask_for_shipping_address", false },
+                { "enable_coupon", false },
+                { "enable_loyalty", false }
             };
 
             if (allowTipping != null)
@@ -90,6 +96,18 @@ namespace Square.Models
             this.AcceptedPaymentMethods = acceptedPaymentMethods;
             this.AppFeeMoney = appFeeMoney;
             this.ShippingFee = shippingFee;
+            if (enableCoupon != null)
+            {
+                shouldSerialize["enable_coupon"] = true;
+                this.EnableCoupon = enableCoupon;
+            }
+
+            if (enableLoyalty != null)
+            {
+                shouldSerialize["enable_loyalty"] = true;
+                this.EnableLoyalty = enableLoyalty;
+            }
+
         }
         internal CheckoutOptions(Dictionary<string, bool> shouldSerialize,
             bool? allowTipping = null,
@@ -100,7 +118,9 @@ namespace Square.Models
             bool? askForShippingAddress = null,
             Models.AcceptedPaymentMethods acceptedPaymentMethods = null,
             Models.Money appFeeMoney = null,
-            Models.ShippingFee shippingFee = null)
+            Models.ShippingFee shippingFee = null,
+            bool? enableCoupon = null,
+            bool? enableLoyalty = null)
         {
             this.shouldSerialize = shouldSerialize;
             AllowTipping = allowTipping;
@@ -112,6 +132,8 @@ namespace Square.Models
             AcceptedPaymentMethods = acceptedPaymentMethods;
             AppFeeMoney = appFeeMoney;
             ShippingFee = shippingFee;
+            EnableCoupon = enableCoupon;
+            EnableLoyalty = enableLoyalty;
         }
 
         /// <summary>
@@ -173,6 +195,18 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("shipping_fee", NullValueHandling = NullValueHandling.Ignore)]
         public Models.ShippingFee ShippingFee { get; }
+
+        /// <summary>
+        /// Indicates whether to include the `Add coupon` section for the buyer to provide a Square marketing coupon in the payment form.
+        /// </summary>
+        [JsonProperty("enable_coupon")]
+        public bool? EnableCoupon { get; }
+
+        /// <summary>
+        /// Indicates whether to include the `REWARDS` section for the buyer to opt in to loyalty, redeem rewards in the payment form, or both.
+        /// </summary>
+        [JsonProperty("enable_loyalty")]
+        public bool? EnableLoyalty { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -238,6 +272,24 @@ namespace Square.Models
             return this.shouldSerialize["ask_for_shipping_address"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEnableCoupon()
+        {
+            return this.shouldSerialize["enable_coupon"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeEnableLoyalty()
+        {
+            return this.shouldSerialize["enable_loyalty"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -258,16 +310,18 @@ namespace Square.Models
                 ((this.AskForShippingAddress == null && other.AskForShippingAddress == null) || (this.AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
                 ((this.AcceptedPaymentMethods == null && other.AcceptedPaymentMethods == null) || (this.AcceptedPaymentMethods?.Equals(other.AcceptedPaymentMethods) == true)) &&
                 ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
-                ((this.ShippingFee == null && other.ShippingFee == null) || (this.ShippingFee?.Equals(other.ShippingFee) == true));
+                ((this.ShippingFee == null && other.ShippingFee == null) || (this.ShippingFee?.Equals(other.ShippingFee) == true)) &&
+                ((this.EnableCoupon == null && other.EnableCoupon == null) || (this.EnableCoupon?.Equals(other.EnableCoupon) == true)) &&
+                ((this.EnableLoyalty == null && other.EnableLoyalty == null) || (this.EnableLoyalty?.Equals(other.EnableLoyalty) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2115752998;
+            int hashCode = 570031906;
             hashCode = HashCode.Combine(this.AllowTipping, this.CustomFields, this.SubscriptionPlanId, this.RedirectUrl, this.MerchantSupportEmail, this.AskForShippingAddress, this.AcceptedPaymentMethods);
 
-            hashCode = HashCode.Combine(hashCode, this.AppFeeMoney, this.ShippingFee);
+            hashCode = HashCode.Combine(hashCode, this.AppFeeMoney, this.ShippingFee, this.EnableCoupon, this.EnableLoyalty);
 
             return hashCode;
         }
@@ -286,6 +340,8 @@ namespace Square.Models
             toStringOutput.Add($"this.AcceptedPaymentMethods = {(this.AcceptedPaymentMethods == null ? "null" : this.AcceptedPaymentMethods.ToString())}");
             toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
             toStringOutput.Add($"this.ShippingFee = {(this.ShippingFee == null ? "null" : this.ShippingFee.ToString())}");
+            toStringOutput.Add($"this.EnableCoupon = {(this.EnableCoupon == null ? "null" : this.EnableCoupon.ToString())}");
+            toStringOutput.Add($"this.EnableLoyalty = {(this.EnableLoyalty == null ? "null" : this.EnableLoyalty.ToString())}");
         }
 
         /// <summary>
@@ -303,7 +359,9 @@ namespace Square.Models
                 .AskForShippingAddress(this.AskForShippingAddress)
                 .AcceptedPaymentMethods(this.AcceptedPaymentMethods)
                 .AppFeeMoney(this.AppFeeMoney)
-                .ShippingFee(this.ShippingFee);
+                .ShippingFee(this.ShippingFee)
+                .EnableCoupon(this.EnableCoupon)
+                .EnableLoyalty(this.EnableLoyalty);
             return builder;
         }
 
@@ -320,6 +378,8 @@ namespace Square.Models
                 { "redirect_url", false },
                 { "merchant_support_email", false },
                 { "ask_for_shipping_address", false },
+                { "enable_coupon", false },
+                { "enable_loyalty", false },
             };
 
             private bool? allowTipping;
@@ -331,6 +391,8 @@ namespace Square.Models
             private Models.AcceptedPaymentMethods acceptedPaymentMethods;
             private Models.Money appFeeMoney;
             private Models.ShippingFee shippingFee;
+            private bool? enableCoupon;
+            private bool? enableLoyalty;
 
              /// <summary>
              /// AllowTipping.
@@ -437,6 +499,30 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// EnableCoupon.
+             /// </summary>
+             /// <param name="enableCoupon"> enableCoupon. </param>
+             /// <returns> Builder. </returns>
+            public Builder EnableCoupon(bool? enableCoupon)
+            {
+                shouldSerialize["enable_coupon"] = true;
+                this.enableCoupon = enableCoupon;
+                return this;
+            }
+
+             /// <summary>
+             /// EnableLoyalty.
+             /// </summary>
+             /// <param name="enableLoyalty"> enableLoyalty. </param>
+             /// <returns> Builder. </returns>
+            public Builder EnableLoyalty(bool? enableLoyalty)
+            {
+                shouldSerialize["enable_loyalty"] = true;
+                this.enableLoyalty = enableLoyalty;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -485,6 +571,22 @@ namespace Square.Models
                 this.shouldSerialize["ask_for_shipping_address"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEnableCoupon()
+            {
+                this.shouldSerialize["enable_coupon"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetEnableLoyalty()
+            {
+                this.shouldSerialize["enable_loyalty"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -501,7 +603,9 @@ namespace Square.Models
                     this.askForShippingAddress,
                     this.acceptedPaymentMethods,
                     this.appFeeMoney,
-                    this.shippingFee);
+                    this.shippingFee,
+                    this.enableCoupon,
+                    this.enableLoyalty);
             }
         }
     }

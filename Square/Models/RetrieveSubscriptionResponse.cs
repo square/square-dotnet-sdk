@@ -44,9 +44,9 @@ namespace Square.Models
         public IList<Models.Error> Errors { get; }
 
         /// <summary>
-        /// Represents a subscription to a subscription plan by a subscriber.
-        /// For an overview of the `Subscription` type, see
-        /// [Subscription object](https://developer.squareup.com/docs/subscriptions-api/overview#subscription-object-overview).
+        /// Represents a subscription purchased by a customer.
+        /// For more information, see
+        /// [Manage Subscriptions](https://developer.squareup.com/docs/subscriptions-api/manage-subscriptions).
         /// </summary>
         [JsonProperty("subscription", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Subscription Subscription { get; }
