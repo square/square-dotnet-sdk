@@ -59,7 +59,7 @@ namespace Square.Models
         /// When the total number of resulting subscription events exceeds the limit of a paged response,
         /// specify the cursor returned from a preceding response here to fetch the next set of results.
         /// If the cursor is unset, the response contains the last page of the results.
-        /// For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination).
+        /// For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).
         /// </summary>
         [JsonProperty("cursor")]
         public string Cursor { get; }

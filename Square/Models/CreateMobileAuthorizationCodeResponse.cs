@@ -23,15 +23,15 @@ namespace Square.Models
         /// </summary>
         /// <param name="authorizationCode">authorization_code.</param>
         /// <param name="expiresAt">expires_at.</param>
-        /// <param name="error">error.</param>
+        /// <param name="errors">errors.</param>
         public CreateMobileAuthorizationCodeResponse(
             string authorizationCode = null,
             string expiresAt = null,
-            Models.Error error = null)
+            IList<Models.Error> errors = null)
         {
             this.AuthorizationCode = authorizationCode;
             this.ExpiresAt = expiresAt;
-            this.Error = error;
+            this.Errors = errors;
         }
 
         /// <summary>
@@ -55,11 +55,10 @@ namespace Square.Models
         public string ExpiresAt { get; }
 
         /// <summary>
-        /// Represents an error encountered during a request to the Connect API.
-        /// See [Handling errors](https://developer.squareup.com/docs/build-basics/handling-errors) for more information.
+        /// Any errors that occurred during the request.
         /// </summary>
-        [JsonProperty("error", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.Error Error { get; }
+        [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.Error> Errors { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -86,19 +85,19 @@ namespace Square.Models
             return obj is CreateMobileAuthorizationCodeResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.AuthorizationCode == null && other.AuthorizationCode == null) || (this.AuthorizationCode?.Equals(other.AuthorizationCode) == true)) &&
                 ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
-                ((this.Error == null && other.Error == null) || (this.Error?.Equals(other.Error) == true));
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -942988970;
+            int hashCode = -1694177242;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.AuthorizationCode, this.ExpiresAt, this.Error);
+            hashCode = HashCode.Combine(this.AuthorizationCode, this.ExpiresAt, this.Errors);
 
             return hashCode;
         }
@@ -116,7 +115,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.AuthorizationCode = {(this.AuthorizationCode == null ? "null" : this.AuthorizationCode == string.Empty ? "" : this.AuthorizationCode)}");
             toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt == string.Empty ? "" : this.ExpiresAt)}");
-            toStringOutput.Add($"this.Error = {(this.Error == null ? "null" : this.Error.ToString())}");
+            toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
         }
 
         /// <summary>
@@ -128,7 +127,7 @@ namespace Square.Models
             var builder = new Builder()
                 .AuthorizationCode(this.AuthorizationCode)
                 .ExpiresAt(this.ExpiresAt)
-                .Error(this.Error);
+                .Errors(this.Errors);
             return builder;
         }
 
@@ -139,7 +138,7 @@ namespace Square.Models
         {
             private string authorizationCode;
             private string expiresAt;
-            private Models.Error error;
+            private IList<Models.Error> errors;
 
              /// <summary>
              /// AuthorizationCode.
@@ -164,13 +163,13 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// Error.
+             /// Errors.
              /// </summary>
-             /// <param name="error"> error. </param>
+             /// <param name="errors"> errors. </param>
              /// <returns> Builder. </returns>
-            public Builder Error(Models.Error error)
+            public Builder Errors(IList<Models.Error> errors)
             {
-                this.error = error;
+                this.errors = errors;
                 return this;
             }
 
@@ -183,7 +182,7 @@ namespace Square.Models
                 return new CreateMobileAuthorizationCodeResponse(
                     this.authorizationCode,
                     this.expiresAt,
-                    this.error);
+                    this.errors);
             }
         }
     }

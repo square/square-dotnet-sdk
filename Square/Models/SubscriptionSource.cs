@@ -17,6 +17,7 @@ namespace Square.Models
     /// </summary>
     public class SubscriptionSource
     {
+        private readonly Dictionary<string, bool> shouldSerialize;
         /// <summary>
         /// Initializes a new instance of the <see cref="SubscriptionSource"/> class.
         /// </summary>
@@ -24,7 +25,23 @@ namespace Square.Models
         public SubscriptionSource(
             string name = null)
         {
-            this.Name = name;
+            shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false }
+            };
+
+            if (name != null)
+            {
+                shouldSerialize["name"] = true;
+                this.Name = name;
+            }
+
+        }
+        internal SubscriptionSource(Dictionary<string, bool> shouldSerialize,
+            string name = null)
+        {
+            this.shouldSerialize = shouldSerialize;
+            Name = name;
         }
 
         /// <summary>
@@ -32,7 +49,7 @@ namespace Square.Models
         /// a subscription originates. If unset, the name defaults to the name
         /// of the application that created the subscription.
         /// </summary>
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("name")]
         public string Name { get; }
 
         /// <inheritdoc/>
@@ -43,6 +60,15 @@ namespace Square.Models
             this.ToString(toStringOutput);
 
             return $"SubscriptionSource : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeName()
+        {
+            return this.shouldSerialize["name"];
         }
 
         /// <inheritdoc/>
@@ -93,6 +119,11 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
+            private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
+            {
+                { "name", false },
+            };
+
             private string name;
 
              /// <summary>
@@ -102,9 +133,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder Name(string name)
             {
+                shouldSerialize["name"] = true;
                 this.name = name;
                 return this;
             }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetName()
+            {
+                this.shouldSerialize["name"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -112,7 +153,7 @@ namespace Square.Models
             /// <returns> SubscriptionSource. </returns>
             public SubscriptionSource Build()
             {
-                return new SubscriptionSource(
+                return new SubscriptionSource(shouldSerialize,
                     this.name);
             }
         }

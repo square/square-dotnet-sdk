@@ -24,17 +24,20 @@ namespace Square.Models
         /// <param name="id">id.</param>
         /// <param name="type">type.</param>
         /// <param name="effectiveDate">effective_date.</param>
-        /// <param name="newPlanId">new_plan_id.</param>
+        /// <param name="phases">phases.</param>
+        /// <param name="newPlanVariationId">new_plan_variation_id.</param>
         public SubscriptionAction(
             string id = null,
             string type = null,
             string effectiveDate = null,
-            string newPlanId = null)
+            IList<Models.Phase> phases = null,
+            string newPlanVariationId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "effective_date", false },
-                { "new_plan_id", false }
+                { "phases", false },
+                { "new_plan_variation_id", false }
             };
 
             this.Id = id;
@@ -45,10 +48,16 @@ namespace Square.Models
                 this.EffectiveDate = effectiveDate;
             }
 
-            if (newPlanId != null)
+            if (phases != null)
             {
-                shouldSerialize["new_plan_id"] = true;
-                this.NewPlanId = newPlanId;
+                shouldSerialize["phases"] = true;
+                this.Phases = phases;
+            }
+
+            if (newPlanVariationId != null)
+            {
+                shouldSerialize["new_plan_variation_id"] = true;
+                this.NewPlanVariationId = newPlanVariationId;
             }
 
         }
@@ -56,13 +65,15 @@ namespace Square.Models
             string id = null,
             string type = null,
             string effectiveDate = null,
-            string newPlanId = null)
+            IList<Models.Phase> phases = null,
+            string newPlanVariationId = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
             Type = type;
             EffectiveDate = effectiveDate;
-            NewPlanId = newPlanId;
+            Phases = phases;
+            NewPlanVariationId = newPlanVariationId;
         }
 
         /// <summary>
@@ -84,10 +95,16 @@ namespace Square.Models
         public string EffectiveDate { get; }
 
         /// <summary>
-        /// The target subscription plan a subscription switches to, for a `SWAP_PLAN` action.
+        /// A list of Phases, to pass phase-specific information used in the swap.
         /// </summary>
-        [JsonProperty("new_plan_id")]
-        public string NewPlanId { get; }
+        [JsonProperty("phases")]
+        public IList<Models.Phase> Phases { get; }
+
+        /// <summary>
+        /// The target subscription plan variation that a subscription switches to, for a `SWAP_PLAN` action.
+        /// </summary>
+        [JsonProperty("new_plan_variation_id")]
+        public string NewPlanVariationId { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -112,9 +129,18 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeNewPlanId()
+        public bool ShouldSerializePhases()
         {
-            return this.shouldSerialize["new_plan_id"];
+            return this.shouldSerialize["phases"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeNewPlanVariationId()
+        {
+            return this.shouldSerialize["new_plan_variation_id"];
         }
 
         /// <inheritdoc/>
@@ -132,14 +158,15 @@ namespace Square.Models
             return obj is SubscriptionAction other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.EffectiveDate == null && other.EffectiveDate == null) || (this.EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
-                ((this.NewPlanId == null && other.NewPlanId == null) || (this.NewPlanId?.Equals(other.NewPlanId) == true));
+                ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true)) &&
+                ((this.NewPlanVariationId == null && other.NewPlanVariationId == null) || (this.NewPlanVariationId?.Equals(other.NewPlanVariationId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1007039208;
-            hashCode = HashCode.Combine(this.Id, this.Type, this.EffectiveDate, this.NewPlanId);
+            int hashCode = -1179358042;
+            hashCode = HashCode.Combine(this.Id, this.Type, this.EffectiveDate, this.Phases, this.NewPlanVariationId);
 
             return hashCode;
         }
@@ -152,7 +179,8 @@ namespace Square.Models
             toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate == string.Empty ? "" : this.EffectiveDate)}");
-            toStringOutput.Add($"this.NewPlanId = {(this.NewPlanId == null ? "null" : this.NewPlanId == string.Empty ? "" : this.NewPlanId)}");
+            toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
+            toStringOutput.Add($"this.NewPlanVariationId = {(this.NewPlanVariationId == null ? "null" : this.NewPlanVariationId == string.Empty ? "" : this.NewPlanVariationId)}");
         }
 
         /// <summary>
@@ -165,7 +193,8 @@ namespace Square.Models
                 .Id(this.Id)
                 .Type(this.Type)
                 .EffectiveDate(this.EffectiveDate)
-                .NewPlanId(this.NewPlanId);
+                .Phases(this.Phases)
+                .NewPlanVariationId(this.NewPlanVariationId);
             return builder;
         }
 
@@ -177,13 +206,15 @@ namespace Square.Models
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
                 { "effective_date", false },
-                { "new_plan_id", false },
+                { "phases", false },
+                { "new_plan_variation_id", false },
             };
 
             private string id;
             private string type;
             private string effectiveDate;
-            private string newPlanId;
+            private IList<Models.Phase> phases;
+            private string newPlanVariationId;
 
              /// <summary>
              /// Id.
@@ -220,14 +251,26 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// NewPlanId.
+             /// Phases.
              /// </summary>
-             /// <param name="newPlanId"> newPlanId. </param>
+             /// <param name="phases"> phases. </param>
              /// <returns> Builder. </returns>
-            public Builder NewPlanId(string newPlanId)
+            public Builder Phases(IList<Models.Phase> phases)
             {
-                shouldSerialize["new_plan_id"] = true;
-                this.newPlanId = newPlanId;
+                shouldSerialize["phases"] = true;
+                this.phases = phases;
+                return this;
+            }
+
+             /// <summary>
+             /// NewPlanVariationId.
+             /// </summary>
+             /// <param name="newPlanVariationId"> newPlanVariationId. </param>
+             /// <returns> Builder. </returns>
+            public Builder NewPlanVariationId(string newPlanVariationId)
+            {
+                shouldSerialize["new_plan_variation_id"] = true;
+                this.newPlanVariationId = newPlanVariationId;
                 return this;
             }
 
@@ -242,9 +285,17 @@ namespace Square.Models
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
-            public void UnsetNewPlanId()
+            public void UnsetPhases()
             {
-                this.shouldSerialize["new_plan_id"] = false;
+                this.shouldSerialize["phases"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetNewPlanVariationId()
+            {
+                this.shouldSerialize["new_plan_variation_id"] = false;
             }
 
 
@@ -258,7 +309,8 @@ namespace Square.Models
                     this.id,
                     this.type,
                     this.effectiveDate,
-                    this.newPlanId);
+                    this.phases,
+                    this.newPlanVariationId);
             }
         }
     }
