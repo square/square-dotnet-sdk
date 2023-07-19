@@ -13,8 +13,8 @@ The service appointment settings, including where and how the service is provide
 |  --- | --- | --- | --- |
 | `LocationTypes` | [`IList<string>`](../../doc/models/business-appointment-settings-booking-location-type.md) | Optional | Types of the location allowed for bookings.<br>See [BusinessAppointmentSettingsBookingLocationType](#type-businessappointmentsettingsbookinglocationtype) for possible values |
 | `AlignmentTime` | [`string`](../../doc/models/business-appointment-settings-alignment-time.md) | Optional | Time units of a service duration for bookings. |
-| `MinBookingLeadTimeSeconds` | `int?` | Optional | The minimum lead time in seconds before a service can be booked. Bookings must be created at least this far ahead of the booking's starting time. |
-| `MaxBookingLeadTimeSeconds` | `int?` | Optional | The maximum lead time in seconds before a service can be booked. Bookings must be created at most this far ahead of the booking's starting time. |
+| `MinBookingLeadTimeSeconds` | `int?` | Optional | The minimum lead time in seconds before a service can be booked. A booking must be created at least this amount of time before its starting time. |
+| `MaxBookingLeadTimeSeconds` | `int?` | Optional | The maximum lead time in seconds before a service can be booked. A booking must be created at most this amount of time before its starting time. |
 | `AnyTeamMemberBookingEnabled` | `bool?` | Optional | Indicates whether a customer can choose from all available time slots and have a staff member assigned<br>automatically (`true`) or not (`false`). |
 | `MultipleServiceBookingEnabled` | `bool?` | Optional | Indicates whether a customer can book multiple services in a single online booking. |
 | `MaxAppointmentsPerDayLimitType` | [`string`](../../doc/models/business-appointment-settings-max-appointments-per-day-limit-type.md) | Optional | Types of daily appointment limits. |

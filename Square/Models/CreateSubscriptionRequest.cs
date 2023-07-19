@@ -23,7 +23,6 @@ namespace Square.Models
         /// <param name="locationId">location_id.</param>
         /// <param name="customerId">customer_id.</param>
         /// <param name="idempotencyKey">idempotency_key.</param>
-        /// <param name="planId">plan_id.</param>
         /// <param name="planVariationId">plan_variation_id.</param>
         /// <param name="startDate">start_date.</param>
         /// <param name="canceledDate">canceled_date.</param>
@@ -37,7 +36,6 @@ namespace Square.Models
             string locationId,
             string customerId,
             string idempotencyKey = null,
-            string planId = null,
             string planVariationId = null,
             string startDate = null,
             string canceledDate = null,
@@ -50,7 +48,6 @@ namespace Square.Models
         {
             this.IdempotencyKey = idempotencyKey;
             this.LocationId = locationId;
-            this.PlanId = planId;
             this.PlanVariationId = planVariationId;
             this.CustomerId = customerId;
             this.StartDate = startDate;
@@ -77,16 +74,6 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }
-
-        /// <summary>
-        /// The ID of the [subscription plan](https://developer.squareup.com/docs/subscriptions-api/plans-and-variations) created using the Catalog API.
-        /// Deprecated in favour of `plan_variation_id`.
-        /// For more information, see
-        /// [Set Up and Manage a Subscription Plan](https://developer.squareup.com/docs/subscriptions-api/setup-plan) and
-        /// [Subscriptions Walkthrough](https://developer.squareup.com/docs/subscriptions-api/walkthrough).
-        /// </summary>
-        [JsonProperty("plan_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string PlanId { get; }
 
         /// <summary>
         /// The ID of the [subscription plan variation](https://developer.squareup.com/docs/subscriptions-api/plans-and-variations#plan-variations) created using the Catalog API.
@@ -191,7 +178,6 @@ namespace Square.Models
             }
             return obj is CreateSubscriptionRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true)) &&
                 ((this.PlanVariationId == null && other.PlanVariationId == null) || (this.PlanVariationId?.Equals(other.PlanVariationId) == true)) &&
                 ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
                 ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
@@ -207,10 +193,10 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1523700510;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.LocationId, this.PlanId, this.PlanVariationId, this.CustomerId, this.StartDate, this.CanceledDate);
+            int hashCode = 1195820218;
+            hashCode = HashCode.Combine(this.IdempotencyKey, this.LocationId, this.PlanVariationId, this.CustomerId, this.StartDate, this.CanceledDate, this.TaxPercentage);
 
-            hashCode = HashCode.Combine(hashCode, this.TaxPercentage, this.PriceOverrideMoney, this.CardId, this.Timezone, this.Source, this.Phases);
+            hashCode = HashCode.Combine(hashCode, this.PriceOverrideMoney, this.CardId, this.Timezone, this.Source, this.Phases);
 
             return hashCode;
         }
@@ -222,7 +208,6 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.PlanId = {(this.PlanId == null ? "null" : this.PlanId == string.Empty ? "" : this.PlanId)}");
             toStringOutput.Add($"this.PlanVariationId = {(this.PlanVariationId == null ? "null" : this.PlanVariationId == string.Empty ? "" : this.PlanVariationId)}");
             toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
             toStringOutput.Add($"this.StartDate = {(this.StartDate == null ? "null" : this.StartDate == string.Empty ? "" : this.StartDate)}");
@@ -245,7 +230,6 @@ namespace Square.Models
                 this.LocationId,
                 this.CustomerId)
                 .IdempotencyKey(this.IdempotencyKey)
-                .PlanId(this.PlanId)
                 .PlanVariationId(this.PlanVariationId)
                 .StartDate(this.StartDate)
                 .CanceledDate(this.CanceledDate)
@@ -266,7 +250,6 @@ namespace Square.Models
             private string locationId;
             private string customerId;
             private string idempotencyKey;
-            private string planId;
             private string planVariationId;
             private string startDate;
             private string canceledDate;
@@ -315,17 +298,6 @@ namespace Square.Models
             public Builder IdempotencyKey(string idempotencyKey)
             {
                 this.idempotencyKey = idempotencyKey;
-                return this;
-            }
-
-             /// <summary>
-             /// PlanId.
-             /// </summary>
-             /// <param name="planId"> planId. </param>
-             /// <returns> Builder. </returns>
-            public Builder PlanId(string planId)
-            {
-                this.planId = planId;
                 return this;
             }
 
@@ -438,7 +410,6 @@ namespace Square.Models
                     this.locationId,
                     this.customerId,
                     this.idempotencyKey,
-                    this.planId,
                     this.planVariationId,
                     this.startDate,
                     this.canceledDate,

@@ -56,20 +56,22 @@ Models.CreateSubscriptionRequest body = new Models.CreateSubscriptionRequest.Bui
     "CHFGVKYY8RSV93M5KCYTG4PN0G"
 )
 .IdempotencyKey("8193148c-9586-11e6-99f9-28cfe92138cf")
-.PlanId("6JHXF3B2CW3YKHDV4XEM674H")
-.StartDate("2021-10-20")
-.TaxPercentage("5")
-.PriceOverrideMoney(
-    new Models.Money.Builder()
-    .Amount(100L)
-    .Currency("USD")
-    .Build())
+.PlanVariationId("6JHXF3B2CW3YKHDV4XEM674H")
+.StartDate("2023-06-20")
 .CardId("ccof:qy5x8hHGYsgLrp4Q4GB")
 .Timezone("America/Los_Angeles")
 .Source(
     new Models.SubscriptionSource.Builder()
-    .Name("My App")
+    .Name("My Application")
     .Build())
+.Phases(
+    new List<Models.Phase>
+    {
+        new Models.Phase.Builder()
+        .Ordinal(0)
+        .OrderTemplateId("U2NaowWxzXwpsZU697x7ZHOAnCNZY")
+        .Build(),
+    })
 .Build();
 
 try
@@ -457,6 +459,16 @@ SwapPlanAsync(
 ```csharp
 string subscriptionId = "subscription_id0";
 Models.SwapPlanRequest body = new Models.SwapPlanRequest.Builder()
+.NewPlanVariationId("FQ7CDXXWSLUJRPM3GFJSJGZ7")
+.Phases(
+    new List<Models.PhaseInput>
+    {
+        new Models.PhaseInput.Builder(
+            0
+        )
+        .OrderTemplateId("uhhnjH9osVv3shUADwaC0b3hNxQZY")
+        .Build(),
+    })
 .Build();
 
 try

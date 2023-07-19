@@ -23,14 +23,17 @@ namespace Square.Models
         /// <param name="cursor">cursor.</param>
         /// <param name="limit">limit.</param>
         /// <param name="query">query.</param>
+        /// <param name="count">count.</param>
         public SearchCustomersRequest(
             string cursor = null,
             long? limit = null,
-            Models.CustomerQuery query = null)
+            Models.CustomerQuery query = null,
+            bool? count = null)
         {
             this.Cursor = cursor;
             this.Limit = limit;
             this.Query = query;
+            this.Count = count;
         }
 
         /// <summary>
@@ -54,6 +57,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("query", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerQuery Query { get; }
+
+        /// <summary>
+        /// Indicates whether to return the total count of matching customers in the `count` field of the response.
+        /// The default value is `false`.
+        /// </summary>
+        [JsonProperty("count", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Count { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -79,14 +89,15 @@ namespace Square.Models
             }
             return obj is SearchCustomersRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true));
+                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
+                ((this.Count == null && other.Count == null) || (this.Count?.Equals(other.Count) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 236271593;
-            hashCode = HashCode.Combine(this.Cursor, this.Limit, this.Query);
+            int hashCode = 113405763;
+            hashCode = HashCode.Combine(this.Cursor, this.Limit, this.Query, this.Count);
 
             return hashCode;
         }
@@ -99,6 +110,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
+            toStringOutput.Add($"this.Count = {(this.Count == null ? "null" : this.Count.ToString())}");
         }
 
         /// <summary>
@@ -110,7 +122,8 @@ namespace Square.Models
             var builder = new Builder()
                 .Cursor(this.Cursor)
                 .Limit(this.Limit)
-                .Query(this.Query);
+                .Query(this.Query)
+                .Count(this.Count);
             return builder;
         }
 
@@ -122,6 +135,7 @@ namespace Square.Models
             private string cursor;
             private long? limit;
             private Models.CustomerQuery query;
+            private bool? count;
 
              /// <summary>
              /// Cursor.
@@ -156,6 +170,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Count.
+             /// </summary>
+             /// <param name="count"> count. </param>
+             /// <returns> Builder. </returns>
+            public Builder Count(bool? count)
+            {
+                this.count = count;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -165,7 +190,8 @@ namespace Square.Models
                 return new SearchCustomersRequest(
                     this.cursor,
                     this.limit,
-                    this.query);
+                    this.query,
+                    this.count);
             }
         }
     }

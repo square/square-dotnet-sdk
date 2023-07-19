@@ -25,18 +25,21 @@ namespace Square.Models
         /// <param name="squareGiftCard">square_gift_card.</param>
         /// <param name="bankAccount">bank_account.</param>
         /// <param name="buyNowPayLater">buy_now_pay_later.</param>
+        /// <param name="cashAppPay">cash_app_pay.</param>
         public InvoiceAcceptedPaymentMethods(
             bool? card = null,
             bool? squareGiftCard = null,
             bool? bankAccount = null,
-            bool? buyNowPayLater = null)
+            bool? buyNowPayLater = null,
+            bool? cashAppPay = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "card", false },
                 { "square_gift_card", false },
                 { "bank_account", false },
-                { "buy_now_pay_later", false }
+                { "buy_now_pay_later", false },
+                { "cash_app_pay", false }
             };
 
             if (card != null)
@@ -63,18 +66,26 @@ namespace Square.Models
                 this.BuyNowPayLater = buyNowPayLater;
             }
 
+            if (cashAppPay != null)
+            {
+                shouldSerialize["cash_app_pay"] = true;
+                this.CashAppPay = cashAppPay;
+            }
+
         }
         internal InvoiceAcceptedPaymentMethods(Dictionary<string, bool> shouldSerialize,
             bool? card = null,
             bool? squareGiftCard = null,
             bool? bankAccount = null,
-            bool? buyNowPayLater = null)
+            bool? buyNowPayLater = null,
+            bool? cashAppPay = null)
         {
             this.shouldSerialize = shouldSerialize;
             Card = card;
             SquareGiftCard = squareGiftCard;
             BankAccount = bankAccount;
             BuyNowPayLater = buyNowPayLater;
+            CashAppPay = cashAppPay;
         }
 
         /// <summary>
@@ -105,6 +116,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("buy_now_pay_later")]
         public bool? BuyNowPayLater { get; }
+
+        /// <summary>
+        /// Indicates whether Cash App payments are accepted. The default value is `false`.
+        /// This payment method is supported only for seller [locations](entity:Location) in the United States.
+        /// </summary>
+        [JsonProperty("cash_app_pay")]
+        public bool? CashAppPay { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -152,6 +170,15 @@ namespace Square.Models
             return this.shouldSerialize["buy_now_pay_later"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCashAppPay()
+        {
+            return this.shouldSerialize["cash_app_pay"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -167,14 +194,15 @@ namespace Square.Models
             return obj is InvoiceAcceptedPaymentMethods other &&                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
                 ((this.SquareGiftCard == null && other.SquareGiftCard == null) || (this.SquareGiftCard?.Equals(other.SquareGiftCard) == true)) &&
                 ((this.BankAccount == null && other.BankAccount == null) || (this.BankAccount?.Equals(other.BankAccount) == true)) &&
-                ((this.BuyNowPayLater == null && other.BuyNowPayLater == null) || (this.BuyNowPayLater?.Equals(other.BuyNowPayLater) == true));
+                ((this.BuyNowPayLater == null && other.BuyNowPayLater == null) || (this.BuyNowPayLater?.Equals(other.BuyNowPayLater) == true)) &&
+                ((this.CashAppPay == null && other.CashAppPay == null) || (this.CashAppPay?.Equals(other.CashAppPay) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1178422628;
-            hashCode = HashCode.Combine(this.Card, this.SquareGiftCard, this.BankAccount, this.BuyNowPayLater);
+            int hashCode = 74998553;
+            hashCode = HashCode.Combine(this.Card, this.SquareGiftCard, this.BankAccount, this.BuyNowPayLater, this.CashAppPay);
 
             return hashCode;
         }
@@ -188,6 +216,7 @@ namespace Square.Models
             toStringOutput.Add($"this.SquareGiftCard = {(this.SquareGiftCard == null ? "null" : this.SquareGiftCard.ToString())}");
             toStringOutput.Add($"this.BankAccount = {(this.BankAccount == null ? "null" : this.BankAccount.ToString())}");
             toStringOutput.Add($"this.BuyNowPayLater = {(this.BuyNowPayLater == null ? "null" : this.BuyNowPayLater.ToString())}");
+            toStringOutput.Add($"this.CashAppPay = {(this.CashAppPay == null ? "null" : this.CashAppPay.ToString())}");
         }
 
         /// <summary>
@@ -200,7 +229,8 @@ namespace Square.Models
                 .Card(this.Card)
                 .SquareGiftCard(this.SquareGiftCard)
                 .BankAccount(this.BankAccount)
-                .BuyNowPayLater(this.BuyNowPayLater);
+                .BuyNowPayLater(this.BuyNowPayLater)
+                .CashAppPay(this.CashAppPay);
             return builder;
         }
 
@@ -215,12 +245,14 @@ namespace Square.Models
                 { "square_gift_card", false },
                 { "bank_account", false },
                 { "buy_now_pay_later", false },
+                { "cash_app_pay", false },
             };
 
             private bool? card;
             private bool? squareGiftCard;
             private bool? bankAccount;
             private bool? buyNowPayLater;
+            private bool? cashAppPay;
 
              /// <summary>
              /// Card.
@@ -270,6 +302,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CashAppPay.
+             /// </summary>
+             /// <param name="cashAppPay"> cashAppPay. </param>
+             /// <returns> Builder. </returns>
+            public Builder CashAppPay(bool? cashAppPay)
+            {
+                shouldSerialize["cash_app_pay"] = true;
+                this.cashAppPay = cashAppPay;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -302,6 +346,14 @@ namespace Square.Models
                 this.shouldSerialize["buy_now_pay_later"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCashAppPay()
+            {
+                this.shouldSerialize["cash_app_pay"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -313,7 +365,8 @@ namespace Square.Models
                     this.card,
                     this.squareGiftCard,
                     this.bankAccount,
-                    this.buyNowPayLater);
+                    this.buyNowPayLater,
+                    this.cashAppPay);
             }
         }
     }
