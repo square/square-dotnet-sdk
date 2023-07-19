@@ -124,6 +124,7 @@ Models.CreateInvoiceRequest body = new Models.CreateInvoiceRequest.Builder(
         .SquareGiftCard(false)
         .BankAccount(false)
         .BuyNowPayLater(false)
+        .CashAppPay(false)
         .Build())
     .CustomFields(
         new List<Models.InvoiceCustomField>

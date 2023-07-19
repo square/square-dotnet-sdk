@@ -24,14 +24,17 @@ namespace Square.Models
         /// <param name="errors">errors.</param>
         /// <param name="customers">customers.</param>
         /// <param name="cursor">cursor.</param>
+        /// <param name="count">count.</param>
         public ListCustomersResponse(
             IList<Models.Error> errors = null,
             IList<Models.Customer> customers = null,
-            string cursor = null)
+            string cursor = null,
+            long? count = null)
         {
             this.Errors = errors;
             this.Customers = customers;
             this.Cursor = cursor;
+            this.Count = count;
         }
 
         /// <summary>
@@ -48,6 +51,8 @@ namespace Square.Models
 
         /// <summary>
         /// The customer profiles associated with the Square account or an empty object (`{}`) if none are found.
+        /// Only customer profiles with public information (`given_name`, `family_name`, `company_name`, `email_address`, or
+        /// `phone_number`) are included in the response.
         /// </summary>
         [JsonProperty("customers", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Customer> Customers { get; }
@@ -60,6 +65,14 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; }
+
+        /// <summary>
+        /// The total count of customers associated with the Square account. Only customer profiles with public information
+        /// (`given_name`, `family_name`, `company_name`, `email_address`, or `phone_number`) are counted. This field is present
+        /// only if `count` is set to `true` in the request.
+        /// </summary>
+        [JsonProperty("count", NullValueHandling = NullValueHandling.Ignore)]
+        public long? Count { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -86,19 +99,20 @@ namespace Square.Models
             return obj is ListCustomersResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
                 ((this.Customers == null && other.Customers == null) || (this.Customers?.Equals(other.Customers) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.Count == null && other.Count == null) || (this.Count?.Equals(other.Count) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1593027597;
+            int hashCode = -1586473133;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.Customers, this.Cursor);
+            hashCode = HashCode.Combine(this.Errors, this.Customers, this.Cursor, this.Count);
 
             return hashCode;
         }
@@ -117,6 +131,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
             toStringOutput.Add($"this.Customers = {(this.Customers == null ? "null" : $"[{string.Join(", ", this.Customers)} ]")}");
             toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.Count = {(this.Count == null ? "null" : this.Count.ToString())}");
         }
 
         /// <summary>
@@ -128,7 +143,8 @@ namespace Square.Models
             var builder = new Builder()
                 .Errors(this.Errors)
                 .Customers(this.Customers)
-                .Cursor(this.Cursor);
+                .Cursor(this.Cursor)
+                .Count(this.Count);
             return builder;
         }
 
@@ -140,6 +156,7 @@ namespace Square.Models
             private IList<Models.Error> errors;
             private IList<Models.Customer> customers;
             private string cursor;
+            private long? count;
 
              /// <summary>
              /// Errors.
@@ -174,6 +191,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Count.
+             /// </summary>
+             /// <param name="count"> count. </param>
+             /// <returns> Builder. </returns>
+            public Builder Count(long? count)
+            {
+                this.count = count;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -183,7 +211,8 @@ namespace Square.Models
                 return new ListCustomersResponse(
                     this.errors,
                     this.customers,
-                    this.cursor);
+                    this.cursor,
+                    this.count);
             }
         }
     }

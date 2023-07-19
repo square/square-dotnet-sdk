@@ -40,13 +40,15 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results. If the specified limit is less than 1 or greater than 100, Square returns a `400 VALUE_TOO_LOW` or `400 VALUE_TOO_HIGH` error. The default value is 100.  For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="sortField">Optional parameter: Indicates how customers should be sorted.  The default value is `DEFAULT`..</param>
         /// <param name="sortOrder">Optional parameter: Indicates whether customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  The default value is `ASC`..</param>
+        /// <param name="count">Optional parameter: Indicates whether to return the total count of customers in the `count` field of the response.  The default value is `false`..</param>
         /// <returns>Returns the Models.ListCustomersResponse response from the API call.</returns>
         public Models.ListCustomersResponse ListCustomers(
                 string cursor = null,
                 int? limit = null,
                 string sortField = null,
-                string sortOrder = null)
-            => CoreHelper.RunTask(ListCustomersAsync(cursor, limit, sortField, sortOrder));
+                string sortOrder = null,
+                bool? count = false)
+            => CoreHelper.RunTask(ListCustomersAsync(cursor, limit, sortField, sortOrder, count));
 
         /// <summary>
         /// Lists customer profiles associated with a Square account.
@@ -58,6 +60,7 @@ namespace Square.Apis
         /// <param name="limit">Optional parameter: The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results. If the specified limit is less than 1 or greater than 100, Square returns a `400 VALUE_TOO_LOW` or `400 VALUE_TOO_HIGH` error. The default value is 100.  For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="sortField">Optional parameter: Indicates how customers should be sorted.  The default value is `DEFAULT`..</param>
         /// <param name="sortOrder">Optional parameter: Indicates whether customers should be sorted in ascending (`ASC`) or descending (`DESC`) order.  The default value is `ASC`..</param>
+        /// <param name="count">Optional parameter: Indicates whether to return the total count of customers in the `count` field of the response.  The default value is `false`..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListCustomersResponse response from the API call.</returns>
         public async Task<Models.ListCustomersResponse> ListCustomersAsync(
@@ -65,6 +68,7 @@ namespace Square.Apis
                 int? limit = null,
                 string sortField = null,
                 string sortOrder = null,
+                bool? count = false,
                 CancellationToken cancellationToken = default)
             => await CreateApiCall<Models.ListCustomersResponse>()
               .RequestBuilder(_requestBuilder => _requestBuilder
@@ -74,7 +78,8 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("cursor", cursor))
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("sort_field", sortField))
-                      .Query(_query => _query.Setup("sort_order", sortOrder))))
+                      .Query(_query => _query.Setup("sort_order", sortOrder))
+                      .Query(_query => _query.Setup("count", (count != null) ? count : false))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context))
                   .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListCustomersResponse>(_response)))

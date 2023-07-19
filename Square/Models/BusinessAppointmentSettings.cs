@@ -166,13 +166,13 @@ namespace Square.Models
         public string AlignmentTime { get; }
 
         /// <summary>
-        /// The minimum lead time in seconds before a service can be booked. Bookings must be created at least this far ahead of the booking's starting time.
+        /// The minimum lead time in seconds before a service can be booked. A booking must be created at least this amount of time before its starting time.
         /// </summary>
         [JsonProperty("min_booking_lead_time_seconds")]
         public int? MinBookingLeadTimeSeconds { get; }
 
         /// <summary>
-        /// The maximum lead time in seconds before a service can be booked. Bookings must be created at most this far ahead of the booking's starting time.
+        /// The maximum lead time in seconds before a service can be booked. A booking must be created at most this amount of time before its starting time.
         /// </summary>
         [JsonProperty("max_booking_lead_time_seconds")]
         public int? MaxBookingLeadTimeSeconds { get; }

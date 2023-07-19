@@ -29,6 +29,7 @@ namespace Square.Models
         /// <param name="createdAt">created_at.</param>
         /// <param name="updatedAt">updated_at.</param>
         /// <param name="appId">app_id.</param>
+        /// <param name="locationId">location_id.</param>
         /// <param name="type">type.</param>
         /// <param name="qrCodeOptions">qr_code_options.</param>
         /// <param name="saveCardOptions">save_card_options.</param>
@@ -49,6 +50,7 @@ namespace Square.Models
             string createdAt = null,
             string updatedAt = null,
             string appId = null,
+            string locationId = null,
             string type = null,
             Models.QrCodeOptions qrCodeOptions = null,
             Models.SaveCardOptions saveCardOptions = null,
@@ -87,6 +89,7 @@ namespace Square.Models
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.AppId = appId;
+            this.LocationId = locationId;
             this.Type = type;
             this.QrCodeOptions = qrCodeOptions;
             this.SaveCardOptions = saveCardOptions;
@@ -118,6 +121,7 @@ namespace Square.Models
             string createdAt = null,
             string updatedAt = null,
             string appId = null,
+            string locationId = null,
             string type = null,
             Models.QrCodeOptions qrCodeOptions = null,
             Models.SaveCardOptions saveCardOptions = null,
@@ -139,6 +143,7 @@ namespace Square.Models
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
             AppId = appId;
+            LocationId = locationId;
             Type = type;
             QrCodeOptions = qrCodeOptions;
             SaveCardOptions = saveCardOptions;
@@ -205,6 +210,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("app_id", NullValueHandling = NullValueHandling.Ignore)]
         public string AppId { get; }
+
+        /// <summary>
+        /// The location id the action is attached to, if a link can be made.
+        /// </summary>
+        [JsonProperty("location_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string LocationId { get; }
 
         /// <summary>
         /// Describes the type of this unit and indicates which field contains the unit information. This is an ‘open’ enum.
@@ -343,6 +354,7 @@ namespace Square.Models
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
                 ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
+                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.QrCodeOptions == null && other.QrCodeOptions == null) || (this.QrCodeOptions?.Equals(other.QrCodeOptions) == true)) &&
                 ((this.SaveCardOptions == null && other.SaveCardOptions == null) || (this.SaveCardOptions?.Equals(other.SaveCardOptions) == true)) &&
@@ -359,12 +371,12 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1561481896;
+            int hashCode = 820116250;
             hashCode = HashCode.Combine(this.Id, this.DeviceId, this.DeadlineDuration, this.Status, this.CancelReason, this.CreatedAt, this.UpdatedAt);
 
-            hashCode = HashCode.Combine(hashCode, this.AppId, this.Type, this.QrCodeOptions, this.SaveCardOptions, this.SignatureOptions, this.ConfirmationOptions, this.ReceiptOptions);
+            hashCode = HashCode.Combine(hashCode, this.AppId, this.LocationId, this.Type, this.QrCodeOptions, this.SaveCardOptions, this.SignatureOptions, this.ConfirmationOptions);
 
-            hashCode = HashCode.Combine(hashCode, this.DataCollectionOptions, this.SelectOptions, this.DeviceMetadata, this.AwaitNextAction, this.AwaitNextActionDuration);
+            hashCode = HashCode.Combine(hashCode, this.ReceiptOptions, this.DataCollectionOptions, this.SelectOptions, this.DeviceMetadata, this.AwaitNextAction, this.AwaitNextActionDuration);
 
             return hashCode;
         }
@@ -382,6 +394,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
             toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
             toStringOutput.Add($"this.AppId = {(this.AppId == null ? "null" : this.AppId == string.Empty ? "" : this.AppId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.QrCodeOptions = {(this.QrCodeOptions == null ? "null" : this.QrCodeOptions.ToString())}");
             toStringOutput.Add($"this.SaveCardOptions = {(this.SaveCardOptions == null ? "null" : this.SaveCardOptions.ToString())}");
@@ -410,6 +423,7 @@ namespace Square.Models
                 .CreatedAt(this.CreatedAt)
                 .UpdatedAt(this.UpdatedAt)
                 .AppId(this.AppId)
+                .LocationId(this.LocationId)
                 .Type(this.Type)
                 .QrCodeOptions(this.QrCodeOptions)
                 .SaveCardOptions(this.SaveCardOptions)
@@ -445,6 +459,7 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
             private string appId;
+            private string locationId;
             private string type;
             private Models.QrCodeOptions qrCodeOptions;
             private Models.SaveCardOptions saveCardOptions;
@@ -544,6 +559,17 @@ namespace Square.Models
             public Builder AppId(string appId)
             {
                 this.appId = appId;
+                return this;
+            }
+
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
+            public Builder LocationId(string locationId)
+            {
+                this.locationId = locationId;
                 return this;
             }
 
@@ -718,6 +744,7 @@ namespace Square.Models
                     this.createdAt,
                     this.updatedAt,
                     this.appId,
+                    this.locationId,
                     this.type,
                     this.qrCodeOptions,
                     this.saveCardOptions,

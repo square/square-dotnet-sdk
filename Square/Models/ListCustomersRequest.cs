@@ -25,16 +25,19 @@ namespace Square.Models
         /// <param name="limit">limit.</param>
         /// <param name="sortField">sort_field.</param>
         /// <param name="sortOrder">sort_order.</param>
+        /// <param name="count">count.</param>
         public ListCustomersRequest(
             string cursor = null,
             int? limit = null,
             string sortField = null,
-            string sortOrder = null)
+            string sortOrder = null,
+            bool? count = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "cursor", false },
-                { "limit", false }
+                { "limit", false },
+                { "count", false }
             };
 
             if (cursor != null)
@@ -51,18 +54,26 @@ namespace Square.Models
 
             this.SortField = sortField;
             this.SortOrder = sortOrder;
+            if (count != null)
+            {
+                shouldSerialize["count"] = true;
+                this.Count = count;
+            }
+
         }
         internal ListCustomersRequest(Dictionary<string, bool> shouldSerialize,
             string cursor = null,
             int? limit = null,
             string sortField = null,
-            string sortOrder = null)
+            string sortOrder = null,
+            bool? count = null)
         {
             this.shouldSerialize = shouldSerialize;
             Cursor = cursor;
             Limit = limit;
             SortField = sortField;
             SortOrder = sortOrder;
+            Count = count;
         }
 
         /// <summary>
@@ -93,6 +104,13 @@ namespace Square.Models
         [JsonProperty("sort_order", NullValueHandling = NullValueHandling.Ignore)]
         public string SortOrder { get; }
 
+        /// <summary>
+        /// Indicates whether to return the total count of customers in the `count` field of the response.
+        /// The default value is `false`.
+        /// </summary>
+        [JsonProperty("count")]
+        public bool? Count { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -121,6 +139,15 @@ namespace Square.Models
             return this.shouldSerialize["limit"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCount()
+        {
+            return this.shouldSerialize["count"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -136,14 +163,15 @@ namespace Square.Models
             return obj is ListCustomersRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.SortField == null && other.SortField == null) || (this.SortField?.Equals(other.SortField) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
+                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
+                ((this.Count == null && other.Count == null) || (this.Count?.Equals(other.Count) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1279199220;
-            hashCode = HashCode.Combine(this.Cursor, this.Limit, this.SortField, this.SortOrder);
+            int hashCode = -2144515002;
+            hashCode = HashCode.Combine(this.Cursor, this.Limit, this.SortField, this.SortOrder, this.Count);
 
             return hashCode;
         }
@@ -157,6 +185,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.SortField = {(this.SortField == null ? "null" : this.SortField.ToString())}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
+            toStringOutput.Add($"this.Count = {(this.Count == null ? "null" : this.Count.ToString())}");
         }
 
         /// <summary>
@@ -169,7 +198,8 @@ namespace Square.Models
                 .Cursor(this.Cursor)
                 .Limit(this.Limit)
                 .SortField(this.SortField)
-                .SortOrder(this.SortOrder);
+                .SortOrder(this.SortOrder)
+                .Count(this.Count);
             return builder;
         }
 
@@ -182,12 +212,14 @@ namespace Square.Models
             {
                 { "cursor", false },
                 { "limit", false },
+                { "count", false },
             };
 
             private string cursor;
             private int? limit;
             private string sortField;
             private string sortOrder;
+            private bool? count;
 
              /// <summary>
              /// Cursor.
@@ -235,6 +267,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Count.
+             /// </summary>
+             /// <param name="count"> count. </param>
+             /// <returns> Builder. </returns>
+            public Builder Count(bool? count)
+            {
+                shouldSerialize["count"] = true;
+                this.count = count;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -251,6 +295,14 @@ namespace Square.Models
                 this.shouldSerialize["limit"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetCount()
+            {
+                this.shouldSerialize["count"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -262,7 +314,8 @@ namespace Square.Models
                     this.cursor,
                     this.limit,
                     this.sortField,
-                    this.sortOrder);
+                    this.sortOrder,
+                    this.count);
             }
         }
     }
