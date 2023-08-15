@@ -37,6 +37,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
         /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="customerId">Optional parameter: The [customer](entity:Customer) for whom to retrieve bookings. If this is not set, bookings for all customers are retrieved..</param>
         /// <param name="teamMemberId">Optional parameter: The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved..</param>
         /// <param name="locationId">Optional parameter: The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved..</param>
         /// <param name="startAtMin">Optional parameter: The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used..</param>
@@ -45,11 +46,12 @@ namespace Square.Apis
         public Models.ListBookingsResponse ListBookings(
                 int? limit = null,
                 string cursor = null,
+                string customerId = null,
                 string teamMemberId = null,
                 string locationId = null,
                 string startAtMin = null,
                 string startAtMax = null)
-            => CoreHelper.RunTask(ListBookingsAsync(limit, cursor, teamMemberId, locationId, startAtMin, startAtMax));
+            => CoreHelper.RunTask(ListBookingsAsync(limit, cursor, customerId, teamMemberId, locationId, startAtMin, startAtMax));
 
         /// <summary>
         /// Retrieve a collection of bookings.
@@ -58,6 +60,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
         /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="customerId">Optional parameter: The [customer](entity:Customer) for whom to retrieve bookings. If this is not set, bookings for all customers are retrieved..</param>
         /// <param name="teamMemberId">Optional parameter: The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved..</param>
         /// <param name="locationId">Optional parameter: The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved..</param>
         /// <param name="startAtMin">Optional parameter: The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used..</param>
@@ -67,6 +70,7 @@ namespace Square.Apis
         public async Task<Models.ListBookingsResponse> ListBookingsAsync(
                 int? limit = null,
                 string cursor = null,
+                string customerId = null,
                 string teamMemberId = null,
                 string locationId = null,
                 string startAtMin = null,
@@ -79,13 +83,13 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))
+                      .Query(_query => _query.Setup("customer_id", customerId))
                       .Query(_query => _query.Setup("team_member_id", teamMemberId))
                       .Query(_query => _query.Setup("location_id", locationId))
                       .Query(_query => _query.Setup("start_at_min", startAtMin))
                       .Query(_query => _query.Setup("start_at_max", startAtMax))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListBookingsResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -134,8 +138,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateBookingResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -168,8 +171,40 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.SearchAvailabilityResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
+        /// Bulk-Retrieves a list of bookings by booking IDs.
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkRetrieveBookingsResponse response from the API call.</returns>
+        public Models.BulkRetrieveBookingsResponse BulkRetrieveBookings(
+                Models.BulkRetrieveBookingsRequest body)
+            => CoreHelper.RunTask(BulkRetrieveBookingsAsync(body));
+
+        /// <summary>
+        /// Bulk-Retrieves a list of bookings by booking IDs.
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkRetrieveBookingsResponse response from the API call.</returns>
+        public async Task<Models.BulkRetrieveBookingsResponse> BulkRetrieveBookingsAsync(
+                Models.BulkRetrieveBookingsRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.BulkRetrieveBookingsResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/bookings/bulk-retrieve")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -190,8 +225,7 @@ namespace Square.Apis
                   .Setup(HttpMethod.Get, "/v2/bookings/business-booking-profile")
                   .WithAuth("global"))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveBusinessBookingProfileResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -234,8 +268,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("cursor", cursor))
                       .Query(_query => _query.Setup("location_id", locationId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListTeamMemberBookingProfilesResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -263,8 +296,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("team_member_id", teamMemberId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveTeamMemberBookingProfileResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -296,8 +328,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("booking_id", bookingId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveBookingResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -339,8 +370,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("booking_id", bookingId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.UpdateBookingResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -382,8 +412,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("booking_id", bookingId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CancelBookingResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
     }
 }

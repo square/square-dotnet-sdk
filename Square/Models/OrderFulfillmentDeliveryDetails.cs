@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -620,26 +621,26 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Recipient = {(this.Recipient == null ? "null" : this.Recipient.ToString())}");
             toStringOutput.Add($"this.ScheduleType = {(this.ScheduleType == null ? "null" : this.ScheduleType.ToString())}");
-            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt == string.Empty ? "" : this.PlacedAt)}");
-            toStringOutput.Add($"this.DeliverAt = {(this.DeliverAt == null ? "null" : this.DeliverAt == string.Empty ? "" : this.DeliverAt)}");
-            toStringOutput.Add($"this.PrepTimeDuration = {(this.PrepTimeDuration == null ? "null" : this.PrepTimeDuration == string.Empty ? "" : this.PrepTimeDuration)}");
-            toStringOutput.Add($"this.DeliveryWindowDuration = {(this.DeliveryWindowDuration == null ? "null" : this.DeliveryWindowDuration == string.Empty ? "" : this.DeliveryWindowDuration)}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
-            toStringOutput.Add($"this.CompletedAt = {(this.CompletedAt == null ? "null" : this.CompletedAt == string.Empty ? "" : this.CompletedAt)}");
-            toStringOutput.Add($"this.InProgressAt = {(this.InProgressAt == null ? "null" : this.InProgressAt == string.Empty ? "" : this.InProgressAt)}");
-            toStringOutput.Add($"this.RejectedAt = {(this.RejectedAt == null ? "null" : this.RejectedAt == string.Empty ? "" : this.RejectedAt)}");
-            toStringOutput.Add($"this.ReadyAt = {(this.ReadyAt == null ? "null" : this.ReadyAt == string.Empty ? "" : this.ReadyAt)}");
-            toStringOutput.Add($"this.DeliveredAt = {(this.DeliveredAt == null ? "null" : this.DeliveredAt == string.Empty ? "" : this.DeliveredAt)}");
-            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt == string.Empty ? "" : this.CanceledAt)}");
-            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason == string.Empty ? "" : this.CancelReason)}");
-            toStringOutput.Add($"this.CourierPickupAt = {(this.CourierPickupAt == null ? "null" : this.CourierPickupAt == string.Empty ? "" : this.CourierPickupAt)}");
-            toStringOutput.Add($"this.CourierPickupWindowDuration = {(this.CourierPickupWindowDuration == null ? "null" : this.CourierPickupWindowDuration == string.Empty ? "" : this.CourierPickupWindowDuration)}");
+            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt)}");
+            toStringOutput.Add($"this.DeliverAt = {(this.DeliverAt == null ? "null" : this.DeliverAt)}");
+            toStringOutput.Add($"this.PrepTimeDuration = {(this.PrepTimeDuration == null ? "null" : this.PrepTimeDuration)}");
+            toStringOutput.Add($"this.DeliveryWindowDuration = {(this.DeliveryWindowDuration == null ? "null" : this.DeliveryWindowDuration)}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
+            toStringOutput.Add($"this.CompletedAt = {(this.CompletedAt == null ? "null" : this.CompletedAt)}");
+            toStringOutput.Add($"this.InProgressAt = {(this.InProgressAt == null ? "null" : this.InProgressAt)}");
+            toStringOutput.Add($"this.RejectedAt = {(this.RejectedAt == null ? "null" : this.RejectedAt)}");
+            toStringOutput.Add($"this.ReadyAt = {(this.ReadyAt == null ? "null" : this.ReadyAt)}");
+            toStringOutput.Add($"this.DeliveredAt = {(this.DeliveredAt == null ? "null" : this.DeliveredAt)}");
+            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt)}");
+            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason)}");
+            toStringOutput.Add($"this.CourierPickupAt = {(this.CourierPickupAt == null ? "null" : this.CourierPickupAt)}");
+            toStringOutput.Add($"this.CourierPickupWindowDuration = {(this.CourierPickupWindowDuration == null ? "null" : this.CourierPickupWindowDuration)}");
             toStringOutput.Add($"this.IsNoContactDelivery = {(this.IsNoContactDelivery == null ? "null" : this.IsNoContactDelivery.ToString())}");
-            toStringOutput.Add($"this.DropoffNotes = {(this.DropoffNotes == null ? "null" : this.DropoffNotes == string.Empty ? "" : this.DropoffNotes)}");
-            toStringOutput.Add($"this.CourierProviderName = {(this.CourierProviderName == null ? "null" : this.CourierProviderName == string.Empty ? "" : this.CourierProviderName)}");
-            toStringOutput.Add($"this.CourierSupportPhoneNumber = {(this.CourierSupportPhoneNumber == null ? "null" : this.CourierSupportPhoneNumber == string.Empty ? "" : this.CourierSupportPhoneNumber)}");
-            toStringOutput.Add($"this.SquareDeliveryId = {(this.SquareDeliveryId == null ? "null" : this.SquareDeliveryId == string.Empty ? "" : this.SquareDeliveryId)}");
-            toStringOutput.Add($"this.ExternalDeliveryId = {(this.ExternalDeliveryId == null ? "null" : this.ExternalDeliveryId == string.Empty ? "" : this.ExternalDeliveryId)}");
+            toStringOutput.Add($"this.DropoffNotes = {(this.DropoffNotes == null ? "null" : this.DropoffNotes)}");
+            toStringOutput.Add($"this.CourierProviderName = {(this.CourierProviderName == null ? "null" : this.CourierProviderName)}");
+            toStringOutput.Add($"this.CourierSupportPhoneNumber = {(this.CourierSupportPhoneNumber == null ? "null" : this.CourierSupportPhoneNumber)}");
+            toStringOutput.Add($"this.SquareDeliveryId = {(this.SquareDeliveryId == null ? "null" : this.SquareDeliveryId)}");
+            toStringOutput.Add($"this.ExternalDeliveryId = {(this.ExternalDeliveryId == null ? "null" : this.ExternalDeliveryId)}");
             toStringOutput.Add($"this.ManagedDelivery = {(this.ManagedDelivery == null ? "null" : this.ManagedDelivery.ToString())}");
         }
 

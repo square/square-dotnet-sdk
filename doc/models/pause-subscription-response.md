@@ -12,9 +12,9 @@ Defines output parameters in a response from the
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Errors encountered during the request. |
-| `Subscription` | [`Models.Subscription`](../../doc/models/subscription.md) | Optional | Represents a subscription purchased by a customer.<br><br>For more information, see<br>[Manage Subscriptions](https://developer.squareup.com/docs/subscriptions-api/manage-subscriptions). |
-| `Actions` | [`IList<Models.SubscriptionAction>`](../../doc/models/subscription-action.md) | Optional | The list of a `PAUSE` action and a possible `RESUME` action created by the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Errors encountered during the request. |
+| `Subscription` | [`Subscription`](../../doc/models/subscription.md) | Optional | Represents a subscription purchased by a customer.<br><br>For more information, see<br>[Manage Subscriptions](https://developer.squareup.com/docs/subscriptions-api/manage-subscriptions). |
+| `Actions` | [`IList<SubscriptionAction>`](../../doc/models/subscription-action.md) | Optional | The list of a `PAUSE` action and a possible `RESUME` action created by the request. |
 
 ## Example (as JSON)
 

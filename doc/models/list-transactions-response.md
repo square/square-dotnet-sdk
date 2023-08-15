@@ -14,8 +14,8 @@ One of `errors` or `transactions` is present in a given response (never both).
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Transactions` | [`IList<Models.Transaction>`](../../doc/models/transaction.md) | Optional | An array of transactions that match your query. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Transactions` | [`IList<Transaction>`](../../doc/models/transaction.md) | Optional | An array of transactions that match your query. |
 | `Cursor` | `string` | Optional | A pagination cursor for retrieving the next set of results,<br>if any remain. Provide this value as the `cursor` parameter in a subsequent<br>request to this endpoint.<br><br>See [Paginating results](https://developer.squareup.com/docs/working-with-apis/pagination) for more information. |
 
 ## Example (as JSON)

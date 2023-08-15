@@ -14,8 +14,8 @@ of points to the points earned from the base program.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Type` | [`string`](../../doc/models/loyalty-promotion-incentive-type.md) | Required | Indicates the type of points incentive for a [loyalty promotion](../../doc/models/loyalty-promotion.md),<br>which is used to determine how buyers can earn points from the promotion. |
-| `PointsMultiplierData` | [`Models.LoyaltyPromotionIncentivePointsMultiplierData`](../../doc/models/loyalty-promotion-incentive-points-multiplier-data.md) | Optional | Represents the metadata for a `POINTS_MULTIPLIER` type of [loyalty promotion incentive](../../doc/models/loyalty-promotion-incentive.md). |
-| `PointsAdditionData` | [`Models.LoyaltyPromotionIncentivePointsAdditionData`](../../doc/models/loyalty-promotion-incentive-points-addition-data.md) | Optional | Represents the metadata for a `POINTS_ADDITION` type of [loyalty promotion incentive](../../doc/models/loyalty-promotion-incentive.md). |
+| `PointsMultiplierData` | [`LoyaltyPromotionIncentivePointsMultiplierData`](../../doc/models/loyalty-promotion-incentive-points-multiplier-data.md) | Optional | Represents the metadata for a `POINTS_MULTIPLIER` type of [loyalty promotion incentive](../../doc/models/loyalty-promotion-incentive.md). |
+| `PointsAdditionData` | [`LoyaltyPromotionIncentivePointsAdditionData`](../../doc/models/loyalty-promotion-incentive-points-addition-data.md) | Optional | Represents the metadata for a `POINTS_ADDITION` type of [loyalty promotion incentive](../../doc/models/loyalty-promotion-incentive.md). |
 
 ## Example (as JSON)
 
@@ -23,7 +23,8 @@ of points to the points earned from the base program.
 {
   "type": "POINTS_MULTIPLIER",
   "points_multiplier_data": {
-    "points_multiplier": 134
+    "points_multiplier": 134,
+    "multiplier": "multiplier4"
   },
   "points_addition_data": {
     "points_addition": 218

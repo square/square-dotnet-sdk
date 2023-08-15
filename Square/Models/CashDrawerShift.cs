@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -424,12 +425,12 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
-            toStringOutput.Add($"this.OpenedAt = {(this.OpenedAt == null ? "null" : this.OpenedAt == string.Empty ? "" : this.OpenedAt)}");
-            toStringOutput.Add($"this.EndedAt = {(this.EndedAt == null ? "null" : this.EndedAt == string.Empty ? "" : this.EndedAt)}");
-            toStringOutput.Add($"this.ClosedAt = {(this.ClosedAt == null ? "null" : this.ClosedAt == string.Empty ? "" : this.ClosedAt)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.OpenedAt = {(this.OpenedAt == null ? "null" : this.OpenedAt)}");
+            toStringOutput.Add($"this.EndedAt = {(this.EndedAt == null ? "null" : this.EndedAt)}");
+            toStringOutput.Add($"this.ClosedAt = {(this.ClosedAt == null ? "null" : this.ClosedAt)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
             toStringOutput.Add($"this.OpenedCashMoney = {(this.OpenedCashMoney == null ? "null" : this.OpenedCashMoney.ToString())}");
             toStringOutput.Add($"this.CashPaymentMoney = {(this.CashPaymentMoney == null ? "null" : this.CashPaymentMoney.ToString())}");
             toStringOutput.Add($"this.CashRefundsMoney = {(this.CashRefundsMoney == null ? "null" : this.CashRefundsMoney.ToString())}");
@@ -438,13 +439,13 @@ namespace Square.Models
             toStringOutput.Add($"this.ExpectedCashMoney = {(this.ExpectedCashMoney == null ? "null" : this.ExpectedCashMoney.ToString())}");
             toStringOutput.Add($"this.ClosedCashMoney = {(this.ClosedCashMoney == null ? "null" : this.ClosedCashMoney.ToString())}");
             toStringOutput.Add($"this.Device = {(this.Device == null ? "null" : this.Device.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
             toStringOutput.Add($"this.TeamMemberIds = {(this.TeamMemberIds == null ? "null" : $"[{string.Join(", ", this.TeamMemberIds)} ]")}");
-            toStringOutput.Add($"this.OpeningTeamMemberId = {(this.OpeningTeamMemberId == null ? "null" : this.OpeningTeamMemberId == string.Empty ? "" : this.OpeningTeamMemberId)}");
-            toStringOutput.Add($"this.EndingTeamMemberId = {(this.EndingTeamMemberId == null ? "null" : this.EndingTeamMemberId == string.Empty ? "" : this.EndingTeamMemberId)}");
-            toStringOutput.Add($"this.ClosingTeamMemberId = {(this.ClosingTeamMemberId == null ? "null" : this.ClosingTeamMemberId == string.Empty ? "" : this.ClosingTeamMemberId)}");
+            toStringOutput.Add($"this.OpeningTeamMemberId = {(this.OpeningTeamMemberId == null ? "null" : this.OpeningTeamMemberId)}");
+            toStringOutput.Add($"this.EndingTeamMemberId = {(this.EndingTeamMemberId == null ? "null" : this.EndingTeamMemberId)}");
+            toStringOutput.Add($"this.ClosingTeamMemberId = {(this.ClosingTeamMemberId == null ? "null" : this.ClosingTeamMemberId)}");
         }
 
         /// <summary>

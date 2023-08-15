@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `OrderFulfillmentUpdated` | [`Models.OrderFulfillmentUpdated`](../../doc/models/order-fulfillment-updated.md) | Optional | - |
+| `OrderFulfillmentUpdated` | [`OrderFulfillmentUpdated`](../../doc/models/order-fulfillment-updated.md) | Optional | - |
 
 ## Example (as JSON)
 

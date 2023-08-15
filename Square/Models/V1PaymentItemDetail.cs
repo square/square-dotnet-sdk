@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -179,10 +180,10 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CategoryName = {(this.CategoryName == null ? "null" : this.CategoryName == string.Empty ? "" : this.CategoryName)}");
-            toStringOutput.Add($"this.Sku = {(this.Sku == null ? "null" : this.Sku == string.Empty ? "" : this.Sku)}");
-            toStringOutput.Add($"this.ItemId = {(this.ItemId == null ? "null" : this.ItemId == string.Empty ? "" : this.ItemId)}");
-            toStringOutput.Add($"this.ItemVariationId = {(this.ItemVariationId == null ? "null" : this.ItemVariationId == string.Empty ? "" : this.ItemVariationId)}");
+            toStringOutput.Add($"this.CategoryName = {(this.CategoryName == null ? "null" : this.CategoryName)}");
+            toStringOutput.Add($"this.Sku = {(this.Sku == null ? "null" : this.Sku)}");
+            toStringOutput.Add($"this.ItemId = {(this.ItemId == null ? "null" : this.ItemId)}");
+            toStringOutput.Add($"this.ItemVariationId = {(this.ItemVariationId == null ? "null" : this.ItemVariationId)}");
         }
 
         /// <summary>

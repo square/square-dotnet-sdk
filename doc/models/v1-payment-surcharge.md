@@ -12,12 +12,12 @@ V1PaymentSurcharge
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Name` | `string` | Optional | The name of the surcharge. |
-| `AppliedMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `AppliedMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
 | `Rate` | `string` | Optional | The amount of the surcharge as a percentage. The percentage is provided as a string representing the decimal equivalent of the percentage. For example, "0.7" corresponds to a 7% surcharge. Exactly one of rate or amount_money should be set. |
-| `AmountMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `AmountMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
 | `Type` | [`string`](../../doc/models/v1-payment-surcharge-type.md) | Optional | - |
 | `Taxable` | `bool?` | Optional | Indicates whether the surcharge is taxable. |
-| `Taxes` | [`IList<Models.V1PaymentTax>`](../../doc/models/v1-payment-tax.md) | Optional | The list of taxes that should be applied to the surcharge. |
+| `Taxes` | [`IList<V1PaymentTax>`](../../doc/models/v1-payment-tax.md) | Optional | The list of taxes that should be applied to the surcharge. |
 | `SurchargeId` | `string` | Optional | A Square-issued unique identifier associated with the surcharge. |
 
 ## Example (as JSON)

@@ -15,7 +15,7 @@
 | `State` | [`string`](../../doc/models/order-state.md) | Optional | The state of the order. |
 | `CreatedAt` | `string` | Optional | The timestamp for when the order was created, in RFC 3339 format. |
 | `UpdatedAt` | `string` | Optional | The timestamp for when the order was last updated, in RFC 3339 format. |
-| `FulfillmentUpdate` | [`IList<Models.OrderFulfillmentUpdatedUpdate>`](../../doc/models/order-fulfillment-updated-update.md) | Optional | The fulfillments that were updated with this version change. |
+| `FulfillmentUpdate` | [`IList<OrderFulfillmentUpdatedUpdate>`](../../doc/models/order-fulfillment-updated-update.md) | Optional | The fulfillments that were updated with this version change. |
 
 ## Example (as JSON)
 

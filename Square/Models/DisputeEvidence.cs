@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -215,12 +216,12 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.EvidenceId = {(this.EvidenceId == null ? "null" : this.EvidenceId == string.Empty ? "" : this.EvidenceId)}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.DisputeId = {(this.DisputeId == null ? "null" : this.DisputeId == string.Empty ? "" : this.DisputeId)}");
+            toStringOutput.Add($"this.EvidenceId = {(this.EvidenceId == null ? "null" : this.EvidenceId)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.DisputeId = {(this.DisputeId == null ? "null" : this.DisputeId)}");
             toStringOutput.Add($"this.EvidenceFile = {(this.EvidenceFile == null ? "null" : this.EvidenceFile.ToString())}");
-            toStringOutput.Add($"this.EvidenceText = {(this.EvidenceText == null ? "null" : this.EvidenceText == string.Empty ? "" : this.EvidenceText)}");
-            toStringOutput.Add($"this.UploadedAt = {(this.UploadedAt == null ? "null" : this.UploadedAt == string.Empty ? "" : this.UploadedAt)}");
+            toStringOutput.Add($"this.EvidenceText = {(this.EvidenceText == null ? "null" : this.EvidenceText)}");
+            toStringOutput.Add($"this.UploadedAt = {(this.UploadedAt == null ? "null" : this.UploadedAt)}");
             toStringOutput.Add($"this.EvidenceType = {(this.EvidenceType == null ? "null" : this.EvidenceType.ToString())}");
         }
 

@@ -21,14 +21,14 @@ Represents an action processed by the Square Terminal.
 | `AppId` | `string` | Optional | The ID of the application that created the action. |
 | `LocationId` | `string` | Optional | The location id the action is attached to, if a link can be made.<br>**Constraints**: *Maximum Length*: `64` |
 | `Type` | [`string`](../../doc/models/terminal-action-action-type.md) | Optional | Describes the type of this unit and indicates which field contains the unit information. This is an ‘open’ enum. |
-| `QrCodeOptions` | [`Models.QrCodeOptions`](../../doc/models/qr-code-options.md) | Optional | Fields to describe the action that displays QR-Codes. |
-| `SaveCardOptions` | [`Models.SaveCardOptions`](../../doc/models/save-card-options.md) | Optional | Describes save-card action fields. |
-| `SignatureOptions` | [`Models.SignatureOptions`](../../doc/models/signature-options.md) | Optional | - |
-| `ConfirmationOptions` | [`Models.ConfirmationOptions`](../../doc/models/confirmation-options.md) | Optional | - |
-| `ReceiptOptions` | [`Models.ReceiptOptions`](../../doc/models/receipt-options.md) | Optional | Describes receipt action fields. |
-| `DataCollectionOptions` | [`Models.DataCollectionOptions`](../../doc/models/data-collection-options.md) | Optional | - |
-| `SelectOptions` | [`Models.SelectOptions`](../../doc/models/select-options.md) | Optional | - |
-| `DeviceMetadata` | [`Models.DeviceMetadata`](../../doc/models/device-metadata.md) | Optional | - |
+| `QrCodeOptions` | [`QrCodeOptions`](../../doc/models/qr-code-options.md) | Optional | Fields to describe the action that displays QR-Codes. |
+| `SaveCardOptions` | [`SaveCardOptions`](../../doc/models/save-card-options.md) | Optional | Describes save-card action fields. |
+| `SignatureOptions` | [`SignatureOptions`](../../doc/models/signature-options.md) | Optional | - |
+| `ConfirmationOptions` | [`ConfirmationOptions`](../../doc/models/confirmation-options.md) | Optional | - |
+| `ReceiptOptions` | [`ReceiptOptions`](../../doc/models/receipt-options.md) | Optional | Describes receipt action fields. |
+| `DataCollectionOptions` | [`DataCollectionOptions`](../../doc/models/data-collection-options.md) | Optional | - |
+| `SelectOptions` | [`SelectOptions`](../../doc/models/select-options.md) | Optional | - |
+| `DeviceMetadata` | [`DeviceMetadata`](../../doc/models/device-metadata.md) | Optional | - |
 | `AwaitNextAction` | `bool?` | Optional | Indicates the action will be linked to another action and requires a waiting dialog to be<br>displayed instead of returning to the idle screen on completion of the action.<br><br>Only supported on SIGNATURE, CONFIRMATION, DATA_COLLECTION, and SELECT types. |
 | `AwaitNextActionDuration` | `string` | Optional | The timeout duration of the waiting dialog as an RFC 3339 duration, after which the<br>waiting dialog will no longer be displayed and the Terminal will return to the idle screen.<br><br>Default: 5 minutes from when the waiting dialog is displayed<br><br>Maximum: 5 minutes |
 

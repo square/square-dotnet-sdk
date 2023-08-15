@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -25,11 +26,13 @@ namespace Square.Models
         /// <param name="frSiret">fr_siret.</param>
         /// <param name="frNaf">fr_naf.</param>
         /// <param name="esNif">es_nif.</param>
+        /// <param name="jpQii">jp_qii.</param>
         public TaxIds(
             string euVat = null,
             string frSiret = null,
             string frNaf = null,
-            string esNif = null)
+            string esNif = null,
+            string jpQii = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -63,18 +66,21 @@ namespace Square.Models
                 this.EsNif = esNif;
             }
 
+            this.JpQii = jpQii;
         }
         internal TaxIds(Dictionary<string, bool> shouldSerialize,
             string euVat = null,
             string frSiret = null,
             string frNaf = null,
-            string esNif = null)
+            string esNif = null,
+            string jpQii = null)
         {
             this.shouldSerialize = shouldSerialize;
             EuVat = euVat;
             FrSiret = frSiret;
             FrNaf = frNaf;
             EsNif = esNif;
+            JpQii = jpQii;
         }
 
         /// <summary>
@@ -106,6 +112,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("es_nif")]
         public string EsNif { get; }
+
+        /// <summary>
+        /// The QII (Qualified Invoice Issuer) number is a 14-character tax identifier used in Japan.
+        /// If it is present, it has been validated. For example, `T1234567890123`.
+        /// </summary>
+        [JsonProperty("jp_qii", NullValueHandling = NullValueHandling.Ignore)]
+        public string JpQii { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -168,14 +181,15 @@ namespace Square.Models
             return obj is TaxIds other &&                ((this.EuVat == null && other.EuVat == null) || (this.EuVat?.Equals(other.EuVat) == true)) &&
                 ((this.FrSiret == null && other.FrSiret == null) || (this.FrSiret?.Equals(other.FrSiret) == true)) &&
                 ((this.FrNaf == null && other.FrNaf == null) || (this.FrNaf?.Equals(other.FrNaf) == true)) &&
-                ((this.EsNif == null && other.EsNif == null) || (this.EsNif?.Equals(other.EsNif) == true));
+                ((this.EsNif == null && other.EsNif == null) || (this.EsNif?.Equals(other.EsNif) == true)) &&
+                ((this.JpQii == null && other.JpQii == null) || (this.JpQii?.Equals(other.JpQii) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1210359385;
-            hashCode = HashCode.Combine(this.EuVat, this.FrSiret, this.FrNaf, this.EsNif);
+            int hashCode = 1902523062;
+            hashCode = HashCode.Combine(this.EuVat, this.FrSiret, this.FrNaf, this.EsNif, this.JpQii);
 
             return hashCode;
         }
@@ -185,10 +199,11 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.EuVat = {(this.EuVat == null ? "null" : this.EuVat == string.Empty ? "" : this.EuVat)}");
-            toStringOutput.Add($"this.FrSiret = {(this.FrSiret == null ? "null" : this.FrSiret == string.Empty ? "" : this.FrSiret)}");
-            toStringOutput.Add($"this.FrNaf = {(this.FrNaf == null ? "null" : this.FrNaf == string.Empty ? "" : this.FrNaf)}");
-            toStringOutput.Add($"this.EsNif = {(this.EsNif == null ? "null" : this.EsNif == string.Empty ? "" : this.EsNif)}");
+            toStringOutput.Add($"this.EuVat = {(this.EuVat == null ? "null" : this.EuVat)}");
+            toStringOutput.Add($"this.FrSiret = {(this.FrSiret == null ? "null" : this.FrSiret)}");
+            toStringOutput.Add($"this.FrNaf = {(this.FrNaf == null ? "null" : this.FrNaf)}");
+            toStringOutput.Add($"this.EsNif = {(this.EsNif == null ? "null" : this.EsNif)}");
+            toStringOutput.Add($"this.JpQii = {(this.JpQii == null ? "null" : this.JpQii)}");
         }
 
         /// <summary>
@@ -201,7 +216,8 @@ namespace Square.Models
                 .EuVat(this.EuVat)
                 .FrSiret(this.FrSiret)
                 .FrNaf(this.FrNaf)
-                .EsNif(this.EsNif);
+                .EsNif(this.EsNif)
+                .JpQii(this.JpQii);
             return builder;
         }
 
@@ -222,6 +238,7 @@ namespace Square.Models
             private string frSiret;
             private string frNaf;
             private string esNif;
+            private string jpQii;
 
              /// <summary>
              /// EuVat.
@@ -271,6 +288,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// JpQii.
+             /// </summary>
+             /// <param name="jpQii"> jpQii. </param>
+             /// <returns> Builder. </returns>
+            public Builder JpQii(string jpQii)
+            {
+                this.jpQii = jpQii;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -314,7 +342,8 @@ namespace Square.Models
                     this.euVat,
                     this.frSiret,
                     this.frNaf,
-                    this.esNif);
+                    this.esNif,
+                    this.jpQii);
             }
         }
     }

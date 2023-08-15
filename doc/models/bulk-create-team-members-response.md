@@ -11,8 +11,8 @@ Represents a response from a bulk create request containing the created `TeamMem
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `TeamMembers` | [`IDictionary<string, Models.CreateTeamMemberResponse>`](../../doc/models/create-team-member-response.md) | Optional | The successfully created `TeamMember` objects. Each key is the `idempotency_key` that maps to the `CreateTeamMemberRequest`. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
+| `TeamMembers` | [`IDictionary<string, CreateTeamMemberResponse>`](../../doc/models/create-team-member-response.md) | Optional | The successfully created `TeamMember` objects. Each key is the `idempotency_key` that maps to the `CreateTeamMemberRequest`. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
 
 ## Example (as JSON)
 

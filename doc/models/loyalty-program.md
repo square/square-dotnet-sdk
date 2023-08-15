@@ -15,13 +15,13 @@ For more information, see [Loyalty Program Overview](https://developer.squareup.
 |  --- | --- | --- | --- |
 | `Id` | `string` | Optional | The Square-assigned ID of the loyalty program. Updates to<br>the loyalty program do not modify the identifier.<br>**Constraints**: *Maximum Length*: `36` |
 | `Status` | [`string`](../../doc/models/loyalty-program-status.md) | Optional | Indicates whether the program is currently active. |
-| `RewardTiers` | [`IList<Models.LoyaltyProgramRewardTier>`](../../doc/models/loyalty-program-reward-tier.md) | Optional | The list of rewards for buyers, sorted by ascending points. |
-| `ExpirationPolicy` | [`Models.LoyaltyProgramExpirationPolicy`](../../doc/models/loyalty-program-expiration-policy.md) | Optional | Describes when the loyalty program expires. |
-| `Terminology` | [`Models.LoyaltyProgramTerminology`](../../doc/models/loyalty-program-terminology.md) | Optional | Represents the naming used for loyalty points. |
+| `RewardTiers` | [`IList<LoyaltyProgramRewardTier>`](../../doc/models/loyalty-program-reward-tier.md) | Optional | The list of rewards for buyers, sorted by ascending points. |
+| `ExpirationPolicy` | [`LoyaltyProgramExpirationPolicy`](../../doc/models/loyalty-program-expiration-policy.md) | Optional | Describes when the loyalty program expires. |
+| `Terminology` | [`LoyaltyProgramTerminology`](../../doc/models/loyalty-program-terminology.md) | Optional | Represents the naming used for loyalty points. |
 | `LocationIds` | `IList<string>` | Optional | The [locations](entity:Location) at which the program is active. |
 | `CreatedAt` | `string` | Optional | The timestamp when the program was created, in RFC 3339 format. |
 | `UpdatedAt` | `string` | Optional | The timestamp when the reward was last updated, in RFC 3339 format. |
-| `AccrualRules` | [`IList<Models.LoyaltyProgramAccrualRule>`](../../doc/models/loyalty-program-accrual-rule.md) | Optional | Defines how buyers can earn loyalty points from the base loyalty program.<br>To check for associated [loyalty promotions](entity:LoyaltyPromotion) that enable<br>buyers to earn extra points, call [ListLoyaltyPromotions](api-endpoint:Loyalty-ListLoyaltyPromotions). |
+| `AccrualRules` | [`IList<LoyaltyProgramAccrualRule>`](../../doc/models/loyalty-program-accrual-rule.md) | Optional | Defines how buyers can earn loyalty points from the base loyalty program.<br>To check for associated [loyalty promotions](entity:LoyaltyPromotion) that enable<br>buyers to earn extra points, call [ListLoyaltyPromotions](api-endpoint:Loyalty-ListLoyaltyPromotions). |
 
 ## Example (as JSON)
 

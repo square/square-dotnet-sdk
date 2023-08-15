@@ -12,7 +12,7 @@ Defines the body parameters that can be included in a request to the
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Group` | [`Models.CustomerGroup`](../../doc/models/customer-group.md) | Required | Represents a group of customer profiles.<br><br>Customer groups can be created, be modified, and have their membership defined using<br>the Customers API or within the Customer Directory in the Square Seller Dashboard or Point of Sale. |
+| `Group` | [`CustomerGroup`](../../doc/models/customer-group.md) | Required | Represents a group of customer profiles.<br><br>Customer groups can be created, be modified, and have their membership defined using<br>the Customers API or within the Customer Directory in the Square Seller Dashboard or Point of Sale. |
 
 ## Example (as JSON)
 

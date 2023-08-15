@@ -12,9 +12,9 @@ a set of `EmployeeWage` objects.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `EmployeeWages` | [`IList<Models.EmployeeWage>`](../../doc/models/employee-wage.md) | Optional | A page of `EmployeeWage` results. |
+| `EmployeeWages` | [`IList<EmployeeWage>`](../../doc/models/employee-wage.md) | Optional | A page of `EmployeeWage` results. |
 | `Cursor` | `string` | Optional | The value supplied in the subsequent request to fetch the next page<br>of `EmployeeWage` results. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

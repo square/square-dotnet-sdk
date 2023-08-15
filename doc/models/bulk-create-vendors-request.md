@@ -11,7 +11,7 @@ Represents an input to a call to [BulkCreateVendors](../../doc/api/vendors.md#bu
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Vendors` | [`IDictionary<string, Models.Vendor>`](../../doc/models/vendor.md) | Required | Specifies a set of new [Vendor](entity:Vendor) objects as represented by a collection of idempotency-key/`Vendor`-object pairs. |
+| `Vendors` | [`IDictionary<string, Vendor>`](../../doc/models/vendor.md) | Required | Specifies a set of new [Vendor](entity:Vendor) objects as represented by a collection of idempotency-key/`Vendor`-object pairs. |
 
 ## Example (as JSON)
 

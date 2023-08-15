@@ -29,17 +29,17 @@ price of items might have changed since the payment was processed.
 | `Name` | `string` | Optional | The item's name. |
 | `Quantity` | `double?` | Optional | The quantity of the item purchased. This can be a decimal value. |
 | `ItemizationType` | [`string`](../../doc/models/v1-payment-itemization-itemization-type.md) | Optional | - |
-| `ItemDetail` | [`Models.V1PaymentItemDetail`](../../doc/models/v1-payment-item-detail.md) | Optional | V1PaymentItemDetail |
+| `ItemDetail` | [`V1PaymentItemDetail`](../../doc/models/v1-payment-item-detail.md) | Optional | V1PaymentItemDetail |
 | `Notes` | `string` | Optional | Notes entered by the merchant about the item at the time of payment, if any. |
 | `ItemVariationName` | `string` | Optional | The name of the item variation purchased, if any. |
-| `TotalMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
-| `SingleQuantityMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
-| `GrossSalesMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
-| `DiscountMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
-| `NetSalesMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
-| `Taxes` | [`IList<Models.V1PaymentTax>`](../../doc/models/v1-payment-tax.md) | Optional | All taxes applied to this itemization. |
-| `Discounts` | [`IList<Models.V1PaymentDiscount>`](../../doc/models/v1-payment-discount.md) | Optional | All discounts applied to this itemization. |
-| `Modifiers` | [`IList<Models.V1PaymentModifier>`](../../doc/models/v1-payment-modifier.md) | Optional | All modifier options applied to this itemization. |
+| `TotalMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `SingleQuantityMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `GrossSalesMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `DiscountMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `NetSalesMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `Taxes` | [`IList<V1PaymentTax>`](../../doc/models/v1-payment-tax.md) | Optional | All taxes applied to this itemization. |
+| `Discounts` | [`IList<V1PaymentDiscount>`](../../doc/models/v1-payment-discount.md) | Optional | All discounts applied to this itemization. |
+| `Modifiers` | [`IList<V1PaymentModifier>`](../../doc/models/v1-payment-modifier.md) | Optional | All modifier options applied to this itemization. |
 
 ## Example (as JSON)
 

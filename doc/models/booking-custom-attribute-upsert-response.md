@@ -12,8 +12,8 @@ Represents a response for an individual upsert request in a [BulkUpsertBookingCu
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `BookingId` | `string` | Optional | The ID of the [booking](entity:Booking) associated with the custom attribute. |
-| `CustomAttribute` | [`Models.CustomAttribute`](../../doc/models/custom-attribute.md) | Optional | A custom attribute value. Each custom attribute value has a corresponding<br>`CustomAttributeDefinition` object. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred while processing the individual request. |
+| `CustomAttribute` | [`CustomAttribute`](../../doc/models/custom-attribute.md) | Optional | A custom attribute value. Each custom attribute value has a corresponding<br>`CustomAttributeDefinition` object. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred while processing the individual request. |
 
 ## Example (as JSON)
 

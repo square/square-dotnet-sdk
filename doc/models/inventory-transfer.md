@@ -22,7 +22,7 @@ particular time from one location to another.
 | `Quantity` | `string` | Optional | The number of items affected by the transfer as a decimal string.<br>Can support up to 5 digits after the decimal point.<br>**Constraints**: *Maximum Length*: `26` |
 | `OccurredAt` | `string` | Optional | A client-generated RFC 3339-formatted timestamp that indicates when<br>the transfer took place. For write actions, the `occurred_at` timestamp<br>cannot be older than 24 hours or in the future relative to the time of the<br>request.<br>**Constraints**: *Maximum Length*: `34` |
 | `CreatedAt` | `string` | Optional | An RFC 3339-formatted timestamp that indicates when Square<br>received the transfer request.<br>**Constraints**: *Maximum Length*: `34` |
-| `Source` | [`Models.SourceApplication`](../../doc/models/source-application.md) | Optional | Represents information about the application used to generate a change. |
+| `Source` | [`SourceApplication`](../../doc/models/source-application.md) | Optional | Represents information about the application used to generate a change. |
 | `EmployeeId` | `string` | Optional | The Square-generated ID of the [Employee](entity:Employee) responsible for the<br>inventory transfer.<br>**Constraints**: *Maximum Length*: `100` |
 | `TeamMemberId` | `string` | Optional | The Square-generated ID of the [Team Member](entity:TeamMember) responsible for the<br>inventory transfer.<br>**Constraints**: *Maximum Length*: `100` |
 

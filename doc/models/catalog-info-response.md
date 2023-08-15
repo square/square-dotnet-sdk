@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Limits` | [`Models.CatalogInfoResponseLimits`](../../doc/models/catalog-info-response-limits.md) | Optional | - |
-| `StandardUnitDescriptionGroup` | [`Models.StandardUnitDescriptionGroup`](../../doc/models/standard-unit-description-group.md) | Optional | Group of standard measurement units. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Limits` | [`CatalogInfoResponseLimits`](../../doc/models/catalog-info-response-limits.md) | Optional | - |
+| `StandardUnitDescriptionGroup` | [`StandardUnitDescriptionGroup`](../../doc/models/standard-unit-description-group.md) | Optional | Group of standard measurement units. |
 
 ## Example (as JSON)
 

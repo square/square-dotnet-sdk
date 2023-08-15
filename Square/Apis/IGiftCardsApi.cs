@@ -25,7 +25,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="type">Optional parameter: If a [type](entity:GiftCardType) is provided, the endpoint returns gift cards of the specified type. Otherwise, the endpoint returns gift cards of all types..</param>
         /// <param name="state">Optional parameter: If a [state](entity:GiftCardStatus) is provided, the endpoint returns the gift cards in the specified state. Otherwise, the endpoint returns the gift cards of all states..</param>
-        /// <param name="limit">Optional parameter: If a limit is provided, the endpoint returns only the specified number of results per page. The maximum value is 50. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="limit">Optional parameter: If a limit is provided, the endpoint returns only the specified number of results per page. The maximum value is 200. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, the endpoint returns the first page of the results.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <param name="customerId">Optional parameter: If a customer ID is provided, the endpoint returns only the gift cards linked to the specified customer..</param>
         /// <returns>Returns the Models.ListGiftCardsResponse response from the API call.</returns>
@@ -42,7 +42,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="type">Optional parameter: If a [type](entity:GiftCardType) is provided, the endpoint returns gift cards of the specified type. Otherwise, the endpoint returns gift cards of all types..</param>
         /// <param name="state">Optional parameter: If a [state](entity:GiftCardStatus) is provided, the endpoint returns the gift cards in the specified state. Otherwise, the endpoint returns the gift cards of all states..</param>
-        /// <param name="limit">Optional parameter: If a limit is provided, the endpoint returns only the specified number of results per page. The maximum value is 50. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
+        /// <param name="limit">Optional parameter: If a limit is provided, the endpoint returns only the specified number of results per page. The maximum value is 200. The default value is 30. For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, the endpoint returns the first page of the results.  For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)..</param>
         /// <param name="customerId">Optional parameter: If a customer ID is provided, the endpoint returns only the gift cards linked to the specified customer..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

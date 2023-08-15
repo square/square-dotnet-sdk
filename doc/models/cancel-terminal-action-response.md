@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `Action` | [`Models.TerminalAction`](../../doc/models/terminal-action.md) | Optional | Represents an action processed by the Square Terminal. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
+| `Action` | [`TerminalAction`](../../doc/models/terminal-action.md) | Optional | Represents an action processed by the Square Terminal. |
 
 ## Example (as JSON)
 

@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -380,23 +381,23 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.AccountNumberSuffix = {(this.AccountNumberSuffix == null ? "null" : this.AccountNumberSuffix == string.Empty ? "" : this.AccountNumberSuffix)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.AccountNumberSuffix = {(this.AccountNumberSuffix == null ? "null" : this.AccountNumberSuffix)}");
             toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country.ToString())}");
             toStringOutput.Add($"this.Currency = {(this.Currency == null ? "null" : this.Currency.ToString())}");
             toStringOutput.Add($"this.AccountType = {(this.AccountType == null ? "null" : this.AccountType.ToString())}");
-            toStringOutput.Add($"this.HolderName = {(this.HolderName == null ? "null" : this.HolderName == string.Empty ? "" : this.HolderName)}");
-            toStringOutput.Add($"this.PrimaryBankIdentificationNumber = {(this.PrimaryBankIdentificationNumber == null ? "null" : this.PrimaryBankIdentificationNumber == string.Empty ? "" : this.PrimaryBankIdentificationNumber)}");
-            toStringOutput.Add($"this.SecondaryBankIdentificationNumber = {(this.SecondaryBankIdentificationNumber == null ? "null" : this.SecondaryBankIdentificationNumber == string.Empty ? "" : this.SecondaryBankIdentificationNumber)}");
-            toStringOutput.Add($"this.DebitMandateReferenceId = {(this.DebitMandateReferenceId == null ? "null" : this.DebitMandateReferenceId == string.Empty ? "" : this.DebitMandateReferenceId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.HolderName = {(this.HolderName == null ? "null" : this.HolderName)}");
+            toStringOutput.Add($"this.PrimaryBankIdentificationNumber = {(this.PrimaryBankIdentificationNumber == null ? "null" : this.PrimaryBankIdentificationNumber)}");
+            toStringOutput.Add($"this.SecondaryBankIdentificationNumber = {(this.SecondaryBankIdentificationNumber == null ? "null" : this.SecondaryBankIdentificationNumber)}");
+            toStringOutput.Add($"this.DebitMandateReferenceId = {(this.DebitMandateReferenceId == null ? "null" : this.DebitMandateReferenceId)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
             toStringOutput.Add($"this.Creditable = {this.Creditable}");
             toStringOutput.Add($"this.Debitable = {this.Debitable}");
-            toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint == string.Empty ? "" : this.Fingerprint)}");
+            toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint)}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.BankName = {(this.BankName == null ? "null" : this.BankName == string.Empty ? "" : this.BankName)}");
+            toStringOutput.Add($"this.BankName = {(this.BankName == null ? "null" : this.BankName)}");
         }
 
         /// <summary>

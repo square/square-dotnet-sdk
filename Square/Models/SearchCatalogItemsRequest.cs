@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -29,6 +30,7 @@ namespace Square.Models
         /// <param name="sortOrder">sort_order.</param>
         /// <param name="productTypes">product_types.</param>
         /// <param name="customAttributeFilters">custom_attribute_filters.</param>
+        /// <param name="archivedState">archived_state.</param>
         public SearchCatalogItemsRequest(
             string textFilter = null,
             IList<string> categoryIds = null,
@@ -38,7 +40,8 @@ namespace Square.Models
             int? limit = null,
             string sortOrder = null,
             IList<string> productTypes = null,
-            IList<Models.CustomAttributeFilter> customAttributeFilters = null)
+            IList<Models.CustomAttributeFilter> customAttributeFilters = null,
+            string archivedState = null)
         {
             this.TextFilter = textFilter;
             this.CategoryIds = categoryIds;
@@ -49,6 +52,7 @@ namespace Square.Models
             this.SortOrder = sortOrder;
             this.ProductTypes = productTypes;
             this.CustomAttributeFilters = customAttributeFilters;
+            this.ArchivedState = archivedState;
         }
 
         /// <summary>
@@ -110,6 +114,14 @@ namespace Square.Models
         [JsonProperty("custom_attribute_filters", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.CustomAttributeFilter> CustomAttributeFilters { get; }
 
+        /// <summary>
+        /// Defines the values for the `archived_state` query expression
+        /// used in [SearchCatalogItems]($e/Catalog/SearchCatalogItems)
+        /// to return the archived, not archived or either type of catalog items.
+        /// </summary>
+        [JsonProperty("archived_state", NullValueHandling = NullValueHandling.Ignore)]
+        public string ArchivedState { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -140,16 +152,17 @@ namespace Square.Models
                 ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
                 ((this.ProductTypes == null && other.ProductTypes == null) || (this.ProductTypes?.Equals(other.ProductTypes) == true)) &&
-                ((this.CustomAttributeFilters == null && other.CustomAttributeFilters == null) || (this.CustomAttributeFilters?.Equals(other.CustomAttributeFilters) == true));
+                ((this.CustomAttributeFilters == null && other.CustomAttributeFilters == null) || (this.CustomAttributeFilters?.Equals(other.CustomAttributeFilters) == true)) &&
+                ((this.ArchivedState == null && other.ArchivedState == null) || (this.ArchivedState?.Equals(other.ArchivedState) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 737510073;
+            int hashCode = 553649714;
             hashCode = HashCode.Combine(this.TextFilter, this.CategoryIds, this.StockLevels, this.EnabledLocationIds, this.Cursor, this.Limit, this.SortOrder);
 
-            hashCode = HashCode.Combine(hashCode, this.ProductTypes, this.CustomAttributeFilters);
+            hashCode = HashCode.Combine(hashCode, this.ProductTypes, this.CustomAttributeFilters, this.ArchivedState);
 
             return hashCode;
         }
@@ -159,15 +172,16 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.TextFilter = {(this.TextFilter == null ? "null" : this.TextFilter == string.Empty ? "" : this.TextFilter)}");
+            toStringOutput.Add($"this.TextFilter = {(this.TextFilter == null ? "null" : this.TextFilter)}");
             toStringOutput.Add($"this.CategoryIds = {(this.CategoryIds == null ? "null" : $"[{string.Join(", ", this.CategoryIds)} ]")}");
             toStringOutput.Add($"this.StockLevels = {(this.StockLevels == null ? "null" : $"[{string.Join(", ", this.StockLevels)} ]")}");
             toStringOutput.Add($"this.EnabledLocationIds = {(this.EnabledLocationIds == null ? "null" : $"[{string.Join(", ", this.EnabledLocationIds)} ]")}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
             toStringOutput.Add($"this.ProductTypes = {(this.ProductTypes == null ? "null" : $"[{string.Join(", ", this.ProductTypes)} ]")}");
             toStringOutput.Add($"this.CustomAttributeFilters = {(this.CustomAttributeFilters == null ? "null" : $"[{string.Join(", ", this.CustomAttributeFilters)} ]")}");
+            toStringOutput.Add($"this.ArchivedState = {(this.ArchivedState == null ? "null" : this.ArchivedState.ToString())}");
         }
 
         /// <summary>
@@ -185,7 +199,8 @@ namespace Square.Models
                 .Limit(this.Limit)
                 .SortOrder(this.SortOrder)
                 .ProductTypes(this.ProductTypes)
-                .CustomAttributeFilters(this.CustomAttributeFilters);
+                .CustomAttributeFilters(this.CustomAttributeFilters)
+                .ArchivedState(this.ArchivedState);
             return builder;
         }
 
@@ -203,6 +218,7 @@ namespace Square.Models
             private string sortOrder;
             private IList<string> productTypes;
             private IList<Models.CustomAttributeFilter> customAttributeFilters;
+            private string archivedState;
 
              /// <summary>
              /// TextFilter.
@@ -303,6 +319,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// ArchivedState.
+             /// </summary>
+             /// <param name="archivedState"> archivedState. </param>
+             /// <returns> Builder. </returns>
+            public Builder ArchivedState(string archivedState)
+            {
+                this.archivedState = archivedState;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -318,7 +345,8 @@ namespace Square.Models
                     this.limit,
                     this.sortOrder,
                     this.productTypes,
-                    this.customAttributeFilters);
+                    this.customAttributeFilters,
+                    this.archivedState);
             }
         }
     }

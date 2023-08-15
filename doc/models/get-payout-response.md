@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Payout` | [`Models.Payout`](../../doc/models/payout.md) | Optional | An accounting of the amount owed the seller and record of the actual transfer to their<br>external bank account or to the Square balance. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
+| `Payout` | [`Payout`](../../doc/models/payout.md) | Optional | An accounting of the amount owed the seller and record of the actual transfer to their<br>external bank account or to the Square balance. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
 
 ## Example (as JSON)
 

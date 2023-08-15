@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -473,18 +474,18 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status == string.Empty ? "" : this.Status)}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status)}");
             toStringOutput.Add($"this.Card = {(this.Card == null ? "null" : this.Card.ToString())}");
-            toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod == string.Empty ? "" : this.EntryMethod)}");
-            toStringOutput.Add($"this.CvvStatus = {(this.CvvStatus == null ? "null" : this.CvvStatus == string.Empty ? "" : this.CvvStatus)}");
-            toStringOutput.Add($"this.AvsStatus = {(this.AvsStatus == null ? "null" : this.AvsStatus == string.Empty ? "" : this.AvsStatus)}");
-            toStringOutput.Add($"this.AuthResultCode = {(this.AuthResultCode == null ? "null" : this.AuthResultCode == string.Empty ? "" : this.AuthResultCode)}");
-            toStringOutput.Add($"this.ApplicationIdentifier = {(this.ApplicationIdentifier == null ? "null" : this.ApplicationIdentifier == string.Empty ? "" : this.ApplicationIdentifier)}");
-            toStringOutput.Add($"this.ApplicationName = {(this.ApplicationName == null ? "null" : this.ApplicationName == string.Empty ? "" : this.ApplicationName)}");
-            toStringOutput.Add($"this.ApplicationCryptogram = {(this.ApplicationCryptogram == null ? "null" : this.ApplicationCryptogram == string.Empty ? "" : this.ApplicationCryptogram)}");
-            toStringOutput.Add($"this.VerificationMethod = {(this.VerificationMethod == null ? "null" : this.VerificationMethod == string.Empty ? "" : this.VerificationMethod)}");
-            toStringOutput.Add($"this.VerificationResults = {(this.VerificationResults == null ? "null" : this.VerificationResults == string.Empty ? "" : this.VerificationResults)}");
-            toStringOutput.Add($"this.StatementDescription = {(this.StatementDescription == null ? "null" : this.StatementDescription == string.Empty ? "" : this.StatementDescription)}");
+            toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod)}");
+            toStringOutput.Add($"this.CvvStatus = {(this.CvvStatus == null ? "null" : this.CvvStatus)}");
+            toStringOutput.Add($"this.AvsStatus = {(this.AvsStatus == null ? "null" : this.AvsStatus)}");
+            toStringOutput.Add($"this.AuthResultCode = {(this.AuthResultCode == null ? "null" : this.AuthResultCode)}");
+            toStringOutput.Add($"this.ApplicationIdentifier = {(this.ApplicationIdentifier == null ? "null" : this.ApplicationIdentifier)}");
+            toStringOutput.Add($"this.ApplicationName = {(this.ApplicationName == null ? "null" : this.ApplicationName)}");
+            toStringOutput.Add($"this.ApplicationCryptogram = {(this.ApplicationCryptogram == null ? "null" : this.ApplicationCryptogram)}");
+            toStringOutput.Add($"this.VerificationMethod = {(this.VerificationMethod == null ? "null" : this.VerificationMethod)}");
+            toStringOutput.Add($"this.VerificationResults = {(this.VerificationResults == null ? "null" : this.VerificationResults)}");
+            toStringOutput.Add($"this.StatementDescription = {(this.StatementDescription == null ? "null" : this.StatementDescription)}");
             toStringOutput.Add($"this.DeviceDetails = {(this.DeviceDetails == null ? "null" : this.DeviceDetails.ToString())}");
             toStringOutput.Add($"this.CardPaymentTimeline = {(this.CardPaymentTimeline == null ? "null" : this.CardPaymentTimeline.ToString())}");
             toStringOutput.Add($"this.RefundRequiresCardPresence = {(this.RefundRequiresCardPresence == null ? "null" : this.RefundRequiresCardPresence.ToString())}");

@@ -11,8 +11,8 @@ Represents a response from a retrieve request containing a `TeamMember` object o
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `TeamMember` | [`Models.TeamMember`](../../doc/models/team-member.md) | Optional | A record representing an individual team member for a business. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
+| `TeamMember` | [`TeamMember`](../../doc/models/team-member.md) | Optional | A record representing an individual team member for a business. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
 
 ## Example (as JSON)
 

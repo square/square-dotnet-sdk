@@ -11,8 +11,8 @@ Represents a response from a bulk update request containing the updated `TeamMem
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `TeamMembers` | [`IDictionary<string, Models.UpdateTeamMemberResponse>`](../../doc/models/update-team-member-response.md) | Optional | The successfully updated `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
+| `TeamMembers` | [`IDictionary<string, UpdateTeamMemberResponse>`](../../doc/models/update-team-member-response.md) | Optional | The successfully updated `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
 
 ## Example (as JSON)
 

@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -197,11 +198,11 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PauseEffectiveDate = {(this.PauseEffectiveDate == null ? "null" : this.PauseEffectiveDate == string.Empty ? "" : this.PauseEffectiveDate)}");
+            toStringOutput.Add($"this.PauseEffectiveDate = {(this.PauseEffectiveDate == null ? "null" : this.PauseEffectiveDate)}");
             toStringOutput.Add($"this.PauseCycleDuration = {(this.PauseCycleDuration == null ? "null" : this.PauseCycleDuration.ToString())}");
-            toStringOutput.Add($"this.ResumeEffectiveDate = {(this.ResumeEffectiveDate == null ? "null" : this.ResumeEffectiveDate == string.Empty ? "" : this.ResumeEffectiveDate)}");
+            toStringOutput.Add($"this.ResumeEffectiveDate = {(this.ResumeEffectiveDate == null ? "null" : this.ResumeEffectiveDate)}");
             toStringOutput.Add($"this.ResumeChangeTiming = {(this.ResumeChangeTiming == null ? "null" : this.ResumeChangeTiming.ToString())}");
-            toStringOutput.Add($"this.PauseReason = {(this.PauseReason == null ? "null" : this.PauseReason == string.Empty ? "" : this.PauseReason)}");
+            toStringOutput.Add($"this.PauseReason = {(this.PauseReason == null ? "null" : this.PauseReason)}");
         }
 
         /// <summary>

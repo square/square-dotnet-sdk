@@ -37,16 +37,16 @@ the `"name"`, `"description"`, or `"abbreviation"` attribute in an applicable qu
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `SortedAttributeQuery` | [`Models.CatalogQuerySortedAttribute`](../../doc/models/catalog-query-sorted-attribute.md) | Optional | The query expression to specify the key to sort search results. |
-| `ExactQuery` | [`Models.CatalogQueryExact`](../../doc/models/catalog-query-exact.md) | Optional | The query filter to return the search result by exact match of the specified attribute name and value. |
-| `SetQuery` | [`Models.CatalogQuerySet`](../../doc/models/catalog-query-set.md) | Optional | The query filter to return the search result(s) by exact match of the specified `attribute_name` and any of<br>the `attribute_values`. |
-| `PrefixQuery` | [`Models.CatalogQueryPrefix`](../../doc/models/catalog-query-prefix.md) | Optional | The query filter to return the search result whose named attribute values are prefixed by the specified attribute value. |
-| `RangeQuery` | [`Models.CatalogQueryRange`](../../doc/models/catalog-query-range.md) | Optional | The query filter to return the search result whose named attribute values fall between the specified range. |
-| `TextQuery` | [`Models.CatalogQueryText`](../../doc/models/catalog-query-text.md) | Optional | The query filter to return the search result whose searchable attribute values contain all of the specified keywords or tokens, independent of the token order or case. |
-| `ItemsForTaxQuery` | [`Models.CatalogQueryItemsForTax`](../../doc/models/catalog-query-items-for-tax.md) | Optional | The query filter to return the items containing the specified tax IDs. |
-| `ItemsForModifierListQuery` | [`Models.CatalogQueryItemsForModifierList`](../../doc/models/catalog-query-items-for-modifier-list.md) | Optional | The query filter to return the items containing the specified modifier list IDs. |
-| `ItemsForItemOptionsQuery` | [`Models.CatalogQueryItemsForItemOptions`](../../doc/models/catalog-query-items-for-item-options.md) | Optional | The query filter to return the items containing the specified item option IDs. |
-| `ItemVariationsForItemOptionValuesQuery` | [`Models.CatalogQueryItemVariationsForItemOptionValues`](../../doc/models/catalog-query-item-variations-for-item-option-values.md) | Optional | The query filter to return the item variations containing the specified item option value IDs. |
+| `SortedAttributeQuery` | [`CatalogQuerySortedAttribute`](../../doc/models/catalog-query-sorted-attribute.md) | Optional | The query expression to specify the key to sort search results. |
+| `ExactQuery` | [`CatalogQueryExact`](../../doc/models/catalog-query-exact.md) | Optional | The query filter to return the search result by exact match of the specified attribute name and value. |
+| `SetQuery` | [`CatalogQuerySet`](../../doc/models/catalog-query-set.md) | Optional | The query filter to return the search result(s) by exact match of the specified `attribute_name` and any of<br>the `attribute_values`. |
+| `PrefixQuery` | [`CatalogQueryPrefix`](../../doc/models/catalog-query-prefix.md) | Optional | The query filter to return the search result whose named attribute values are prefixed by the specified attribute value. |
+| `RangeQuery` | [`CatalogQueryRange`](../../doc/models/catalog-query-range.md) | Optional | The query filter to return the search result whose named attribute values fall between the specified range. |
+| `TextQuery` | [`CatalogQueryText`](../../doc/models/catalog-query-text.md) | Optional | The query filter to return the search result whose searchable attribute values contain all of the specified keywords or tokens, independent of the token order or case. |
+| `ItemsForTaxQuery` | [`CatalogQueryItemsForTax`](../../doc/models/catalog-query-items-for-tax.md) | Optional | The query filter to return the items containing the specified tax IDs. |
+| `ItemsForModifierListQuery` | [`CatalogQueryItemsForModifierList`](../../doc/models/catalog-query-items-for-modifier-list.md) | Optional | The query filter to return the items containing the specified modifier list IDs. |
+| `ItemsForItemOptionsQuery` | [`CatalogQueryItemsForItemOptions`](../../doc/models/catalog-query-items-for-item-options.md) | Optional | The query filter to return the items containing the specified item option IDs. |
+| `ItemVariationsForItemOptionValuesQuery` | [`CatalogQueryItemVariationsForItemOptionValues`](../../doc/models/catalog-query-item-variations-for-item-option-values.md) | Optional | The query filter to return the item variations containing the specified item option value IDs. |
 
 ## Example (as JSON)
 

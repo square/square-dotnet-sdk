@@ -11,7 +11,7 @@
 |  --- | --- | --- | --- |
 | `Title` | `string` | Required | The title text to display in the signature capture flow on the Terminal.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `250` |
 | `Body` | `string` | Required | The body text to display in the signature capture flow on the Terminal.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `10000` |
-| `Signature` | [`IList<Models.SignatureImage>`](../../doc/models/signature-image.md) | Optional | An image representation of the collected signature. |
+| `Signature` | [`IList<SignatureImage>`](../../doc/models/signature-image.md) | Optional | An image representation of the collected signature. |
 
 ## Example (as JSON)
 

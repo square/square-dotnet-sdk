@@ -12,11 +12,11 @@ the endpoint uses a logical AND to evaluate them.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `LoyaltyAccountFilter` | [`Models.LoyaltyEventLoyaltyAccountFilter`](../../doc/models/loyalty-event-loyalty-account-filter.md) | Optional | Filter events by loyalty account. |
-| `TypeFilter` | [`Models.LoyaltyEventTypeFilter`](../../doc/models/loyalty-event-type-filter.md) | Optional | Filter events by event type. |
-| `DateTimeFilter` | [`Models.LoyaltyEventDateTimeFilter`](../../doc/models/loyalty-event-date-time-filter.md) | Optional | Filter events by date time range. |
-| `LocationFilter` | [`Models.LoyaltyEventLocationFilter`](../../doc/models/loyalty-event-location-filter.md) | Optional | Filter events by location. |
-| `OrderFilter` | [`Models.LoyaltyEventOrderFilter`](../../doc/models/loyalty-event-order-filter.md) | Optional | Filter events by the order associated with the event. |
+| `LoyaltyAccountFilter` | [`LoyaltyEventLoyaltyAccountFilter`](../../doc/models/loyalty-event-loyalty-account-filter.md) | Optional | Filter events by loyalty account. |
+| `TypeFilter` | [`LoyaltyEventTypeFilter`](../../doc/models/loyalty-event-type-filter.md) | Optional | Filter events by event type. |
+| `DateTimeFilter` | [`LoyaltyEventDateTimeFilter`](../../doc/models/loyalty-event-date-time-filter.md) | Optional | Filter events by date time range. |
+| `LocationFilter` | [`LoyaltyEventLocationFilter`](../../doc/models/loyalty-event-location-filter.md) | Optional | Filter events by location. |
+| `OrderFilter` | [`LoyaltyEventOrderFilter`](../../doc/models/loyalty-event-order-filter.md) | Optional | Filter events by the order associated with the event. |
 
 ## Example (as JSON)
 

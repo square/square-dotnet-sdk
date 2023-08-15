@@ -12,9 +12,9 @@ a set of `TeamMemberWage` objects.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `TeamMemberWages` | [`IList<Models.TeamMemberWage>`](../../doc/models/team-member-wage.md) | Optional | A page of `TeamMemberWage` results. |
+| `TeamMemberWages` | [`IList<TeamMemberWage>`](../../doc/models/team-member-wage.md) | Optional | A page of `TeamMemberWage` results. |
 | `Cursor` | `string` | Optional | The value supplied in the subsequent request to fetch the next page<br>of `TeamMemberWage` results. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

@@ -41,12 +41,12 @@ associated payment.
 | `PanSuffix` | `string` | Optional | The last four digits of the provided credit card's account number. |
 | `EntryMethod` | [`string`](../../doc/models/v1-tender-entry-method.md) | Optional | - |
 | `PaymentNote` | `string` | Optional | Notes entered by the merchant about the tender at the time of payment, if any. Typically only present for tender with the type: OTHER. |
-| `TotalMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
-| `TenderedMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `TotalMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `TenderedMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
 | `TenderedAt` | `string` | Optional | The time when the tender was created, in ISO 8601 format. |
 | `SettledAt` | `string` | Optional | The time when the tender was settled, in ISO 8601 format. |
-| `ChangeBackMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
-| `RefundedMoney` | [`Models.V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `ChangeBackMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
+| `RefundedMoney` | [`V1Money`](../../doc/models/v1-money.md) | Optional | - |
 | `IsExchange` | `bool?` | Optional | Indicates whether or not the tender is associated with an exchange. If is_exchange is true, the tender represents the value of goods returned in an exchange not the actual money paid. The exchange value reduces the tender amounts needed to pay for items purchased in the exchange. |
 
 ## Example (as JSON)

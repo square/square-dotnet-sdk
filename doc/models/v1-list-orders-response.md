@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Items` | [`IList<Models.V1Order>`](../../doc/models/v1-order.md) | Optional | - |
+| `Items` | [`IList<V1Order>`](../../doc/models/v1-order.md) | Optional | - |
 
 ## Example (as JSON)
 

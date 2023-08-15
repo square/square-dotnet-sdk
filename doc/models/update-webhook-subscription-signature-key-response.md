@@ -15,7 +15,7 @@ present.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
 | `SignatureKey` | `string` | Optional | The new Square-generated signature key used to validate the origin of the webhook event. |
 
 ## Example (as JSON)

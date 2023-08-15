@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -39,6 +40,7 @@ namespace Square.Models
         /// <param name="sortName">sort_name.</param>
         /// <param name="descriptionHtml">description_html.</param>
         /// <param name="descriptionPlaintext">description_plaintext.</param>
+        /// <param name="isArchived">is_archived.</param>
         public CatalogItem(
             string name = null,
             string description = null,
@@ -57,7 +59,8 @@ namespace Square.Models
             IList<string> imageIds = null,
             string sortName = null,
             string descriptionHtml = null,
-            string descriptionPlaintext = null)
+            string descriptionPlaintext = null,
+            bool? isArchived = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -76,7 +79,8 @@ namespace Square.Models
                 { "item_options", false },
                 { "image_ids", false },
                 { "sort_name", false },
-                { "description_html", false }
+                { "description_html", false },
+                { "is_archived", false }
             };
 
             if (name != null)
@@ -177,6 +181,12 @@ namespace Square.Models
             }
 
             this.DescriptionPlaintext = descriptionPlaintext;
+            if (isArchived != null)
+            {
+                shouldSerialize["is_archived"] = true;
+                this.IsArchived = isArchived;
+            }
+
         }
         internal CatalogItem(Dictionary<string, bool> shouldSerialize,
             string name = null,
@@ -196,7 +206,8 @@ namespace Square.Models
             IList<string> imageIds = null,
             string sortName = null,
             string descriptionHtml = null,
-            string descriptionPlaintext = null)
+            string descriptionPlaintext = null,
+            bool? isArchived = null)
         {
             this.shouldSerialize = shouldSerialize;
             Name = name;
@@ -217,6 +228,7 @@ namespace Square.Models
             SortName = sortName;
             DescriptionHtml = descriptionHtml;
             DescriptionPlaintext = descriptionPlaintext;
+            IsArchived = isArchived;
         }
 
         /// <summary>
@@ -369,6 +381,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("description_plaintext", NullValueHandling = NullValueHandling.Ignore)]
         public string DescriptionPlaintext { get; }
+
+        /// <summary>
+        /// Indicates whether this item is archived (`true`) or not (`false`).
+        /// </summary>
+        [JsonProperty("is_archived")]
+        public bool? IsArchived { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -524,6 +542,15 @@ namespace Square.Models
             return this.shouldSerialize["description_html"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsArchived()
+        {
+            return this.shouldSerialize["is_archived"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -553,18 +580,19 @@ namespace Square.Models
                 ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
                 ((this.SortName == null && other.SortName == null) || (this.SortName?.Equals(other.SortName) == true)) &&
                 ((this.DescriptionHtml == null && other.DescriptionHtml == null) || (this.DescriptionHtml?.Equals(other.DescriptionHtml) == true)) &&
-                ((this.DescriptionPlaintext == null && other.DescriptionPlaintext == null) || (this.DescriptionPlaintext?.Equals(other.DescriptionPlaintext) == true));
+                ((this.DescriptionPlaintext == null && other.DescriptionPlaintext == null) || (this.DescriptionPlaintext?.Equals(other.DescriptionPlaintext) == true)) &&
+                ((this.IsArchived == null && other.IsArchived == null) || (this.IsArchived?.Equals(other.IsArchived) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -135597555;
+            int hashCode = 653710663;
             hashCode = HashCode.Combine(this.Name, this.Description, this.Abbreviation, this.LabelColor, this.AvailableOnline, this.AvailableForPickup, this.AvailableElectronically);
 
             hashCode = HashCode.Combine(hashCode, this.CategoryId, this.TaxIds, this.ModifierListInfo, this.Variations, this.ProductType, this.SkipModifierScreen, this.ItemOptions);
 
-            hashCode = HashCode.Combine(hashCode, this.ImageIds, this.SortName, this.DescriptionHtml, this.DescriptionPlaintext);
+            hashCode = HashCode.Combine(hashCode, this.ImageIds, this.SortName, this.DescriptionHtml, this.DescriptionPlaintext, this.IsArchived);
 
             return hashCode;
         }
@@ -574,14 +602,14 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
-            toStringOutput.Add($"this.Abbreviation = {(this.Abbreviation == null ? "null" : this.Abbreviation == string.Empty ? "" : this.Abbreviation)}");
-            toStringOutput.Add($"this.LabelColor = {(this.LabelColor == null ? "null" : this.LabelColor == string.Empty ? "" : this.LabelColor)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.Abbreviation = {(this.Abbreviation == null ? "null" : this.Abbreviation)}");
+            toStringOutput.Add($"this.LabelColor = {(this.LabelColor == null ? "null" : this.LabelColor)}");
             toStringOutput.Add($"this.AvailableOnline = {(this.AvailableOnline == null ? "null" : this.AvailableOnline.ToString())}");
             toStringOutput.Add($"this.AvailableForPickup = {(this.AvailableForPickup == null ? "null" : this.AvailableForPickup.ToString())}");
             toStringOutput.Add($"this.AvailableElectronically = {(this.AvailableElectronically == null ? "null" : this.AvailableElectronically.ToString())}");
-            toStringOutput.Add($"this.CategoryId = {(this.CategoryId == null ? "null" : this.CategoryId == string.Empty ? "" : this.CategoryId)}");
+            toStringOutput.Add($"this.CategoryId = {(this.CategoryId == null ? "null" : this.CategoryId)}");
             toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : $"[{string.Join(", ", this.TaxIds)} ]")}");
             toStringOutput.Add($"this.ModifierListInfo = {(this.ModifierListInfo == null ? "null" : $"[{string.Join(", ", this.ModifierListInfo)} ]")}");
             toStringOutput.Add($"this.Variations = {(this.Variations == null ? "null" : $"[{string.Join(", ", this.Variations)} ]")}");
@@ -589,9 +617,10 @@ namespace Square.Models
             toStringOutput.Add($"this.SkipModifierScreen = {(this.SkipModifierScreen == null ? "null" : this.SkipModifierScreen.ToString())}");
             toStringOutput.Add($"this.ItemOptions = {(this.ItemOptions == null ? "null" : $"[{string.Join(", ", this.ItemOptions)} ]")}");
             toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
-            toStringOutput.Add($"this.SortName = {(this.SortName == null ? "null" : this.SortName == string.Empty ? "" : this.SortName)}");
-            toStringOutput.Add($"this.DescriptionHtml = {(this.DescriptionHtml == null ? "null" : this.DescriptionHtml == string.Empty ? "" : this.DescriptionHtml)}");
-            toStringOutput.Add($"this.DescriptionPlaintext = {(this.DescriptionPlaintext == null ? "null" : this.DescriptionPlaintext == string.Empty ? "" : this.DescriptionPlaintext)}");
+            toStringOutput.Add($"this.SortName = {(this.SortName == null ? "null" : this.SortName)}");
+            toStringOutput.Add($"this.DescriptionHtml = {(this.DescriptionHtml == null ? "null" : this.DescriptionHtml)}");
+            toStringOutput.Add($"this.DescriptionPlaintext = {(this.DescriptionPlaintext == null ? "null" : this.DescriptionPlaintext)}");
+            toStringOutput.Add($"this.IsArchived = {(this.IsArchived == null ? "null" : this.IsArchived.ToString())}");
         }
 
         /// <summary>
@@ -618,7 +647,8 @@ namespace Square.Models
                 .ImageIds(this.ImageIds)
                 .SortName(this.SortName)
                 .DescriptionHtml(this.DescriptionHtml)
-                .DescriptionPlaintext(this.DescriptionPlaintext);
+                .DescriptionPlaintext(this.DescriptionPlaintext)
+                .IsArchived(this.IsArchived);
             return builder;
         }
 
@@ -645,6 +675,7 @@ namespace Square.Models
                 { "image_ids", false },
                 { "sort_name", false },
                 { "description_html", false },
+                { "is_archived", false },
             };
 
             private string name;
@@ -665,6 +696,7 @@ namespace Square.Models
             private string sortName;
             private string descriptionHtml;
             private string descriptionPlaintext;
+            private bool? isArchived;
 
              /// <summary>
              /// Name.
@@ -880,6 +912,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// IsArchived.
+             /// </summary>
+             /// <param name="isArchived"> isArchived. </param>
+             /// <returns> Builder. </returns>
+            public Builder IsArchived(bool? isArchived)
+            {
+                shouldSerialize["is_archived"] = true;
+                this.isArchived = isArchived;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -1008,6 +1052,14 @@ namespace Square.Models
                 this.shouldSerialize["description_html"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIsArchived()
+            {
+                this.shouldSerialize["is_archived"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -1033,7 +1085,8 @@ namespace Square.Models
                     this.imageIds,
                     this.sortName,
                     this.descriptionHtml,
-                    this.descriptionPlaintext);
+                    this.descriptionPlaintext,
+                    this.isArchived);
             }
         }
     }

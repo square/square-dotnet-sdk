@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 | `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request. If unset, this is the final response.<br>See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information. |
-| `Objects` | [`IList<Models.CatalogObject>`](../../doc/models/catalog-object.md) | Optional | The CatalogObjects returned. |
-| `RelatedObjects` | [`IList<Models.CatalogObject>`](../../doc/models/catalog-object.md) | Optional | A list of CatalogObjects referenced by the objects in the `objects` field. |
+| `Objects` | [`IList<CatalogObject>`](../../doc/models/catalog-object.md) | Optional | The CatalogObjects returned. |
+| `RelatedObjects` | [`IList<CatalogObject>`](../../doc/models/catalog-object.md) | Optional | A list of CatalogObjects referenced by the objects in the `objects` field. |
 | `LatestTime` | `string` | Optional | When the associated product catalog was last updated. Will<br>match the value for `end_time` or `cursor` if either field is included in the `SearchCatalog` request. |
 
 ## Example (as JSON)

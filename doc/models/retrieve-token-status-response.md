@@ -16,7 +16,7 @@ a request to the `RetrieveTokenStatus` endpoint.
 | `ExpiresAt` | `string` | Optional | The date and time when the `access_token` expires, in RFC 3339 format. Empty if the token never expires. |
 | `ClientId` | `string` | Optional | The Square-issued application ID associated with the access token. This is the same application ID used to obtain the token.<br>**Constraints**: *Maximum Length*: `191` |
 | `MerchantId` | `string` | Optional | The ID of the authorizing merchant's business.<br>**Constraints**: *Minimum Length*: `8`, *Maximum Length*: `191` |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

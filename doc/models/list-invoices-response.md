@@ -11,9 +11,9 @@ Describes a `ListInvoice` response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Invoices` | [`IList<Models.Invoice>`](../../doc/models/invoice.md) | Optional | The invoices retrieved. |
+| `Invoices` | [`IList<Invoice>`](../../doc/models/invoice.md) | Optional | The invoices retrieved. |
 | `Cursor` | `string` | Optional | When a response is truncated, it includes a cursor that you can use in a<br>subsequent request to retrieve the next set of invoices. If empty, this is the final<br>response.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
 
 ## Example (as JSON)
 

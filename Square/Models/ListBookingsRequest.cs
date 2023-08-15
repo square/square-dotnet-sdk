@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -23,6 +24,7 @@ namespace Square.Models
         /// </summary>
         /// <param name="limit">limit.</param>
         /// <param name="cursor">cursor.</param>
+        /// <param name="customerId">customer_id.</param>
         /// <param name="teamMemberId">team_member_id.</param>
         /// <param name="locationId">location_id.</param>
         /// <param name="startAtMin">start_at_min.</param>
@@ -30,6 +32,7 @@ namespace Square.Models
         public ListBookingsRequest(
             int? limit = null,
             string cursor = null,
+            string customerId = null,
             string teamMemberId = null,
             string locationId = null,
             string startAtMin = null,
@@ -39,6 +42,7 @@ namespace Square.Models
             {
                 { "limit", false },
                 { "cursor", false },
+                { "customer_id", false },
                 { "team_member_id", false },
                 { "location_id", false },
                 { "start_at_min", false },
@@ -55,6 +59,12 @@ namespace Square.Models
             {
                 shouldSerialize["cursor"] = true;
                 this.Cursor = cursor;
+            }
+
+            if (customerId != null)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.CustomerId = customerId;
             }
 
             if (teamMemberId != null)
@@ -85,6 +95,7 @@ namespace Square.Models
         internal ListBookingsRequest(Dictionary<string, bool> shouldSerialize,
             int? limit = null,
             string cursor = null,
+            string customerId = null,
             string teamMemberId = null,
             string locationId = null,
             string startAtMin = null,
@@ -93,6 +104,7 @@ namespace Square.Models
             this.shouldSerialize = shouldSerialize;
             Limit = limit;
             Cursor = cursor;
+            CustomerId = customerId;
             TeamMemberId = teamMemberId;
             LocationId = locationId;
             StartAtMin = startAtMin;
@@ -110,6 +122,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("cursor")]
         public string Cursor { get; }
+
+        /// <summary>
+        /// The [customer](entity:Customer) for whom to retrieve bookings. If this is not set, bookings for all customers are retrieved.
+        /// </summary>
+        [JsonProperty("customer_id")]
+        public string CustomerId { get; }
 
         /// <summary>
         /// The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved.
@@ -167,6 +185,15 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCustomerId()
+        {
+            return this.shouldSerialize["customer_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
         public bool ShouldSerializeTeamMemberId()
         {
             return this.shouldSerialize["team_member_id"];
@@ -213,6 +240,7 @@ namespace Square.Models
             }
             return obj is ListBookingsRequest other &&                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
                 ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
+                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
                 ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
                 ((this.StartAtMin == null && other.StartAtMin == null) || (this.StartAtMin?.Equals(other.StartAtMin) == true)) &&
@@ -222,8 +250,8 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1962659262;
-            hashCode = HashCode.Combine(this.Limit, this.Cursor, this.TeamMemberId, this.LocationId, this.StartAtMin, this.StartAtMax);
+            int hashCode = -1824278131;
+            hashCode = HashCode.Combine(this.Limit, this.Cursor, this.CustomerId, this.TeamMemberId, this.LocationId, this.StartAtMin, this.StartAtMax);
 
             return hashCode;
         }
@@ -234,11 +262,12 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.StartAtMin = {(this.StartAtMin == null ? "null" : this.StartAtMin == string.Empty ? "" : this.StartAtMin)}");
-            toStringOutput.Add($"this.StartAtMax = {(this.StartAtMax == null ? "null" : this.StartAtMax == string.Empty ? "" : this.StartAtMax)}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.StartAtMin = {(this.StartAtMin == null ? "null" : this.StartAtMin)}");
+            toStringOutput.Add($"this.StartAtMax = {(this.StartAtMax == null ? "null" : this.StartAtMax)}");
         }
 
         /// <summary>
@@ -250,6 +279,7 @@ namespace Square.Models
             var builder = new Builder()
                 .Limit(this.Limit)
                 .Cursor(this.Cursor)
+                .CustomerId(this.CustomerId)
                 .TeamMemberId(this.TeamMemberId)
                 .LocationId(this.LocationId)
                 .StartAtMin(this.StartAtMin)
@@ -266,6 +296,7 @@ namespace Square.Models
             {
                 { "limit", false },
                 { "cursor", false },
+                { "customer_id", false },
                 { "team_member_id", false },
                 { "location_id", false },
                 { "start_at_min", false },
@@ -274,6 +305,7 @@ namespace Square.Models
 
             private int? limit;
             private string cursor;
+            private string customerId;
             private string teamMemberId;
             private string locationId;
             private string startAtMin;
@@ -300,6 +332,18 @@ namespace Square.Models
             {
                 shouldSerialize["cursor"] = true;
                 this.cursor = cursor;
+                return this;
+            }
+
+             /// <summary>
+             /// CustomerId.
+             /// </summary>
+             /// <param name="customerId"> customerId. </param>
+             /// <returns> Builder. </returns>
+            public Builder CustomerId(string customerId)
+            {
+                shouldSerialize["customer_id"] = true;
+                this.customerId = customerId;
                 return this;
             }
 
@@ -370,6 +414,14 @@ namespace Square.Models
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
+            public void UnsetCustomerId()
+            {
+                this.shouldSerialize["customer_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
             public void UnsetTeamMemberId()
             {
                 this.shouldSerialize["team_member_id"] = false;
@@ -409,6 +461,7 @@ namespace Square.Models
                 return new ListBookingsRequest(shouldSerialize,
                     this.limit,
                     this.cursor,
+                    this.customerId,
                     this.teamMemberId,
                     this.locationId,
                     this.startAtMin,

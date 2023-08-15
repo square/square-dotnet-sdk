@@ -14,7 +14,7 @@ Either `errors` or `status` are present in a given response (never both).
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 | `Status` | [`string`](../../doc/models/register-domain-response-status.md) | Optional | The status of the domain registration. |
 
 ## Example (as JSON)

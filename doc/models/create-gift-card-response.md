@@ -12,8 +12,8 @@ resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `GiftCard` | [`Models.GiftCard`](../../doc/models/gift-card.md) | Optional | Represents a Square gift card. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `GiftCard` | [`GiftCard`](../../doc/models/gift-card.md) | Optional | Represents a Square gift card. |
 
 ## Example (as JSON)
 

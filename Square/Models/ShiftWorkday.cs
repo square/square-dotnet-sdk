@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -128,7 +129,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.DateRange = {(this.DateRange == null ? "null" : this.DateRange.ToString())}");
             toStringOutput.Add($"this.MatchShiftsBy = {(this.MatchShiftsBy == null ? "null" : this.MatchShiftsBy.ToString())}");
-            toStringOutput.Add($"this.DefaultTimezone = {(this.DefaultTimezone == null ? "null" : this.DefaultTimezone == string.Empty ? "" : this.DefaultTimezone)}");
+            toStringOutput.Add($"this.DefaultTimezone = {(this.DefaultTimezone == null ? "null" : this.DefaultTimezone)}");
         }
 
         /// <summary>

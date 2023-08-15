@@ -12,8 +12,8 @@ Defines output parameters in a response from the
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Errors encountered during the request. |
-| `Subscriptions` | [`IList<Models.Subscription>`](../../doc/models/subscription.md) | Optional | The subscriptions matching the specified query expressions. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Errors encountered during the request. |
+| `Subscriptions` | [`IList<Subscription>`](../../doc/models/subscription.md) | Optional | The subscriptions matching the specified query expressions. |
 | `Cursor` | `string` | Optional | When the total number of resulting subscription exceeds the limit of a paged response,<br>the response includes a cursor for you to use in a subsequent request to fetch the next set of results.<br>If the cursor is unset, the response contains the last page of the results.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 
 ## Example (as JSON)

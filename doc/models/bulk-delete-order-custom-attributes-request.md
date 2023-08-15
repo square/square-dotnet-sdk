@@ -11,7 +11,7 @@ Represents a bulk delete request for one or more order custom attributes.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Values` | [`IDictionary<string, Models.BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute>`](../../doc/models/bulk-delete-order-custom-attributes-request-delete-custom-attribute.md) | Required | A map of requests that correspond to individual delete operations for custom attributes. |
+| `Values` | [`IDictionary<string, BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute>`](../../doc/models/bulk-delete-order-custom-attributes-request-delete-custom-attribute.md) | Required | A map of requests that correspond to individual delete operations for custom attributes. |
 
 ## Example (as JSON)
 

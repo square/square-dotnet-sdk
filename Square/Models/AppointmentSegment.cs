@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -201,8 +202,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.DurationMinutes = {(this.DurationMinutes == null ? "null" : this.DurationMinutes.ToString())}");
-            toStringOutput.Add($"this.ServiceVariationId = {(this.ServiceVariationId == null ? "null" : this.ServiceVariationId == string.Empty ? "" : this.ServiceVariationId)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.ServiceVariationId = {(this.ServiceVariationId == null ? "null" : this.ServiceVariationId)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
             toStringOutput.Add($"this.ServiceVariationVersion = {(this.ServiceVariationVersion == null ? "null" : this.ServiceVariationVersion.ToString())}");
             toStringOutput.Add($"this.IntermissionMinutes = {(this.IntermissionMinutes == null ? "null" : this.IntermissionMinutes.ToString())}");
             toStringOutput.Add($"this.AnyTeamMember = {(this.AnyTeamMember == null ? "null" : this.AnyTeamMember.ToString())}");

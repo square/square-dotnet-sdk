@@ -11,8 +11,8 @@ The response object returned by the [RetrieveMerchant](../../doc/api/merchants.m
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `Merchant` | [`Models.Merchant`](../../doc/models/merchant.md) | Optional | Represents a business that sells with Square. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
+| `Merchant` | [`Merchant`](../../doc/models/merchant.md) | Optional | Represents a business that sells with Square. |
 
 ## Example (as JSON)
 

@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -401,18 +402,18 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BatteryPercentage = {(this.BatteryPercentage == null ? "null" : this.BatteryPercentage == string.Empty ? "" : this.BatteryPercentage)}");
-            toStringOutput.Add($"this.ChargingState = {(this.ChargingState == null ? "null" : this.ChargingState == string.Empty ? "" : this.ChargingState)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
-            toStringOutput.Add($"this.NetworkConnectionType = {(this.NetworkConnectionType == null ? "null" : this.NetworkConnectionType == string.Empty ? "" : this.NetworkConnectionType)}");
-            toStringOutput.Add($"this.PaymentRegion = {(this.PaymentRegion == null ? "null" : this.PaymentRegion == string.Empty ? "" : this.PaymentRegion)}");
-            toStringOutput.Add($"this.SerialNumber = {(this.SerialNumber == null ? "null" : this.SerialNumber == string.Empty ? "" : this.SerialNumber)}");
-            toStringOutput.Add($"this.OsVersion = {(this.OsVersion == null ? "null" : this.OsVersion == string.Empty ? "" : this.OsVersion)}");
-            toStringOutput.Add($"this.AppVersion = {(this.AppVersion == null ? "null" : this.AppVersion == string.Empty ? "" : this.AppVersion)}");
-            toStringOutput.Add($"this.WifiNetworkName = {(this.WifiNetworkName == null ? "null" : this.WifiNetworkName == string.Empty ? "" : this.WifiNetworkName)}");
-            toStringOutput.Add($"this.WifiNetworkStrength = {(this.WifiNetworkStrength == null ? "null" : this.WifiNetworkStrength == string.Empty ? "" : this.WifiNetworkStrength)}");
-            toStringOutput.Add($"this.IpAddress = {(this.IpAddress == null ? "null" : this.IpAddress == string.Empty ? "" : this.IpAddress)}");
+            toStringOutput.Add($"this.BatteryPercentage = {(this.BatteryPercentage == null ? "null" : this.BatteryPercentage)}");
+            toStringOutput.Add($"this.ChargingState = {(this.ChargingState == null ? "null" : this.ChargingState)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
+            toStringOutput.Add($"this.NetworkConnectionType = {(this.NetworkConnectionType == null ? "null" : this.NetworkConnectionType)}");
+            toStringOutput.Add($"this.PaymentRegion = {(this.PaymentRegion == null ? "null" : this.PaymentRegion)}");
+            toStringOutput.Add($"this.SerialNumber = {(this.SerialNumber == null ? "null" : this.SerialNumber)}");
+            toStringOutput.Add($"this.OsVersion = {(this.OsVersion == null ? "null" : this.OsVersion)}");
+            toStringOutput.Add($"this.AppVersion = {(this.AppVersion == null ? "null" : this.AppVersion)}");
+            toStringOutput.Add($"this.WifiNetworkName = {(this.WifiNetworkName == null ? "null" : this.WifiNetworkName)}");
+            toStringOutput.Add($"this.WifiNetworkStrength = {(this.WifiNetworkStrength == null ? "null" : this.WifiNetworkStrength)}");
+            toStringOutput.Add($"this.IpAddress = {(this.IpAddress == null ? "null" : this.IpAddress)}");
         }
 
         /// <summary>

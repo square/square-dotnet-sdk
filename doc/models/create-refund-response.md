@@ -14,8 +14,8 @@ One of `errors` or `refund` is present in a given response (never both).
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Refund` | [`Models.Refund`](../../doc/models/refund.md) | Optional | Represents a refund processed for a Square transaction. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Refund` | [`Refund`](../../doc/models/refund.md) | Optional | Represents a refund processed for a Square transaction. |
 
 ## Example (as JSON)
 
