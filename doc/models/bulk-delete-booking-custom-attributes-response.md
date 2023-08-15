@@ -12,8 +12,8 @@ which contains a map of responses that each corresponds to an individual delete 
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Values` | [`IDictionary<string, Models.BookingCustomAttributeDeleteResponse>`](../../doc/models/booking-custom-attribute-delete-response.md) | Optional | A map of responses that correspond to individual delete requests. Each response has the<br>same ID as the corresponding request and contains `booking_id` and  `errors` field. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Values` | [`IDictionary<string, BookingCustomAttributeDeleteResponse>`](../../doc/models/booking-custom-attribute-delete-response.md) | Optional | A map of responses that correspond to individual delete requests. Each response has the<br>same ID as the corresponding request and contains `booking_id` and  `errors` field. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

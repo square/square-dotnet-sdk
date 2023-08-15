@@ -15,7 +15,7 @@
 | `CustomerTimezoneChoice` | [`string`](../../doc/models/business-booking-profile-customer-timezone-choice.md) | Optional | Choices of customer-facing time zone used for bookings. |
 | `BookingPolicy` | [`string`](../../doc/models/business-booking-profile-booking-policy.md) | Optional | Policies for accepting bookings. |
 | `AllowUserCancel` | `bool?` | Optional | Indicates whether customers can cancel or reschedule their own bookings (`true`) or not (`false`). |
-| `BusinessAppointmentSettings` | [`Models.BusinessAppointmentSettings`](../../doc/models/business-appointment-settings.md) | Optional | The service appointment settings, including where and how the service is provided. |
+| `BusinessAppointmentSettings` | [`BusinessAppointmentSettings`](../../doc/models/business-appointment-settings.md) | Optional | The service appointment settings, including where and how the service is provided. |
 | `SupportSellerLevelWrites` | `bool?` | Optional | Indicates whether the seller's subscription to Square Appointments supports creating, updating or canceling an appointment through the API (`true`) or not (`false`) using seller permission. |
 
 ## Example (as JSON)

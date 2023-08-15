@@ -11,7 +11,7 @@ The search criteria for the loyalty accounts.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Mappings` | [`IList<Models.LoyaltyAccountMapping>`](../../doc/models/loyalty-account-mapping.md) | Optional | The set of mappings to use in the loyalty account search.<br><br>This cannot be combined with `customer_ids`.<br><br>Max: 30 mappings |
+| `Mappings` | [`IList<LoyaltyAccountMapping>`](../../doc/models/loyalty-account-mapping.md) | Optional | The set of mappings to use in the loyalty account search.<br><br>This cannot be combined with `customer_ids`.<br><br>Max: 30 mappings |
 | `CustomerIds` | `IList<string>` | Optional | The set of customer IDs to use in the loyalty account search.<br><br>This cannot be combined with `mappings`.<br><br>Max: 30 customer IDs |
 
 ## Example (as JSON)

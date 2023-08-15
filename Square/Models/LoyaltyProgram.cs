@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -229,14 +230,14 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
             toStringOutput.Add($"this.RewardTiers = {(this.RewardTiers == null ? "null" : $"[{string.Join(", ", this.RewardTiers)} ]")}");
             toStringOutput.Add($"this.ExpirationPolicy = {(this.ExpirationPolicy == null ? "null" : this.ExpirationPolicy.ToString())}");
             toStringOutput.Add($"this.Terminology = {(this.Terminology == null ? "null" : this.Terminology.ToString())}");
             toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
             toStringOutput.Add($"this.AccrualRules = {(this.AccrualRules == null ? "null" : $"[{string.Join(", ", this.AccrualRules)} ]")}");
         }
 

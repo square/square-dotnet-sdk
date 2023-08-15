@@ -14,8 +14,8 @@ Either `errors` or `locations` is present in a given response (never both).
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Locations` | [`IList<Models.Location>`](../../doc/models/location.md) | Optional | The business locations. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Locations` | [`IList<Location>`](../../doc/models/location.md) | Optional | The business locations. |
 
 ## Example (as JSON)
 

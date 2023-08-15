@@ -66,8 +66,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateSubscriptionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -118,8 +117,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.SearchSubscriptionsResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -152,8 +150,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("subscription_id", subscriptionId))
                       .Query(_query => _query.Setup("include", include))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveSubscriptionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -189,8 +186,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("subscription_id", subscriptionId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.UpdateSubscriptionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -223,8 +219,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("subscription_id", subscriptionId))
                       .Template(_template => _template.Setup("action_id", actionId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DeleteSubscriptionActionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -256,8 +251,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("subscription_id", subscriptionId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CancelSubscriptionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -295,8 +289,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("cursor", cursor))
                       .Query(_query => _query.Setup("limit", limit))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListSubscriptionEventsResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -330,8 +323,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("subscription_id", subscriptionId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.PauseSubscriptionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -365,8 +357,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("subscription_id", subscriptionId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ResumeSubscriptionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -402,8 +393,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("subscription_id", subscriptionId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.SwapPlanResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
     }
 }

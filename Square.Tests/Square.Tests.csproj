@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  
+
   <ItemGroup>
  
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0"></PackageReference>

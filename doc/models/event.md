@@ -14,7 +14,7 @@
 | `Type` | `string` | Optional | The type of event this represents. |
 | `EventId` | `string` | Optional | A unique ID for the event. |
 | `CreatedAt` | `string` | Optional | Timestamp of when the event was created, in RFC 3339 format. |
-| `Data` | [`Models.EventData`](../../doc/models/event-data.md) | Optional | - |
+| `Data` | [`EventData`](../../doc/models/event-data.md) | Optional | - |
 
 ## Example (as JSON)
 

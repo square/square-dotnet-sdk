@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -134,10 +135,10 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
             toStringOutput.Add($"this.Objects = {(this.Objects == null ? "null" : $"[{string.Join(", ", this.Objects)} ]")}");
             toStringOutput.Add($"this.RelatedObjects = {(this.RelatedObjects == null ? "null" : $"[{string.Join(", ", this.RelatedObjects)} ]")}");
-            toStringOutput.Add($"this.LatestTime = {(this.LatestTime == null ? "null" : this.LatestTime == string.Empty ? "" : this.LatestTime)}");
+            toStringOutput.Add($"this.LatestTime = {(this.LatestTime == null ? "null" : this.LatestTime)}");
         }
 
         /// <summary>

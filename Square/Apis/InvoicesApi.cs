@@ -69,8 +69,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("cursor", cursor))
                       .Query(_query => _query.Setup("limit", limit))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListInvoicesResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -105,8 +104,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateInvoiceResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -145,8 +143,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.SearchInvoicesResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -183,8 +180,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("invoice_id", invoiceId))
                       .Query(_query => _query.Setup("version", version))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DeleteInvoiceResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -212,8 +208,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("invoice_id", invoiceId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.GetInvoiceResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -253,8 +248,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("invoice_id", invoiceId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.UpdateInvoiceResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -292,8 +286,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("invoice_id", invoiceId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CancelInvoiceResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -343,8 +336,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("invoice_id", invoiceId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.PublishInvoiceResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
     }
 }

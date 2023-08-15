@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `PaymentLink` | [`Models.PaymentLink`](../../doc/models/payment-link.md) | Required | - |
+| `PaymentLink` | [`PaymentLink`](../../doc/models/payment-link.md) | Required | - |
 
 ## Example (as JSON)
 

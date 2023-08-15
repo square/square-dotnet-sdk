@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -39,7 +40,7 @@ namespace Square.Models
         /// <summary>
         /// A unique string that identifies this `UpdatePayment` request. Keys can be any valid string
         /// but must be unique for every `UpdatePayment` request.
-        /// For more information, see [Idempotency](https://developer.squareup.com/docs/basics/api101/idempotency).
+        /// For more information, see [Idempotency](https://developer.squareup.com/docs/build-basics/common-api-patterns/idempotency).
         /// </summary>
         [JsonProperty("idempotency_key")]
         public string IdempotencyKey { get; }
@@ -85,7 +86,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Payment = {(this.Payment == null ? "null" : this.Payment.ToString())}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
         }
 
         /// <summary>

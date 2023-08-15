@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -624,10 +625,10 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.BuyerEmail = {(this.BuyerEmail == null ? "null" : this.BuyerEmail == string.Empty ? "" : this.BuyerEmail)}");
-            toStringOutput.Add($"this.RecipientName = {(this.RecipientName == null ? "null" : this.RecipientName == string.Empty ? "" : this.RecipientName)}");
-            toStringOutput.Add($"this.RecipientPhoneNumber = {(this.RecipientPhoneNumber == null ? "null" : this.RecipientPhoneNumber == string.Empty ? "" : this.RecipientPhoneNumber)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.BuyerEmail = {(this.BuyerEmail == null ? "null" : this.BuyerEmail)}");
+            toStringOutput.Add($"this.RecipientName = {(this.RecipientName == null ? "null" : this.RecipientName)}");
+            toStringOutput.Add($"this.RecipientPhoneNumber = {(this.RecipientPhoneNumber == null ? "null" : this.RecipientPhoneNumber)}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
             toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
             toStringOutput.Add($"this.SubtotalMoney = {(this.SubtotalMoney == null ? "null" : this.SubtotalMoney.ToString())}");
@@ -635,18 +636,18 @@ namespace Square.Models
             toStringOutput.Add($"this.TotalTaxMoney = {(this.TotalTaxMoney == null ? "null" : this.TotalTaxMoney.ToString())}");
             toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
             toStringOutput.Add($"this.TotalDiscountMoney = {(this.TotalDiscountMoney == null ? "null" : this.TotalDiscountMoney.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt == string.Empty ? "" : this.ExpiresAt)}");
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
-            toStringOutput.Add($"this.BuyerNote = {(this.BuyerNote == null ? "null" : this.BuyerNote == string.Empty ? "" : this.BuyerNote)}");
-            toStringOutput.Add($"this.CompletedNote = {(this.CompletedNote == null ? "null" : this.CompletedNote == string.Empty ? "" : this.CompletedNote)}");
-            toStringOutput.Add($"this.RefundedNote = {(this.RefundedNote == null ? "null" : this.RefundedNote == string.Empty ? "" : this.RefundedNote)}");
-            toStringOutput.Add($"this.CanceledNote = {(this.CanceledNote == null ? "null" : this.CanceledNote == string.Empty ? "" : this.CanceledNote)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt)}");
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
+            toStringOutput.Add($"this.BuyerNote = {(this.BuyerNote == null ? "null" : this.BuyerNote)}");
+            toStringOutput.Add($"this.CompletedNote = {(this.CompletedNote == null ? "null" : this.CompletedNote)}");
+            toStringOutput.Add($"this.RefundedNote = {(this.RefundedNote == null ? "null" : this.RefundedNote)}");
+            toStringOutput.Add($"this.CanceledNote = {(this.CanceledNote == null ? "null" : this.CanceledNote)}");
             toStringOutput.Add($"this.Tender = {(this.Tender == null ? "null" : this.Tender.ToString())}");
             toStringOutput.Add($"this.OrderHistory = {(this.OrderHistory == null ? "null" : $"[{string.Join(", ", this.OrderHistory)} ]")}");
-            toStringOutput.Add($"this.PromoCode = {(this.PromoCode == null ? "null" : this.PromoCode == string.Empty ? "" : this.PromoCode)}");
-            toStringOutput.Add($"this.BtcReceiveAddress = {(this.BtcReceiveAddress == null ? "null" : this.BtcReceiveAddress == string.Empty ? "" : this.BtcReceiveAddress)}");
+            toStringOutput.Add($"this.PromoCode = {(this.PromoCode == null ? "null" : this.PromoCode)}");
+            toStringOutput.Add($"this.BtcReceiveAddress = {(this.BtcReceiveAddress == null ? "null" : this.BtcReceiveAddress)}");
             toStringOutput.Add($"this.BtcPriceSatoshi = {(this.BtcPriceSatoshi == null ? "null" : this.BtcPriceSatoshi.ToString())}");
         }
 

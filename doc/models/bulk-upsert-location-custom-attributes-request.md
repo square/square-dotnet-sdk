@@ -11,7 +11,7 @@ Represents a [BulkUpsertLocationCustomAttributes](../../doc/api/location-custom-
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Values` | [`IDictionary<string, Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest>`](../../doc/models/bulk-upsert-location-custom-attributes-request-location-custom-attribute-upsert-request.md) | Required | A map containing 1 to 25 individual upsert requests. For each request, provide an<br>arbitrary ID that is unique for this `BulkUpsertLocationCustomAttributes` request and the<br>information needed to create or update a custom attribute. |
+| `Values` | [`IDictionary<string, BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest>`](../../doc/models/bulk-upsert-location-custom-attributes-request-location-custom-attribute-upsert-request.md) | Required | A map containing 1 to 25 individual upsert requests. For each request, provide an<br>arbitrary ID that is unique for this `BulkUpsertLocationCustomAttributes` request and the<br>information needed to create or update a custom attribute. |
 
 ## Example (as JSON)
 

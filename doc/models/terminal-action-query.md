@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Filter` | [`Models.TerminalActionQueryFilter`](../../doc/models/terminal-action-query-filter.md) | Optional | - |
-| `Sort` | [`Models.TerminalActionQuerySort`](../../doc/models/terminal-action-query-sort.md) | Optional | - |
+| `Filter` | [`TerminalActionQueryFilter`](../../doc/models/terminal-action-query-filter.md) | Optional | - |
+| `Sort` | [`TerminalActionQuerySort`](../../doc/models/terminal-action-query-sort.md) | Optional | - |
 
 ## Example (as JSON)
 

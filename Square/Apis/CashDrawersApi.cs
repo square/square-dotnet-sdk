@@ -82,8 +82,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListCashDrawerShiftsResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -118,8 +117,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("location_id", locationId))
                       .Template(_template => _template.Setup("shift_id", shiftId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveCashDrawerShiftResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -162,8 +160,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListCashDrawerShiftEventsResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
     }
 }

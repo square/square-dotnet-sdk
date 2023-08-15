@@ -65,8 +65,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListBreakTypesResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -115,8 +114,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateBreakTypeResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -146,8 +144,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("id", id))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DeleteBreakTypeResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -175,8 +172,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("id", id))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.GetBreakTypeResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -210,8 +206,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("id", id))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.UpdateBreakTypeResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -251,8 +246,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListEmployeeWagesResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -282,8 +276,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("id", id))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.GetEmployeeWageResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -340,8 +333,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateShiftResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -394,8 +386,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.SearchShiftsResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -423,8 +414,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("id", id))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DeleteShiftResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -452,8 +442,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("id", id))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.GetShiftResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -495,8 +484,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("id", id))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.UpdateShiftResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -534,8 +522,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListTeamMemberWagesResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -563,8 +550,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("id", id))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.GetTeamMemberWageResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -597,8 +583,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListWorkweekConfigsResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -632,8 +617,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("id", id))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.UpdateWorkweekConfigResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
     }
 }

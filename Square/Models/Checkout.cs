@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -308,15 +309,15 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.CheckoutPageUrl = {(this.CheckoutPageUrl == null ? "null" : this.CheckoutPageUrl == string.Empty ? "" : this.CheckoutPageUrl)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.CheckoutPageUrl = {(this.CheckoutPageUrl == null ? "null" : this.CheckoutPageUrl)}");
             toStringOutput.Add($"this.AskForShippingAddress = {(this.AskForShippingAddress == null ? "null" : this.AskForShippingAddress.ToString())}");
-            toStringOutput.Add($"this.MerchantSupportEmail = {(this.MerchantSupportEmail == null ? "null" : this.MerchantSupportEmail == string.Empty ? "" : this.MerchantSupportEmail)}");
-            toStringOutput.Add($"this.PrePopulateBuyerEmail = {(this.PrePopulateBuyerEmail == null ? "null" : this.PrePopulateBuyerEmail == string.Empty ? "" : this.PrePopulateBuyerEmail)}");
+            toStringOutput.Add($"this.MerchantSupportEmail = {(this.MerchantSupportEmail == null ? "null" : this.MerchantSupportEmail)}");
+            toStringOutput.Add($"this.PrePopulateBuyerEmail = {(this.PrePopulateBuyerEmail == null ? "null" : this.PrePopulateBuyerEmail)}");
             toStringOutput.Add($"this.PrePopulateShippingAddress = {(this.PrePopulateShippingAddress == null ? "null" : this.PrePopulateShippingAddress.ToString())}");
-            toStringOutput.Add($"this.RedirectUrl = {(this.RedirectUrl == null ? "null" : this.RedirectUrl == string.Empty ? "" : this.RedirectUrl)}");
+            toStringOutput.Add($"this.RedirectUrl = {(this.RedirectUrl == null ? "null" : this.RedirectUrl)}");
             toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
             toStringOutput.Add($"this.AdditionalRecipients = {(this.AdditionalRecipients == null ? "null" : $"[{string.Join(", ", this.AdditionalRecipients)} ]")}");
         }
 

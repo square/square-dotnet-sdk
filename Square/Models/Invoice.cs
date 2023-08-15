@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -565,28 +566,28 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
             toStringOutput.Add($"this.PrimaryRecipient = {(this.PrimaryRecipient == null ? "null" : this.PrimaryRecipient.ToString())}");
             toStringOutput.Add($"this.PaymentRequests = {(this.PaymentRequests == null ? "null" : $"[{string.Join(", ", this.PaymentRequests)} ]")}");
             toStringOutput.Add($"this.DeliveryMethod = {(this.DeliveryMethod == null ? "null" : this.DeliveryMethod.ToString())}");
-            toStringOutput.Add($"this.InvoiceNumber = {(this.InvoiceNumber == null ? "null" : this.InvoiceNumber == string.Empty ? "" : this.InvoiceNumber)}");
-            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title == string.Empty ? "" : this.Title)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
-            toStringOutput.Add($"this.ScheduledAt = {(this.ScheduledAt == null ? "null" : this.ScheduledAt == string.Empty ? "" : this.ScheduledAt)}");
-            toStringOutput.Add($"this.PublicUrl = {(this.PublicUrl == null ? "null" : this.PublicUrl == string.Empty ? "" : this.PublicUrl)}");
+            toStringOutput.Add($"this.InvoiceNumber = {(this.InvoiceNumber == null ? "null" : this.InvoiceNumber)}");
+            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.ScheduledAt = {(this.ScheduledAt == null ? "null" : this.ScheduledAt)}");
+            toStringOutput.Add($"this.PublicUrl = {(this.PublicUrl == null ? "null" : this.PublicUrl)}");
             toStringOutput.Add($"this.NextPaymentAmountMoney = {(this.NextPaymentAmountMoney == null ? "null" : this.NextPaymentAmountMoney.ToString())}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone == string.Empty ? "" : this.Timezone)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
             toStringOutput.Add($"this.AcceptedPaymentMethods = {(this.AcceptedPaymentMethods == null ? "null" : this.AcceptedPaymentMethods.ToString())}");
             toStringOutput.Add($"this.CustomFields = {(this.CustomFields == null ? "null" : $"[{string.Join(", ", this.CustomFields)} ]")}");
-            toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId == string.Empty ? "" : this.SubscriptionId)}");
-            toStringOutput.Add($"this.SaleOrServiceDate = {(this.SaleOrServiceDate == null ? "null" : this.SaleOrServiceDate == string.Empty ? "" : this.SaleOrServiceDate)}");
-            toStringOutput.Add($"this.PaymentConditions = {(this.PaymentConditions == null ? "null" : this.PaymentConditions == string.Empty ? "" : this.PaymentConditions)}");
+            toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId)}");
+            toStringOutput.Add($"this.SaleOrServiceDate = {(this.SaleOrServiceDate == null ? "null" : this.SaleOrServiceDate)}");
+            toStringOutput.Add($"this.PaymentConditions = {(this.PaymentConditions == null ? "null" : this.PaymentConditions)}");
             toStringOutput.Add($"this.StorePaymentMethodEnabled = {(this.StorePaymentMethodEnabled == null ? "null" : this.StorePaymentMethodEnabled.ToString())}");
         }
 

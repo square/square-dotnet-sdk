@@ -15,7 +15,7 @@ see [Optional Checkout Configurations](https://developer.squareup.com/docs/check
 |  --- | --- | --- | --- |
 | `BuyerEmail` | `string` | Optional | The buyer email to prepopulate in the payment form.<br>**Constraints**: *Maximum Length*: `256` |
 | `BuyerPhoneNumber` | `string` | Optional | The buyer phone number to prepopulate in the payment form.<br>**Constraints**: *Maximum Length*: `17` |
-| `BuyerAddress` | [`Models.Address`](../../doc/models/address.md) | Optional | Represents a postal address in a country.<br>For more information, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses). |
+| `BuyerAddress` | [`Address`](../../doc/models/address.md) | Optional | Represents a postal address in a country.<br>For more information, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses). |
 
 ## Example (as JSON)
 

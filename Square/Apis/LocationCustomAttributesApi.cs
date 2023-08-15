@@ -71,8 +71,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListLocationCustomAttributeDefinitionsResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -113,8 +112,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.CreateLocationCustomAttributeDefinitionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -148,8 +146,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("key", key))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DeleteLocationCustomAttributeDefinitionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -186,8 +183,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("key", key))
                       .Query(_query => _query.Setup("version", version))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveLocationCustomAttributeDefinitionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -227,8 +223,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("key", key))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.UpdateLocationCustomAttributeDefinitionResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -261,8 +256,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.BulkDeleteLocationCustomAttributesResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -309,8 +303,7 @@ namespace Square.Apis
                       .Body(_bodyParameter => _bodyParameter.Setup(body))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.BulkUpsertLocationCustomAttributesResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -368,8 +361,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("cursor", cursor))
                       .Query(_query => _query.Setup("with_definitions", (withDefinitions != null) ? withDefinitions : false))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.ListLocationCustomAttributesResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -406,8 +398,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("location_id", locationId))
                       .Template(_template => _template.Setup("key", key))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.DeleteLocationCustomAttributeResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -458,8 +449,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("with_definition", (withDefinition != null) ? withDefinition : false))
                       .Query(_query => _query.Setup("version", version))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.RetrieveLocationCustomAttributeResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -508,8 +498,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("key", key))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.UpsertLocationCustomAttributeResponse>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
     }
 }

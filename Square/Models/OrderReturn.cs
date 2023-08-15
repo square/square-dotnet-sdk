@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -250,8 +251,8 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
-            toStringOutput.Add($"this.SourceOrderId = {(this.SourceOrderId == null ? "null" : this.SourceOrderId == string.Empty ? "" : this.SourceOrderId)}");
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
+            toStringOutput.Add($"this.SourceOrderId = {(this.SourceOrderId == null ? "null" : this.SourceOrderId)}");
             toStringOutput.Add($"this.ReturnLineItems = {(this.ReturnLineItems == null ? "null" : $"[{string.Join(", ", this.ReturnLineItems)} ]")}");
             toStringOutput.Add($"this.ReturnServiceCharges = {(this.ReturnServiceCharges == null ? "null" : $"[{string.Join(", ", this.ReturnServiceCharges)} ]")}");
             toStringOutput.Add($"this.ReturnTaxes = {(this.ReturnTaxes == null ? "null" : $"[{string.Join(", ", this.ReturnTaxes)} ]")}");

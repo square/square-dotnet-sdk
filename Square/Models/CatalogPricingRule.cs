@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -422,16 +423,16 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
             toStringOutput.Add($"this.TimePeriodIds = {(this.TimePeriodIds == null ? "null" : $"[{string.Join(", ", this.TimePeriodIds)} ]")}");
-            toStringOutput.Add($"this.DiscountId = {(this.DiscountId == null ? "null" : this.DiscountId == string.Empty ? "" : this.DiscountId)}");
-            toStringOutput.Add($"this.MatchProductsId = {(this.MatchProductsId == null ? "null" : this.MatchProductsId == string.Empty ? "" : this.MatchProductsId)}");
-            toStringOutput.Add($"this.ApplyProductsId = {(this.ApplyProductsId == null ? "null" : this.ApplyProductsId == string.Empty ? "" : this.ApplyProductsId)}");
-            toStringOutput.Add($"this.ExcludeProductsId = {(this.ExcludeProductsId == null ? "null" : this.ExcludeProductsId == string.Empty ? "" : this.ExcludeProductsId)}");
-            toStringOutput.Add($"this.ValidFromDate = {(this.ValidFromDate == null ? "null" : this.ValidFromDate == string.Empty ? "" : this.ValidFromDate)}");
-            toStringOutput.Add($"this.ValidFromLocalTime = {(this.ValidFromLocalTime == null ? "null" : this.ValidFromLocalTime == string.Empty ? "" : this.ValidFromLocalTime)}");
-            toStringOutput.Add($"this.ValidUntilDate = {(this.ValidUntilDate == null ? "null" : this.ValidUntilDate == string.Empty ? "" : this.ValidUntilDate)}");
-            toStringOutput.Add($"this.ValidUntilLocalTime = {(this.ValidUntilLocalTime == null ? "null" : this.ValidUntilLocalTime == string.Empty ? "" : this.ValidUntilLocalTime)}");
+            toStringOutput.Add($"this.DiscountId = {(this.DiscountId == null ? "null" : this.DiscountId)}");
+            toStringOutput.Add($"this.MatchProductsId = {(this.MatchProductsId == null ? "null" : this.MatchProductsId)}");
+            toStringOutput.Add($"this.ApplyProductsId = {(this.ApplyProductsId == null ? "null" : this.ApplyProductsId)}");
+            toStringOutput.Add($"this.ExcludeProductsId = {(this.ExcludeProductsId == null ? "null" : this.ExcludeProductsId)}");
+            toStringOutput.Add($"this.ValidFromDate = {(this.ValidFromDate == null ? "null" : this.ValidFromDate)}");
+            toStringOutput.Add($"this.ValidFromLocalTime = {(this.ValidFromLocalTime == null ? "null" : this.ValidFromLocalTime)}");
+            toStringOutput.Add($"this.ValidUntilDate = {(this.ValidUntilDate == null ? "null" : this.ValidUntilDate)}");
+            toStringOutput.Add($"this.ValidUntilLocalTime = {(this.ValidUntilLocalTime == null ? "null" : this.ValidUntilLocalTime)}");
             toStringOutput.Add($"this.ExcludeStrategy = {(this.ExcludeStrategy == null ? "null" : this.ExcludeStrategy.ToString())}");
             toStringOutput.Add($"this.MinimumOrderSubtotalMoney = {(this.MinimumOrderSubtotalMoney == null ? "null" : this.MinimumOrderSubtotalMoney.ToString())}");
             toStringOutput.Add($"this.CustomerGroupIdsAny = {(this.CustomerGroupIdsAny == null ? "null" : $"[{string.Join(", ", this.CustomerGroupIdsAny)} ]")}");

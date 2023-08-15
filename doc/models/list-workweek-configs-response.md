@@ -13,9 +13,9 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `WorkweekConfigs` | [`IList<Models.WorkweekConfig>`](../../doc/models/workweek-config.md) | Optional | A page of `WorkweekConfig` results. |
+| `WorkweekConfigs` | [`IList<WorkweekConfig>`](../../doc/models/workweek-config.md) | Optional | A page of `WorkweekConfig` results. |
 | `Cursor` | `string` | Optional | The value supplied in the subsequent request to fetch the next page of<br>`WorkweekConfig` results. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

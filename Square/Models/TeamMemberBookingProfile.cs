@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -146,11 +147,11 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
-            toStringOutput.Add($"this.DisplayName = {(this.DisplayName == null ? "null" : this.DisplayName == string.Empty ? "" : this.DisplayName)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.DisplayName = {(this.DisplayName == null ? "null" : this.DisplayName)}");
             toStringOutput.Add($"this.IsBookable = {(this.IsBookable == null ? "null" : this.IsBookable.ToString())}");
-            toStringOutput.Add($"this.ProfileImageUrl = {(this.ProfileImageUrl == null ? "null" : this.ProfileImageUrl == string.Empty ? "" : this.ProfileImageUrl)}");
+            toStringOutput.Add($"this.ProfileImageUrl = {(this.ProfileImageUrl == null ? "null" : this.ProfileImageUrl)}");
         }
 
         /// <summary>

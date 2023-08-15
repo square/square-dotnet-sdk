@@ -13,7 +13,7 @@ or inches. Exactly one of the following fields are required: `custom_unit`,
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `CustomUnit` | [`Models.MeasurementUnitCustom`](../../doc/models/measurement-unit-custom.md) | Optional | The information needed to define a custom unit, provided by the seller. |
+| `CustomUnit` | [`MeasurementUnitCustom`](../../doc/models/measurement-unit-custom.md) | Optional | The information needed to define a custom unit, provided by the seller. |
 | `AreaUnit` | [`string`](../../doc/models/measurement-unit-area.md) | Optional | Unit of area used to measure a quantity. |
 | `LengthUnit` | [`string`](../../doc/models/measurement-unit-length.md) | Optional | The unit of length used to measure a quantity. |
 | `VolumeUnit` | [`string`](../../doc/models/measurement-unit-volume.md) | Optional | The unit of volume used to measure a quantity. |

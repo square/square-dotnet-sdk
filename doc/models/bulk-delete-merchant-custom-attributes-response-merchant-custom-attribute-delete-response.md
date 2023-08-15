@@ -12,7 +12,7 @@ request.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Errors that occurred while processing the individual MerchantCustomAttributeDeleteRequest request |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Errors that occurred while processing the individual MerchantCustomAttributeDeleteRequest request |
 
 ## Example (as JSON)
 

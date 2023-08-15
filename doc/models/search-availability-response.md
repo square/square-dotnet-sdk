@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Availabilities` | [`IList<Models.Availability>`](../../doc/models/availability.md) | Optional | List of appointment slots available for booking. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Errors that occurred during the request. |
+| `Availabilities` | [`IList<Availability>`](../../doc/models/availability.md) | Optional | List of appointment slots available for booking. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Errors that occurred during the request. |
 
 ## Example (as JSON)
 

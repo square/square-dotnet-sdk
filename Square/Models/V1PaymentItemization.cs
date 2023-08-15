@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -346,12 +347,12 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
             toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity.ToString())}");
             toStringOutput.Add($"this.ItemizationType = {(this.ItemizationType == null ? "null" : this.ItemizationType.ToString())}");
             toStringOutput.Add($"this.ItemDetail = {(this.ItemDetail == null ? "null" : this.ItemDetail.ToString())}");
-            toStringOutput.Add($"this.Notes = {(this.Notes == null ? "null" : this.Notes == string.Empty ? "" : this.Notes)}");
-            toStringOutput.Add($"this.ItemVariationName = {(this.ItemVariationName == null ? "null" : this.ItemVariationName == string.Empty ? "" : this.ItemVariationName)}");
+            toStringOutput.Add($"this.Notes = {(this.Notes == null ? "null" : this.Notes)}");
+            toStringOutput.Add($"this.ItemVariationName = {(this.ItemVariationName == null ? "null" : this.ItemVariationName)}");
             toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
             toStringOutput.Add($"this.SingleQuantityMoney = {(this.SingleQuantityMoney == null ? "null" : this.SingleQuantityMoney.ToString())}");
             toStringOutput.Add($"this.GrossSalesMoney = {(this.GrossSalesMoney == null ? "null" : this.GrossSalesMoney.ToString())}");

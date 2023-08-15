@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `BusinessBookingProfile` | [`Models.BusinessBookingProfile`](../../doc/models/business-booking-profile.md) | Optional | - |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Errors that occurred during the request. |
+| `BusinessBookingProfile` | [`BusinessBookingProfile`](../../doc/models/business-booking-profile.md) | Optional | - |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Errors that occurred during the request. |
 
 ## Example (as JSON)
 

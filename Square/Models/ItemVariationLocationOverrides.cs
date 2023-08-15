@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -228,14 +229,14 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
             toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
             toStringOutput.Add($"this.PricingType = {(this.PricingType == null ? "null" : this.PricingType.ToString())}");
             toStringOutput.Add($"this.TrackInventory = {(this.TrackInventory == null ? "null" : this.TrackInventory.ToString())}");
             toStringOutput.Add($"this.InventoryAlertType = {(this.InventoryAlertType == null ? "null" : this.InventoryAlertType.ToString())}");
             toStringOutput.Add($"this.InventoryAlertThreshold = {(this.InventoryAlertThreshold == null ? "null" : this.InventoryAlertThreshold.ToString())}");
             toStringOutput.Add($"this.SoldOut = {(this.SoldOut == null ? "null" : this.SoldOut.ToString())}");
-            toStringOutput.Add($"this.SoldOutValidUntil = {(this.SoldOutValidUntil == null ? "null" : this.SoldOutValidUntil == string.Empty ? "" : this.SoldOutValidUntil)}");
+            toStringOutput.Add($"this.SoldOutValidUntil = {(this.SoldOutValidUntil == null ? "null" : this.SoldOutValidUntil)}");
         }
 
         /// <summary>

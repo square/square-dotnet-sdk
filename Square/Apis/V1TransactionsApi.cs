@@ -76,8 +76,7 @@ namespace Square.Apis
                   {
                       _result.ForEach(model => model.ContextSetter(_context));
                       return _result;
-                  })
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<List<Models.V1Order>>(_response)))
+                  }))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -112,8 +111,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("location_id", locationId))
                       .Template(_template => _template.Setup("order_id", orderId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Order>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -154,8 +152,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("order_id", orderId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Order>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -237,8 +234,7 @@ namespace Square.Apis
                   {
                       _result.ForEach(model => model.ContextSetter(_context));
                       return _result;
-                  })
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<List<Models.V1Payment>>(_response)))
+                  }))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -273,8 +269,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("location_id", locationId))
                       .Template(_template => _template.Setup("payment_id", paymentId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Payment>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -333,8 +328,7 @@ namespace Square.Apis
                   {
                       _result.ForEach(model => model.ContextSetter(_context));
                       return _result;
-                  })
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<List<Models.V1Refund>>(_response)))
+                  }))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -388,8 +382,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("location_id", locationId))
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Refund>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -461,8 +454,7 @@ namespace Square.Apis
                   {
                       _result.ForEach(model => model.ContextSetter(_context));
                       return _result;
-                  })
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<List<Models.V1Settlement>>(_response)))
+                  }))
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
@@ -523,8 +515,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("location_id", locationId))
                       .Template(_template => _template.Setup("settlement_id", settlementId))))
               .ResponseHandler(_responseHandler => _responseHandler
-                  .ContextAdder((_result, _context) => _result.ContextSetter(_context))
-                  .Deserializer(_response => ApiHelper.JsonDeserialize<Models.V1Settlement>(_response)))
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);
     }
 }

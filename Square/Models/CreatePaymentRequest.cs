@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -42,6 +43,7 @@ namespace Square.Models
         /// <param name="statementDescriptionIdentifier">statement_description_identifier.</param>
         /// <param name="cashDetails">cash_details.</param>
         /// <param name="externalDetails">external_details.</param>
+        /// <param name="customerDetails">customer_details.</param>
         public CreatePaymentRequest(
             string sourceId,
             string idempotencyKey,
@@ -64,7 +66,8 @@ namespace Square.Models
             string note = null,
             string statementDescriptionIdentifier = null,
             Models.CashPaymentDetails cashDetails = null,
-            Models.ExternalPaymentDetails externalDetails = null)
+            Models.ExternalPaymentDetails externalDetails = null,
+            Models.CustomerDetails customerDetails = null)
         {
             this.SourceId = sourceId;
             this.IdempotencyKey = idempotencyKey;
@@ -88,6 +91,7 @@ namespace Square.Models
             this.StatementDescriptionIdentifier = statementDescriptionIdentifier;
             this.CashDetails = cashDetails;
             this.ExternalDetails = externalDetails;
+            this.CustomerDetails = customerDetails;
         }
 
         /// <summary>
@@ -288,6 +292,12 @@ namespace Square.Models
         [JsonProperty("external_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.ExternalPaymentDetails ExternalDetails { get; }
 
+        /// <summary>
+        /// Details about the customer making the payment.
+        /// </summary>
+        [JsonProperty("customer_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CustomerDetails CustomerDetails { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -331,20 +341,21 @@ namespace Square.Models
                 ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
                 ((this.StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (this.StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true)) &&
                 ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
-                ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true));
+                ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true)) &&
+                ((this.CustomerDetails == null && other.CustomerDetails == null) || (this.CustomerDetails?.Equals(other.CustomerDetails) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1754918315;
+            int hashCode = 1620166142;
             hashCode = HashCode.Combine(this.SourceId, this.IdempotencyKey, this.AmountMoney, this.TipMoney, this.AppFeeMoney, this.DelayDuration, this.DelayAction);
 
             hashCode = HashCode.Combine(hashCode, this.Autocomplete, this.OrderId, this.CustomerId, this.LocationId, this.TeamMemberId, this.ReferenceId, this.VerificationToken);
 
             hashCode = HashCode.Combine(hashCode, this.AcceptPartialAuthorization, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier, this.CashDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.ExternalDetails);
+            hashCode = HashCode.Combine(hashCode, this.ExternalDetails, this.CustomerDetails);
 
             return hashCode;
         }
@@ -354,28 +365,29 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.SourceId = {(this.SourceId == null ? "null" : this.SourceId == string.Empty ? "" : this.SourceId)}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey == string.Empty ? "" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.SourceId = {(this.SourceId == null ? "null" : this.SourceId)}");
+            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.TipMoney = {(this.TipMoney == null ? "null" : this.TipMoney.ToString())}");
             toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
-            toStringOutput.Add($"this.DelayDuration = {(this.DelayDuration == null ? "null" : this.DelayDuration == string.Empty ? "" : this.DelayDuration)}");
-            toStringOutput.Add($"this.DelayAction = {(this.DelayAction == null ? "null" : this.DelayAction == string.Empty ? "" : this.DelayAction)}");
+            toStringOutput.Add($"this.DelayDuration = {(this.DelayDuration == null ? "null" : this.DelayDuration)}");
+            toStringOutput.Add($"this.DelayAction = {(this.DelayAction == null ? "null" : this.DelayAction)}");
             toStringOutput.Add($"this.Autocomplete = {(this.Autocomplete == null ? "null" : this.Autocomplete.ToString())}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId == string.Empty ? "" : this.OrderId)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId == string.Empty ? "" : this.TeamMemberId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
-            toStringOutput.Add($"this.VerificationToken = {(this.VerificationToken == null ? "null" : this.VerificationToken == string.Empty ? "" : this.VerificationToken)}");
+            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
+            toStringOutput.Add($"this.VerificationToken = {(this.VerificationToken == null ? "null" : this.VerificationToken)}");
             toStringOutput.Add($"this.AcceptPartialAuthorization = {(this.AcceptPartialAuthorization == null ? "null" : this.AcceptPartialAuthorization.ToString())}");
-            toStringOutput.Add($"this.BuyerEmailAddress = {(this.BuyerEmailAddress == null ? "null" : this.BuyerEmailAddress == string.Empty ? "" : this.BuyerEmailAddress)}");
+            toStringOutput.Add($"this.BuyerEmailAddress = {(this.BuyerEmailAddress == null ? "null" : this.BuyerEmailAddress)}");
             toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
             toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
-            toStringOutput.Add($"this.StatementDescriptionIdentifier = {(this.StatementDescriptionIdentifier == null ? "null" : this.StatementDescriptionIdentifier == string.Empty ? "" : this.StatementDescriptionIdentifier)}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
+            toStringOutput.Add($"this.StatementDescriptionIdentifier = {(this.StatementDescriptionIdentifier == null ? "null" : this.StatementDescriptionIdentifier)}");
             toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
             toStringOutput.Add($"this.ExternalDetails = {(this.ExternalDetails == null ? "null" : this.ExternalDetails.ToString())}");
+            toStringOutput.Add($"this.CustomerDetails = {(this.CustomerDetails == null ? "null" : this.CustomerDetails.ToString())}");
         }
 
         /// <summary>
@@ -406,7 +418,8 @@ namespace Square.Models
                 .Note(this.Note)
                 .StatementDescriptionIdentifier(this.StatementDescriptionIdentifier)
                 .CashDetails(this.CashDetails)
-                .ExternalDetails(this.ExternalDetails);
+                .ExternalDetails(this.ExternalDetails)
+                .CustomerDetails(this.CustomerDetails);
             return builder;
         }
 
@@ -437,6 +450,7 @@ namespace Square.Models
             private string statementDescriptionIdentifier;
             private Models.CashPaymentDetails cashDetails;
             private Models.ExternalPaymentDetails externalDetails;
+            private Models.CustomerDetails customerDetails;
 
             public Builder(
                 string sourceId,
@@ -688,6 +702,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CustomerDetails.
+             /// </summary>
+             /// <param name="customerDetails"> customerDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder CustomerDetails(Models.CustomerDetails customerDetails)
+            {
+                this.customerDetails = customerDetails;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -716,7 +741,8 @@ namespace Square.Models
                     this.note,
                     this.statementDescriptionIdentifier,
                     this.cashDetails,
-                    this.externalDetails);
+                    this.externalDetails,
+                    this.customerDetails);
             }
         }
     }

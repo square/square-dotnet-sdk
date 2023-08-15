@@ -11,8 +11,8 @@ A response that contains all loyalty programs.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Programs` | [`IList<Models.LoyaltyProgram>`](../../doc/models/loyalty-program.md) | Optional | A list of `LoyaltyProgram` for the merchant. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Programs` | [`IList<LoyaltyProgram>`](../../doc/models/loyalty-program.md) | Optional | A list of `LoyaltyProgram` for the merchant. |
 
 ## Example (as JSON)
 

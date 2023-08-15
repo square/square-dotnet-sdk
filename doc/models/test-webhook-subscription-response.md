@@ -15,8 +15,8 @@ present.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `SubscriptionTestResult` | [`Models.SubscriptionTestResult`](../../doc/models/subscription-test-result.md) | Optional | Represents the details of a webhook subscription, including notification URL,<br>event types, and signature key. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
+| `SubscriptionTestResult` | [`SubscriptionTestResult`](../../doc/models/subscription-test-result.md) | Optional | Represents the details of a webhook subscription, including notification URL,<br>event types, and signature key. |
 
 ## Example (as JSON)
 

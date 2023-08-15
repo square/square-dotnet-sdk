@@ -13,7 +13,7 @@ For more information, see [Subscription Plans and Variations](https://developer.
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Name` | `string` | Required | The name of the plan variation. |
-| `Phases` | [`IList<Models.SubscriptionPhase>`](../../doc/models/subscription-phase.md) | Required | A list containing each [SubscriptionPhase](entity:SubscriptionPhase) for this plan variation. |
+| `Phases` | [`IList<SubscriptionPhase>`](../../doc/models/subscription-phase.md) | Required | A list containing each [SubscriptionPhase](entity:SubscriptionPhase) for this plan variation. |
 | `SubscriptionPlanId` | `string` | Optional | The id of the subscription plan, if there is one. |
 
 ## Example (as JSON)

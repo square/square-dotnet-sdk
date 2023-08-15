@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -176,11 +177,11 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate == string.Empty ? "" : this.EffectiveDate)}");
+            toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate)}");
             toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
-            toStringOutput.Add($"this.NewPlanVariationId = {(this.NewPlanVariationId == null ? "null" : this.NewPlanVariationId == string.Empty ? "" : this.NewPlanVariationId)}");
+            toStringOutput.Add($"this.NewPlanVariationId = {(this.NewPlanVariationId == null ? "null" : this.NewPlanVariationId)}");
         }
 
         /// <summary>

@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -232,13 +233,13 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
             toStringOutput.Add($"this.CalculationPhase = {(this.CalculationPhase == null ? "null" : this.CalculationPhase.ToString())}");
             toStringOutput.Add($"this.InclusionType = {(this.InclusionType == null ? "null" : this.InclusionType.ToString())}");
-            toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage == string.Empty ? "" : this.Percentage)}");
+            toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage)}");
             toStringOutput.Add($"this.AppliesToCustomAmounts = {(this.AppliesToCustomAmounts == null ? "null" : this.AppliesToCustomAmounts.ToString())}");
             toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
-            toStringOutput.Add($"this.AppliesToProductSetId = {(this.AppliesToProductSetId == null ? "null" : this.AppliesToProductSetId == string.Empty ? "" : this.AppliesToProductSetId)}");
+            toStringOutput.Add($"this.AppliesToProductSetId = {(this.AppliesToProductSetId == null ? "null" : this.AppliesToProductSetId)}");
         }
 
         /// <summary>

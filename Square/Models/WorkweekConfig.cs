@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -127,12 +128,12 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.StartOfWeek = {(this.StartOfWeek == null ? "null" : this.StartOfWeek.ToString())}");
-            toStringOutput.Add($"this.StartOfDayLocalTime = {(this.StartOfDayLocalTime == null ? "null" : this.StartOfDayLocalTime == string.Empty ? "" : this.StartOfDayLocalTime)}");
+            toStringOutput.Add($"this.StartOfDayLocalTime = {(this.StartOfDayLocalTime == null ? "null" : this.StartOfDayLocalTime)}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
         }
 
         /// <summary>

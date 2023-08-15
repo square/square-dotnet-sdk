@@ -11,7 +11,7 @@ Updates a [Subscription](../../doc/models/webhook-subscription.md).
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Subscription` | [`Models.WebhookSubscription`](../../doc/models/webhook-subscription.md) | Optional | Represents the details of a webhook subscription, including notification URL,<br>event types, and signature key. |
+| `Subscription` | [`WebhookSubscription`](../../doc/models/webhook-subscription.md) | Optional | Represents the details of a webhook subscription, including notification URL,<br>event types, and signature key. |
 
 ## Example (as JSON)
 

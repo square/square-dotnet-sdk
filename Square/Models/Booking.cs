@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -359,16 +360,16 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.StartAt = {(this.StartAt == null ? "null" : this.StartAt == string.Empty ? "" : this.StartAt)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
-            toStringOutput.Add($"this.CustomerNote = {(this.CustomerNote == null ? "null" : this.CustomerNote == string.Empty ? "" : this.CustomerNote)}");
-            toStringOutput.Add($"this.SellerNote = {(this.SellerNote == null ? "null" : this.SellerNote == string.Empty ? "" : this.SellerNote)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.StartAt = {(this.StartAt == null ? "null" : this.StartAt)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
+            toStringOutput.Add($"this.CustomerNote = {(this.CustomerNote == null ? "null" : this.CustomerNote)}");
+            toStringOutput.Add($"this.SellerNote = {(this.SellerNote == null ? "null" : this.SellerNote)}");
             toStringOutput.Add($"this.AppointmentSegments = {(this.AppointmentSegments == null ? "null" : $"[{string.Join(", ", this.AppointmentSegments)} ]")}");
             toStringOutput.Add($"this.TransitionTimeMinutes = {(this.TransitionTimeMinutes == null ? "null" : this.TransitionTimeMinutes.ToString())}");
             toStringOutput.Add($"this.AllDay = {(this.AllDay == null ? "null" : this.AllDay.ToString())}");

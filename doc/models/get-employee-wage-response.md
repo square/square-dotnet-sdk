@@ -13,8 +13,8 @@ the request resulted in errors.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `EmployeeWage` | [`Models.EmployeeWage`](../../doc/models/employee-wage.md) | Optional | The hourly wage rate that an employee earns on a `Shift` for doing the job specified by the `title` property of this object. Deprecated at version 2020-08-26. Use [TeamMemberWage](entity:TeamMemberWage). |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `EmployeeWage` | [`EmployeeWage`](../../doc/models/employee-wage.md) | Optional | The hourly wage rate that an employee earns on a `Shift` for doing the job specified by the `title` property of this object. Deprecated at version 2020-08-26. Use [TeamMemberWage](entity:TeamMemberWage). |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

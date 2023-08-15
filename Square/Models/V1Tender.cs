@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -387,19 +388,19 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
-            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId == string.Empty ? "" : this.EmployeeId)}");
-            toStringOutput.Add($"this.ReceiptUrl = {(this.ReceiptUrl == null ? "null" : this.ReceiptUrl == string.Empty ? "" : this.ReceiptUrl)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId)}");
+            toStringOutput.Add($"this.ReceiptUrl = {(this.ReceiptUrl == null ? "null" : this.ReceiptUrl)}");
             toStringOutput.Add($"this.CardBrand = {(this.CardBrand == null ? "null" : this.CardBrand.ToString())}");
-            toStringOutput.Add($"this.PanSuffix = {(this.PanSuffix == null ? "null" : this.PanSuffix == string.Empty ? "" : this.PanSuffix)}");
+            toStringOutput.Add($"this.PanSuffix = {(this.PanSuffix == null ? "null" : this.PanSuffix)}");
             toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod.ToString())}");
-            toStringOutput.Add($"this.PaymentNote = {(this.PaymentNote == null ? "null" : this.PaymentNote == string.Empty ? "" : this.PaymentNote)}");
+            toStringOutput.Add($"this.PaymentNote = {(this.PaymentNote == null ? "null" : this.PaymentNote)}");
             toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
             toStringOutput.Add($"this.TenderedMoney = {(this.TenderedMoney == null ? "null" : this.TenderedMoney.ToString())}");
-            toStringOutput.Add($"this.TenderedAt = {(this.TenderedAt == null ? "null" : this.TenderedAt == string.Empty ? "" : this.TenderedAt)}");
-            toStringOutput.Add($"this.SettledAt = {(this.SettledAt == null ? "null" : this.SettledAt == string.Empty ? "" : this.SettledAt)}");
+            toStringOutput.Add($"this.TenderedAt = {(this.TenderedAt == null ? "null" : this.TenderedAt)}");
+            toStringOutput.Add($"this.SettledAt = {(this.SettledAt == null ? "null" : this.SettledAt)}");
             toStringOutput.Add($"this.ChangeBackMoney = {(this.ChangeBackMoney == null ? "null" : this.ChangeBackMoney.ToString())}");
             toStringOutput.Add($"this.RefundedMoney = {(this.RefundedMoney == null ? "null" : this.RefundedMoney.ToString())}");
             toStringOutput.Add($"this.IsExchange = {(this.IsExchange == null ? "null" : this.IsExchange.ToString())}");

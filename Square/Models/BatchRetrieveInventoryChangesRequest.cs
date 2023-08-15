@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -304,9 +305,9 @@ namespace Square.Models
             toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
             toStringOutput.Add($"this.Types = {(this.Types == null ? "null" : $"[{string.Join(", ", this.Types)} ]")}");
             toStringOutput.Add($"this.States = {(this.States == null ? "null" : $"[{string.Join(", ", this.States)} ]")}");
-            toStringOutput.Add($"this.UpdatedAfter = {(this.UpdatedAfter == null ? "null" : this.UpdatedAfter == string.Empty ? "" : this.UpdatedAfter)}");
-            toStringOutput.Add($"this.UpdatedBefore = {(this.UpdatedBefore == null ? "null" : this.UpdatedBefore == string.Empty ? "" : this.UpdatedBefore)}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor == string.Empty ? "" : this.Cursor)}");
+            toStringOutput.Add($"this.UpdatedAfter = {(this.UpdatedAfter == null ? "null" : this.UpdatedAfter)}");
+            toStringOutput.Add($"this.UpdatedBefore = {(this.UpdatedBefore == null ? "null" : this.UpdatedBefore)}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
         }
 

@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -151,14 +152,14 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.BreakName = {(this.BreakName == null ? "null" : this.BreakName == string.Empty ? "" : this.BreakName)}");
-            toStringOutput.Add($"this.ExpectedDuration = {(this.ExpectedDuration == null ? "null" : this.ExpectedDuration == string.Empty ? "" : this.ExpectedDuration)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.BreakName = {(this.BreakName == null ? "null" : this.BreakName)}");
+            toStringOutput.Add($"this.ExpectedDuration = {(this.ExpectedDuration == null ? "null" : this.ExpectedDuration)}");
             toStringOutput.Add($"this.IsPaid = {this.IsPaid}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
         }
 
         /// <summary>

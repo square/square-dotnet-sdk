@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -598,32 +599,32 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
             toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
-            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone == string.Empty ? "" : this.Timezone)}");
+            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone)}");
             toStringOutput.Add($"this.Capabilities = {(this.Capabilities == null ? "null" : $"[{string.Join(", ", this.Capabilities)} ]")}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
             toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country.ToString())}");
-            toStringOutput.Add($"this.LanguageCode = {(this.LanguageCode == null ? "null" : this.LanguageCode == string.Empty ? "" : this.LanguageCode)}");
+            toStringOutput.Add($"this.LanguageCode = {(this.LanguageCode == null ? "null" : this.LanguageCode)}");
             toStringOutput.Add($"this.Currency = {(this.Currency == null ? "null" : this.Currency.ToString())}");
-            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber == string.Empty ? "" : this.PhoneNumber)}");
-            toStringOutput.Add($"this.BusinessName = {(this.BusinessName == null ? "null" : this.BusinessName == string.Empty ? "" : this.BusinessName)}");
+            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.BusinessName = {(this.BusinessName == null ? "null" : this.BusinessName)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.WebsiteUrl = {(this.WebsiteUrl == null ? "null" : this.WebsiteUrl == string.Empty ? "" : this.WebsiteUrl)}");
+            toStringOutput.Add($"this.WebsiteUrl = {(this.WebsiteUrl == null ? "null" : this.WebsiteUrl)}");
             toStringOutput.Add($"this.BusinessHours = {(this.BusinessHours == null ? "null" : this.BusinessHours.ToString())}");
-            toStringOutput.Add($"this.BusinessEmail = {(this.BusinessEmail == null ? "null" : this.BusinessEmail == string.Empty ? "" : this.BusinessEmail)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
-            toStringOutput.Add($"this.TwitterUsername = {(this.TwitterUsername == null ? "null" : this.TwitterUsername == string.Empty ? "" : this.TwitterUsername)}");
-            toStringOutput.Add($"this.InstagramUsername = {(this.InstagramUsername == null ? "null" : this.InstagramUsername == string.Empty ? "" : this.InstagramUsername)}");
-            toStringOutput.Add($"this.FacebookUrl = {(this.FacebookUrl == null ? "null" : this.FacebookUrl == string.Empty ? "" : this.FacebookUrl)}");
+            toStringOutput.Add($"this.BusinessEmail = {(this.BusinessEmail == null ? "null" : this.BusinessEmail)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.TwitterUsername = {(this.TwitterUsername == null ? "null" : this.TwitterUsername)}");
+            toStringOutput.Add($"this.InstagramUsername = {(this.InstagramUsername == null ? "null" : this.InstagramUsername)}");
+            toStringOutput.Add($"this.FacebookUrl = {(this.FacebookUrl == null ? "null" : this.FacebookUrl)}");
             toStringOutput.Add($"this.Coordinates = {(this.Coordinates == null ? "null" : this.Coordinates.ToString())}");
-            toStringOutput.Add($"this.LogoUrl = {(this.LogoUrl == null ? "null" : this.LogoUrl == string.Empty ? "" : this.LogoUrl)}");
-            toStringOutput.Add($"this.PosBackgroundUrl = {(this.PosBackgroundUrl == null ? "null" : this.PosBackgroundUrl == string.Empty ? "" : this.PosBackgroundUrl)}");
-            toStringOutput.Add($"this.Mcc = {(this.Mcc == null ? "null" : this.Mcc == string.Empty ? "" : this.Mcc)}");
-            toStringOutput.Add($"this.FullFormatLogoUrl = {(this.FullFormatLogoUrl == null ? "null" : this.FullFormatLogoUrl == string.Empty ? "" : this.FullFormatLogoUrl)}");
+            toStringOutput.Add($"this.LogoUrl = {(this.LogoUrl == null ? "null" : this.LogoUrl)}");
+            toStringOutput.Add($"this.PosBackgroundUrl = {(this.PosBackgroundUrl == null ? "null" : this.PosBackgroundUrl)}");
+            toStringOutput.Add($"this.Mcc = {(this.Mcc == null ? "null" : this.Mcc)}");
+            toStringOutput.Add($"this.FullFormatLogoUrl = {(this.FullFormatLogoUrl == null ? "null" : this.FullFormatLogoUrl)}");
             toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : this.TaxIds.ToString())}");
         }
 

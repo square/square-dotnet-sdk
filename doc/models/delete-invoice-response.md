@@ -11,7 +11,7 @@ Describes a `DeleteInvoice` response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
 
 ## Example (as JSON)
 

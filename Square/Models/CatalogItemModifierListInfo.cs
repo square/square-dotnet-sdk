@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -191,7 +192,7 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ModifierListId = {(this.ModifierListId == null ? "null" : this.ModifierListId == string.Empty ? "" : this.ModifierListId)}");
+            toStringOutput.Add($"this.ModifierListId = {(this.ModifierListId == null ? "null" : this.ModifierListId)}");
             toStringOutput.Add($"this.ModifierOverrides = {(this.ModifierOverrides == null ? "null" : $"[{string.Join(", ", this.ModifierOverrides)} ]")}");
             toStringOutput.Add($"this.MinSelectedModifiers = {(this.MinSelectedModifiers == null ? "null" : this.MinSelectedModifiers.ToString())}");
             toStringOutput.Add($"this.MaxSelectedModifiers = {(this.MaxSelectedModifiers == null ? "null" : this.MaxSelectedModifiers.ToString())}");

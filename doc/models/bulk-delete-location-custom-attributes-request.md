@@ -11,7 +11,7 @@ Represents a [BulkDeleteLocationCustomAttributes](../../doc/api/location-custom-
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Values` | [`IDictionary<string, Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest>`](../../doc/models/bulk-delete-location-custom-attributes-request-location-custom-attribute-delete-request.md) | Required | The data used to update the `CustomAttribute` objects.<br>The keys must be unique and are used to map to the corresponding response. |
+| `Values` | [`IDictionary<string, BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest>`](../../doc/models/bulk-delete-location-custom-attributes-request-location-custom-attribute-delete-request.md) | Required | The data used to update the `CustomAttribute` objects.<br>The keys must be unique and are used to map to the corresponding response. |
 
 ## Example (as JSON)
 

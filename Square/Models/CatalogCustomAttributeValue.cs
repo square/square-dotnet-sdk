@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -247,14 +248,14 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
-            toStringOutput.Add($"this.StringValue = {(this.StringValue == null ? "null" : this.StringValue == string.Empty ? "" : this.StringValue)}");
-            toStringOutput.Add($"this.CustomAttributeDefinitionId = {(this.CustomAttributeDefinitionId == null ? "null" : this.CustomAttributeDefinitionId == string.Empty ? "" : this.CustomAttributeDefinitionId)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.StringValue = {(this.StringValue == null ? "null" : this.StringValue)}");
+            toStringOutput.Add($"this.CustomAttributeDefinitionId = {(this.CustomAttributeDefinitionId == null ? "null" : this.CustomAttributeDefinitionId)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.NumberValue = {(this.NumberValue == null ? "null" : this.NumberValue == string.Empty ? "" : this.NumberValue)}");
+            toStringOutput.Add($"this.NumberValue = {(this.NumberValue == null ? "null" : this.NumberValue)}");
             toStringOutput.Add($"this.BooleanValue = {(this.BooleanValue == null ? "null" : this.BooleanValue.ToString())}");
             toStringOutput.Add($"this.SelectionUidValues = {(this.SelectionUidValues == null ? "null" : $"[{string.Join(", ", this.SelectionUidValues)} ]")}");
-            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key == string.Empty ? "" : this.Key)}");
+            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key)}");
         }
 
         /// <summary>

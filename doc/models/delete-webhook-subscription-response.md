@@ -12,7 +12,7 @@ a request to the [DeleteWebhookSubscription](../../doc/api/webhook-subscriptions
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
 
 ## Example (as JSON)
 

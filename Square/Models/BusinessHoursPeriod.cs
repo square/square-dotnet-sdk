@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -142,8 +143,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.DayOfWeek = {(this.DayOfWeek == null ? "null" : this.DayOfWeek.ToString())}");
-            toStringOutput.Add($"this.StartLocalTime = {(this.StartLocalTime == null ? "null" : this.StartLocalTime == string.Empty ? "" : this.StartLocalTime)}");
-            toStringOutput.Add($"this.EndLocalTime = {(this.EndLocalTime == null ? "null" : this.EndLocalTime == string.Empty ? "" : this.EndLocalTime)}");
+            toStringOutput.Add($"this.StartLocalTime = {(this.StartLocalTime == null ? "null" : this.StartLocalTime)}");
+            toStringOutput.Add($"this.EndLocalTime = {(this.EndLocalTime == null ? "null" : this.EndLocalTime)}");
         }
 
         /// <summary>

@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -358,15 +359,15 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid == string.Empty ? "" : this.Uid)}");
+            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
             toStringOutput.Add($"this.RequestMethod = {(this.RequestMethod == null ? "null" : this.RequestMethod.ToString())}");
             toStringOutput.Add($"this.RequestType = {(this.RequestType == null ? "null" : this.RequestType.ToString())}");
-            toStringOutput.Add($"this.DueDate = {(this.DueDate == null ? "null" : this.DueDate == string.Empty ? "" : this.DueDate)}");
+            toStringOutput.Add($"this.DueDate = {(this.DueDate == null ? "null" : this.DueDate)}");
             toStringOutput.Add($"this.FixedAmountRequestedMoney = {(this.FixedAmountRequestedMoney == null ? "null" : this.FixedAmountRequestedMoney.ToString())}");
-            toStringOutput.Add($"this.PercentageRequested = {(this.PercentageRequested == null ? "null" : this.PercentageRequested == string.Empty ? "" : this.PercentageRequested)}");
+            toStringOutput.Add($"this.PercentageRequested = {(this.PercentageRequested == null ? "null" : this.PercentageRequested)}");
             toStringOutput.Add($"this.TippingEnabled = {(this.TippingEnabled == null ? "null" : this.TippingEnabled.ToString())}");
             toStringOutput.Add($"this.AutomaticPaymentSource = {(this.AutomaticPaymentSource == null ? "null" : this.AutomaticPaymentSource.ToString())}");
-            toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId == string.Empty ? "" : this.CardId)}");
+            toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId)}");
             toStringOutput.Add($"this.Reminders = {(this.Reminders == null ? "null" : $"[{string.Join(", ", this.Reminders)} ]")}");
             toStringOutput.Add($"this.ComputedAmountMoney = {(this.ComputedAmountMoney == null ? "null" : this.ComputedAmountMoney.ToString())}");
             toStringOutput.Add($"this.TotalCompletedAmountMoney = {(this.TotalCompletedAmountMoney == null ? "null" : this.TotalCompletedAmountMoney.ToString())}");

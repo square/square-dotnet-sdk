@@ -11,8 +11,8 @@ Describes a `GetInvoice` response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Invoice` | [`Models.Invoice`](../../doc/models/invoice.md) | Optional | Stores information about an invoice. You use the Invoices API to create and manage<br>invoices. For more information, see [Invoices API Overview](https://developer.squareup.com/docs/invoices-api/overview). |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
+| `Invoice` | [`Invoice`](../../doc/models/invoice.md) | Optional | Stores information about an invoice. You use the Invoices API to create and manage<br>invoices. For more information, see [Invoices API Overview](https://developer.squareup.com/docs/invoices-api/overview). |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information about errors encountered during the request. |
 
 ## Example (as JSON)
 

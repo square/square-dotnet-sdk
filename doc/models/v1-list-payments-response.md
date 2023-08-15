@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Items` | [`IList<Models.V1Payment>`](../../doc/models/v1-payment.md) | Optional | - |
+| `Items` | [`IList<V1Payment>`](../../doc/models/v1-payment.md) | Optional | - |
 
 ## Example (as JSON)
 

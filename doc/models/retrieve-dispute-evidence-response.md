@@ -11,8 +11,8 @@ Defines the fields in a `RetrieveDisputeEvidence` response.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `Evidence` | [`Models.DisputeEvidence`](../../doc/models/dispute-evidence.md) | Optional | - |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Evidence` | [`DisputeEvidence`](../../doc/models/dispute-evidence.md) | Optional | - |
 
 ## Example (as JSON)
 

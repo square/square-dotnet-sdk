@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -42,7 +43,6 @@ namespace Square.Models
         /// <param name="imageIds">image_ids.</param>
         /// <param name="teamMemberIds">team_member_ids.</param>
         /// <param name="stockableConversion">stockable_conversion.</param>
-        /// <param name="itemVariationVendorInfoIds">item_variation_vendor_info_ids.</param>
         public CatalogItemVariation(
             string itemId = null,
             string name = null,
@@ -64,8 +64,7 @@ namespace Square.Models
             bool? stockable = null,
             IList<string> imageIds = null,
             IList<string> teamMemberIds = null,
-            Models.CatalogStockConversion stockableConversion = null,
-            IList<string> itemVariationVendorInfoIds = null)
+            Models.CatalogStockConversion stockableConversion = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -84,8 +83,7 @@ namespace Square.Models
                 { "sellable", false },
                 { "stockable", false },
                 { "image_ids", false },
-                { "team_member_ids", false },
-                { "item_variation_vendor_info_ids", false }
+                { "team_member_ids", false }
             };
 
             if (itemId != null)
@@ -189,12 +187,6 @@ namespace Square.Models
             }
 
             this.StockableConversion = stockableConversion;
-            if (itemVariationVendorInfoIds != null)
-            {
-                shouldSerialize["item_variation_vendor_info_ids"] = true;
-                this.ItemVariationVendorInfoIds = itemVariationVendorInfoIds;
-            }
-
         }
         internal CatalogItemVariation(Dictionary<string, bool> shouldSerialize,
             string itemId = null,
@@ -217,8 +209,7 @@ namespace Square.Models
             bool? stockable = null,
             IList<string> imageIds = null,
             IList<string> teamMemberIds = null,
-            Models.CatalogStockConversion stockableConversion = null,
-            IList<string> itemVariationVendorInfoIds = null)
+            Models.CatalogStockConversion stockableConversion = null)
         {
             this.shouldSerialize = shouldSerialize;
             ItemId = itemId;
@@ -242,7 +233,6 @@ namespace Square.Models
             ImageIds = imageIds;
             TeamMemberIds = teamMemberIds;
             StockableConversion = stockableConversion;
-            ItemVariationVendorInfoIds = itemVariationVendorInfoIds;
         }
 
         /// <summary>
@@ -399,13 +389,6 @@ namespace Square.Models
         [JsonProperty("stockable_conversion", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogStockConversion StockableConversion { get; }
 
-        /// <summary>
-        /// A list of ids of [CatalogItemVariationVendorInfo](entity:CatalogItemVariationVendorInfo) objects that
-        /// reference this ItemVariation. (Deprecated in favor of item_variation_vendor_infos)
-        /// </summary>
-        [JsonProperty("item_variation_vendor_info_ids")]
-        public IList<string> ItemVariationVendorInfoIds { get; }
-
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -560,15 +543,6 @@ namespace Square.Models
             return this.shouldSerialize["team_member_ids"];
         }
 
-        /// <summary>
-        /// Checks if the field should be serialized or not.
-        /// </summary>
-        /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeItemVariationVendorInfoIds()
-        {
-            return this.shouldSerialize["item_variation_vendor_info_ids"];
-        }
-
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -601,21 +575,18 @@ namespace Square.Models
                 ((this.Stockable == null && other.Stockable == null) || (this.Stockable?.Equals(other.Stockable) == true)) &&
                 ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
                 ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true)) &&
-                ((this.StockableConversion == null && other.StockableConversion == null) || (this.StockableConversion?.Equals(other.StockableConversion) == true)) &&
-                ((this.ItemVariationVendorInfoIds == null && other.ItemVariationVendorInfoIds == null) || (this.ItemVariationVendorInfoIds?.Equals(other.ItemVariationVendorInfoIds) == true));
+                ((this.StockableConversion == null && other.StockableConversion == null) || (this.StockableConversion?.Equals(other.StockableConversion) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -786498260;
+            int hashCode = -1883269802;
             hashCode = HashCode.Combine(this.ItemId, this.Name, this.Sku, this.Upc, this.Ordinal, this.PricingType, this.PriceMoney);
 
             hashCode = HashCode.Combine(hashCode, this.LocationOverrides, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold, this.UserData, this.ServiceDuration, this.AvailableForBooking);
 
             hashCode = HashCode.Combine(hashCode, this.ItemOptionValues, this.MeasurementUnitId, this.Sellable, this.Stockable, this.ImageIds, this.TeamMemberIds, this.StockableConversion);
-
-            hashCode = HashCode.Combine(hashCode, this.ItemVariationVendorInfoIds);
 
             return hashCode;
         }
@@ -625,10 +596,10 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ItemId = {(this.ItemId == null ? "null" : this.ItemId == string.Empty ? "" : this.ItemId)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
-            toStringOutput.Add($"this.Sku = {(this.Sku == null ? "null" : this.Sku == string.Empty ? "" : this.Sku)}");
-            toStringOutput.Add($"this.Upc = {(this.Upc == null ? "null" : this.Upc == string.Empty ? "" : this.Upc)}");
+            toStringOutput.Add($"this.ItemId = {(this.ItemId == null ? "null" : this.ItemId)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Sku = {(this.Sku == null ? "null" : this.Sku)}");
+            toStringOutput.Add($"this.Upc = {(this.Upc == null ? "null" : this.Upc)}");
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
             toStringOutput.Add($"this.PricingType = {(this.PricingType == null ? "null" : this.PricingType.ToString())}");
             toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
@@ -636,17 +607,16 @@ namespace Square.Models
             toStringOutput.Add($"this.TrackInventory = {(this.TrackInventory == null ? "null" : this.TrackInventory.ToString())}");
             toStringOutput.Add($"this.InventoryAlertType = {(this.InventoryAlertType == null ? "null" : this.InventoryAlertType.ToString())}");
             toStringOutput.Add($"this.InventoryAlertThreshold = {(this.InventoryAlertThreshold == null ? "null" : this.InventoryAlertThreshold.ToString())}");
-            toStringOutput.Add($"this.UserData = {(this.UserData == null ? "null" : this.UserData == string.Empty ? "" : this.UserData)}");
+            toStringOutput.Add($"this.UserData = {(this.UserData == null ? "null" : this.UserData)}");
             toStringOutput.Add($"this.ServiceDuration = {(this.ServiceDuration == null ? "null" : this.ServiceDuration.ToString())}");
             toStringOutput.Add($"this.AvailableForBooking = {(this.AvailableForBooking == null ? "null" : this.AvailableForBooking.ToString())}");
             toStringOutput.Add($"this.ItemOptionValues = {(this.ItemOptionValues == null ? "null" : $"[{string.Join(", ", this.ItemOptionValues)} ]")}");
-            toStringOutput.Add($"this.MeasurementUnitId = {(this.MeasurementUnitId == null ? "null" : this.MeasurementUnitId == string.Empty ? "" : this.MeasurementUnitId)}");
+            toStringOutput.Add($"this.MeasurementUnitId = {(this.MeasurementUnitId == null ? "null" : this.MeasurementUnitId)}");
             toStringOutput.Add($"this.Sellable = {(this.Sellable == null ? "null" : this.Sellable.ToString())}");
             toStringOutput.Add($"this.Stockable = {(this.Stockable == null ? "null" : this.Stockable.ToString())}");
             toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
             toStringOutput.Add($"this.TeamMemberIds = {(this.TeamMemberIds == null ? "null" : $"[{string.Join(", ", this.TeamMemberIds)} ]")}");
             toStringOutput.Add($"this.StockableConversion = {(this.StockableConversion == null ? "null" : this.StockableConversion.ToString())}");
-            toStringOutput.Add($"this.ItemVariationVendorInfoIds = {(this.ItemVariationVendorInfoIds == null ? "null" : $"[{string.Join(", ", this.ItemVariationVendorInfoIds)} ]")}");
         }
 
         /// <summary>
@@ -676,8 +646,7 @@ namespace Square.Models
                 .Stockable(this.Stockable)
                 .ImageIds(this.ImageIds)
                 .TeamMemberIds(this.TeamMemberIds)
-                .StockableConversion(this.StockableConversion)
-                .ItemVariationVendorInfoIds(this.ItemVariationVendorInfoIds);
+                .StockableConversion(this.StockableConversion);
             return builder;
         }
 
@@ -704,7 +673,6 @@ namespace Square.Models
                 { "stockable", false },
                 { "image_ids", false },
                 { "team_member_ids", false },
-                { "item_variation_vendor_info_ids", false },
             };
 
             private string itemId;
@@ -728,7 +696,6 @@ namespace Square.Models
             private IList<string> imageIds;
             private IList<string> teamMemberIds;
             private Models.CatalogStockConversion stockableConversion;
-            private IList<string> itemVariationVendorInfoIds;
 
              /// <summary>
              /// ItemId.
@@ -977,18 +944,6 @@ namespace Square.Models
                 return this;
             }
 
-             /// <summary>
-             /// ItemVariationVendorInfoIds.
-             /// </summary>
-             /// <param name="itemVariationVendorInfoIds"> itemVariationVendorInfoIds. </param>
-             /// <returns> Builder. </returns>
-            public Builder ItemVariationVendorInfoIds(IList<string> itemVariationVendorInfoIds)
-            {
-                shouldSerialize["item_variation_vendor_info_ids"] = true;
-                this.itemVariationVendorInfoIds = itemVariationVendorInfoIds;
-                return this;
-            }
-
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -1117,14 +1072,6 @@ namespace Square.Models
                 this.shouldSerialize["team_member_ids"] = false;
             }
 
-            /// <summary>
-            /// Marks the field to not be serailized.
-            /// </summary>
-            public void UnsetItemVariationVendorInfoIds()
-            {
-                this.shouldSerialize["item_variation_vendor_info_ids"] = false;
-            }
-
 
             /// <summary>
             /// Builds class object.
@@ -1153,8 +1100,7 @@ namespace Square.Models
                     this.stockable,
                     this.imageIds,
                     this.teamMemberIds,
-                    this.stockableConversion,
-                    this.itemVariationVendorInfoIds);
+                    this.stockableConversion);
             }
         }
     }

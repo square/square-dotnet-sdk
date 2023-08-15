@@ -9,9 +9,9 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Employees` | [`IList<Models.Employee>`](../../doc/models/employee.md) | Optional | - |
+| `Employees` | [`IList<Employee>`](../../doc/models/employee.md) | Optional | - |
 | `Cursor` | `string` | Optional | The token to be used to retrieve the next page of results. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

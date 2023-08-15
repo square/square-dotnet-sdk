@@ -11,7 +11,7 @@ Represents an [AccumulateLoyaltyPoints](../../doc/api/loyalty.md#accumulate-loya
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `AccumulatePoints` | [`Models.LoyaltyEventAccumulatePoints`](../../doc/models/loyalty-event-accumulate-points.md) | Required | Provides metadata when the event `type` is `ACCUMULATE_POINTS`. |
+| `AccumulatePoints` | [`LoyaltyEventAccumulatePoints`](../../doc/models/loyalty-event-accumulate-points.md) | Required | Provides metadata when the event `type` is `ACCUMULATE_POINTS`. |
 | `IdempotencyKey` | `string` | Required | A unique string that identifies the `AccumulateLoyaltyPoints` request.<br>Keys can be any valid string but must be unique for every request.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `128` |
 | `LocationId` | `string` | Required | The [location](entity:Location) where the purchase was made. |
 

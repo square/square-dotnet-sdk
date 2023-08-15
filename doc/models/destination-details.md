@@ -11,7 +11,7 @@ Details about a refund's destination.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `CardDetails` | [`Models.DestinationDetailsCardRefundDetails`](../../doc/models/destination-details-card-refund-details.md) | Optional | - |
+| `CardDetails` | [`DestinationDetailsCardRefundDetails`](../../doc/models/destination-details-card-refund-details.md) | Optional | - |
 
 ## Example (as JSON)
 

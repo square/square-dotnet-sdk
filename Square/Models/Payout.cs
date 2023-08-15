@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -271,18 +272,18 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.Destination = {(this.Destination == null ? "null" : this.Destination.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.PayoutFee = {(this.PayoutFee == null ? "null" : $"[{string.Join(", ", this.PayoutFee)} ]")}");
-            toStringOutput.Add($"this.ArrivalDate = {(this.ArrivalDate == null ? "null" : this.ArrivalDate == string.Empty ? "" : this.ArrivalDate)}");
-            toStringOutput.Add($"this.EndToEndId = {(this.EndToEndId == null ? "null" : this.EndToEndId == string.Empty ? "" : this.EndToEndId)}");
+            toStringOutput.Add($"this.ArrivalDate = {(this.ArrivalDate == null ? "null" : this.ArrivalDate)}");
+            toStringOutput.Add($"this.EndToEndId = {(this.EndToEndId == null ? "null" : this.EndToEndId)}");
         }
 
         /// <summary>

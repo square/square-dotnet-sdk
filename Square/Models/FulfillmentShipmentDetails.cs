@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -407,20 +408,20 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Recipient = {(this.Recipient == null ? "null" : this.Recipient.ToString())}");
-            toStringOutput.Add($"this.Carrier = {(this.Carrier == null ? "null" : this.Carrier == string.Empty ? "" : this.Carrier)}");
-            toStringOutput.Add($"this.ShippingNote = {(this.ShippingNote == null ? "null" : this.ShippingNote == string.Empty ? "" : this.ShippingNote)}");
-            toStringOutput.Add($"this.ShippingType = {(this.ShippingType == null ? "null" : this.ShippingType == string.Empty ? "" : this.ShippingType)}");
-            toStringOutput.Add($"this.TrackingNumber = {(this.TrackingNumber == null ? "null" : this.TrackingNumber == string.Empty ? "" : this.TrackingNumber)}");
-            toStringOutput.Add($"this.TrackingUrl = {(this.TrackingUrl == null ? "null" : this.TrackingUrl == string.Empty ? "" : this.TrackingUrl)}");
-            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt == string.Empty ? "" : this.PlacedAt)}");
-            toStringOutput.Add($"this.InProgressAt = {(this.InProgressAt == null ? "null" : this.InProgressAt == string.Empty ? "" : this.InProgressAt)}");
-            toStringOutput.Add($"this.PackagedAt = {(this.PackagedAt == null ? "null" : this.PackagedAt == string.Empty ? "" : this.PackagedAt)}");
-            toStringOutput.Add($"this.ExpectedShippedAt = {(this.ExpectedShippedAt == null ? "null" : this.ExpectedShippedAt == string.Empty ? "" : this.ExpectedShippedAt)}");
-            toStringOutput.Add($"this.ShippedAt = {(this.ShippedAt == null ? "null" : this.ShippedAt == string.Empty ? "" : this.ShippedAt)}");
-            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt == string.Empty ? "" : this.CanceledAt)}");
-            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason == string.Empty ? "" : this.CancelReason)}");
-            toStringOutput.Add($"this.FailedAt = {(this.FailedAt == null ? "null" : this.FailedAt == string.Empty ? "" : this.FailedAt)}");
-            toStringOutput.Add($"this.FailureReason = {(this.FailureReason == null ? "null" : this.FailureReason == string.Empty ? "" : this.FailureReason)}");
+            toStringOutput.Add($"this.Carrier = {(this.Carrier == null ? "null" : this.Carrier)}");
+            toStringOutput.Add($"this.ShippingNote = {(this.ShippingNote == null ? "null" : this.ShippingNote)}");
+            toStringOutput.Add($"this.ShippingType = {(this.ShippingType == null ? "null" : this.ShippingType)}");
+            toStringOutput.Add($"this.TrackingNumber = {(this.TrackingNumber == null ? "null" : this.TrackingNumber)}");
+            toStringOutput.Add($"this.TrackingUrl = {(this.TrackingUrl == null ? "null" : this.TrackingUrl)}");
+            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt)}");
+            toStringOutput.Add($"this.InProgressAt = {(this.InProgressAt == null ? "null" : this.InProgressAt)}");
+            toStringOutput.Add($"this.PackagedAt = {(this.PackagedAt == null ? "null" : this.PackagedAt)}");
+            toStringOutput.Add($"this.ExpectedShippedAt = {(this.ExpectedShippedAt == null ? "null" : this.ExpectedShippedAt)}");
+            toStringOutput.Add($"this.ShippedAt = {(this.ShippedAt == null ? "null" : this.ShippedAt)}");
+            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt)}");
+            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason)}");
+            toStringOutput.Add($"this.FailedAt = {(this.FailedAt == null ? "null" : this.FailedAt)}");
+            toStringOutput.Add($"this.FailureReason = {(this.FailureReason == null ? "null" : this.FailureReason)}");
         }
 
         /// <summary>

@@ -13,7 +13,7 @@ Defines input parameters in a call to the
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `NewPlanVariationId` | `string` | Optional | The ID of the new subscription plan variation.<br><br>This field is required. |
-| `Phases` | [`IList<Models.PhaseInput>`](../../doc/models/phase-input.md) | Optional | A list of PhaseInputs, to pass phase-specific information used in the swap. |
+| `Phases` | [`IList<PhaseInput>`](../../doc/models/phase-input.md) | Optional | A list of PhaseInputs, to pass phase-specific information used in the swap. |
 
 ## Example (as JSON)
 

@@ -11,8 +11,8 @@ Represents a [RetrieveLoyaltyPromotionPromotions](../../doc/api/loyalty.md#retri
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `LoyaltyPromotion` | [`Models.LoyaltyPromotion`](../../doc/models/loyalty-promotion.md) | Optional | Represents a promotion for a [loyalty program](../../doc/models/loyalty-program.md). Loyalty promotions enable buyers<br>to earn extra points on top of those earned from the base program.<br><br>A loyalty program can have a maximum of 10 loyalty promotions with an `ACTIVE` or `SCHEDULED` status. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `LoyaltyPromotion` | [`LoyaltyPromotion`](../../doc/models/loyalty-promotion.md) | Optional | Represents a promotion for a [loyalty program](../../doc/models/loyalty-program.md). Loyalty promotions enable buyers<br>to earn extra points on top of those earned from the base program.<br><br>A loyalty program can have a maximum of 10 loyalty promotions with an `ACTIVE` or `SCHEDULED` status. |
 
 ## Example (as JSON)
 
@@ -30,6 +30,7 @@ Represents a [RetrieveLoyaltyPromotionPromotions](../../doc/api/loyalty.md#retri
     "id": "loypromo_f0f9b849-725e-378d-b810-511237e07b67",
     "incentive": {
       "points_multiplier_data": {
+        "multiplier": "3.000",
         "points_multiplier": 3
       },
       "type": "POINTS_MULTIPLIER",

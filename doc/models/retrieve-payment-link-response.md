@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `PaymentLink` | [`Models.PaymentLink`](../../doc/models/payment-link.md) | Optional | - |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `PaymentLink` | [`PaymentLink`](../../doc/models/payment-link.md) | Optional | - |
 
 ## Example (as JSON)
 

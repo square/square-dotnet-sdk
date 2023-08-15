@@ -13,9 +13,9 @@ If additional results are available, the `cursor` field is also present along wi
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `CustomAttributeDefinitions` | [`IList<Models.CustomAttributeDefinition>`](../../doc/models/custom-attribute-definition.md) | Optional | The retrieved custom attribute definitions. If no custom attribute definitions are found,<br>Square returns an empty object (`{}`). |
+| `CustomAttributeDefinitions` | [`IList<CustomAttributeDefinition>`](../../doc/models/custom-attribute-definition.md) | Optional | The retrieved custom attribute definitions. If no custom attribute definitions are found,<br>Square returns an empty object (`{}`). |
 | `Cursor` | `string` | Optional | The cursor to provide in your next call to this endpoint to retrieve the next page of<br>results for your original request. This field is present only if the request succeeded and<br>additional results are available. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
 
 ## Example (as JSON)
 

@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -220,10 +221,10 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
-            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime == string.Empty ? "" : this.BeginTime)}");
-            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime == string.Empty ? "" : this.EndTime)}");
+            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime)}");
+            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime)}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.BatchToken = {(this.BatchToken == null ? "null" : this.BatchToken == string.Empty ? "" : this.BatchToken)}");
+            toStringOutput.Add($"this.BatchToken = {(this.BatchToken == null ? "null" : this.BatchToken)}");
             toStringOutput.Add($"this.IncludePartial = {(this.IncludePartial == null ? "null" : this.IncludePartial.ToString())}");
         }
 

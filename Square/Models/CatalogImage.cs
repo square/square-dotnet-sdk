@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -186,10 +187,10 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
-            toStringOutput.Add($"this.Url = {(this.Url == null ? "null" : this.Url == string.Empty ? "" : this.Url)}");
-            toStringOutput.Add($"this.Caption = {(this.Caption == null ? "null" : this.Caption == string.Empty ? "" : this.Caption)}");
-            toStringOutput.Add($"this.PhotoStudioOrderId = {(this.PhotoStudioOrderId == null ? "null" : this.PhotoStudioOrderId == string.Empty ? "" : this.PhotoStudioOrderId)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Url = {(this.Url == null ? "null" : this.Url)}");
+            toStringOutput.Add($"this.Caption = {(this.Caption == null ? "null" : this.Caption)}");
+            toStringOutput.Add($"this.PhotoStudioOrderId = {(this.PhotoStudioOrderId == null ? "null" : this.PhotoStudioOrderId)}");
         }
 
         /// <summary>

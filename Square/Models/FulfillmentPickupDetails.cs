@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -441,21 +442,21 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Recipient = {(this.Recipient == null ? "null" : this.Recipient.ToString())}");
-            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt == string.Empty ? "" : this.ExpiresAt)}");
-            toStringOutput.Add($"this.AutoCompleteDuration = {(this.AutoCompleteDuration == null ? "null" : this.AutoCompleteDuration == string.Empty ? "" : this.AutoCompleteDuration)}");
+            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt)}");
+            toStringOutput.Add($"this.AutoCompleteDuration = {(this.AutoCompleteDuration == null ? "null" : this.AutoCompleteDuration)}");
             toStringOutput.Add($"this.ScheduleType = {(this.ScheduleType == null ? "null" : this.ScheduleType.ToString())}");
-            toStringOutput.Add($"this.PickupAt = {(this.PickupAt == null ? "null" : this.PickupAt == string.Empty ? "" : this.PickupAt)}");
-            toStringOutput.Add($"this.PickupWindowDuration = {(this.PickupWindowDuration == null ? "null" : this.PickupWindowDuration == string.Empty ? "" : this.PickupWindowDuration)}");
-            toStringOutput.Add($"this.PrepTimeDuration = {(this.PrepTimeDuration == null ? "null" : this.PrepTimeDuration == string.Empty ? "" : this.PrepTimeDuration)}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
-            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt == string.Empty ? "" : this.PlacedAt)}");
-            toStringOutput.Add($"this.AcceptedAt = {(this.AcceptedAt == null ? "null" : this.AcceptedAt == string.Empty ? "" : this.AcceptedAt)}");
-            toStringOutput.Add($"this.RejectedAt = {(this.RejectedAt == null ? "null" : this.RejectedAt == string.Empty ? "" : this.RejectedAt)}");
-            toStringOutput.Add($"this.ReadyAt = {(this.ReadyAt == null ? "null" : this.ReadyAt == string.Empty ? "" : this.ReadyAt)}");
-            toStringOutput.Add($"this.ExpiredAt = {(this.ExpiredAt == null ? "null" : this.ExpiredAt == string.Empty ? "" : this.ExpiredAt)}");
-            toStringOutput.Add($"this.PickedUpAt = {(this.PickedUpAt == null ? "null" : this.PickedUpAt == string.Empty ? "" : this.PickedUpAt)}");
-            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt == string.Empty ? "" : this.CanceledAt)}");
-            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason == string.Empty ? "" : this.CancelReason)}");
+            toStringOutput.Add($"this.PickupAt = {(this.PickupAt == null ? "null" : this.PickupAt)}");
+            toStringOutput.Add($"this.PickupWindowDuration = {(this.PickupWindowDuration == null ? "null" : this.PickupWindowDuration)}");
+            toStringOutput.Add($"this.PrepTimeDuration = {(this.PrepTimeDuration == null ? "null" : this.PrepTimeDuration)}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
+            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt)}");
+            toStringOutput.Add($"this.AcceptedAt = {(this.AcceptedAt == null ? "null" : this.AcceptedAt)}");
+            toStringOutput.Add($"this.RejectedAt = {(this.RejectedAt == null ? "null" : this.RejectedAt)}");
+            toStringOutput.Add($"this.ReadyAt = {(this.ReadyAt == null ? "null" : this.ReadyAt)}");
+            toStringOutput.Add($"this.ExpiredAt = {(this.ExpiredAt == null ? "null" : this.ExpiredAt)}");
+            toStringOutput.Add($"this.PickedUpAt = {(this.PickedUpAt == null ? "null" : this.PickedUpAt)}");
+            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt)}");
+            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason)}");
             toStringOutput.Add($"this.IsCurbsidePickup = {(this.IsCurbsidePickup == null ? "null" : this.IsCurbsidePickup.ToString())}");
             toStringOutput.Add($"this.CurbsidePickupDetails = {(this.CurbsidePickupDetails == null ? "null" : this.CurbsidePickupDetails.ToString())}");
         }

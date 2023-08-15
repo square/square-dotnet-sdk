@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -378,22 +379,22 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.DisputeId = {(this.DisputeId == null ? "null" : this.DisputeId == string.Empty ? "" : this.DisputeId)}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.DisputeId = {(this.DisputeId == null ? "null" : this.DisputeId)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason.ToString())}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
-            toStringOutput.Add($"this.DueAt = {(this.DueAt == null ? "null" : this.DueAt == string.Empty ? "" : this.DueAt)}");
+            toStringOutput.Add($"this.DueAt = {(this.DueAt == null ? "null" : this.DueAt)}");
             toStringOutput.Add($"this.DisputedPayment = {(this.DisputedPayment == null ? "null" : this.DisputedPayment.ToString())}");
             toStringOutput.Add($"this.EvidenceIds = {(this.EvidenceIds == null ? "null" : $"[{string.Join(", ", this.EvidenceIds)} ]")}");
             toStringOutput.Add($"this.CardBrand = {(this.CardBrand == null ? "null" : this.CardBrand.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.BrandDisputeId = {(this.BrandDisputeId == null ? "null" : this.BrandDisputeId == string.Empty ? "" : this.BrandDisputeId)}");
-            toStringOutput.Add($"this.ReportedDate = {(this.ReportedDate == null ? "null" : this.ReportedDate == string.Empty ? "" : this.ReportedDate)}");
-            toStringOutput.Add($"this.ReportedAt = {(this.ReportedAt == null ? "null" : this.ReportedAt == string.Empty ? "" : this.ReportedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.BrandDisputeId = {(this.BrandDisputeId == null ? "null" : this.BrandDisputeId)}");
+            toStringOutput.Add($"this.ReportedDate = {(this.ReportedDate == null ? "null" : this.ReportedDate)}");
+            toStringOutput.Add($"this.ReportedAt = {(this.ReportedAt == null ? "null" : this.ReportedAt)}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
         }
 
         /// <summary>

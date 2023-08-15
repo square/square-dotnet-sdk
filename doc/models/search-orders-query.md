@@ -11,8 +11,8 @@ Contains query criteria for the search.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Filter` | [`Models.SearchOrdersFilter`](../../doc/models/search-orders-filter.md) | Optional | Filtering criteria to use for a `SearchOrders` request. Multiple filters<br>are ANDed together. |
-| `Sort` | [`Models.SearchOrdersSort`](../../doc/models/search-orders-sort.md) | Optional | Sorting criteria for a `SearchOrders` request. Results can only be sorted<br>by a timestamp field. |
+| `Filter` | [`SearchOrdersFilter`](../../doc/models/search-orders-filter.md) | Optional | Filtering criteria to use for a `SearchOrders` request. Multiple filters<br>are ANDed together. |
+| `Sort` | [`SearchOrdersSort`](../../doc/models/search-orders-sort.md) | Optional | Sorting criteria for a `SearchOrders` request. Results can only be sorted<br>by a timestamp field. |
 
 ## Example (as JSON)
 

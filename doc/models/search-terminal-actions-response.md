@@ -9,8 +9,8 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
-| `Action` | [`IList<Models.TerminalAction>`](../../doc/models/terminal-action.md) | Optional | The requested search result of `TerminalAction`s. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Information on errors encountered during the request. |
+| `Action` | [`IList<TerminalAction>`](../../doc/models/terminal-action.md) | Optional | The requested search result of `TerminalAction`s. |
 | `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request. If empty,<br>this is the final response.<br><br>See [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more<br>information. |
 
 ## Example (as JSON)

@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -362,21 +363,21 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.CardBrand = {(this.CardBrand == null ? "null" : this.CardBrand.ToString())}");
-            toStringOutput.Add($"this.Last4 = {(this.Last4 == null ? "null" : this.Last4 == string.Empty ? "" : this.Last4)}");
+            toStringOutput.Add($"this.Last4 = {(this.Last4 == null ? "null" : this.Last4)}");
             toStringOutput.Add($"this.ExpMonth = {(this.ExpMonth == null ? "null" : this.ExpMonth.ToString())}");
             toStringOutput.Add($"this.ExpYear = {(this.ExpYear == null ? "null" : this.ExpYear.ToString())}");
-            toStringOutput.Add($"this.CardholderName = {(this.CardholderName == null ? "null" : this.CardholderName == string.Empty ? "" : this.CardholderName)}");
+            toStringOutput.Add($"this.CardholderName = {(this.CardholderName == null ? "null" : this.CardholderName)}");
             toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
-            toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint == string.Empty ? "" : this.Fingerprint)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint)}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
             toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
             toStringOutput.Add($"this.CardType = {(this.CardType == null ? "null" : this.CardType.ToString())}");
             toStringOutput.Add($"this.PrepaidType = {(this.PrepaidType == null ? "null" : this.PrepaidType.ToString())}");
-            toStringOutput.Add($"this.Bin = {(this.Bin == null ? "null" : this.Bin == string.Empty ? "" : this.Bin)}");
+            toStringOutput.Add($"this.Bin = {(this.Bin == null ? "null" : this.Bin)}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.CardCoBrand = {(this.CardCoBrand == null ? "null" : this.CardCoBrand.ToString())}");
         }

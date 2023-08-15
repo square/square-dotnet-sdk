@@ -12,8 +12,8 @@ or error messages.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `WageSetting` | [`Models.WageSetting`](../../doc/models/wage-setting.md) | Optional | An object representing a team member's wage information. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
+| `WageSetting` | [`WageSetting`](../../doc/models/wage-setting.md) | Optional | An object representing a team member's wage information. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | The errors that occurred during the request. |
 
 ## Example (as JSON)
 

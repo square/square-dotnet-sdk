@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -276,12 +277,12 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BankName = {(this.BankName == null ? "null" : this.BankName == string.Empty ? "" : this.BankName)}");
-            toStringOutput.Add($"this.TransferType = {(this.TransferType == null ? "null" : this.TransferType == string.Empty ? "" : this.TransferType)}");
-            toStringOutput.Add($"this.AccountOwnershipType = {(this.AccountOwnershipType == null ? "null" : this.AccountOwnershipType == string.Empty ? "" : this.AccountOwnershipType)}");
-            toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint == string.Empty ? "" : this.Fingerprint)}");
-            toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country == string.Empty ? "" : this.Country)}");
-            toStringOutput.Add($"this.StatementDescription = {(this.StatementDescription == null ? "null" : this.StatementDescription == string.Empty ? "" : this.StatementDescription)}");
+            toStringOutput.Add($"this.BankName = {(this.BankName == null ? "null" : this.BankName)}");
+            toStringOutput.Add($"this.TransferType = {(this.TransferType == null ? "null" : this.TransferType)}");
+            toStringOutput.Add($"this.AccountOwnershipType = {(this.AccountOwnershipType == null ? "null" : this.AccountOwnershipType)}");
+            toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint)}");
+            toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country)}");
+            toStringOutput.Add($"this.StatementDescription = {(this.StatementDescription == null ? "null" : this.StatementDescription)}");
             toStringOutput.Add($"this.AchDetails = {(this.AchDetails == null ? "null" : this.AchDetails.ToString())}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
         }

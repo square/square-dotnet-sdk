@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -657,11 +658,11 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId == string.Empty ? "" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
             toStringOutput.Add($"this.LineItems = {(this.LineItems == null ? "null" : $"[{string.Join(", ", this.LineItems)} ]")}");
             toStringOutput.Add($"this.Taxes = {(this.Taxes == null ? "null" : $"[{string.Join(", ", this.Taxes)} ]")}");
             toStringOutput.Add($"this.Discounts = {(this.Discounts == null ? "null" : $"[{string.Join(", ", this.Discounts)} ]")}");
@@ -674,9 +675,9 @@ namespace Square.Models
             toStringOutput.Add($"this.Tenders = {(this.Tenders == null ? "null" : $"[{string.Join(", ", this.Tenders)} ]")}");
             toStringOutput.Add($"this.Refunds = {(this.Refunds == null ? "null" : $"[{string.Join(", ", this.Refunds)} ]")}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.ClosedAt = {(this.ClosedAt == null ? "null" : this.ClosedAt == string.Empty ? "" : this.ClosedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.ClosedAt = {(this.ClosedAt == null ? "null" : this.ClosedAt)}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
@@ -684,7 +685,7 @@ namespace Square.Models
             toStringOutput.Add($"this.TotalDiscountMoney = {(this.TotalDiscountMoney == null ? "null" : this.TotalDiscountMoney.ToString())}");
             toStringOutput.Add($"this.TotalTipMoney = {(this.TotalTipMoney == null ? "null" : this.TotalTipMoney.ToString())}");
             toStringOutput.Add($"this.TotalServiceChargeMoney = {(this.TotalServiceChargeMoney == null ? "null" : this.TotalServiceChargeMoney.ToString())}");
-            toStringOutput.Add($"this.TicketName = {(this.TicketName == null ? "null" : this.TicketName == string.Empty ? "" : this.TicketName)}");
+            toStringOutput.Add($"this.TicketName = {(this.TicketName == null ? "null" : this.TicketName)}");
             toStringOutput.Add($"this.PricingOptions = {(this.PricingOptions == null ? "null" : this.PricingOptions.ToString())}");
             toStringOutput.Add($"this.Rewards = {(this.Rewards == null ? "null" : $"[{string.Join(", ", this.Rewards)} ]")}");
             toStringOutput.Add($"this.NetAmountDueMoney = {(this.NetAmountDueMoney == null ? "null" : this.NetAmountDueMoney.ToString())}");

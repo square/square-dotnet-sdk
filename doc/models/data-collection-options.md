@@ -12,7 +12,7 @@
 | `Title` | `string` | Required | The title text to display in the data collection flow on the Terminal.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `250` |
 | `Body` | `string` | Required | The body text to display under the title in the data collection screen flow on the<br>Terminal.<br>**Constraints**: *Minimum Length*: `1`, *Maximum Length*: `10000` |
 | `InputType` | [`string`](../../doc/models/data-collection-options-input-type.md) | Required | Describes the input type of the data. |
-| `CollectedData` | [`Models.CollectedData`](../../doc/models/collected-data.md) | Optional | - |
+| `CollectedData` | [`CollectedData`](../../doc/models/collected-data.md) | Optional | - |
 
 ## Example (as JSON)
 

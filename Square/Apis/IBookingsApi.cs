@@ -26,6 +26,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
         /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="customerId">Optional parameter: The [customer](entity:Customer) for whom to retrieve bookings. If this is not set, bookings for all customers are retrieved..</param>
         /// <param name="teamMemberId">Optional parameter: The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved..</param>
         /// <param name="locationId">Optional parameter: The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved..</param>
         /// <param name="startAtMin">Optional parameter: The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used..</param>
@@ -34,6 +35,7 @@ namespace Square.Apis
         Models.ListBookingsResponse ListBookings(
                 int? limit = null,
                 string cursor = null,
+                string customerId = null,
                 string teamMemberId = null,
                 string locationId = null,
                 string startAtMin = null,
@@ -46,6 +48,7 @@ namespace Square.Apis
         /// </summary>
         /// <param name="limit">Optional parameter: The maximum number of results per page to return in a paged response..</param>
         /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="customerId">Optional parameter: The [customer](entity:Customer) for whom to retrieve bookings. If this is not set, bookings for all customers are retrieved..</param>
         /// <param name="teamMemberId">Optional parameter: The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved..</param>
         /// <param name="locationId">Optional parameter: The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved..</param>
         /// <param name="startAtMin">Optional parameter: The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used..</param>
@@ -55,6 +58,7 @@ namespace Square.Apis
         Task<Models.ListBookingsResponse> ListBookingsAsync(
                 int? limit = null,
                 string cursor = null,
+                string customerId = null,
                 string teamMemberId = null,
                 string locationId = null,
                 string startAtMin = null,
@@ -119,6 +123,28 @@ namespace Square.Apis
         /// <returns>Returns the Models.SearchAvailabilityResponse response from the API call.</returns>
         Task<Models.SearchAvailabilityResponse> SearchAvailabilityAsync(
                 Models.SearchAvailabilityRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Bulk-Retrieves a list of bookings by booking IDs.
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkRetrieveBookingsResponse response from the API call.</returns>
+        Models.BulkRetrieveBookingsResponse BulkRetrieveBookings(
+                Models.BulkRetrieveBookingsRequest body);
+
+        /// <summary>
+        /// Bulk-Retrieves a list of bookings by booking IDs.
+        /// To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
+        /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkRetrieveBookingsResponse response from the API call.</returns>
+        Task<Models.BulkRetrieveBookingsResponse> BulkRetrieveBookingsAsync(
+                Models.BulkRetrieveBookingsRequest body,
                 CancellationToken cancellationToken = default);
 
         /// <summary>

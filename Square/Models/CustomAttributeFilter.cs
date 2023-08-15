@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -228,9 +229,9 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CustomAttributeDefinitionId = {(this.CustomAttributeDefinitionId == null ? "null" : this.CustomAttributeDefinitionId == string.Empty ? "" : this.CustomAttributeDefinitionId)}");
-            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key == string.Empty ? "" : this.Key)}");
-            toStringOutput.Add($"this.StringFilter = {(this.StringFilter == null ? "null" : this.StringFilter == string.Empty ? "" : this.StringFilter)}");
+            toStringOutput.Add($"this.CustomAttributeDefinitionId = {(this.CustomAttributeDefinitionId == null ? "null" : this.CustomAttributeDefinitionId)}");
+            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key)}");
+            toStringOutput.Add($"this.StringFilter = {(this.StringFilter == null ? "null" : this.StringFilter)}");
             toStringOutput.Add($"this.NumberFilter = {(this.NumberFilter == null ? "null" : this.NumberFilter.ToString())}");
             toStringOutput.Add($"this.SelectionUidsFilter = {(this.SelectionUidsFilter == null ? "null" : $"[{string.Join(", ", this.SelectionUidsFilter)} ]")}");
             toStringOutput.Add($"this.BoolFilter = {(this.BoolFilter == null ? "null" : this.BoolFilter.ToString())}");

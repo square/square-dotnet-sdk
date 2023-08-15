@@ -11,7 +11,7 @@ Represents a [BulkDeleteBookingCustomAttributes](../../doc/api/booking-custom-at
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Values` | [`IDictionary<string, Models.BookingCustomAttributeDeleteRequest>`](../../doc/models/booking-custom-attribute-delete-request.md) | Required | A map containing 1 to 25 individual Delete requests. For each request, provide an<br>arbitrary ID that is unique for this `BulkDeleteBookingCustomAttributes` request and the<br>information needed to delete a custom attribute. |
+| `Values` | [`IDictionary<string, BookingCustomAttributeDeleteRequest>`](../../doc/models/booking-custom-attribute-delete-request.md) | Required | A map containing 1 to 25 individual Delete requests. For each request, provide an<br>arbitrary ID that is unique for this `BulkDeleteBookingCustomAttributes` request and the<br>information needed to delete a custom attribute. |
 
 ## Example (as JSON)
 

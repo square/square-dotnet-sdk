@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -262,8 +263,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name == string.Empty ? "" : this.Name)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description == string.Empty ? "" : this.Description)}");
+            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
             toStringOutput.Add($"this.SourceApplication = {(this.SourceApplication == null ? "null" : this.SourceApplication.ToString())}");
             toStringOutput.Add($"this.AllowedObjectTypes = {(this.AllowedObjectTypes == null ? "null" : $"[{string.Join(", ", this.AllowedObjectTypes)} ]")}");
             toStringOutput.Add($"this.SellerVisibility = {(this.SellerVisibility == null ? "null" : this.SellerVisibility.ToString())}");
@@ -272,7 +273,7 @@ namespace Square.Models
             toStringOutput.Add($"this.NumberConfig = {(this.NumberConfig == null ? "null" : this.NumberConfig.ToString())}");
             toStringOutput.Add($"this.SelectionConfig = {(this.SelectionConfig == null ? "null" : this.SelectionConfig.ToString())}");
             toStringOutput.Add($"this.CustomAttributeUsageCount = {(this.CustomAttributeUsageCount == null ? "null" : this.CustomAttributeUsageCount.ToString())}");
-            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key == string.Empty ? "" : this.Key)}");
+            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key)}");
         }
 
         /// <summary>

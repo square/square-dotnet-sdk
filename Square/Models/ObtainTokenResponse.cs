@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -201,17 +202,17 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.AccessToken = {(this.AccessToken == null ? "null" : this.AccessToken == string.Empty ? "" : this.AccessToken)}");
-            toStringOutput.Add($"this.TokenType = {(this.TokenType == null ? "null" : this.TokenType == string.Empty ? "" : this.TokenType)}");
-            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt == string.Empty ? "" : this.ExpiresAt)}");
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId == string.Empty ? "" : this.MerchantId)}");
-            toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId == string.Empty ? "" : this.SubscriptionId)}");
-            toStringOutput.Add($"this.PlanId = {(this.PlanId == null ? "null" : this.PlanId == string.Empty ? "" : this.PlanId)}");
-            toStringOutput.Add($"this.IdToken = {(this.IdToken == null ? "null" : this.IdToken == string.Empty ? "" : this.IdToken)}");
-            toStringOutput.Add($"this.RefreshToken = {(this.RefreshToken == null ? "null" : this.RefreshToken == string.Empty ? "" : this.RefreshToken)}");
+            toStringOutput.Add($"this.AccessToken = {(this.AccessToken == null ? "null" : this.AccessToken)}");
+            toStringOutput.Add($"this.TokenType = {(this.TokenType == null ? "null" : this.TokenType)}");
+            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt)}");
+            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
+            toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId)}");
+            toStringOutput.Add($"this.PlanId = {(this.PlanId == null ? "null" : this.PlanId)}");
+            toStringOutput.Add($"this.IdToken = {(this.IdToken == null ? "null" : this.IdToken)}");
+            toStringOutput.Add($"this.RefreshToken = {(this.RefreshToken == null ? "null" : this.RefreshToken)}");
             toStringOutput.Add($"this.ShortLived = {(this.ShortLived == null ? "null" : this.ShortLived.ToString())}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.RefreshTokenExpiresAt = {(this.RefreshTokenExpiresAt == null ? "null" : this.RefreshTokenExpiresAt == string.Empty ? "" : this.RefreshTokenExpiresAt)}");
+            toStringOutput.Add($"this.RefreshTokenExpiresAt = {(this.RefreshTokenExpiresAt == null ? "null" : this.RefreshTokenExpiresAt)}");
         }
 
         /// <summary>

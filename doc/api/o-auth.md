@@ -54,7 +54,7 @@ RenewTokenAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `clientId` | `string` | Template, Required | Your application ID, which is available on the **OAuth** page in the [Developer Dashboard](https://developer.squareup.com/apps). |
-| `body` | [`Models.RenewTokenRequest`](../../doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`RenewTokenRequest`](../../doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `string` | Header, Required | Client APPLICATION_SECRET |
 
 ## Response Type
@@ -113,7 +113,7 @@ RevokeTokenAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.RevokeTokenRequest`](../../doc/models/revoke-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`RevokeTokenRequest`](../../doc/models/revoke-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 | `authorization` | `string` | Header, Required | Client APPLICATION_SECRET |
 
 ## Response Type
@@ -172,7 +172,7 @@ ObtainTokenAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.ObtainTokenRequest`](../../doc/models/obtain-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`ObtainTokenRequest`](../../doc/models/obtain-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 

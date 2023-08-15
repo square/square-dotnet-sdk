@@ -12,7 +12,7 @@ a `Shift` must start or end in before passing the filter condition.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `DateRange` | [`Models.DateRange`](../../doc/models/date-range.md) | Optional | A range defined by two dates. Used for filtering a query for Connect v2<br>objects that have date properties. |
+| `DateRange` | [`DateRange`](../../doc/models/date-range.md) | Optional | A range defined by two dates. Used for filtering a query for Connect v2<br>objects that have date properties. |
 | `MatchShiftsBy` | [`string`](../../doc/models/shift-workday-matcher.md) | Optional | Defines the logic used to apply a workday filter. |
 | `DefaultTimezone` | `string` | Optional | Location-specific timezones convert workdays to datetime filters.<br>Every location included in the query must have a timezone or this field<br>must be provided as a fallback. Format: the IANA timezone database<br>identifier for the relevant timezone. |
 

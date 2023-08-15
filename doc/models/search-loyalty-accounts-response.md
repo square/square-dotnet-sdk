@@ -11,8 +11,8 @@ A response that includes loyalty accounts that satisfy the search criteria.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `LoyaltyAccounts` | [`IList<Models.LoyaltyAccount>`](../../doc/models/loyalty-account.md) | Optional | The loyalty accounts that met the search criteria,  <br>in order of creation date. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `LoyaltyAccounts` | [`IList<LoyaltyAccount>`](../../doc/models/loyalty-account.md) | Optional | The loyalty accounts that met the search criteria,  <br>in order of creation date. |
 | `Cursor` | `string` | Optional | The pagination cursor to use in a subsequent<br>request. If empty, this is the final response.<br>For more information,<br>see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 
 ## Example (as JSON)

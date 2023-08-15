@@ -10,8 +10,8 @@
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `Cursor` | `string` | Optional | Opaque cursor for fetching the next page. Cursor is not present in<br>the last page of results. |
-| `Errors` | [`IList<Models.Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
-| `CashDrawerShiftEvents` | [`IList<Models.CashDrawerShiftEvent>`](../../doc/models/cash-drawer-shift-event.md) | Optional | All of the events (payments, refunds, etc.) for a cash drawer during<br>the shift. |
+| `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | Any errors that occurred during the request. |
+| `CashDrawerShiftEvents` | [`IList<CashDrawerShiftEvent>`](../../doc/models/cash-drawer-shift-event.md) | Optional | All of the events (payments, refunds, etc.) for a cash drawer during<br>the shift. |
 
 ## Example (as JSON)
 

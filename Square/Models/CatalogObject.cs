@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -211,7 +212,7 @@ namespace Square.Models
 
         /// <summary>
         /// Possible types of CatalogObjects returned from the catalog, each
-        /// containing type-specific properties in the `*_data` field corresponding to the specfied object type.
+        /// containing type-specific properties in the `*_data` field corresponding to the specified object type.
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; }
@@ -563,8 +564,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt == string.Empty ? "" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.IsDeleted = {(this.IsDeleted == null ? "null" : this.IsDeleted.ToString())}");
             toStringOutput.Add($"CustomAttributeValues = {(this.CustomAttributeValues == null ? "null" : this.CustomAttributeValues.ToString())}");

@@ -11,7 +11,7 @@ The request object for the [UpdateLocation](../../doc/api/locations.md#update-lo
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Location` | [`Models.Location`](../../doc/models/location.md) | Optional | Represents one of a business' [locations](https://developer.squareup.com/docs/locations-api). |
+| `Location` | [`Location`](../../doc/models/location.md) | Optional | Represents one of a business' [locations](https://developer.squareup.com/docs/locations-api). |
 
 ## Example (as JSON)
 

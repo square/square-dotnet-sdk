@@ -11,7 +11,7 @@ Represents a bulk upsert request for one or more order custom attributes.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Values` | [`IDictionary<string, Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute>`](../../doc/models/bulk-upsert-order-custom-attributes-request-upsert-custom-attribute.md) | Required | A map of requests that correspond to individual upsert operations for custom attributes. |
+| `Values` | [`IDictionary<string, BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute>`](../../doc/models/bulk-upsert-order-custom-attributes-request-upsert-custom-attribute.md) | Required | A map of requests that correspond to individual upsert operations for custom attributes. |
 
 ## Example (as JSON)
 

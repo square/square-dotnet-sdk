@@ -9,7 +9,7 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `OrderCreated` | [`Models.OrderCreated`](../../doc/models/order-created.md) | Optional | - |
+| `OrderCreated` | [`OrderCreated`](../../doc/models/order-created.md) | Optional | - |
 
 ## Example (as JSON)
 

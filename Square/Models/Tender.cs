@@ -7,6 +7,7 @@ namespace Square.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using APIMatic.Core.Utilities.Converters;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Square;
@@ -33,6 +34,9 @@ namespace Square.Models
         /// <param name="customerId">customer_id.</param>
         /// <param name="cardDetails">card_details.</param>
         /// <param name="cashDetails">cash_details.</param>
+        /// <param name="bankAccountDetails">bank_account_details.</param>
+        /// <param name="buyNowPayLaterDetails">buy_now_pay_later_details.</param>
+        /// <param name="squareAccountDetails">square_account_details.</param>
         /// <param name="additionalRecipients">additional_recipients.</param>
         /// <param name="paymentId">payment_id.</param>
         public Tender(
@@ -48,6 +52,9 @@ namespace Square.Models
             string customerId = null,
             Models.TenderCardDetails cardDetails = null,
             Models.TenderCashDetails cashDetails = null,
+            Models.TenderBankAccountDetails bankAccountDetails = null,
+            Models.TenderBuyNowPayLaterDetails buyNowPayLaterDetails = null,
+            Models.TenderSquareAccountDetails squareAccountDetails = null,
             IList<Models.AdditionalRecipient> additionalRecipients = null,
             string paymentId = null)
         {
@@ -93,6 +100,9 @@ namespace Square.Models
             this.Type = type;
             this.CardDetails = cardDetails;
             this.CashDetails = cashDetails;
+            this.BankAccountDetails = bankAccountDetails;
+            this.BuyNowPayLaterDetails = buyNowPayLaterDetails;
+            this.SquareAccountDetails = squareAccountDetails;
             if (additionalRecipients != null)
             {
                 shouldSerialize["additional_recipients"] = true;
@@ -119,6 +129,9 @@ namespace Square.Models
             string customerId = null,
             Models.TenderCardDetails cardDetails = null,
             Models.TenderCashDetails cashDetails = null,
+            Models.TenderBankAccountDetails bankAccountDetails = null,
+            Models.TenderBuyNowPayLaterDetails buyNowPayLaterDetails = null,
+            Models.TenderSquareAccountDetails squareAccountDetails = null,
             IList<Models.AdditionalRecipient> additionalRecipients = null,
             string paymentId = null)
         {
@@ -135,6 +148,9 @@ namespace Square.Models
             Type = type;
             CardDetails = cardDetails;
             CashDetails = cashDetails;
+            BankAccountDetails = bankAccountDetails;
+            BuyNowPayLaterDetails = buyNowPayLaterDetails;
+            SquareAccountDetails = squareAccountDetails;
             AdditionalRecipients = additionalRecipients;
             PaymentId = paymentId;
         }
@@ -226,6 +242,26 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("cash_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TenderCashDetails CashDetails { get; }
+
+        /// <summary>
+        /// Represents the details of a tender with `type` `BANK_ACCOUNT`.
+        /// See [BankAccountPaymentDetails]($m/BankAccountPaymentDetails)
+        /// for more exposed details of a bank account payment.
+        /// </summary>
+        [JsonProperty("bank_account_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.TenderBankAccountDetails BankAccountDetails { get; }
+
+        /// <summary>
+        /// Represents the details of a tender with `type` `BUY_NOW_PAY_LATER`.
+        /// </summary>
+        [JsonProperty("buy_now_pay_later_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.TenderBuyNowPayLaterDetails BuyNowPayLaterDetails { get; }
+
+        /// <summary>
+        /// Represents the details of a tender with `type` `SQUARE_ACCOUNT`.
+        /// </summary>
+        [JsonProperty("square_account_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.TenderSquareAccountDetails SquareAccountDetails { get; }
 
         /// <summary>
         /// Additional recipients (other than the merchant) receiving a portion of this tender.
@@ -329,6 +365,9 @@ namespace Square.Models
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.CardDetails == null && other.CardDetails == null) || (this.CardDetails?.Equals(other.CardDetails) == true)) &&
                 ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
+                ((this.BankAccountDetails == null && other.BankAccountDetails == null) || (this.BankAccountDetails?.Equals(other.BankAccountDetails) == true)) &&
+                ((this.BuyNowPayLaterDetails == null && other.BuyNowPayLaterDetails == null) || (this.BuyNowPayLaterDetails?.Equals(other.BuyNowPayLaterDetails) == true)) &&
+                ((this.SquareAccountDetails == null && other.SquareAccountDetails == null) || (this.SquareAccountDetails?.Equals(other.SquareAccountDetails) == true)) &&
                 ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
                 ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
         }
@@ -336,10 +375,12 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1832006143;
+            int hashCode = -2135423023;
             hashCode = HashCode.Combine(this.Id, this.LocationId, this.TransactionId, this.CreatedAt, this.Note, this.AmountMoney, this.TipMoney);
 
-            hashCode = HashCode.Combine(hashCode, this.ProcessingFeeMoney, this.CustomerId, this.Type, this.CardDetails, this.CashDetails, this.AdditionalRecipients, this.PaymentId);
+            hashCode = HashCode.Combine(hashCode, this.ProcessingFeeMoney, this.CustomerId, this.Type, this.CardDetails, this.CashDetails, this.BankAccountDetails, this.BuyNowPayLaterDetails);
+
+            hashCode = HashCode.Combine(hashCode, this.SquareAccountDetails, this.AdditionalRecipients, this.PaymentId);
 
             return hashCode;
         }
@@ -349,20 +390,23 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id == string.Empty ? "" : this.Id)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId == string.Empty ? "" : this.LocationId)}");
-            toStringOutput.Add($"this.TransactionId = {(this.TransactionId == null ? "null" : this.TransactionId == string.Empty ? "" : this.TransactionId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt == string.Empty ? "" : this.CreatedAt)}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note == string.Empty ? "" : this.Note)}");
+            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.TransactionId = {(this.TransactionId == null ? "null" : this.TransactionId)}");
+            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.TipMoney = {(this.TipMoney == null ? "null" : this.TipMoney.ToString())}");
             toStringOutput.Add($"this.ProcessingFeeMoney = {(this.ProcessingFeeMoney == null ? "null" : this.ProcessingFeeMoney.ToString())}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId == string.Empty ? "" : this.CustomerId)}");
+            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.CardDetails = {(this.CardDetails == null ? "null" : this.CardDetails.ToString())}");
             toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
+            toStringOutput.Add($"this.BankAccountDetails = {(this.BankAccountDetails == null ? "null" : this.BankAccountDetails.ToString())}");
+            toStringOutput.Add($"this.BuyNowPayLaterDetails = {(this.BuyNowPayLaterDetails == null ? "null" : this.BuyNowPayLaterDetails.ToString())}");
+            toStringOutput.Add($"this.SquareAccountDetails = {(this.SquareAccountDetails == null ? "null" : this.SquareAccountDetails.ToString())}");
             toStringOutput.Add($"this.AdditionalRecipients = {(this.AdditionalRecipients == null ? "null" : $"[{string.Join(", ", this.AdditionalRecipients)} ]")}");
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId == string.Empty ? "" : this.PaymentId)}");
+            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
         }
 
         /// <summary>
@@ -384,6 +428,9 @@ namespace Square.Models
                 .CustomerId(this.CustomerId)
                 .CardDetails(this.CardDetails)
                 .CashDetails(this.CashDetails)
+                .BankAccountDetails(this.BankAccountDetails)
+                .BuyNowPayLaterDetails(this.BuyNowPayLaterDetails)
+                .SquareAccountDetails(this.SquareAccountDetails)
                 .AdditionalRecipients(this.AdditionalRecipients)
                 .PaymentId(this.PaymentId);
             return builder;
@@ -416,6 +463,9 @@ namespace Square.Models
             private string customerId;
             private Models.TenderCardDetails cardDetails;
             private Models.TenderCashDetails cashDetails;
+            private Models.TenderBankAccountDetails bankAccountDetails;
+            private Models.TenderBuyNowPayLaterDetails buyNowPayLaterDetails;
+            private Models.TenderSquareAccountDetails squareAccountDetails;
             private IList<Models.AdditionalRecipient> additionalRecipients;
             private string paymentId;
 
@@ -562,6 +612,39 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// BankAccountDetails.
+             /// </summary>
+             /// <param name="bankAccountDetails"> bankAccountDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder BankAccountDetails(Models.TenderBankAccountDetails bankAccountDetails)
+            {
+                this.bankAccountDetails = bankAccountDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// BuyNowPayLaterDetails.
+             /// </summary>
+             /// <param name="buyNowPayLaterDetails"> buyNowPayLaterDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder BuyNowPayLaterDetails(Models.TenderBuyNowPayLaterDetails buyNowPayLaterDetails)
+            {
+                this.buyNowPayLaterDetails = buyNowPayLaterDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// SquareAccountDetails.
+             /// </summary>
+             /// <param name="squareAccountDetails"> squareAccountDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder SquareAccountDetails(Models.TenderSquareAccountDetails squareAccountDetails)
+            {
+                this.squareAccountDetails = squareAccountDetails;
+                return this;
+            }
+
+             /// <summary>
              /// AdditionalRecipients.
              /// </summary>
              /// <param name="additionalRecipients"> additionalRecipients. </param>
@@ -653,6 +736,9 @@ namespace Square.Models
                     this.customerId,
                     this.cardDetails,
                     this.cashDetails,
+                    this.bankAccountDetails,
+                    this.buyNowPayLaterDetails,
+                    this.squareAccountDetails,
                     this.additionalRecipients,
                     this.paymentId);
             }

@@ -13,6 +13,7 @@ IBookingsApi bookingsApi = client.BookingsApi;
 * [List Bookings](../../doc/api/bookings.md#list-bookings)
 * [Create Booking](../../doc/api/bookings.md#create-booking)
 * [Search Availability](../../doc/api/bookings.md#search-availability)
+* [Bulk Retrieve Bookings](../../doc/api/bookings.md#bulk-retrieve-bookings)
 * [Retrieve Business Booking Profile](../../doc/api/bookings.md#retrieve-business-booking-profile)
 * [List Team Member Booking Profiles](../../doc/api/bookings.md#list-team-member-booking-profiles)
 * [Retrieve Team Member Booking Profile](../../doc/api/bookings.md#retrieve-team-member-booking-profile)
@@ -32,6 +33,7 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 ListBookingsAsync(
     int? limit = null,
     string cursor = null,
+    string customerId = null,
     string teamMemberId = null,
     string locationId = null,
     string startAtMin = null,
@@ -44,6 +46,7 @@ ListBookingsAsync(
 |  --- | --- | --- | --- |
 | `limit` | `int?` | Query, Optional | The maximum number of results per page to return in a paged response. |
 | `cursor` | `string` | Query, Optional | The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results. |
+| `customerId` | `string` | Query, Optional | The [customer](entity:Customer) for whom to retrieve bookings. If this is not set, bookings for all customers are retrieved. |
 | `teamMemberId` | `string` | Query, Optional | The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved. |
 | `locationId` | `string` | Query, Optional | The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved. |
 | `startAtMin` | `string` | Query, Optional | The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used. |
@@ -58,7 +61,7 @@ ListBookingsAsync(
 ```csharp
 try
 {
-    ListBookingsResponse result = await bookingsApi.ListBookingsAsync(null, null, null, null, null, null);
+    ListBookingsResponse result = await bookingsApi.ListBookingsAsync(null, null, null, null, null, null, null);
 }
 catch (ApiException e)
 {
@@ -95,7 +98,7 @@ CreateBookingAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.CreateBookingRequest`](../../doc/models/create-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`CreateBookingRequest`](../../doc/models/create-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
@@ -138,7 +141,7 @@ SearchAvailabilityAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `body` | [`Models.SearchAvailabilityRequest`](../../doc/models/search-availability-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`SearchAvailabilityRequest`](../../doc/models/search-availability-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
@@ -162,6 +165,53 @@ Models.SearchAvailabilityRequest body = new Models.SearchAvailabilityRequest.Bui
 try
 {
     SearchAvailabilityResponse result = await bookingsApi.SearchAvailabilityAsync(body);
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Bulk Retrieve Bookings
+
+Bulk-Retrieves a list of bookings by booking IDs.
+
+To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.
+To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
+
+```csharp
+BulkRetrieveBookingsAsync(
+    Models.BulkRetrieveBookingsRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`BulkRetrieveBookingsRequest`](../../doc/models/bulk-retrieve-bookings-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.BulkRetrieveBookingsResponse>`](../../doc/models/bulk-retrieve-bookings-response.md)
+
+## Example Usage
+
+```csharp
+Models.BulkRetrieveBookingsRequest body = new Models.BulkRetrieveBookingsRequest.Builder(
+    new List<string>
+    {
+        "booking_ids8",
+        "booking_ids9",
+        "booking_ids0",
+    }
+)
+.Build();
+
+try
+{
+    BulkRetrieveBookingsResponse result = await bookingsApi.BulkRetrieveBookingsAsync(body);
 }
 catch (ApiException e)
 {
@@ -333,7 +383,7 @@ UpdateBookingAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `bookingId` | `string` | Template, Required | The ID of the [Booking](entity:Booking) object representing the to-be-updated booking. |
-| `body` | [`Models.UpdateBookingRequest`](../../doc/models/update-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`UpdateBookingRequest`](../../doc/models/update-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
@@ -382,7 +432,7 @@ CancelBookingAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `bookingId` | `string` | Template, Required | The ID of the [Booking](entity:Booking) object representing the to-be-cancelled booking. |
-| `body` | [`Models.CancelBookingRequest`](../../doc/models/cancel-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+| `body` | [`CancelBookingRequest`](../../doc/models/cancel-booking-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
 
 ## Response Type
 
