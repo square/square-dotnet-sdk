@@ -24,9 +24,11 @@ namespace Square.Models
         /// </summary>
         /// <param name="locationId">location_id.</param>
         /// <param name="priceMoney">price_money.</param>
+        /// <param name="soldOut">sold_out.</param>
         public ModifierLocationOverrides(
             string locationId = null,
-            Models.Money priceMoney = null)
+            Models.Money priceMoney = null,
+            bool? soldOut = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -40,14 +42,17 @@ namespace Square.Models
             }
 
             this.PriceMoney = priceMoney;
+            this.SoldOut = soldOut;
         }
         internal ModifierLocationOverrides(Dictionary<string, bool> shouldSerialize,
             string locationId = null,
-            Models.Money priceMoney = null)
+            Models.Money priceMoney = null,
+            bool? soldOut = null)
         {
             this.shouldSerialize = shouldSerialize;
             LocationId = locationId;
             PriceMoney = priceMoney;
+            SoldOut = soldOut;
         }
 
         /// <summary>
@@ -66,6 +71,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("price_money", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Money PriceMoney { get; }
+
+        /// <summary>
+        /// Indicates whether the modifier is sold out at the specified location or not. As an example, for cheese (modifier) burger (item), when the modifier is sold out, it is the cheese, but not the burger, that is sold out.
+        /// The seller can manually set this sold out status. Attempts by an application to set this attribute are ignored.
+        /// </summary>
+        [JsonProperty("sold_out", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? SoldOut { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -99,14 +111,15 @@ namespace Square.Models
                 return true;
             }
             return obj is ModifierLocationOverrides other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true));
+                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true)) &&
+                ((this.SoldOut == null && other.SoldOut == null) || (this.SoldOut?.Equals(other.SoldOut) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1802400325;
-            hashCode = HashCode.Combine(this.LocationId, this.PriceMoney);
+            int hashCode = -1732964243;
+            hashCode = HashCode.Combine(this.LocationId, this.PriceMoney, this.SoldOut);
 
             return hashCode;
         }
@@ -118,6 +131,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
             toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
+            toStringOutput.Add($"this.SoldOut = {(this.SoldOut == null ? "null" : this.SoldOut.ToString())}");
         }
 
         /// <summary>
@@ -128,7 +142,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .LocationId(this.LocationId)
-                .PriceMoney(this.PriceMoney);
+                .PriceMoney(this.PriceMoney)
+                .SoldOut(this.SoldOut);
             return builder;
         }
 
@@ -144,6 +159,7 @@ namespace Square.Models
 
             private string locationId;
             private Models.Money priceMoney;
+            private bool? soldOut;
 
              /// <summary>
              /// LocationId.
@@ -168,6 +184,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// SoldOut.
+             /// </summary>
+             /// <param name="soldOut"> soldOut. </param>
+             /// <returns> Builder. </returns>
+            public Builder SoldOut(bool? soldOut)
+            {
+                this.soldOut = soldOut;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -185,7 +212,8 @@ namespace Square.Models
             {
                 return new ModifierLocationOverrides(shouldSerialize,
                     this.locationId,
-                    this.priceMoney);
+                    this.priceMoney,
+                    this.soldOut);
             }
         }
     }

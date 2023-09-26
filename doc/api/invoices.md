@@ -51,7 +51,7 @@ ListInvoicesAsync(
 string locationId = "location_id4";
 try
 {
-    ListInvoicesResponse result = await invoicesApi.ListInvoicesAsync(locationId, null, null);
+    ListInvoicesResponse result = await invoicesApi.ListInvoicesAsync(locationId);
 }
 catch (ApiException e)
 {
@@ -253,7 +253,7 @@ DeleteInvoiceAsync(
 string invoiceId = "invoice_id0";
 try
 {
-    DeleteInvoiceResponse result = await invoicesApi.DeleteInvoiceAsync(invoiceId, null);
+    DeleteInvoiceResponse result = await invoicesApi.DeleteInvoiceAsync(invoiceId);
 }
 catch (ApiException e)
 {
@@ -349,7 +349,10 @@ Models.UpdateInvoiceRequest body = new Models.UpdateInvoiceRequest.Builder(
 
 try
 {
-    UpdateInvoiceResponse result = await invoicesApi.UpdateInvoiceAsync(invoiceId, body);
+    UpdateInvoiceResponse result = await invoicesApi.UpdateInvoiceAsync(
+        invoiceId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -394,7 +397,10 @@ Models.CancelInvoiceRequest body = new Models.CancelInvoiceRequest.Builder(
 
 try
 {
-    CancelInvoiceResponse result = await invoicesApi.CancelInvoiceAsync(invoiceId, body);
+    CancelInvoiceResponse result = await invoicesApi.CancelInvoiceAsync(
+        invoiceId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -447,7 +453,10 @@ Models.PublishInvoiceRequest body = new Models.PublishInvoiceRequest.Builder(
 
 try
 {
-    PublishInvoiceResponse result = await invoicesApi.PublishInvoiceAsync(invoiceId, body);
+    PublishInvoiceResponse result = await invoicesApi.PublishInvoiceAsync(
+        invoiceId,
+        body
+    );
 }
 catch (ApiException e)
 {

@@ -355,7 +355,7 @@ Models.CreateCatalogImageRequest request = new Models.CreateCatalogImageRequest.
 
 try
 {
-    CreateCatalogImageResponse result = await catalogApi.CreateCatalogImageAsync(request, null);
+    CreateCatalogImageResponse result = await catalogApi.CreateCatalogImageAsync(request);
 }
 catch (ApiException e)
 {
@@ -402,7 +402,10 @@ Models.UpdateCatalogImageRequest request = new Models.UpdateCatalogImageRequest.
 
 try
 {
-    UpdateCatalogImageResponse result = await catalogApi.UpdateCatalogImageAsync(imageId, request, null);
+    UpdateCatalogImageResponse result = await catalogApi.UpdateCatalogImageAsync(
+        imageId,
+        request
+    );
 }
 catch (ApiException e)
 {
@@ -475,7 +478,7 @@ ListCatalogAsync(
 ```csharp
 try
 {
-    ListCatalogResponse result = await catalogApi.ListCatalogAsync(null, null, null);
+    ListCatalogResponse result = await catalogApi.ListCatalogAsync();
 }
 catch (ApiException e)
 {
@@ -650,7 +653,10 @@ string objectId = "object_id8";
 bool? includeRelatedObjects = false;
 try
 {
-    RetrieveCatalogObjectResponse result = await catalogApi.RetrieveCatalogObjectAsync(objectId, includeRelatedObjects, null);
+    RetrieveCatalogObjectResponse result = await catalogApi.RetrieveCatalogObjectAsync(
+        objectId,
+        includeRelatedObjects
+    );
 }
 catch (ApiException e)
 {

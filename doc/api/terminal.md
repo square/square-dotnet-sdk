@@ -104,7 +104,7 @@ Models.SearchTerminalActionsRequest body = new Models.SearchTerminalActionsReque
         new Models.TerminalActionQueryFilter.Builder()
         .CreatedAt(
             new Models.TimeRange.Builder()
-            .StartAt("2022-04-01T00:00:00Z")
+            .StartAt("2022-04-01T00:00:00.000Z")
             .Build())
         .Build())
     .Sort(

@@ -386,7 +386,10 @@ Models.UpdateTeamMemberRequest body = new Models.UpdateTeamMemberRequest.Builder
 
 try
 {
-    UpdateTeamMemberResponse result = await teamApi.UpdateTeamMemberAsync(teamMemberId, body);
+    UpdateTeamMemberResponse result = await teamApi.UpdateTeamMemberAsync(
+        teamMemberId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -496,7 +499,10 @@ Models.UpdateWageSettingRequest body = new Models.UpdateWageSettingRequest.Build
 
 try
 {
-    UpdateWageSettingResponse result = await teamApi.UpdateWageSettingAsync(teamMemberId, body);
+    UpdateWageSettingResponse result = await teamApi.UpdateWageSettingAsync(
+        teamMemberId,
+        body
+    );
 }
 catch (ApiException e)
 {

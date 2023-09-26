@@ -55,7 +55,7 @@ namespace Square.Models
             string merchantId = null,
             string createdAt = null,
             string creatorId = null,
-            Models.Device device = null,
+            Models.V1Device device = null,
             string paymentUrl = null,
             string receiptUrl = null,
             Models.V1Money inclusiveTaxMoney = null,
@@ -182,7 +182,7 @@ namespace Square.Models
             string merchantId = null,
             string createdAt = null,
             string creatorId = null,
-            Models.Device device = null,
+            Models.V1Device device = null,
             string paymentUrl = null,
             string receiptUrl = null,
             Models.V1Money inclusiveTaxMoney = null,
@@ -270,7 +270,7 @@ namespace Square.Models
         /// Gets or sets Device.
         /// </summary>
         [JsonProperty("device", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.Device Device { get; }
+        public Models.V1Device Device { get; }
 
         /// <summary>
         /// The URL of the payment's detail page in the merchant dashboard. The merchant must be signed in to the merchant dashboard to view this page.
@@ -564,7 +564,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -215174345;
+            int hashCode = 1409432714;
 
             if (this.Context != null)
             {
@@ -682,7 +682,7 @@ namespace Square.Models
             private string merchantId;
             private string createdAt;
             private string creatorId;
-            private Models.Device device;
+            private Models.V1Device device;
             private string paymentUrl;
             private string receiptUrl;
             private Models.V1Money inclusiveTaxMoney;
@@ -757,7 +757,7 @@ namespace Square.Models
              /// </summary>
              /// <param name="device"> device. </param>
              /// <returns> Builder. </returns>
-            public Builder Device(Models.Device device)
+            public Builder Device(Models.V1Device device)
             {
                 this.device = device;
                 return this;

@@ -46,7 +46,7 @@ ListEmployeesAsync(
 ```csharp
 try
 {
-    ListEmployeesResponse result = await employeesApi.ListEmployeesAsync(null, null, null, null);
+    ListEmployeesResponse result = await employeesApi.ListEmployeesAsync();
 }
 catch (ApiException e)
 {

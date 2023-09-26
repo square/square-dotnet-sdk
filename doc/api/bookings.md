@@ -16,6 +16,7 @@ IBookingsApi bookingsApi = client.BookingsApi;
 * [Bulk Retrieve Bookings](../../doc/api/bookings.md#bulk-retrieve-bookings)
 * [Retrieve Business Booking Profile](../../doc/api/bookings.md#retrieve-business-booking-profile)
 * [List Team Member Booking Profiles](../../doc/api/bookings.md#list-team-member-booking-profiles)
+* [Bulk Retrieve Team Member Booking Profiles](../../doc/api/bookings.md#bulk-retrieve-team-member-booking-profiles)
 * [Retrieve Team Member Booking Profile](../../doc/api/bookings.md#retrieve-team-member-booking-profile)
 * [Retrieve Booking](../../doc/api/bookings.md#retrieve-booking)
 * [Update Booking](../../doc/api/bookings.md#update-booking)
@@ -61,7 +62,7 @@ ListBookingsAsync(
 ```csharp
 try
 {
-    ListBookingsResponse result = await bookingsApi.ListBookingsAsync(null, null, null, null, null, null, null);
+    ListBookingsResponse result = await bookingsApi.ListBookingsAsync();
 }
 catch (ApiException e)
 {
@@ -279,7 +280,51 @@ ListTeamMemberBookingProfilesAsync(
 bool? bookableOnly = false;
 try
 {
-    ListTeamMemberBookingProfilesResponse result = await bookingsApi.ListTeamMemberBookingProfilesAsync(bookableOnly, null, null, null);
+    ListTeamMemberBookingProfilesResponse result = await bookingsApi.ListTeamMemberBookingProfilesAsync(bookableOnly);
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Bulk Retrieve Team Member Booking Profiles
+
+Retrieves one or more team members' booking profiles.
+
+```csharp
+BulkRetrieveTeamMemberBookingProfilesAsync(
+    Models.BulkRetrieveTeamMemberBookingProfilesRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`BulkRetrieveTeamMemberBookingProfilesRequest`](../../doc/models/bulk-retrieve-team-member-booking-profiles-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.BulkRetrieveTeamMemberBookingProfilesResponse>`](../../doc/models/bulk-retrieve-team-member-booking-profiles-response.md)
+
+## Example Usage
+
+```csharp
+Models.BulkRetrieveTeamMemberBookingProfilesRequest body = new Models.BulkRetrieveTeamMemberBookingProfilesRequest.Builder(
+    new List<string>
+    {
+        "team_member_ids3",
+        "team_member_ids4",
+        "team_member_ids5",
+    }
+)
+.Build();
+
+try
+{
+    BulkRetrieveTeamMemberBookingProfilesResponse result = await bookingsApi.BulkRetrieveTeamMemberBookingProfilesAsync(body);
 }
 catch (ApiException e)
 {
@@ -401,7 +446,10 @@ Models.UpdateBookingRequest body = new Models.UpdateBookingRequest.Builder(
 
 try
 {
-    UpdateBookingResponse result = await bookingsApi.UpdateBookingAsync(bookingId, body);
+    UpdateBookingResponse result = await bookingsApi.UpdateBookingAsync(
+        bookingId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -447,7 +495,10 @@ Models.CancelBookingRequest body = new Models.CancelBookingRequest.Builder()
 
 try
 {
-    CancelBookingResponse result = await bookingsApi.CancelBookingAsync(bookingId, body);
+    CancelBookingResponse result = await bookingsApi.CancelBookingAsync(
+        bookingId,
+        body
+    );
 }
 catch (ApiException e)
 {

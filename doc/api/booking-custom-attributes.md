@@ -52,7 +52,7 @@ ListBookingCustomAttributeDefinitionsAsync(
 ```csharp
 try
 {
-    ListBookingCustomAttributeDefinitionsResponse result = await bookingCustomAttributesApi.ListBookingCustomAttributeDefinitionsAsync(null, null);
+    ListBookingCustomAttributeDefinitionsResponse result = await bookingCustomAttributesApi.ListBookingCustomAttributeDefinitionsAsync();
 }
 catch (ApiException e)
 {
@@ -179,7 +179,7 @@ RetrieveBookingCustomAttributeDefinitionAsync(
 string key = "key0";
 try
 {
-    RetrieveBookingCustomAttributeDefinitionResponse result = await bookingCustomAttributesApi.RetrieveBookingCustomAttributeDefinitionAsync(key, null);
+    RetrieveBookingCustomAttributeDefinitionResponse result = await bookingCustomAttributesApi.RetrieveBookingCustomAttributeDefinitionAsync(key);
 }
 catch (ApiException e)
 {
@@ -228,7 +228,10 @@ Models.UpdateBookingCustomAttributeDefinitionRequest body = new Models.UpdateBoo
 
 try
 {
-    UpdateBookingCustomAttributeDefinitionResponse result = await bookingCustomAttributesApi.UpdateBookingCustomAttributeDefinitionAsync(key, body);
+    UpdateBookingCustomAttributeDefinitionResponse result = await bookingCustomAttributesApi.UpdateBookingCustomAttributeDefinitionAsync(
+        key,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -270,13 +273,13 @@ Models.BulkDeleteBookingCustomAttributesRequest body = new Models.BulkDeleteBook
     new Dictionary<string, Models.BookingCustomAttributeDeleteRequest>
     {
         ["key0"] = new Models.BookingCustomAttributeDeleteRequest.Builder(
-            "booking_id8",
-            "key4"
+            "booking_id4",
+            "key0"
         )
         .Build(),
         ["key1"] = new Models.BookingCustomAttributeDeleteRequest.Builder(
-            "booking_id9",
-            "key5"
+            "booking_id4",
+            "key0"
         )
         .Build(),
     }
@@ -327,13 +330,13 @@ Models.BulkUpsertBookingCustomAttributesRequest body = new Models.BulkUpsertBook
     new Dictionary<string, Models.BookingCustomAttributeUpsertRequest>
     {
         ["key0"] = new Models.BookingCustomAttributeUpsertRequest.Builder(
-            "booking_id8",
+            "booking_id4",
             new Models.CustomAttribute.Builder()
             .Build()
         )
         .Build(),
         ["key1"] = new Models.BookingCustomAttributeUpsertRequest.Builder(
-            "booking_id9",
+            "booking_id4",
             new Models.CustomAttribute.Builder()
             .Build()
         )
@@ -389,7 +392,12 @@ string bookingId = "booking_id4";
 bool? withDefinitions = false;
 try
 {
-    ListBookingCustomAttributesResponse result = await bookingCustomAttributesApi.ListBookingCustomAttributesAsync(bookingId, null, null, withDefinitions);
+    ListBookingCustomAttributesResponse result = await bookingCustomAttributesApi.ListBookingCustomAttributesAsync(
+        bookingId,
+        null,
+        null,
+        withDefinitions
+    );
 }
 catch (ApiException e)
 {
@@ -433,7 +441,10 @@ string bookingId = "booking_id4";
 string key = "key0";
 try
 {
-    DeleteBookingCustomAttributeResponse result = await bookingCustomAttributesApi.DeleteBookingCustomAttributeAsync(bookingId, key);
+    DeleteBookingCustomAttributeResponse result = await bookingCustomAttributesApi.DeleteBookingCustomAttributeAsync(
+        bookingId,
+        key
+    );
 }
 catch (ApiException e)
 {
@@ -479,7 +490,11 @@ string key = "key0";
 bool? withDefinition = false;
 try
 {
-    RetrieveBookingCustomAttributeResponse result = await bookingCustomAttributesApi.RetrieveBookingCustomAttributeAsync(bookingId, key, withDefinition, null);
+    RetrieveBookingCustomAttributeResponse result = await bookingCustomAttributesApi.RetrieveBookingCustomAttributeAsync(
+        bookingId,
+        key,
+        withDefinition
+    );
 }
 catch (ApiException e)
 {
@@ -531,7 +546,11 @@ Models.UpsertBookingCustomAttributeRequest body = new Models.UpsertBookingCustom
 
 try
 {
-    UpsertBookingCustomAttributeResponse result = await bookingCustomAttributesApi.UpsertBookingCustomAttributeAsync(bookingId, key, body);
+    UpsertBookingCustomAttributeResponse result = await bookingCustomAttributesApi.UpsertBookingCustomAttributeAsync(
+        bookingId,
+        key,
+        body
+    );
 }
 catch (ApiException e)
 {

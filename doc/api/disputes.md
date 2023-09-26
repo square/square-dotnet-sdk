@@ -49,7 +49,7 @@ ListDisputesAsync(
 ```csharp
 try
 {
-    ListDisputesResponse result = await disputesApi.ListDisputesAsync(null, null, null);
+    ListDisputesResponse result = await disputesApi.ListDisputesAsync();
 }
 catch (ApiException e)
 {
@@ -160,7 +160,7 @@ ListDisputeEvidenceAsync(
 string disputeId = "dispute_id2";
 try
 {
-    ListDisputeEvidenceResponse result = await disputesApi.ListDisputeEvidenceAsync(disputeId, null);
+    ListDisputeEvidenceResponse result = await disputesApi.ListDisputeEvidenceAsync(disputeId);
 }
 catch (ApiException e)
 {
@@ -200,7 +200,7 @@ CreateDisputeEvidenceFileAsync(
 string disputeId = "dispute_id2";
 try
 {
-    CreateDisputeEvidenceFileResponse result = await disputesApi.CreateDisputeEvidenceFileAsync(disputeId, null, null);
+    CreateDisputeEvidenceFileResponse result = await disputesApi.CreateDisputeEvidenceFileAsync(disputeId);
 }
 catch (ApiException e)
 {
@@ -244,7 +244,10 @@ Models.CreateDisputeEvidenceTextRequest body = new Models.CreateDisputeEvidenceT
 
 try
 {
-    CreateDisputeEvidenceTextResponse result = await disputesApi.CreateDisputeEvidenceTextAsync(disputeId, body);
+    CreateDisputeEvidenceTextResponse result = await disputesApi.CreateDisputeEvidenceTextAsync(
+        disputeId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -283,7 +286,10 @@ string disputeId = "dispute_id2";
 string evidenceId = "evidence_id2";
 try
 {
-    DeleteDisputeEvidenceResponse result = await disputesApi.DeleteDisputeEvidenceAsync(disputeId, evidenceId);
+    DeleteDisputeEvidenceResponse result = await disputesApi.DeleteDisputeEvidenceAsync(
+        disputeId,
+        evidenceId
+    );
 }
 catch (ApiException e)
 {
@@ -323,7 +329,10 @@ string disputeId = "dispute_id2";
 string evidenceId = "evidence_id2";
 try
 {
-    RetrieveDisputeEvidenceResponse result = await disputesApi.RetrieveDisputeEvidenceAsync(disputeId, evidenceId);
+    RetrieveDisputeEvidenceResponse result = await disputesApi.RetrieveDisputeEvidenceAsync(
+        disputeId,
+        evidenceId
+    );
 }
 catch (ApiException e)
 {

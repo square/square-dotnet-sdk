@@ -54,7 +54,7 @@ ListLocationCustomAttributeDefinitionsAsync(
 ```csharp
 try
 {
-    ListLocationCustomAttributeDefinitionsResponse result = await locationCustomAttributesApi.ListLocationCustomAttributeDefinitionsAsync(null, null, null);
+    ListLocationCustomAttributeDefinitionsResponse result = await locationCustomAttributesApi.ListLocationCustomAttributeDefinitionsAsync();
 }
 catch (ApiException e)
 {
@@ -181,7 +181,7 @@ RetrieveLocationCustomAttributeDefinitionAsync(
 string key = "key0";
 try
 {
-    RetrieveLocationCustomAttributeDefinitionResponse result = await locationCustomAttributesApi.RetrieveLocationCustomAttributeDefinitionAsync(key, null);
+    RetrieveLocationCustomAttributeDefinitionResponse result = await locationCustomAttributesApi.RetrieveLocationCustomAttributeDefinitionAsync(key);
 }
 catch (ApiException e)
 {
@@ -229,7 +229,10 @@ Models.UpdateLocationCustomAttributeDefinitionRequest body = new Models.UpdateLo
 
 try
 {
-    UpdateLocationCustomAttributeDefinitionResponse result = await locationCustomAttributesApi.UpdateLocationCustomAttributeDefinitionAsync(key, body);
+    UpdateLocationCustomAttributeDefinitionResponse result = await locationCustomAttributesApi.UpdateLocationCustomAttributeDefinitionAsync(
+        key,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -267,10 +270,13 @@ Models.BulkDeleteLocationCustomAttributesRequest body = new Models.BulkDeleteLoc
     new Dictionary<string, Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest>
     {
         ["id1"] = new Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
+        .Key("bestseller")
         .Build(),
         ["id2"] = new Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
+        .Key("bestseller")
         .Build(),
         ["id3"] = new Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
+        .Key("phone-number")
         .Build(),
     }
 )
@@ -323,13 +329,13 @@ Models.BulkUpsertLocationCustomAttributesRequest body = new Models.BulkUpsertLoc
     new Dictionary<string, Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest>
     {
         ["key0"] = new Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
-            "location_id8",
+            "location_id4",
             new Models.CustomAttribute.Builder()
             .Build()
         )
         .Build(),
         ["key1"] = new Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
-            "location_id9",
+            "location_id4",
             new Models.CustomAttribute.Builder()
             .Build()
         )
@@ -389,7 +395,13 @@ string locationId = "location_id4";
 bool? withDefinitions = false;
 try
 {
-    ListLocationCustomAttributesResponse result = await locationCustomAttributesApi.ListLocationCustomAttributesAsync(locationId, null, null, null, withDefinitions);
+    ListLocationCustomAttributesResponse result = await locationCustomAttributesApi.ListLocationCustomAttributesAsync(
+        locationId,
+        null,
+        null,
+        null,
+        withDefinitions
+    );
 }
 catch (ApiException e)
 {
@@ -429,7 +441,10 @@ string locationId = "location_id4";
 string key = "key0";
 try
 {
-    DeleteLocationCustomAttributeResponse result = await locationCustomAttributesApi.DeleteLocationCustomAttributeAsync(locationId, key);
+    DeleteLocationCustomAttributeResponse result = await locationCustomAttributesApi.DeleteLocationCustomAttributeAsync(
+        locationId,
+        key
+    );
 }
 catch (ApiException e)
 {
@@ -476,7 +491,11 @@ string key = "key0";
 bool? withDefinition = false;
 try
 {
-    RetrieveLocationCustomAttributeResponse result = await locationCustomAttributesApi.RetrieveLocationCustomAttributeAsync(locationId, key, withDefinition, null);
+    RetrieveLocationCustomAttributeResponse result = await locationCustomAttributesApi.RetrieveLocationCustomAttributeAsync(
+        locationId,
+        key,
+        withDefinition
+    );
 }
 catch (ApiException e)
 {
@@ -527,7 +546,11 @@ Models.UpsertLocationCustomAttributeRequest body = new Models.UpsertLocationCust
 
 try
 {
-    UpsertLocationCustomAttributeResponse result = await locationCustomAttributesApi.UpsertLocationCustomAttributeAsync(locationId, key, body);
+    UpsertLocationCustomAttributeResponse result = await locationCustomAttributesApi.UpsertLocationCustomAttributeAsync(
+        locationId,
+        key,
+        body
+    );
 }
 catch (ApiException e)
 {

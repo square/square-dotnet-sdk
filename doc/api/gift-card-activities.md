@@ -55,7 +55,7 @@ ListGiftCardActivitiesAsync(
 ```csharp
 try
 {
-    ListGiftCardActivitiesResponse result = await giftCardActivitiesApi.ListGiftCardActivitiesAsync(null, null, null, null, null, null, null, null);
+    ListGiftCardActivitiesResponse result = await giftCardActivitiesApi.ListGiftCardActivitiesAsync();
 }
 catch (ApiException e)
 {

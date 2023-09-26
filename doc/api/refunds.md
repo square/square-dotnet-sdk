@@ -58,7 +58,7 @@ ListPaymentRefundsAsync(
 ```csharp
 try
 {
-    ListPaymentRefundsResponse result = await refundsApi.ListPaymentRefundsAsync(null, null, null, null, null, null, null, null);
+    ListPaymentRefundsResponse result = await refundsApi.ListPaymentRefundsAsync();
 }
 catch (ApiException e)
 {

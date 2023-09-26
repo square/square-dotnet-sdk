@@ -470,7 +470,10 @@ Models.UpdateOrderRequest body = new Models.UpdateOrderRequest.Builder()
 
 try
 {
-    UpdateOrderResponse result = await ordersApi.UpdateOrderAsync(orderId, body);
+    UpdateOrderResponse result = await ordersApi.UpdateOrderAsync(
+        orderId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -531,7 +534,10 @@ Models.PayOrderRequest body = new Models.PayOrderRequest.Builder(
 
 try
 {
-    PayOrderResponse result = await ordersApi.PayOrderAsync(orderId, body);
+    PayOrderResponse result = await ordersApi.PayOrderAsync(
+        orderId,
+        body
+    );
 }
 catch (ApiException e)
 {

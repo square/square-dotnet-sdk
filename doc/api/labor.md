@@ -56,7 +56,7 @@ ListBreakTypesAsync(
 ```csharp
 try
 {
-    ListBreakTypesResponse result = await laborApi.ListBreakTypesAsync(null, null, null);
+    ListBreakTypesResponse result = await laborApi.ListBreakTypesAsync();
 }
 catch (ApiException e)
 {
@@ -236,7 +236,10 @@ Models.UpdateBreakTypeRequest body = new Models.UpdateBreakTypeRequest.Builder(
 
 try
 {
-    UpdateBreakTypeResponse result = await laborApi.UpdateBreakTypeAsync(id, body);
+    UpdateBreakTypeResponse result = await laborApi.UpdateBreakTypeAsync(
+        id,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -276,7 +279,7 @@ ListEmployeeWagesAsync(
 ```csharp
 try
 {
-    ListEmployeeWagesResponse result = await laborApi.ListEmployeeWagesAsync(null, null, null);
+    ListEmployeeWagesResponse result = await laborApi.ListEmployeeWagesAsync();
 }
 catch (ApiException e)
 {
@@ -365,10 +368,10 @@ CreateShiftAsync(
 ```csharp
 Models.CreateShiftRequest body = new Models.CreateShiftRequest.Builder(
     new Models.Shift.Builder(
-        "2019-01-25T08:11:00+00:00"
+        "2019-01-25T03:11:00-05:00"
     )
     .LocationId("PAA1RJZZKXBFG")
-    .EndAt("2019-01-25T18:11:00+00:00")
+    .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(
         new Models.ShiftWage.Builder()
         .Title("Barista")
@@ -382,13 +385,13 @@ Models.CreateShiftRequest body = new Models.CreateShiftRequest.Builder(
         new List<Models.Break>
         {
             new Models.Break.Builder(
-                "2019-01-25T11:11:00+00:00",
+                "2019-01-25T06:11:00-05:00",
                 "REGS1EQR1TPZ5",
                 "Tea Break",
                 "PT5M",
                 true
             )
-            .EndAt("2019-01-25T11:16:00+00:00")
+            .EndAt("2019-01-25T06:16:00-05:00")
             .Build(),
         })
     .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
@@ -581,10 +584,10 @@ UpdateShiftAsync(
 string id = "id0";
 Models.UpdateShiftRequest body = new Models.UpdateShiftRequest.Builder(
     new Models.Shift.Builder(
-        "2019-01-25T08:11:00+00:00"
+        "2019-01-25T03:11:00-05:00"
     )
     .LocationId("PAA1RJZZKXBFG")
-    .EndAt("2019-01-25T18:11:00+00:00")
+    .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(
         new Models.ShiftWage.Builder()
         .Title("Bartender")
@@ -598,14 +601,14 @@ Models.UpdateShiftRequest body = new Models.UpdateShiftRequest.Builder(
         new List<Models.Break>
         {
             new Models.Break.Builder(
-                "2019-01-25T11:11:00+00:00",
+                "2019-01-25T06:11:00-05:00",
                 "REGS1EQR1TPZ5",
                 "Tea Break",
                 "PT5M",
                 true
             )
             .Id("X7GAQYVVRRG6P")
-            .EndAt("2019-01-25T11:16:00+00:00")
+            .EndAt("2019-01-25T06:16:00-05:00")
             .Build(),
         })
     .Version(1)
@@ -616,7 +619,10 @@ Models.UpdateShiftRequest body = new Models.UpdateShiftRequest.Builder(
 
 try
 {
-    UpdateShiftResponse result = await laborApi.UpdateShiftAsync(id, body);
+    UpdateShiftResponse result = await laborApi.UpdateShiftAsync(
+        id,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -654,7 +660,7 @@ ListTeamMemberWagesAsync(
 ```csharp
 try
 {
-    ListTeamMemberWagesResponse result = await laborApi.ListTeamMemberWagesAsync(null, null, null);
+    ListTeamMemberWagesResponse result = await laborApi.ListTeamMemberWagesAsync();
 }
 catch (ApiException e)
 {
@@ -725,7 +731,7 @@ ListWorkweekConfigsAsync(
 ```csharp
 try
 {
-    ListWorkweekConfigsResponse result = await laborApi.ListWorkweekConfigsAsync(null, null);
+    ListWorkweekConfigsResponse result = await laborApi.ListWorkweekConfigsAsync();
 }
 catch (ApiException e)
 {
@@ -772,7 +778,10 @@ Models.UpdateWorkweekConfigRequest body = new Models.UpdateWorkweekConfigRequest
 
 try
 {
-    UpdateWorkweekConfigResponse result = await laborApi.UpdateWorkweekConfigAsync(id, body);
+    UpdateWorkweekConfigResponse result = await laborApi.UpdateWorkweekConfigAsync(
+        id,
+        body
+    );
 }
 catch (ApiException e)
 {

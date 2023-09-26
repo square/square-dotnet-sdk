@@ -191,6 +191,24 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Retrieves one or more team members' booking profiles.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkRetrieveTeamMemberBookingProfilesResponse response from the API call.</returns>
+        Models.BulkRetrieveTeamMemberBookingProfilesResponse BulkRetrieveTeamMemberBookingProfiles(
+                Models.BulkRetrieveTeamMemberBookingProfilesRequest body);
+
+        /// <summary>
+        /// Retrieves one or more team members' booking profiles.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkRetrieveTeamMemberBookingProfilesResponse response from the API call.</returns>
+        Task<Models.BulkRetrieveTeamMemberBookingProfilesResponse> BulkRetrieveTeamMemberBookingProfilesAsync(
+                Models.BulkRetrieveTeamMemberBookingProfilesRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Retrieves a team member's booking profile.
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve..</param>

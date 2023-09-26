@@ -64,7 +64,7 @@ ListPaymentsAsync(
 ```csharp
 try
 {
-    ListPaymentsResponse result = await paymentsApi.ListPaymentsAsync(null, null, null, null, null, null, null, null, null);
+    ListPaymentsResponse result = await paymentsApi.ListPaymentsAsync();
 }
 catch (ApiException e)
 {
@@ -267,7 +267,10 @@ Models.UpdatePaymentRequest body = new Models.UpdatePaymentRequest.Builder(
 
 try
 {
-    UpdatePaymentResponse result = await paymentsApi.UpdatePaymentAsync(paymentId, body);
+    UpdatePaymentResponse result = await paymentsApi.UpdatePaymentAsync(
+        paymentId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -346,7 +349,10 @@ Models.CompletePaymentRequest body = new Models.CompletePaymentRequest.Builder()
 
 try
 {
-    CompletePaymentResponse result = await paymentsApi.CompletePaymentAsync(paymentId, body);
+    CompletePaymentResponse result = await paymentsApi.CompletePaymentAsync(
+        paymentId,
+        body
+    );
 }
 catch (ApiException e)
 {

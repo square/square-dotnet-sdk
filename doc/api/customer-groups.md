@@ -43,7 +43,7 @@ ListCustomerGroupsAsync(
 ```csharp
 try
 {
-    ListCustomerGroupsResponse result = await customerGroupsApi.ListCustomerGroupsAsync(null, null);
+    ListCustomerGroupsResponse result = await customerGroupsApi.ListCustomerGroupsAsync();
 }
 catch (ApiException e)
 {
@@ -202,7 +202,10 @@ Models.UpdateCustomerGroupRequest body = new Models.UpdateCustomerGroupRequest.B
 
 try
 {
-    UpdateCustomerGroupResponse result = await customerGroupsApi.UpdateCustomerGroupAsync(groupId, body);
+    UpdateCustomerGroupResponse result = await customerGroupsApi.UpdateCustomerGroupAsync(
+        groupId,
+        body
+    );
 }
 catch (ApiException e)
 {

@@ -84,7 +84,7 @@ namespace Square.Models
         public string DisplayName { get; }
 
         /// <summary>
-        /// Indicates whether the team member can be booked through the Bookings API or the seller's online booking channel or site (`true) or not (`false`).
+        /// Indicates whether the team member can be booked through the Bookings API or the seller's online booking channel or site (`true`) or not (`false`).
         /// </summary>
         [JsonProperty("is_bookable")]
         public bool? IsBookable { get; }

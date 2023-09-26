@@ -52,7 +52,7 @@ ListGiftCardsAsync(
 ```csharp
 try
 {
-    ListGiftCardsResponse result = await giftCardsApi.ListGiftCardsAsync(null, null, null, null, null);
+    ListGiftCardsResponse result = await giftCardsApi.ListGiftCardsAsync();
 }
 catch (ApiException e)
 {
@@ -218,7 +218,10 @@ Models.LinkCustomerToGiftCardRequest body = new Models.LinkCustomerToGiftCardReq
 
 try
 {
-    LinkCustomerToGiftCardResponse result = await giftCardsApi.LinkCustomerToGiftCardAsync(giftCardId, body);
+    LinkCustomerToGiftCardResponse result = await giftCardsApi.LinkCustomerToGiftCardAsync(
+        giftCardId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -260,7 +263,10 @@ Models.UnlinkCustomerFromGiftCardRequest body = new Models.UnlinkCustomerFromGif
 
 try
 {
-    UnlinkCustomerFromGiftCardResponse result = await giftCardsApi.UnlinkCustomerFromGiftCardAsync(giftCardId, body);
+    UnlinkCustomerFromGiftCardResponse result = await giftCardsApi.UnlinkCustomerFromGiftCardAsync(
+        giftCardId,
+        body
+    );
 }
 catch (ApiException e)
 {

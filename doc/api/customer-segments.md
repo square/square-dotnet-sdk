@@ -40,7 +40,7 @@ ListCustomerSegmentsAsync(
 ```csharp
 try
 {
-    ListCustomerSegmentsResponse result = await customerSegmentsApi.ListCustomerSegmentsAsync(null, null);
+    ListCustomerSegmentsResponse result = await customerSegmentsApi.ListCustomerSegmentsAsync();
 }
 catch (ApiException e)
 {

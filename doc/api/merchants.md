@@ -47,7 +47,7 @@ ListMerchantsAsync(
 ```csharp
 try
 {
-    ListMerchantsResponse result = await merchantsApi.ListMerchantsAsync(null);
+    ListMerchantsResponse result = await merchantsApi.ListMerchantsAsync();
 }
 catch (ApiException e)
 {

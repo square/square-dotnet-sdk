@@ -44,7 +44,7 @@ ListWebhookEventTypesAsync(
 ```csharp
 try
 {
-    ListWebhookEventTypesResponse result = await webhookSubscriptionsApi.ListWebhookEventTypesAsync(null);
+    ListWebhookEventTypesResponse result = await webhookSubscriptionsApi.ListWebhookEventTypesAsync();
 }
 catch (ApiException e)
 {
@@ -85,7 +85,10 @@ ListWebhookSubscriptionsAsync(
 bool? includeDisabled = false;
 try
 {
-    ListWebhookSubscriptionsResponse result = await webhookSubscriptionsApi.ListWebhookSubscriptionsAsync(null, includeDisabled, null, null);
+    ListWebhookSubscriptionsResponse result = await webhookSubscriptionsApi.ListWebhookSubscriptionsAsync(
+        null,
+        includeDisabled
+    );
 }
 catch (ApiException e)
 {
@@ -250,7 +253,10 @@ Models.UpdateWebhookSubscriptionRequest body = new Models.UpdateWebhookSubscript
 
 try
 {
-    UpdateWebhookSubscriptionResponse result = await webhookSubscriptionsApi.UpdateWebhookSubscriptionAsync(subscriptionId, body);
+    UpdateWebhookSubscriptionResponse result = await webhookSubscriptionsApi.UpdateWebhookSubscriptionAsync(
+        subscriptionId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -291,7 +297,10 @@ Models.UpdateWebhookSubscriptionSignatureKeyRequest body = new Models.UpdateWebh
 
 try
 {
-    UpdateWebhookSubscriptionSignatureKeyResponse result = await webhookSubscriptionsApi.UpdateWebhookSubscriptionSignatureKeyAsync(subscriptionId, body);
+    UpdateWebhookSubscriptionSignatureKeyResponse result = await webhookSubscriptionsApi.UpdateWebhookSubscriptionSignatureKeyAsync(
+        subscriptionId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -332,7 +341,10 @@ Models.TestWebhookSubscriptionRequest body = new Models.TestWebhookSubscriptionR
 
 try
 {
-    TestWebhookSubscriptionResponse result = await webhookSubscriptionsApi.TestWebhookSubscriptionAsync(subscriptionId, body);
+    TestWebhookSubscriptionResponse result = await webhookSubscriptionsApi.TestWebhookSubscriptionAsync(
+        subscriptionId,
+        body
+    );
 }
 catch (ApiException e)
 {

@@ -56,7 +56,7 @@ ListTransactionsAsync(
 string locationId = "location_id4";
 try
 {
-    ListTransactionsResponse result = await transactionsApi.ListTransactionsAsync(locationId, null, null, null, null);
+    ListTransactionsResponse result = await transactionsApi.ListTransactionsAsync(locationId);
 }
 catch (ApiException e)
 {
@@ -96,7 +96,10 @@ string locationId = "location_id4";
 string transactionId = "transaction_id8";
 try
 {
-    RetrieveTransactionResponse result = await transactionsApi.RetrieveTransactionAsync(locationId, transactionId);
+    RetrieveTransactionResponse result = await transactionsApi.RetrieveTransactionAsync(
+        locationId,
+        transactionId
+    );
 }
 catch (ApiException e)
 {
@@ -140,7 +143,10 @@ string locationId = "location_id4";
 string transactionId = "transaction_id8";
 try
 {
-    CaptureTransactionResponse result = await transactionsApi.CaptureTransactionAsync(locationId, transactionId);
+    CaptureTransactionResponse result = await transactionsApi.CaptureTransactionAsync(
+        locationId,
+        transactionId
+    );
 }
 catch (ApiException e)
 {
@@ -184,7 +190,10 @@ string locationId = "location_id4";
 string transactionId = "transaction_id8";
 try
 {
-    VoidTransactionResponse result = await transactionsApi.VoidTransactionAsync(locationId, transactionId);
+    VoidTransactionResponse result = await transactionsApi.VoidTransactionAsync(
+        locationId,
+        transactionId
+    );
 }
 catch (ApiException e)
 {
