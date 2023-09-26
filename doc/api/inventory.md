@@ -205,8 +205,8 @@ Models.BatchRetrieveInventoryChangesRequest body = new Models.BatchRetrieveInven
     {
         "IN_STOCK",
     })
-.UpdatedAfter("2016-11-01T00:00:00Z")
-.UpdatedBefore("2016-12-01T00:00:00Z")
+.UpdatedAfter("2016-11-01T00:00:00.000Z")
+.UpdatedBefore("2016-12-01T00:00:00.000Z")
 .Build();
 
 try
@@ -257,7 +257,7 @@ Models.BatchRetrieveInventoryCountsRequest body = new Models.BatchRetrieveInvent
     {
         "59TNP9SA8VGDA",
     })
-.UpdatedAfter("2016-11-16T00:00:00Z")
+.UpdatedAfter("2016-11-16T00:00:00.000Z")
 .Build();
 
 try
@@ -383,8 +383,8 @@ Models.BatchRetrieveInventoryChangesRequest body = new Models.BatchRetrieveInven
     {
         "IN_STOCK",
     })
-.UpdatedAfter("2016-11-01T00:00:00Z")
-.UpdatedBefore("2016-12-01T00:00:00Z")
+.UpdatedAfter("2016-11-01T00:00:00.000Z")
+.UpdatedBefore("2016-12-01T00:00:00.000Z")
 .Build();
 
 try
@@ -442,7 +442,7 @@ Models.BatchRetrieveInventoryCountsRequest body = new Models.BatchRetrieveInvent
     {
         "59TNP9SA8VGDA",
     })
-.UpdatedAfter("2016-11-16T00:00:00Z")
+.UpdatedAfter("2016-11-16T00:00:00.000Z")
 .Build();
 
 try
@@ -599,7 +599,7 @@ RetrieveInventoryCountAsync(
 string catalogObjectId = "catalog_object_id6";
 try
 {
-    RetrieveInventoryCountResponse result = await inventoryApi.RetrieveInventoryCountAsync(catalogObjectId, null, null);
+    RetrieveInventoryCountResponse result = await inventoryApi.RetrieveInventoryCountAsync(catalogObjectId);
 }
 catch (ApiException e)
 {
@@ -652,7 +652,7 @@ RetrieveInventoryChangesAsync(
 string catalogObjectId = "catalog_object_id6";
 try
 {
-    RetrieveInventoryChangesResponse result = await inventoryApi.RetrieveInventoryChangesAsync(catalogObjectId, null, null);
+    RetrieveInventoryChangesResponse result = await inventoryApi.RetrieveInventoryChangesAsync(catalogObjectId);
 }
 catch (ApiException e)
 {

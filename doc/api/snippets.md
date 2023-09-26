@@ -133,7 +133,10 @@ Models.UpsertSnippetRequest body = new Models.UpsertSnippetRequest.Builder(
 
 try
 {
-    UpsertSnippetResponse result = await snippetsApi.UpsertSnippetAsync(siteId, body);
+    UpsertSnippetResponse result = await snippetsApi.UpsertSnippetAsync(
+        siteId,
+        body
+    );
 }
 catch (ApiException e)
 {

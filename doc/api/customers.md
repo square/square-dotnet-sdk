@@ -59,7 +59,13 @@ ListCustomersAsync(
 bool? count = false;
 try
 {
-    ListCustomersResponse result = await customersApi.ListCustomersAsync(null, null, null, null, count);
+    ListCustomersResponse result = await customersApi.ListCustomersAsync(
+        null,
+        null,
+        null,
+        null,
+        count
+    );
 }
 catch (ApiException e)
 {
@@ -177,8 +183,8 @@ Models.SearchCustomersRequest body = new Models.SearchCustomersRequest.Builder()
             .Build())
         .CreatedAt(
             new Models.TimeRange.Builder()
-            .StartAt("2018-01-01T00:00:00+00:00")
-            .EndAt("2018-02-01T00:00:00+00:00")
+            .StartAt("2018-01-01T00:00:00-00:00")
+            .EndAt("2018-02-01T00:00:00-00:00")
             .Build())
         .EmailAddress(
             new Models.CustomerTextFilter.Builder()
@@ -245,7 +251,7 @@ DeleteCustomerAsync(
 string customerId = "customer_id8";
 try
 {
-    DeleteCustomerResponse result = await customersApi.DeleteCustomerAsync(customerId, null);
+    DeleteCustomerResponse result = await customersApi.DeleteCustomerAsync(customerId);
 }
 catch (ApiException e)
 {
@@ -333,7 +339,10 @@ Models.UpdateCustomerRequest body = new Models.UpdateCustomerRequest.Builder()
 
 try
 {
-    UpdateCustomerResponse result = await customersApi.UpdateCustomerAsync(customerId, body);
+    UpdateCustomerResponse result = await customersApi.UpdateCustomerAsync(
+        customerId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -391,7 +400,10 @@ Models.CreateCustomerCardRequest body = new Models.CreateCustomerCardRequest.Bui
 
 try
 {
-    CreateCustomerCardResponse result = await customersApi.CreateCustomerCardAsync(customerId, body);
+    CreateCustomerCardResponse result = await customersApi.CreateCustomerCardAsync(
+        customerId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -431,7 +443,10 @@ string customerId = "customer_id8";
 string cardId = "card_id4";
 try
 {
-    DeleteCustomerCardResponse result = await customersApi.DeleteCustomerCardAsync(customerId, cardId);
+    DeleteCustomerCardResponse result = await customersApi.DeleteCustomerCardAsync(
+        customerId,
+        cardId
+    );
 }
 catch (ApiException e)
 {
@@ -472,7 +487,10 @@ string customerId = "customer_id8";
 string groupId = "group_id0";
 try
 {
-    RemoveGroupFromCustomerResponse result = await customersApi.RemoveGroupFromCustomerAsync(customerId, groupId);
+    RemoveGroupFromCustomerResponse result = await customersApi.RemoveGroupFromCustomerAsync(
+        customerId,
+        groupId
+    );
 }
 catch (ApiException e)
 {
@@ -513,7 +531,10 @@ string customerId = "customer_id8";
 string groupId = "group_id0";
 try
 {
-    AddGroupToCustomerResponse result = await customersApi.AddGroupToCustomerAsync(customerId, groupId);
+    AddGroupToCustomerResponse result = await customersApi.AddGroupToCustomerAsync(
+        customerId,
+        groupId
+    );
 }
 catch (ApiException e)
 {

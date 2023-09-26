@@ -54,7 +54,7 @@ V1ListOrdersAsync(
 string locationId = "location_id4";
 try
 {
-    List<V1Order> result = await v1TransactionsApi.V1ListOrdersAsync(locationId, null, null, null);
+    List<V1Order> result = await v1TransactionsApi.V1ListOrdersAsync(locationId);
 }
 catch (ApiException e)
 {
@@ -94,7 +94,10 @@ string locationId = "location_id4";
 string orderId = "order_id6";
 try
 {
-    V1Order result = await v1TransactionsApi.V1RetrieveOrderAsync(locationId, orderId);
+    V1Order result = await v1TransactionsApi.V1RetrieveOrderAsync(
+        locationId,
+        orderId
+    );
 }
 catch (ApiException e)
 {
@@ -141,7 +144,11 @@ Models.V1UpdateOrderRequest body = new Models.V1UpdateOrderRequest.Builder(
 
 try
 {
-    V1Order result = await v1TransactionsApi.V1UpdateOrderAsync(locationId, orderId, body);
+    V1Order result = await v1TransactionsApi.V1UpdateOrderAsync(
+        locationId,
+        orderId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -201,7 +208,15 @@ string locationId = "location_id4";
 bool? includePartial = false;
 try
 {
-    List<V1Payment> result = await v1TransactionsApi.V1ListPaymentsAsync(locationId, null, null, null, null, null, includePartial);
+    List<V1Payment> result = await v1TransactionsApi.V1ListPaymentsAsync(
+        locationId,
+        null,
+        null,
+        null,
+        null,
+        null,
+        includePartial
+    );
 }
 catch (ApiException e)
 {
@@ -241,7 +256,10 @@ string locationId = "location_id4";
 string paymentId = "payment_id0";
 try
 {
-    V1Payment result = await v1TransactionsApi.V1RetrievePaymentAsync(locationId, paymentId);
+    V1Payment result = await v1TransactionsApi.V1RetrievePaymentAsync(
+        locationId,
+        paymentId
+    );
 }
 catch (ApiException e)
 {
@@ -288,7 +306,7 @@ V1ListRefundsAsync(
 string locationId = "location_id4";
 try
 {
-    List<V1Refund> result = await v1TransactionsApi.V1ListRefundsAsync(locationId, null, null, null, null, null);
+    List<V1Refund> result = await v1TransactionsApi.V1ListRefundsAsync(locationId);
 }
 catch (ApiException e)
 {
@@ -345,7 +363,10 @@ Models.V1CreateRefundRequest body = new Models.V1CreateRefundRequest.Builder(
 
 try
 {
-    V1Refund result = await v1TransactionsApi.V1CreateRefundAsync(locationId, body);
+    V1Refund result = await v1TransactionsApi.V1CreateRefundAsync(
+        locationId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -399,7 +420,7 @@ V1ListSettlementsAsync(
 string locationId = "location_id4";
 try
 {
-    List<V1Settlement> result = await v1TransactionsApi.V1ListSettlementsAsync(locationId, null, null, null, null, null, null);
+    List<V1Settlement> result = await v1TransactionsApi.V1ListSettlementsAsync(locationId);
 }
 catch (ApiException e)
 {
@@ -455,7 +476,10 @@ string locationId = "location_id4";
 string settlementId = "settlement_id0";
 try
 {
-    V1Settlement result = await v1TransactionsApi.V1RetrieveSettlementAsync(locationId, settlementId);
+    V1Settlement result = await v1TransactionsApi.V1RetrieveSettlementAsync(
+        locationId,
+        settlementId
+    );
 }
 catch (ApiException e)
 {

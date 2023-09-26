@@ -54,7 +54,7 @@ ListMerchantCustomAttributeDefinitionsAsync(
 ```csharp
 try
 {
-    ListMerchantCustomAttributeDefinitionsResponse result = await merchantCustomAttributesApi.ListMerchantCustomAttributeDefinitionsAsync(null, null, null);
+    ListMerchantCustomAttributeDefinitionsResponse result = await merchantCustomAttributesApi.ListMerchantCustomAttributeDefinitionsAsync();
 }
 catch (ApiException e)
 {
@@ -181,7 +181,7 @@ RetrieveMerchantCustomAttributeDefinitionAsync(
 string key = "key0";
 try
 {
-    RetrieveMerchantCustomAttributeDefinitionResponse result = await merchantCustomAttributesApi.RetrieveMerchantCustomAttributeDefinitionAsync(key, null);
+    RetrieveMerchantCustomAttributeDefinitionResponse result = await merchantCustomAttributesApi.RetrieveMerchantCustomAttributeDefinitionAsync(key);
 }
 catch (ApiException e)
 {
@@ -229,7 +229,10 @@ Models.UpdateMerchantCustomAttributeDefinitionRequest body = new Models.UpdateMe
 
 try
 {
-    UpdateMerchantCustomAttributeDefinitionResponse result = await merchantCustomAttributesApi.UpdateMerchantCustomAttributeDefinitionAsync(key, body);
+    UpdateMerchantCustomAttributeDefinitionResponse result = await merchantCustomAttributesApi.UpdateMerchantCustomAttributeDefinitionAsync(
+        key,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -267,8 +270,10 @@ Models.BulkDeleteMerchantCustomAttributesRequest body = new Models.BulkDeleteMer
     new Dictionary<string, Models.BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest>
     {
         ["id1"] = new Models.BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest.Builder()
+        .Key("alternative_seller_name")
         .Build(),
         ["id2"] = new Models.BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest.Builder()
+        .Key("has_seen_tutorial")
         .Build(),
     }
 )
@@ -321,13 +326,13 @@ Models.BulkUpsertMerchantCustomAttributesRequest body = new Models.BulkUpsertMer
     new Dictionary<string, Models.BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest>
     {
         ["key0"] = new Models.BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest.Builder(
-            "merchant_id4",
+            "merchant_id0",
             new Models.CustomAttribute.Builder()
             .Build()
         )
         .Build(),
         ["key1"] = new Models.BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest.Builder(
-            "merchant_id5",
+            "merchant_id0",
             new Models.CustomAttribute.Builder()
             .Build()
         )
@@ -387,7 +392,13 @@ string merchantId = "merchant_id0";
 bool? withDefinitions = false;
 try
 {
-    ListMerchantCustomAttributesResponse result = await merchantCustomAttributesApi.ListMerchantCustomAttributesAsync(merchantId, null, null, null, withDefinitions);
+    ListMerchantCustomAttributesResponse result = await merchantCustomAttributesApi.ListMerchantCustomAttributesAsync(
+        merchantId,
+        null,
+        null,
+        null,
+        withDefinitions
+    );
 }
 catch (ApiException e)
 {
@@ -427,7 +438,10 @@ string merchantId = "merchant_id0";
 string key = "key0";
 try
 {
-    DeleteMerchantCustomAttributeResponse result = await merchantCustomAttributesApi.DeleteMerchantCustomAttributeAsync(merchantId, key);
+    DeleteMerchantCustomAttributeResponse result = await merchantCustomAttributesApi.DeleteMerchantCustomAttributeAsync(
+        merchantId,
+        key
+    );
 }
 catch (ApiException e)
 {
@@ -474,7 +488,11 @@ string key = "key0";
 bool? withDefinition = false;
 try
 {
-    RetrieveMerchantCustomAttributeResponse result = await merchantCustomAttributesApi.RetrieveMerchantCustomAttributeAsync(merchantId, key, withDefinition, null);
+    RetrieveMerchantCustomAttributeResponse result = await merchantCustomAttributesApi.RetrieveMerchantCustomAttributeAsync(
+        merchantId,
+        key,
+        withDefinition
+    );
 }
 catch (ApiException e)
 {
@@ -525,7 +543,11 @@ Models.UpsertMerchantCustomAttributeRequest body = new Models.UpsertMerchantCust
 
 try
 {
-    UpsertMerchantCustomAttributeResponse result = await merchantCustomAttributesApi.UpsertMerchantCustomAttributeAsync(merchantId, key, body);
+    UpsertMerchantCustomAttributeResponse result = await merchantCustomAttributesApi.UpsertMerchantCustomAttributeAsync(
+        merchantId,
+        key,
+        body
+    );
 }
 catch (ApiException e)
 {

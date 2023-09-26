@@ -43,7 +43,7 @@ ListBankAccountsAsync(
 ```csharp
 try
 {
-    ListBankAccountsResponse result = await bankAccountsApi.ListBankAccountsAsync(null, null, null);
+    ListBankAccountsResponse result = await bankAccountsApi.ListBankAccountsAsync();
 }
 catch (ApiException e)
 {

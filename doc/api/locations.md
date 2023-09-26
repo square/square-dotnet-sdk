@@ -191,7 +191,10 @@ Models.UpdateLocationRequest body = new Models.UpdateLocationRequest.Builder()
 
 try
 {
-    UpdateLocationResponse result = await locationsApi.UpdateLocationAsync(locationId, body);
+    UpdateLocationResponse result = await locationsApi.UpdateLocationAsync(
+        locationId,
+        body
+    );
 }
 catch (ApiException e)
 {

@@ -56,7 +56,7 @@ ListOrderCustomAttributeDefinitionsAsync(
 ```csharp
 try
 {
-    ListOrderCustomAttributeDefinitionsResponse result = await orderCustomAttributesApi.ListOrderCustomAttributeDefinitionsAsync(null, null, null);
+    ListOrderCustomAttributeDefinitionsResponse result = await orderCustomAttributesApi.ListOrderCustomAttributeDefinitionsAsync();
 }
 catch (ApiException e)
 {
@@ -183,7 +183,7 @@ RetrieveOrderCustomAttributeDefinitionAsync(
 string key = "key0";
 try
 {
-    RetrieveOrderCustomAttributeDefinitionResponse result = await orderCustomAttributesApi.RetrieveOrderCustomAttributeDefinitionAsync(key, null);
+    RetrieveOrderCustomAttributeDefinitionResponse result = await orderCustomAttributesApi.RetrieveOrderCustomAttributeDefinitionAsync(key);
 }
 catch (ApiException e)
 {
@@ -232,7 +232,10 @@ Models.UpdateOrderCustomAttributeDefinitionRequest body = new Models.UpdateOrder
 
 try
 {
-    UpdateOrderCustomAttributeDefinitionResponse result = await orderCustomAttributesApi.UpdateOrderCustomAttributeDefinitionAsync(key, body);
+    UpdateOrderCustomAttributeDefinitionResponse result = await orderCustomAttributesApi.UpdateOrderCustomAttributeDefinitionAsync(
+        key,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -347,13 +350,13 @@ Models.BulkUpsertOrderCustomAttributesRequest body = new Models.BulkUpsertOrderC
         ["key0"] = new Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
             new Models.CustomAttribute.Builder()
             .Build(),
-            "order_id2"
+            "order_id4"
         )
         .Build(),
         ["key1"] = new Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
             new Models.CustomAttribute.Builder()
             .Build(),
-            "order_id1"
+            "order_id4"
         )
         .Build(),
     }
@@ -413,7 +416,13 @@ string orderId = "order_id6";
 bool? withDefinitions = false;
 try
 {
-    ListOrderCustomAttributesResponse result = await orderCustomAttributesApi.ListOrderCustomAttributesAsync(orderId, null, null, null, withDefinitions);
+    ListOrderCustomAttributesResponse result = await orderCustomAttributesApi.ListOrderCustomAttributesAsync(
+        orderId,
+        null,
+        null,
+        null,
+        withDefinitions
+    );
 }
 catch (ApiException e)
 {
@@ -455,7 +464,10 @@ string orderId = "order_id6";
 string customAttributeKey = "custom_attribute_key2";
 try
 {
-    DeleteOrderCustomAttributeResponse result = await orderCustomAttributesApi.DeleteOrderCustomAttributeAsync(orderId, customAttributeKey);
+    DeleteOrderCustomAttributeResponse result = await orderCustomAttributesApi.DeleteOrderCustomAttributeAsync(
+        orderId,
+        customAttributeKey
+    );
 }
 catch (ApiException e)
 {
@@ -505,7 +517,12 @@ string customAttributeKey = "custom_attribute_key2";
 bool? withDefinition = false;
 try
 {
-    RetrieveOrderCustomAttributeResponse result = await orderCustomAttributesApi.RetrieveOrderCustomAttributeAsync(orderId, customAttributeKey, null, withDefinition);
+    RetrieveOrderCustomAttributeResponse result = await orderCustomAttributesApi.RetrieveOrderCustomAttributeAsync(
+        orderId,
+        customAttributeKey,
+        null,
+        withDefinition
+    );
 }
 catch (ApiException e)
 {
@@ -559,7 +576,11 @@ Models.UpsertOrderCustomAttributeRequest body = new Models.UpsertOrderCustomAttr
 
 try
 {
-    UpsertOrderCustomAttributeResponse result = await orderCustomAttributesApi.UpsertOrderCustomAttributeAsync(orderId, customAttributeKey, body);
+    UpsertOrderCustomAttributeResponse result = await orderCustomAttributesApi.UpsertOrderCustomAttributeAsync(
+        orderId,
+        customAttributeKey,
+        body
+    );
 }
 catch (ApiException e)
 {

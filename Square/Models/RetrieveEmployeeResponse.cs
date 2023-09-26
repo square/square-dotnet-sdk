@@ -40,6 +40,7 @@ namespace Square.Models
 
         /// <summary>
         /// An employee object that is used by the external API.
+        /// DEPRECATED at version 2020-08-26. Replaced by [TeamMember](entity:TeamMember).
         /// </summary>
         [JsonProperty("employee", NullValueHandling = NullValueHandling.Ignore)]
         public Models.Employee Employee { get; }

@@ -184,7 +184,7 @@ RetrieveSubscriptionAsync(
 string subscriptionId = "subscription_id0";
 try
 {
-    RetrieveSubscriptionResponse result = await subscriptionsApi.RetrieveSubscriptionAsync(subscriptionId, null);
+    RetrieveSubscriptionResponse result = await subscriptionsApi.RetrieveSubscriptionAsync(subscriptionId);
 }
 catch (ApiException e)
 {
@@ -223,12 +223,17 @@ string subscriptionId = "subscription_id0";
 Models.UpdateSubscriptionRequest body = new Models.UpdateSubscriptionRequest.Builder()
 .Subscription(
     new Models.Subscription.Builder()
+    .CanceledDate("canceled_date6")
+    .CardId("{NEW CARD ID}")
     .Build())
 .Build();
 
 try
 {
-    UpdateSubscriptionResponse result = await subscriptionsApi.UpdateSubscriptionAsync(subscriptionId, body);
+    UpdateSubscriptionResponse result = await subscriptionsApi.UpdateSubscriptionAsync(
+        subscriptionId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -266,7 +271,10 @@ string subscriptionId = "subscription_id0";
 string actionId = "action_id6";
 try
 {
-    DeleteSubscriptionActionResponse result = await subscriptionsApi.DeleteSubscriptionActionAsync(subscriptionId, actionId);
+    DeleteSubscriptionActionResponse result = await subscriptionsApi.DeleteSubscriptionActionAsync(
+        subscriptionId,
+        actionId
+    );
 }
 catch (ApiException e)
 {
@@ -342,7 +350,7 @@ ListSubscriptionEventsAsync(
 string subscriptionId = "subscription_id0";
 try
 {
-    ListSubscriptionEventsResponse result = await subscriptionsApi.ListSubscriptionEventsAsync(subscriptionId, null, null);
+    ListSubscriptionEventsResponse result = await subscriptionsApi.ListSubscriptionEventsAsync(subscriptionId);
 }
 catch (ApiException e)
 {
@@ -382,7 +390,10 @@ Models.PauseSubscriptionRequest body = new Models.PauseSubscriptionRequest.Build
 
 try
 {
-    PauseSubscriptionResponse result = await subscriptionsApi.PauseSubscriptionAsync(subscriptionId, body);
+    PauseSubscriptionResponse result = await subscriptionsApi.PauseSubscriptionAsync(
+        subscriptionId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -422,7 +433,10 @@ Models.ResumeSubscriptionRequest body = new Models.ResumeSubscriptionRequest.Bui
 
 try
 {
-    ResumeSubscriptionResponse result = await subscriptionsApi.ResumeSubscriptionAsync(subscriptionId, body);
+    ResumeSubscriptionResponse result = await subscriptionsApi.ResumeSubscriptionAsync(
+        subscriptionId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -473,7 +487,10 @@ Models.SwapPlanRequest body = new Models.SwapPlanRequest.Builder()
 
 try
 {
-    SwapPlanResponse result = await subscriptionsApi.SwapPlanAsync(subscriptionId, body);
+    SwapPlanResponse result = await subscriptionsApi.SwapPlanAsync(
+        subscriptionId,
+        body
+    );
 }
 catch (ApiException e)
 {

@@ -213,7 +213,10 @@ Models.AccumulateLoyaltyPointsRequest body = new Models.AccumulateLoyaltyPointsR
 
 try
 {
-    AccumulateLoyaltyPointsResponse result = await loyaltyApi.AccumulateLoyaltyPointsAsync(accountId, body);
+    AccumulateLoyaltyPointsResponse result = await loyaltyApi.AccumulateLoyaltyPointsAsync(
+        accountId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -264,7 +267,10 @@ Models.AdjustLoyaltyPointsRequest body = new Models.AdjustLoyaltyPointsRequest.B
 
 try
 {
-    AdjustLoyaltyPointsResponse result = await loyaltyApi.AdjustLoyaltyPointsAsync(accountId, body);
+    AdjustLoyaltyPointsResponse result = await loyaltyApi.AdjustLoyaltyPointsAsync(
+        accountId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -445,7 +451,10 @@ Models.CalculateLoyaltyPointsRequest body = new Models.CalculateLoyaltyPointsReq
 
 try
 {
-    CalculateLoyaltyPointsResponse result = await loyaltyApi.CalculateLoyaltyPointsAsync(programId, body);
+    CalculateLoyaltyPointsResponse result = await loyaltyApi.CalculateLoyaltyPointsAsync(
+        programId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -487,7 +496,7 @@ ListLoyaltyPromotionsAsync(
 string programId = "program_id0";
 try
 {
-    ListLoyaltyPromotionsResponse result = await loyaltyApi.ListLoyaltyPromotionsAsync(programId, null, null, null);
+    ListLoyaltyPromotionsResponse result = await loyaltyApi.ListLoyaltyPromotionsAsync(programId);
 }
 catch (ApiException e)
 {
@@ -569,7 +578,10 @@ Models.CreateLoyaltyPromotionRequest body = new Models.CreateLoyaltyPromotionReq
 
 try
 {
-    CreateLoyaltyPromotionResponse result = await loyaltyApi.CreateLoyaltyPromotionAsync(programId, body);
+    CreateLoyaltyPromotionResponse result = await loyaltyApi.CreateLoyaltyPromotionAsync(
+        programId,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -607,7 +619,10 @@ string promotionId = "promotion_id0";
 string programId = "program_id0";
 try
 {
-    RetrieveLoyaltyPromotionResponse result = await loyaltyApi.RetrieveLoyaltyPromotionAsync(promotionId, programId);
+    RetrieveLoyaltyPromotionResponse result = await loyaltyApi.RetrieveLoyaltyPromotionAsync(
+        promotionId,
+        programId
+    );
 }
 catch (ApiException e)
 {
@@ -650,7 +665,10 @@ string promotionId = "promotion_id0";
 string programId = "program_id0";
 try
 {
-    CancelLoyaltyPromotionResponse result = await loyaltyApi.CancelLoyaltyPromotionAsync(promotionId, programId);
+    CancelLoyaltyPromotionResponse result = await loyaltyApi.CancelLoyaltyPromotionAsync(
+        promotionId,
+        programId
+    );
 }
 catch (ApiException e)
 {
@@ -882,7 +900,10 @@ Models.RedeemLoyaltyRewardRequest body = new Models.RedeemLoyaltyRewardRequest.B
 
 try
 {
-    RedeemLoyaltyRewardResponse result = await loyaltyApi.RedeemLoyaltyRewardAsync(rewardId, body);
+    RedeemLoyaltyRewardResponse result = await loyaltyApi.RedeemLoyaltyRewardAsync(
+        rewardId,
+        body
+    );
 }
 catch (ApiException e)
 {

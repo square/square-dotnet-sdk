@@ -306,7 +306,10 @@ Models.UpdateVendorRequest body = new Models.UpdateVendorRequest.Builder(
 string vendorId = "vendor_id8";
 try
 {
-    UpdateVendorResponse result = await vendorsApi.UpdateVendorAsync(body, vendorId);
+    UpdateVendorResponse result = await vendorsApi.UpdateVendorAsync(
+        body,
+        vendorId
+    );
 }
 catch (ApiException e)
 {

@@ -22,45 +22,68 @@ namespace Square.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Device"/> class.
         /// </summary>
+        /// <param name="attributes">attributes.</param>
         /// <param name="id">id.</param>
-        /// <param name="name">name.</param>
+        /// <param name="components">components.</param>
+        /// <param name="status">status.</param>
         public Device(
+            Models.DeviceAttributes attributes,
             string id = null,
-            string name = null)
+            IList<Models.Component> components = null,
+            Models.DeviceStatus status = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
-                { "name", false }
+                { "components", false }
             };
 
             this.Id = id;
-            if (name != null)
+            this.Attributes = attributes;
+            if (components != null)
             {
-                shouldSerialize["name"] = true;
-                this.Name = name;
+                shouldSerialize["components"] = true;
+                this.Components = components;
             }
 
+            this.Status = status;
         }
         internal Device(Dictionary<string, bool> shouldSerialize,
+            Models.DeviceAttributes attributes,
             string id = null,
-            string name = null)
+            IList<Models.Component> components = null,
+            Models.DeviceStatus status = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
-            Name = name;
+            Attributes = attributes;
+            Components = components;
+            Status = status;
         }
 
         /// <summary>
-        /// The device's Square-issued ID.
+        /// A synthetic identifier for the device. The identifier includes a standardized prefix and
+        /// is otherwise an opaque id generated from key device fields.
         /// </summary>
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; }
 
         /// <summary>
-        /// The device's merchant-specified name.
+        /// Gets or sets Attributes.
         /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; }
+        [JsonProperty("attributes")]
+        public Models.DeviceAttributes Attributes { get; }
+
+        /// <summary>
+        /// A list of components applicable to the device.
+        /// </summary>
+        [JsonProperty("components")]
+        public IList<Models.Component> Components { get; }
+
+        /// <summary>
+        /// Gets or sets Status.
+        /// </summary>
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.DeviceStatus Status { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -76,9 +99,9 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeName()
+        public bool ShouldSerializeComponents()
         {
-            return this.shouldSerialize["name"];
+            return this.shouldSerialize["components"];
         }
 
         /// <inheritdoc/>
@@ -94,14 +117,16 @@ namespace Square.Models
                 return true;
             }
             return obj is Device other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
+                ((this.Attributes == null && other.Attributes == null) || (this.Attributes?.Equals(other.Attributes) == true)) &&
+                ((this.Components == null && other.Components == null) || (this.Components?.Equals(other.Components) == true)) &&
+                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1703801310;
-            hashCode = HashCode.Combine(this.Id, this.Name);
+            int hashCode = 936950560;
+            hashCode = HashCode.Combine(this.Id, this.Attributes, this.Components, this.Status);
 
             return hashCode;
         }
@@ -112,7 +137,9 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Attributes = {(this.Attributes == null ? "null" : this.Attributes.ToString())}");
+            toStringOutput.Add($"this.Components = {(this.Components == null ? "null" : $"[{string.Join(", ", this.Components)} ]")}");
+            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
         }
 
         /// <summary>
@@ -121,9 +148,11 @@ namespace Square.Models
         /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder()
+            var builder = new Builder(
+                this.Attributes)
                 .Id(this.Id)
-                .Name(this.Name);
+                .Components(this.Components)
+                .Status(this.Status);
             return builder;
         }
 
@@ -134,11 +163,30 @@ namespace Square.Models
         {
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
-                { "name", false },
+                { "components", false },
             };
 
+            private Models.DeviceAttributes attributes;
             private string id;
-            private string name;
+            private IList<Models.Component> components;
+            private Models.DeviceStatus status;
+
+            public Builder(
+                Models.DeviceAttributes attributes)
+            {
+                this.attributes = attributes;
+            }
+
+             /// <summary>
+             /// Attributes.
+             /// </summary>
+             /// <param name="attributes"> attributes. </param>
+             /// <returns> Builder. </returns>
+            public Builder Attributes(Models.DeviceAttributes attributes)
+            {
+                this.attributes = attributes;
+                return this;
+            }
 
              /// <summary>
              /// Id.
@@ -152,23 +200,34 @@ namespace Square.Models
             }
 
              /// <summary>
-             /// Name.
+             /// Components.
              /// </summary>
-             /// <param name="name"> name. </param>
+             /// <param name="components"> components. </param>
              /// <returns> Builder. </returns>
-            public Builder Name(string name)
+            public Builder Components(IList<Models.Component> components)
             {
-                shouldSerialize["name"] = true;
-                this.name = name;
+                shouldSerialize["components"] = true;
+                this.components = components;
+                return this;
+            }
+
+             /// <summary>
+             /// Status.
+             /// </summary>
+             /// <param name="status"> status. </param>
+             /// <returns> Builder. </returns>
+            public Builder Status(Models.DeviceStatus status)
+            {
+                this.status = status;
                 return this;
             }
 
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
-            public void UnsetName()
+            public void UnsetComponents()
             {
-                this.shouldSerialize["name"] = false;
+                this.shouldSerialize["components"] = false;
             }
 
 
@@ -179,8 +238,10 @@ namespace Square.Models
             public Device Build()
             {
                 return new Device(shouldSerialize,
+                    this.attributes,
                     this.id,
-                    this.name);
+                    this.components,
+                    this.status);
             }
         }
     }

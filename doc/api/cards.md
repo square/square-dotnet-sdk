@@ -50,7 +50,11 @@ ListCardsAsync(
 bool? includeDisabled = false;
 try
 {
-    ListCardsResponse result = await cardsApi.ListCardsAsync(null, null, includeDisabled, null, null);
+    ListCardsResponse result = await cardsApi.ListCardsAsync(
+        null,
+        null,
+        includeDisabled
+    );
 }
 catch (ApiException e)
 {

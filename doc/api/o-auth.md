@@ -72,7 +72,11 @@ Models.RenewTokenRequest body = new Models.RenewTokenRequest.Builder()
 string authorization = "Client CLIENT_SECRET";
 try
 {
-    RenewTokenResponse result = await oAuthApi.RenewTokenAsync(clientId, body, authorization);
+    RenewTokenResponse result = await oAuthApi.RenewTokenAsync(
+        clientId,
+        body,
+        authorization
+    );
 }
 catch (ApiException e)
 {
@@ -87,9 +91,7 @@ catch (ApiException e)
 Revokes an access token generated with the OAuth flow.
 
 If an account has more than one OAuth access token for your application, this
-endpoint revokes all of them, regardless of which token you specify. When an
-OAuth access token is revoked, all of the active subscriptions associated
-with that OAuth token are canceled immediately.
+endpoint revokes all of them, regardless of which token you specify.
 
 __Important:__ The `Authorization` header for this endpoint must have the
 following format:
@@ -131,7 +133,10 @@ Models.RevokeTokenRequest body = new Models.RevokeTokenRequest.Builder()
 string authorization = "Client CLIENT_SECRET";
 try
 {
-    RevokeTokenResponse result = await oAuthApi.RevokeTokenAsync(body, authorization);
+    RevokeTokenResponse result = await oAuthApi.RevokeTokenAsync(
+        body,
+        authorization
+    );
 }
 catch (ApiException e)
 {

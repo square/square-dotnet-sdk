@@ -53,7 +53,7 @@ ListCustomerCustomAttributeDefinitionsAsync(
 ```csharp
 try
 {
-    ListCustomerCustomAttributeDefinitionsResponse result = await customerCustomAttributesApi.ListCustomerCustomAttributeDefinitionsAsync(null, null);
+    ListCustomerCustomAttributeDefinitionsResponse result = await customerCustomAttributesApi.ListCustomerCustomAttributeDefinitionsAsync();
 }
 catch (ApiException e)
 {
@@ -188,7 +188,7 @@ RetrieveCustomerCustomAttributeDefinitionAsync(
 string key = "key0";
 try
 {
-    RetrieveCustomerCustomAttributeDefinitionResponse result = await customerCustomAttributesApi.RetrieveCustomerCustomAttributeDefinitionAsync(key, null);
+    RetrieveCustomerCustomAttributeDefinitionResponse result = await customerCustomAttributesApi.RetrieveCustomerCustomAttributeDefinitionAsync(key);
 }
 catch (ApiException e)
 {
@@ -239,7 +239,10 @@ Models.UpdateCustomerCustomAttributeDefinitionRequest body = new Models.UpdateCu
 
 try
 {
-    UpdateCustomerCustomAttributeDefinitionResponse result = await customerCustomAttributesApi.UpdateCustomerCustomAttributeDefinitionAsync(key, body);
+    UpdateCustomerCustomAttributeDefinitionResponse result = await customerCustomAttributesApi.UpdateCustomerCustomAttributeDefinitionAsync(
+        key,
+        body
+    );
 }
 catch (ApiException e)
 {
@@ -288,13 +291,13 @@ Models.BulkUpsertCustomerCustomAttributesRequest body = new Models.BulkUpsertCus
     new Dictionary<string, Models.BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest>
     {
         ["key0"] = new Models.BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
-            "customer_id2",
+            "customer_id8",
             new Models.CustomAttribute.Builder()
             .Build()
         )
         .Build(),
         ["key1"] = new Models.BulkUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest.Builder(
-            "customer_id3",
+            "customer_id8",
             new Models.CustomAttribute.Builder()
             .Build()
         )
@@ -354,7 +357,12 @@ string customerId = "customer_id8";
 bool? withDefinitions = false;
 try
 {
-    ListCustomerCustomAttributesResponse result = await customerCustomAttributesApi.ListCustomerCustomAttributesAsync(customerId, null, null, withDefinitions);
+    ListCustomerCustomAttributesResponse result = await customerCustomAttributesApi.ListCustomerCustomAttributesAsync(
+        customerId,
+        null,
+        null,
+        withDefinitions
+    );
 }
 catch (ApiException e)
 {
@@ -396,7 +404,10 @@ string customerId = "customer_id8";
 string key = "key0";
 try
 {
-    DeleteCustomerCustomAttributeResponse result = await customerCustomAttributesApi.DeleteCustomerCustomAttributeAsync(customerId, key);
+    DeleteCustomerCustomAttributeResponse result = await customerCustomAttributesApi.DeleteCustomerCustomAttributeAsync(
+        customerId,
+        key
+    );
 }
 catch (ApiException e)
 {
@@ -446,7 +457,11 @@ string key = "key0";
 bool? withDefinition = false;
 try
 {
-    RetrieveCustomerCustomAttributeResponse result = await customerCustomAttributesApi.RetrieveCustomerCustomAttributeAsync(customerId, key, withDefinition, null);
+    RetrieveCustomerCustomAttributeResponse result = await customerCustomAttributesApi.RetrieveCustomerCustomAttributeAsync(
+        customerId,
+        key,
+        withDefinition
+    );
 }
 catch (ApiException e)
 {
@@ -500,7 +515,11 @@ Models.UpsertCustomerCustomAttributeRequest body = new Models.UpsertCustomerCust
 
 try
 {
-    UpsertCustomerCustomAttributeResponse result = await customerCustomAttributesApi.UpsertCustomerCustomAttributeAsync(customerId, key, body);
+    UpsertCustomerCustomAttributeResponse result = await customerCustomAttributesApi.UpsertCustomerCustomAttributeAsync(
+        customerId,
+        key,
+        body
+    );
 }
 catch (ApiException e)
 {

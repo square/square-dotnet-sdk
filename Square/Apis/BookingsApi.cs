@@ -272,6 +272,35 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
+        /// Retrieves one or more team members' booking profiles.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkRetrieveTeamMemberBookingProfilesResponse response from the API call.</returns>
+        public Models.BulkRetrieveTeamMemberBookingProfilesResponse BulkRetrieveTeamMemberBookingProfiles(
+                Models.BulkRetrieveTeamMemberBookingProfilesRequest body)
+            => CoreHelper.RunTask(BulkRetrieveTeamMemberBookingProfilesAsync(body));
+
+        /// <summary>
+        /// Retrieves one or more team members' booking profiles.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkRetrieveTeamMemberBookingProfilesResponse response from the API call.</returns>
+        public async Task<Models.BulkRetrieveTeamMemberBookingProfilesResponse> BulkRetrieveTeamMemberBookingProfilesAsync(
+                Models.BulkRetrieveTeamMemberBookingProfilesRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.BulkRetrieveTeamMemberBookingProfilesResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/bookings/team-member-booking-profiles/bulk-retrieve")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
         /// Retrieves a team member's booking profile.
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member to retrieve..</param>

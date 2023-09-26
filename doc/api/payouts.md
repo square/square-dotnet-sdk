@@ -53,7 +53,7 @@ ListPayoutsAsync(
 ```csharp
 try
 {
-    ListPayoutsResponse result = await payoutsApi.ListPayoutsAsync(null, null, null, null, null, null, null);
+    ListPayoutsResponse result = await payoutsApi.ListPayoutsAsync();
 }
 catch (ApiException e)
 {
@@ -131,7 +131,7 @@ ListPayoutEntriesAsync(
 string payoutId = "payout_id6";
 try
 {
-    ListPayoutEntriesResponse result = await payoutsApi.ListPayoutEntriesAsync(payoutId, null, null, null);
+    ListPayoutEntriesResponse result = await payoutsApi.ListPayoutEntriesAsync(payoutId);
 }
 catch (ApiException e)
 {
