@@ -25,7 +25,7 @@ namespace Square.Models
         /// <param name="ordinal">ordinal.</param>
         /// <param name="orderTemplateId">order_template_id.</param>
         public PhaseInput(
-            int ordinal,
+            long ordinal,
             string orderTemplateId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
@@ -42,7 +42,7 @@ namespace Square.Models
 
         }
         internal PhaseInput(Dictionary<string, bool> shouldSerialize,
-            int ordinal,
+            long ordinal,
             string orderTemplateId = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -54,7 +54,7 @@ namespace Square.Models
         /// index of phase in total subscription plan
         /// </summary>
         [JsonProperty("ordinal")]
-        public int Ordinal { get; }
+        public long Ordinal { get; }
 
         /// <summary>
         /// id of order to be used in billing
@@ -100,7 +100,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2074738993;
+            int hashCode = -360399112;
             hashCode = HashCode.Combine(this.Ordinal, this.OrderTemplateId);
 
             return hashCode;
@@ -137,11 +137,11 @@ namespace Square.Models
                 { "order_template_id", false },
             };
 
-            private int ordinal;
+            private long ordinal;
             private string orderTemplateId;
 
             public Builder(
-                int ordinal)
+                long ordinal)
             {
                 this.ordinal = ordinal;
             }
@@ -151,7 +151,7 @@ namespace Square.Models
              /// </summary>
              /// <param name="ordinal"> ordinal. </param>
              /// <returns> Builder. </returns>
-            public Builder Ordinal(int ordinal)
+            public Builder Ordinal(long ordinal)
             {
                 this.ordinal = ordinal;
                 return this;

@@ -11,7 +11,7 @@ Represents the arguments used to construct a new phase.
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Ordinal` | `int` | Required | index of phase in total subscription plan |
+| `Ordinal` | `long` | Required | index of phase in total subscription plan |
 | `OrderTemplateId` | `string` | Optional | id of order to be used in billing |
 
 ## Example (as JSON)

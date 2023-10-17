@@ -70,6 +70,37 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
+        /// Schedules a plan variation change for all active subscriptions under a given plan.
+        /// variation. For more information, see [Swap Subscription Plan Variations](https://developer.squareup.com/docs/subscriptions-api/swap-plan-variations).
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkSwapPlanResponse response from the API call.</returns>
+        public Models.BulkSwapPlanResponse BulkSwapPlan(
+                Models.BulkSwapPlanRequest body)
+            => CoreHelper.RunTask(BulkSwapPlanAsync(body));
+
+        /// <summary>
+        /// Schedules a plan variation change for all active subscriptions under a given plan.
+        /// variation. For more information, see [Swap Subscription Plan Variations](https://developer.squareup.com/docs/subscriptions-api/swap-plan-variations).
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkSwapPlanResponse response from the API call.</returns>
+        public async Task<Models.BulkSwapPlanResponse> BulkSwapPlanAsync(
+                Models.BulkSwapPlanRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.BulkSwapPlanResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/subscriptions/bulk-swap-plan")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
         /// Searches for subscriptions.
         /// Results are ordered chronologically by subscription creation date. If.
         /// the request specifies more than one location ID,.
@@ -218,6 +249,42 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("subscription_id", subscriptionId))
                       .Template(_template => _template.Setup("action_id", actionId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
+        /// Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates).
+        /// for a subscription.
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The ID of the subscription to update the billing anchor date..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.ChangeBillingAnchorDateResponse response from the API call.</returns>
+        public Models.ChangeBillingAnchorDateResponse ChangeBillingAnchorDate(
+                string subscriptionId,
+                Models.ChangeBillingAnchorDateRequest body)
+            => CoreHelper.RunTask(ChangeBillingAnchorDateAsync(subscriptionId, body));
+
+        /// <summary>
+        /// Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates).
+        /// for a subscription.
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The ID of the subscription to update the billing anchor date..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ChangeBillingAnchorDateResponse response from the API call.</returns>
+        public async Task<Models.ChangeBillingAnchorDateResponse> ChangeBillingAnchorDateAsync(
+                string subscriptionId,
+                Models.ChangeBillingAnchorDateRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.ChangeBillingAnchorDateResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/subscriptions/{subscription_id}/billing-anchor")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Template(_template => _template.Setup("subscription_id", subscriptionId))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken);

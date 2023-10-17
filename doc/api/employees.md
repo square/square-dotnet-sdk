@@ -18,8 +18,6 @@ IEmployeesApi employeesApi = client.EmployeesApi;
 
 **This endpoint is deprecated.**
 
-ListEmployees
-
 ```csharp
 ListEmployeesAsync(
     string locationId = null,
@@ -59,8 +57,6 @@ catch (ApiException e)
 # Retrieve Employee
 
 **This endpoint is deprecated.**
-
-RetrieveEmployee
 
 ```csharp
 RetrieveEmployeeAsync(

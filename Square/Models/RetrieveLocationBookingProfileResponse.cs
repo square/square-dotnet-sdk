@@ -15,20 +15,20 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// RetrieveBusinessBookingProfileResponse.
+    /// RetrieveLocationBookingProfileResponse.
     /// </summary>
-    public class RetrieveBusinessBookingProfileResponse
+    public class RetrieveLocationBookingProfileResponse
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RetrieveBusinessBookingProfileResponse"/> class.
+        /// Initializes a new instance of the <see cref="RetrieveLocationBookingProfileResponse"/> class.
         /// </summary>
-        /// <param name="businessBookingProfile">business_booking_profile.</param>
+        /// <param name="locationBookingProfile">location_booking_profile.</param>
         /// <param name="errors">errors.</param>
-        public RetrieveBusinessBookingProfileResponse(
-            Models.BusinessBookingProfile businessBookingProfile = null,
+        public RetrieveLocationBookingProfileResponse(
+            Models.LocationBookingProfile locationBookingProfile = null,
             IList<Models.Error> errors = null)
         {
-            this.BusinessBookingProfile = businessBookingProfile;
+            this.LocationBookingProfile = locationBookingProfile;
             this.Errors = errors;
         }
 
@@ -39,10 +39,10 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// A seller's business booking profile, including booking policy, appointment settings, etc.
+        /// The booking profile of a seller's location, including the location's ID and whether the location is enabled for online booking.
         /// </summary>
-        [JsonProperty("business_booking_profile", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.BusinessBookingProfile BusinessBookingProfile { get; }
+        [JsonProperty("location_booking_profile", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.LocationBookingProfile LocationBookingProfile { get; }
 
         /// <summary>
         /// Errors that occurred during the request.
@@ -57,7 +57,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"RetrieveBusinessBookingProfileResponse : ({string.Join(", ", toStringOutput)})";
+            return $"RetrieveLocationBookingProfileResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -72,25 +72,25 @@ namespace Square.Models
             {
                 return true;
             }
-            return obj is RetrieveBusinessBookingProfileResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.BusinessBookingProfile == null && other.BusinessBookingProfile == null) || (this.BusinessBookingProfile?.Equals(other.BusinessBookingProfile) == true)) &&
+            return obj is RetrieveLocationBookingProfileResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.LocationBookingProfile == null && other.LocationBookingProfile == null) || (this.LocationBookingProfile?.Equals(other.LocationBookingProfile) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1635211081;
+            int hashCode = -1211764508;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.BusinessBookingProfile, this.Errors);
+            hashCode = HashCode.Combine(this.LocationBookingProfile, this.Errors);
 
             return hashCode;
         }
-        internal RetrieveBusinessBookingProfileResponse ContextSetter(HttpContext context)
+        internal RetrieveLocationBookingProfileResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
             return this;
@@ -102,7 +102,7 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BusinessBookingProfile = {(this.BusinessBookingProfile == null ? "null" : this.BusinessBookingProfile.ToString())}");
+            toStringOutput.Add($"this.LocationBookingProfile = {(this.LocationBookingProfile == null ? "null" : this.LocationBookingProfile.ToString())}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
         }
 
@@ -113,7 +113,7 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .BusinessBookingProfile(this.BusinessBookingProfile)
+                .LocationBookingProfile(this.LocationBookingProfile)
                 .Errors(this.Errors);
             return builder;
         }
@@ -123,17 +123,17 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private Models.BusinessBookingProfile businessBookingProfile;
+            private Models.LocationBookingProfile locationBookingProfile;
             private IList<Models.Error> errors;
 
              /// <summary>
-             /// BusinessBookingProfile.
+             /// LocationBookingProfile.
              /// </summary>
-             /// <param name="businessBookingProfile"> businessBookingProfile. </param>
+             /// <param name="locationBookingProfile"> locationBookingProfile. </param>
              /// <returns> Builder. </returns>
-            public Builder BusinessBookingProfile(Models.BusinessBookingProfile businessBookingProfile)
+            public Builder LocationBookingProfile(Models.LocationBookingProfile locationBookingProfile)
             {
-                this.businessBookingProfile = businessBookingProfile;
+                this.locationBookingProfile = locationBookingProfile;
                 return this;
             }
 
@@ -151,11 +151,11 @@ namespace Square.Models
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> RetrieveBusinessBookingProfileResponse. </returns>
-            public RetrieveBusinessBookingProfileResponse Build()
+            /// <returns> RetrieveLocationBookingProfileResponse. </returns>
+            public RetrieveLocationBookingProfileResponse Build()
             {
-                return new RetrieveBusinessBookingProfileResponse(
-                    this.businessBookingProfile,
+                return new RetrieveLocationBookingProfileResponse(
+                    this.locationBookingProfile,
                     this.errors);
             }
         }

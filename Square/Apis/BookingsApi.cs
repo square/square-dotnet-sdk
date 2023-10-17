@@ -229,6 +229,67 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
+        /// Lists location booking profiles of a seller.
+        /// </summary>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <returns>Returns the Models.ListLocationBookingProfilesResponse response from the API call.</returns>
+        public Models.ListLocationBookingProfilesResponse ListLocationBookingProfiles(
+                int? limit = null,
+                string cursor = null)
+            => CoreHelper.RunTask(ListLocationBookingProfilesAsync(limit, cursor));
+
+        /// <summary>
+        /// Lists location booking profiles of a seller.
+        /// </summary>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ListLocationBookingProfilesResponse response from the API call.</returns>
+        public async Task<Models.ListLocationBookingProfilesResponse> ListLocationBookingProfilesAsync(
+                int? limit = null,
+                string cursor = null,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.ListLocationBookingProfilesResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/bookings/location-booking-profiles")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Query(_query => _query.Setup("limit", limit))
+                      .Query(_query => _query.Setup("cursor", cursor))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
+        /// Retrieves a seller's location booking profile.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location to retrieve the booking profile..</param>
+        /// <returns>Returns the Models.RetrieveLocationBookingProfileResponse response from the API call.</returns>
+        public Models.RetrieveLocationBookingProfileResponse RetrieveLocationBookingProfile(
+                string locationId)
+            => CoreHelper.RunTask(RetrieveLocationBookingProfileAsync(locationId));
+
+        /// <summary>
+        /// Retrieves a seller's location booking profile.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location to retrieve the booking profile..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveLocationBookingProfileResponse response from the API call.</returns>
+        public async Task<Models.RetrieveLocationBookingProfileResponse> RetrieveLocationBookingProfileAsync(
+                string locationId,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.RetrieveLocationBookingProfileResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/bookings/location-booking-profiles/{location_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("location_id", locationId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
         /// Lists booking profiles for team members.
         /// </summary>
         /// <param name="bookableOnly">Optional parameter: Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`)..</param>

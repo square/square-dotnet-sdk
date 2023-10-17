@@ -161,6 +161,46 @@ namespace Square.Apis
         Task<Models.RetrieveBusinessBookingProfileResponse> RetrieveBusinessBookingProfileAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Lists location booking profiles of a seller.
+        /// </summary>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <returns>Returns the Models.ListLocationBookingProfilesResponse response from the API call.</returns>
+        Models.ListLocationBookingProfilesResponse ListLocationBookingProfiles(
+                int? limit = null,
+                string cursor = null);
+
+        /// <summary>
+        /// Lists location booking profiles of a seller.
+        /// </summary>
+        /// <param name="limit">Optional parameter: The maximum number of results to return in a paged response..</param>
+        /// <param name="cursor">Optional parameter: The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ListLocationBookingProfilesResponse response from the API call.</returns>
+        Task<Models.ListLocationBookingProfilesResponse> ListLocationBookingProfilesAsync(
+                int? limit = null,
+                string cursor = null,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves a seller's location booking profile.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location to retrieve the booking profile..</param>
+        /// <returns>Returns the Models.RetrieveLocationBookingProfileResponse response from the API call.</returns>
+        Models.RetrieveLocationBookingProfileResponse RetrieveLocationBookingProfile(
+                string locationId);
+
+        /// <summary>
+        /// Retrieves a seller's location booking profile.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location to retrieve the booking profile..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveLocationBookingProfileResponse response from the API call.</returns>
+        Task<Models.RetrieveLocationBookingProfileResponse> RetrieveLocationBookingProfileAsync(
+                string locationId,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Lists booking profiles for team members.
         /// </summary>
         /// <param name="bookableOnly">Optional parameter: Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`)..</param>

@@ -48,6 +48,26 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Schedules a plan variation change for all active subscriptions under a given plan.
+        /// variation. For more information, see [Swap Subscription Plan Variations](https://developer.squareup.com/docs/subscriptions-api/swap-plan-variations).
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkSwapPlanResponse response from the API call.</returns>
+        Models.BulkSwapPlanResponse BulkSwapPlan(
+                Models.BulkSwapPlanRequest body);
+
+        /// <summary>
+        /// Schedules a plan variation change for all active subscriptions under a given plan.
+        /// variation. For more information, see [Swap Subscription Plan Variations](https://developer.squareup.com/docs/subscriptions-api/swap-plan-variations).
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkSwapPlanResponse response from the API call.</returns>
+        Task<Models.BulkSwapPlanResponse> BulkSwapPlanAsync(
+                Models.BulkSwapPlanRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Searches for subscriptions.
         /// Results are ordered chronologically by subscription creation date. If.
         /// the request specifies more than one location ID,.
@@ -153,6 +173,30 @@ namespace Square.Apis
         Task<Models.DeleteSubscriptionActionResponse> DeleteSubscriptionActionAsync(
                 string subscriptionId,
                 string actionId,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates).
+        /// for a subscription.
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The ID of the subscription to update the billing anchor date..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.ChangeBillingAnchorDateResponse response from the API call.</returns>
+        Models.ChangeBillingAnchorDateResponse ChangeBillingAnchorDate(
+                string subscriptionId,
+                Models.ChangeBillingAnchorDateRequest body);
+
+        /// <summary>
+        /// Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates).
+        /// for a subscription.
+        /// </summary>
+        /// <param name="subscriptionId">Required parameter: The ID of the subscription to update the billing anchor date..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ChangeBillingAnchorDateResponse response from the API call.</returns>
+        Task<Models.ChangeBillingAnchorDateResponse> ChangeBillingAnchorDateAsync(
+                string subscriptionId,
+                Models.ChangeBillingAnchorDateRequest body,
                 CancellationToken cancellationToken = default);
 
         /// <summary>

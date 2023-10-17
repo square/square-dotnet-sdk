@@ -32,6 +32,7 @@ namespace Square.Models
         /// <param name="cardId">card_id.</param>
         /// <param name="timezone">timezone.</param>
         /// <param name="source">source.</param>
+        /// <param name="monthlyBillingAnchorDate">monthly_billing_anchor_date.</param>
         /// <param name="phases">phases.</param>
         public CreateSubscriptionRequest(
             string locationId,
@@ -45,6 +46,7 @@ namespace Square.Models
             string cardId = null,
             string timezone = null,
             Models.SubscriptionSource source = null,
+            int? monthlyBillingAnchorDate = null,
             IList<Models.Phase> phases = null)
         {
             this.IdempotencyKey = idempotencyKey;
@@ -58,6 +60,7 @@ namespace Square.Models
             this.CardId = cardId;
             this.Timezone = timezone;
             this.Source = source;
+            this.MonthlyBillingAnchorDate = monthlyBillingAnchorDate;
             this.Phases = phases;
         }
 
@@ -150,6 +153,12 @@ namespace Square.Models
         public Models.SubscriptionSource Source { get; }
 
         /// <summary>
+        /// The day-of-the-month to change the billing date to.
+        /// </summary>
+        [JsonProperty("monthly_billing_anchor_date", NullValueHandling = NullValueHandling.Ignore)]
+        public int? MonthlyBillingAnchorDate { get; }
+
+        /// <summary>
         /// array of phases for this subscription
         /// </summary>
         [JsonProperty("phases", NullValueHandling = NullValueHandling.Ignore)]
@@ -188,16 +197,17 @@ namespace Square.Models
                 ((this.CardId == null && other.CardId == null) || (this.CardId?.Equals(other.CardId) == true)) &&
                 ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
                 ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
+                ((this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null) || (this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true)) &&
                 ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1195820218;
+            int hashCode = -161501428;
             hashCode = HashCode.Combine(this.IdempotencyKey, this.LocationId, this.PlanVariationId, this.CustomerId, this.StartDate, this.CanceledDate, this.TaxPercentage);
 
-            hashCode = HashCode.Combine(hashCode, this.PriceOverrideMoney, this.CardId, this.Timezone, this.Source, this.Phases);
+            hashCode = HashCode.Combine(hashCode, this.PriceOverrideMoney, this.CardId, this.Timezone, this.Source, this.MonthlyBillingAnchorDate, this.Phases);
 
             return hashCode;
         }
@@ -218,6 +228,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId)}");
             toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone)}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
+            toStringOutput.Add($"this.MonthlyBillingAnchorDate = {(this.MonthlyBillingAnchorDate == null ? "null" : this.MonthlyBillingAnchorDate.ToString())}");
             toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
         }
 
@@ -239,6 +250,7 @@ namespace Square.Models
                 .CardId(this.CardId)
                 .Timezone(this.Timezone)
                 .Source(this.Source)
+                .MonthlyBillingAnchorDate(this.MonthlyBillingAnchorDate)
                 .Phases(this.Phases);
             return builder;
         }
@@ -259,6 +271,7 @@ namespace Square.Models
             private string cardId;
             private string timezone;
             private Models.SubscriptionSource source;
+            private int? monthlyBillingAnchorDate;
             private IList<Models.Phase> phases;
 
             public Builder(
@@ -391,6 +404,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// MonthlyBillingAnchorDate.
+             /// </summary>
+             /// <param name="monthlyBillingAnchorDate"> monthlyBillingAnchorDate. </param>
+             /// <returns> Builder. </returns>
+            public Builder MonthlyBillingAnchorDate(int? monthlyBillingAnchorDate)
+            {
+                this.monthlyBillingAnchorDate = monthlyBillingAnchorDate;
+                return this;
+            }
+
+             /// <summary>
              /// Phases.
              /// </summary>
              /// <param name="phases"> phases. </param>
@@ -419,6 +443,7 @@ namespace Square.Models
                     this.cardId,
                     this.timezone,
                     this.source,
+                    this.monthlyBillingAnchorDate,
                     this.phases);
             }
         }

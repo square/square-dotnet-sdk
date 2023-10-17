@@ -15,21 +15,21 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// RetrieveBusinessBookingProfileResponse.
+    /// BulkSwapPlanResponse.
     /// </summary>
-    public class RetrieveBusinessBookingProfileResponse
+    public class BulkSwapPlanResponse
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RetrieveBusinessBookingProfileResponse"/> class.
+        /// Initializes a new instance of the <see cref="BulkSwapPlanResponse"/> class.
         /// </summary>
-        /// <param name="businessBookingProfile">business_booking_profile.</param>
         /// <param name="errors">errors.</param>
-        public RetrieveBusinessBookingProfileResponse(
-            Models.BusinessBookingProfile businessBookingProfile = null,
-            IList<Models.Error> errors = null)
+        /// <param name="affectedSubscriptions">affected_subscriptions.</param>
+        public BulkSwapPlanResponse(
+            IList<Models.Error> errors = null,
+            int? affectedSubscriptions = null)
         {
-            this.BusinessBookingProfile = businessBookingProfile;
             this.Errors = errors;
+            this.AffectedSubscriptions = affectedSubscriptions;
         }
 
         /// <summary>
@@ -39,16 +39,16 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// A seller's business booking profile, including booking policy, appointment settings, etc.
-        /// </summary>
-        [JsonProperty("business_booking_profile", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.BusinessBookingProfile BusinessBookingProfile { get; }
-
-        /// <summary>
-        /// Errors that occurred during the request.
+        /// Errors encountered during the request.
         /// </summary>
         [JsonProperty("errors", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.Error> Errors { get; }
+
+        /// <summary>
+        /// The number of affected subscriptions.
+        /// </summary>
+        [JsonProperty("affected_subscriptions", NullValueHandling = NullValueHandling.Ignore)]
+        public int? AffectedSubscriptions { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -57,7 +57,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"RetrieveBusinessBookingProfileResponse : ({string.Join(", ", toStringOutput)})";
+            return $"BulkSwapPlanResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -72,25 +72,25 @@ namespace Square.Models
             {
                 return true;
             }
-            return obj is RetrieveBusinessBookingProfileResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.BusinessBookingProfile == null && other.BusinessBookingProfile == null) || (this.BusinessBookingProfile?.Equals(other.BusinessBookingProfile) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
+            return obj is BulkSwapPlanResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
+                ((this.AffectedSubscriptions == null && other.AffectedSubscriptions == null) || (this.AffectedSubscriptions?.Equals(other.AffectedSubscriptions) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1635211081;
+            int hashCode = 1153695832;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.BusinessBookingProfile, this.Errors);
+            hashCode = HashCode.Combine(this.Errors, this.AffectedSubscriptions);
 
             return hashCode;
         }
-        internal RetrieveBusinessBookingProfileResponse ContextSetter(HttpContext context)
+        internal BulkSwapPlanResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
             return this;
@@ -102,8 +102,8 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BusinessBookingProfile = {(this.BusinessBookingProfile == null ? "null" : this.BusinessBookingProfile.ToString())}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
+            toStringOutput.Add($"this.AffectedSubscriptions = {(this.AffectedSubscriptions == null ? "null" : this.AffectedSubscriptions.ToString())}");
         }
 
         /// <summary>
@@ -113,8 +113,8 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .BusinessBookingProfile(this.BusinessBookingProfile)
-                .Errors(this.Errors);
+                .Errors(this.Errors)
+                .AffectedSubscriptions(this.AffectedSubscriptions);
             return builder;
         }
 
@@ -123,19 +123,8 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private Models.BusinessBookingProfile businessBookingProfile;
             private IList<Models.Error> errors;
-
-             /// <summary>
-             /// BusinessBookingProfile.
-             /// </summary>
-             /// <param name="businessBookingProfile"> businessBookingProfile. </param>
-             /// <returns> Builder. </returns>
-            public Builder BusinessBookingProfile(Models.BusinessBookingProfile businessBookingProfile)
-            {
-                this.businessBookingProfile = businessBookingProfile;
-                return this;
-            }
+            private int? affectedSubscriptions;
 
              /// <summary>
              /// Errors.
@@ -148,15 +137,26 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AffectedSubscriptions.
+             /// </summary>
+             /// <param name="affectedSubscriptions"> affectedSubscriptions. </param>
+             /// <returns> Builder. </returns>
+            public Builder AffectedSubscriptions(int? affectedSubscriptions)
+            {
+                this.affectedSubscriptions = affectedSubscriptions;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> RetrieveBusinessBookingProfileResponse. </returns>
-            public RetrieveBusinessBookingProfileResponse Build()
+            /// <returns> BulkSwapPlanResponse. </returns>
+            public BulkSwapPlanResponse Build()
             {
-                return new RetrieveBusinessBookingProfileResponse(
-                    this.businessBookingProfile,
-                    this.errors);
+                return new BulkSwapPlanResponse(
+                    this.errors,
+                    this.affectedSubscriptions);
             }
         }
     }

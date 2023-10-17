@@ -15,6 +15,8 @@ IBookingsApi bookingsApi = client.BookingsApi;
 * [Search Availability](../../doc/api/bookings.md#search-availability)
 * [Bulk Retrieve Bookings](../../doc/api/bookings.md#bulk-retrieve-bookings)
 * [Retrieve Business Booking Profile](../../doc/api/bookings.md#retrieve-business-booking-profile)
+* [List Location Booking Profiles](../../doc/api/bookings.md#list-location-booking-profiles)
+* [Retrieve Location Booking Profile](../../doc/api/bookings.md#retrieve-location-booking-profile)
 * [List Team Member Booking Profiles](../../doc/api/bookings.md#list-team-member-booking-profiles)
 * [Bulk Retrieve Team Member Booking Profiles](../../doc/api/bookings.md#bulk-retrieve-team-member-booking-profiles)
 * [Retrieve Team Member Booking Profile](../../doc/api/bookings.md#retrieve-team-member-booking-profile)
@@ -240,6 +242,77 @@ RetrieveBusinessBookingProfileAsync()
 try
 {
     RetrieveBusinessBookingProfileResponse result = await bookingsApi.RetrieveBusinessBookingProfileAsync();
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# List Location Booking Profiles
+
+Lists location booking profiles of a seller.
+
+```csharp
+ListLocationBookingProfilesAsync(
+    int? limit = null,
+    string cursor = null)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `limit` | `int?` | Query, Optional | The maximum number of results to return in a paged response. |
+| `cursor` | `string` | Query, Optional | The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results. |
+
+## Response Type
+
+[`Task<Models.ListLocationBookingProfilesResponse>`](../../doc/models/list-location-booking-profiles-response.md)
+
+## Example Usage
+
+```csharp
+try
+{
+    ListLocationBookingProfilesResponse result = await bookingsApi.ListLocationBookingProfilesAsync();
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Retrieve Location Booking Profile
+
+Retrieves a seller's location booking profile.
+
+```csharp
+RetrieveLocationBookingProfileAsync(
+    string locationId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `locationId` | `string` | Template, Required | The ID of the location to retrieve the booking profile. |
+
+## Response Type
+
+[`Task<Models.RetrieveLocationBookingProfileResponse>`](../../doc/models/retrieve-location-booking-profile-response.md)
+
+## Example Usage
+
+```csharp
+string locationId = "location_id4";
+try
+{
+    RetrieveLocationBookingProfileResponse result = await bookingsApi.RetrieveLocationBookingProfileAsync(locationId);
 }
 catch (ApiException e)
 {
