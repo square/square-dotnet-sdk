@@ -15,20 +15,23 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// RetrieveBusinessBookingProfileResponse.
+    /// ListLocationBookingProfilesResponse.
     /// </summary>
-    public class RetrieveBusinessBookingProfileResponse
+    public class ListLocationBookingProfilesResponse
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RetrieveBusinessBookingProfileResponse"/> class.
+        /// Initializes a new instance of the <see cref="ListLocationBookingProfilesResponse"/> class.
         /// </summary>
-        /// <param name="businessBookingProfile">business_booking_profile.</param>
+        /// <param name="locationBookingProfiles">location_booking_profiles.</param>
+        /// <param name="cursor">cursor.</param>
         /// <param name="errors">errors.</param>
-        public RetrieveBusinessBookingProfileResponse(
-            Models.BusinessBookingProfile businessBookingProfile = null,
+        public ListLocationBookingProfilesResponse(
+            IList<Models.LocationBookingProfile> locationBookingProfiles = null,
+            string cursor = null,
             IList<Models.Error> errors = null)
         {
-            this.BusinessBookingProfile = businessBookingProfile;
+            this.LocationBookingProfiles = locationBookingProfiles;
+            this.Cursor = cursor;
             this.Errors = errors;
         }
 
@@ -39,10 +42,16 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// A seller's business booking profile, including booking policy, appointment settings, etc.
+        /// The list of a seller's location booking profiles.
         /// </summary>
-        [JsonProperty("business_booking_profile", NullValueHandling = NullValueHandling.Ignore)]
-        public Models.BusinessBookingProfile BusinessBookingProfile { get; }
+        [JsonProperty("location_booking_profiles", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.LocationBookingProfile> LocationBookingProfiles { get; }
+
+        /// <summary>
+        /// The pagination cursor to be used in the subsequent request to get the next page of the results. Stop retrieving the next page of the results when the cursor is not set.
+        /// </summary>
+        [JsonProperty("cursor", NullValueHandling = NullValueHandling.Ignore)]
+        public string Cursor { get; }
 
         /// <summary>
         /// Errors that occurred during the request.
@@ -57,7 +66,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"RetrieveBusinessBookingProfileResponse : ({string.Join(", ", toStringOutput)})";
+            return $"ListLocationBookingProfilesResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -72,25 +81,26 @@ namespace Square.Models
             {
                 return true;
             }
-            return obj is RetrieveBusinessBookingProfileResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.BusinessBookingProfile == null && other.BusinessBookingProfile == null) || (this.BusinessBookingProfile?.Equals(other.BusinessBookingProfile) == true)) &&
+            return obj is ListLocationBookingProfilesResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
+                ((this.LocationBookingProfiles == null && other.LocationBookingProfiles == null) || (this.LocationBookingProfiles?.Equals(other.LocationBookingProfiles) == true)) &&
+                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
                 ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1635211081;
+            int hashCode = 904318020;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.BusinessBookingProfile, this.Errors);
+            hashCode = HashCode.Combine(this.LocationBookingProfiles, this.Cursor, this.Errors);
 
             return hashCode;
         }
-        internal RetrieveBusinessBookingProfileResponse ContextSetter(HttpContext context)
+        internal ListLocationBookingProfilesResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
             return this;
@@ -102,7 +112,8 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BusinessBookingProfile = {(this.BusinessBookingProfile == null ? "null" : this.BusinessBookingProfile.ToString())}");
+            toStringOutput.Add($"this.LocationBookingProfiles = {(this.LocationBookingProfiles == null ? "null" : $"[{string.Join(", ", this.LocationBookingProfiles)} ]")}");
+            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
         }
 
@@ -113,7 +124,8 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .BusinessBookingProfile(this.BusinessBookingProfile)
+                .LocationBookingProfiles(this.LocationBookingProfiles)
+                .Cursor(this.Cursor)
                 .Errors(this.Errors);
             return builder;
         }
@@ -123,17 +135,29 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private Models.BusinessBookingProfile businessBookingProfile;
+            private IList<Models.LocationBookingProfile> locationBookingProfiles;
+            private string cursor;
             private IList<Models.Error> errors;
 
              /// <summary>
-             /// BusinessBookingProfile.
+             /// LocationBookingProfiles.
              /// </summary>
-             /// <param name="businessBookingProfile"> businessBookingProfile. </param>
+             /// <param name="locationBookingProfiles"> locationBookingProfiles. </param>
              /// <returns> Builder. </returns>
-            public Builder BusinessBookingProfile(Models.BusinessBookingProfile businessBookingProfile)
+            public Builder LocationBookingProfiles(IList<Models.LocationBookingProfile> locationBookingProfiles)
             {
-                this.businessBookingProfile = businessBookingProfile;
+                this.locationBookingProfiles = locationBookingProfiles;
+                return this;
+            }
+
+             /// <summary>
+             /// Cursor.
+             /// </summary>
+             /// <param name="cursor"> cursor. </param>
+             /// <returns> Builder. </returns>
+            public Builder Cursor(string cursor)
+            {
+                this.cursor = cursor;
                 return this;
             }
 
@@ -151,11 +175,12 @@ namespace Square.Models
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> RetrieveBusinessBookingProfileResponse. </returns>
-            public RetrieveBusinessBookingProfileResponse Build()
+            /// <returns> ListLocationBookingProfilesResponse. </returns>
+            public ListLocationBookingProfilesResponse Build()
             {
-                return new RetrieveBusinessBookingProfileResponse(
-                    this.businessBookingProfile,
+                return new ListLocationBookingProfilesResponse(
+                    this.locationBookingProfiles,
+                    this.cursor,
                     this.errors);
             }
         }

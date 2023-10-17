@@ -26,6 +26,7 @@ namespace Square.Models
         /// <param name="subscriptionEventType">subscription_event_type.</param>
         /// <param name="effectiveDate">effective_date.</param>
         /// <param name="planVariationId">plan_variation_id.</param>
+        /// <param name="monthlyBillingAnchorDate">monthly_billing_anchor_date.</param>
         /// <param name="info">info.</param>
         /// <param name="phases">phases.</param>
         public SubscriptionEvent(
@@ -33,6 +34,7 @@ namespace Square.Models
             string subscriptionEventType,
             string effectiveDate,
             string planVariationId,
+            int? monthlyBillingAnchorDate = null,
             Models.SubscriptionEventInfo info = null,
             IList<Models.Phase> phases = null)
         {
@@ -44,6 +46,7 @@ namespace Square.Models
             this.Id = id;
             this.SubscriptionEventType = subscriptionEventType;
             this.EffectiveDate = effectiveDate;
+            this.MonthlyBillingAnchorDate = monthlyBillingAnchorDate;
             this.Info = info;
             if (phases != null)
             {
@@ -58,6 +61,7 @@ namespace Square.Models
             string subscriptionEventType,
             string effectiveDate,
             string planVariationId,
+            int? monthlyBillingAnchorDate = null,
             Models.SubscriptionEventInfo info = null,
             IList<Models.Phase> phases = null)
         {
@@ -65,6 +69,7 @@ namespace Square.Models
             Id = id;
             SubscriptionEventType = subscriptionEventType;
             EffectiveDate = effectiveDate;
+            MonthlyBillingAnchorDate = monthlyBillingAnchorDate;
             Info = info;
             Phases = phases;
             PlanVariationId = planVariationId;
@@ -87,6 +92,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("effective_date")]
         public string EffectiveDate { get; }
+
+        /// <summary>
+        /// The day-of-the-month the billing anchor date was changed to, if applicable.
+        /// </summary>
+        [JsonProperty("monthly_billing_anchor_date", NullValueHandling = NullValueHandling.Ignore)]
+        public int? MonthlyBillingAnchorDate { get; }
 
         /// <summary>
         /// Provides information about the subscription event.
@@ -140,6 +151,7 @@ namespace Square.Models
             return obj is SubscriptionEvent other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.SubscriptionEventType == null && other.SubscriptionEventType == null) || (this.SubscriptionEventType?.Equals(other.SubscriptionEventType) == true)) &&
                 ((this.EffectiveDate == null && other.EffectiveDate == null) || (this.EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
+                ((this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null) || (this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true)) &&
                 ((this.Info == null && other.Info == null) || (this.Info?.Equals(other.Info) == true)) &&
                 ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true)) &&
                 ((this.PlanVariationId == null && other.PlanVariationId == null) || (this.PlanVariationId?.Equals(other.PlanVariationId) == true));
@@ -148,8 +160,8 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1284324137;
-            hashCode = HashCode.Combine(this.Id, this.SubscriptionEventType, this.EffectiveDate, this.Info, this.Phases, this.PlanVariationId);
+            int hashCode = -1755317815;
+            hashCode = HashCode.Combine(this.Id, this.SubscriptionEventType, this.EffectiveDate, this.MonthlyBillingAnchorDate, this.Info, this.Phases, this.PlanVariationId);
 
             return hashCode;
         }
@@ -162,6 +174,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.SubscriptionEventType = {(this.SubscriptionEventType == null ? "null" : this.SubscriptionEventType.ToString())}");
             toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate)}");
+            toStringOutput.Add($"this.MonthlyBillingAnchorDate = {(this.MonthlyBillingAnchorDate == null ? "null" : this.MonthlyBillingAnchorDate.ToString())}");
             toStringOutput.Add($"this.Info = {(this.Info == null ? "null" : this.Info.ToString())}");
             toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
             toStringOutput.Add($"this.PlanVariationId = {(this.PlanVariationId == null ? "null" : this.PlanVariationId)}");
@@ -178,6 +191,7 @@ namespace Square.Models
                 this.SubscriptionEventType,
                 this.EffectiveDate,
                 this.PlanVariationId)
+                .MonthlyBillingAnchorDate(this.MonthlyBillingAnchorDate)
                 .Info(this.Info)
                 .Phases(this.Phases);
             return builder;
@@ -197,6 +211,7 @@ namespace Square.Models
             private string subscriptionEventType;
             private string effectiveDate;
             private string planVariationId;
+            private int? monthlyBillingAnchorDate;
             private Models.SubscriptionEventInfo info;
             private IList<Models.Phase> phases;
 
@@ -257,6 +272,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// MonthlyBillingAnchorDate.
+             /// </summary>
+             /// <param name="monthlyBillingAnchorDate"> monthlyBillingAnchorDate. </param>
+             /// <returns> Builder. </returns>
+            public Builder MonthlyBillingAnchorDate(int? monthlyBillingAnchorDate)
+            {
+                this.monthlyBillingAnchorDate = monthlyBillingAnchorDate;
+                return this;
+            }
+
+             /// <summary>
              /// Info.
              /// </summary>
              /// <param name="info"> info. </param>
@@ -299,6 +325,7 @@ namespace Square.Models
                     this.subscriptionEventType,
                     this.effectiveDate,
                     this.planVariationId,
+                    this.monthlyBillingAnchorDate,
                     this.info,
                     this.phases);
             }

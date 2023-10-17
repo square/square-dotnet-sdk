@@ -31,7 +31,7 @@ namespace Square.Apis
         internal EmployeesApi(GlobalConfiguration globalConfiguration) : base(globalConfiguration) { }
 
         /// <summary>
-        /// ListEmployees.
+        /// ListEmployees EndPoint.
         /// </summary>
         /// <param name="locationId">Optional parameter: Example: .</param>
         /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by..</param>
@@ -47,7 +47,7 @@ namespace Square.Apis
             => CoreHelper.RunTask(ListEmployeesAsync(locationId, status, limit, cursor));
 
         /// <summary>
-        /// ListEmployees.
+        /// ListEmployees EndPoint.
         /// </summary>
         /// <param name="locationId">Optional parameter: Example: .</param>
         /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by..</param>
@@ -76,7 +76,7 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
-        /// RetrieveEmployee.
+        /// RetrieveEmployee EndPoint.
         /// </summary>
         /// <param name="id">Required parameter: UUID for the employee that was requested..</param>
         /// <returns>Returns the Models.RetrieveEmployeeResponse response from the API call.</returns>
@@ -86,7 +86,7 @@ namespace Square.Apis
             => CoreHelper.RunTask(RetrieveEmployeeAsync(id));
 
         /// <summary>
-        /// RetrieveEmployee.
+        /// RetrieveEmployee EndPoint.
         /// </summary>
         /// <param name="id">Required parameter: UUID for the employee that was requested..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

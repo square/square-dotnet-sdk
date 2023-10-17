@@ -25,18 +25,21 @@ namespace Square.Models
         /// <param name="id">id.</param>
         /// <param name="type">type.</param>
         /// <param name="effectiveDate">effective_date.</param>
+        /// <param name="monthlyBillingAnchorDate">monthly_billing_anchor_date.</param>
         /// <param name="phases">phases.</param>
         /// <param name="newPlanVariationId">new_plan_variation_id.</param>
         public SubscriptionAction(
             string id = null,
             string type = null,
             string effectiveDate = null,
+            int? monthlyBillingAnchorDate = null,
             IList<Models.Phase> phases = null,
             string newPlanVariationId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "effective_date", false },
+                { "monthly_billing_anchor_date", false },
                 { "phases", false },
                 { "new_plan_variation_id", false }
             };
@@ -47,6 +50,12 @@ namespace Square.Models
             {
                 shouldSerialize["effective_date"] = true;
                 this.EffectiveDate = effectiveDate;
+            }
+
+            if (monthlyBillingAnchorDate != null)
+            {
+                shouldSerialize["monthly_billing_anchor_date"] = true;
+                this.MonthlyBillingAnchorDate = monthlyBillingAnchorDate;
             }
 
             if (phases != null)
@@ -66,6 +75,7 @@ namespace Square.Models
             string id = null,
             string type = null,
             string effectiveDate = null,
+            int? monthlyBillingAnchorDate = null,
             IList<Models.Phase> phases = null,
             string newPlanVariationId = null)
         {
@@ -73,6 +83,7 @@ namespace Square.Models
             Id = id;
             Type = type;
             EffectiveDate = effectiveDate;
+            MonthlyBillingAnchorDate = monthlyBillingAnchorDate;
             Phases = phases;
             NewPlanVariationId = newPlanVariationId;
         }
@@ -94,6 +105,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("effective_date")]
         public string EffectiveDate { get; }
+
+        /// <summary>
+        /// The new billing anchor day value, for a `CHANGE_BILLING_ANCHOR_DATE` action.
+        /// </summary>
+        [JsonProperty("monthly_billing_anchor_date")]
+        public int? MonthlyBillingAnchorDate { get; }
 
         /// <summary>
         /// A list of Phases, to pass phase-specific information used in the swap.
@@ -130,6 +147,15 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeMonthlyBillingAnchorDate()
+        {
+            return this.shouldSerialize["monthly_billing_anchor_date"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
         public bool ShouldSerializePhases()
         {
             return this.shouldSerialize["phases"];
@@ -159,6 +185,7 @@ namespace Square.Models
             return obj is SubscriptionAction other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
                 ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
                 ((this.EffectiveDate == null && other.EffectiveDate == null) || (this.EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
+                ((this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null) || (this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true)) &&
                 ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true)) &&
                 ((this.NewPlanVariationId == null && other.NewPlanVariationId == null) || (this.NewPlanVariationId?.Equals(other.NewPlanVariationId) == true));
         }
@@ -166,8 +193,8 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1179358042;
-            hashCode = HashCode.Combine(this.Id, this.Type, this.EffectiveDate, this.Phases, this.NewPlanVariationId);
+            int hashCode = -904463000;
+            hashCode = HashCode.Combine(this.Id, this.Type, this.EffectiveDate, this.MonthlyBillingAnchorDate, this.Phases, this.NewPlanVariationId);
 
             return hashCode;
         }
@@ -180,6 +207,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate)}");
+            toStringOutput.Add($"this.MonthlyBillingAnchorDate = {(this.MonthlyBillingAnchorDate == null ? "null" : this.MonthlyBillingAnchorDate.ToString())}");
             toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
             toStringOutput.Add($"this.NewPlanVariationId = {(this.NewPlanVariationId == null ? "null" : this.NewPlanVariationId)}");
         }
@@ -194,6 +222,7 @@ namespace Square.Models
                 .Id(this.Id)
                 .Type(this.Type)
                 .EffectiveDate(this.EffectiveDate)
+                .MonthlyBillingAnchorDate(this.MonthlyBillingAnchorDate)
                 .Phases(this.Phases)
                 .NewPlanVariationId(this.NewPlanVariationId);
             return builder;
@@ -207,6 +236,7 @@ namespace Square.Models
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
                 { "effective_date", false },
+                { "monthly_billing_anchor_date", false },
                 { "phases", false },
                 { "new_plan_variation_id", false },
             };
@@ -214,6 +244,7 @@ namespace Square.Models
             private string id;
             private string type;
             private string effectiveDate;
+            private int? monthlyBillingAnchorDate;
             private IList<Models.Phase> phases;
             private string newPlanVariationId;
 
@@ -252,6 +283,18 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// MonthlyBillingAnchorDate.
+             /// </summary>
+             /// <param name="monthlyBillingAnchorDate"> monthlyBillingAnchorDate. </param>
+             /// <returns> Builder. </returns>
+            public Builder MonthlyBillingAnchorDate(int? monthlyBillingAnchorDate)
+            {
+                shouldSerialize["monthly_billing_anchor_date"] = true;
+                this.monthlyBillingAnchorDate = monthlyBillingAnchorDate;
+                return this;
+            }
+
+             /// <summary>
              /// Phases.
              /// </summary>
              /// <param name="phases"> phases. </param>
@@ -286,6 +329,14 @@ namespace Square.Models
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
+            public void UnsetMonthlyBillingAnchorDate()
+            {
+                this.shouldSerialize["monthly_billing_anchor_date"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
             public void UnsetPhases()
             {
                 this.shouldSerialize["phases"] = false;
@@ -310,6 +361,7 @@ namespace Square.Models
                     this.id,
                     this.type,
                     this.effectiveDate,
+                    this.monthlyBillingAnchorDate,
                     this.phases,
                     this.newPlanVariationId);
             }

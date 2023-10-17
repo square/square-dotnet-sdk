@@ -20,7 +20,7 @@ namespace Square.Apis
     public interface IEmployeesApi
     {
         /// <summary>
-        /// ListEmployees.
+        /// ListEmployees EndPoint.
         /// </summary>
         /// <param name="locationId">Optional parameter: Example: .</param>
         /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by..</param>
@@ -35,7 +35,7 @@ namespace Square.Apis
                 string cursor = null);
 
         /// <summary>
-        /// ListEmployees.
+        /// ListEmployees EndPoint.
         /// </summary>
         /// <param name="locationId">Optional parameter: Example: .</param>
         /// <param name="status">Optional parameter: Specifies the EmployeeStatus to filter the employee by..</param>
@@ -52,7 +52,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// RetrieveEmployee.
+        /// RetrieveEmployee EndPoint.
         /// </summary>
         /// <param name="id">Required parameter: UUID for the employee that was requested..</param>
         /// <returns>Returns the Models.RetrieveEmployeeResponse response from the API call.</returns>
@@ -61,7 +61,7 @@ namespace Square.Apis
                 string id);
 
         /// <summary>
-        /// RetrieveEmployee.
+        /// RetrieveEmployee EndPoint.
         /// </summary>
         /// <param name="id">Required parameter: UUID for the employee that was requested..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

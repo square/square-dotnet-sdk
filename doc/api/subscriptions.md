@@ -11,10 +11,12 @@ ISubscriptionsApi subscriptionsApi = client.SubscriptionsApi;
 ## Methods
 
 * [Create Subscription](../../doc/api/subscriptions.md#create-subscription)
+* [Bulk Swap Plan](../../doc/api/subscriptions.md#bulk-swap-plan)
 * [Search Subscriptions](../../doc/api/subscriptions.md#search-subscriptions)
 * [Retrieve Subscription](../../doc/api/subscriptions.md#retrieve-subscription)
 * [Update Subscription](../../doc/api/subscriptions.md#update-subscription)
 * [Delete Subscription Action](../../doc/api/subscriptions.md#delete-subscription-action)
+* [Change Billing Anchor Date](../../doc/api/subscriptions.md#change-billing-anchor-date)
 * [Cancel Subscription](../../doc/api/subscriptions.md#cancel-subscription)
 * [List Subscription Events](../../doc/api/subscriptions.md#list-subscription-events)
 * [Pause Subscription](../../doc/api/subscriptions.md#pause-subscription)
@@ -68,7 +70,7 @@ Models.CreateSubscriptionRequest body = new Models.CreateSubscriptionRequest.Bui
     new List<Models.Phase>
     {
         new Models.Phase.Builder()
-        .Ordinal(0)
+        .Ordinal(0L)
         .OrderTemplateId("U2NaowWxzXwpsZU697x7ZHOAnCNZY")
         .Build(),
     })
@@ -77,6 +79,48 @@ Models.CreateSubscriptionRequest body = new Models.CreateSubscriptionRequest.Bui
 try
 {
     CreateSubscriptionResponse result = await subscriptionsApi.CreateSubscriptionAsync(body);
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Bulk Swap Plan
+
+Schedules a plan variation change for all active subscriptions under a given plan
+variation. For more information, see [Swap Subscription Plan Variations](https://developer.squareup.com/docs/subscriptions-api/swap-plan-variations).
+
+```csharp
+BulkSwapPlanAsync(
+    Models.BulkSwapPlanRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`BulkSwapPlanRequest`](../../doc/models/bulk-swap-plan-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.BulkSwapPlanResponse>`](../../doc/models/bulk-swap-plan-response.md)
+
+## Example Usage
+
+```csharp
+Models.BulkSwapPlanRequest body = new Models.BulkSwapPlanRequest.Builder(
+    "FQ7CDXXWSLUJRPM3GFJSJGZ7",
+    "6JHXF3B2CW3YKHDV4XEM674H",
+    "S8GWD5R9QB376"
+)
+.Build();
+
+try
+{
+    BulkSwapPlanResponse result = await subscriptionsApi.BulkSwapPlanAsync(body);
 }
 catch (ApiException e)
 {
@@ -284,6 +328,51 @@ catch (ApiException e)
 ```
 
 
+# Change Billing Anchor Date
+
+Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates)
+for a subscription.
+
+```csharp
+ChangeBillingAnchorDateAsync(
+    string subscriptionId,
+    Models.ChangeBillingAnchorDateRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `subscriptionId` | `string` | Template, Required | The ID of the subscription to update the billing anchor date. |
+| `body` | [`ChangeBillingAnchorDateRequest`](../../doc/models/change-billing-anchor-date-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.ChangeBillingAnchorDateResponse>`](../../doc/models/change-billing-anchor-date-response.md)
+
+## Example Usage
+
+```csharp
+string subscriptionId = "subscription_id0";
+Models.ChangeBillingAnchorDateRequest body = new Models.ChangeBillingAnchorDateRequest.Builder()
+.MonthlyBillingAnchorDate(1)
+.Build();
+
+try
+{
+    ChangeBillingAnchorDateResponse result = await subscriptionsApi.ChangeBillingAnchorDateAsync(
+        subscriptionId,
+        body
+    );
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
 # Cancel Subscription
 
 Schedules a `CANCEL` action to cancel an active subscription. This
@@ -478,7 +567,7 @@ Models.SwapPlanRequest body = new Models.SwapPlanRequest.Builder()
     new List<Models.PhaseInput>
     {
         new Models.PhaseInput.Builder(
-            0
+            0L
         )
         .OrderTemplateId("uhhnjH9osVv3shUADwaC0b3hNxQZY")
         .Build(),
