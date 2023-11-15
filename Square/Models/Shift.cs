@@ -22,10 +22,10 @@ namespace Square.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Shift"/> class.
         /// </summary>
+        /// <param name="locationId">location_id.</param>
         /// <param name="startAt">start_at.</param>
         /// <param name="id">id.</param>
         /// <param name="employeeId">employee_id.</param>
-        /// <param name="locationId">location_id.</param>
         /// <param name="timezone">timezone.</param>
         /// <param name="endAt">end_at.</param>
         /// <param name="wage">wage.</param>
@@ -35,11 +35,12 @@ namespace Square.Models
         /// <param name="createdAt">created_at.</param>
         /// <param name="updatedAt">updated_at.</param>
         /// <param name="teamMemberId">team_member_id.</param>
+        /// <param name="declaredCashTipMoney">declared_cash_tip_money.</param>
         public Shift(
+            string locationId,
             string startAt,
             string id = null,
             string employeeId = null,
-            string locationId = null,
             string timezone = null,
             string endAt = null,
             Models.ShiftWage wage = null,
@@ -48,12 +49,12 @@ namespace Square.Models
             int? version = null,
             string createdAt = null,
             string updatedAt = null,
-            string teamMemberId = null)
+            string teamMemberId = null,
+            Models.Money declaredCashTipMoney = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "employee_id", false },
-                { "location_id", false },
                 { "timezone", false },
                 { "end_at", false },
                 { "breaks", false },
@@ -67,12 +68,7 @@ namespace Square.Models
                 this.EmployeeId = employeeId;
             }
 
-            if (locationId != null)
-            {
-                shouldSerialize["location_id"] = true;
-                this.LocationId = locationId;
-            }
-
+            this.LocationId = locationId;
             if (timezone != null)
             {
                 shouldSerialize["timezone"] = true;
@@ -103,12 +99,13 @@ namespace Square.Models
                 this.TeamMemberId = teamMemberId;
             }
 
+            this.DeclaredCashTipMoney = declaredCashTipMoney;
         }
         internal Shift(Dictionary<string, bool> shouldSerialize,
+            string locationId,
             string startAt,
             string id = null,
             string employeeId = null,
-            string locationId = null,
             string timezone = null,
             string endAt = null,
             Models.ShiftWage wage = null,
@@ -117,7 +114,8 @@ namespace Square.Models
             int? version = null,
             string createdAt = null,
             string updatedAt = null,
-            string teamMemberId = null)
+            string teamMemberId = null,
+            Models.Money declaredCashTipMoney = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -133,6 +131,7 @@ namespace Square.Models
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
             TeamMemberId = teamMemberId;
+            DeclaredCashTipMoney = declaredCashTipMoney;
         }
 
         /// <summary>
@@ -221,6 +220,17 @@ namespace Square.Models
         [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }
 
+        /// <summary>
+        /// Represents an amount of money. `Money` fields can be signed or unsigned.
+        /// Fields that do not explicitly define whether they are signed or unsigned are
+        /// considered unsigned and can only hold positive amounts. For signed fields, the
+        /// sign of the value indicates the purpose of the money transfer. See
+        /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts)
+        /// for more information.
+        /// </summary>
+        [JsonProperty("declared_cash_tip_money", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Money DeclaredCashTipMoney { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -238,15 +248,6 @@ namespace Square.Models
         public bool ShouldSerializeEmployeeId()
         {
             return this.shouldSerialize["employee_id"];
-        }
-
-        /// <summary>
-        /// Checks if the field should be serialized or not.
-        /// </summary>
-        /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeLocationId()
-        {
-            return this.shouldSerialize["location_id"];
         }
 
         /// <summary>
@@ -309,16 +310,17 @@ namespace Square.Models
                 ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true));
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
+                ((this.DeclaredCashTipMoney == null && other.DeclaredCashTipMoney == null) || (this.DeclaredCashTipMoney?.Equals(other.DeclaredCashTipMoney) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1338935965;
+            int hashCode = -1919717746;
             hashCode = HashCode.Combine(this.Id, this.EmployeeId, this.LocationId, this.Timezone, this.StartAt, this.EndAt, this.Wage);
 
-            hashCode = HashCode.Combine(hashCode, this.Breaks, this.Status, this.Version, this.CreatedAt, this.UpdatedAt, this.TeamMemberId);
+            hashCode = HashCode.Combine(hashCode, this.Breaks, this.Status, this.Version, this.CreatedAt, this.UpdatedAt, this.TeamMemberId, this.DeclaredCashTipMoney);
 
             return hashCode;
         }
@@ -341,6 +343,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
             toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
             toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.DeclaredCashTipMoney = {(this.DeclaredCashTipMoney == null ? "null" : this.DeclaredCashTipMoney.ToString())}");
         }
 
         /// <summary>
@@ -350,10 +353,10 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
+                this.LocationId,
                 this.StartAt)
                 .Id(this.Id)
                 .EmployeeId(this.EmployeeId)
-                .LocationId(this.LocationId)
                 .Timezone(this.Timezone)
                 .EndAt(this.EndAt)
                 .Wage(this.Wage)
@@ -362,7 +365,8 @@ namespace Square.Models
                 .Version(this.Version)
                 .CreatedAt(this.CreatedAt)
                 .UpdatedAt(this.UpdatedAt)
-                .TeamMemberId(this.TeamMemberId);
+                .TeamMemberId(this.TeamMemberId)
+                .DeclaredCashTipMoney(this.DeclaredCashTipMoney);
             return builder;
         }
 
@@ -374,17 +378,16 @@ namespace Square.Models
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
                 { "employee_id", false },
-                { "location_id", false },
                 { "timezone", false },
                 { "end_at", false },
                 { "breaks", false },
                 { "team_member_id", false },
             };
 
+            private string locationId;
             private string startAt;
             private string id;
             private string employeeId;
-            private string locationId;
             private string timezone;
             private string endAt;
             private Models.ShiftWage wage;
@@ -394,11 +397,25 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
             private string teamMemberId;
+            private Models.Money declaredCashTipMoney;
 
             public Builder(
+                string locationId,
                 string startAt)
             {
+                this.locationId = locationId;
                 this.startAt = startAt;
+            }
+
+             /// <summary>
+             /// LocationId.
+             /// </summary>
+             /// <param name="locationId"> locationId. </param>
+             /// <returns> Builder. </returns>
+            public Builder LocationId(string locationId)
+            {
+                this.locationId = locationId;
+                return this;
             }
 
              /// <summary>
@@ -432,18 +449,6 @@ namespace Square.Models
             {
                 shouldSerialize["employee_id"] = true;
                 this.employeeId = employeeId;
-                return this;
-            }
-
-             /// <summary>
-             /// LocationId.
-             /// </summary>
-             /// <param name="locationId"> locationId. </param>
-             /// <returns> Builder. </returns>
-            public Builder LocationId(string locationId)
-            {
-                shouldSerialize["location_id"] = true;
-                this.locationId = locationId;
                 return this;
             }
 
@@ -550,20 +555,23 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// DeclaredCashTipMoney.
+             /// </summary>
+             /// <param name="declaredCashTipMoney"> declaredCashTipMoney. </param>
+             /// <returns> Builder. </returns>
+            public Builder DeclaredCashTipMoney(Models.Money declaredCashTipMoney)
+            {
+                this.declaredCashTipMoney = declaredCashTipMoney;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
             public void UnsetEmployeeId()
             {
                 this.shouldSerialize["employee_id"] = false;
-            }
-
-            /// <summary>
-            /// Marks the field to not be serailized.
-            /// </summary>
-            public void UnsetLocationId()
-            {
-                this.shouldSerialize["location_id"] = false;
             }
 
             /// <summary>
@@ -606,10 +614,10 @@ namespace Square.Models
             public Shift Build()
             {
                 return new Shift(shouldSerialize,
+                    this.locationId,
                     this.startAt,
                     this.id,
                     this.employeeId,
-                    this.locationId,
                     this.timezone,
                     this.endAt,
                     this.wage,
@@ -618,7 +626,8 @@ namespace Square.Models
                     this.version,
                     this.createdAt,
                     this.updatedAt,
-                    this.teamMemberId);
+                    this.teamMemberId,
+                    this.declaredCashTipMoney);
             }
         }
     }

@@ -368,9 +368,9 @@ CreateShiftAsync(
 ```csharp
 Models.CreateShiftRequest body = new Models.CreateShiftRequest.Builder(
     new Models.Shift.Builder(
+        "PAA1RJZZKXBFG",
         "2019-01-25T03:11:00-05:00"
     )
-    .LocationId("PAA1RJZZKXBFG")
     .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(
         new Models.ShiftWage.Builder()
@@ -380,6 +380,7 @@ Models.CreateShiftRequest body = new Models.CreateShiftRequest.Builder(
             .Amount(1100L)
             .Currency("USD")
             .Build())
+        .TipEligible(true)
         .Build())
     .Breaks(
         new List<Models.Break>
@@ -395,6 +396,11 @@ Models.CreateShiftRequest body = new Models.CreateShiftRequest.Builder(
             .Build(),
         })
     .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
+    .DeclaredCashTipMoney(
+        new Models.Money.Builder()
+        .Amount(500L)
+        .Currency("USD")
+        .Build())
     .Build()
 )
 .IdempotencyKey("HIDSNG5KS478L")
@@ -584,9 +590,9 @@ UpdateShiftAsync(
 string id = "id0";
 Models.UpdateShiftRequest body = new Models.UpdateShiftRequest.Builder(
     new Models.Shift.Builder(
+        "PAA1RJZZKXBFG",
         "2019-01-25T03:11:00-05:00"
     )
-    .LocationId("PAA1RJZZKXBFG")
     .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(
         new Models.ShiftWage.Builder()
@@ -596,6 +602,7 @@ Models.UpdateShiftRequest body = new Models.UpdateShiftRequest.Builder(
             .Amount(1500L)
             .Currency("USD")
             .Build())
+        .TipEligible(true)
         .Build())
     .Breaks(
         new List<Models.Break>
@@ -613,6 +620,11 @@ Models.UpdateShiftRequest body = new Models.UpdateShiftRequest.Builder(
         })
     .Version(1)
     .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
+    .DeclaredCashTipMoney(
+        new Models.Money.Builder()
+        .Amount(500L)
+        .Currency("USD")
+        .Build())
     .Build()
 )
 .Build();

@@ -66,7 +66,7 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// A valid OAuth access token. OAuth access tokens are 64 bytes long.
+        /// A valid OAuth access token.
         /// Provide the access token in a header with every request to Connect API
         /// endpoints. For more information, see [OAuth API: Walkthrough](https://developer.squareup.com/docs/oauth-api/walkthrough).
         /// </summary>
@@ -114,7 +114,7 @@ namespace Square.Models
         public string IdToken { get; }
 
         /// <summary>
-        /// A refresh token. OAuth refresh tokens are 64 bytes long.
+        /// A refresh token.
         /// For more information, see [Refresh, Revoke, and Limit the Scope of OAuth Tokens](https://developer.squareup.com/docs/oauth-api/refresh-revoke-limit-scope).
         /// </summary>
         [JsonProperty("refresh_token", NullValueHandling = NullValueHandling.Ignore)]
