@@ -27,18 +27,21 @@ namespace Square.Models
         /// <param name="title">title.</param>
         /// <param name="hourlyRate">hourly_rate.</param>
         /// <param name="jobId">job_id.</param>
+        /// <param name="tipEligible">tip_eligible.</param>
         public TeamMemberWage(
             string id = null,
             string teamMemberId = null,
             string title = null,
             Models.Money hourlyRate = null,
-            string jobId = null)
+            string jobId = null,
+            bool? tipEligible = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "team_member_id", false },
                 { "title", false },
-                { "job_id", false }
+                { "job_id", false },
+                { "tip_eligible", false }
             };
 
             this.Id = id;
@@ -61,13 +64,20 @@ namespace Square.Models
                 this.JobId = jobId;
             }
 
+            if (tipEligible != null)
+            {
+                shouldSerialize["tip_eligible"] = true;
+                this.TipEligible = tipEligible;
+            }
+
         }
         internal TeamMemberWage(Dictionary<string, bool> shouldSerialize,
             string id = null,
             string teamMemberId = null,
             string title = null,
             Models.Money hourlyRate = null,
-            string jobId = null)
+            string jobId = null,
+            bool? tipEligible = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -75,6 +85,7 @@ namespace Square.Models
             Title = title;
             HourlyRate = hourlyRate;
             JobId = jobId;
+            TipEligible = tipEligible;
         }
 
         /// <summary>
@@ -113,6 +124,12 @@ namespace Square.Models
         [JsonProperty("job_id")]
         public string JobId { get; }
 
+        /// <summary>
+        /// Whether team members are eligible for tips when working this job.
+        /// </summary>
+        [JsonProperty("tip_eligible")]
+        public bool? TipEligible { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -150,6 +167,15 @@ namespace Square.Models
             return this.shouldSerialize["job_id"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTipEligible()
+        {
+            return this.shouldSerialize["tip_eligible"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -166,14 +192,15 @@ namespace Square.Models
                 ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
                 ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true)) &&
-                ((this.JobId == null && other.JobId == null) || (this.JobId?.Equals(other.JobId) == true));
+                ((this.JobId == null && other.JobId == null) || (this.JobId?.Equals(other.JobId) == true)) &&
+                ((this.TipEligible == null && other.TipEligible == null) || (this.TipEligible?.Equals(other.TipEligible) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1846697817;
-            hashCode = HashCode.Combine(this.Id, this.TeamMemberId, this.Title, this.HourlyRate, this.JobId);
+            int hashCode = 1986265837;
+            hashCode = HashCode.Combine(this.Id, this.TeamMemberId, this.Title, this.HourlyRate, this.JobId, this.TipEligible);
 
             return hashCode;
         }
@@ -188,6 +215,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
             toStringOutput.Add($"this.HourlyRate = {(this.HourlyRate == null ? "null" : this.HourlyRate.ToString())}");
             toStringOutput.Add($"this.JobId = {(this.JobId == null ? "null" : this.JobId)}");
+            toStringOutput.Add($"this.TipEligible = {(this.TipEligible == null ? "null" : this.TipEligible.ToString())}");
         }
 
         /// <summary>
@@ -201,7 +229,8 @@ namespace Square.Models
                 .TeamMemberId(this.TeamMemberId)
                 .Title(this.Title)
                 .HourlyRate(this.HourlyRate)
-                .JobId(this.JobId);
+                .JobId(this.JobId)
+                .TipEligible(this.TipEligible);
             return builder;
         }
 
@@ -215,6 +244,7 @@ namespace Square.Models
                 { "team_member_id", false },
                 { "title", false },
                 { "job_id", false },
+                { "tip_eligible", false },
             };
 
             private string id;
@@ -222,6 +252,7 @@ namespace Square.Models
             private string title;
             private Models.Money hourlyRate;
             private string jobId;
+            private bool? tipEligible;
 
              /// <summary>
              /// Id.
@@ -281,6 +312,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TipEligible.
+             /// </summary>
+             /// <param name="tipEligible"> tipEligible. </param>
+             /// <returns> Builder. </returns>
+            public Builder TipEligible(bool? tipEligible)
+            {
+                shouldSerialize["tip_eligible"] = true;
+                this.tipEligible = tipEligible;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -305,6 +348,14 @@ namespace Square.Models
                 this.shouldSerialize["job_id"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTipEligible()
+            {
+                this.shouldSerialize["tip_eligible"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -317,7 +368,8 @@ namespace Square.Models
                     this.teamMemberId,
                     this.title,
                     this.hourlyRate,
-                    this.jobId);
+                    this.jobId,
+                    this.tipEligible);
             }
         }
     }

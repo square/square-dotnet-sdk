@@ -43,7 +43,7 @@ namespace Square
         };
 
         private readonly GlobalConfiguration globalConfiguration;
-        private const string userAgent = "Square-DotNet-SDK/32.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+        private const string userAgent = "Square-DotNet-SDK/33.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
         private readonly HttpCallBack httpCallBack;
         private readonly BearerAuthManager bearerAuthManager;
         private readonly IDictionary<string, List<string>> additionalHeaders;
@@ -419,7 +419,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "32.0.0";
+        public string SdkVersion => "33.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -566,7 +566,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2023-10-18";
+            private string squareVersion = "2023-11-15";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
