@@ -26,17 +26,20 @@ namespace Square.Models
         /// <param name="includeRelatedObjects">include_related_objects.</param>
         /// <param name="catalogVersion">catalog_version.</param>
         /// <param name="includeDeletedObjects">include_deleted_objects.</param>
+        /// <param name="includeCategoryPathToRoot">include_category_path_to_root.</param>
         public BatchRetrieveCatalogObjectsRequest(
             IList<string> objectIds,
             bool? includeRelatedObjects = null,
             long? catalogVersion = null,
-            bool? includeDeletedObjects = null)
+            bool? includeDeletedObjects = null,
+            bool? includeCategoryPathToRoot = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "include_related_objects", false },
                 { "catalog_version", false },
-                { "include_deleted_objects", false }
+                { "include_deleted_objects", false },
+                { "include_category_path_to_root", false }
             };
 
             this.ObjectIds = objectIds;
@@ -58,18 +61,26 @@ namespace Square.Models
                 this.IncludeDeletedObjects = includeDeletedObjects;
             }
 
+            if (includeCategoryPathToRoot != null)
+            {
+                shouldSerialize["include_category_path_to_root"] = true;
+                this.IncludeCategoryPathToRoot = includeCategoryPathToRoot;
+            }
+
         }
         internal BatchRetrieveCatalogObjectsRequest(Dictionary<string, bool> shouldSerialize,
             IList<string> objectIds,
             bool? includeRelatedObjects = null,
             long? catalogVersion = null,
-            bool? includeDeletedObjects = null)
+            bool? includeDeletedObjects = null,
+            bool? includeCategoryPathToRoot = null)
         {
             this.shouldSerialize = shouldSerialize;
             ObjectIds = objectIds;
             IncludeRelatedObjects = includeRelatedObjects;
             CatalogVersion = catalogVersion;
             IncludeDeletedObjects = includeDeletedObjects;
+            IncludeCategoryPathToRoot = includeCategoryPathToRoot;
         }
 
         /// <summary>
@@ -110,6 +121,15 @@ namespace Square.Models
         [JsonProperty("include_deleted_objects")]
         public bool? IncludeDeletedObjects { get; }
 
+        /// <summary>
+        /// Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists
+        /// of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category
+        /// and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned
+        /// in the response payload.
+        /// </summary>
+        [JsonProperty("include_category_path_to_root")]
+        public bool? IncludeCategoryPathToRoot { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -147,6 +167,15 @@ namespace Square.Models
             return this.shouldSerialize["include_deleted_objects"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIncludeCategoryPathToRoot()
+        {
+            return this.shouldSerialize["include_category_path_to_root"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -162,14 +191,15 @@ namespace Square.Models
             return obj is BatchRetrieveCatalogObjectsRequest other &&                ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true)) &&
                 ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
                 ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
-                ((this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true));
+                ((this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true)) &&
+                ((this.IncludeCategoryPathToRoot == null && other.IncludeCategoryPathToRoot == null) || (this.IncludeCategoryPathToRoot?.Equals(other.IncludeCategoryPathToRoot) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1492875239;
-            hashCode = HashCode.Combine(this.ObjectIds, this.IncludeRelatedObjects, this.CatalogVersion, this.IncludeDeletedObjects);
+            int hashCode = 10343946;
+            hashCode = HashCode.Combine(this.ObjectIds, this.IncludeRelatedObjects, this.CatalogVersion, this.IncludeDeletedObjects, this.IncludeCategoryPathToRoot);
 
             return hashCode;
         }
@@ -183,6 +213,7 @@ namespace Square.Models
             toStringOutput.Add($"this.IncludeRelatedObjects = {(this.IncludeRelatedObjects == null ? "null" : this.IncludeRelatedObjects.ToString())}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
             toStringOutput.Add($"this.IncludeDeletedObjects = {(this.IncludeDeletedObjects == null ? "null" : this.IncludeDeletedObjects.ToString())}");
+            toStringOutput.Add($"this.IncludeCategoryPathToRoot = {(this.IncludeCategoryPathToRoot == null ? "null" : this.IncludeCategoryPathToRoot.ToString())}");
         }
 
         /// <summary>
@@ -195,7 +226,8 @@ namespace Square.Models
                 this.ObjectIds)
                 .IncludeRelatedObjects(this.IncludeRelatedObjects)
                 .CatalogVersion(this.CatalogVersion)
-                .IncludeDeletedObjects(this.IncludeDeletedObjects);
+                .IncludeDeletedObjects(this.IncludeDeletedObjects)
+                .IncludeCategoryPathToRoot(this.IncludeCategoryPathToRoot);
             return builder;
         }
 
@@ -209,12 +241,14 @@ namespace Square.Models
                 { "include_related_objects", false },
                 { "catalog_version", false },
                 { "include_deleted_objects", false },
+                { "include_category_path_to_root", false },
             };
 
             private IList<string> objectIds;
             private bool? includeRelatedObjects;
             private long? catalogVersion;
             private bool? includeDeletedObjects;
+            private bool? includeCategoryPathToRoot;
 
             public Builder(
                 IList<string> objectIds)
@@ -269,6 +303,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// IncludeCategoryPathToRoot.
+             /// </summary>
+             /// <param name="includeCategoryPathToRoot"> includeCategoryPathToRoot. </param>
+             /// <returns> Builder. </returns>
+            public Builder IncludeCategoryPathToRoot(bool? includeCategoryPathToRoot)
+            {
+                shouldSerialize["include_category_path_to_root"] = true;
+                this.includeCategoryPathToRoot = includeCategoryPathToRoot;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -293,6 +339,14 @@ namespace Square.Models
                 this.shouldSerialize["include_deleted_objects"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIncludeCategoryPathToRoot()
+            {
+                this.shouldSerialize["include_category_path_to_root"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -304,7 +358,8 @@ namespace Square.Models
                     this.objectIds,
                     this.includeRelatedObjects,
                     this.catalogVersion,
-                    this.includeDeletedObjects);
+                    this.includeDeletedObjects,
+                    this.includeCategoryPathToRoot);
             }
         }
     }

@@ -75,6 +75,118 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
+        /// Retrieves the location-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location for which to retrieve settings..</param>
+        /// <returns>Returns the Models.RetrieveLocationSettingsResponse response from the API call.</returns>
+        public Models.RetrieveLocationSettingsResponse RetrieveLocationSettings(
+                string locationId)
+            => CoreHelper.RunTask(RetrieveLocationSettingsAsync(locationId));
+
+        /// <summary>
+        /// Retrieves the location-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location for which to retrieve settings..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveLocationSettingsResponse response from the API call.</returns>
+        public async Task<Models.RetrieveLocationSettingsResponse> RetrieveLocationSettingsAsync(
+                string locationId,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.RetrieveLocationSettingsResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/online-checkout/location-settings/{location_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("location_id", locationId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
+        /// Updates the location-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location for which to retrieve settings..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.UpdateLocationSettingsResponse response from the API call.</returns>
+        public Models.UpdateLocationSettingsResponse UpdateLocationSettings(
+                string locationId,
+                Models.UpdateLocationSettingsRequest body)
+            => CoreHelper.RunTask(UpdateLocationSettingsAsync(locationId, body));
+
+        /// <summary>
+        /// Updates the location-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location for which to retrieve settings..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.UpdateLocationSettingsResponse response from the API call.</returns>
+        public async Task<Models.UpdateLocationSettingsResponse> UpdateLocationSettingsAsync(
+                string locationId,
+                Models.UpdateLocationSettingsRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.UpdateLocationSettingsResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Put, "/v2/online-checkout/location-settings/{location_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Template(_template => _template.Setup("location_id", locationId))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
+        /// Retrieves the merchant-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <returns>Returns the Models.RetrieveMerchantSettingsResponse response from the API call.</returns>
+        public Models.RetrieveMerchantSettingsResponse RetrieveMerchantSettings()
+            => CoreHelper.RunTask(RetrieveMerchantSettingsAsync());
+
+        /// <summary>
+        /// Retrieves the merchant-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveMerchantSettingsResponse response from the API call.</returns>
+        public async Task<Models.RetrieveMerchantSettingsResponse> RetrieveMerchantSettingsAsync(CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.RetrieveMerchantSettingsResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/online-checkout/merchant-settings")
+                  .WithAuth("global"))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
+        /// Updates the merchant-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.UpdateMerchantSettingsResponse response from the API call.</returns>
+        public Models.UpdateMerchantSettingsResponse UpdateMerchantSettings(
+                Models.UpdateMerchantSettingsRequest body)
+            => CoreHelper.RunTask(UpdateMerchantSettingsAsync(body));
+
+        /// <summary>
+        /// Updates the merchant-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.UpdateMerchantSettingsResponse response from the API call.</returns>
+        public async Task<Models.UpdateMerchantSettingsResponse> UpdateMerchantSettingsAsync(
+                Models.UpdateMerchantSettingsRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.UpdateMerchantSettingsResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Put, "/v2/online-checkout/merchant-settings")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
         /// Lists all payment links.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, the endpoint returns the first page of the results. For more  information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>

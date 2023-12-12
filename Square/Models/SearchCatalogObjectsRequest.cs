@@ -28,6 +28,7 @@ namespace Square.Models
         /// <param name="beginTime">begin_time.</param>
         /// <param name="query">query.</param>
         /// <param name="limit">limit.</param>
+        /// <param name="includeCategoryPathToRoot">include_category_path_to_root.</param>
         public SearchCatalogObjectsRequest(
             string cursor = null,
             IList<string> objectTypes = null,
@@ -35,7 +36,8 @@ namespace Square.Models
             bool? includeRelatedObjects = null,
             string beginTime = null,
             Models.CatalogQuery query = null,
-            int? limit = null)
+            int? limit = null,
+            bool? includeCategoryPathToRoot = null)
         {
             this.Cursor = cursor;
             this.ObjectTypes = objectTypes;
@@ -44,6 +46,7 @@ namespace Square.Models
             this.BeginTime = beginTime;
             this.Query = query;
             this.Limit = limit;
+            this.IncludeCategoryPathToRoot = includeCategoryPathToRoot;
         }
 
         /// <summary>
@@ -113,8 +116,8 @@ namespace Square.Models
         /// All other query types cannot be combined with any others.
         /// When a query filter is based on an attribute, the attribute must be searchable.
         /// Searchable attributes are listed as follows, along their parent types that can be searched for with applicable query filters.
-        /// * Searchable attribute and objects queryable by searchable attributes **
-        /// - `name`:  `CatalogItem`, `CatalogItemVariation`, `CatalogCategory`, `CatalogTax`, `CatalogDiscount`, `CatalogModifier`, 'CatalogModifierList`, `CatalogItemOption`, `CatalogItemOptionValue`
+        /// Searchable attribute and objects queryable by searchable attributes:
+        /// - `name`:  `CatalogItem`, `CatalogItemVariation`, `CatalogCategory`, `CatalogTax`, `CatalogDiscount`, `CatalogModifier`, `CatalogModifierList`, `CatalogItemOption`, `CatalogItemOptionValue`
         /// - `description`: `CatalogItem`, `CatalogItemOptionValue`
         /// - `abbreviation`: `CatalogItem`
         /// - `upc`: `CatalogItemVariation`
@@ -134,6 +137,15 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }
+
+        /// <summary>
+        /// Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists
+        /// of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category
+        /// and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned
+        /// in the response payload.
+        /// </summary>
+        [JsonProperty("include_category_path_to_root", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IncludeCategoryPathToRoot { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -163,14 +175,17 @@ namespace Square.Models
                 ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
                 ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
                 ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
+                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
+                ((this.IncludeCategoryPathToRoot == null && other.IncludeCategoryPathToRoot == null) || (this.IncludeCategoryPathToRoot?.Equals(other.IncludeCategoryPathToRoot) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 405501134;
+            int hashCode = -2076746851;
             hashCode = HashCode.Combine(this.Cursor, this.ObjectTypes, this.IncludeDeletedObjects, this.IncludeRelatedObjects, this.BeginTime, this.Query, this.Limit);
+
+            hashCode = HashCode.Combine(hashCode, this.IncludeCategoryPathToRoot);
 
             return hashCode;
         }
@@ -187,6 +202,7 @@ namespace Square.Models
             toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime)}");
             toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
+            toStringOutput.Add($"this.IncludeCategoryPathToRoot = {(this.IncludeCategoryPathToRoot == null ? "null" : this.IncludeCategoryPathToRoot.ToString())}");
         }
 
         /// <summary>
@@ -202,7 +218,8 @@ namespace Square.Models
                 .IncludeRelatedObjects(this.IncludeRelatedObjects)
                 .BeginTime(this.BeginTime)
                 .Query(this.Query)
-                .Limit(this.Limit);
+                .Limit(this.Limit)
+                .IncludeCategoryPathToRoot(this.IncludeCategoryPathToRoot);
             return builder;
         }
 
@@ -218,6 +235,7 @@ namespace Square.Models
             private string beginTime;
             private Models.CatalogQuery query;
             private int? limit;
+            private bool? includeCategoryPathToRoot;
 
              /// <summary>
              /// Cursor.
@@ -296,6 +314,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// IncludeCategoryPathToRoot.
+             /// </summary>
+             /// <param name="includeCategoryPathToRoot"> includeCategoryPathToRoot. </param>
+             /// <returns> Builder. </returns>
+            public Builder IncludeCategoryPathToRoot(bool? includeCategoryPathToRoot)
+            {
+                this.includeCategoryPathToRoot = includeCategoryPathToRoot;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -309,7 +338,8 @@ namespace Square.Models
                     this.includeRelatedObjects,
                     this.beginTime,
                     this.query,
-                    this.limit);
+                    this.limit,
+                    this.includeCategoryPathToRoot);
             }
         }
     }

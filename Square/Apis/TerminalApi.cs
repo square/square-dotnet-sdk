@@ -148,7 +148,7 @@ namespace Square.Apis
         /// Dismisses a Terminal action request if the status and type of the request permits it.
         /// See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/advanced-features/custom-workflows/link-and-dismiss-actions) for more details.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the `TerminalAction` associated with the waiting dialog to be dismissed..</param>
+        /// <param name="actionId">Required parameter: Unique ID for the `TerminalAction` associated with the action to be dismissed..</param>
         /// <returns>Returns the Models.DismissTerminalActionResponse response from the API call.</returns>
         public Models.DismissTerminalActionResponse DismissTerminalAction(
                 string actionId)
@@ -158,7 +158,7 @@ namespace Square.Apis
         /// Dismisses a Terminal action request if the status and type of the request permits it.
         /// See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/advanced-features/custom-workflows/link-and-dismiss-actions) for more details.
         /// </summary>
-        /// <param name="actionId">Required parameter: Unique ID for the `TerminalAction` associated with the waiting dialog to be dismissed..</param>
+        /// <param name="actionId">Required parameter: Unique ID for the `TerminalAction` associated with the action to be dismissed..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.DismissTerminalActionResponse response from the API call.</returns>
         public async Task<Models.DismissTerminalActionResponse> DismissTerminalActionAsync(
@@ -291,6 +291,34 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken);
 
         /// <summary>
+        /// Dismisses a Terminal checkout request if the status and type of the request permits it.
+        /// </summary>
+        /// <param name="checkoutId">Required parameter: Unique ID for the `TerminalCheckout` associated with the checkout to be dismissed..</param>
+        /// <returns>Returns the Models.DismissTerminalCheckoutResponse response from the API call.</returns>
+        public Models.DismissTerminalCheckoutResponse DismissTerminalCheckout(
+                string checkoutId)
+            => CoreHelper.RunTask(DismissTerminalCheckoutAsync(checkoutId));
+
+        /// <summary>
+        /// Dismisses a Terminal checkout request if the status and type of the request permits it.
+        /// </summary>
+        /// <param name="checkoutId">Required parameter: Unique ID for the `TerminalCheckout` associated with the checkout to be dismissed..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DismissTerminalCheckoutResponse response from the API call.</returns>
+        public async Task<Models.DismissTerminalCheckoutResponse> DismissTerminalCheckoutAsync(
+                string checkoutId,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.DismissTerminalCheckoutResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/terminals/checkouts/{checkout_id}/dismiss")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("checkout_id", checkoutId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
         /// Creates a request to refund an Interac payment completed on a Square Terminal. Refunds for Interac payments on a Square Terminal are supported only for Interac debit cards in Canada. Other refunds for Terminal payments should use the Refunds API. For more information, see [Refunds API]($e/Refunds).
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -397,6 +425,34 @@ namespace Square.Apis
             => await CreateApiCall<Models.CancelTerminalRefundResponse>()
               .RequestBuilder(_requestBuilder => _requestBuilder
                   .Setup(HttpMethod.Post, "/v2/terminals/refunds/{terminal_refund_id}/cancel")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("terminal_refund_id", terminalRefundId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken);
+
+        /// <summary>
+        /// Dismisses a Terminal refund request if the status and type of the request permits it.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the `TerminalRefund` associated with the refund to be dismissed..</param>
+        /// <returns>Returns the Models.DismissTerminalRefundResponse response from the API call.</returns>
+        public Models.DismissTerminalRefundResponse DismissTerminalRefund(
+                string terminalRefundId)
+            => CoreHelper.RunTask(DismissTerminalRefundAsync(terminalRefundId));
+
+        /// <summary>
+        /// Dismisses a Terminal refund request if the status and type of the request permits it.
+        /// </summary>
+        /// <param name="terminalRefundId">Required parameter: Unique ID for the `TerminalRefund` associated with the refund to be dismissed..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DismissTerminalRefundResponse response from the API call.</returns>
+        public async Task<Models.DismissTerminalRefundResponse> DismissTerminalRefundAsync(
+                string terminalRefundId,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.DismissTerminalRefundResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/terminals/refunds/{terminal_refund_id}/dismiss")
                   .WithAuth("global")
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("terminal_refund_id", terminalRefundId))))

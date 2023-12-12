@@ -24,14 +24,17 @@ namespace Square.Models
         /// </summary>
         /// <param name="includeRelatedObjects">include_related_objects.</param>
         /// <param name="catalogVersion">catalog_version.</param>
+        /// <param name="includeCategoryPathToRoot">include_category_path_to_root.</param>
         public RetrieveCatalogObjectRequest(
             bool? includeRelatedObjects = null,
-            long? catalogVersion = null)
+            long? catalogVersion = null,
+            bool? includeCategoryPathToRoot = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "include_related_objects", false },
-                { "catalog_version", false }
+                { "catalog_version", false },
+                { "include_category_path_to_root", false }
             };
 
             if (includeRelatedObjects != null)
@@ -46,14 +49,22 @@ namespace Square.Models
                 this.CatalogVersion = catalogVersion;
             }
 
+            if (includeCategoryPathToRoot != null)
+            {
+                shouldSerialize["include_category_path_to_root"] = true;
+                this.IncludeCategoryPathToRoot = includeCategoryPathToRoot;
+            }
+
         }
         internal RetrieveCatalogObjectRequest(Dictionary<string, bool> shouldSerialize,
             bool? includeRelatedObjects = null,
-            long? catalogVersion = null)
+            long? catalogVersion = null,
+            bool? includeCategoryPathToRoot = null)
         {
             this.shouldSerialize = shouldSerialize;
             IncludeRelatedObjects = includeRelatedObjects;
             CatalogVersion = catalogVersion;
+            IncludeCategoryPathToRoot = includeCategoryPathToRoot;
         }
 
         /// <summary>
@@ -81,6 +92,15 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("catalog_version")]
         public long? CatalogVersion { get; }
+
+        /// <summary>
+        /// Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists
+        /// of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category
+        /// and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned
+        /// in the response payload.
+        /// </summary>
+        [JsonProperty("include_category_path_to_root")]
+        public bool? IncludeCategoryPathToRoot { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -110,6 +130,15 @@ namespace Square.Models
             return this.shouldSerialize["catalog_version"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIncludeCategoryPathToRoot()
+        {
+            return this.shouldSerialize["include_category_path_to_root"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -123,14 +152,15 @@ namespace Square.Models
                 return true;
             }
             return obj is RetrieveCatalogObjectRequest other &&                ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
+                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
+                ((this.IncludeCategoryPathToRoot == null && other.IncludeCategoryPathToRoot == null) || (this.IncludeCategoryPathToRoot?.Equals(other.IncludeCategoryPathToRoot) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -126608082;
-            hashCode = HashCode.Combine(this.IncludeRelatedObjects, this.CatalogVersion);
+            int hashCode = -1806046083;
+            hashCode = HashCode.Combine(this.IncludeRelatedObjects, this.CatalogVersion, this.IncludeCategoryPathToRoot);
 
             return hashCode;
         }
@@ -142,6 +172,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.IncludeRelatedObjects = {(this.IncludeRelatedObjects == null ? "null" : this.IncludeRelatedObjects.ToString())}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
+            toStringOutput.Add($"this.IncludeCategoryPathToRoot = {(this.IncludeCategoryPathToRoot == null ? "null" : this.IncludeCategoryPathToRoot.ToString())}");
         }
 
         /// <summary>
@@ -152,7 +183,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .IncludeRelatedObjects(this.IncludeRelatedObjects)
-                .CatalogVersion(this.CatalogVersion);
+                .CatalogVersion(this.CatalogVersion)
+                .IncludeCategoryPathToRoot(this.IncludeCategoryPathToRoot);
             return builder;
         }
 
@@ -165,10 +197,12 @@ namespace Square.Models
             {
                 { "include_related_objects", false },
                 { "catalog_version", false },
+                { "include_category_path_to_root", false },
             };
 
             private bool? includeRelatedObjects;
             private long? catalogVersion;
+            private bool? includeCategoryPathToRoot;
 
              /// <summary>
              /// IncludeRelatedObjects.
@@ -194,6 +228,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// IncludeCategoryPathToRoot.
+             /// </summary>
+             /// <param name="includeCategoryPathToRoot"> includeCategoryPathToRoot. </param>
+             /// <returns> Builder. </returns>
+            public Builder IncludeCategoryPathToRoot(bool? includeCategoryPathToRoot)
+            {
+                shouldSerialize["include_category_path_to_root"] = true;
+                this.includeCategoryPathToRoot = includeCategoryPathToRoot;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -210,6 +256,14 @@ namespace Square.Models
                 this.shouldSerialize["catalog_version"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetIncludeCategoryPathToRoot()
+            {
+                this.shouldSerialize["include_category_path_to_root"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -219,7 +273,8 @@ namespace Square.Models
             {
                 return new RetrieveCatalogObjectRequest(shouldSerialize,
                     this.includeRelatedObjects,
-                    this.catalogVersion);
+                    this.catalogVersion,
+                    this.includeCategoryPathToRoot);
             }
         }
     }
