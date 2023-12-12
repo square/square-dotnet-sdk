@@ -38,9 +38,13 @@ namespace Square.Models
         /// <param name="itemOptions">item_options.</param>
         /// <param name="imageIds">image_ids.</param>
         /// <param name="sortName">sort_name.</param>
+        /// <param name="categories">categories.</param>
         /// <param name="descriptionHtml">description_html.</param>
         /// <param name="descriptionPlaintext">description_plaintext.</param>
+        /// <param name="channels">channels.</param>
         /// <param name="isArchived">is_archived.</param>
+        /// <param name="ecomSeoData">ecom_seo_data.</param>
+        /// <param name="reportingCategory">reporting_category.</param>
         public CatalogItem(
             string name = null,
             string description = null,
@@ -58,9 +62,13 @@ namespace Square.Models
             IList<Models.CatalogItemOptionForItem> itemOptions = null,
             IList<string> imageIds = null,
             string sortName = null,
+            IList<Models.CatalogObjectCategory> categories = null,
             string descriptionHtml = null,
             string descriptionPlaintext = null,
-            bool? isArchived = null)
+            IList<string> channels = null,
+            bool? isArchived = null,
+            Models.CatalogEcomSeoData ecomSeoData = null,
+            Models.CatalogObjectCategory reportingCategory = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -79,7 +87,9 @@ namespace Square.Models
                 { "item_options", false },
                 { "image_ids", false },
                 { "sort_name", false },
+                { "categories", false },
                 { "description_html", false },
+                { "channels", false },
                 { "is_archived", false }
             };
 
@@ -174,6 +184,12 @@ namespace Square.Models
                 this.SortName = sortName;
             }
 
+            if (categories != null)
+            {
+                shouldSerialize["categories"] = true;
+                this.Categories = categories;
+            }
+
             if (descriptionHtml != null)
             {
                 shouldSerialize["description_html"] = true;
@@ -181,12 +197,20 @@ namespace Square.Models
             }
 
             this.DescriptionPlaintext = descriptionPlaintext;
+            if (channels != null)
+            {
+                shouldSerialize["channels"] = true;
+                this.Channels = channels;
+            }
+
             if (isArchived != null)
             {
                 shouldSerialize["is_archived"] = true;
                 this.IsArchived = isArchived;
             }
 
+            this.EcomSeoData = ecomSeoData;
+            this.ReportingCategory = reportingCategory;
         }
         internal CatalogItem(Dictionary<string, bool> shouldSerialize,
             string name = null,
@@ -205,9 +229,13 @@ namespace Square.Models
             IList<Models.CatalogItemOptionForItem> itemOptions = null,
             IList<string> imageIds = null,
             string sortName = null,
+            IList<Models.CatalogObjectCategory> categories = null,
             string descriptionHtml = null,
             string descriptionPlaintext = null,
-            bool? isArchived = null)
+            IList<string> channels = null,
+            bool? isArchived = null,
+            Models.CatalogEcomSeoData ecomSeoData = null,
+            Models.CatalogObjectCategory reportingCategory = null)
         {
             this.shouldSerialize = shouldSerialize;
             Name = name;
@@ -226,9 +254,13 @@ namespace Square.Models
             ItemOptions = itemOptions;
             ImageIds = imageIds;
             SortName = sortName;
+            Categories = categories;
             DescriptionHtml = descriptionHtml;
             DescriptionPlaintext = descriptionPlaintext;
+            Channels = channels;
             IsArchived = isArchived;
+            EcomSeoData = ecomSeoData;
+            ReportingCategory = reportingCategory;
         }
 
         /// <summary>
@@ -280,7 +312,7 @@ namespace Square.Models
         public bool? AvailableElectronically { get; }
 
         /// <summary>
-        /// The ID of the item's category, if any.
+        /// The ID of the item's category, if any. Deprecated since 2023-12-13. Use `CatalogItem.categories`, instead.
         /// </summary>
         [JsonProperty("category_id")]
         public string CategoryId { get; }
@@ -351,6 +383,12 @@ namespace Square.Models
         public string SortName { get; }
 
         /// <summary>
+        /// The list of categories.
+        /// </summary>
+        [JsonProperty("categories")]
+        public IList<Models.CatalogObjectCategory> Categories { get; }
+
+        /// <summary>
         /// The item's description as expressed in valid HTML elements. The length of this field value, including those of HTML tags,
         /// is of Unicode points. With application query filters, the text values of the HTML elements and attributes are searchable. Invalid or
         /// unsupported HTML elements or attributes are ignored.
@@ -383,10 +421,30 @@ namespace Square.Models
         public string DescriptionPlaintext { get; }
 
         /// <summary>
+        /// A list of IDs representing channels, such as a Square Online site, where the item can be made visible or available.
+        /// </summary>
+        [JsonProperty("channels")]
+        public IList<string> Channels { get; }
+
+        /// <summary>
         /// Indicates whether this item is archived (`true`) or not (`false`).
         /// </summary>
         [JsonProperty("is_archived")]
         public bool? IsArchived { get; }
+
+        /// <summary>
+        /// SEO data for for a seller's Square Online store.
+        /// </summary>
+        [JsonProperty("ecom_seo_data", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CatalogEcomSeoData EcomSeoData { get; }
+
+        /// <summary>
+        /// A category that can be assigned to an item or a parent category that can be assigned
+        /// to another category. For example, a clothing category can be assigned to a t-shirt item or
+        /// be made as the parent category to the pants category.
+        /// </summary>
+        [JsonProperty("reporting_category", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CatalogObjectCategory ReportingCategory { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -537,9 +595,27 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeCategories()
+        {
+            return this.shouldSerialize["categories"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
         public bool ShouldSerializeDescriptionHtml()
         {
             return this.shouldSerialize["description_html"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeChannels()
+        {
+            return this.shouldSerialize["channels"];
         }
 
         /// <summary>
@@ -579,20 +655,26 @@ namespace Square.Models
                 ((this.ItemOptions == null && other.ItemOptions == null) || (this.ItemOptions?.Equals(other.ItemOptions) == true)) &&
                 ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
                 ((this.SortName == null && other.SortName == null) || (this.SortName?.Equals(other.SortName) == true)) &&
+                ((this.Categories == null && other.Categories == null) || (this.Categories?.Equals(other.Categories) == true)) &&
                 ((this.DescriptionHtml == null && other.DescriptionHtml == null) || (this.DescriptionHtml?.Equals(other.DescriptionHtml) == true)) &&
                 ((this.DescriptionPlaintext == null && other.DescriptionPlaintext == null) || (this.DescriptionPlaintext?.Equals(other.DescriptionPlaintext) == true)) &&
-                ((this.IsArchived == null && other.IsArchived == null) || (this.IsArchived?.Equals(other.IsArchived) == true));
+                ((this.Channels == null && other.Channels == null) || (this.Channels?.Equals(other.Channels) == true)) &&
+                ((this.IsArchived == null && other.IsArchived == null) || (this.IsArchived?.Equals(other.IsArchived) == true)) &&
+                ((this.EcomSeoData == null && other.EcomSeoData == null) || (this.EcomSeoData?.Equals(other.EcomSeoData) == true)) &&
+                ((this.ReportingCategory == null && other.ReportingCategory == null) || (this.ReportingCategory?.Equals(other.ReportingCategory) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 653710663;
+            int hashCode = 1153792050;
             hashCode = HashCode.Combine(this.Name, this.Description, this.Abbreviation, this.LabelColor, this.AvailableOnline, this.AvailableForPickup, this.AvailableElectronically);
 
             hashCode = HashCode.Combine(hashCode, this.CategoryId, this.TaxIds, this.ModifierListInfo, this.Variations, this.ProductType, this.SkipModifierScreen, this.ItemOptions);
 
-            hashCode = HashCode.Combine(hashCode, this.ImageIds, this.SortName, this.DescriptionHtml, this.DescriptionPlaintext, this.IsArchived);
+            hashCode = HashCode.Combine(hashCode, this.ImageIds, this.SortName, this.Categories, this.DescriptionHtml, this.DescriptionPlaintext, this.Channels, this.IsArchived);
+
+            hashCode = HashCode.Combine(hashCode, this.EcomSeoData, this.ReportingCategory);
 
             return hashCode;
         }
@@ -618,9 +700,13 @@ namespace Square.Models
             toStringOutput.Add($"this.ItemOptions = {(this.ItemOptions == null ? "null" : $"[{string.Join(", ", this.ItemOptions)} ]")}");
             toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
             toStringOutput.Add($"this.SortName = {(this.SortName == null ? "null" : this.SortName)}");
+            toStringOutput.Add($"this.Categories = {(this.Categories == null ? "null" : $"[{string.Join(", ", this.Categories)} ]")}");
             toStringOutput.Add($"this.DescriptionHtml = {(this.DescriptionHtml == null ? "null" : this.DescriptionHtml)}");
             toStringOutput.Add($"this.DescriptionPlaintext = {(this.DescriptionPlaintext == null ? "null" : this.DescriptionPlaintext)}");
+            toStringOutput.Add($"this.Channels = {(this.Channels == null ? "null" : $"[{string.Join(", ", this.Channels)} ]")}");
             toStringOutput.Add($"this.IsArchived = {(this.IsArchived == null ? "null" : this.IsArchived.ToString())}");
+            toStringOutput.Add($"this.EcomSeoData = {(this.EcomSeoData == null ? "null" : this.EcomSeoData.ToString())}");
+            toStringOutput.Add($"this.ReportingCategory = {(this.ReportingCategory == null ? "null" : this.ReportingCategory.ToString())}");
         }
 
         /// <summary>
@@ -646,9 +732,13 @@ namespace Square.Models
                 .ItemOptions(this.ItemOptions)
                 .ImageIds(this.ImageIds)
                 .SortName(this.SortName)
+                .Categories(this.Categories)
                 .DescriptionHtml(this.DescriptionHtml)
                 .DescriptionPlaintext(this.DescriptionPlaintext)
-                .IsArchived(this.IsArchived);
+                .Channels(this.Channels)
+                .IsArchived(this.IsArchived)
+                .EcomSeoData(this.EcomSeoData)
+                .ReportingCategory(this.ReportingCategory);
             return builder;
         }
 
@@ -674,7 +764,9 @@ namespace Square.Models
                 { "item_options", false },
                 { "image_ids", false },
                 { "sort_name", false },
+                { "categories", false },
                 { "description_html", false },
+                { "channels", false },
                 { "is_archived", false },
             };
 
@@ -694,9 +786,13 @@ namespace Square.Models
             private IList<Models.CatalogItemOptionForItem> itemOptions;
             private IList<string> imageIds;
             private string sortName;
+            private IList<Models.CatalogObjectCategory> categories;
             private string descriptionHtml;
             private string descriptionPlaintext;
+            private IList<string> channels;
             private bool? isArchived;
+            private Models.CatalogEcomSeoData ecomSeoData;
+            private Models.CatalogObjectCategory reportingCategory;
 
              /// <summary>
              /// Name.
@@ -890,6 +986,18 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// Categories.
+             /// </summary>
+             /// <param name="categories"> categories. </param>
+             /// <returns> Builder. </returns>
+            public Builder Categories(IList<Models.CatalogObjectCategory> categories)
+            {
+                shouldSerialize["categories"] = true;
+                this.categories = categories;
+                return this;
+            }
+
+             /// <summary>
              /// DescriptionHtml.
              /// </summary>
              /// <param name="descriptionHtml"> descriptionHtml. </param>
@@ -913,6 +1021,18 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// Channels.
+             /// </summary>
+             /// <param name="channels"> channels. </param>
+             /// <returns> Builder. </returns>
+            public Builder Channels(IList<string> channels)
+            {
+                shouldSerialize["channels"] = true;
+                this.channels = channels;
+                return this;
+            }
+
+             /// <summary>
              /// IsArchived.
              /// </summary>
              /// <param name="isArchived"> isArchived. </param>
@@ -921,6 +1041,28 @@ namespace Square.Models
             {
                 shouldSerialize["is_archived"] = true;
                 this.isArchived = isArchived;
+                return this;
+            }
+
+             /// <summary>
+             /// EcomSeoData.
+             /// </summary>
+             /// <param name="ecomSeoData"> ecomSeoData. </param>
+             /// <returns> Builder. </returns>
+            public Builder EcomSeoData(Models.CatalogEcomSeoData ecomSeoData)
+            {
+                this.ecomSeoData = ecomSeoData;
+                return this;
+            }
+
+             /// <summary>
+             /// ReportingCategory.
+             /// </summary>
+             /// <param name="reportingCategory"> reportingCategory. </param>
+             /// <returns> Builder. </returns>
+            public Builder ReportingCategory(Models.CatalogObjectCategory reportingCategory)
+            {
+                this.reportingCategory = reportingCategory;
                 return this;
             }
 
@@ -1047,9 +1189,25 @@ namespace Square.Models
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
+            public void UnsetCategories()
+            {
+                this.shouldSerialize["categories"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
             public void UnsetDescriptionHtml()
             {
                 this.shouldSerialize["description_html"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetChannels()
+            {
+                this.shouldSerialize["channels"] = false;
             }
 
             /// <summary>
@@ -1084,9 +1242,13 @@ namespace Square.Models
                     this.itemOptions,
                     this.imageIds,
                     this.sortName,
+                    this.categories,
                     this.descriptionHtml,
                     this.descriptionPlaintext,
-                    this.isArchived);
+                    this.channels,
+                    this.isArchived,
+                    this.ecomSeoData,
+                    this.reportingCategory);
             }
         }
     }

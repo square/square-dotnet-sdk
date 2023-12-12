@@ -52,6 +52,77 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Retrieves the location-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location for which to retrieve settings..</param>
+        /// <returns>Returns the Models.RetrieveLocationSettingsResponse response from the API call.</returns>
+        Models.RetrieveLocationSettingsResponse RetrieveLocationSettings(
+                string locationId);
+
+        /// <summary>
+        /// Retrieves the location-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location for which to retrieve settings..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveLocationSettingsResponse response from the API call.</returns>
+        Task<Models.RetrieveLocationSettingsResponse> RetrieveLocationSettingsAsync(
+                string locationId,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Updates the location-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location for which to retrieve settings..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.UpdateLocationSettingsResponse response from the API call.</returns>
+        Models.UpdateLocationSettingsResponse UpdateLocationSettings(
+                string locationId,
+                Models.UpdateLocationSettingsRequest body);
+
+        /// <summary>
+        /// Updates the location-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="locationId">Required parameter: The ID of the location for which to retrieve settings..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.UpdateLocationSettingsResponse response from the API call.</returns>
+        Task<Models.UpdateLocationSettingsResponse> UpdateLocationSettingsAsync(
+                string locationId,
+                Models.UpdateLocationSettingsRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Retrieves the merchant-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <returns>Returns the Models.RetrieveMerchantSettingsResponse response from the API call.</returns>
+        Models.RetrieveMerchantSettingsResponse RetrieveMerchantSettings();
+
+        /// <summary>
+        /// Retrieves the merchant-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveMerchantSettingsResponse response from the API call.</returns>
+        Task<Models.RetrieveMerchantSettingsResponse> RetrieveMerchantSettingsAsync(CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Updates the merchant-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.UpdateMerchantSettingsResponse response from the API call.</returns>
+        Models.UpdateMerchantSettingsResponse UpdateMerchantSettings(
+                Models.UpdateMerchantSettingsRequest body);
+
+        /// <summary>
+        /// Updates the merchant-level settings for a Square-hosted checkout page.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.UpdateMerchantSettingsResponse response from the API call.</returns>
+        Task<Models.UpdateMerchantSettingsResponse> UpdateMerchantSettingsAsync(
+                Models.UpdateMerchantSettingsRequest body,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Lists all payment links.
         /// </summary>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query. If a cursor is not provided, the endpoint returns the first page of the results. For more  information, see [Pagination](https://developer.squareup.com/docs/basics/api101/pagination)..</param>

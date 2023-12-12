@@ -11,6 +11,10 @@ ICheckoutApi checkoutApi = client.CheckoutApi;
 ## Methods
 
 * [Create Checkout](../../doc/api/checkout.md#create-checkout)
+* [Retrieve Location Settings](../../doc/api/checkout.md#retrieve-location-settings)
+* [Update Location Settings](../../doc/api/checkout.md#update-location-settings)
+* [Retrieve Merchant Settings](../../doc/api/checkout.md#retrieve-merchant-settings)
+* [Update Merchant Settings](../../doc/api/checkout.md#update-merchant-settings)
 * [List Payment Links](../../doc/api/checkout.md#list-payment-links)
 * [Create Payment Link](../../doc/api/checkout.md#create-payment-link)
 * [Delete Payment Link](../../doc/api/checkout.md#delete-payment-link)
@@ -173,6 +177,154 @@ try
         locationId,
         body
     );
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Retrieve Location Settings
+
+Retrieves the location-level settings for a Square-hosted checkout page.
+
+```csharp
+RetrieveLocationSettingsAsync(
+    string locationId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `locationId` | `string` | Template, Required | The ID of the location for which to retrieve settings. |
+
+## Response Type
+
+[`Task<Models.RetrieveLocationSettingsResponse>`](../../doc/models/retrieve-location-settings-response.md)
+
+## Example Usage
+
+```csharp
+string locationId = "location_id4";
+try
+{
+    RetrieveLocationSettingsResponse result = await checkoutApi.RetrieveLocationSettingsAsync(locationId);
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Update Location Settings
+
+Updates the location-level settings for a Square-hosted checkout page.
+
+```csharp
+UpdateLocationSettingsAsync(
+    string locationId,
+    Models.UpdateLocationSettingsRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `locationId` | `string` | Template, Required | The ID of the location for which to retrieve settings. |
+| `body` | [`UpdateLocationSettingsRequest`](../../doc/models/update-location-settings-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.UpdateLocationSettingsResponse>`](../../doc/models/update-location-settings-response.md)
+
+## Example Usage
+
+```csharp
+string locationId = "location_id4";
+Models.UpdateLocationSettingsRequest body = new Models.UpdateLocationSettingsRequest.Builder(
+    new Models.CheckoutLocationSettings.Builder()
+    .Build()
+)
+.Build();
+
+try
+{
+    UpdateLocationSettingsResponse result = await checkoutApi.UpdateLocationSettingsAsync(
+        locationId,
+        body
+    );
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Retrieve Merchant Settings
+
+Retrieves the merchant-level settings for a Square-hosted checkout page.
+
+```csharp
+RetrieveMerchantSettingsAsync()
+```
+
+## Response Type
+
+[`Task<Models.RetrieveMerchantSettingsResponse>`](../../doc/models/retrieve-merchant-settings-response.md)
+
+## Example Usage
+
+```csharp
+try
+{
+    RetrieveMerchantSettingsResponse result = await checkoutApi.RetrieveMerchantSettingsAsync();
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Update Merchant Settings
+
+Updates the merchant-level settings for a Square-hosted checkout page.
+
+```csharp
+UpdateMerchantSettingsAsync(
+    Models.UpdateMerchantSettingsRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`UpdateMerchantSettingsRequest`](../../doc/models/update-merchant-settings-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.UpdateMerchantSettingsResponse>`](../../doc/models/update-merchant-settings-response.md)
+
+## Example Usage
+
+```csharp
+Models.UpdateMerchantSettingsRequest body = new Models.UpdateMerchantSettingsRequest.Builder(
+    new Models.CheckoutMerchantSettings.Builder()
+    .Build()
+)
+.Build();
+
+try
+{
+    UpdateMerchantSettingsResponse result = await checkoutApi.UpdateMerchantSettingsAsync(body);
 }
 catch (ApiException e)
 {

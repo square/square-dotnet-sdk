@@ -50,6 +50,7 @@ namespace Square.Models
         /// <param name="customAttributeDefinitionData">custom_attribute_definition_data.</param>
         /// <param name="quickAmountsSettingsData">quick_amounts_settings_data.</param>
         /// <param name="subscriptionPlanVariationData">subscription_plan_variation_data.</param>
+        /// <param name="availabilityPeriodData">availability_period_data.</param>
         public CatalogObject(
             string type,
             string id,
@@ -78,7 +79,8 @@ namespace Square.Models
             Models.CatalogItemOptionValue itemOptionValueData = null,
             Models.CatalogCustomAttributeDefinition customAttributeDefinitionData = null,
             Models.CatalogQuickAmountsSettings quickAmountsSettingsData = null,
-            Models.CatalogSubscriptionPlanVariation subscriptionPlanVariationData = null)
+            Models.CatalogSubscriptionPlanVariation subscriptionPlanVariationData = null,
+            Models.CatalogAvailabilityPeriod availabilityPeriodData = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -148,6 +150,7 @@ namespace Square.Models
             this.CustomAttributeDefinitionData = customAttributeDefinitionData;
             this.QuickAmountsSettingsData = quickAmountsSettingsData;
             this.SubscriptionPlanVariationData = subscriptionPlanVariationData;
+            this.AvailabilityPeriodData = availabilityPeriodData;
         }
         internal CatalogObject(Dictionary<string, bool> shouldSerialize,
             string type,
@@ -177,7 +180,8 @@ namespace Square.Models
             Models.CatalogItemOptionValue itemOptionValueData = null,
             Models.CatalogCustomAttributeDefinition customAttributeDefinitionData = null,
             Models.CatalogQuickAmountsSettings quickAmountsSettingsData = null,
-            Models.CatalogSubscriptionPlanVariation subscriptionPlanVariationData = null)
+            Models.CatalogSubscriptionPlanVariation subscriptionPlanVariationData = null,
+            Models.CatalogAvailabilityPeriod availabilityPeriodData = null)
         {
             this.shouldSerialize = shouldSerialize;
             Type = type;
@@ -208,6 +212,7 @@ namespace Square.Models
             CustomAttributeDefinitionData = customAttributeDefinitionData;
             QuickAmountsSettingsData = quickAmountsSettingsData;
             SubscriptionPlanVariationData = subscriptionPlanVariationData;
+            AvailabilityPeriodData = availabilityPeriodData;
         }
 
         /// <summary>
@@ -437,6 +442,12 @@ namespace Square.Models
         [JsonProperty("subscription_plan_variation_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogSubscriptionPlanVariation SubscriptionPlanVariationData { get; }
 
+        /// <summary>
+        /// Represents a time period of availability.
+        /// </summary>
+        [JsonProperty("availability_period_data", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CatalogAvailabilityPeriod AvailabilityPeriodData { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -540,13 +551,14 @@ namespace Square.Models
                 ((this.ItemOptionValueData == null && other.ItemOptionValueData == null) || (this.ItemOptionValueData?.Equals(other.ItemOptionValueData) == true)) &&
                 ((this.CustomAttributeDefinitionData == null && other.CustomAttributeDefinitionData == null) || (this.CustomAttributeDefinitionData?.Equals(other.CustomAttributeDefinitionData) == true)) &&
                 ((this.QuickAmountsSettingsData == null && other.QuickAmountsSettingsData == null) || (this.QuickAmountsSettingsData?.Equals(other.QuickAmountsSettingsData) == true)) &&
-                ((this.SubscriptionPlanVariationData == null && other.SubscriptionPlanVariationData == null) || (this.SubscriptionPlanVariationData?.Equals(other.SubscriptionPlanVariationData) == true));
+                ((this.SubscriptionPlanVariationData == null && other.SubscriptionPlanVariationData == null) || (this.SubscriptionPlanVariationData?.Equals(other.SubscriptionPlanVariationData) == true)) &&
+                ((this.AvailabilityPeriodData == null && other.AvailabilityPeriodData == null) || (this.AvailabilityPeriodData?.Equals(other.AvailabilityPeriodData) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1129528004;
+            int hashCode = 1511989397;
             hashCode = HashCode.Combine(this.Type, this.Id, this.UpdatedAt, this.Version, this.IsDeleted, this.CustomAttributeValues, this.CatalogV1Ids);
 
             hashCode = HashCode.Combine(hashCode, this.PresentAtAllLocations, this.PresentAtLocationIds, this.AbsentAtLocationIds, this.ItemData, this.CategoryData, this.ItemVariationData, this.TaxData);
@@ -554,6 +566,8 @@ namespace Square.Models
             hashCode = HashCode.Combine(hashCode, this.DiscountData, this.ModifierListData, this.ModifierData, this.TimePeriodData, this.ProductSetData, this.PricingRuleData, this.ImageData);
 
             hashCode = HashCode.Combine(hashCode, this.MeasurementUnitData, this.SubscriptionPlanData, this.ItemOptionData, this.ItemOptionValueData, this.CustomAttributeDefinitionData, this.QuickAmountsSettingsData, this.SubscriptionPlanVariationData);
+
+            hashCode = HashCode.Combine(hashCode, this.AvailabilityPeriodData);
 
             return hashCode;
         }
@@ -591,6 +605,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CustomAttributeDefinitionData = {(this.CustomAttributeDefinitionData == null ? "null" : this.CustomAttributeDefinitionData.ToString())}");
             toStringOutput.Add($"this.QuickAmountsSettingsData = {(this.QuickAmountsSettingsData == null ? "null" : this.QuickAmountsSettingsData.ToString())}");
             toStringOutput.Add($"this.SubscriptionPlanVariationData = {(this.SubscriptionPlanVariationData == null ? "null" : this.SubscriptionPlanVariationData.ToString())}");
+            toStringOutput.Add($"this.AvailabilityPeriodData = {(this.AvailabilityPeriodData == null ? "null" : this.AvailabilityPeriodData.ToString())}");
         }
 
         /// <summary>
@@ -627,7 +642,8 @@ namespace Square.Models
                 .ItemOptionValueData(this.ItemOptionValueData)
                 .CustomAttributeDefinitionData(this.CustomAttributeDefinitionData)
                 .QuickAmountsSettingsData(this.QuickAmountsSettingsData)
-                .SubscriptionPlanVariationData(this.SubscriptionPlanVariationData);
+                .SubscriptionPlanVariationData(this.SubscriptionPlanVariationData)
+                .AvailabilityPeriodData(this.AvailabilityPeriodData);
             return builder;
         }
 
@@ -674,6 +690,7 @@ namespace Square.Models
             private Models.CatalogCustomAttributeDefinition customAttributeDefinitionData;
             private Models.CatalogQuickAmountsSettings quickAmountsSettingsData;
             private Models.CatalogSubscriptionPlanVariation subscriptionPlanVariationData;
+            private Models.CatalogAvailabilityPeriod availabilityPeriodData;
 
             public Builder(
                 string type,
@@ -997,6 +1014,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AvailabilityPeriodData.
+             /// </summary>
+             /// <param name="availabilityPeriodData"> availabilityPeriodData. </param>
+             /// <returns> Builder. </returns>
+            public Builder AvailabilityPeriodData(Models.CatalogAvailabilityPeriod availabilityPeriodData)
+            {
+                this.availabilityPeriodData = availabilityPeriodData;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -1080,7 +1108,8 @@ namespace Square.Models
                     this.itemOptionValueData,
                     this.customAttributeDefinitionData,
                     this.quickAmountsSettingsData,
-                    this.subscriptionPlanVariationData);
+                    this.subscriptionPlanVariationData,
+                    this.availabilityPeriodData);
             }
         }
     }
