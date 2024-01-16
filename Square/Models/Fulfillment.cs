@@ -31,6 +31,7 @@ namespace Square.Models
         /// <param name="pickupDetails">pickup_details.</param>
         /// <param name="shipmentDetails">shipment_details.</param>
         /// <param name="deliveryDetails">delivery_details.</param>
+        /// <param name="version">version.</param>
         public Fulfillment(
             string uid = null,
             string type = null,
@@ -40,7 +41,8 @@ namespace Square.Models
             IDictionary<string, string> metadata = null,
             Models.FulfillmentPickupDetails pickupDetails = null,
             Models.FulfillmentShipmentDetails shipmentDetails = null,
-            Models.FulfillmentDeliveryDetails deliveryDetails = null)
+            Models.FulfillmentDeliveryDetails deliveryDetails = null,
+            int? version = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -67,6 +69,7 @@ namespace Square.Models
             this.PickupDetails = pickupDetails;
             this.ShipmentDetails = shipmentDetails;
             this.DeliveryDetails = deliveryDetails;
+            this.Version = version;
         }
         internal Fulfillment(Dictionary<string, bool> shouldSerialize,
             string uid = null,
@@ -77,7 +80,8 @@ namespace Square.Models
             IDictionary<string, string> metadata = null,
             Models.FulfillmentPickupDetails pickupDetails = null,
             Models.FulfillmentShipmentDetails shipmentDetails = null,
-            Models.FulfillmentDeliveryDetails deliveryDetails = null)
+            Models.FulfillmentDeliveryDetails deliveryDetails = null,
+            int? version = null)
         {
             this.shouldSerialize = shouldSerialize;
             Uid = uid;
@@ -89,6 +93,7 @@ namespace Square.Models
             PickupDetails = pickupDetails;
             ShipmentDetails = shipmentDetails;
             DeliveryDetails = deliveryDetails;
+            Version = version;
         }
 
         /// <summary>
@@ -166,6 +171,14 @@ namespace Square.Models
         [JsonProperty("delivery_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.FulfillmentDeliveryDetails DeliveryDetails { get; }
 
+        /// <summary>
+        /// The version number attributed to the fulfillment and incremented every time there is a
+        /// fulfillment-related update. The fulfillment version is an internal field only for use
+        /// between Orders and the Fulfillment service.
+        /// </summary>
+        [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Version { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -214,16 +227,17 @@ namespace Square.Models
                 ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
                 ((this.PickupDetails == null && other.PickupDetails == null) || (this.PickupDetails?.Equals(other.PickupDetails) == true)) &&
                 ((this.ShipmentDetails == null && other.ShipmentDetails == null) || (this.ShipmentDetails?.Equals(other.ShipmentDetails) == true)) &&
-                ((this.DeliveryDetails == null && other.DeliveryDetails == null) || (this.DeliveryDetails?.Equals(other.DeliveryDetails) == true));
+                ((this.DeliveryDetails == null && other.DeliveryDetails == null) || (this.DeliveryDetails?.Equals(other.DeliveryDetails) == true)) &&
+                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -789701842;
+            int hashCode = -1046473688;
             hashCode = HashCode.Combine(this.Uid, this.Type, this.State, this.LineItemApplication, this.Entries, this.Metadata, this.PickupDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.ShipmentDetails, this.DeliveryDetails);
+            hashCode = HashCode.Combine(hashCode, this.ShipmentDetails, this.DeliveryDetails, this.Version);
 
             return hashCode;
         }
@@ -242,6 +256,7 @@ namespace Square.Models
             toStringOutput.Add($"this.PickupDetails = {(this.PickupDetails == null ? "null" : this.PickupDetails.ToString())}");
             toStringOutput.Add($"this.ShipmentDetails = {(this.ShipmentDetails == null ? "null" : this.ShipmentDetails.ToString())}");
             toStringOutput.Add($"this.DeliveryDetails = {(this.DeliveryDetails == null ? "null" : this.DeliveryDetails.ToString())}");
+            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
         }
 
         /// <summary>
@@ -259,7 +274,8 @@ namespace Square.Models
                 .Metadata(this.Metadata)
                 .PickupDetails(this.PickupDetails)
                 .ShipmentDetails(this.ShipmentDetails)
-                .DeliveryDetails(this.DeliveryDetails);
+                .DeliveryDetails(this.DeliveryDetails)
+                .Version(this.Version);
             return builder;
         }
 
@@ -283,6 +299,7 @@ namespace Square.Models
             private Models.FulfillmentPickupDetails pickupDetails;
             private Models.FulfillmentShipmentDetails shipmentDetails;
             private Models.FulfillmentDeliveryDetails deliveryDetails;
+            private int? version;
 
              /// <summary>
              /// Uid.
@@ -385,6 +402,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Version.
+             /// </summary>
+             /// <param name="version"> version. </param>
+             /// <returns> Builder. </returns>
+            public Builder Version(int? version)
+            {
+                this.version = version;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -417,7 +445,8 @@ namespace Square.Models
                     this.metadata,
                     this.pickupDetails,
                     this.shipmentDetails,
-                    this.deliveryDetails);
+                    this.deliveryDetails,
+                    this.version);
             }
         }
     }

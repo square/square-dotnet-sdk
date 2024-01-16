@@ -74,7 +74,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Creates an order-related custom attribute definition.  Use this endpoint to.
@@ -109,7 +109,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Deletes an order-related [custom attribute definition]($m/CustomAttributeDefinition) from a Square seller account.
@@ -139,7 +139,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("key", key))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Retrieves an order-related [custom attribute definition]($m/CustomAttributeDefinition) from a Square seller account.
@@ -178,7 +178,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("version", version))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Updates an order-related custom attribute definition for a Square seller account.
@@ -214,7 +214,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Deletes order [custom attributes]($m/CustomAttribute) as a bulk operation.
@@ -263,7 +263,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Creates or updates order [custom attributes]($m/CustomAttribute) as a bulk operation.
@@ -312,7 +312,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Lists the [custom attributes]($m/CustomAttribute) associated with an order.
@@ -370,7 +370,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("with_definitions", (withDefinitions != null) ? withDefinitions : false))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Deletes a [custom attribute]($m/CustomAttribute) associated with a customer profile.
@@ -409,7 +409,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("custom_attribute_key", customAttributeKey))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Retrieves a [custom attribute]($m/CustomAttribute) associated with an order.
@@ -462,7 +462,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("with_definition", (withDefinition != null) ? withDefinition : false))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Creates or updates a [custom attribute]($m/CustomAttribute) for an order.
@@ -513,6 +513,6 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
     }
 }

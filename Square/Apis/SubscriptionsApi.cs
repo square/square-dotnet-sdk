@@ -67,7 +67,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Schedules a plan variation change for all active subscriptions under a given plan.
@@ -98,7 +98,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Searches for subscriptions.
@@ -149,7 +149,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Retrieves a specific subscription.
@@ -182,7 +182,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("include", include))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Updates a subscription by modifying or clearing `subscription` field values.
@@ -218,7 +218,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Deletes a scheduled action for a subscription.
@@ -251,7 +251,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("action_id", actionId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Changes the [billing anchor date](https://developer.squareup.com/docs/subscriptions-api/subscription-billing#billing-dates).
@@ -287,7 +287,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Schedules a `CANCEL` action to cancel an active subscription. This .
@@ -319,7 +319,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("subscription_id", subscriptionId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Lists all [events](https://developer.squareup.com/docs/subscriptions-api/actions-events) for a specific subscription.
@@ -357,7 +357,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Schedules a `PAUSE` action to pause an active subscription.
@@ -391,7 +391,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Schedules a `RESUME` action to resume a paused or a deactivated subscription.
@@ -425,7 +425,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Schedules a `SWAP_PLAN` action to swap a subscription plan variation in an existing subscription. .
@@ -461,6 +461,6 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
     }
 }

@@ -97,7 +97,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Refunds a payment. You can refund the entire payment amount or a.
@@ -132,7 +132,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Retrieves a specific refund using the `refund_id`.
@@ -160,6 +160,6 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("refund_id", refundId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
     }
 }

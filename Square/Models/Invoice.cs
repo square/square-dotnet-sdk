@@ -45,6 +45,7 @@ namespace Square.Models
         /// <param name="saleOrServiceDate">sale_or_service_date.</param>
         /// <param name="paymentConditions">payment_conditions.</param>
         /// <param name="storePaymentMethodEnabled">store_payment_method_enabled.</param>
+        /// <param name="attachments">attachments.</param>
         public Invoice(
             string id = null,
             int? version = null,
@@ -68,7 +69,8 @@ namespace Square.Models
             string subscriptionId = null,
             string saleOrServiceDate = null,
             string paymentConditions = null,
-            bool? storePaymentMethodEnabled = null)
+            bool? storePaymentMethodEnabled = null,
+            IList<Models.InvoiceAttachment> attachments = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -163,6 +165,7 @@ namespace Square.Models
                 this.StorePaymentMethodEnabled = storePaymentMethodEnabled;
             }
 
+            this.Attachments = attachments;
         }
         internal Invoice(Dictionary<string, bool> shouldSerialize,
             string id = null,
@@ -187,7 +190,8 @@ namespace Square.Models
             string subscriptionId = null,
             string saleOrServiceDate = null,
             string paymentConditions = null,
-            bool? storePaymentMethodEnabled = null)
+            bool? storePaymentMethodEnabled = null,
+            IList<Models.InvoiceAttachment> attachments = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -213,6 +217,7 @@ namespace Square.Models
             SaleOrServiceDate = saleOrServiceDate;
             PaymentConditions = paymentConditions;
             StorePaymentMethodEnabled = storePaymentMethodEnabled;
+            Attachments = attachments;
         }
 
         /// <summary>
@@ -400,6 +405,13 @@ namespace Square.Models
         [JsonProperty("store_payment_method_enabled")]
         public bool? StorePaymentMethodEnabled { get; }
 
+        /// <summary>
+        /// Metadata about the attachments on the invoice. Invoice attachments are managed using the
+        /// [CreateInvoiceAttachment](api-endpoint:Invoices-CreateInvoiceAttachment) and [DeleteInvoiceAttachment](api-endpoint:Invoices-DeleteInvoiceAttachment) endpoints.
+        /// </summary>
+        [JsonProperty("attachments", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Models.InvoiceAttachment> Attachments { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -543,20 +555,21 @@ namespace Square.Models
                 ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
                 ((this.SaleOrServiceDate == null && other.SaleOrServiceDate == null) || (this.SaleOrServiceDate?.Equals(other.SaleOrServiceDate) == true)) &&
                 ((this.PaymentConditions == null && other.PaymentConditions == null) || (this.PaymentConditions?.Equals(other.PaymentConditions) == true)) &&
-                ((this.StorePaymentMethodEnabled == null && other.StorePaymentMethodEnabled == null) || (this.StorePaymentMethodEnabled?.Equals(other.StorePaymentMethodEnabled) == true));
+                ((this.StorePaymentMethodEnabled == null && other.StorePaymentMethodEnabled == null) || (this.StorePaymentMethodEnabled?.Equals(other.StorePaymentMethodEnabled) == true)) &&
+                ((this.Attachments == null && other.Attachments == null) || (this.Attachments?.Equals(other.Attachments) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1679181268;
+            int hashCode = 1120130703;
             hashCode = HashCode.Combine(this.Id, this.Version, this.LocationId, this.OrderId, this.PrimaryRecipient, this.PaymentRequests, this.DeliveryMethod);
 
             hashCode = HashCode.Combine(hashCode, this.InvoiceNumber, this.Title, this.Description, this.ScheduledAt, this.PublicUrl, this.NextPaymentAmountMoney, this.Status);
 
             hashCode = HashCode.Combine(hashCode, this.Timezone, this.CreatedAt, this.UpdatedAt, this.AcceptedPaymentMethods, this.CustomFields, this.SubscriptionId, this.SaleOrServiceDate);
 
-            hashCode = HashCode.Combine(hashCode, this.PaymentConditions, this.StorePaymentMethodEnabled);
+            hashCode = HashCode.Combine(hashCode, this.PaymentConditions, this.StorePaymentMethodEnabled, this.Attachments);
 
             return hashCode;
         }
@@ -589,6 +602,7 @@ namespace Square.Models
             toStringOutput.Add($"this.SaleOrServiceDate = {(this.SaleOrServiceDate == null ? "null" : this.SaleOrServiceDate)}");
             toStringOutput.Add($"this.PaymentConditions = {(this.PaymentConditions == null ? "null" : this.PaymentConditions)}");
             toStringOutput.Add($"this.StorePaymentMethodEnabled = {(this.StorePaymentMethodEnabled == null ? "null" : this.StorePaymentMethodEnabled.ToString())}");
+            toStringOutput.Add($"this.Attachments = {(this.Attachments == null ? "null" : $"[{string.Join(", ", this.Attachments)} ]")}");
         }
 
         /// <summary>
@@ -620,7 +634,8 @@ namespace Square.Models
                 .SubscriptionId(this.SubscriptionId)
                 .SaleOrServiceDate(this.SaleOrServiceDate)
                 .PaymentConditions(this.PaymentConditions)
-                .StorePaymentMethodEnabled(this.StorePaymentMethodEnabled);
+                .StorePaymentMethodEnabled(this.StorePaymentMethodEnabled)
+                .Attachments(this.Attachments);
             return builder;
         }
 
@@ -667,6 +682,7 @@ namespace Square.Models
             private string saleOrServiceDate;
             private string paymentConditions;
             private bool? storePaymentMethodEnabled;
+            private IList<Models.InvoiceAttachment> attachments;
 
              /// <summary>
              /// Id.
@@ -932,6 +948,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Attachments.
+             /// </summary>
+             /// <param name="attachments"> attachments. </param>
+             /// <returns> Builder. </returns>
+            public Builder Attachments(IList<Models.InvoiceAttachment> attachments)
+            {
+                this.attachments = attachments;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -1050,7 +1077,8 @@ namespace Square.Models
                     this.subscriptionId,
                     this.saleOrServiceDate,
                     this.paymentConditions,
-                    this.storePaymentMethodEnabled);
+                    this.storePaymentMethodEnabled,
+                    this.attachments);
             }
         }
     }

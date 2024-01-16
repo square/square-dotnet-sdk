@@ -16,6 +16,8 @@ IInvoicesApi invoicesApi = client.InvoicesApi;
 * [Delete Invoice](../../doc/api/invoices.md#delete-invoice)
 * [Get Invoice](../../doc/api/invoices.md#get-invoice)
 * [Update Invoice](../../doc/api/invoices.md#update-invoice)
+* [Create Invoice Attachment](../../doc/api/invoices.md#create-invoice-attachment)
+* [Delete Invoice Attachment](../../doc/api/invoices.md#delete-invoice-attachment)
 * [Cancel Invoice](../../doc/api/invoices.md#cancel-invoice)
 * [Publish Invoice](../../doc/api/invoices.md#publish-invoice)
 
@@ -352,6 +354,100 @@ try
     UpdateInvoiceResponse result = await invoicesApi.UpdateInvoiceAsync(
         invoiceId,
         body
+    );
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Create Invoice Attachment
+
+Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads
+with a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file
+in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
+
+Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices
+in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+
+```csharp
+CreateInvoiceAttachmentAsync(
+    string invoiceId,
+    Models.CreateInvoiceAttachmentRequest request = null,
+    FileStreamInfo imageFile = null)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `invoiceId` | `string` | Template, Required | The ID of the [invoice](entity:Invoice) to attach the file to. |
+| `request` | [`CreateInvoiceAttachmentRequest`](../../doc/models/create-invoice-attachment-request.md) | Form (JSON-Encoded), Optional | Represents a [CreateInvoiceAttachment](../../doc/api/invoices.md#create-invoice-attachment) request. |
+| `imageFile` | `FileStreamInfo` | Form, Optional | - |
+
+## Response Type
+
+[`Task<Models.CreateInvoiceAttachmentResponse>`](../../doc/models/create-invoice-attachment-response.md)
+
+## Example Usage
+
+```csharp
+string invoiceId = "invoice_id0";
+Models.CreateInvoiceAttachmentRequest request = new Models.CreateInvoiceAttachmentRequest.Builder()
+.IdempotencyKey("ae5e84f9-4742-4fc1-ba12-a3ce3748f1c3")
+.Description("Service contract")
+.Build();
+
+try
+{
+    CreateInvoiceAttachmentResponse result = await invoicesApi.CreateInvoiceAttachmentAsync(
+        invoiceId,
+        request
+    );
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Delete Invoice Attachment
+
+Removes an attachment from an invoice and permanently deletes the file. Attachments can be removed only
+from invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+
+```csharp
+DeleteInvoiceAttachmentAsync(
+    string invoiceId,
+    string attachmentId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `invoiceId` | `string` | Template, Required | The ID of the [invoice](entity:Invoice) to delete the attachment from. |
+| `attachmentId` | `string` | Template, Required | The ID of the [attachment](entity:InvoiceAttachment) to delete. |
+
+## Response Type
+
+[`Task<Models.DeleteInvoiceAttachmentResponse>`](../../doc/models/delete-invoice-attachment-response.md)
+
+## Example Usage
+
+```csharp
+string invoiceId = "invoice_id0";
+string attachmentId = "attachment_id6";
+try
+{
+    DeleteInvoiceAttachmentResponse result = await invoicesApi.DeleteInvoiceAttachmentAsync(
+        invoiceId,
+        attachmentId
     );
 }
 catch (ApiException e)

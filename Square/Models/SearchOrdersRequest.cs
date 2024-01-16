@@ -43,7 +43,6 @@ namespace Square.Models
         /// <summary>
         /// The location IDs for the orders to query. All locations must belong to
         /// the same merchant.
-        /// Min: 1 location ID.
         /// Max: 10 location IDs.
         /// </summary>
         [JsonProperty("location_ids", NullValueHandling = NullValueHandling.Ignore)]
@@ -64,9 +63,9 @@ namespace Square.Models
         public Models.SearchOrdersQuery Query { get; }
 
         /// <summary>
-        /// The maximum number of results to be returned in a single page. It is
-        /// possible to receive fewer results than the specified limit on a given page.
+        /// The maximum number of results to be returned in a single page.
         /// Default: `500`
+        /// Max: `1000`
         /// </summary>
         [JsonProperty("limit", NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; }

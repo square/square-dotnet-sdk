@@ -77,7 +77,7 @@ namespace Square.Apis
                       _result.ForEach(model => model.ContextSetter(_context));
                       return _result;
                   }))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Provides comprehensive information for a single online store order, including the order's history.
@@ -112,7 +112,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("order_id", orderId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Updates the details of an online store order. Every update you perform on an order corresponds to one of three actions:.
@@ -153,7 +153,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Provides summary information for all payments taken for a given.
@@ -235,7 +235,7 @@ namespace Square.Apis
                       _result.ForEach(model => model.ContextSetter(_context));
                       return _result;
                   }))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Provides comprehensive information for a single payment.
@@ -270,7 +270,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("payment_id", paymentId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Provides the details for all refunds initiated by a merchant or any of the merchant's mobile staff during a date range. Date ranges cannot exceed one year in length.
@@ -329,7 +329,7 @@ namespace Square.Apis
                       _result.ForEach(model => model.ContextSetter(_context));
                       return _result;
                   }))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Issues a refund for a previously processed payment. You must issue.
@@ -383,7 +383,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Provides summary information for all deposits and withdrawals.
@@ -455,7 +455,7 @@ namespace Square.Apis
                       _result.ForEach(model => model.ContextSetter(_context));
                       return _result;
                   }))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Provides comprehensive information for a single settlement.
@@ -516,6 +516,6 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("settlement_id", settlementId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
     }
 }

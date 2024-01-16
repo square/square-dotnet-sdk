@@ -47,7 +47,7 @@ namespace Square.Models
 
         /// <summary>
         /// A list of customer IDs to filter by.
-        /// Max: 10 customer IDs.
+        /// Max: 10 customer ids.
         /// </summary>
         [JsonProperty("customer_ids")]
         public IList<string> CustomerIds { get; }

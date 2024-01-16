@@ -28,6 +28,7 @@ namespace Square.Models
         /// <param name="returnServiceCharges">return_service_charges.</param>
         /// <param name="returnTaxes">return_taxes.</param>
         /// <param name="returnDiscounts">return_discounts.</param>
+        /// <param name="returnTips">return_tips.</param>
         /// <param name="roundingAdjustment">rounding_adjustment.</param>
         /// <param name="returnAmounts">return_amounts.</param>
         public OrderReturn(
@@ -37,6 +38,7 @@ namespace Square.Models
             IList<Models.OrderReturnServiceCharge> returnServiceCharges = null,
             IList<Models.OrderReturnTax> returnTaxes = null,
             IList<Models.OrderReturnDiscount> returnDiscounts = null,
+            IList<Models.OrderReturnTip> returnTips = null,
             Models.OrderRoundingAdjustment roundingAdjustment = null,
             Models.OrderMoneyAmounts returnAmounts = null)
         {
@@ -45,8 +47,8 @@ namespace Square.Models
                 { "uid", false },
                 { "source_order_id", false },
                 { "return_line_items", false },
-                { "return_taxes", false },
-                { "return_discounts", false }
+                { "return_service_charges", false },
+                { "return_tips", false }
             };
 
             if (uid != null)
@@ -67,17 +69,18 @@ namespace Square.Models
                 this.ReturnLineItems = returnLineItems;
             }
 
-            this.ReturnServiceCharges = returnServiceCharges;
-            if (returnTaxes != null)
+            if (returnServiceCharges != null)
             {
-                shouldSerialize["return_taxes"] = true;
-                this.ReturnTaxes = returnTaxes;
+                shouldSerialize["return_service_charges"] = true;
+                this.ReturnServiceCharges = returnServiceCharges;
             }
 
-            if (returnDiscounts != null)
+            this.ReturnTaxes = returnTaxes;
+            this.ReturnDiscounts = returnDiscounts;
+            if (returnTips != null)
             {
-                shouldSerialize["return_discounts"] = true;
-                this.ReturnDiscounts = returnDiscounts;
+                shouldSerialize["return_tips"] = true;
+                this.ReturnTips = returnTips;
             }
 
             this.RoundingAdjustment = roundingAdjustment;
@@ -90,6 +93,7 @@ namespace Square.Models
             IList<Models.OrderReturnServiceCharge> returnServiceCharges = null,
             IList<Models.OrderReturnTax> returnTaxes = null,
             IList<Models.OrderReturnDiscount> returnDiscounts = null,
+            IList<Models.OrderReturnTip> returnTips = null,
             Models.OrderRoundingAdjustment roundingAdjustment = null,
             Models.OrderMoneyAmounts returnAmounts = null)
         {
@@ -100,6 +104,7 @@ namespace Square.Models
             ReturnServiceCharges = returnServiceCharges;
             ReturnTaxes = returnTaxes;
             ReturnDiscounts = returnDiscounts;
+            ReturnTips = returnTips;
             RoundingAdjustment = roundingAdjustment;
             ReturnAmounts = returnAmounts;
         }
@@ -126,7 +131,7 @@ namespace Square.Models
         /// <summary>
         /// A collection of service charges that are being returned.
         /// </summary>
-        [JsonProperty("return_service_charges", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("return_service_charges")]
         public IList<Models.OrderReturnServiceCharge> ReturnServiceCharges { get; }
 
         /// <summary>
@@ -134,7 +139,7 @@ namespace Square.Models
         /// applied tax amount to be returned. The taxes must reference a top-level tax ID from the source
         /// order.
         /// </summary>
-        [JsonProperty("return_taxes")]
+        [JsonProperty("return_taxes", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturnTax> ReturnTaxes { get; }
 
         /// <summary>
@@ -142,8 +147,14 @@ namespace Square.Models
         /// applied discount amount to be returned. The discounts must reference a top-level discount ID
         /// from the source order.
         /// </summary>
-        [JsonProperty("return_discounts")]
+        [JsonProperty("return_discounts", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Models.OrderReturnDiscount> ReturnDiscounts { get; }
+
+        /// <summary>
+        /// A collection of references to tips being returned for an order.
+        /// </summary>
+        [JsonProperty("return_tips")]
+        public IList<Models.OrderReturnTip> ReturnTips { get; }
 
         /// <summary>
         /// A rounding adjustment of the money being returned. Commonly used to apply cash rounding
@@ -199,18 +210,18 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeReturnTaxes()
+        public bool ShouldSerializeReturnServiceCharges()
         {
-            return this.shouldSerialize["return_taxes"];
+            return this.shouldSerialize["return_service_charges"];
         }
 
         /// <summary>
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
-        public bool ShouldSerializeReturnDiscounts()
+        public bool ShouldSerializeReturnTips()
         {
-            return this.shouldSerialize["return_discounts"];
+            return this.shouldSerialize["return_tips"];
         }
 
         /// <inheritdoc/>
@@ -231,6 +242,7 @@ namespace Square.Models
                 ((this.ReturnServiceCharges == null && other.ReturnServiceCharges == null) || (this.ReturnServiceCharges?.Equals(other.ReturnServiceCharges) == true)) &&
                 ((this.ReturnTaxes == null && other.ReturnTaxes == null) || (this.ReturnTaxes?.Equals(other.ReturnTaxes) == true)) &&
                 ((this.ReturnDiscounts == null && other.ReturnDiscounts == null) || (this.ReturnDiscounts?.Equals(other.ReturnDiscounts) == true)) &&
+                ((this.ReturnTips == null && other.ReturnTips == null) || (this.ReturnTips?.Equals(other.ReturnTips) == true)) &&
                 ((this.RoundingAdjustment == null && other.RoundingAdjustment == null) || (this.RoundingAdjustment?.Equals(other.RoundingAdjustment) == true)) &&
                 ((this.ReturnAmounts == null && other.ReturnAmounts == null) || (this.ReturnAmounts?.Equals(other.ReturnAmounts) == true));
         }
@@ -238,10 +250,10 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2075174143;
-            hashCode = HashCode.Combine(this.Uid, this.SourceOrderId, this.ReturnLineItems, this.ReturnServiceCharges, this.ReturnTaxes, this.ReturnDiscounts, this.RoundingAdjustment);
+            int hashCode = 1922557900;
+            hashCode = HashCode.Combine(this.Uid, this.SourceOrderId, this.ReturnLineItems, this.ReturnServiceCharges, this.ReturnTaxes, this.ReturnDiscounts, this.ReturnTips);
 
-            hashCode = HashCode.Combine(hashCode, this.ReturnAmounts);
+            hashCode = HashCode.Combine(hashCode, this.RoundingAdjustment, this.ReturnAmounts);
 
             return hashCode;
         }
@@ -257,6 +269,7 @@ namespace Square.Models
             toStringOutput.Add($"this.ReturnServiceCharges = {(this.ReturnServiceCharges == null ? "null" : $"[{string.Join(", ", this.ReturnServiceCharges)} ]")}");
             toStringOutput.Add($"this.ReturnTaxes = {(this.ReturnTaxes == null ? "null" : $"[{string.Join(", ", this.ReturnTaxes)} ]")}");
             toStringOutput.Add($"this.ReturnDiscounts = {(this.ReturnDiscounts == null ? "null" : $"[{string.Join(", ", this.ReturnDiscounts)} ]")}");
+            toStringOutput.Add($"this.ReturnTips = {(this.ReturnTips == null ? "null" : $"[{string.Join(", ", this.ReturnTips)} ]")}");
             toStringOutput.Add($"this.RoundingAdjustment = {(this.RoundingAdjustment == null ? "null" : this.RoundingAdjustment.ToString())}");
             toStringOutput.Add($"this.ReturnAmounts = {(this.ReturnAmounts == null ? "null" : this.ReturnAmounts.ToString())}");
         }
@@ -274,6 +287,7 @@ namespace Square.Models
                 .ReturnServiceCharges(this.ReturnServiceCharges)
                 .ReturnTaxes(this.ReturnTaxes)
                 .ReturnDiscounts(this.ReturnDiscounts)
+                .ReturnTips(this.ReturnTips)
                 .RoundingAdjustment(this.RoundingAdjustment)
                 .ReturnAmounts(this.ReturnAmounts);
             return builder;
@@ -289,8 +303,8 @@ namespace Square.Models
                 { "uid", false },
                 { "source_order_id", false },
                 { "return_line_items", false },
-                { "return_taxes", false },
-                { "return_discounts", false },
+                { "return_service_charges", false },
+                { "return_tips", false },
             };
 
             private string uid;
@@ -299,6 +313,7 @@ namespace Square.Models
             private IList<Models.OrderReturnServiceCharge> returnServiceCharges;
             private IList<Models.OrderReturnTax> returnTaxes;
             private IList<Models.OrderReturnDiscount> returnDiscounts;
+            private IList<Models.OrderReturnTip> returnTips;
             private Models.OrderRoundingAdjustment roundingAdjustment;
             private Models.OrderMoneyAmounts returnAmounts;
 
@@ -345,6 +360,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReturnServiceCharges(IList<Models.OrderReturnServiceCharge> returnServiceCharges)
             {
+                shouldSerialize["return_service_charges"] = true;
                 this.returnServiceCharges = returnServiceCharges;
                 return this;
             }
@@ -356,7 +372,6 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReturnTaxes(IList<Models.OrderReturnTax> returnTaxes)
             {
-                shouldSerialize["return_taxes"] = true;
                 this.returnTaxes = returnTaxes;
                 return this;
             }
@@ -368,8 +383,19 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder ReturnDiscounts(IList<Models.OrderReturnDiscount> returnDiscounts)
             {
-                shouldSerialize["return_discounts"] = true;
                 this.returnDiscounts = returnDiscounts;
+                return this;
+            }
+
+             /// <summary>
+             /// ReturnTips.
+             /// </summary>
+             /// <param name="returnTips"> returnTips. </param>
+             /// <returns> Builder. </returns>
+            public Builder ReturnTips(IList<Models.OrderReturnTip> returnTips)
+            {
+                shouldSerialize["return_tips"] = true;
+                this.returnTips = returnTips;
                 return this;
             }
 
@@ -422,17 +448,17 @@ namespace Square.Models
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
-            public void UnsetReturnTaxes()
+            public void UnsetReturnServiceCharges()
             {
-                this.shouldSerialize["return_taxes"] = false;
+                this.shouldSerialize["return_service_charges"] = false;
             }
 
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
-            public void UnsetReturnDiscounts()
+            public void UnsetReturnTips()
             {
-                this.shouldSerialize["return_discounts"] = false;
+                this.shouldSerialize["return_tips"] = false;
             }
 
 
@@ -449,6 +475,7 @@ namespace Square.Models
                     this.returnServiceCharges,
                     this.returnTaxes,
                     this.returnDiscounts,
+                    this.returnTips,
                     this.roundingAdjustment,
                     this.returnAmounts);
             }

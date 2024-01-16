@@ -17,6 +17,7 @@ The set of line items, service charges, taxes, discounts, tips, and other items 
 | `ReturnServiceCharges` | [`IList<OrderReturnServiceCharge>`](../../doc/models/order-return-service-charge.md) | Optional | A collection of service charges that are being returned. |
 | `ReturnTaxes` | [`IList<OrderReturnTax>`](../../doc/models/order-return-tax.md) | Optional | A collection of references to taxes being returned for an order, including the total<br>applied tax amount to be returned. The taxes must reference a top-level tax ID from the source<br>order. |
 | `ReturnDiscounts` | [`IList<OrderReturnDiscount>`](../../doc/models/order-return-discount.md) | Optional | A collection of references to discounts being returned for an order, including the total<br>applied discount amount to be returned. The discounts must reference a top-level discount ID<br>from the source order. |
+| `ReturnTips` | [`IList<OrderReturnTip>`](../../doc/models/order-return-tip.md) | Optional | A collection of references to tips being returned for an order. |
 | `RoundingAdjustment` | [`OrderRoundingAdjustment`](../../doc/models/order-rounding-adjustment.md) | Optional | A rounding adjustment of the money being returned. Commonly used to apply cash rounding<br>when the minimum unit of the account is smaller than the lowest physical denomination of the currency. |
 | `ReturnAmounts` | [`OrderMoneyAmounts`](../../doc/models/order-money-amounts.md) | Optional | A collection of various money amounts. |
 

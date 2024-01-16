@@ -44,6 +44,7 @@ namespace Square.Models
         /// <param name="channels">channels.</param>
         /// <param name="isArchived">is_archived.</param>
         /// <param name="ecomSeoData">ecom_seo_data.</param>
+        /// <param name="foodAndBeverageDetails">food_and_beverage_details.</param>
         /// <param name="reportingCategory">reporting_category.</param>
         public CatalogItem(
             string name = null,
@@ -68,6 +69,7 @@ namespace Square.Models
             IList<string> channels = null,
             bool? isArchived = null,
             Models.CatalogEcomSeoData ecomSeoData = null,
+            Models.CatalogItemFoodAndBeverageDetails foodAndBeverageDetails = null,
             Models.CatalogObjectCategory reportingCategory = null)
         {
             shouldSerialize = new Dictionary<string, bool>
@@ -210,6 +212,7 @@ namespace Square.Models
             }
 
             this.EcomSeoData = ecomSeoData;
+            this.FoodAndBeverageDetails = foodAndBeverageDetails;
             this.ReportingCategory = reportingCategory;
         }
         internal CatalogItem(Dictionary<string, bool> shouldSerialize,
@@ -235,6 +238,7 @@ namespace Square.Models
             IList<string> channels = null,
             bool? isArchived = null,
             Models.CatalogEcomSeoData ecomSeoData = null,
+            Models.CatalogItemFoodAndBeverageDetails foodAndBeverageDetails = null,
             Models.CatalogObjectCategory reportingCategory = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -260,6 +264,7 @@ namespace Square.Models
             Channels = channels;
             IsArchived = isArchived;
             EcomSeoData = ecomSeoData;
+            FoodAndBeverageDetails = foodAndBeverageDetails;
             ReportingCategory = reportingCategory;
         }
 
@@ -437,6 +442,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("ecom_seo_data", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CatalogEcomSeoData EcomSeoData { get; }
+
+        /// <summary>
+        /// The food and beverage-specific details of a `FOOD_AND_BEV` item.
+        /// </summary>
+        [JsonProperty("food_and_beverage_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.CatalogItemFoodAndBeverageDetails FoodAndBeverageDetails { get; }
 
         /// <summary>
         /// A category that can be assigned to an item or a parent category that can be assigned
@@ -661,20 +672,21 @@ namespace Square.Models
                 ((this.Channels == null && other.Channels == null) || (this.Channels?.Equals(other.Channels) == true)) &&
                 ((this.IsArchived == null && other.IsArchived == null) || (this.IsArchived?.Equals(other.IsArchived) == true)) &&
                 ((this.EcomSeoData == null && other.EcomSeoData == null) || (this.EcomSeoData?.Equals(other.EcomSeoData) == true)) &&
+                ((this.FoodAndBeverageDetails == null && other.FoodAndBeverageDetails == null) || (this.FoodAndBeverageDetails?.Equals(other.FoodAndBeverageDetails) == true)) &&
                 ((this.ReportingCategory == null && other.ReportingCategory == null) || (this.ReportingCategory?.Equals(other.ReportingCategory) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1153792050;
+            int hashCode = -32689781;
             hashCode = HashCode.Combine(this.Name, this.Description, this.Abbreviation, this.LabelColor, this.AvailableOnline, this.AvailableForPickup, this.AvailableElectronically);
 
             hashCode = HashCode.Combine(hashCode, this.CategoryId, this.TaxIds, this.ModifierListInfo, this.Variations, this.ProductType, this.SkipModifierScreen, this.ItemOptions);
 
             hashCode = HashCode.Combine(hashCode, this.ImageIds, this.SortName, this.Categories, this.DescriptionHtml, this.DescriptionPlaintext, this.Channels, this.IsArchived);
 
-            hashCode = HashCode.Combine(hashCode, this.EcomSeoData, this.ReportingCategory);
+            hashCode = HashCode.Combine(hashCode, this.EcomSeoData, this.FoodAndBeverageDetails, this.ReportingCategory);
 
             return hashCode;
         }
@@ -706,6 +718,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Channels = {(this.Channels == null ? "null" : $"[{string.Join(", ", this.Channels)} ]")}");
             toStringOutput.Add($"this.IsArchived = {(this.IsArchived == null ? "null" : this.IsArchived.ToString())}");
             toStringOutput.Add($"this.EcomSeoData = {(this.EcomSeoData == null ? "null" : this.EcomSeoData.ToString())}");
+            toStringOutput.Add($"this.FoodAndBeverageDetails = {(this.FoodAndBeverageDetails == null ? "null" : this.FoodAndBeverageDetails.ToString())}");
             toStringOutput.Add($"this.ReportingCategory = {(this.ReportingCategory == null ? "null" : this.ReportingCategory.ToString())}");
         }
 
@@ -738,6 +751,7 @@ namespace Square.Models
                 .Channels(this.Channels)
                 .IsArchived(this.IsArchived)
                 .EcomSeoData(this.EcomSeoData)
+                .FoodAndBeverageDetails(this.FoodAndBeverageDetails)
                 .ReportingCategory(this.ReportingCategory);
             return builder;
         }
@@ -792,6 +806,7 @@ namespace Square.Models
             private IList<string> channels;
             private bool? isArchived;
             private Models.CatalogEcomSeoData ecomSeoData;
+            private Models.CatalogItemFoodAndBeverageDetails foodAndBeverageDetails;
             private Models.CatalogObjectCategory reportingCategory;
 
              /// <summary>
@@ -1056,6 +1071,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// FoodAndBeverageDetails.
+             /// </summary>
+             /// <param name="foodAndBeverageDetails"> foodAndBeverageDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder FoodAndBeverageDetails(Models.CatalogItemFoodAndBeverageDetails foodAndBeverageDetails)
+            {
+                this.foodAndBeverageDetails = foodAndBeverageDetails;
+                return this;
+            }
+
+             /// <summary>
              /// ReportingCategory.
              /// </summary>
              /// <param name="reportingCategory"> reportingCategory. </param>
@@ -1248,6 +1274,7 @@ namespace Square.Models
                     this.channels,
                     this.isArchived,
                     this.ecomSeoData,
+                    this.foodAndBeverageDetails,
                     this.reportingCategory);
             }
         }

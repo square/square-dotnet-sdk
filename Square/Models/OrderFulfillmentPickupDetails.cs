@@ -180,19 +180,18 @@ namespace Square.Models
 
         /// <summary>
         /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
-        /// indicating when this fulfillment expires if it is not accepted. The timestamp must be in RFC 3339 format
-        /// (for example, "2016-09-04T23:59:33.123Z"). The expiration time can only be set up to 7 days in the future.
-        /// If `expires_at` is not set, this pickup fulfillment is automatically accepted when
-        /// placed.
+        /// indicating when this fulfillment expires if it is not marked in progress. The timestamp must be
+        /// in RFC 3339 format (for example, "2016-09-04T23:59:33.123Z"). The expiration time can only be set
+        /// up to 7 days in the future. If `expires_at` is not set, any new payments attached to the order
+        /// are automatically completed.
         /// </summary>
         [JsonProperty("expires_at")]
         public string ExpiresAt { get; }
 
         /// <summary>
-        /// The duration of time after which an open and accepted pickup fulfillment
-        /// is automatically moved to the `COMPLETED` state. The duration must be in RFC 3339
-        /// format (for example, "P1W3D").
-        /// If not set, this pickup fulfillment remains accepted until it is canceled or completed.
+        /// The duration of time after which an in progress pickup fulfillment is automatically moved
+        /// to the `COMPLETED` state. The duration must be in RFC 3339 format (for example, "P1W3D").
+        /// If not set, this pickup fulfillment remains in progress until it is canceled or completed.
         /// </summary>
         [JsonProperty("auto_complete_duration")]
         public string AutoCompleteDuration { get; }
@@ -245,7 +244,7 @@ namespace Square.Models
 
         /// <summary>
         /// The [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates)
-        /// indicating when the fulfillment was accepted. The timestamp must be in RFC 3339 format
+        /// indicating when the fulfillment was marked in progress. The timestamp must be in RFC 3339 format
         /// (for example, "2016-09-04T23:59:33.123Z").
         /// </summary>
         [JsonProperty("accepted_at", NullValueHandling = NullValueHandling.Ignore)]
