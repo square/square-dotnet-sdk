@@ -33,6 +33,7 @@ A [CatalogObject](../../doc/models/catalog-object.md) instance of the `ITEM` typ
 | `Channels` | `IList<string>` | Optional | A list of IDs representing channels, such as a Square Online site, where the item can be made visible or available. |
 | `IsArchived` | `bool?` | Optional | Indicates whether this item is archived (`true`) or not (`false`). |
 | `EcomSeoData` | [`CatalogEcomSeoData`](../../doc/models/catalog-ecom-seo-data.md) | Optional | SEO data for for a seller's Square Online store. |
+| `FoodAndBeverageDetails` | [`CatalogItemFoodAndBeverageDetails`](../../doc/models/catalog-item-food-and-beverage-details.md) | Optional | The food and beverage-specific details of a `FOOD_AND_BEV` item. |
 | `ReportingCategory` | [`CatalogObjectCategory`](../../doc/models/catalog-object-category.md) | Optional | A category that can be assigned to an item or a parent category that can be assigned<br>to another category. For example, a clothing category can be assigned to a t-shirt item or<br>be made as the parent category to the pants category. |
 
 ## Example (as JSON)

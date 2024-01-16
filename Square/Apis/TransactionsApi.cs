@@ -84,7 +84,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("cursor", cursor))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Retrieves details for a single transaction.
@@ -119,7 +119,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("transaction_id", transactionId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge).
@@ -160,7 +160,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("transaction_id", transactionId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge).
@@ -201,6 +201,6 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("transaction_id", transactionId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
     }
 }

@@ -174,6 +174,64 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads.
+        /// with a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file.
+        /// in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
+        /// Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices.
+        /// in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to attach the file to..</param>
+        /// <param name="request">Optional parameter: Represents a [CreateInvoiceAttachment]($e/Invoices/CreateInvoiceAttachment) request..</param>
+        /// <param name="imageFile">Optional parameter: Example: .</param>
+        /// <returns>Returns the Models.CreateInvoiceAttachmentResponse response from the API call.</returns>
+        Models.CreateInvoiceAttachmentResponse CreateInvoiceAttachment(
+                string invoiceId,
+                Models.CreateInvoiceAttachmentRequest request = null,
+                FileStreamInfo imageFile = null);
+
+        /// <summary>
+        /// Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads.
+        /// with a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file.
+        /// in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
+        /// Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices.
+        /// in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to attach the file to..</param>
+        /// <param name="request">Optional parameter: Represents a [CreateInvoiceAttachment]($e/Invoices/CreateInvoiceAttachment) request..</param>
+        /// <param name="imageFile">Optional parameter: Example: .</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CreateInvoiceAttachmentResponse response from the API call.</returns>
+        Task<Models.CreateInvoiceAttachmentResponse> CreateInvoiceAttachmentAsync(
+                string invoiceId,
+                Models.CreateInvoiceAttachmentRequest request = null,
+                FileStreamInfo imageFile = null,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Removes an attachment from an invoice and permanently deletes the file. Attachments can be removed only.
+        /// from invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to delete the attachment from..</param>
+        /// <param name="attachmentId">Required parameter: The ID of the [attachment](entity:InvoiceAttachment) to delete..</param>
+        /// <returns>Returns the Models.DeleteInvoiceAttachmentResponse response from the API call.</returns>
+        Models.DeleteInvoiceAttachmentResponse DeleteInvoiceAttachment(
+                string invoiceId,
+                string attachmentId);
+
+        /// <summary>
+        /// Removes an attachment from an invoice and permanently deletes the file. Attachments can be removed only.
+        /// from invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to delete the attachment from..</param>
+        /// <param name="attachmentId">Required parameter: The ID of the [attachment](entity:InvoiceAttachment) to delete..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DeleteInvoiceAttachmentResponse response from the API call.</returns>
+        Task<Models.DeleteInvoiceAttachmentResponse> DeleteInvoiceAttachmentAsync(
+                string invoiceId,
+                string attachmentId,
+                CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Cancels an invoice. The seller cannot collect payments for .
         /// the canceled invoice.
         /// You cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.

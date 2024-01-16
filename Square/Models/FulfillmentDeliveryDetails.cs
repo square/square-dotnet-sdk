@@ -276,17 +276,17 @@ namespace Square.Models
 
         /// <summary>
         /// The duration of time it takes to prepare and deliver this fulfillment.
-        /// The timestamp must be in RFC 3339 format (for example, "P1W3D").
+        /// The duration must be in RFC 3339 format (for example, "P1W3D").
         /// </summary>
         [JsonProperty("prep_time_duration")]
         public string PrepTimeDuration { get; }
 
         /// <summary>
-        /// The time period after the `deliver_at` timestamp in which to deliver the order.
+        /// The time period after `deliver_at` in which to deliver the order.
         /// Applications can set this field when the fulfillment `state` is
         /// `PROPOSED`, `RESERVED`, or `PREPARED` (any time before the terminal state
         /// such as `COMPLETED`, `CANCELED`, and `FAILED`).
-        /// The timestamp must be in RFC 3339 format (for example, "P1W3D").
+        /// The duration must be in RFC 3339 format (for example, "P1W3D").
         /// </summary>
         [JsonProperty("delivery_window_duration")]
         public string DeliveryWindowDuration { get; }
@@ -367,9 +367,8 @@ namespace Square.Models
         public string CourierPickupAt { get; }
 
         /// <summary>
-        /// The period of time in which the order should be picked up by the courier after the
-        /// `courier_pickup_at` timestamp.
-        /// The time must be in RFC 3339 format (for example, "P1W3D").
+        /// The time period after `courier_pickup_at` in which the courier should pick up the order.
+        /// The duration must be in RFC 3339 format (for example, "P1W3D").
         /// </summary>
         [JsonProperty("courier_pickup_window_duration")]
         public string CourierPickupWindowDuration { get; }

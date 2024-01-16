@@ -82,7 +82,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("count", (count != null) ? count : false))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Creates a new customer for a business.
@@ -125,7 +125,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Searches the customer profiles associated with a Square account using one or more supported query filters.
@@ -166,12 +166,12 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
-        /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file. .
+        /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file.
         /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-        /// If included, the value must be set to the current version of the customer profile. .
+        /// If included, the value must be set to the current version of the customer profile.
         /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
@@ -183,9 +183,9 @@ namespace Square.Apis
             => CoreHelper.RunTask(DeleteCustomerAsync(customerId, version));
 
         /// <summary>
-        /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file. .
+        /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file.
         /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-        /// If included, the value must be set to the current version of the customer profile. .
+        /// If included, the value must be set to the current version of the customer profile.
         /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
@@ -205,7 +205,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("version", version))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Returns details for a single customer.
@@ -233,11 +233,11 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("customer_id", customerId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Updates a customer profile. This endpoint supports sparse updates, so only new or changed fields are required in the request.
-        /// To add or update a field, specify the new value. To remove a field, specify `null` and include the `X-Clear-Null` header set to `true`.
+        /// To add or update a field, specify the new value. To remove a field, specify `null`.
         /// (recommended) or specify an empty string (string fields only).
         /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
         /// If included, the value must be set to the current version of the customer profile.
@@ -254,7 +254,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Updates a customer profile. This endpoint supports sparse updates, so only new or changed fields are required in the request.
-        /// To add or update a field, specify the new value. To remove a field, specify `null` and include the `X-Clear-Null` header set to `true`.
+        /// To add or update a field, specify the new value. To remove a field, specify `null`.
         /// (recommended) or specify an empty string (string fields only).
         /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
         /// If included, the value must be set to the current version of the customer profile.
@@ -279,7 +279,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Adds a card on file to an existing customer.
@@ -321,7 +321,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Removes a card on file from a customer.
@@ -356,7 +356,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("card_id", cardId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Removes a group membership from a customer.
@@ -393,7 +393,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("group_id", groupId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Adds a group membership to a customer.
@@ -430,6 +430,6 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("group_id", groupId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
     }
 }

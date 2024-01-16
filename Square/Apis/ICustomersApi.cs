@@ -122,9 +122,9 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file. .
+        /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file.
         /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-        /// If included, the value must be set to the current version of the customer profile. .
+        /// If included, the value must be set to the current version of the customer profile.
         /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
@@ -135,9 +135,9 @@ namespace Square.Apis
                 long? version = null);
 
         /// <summary>
-        /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file. .
+        /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file.
         /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-        /// If included, the value must be set to the current version of the customer profile. .
+        /// If included, the value must be set to the current version of the customer profile.
         /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
@@ -169,7 +169,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Updates a customer profile. This endpoint supports sparse updates, so only new or changed fields are required in the request.
-        /// To add or update a field, specify the new value. To remove a field, specify `null` and include the `X-Clear-Null` header set to `true`.
+        /// To add or update a field, specify the new value. To remove a field, specify `null`.
         /// (recommended) or specify an empty string (string fields only).
         /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
         /// If included, the value must be set to the current version of the customer profile.
@@ -185,7 +185,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Updates a customer profile. This endpoint supports sparse updates, so only new or changed fields are required in the request.
-        /// To add or update a field, specify the new value. To remove a field, specify `null` and include the `X-Clear-Null` header set to `true`.
+        /// To add or update a field, specify the new value. To remove a field, specify `null`.
         /// (recommended) or specify an empty string (string fields only).
         /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
         /// If included, the value must be set to the current version of the customer profile.

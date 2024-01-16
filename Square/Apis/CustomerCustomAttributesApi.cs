@@ -69,7 +69,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("cursor", cursor))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Creates a customer-related [custom attribute definition]($m/CustomAttributeDefinition) for a Square seller account.
@@ -114,7 +114,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Deletes a customer-related [custom attribute definition]($m/CustomAttributeDefinition) from a Square seller account.
@@ -148,7 +148,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("key", key))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Retrieves a customer-related [custom attribute definition]($m/CustomAttributeDefinition) from a Square seller account.
@@ -187,7 +187,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("version", version))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Updates a customer-related [custom attribute definition]($m/CustomAttributeDefinition) for a Square seller account.
@@ -229,16 +229,16 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Creates or updates [custom attributes]($m/CustomAttribute) for customer profiles as a bulk operation.
         /// Use this endpoint to set the value of one or more custom attributes for one or more customer profiles.
         /// A custom attribute is based on a custom attribute definition in a Square seller account, which is.
         /// created using the [CreateCustomerCustomAttributeDefinition]($e/CustomerCustomAttributes/CreateCustomerCustomAttributeDefinition) endpoint.
-        /// This `BulkUpsertCustomerCustomAttributes` endpoint accepts a map of 1 to 25 individual upsert .
-        /// requests and returns a map of individual upsert responses. Each upsert request has a unique ID .
-        /// and provides a customer ID and custom attribute. Each upsert response is returned with the ID .
+        /// This `BulkUpsertCustomerCustomAttributes` endpoint accepts a map of 1 to 25 individual upsert.
+        /// requests and returns a map of individual upsert responses. Each upsert request has a unique ID.
+        /// and provides a customer ID and custom attribute. Each upsert response is returned with the ID.
         /// of the corresponding request.
         /// To create or update a custom attribute owned by another application, the `visibility` setting.
         /// must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
@@ -255,9 +255,9 @@ namespace Square.Apis
         /// Use this endpoint to set the value of one or more custom attributes for one or more customer profiles.
         /// A custom attribute is based on a custom attribute definition in a Square seller account, which is.
         /// created using the [CreateCustomerCustomAttributeDefinition]($e/CustomerCustomAttributes/CreateCustomerCustomAttributeDefinition) endpoint.
-        /// This `BulkUpsertCustomerCustomAttributes` endpoint accepts a map of 1 to 25 individual upsert .
-        /// requests and returns a map of individual upsert responses. Each upsert request has a unique ID .
-        /// and provides a customer ID and custom attribute. Each upsert response is returned with the ID .
+        /// This `BulkUpsertCustomerCustomAttributes` endpoint accepts a map of 1 to 25 individual upsert.
+        /// requests and returns a map of individual upsert responses. Each upsert request has a unique ID.
+        /// and provides a customer ID and custom attribute. Each upsert response is returned with the ID.
         /// of the corresponding request.
         /// To create or update a custom attribute owned by another application, the `visibility` setting.
         /// must be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes.
@@ -278,7 +278,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Lists the [custom attributes]($m/CustomAttribute) associated with a customer profile.
@@ -331,7 +331,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("with_definitions", (withDefinitions != null) ? withDefinitions : false))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Deletes a [custom attribute]($m/CustomAttribute) associated with a customer profile.
@@ -370,7 +370,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("key", key))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Retrieves a [custom attribute]($m/CustomAttribute) associated with a customer profile.
@@ -423,7 +423,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("version", version))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Creates or updates a [custom attribute]($m/CustomAttribute) for a customer profile.
@@ -474,6 +474,6 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
     }
 }

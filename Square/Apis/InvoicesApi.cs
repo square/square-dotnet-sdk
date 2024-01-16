@@ -70,7 +70,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Creates a draft [invoice]($m/Invoice) .
@@ -105,7 +105,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Searches for invoices from a location specified in .
@@ -144,7 +144,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Deletes the specified invoice. When an invoice is deleted, the .
@@ -181,7 +181,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("version", version))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Retrieves an invoice by invoice ID.
@@ -209,7 +209,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("invoice_id", invoiceId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Updates an invoice by modifying fields, clearing fields, or both. For most updates, you can use a sparse .
@@ -249,7 +249,88 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads.
+        /// with a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file.
+        /// in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
+        /// Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices.
+        /// in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to attach the file to..</param>
+        /// <param name="request">Optional parameter: Represents a [CreateInvoiceAttachment]($e/Invoices/CreateInvoiceAttachment) request..</param>
+        /// <param name="imageFile">Optional parameter: Example: .</param>
+        /// <returns>Returns the Models.CreateInvoiceAttachmentResponse response from the API call.</returns>
+        public Models.CreateInvoiceAttachmentResponse CreateInvoiceAttachment(
+                string invoiceId,
+                Models.CreateInvoiceAttachmentRequest request = null,
+                FileStreamInfo imageFile = null)
+            => CoreHelper.RunTask(CreateInvoiceAttachmentAsync(invoiceId, request, imageFile));
+
+        /// <summary>
+        /// Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads.
+        /// with a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file.
+        /// in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
+        /// Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices.
+        /// in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to attach the file to..</param>
+        /// <param name="request">Optional parameter: Represents a [CreateInvoiceAttachment]($e/Invoices/CreateInvoiceAttachment) request..</param>
+        /// <param name="imageFile">Optional parameter: Example: .</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CreateInvoiceAttachmentResponse response from the API call.</returns>
+        public async Task<Models.CreateInvoiceAttachmentResponse> CreateInvoiceAttachmentAsync(
+                string invoiceId,
+                Models.CreateInvoiceAttachmentRequest request = null,
+                FileStreamInfo imageFile = null,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.CreateInvoiceAttachmentResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/invoices/{invoice_id}/attachments")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("invoice_id", invoiceId))
+                      .Form(_form => _form.EncodingHeader("Content-Type", "application/json; charset=utf-8").Setup("request", request))
+                      .Form(_form => _form.EncodingHeader("Content-Type", string.IsNullOrEmpty(imageFile.ContentType) ? "image/jpeg" : imageFile.ContentType).Setup("image_file", imageFile))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Removes an attachment from an invoice and permanently deletes the file. Attachments can be removed only.
+        /// from invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to delete the attachment from..</param>
+        /// <param name="attachmentId">Required parameter: The ID of the [attachment](entity:InvoiceAttachment) to delete..</param>
+        /// <returns>Returns the Models.DeleteInvoiceAttachmentResponse response from the API call.</returns>
+        public Models.DeleteInvoiceAttachmentResponse DeleteInvoiceAttachment(
+                string invoiceId,
+                string attachmentId)
+            => CoreHelper.RunTask(DeleteInvoiceAttachmentAsync(invoiceId, attachmentId));
+
+        /// <summary>
+        /// Removes an attachment from an invoice and permanently deletes the file. Attachments can be removed only.
+        /// from invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+        /// </summary>
+        /// <param name="invoiceId">Required parameter: The ID of the [invoice](entity:Invoice) to delete the attachment from..</param>
+        /// <param name="attachmentId">Required parameter: The ID of the [attachment](entity:InvoiceAttachment) to delete..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.DeleteInvoiceAttachmentResponse response from the API call.</returns>
+        public async Task<Models.DeleteInvoiceAttachmentResponse> DeleteInvoiceAttachmentAsync(
+                string invoiceId,
+                string attachmentId,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.DeleteInvoiceAttachmentResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Delete, "/v2/invoices/{invoice_id}/attachments/{attachment_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("invoice_id", invoiceId))
+                      .Template(_template => _template.Setup("attachment_id", attachmentId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Cancels an invoice. The seller cannot collect payments for .
@@ -287,7 +368,7 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Publishes the specified draft invoice. .
@@ -337,6 +418,6 @@ namespace Square.Apis
                       .Header(_header => _header.Setup("Content-Type", "application/json"))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
     }
 }

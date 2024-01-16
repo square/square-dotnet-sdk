@@ -66,7 +66,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("location_id", locationId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Returns details of a [BankAccount]($m/BankAccount) identified by V1 bank account ID.
@@ -94,7 +94,7 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("v1_bank_account_id", v1BankAccountId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
         /// Returns details of a [BankAccount]($m/BankAccount).
@@ -124,6 +124,6 @@ namespace Square.Apis
                       .Template(_template => _template.Setup("bank_account_id", bankAccountId))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
-              .ExecuteAsync(cancellationToken);
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
     }
 }
