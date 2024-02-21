@@ -99,6 +99,10 @@ namespace Square.Models
         {
             private Models.Money amountMoney;
 
+            /// <summary>
+            /// Initialize Builder for GiftCardActivityImportReversal.
+            /// </summary>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 Models.Money amountMoney)
             {

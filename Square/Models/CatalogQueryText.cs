@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private IList<string> keywords;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQueryText.
+            /// </summary>
+            /// <param name="keywords"> keywords. </param>
             public Builder(
                 IList<string> keywords)
             {

@@ -110,6 +110,10 @@ namespace Square.Models
             private string idempotencyKey;
             private Models.Vendor vendor;
 
+            /// <summary>
+            /// Initialize Builder for CreateVendorRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
             public Builder(
                 string idempotencyKey)
             {

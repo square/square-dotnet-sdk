@@ -322,6 +322,12 @@ namespace Square.Models
             private int? customAttributeUsageCount;
             private string key;
 
+            /// <summary>
+            /// Initialize Builder for CatalogCustomAttributeDefinition.
+            /// </summary>
+            /// <param name="type"> type. </param>
+            /// <param name="name"> name. </param>
+            /// <param name="allowedObjectTypes"> allowedObjectTypes. </param>
             public Builder(
                 string type,
                 string name,

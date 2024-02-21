@@ -121,6 +121,12 @@ namespace Square.Models
             private string body;
             private string barcodeContents;
 
+            /// <summary>
+            /// Initialize Builder for QrCodeOptions.
+            /// </summary>
+            /// <param name="title"> title. </param>
+            /// <param name="body"> body. </param>
+            /// <param name="barcodeContents"> barcodeContents. </param>
             public Builder(
                 string title,
                 string body,

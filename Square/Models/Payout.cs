@@ -333,6 +333,11 @@ namespace Square.Models
             private string arrivalDate;
             private string endToEndId;
 
+            /// <summary>
+            /// Initialize Builder for Payout.
+            /// </summary>
+            /// <param name="id"> id. </param>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 string id,
                 string locationId)

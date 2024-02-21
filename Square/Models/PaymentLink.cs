@@ -297,6 +297,10 @@ namespace Square.Models
             private string updatedAt;
             private string paymentNote;
 
+            /// <summary>
+            /// Initialize Builder for PaymentLink.
+            /// </summary>
+            /// <param name="version"> version. </param>
             public Builder(
                 int version)
             {

@@ -109,6 +109,11 @@ namespace Square.Models
             private string bookingId;
             private string key;
 
+            /// <summary>
+            /// Initialize Builder for BookingCustomAttributeDeleteRequest.
+            /// </summary>
+            /// <param name="bookingId"> bookingId. </param>
+            /// <param name="key"> key. </param>
             public Builder(
                 string bookingId,
                 string key)

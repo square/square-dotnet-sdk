@@ -126,6 +126,10 @@ namespace Square.Models
             private IDictionary<string, Models.UpsertOrderCustomAttributeResponse> values;
             private IList<Models.Error> errors;
 
+            /// <summary>
+            /// Initialize Builder for BulkUpsertOrderCustomAttributesResponse.
+            /// </summary>
+            /// <param name="values"> values. </param>
             public Builder(
                 IDictionary<string, Models.UpsertOrderCustomAttributeResponse> values)
             {

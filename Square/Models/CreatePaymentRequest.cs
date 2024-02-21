@@ -452,6 +452,11 @@ namespace Square.Models
             private Models.ExternalPaymentDetails externalDetails;
             private Models.CustomerDetails customerDetails;
 
+            /// <summary>
+            /// Initialize Builder for CreatePaymentRequest.
+            /// </summary>
+            /// <param name="sourceId"> sourceId. </param>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
             public Builder(
                 string sourceId,
                 string idempotencyKey)

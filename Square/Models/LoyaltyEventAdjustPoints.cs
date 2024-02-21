@@ -155,6 +155,10 @@ namespace Square.Models
             private string loyaltyProgramId;
             private string reason;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyEventAdjustPoints.
+            /// </summary>
+            /// <param name="points"> points. </param>
             public Builder(
                 int points)
             {

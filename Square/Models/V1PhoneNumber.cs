@@ -107,6 +107,11 @@ namespace Square.Models
             private string callingCode;
             private string number;
 
+            /// <summary>
+            /// Initialize Builder for V1PhoneNumber.
+            /// </summary>
+            /// <param name="callingCode"> callingCode. </param>
+            /// <param name="number"> number. </param>
             public Builder(
                 string callingCode,
                 string number)

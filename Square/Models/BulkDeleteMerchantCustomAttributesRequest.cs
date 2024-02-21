@@ -95,6 +95,10 @@ namespace Square.Models
         {
             private IDictionary<string, Models.BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest> values;
 
+            /// <summary>
+            /// Initialize Builder for BulkDeleteMerchantCustomAttributesRequest.
+            /// </summary>
+            /// <param name="values"> values. </param>
             public Builder(
                 IDictionary<string, Models.BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest> values)
             {

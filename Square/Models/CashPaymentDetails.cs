@@ -117,6 +117,10 @@ namespace Square.Models
             private Models.Money buyerSuppliedMoney;
             private Models.Money changeBackMoney;
 
+            /// <summary>
+            /// Initialize Builder for CashPaymentDetails.
+            /// </summary>
+            /// <param name="buyerSuppliedMoney"> buyerSuppliedMoney. </param>
             public Builder(
                 Models.Money buyerSuppliedMoney)
             {

@@ -108,6 +108,10 @@ namespace Square.Models
             private string orderId;
             private string key;
 
+            /// <summary>
+            /// Initialize Builder for BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.
+            /// </summary>
+            /// <param name="orderId"> orderId. </param>
             public Builder(
                 string orderId)
             {

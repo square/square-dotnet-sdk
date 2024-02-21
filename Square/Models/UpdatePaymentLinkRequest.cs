@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private Models.PaymentLink paymentLink;
 
+            /// <summary>
+            /// Initialize Builder for UpdatePaymentLinkRequest.
+            /// </summary>
+            /// <param name="paymentLink"> paymentLink. </param>
             public Builder(
                 Models.PaymentLink paymentLink)
             {

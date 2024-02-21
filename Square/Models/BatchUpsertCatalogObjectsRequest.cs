@@ -129,6 +129,11 @@ namespace Square.Models
             private string idempotencyKey;
             private IList<Models.CatalogObjectBatch> batches;
 
+            /// <summary>
+            /// Initialize Builder for BatchUpsertCatalogObjectsRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="batches"> batches. </param>
             public Builder(
                 string idempotencyKey,
                 IList<Models.CatalogObjectBatch> batches)

@@ -125,6 +125,12 @@ namespace Square.Models
             private Models.Money priceMoney;
             private string locationId;
 
+            /// <summary>
+            /// Initialize Builder for QuickPay.
+            /// </summary>
+            /// <param name="name"> name. </param>
+            /// <param name="priceMoney"> priceMoney. </param>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 string name,
                 Models.Money priceMoney,

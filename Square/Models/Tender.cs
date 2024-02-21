@@ -469,6 +469,10 @@ namespace Square.Models
             private IList<Models.AdditionalRecipient> additionalRecipients;
             private string paymentId;
 
+            /// <summary>
+            /// Initialize Builder for Tender.
+            /// </summary>
+            /// <param name="type"> type. </param>
             public Builder(
                 string type)
             {

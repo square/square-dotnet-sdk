@@ -195,6 +195,11 @@ namespace Square.Models
             private Models.Money annualRate;
             private int? weeklyHours;
 
+            /// <summary>
+            /// Initialize Builder for JobAssignment.
+            /// </summary>
+            /// <param name="jobTitle"> jobTitle. </param>
+            /// <param name="payType"> payType. </param>
             public Builder(
                 string jobTitle,
                 string payType)

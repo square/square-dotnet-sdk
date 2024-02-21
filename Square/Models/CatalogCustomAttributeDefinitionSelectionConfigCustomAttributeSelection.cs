@@ -140,6 +140,10 @@ namespace Square.Models
             private string name;
             private string uid;
 
+            /// <summary>
+            /// Initialize Builder for CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection.
+            /// </summary>
+            /// <param name="name"> name. </param>
             public Builder(
                 string name)
             {

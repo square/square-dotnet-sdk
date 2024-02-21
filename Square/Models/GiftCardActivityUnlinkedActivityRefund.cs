@@ -160,6 +160,10 @@ namespace Square.Models
             private string referenceId;
             private string paymentId;
 
+            /// <summary>
+            /// Initialize Builder for GiftCardActivityUnlinkedActivityRefund.
+            /// </summary>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 Models.Money amountMoney)
             {

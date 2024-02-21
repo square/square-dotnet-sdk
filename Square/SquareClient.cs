@@ -43,9 +43,8 @@ namespace Square
         };
 
         private readonly GlobalConfiguration globalConfiguration;
-        private const string userAgent = "Square-DotNet-SDK/34.0.1 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+        private const string userAgent = "Square-DotNet-SDK/35.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
         private readonly HttpCallBack httpCallBack;
-        private readonly BearerAuthManager bearerAuthManager;
         private readonly IDictionary<string, List<string>> additionalHeaders;
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
         private readonly Lazy<IOAuthApi> oAuth;
@@ -94,7 +93,7 @@ namespace Square
             string userAgentDetail,
             Environment environment,
             string customUrl,
-            string accessToken,
+            BearerAuthModel bearerAuthModel,
             HttpCallBack httpCallBack,
             IDictionary<string, List<string>> additionalHeaders,
             IHttpClientConfiguration httpClientConfiguration)
@@ -106,10 +105,11 @@ namespace Square
             this.httpCallBack = httpCallBack;
             this.additionalHeaders = additionalHeaders;
             this.HttpClientConfiguration = httpClientConfiguration;
-            bearerAuthManager = new BearerAuthManager(accessToken);
+            BearerAuthModel = bearerAuthModel;
+            var bearerAuthManager = new BearerAuthManager(bearerAuthModel);
             globalConfiguration = new GlobalConfiguration.Builder()
                 .AuthManagers(new Dictionary<string, AuthManager> {
-                        {"global", bearerAuthManager}
+                    {"global", bearerAuthManager},
                 })
                 .ApiCallback(httpCallBack)
                 .HttpConfiguration(httpClientConfiguration)
@@ -121,6 +121,7 @@ namespace Square
                 .UserAgent(userAgent, GetUserAgentConfig())
                 .Build();
 
+            BearerAuthCredentials = bearerAuthManager;
 
             this.mobileAuthorization = new Lazy<IMobileAuthorizationApi>(
                 () => new MobileAuthorizationApi(globalConfiguration));
@@ -419,7 +420,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "34.0.1";
+        public string SdkVersion => "35.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -458,7 +459,12 @@ namespace Square
         /// <summary>
         /// Gets the credentials to use with BearerAuth.
         /// </summary>
-        private IBearerAuthCredentials BearerAuthCredentials => this.bearerAuthManager;
+        public IBearerAuthCredentials BearerAuthCredentials { get; private set; }
+
+        /// <summary>
+        /// Gets the credentials model to use with BearerAuth.
+        /// </summary>
+        public BearerAuthModel BearerAuthModel { get; private set; }
 
         /// <summary>
         /// Gets the access token to use with OAuth 2 authentication.
@@ -487,10 +493,14 @@ namespace Square
                 .UserAgentDetail(this.UserAgentDetail)
                 .Environment(this.Environment)
                 .CustomUrl(this.CustomUrl)
-                .AccessToken(BearerAuthCredentials.AccessToken)
                 .AdditionalHeaders(additionalHeaders)
                 .HttpCallBack(httpCallBack)
                 .HttpClientConfig(config => config.Build());
+
+            if (BearerAuthModel != null)
+            {
+                builder.BearerAuthCredentials(BearerAuthModel.ToBuilder().Build());
+            }
 
             return builder;
         }
@@ -537,7 +547,9 @@ namespace Square
 
             if (accessToken != null)
             {
-                builder.AccessToken(accessToken);
+                builder.BearerAuthCredentials(new BearerAuthModel
+                .Builder(accessToken)
+                .Build());
             }
 
             return builder.Build();
@@ -566,11 +578,11 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2024-01-18";
+            private string squareVersion = "2024-02-22";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
-            private string accessToken = "";
+            private BearerAuthModel bearerAuthModel = new BearerAuthModel();
             private HttpClientConfiguration.Builder httpClientConfig = new HttpClientConfiguration.Builder();
             private HttpCallBack httpCallBack;
             private IDictionary<string, List<string>> additionalHeaders = new Dictionary<string, List<string>>();
@@ -580,9 +592,28 @@ namespace Square
             /// </summary>
             /// <param name="accessToken">AccessToken.</param>
             /// <returns>Builder.</returns>
+            [Obsolete("This method is deprecated. Use BearerAuthCredentials(bearerAuthModel) instead.")]
             public Builder AccessToken(string accessToken)
             {
-                this.accessToken = accessToken ?? throw new ArgumentNullException(nameof(accessToken));
+                bearerAuthModel = bearerAuthModel.ToBuilder()
+                    .AccessToken(accessToken)
+                    .Build();
+                return this;
+            }
+
+            /// <summary>
+            /// Sets credentials for BearerAuth.
+            /// </summary>
+            /// <param name="bearerAuthModel">BearerAuthModel.</param>
+            /// <returns>Builder.</returns>
+            public Builder BearerAuthCredentials(BearerAuthModel bearerAuthModel)
+            {
+                if (bearerAuthModel is null)
+                {
+                    throw new ArgumentNullException(nameof(bearerAuthModel));
+                }
+
+                this.bearerAuthModel = bearerAuthModel;
                 return this;
             }
 
@@ -711,12 +742,16 @@ namespace Square
             public SquareClient Build()
             {
 
+                if (bearerAuthModel.AccessToken == null)
+                {
+                    bearerAuthModel = null;
+                }
                 return new SquareClient(
                     squareVersion,
                     userAgentDetail,
                     environment,
                     customUrl,
-                    accessToken,
+                    bearerAuthModel,
                     httpCallBack,
                     additionalHeaders,
                     httpClientConfig.Build());

@@ -145,6 +145,10 @@ namespace Square.Models
             private Models.Money charge;
             private string name;
 
+            /// <summary>
+            /// Initialize Builder for ShippingFee.
+            /// </summary>
+            /// <param name="charge"> charge. </param>
             public Builder(
                 Models.Money charge)
             {

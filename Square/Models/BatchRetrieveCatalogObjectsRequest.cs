@@ -250,6 +250,10 @@ namespace Square.Models
             private bool? includeDeletedObjects;
             private bool? includeCategoryPathToRoot;
 
+            /// <summary>
+            /// Initialize Builder for BatchRetrieveCatalogObjectsRequest.
+            /// </summary>
+            /// <param name="objectIds"> objectIds. </param>
             public Builder(
                 IList<string> objectIds)
             {

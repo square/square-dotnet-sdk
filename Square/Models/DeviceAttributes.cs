@@ -282,6 +282,11 @@ namespace Square.Models
             private string version;
             private string merchantToken;
 
+            /// <summary>
+            /// Initialize Builder for DeviceAttributes.
+            /// </summary>
+            /// <param name="type"> type. </param>
+            /// <param name="manufacturer"> manufacturer. </param>
             public Builder(
                 string type,
                 string manufacturer)

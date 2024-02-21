@@ -681,6 +681,10 @@ namespace Square.Models
             private Models.OrderLineItemPricingBlocklists pricingBlocklists;
             private Models.Money totalServiceChargeMoney;
 
+            /// <summary>
+            /// Initialize Builder for OrderLineItem.
+            /// </summary>
+            /// <param name="quantity"> quantity. </param>
             public Builder(
                 string quantity)
             {

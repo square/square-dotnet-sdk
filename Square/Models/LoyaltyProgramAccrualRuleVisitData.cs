@@ -113,6 +113,10 @@ namespace Square.Models
             private string taxMode;
             private Models.Money minimumAmountMoney;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyProgramAccrualRuleVisitData.
+            /// </summary>
+            /// <param name="taxMode"> taxMode. </param>
             public Builder(
                 string taxMode)
             {

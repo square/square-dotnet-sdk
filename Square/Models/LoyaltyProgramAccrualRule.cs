@@ -201,6 +201,10 @@ namespace Square.Models
             private Models.LoyaltyProgramAccrualRuleItemVariationData itemVariationData;
             private Models.LoyaltyProgramAccrualRuleCategoryData categoryData;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyProgramAccrualRule.
+            /// </summary>
+            /// <param name="accrualType"> accrualType. </param>
             public Builder(
                 string accrualType)
             {

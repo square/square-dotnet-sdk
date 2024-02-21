@@ -508,6 +508,11 @@ namespace Square.Models
             private IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients;
             private string verificationToken;
 
+            /// <summary>
+            /// Initialize Builder for ChargeRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 string idempotencyKey,
                 Models.Money amountMoney)

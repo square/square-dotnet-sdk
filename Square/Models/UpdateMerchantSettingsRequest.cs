@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private Models.CheckoutMerchantSettings merchantSettings;
 
+            /// <summary>
+            /// Initialize Builder for UpdateMerchantSettingsRequest.
+            /// </summary>
+            /// <param name="merchantSettings"> merchantSettings. </param>
             public Builder(
                 Models.CheckoutMerchantSettings merchantSettings)
             {

@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private IList<string> teamMemberIds;
 
+            /// <summary>
+            /// Initialize Builder for BulkRetrieveTeamMemberBookingProfilesRequest.
+            /// </summary>
+            /// <param name="teamMemberIds"> teamMemberIds. </param>
             public Builder(
                 IList<string> teamMemberIds)
             {

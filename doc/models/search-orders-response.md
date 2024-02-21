@@ -14,7 +14,7 @@ Either the `order_entries` or `orders` field is set, depending on whether
 |  --- | --- | --- | --- |
 | `OrderEntries` | [`IList<OrderEntry>`](../../doc/models/order-entry.md) | Optional | A list of [OrderEntries](entity:OrderEntry) that fit the query<br>conditions. The list is populated only if `return_entries` is set to `true` in the request. |
 | `Orders` | [`IList<Order>`](../../doc/models/order.md) | Optional | A list of<br>[Order](entity:Order) objects that match the query conditions. The list is populated only if<br>`return_entries` is set to `false` in the request. |
-| `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request. If unset,<br>this is the final response.<br>For more information, see [Pagination](https://developer.squareup.com/docs/basics/build-basics/common-api-patterns/pagination). |
+| `Cursor` | `string` | Optional | The pagination cursor to be used in a subsequent request. If unset,<br>this is the final response.<br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `Errors` | [`IList<Error>`](../../doc/models/error.md) | Optional | [Errors](entity:Error) encountered during the search. |
 
 ## Example (as JSON)

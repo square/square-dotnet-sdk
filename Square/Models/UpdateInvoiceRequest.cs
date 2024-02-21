@@ -176,6 +176,10 @@ namespace Square.Models
             private string idempotencyKey;
             private IList<string> fieldsToClear;
 
+            /// <summary>
+            /// Initialize Builder for UpdateInvoiceRequest.
+            /// </summary>
+            /// <param name="invoice"> invoice. </param>
             public Builder(
                 Models.Invoice invoice)
             {

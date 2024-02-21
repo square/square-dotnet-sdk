@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private string orderId;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyEventOrderFilter.
+            /// </summary>
+            /// <param name="orderId"> orderId. </param>
             public Builder(
                 string orderId)
             {

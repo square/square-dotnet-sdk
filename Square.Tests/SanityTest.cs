@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Square.Apis;
+using Square.Authentication;
 using Square.Exceptions;
 using Square.Models;
 using System.IO;
@@ -105,7 +106,11 @@ namespace Square.Tests
         {
             SquareClient badClient = new SquareClient.Builder()
             .Environment(Environment.Sandbox)
-            .AccessToken("BAD_TOKEN")
+            .BearerAuthCredentials(
+                    new BearerAuthModel.Builder(
+                        "BAD_TOKEN"
+                    )
+                    .Build())
             .Build();
 
             var api = badClient.LocationsApi;

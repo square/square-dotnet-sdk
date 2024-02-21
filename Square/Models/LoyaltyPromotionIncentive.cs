@@ -121,6 +121,10 @@ namespace Square.Models
             private Models.LoyaltyPromotionIncentivePointsMultiplierData pointsMultiplierData;
             private Models.LoyaltyPromotionIncentivePointsAdditionData pointsAdditionData;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyPromotionIncentive.
+            /// </summary>
+            /// <param name="type"> type. </param>
             public Builder(
                 string type)
             {

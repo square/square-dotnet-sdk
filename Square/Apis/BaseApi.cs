@@ -18,7 +18,7 @@ namespace Square.Apis
         private readonly GlobalConfiguration globalConfiguration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BaseController"/> class.
+        /// Initializes a new instance of the <see cref="BaseApi"/> class.
         /// </summary>
         internal BaseApi(GlobalConfiguration config) => globalConfiguration = config;
 

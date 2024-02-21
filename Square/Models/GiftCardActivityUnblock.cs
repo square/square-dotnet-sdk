@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private string reason;
 
+            /// <summary>
+            /// Initialize Builder for GiftCardActivityUnblock.
+            /// </summary>
+            /// <param name="reason"> reason. </param>
             public Builder(
                 string reason)
             {

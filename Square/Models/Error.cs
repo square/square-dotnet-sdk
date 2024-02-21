@@ -136,6 +136,11 @@ namespace Square.Models
             private string detail;
             private string field;
 
+            /// <summary>
+            /// Initialize Builder for Error.
+            /// </summary>
+            /// <param name="category"> category. </param>
+            /// <param name="code"> code. </param>
             public Builder(
                 string category,
                 string code)

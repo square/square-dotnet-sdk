@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private Models.SearchAvailabilityQuery query;
 
+            /// <summary>
+            /// Initialize Builder for SearchAvailabilityRequest.
+            /// </summary>
+            /// <param name="query"> query. </param>
             public Builder(
                 Models.SearchAvailabilityQuery query)
             {

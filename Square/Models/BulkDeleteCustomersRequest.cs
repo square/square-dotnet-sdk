@@ -14,25 +14,25 @@ namespace Square.Models
     using Square.Utilities;
 
     /// <summary>
-    /// V1ListRefundsResponse.
+    /// BulkDeleteCustomersRequest.
     /// </summary>
-    public class V1ListRefundsResponse
+    public class BulkDeleteCustomersRequest
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="V1ListRefundsResponse"/> class.
+        /// Initializes a new instance of the <see cref="BulkDeleteCustomersRequest"/> class.
         /// </summary>
-        /// <param name="items">items.</param>
-        public V1ListRefundsResponse(
-            IList<Models.V1Refund> items = null)
+        /// <param name="customerIds">customer_ids.</param>
+        public BulkDeleteCustomersRequest(
+            IList<string> customerIds)
         {
-            this.Items = items;
+            this.CustomerIds = customerIds;
         }
 
         /// <summary>
-        /// Gets or sets Items.
+        /// The IDs of the [customer profiles](entity:Customer) to delete.
         /// </summary>
-        [JsonProperty("items", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<Models.V1Refund> Items { get; }
+        [JsonProperty("customer_ids")]
+        public IList<string> CustomerIds { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -41,7 +41,7 @@ namespace Square.Models
 
             this.ToString(toStringOutput);
 
-            return $"V1ListRefundsResponse : ({string.Join(", ", toStringOutput)})";
+            return $"BulkDeleteCustomersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
@@ -56,14 +56,14 @@ namespace Square.Models
             {
                 return true;
             }
-            return obj is V1ListRefundsResponse other &&                ((this.Items == null && other.Items == null) || (this.Items?.Equals(other.Items) == true));
+            return obj is BulkDeleteCustomersRequest other &&                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 475312657;
-            hashCode = HashCode.Combine(this.Items);
+            int hashCode = 1157396994;
+            hashCode = HashCode.Combine(this.CustomerIds);
 
             return hashCode;
         }
@@ -73,7 +73,7 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Items = {(this.Items == null ? "null" : $"[{string.Join(", ", this.Items)} ]")}");
+            toStringOutput.Add($"this.CustomerIds = {(this.CustomerIds == null ? "null" : $"[{string.Join(", ", this.CustomerIds)} ]")}");
         }
 
         /// <summary>
@@ -82,8 +82,8 @@ namespace Square.Models
         /// <returns> Builder. </returns>
         public Builder ToBuilder()
         {
-            var builder = new Builder()
-                .Items(this.Items);
+            var builder = new Builder(
+                this.CustomerIds);
             return builder;
         }
 
@@ -92,27 +92,37 @@ namespace Square.Models
         /// </summary>
         public class Builder
         {
-            private IList<Models.V1Refund> items;
+            private IList<string> customerIds;
+
+            /// <summary>
+            /// Initialize Builder for BulkDeleteCustomersRequest.
+            /// </summary>
+            /// <param name="customerIds"> customerIds. </param>
+            public Builder(
+                IList<string> customerIds)
+            {
+                this.customerIds = customerIds;
+            }
 
              /// <summary>
-             /// Items.
+             /// CustomerIds.
              /// </summary>
-             /// <param name="items"> items. </param>
+             /// <param name="customerIds"> customerIds. </param>
              /// <returns> Builder. </returns>
-            public Builder Items(IList<Models.V1Refund> items)
+            public Builder CustomerIds(IList<string> customerIds)
             {
-                this.items = items;
+                this.customerIds = customerIds;
                 return this;
             }
 
             /// <summary>
             /// Builds class object.
             /// </summary>
-            /// <returns> V1ListRefundsResponse. </returns>
-            public V1ListRefundsResponse Build()
+            /// <returns> BulkDeleteCustomersRequest. </returns>
+            public BulkDeleteCustomersRequest Build()
             {
-                return new V1ListRefundsResponse(
-                    this.items);
+                return new BulkDeleteCustomersRequest(
+                    this.customerIds);
             }
         }
     }

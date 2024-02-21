@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private IDictionary<string, Models.Vendor> vendors;
 
+            /// <summary>
+            /// Initialize Builder for BulkCreateVendorsRequest.
+            /// </summary>
+            /// <param name="vendors"> vendors. </param>
             public Builder(
                 IDictionary<string, Models.Vendor> vendors)
             {

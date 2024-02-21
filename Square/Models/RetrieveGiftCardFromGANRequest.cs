@@ -96,6 +96,10 @@ namespace Square.Models
         {
             private string gan;
 
+            /// <summary>
+            /// Initialize Builder for RetrieveGiftCardFromGANRequest.
+            /// </summary>
+            /// <param name="gan"> gan. </param>
             public Builder(
                 string gan)
             {

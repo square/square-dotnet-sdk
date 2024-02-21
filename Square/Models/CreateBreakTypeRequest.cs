@@ -108,6 +108,10 @@ namespace Square.Models
             private Models.BreakType breakType;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for CreateBreakTypeRequest.
+            /// </summary>
+            /// <param name="breakType"> breakType. </param>
             public Builder(
                 Models.BreakType breakType)
             {

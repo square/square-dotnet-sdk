@@ -265,6 +265,14 @@ namespace Square.Models
             private Models.LoyaltyEventOther otherEvent;
             private Models.LoyaltyEventAccumulatePromotionPoints accumulatePromotionPoints;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyEvent.
+            /// </summary>
+            /// <param name="id"> id. </param>
+            /// <param name="type"> type. </param>
+            /// <param name="createdAt"> createdAt. </param>
+            /// <param name="loyaltyAccountId"> loyaltyAccountId. </param>
+            /// <param name="source"> source. </param>
             public Builder(
                 string id,
                 string type,

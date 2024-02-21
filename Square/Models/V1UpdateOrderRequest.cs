@@ -233,6 +233,10 @@ namespace Square.Models
             private string refundedNote;
             private string canceledNote;
 
+            /// <summary>
+            /// Initialize Builder for V1UpdateOrderRequest.
+            /// </summary>
+            /// <param name="action"> action. </param>
             public Builder(
                 string action)
             {

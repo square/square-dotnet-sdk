@@ -148,6 +148,10 @@ namespace Square.Models
             private Models.Order order;
             private IList<Models.OrderReward> proposedRewards;
 
+            /// <summary>
+            /// Initialize Builder for CalculateOrderRequest.
+            /// </summary>
+            /// <param name="order"> order. </param>
             public Builder(
                 Models.Order order)
             {

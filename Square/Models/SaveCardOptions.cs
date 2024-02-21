@@ -157,6 +157,10 @@ namespace Square.Models
             private string cardId;
             private string referenceId;
 
+            /// <summary>
+            /// Initialize Builder for SaveCardOptions.
+            /// </summary>
+            /// <param name="customerId"> customerId. </param>
             public Builder(
                 string customerId)
             {

@@ -181,8 +181,8 @@ namespace Square.Models
 
         /// <summary>
         /// The destination type for this refund.
-        /// Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `BUY_NOW_PAY_LATER`, `CASH`, and
-        /// `EXTERNAL`.
+        /// Current values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `BUY_NOW_PAY_LATER`, `CASH`,
+        /// `EXTERNAL`, and `SQUARE_ACCOUNT`.
         /// </summary>
         [JsonProperty("destination_type")]
         public string DestinationType { get; }
@@ -451,6 +451,11 @@ namespace Square.Models
             private string updatedAt;
             private string teamMemberId;
 
+            /// <summary>
+            /// Initialize Builder for PaymentRefund.
+            /// </summary>
+            /// <param name="id"> id. </param>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 string id,
                 Models.Money amountMoney)

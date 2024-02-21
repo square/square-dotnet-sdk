@@ -121,6 +121,10 @@ namespace Square.Models
             private string evidenceType;
             private string contentType;
 
+            /// <summary>
+            /// Initialize Builder for CreateDisputeEvidenceFileRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
             public Builder(
                 string idempotencyKey)
             {

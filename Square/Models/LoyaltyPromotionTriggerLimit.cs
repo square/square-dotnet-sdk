@@ -108,6 +108,10 @@ namespace Square.Models
             private int times;
             private string interval;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyPromotionTriggerLimit.
+            /// </summary>
+            /// <param name="times"> times. </param>
             public Builder(
                 int times)
             {

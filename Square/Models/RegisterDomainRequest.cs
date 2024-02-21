@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private string domainName;
 
+            /// <summary>
+            /// Initialize Builder for RegisterDomainRequest.
+            /// </summary>
+            /// <param name="domainName"> domainName. </param>
             public Builder(
                 string domainName)
             {

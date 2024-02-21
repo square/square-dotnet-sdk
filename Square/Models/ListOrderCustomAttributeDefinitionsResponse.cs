@@ -141,6 +141,10 @@ namespace Square.Models
             private string cursor;
             private IList<Models.Error> errors;
 
+            /// <summary>
+            /// Initialize Builder for ListOrderCustomAttributeDefinitionsResponse.
+            /// </summary>
+            /// <param name="customAttributeDefinitions"> customAttributeDefinitions. </param>
             public Builder(
                 IList<Models.CustomAttributeDefinition> customAttributeDefinitions)
             {

@@ -267,6 +267,10 @@ namespace Square.Models
             private string mainLocationId;
             private string createdAt;
 
+            /// <summary>
+            /// Initialize Builder for Merchant.
+            /// </summary>
+            /// <param name="country"> country. </param>
             public Builder(
                 string country)
             {

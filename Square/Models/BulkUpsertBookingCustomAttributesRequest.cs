@@ -96,6 +96,10 @@ namespace Square.Models
         {
             private IDictionary<string, Models.BookingCustomAttributeUpsertRequest> values;
 
+            /// <summary>
+            /// Initialize Builder for BulkUpsertBookingCustomAttributesRequest.
+            /// </summary>
+            /// <param name="values"> values. </param>
             public Builder(
                 IDictionary<string, Models.BookingCustomAttributeUpsertRequest> values)
             {

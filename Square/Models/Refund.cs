@@ -289,6 +289,15 @@ namespace Square.Models
             private Models.Money processingFeeMoney;
             private IList<Models.AdditionalRecipient> additionalRecipients;
 
+            /// <summary>
+            /// Initialize Builder for Refund.
+            /// </summary>
+            /// <param name="id"> id. </param>
+            /// <param name="locationId"> locationId. </param>
+            /// <param name="tenderId"> tenderId. </param>
+            /// <param name="reason"> reason. </param>
+            /// <param name="amountMoney"> amountMoney. </param>
+            /// <param name="status"> status. </param>
             public Builder(
                 string id,
                 string locationId,

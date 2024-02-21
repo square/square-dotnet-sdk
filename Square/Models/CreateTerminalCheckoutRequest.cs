@@ -109,6 +109,11 @@ namespace Square.Models
             private string idempotencyKey;
             private Models.TerminalCheckout checkout;
 
+            /// <summary>
+            /// Initialize Builder for CreateTerminalCheckoutRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="checkout"> checkout. </param>
             public Builder(
                 string idempotencyKey,
                 Models.TerminalCheckout checkout)

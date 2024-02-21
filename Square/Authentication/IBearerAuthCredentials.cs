@@ -2,6 +2,9 @@ namespace Square.Authentication
 {
     using System;
 
+    /// <summary>
+    /// Authentication configuration interface for BearerAuth.
+    /// </summary>
     public interface IBearerAuthCredentials
     {
         /// <summary>

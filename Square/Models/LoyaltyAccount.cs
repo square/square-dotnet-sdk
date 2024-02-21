@@ -302,6 +302,10 @@ namespace Square.Models
             private Models.LoyaltyAccountMapping mapping;
             private IList<Models.LoyaltyAccountExpiringPointDeadline> expiringPointDeadlines;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyAccount.
+            /// </summary>
+            /// <param name="programId"> programId. </param>
             public Builder(
                 string programId)
             {

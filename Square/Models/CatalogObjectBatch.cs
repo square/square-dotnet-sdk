@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private IList<Models.CatalogObject> objects;
 
+            /// <summary>
+            /// Initialize Builder for CatalogObjectBatch.
+            /// </summary>
+            /// <param name="objects"> objects. </param>
             public Builder(
                 IList<Models.CatalogObject> objects)
             {

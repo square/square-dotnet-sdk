@@ -250,6 +250,10 @@ namespace Square.Models
             private string phoneNumber;
             private bool? removed;
 
+            /// <summary>
+            /// Initialize Builder for VendorContact.
+            /// </summary>
+            /// <param name="ordinal"> ordinal. </param>
             public Builder(
                 int ordinal)
             {

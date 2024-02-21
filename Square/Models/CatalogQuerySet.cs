@@ -108,6 +108,11 @@ namespace Square.Models
             private string attributeName;
             private IList<string> attributeValues;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQuerySet.
+            /// </summary>
+            /// <param name="attributeName"> attributeName. </param>
+            /// <param name="attributeValues"> attributeValues. </param>
             public Builder(
                 string attributeName,
                 IList<string> attributeValues)

@@ -96,6 +96,10 @@ namespace Square.Models
         {
             private Models.Shift shift;
 
+            /// <summary>
+            /// Initialize Builder for UpdateShiftRequest.
+            /// </summary>
+            /// <param name="shift"> shift. </param>
             public Builder(
                 Models.Shift shift)
             {

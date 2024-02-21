@@ -122,6 +122,12 @@ namespace Square.Models
             private string locationId;
             private Models.GiftCard giftCard;
 
+            /// <summary>
+            /// Initialize Builder for CreateGiftCardRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="locationId"> locationId. </param>
+            /// <param name="giftCard"> giftCard. </param>
             public Builder(
                 string idempotencyKey,
                 string locationId,

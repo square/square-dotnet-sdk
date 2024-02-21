@@ -126,6 +126,10 @@ namespace Square.Models
             private Models.CustomerCustomAttributeFilterValue filter;
             private Models.TimeRange updatedAt;
 
+            /// <summary>
+            /// Initialize Builder for CustomerCustomAttributeFilter.
+            /// </summary>
+            /// <param name="key"> key. </param>
             public Builder(
                 string key)
             {

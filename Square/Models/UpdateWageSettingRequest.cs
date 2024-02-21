@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private Models.WageSetting wageSetting;
 
+            /// <summary>
+            /// Initialize Builder for UpdateWageSettingRequest.
+            /// </summary>
+            /// <param name="wageSetting"> wageSetting. </param>
             public Builder(
                 Models.WageSetting wageSetting)
             {

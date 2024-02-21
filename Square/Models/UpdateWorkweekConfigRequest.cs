@@ -95,6 +95,10 @@ namespace Square.Models
         {
             private Models.WorkweekConfig workweekConfig;
 
+            /// <summary>
+            /// Initialize Builder for UpdateWorkweekConfigRequest.
+            /// </summary>
+            /// <param name="workweekConfig"> workweekConfig. </param>
             public Builder(
                 Models.WorkweekConfig workweekConfig)
             {

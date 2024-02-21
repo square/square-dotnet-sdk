@@ -250,6 +250,11 @@ namespace Square.Models
             private bool? canProrate;
             private string successorPlanVariationId;
 
+            /// <summary>
+            /// Initialize Builder for CatalogSubscriptionPlanVariation.
+            /// </summary>
+            /// <param name="name"> name. </param>
+            /// <param name="phases"> phases. </param>
             public Builder(
                 string name,
                 IList<Models.SubscriptionPhase> phases)

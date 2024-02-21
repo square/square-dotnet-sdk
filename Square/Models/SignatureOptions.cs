@@ -120,6 +120,11 @@ namespace Square.Models
             private string body;
             private IList<Models.SignatureImage> signature;
 
+            /// <summary>
+            /// Initialize Builder for SignatureOptions.
+            /// </summary>
+            /// <param name="title"> title. </param>
+            /// <param name="body"> body. </param>
             public Builder(
                 string title,
                 string body)

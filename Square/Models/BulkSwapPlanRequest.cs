@@ -123,6 +123,12 @@ namespace Square.Models
             private string oldPlanVariationId;
             private string locationId;
 
+            /// <summary>
+            /// Initialize Builder for BulkSwapPlanRequest.
+            /// </summary>
+            /// <param name="newPlanVariationId"> newPlanVariationId. </param>
+            /// <param name="oldPlanVariationId"> oldPlanVariationId. </param>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 string newPlanVariationId,
                 string oldPlanVariationId,

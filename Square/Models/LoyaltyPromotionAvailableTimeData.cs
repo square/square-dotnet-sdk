@@ -131,6 +131,10 @@ namespace Square.Models
             private string startDate;
             private string endDate;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyPromotionAvailableTimeData.
+            /// </summary>
+            /// <param name="timePeriods"> timePeriods. </param>
             public Builder(
                 IList<string> timePeriods)
             {

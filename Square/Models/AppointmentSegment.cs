@@ -247,6 +247,10 @@ namespace Square.Models
             private bool? anyTeamMember;
             private IList<string> resourceIds;
 
+            /// <summary>
+            /// Initialize Builder for AppointmentSegment.
+            /// </summary>
+            /// <param name="teamMemberId"> teamMemberId. </param>
             public Builder(
                 string teamMemberId)
             {

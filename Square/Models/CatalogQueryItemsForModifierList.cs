@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private IList<string> modifierListIds;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQueryItemsForModifierList.
+            /// </summary>
+            /// <param name="modifierListIds"> modifierListIds. </param>
             public Builder(
                 IList<string> modifierListIds)
             {

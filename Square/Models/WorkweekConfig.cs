@@ -164,6 +164,11 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
+            /// <summary>
+            /// Initialize Builder for WorkweekConfig.
+            /// </summary>
+            /// <param name="startOfWeek"> startOfWeek. </param>
+            /// <param name="startOfDayLocalTime"> startOfDayLocalTime. </param>
             public Builder(
                 string startOfWeek,
                 string startOfDayLocalTime)

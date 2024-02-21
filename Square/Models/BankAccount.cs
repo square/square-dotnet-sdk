@@ -460,6 +460,19 @@ namespace Square.Models
             private int? version;
             private string bankName;
 
+            /// <summary>
+            /// Initialize Builder for BankAccount.
+            /// </summary>
+            /// <param name="id"> id. </param>
+            /// <param name="accountNumberSuffix"> accountNumberSuffix. </param>
+            /// <param name="country"> country. </param>
+            /// <param name="currency"> currency. </param>
+            /// <param name="accountType"> accountType. </param>
+            /// <param name="holderName"> holderName. </param>
+            /// <param name="primaryBankIdentificationNumber"> primaryBankIdentificationNumber. </param>
+            /// <param name="status"> status. </param>
+            /// <param name="creditable"> creditable. </param>
+            /// <param name="debitable"> debitable. </param>
             public Builder(
                 string id,
                 string accountNumberSuffix,

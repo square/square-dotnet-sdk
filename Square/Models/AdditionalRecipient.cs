@@ -191,6 +191,11 @@ namespace Square.Models
             private string description;
             private string receivableId;
 
+            /// <summary>
+            /// Initialize Builder for AdditionalRecipient.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 string locationId,
                 Models.Money amountMoney)

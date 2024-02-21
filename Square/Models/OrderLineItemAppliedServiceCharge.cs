@@ -163,6 +163,10 @@ namespace Square.Models
             private string uid;
             private Models.Money appliedMoney;
 
+            /// <summary>
+            /// Initialize Builder for OrderLineItemAppliedServiceCharge.
+            /// </summary>
+            /// <param name="serviceChargeUid"> serviceChargeUid. </param>
             public Builder(
                 string serviceChargeUid)
             {

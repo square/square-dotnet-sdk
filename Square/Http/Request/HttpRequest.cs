@@ -81,6 +81,7 @@ namespace Square.Http.Request
         /// <param name="method">Http verb to use for the http request.</param>
         /// <param name="queryUrl">The query url for the http request.</param>
         /// <param name="headers">Headers to send with the request.</param>
+        /// <param name="body">The string to use as raw body of the http request.</param>
         /// <param name="formParameters">Form parameters collection for the request.</param>
         /// <param name="username">Basic auth username.</param>
         /// <param name="password">Basic auth password.</param>

@@ -399,6 +399,11 @@ namespace Square.Models
             private string teamMemberId;
             private Models.Money declaredCashTipMoney;
 
+            /// <summary>
+            /// Initialize Builder for Shift.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
+            /// <param name="startAt"> startAt. </param>
             public Builder(
                 string locationId,
                 string startAt)

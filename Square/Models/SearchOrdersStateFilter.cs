@@ -95,6 +95,10 @@ namespace Square.Models
         {
             private IList<string> states;
 
+            /// <summary>
+            /// Initialize Builder for SearchOrdersStateFilter.
+            /// </summary>
+            /// <param name="states"> states. </param>
             public Builder(
                 IList<string> states)
             {

@@ -333,6 +333,13 @@ namespace Square.Models
             private string appId;
             private string locationId;
 
+            /// <summary>
+            /// Initialize Builder for TerminalRefund.
+            /// </summary>
+            /// <param name="paymentId"> paymentId. </param>
+            /// <param name="amountMoney"> amountMoney. </param>
+            /// <param name="reason"> reason. </param>
+            /// <param name="deviceId"> deviceId. </param>
             public Builder(
                 string paymentId,
                 Models.Money amountMoney,

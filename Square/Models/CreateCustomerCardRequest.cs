@@ -141,6 +141,10 @@ namespace Square.Models
             private string cardholderName;
             private string verificationToken;
 
+            /// <summary>
+            /// Initialize Builder for CreateCustomerCardRequest.
+            /// </summary>
+            /// <param name="cardNonce"> cardNonce. </param>
             public Builder(
                 string cardNonce)
             {

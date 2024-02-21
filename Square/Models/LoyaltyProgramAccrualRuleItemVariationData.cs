@@ -95,6 +95,10 @@ namespace Square.Models
         {
             private string itemVariationId;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyProgramAccrualRuleItemVariationData.
+            /// </summary>
+            /// <param name="itemVariationId"> itemVariationId. </param>
             public Builder(
                 string itemVariationId)
             {

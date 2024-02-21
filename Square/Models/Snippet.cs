@@ -146,6 +146,10 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
+            /// <summary>
+            /// Initialize Builder for Snippet.
+            /// </summary>
+            /// <param name="content"> content. </param>
             public Builder(
                 string content)
             {

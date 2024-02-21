@@ -171,6 +171,10 @@ namespace Square.Models
             private long? attributeMinValue;
             private long? attributeMaxValue;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQueryRange.
+            /// </summary>
+            /// <param name="attributeName"> attributeName. </param>
             public Builder(
                 string attributeName)
             {

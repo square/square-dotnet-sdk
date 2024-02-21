@@ -551,6 +551,11 @@ namespace Square.Models
             private string statementDescriptionIdentifier;
             private Models.Money tipMoney;
 
+            /// <summary>
+            /// Initialize Builder for TerminalCheckout.
+            /// </summary>
+            /// <param name="amountMoney"> amountMoney. </param>
+            /// <param name="deviceOptions"> deviceOptions. </param>
             public Builder(
                 Models.Money amountMoney,
                 Models.DeviceCheckoutOptions deviceOptions)

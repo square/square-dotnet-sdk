@@ -141,6 +141,10 @@ namespace Square.Models
             private IList<string> orderIds;
             private string locationId;
 
+            /// <summary>
+            /// Initialize Builder for BatchRetrieveOrdersRequest.
+            /// </summary>
+            /// <param name="orderIds"> orderIds. </param>
             public Builder(
                 IList<string> orderIds)
             {

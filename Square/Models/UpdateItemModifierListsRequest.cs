@@ -173,6 +173,10 @@ namespace Square.Models
             private IList<string> modifierListsToEnable;
             private IList<string> modifierListsToDisable;
 
+            /// <summary>
+            /// Initialize Builder for UpdateItemModifierListsRequest.
+            /// </summary>
+            /// <param name="itemIds"> itemIds. </param>
             public Builder(
                 IList<string> itemIds)
             {

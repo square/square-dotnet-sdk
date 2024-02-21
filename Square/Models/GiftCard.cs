@@ -243,6 +243,10 @@ namespace Square.Models
             private string createdAt;
             private IList<string> customerIds;
 
+            /// <summary>
+            /// Initialize Builder for GiftCard.
+            /// </summary>
+            /// <param name="type"> type. </param>
             public Builder(
                 string type)
             {

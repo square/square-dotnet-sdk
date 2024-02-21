@@ -265,6 +265,10 @@ namespace Square.Models
             private IList<string> eligibleCategoryIds;
             private bool? allItems;
 
+            /// <summary>
+            /// Initialize Builder for CatalogSubscriptionPlan.
+            /// </summary>
+            /// <param name="name"> name. </param>
             public Builder(
                 string name)
             {

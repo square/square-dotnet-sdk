@@ -127,6 +127,10 @@ namespace Square.Models
             private IDictionary<string, Models.BulkDeleteMerchantCustomAttributesResponseMerchantCustomAttributeDeleteResponse> values;
             private IList<Models.Error> errors;
 
+            /// <summary>
+            /// Initialize Builder for BulkDeleteMerchantCustomAttributesResponse.
+            /// </summary>
+            /// <param name="values"> values. </param>
             public Builder(
                 IDictionary<string, Models.BulkDeleteMerchantCustomAttributesResponseMerchantCustomAttributeDeleteResponse> values)
             {

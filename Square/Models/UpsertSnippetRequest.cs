@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private Models.Snippet snippet;
 
+            /// <summary>
+            /// Initialize Builder for UpsertSnippetRequest.
+            /// </summary>
+            /// <param name="snippet"> snippet. </param>
             public Builder(
                 Models.Snippet snippet)
             {

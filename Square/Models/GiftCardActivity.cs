@@ -471,6 +471,11 @@ namespace Square.Models
             private Models.GiftCardActivityTransferBalanceTo transferBalanceToActivityDetails;
             private Models.GiftCardActivityTransferBalanceFrom transferBalanceFromActivityDetails;
 
+            /// <summary>
+            /// Initialize Builder for GiftCardActivity.
+            /// </summary>
+            /// <param name="type"> type. </param>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 string type,
                 string locationId)

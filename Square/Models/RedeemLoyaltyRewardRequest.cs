@@ -108,6 +108,11 @@ namespace Square.Models
             private string idempotencyKey;
             private string locationId;
 
+            /// <summary>
+            /// Initialize Builder for RedeemLoyaltyRewardRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 string idempotencyKey,
                 string locationId)
