@@ -97,6 +97,10 @@ namespace Square.Models
         {
             private IList<string> types;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyEventTypeFilter.
+            /// </summary>
+            /// <param name="types"> types. </param>
             public Builder(
                 IList<string> types)
             {

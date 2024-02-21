@@ -98,6 +98,10 @@ namespace Square.Models
         {
             private Models.TimeRange createdAt;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyEventDateTimeFilter.
+            /// </summary>
+            /// <param name="createdAt"> createdAt. </param>
             public Builder(
                 Models.TimeRange createdAt)
             {

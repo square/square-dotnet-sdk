@@ -123,6 +123,10 @@ namespace Square.Models
             private int? limit;
             private string cursor;
 
+            /// <summary>
+            /// Initialize Builder for SearchInvoicesRequest.
+            /// </summary>
+            /// <param name="query"> query. </param>
             public Builder(
                 Models.InvoiceQuery query)
             {

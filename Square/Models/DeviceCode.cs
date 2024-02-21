@@ -293,6 +293,10 @@ namespace Square.Models
             private string statusChangedAt;
             private string pairedAt;
 
+            /// <summary>
+            /// Initialize Builder for DeviceCode.
+            /// </summary>
+            /// <param name="productType"> productType. </param>
             public Builder(
                 string productType)
             {

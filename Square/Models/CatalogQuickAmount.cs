@@ -192,6 +192,11 @@ namespace Square.Models
             private long? score;
             private long? ordinal;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQuickAmount.
+            /// </summary>
+            /// <param name="type"> type. </param>
+            /// <param name="amount"> amount. </param>
             public Builder(
                 string type,
                 Models.Money amount)

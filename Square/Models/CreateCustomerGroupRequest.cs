@@ -109,6 +109,10 @@ namespace Square.Models
             private Models.CustomerGroup mGroup;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for CreateCustomerGroupRequest.
+            /// </summary>
+            /// <param name="mGroup"> mGroup. </param>
             public Builder(
                 Models.CustomerGroup mGroup)
             {

@@ -109,6 +109,10 @@ namespace Square.Models
             private Models.CustomAttributeDefinition customAttributeDefinition;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for CreateCustomerCustomAttributeDefinitionRequest.
+            /// </summary>
+            /// <param name="customAttributeDefinition"> customAttributeDefinition. </param>
             public Builder(
                 Models.CustomAttributeDefinition customAttributeDefinition)
             {

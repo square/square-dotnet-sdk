@@ -96,6 +96,10 @@ namespace Square.Models
         {
             private Models.CustomerGroup mGroup;
 
+            /// <summary>
+            /// Initialize Builder for UpdateCustomerGroupRequest.
+            /// </summary>
+            /// <param name="mGroup"> mGroup. </param>
             public Builder(
                 Models.CustomerGroup mGroup)
             {

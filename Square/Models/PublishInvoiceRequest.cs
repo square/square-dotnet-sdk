@@ -144,6 +144,10 @@ namespace Square.Models
             private int version;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for PublishInvoiceRequest.
+            /// </summary>
+            /// <param name="version"> version. </param>
             public Builder(
                 int version)
             {

@@ -171,6 +171,10 @@ namespace Square.Models
             private IList<Models.Component> components;
             private Models.DeviceStatus status;
 
+            /// <summary>
+            /// Initialize Builder for Device.
+            /// </summary>
+            /// <param name="attributes"> attributes. </param>
             public Builder(
                 Models.DeviceAttributes attributes)
             {

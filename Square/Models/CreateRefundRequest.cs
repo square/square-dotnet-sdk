@@ -147,6 +147,12 @@ namespace Square.Models
             private Models.Money amountMoney;
             private string reason;
 
+            /// <summary>
+            /// Initialize Builder for CreateRefundRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="tenderId"> tenderId. </param>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 string idempotencyKey,
                 string tenderId,

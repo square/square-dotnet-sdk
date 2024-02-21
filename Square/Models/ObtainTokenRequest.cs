@@ -395,6 +395,11 @@ namespace Square.Models
             private bool? shortLived;
             private string codeVerifier;
 
+            /// <summary>
+            /// Initialize Builder for ObtainTokenRequest.
+            /// </summary>
+            /// <param name="clientId"> clientId. </param>
+            /// <param name="grantType"> grantType. </param>
             public Builder(
                 string clientId,
                 string grantType)

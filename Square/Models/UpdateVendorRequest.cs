@@ -144,6 +144,10 @@ namespace Square.Models
             private Models.Vendor vendor;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for UpdateVendorRequest.
+            /// </summary>
+            /// <param name="vendor"> vendor. </param>
             public Builder(
                 Models.Vendor vendor)
             {

@@ -108,6 +108,11 @@ namespace Square.Models
             private string attributeName;
             private string attributeValue;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQueryExact.
+            /// </summary>
+            /// <param name="attributeName"> attributeName. </param>
+            /// <param name="attributeValue"> attributeValue. </param>
             public Builder(
                 string attributeName,
                 string attributeValue)

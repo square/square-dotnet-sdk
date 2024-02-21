@@ -157,6 +157,10 @@ namespace Square.Models
             private string initialAttributeValue;
             private string sortOrder;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQuerySortedAttribute.
+            /// </summary>
+            /// <param name="attributeName"> attributeName. </param>
             public Builder(
                 string attributeName)
             {

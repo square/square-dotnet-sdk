@@ -107,6 +107,10 @@ namespace Square.Models
             private string loyaltyAccountId;
             private string status;
 
+            /// <summary>
+            /// Initialize Builder for SearchLoyaltyRewardsRequestLoyaltyRewardQuery.
+            /// </summary>
+            /// <param name="loyaltyAccountId"> loyaltyAccountId. </param>
             public Builder(
                 string loyaltyAccountId)
             {

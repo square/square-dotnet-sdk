@@ -27,19 +27,22 @@ namespace Square.Models
         /// <param name="minSelectedModifiers">min_selected_modifiers.</param>
         /// <param name="maxSelectedModifiers">max_selected_modifiers.</param>
         /// <param name="enabled">enabled.</param>
+        /// <param name="ordinal">ordinal.</param>
         public CatalogItemModifierListInfo(
             string modifierListId,
             IList<Models.CatalogModifierOverride> modifierOverrides = null,
             int? minSelectedModifiers = null,
             int? maxSelectedModifiers = null,
-            bool? enabled = null)
+            bool? enabled = null,
+            int? ordinal = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "modifier_overrides", false },
                 { "min_selected_modifiers", false },
                 { "max_selected_modifiers", false },
-                { "enabled", false }
+                { "enabled", false },
+                { "ordinal", false }
             };
 
             this.ModifierListId = modifierListId;
@@ -67,13 +70,20 @@ namespace Square.Models
                 this.Enabled = enabled;
             }
 
+            if (ordinal != null)
+            {
+                shouldSerialize["ordinal"] = true;
+                this.Ordinal = ordinal;
+            }
+
         }
         internal CatalogItemModifierListInfo(Dictionary<string, bool> shouldSerialize,
             string modifierListId,
             IList<Models.CatalogModifierOverride> modifierOverrides = null,
             int? minSelectedModifiers = null,
             int? maxSelectedModifiers = null,
-            bool? enabled = null)
+            bool? enabled = null,
+            int? ordinal = null)
         {
             this.shouldSerialize = shouldSerialize;
             ModifierListId = modifierListId;
@@ -81,6 +91,7 @@ namespace Square.Models
             MinSelectedModifiers = minSelectedModifiers;
             MaxSelectedModifiers = maxSelectedModifiers;
             Enabled = enabled;
+            Ordinal = ordinal;
         }
 
         /// <summary>
@@ -112,6 +123,13 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("enabled")]
         public bool? Enabled { get; }
+
+        /// <summary>
+        /// The position of this `CatalogItemModifierListInfo` object within the `modifier_list_info` list applied
+        /// to a `CatalogItem` instance.
+        /// </summary>
+        [JsonProperty("ordinal")]
+        public int? Ordinal { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -159,6 +177,15 @@ namespace Square.Models
             return this.shouldSerialize["enabled"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeOrdinal()
+        {
+            return this.shouldSerialize["ordinal"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -175,14 +202,15 @@ namespace Square.Models
                 ((this.ModifierOverrides == null && other.ModifierOverrides == null) || (this.ModifierOverrides?.Equals(other.ModifierOverrides) == true)) &&
                 ((this.MinSelectedModifiers == null && other.MinSelectedModifiers == null) || (this.MinSelectedModifiers?.Equals(other.MinSelectedModifiers) == true)) &&
                 ((this.MaxSelectedModifiers == null && other.MaxSelectedModifiers == null) || (this.MaxSelectedModifiers?.Equals(other.MaxSelectedModifiers) == true)) &&
-                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true));
+                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true)) &&
+                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1904387422;
-            hashCode = HashCode.Combine(this.ModifierListId, this.ModifierOverrides, this.MinSelectedModifiers, this.MaxSelectedModifiers, this.Enabled);
+            int hashCode = -351709295;
+            hashCode = HashCode.Combine(this.ModifierListId, this.ModifierOverrides, this.MinSelectedModifiers, this.MaxSelectedModifiers, this.Enabled, this.Ordinal);
 
             return hashCode;
         }
@@ -197,6 +225,7 @@ namespace Square.Models
             toStringOutput.Add($"this.MinSelectedModifiers = {(this.MinSelectedModifiers == null ? "null" : this.MinSelectedModifiers.ToString())}");
             toStringOutput.Add($"this.MaxSelectedModifiers = {(this.MaxSelectedModifiers == null ? "null" : this.MaxSelectedModifiers.ToString())}");
             toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
+            toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
         }
 
         /// <summary>
@@ -210,7 +239,8 @@ namespace Square.Models
                 .ModifierOverrides(this.ModifierOverrides)
                 .MinSelectedModifiers(this.MinSelectedModifiers)
                 .MaxSelectedModifiers(this.MaxSelectedModifiers)
-                .Enabled(this.Enabled);
+                .Enabled(this.Enabled)
+                .Ordinal(this.Ordinal);
             return builder;
         }
 
@@ -225,6 +255,7 @@ namespace Square.Models
                 { "min_selected_modifiers", false },
                 { "max_selected_modifiers", false },
                 { "enabled", false },
+                { "ordinal", false },
             };
 
             private string modifierListId;
@@ -232,7 +263,12 @@ namespace Square.Models
             private int? minSelectedModifiers;
             private int? maxSelectedModifiers;
             private bool? enabled;
+            private int? ordinal;
 
+            /// <summary>
+            /// Initialize Builder for CatalogItemModifierListInfo.
+            /// </summary>
+            /// <param name="modifierListId"> modifierListId. </param>
             public Builder(
                 string modifierListId)
             {
@@ -298,6 +334,18 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Ordinal.
+             /// </summary>
+             /// <param name="ordinal"> ordinal. </param>
+             /// <returns> Builder. </returns>
+            public Builder Ordinal(int? ordinal)
+            {
+                shouldSerialize["ordinal"] = true;
+                this.ordinal = ordinal;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -330,6 +378,14 @@ namespace Square.Models
                 this.shouldSerialize["enabled"] = false;
             }
 
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetOrdinal()
+            {
+                this.shouldSerialize["ordinal"] = false;
+            }
+
 
             /// <summary>
             /// Builds class object.
@@ -342,7 +398,8 @@ namespace Square.Models
                     this.modifierOverrides,
                     this.minSelectedModifiers,
                     this.maxSelectedModifiers,
-                    this.enabled);
+                    this.enabled,
+                    this.ordinal);
             }
         }
     }

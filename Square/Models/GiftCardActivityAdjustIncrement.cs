@@ -112,6 +112,11 @@ namespace Square.Models
             private Models.Money amountMoney;
             private string reason;
 
+            /// <summary>
+            /// Initialize Builder for GiftCardActivityAdjustIncrement.
+            /// </summary>
+            /// <param name="amountMoney"> amountMoney. </param>
+            /// <param name="reason"> reason. </param>
             public Builder(
                 Models.Money amountMoney,
                 string reason)

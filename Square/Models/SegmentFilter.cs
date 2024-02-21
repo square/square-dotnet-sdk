@@ -110,6 +110,10 @@ namespace Square.Models
             private string serviceVariationId;
             private Models.FilterValue teamMemberIdFilter;
 
+            /// <summary>
+            /// Initialize Builder for SegmentFilter.
+            /// </summary>
+            /// <param name="serviceVariationId"> serviceVariationId. </param>
             public Builder(
                 string serviceVariationId)
             {

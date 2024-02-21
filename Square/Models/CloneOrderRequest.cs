@@ -162,6 +162,10 @@ namespace Square.Models
             private int? version;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for CloneOrderRequest.
+            /// </summary>
+            /// <param name="orderId"> orderId. </param>
             public Builder(
                 string orderId)
             {

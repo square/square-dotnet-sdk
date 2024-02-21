@@ -180,6 +180,10 @@ namespace Square.Models
             private string referenceId;
             private string status;
 
+            /// <summary>
+            /// Initialize Builder for GiftCardActivityRedeem.
+            /// </summary>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 Models.Money amountMoney)
             {

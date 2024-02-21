@@ -159,6 +159,10 @@ namespace Square.Models
             private Models.DeviceComponentDetailsWiFiDetails wifiDetails;
             private Models.DeviceComponentDetailsEthernetDetails ethernetDetails;
 
+            /// <summary>
+            /// Initialize Builder for Component.
+            /// </summary>
+            /// <param name="type"> type. </param>
             public Builder(
                 string type)
             {

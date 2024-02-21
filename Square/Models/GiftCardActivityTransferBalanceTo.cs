@@ -112,6 +112,11 @@ namespace Square.Models
             private string transferFromGiftCardId;
             private Models.Money amountMoney;
 
+            /// <summary>
+            /// Initialize Builder for GiftCardActivityTransferBalanceTo.
+            /// </summary>
+            /// <param name="transferFromGiftCardId"> transferFromGiftCardId. </param>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 string transferFromGiftCardId,
                 Models.Money amountMoney)

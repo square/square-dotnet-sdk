@@ -178,6 +178,10 @@ namespace Square.Models
             private IList<Models.InventoryChange> changes;
             private bool? ignoreUnchangedCounts;
 
+            /// <summary>
+            /// Initialize Builder for BatchChangeInventoryRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
             public Builder(
                 string idempotencyKey)
             {

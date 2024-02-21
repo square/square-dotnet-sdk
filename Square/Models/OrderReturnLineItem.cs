@@ -637,6 +637,10 @@ namespace Square.Models
             private IList<Models.OrderLineItemAppliedServiceCharge> appliedServiceCharges;
             private Models.Money totalServiceChargeMoney;
 
+            /// <summary>
+            /// Initialize Builder for OrderReturnLineItem.
+            /// </summary>
+            /// <param name="quantity"> quantity. </param>
             public Builder(
                 string quantity)
             {

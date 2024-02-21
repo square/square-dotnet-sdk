@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private string title;
 
+            /// <summary>
+            /// Initialize Builder for CustomField.
+            /// </summary>
+            /// <param name="title"> title. </param>
             public Builder(
                 string title)
             {

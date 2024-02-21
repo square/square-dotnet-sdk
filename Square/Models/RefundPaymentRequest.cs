@@ -417,6 +417,11 @@ namespace Square.Models
             private string paymentVersionToken;
             private string teamMemberId;
 
+            /// <summary>
+            /// Initialize Builder for RefundPaymentRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 string idempotencyKey,
                 Models.Money amountMoney)

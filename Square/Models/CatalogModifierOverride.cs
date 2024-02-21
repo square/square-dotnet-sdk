@@ -140,6 +140,10 @@ namespace Square.Models
             private string modifierId;
             private bool? onByDefault;
 
+            /// <summary>
+            /// Initialize Builder for CatalogModifierOverride.
+            /// </summary>
+            /// <param name="modifierId"> modifierId. </param>
             public Builder(
                 string modifierId)
             {

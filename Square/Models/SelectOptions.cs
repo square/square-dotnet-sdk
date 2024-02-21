@@ -133,6 +133,12 @@ namespace Square.Models
             private IList<Models.SelectOption> options;
             private Models.SelectOption selectedOption;
 
+            /// <summary>
+            /// Initialize Builder for SelectOptions.
+            /// </summary>
+            /// <param name="title"> title. </param>
+            /// <param name="body"> body. </param>
+            /// <param name="options"> options. </param>
             public Builder(
                 string title,
                 string body,

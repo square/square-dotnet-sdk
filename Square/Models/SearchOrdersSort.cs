@@ -107,6 +107,10 @@ namespace Square.Models
             private string sortField;
             private string sortOrder;
 
+            /// <summary>
+            /// Initialize Builder for SearchOrdersSort.
+            /// </summary>
+            /// <param name="sortField"> sortField. </param>
             public Builder(
                 string sortField)
             {

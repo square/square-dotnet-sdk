@@ -143,6 +143,10 @@ namespace Square.Models
             private IList<string> locationIds;
             private IList<string> customerIds;
 
+            /// <summary>
+            /// Initialize Builder for InvoiceFilter.
+            /// </summary>
+            /// <param name="locationIds"> locationIds. </param>
             public Builder(
                 IList<string> locationIds)
             {

@@ -140,6 +140,12 @@ namespace Square.Models
             private Models.Card card;
             private string verificationToken;
 
+            /// <summary>
+            /// Initialize Builder for CreateCardRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="sourceId"> sourceId. </param>
+            /// <param name="card"> card. </param>
             public Builder(
                 string idempotencyKey,
                 string sourceId,

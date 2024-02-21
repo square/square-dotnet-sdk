@@ -174,6 +174,10 @@ namespace Square.Models
             private IList<string> taxesToEnable;
             private IList<string> taxesToDisable;
 
+            /// <summary>
+            /// Initialize Builder for UpdateItemTaxesRequest.
+            /// </summary>
+            /// <param name="itemIds"> itemIds. </param>
             public Builder(
                 IList<string> itemIds)
             {

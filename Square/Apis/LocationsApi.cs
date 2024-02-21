@@ -15,7 +15,6 @@ namespace Square.Apis
     using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
-    using Square.Authentication;
     using Square.Http.Client;
     using Square.Utilities;
     using System.Net.Http;
@@ -32,7 +31,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides details about all of the seller's [locations](https://developer.squareup.com/docs/locations-api),.
-        /// including those with an inactive status.
+        /// including those with an inactive status. Locations are listed alphabetically by `name`.
         /// </summary>
         /// <returns>Returns the Models.ListLocationsResponse response from the API call.</returns>
         public Models.ListLocationsResponse ListLocations()
@@ -40,7 +39,7 @@ namespace Square.Apis
 
         /// <summary>
         /// Provides details about all of the seller's [locations](https://developer.squareup.com/docs/locations-api),.
-        /// including those with an inactive status.
+        /// including those with an inactive status. Locations are listed alphabetically by `name`.
         /// </summary>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListLocationsResponse response from the API call.</returns>

@@ -220,6 +220,10 @@ namespace Square.Models
             private Models.TipSettings tipSettings;
             private bool? showItemizedCart;
 
+            /// <summary>
+            /// Initialize Builder for DeviceCheckoutOptions.
+            /// </summary>
+            /// <param name="deviceId"> deviceId. </param>
             public Builder(
                 string deviceId)
             {

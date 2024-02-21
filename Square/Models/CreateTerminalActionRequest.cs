@@ -110,6 +110,11 @@ namespace Square.Models
             private string idempotencyKey;
             private Models.TerminalAction action;
 
+            /// <summary>
+            /// Initialize Builder for CreateTerminalActionRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="action"> action. </param>
             public Builder(
                 string idempotencyKey,
                 Models.TerminalAction action)

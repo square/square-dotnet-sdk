@@ -109,6 +109,10 @@ namespace Square.Models
             private string idempotencyKey;
             private Models.TerminalRefund refund;
 
+            /// <summary>
+            /// Initialize Builder for CreateTerminalRefundRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
             public Builder(
                 string idempotencyKey)
             {

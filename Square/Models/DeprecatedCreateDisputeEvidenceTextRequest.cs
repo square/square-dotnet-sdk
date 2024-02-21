@@ -120,6 +120,11 @@ namespace Square.Models
             private string evidenceText;
             private string evidenceType;
 
+            /// <summary>
+            /// Initialize Builder for DeprecatedCreateDisputeEvidenceTextRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="evidenceText"> evidenceText. </param>
             public Builder(
                 string idempotencyKey,
                 string evidenceText)

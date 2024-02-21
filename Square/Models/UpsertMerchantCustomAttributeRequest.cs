@@ -142,6 +142,10 @@ namespace Square.Models
             private Models.CustomAttribute customAttribute;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for UpsertMerchantCustomAttributeRequest.
+            /// </summary>
+            /// <param name="customAttribute"> customAttribute. </param>
             public Builder(
                 Models.CustomAttribute customAttribute)
             {

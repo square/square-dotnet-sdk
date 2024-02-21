@@ -109,6 +109,11 @@ namespace Square.Models
             private Models.LoyaltyReward reward;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for CreateLoyaltyRewardRequest.
+            /// </summary>
+            /// <param name="reward"> reward. </param>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
             public Builder(
                 Models.LoyaltyReward reward,
                 string idempotencyKey)

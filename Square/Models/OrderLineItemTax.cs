@@ -154,6 +154,7 @@ namespace Square.Models
         /// The percentage of the tax, as a string representation of a decimal
         /// number. For example, a value of `"7.25"` corresponds to a percentage of
         /// 7.25%.
+        /// Either `percentage` or `amount_money` should be set, but not both.
         /// </summary>
         [JsonProperty("percentage")]
         public string Percentage { get; }

@@ -15,11 +15,13 @@ internal class BearerAuthManager : AuthManager, IBearerAuthCredentials
         /// Initializes a new instance of the <see cref="BearerAuthManager"/> class.
         /// </summary>
         /// <param name="accessToken">accessToken.</param>
-        public BearerAuthManager(string accessToken)
+        public BearerAuthManager(BearerAuthModel bearerAuthModel)
         {
-            this.AccessToken = accessToken;
+            this.AccessToken = bearerAuthModel?.AccessToken;
             Parameters(paramBuilder => paramBuilder
-                .Header(header => header.Setup("Authorization", "Bearer " + this.AccessToken)));
+                .Header(header => header.Setup("Authorization",
+                    this.AccessToken == null ? null : $"Bearer {this.AccessToken}"
+                ).Required()));
         }
 
         /// <summary>
@@ -37,5 +39,60 @@ internal class BearerAuthManager : AuthManager, IBearerAuthCredentials
             return accessToken.Equals(this.AccessToken);
         }
 
+    }
+
+    public sealed class BearerAuthModel
+    {
+        internal BearerAuthModel()
+        {
+        }
+
+        internal string AccessToken { get; set; }
+
+        /// <summary>
+        /// Creates an object of the BearerAuthModel using the values provided for the builder.
+        /// </summary>
+        /// <returns>Builder.</returns>
+        public Builder ToBuilder()
+        {
+            return new Builder(AccessToken);
+        }
+
+        /// <summary>
+        /// Builder class for BearerAuthModel.
+        /// </summary>
+        public class Builder
+        {
+            private string accessToken;
+
+            public Builder(string accessToken)
+            {
+                this.accessToken = accessToken ?? throw new ArgumentNullException(nameof(accessToken));
+            }
+
+            /// <summary>
+            /// Sets AccessToken.
+            /// </summary>
+            /// <param name="accessToken">AccessToken.</param>
+            /// <returns>Builder.</returns>
+            public Builder AccessToken(string accessToken)
+            {
+                this.accessToken = accessToken ?? throw new ArgumentNullException(nameof(accessToken));
+                return this;
+            }
+
+
+            /// <summary>
+            /// Creates an object of the BearerAuthModel using the values provided for the builder.
+            /// </summary>
+            /// <returns>BearerAuthModel.</returns>
+            public BearerAuthModel Build()
+            {
+                return new BearerAuthModel()
+                {
+                    AccessToken = this.accessToken
+                };
+            }
+        }
     }
 }

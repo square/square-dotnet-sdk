@@ -15,7 +15,6 @@ namespace Square.Apis
     using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
-    using Square.Authentication;
     using Square.Http.Client;
     using Square.Utilities;
     using System.Net.Http;

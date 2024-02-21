@@ -109,6 +109,11 @@ namespace Square.Models
             private string idempotencyKey;
             private Models.GiftCardActivity giftCardActivity;
 
+            /// <summary>
+            /// Initialize Builder for CreateGiftCardActivityRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="giftCardActivity"> giftCardActivity. </param>
             public Builder(
                 string idempotencyKey,
                 Models.GiftCardActivity giftCardActivity)

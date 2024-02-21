@@ -201,6 +201,11 @@ namespace Square.Models
             private string uid;
             private IDictionary<string, string> metadata;
 
+            /// <summary>
+            /// Initialize Builder for OrderFulfillmentFulfillmentEntry.
+            /// </summary>
+            /// <param name="lineItemUid"> lineItemUid. </param>
+            /// <param name="quantity"> quantity. </param>
             public Builder(
                 string lineItemUid,
                 string quantity)

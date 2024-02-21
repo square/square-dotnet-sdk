@@ -109,6 +109,10 @@ namespace Square.Models
             private Models.Shift shift;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for CreateShiftRequest.
+            /// </summary>
+            /// <param name="shift"> shift. </param>
             public Builder(
                 Models.Shift shift)
             {

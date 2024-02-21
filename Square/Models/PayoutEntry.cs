@@ -568,6 +568,11 @@ namespace Square.Models
             private Models.PaymentBalanceActivityThirdPartyFeeDetail typeThirdPartyFeeDetails;
             private Models.PaymentBalanceActivityThirdPartyFeeRefundDetail typeThirdPartyFeeRefundDetails;
 
+            /// <summary>
+            /// Initialize Builder for PayoutEntry.
+            /// </summary>
+            /// <param name="id"> id. </param>
+            /// <param name="payoutId"> payoutId. </param>
             public Builder(
                 string id,
                 string payoutId)

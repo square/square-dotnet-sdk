@@ -185,6 +185,12 @@ namespace Square.Models
             private string disagreeButtonText;
             private Models.ConfirmationDecision decision;
 
+            /// <summary>
+            /// Initialize Builder for ConfirmationOptions.
+            /// </summary>
+            /// <param name="title"> title. </param>
+            /// <param name="body"> body. </param>
+            /// <param name="agreeButtonText"> agreeButtonText. </param>
             public Builder(
                 string title,
                 string body,

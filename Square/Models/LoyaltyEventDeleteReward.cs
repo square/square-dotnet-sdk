@@ -121,6 +121,11 @@ namespace Square.Models
             private int points;
             private string rewardId;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyEventDeleteReward.
+            /// </summary>
+            /// <param name="loyaltyProgramId"> loyaltyProgramId. </param>
+            /// <param name="points"> points. </param>
             public Builder(
                 string loyaltyProgramId,
                 int points)

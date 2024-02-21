@@ -107,6 +107,11 @@ namespace Square.Models
             private int points;
             private string expiresAt;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyAccountExpiringPointDeadline.
+            /// </summary>
+            /// <param name="points"> points. </param>
+            /// <param name="expiresAt"> expiresAt. </param>
             public Builder(
                 int points,
                 string expiresAt)

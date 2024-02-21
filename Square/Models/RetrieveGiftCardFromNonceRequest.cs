@@ -95,6 +95,10 @@ namespace Square.Models
         {
             private string nonce;
 
+            /// <summary>
+            /// Initialize Builder for RetrieveGiftCardFromNonceRequest.
+            /// </summary>
+            /// <param name="nonce"> nonce. </param>
             public Builder(
                 string nonce)
             {

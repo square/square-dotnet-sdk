@@ -194,6 +194,13 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
+            /// <summary>
+            /// Initialize Builder for BreakType.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
+            /// <param name="breakName"> breakName. </param>
+            /// <param name="expectedDuration"> expectedDuration. </param>
+            /// <param name="isPaid"> isPaid. </param>
             public Builder(
                 string locationId,
                 string breakName,

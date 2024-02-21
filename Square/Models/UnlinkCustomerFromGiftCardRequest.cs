@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private string customerId;
 
+            /// <summary>
+            /// Initialize Builder for UnlinkCustomerFromGiftCardRequest.
+            /// </summary>
+            /// <param name="customerId"> customerId. </param>
             public Builder(
                 string customerId)
             {

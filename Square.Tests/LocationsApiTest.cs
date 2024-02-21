@@ -37,7 +37,7 @@ namespace Square
 
         /// <summary>
         /// Provides details about all of the seller's [locations](https://developer.squareup.com/docs/locations-api),
-        ///including those with an inactive status..
+        ///including those with an inactive status. Locations are listed alphabetically by `name`..
         /// </summary>
         /// <returns>A <see cref="Task"/> representing the asynchronous unit test.</returns>
         [Test]

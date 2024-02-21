@@ -782,6 +782,10 @@ namespace Square.Models
             private IList<Models.OrderReward> rewards;
             private Models.Money netAmountDueMoney;
 
+            /// <summary>
+            /// Initialize Builder for Order.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 string locationId)
             {

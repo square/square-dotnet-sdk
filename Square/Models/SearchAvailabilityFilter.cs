@@ -211,6 +211,10 @@ namespace Square.Models
             private IList<Models.SegmentFilter> segmentFilters;
             private string bookingId;
 
+            /// <summary>
+            /// Initialize Builder for SearchAvailabilityFilter.
+            /// </summary>
+            /// <param name="startAtRange"> startAtRange. </param>
             public Builder(
                 Models.TimeRange startAtRange)
             {

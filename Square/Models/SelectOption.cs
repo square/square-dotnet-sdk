@@ -107,6 +107,11 @@ namespace Square.Models
             private string referenceId;
             private string title;
 
+            /// <summary>
+            /// Initialize Builder for SelectOption.
+            /// </summary>
+            /// <param name="referenceId"> referenceId. </param>
+            /// <param name="title"> title. </param>
             public Builder(
                 string referenceId,
                 string title)

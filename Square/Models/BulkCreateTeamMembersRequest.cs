@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private IDictionary<string, Models.CreateTeamMemberRequest> teamMembers;
 
+            /// <summary>
+            /// Initialize Builder for BulkCreateTeamMembersRequest.
+            /// </summary>
+            /// <param name="teamMembers"> teamMembers. </param>
             public Builder(
                 IDictionary<string, Models.CreateTeamMemberRequest> teamMembers)
             {

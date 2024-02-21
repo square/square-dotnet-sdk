@@ -172,6 +172,10 @@ namespace Square.Models
             private bool? eligibleForAutoAmounts;
             private IList<Models.CatalogQuickAmount> amounts;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQuickAmountsSettings.
+            /// </summary>
+            /// <param name="option"> option. </param>
             public Builder(
                 string option)
             {

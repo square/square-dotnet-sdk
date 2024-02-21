@@ -131,6 +131,12 @@ namespace Square.Models
             private string stockableQuantity;
             private string nonstockableQuantity;
 
+            /// <summary>
+            /// Initialize Builder for CatalogStockConversion.
+            /// </summary>
+            /// <param name="stockableItemVariationId"> stockableItemVariationId. </param>
+            /// <param name="stockableQuantity"> stockableQuantity. </param>
+            /// <param name="nonstockableQuantity"> nonstockableQuantity. </param>
             public Builder(
                 string stockableItemVariationId,
                 string stockableQuantity,

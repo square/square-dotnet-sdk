@@ -174,6 +174,10 @@ namespace Square.Models
             private bool? printOnly;
             private bool? isDuplicate;
 
+            /// <summary>
+            /// Initialize Builder for ReceiptOptions.
+            /// </summary>
+            /// <param name="paymentId"> paymentId. </param>
             public Builder(
                 string paymentId)
             {

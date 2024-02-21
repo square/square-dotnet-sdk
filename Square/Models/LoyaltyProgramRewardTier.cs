@@ -163,6 +163,11 @@ namespace Square.Models
             private Models.LoyaltyProgramRewardDefinition definition;
             private string createdAt;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyProgramRewardTier.
+            /// </summary>
+            /// <param name="points"> points. </param>
+            /// <param name="pricingRuleReference"> pricingRuleReference. </param>
             public Builder(
                 int points,
                 Models.CatalogObjectReference pricingRuleReference)

@@ -108,6 +108,10 @@ namespace Square.Models
             private Models.WebhookSubscription subscription;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for CreateWebhookSubscriptionRequest.
+            /// </summary>
+            /// <param name="subscription"> subscription. </param>
             public Builder(
                 Models.WebhookSubscription subscription)
             {

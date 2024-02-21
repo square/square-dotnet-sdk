@@ -122,6 +122,10 @@ namespace Square.Models
             private string rewardId;
             private string orderId;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyEventRedeemReward.
+            /// </summary>
+            /// <param name="loyaltyProgramId"> loyaltyProgramId. </param>
             public Builder(
                 string loyaltyProgramId)
             {

@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private string loyaltyAccountId;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyEventLoyaltyAccountFilter.
+            /// </summary>
+            /// <param name="loyaltyAccountId"> loyaltyAccountId. </param>
             public Builder(
                 string loyaltyAccountId)
             {

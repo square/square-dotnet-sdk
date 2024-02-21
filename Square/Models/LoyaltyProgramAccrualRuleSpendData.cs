@@ -196,6 +196,11 @@ namespace Square.Models
             private IList<string> excludedCategoryIds;
             private IList<string> excludedItemVariationIds;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyProgramAccrualRuleSpendData.
+            /// </summary>
+            /// <param name="amountMoney"> amountMoney. </param>
+            /// <param name="taxMode"> taxMode. </param>
             public Builder(
                 Models.Money amountMoney,
                 string taxMode)

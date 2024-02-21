@@ -188,6 +188,11 @@ namespace Square.Models
             private string sourceId;
             private Models.Money sourceFeeMoney;
 
+            /// <summary>
+            /// Initialize Builder for ExternalPaymentDetails.
+            /// </summary>
+            /// <param name="type"> type. </param>
+            /// <param name="source"> source. </param>
             public Builder(
                 string type,
                 string source)

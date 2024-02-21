@@ -140,6 +140,10 @@ namespace Square.Models
             private long ordinal;
             private string orderTemplateId;
 
+            /// <summary>
+            /// Initialize Builder for PhaseInput.
+            /// </summary>
+            /// <param name="ordinal"> ordinal. </param>
             public Builder(
                 long ordinal)
             {

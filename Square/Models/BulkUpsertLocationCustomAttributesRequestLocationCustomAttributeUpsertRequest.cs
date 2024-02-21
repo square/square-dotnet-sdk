@@ -157,6 +157,11 @@ namespace Square.Models
             private Models.CustomAttribute customAttribute;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
+            /// <param name="customAttribute"> customAttribute. </param>
             public Builder(
                 string locationId,
                 Models.CustomAttribute customAttribute)

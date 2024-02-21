@@ -15,7 +15,6 @@ namespace Square.Apis
     using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
-    using Square.Authentication;
     using Square.Http.Client;
     using Square.Utilities;
     using System.Net.Http;
@@ -128,6 +127,144 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
+        /// Creates multiple [customer profiles]($m/Customer) for a business.
+        /// This endpoint takes a map of individual create requests and returns a map of responses.
+        /// You must provide at least one of the following values in each create request:.
+        /// - `given_name`.
+        /// - `family_name`.
+        /// - `company_name`.
+        /// - `email_address`.
+        /// - `phone_number`.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkCreateCustomersResponse response from the API call.</returns>
+        public Models.BulkCreateCustomersResponse BulkCreateCustomers(
+                Models.BulkCreateCustomersRequest body)
+            => CoreHelper.RunTask(BulkCreateCustomersAsync(body));
+
+        /// <summary>
+        /// Creates multiple [customer profiles]($m/Customer) for a business.
+        /// This endpoint takes a map of individual create requests and returns a map of responses.
+        /// You must provide at least one of the following values in each create request:.
+        /// - `given_name`.
+        /// - `family_name`.
+        /// - `company_name`.
+        /// - `email_address`.
+        /// - `phone_number`.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkCreateCustomersResponse response from the API call.</returns>
+        public async Task<Models.BulkCreateCustomersResponse> BulkCreateCustomersAsync(
+                Models.BulkCreateCustomersRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.BulkCreateCustomersResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/customers/bulk-create")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Deletes multiple customer profiles.
+        /// The endpoint takes a list of customer IDs and returns a map of responses.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkDeleteCustomersResponse response from the API call.</returns>
+        public Models.BulkDeleteCustomersResponse BulkDeleteCustomers(
+                Models.BulkDeleteCustomersRequest body)
+            => CoreHelper.RunTask(BulkDeleteCustomersAsync(body));
+
+        /// <summary>
+        /// Deletes multiple customer profiles.
+        /// The endpoint takes a list of customer IDs and returns a map of responses.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkDeleteCustomersResponse response from the API call.</returns>
+        public async Task<Models.BulkDeleteCustomersResponse> BulkDeleteCustomersAsync(
+                Models.BulkDeleteCustomersRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.BulkDeleteCustomersResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/customers/bulk-delete")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Retrieves multiple customer profiles.
+        /// This endpoint takes a list of customer IDs and returns a map of responses.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkRetrieveCustomersResponse response from the API call.</returns>
+        public Models.BulkRetrieveCustomersResponse BulkRetrieveCustomers(
+                Models.BulkRetrieveCustomersRequest body)
+            => CoreHelper.RunTask(BulkRetrieveCustomersAsync(body));
+
+        /// <summary>
+        /// Retrieves multiple customer profiles.
+        /// This endpoint takes a list of customer IDs and returns a map of responses.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkRetrieveCustomersResponse response from the API call.</returns>
+        public async Task<Models.BulkRetrieveCustomersResponse> BulkRetrieveCustomersAsync(
+                Models.BulkRetrieveCustomersRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.BulkRetrieveCustomersResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/customers/bulk-retrieve")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Updates multiple customer profiles.
+        /// This endpoint takes a map of individual update requests and returns a map of responses.
+        /// You cannot use this endpoint to change cards on file. To make changes, use the [Cards API]($e/Cards) or [Gift Cards API]($e/GiftCards).
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.BulkUpdateCustomersResponse response from the API call.</returns>
+        public Models.BulkUpdateCustomersResponse BulkUpdateCustomers(
+                Models.BulkUpdateCustomersRequest body)
+            => CoreHelper.RunTask(BulkUpdateCustomersAsync(body));
+
+        /// <summary>
+        /// Updates multiple customer profiles.
+        /// This endpoint takes a map of individual update requests and returns a map of responses.
+        /// You cannot use this endpoint to change cards on file. To make changes, use the [Cards API]($e/Cards) or [Gift Cards API]($e/GiftCards).
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.BulkUpdateCustomersResponse response from the API call.</returns>
+        public async Task<Models.BulkUpdateCustomersResponse> BulkUpdateCustomersAsync(
+                Models.BulkUpdateCustomersRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.BulkUpdateCustomersResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/customers/bulk-update")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
         /// Searches the customer profiles associated with a Square account using one or more supported query filters.
         /// Calling `SearchCustomers` without any explicit query filter returns all.
         /// customer profiles ordered alphabetically based on `given_name` and.
@@ -170,8 +307,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file.
-        /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-        /// If included, the value must be set to the current version of the customer profile.
         /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
@@ -184,8 +319,6 @@ namespace Square.Apis
 
         /// <summary>
         /// Deletes a customer profile from a business. This operation also unlinks any associated cards on file.
-        /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-        /// If included, the value must be set to the current version of the customer profile.
         /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
         /// </summary>
         /// <param name="customerId">Required parameter: The ID of the customer to delete..</param>
@@ -238,9 +371,6 @@ namespace Square.Apis
         /// <summary>
         /// Updates a customer profile. This endpoint supports sparse updates, so only new or changed fields are required in the request.
         /// To add or update a field, specify the new value. To remove a field, specify `null`.
-        /// (recommended) or specify an empty string (string fields only).
-        /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-        /// If included, the value must be set to the current version of the customer profile.
         /// To update a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
         /// You cannot use this endpoint to change cards on file. To make changes, use the [Cards API]($e/Cards) or [Gift Cards API]($e/GiftCards).
         /// </summary>
@@ -255,9 +385,6 @@ namespace Square.Apis
         /// <summary>
         /// Updates a customer profile. This endpoint supports sparse updates, so only new or changed fields are required in the request.
         /// To add or update a field, specify the new value. To remove a field, specify `null`.
-        /// (recommended) or specify an empty string (string fields only).
-        /// As a best practice, include the `version` field in the request to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.
-        /// If included, the value must be set to the current version of the customer profile.
         /// To update a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
         /// You cannot use this endpoint to change cards on file. To make changes, use the [Cards API]($e/Cards) or [Gift Cards API]($e/GiftCards).
         /// </summary>

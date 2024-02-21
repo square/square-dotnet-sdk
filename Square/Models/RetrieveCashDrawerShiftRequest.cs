@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private string locationId;
 
+            /// <summary>
+            /// Initialize Builder for RetrieveCashDrawerShiftRequest.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 string locationId)
             {

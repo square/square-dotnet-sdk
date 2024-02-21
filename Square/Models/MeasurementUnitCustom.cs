@@ -108,6 +108,11 @@ namespace Square.Models
             private string name;
             private string abbreviation;
 
+            /// <summary>
+            /// Initialize Builder for MeasurementUnitCustom.
+            /// </summary>
+            /// <param name="name"> name. </param>
+            /// <param name="abbreviation"> abbreviation. </param>
             public Builder(
                 string name,
                 string abbreviation)

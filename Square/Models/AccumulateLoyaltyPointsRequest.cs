@@ -121,6 +121,12 @@ namespace Square.Models
             private string idempotencyKey;
             private string locationId;
 
+            /// <summary>
+            /// Initialize Builder for AccumulateLoyaltyPointsRequest.
+            /// </summary>
+            /// <param name="accumulatePoints"> accumulatePoints. </param>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 Models.LoyaltyEventAccumulatePoints accumulatePoints,
                 string idempotencyKey,

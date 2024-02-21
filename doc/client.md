@@ -5,19 +5,23 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2024-01-18"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2024-02-22"` |
 | `CustomUrl` | `string` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `"https://connect.squareup.com"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(60)` |
 | `UserAgentDetail` | `string` | User-Agent detail.<br>*Default*: `"null"` |
-| `AccessToken` | `string` | The OAuth 2.0 Access Token to use for API requests. |
+| `BearerAuthCredentials` | [`BearerAuthCredentials`](auth/oauth-2-bearer-token.md) | The Credentials Setter for OAuth 2 Bearer token |
 
 The API client can be initialized as follows:
 
 ```csharp
 Square.SquareClient client = new Square.SquareClient.Builder()
-    .AccessToken("AccessToken")
-    .SquareVersion("2024-01-18")
+    .BearerAuthCredentials(
+        new BearerAuthModel.Builder(
+            "AccessToken"
+        )
+        .Build())
+    .SquareVersion("2024-02-22")
     .Environment(Square.Environment.Production)
     .CustomUrl("https://connect.squareup.com")
     .Build();
@@ -27,6 +31,7 @@ Square.SquareClient client = new Square.SquareClient.Builder()
 
 ```csharp
 using Square.Apis;
+using Square.Authentication;
 using Square.Exceptions;
 using Square.Models;
 using System;
@@ -39,8 +44,12 @@ namespace Testing
         public static async Task Main()
         {
             SquareClient client = new SquareClient.Builder()
-                .AccessToken("AccessToken")
-                .SquareVersion("2024-01-18")
+                .BearerAuthCredentials(
+                    new BearerAuthModel.Builder(
+                        "AccessToken"
+                    )
+                    .Build())
+                .SquareVersion("2024-02-22")
                 .Build();
 
             ILocationsApi locationsApi = client.LocationsApi;
@@ -121,6 +130,7 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | UserAgentDetail | User-Agent detail. | `string` |
 | Environment | Current API environment. | `Environment` |
 | CustomUrl | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `string` |
+| BearerAuthCredentials | Gets the credentials to use with BearerAuth. | [`IBearerAuthCredentials`](auth/oauth-2-bearer-token.md) |
 
 ### Methods
 
@@ -145,4 +155,5 @@ Class to build instances of SquareClient.
 | `UserAgentDetail(string userAgentDetail)` | User-Agent detail. | `Builder` |
 | `Environment(Environment environment)` | Current API environment. | `Builder` |
 | `CustomUrl(string customUrl)` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com` | `Builder` |
+| `BearerAuthCredentials(Action<BearerAuthModel.Builder> action)` | Sets credentials for BearerAuth. | `Builder` |
 

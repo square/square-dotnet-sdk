@@ -95,6 +95,10 @@ namespace Square.Models
         {
             private Models.BreakType breakType;
 
+            /// <summary>
+            /// Initialize Builder for UpdateBreakTypeRequest.
+            /// </summary>
+            /// <param name="breakType"> breakType. </param>
             public Builder(
                 Models.BreakType breakType)
             {

@@ -109,6 +109,10 @@ namespace Square.Models
             private string idempotencyKey;
             private Models.Payment payment;
 
+            /// <summary>
+            /// Initialize Builder for UpdatePaymentRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
             public Builder(
                 string idempotencyKey)
             {

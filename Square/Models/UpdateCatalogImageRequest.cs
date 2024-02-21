@@ -96,6 +96,10 @@ namespace Square.Models
         {
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for UpdateCatalogImageRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
             public Builder(
                 string idempotencyKey)
             {

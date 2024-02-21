@@ -215,6 +215,13 @@ namespace Square.Models
             private Models.SubscriptionEventInfo info;
             private IList<Models.Phase> phases;
 
+            /// <summary>
+            /// Initialize Builder for SubscriptionEvent.
+            /// </summary>
+            /// <param name="id"> id. </param>
+            /// <param name="subscriptionEventType"> subscriptionEventType. </param>
+            /// <param name="effectiveDate"> effectiveDate. </param>
+            /// <param name="planVariationId"> planVariationId. </param>
             public Builder(
                 string id,
                 string subscriptionEventType,

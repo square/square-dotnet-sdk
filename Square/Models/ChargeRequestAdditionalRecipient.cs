@@ -125,6 +125,12 @@ namespace Square.Models
             private string description;
             private Models.Money amountMoney;
 
+            /// <summary>
+            /// Initialize Builder for ChargeRequestAdditionalRecipient.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
+            /// <param name="description"> description. </param>
+            /// <param name="amountMoney"> amountMoney. </param>
             public Builder(
                 string locationId,
                 string description,

@@ -158,6 +158,11 @@ namespace Square.Models
             private Models.LoyaltyEventAdjustPoints adjustPoints;
             private bool? allowNegativeBalance;
 
+            /// <summary>
+            /// Initialize Builder for AdjustLoyaltyPointsRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="adjustPoints"> adjustPoints. </param>
             public Builder(
                 string idempotencyKey,
                 Models.LoyaltyEventAdjustPoints adjustPoints)

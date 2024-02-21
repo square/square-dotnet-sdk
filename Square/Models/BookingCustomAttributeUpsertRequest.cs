@@ -157,6 +157,11 @@ namespace Square.Models
             private Models.CustomAttribute customAttribute;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for BookingCustomAttributeUpsertRequest.
+            /// </summary>
+            /// <param name="bookingId"> bookingId. </param>
+            /// <param name="customAttribute"> customAttribute. </param>
             public Builder(
                 string bookingId,
                 Models.CustomAttribute customAttribute)

@@ -107,6 +107,11 @@ namespace Square.Models
             private string one;
             private string other;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyProgramTerminology.
+            /// </summary>
+            /// <param name="one"> one. </param>
+            /// <param name="other"> other. </param>
             public Builder(
                 string one,
                 string other)

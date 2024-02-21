@@ -232,6 +232,11 @@ namespace Square.Models
             private IList<Models.ChargeRequestAdditionalRecipient> additionalRecipients;
             private string note;
 
+            /// <summary>
+            /// Initialize Builder for CreateCheckoutRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="order"> order. </param>
             public Builder(
                 string idempotencyKey,
                 Models.CreateOrderRequest order)

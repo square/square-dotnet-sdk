@@ -95,6 +95,10 @@ namespace Square.Models
         {
             private string expirationDuration;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyProgramExpirationPolicy.
+            /// </summary>
+            /// <param name="expirationDuration"> expirationDuration. </param>
             public Builder(
                 string expirationDuration)
             {

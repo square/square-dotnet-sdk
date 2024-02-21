@@ -109,6 +109,11 @@ namespace Square.Models
             private string idempotencyKey;
             private Models.DeviceCode deviceCode;
 
+            /// <summary>
+            /// Initialize Builder for CreateDeviceCodeRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
+            /// <param name="deviceCode"> deviceCode. </param>
             public Builder(
                 string idempotencyKey,
                 Models.DeviceCode deviceCode)

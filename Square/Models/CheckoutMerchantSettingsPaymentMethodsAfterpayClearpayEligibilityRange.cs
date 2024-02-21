@@ -117,6 +117,11 @@ namespace Square.Models
             private Models.Money min;
             private Models.Money max;
 
+            /// <summary>
+            /// Initialize Builder for CheckoutMerchantSettingsPaymentMethodsAfterpayClearpayEligibilityRange.
+            /// </summary>
+            /// <param name="min"> min. </param>
+            /// <param name="max"> max. </param>
             public Builder(
                 Models.Money min,
                 Models.Money max)

@@ -157,6 +157,11 @@ namespace Square.Models
             private string orderId;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.
+            /// </summary>
+            /// <param name="customAttribute"> customAttribute. </param>
+            /// <param name="orderId"> orderId. </param>
             public Builder(
                 Models.CustomAttribute customAttribute,
                 string orderId)

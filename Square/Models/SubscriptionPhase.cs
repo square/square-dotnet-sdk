@@ -237,6 +237,10 @@ namespace Square.Models
             private long? ordinal;
             private Models.SubscriptionPricing pricing;
 
+            /// <summary>
+            /// Initialize Builder for SubscriptionPhase.
+            /// </summary>
+            /// <param name="cadence"> cadence. </param>
             public Builder(
                 string cadence)
             {

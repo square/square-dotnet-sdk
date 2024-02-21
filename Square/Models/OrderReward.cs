@@ -107,6 +107,11 @@ namespace Square.Models
             private string id;
             private string rewardTierId;
 
+            /// <summary>
+            /// Initialize Builder for OrderReward.
+            /// </summary>
+            /// <param name="id"> id. </param>
+            /// <param name="rewardTierId"> rewardTierId. </param>
             public Builder(
                 string id,
                 string rewardTierId)

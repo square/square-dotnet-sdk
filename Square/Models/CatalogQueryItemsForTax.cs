@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private IList<string> taxIds;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQueryItemsForTax.
+            /// </summary>
+            /// <param name="taxIds"> taxIds. </param>
             public Builder(
                 IList<string> taxIds)
             {

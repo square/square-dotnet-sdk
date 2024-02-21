@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private Models.CheckoutLocationSettings locationSettings;
 
+            /// <summary>
+            /// Initialize Builder for UpdateLocationSettingsRequest.
+            /// </summary>
+            /// <param name="locationSettings"> locationSettings. </param>
             public Builder(
                 Models.CheckoutLocationSettings locationSettings)
             {

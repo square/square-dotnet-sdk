@@ -15,7 +15,6 @@ namespace Square.Apis
     using APIMatic.Core.Utilities.Date.Xml;
     using Newtonsoft.Json.Converters;
     using Square;
-    using Square.Authentication;
     using Square.Http.Client;
     using Square.Utilities;
     using System.Net.Http;
@@ -378,8 +377,10 @@ namespace Square.Apis
         /// nothing. Square also makes the invoice available on a Square-hosted invoice page. .
         /// The invoice `status` also changes from `DRAFT` to a status .
         /// based on the invoice configuration. For example, the status changes to `UNPAID` if .
-        /// Square emails the invoice or `PARTIALLY_PAID` if Square charge a card on file for a portion of the .
+        /// Square emails the invoice or `PARTIALLY_PAID` if Square charges a card on file for a portion of the .
         /// invoice amount.
+        /// In addition to the required `ORDERS_WRITE` and `INVOICES_WRITE` permissions, `CUSTOMERS_READ`.
+        /// and `PAYMENTS_WRITE` are required when publishing invoices configured for card-on-file payments.
         /// </summary>
         /// <param name="invoiceId">Required parameter: The ID of the invoice to publish..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -397,8 +398,10 @@ namespace Square.Apis
         /// nothing. Square also makes the invoice available on a Square-hosted invoice page. .
         /// The invoice `status` also changes from `DRAFT` to a status .
         /// based on the invoice configuration. For example, the status changes to `UNPAID` if .
-        /// Square emails the invoice or `PARTIALLY_PAID` if Square charge a card on file for a portion of the .
+        /// Square emails the invoice or `PARTIALLY_PAID` if Square charges a card on file for a portion of the .
         /// invoice amount.
+        /// In addition to the required `ORDERS_WRITE` and `INVOICES_WRITE` permissions, `CUSTOMERS_READ`.
+        /// and `PAYMENTS_WRITE` are required when publishing invoices configured for card-on-file payments.
         /// </summary>
         /// <param name="invoiceId">Required parameter: The ID of the invoice to publish..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

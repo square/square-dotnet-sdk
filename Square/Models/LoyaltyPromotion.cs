@@ -342,6 +342,12 @@ namespace Square.Models
             private IList<string> qualifyingItemVariationIds;
             private IList<string> qualifyingCategoryIds;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyPromotion.
+            /// </summary>
+            /// <param name="name"> name. </param>
+            /// <param name="incentive"> incentive. </param>
+            /// <param name="availableTime"> availableTime. </param>
             public Builder(
                 string name,
                 Models.LoyaltyPromotionIncentive incentive,

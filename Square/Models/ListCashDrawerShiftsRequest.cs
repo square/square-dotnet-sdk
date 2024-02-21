@@ -249,6 +249,10 @@ namespace Square.Models
             private int? limit;
             private string cursor;
 
+            /// <summary>
+            /// Initialize Builder for ListCashDrawerShiftsRequest.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 string locationId)
             {

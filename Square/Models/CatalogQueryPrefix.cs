@@ -107,6 +107,11 @@ namespace Square.Models
             private string attributeName;
             private string attributePrefix;
 
+            /// <summary>
+            /// Initialize Builder for CatalogQueryPrefix.
+            /// </summary>
+            /// <param name="attributeName"> attributeName. </param>
+            /// <param name="attributePrefix"> attributePrefix. </param>
             public Builder(
                 string attributeName,
                 string attributePrefix)

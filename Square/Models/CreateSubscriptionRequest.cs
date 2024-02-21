@@ -274,6 +274,11 @@ namespace Square.Models
             private int? monthlyBillingAnchorDate;
             private IList<Models.Phase> phases;
 
+            /// <summary>
+            /// Initialize Builder for CreateSubscriptionRequest.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
+            /// <param name="customerId"> customerId. </param>
             public Builder(
                 string locationId,
                 string customerId)

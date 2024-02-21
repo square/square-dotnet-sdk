@@ -97,6 +97,10 @@ namespace Square.Models
         {
             private int pointsAddition;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyPromotionIncentivePointsAdditionData.
+            /// </summary>
+            /// <param name="pointsAddition"> pointsAddition. </param>
             public Builder(
                 int pointsAddition)
             {

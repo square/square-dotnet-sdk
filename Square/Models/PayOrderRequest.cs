@@ -175,6 +175,10 @@ namespace Square.Models
             private int? orderVersion;
             private IList<string> paymentIds;
 
+            /// <summary>
+            /// Initialize Builder for PayOrderRequest.
+            /// </summary>
+            /// <param name="idempotencyKey"> idempotencyKey. </param>
             public Builder(
                 string idempotencyKey)
             {

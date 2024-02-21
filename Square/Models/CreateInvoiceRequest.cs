@@ -111,6 +111,10 @@ namespace Square.Models
             private Models.Invoice invoice;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for CreateInvoiceRequest.
+            /// </summary>
+            /// <param name="invoice"> invoice. </param>
             public Builder(
                 Models.Invoice invoice)
             {

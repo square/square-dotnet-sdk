@@ -174,6 +174,10 @@ namespace Square.Models
             private string cursor;
             private int? limit;
 
+            /// <summary>
+            /// Initialize Builder for ListInvoicesRequest.
+            /// </summary>
+            /// <param name="locationId"> locationId. </param>
             public Builder(
                 string locationId)
             {

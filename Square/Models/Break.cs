@@ -219,6 +219,14 @@ namespace Square.Models
             private string id;
             private string endAt;
 
+            /// <summary>
+            /// Initialize Builder for Break.
+            /// </summary>
+            /// <param name="startAt"> startAt. </param>
+            /// <param name="breakTypeId"> breakTypeId. </param>
+            /// <param name="name"> name. </param>
+            /// <param name="expectedDuration"> expectedDuration. </param>
+            /// <param name="isPaid"> isPaid. </param>
             public Builder(
                 string startAt,
                 string breakTypeId,

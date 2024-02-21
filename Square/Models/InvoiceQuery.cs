@@ -107,6 +107,10 @@ namespace Square.Models
             private Models.InvoiceFilter filter;
             private Models.InvoiceSort sort;
 
+            /// <summary>
+            /// Initialize Builder for InvoiceQuery.
+            /// </summary>
+            /// <param name="filter"> filter. </param>
             public Builder(
                 Models.InvoiceFilter filter)
             {

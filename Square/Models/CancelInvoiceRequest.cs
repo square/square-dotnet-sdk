@@ -96,6 +96,10 @@ namespace Square.Models
         {
             private int version;
 
+            /// <summary>
+            /// Initialize Builder for CancelInvoiceRequest.
+            /// </summary>
+            /// <param name="version"> version. </param>
             public Builder(
                 int version)
             {

@@ -133,6 +133,10 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
 
+            /// <summary>
+            /// Initialize Builder for CustomerGroup.
+            /// </summary>
+            /// <param name="name"> name. </param>
             public Builder(
                 string name)
             {

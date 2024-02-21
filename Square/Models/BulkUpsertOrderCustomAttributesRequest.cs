@@ -94,6 +94,10 @@ namespace Square.Models
         {
             private IDictionary<string, Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute> values;
 
+            /// <summary>
+            /// Initialize Builder for BulkUpsertOrderCustomAttributesRequest.
+            /// </summary>
+            /// <param name="values"> values. </param>
             public Builder(
                 IDictionary<string, Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute> values)
             {

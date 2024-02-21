@@ -177,6 +177,11 @@ namespace Square.Models
             private Models.Money fixedDiscountMoney;
             private Models.Money maxDiscountMoney;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyProgramRewardDefinition.
+            /// </summary>
+            /// <param name="scope"> scope. </param>
+            /// <param name="discountType"> discountType. </param>
             public Builder(
                 string scope,
                 string discountType)

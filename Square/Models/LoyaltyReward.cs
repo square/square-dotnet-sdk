@@ -247,6 +247,11 @@ namespace Square.Models
             private string updatedAt;
             private string redeemedAt;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyReward.
+            /// </summary>
+            /// <param name="loyaltyAccountId"> loyaltyAccountId. </param>
+            /// <param name="rewardTierId"> rewardTierId. </param>
             public Builder(
                 string loyaltyAccountId,
                 string rewardTierId)

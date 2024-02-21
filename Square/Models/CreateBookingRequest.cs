@@ -108,6 +108,10 @@ namespace Square.Models
             private Models.Booking booking;
             private string idempotencyKey;
 
+            /// <summary>
+            /// Initialize Builder for CreateBookingRequest.
+            /// </summary>
+            /// <param name="booking"> booking. </param>
             public Builder(
                 Models.Booking booking)
             {

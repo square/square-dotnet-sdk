@@ -107,6 +107,10 @@ namespace Square.Models
             private string field;
             private string order;
 
+            /// <summary>
+            /// Initialize Builder for InvoiceSort.
+            /// </summary>
+            /// <param name="field"> field. </param>
             public Builder(
                 string field)
             {

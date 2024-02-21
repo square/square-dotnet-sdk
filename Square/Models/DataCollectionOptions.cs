@@ -134,6 +134,12 @@ namespace Square.Models
             private string inputType;
             private Models.CollectedData collectedData;
 
+            /// <summary>
+            /// Initialize Builder for DataCollectionOptions.
+            /// </summary>
+            /// <param name="title"> title. </param>
+            /// <param name="body"> body. </param>
+            /// <param name="inputType"> inputType. </param>
             public Builder(
                 string title,
                 string body,

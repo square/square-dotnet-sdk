@@ -96,6 +96,10 @@ namespace Square.Models
         {
             private IList<string> locationIds;
 
+            /// <summary>
+            /// Initialize Builder for LoyaltyEventLocationFilter.
+            /// </summary>
+            /// <param name="locationIds"> locationIds. </param>
             public Builder(
                 IList<string> locationIds)
             {

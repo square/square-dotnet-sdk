@@ -8,6 +8,7 @@ namespace Square
     using APIMatic.Core.Types;
     using NUnit.Framework;
     using Square;
+    using Square.Authentication;
     using Square.Http.Client;
     using Square.Models;
 
