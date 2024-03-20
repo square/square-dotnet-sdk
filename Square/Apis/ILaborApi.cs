@@ -193,17 +193,17 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a new `Shift`.
-        /// A `Shift` represents a complete workday for a single employee.
+        /// A `Shift` represents a complete workday for a single team member.
         /// You must provide the following values in your request to this.
         /// endpoint:.
         /// - `location_id`.
-        /// - `employee_id`.
+        /// - `team_member_id`.
         /// - `start_at`.
         /// An attempt to create a new `Shift` can result in a `BAD_REQUEST` error when:.
-        /// - The `status` of the new `Shift` is `OPEN` and the employee has another.
+        /// - The `status` of the new `Shift` is `OPEN` and the team member has another.
         /// shift with an `OPEN` status.
         /// - The `start_at` date is in the future.
-        /// - The `start_at` or `end_at` date overlaps another shift for the same employee.
+        /// - The `start_at` or `end_at` date overlaps another shift for the same team member.
         /// - The `Break` instances are set in the request and a break `start_at`.
         /// is before the `Shift.start_at`, a break `end_at` is after.
         /// the `Shift.end_at`, or both.
@@ -215,17 +215,17 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates a new `Shift`.
-        /// A `Shift` represents a complete workday for a single employee.
+        /// A `Shift` represents a complete workday for a single team member.
         /// You must provide the following values in your request to this.
         /// endpoint:.
         /// - `location_id`.
-        /// - `employee_id`.
+        /// - `team_member_id`.
         /// - `start_at`.
         /// An attempt to create a new `Shift` can result in a `BAD_REQUEST` error when:.
-        /// - The `status` of the new `Shift` is `OPEN` and the employee has another.
+        /// - The `status` of the new `Shift` is `OPEN` and the team member has another.
         /// shift with an `OPEN` status.
         /// - The `start_at` date is in the future.
-        /// - The `start_at` or `end_at` date overlaps another shift for the same employee.
+        /// - The `start_at` or `end_at` date overlaps another shift for the same team member.
         /// - The `Break` instances are set in the request and a break `start_at`.
         /// is before the `Shift.start_at`, a break `end_at` is after.
         /// the `Shift.end_at`, or both.
@@ -241,16 +241,16 @@ namespace Square.Apis
         /// Returns a paginated list of `Shift` records for a business.
         /// The list to be returned can be filtered by:.
         /// - Location IDs.
-        /// - Employee IDs.
-        /// - Shift status (`OPEN` and `CLOSED`).
+        /// - Team member IDs.
+        /// - Shift status (`OPEN` or `CLOSED`).
         /// - Shift start.
         /// - Shift end.
         /// - Workday details.
         /// The list can be sorted by:.
-        /// - `start_at`.
-        /// - `end_at`.
-        /// - `created_at`.
-        /// - `updated_at`.
+        /// - `START_AT`.
+        /// - `END_AT`.
+        /// - `CREATED_AT`.
+        /// - `UPDATED_AT`.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchShiftsResponse response from the API call.</returns>
@@ -261,16 +261,16 @@ namespace Square.Apis
         /// Returns a paginated list of `Shift` records for a business.
         /// The list to be returned can be filtered by:.
         /// - Location IDs.
-        /// - Employee IDs.
-        /// - Shift status (`OPEN` and `CLOSED`).
+        /// - Team member IDs.
+        /// - Shift status (`OPEN` or `CLOSED`).
         /// - Shift start.
         /// - Shift end.
         /// - Workday details.
         /// The list can be sorted by:.
-        /// - `start_at`.
-        /// - `end_at`.
-        /// - `created_at`.
-        /// - `updated_at`.
+        /// - `START_AT`.
+        /// - `END_AT`.
+        /// - `CREATED_AT`.
+        /// - `UPDATED_AT`.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -372,7 +372,7 @@ namespace Square.Apis
                 CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Returns a single `TeamMemberWage` specified by `id `.
+        /// Returns a single `TeamMemberWage` specified by `id`.
         /// </summary>
         /// <param name="id">Required parameter: The UUID for the `TeamMemberWage` being retrieved..</param>
         /// <returns>Returns the Models.GetTeamMemberWageResponse response from the API call.</returns>
@@ -380,7 +380,7 @@ namespace Square.Apis
                 string id);
 
         /// <summary>
-        /// Returns a single `TeamMemberWage` specified by `id `.
+        /// Returns a single `TeamMemberWage` specified by `id`.
         /// </summary>
         /// <param name="id">Required parameter: The UUID for the `TeamMemberWage` being retrieved..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
