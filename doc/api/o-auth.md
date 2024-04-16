@@ -10,80 +10,9 @@ IOAuthApi oAuthApi = client.OAuthApi;
 
 ## Methods
 
-* [Renew Token](../../doc/api/o-auth.md#renew-token)
 * [Revoke Token](../../doc/api/o-auth.md#revoke-token)
 * [Obtain Token](../../doc/api/o-auth.md#obtain-token)
 * [Retrieve Token Status](../../doc/api/o-auth.md#retrieve-token-status)
-
-
-# Renew Token
-
-**This endpoint is deprecated.**
-
-`RenewToken` is deprecated. For information about refreshing OAuth access tokens, see
-[Migrate from Renew to Refresh OAuth Tokens](https://developer.squareup.com/docs/oauth-api/migrate-to-refresh-tokens).
-
-Renews an OAuth access token before it expires.
-
-OAuth access tokens besides your application's personal access token expire after 30 days.
-You can also renew expired tokens within 15 days of their expiration.
-You cannot renew an access token that has been expired for more than 15 days.
-Instead, the associated user must recomplete the OAuth flow from the beginning.
-
-__Important:__ The `Authorization` header for this endpoint must have the
-following format:
-
-```
-Authorization: Client APPLICATION_SECRET
-```
-
-Replace `APPLICATION_SECRET` with the application secret on the **Credentials**
-page in the [Developer Dashboard](https://developer.squareup.com/apps).
-
-:information_source: **Note** This endpoint does not require authentication.
-
-```csharp
-RenewTokenAsync(
-    string clientId,
-    Models.RenewTokenRequest body,
-    string authorization)
-```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `clientId` | `string` | Template, Required | Your application ID, which is available on the **OAuth** page in the [Developer Dashboard](https://developer.squareup.com/apps). |
-| `body` | [`RenewTokenRequest`](../../doc/models/renew-token-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
-| `authorization` | `string` | Header, Required | Client APPLICATION_SECRET |
-
-## Response Type
-
-[`Task<Models.RenewTokenResponse>`](../../doc/models/renew-token-response.md)
-
-## Example Usage
-
-```csharp
-string clientId = "client_id8";
-Models.RenewTokenRequest body = new Models.RenewTokenRequest.Builder()
-.AccessToken("ACCESS_TOKEN")
-.Build();
-
-string authorization = "Client CLIENT_SECRET";
-try
-{
-    RenewTokenResponse result = await oAuthApi.RenewTokenAsync(
-        clientId,
-        body,
-        authorization
-    );
-}
-catch (ApiException e)
-{
-    // TODO: Handle exception here
-    Console.WriteLine(e.Message);
-}
-```
 
 
 # Revoke Token
