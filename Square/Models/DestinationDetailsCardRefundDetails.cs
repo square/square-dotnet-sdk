@@ -24,13 +24,16 @@ namespace Square.Models
         /// </summary>
         /// <param name="card">card.</param>
         /// <param name="entryMethod">entry_method.</param>
+        /// <param name="authResultCode">auth_result_code.</param>
         public DestinationDetailsCardRefundDetails(
             Models.Card card = null,
-            string entryMethod = null)
+            string entryMethod = null,
+            string authResultCode = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
-                { "entry_method", false }
+                { "entry_method", false },
+                { "auth_result_code", false }
             };
 
             this.Card = card;
@@ -40,14 +43,22 @@ namespace Square.Models
                 this.EntryMethod = entryMethod;
             }
 
+            if (authResultCode != null)
+            {
+                shouldSerialize["auth_result_code"] = true;
+                this.AuthResultCode = authResultCode;
+            }
+
         }
         internal DestinationDetailsCardRefundDetails(Dictionary<string, bool> shouldSerialize,
             Models.Card card = null,
-            string entryMethod = null)
+            string entryMethod = null,
+            string authResultCode = null)
         {
             this.shouldSerialize = shouldSerialize;
             Card = card;
             EntryMethod = entryMethod;
+            AuthResultCode = authResultCode;
         }
 
         /// <summary>
@@ -63,6 +74,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("entry_method")]
         public string EntryMethod { get; }
+
+        /// <summary>
+        /// The authorization code provided by the issuer when a refund is approved.
+        /// </summary>
+        [JsonProperty("auth_result_code")]
+        public string AuthResultCode { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -83,6 +100,15 @@ namespace Square.Models
             return this.shouldSerialize["entry_method"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeAuthResultCode()
+        {
+            return this.shouldSerialize["auth_result_code"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
@@ -96,14 +122,15 @@ namespace Square.Models
                 return true;
             }
             return obj is DestinationDetailsCardRefundDetails other &&                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
-                ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true));
+                ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true)) &&
+                ((this.AuthResultCode == null && other.AuthResultCode == null) || (this.AuthResultCode?.Equals(other.AuthResultCode) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -862425387;
-            hashCode = HashCode.Combine(this.Card, this.EntryMethod);
+            int hashCode = 603022044;
+            hashCode = HashCode.Combine(this.Card, this.EntryMethod, this.AuthResultCode);
 
             return hashCode;
         }
@@ -115,6 +142,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Card = {(this.Card == null ? "null" : this.Card.ToString())}");
             toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod)}");
+            toStringOutput.Add($"this.AuthResultCode = {(this.AuthResultCode == null ? "null" : this.AuthResultCode)}");
         }
 
         /// <summary>
@@ -125,7 +153,8 @@ namespace Square.Models
         {
             var builder = new Builder()
                 .Card(this.Card)
-                .EntryMethod(this.EntryMethod);
+                .EntryMethod(this.EntryMethod)
+                .AuthResultCode(this.AuthResultCode);
             return builder;
         }
 
@@ -137,10 +166,12 @@ namespace Square.Models
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
                 { "entry_method", false },
+                { "auth_result_code", false },
             };
 
             private Models.Card card;
             private string entryMethod;
+            private string authResultCode;
 
              /// <summary>
              /// Card.
@@ -165,12 +196,32 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// AuthResultCode.
+             /// </summary>
+             /// <param name="authResultCode"> authResultCode. </param>
+             /// <returns> Builder. </returns>
+            public Builder AuthResultCode(string authResultCode)
+            {
+                shouldSerialize["auth_result_code"] = true;
+                this.authResultCode = authResultCode;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
             public void UnsetEntryMethod()
             {
                 this.shouldSerialize["entry_method"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetAuthResultCode()
+            {
+                this.shouldSerialize["auth_result_code"] = false;
             }
 
 
@@ -182,7 +233,8 @@ namespace Square.Models
             {
                 return new DestinationDetailsCardRefundDetails(shouldSerialize,
                     this.card,
-                    this.entryMethod);
+                    this.entryMethod,
+                    this.authResultCode);
             }
         }
     }

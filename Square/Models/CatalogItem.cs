@@ -26,6 +26,7 @@ namespace Square.Models
         /// <param name="description">description.</param>
         /// <param name="abbreviation">abbreviation.</param>
         /// <param name="labelColor">label_color.</param>
+        /// <param name="isTaxable">is_taxable.</param>
         /// <param name="availableOnline">available_online.</param>
         /// <param name="availableForPickup">available_for_pickup.</param>
         /// <param name="availableElectronically">available_electronically.</param>
@@ -51,6 +52,7 @@ namespace Square.Models
             string description = null,
             string abbreviation = null,
             string labelColor = null,
+            bool? isTaxable = null,
             bool? availableOnline = null,
             bool? availableForPickup = null,
             bool? availableElectronically = null,
@@ -78,6 +80,7 @@ namespace Square.Models
                 { "description", false },
                 { "abbreviation", false },
                 { "label_color", false },
+                { "is_taxable", false },
                 { "available_online", false },
                 { "available_for_pickup", false },
                 { "available_electronically", false },
@@ -117,6 +120,12 @@ namespace Square.Models
             {
                 shouldSerialize["label_color"] = true;
                 this.LabelColor = labelColor;
+            }
+
+            if (isTaxable != null)
+            {
+                shouldSerialize["is_taxable"] = true;
+                this.IsTaxable = isTaxable;
             }
 
             if (availableOnline != null)
@@ -220,6 +229,7 @@ namespace Square.Models
             string description = null,
             string abbreviation = null,
             string labelColor = null,
+            bool? isTaxable = null,
             bool? availableOnline = null,
             bool? availableForPickup = null,
             bool? availableElectronically = null,
@@ -246,6 +256,7 @@ namespace Square.Models
             Description = description;
             Abbreviation = abbreviation;
             LabelColor = labelColor;
+            IsTaxable = isTaxable;
             AvailableOnline = availableOnline;
             AvailableForPickup = availableForPickup;
             AvailableElectronically = availableElectronically;
@@ -297,6 +308,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("label_color")]
         public string LabelColor { get; }
+
+        /// <summary>
+        /// Indicates whether the item is taxable (`true`) or non-taxable (`false`). Default is `true`.
+        /// </summary>
+        [JsonProperty("is_taxable")]
+        public bool? IsTaxable { get; }
 
         /// <summary>
         /// If `true`, the item can be added to shipping orders from the merchant's online store.
@@ -507,6 +524,15 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeIsTaxable()
+        {
+            return this.shouldSerialize["is_taxable"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
         public bool ShouldSerializeAvailableOnline()
         {
             return this.shouldSerialize["available_online"];
@@ -654,6 +680,7 @@ namespace Square.Models
                 ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
                 ((this.Abbreviation == null && other.Abbreviation == null) || (this.Abbreviation?.Equals(other.Abbreviation) == true)) &&
                 ((this.LabelColor == null && other.LabelColor == null) || (this.LabelColor?.Equals(other.LabelColor) == true)) &&
+                ((this.IsTaxable == null && other.IsTaxable == null) || (this.IsTaxable?.Equals(other.IsTaxable) == true)) &&
                 ((this.AvailableOnline == null && other.AvailableOnline == null) || (this.AvailableOnline?.Equals(other.AvailableOnline) == true)) &&
                 ((this.AvailableForPickup == null && other.AvailableForPickup == null) || (this.AvailableForPickup?.Equals(other.AvailableForPickup) == true)) &&
                 ((this.AvailableElectronically == null && other.AvailableElectronically == null) || (this.AvailableElectronically?.Equals(other.AvailableElectronically) == true)) &&
@@ -679,14 +706,14 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -32689781;
-            hashCode = HashCode.Combine(this.Name, this.Description, this.Abbreviation, this.LabelColor, this.AvailableOnline, this.AvailableForPickup, this.AvailableElectronically);
+            int hashCode = -671057138;
+            hashCode = HashCode.Combine(this.Name, this.Description, this.Abbreviation, this.LabelColor, this.IsTaxable, this.AvailableOnline, this.AvailableForPickup);
 
-            hashCode = HashCode.Combine(hashCode, this.CategoryId, this.TaxIds, this.ModifierListInfo, this.Variations, this.ProductType, this.SkipModifierScreen, this.ItemOptions);
+            hashCode = HashCode.Combine(hashCode, this.AvailableElectronically, this.CategoryId, this.TaxIds, this.ModifierListInfo, this.Variations, this.ProductType, this.SkipModifierScreen);
 
-            hashCode = HashCode.Combine(hashCode, this.ImageIds, this.SortName, this.Categories, this.DescriptionHtml, this.DescriptionPlaintext, this.Channels, this.IsArchived);
+            hashCode = HashCode.Combine(hashCode, this.ItemOptions, this.ImageIds, this.SortName, this.Categories, this.DescriptionHtml, this.DescriptionPlaintext, this.Channels);
 
-            hashCode = HashCode.Combine(hashCode, this.EcomSeoData, this.FoodAndBeverageDetails, this.ReportingCategory);
+            hashCode = HashCode.Combine(hashCode, this.IsArchived, this.EcomSeoData, this.FoodAndBeverageDetails, this.ReportingCategory);
 
             return hashCode;
         }
@@ -700,6 +727,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
             toStringOutput.Add($"this.Abbreviation = {(this.Abbreviation == null ? "null" : this.Abbreviation)}");
             toStringOutput.Add($"this.LabelColor = {(this.LabelColor == null ? "null" : this.LabelColor)}");
+            toStringOutput.Add($"this.IsTaxable = {(this.IsTaxable == null ? "null" : this.IsTaxable.ToString())}");
             toStringOutput.Add($"this.AvailableOnline = {(this.AvailableOnline == null ? "null" : this.AvailableOnline.ToString())}");
             toStringOutput.Add($"this.AvailableForPickup = {(this.AvailableForPickup == null ? "null" : this.AvailableForPickup.ToString())}");
             toStringOutput.Add($"this.AvailableElectronically = {(this.AvailableElectronically == null ? "null" : this.AvailableElectronically.ToString())}");
@@ -733,6 +761,7 @@ namespace Square.Models
                 .Description(this.Description)
                 .Abbreviation(this.Abbreviation)
                 .LabelColor(this.LabelColor)
+                .IsTaxable(this.IsTaxable)
                 .AvailableOnline(this.AvailableOnline)
                 .AvailableForPickup(this.AvailableForPickup)
                 .AvailableElectronically(this.AvailableElectronically)
@@ -767,6 +796,7 @@ namespace Square.Models
                 { "description", false },
                 { "abbreviation", false },
                 { "label_color", false },
+                { "is_taxable", false },
                 { "available_online", false },
                 { "available_for_pickup", false },
                 { "available_electronically", false },
@@ -788,6 +818,7 @@ namespace Square.Models
             private string description;
             private string abbreviation;
             private string labelColor;
+            private bool? isTaxable;
             private bool? availableOnline;
             private bool? availableForPickup;
             private bool? availableElectronically;
@@ -854,6 +885,18 @@ namespace Square.Models
             {
                 shouldSerialize["label_color"] = true;
                 this.labelColor = labelColor;
+                return this;
+            }
+
+             /// <summary>
+             /// IsTaxable.
+             /// </summary>
+             /// <param name="isTaxable"> isTaxable. </param>
+             /// <returns> Builder. </returns>
+            public Builder IsTaxable(bool? isTaxable)
+            {
+                shouldSerialize["is_taxable"] = true;
+                this.isTaxable = isTaxable;
                 return this;
             }
 
@@ -1127,6 +1170,14 @@ namespace Square.Models
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
+            public void UnsetIsTaxable()
+            {
+                this.shouldSerialize["is_taxable"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
             public void UnsetAvailableOnline()
             {
                 this.shouldSerialize["available_online"] = false;
@@ -1256,6 +1307,7 @@ namespace Square.Models
                     this.description,
                     this.abbreviation,
                     this.labelColor,
+                    this.isTaxable,
                     this.availableOnline,
                     this.availableForPickup,
                     this.availableElectronically,
