@@ -62,6 +62,7 @@ namespace Square.Models
         /// <param name="receiptUrl">receipt_url.</param>
         /// <param name="deviceDetails">device_details.</param>
         /// <param name="applicationDetails">application_details.</param>
+        /// <param name="isOfflinePayment">is_offline_payment.</param>
         /// <param name="versionToken">version_token.</param>
         public Payment(
             string id = null,
@@ -104,6 +105,7 @@ namespace Square.Models
             string receiptUrl = null,
             Models.DeviceDetails deviceDetails = null,
             Models.ApplicationDetails applicationDetails = null,
+            bool? isOfflinePayment = null,
             string versionToken = null)
         {
             shouldSerialize = new Dictionary<string, bool>
@@ -157,6 +159,7 @@ namespace Square.Models
             this.ReceiptUrl = receiptUrl;
             this.DeviceDetails = deviceDetails;
             this.ApplicationDetails = applicationDetails;
+            this.IsOfflinePayment = isOfflinePayment;
             if (versionToken != null)
             {
                 shouldSerialize["version_token"] = true;
@@ -205,6 +208,7 @@ namespace Square.Models
             string receiptUrl = null,
             Models.DeviceDetails deviceDetails = null,
             Models.ApplicationDetails applicationDetails = null,
+            bool? isOfflinePayment = null,
             string versionToken = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -248,6 +252,7 @@ namespace Square.Models
             ReceiptUrl = receiptUrl;
             DeviceDetails = deviceDetails;
             ApplicationDetails = applicationDetails;
+            IsOfflinePayment = isOfflinePayment;
             VersionToken = versionToken;
         }
 
@@ -573,6 +578,12 @@ namespace Square.Models
         public Models.ApplicationDetails ApplicationDetails { get; }
 
         /// <summary>
+        /// Whether or not this payment was taken offline.
+        /// </summary>
+        [JsonProperty("is_offline_payment", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsOfflinePayment { get; }
+
+        /// <summary>
         /// Used for optimistic concurrency. This opaque token identifies a specific version of the
         /// `Payment` object.
         /// </summary>
@@ -659,13 +670,14 @@ namespace Square.Models
                 ((this.ReceiptUrl == null && other.ReceiptUrl == null) || (this.ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
                 ((this.DeviceDetails == null && other.DeviceDetails == null) || (this.DeviceDetails?.Equals(other.DeviceDetails) == true)) &&
                 ((this.ApplicationDetails == null && other.ApplicationDetails == null) || (this.ApplicationDetails?.Equals(other.ApplicationDetails) == true)) &&
+                ((this.IsOfflinePayment == null && other.IsOfflinePayment == null) || (this.IsOfflinePayment?.Equals(other.IsOfflinePayment) == true)) &&
                 ((this.VersionToken == null && other.VersionToken == null) || (this.VersionToken?.Equals(other.VersionToken) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1155904926;
+            int hashCode = -1515154210;
             hashCode = HashCode.Combine(this.Id, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.TipMoney, this.TotalMoney, this.AppFeeMoney);
 
             hashCode = HashCode.Combine(hashCode, this.ApprovedMoney, this.ProcessingFee, this.RefundedMoney, this.Status, this.DelayDuration, this.DelayAction, this.DelayedUntil);
@@ -676,7 +688,7 @@ namespace Square.Models
 
             hashCode = HashCode.Combine(hashCode, this.RefundIds, this.RiskEvaluation, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier);
 
-            hashCode = HashCode.Combine(hashCode, this.Capabilities, this.ReceiptNumber, this.ReceiptUrl, this.DeviceDetails, this.ApplicationDetails, this.VersionToken);
+            hashCode = HashCode.Combine(hashCode, this.Capabilities, this.ReceiptNumber, this.ReceiptUrl, this.DeviceDetails, this.ApplicationDetails, this.IsOfflinePayment, this.VersionToken);
 
             return hashCode;
         }
@@ -726,6 +738,7 @@ namespace Square.Models
             toStringOutput.Add($"this.ReceiptUrl = {(this.ReceiptUrl == null ? "null" : this.ReceiptUrl)}");
             toStringOutput.Add($"this.DeviceDetails = {(this.DeviceDetails == null ? "null" : this.DeviceDetails.ToString())}");
             toStringOutput.Add($"this.ApplicationDetails = {(this.ApplicationDetails == null ? "null" : this.ApplicationDetails.ToString())}");
+            toStringOutput.Add($"this.IsOfflinePayment = {(this.IsOfflinePayment == null ? "null" : this.IsOfflinePayment.ToString())}");
             toStringOutput.Add($"this.VersionToken = {(this.VersionToken == null ? "null" : this.VersionToken)}");
         }
 
@@ -776,6 +789,7 @@ namespace Square.Models
                 .ReceiptUrl(this.ReceiptUrl)
                 .DeviceDetails(this.DeviceDetails)
                 .ApplicationDetails(this.ApplicationDetails)
+                .IsOfflinePayment(this.IsOfflinePayment)
                 .VersionToken(this.VersionToken);
             return builder;
         }
@@ -831,6 +845,7 @@ namespace Square.Models
             private string receiptUrl;
             private Models.DeviceDetails deviceDetails;
             private Models.ApplicationDetails applicationDetails;
+            private bool? isOfflinePayment;
             private string versionToken;
 
              /// <summary>
@@ -1275,6 +1290,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// IsOfflinePayment.
+             /// </summary>
+             /// <param name="isOfflinePayment"> isOfflinePayment. </param>
+             /// <returns> Builder. </returns>
+            public Builder IsOfflinePayment(bool? isOfflinePayment)
+            {
+                this.isOfflinePayment = isOfflinePayment;
+                return this;
+            }
+
+             /// <summary>
              /// VersionToken.
              /// </summary>
              /// <param name="versionToken"> versionToken. </param>
@@ -1350,6 +1376,7 @@ namespace Square.Models
                     this.receiptUrl,
                     this.deviceDetails,
                     this.applicationDetails,
+                    this.isOfflinePayment,
                     this.versionToken);
             }
         }

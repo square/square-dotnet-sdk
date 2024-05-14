@@ -43,7 +43,7 @@ namespace Square
         };
 
         private readonly GlobalConfiguration globalConfiguration;
-        private const string userAgent = "Square-DotNet-SDK/36.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+        private const string userAgent = "Square-DotNet-SDK/37.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
         private readonly HttpCallBack httpCallBack;
         private readonly IDictionary<string, List<string>> additionalHeaders;
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
@@ -420,7 +420,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "36.0.0";
+        public string SdkVersion => "37.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -578,7 +578,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2024-04-17";
+            private string squareVersion = "2024-05-15";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
@@ -677,6 +677,7 @@ namespace Square
                 return this;
             }
 
+
             /// <summary>
             /// Sets the AdditionalHeaders for the Builder.
             /// </summary>
@@ -741,7 +742,6 @@ namespace Square
             /// <returns>SquareClient.</returns>
             public SquareClient Build()
             {
-
                 if (bearerAuthModel.AccessToken == null)
                 {
                     bearerAuthModel = null;
