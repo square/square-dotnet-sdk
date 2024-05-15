@@ -43,7 +43,7 @@ namespace Square
         };
 
         private readonly GlobalConfiguration globalConfiguration;
-        private const string userAgent = "Square-DotNet-SDK/37.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+        private const string userAgent = "Square-DotNet-SDK/37.0.1 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
         private readonly HttpCallBack httpCallBack;
         private readonly IDictionary<string, List<string>> additionalHeaders;
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
@@ -420,7 +420,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "37.0.0";
+        public string SdkVersion => "37.0.1";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -557,13 +557,13 @@ namespace Square
 
         private void SetupAdditionalHeaders(AdditionalHeaderParams additionalHeaderParams)
         {
-            if (additionalHeaders != null)
+            if (additionalHeaders == null)
             {
                 return;
             }
             foreach (var entry in additionalHeaders)
             {
-                additionalHeaderParams.Setup(entry.Key, entry.Value);
+                additionalHeaderParams.Setup(entry.Key, string.Join(", ", entry.Value));
             }
         }
 
