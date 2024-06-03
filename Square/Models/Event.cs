@@ -95,7 +95,7 @@ namespace Square.Models
         public string MerchantId { get; }
 
         /// <summary>
-        /// The ID of the location associated with the event.
+        /// The ID of the target location associated with the event.
         /// </summary>
         [JsonProperty("location_id")]
         public string LocationId { get; }

@@ -43,7 +43,7 @@ namespace Square
         };
 
         private readonly GlobalConfiguration globalConfiguration;
-        private const string userAgent = "Square-DotNet-SDK/37.0.1 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+        private const string userAgent = "Square-DotNet-SDK/37.1.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
         private readonly HttpCallBack httpCallBack;
         private readonly IDictionary<string, List<string>> additionalHeaders;
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
@@ -63,6 +63,7 @@ namespace Square
         private readonly Lazy<IDevicesApi> devices;
         private readonly Lazy<IDisputesApi> disputes;
         private readonly Lazy<IEmployeesApi> employees;
+        private readonly Lazy<IEventsApi> events;
         private readonly Lazy<IGiftCardsApi> giftCards;
         private readonly Lazy<IGiftCardActivitiesApi> giftCardActivities;
         private readonly Lazy<IInventoryApi> inventory;
@@ -157,6 +158,8 @@ namespace Square
                 () => new DisputesApi(globalConfiguration));
             this.employees = new Lazy<IEmployeesApi>(
                 () => new EmployeesApi(globalConfiguration));
+            this.events = new Lazy<IEventsApi>(
+                () => new EventsApi(globalConfiguration));
             this.giftCards = new Lazy<IGiftCardsApi>(
                 () => new GiftCardsApi(globalConfiguration));
             this.giftCardActivities = new Lazy<IGiftCardActivitiesApi>(
@@ -293,6 +296,11 @@ namespace Square
         public IEmployeesApi EmployeesApi => this.employees.Value;
 
         /// <summary>
+        /// Gets EventsApi.
+        /// </summary>
+        public IEventsApi EventsApi => this.events.Value;
+
+        /// <summary>
         /// Gets GiftCardsApi.
         /// </summary>
         public IGiftCardsApi GiftCardsApi => this.giftCards.Value;
@@ -420,7 +428,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "37.0.1";
+        public string SdkVersion => "37.1.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -578,7 +586,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2024-05-15";
+            private string squareVersion = "2024-06-04";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
