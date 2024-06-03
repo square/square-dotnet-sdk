@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2024-05-15"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2024-06-04"` |
 | `CustomUrl` | `string` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `"https://connect.squareup.com"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(60)` |
@@ -21,7 +21,7 @@ Square.SquareClient client = new Square.SquareClient.Builder()
             "AccessToken"
         )
         .Build())
-    .SquareVersion("2024-05-15")
+    .SquareVersion("2024-06-04")
     .Environment(Square.Environment.Production)
     .CustomUrl("https://connect.squareup.com")
     .Build();
@@ -49,7 +49,7 @@ namespace Testing
                         "AccessToken"
                     )
                     .Build())
-                .SquareVersion("2024-05-15")
+                .SquareVersion("2024-06-04")
                 .Build();
 
             ILocationsApi locationsApi = client.LocationsApi;
@@ -93,6 +93,7 @@ The gateway for the SDK. This class acts as a factory for the Apis and also hold
 | DevicesApi | Gets DevicesApi. |
 | DisputesApi | Gets DisputesApi. |
 | EmployeesApi | Gets EmployeesApi. |
+| EventsApi | Gets EventsApi. |
 | GiftCardsApi | Gets GiftCardsApi. |
 | GiftCardActivitiesApi | Gets GiftCardActivitiesApi. |
 | InventoryApi | Gets InventoryApi. |

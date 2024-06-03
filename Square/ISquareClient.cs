@@ -94,6 +94,11 @@ namespace Square
         IEmployeesApi EmployeesApi { get; }
 
         /// <summary>
+        /// Gets instance for IEventsApi.
+        /// </summary>
+        IEventsApi EventsApi { get; }
+
+        /// <summary>
         /// Gets instance for IGiftCardsApi.
         /// </summary>
         IGiftCardsApi GiftCardsApi { get; }

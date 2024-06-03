@@ -9,10 +9,10 @@
 
 | Name | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `Type` | `string` | Optional | Name of the affected object’s type. |
-| `Id` | `string` | Optional | ID of the affected object. |
-| `Deleted` | `bool?` | Optional | Is true if the affected object was deleted. Otherwise absent. |
-| `MObject` | `JsonObject` | Optional | An object containing fields and values relevant to the event. Is absent if affected object was deleted. |
+| `Type` | `string` | Optional | The name of the affected object’s type. |
+| `Id` | `string` | Optional | The ID of the affected object. |
+| `Deleted` | `bool?` | Optional | This is true if the affected object has been deleted; otherwise, it's absent. |
+| `MObject` | `JsonObject` | Optional | An object containing fields and values relevant to the event. It is absent if the affected object has been deleted. |
 
 ## Example (as JSON)
 
