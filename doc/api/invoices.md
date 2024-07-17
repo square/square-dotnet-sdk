@@ -302,10 +302,10 @@ catch (ApiException e)
 
 # Update Invoice
 
-Updates an invoice by modifying fields, clearing fields, or both. For most updates, you can use a sparse
-`Invoice` object to add fields or change values and use the `fields_to_clear` field to specify fields to clear.
-However, some restrictions apply. For example, you cannot change the `order_id` or `location_id` field and you
-must provide the complete `custom_fields` list to update a custom field. Published invoices have additional restrictions.
+Updates an invoice. This endpoint supports sparse updates, so you only need
+to specify the fields you want to change along with the required `version` field.
+Some restrictions apply to updating invoices. For example, you cannot change the
+`order_id` or `location_id` field.
 
 ```csharp
 UpdateInvoiceAsync(
@@ -337,16 +337,21 @@ Models.UpdateInvoiceRequest body = new Models.UpdateInvoiceRequest.Builder(
             new Models.InvoicePaymentRequest.Builder()
             .Uid("2da7964f-f3d2-4f43-81e8-5aa220bf3355")
             .TippingEnabled(false)
+            .Reminders(
+                new List<Models.InvoicePaymentReminder>
+                {
+                    new Models.InvoicePaymentReminder.Builder()
+                    .Build(),
+                    new Models.InvoicePaymentReminder.Builder()
+                    .Build(),
+                    new Models.InvoicePaymentReminder.Builder()
+                    .Build(),
+                })
             .Build(),
         })
     .Build()
 )
 .IdempotencyKey("4ee82288-0910-499e-ab4c-5d0071dad1be")
-.FieldsToClear(
-    new List<string>
-    {
-        "payments_requests[2da7964f-f3d2-4f43-81e8-5aa220bf3355].reminders",
-    })
 .Build();
 
 try
