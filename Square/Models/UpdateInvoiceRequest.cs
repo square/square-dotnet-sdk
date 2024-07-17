@@ -78,8 +78,9 @@ namespace Square.Models
         public string IdempotencyKey { get; }
 
         /// <summary>
-        /// The list of fields to clear.
-        /// For examples, see [Update an Invoice](https://developer.squareup.com/docs/invoices-api/update-invoices).
+        /// The list of fields to clear. Although this field is currently supported, we
+        /// recommend using null values or the `remove` field when possible. For examples, see
+        /// [Update an Invoice](https://developer.squareup.com/docs/invoices-api/update-invoices).
         /// </summary>
         [JsonProperty("fields_to_clear")]
         public IList<string> FieldsToClear { get; }

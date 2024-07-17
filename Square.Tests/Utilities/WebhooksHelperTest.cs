@@ -21,6 +21,18 @@ namespace Square.Tests.Utilities
         }
 
         [Test]
+        public void IsValidWebhookEventSignatureIsTrueForEscapedBodyValidNotification()
+        {
+            const string escpaedRequestBody = "{\"data\":{\"type\":\"webhooks\",\"id\":\">id<\"}}";
+            const string newSignatureHeader = "Cxt7+aTi4rKgcA0bC4g9EHdVtLSDWdqccmL5MvihU4U=";
+            const string signatureKey = "signature-key";
+            const string url = "https://webhook.site/webhooks";
+            
+            var result = WebhooksHelper.IsValidWebhookEventSignature(escpaedRequestBody, newSignatureHeader, signatureKey, url);
+            Assert.True(result);
+        }
+
+        [Test]
         public void IsValidWebhookEventSignatureIsFalseIfNotificationUrlMismatch()
         {
             var result = WebhooksHelper.IsValidWebhookEventSignature(BODY_STRING, SIGNATURE_HEADER, SIGNATURE_KEY, "https://webhook.site/79a4f3a-dcfa-49ee-bac5-9d0edad886b9");
