@@ -63,6 +63,7 @@ namespace Square.Models
         /// <param name="deviceDetails">device_details.</param>
         /// <param name="applicationDetails">application_details.</param>
         /// <param name="isOfflinePayment">is_offline_payment.</param>
+        /// <param name="offlinePaymentDetails">offline_payment_details.</param>
         /// <param name="versionToken">version_token.</param>
         public Payment(
             string id = null,
@@ -106,11 +107,13 @@ namespace Square.Models
             Models.DeviceDetails deviceDetails = null,
             Models.ApplicationDetails applicationDetails = null,
             bool? isOfflinePayment = null,
+            Models.OfflinePaymentDetails offlinePaymentDetails = null,
             string versionToken = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "delay_action", false },
+                { "team_member_id", false },
                 { "version_token", false }
             };
 
@@ -146,7 +149,12 @@ namespace Square.Models
             this.ReferenceId = referenceId;
             this.CustomerId = customerId;
             this.EmployeeId = employeeId;
-            this.TeamMemberId = teamMemberId;
+            if (teamMemberId != null)
+            {
+                shouldSerialize["team_member_id"] = true;
+                this.TeamMemberId = teamMemberId;
+            }
+
             this.RefundIds = refundIds;
             this.RiskEvaluation = riskEvaluation;
             this.BuyerEmailAddress = buyerEmailAddress;
@@ -160,6 +168,7 @@ namespace Square.Models
             this.DeviceDetails = deviceDetails;
             this.ApplicationDetails = applicationDetails;
             this.IsOfflinePayment = isOfflinePayment;
+            this.OfflinePaymentDetails = offlinePaymentDetails;
             if (versionToken != null)
             {
                 shouldSerialize["version_token"] = true;
@@ -209,6 +218,7 @@ namespace Square.Models
             Models.DeviceDetails deviceDetails = null,
             Models.ApplicationDetails applicationDetails = null,
             bool? isOfflinePayment = null,
+            Models.OfflinePaymentDetails offlinePaymentDetails = null,
             string versionToken = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -253,6 +263,7 @@ namespace Square.Models
             DeviceDetails = deviceDetails;
             ApplicationDetails = applicationDetails;
             IsOfflinePayment = isOfflinePayment;
+            OfflinePaymentDetails = offlinePaymentDetails;
             VersionToken = versionToken;
         }
 
@@ -485,7 +496,7 @@ namespace Square.Models
         /// <summary>
         /// An optional ID of the [TeamMember](entity:TeamMember) associated with taking the payment.
         /// </summary>
-        [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }
 
         /// <summary>
@@ -584,6 +595,12 @@ namespace Square.Models
         public bool? IsOfflinePayment { get; }
 
         /// <summary>
+        /// Details specific to offline payments.
+        /// </summary>
+        [JsonProperty("offline_payment_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.OfflinePaymentDetails OfflinePaymentDetails { get; }
+
+        /// <summary>
         /// Used for optimistic concurrency. This opaque token identifies a specific version of the
         /// `Payment` object.
         /// </summary>
@@ -607,6 +624,15 @@ namespace Square.Models
         public bool ShouldSerializeDelayAction()
         {
             return this.shouldSerialize["delay_action"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTeamMemberId()
+        {
+            return this.shouldSerialize["team_member_id"];
         }
 
         /// <summary>
@@ -671,13 +697,14 @@ namespace Square.Models
                 ((this.DeviceDetails == null && other.DeviceDetails == null) || (this.DeviceDetails?.Equals(other.DeviceDetails) == true)) &&
                 ((this.ApplicationDetails == null && other.ApplicationDetails == null) || (this.ApplicationDetails?.Equals(other.ApplicationDetails) == true)) &&
                 ((this.IsOfflinePayment == null && other.IsOfflinePayment == null) || (this.IsOfflinePayment?.Equals(other.IsOfflinePayment) == true)) &&
+                ((this.OfflinePaymentDetails == null && other.OfflinePaymentDetails == null) || (this.OfflinePaymentDetails?.Equals(other.OfflinePaymentDetails) == true)) &&
                 ((this.VersionToken == null && other.VersionToken == null) || (this.VersionToken?.Equals(other.VersionToken) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1515154210;
+            int hashCode = -1495287124;
             hashCode = HashCode.Combine(this.Id, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.TipMoney, this.TotalMoney, this.AppFeeMoney);
 
             hashCode = HashCode.Combine(hashCode, this.ApprovedMoney, this.ProcessingFee, this.RefundedMoney, this.Status, this.DelayDuration, this.DelayAction, this.DelayedUntil);
@@ -688,7 +715,9 @@ namespace Square.Models
 
             hashCode = HashCode.Combine(hashCode, this.RefundIds, this.RiskEvaluation, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier);
 
-            hashCode = HashCode.Combine(hashCode, this.Capabilities, this.ReceiptNumber, this.ReceiptUrl, this.DeviceDetails, this.ApplicationDetails, this.IsOfflinePayment, this.VersionToken);
+            hashCode = HashCode.Combine(hashCode, this.Capabilities, this.ReceiptNumber, this.ReceiptUrl, this.DeviceDetails, this.ApplicationDetails, this.IsOfflinePayment, this.OfflinePaymentDetails);
+
+            hashCode = HashCode.Combine(hashCode, this.VersionToken);
 
             return hashCode;
         }
@@ -739,6 +768,7 @@ namespace Square.Models
             toStringOutput.Add($"this.DeviceDetails = {(this.DeviceDetails == null ? "null" : this.DeviceDetails.ToString())}");
             toStringOutput.Add($"this.ApplicationDetails = {(this.ApplicationDetails == null ? "null" : this.ApplicationDetails.ToString())}");
             toStringOutput.Add($"this.IsOfflinePayment = {(this.IsOfflinePayment == null ? "null" : this.IsOfflinePayment.ToString())}");
+            toStringOutput.Add($"this.OfflinePaymentDetails = {(this.OfflinePaymentDetails == null ? "null" : this.OfflinePaymentDetails.ToString())}");
             toStringOutput.Add($"this.VersionToken = {(this.VersionToken == null ? "null" : this.VersionToken)}");
         }
 
@@ -790,6 +820,7 @@ namespace Square.Models
                 .DeviceDetails(this.DeviceDetails)
                 .ApplicationDetails(this.ApplicationDetails)
                 .IsOfflinePayment(this.IsOfflinePayment)
+                .OfflinePaymentDetails(this.OfflinePaymentDetails)
                 .VersionToken(this.VersionToken);
             return builder;
         }
@@ -802,6 +833,7 @@ namespace Square.Models
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
                 { "delay_action", false },
+                { "team_member_id", false },
                 { "version_token", false },
             };
 
@@ -846,6 +878,7 @@ namespace Square.Models
             private Models.DeviceDetails deviceDetails;
             private Models.ApplicationDetails applicationDetails;
             private bool? isOfflinePayment;
+            private Models.OfflinePaymentDetails offlinePaymentDetails;
             private string versionToken;
 
              /// <summary>
@@ -1153,6 +1186,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TeamMemberId(string teamMemberId)
             {
+                shouldSerialize["team_member_id"] = true;
                 this.teamMemberId = teamMemberId;
                 return this;
             }
@@ -1301,6 +1335,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// OfflinePaymentDetails.
+             /// </summary>
+             /// <param name="offlinePaymentDetails"> offlinePaymentDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder OfflinePaymentDetails(Models.OfflinePaymentDetails offlinePaymentDetails)
+            {
+                this.offlinePaymentDetails = offlinePaymentDetails;
+                return this;
+            }
+
+             /// <summary>
              /// VersionToken.
              /// </summary>
              /// <param name="versionToken"> versionToken. </param>
@@ -1318,6 +1363,14 @@ namespace Square.Models
             public void UnsetDelayAction()
             {
                 this.shouldSerialize["delay_action"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serailized.
+            /// </summary>
+            public void UnsetTeamMemberId()
+            {
+                this.shouldSerialize["team_member_id"] = false;
             }
 
             /// <summary>
@@ -1377,6 +1430,7 @@ namespace Square.Models
                     this.deviceDetails,
                     this.applicationDetails,
                     this.isOfflinePayment,
+                    this.offlinePaymentDetails,
                     this.versionToken);
             }
         }

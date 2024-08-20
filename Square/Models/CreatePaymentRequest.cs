@@ -44,6 +44,7 @@ namespace Square.Models
         /// <param name="cashDetails">cash_details.</param>
         /// <param name="externalDetails">external_details.</param>
         /// <param name="customerDetails">customer_details.</param>
+        /// <param name="offlinePaymentDetails">offline_payment_details.</param>
         public CreatePaymentRequest(
             string sourceId,
             string idempotencyKey,
@@ -67,7 +68,8 @@ namespace Square.Models
             string statementDescriptionIdentifier = null,
             Models.CashPaymentDetails cashDetails = null,
             Models.ExternalPaymentDetails externalDetails = null,
-            Models.CustomerDetails customerDetails = null)
+            Models.CustomerDetails customerDetails = null,
+            Models.OfflinePaymentDetails offlinePaymentDetails = null)
         {
             this.SourceId = sourceId;
             this.IdempotencyKey = idempotencyKey;
@@ -92,6 +94,7 @@ namespace Square.Models
             this.CashDetails = cashDetails;
             this.ExternalDetails = externalDetails;
             this.CustomerDetails = customerDetails;
+            this.OfflinePaymentDetails = offlinePaymentDetails;
         }
 
         /// <summary>
@@ -298,6 +301,12 @@ namespace Square.Models
         [JsonProperty("customer_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.CustomerDetails CustomerDetails { get; }
 
+        /// <summary>
+        /// Details specific to offline payments.
+        /// </summary>
+        [JsonProperty("offline_payment_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.OfflinePaymentDetails OfflinePaymentDetails { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -342,20 +351,21 @@ namespace Square.Models
                 ((this.StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (this.StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true)) &&
                 ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
                 ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true)) &&
-                ((this.CustomerDetails == null && other.CustomerDetails == null) || (this.CustomerDetails?.Equals(other.CustomerDetails) == true));
+                ((this.CustomerDetails == null && other.CustomerDetails == null) || (this.CustomerDetails?.Equals(other.CustomerDetails) == true)) &&
+                ((this.OfflinePaymentDetails == null && other.OfflinePaymentDetails == null) || (this.OfflinePaymentDetails?.Equals(other.OfflinePaymentDetails) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1620166142;
+            int hashCode = -1886306356;
             hashCode = HashCode.Combine(this.SourceId, this.IdempotencyKey, this.AmountMoney, this.TipMoney, this.AppFeeMoney, this.DelayDuration, this.DelayAction);
 
             hashCode = HashCode.Combine(hashCode, this.Autocomplete, this.OrderId, this.CustomerId, this.LocationId, this.TeamMemberId, this.ReferenceId, this.VerificationToken);
 
             hashCode = HashCode.Combine(hashCode, this.AcceptPartialAuthorization, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier, this.CashDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.ExternalDetails, this.CustomerDetails);
+            hashCode = HashCode.Combine(hashCode, this.ExternalDetails, this.CustomerDetails, this.OfflinePaymentDetails);
 
             return hashCode;
         }
@@ -388,6 +398,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
             toStringOutput.Add($"this.ExternalDetails = {(this.ExternalDetails == null ? "null" : this.ExternalDetails.ToString())}");
             toStringOutput.Add($"this.CustomerDetails = {(this.CustomerDetails == null ? "null" : this.CustomerDetails.ToString())}");
+            toStringOutput.Add($"this.OfflinePaymentDetails = {(this.OfflinePaymentDetails == null ? "null" : this.OfflinePaymentDetails.ToString())}");
         }
 
         /// <summary>
@@ -419,7 +430,8 @@ namespace Square.Models
                 .StatementDescriptionIdentifier(this.StatementDescriptionIdentifier)
                 .CashDetails(this.CashDetails)
                 .ExternalDetails(this.ExternalDetails)
-                .CustomerDetails(this.CustomerDetails);
+                .CustomerDetails(this.CustomerDetails)
+                .OfflinePaymentDetails(this.OfflinePaymentDetails);
             return builder;
         }
 
@@ -451,6 +463,7 @@ namespace Square.Models
             private Models.CashPaymentDetails cashDetails;
             private Models.ExternalPaymentDetails externalDetails;
             private Models.CustomerDetails customerDetails;
+            private Models.OfflinePaymentDetails offlinePaymentDetails;
 
             /// <summary>
             /// Initialize Builder for CreatePaymentRequest.
@@ -718,6 +731,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// OfflinePaymentDetails.
+             /// </summary>
+             /// <param name="offlinePaymentDetails"> offlinePaymentDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder OfflinePaymentDetails(Models.OfflinePaymentDetails offlinePaymentDetails)
+            {
+                this.offlinePaymentDetails = offlinePaymentDetails;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -747,7 +771,8 @@ namespace Square.Models
                     this.statementDescriptionIdentifier,
                     this.cashDetails,
                     this.externalDetails,
-                    this.customerDetails);
+                    this.customerDetails,
+                    this.offlinePaymentDetails);
             }
         }
     }

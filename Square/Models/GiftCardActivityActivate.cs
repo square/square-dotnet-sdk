@@ -126,6 +126,7 @@ namespace Square.Models
         /// Square uses this information to perform compliance checks.
         /// For applications that use the Square Orders API to process payments, Square has the necessary
         /// instrument IDs to perform compliance checks.
+        /// Each buyer payment instrument ID can contain a maximum of 255 characters.
         /// </summary>
         [JsonProperty("buyer_payment_instrument_ids")]
         public IList<string> BuyerPaymentInstrumentIds { get; }

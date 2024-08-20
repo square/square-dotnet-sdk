@@ -114,10 +114,8 @@ namespace Square.Apis
         /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
         /// If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
         /// </summary>
-        /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
         /// <returns>Returns the Models.RetrieveTokenStatusResponse response from the API call.</returns>
-        Models.RetrieveTokenStatusResponse RetrieveTokenStatus(
-                string authorization);
+        Models.RetrieveTokenStatusResponse RetrieveTokenStatus();
 
         /// <summary>
         /// Returns information about an [OAuth access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-an-oauth-access-token) or an application’s [personal access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-a-personal-access-token).
@@ -130,11 +128,8 @@ namespace Square.Apis
         /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
         /// If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
         /// </summary>
-        /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveTokenStatusResponse response from the API call.</returns>
-        Task<Models.RetrieveTokenStatusResponse> RetrieveTokenStatusAsync(
-                string authorization,
-                CancellationToken cancellationToken = default);
+        Task<Models.RetrieveTokenStatusResponse> RetrieveTokenStatusAsync(CancellationToken cancellationToken = default);
     }
 }

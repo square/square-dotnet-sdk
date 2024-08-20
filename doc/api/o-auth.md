@@ -152,18 +152,9 @@ where `ACCESS_TOKEN` is a
 
 If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
 
-:information_source: **Note** This endpoint does not require authentication.
-
 ```csharp
-RetrieveTokenStatusAsync(
-    string authorization)
+RetrieveTokenStatusAsync()
 ```
-
-## Parameters
-
-| Parameter | Type | Tags | Description |
-|  --- | --- | --- | --- |
-| `authorization` | `string` | Header, Required | Client APPLICATION_SECRET |
 
 ## Response Type
 
@@ -172,10 +163,9 @@ RetrieveTokenStatusAsync(
 ## Example Usage
 
 ```csharp
-string authorization = "Client CLIENT_SECRET";
 try
 {
-    RetrieveTokenStatusResponse result = await oAuthApi.RetrieveTokenStatusAsync(authorization);
+    RetrieveTokenStatusResponse result = await oAuthApi.RetrieveTokenStatusAsync();
 }
 catch (ApiException e)
 {

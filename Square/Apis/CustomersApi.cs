@@ -78,7 +78,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("sort_field", sortField))
                       .Query(_query => _query.Setup("sort_order", sortOrder))
-                      .Query(_query => _query.Setup("count", (count != null) ? count : false))))
+                      .Query(_query => _query.Setup("count", count ?? false))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken).ConfigureAwait(false);

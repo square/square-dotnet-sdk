@@ -52,6 +52,7 @@ Represents a payment processed by the Square API.
 | `DeviceDetails` | [`DeviceDetails`](../../doc/models/device-details.md) | Optional | Details about the device that took the payment. |
 | `ApplicationDetails` | [`ApplicationDetails`](../../doc/models/application-details.md) | Optional | Details about the application that took the payment. |
 | `IsOfflinePayment` | `bool?` | Optional | Whether or not this payment was taken offline. |
+| `OfflinePaymentDetails` | [`OfflinePaymentDetails`](../../doc/models/offline-payment-details.md) | Optional | Details specific to offline payments. |
 | `VersionToken` | `string` | Optional | Used for optimistic concurrency. This opaque token identifies a specific version of the<br>`Payment` object. |
 
 ## Example (as JSON)
