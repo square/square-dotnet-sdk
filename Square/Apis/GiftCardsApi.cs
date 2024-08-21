@@ -80,9 +80,11 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
-        /// Creates a digital gift card or registers a physical (plastic) gift card. After the gift card .
-        /// is created, you must call [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) .
-        /// to activate the card with an initial balance before it can be used for payment.
+        /// Creates a digital gift card or registers a physical (plastic) gift card. The resulting gift card.
+        /// has a `PENDING` state. To activate a gift card so that it can be redeemed for purchases, call.
+        /// [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) and create an `ACTIVATE`.
+        /// activity with the initial balance. Alternatively, you can use [RefundPayment]($e/Refunds/RefundPayment).
+        /// to refund a payment to the new gift card.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.CreateGiftCardResponse response from the API call.</returns>
@@ -91,9 +93,11 @@ namespace Square.Apis
             => CoreHelper.RunTask(CreateGiftCardAsync(body));
 
         /// <summary>
-        /// Creates a digital gift card or registers a physical (plastic) gift card. After the gift card .
-        /// is created, you must call [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) .
-        /// to activate the card with an initial balance before it can be used for payment.
+        /// Creates a digital gift card or registers a physical (plastic) gift card. The resulting gift card.
+        /// has a `PENDING` state. To activate a gift card so that it can be redeemed for purchases, call.
+        /// [CreateGiftCardActivity]($e/GiftCardActivities/CreateGiftCardActivity) and create an `ACTIVATE`.
+        /// activity with the initial balance. Alternatively, you can use [RefundPayment]($e/Refunds/RefundPayment).
+        /// to refund a payment to the new gift card.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>

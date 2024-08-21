@@ -35,6 +35,7 @@ Describes a request to create a payment using
 | `CashDetails` | [`CashPaymentDetails`](../../doc/models/cash-payment-details.md) | Optional | Stores details about a cash payment. Contains only non-confidential information. For more information, see<br>[Take Cash Payments](https://developer.squareup.com/docs/payments-api/take-payments/cash-payments). |
 | `ExternalDetails` | [`ExternalPaymentDetails`](../../doc/models/external-payment-details.md) | Optional | Stores details about an external payment. Contains only non-confidential information.<br>For more information, see<br>[Take External Payments](https://developer.squareup.com/docs/payments-api/take-payments/external-payments). |
 | `CustomerDetails` | [`CustomerDetails`](../../doc/models/customer-details.md) | Optional | Details about the customer making the payment. |
+| `OfflinePaymentDetails` | [`OfflinePaymentDetails`](../../doc/models/offline-payment-details.md) | Optional | Details specific to offline payments. |
 
 ## Example (as JSON)
 

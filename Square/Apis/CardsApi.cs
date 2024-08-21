@@ -72,7 +72,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Query(_query => _query.Setup("cursor", cursor))
                       .Query(_query => _query.Setup("customer_id", customerId))
-                      .Query(_query => _query.Setup("include_disabled", (includeDisabled != null) ? includeDisabled : false))
+                      .Query(_query => _query.Setup("include_disabled", includeDisabled ?? false))
                       .Query(_query => _query.Setup("reference_id", referenceId))
                       .Query(_query => _query.Setup("sort_order", sortOrder))))
               .ResponseHandler(_responseHandler => _responseHandler

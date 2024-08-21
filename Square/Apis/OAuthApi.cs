@@ -145,11 +145,9 @@ namespace Square.Apis
         /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
         /// If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
         /// </summary>
-        /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
         /// <returns>Returns the Models.RetrieveTokenStatusResponse response from the API call.</returns>
-        public Models.RetrieveTokenStatusResponse RetrieveTokenStatus(
-                string authorization)
-            => CoreHelper.RunTask(RetrieveTokenStatusAsync(authorization));
+        public Models.RetrieveTokenStatusResponse RetrieveTokenStatus()
+            => CoreHelper.RunTask(RetrieveTokenStatusAsync());
 
         /// <summary>
         /// Returns information about an [OAuth access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-an-oauth-access-token) or an application’s [personal access token](https://developer.squareup.com/docs/build-basics/access-tokens#get-a-personal-access-token).
@@ -162,17 +160,13 @@ namespace Square.Apis
         /// [valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).
         /// If the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.
         /// </summary>
-        /// <param name="authorization">Required parameter: Client APPLICATION_SECRET.</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.RetrieveTokenStatusResponse response from the API call.</returns>
-        public async Task<Models.RetrieveTokenStatusResponse> RetrieveTokenStatusAsync(
-                string authorization,
-                CancellationToken cancellationToken = default)
+        public async Task<Models.RetrieveTokenStatusResponse> RetrieveTokenStatusAsync(CancellationToken cancellationToken = default)
             => await CreateApiCall<Models.RetrieveTokenStatusResponse>()
               .RequestBuilder(_requestBuilder => _requestBuilder
                   .Setup(HttpMethod.Post, "/oauth2/token/status")
-                  .Parameters(_parameters => _parameters
-                      .Header(_header => _header.Setup("Authorization", authorization))))
+                  .WithAuth("global"))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken).ConfigureAwait(false);

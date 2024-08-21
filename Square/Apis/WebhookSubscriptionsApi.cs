@@ -93,7 +93,7 @@ namespace Square.Apis
                   .WithAuth("global")
                   .Parameters(_parameters => _parameters
                       .Query(_query => _query.Setup("cursor", cursor))
-                      .Query(_query => _query.Setup("include_disabled", (includeDisabled != null) ? includeDisabled : false))
+                      .Query(_query => _query.Setup("include_disabled", includeDisabled ?? false))
                       .Query(_query => _query.Setup("sort_order", sortOrder))
                       .Query(_query => _query.Setup("limit", limit))))
               .ResponseHandler(_responseHandler => _responseHandler

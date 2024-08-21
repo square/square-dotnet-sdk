@@ -323,7 +323,7 @@ namespace Square.Apis
                   .Setup(HttpMethod.Get, "/v2/bookings/team-member-booking-profiles")
                   .WithAuth("global")
                   .Parameters(_parameters => _parameters
-                      .Query(_query => _query.Setup("bookable_only", (bookableOnly != null) ? bookableOnly : false))
+                      .Query(_query => _query.Setup("bookable_only", bookableOnly ?? false))
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))
                       .Query(_query => _query.Setup("location_id", locationId))))

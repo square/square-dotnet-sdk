@@ -34,6 +34,9 @@ namespace Square.Apis
         /// <param name="last4">Optional parameter: The last four digits of a payment card..</param>
         /// <param name="cardBrand">Optional parameter: The brand of the payment card (for example, VISA)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page.  The default value of 100 is also the maximum allowed value. If the provided value is  greater than 100, it is ignored and the default value is used instead.  Default: `100`.</param>
+        /// <param name="isOfflinePayment">Optional parameter: Whether the payment was taken offline or not..</param>
+        /// <param name="offlineBeginTime">Optional parameter: Indicates the start of the time range for which to retrieve offline payments, in RFC 3339 format for timestamps. The range is determined using the `offline_payment_details.client_created_at` field for each Payment. If set, payments without a value set in `offline_payment_details.client_created_at` will not be returned.  Default: The current time..</param>
+        /// <param name="offlineEndTime">Optional parameter: Indicates the end of the time range for which to retrieve offline payments, in RFC 3339 format for timestamps. The range is determined using the `offline_payment_details.client_created_at` field for each Payment. If set, payments without a value set in `offline_payment_details.client_created_at` will not be returned.  Default: The current time..</param>
         /// <returns>Returns the Models.ListPaymentsResponse response from the API call.</returns>
         Models.ListPaymentsResponse ListPayments(
                 string beginTime = null,
@@ -44,7 +47,10 @@ namespace Square.Apis
                 long? total = null,
                 string last4 = null,
                 string cardBrand = null,
-                int? limit = null);
+                int? limit = null,
+                bool? isOfflinePayment = false,
+                string offlineBeginTime = null,
+                string offlineEndTime = null);
 
         /// <summary>
         /// Retrieves a list of payments taken by the account making the request.
@@ -61,6 +67,9 @@ namespace Square.Apis
         /// <param name="last4">Optional parameter: The last four digits of a payment card..</param>
         /// <param name="cardBrand">Optional parameter: The brand of the payment card (for example, VISA)..</param>
         /// <param name="limit">Optional parameter: The maximum number of results to be returned in a single page. It is possible to receive fewer results than the specified limit on a given page.  The default value of 100 is also the maximum allowed value. If the provided value is  greater than 100, it is ignored and the default value is used instead.  Default: `100`.</param>
+        /// <param name="isOfflinePayment">Optional parameter: Whether the payment was taken offline or not..</param>
+        /// <param name="offlineBeginTime">Optional parameter: Indicates the start of the time range for which to retrieve offline payments, in RFC 3339 format for timestamps. The range is determined using the `offline_payment_details.client_created_at` field for each Payment. If set, payments without a value set in `offline_payment_details.client_created_at` will not be returned.  Default: The current time..</param>
+        /// <param name="offlineEndTime">Optional parameter: Indicates the end of the time range for which to retrieve offline payments, in RFC 3339 format for timestamps. The range is determined using the `offline_payment_details.client_created_at` field for each Payment. If set, payments without a value set in `offline_payment_details.client_created_at` will not be returned.  Default: The current time..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
         /// <returns>Returns the Models.ListPaymentsResponse response from the API call.</returns>
         Task<Models.ListPaymentsResponse> ListPaymentsAsync(
@@ -73,6 +82,9 @@ namespace Square.Apis
                 string last4 = null,
                 string cardBrand = null,
                 int? limit = null,
+                bool? isOfflinePayment = false,
+                string offlineBeginTime = null,
+                string offlineEndTime = null,
                 CancellationToken cancellationToken = default);
 
         /// <summary>

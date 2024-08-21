@@ -14,7 +14,7 @@ internal class BearerAuthManager : AuthManager, IBearerAuthCredentials
         /// <summary>
         /// Initializes a new instance of the <see cref="BearerAuthManager"/> class.
         /// </summary>
-        /// <param name="accessToken">accessToken.</param>
+        /// <param name="bearerAuthModel">BearerAuthModel.</param>
         public BearerAuthManager(BearerAuthModel bearerAuthModel)
         {
             this.AccessToken = bearerAuthModel?.AccessToken;

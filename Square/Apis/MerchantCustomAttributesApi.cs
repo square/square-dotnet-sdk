@@ -358,7 +358,7 @@ namespace Square.Apis
                       .Query(_query => _query.Setup("visibility_filter", visibilityFilter))
                       .Query(_query => _query.Setup("limit", limit))
                       .Query(_query => _query.Setup("cursor", cursor))
-                      .Query(_query => _query.Setup("with_definitions", (withDefinitions != null) ? withDefinitions : false))))
+                      .Query(_query => _query.Setup("with_definitions", withDefinitions ?? false))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
               .ExecuteAsync(cancellationToken).ConfigureAwait(false);
@@ -445,7 +445,7 @@ namespace Square.Apis
                   .Parameters(_parameters => _parameters
                       .Template(_template => _template.Setup("merchant_id", merchantId))
                       .Template(_template => _template.Setup("key", key))
-                      .Query(_query => _query.Setup("with_definition", (withDefinition != null) ? withDefinition : false))
+                      .Query(_query => _query.Setup("with_definition", withDefinition ?? false))
                       .Query(_query => _query.Setup("version", version))))
               .ResponseHandler(_responseHandler => _responseHandler
                   .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
