@@ -1,8 +1,8 @@
+using System;
+using Square.Apis;
+
 namespace Square
 {
-    using System;
-    using Square.Apis;
-
     /// <summary>
     /// ISquareClient.
     /// </summary>

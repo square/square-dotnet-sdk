@@ -1,12 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
+using System.Net.Http;
+using APIMatic.Core.Http.Configuration;
+
 namespace Square.Http.Client
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.Immutable;
-    using System.Linq;
-    using System.Net.Http;
-    using APIMatic.Core.Http.Configuration;
-
     /// <summary>
     /// HttpClientConfiguration represents the current state of the Http Client.
     /// </summary>

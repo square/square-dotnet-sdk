@@ -1,7 +1,7 @@
+using System;
+
 namespace Square.Authentication
 {
-    using System;
-
     /// <summary>
     /// Authentication configuration interface for BearerAuth.
     /// </summary>

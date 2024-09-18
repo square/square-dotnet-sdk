@@ -1,18 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using APIMatic.Core.Utilities.Converters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Square;
+using Square.Utilities;
+
 namespace Square.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using APIMatic.Core.Utilities.Converters;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using Square;
-    using Square.Utilities;
-
     /// <summary>
     /// SearchCatalogObjectsRequest.
     /// </summary>

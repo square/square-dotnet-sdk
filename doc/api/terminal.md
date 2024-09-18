@@ -49,14 +49,14 @@ CreateTerminalActionAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateTerminalActionRequest body = new Models.CreateTerminalActionRequest.Builder(
+CreateTerminalActionRequest body = new CreateTerminalActionRequest.Builder(
     "thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e",
-    new Models.TerminalAction.Builder()
+    new TerminalAction.Builder()
     .DeviceId("{{DEVICE_ID}}")
     .DeadlineDuration("PT5M")
     .Type("SAVE_CARD")
     .SaveCardOptions(
-        new Models.SaveCardOptions.Builder(
+        new SaveCardOptions.Builder(
             "{{CUSTOMER_ID}}"
         )
         .ReferenceId("user-id-1")
@@ -99,18 +99,18 @@ SearchTerminalActionsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchTerminalActionsRequest body = new Models.SearchTerminalActionsRequest.Builder()
+SearchTerminalActionsRequest body = new SearchTerminalActionsRequest.Builder()
 .Query(
-    new Models.TerminalActionQuery.Builder()
+    new TerminalActionQuery.Builder()
     .Filter(
-        new Models.TerminalActionQueryFilter.Builder()
+        new TerminalActionQueryFilter.Builder()
         .CreatedAt(
-            new Models.TimeRange.Builder()
+            new TimeRange.Builder()
             .StartAt("2022-04-01T00:00:00.000Z")
             .Build())
         .Build())
     .Sort(
-        new Models.TerminalActionQuerySort.Builder()
+        new TerminalActionQuerySort.Builder()
         .SortOrder("DESC")
         .Build())
     .Build())
@@ -259,14 +259,14 @@ CreateTerminalCheckoutAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateTerminalCheckoutRequest body = new Models.CreateTerminalCheckoutRequest.Builder(
+CreateTerminalCheckoutRequest body = new CreateTerminalCheckoutRequest.Builder(
     "28a0c3bc-7839-11ea-bc55-0242ac130003",
-    new Models.TerminalCheckout.Builder(
-        new Models.Money.Builder()
+    new TerminalCheckout.Builder(
+        new Money.Builder()
         .Amount(2610L)
         .Currency("USD")
         .Build(),
-        new Models.DeviceCheckoutOptions.Builder(
+        new DeviceCheckoutOptions.Builder(
             "dbb5d83a-7838-11ea-bc55-0242ac130003"
         )
         .Build()
@@ -311,11 +311,11 @@ SearchTerminalCheckoutsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchTerminalCheckoutsRequest body = new Models.SearchTerminalCheckoutsRequest.Builder()
+SearchTerminalCheckoutsRequest body = new SearchTerminalCheckoutsRequest.Builder()
 .Query(
-    new Models.TerminalCheckoutQuery.Builder()
+    new TerminalCheckoutQuery.Builder()
     .Filter(
-        new Models.TerminalCheckoutQueryFilter.Builder()
+        new TerminalCheckoutQueryFilter.Builder()
         .Status("COMPLETED")
         .Build())
     .Build())
@@ -461,13 +461,13 @@ CreateTerminalRefundAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateTerminalRefundRequest body = new Models.CreateTerminalRefundRequest.Builder(
+CreateTerminalRefundRequest body = new CreateTerminalRefundRequest.Builder(
     "402a640b-b26f-401f-b406-46f839590c04"
 )
 .Refund(
-    new Models.TerminalRefund.Builder(
+    new TerminalRefund.Builder(
         "5O5OvgkcNUhl7JBuINflcjKqUzXZY",
-        new Models.Money.Builder()
+        new Money.Builder()
         .Amount(111L)
         .Currency("CAD")
         .Build(),
@@ -511,11 +511,11 @@ SearchTerminalRefundsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchTerminalRefundsRequest body = new Models.SearchTerminalRefundsRequest.Builder()
+SearchTerminalRefundsRequest body = new SearchTerminalRefundsRequest.Builder()
 .Query(
-    new Models.TerminalRefundQuery.Builder()
+    new TerminalRefundQuery.Builder()
     .Filter(
-        new Models.TerminalRefundQueryFilter.Builder()
+        new TerminalRefundQueryFilter.Builder()
         .Status("COMPLETED")
         .Build())
     .Build())

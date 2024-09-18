@@ -92,8 +92,8 @@ CreateLocationCustomAttributeDefinitionAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateLocationCustomAttributeDefinitionRequest body = new Models.CreateLocationCustomAttributeDefinitionRequest.Builder(
-    new Models.CustomAttributeDefinition.Builder()
+CreateLocationCustomAttributeDefinitionRequest body = new CreateLocationCustomAttributeDefinitionRequest.Builder(
+    new CustomAttributeDefinition.Builder()
     .Key("bestseller")
     .Name("Bestseller")
     .Description("Bestselling item at location")
@@ -219,8 +219,8 @@ UpdateLocationCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-Models.UpdateLocationCustomAttributeDefinitionRequest body = new Models.UpdateLocationCustomAttributeDefinitionRequest.Builder(
-    new Models.CustomAttributeDefinition.Builder()
+UpdateLocationCustomAttributeDefinitionRequest body = new UpdateLocationCustomAttributeDefinitionRequest.Builder(
+    new CustomAttributeDefinition.Builder()
     .Description("Update the description as desired.")
     .Visibility("VISIBILITY_READ_ONLY")
     .Build()
@@ -266,16 +266,16 @@ BulkDeleteLocationCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkDeleteLocationCustomAttributesRequest body = new Models.BulkDeleteLocationCustomAttributesRequest.Builder(
-    new Dictionary<string, Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest>
+BulkDeleteLocationCustomAttributesRequest body = new BulkDeleteLocationCustomAttributesRequest.Builder(
+    new Dictionary<string, BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest>
     {
-        ["id1"] = new Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
+        ["id1"] = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
         .Key("bestseller")
         .Build(),
-        ["id2"] = new Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
+        ["id2"] = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
         .Key("bestseller")
         .Build(),
-        ["id3"] = new Models.BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
+        ["id3"] = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
         .Key("phone-number")
         .Build(),
     }
@@ -325,18 +325,18 @@ BulkUpsertLocationCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkUpsertLocationCustomAttributesRequest body = new Models.BulkUpsertLocationCustomAttributesRequest.Builder(
-    new Dictionary<string, Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest>
+BulkUpsertLocationCustomAttributesRequest body = new BulkUpsertLocationCustomAttributesRequest.Builder(
+    new Dictionary<string, BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest>
     {
-        ["key0"] = new Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
+        ["key0"] = new BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
             "location_id4",
-            new Models.CustomAttribute.Builder()
+            new CustomAttribute.Builder()
             .Build()
         )
         .Build(),
-        ["key1"] = new Models.BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
+        ["key1"] = new BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest.Builder(
             "location_id4",
-            new Models.CustomAttribute.Builder()
+            new CustomAttribute.Builder()
             .Build()
         )
         .Build(),
@@ -382,7 +382,7 @@ ListLocationCustomAttributesAsync(
 | `visibilityFilter` | [`string`](../../doc/models/visibility-filter.md) | Query, Optional | Filters the `CustomAttributeDefinition` results by their `visibility` values. |
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `cursor` | `string` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request. For more<br>information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`. |
+| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -476,7 +476,7 @@ RetrieveLocationCustomAttributeAsync(
 |  --- | --- | --- | --- |
 | `locationId` | `string` | Template, Required | The ID of the target [location](entity:Location). |
 | `key` | `string` | Template, Required | The key of the custom attribute to retrieve. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
-| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`. |
+| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 | `version` | `int?` | Query, Optional | The current version of the custom attribute, which is used for strongly consistent reads to<br>guarantee that you receive the most up-to-date data. When included in the request, Square<br>returns the specified version or a higher version if one exists. If the specified version is<br>higher than the current version, Square returns a `BAD_REQUEST` error. |
 
 ## Response Type
@@ -538,8 +538,8 @@ UpsertLocationCustomAttributeAsync(
 ```csharp
 string locationId = "location_id4";
 string key = "key0";
-Models.UpsertLocationCustomAttributeRequest body = new Models.UpsertLocationCustomAttributeRequest.Builder(
-    new Models.CustomAttribute.Builder()
+UpsertLocationCustomAttributeRequest body = new UpsertLocationCustomAttributeRequest.Builder(
+    new CustomAttribute.Builder()
     .Build()
 )
 .Build();

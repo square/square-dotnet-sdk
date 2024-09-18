@@ -92,8 +92,8 @@ CreateOrderCustomAttributeDefinitionAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateOrderCustomAttributeDefinitionRequest body = new Models.CreateOrderCustomAttributeDefinitionRequest.Builder(
-    new Models.CustomAttributeDefinition.Builder()
+CreateOrderCustomAttributeDefinitionRequest body = new CreateOrderCustomAttributeDefinitionRequest.Builder(
+    new CustomAttributeDefinition.Builder()
     .Key("cover-count")
     .Name("Cover count")
     .Description("The number of people seated at a table")
@@ -220,8 +220,8 @@ UpdateOrderCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-Models.UpdateOrderCustomAttributeDefinitionRequest body = new Models.UpdateOrderCustomAttributeDefinitionRequest.Builder(
-    new Models.CustomAttributeDefinition.Builder()
+UpdateOrderCustomAttributeDefinitionRequest body = new UpdateOrderCustomAttributeDefinitionRequest.Builder(
+    new CustomAttributeDefinition.Builder()
     .Key("cover-count")
     .Visibility("VISIBILITY_READ_ONLY")
     .Version(1)
@@ -280,15 +280,15 @@ BulkDeleteOrderCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkDeleteOrderCustomAttributesRequest body = new Models.BulkDeleteOrderCustomAttributesRequest.Builder(
-    new Dictionary<string, Models.BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute>
+BulkDeleteOrderCustomAttributesRequest body = new BulkDeleteOrderCustomAttributesRequest.Builder(
+    new Dictionary<string, BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute>
     {
-        ["cover-count"] = new Models.BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
+        ["cover-count"] = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
             "7BbXGEIWNldxAzrtGf9GPVZTwZ4F"
         )
         .Key("cover-count")
         .Build(),
-        ["table-number"] = new Models.BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
+        ["table-number"] = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
             "7BbXGEIWNldxAzrtGf9GPVZTwZ4F"
         )
         .Key("table-number")
@@ -344,17 +344,17 @@ BulkUpsertOrderCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkUpsertOrderCustomAttributesRequest body = new Models.BulkUpsertOrderCustomAttributesRequest.Builder(
-    new Dictionary<string, Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute>
+BulkUpsertOrderCustomAttributesRequest body = new BulkUpsertOrderCustomAttributesRequest.Builder(
+    new Dictionary<string, BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute>
     {
-        ["key0"] = new Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
-            new Models.CustomAttribute.Builder()
+        ["key0"] = new BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
+            new CustomAttribute.Builder()
             .Build(),
             "order_id4"
         )
         .Build(),
-        ["key1"] = new Models.BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
-            new Models.CustomAttribute.Builder()
+        ["key1"] = new BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute.Builder(
+            new CustomAttribute.Builder()
             .Build(),
             "order_id4"
         )
@@ -403,7 +403,7 @@ ListOrderCustomAttributesAsync(
 | `visibilityFilter` | [`string`](../../doc/models/visibility-filter.md) | Query, Optional | Requests that all of the custom attributes be returned, or only those that are read-only or read-write. |
 | `cursor` | `string` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20.<br>For more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination). |
-| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`. |
+| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -503,7 +503,7 @@ RetrieveOrderCustomAttributeAsync(
 | `orderId` | `string` | Template, Required | The ID of the target [order](entity:Order). |
 | `customAttributeKey` | `string` | Template, Required | The key of the custom attribute to retrieve.  This key must match the key of an<br>existing custom attribute definition. |
 | `version` | `int?` | Query, Optional | To enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency)<br>control, include this optional field and specify the current version of the custom attribute. |
-| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`. |
+| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom attribute,<br>information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -568,8 +568,8 @@ UpsertOrderCustomAttributeAsync(
 ```csharp
 string orderId = "order_id6";
 string customAttributeKey = "custom_attribute_key2";
-Models.UpsertOrderCustomAttributeRequest body = new Models.UpsertOrderCustomAttributeRequest.Builder(
-    new Models.CustomAttribute.Builder()
+UpsertOrderCustomAttributeRequest body = new UpsertOrderCustomAttributeRequest.Builder(
+    new CustomAttribute.Builder()
     .Build()
 )
 .Build();

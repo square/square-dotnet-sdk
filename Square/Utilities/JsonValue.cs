@@ -1,11 +1,11 @@
+using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using APIMatic.Core.Types.Sdk;
+using System.Collections.Generic;
+
 namespace Square.Utilities
 {
-    using System;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using APIMatic.Core.Types.Sdk;
-    using System.Collections.Generic;
-
     [JsonConverter(typeof(JsonValueSerializer))]
     public class JsonValue : CoreJsonValue
     {

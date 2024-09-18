@@ -90,8 +90,8 @@ CreateBookingCustomAttributeDefinitionAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateBookingCustomAttributeDefinitionRequest body = new Models.CreateBookingCustomAttributeDefinitionRequest.Builder(
-    new Models.CustomAttributeDefinition.Builder()
+CreateBookingCustomAttributeDefinitionRequest body = new CreateBookingCustomAttributeDefinitionRequest.Builder(
+    new CustomAttributeDefinition.Builder()
     .Build()
 )
 .Build();
@@ -220,8 +220,8 @@ UpdateBookingCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-Models.UpdateBookingCustomAttributeDefinitionRequest body = new Models.UpdateBookingCustomAttributeDefinitionRequest.Builder(
-    new Models.CustomAttributeDefinition.Builder()
+UpdateBookingCustomAttributeDefinitionRequest body = new UpdateBookingCustomAttributeDefinitionRequest.Builder(
+    new CustomAttributeDefinition.Builder()
     .Build()
 )
 .Build();
@@ -269,15 +269,15 @@ BulkDeleteBookingCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkDeleteBookingCustomAttributesRequest body = new Models.BulkDeleteBookingCustomAttributesRequest.Builder(
-    new Dictionary<string, Models.BookingCustomAttributeDeleteRequest>
+BulkDeleteBookingCustomAttributesRequest body = new BulkDeleteBookingCustomAttributesRequest.Builder(
+    new Dictionary<string, BookingCustomAttributeDeleteRequest>
     {
-        ["key0"] = new Models.BookingCustomAttributeDeleteRequest.Builder(
+        ["key0"] = new BookingCustomAttributeDeleteRequest.Builder(
             "booking_id4",
             "key0"
         )
         .Build(),
-        ["key1"] = new Models.BookingCustomAttributeDeleteRequest.Builder(
+        ["key1"] = new BookingCustomAttributeDeleteRequest.Builder(
             "booking_id4",
             "key0"
         )
@@ -326,18 +326,18 @@ BulkUpsertBookingCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkUpsertBookingCustomAttributesRequest body = new Models.BulkUpsertBookingCustomAttributesRequest.Builder(
-    new Dictionary<string, Models.BookingCustomAttributeUpsertRequest>
+BulkUpsertBookingCustomAttributesRequest body = new BulkUpsertBookingCustomAttributesRequest.Builder(
+    new Dictionary<string, BookingCustomAttributeUpsertRequest>
     {
-        ["key0"] = new Models.BookingCustomAttributeUpsertRequest.Builder(
+        ["key0"] = new BookingCustomAttributeUpsertRequest.Builder(
             "booking_id4",
-            new Models.CustomAttribute.Builder()
+            new CustomAttribute.Builder()
             .Build()
         )
         .Build(),
-        ["key1"] = new Models.BookingCustomAttributeUpsertRequest.Builder(
+        ["key1"] = new BookingCustomAttributeUpsertRequest.Builder(
             "booking_id4",
-            new Models.CustomAttribute.Builder()
+            new CustomAttribute.Builder()
             .Build()
         )
         .Build(),
@@ -379,7 +379,7 @@ ListBookingCustomAttributesAsync(
 | `bookingId` | `string` | Template, Required | The ID of the target [booking](entity:Booking). |
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `cursor` | `string` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request. For more<br>information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`. |
+| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -475,7 +475,7 @@ RetrieveBookingCustomAttributeAsync(
 |  --- | --- | --- | --- |
 | `bookingId` | `string` | Template, Required | The ID of the target [booking](entity:Booking). |
 | `key` | `string` | Template, Required | The key of the custom attribute to retrieve. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
-| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`. |
+| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 | `version` | `int?` | Query, Optional | The current version of the custom attribute, which is used for strongly consistent reads to<br>guarantee that you receive the most up-to-date data. When included in the request, Square<br>returns the specified version or a higher version if one exists. If the specified version is<br>higher than the current version, Square returns a `BAD_REQUEST` error. |
 
 ## Response Type
@@ -538,8 +538,8 @@ UpsertBookingCustomAttributeAsync(
 ```csharp
 string bookingId = "booking_id4";
 string key = "key0";
-Models.UpsertBookingCustomAttributeRequest body = new Models.UpsertBookingCustomAttributeRequest.Builder(
-    new Models.CustomAttribute.Builder()
+UpsertBookingCustomAttributeRequest body = new UpsertBookingCustomAttributeRequest.Builder(
+    new CustomAttribute.Builder()
     .Build()
 )
 .Build();

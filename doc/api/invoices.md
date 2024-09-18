@@ -89,26 +89,26 @@ CreateInvoiceAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateInvoiceRequest body = new Models.CreateInvoiceRequest.Builder(
-    new Models.Invoice.Builder()
+CreateInvoiceRequest body = new CreateInvoiceRequest.Builder(
+    new Invoice.Builder()
     .LocationId("ES0RJRZYEC39A")
     .OrderId("CAISENgvlJ6jLWAzERDzjyHVybY")
     .PrimaryRecipient(
-        new Models.InvoiceRecipient.Builder()
+        new InvoiceRecipient.Builder()
         .CustomerId("JDKYHBWT1D4F8MFH63DBMEN8Y4")
         .Build())
     .PaymentRequests(
-        new List<Models.InvoicePaymentRequest>
+        new List<InvoicePaymentRequest>
         {
-            new Models.InvoicePaymentRequest.Builder()
+            new InvoicePaymentRequest.Builder()
             .RequestType("BALANCE")
             .DueDate("2030-01-24")
             .TippingEnabled(true)
             .AutomaticPaymentSource("NONE")
             .Reminders(
-                new List<Models.InvoicePaymentReminder>
+                new List<InvoicePaymentReminder>
                 {
-                    new Models.InvoicePaymentReminder.Builder()
+                    new InvoicePaymentReminder.Builder()
                     .RelativeScheduledDays(-1)
                     .Message("Your invoice is due tomorrow")
                     .Build(),
@@ -121,7 +121,7 @@ Models.CreateInvoiceRequest body = new Models.CreateInvoiceRequest.Builder(
     .Description("We appreciate your business!")
     .ScheduledAt("2030-01-13T10:00:00Z")
     .AcceptedPaymentMethods(
-        new Models.InvoiceAcceptedPaymentMethods.Builder()
+        new InvoiceAcceptedPaymentMethods.Builder()
         .Card(true)
         .SquareGiftCard(false)
         .BankAccount(false)
@@ -129,14 +129,14 @@ Models.CreateInvoiceRequest body = new Models.CreateInvoiceRequest.Builder(
         .CashAppPay(false)
         .Build())
     .CustomFields(
-        new List<Models.InvoiceCustomField>
+        new List<InvoiceCustomField>
         {
-            new Models.InvoiceCustomField.Builder()
+            new InvoiceCustomField.Builder()
             .Label("Event Reference Number")
             .MValue("Ref. #1234")
             .Placement("ABOVE_LINE_ITEMS")
             .Build(),
-            new Models.InvoiceCustomField.Builder()
+            new InvoiceCustomField.Builder()
             .Label("Terms of Service")
             .MValue("The terms of service are...")
             .Placement("BELOW_LINE_ITEMS")
@@ -189,9 +189,9 @@ SearchInvoicesAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchInvoicesRequest body = new Models.SearchInvoicesRequest.Builder(
-    new Models.InvoiceQuery.Builder(
-        new Models.InvoiceFilter.Builder(
+SearchInvoicesRequest body = new SearchInvoicesRequest.Builder(
+    new InvoiceQuery.Builder(
+        new InvoiceFilter.Builder(
             new List<string>
             {
                 "ES0RJRZYEC39A",
@@ -205,7 +205,7 @@ Models.SearchInvoicesRequest body = new Models.SearchInvoicesRequest.Builder(
         .Build()
     )
     .Sort(
-        new Models.InvoiceSort.Builder(
+        new InvoiceSort.Builder(
             "INVOICE_SORT_DATE"
         )
         .Order("DESC")
@@ -328,23 +328,23 @@ UpdateInvoiceAsync(
 
 ```csharp
 string invoiceId = "invoice_id0";
-Models.UpdateInvoiceRequest body = new Models.UpdateInvoiceRequest.Builder(
-    new Models.Invoice.Builder()
+UpdateInvoiceRequest body = new UpdateInvoiceRequest.Builder(
+    new Invoice.Builder()
     .Version(1)
     .PaymentRequests(
-        new List<Models.InvoicePaymentRequest>
+        new List<InvoicePaymentRequest>
         {
-            new Models.InvoicePaymentRequest.Builder()
+            new InvoicePaymentRequest.Builder()
             .Uid("2da7964f-f3d2-4f43-81e8-5aa220bf3355")
             .TippingEnabled(false)
             .Reminders(
-                new List<Models.InvoicePaymentReminder>
+                new List<InvoicePaymentReminder>
                 {
-                    new Models.InvoicePaymentReminder.Builder()
+                    new InvoicePaymentReminder.Builder()
                     .Build(),
-                    new Models.InvoicePaymentReminder.Builder()
+                    new InvoicePaymentReminder.Builder()
                     .Build(),
-                    new Models.InvoicePaymentReminder.Builder()
+                    new InvoicePaymentReminder.Builder()
                     .Build(),
                 })
             .Build(),
@@ -401,7 +401,7 @@ CreateInvoiceAttachmentAsync(
 
 ```csharp
 string invoiceId = "invoice_id0";
-Models.CreateInvoiceAttachmentRequest request = new Models.CreateInvoiceAttachmentRequest.Builder()
+CreateInvoiceAttachmentRequest request = new CreateInvoiceAttachmentRequest.Builder()
 .IdempotencyKey("ae5e84f9-4742-4fc1-ba12-a3ce3748f1c3")
 .Description("Service contract")
 .Build();
@@ -491,7 +491,7 @@ CancelInvoiceAsync(
 
 ```csharp
 string invoiceId = "invoice_id0";
-Models.CancelInvoiceRequest body = new Models.CancelInvoiceRequest.Builder(
+CancelInvoiceRequest body = new CancelInvoiceRequest.Builder(
     0
 )
 .Build();
@@ -549,7 +549,7 @@ PublishInvoiceAsync(
 
 ```csharp
 string invoiceId = "invoice_id0";
-Models.PublishInvoiceRequest body = new Models.PublishInvoiceRequest.Builder(
+PublishInvoiceRequest body = new PublishInvoiceRequest.Builder(
     1
 )
 .IdempotencyKey("32da42d0-1997-41b0-826b-f09464fc2c2e")

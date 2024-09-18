@@ -1,18 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using APIMatic.Core.Utilities.Converters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Square;
+using Square.Utilities;
+
 namespace Square.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using APIMatic.Core.Utilities.Converters;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using Square;
-    using Square.Utilities;
-
     /// <summary>
     /// Customer.
     /// </summary>
@@ -228,7 +228,7 @@ namespace Square.Models
 
         /// <summary>
         /// Payment details of the credit, debit, and gift cards stored on file for the customer profile.
-        /// DEPRECATED at version 2021-06-16. Replaced by calling [ListCards](api-endpoint:Cards-ListCards) (for credit and debit cards on file)
+        /// DEPRECATED at version 2021-06-16 and will be RETIRED at version 2024-12-18. Replaced by calling [ListCards](api-endpoint:Cards-ListCards) (for credit and debit cards on file)
         /// or [ListGiftCards](api-endpoint:GiftCards-ListGiftCards) (for gift cards on file) and including the `customer_id` query parameter.
         /// For more information, see [Migration notes](https://developer.squareup.com/docs/customers-api/what-it-does#migrate-customer-cards).
         /// </summary>

@@ -1,13 +1,12 @@
+using APIMatic.Core.Types.Sdk;
+using APIMatic.Core.Utilities;
+using Square.Exceptions;
+using Square.Http.Client;
+using Square.Http.Request;
+using Square.Http.Response;
 
 namespace Square.Utilities
 {
-    using APIMatic.Core.Types.Sdk;
-    using APIMatic.Core.Utilities;
-    using Square.Exceptions;
-    using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Response;
-
     internal class CompatibilityFactory : ICompatibilityFactory<HttpRequest, HttpResponse, HttpContext, ApiException>
     {
         public ApiException CreateApiException(string reason, CoreContext<CoreRequest, CoreResponse> context) =>

@@ -235,7 +235,7 @@ CreateDisputeEvidenceTextAsync(
 
 ```csharp
 string disputeId = "dispute_id2";
-Models.CreateDisputeEvidenceTextRequest body = new Models.CreateDisputeEvidenceTextRequest.Builder(
+CreateDisputeEvidenceTextRequest body = new CreateDisputeEvidenceTextRequest.Builder(
     "ed3ee3933d946f1514d505d173c82648",
     "1Z8888888888888888"
 )

@@ -61,7 +61,7 @@ BatchDeleteCatalogObjectsAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchDeleteCatalogObjectsRequest body = new Models.BatchDeleteCatalogObjectsRequest.Builder()
+BatchDeleteCatalogObjectsRequest body = new BatchDeleteCatalogObjectsRequest.Builder()
 .ObjectIds(
     new List<string>
     {
@@ -109,7 +109,7 @@ BatchRetrieveCatalogObjectsAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchRetrieveCatalogObjectsRequest body = new Models.BatchRetrieveCatalogObjectsRequest.Builder(
+BatchRetrieveCatalogObjectsRequest body = new BatchRetrieveCatalogObjectsRequest.Builder(
     new List<string>
     {
         "W62UWFY35CWMYGVWK6TWJDNI",
@@ -165,20 +165,20 @@ BatchUpsertCatalogObjectsAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchUpsertCatalogObjectsRequest body = new Models.BatchUpsertCatalogObjectsRequest.Builder(
+BatchUpsertCatalogObjectsRequest body = new BatchUpsertCatalogObjectsRequest.Builder(
     "789ff020-f723-43a9-b4b5-43b5dc1fa3dc",
-    new List<Models.CatalogObjectBatch>
+    new List<CatalogObjectBatch>
     {
-        new Models.CatalogObjectBatch.Builder(
-            new List<Models.CatalogObject>
+        new CatalogObjectBatch.Builder(
+            new List<CatalogObject>
             {
-                new Models.CatalogObject.Builder(
+                new CatalogObject.Builder(
                     "ITEM",
                     "#Tea"
                 )
                 .PresentAtAllLocations(true)
                 .ItemData(
-                    new Models.CatalogItem.Builder()
+                    new CatalogItem.Builder()
                     .Name("Tea")
                     .TaxIds(
                         new List<string>
@@ -186,20 +186,20 @@ Models.BatchUpsertCatalogObjectsRequest body = new Models.BatchUpsertCatalogObje
                             "#SalesTax",
                         })
                     .Variations(
-                        new List<Models.CatalogObject>
+                        new List<CatalogObject>
                         {
-                            new Models.CatalogObject.Builder(
+                            new CatalogObject.Builder(
                                 "ITEM_VARIATION",
                                 "#Tea_Mug"
                             )
                             .PresentAtAllLocations(true)
                             .ItemVariationData(
-                                new Models.CatalogItemVariation.Builder()
+                                new CatalogItemVariation.Builder()
                                 .ItemId("#Tea")
                                 .Name("Mug")
                                 .PricingType("FIXED_PRICING")
                                 .PriceMoney(
-                                    new Models.Money.Builder()
+                                    new Money.Builder()
                                     .Amount(150L)
                                     .Currency("USD")
                                     .Build())
@@ -207,22 +207,22 @@ Models.BatchUpsertCatalogObjectsRequest body = new Models.BatchUpsertCatalogObje
                             .Build(),
                         })
                     .Categories(
-                        new List<Models.CatalogObjectCategory>
+                        new List<CatalogObjectCategory>
                         {
-                            new Models.CatalogObjectCategory.Builder()
+                            new CatalogObjectCategory.Builder()
                             .Id("#Beverages")
                             .Build(),
                         })
                     .DescriptionHtml("<p><strong>Hot</strong> Leaf Juice</p>")
                     .Build())
                 .Build(),
-                new Models.CatalogObject.Builder(
+                new CatalogObject.Builder(
                     "ITEM",
                     "#Coffee"
                 )
                 .PresentAtAllLocations(true)
                 .ItemData(
-                    new Models.CatalogItem.Builder()
+                    new CatalogItem.Builder()
                     .Name("Coffee")
                     .TaxIds(
                         new List<string>
@@ -230,37 +230,37 @@ Models.BatchUpsertCatalogObjectsRequest body = new Models.BatchUpsertCatalogObje
                             "#SalesTax",
                         })
                     .Variations(
-                        new List<Models.CatalogObject>
+                        new List<CatalogObject>
                         {
-                            new Models.CatalogObject.Builder(
+                            new CatalogObject.Builder(
                                 "ITEM_VARIATION",
                                 "#Coffee_Regular"
                             )
                             .PresentAtAllLocations(true)
                             .ItemVariationData(
-                                new Models.CatalogItemVariation.Builder()
+                                new CatalogItemVariation.Builder()
                                 .ItemId("#Coffee")
                                 .Name("Regular")
                                 .PricingType("FIXED_PRICING")
                                 .PriceMoney(
-                                    new Models.Money.Builder()
+                                    new Money.Builder()
                                     .Amount(250L)
                                     .Currency("USD")
                                     .Build())
                                 .Build())
                             .Build(),
-                            new Models.CatalogObject.Builder(
+                            new CatalogObject.Builder(
                                 "ITEM_VARIATION",
                                 "#Coffee_Large"
                             )
                             .PresentAtAllLocations(true)
                             .ItemVariationData(
-                                new Models.CatalogItemVariation.Builder()
+                                new CatalogItemVariation.Builder()
                                 .ItemId("#Coffee")
                                 .Name("Large")
                                 .PricingType("FIXED_PRICING")
                                 .PriceMoney(
-                                    new Models.Money.Builder()
+                                    new Money.Builder()
                                     .Amount(350L)
                                     .Currency("USD")
                                     .Build())
@@ -268,32 +268,32 @@ Models.BatchUpsertCatalogObjectsRequest body = new Models.BatchUpsertCatalogObje
                             .Build(),
                         })
                     .Categories(
-                        new List<Models.CatalogObjectCategory>
+                        new List<CatalogObjectCategory>
                         {
-                            new Models.CatalogObjectCategory.Builder()
+                            new CatalogObjectCategory.Builder()
                             .Id("#Beverages")
                             .Build(),
                         })
                     .DescriptionHtml("<p>Hot <em>Bean Juice</em></p>")
                     .Build())
                 .Build(),
-                new Models.CatalogObject.Builder(
+                new CatalogObject.Builder(
                     "CATEGORY",
                     "#Beverages"
                 )
                 .PresentAtAllLocations(true)
                 .CategoryData(
-                    new Models.CatalogCategory.Builder()
+                    new CatalogCategory.Builder()
                     .Name("Beverages")
                     .Build())
                 .Build(),
-                new Models.CatalogObject.Builder(
+                new CatalogObject.Builder(
                     "TAX",
                     "#SalesTax"
                 )
                 .PresentAtAllLocations(true)
                 .TaxData(
-                    new Models.CatalogTax.Builder()
+                    new CatalogTax.Builder()
                     .Name("Sales Tax")
                     .CalculationPhase("TAX_SUBTOTAL_PHASE")
                     .InclusionType("ADDITIVE")
@@ -350,14 +350,14 @@ CreateCatalogImageAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateCatalogImageRequest request = new Models.CreateCatalogImageRequest.Builder(
+CreateCatalogImageRequest request = new CreateCatalogImageRequest.Builder(
     "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86",
-    new Models.CatalogObject.Builder(
+    new CatalogObject.Builder(
         "IMAGE",
         "#TEMP_ID"
     )
     .ImageData(
-        new Models.CatalogImage.Builder()
+        new CatalogImage.Builder()
         .Caption("A picture of a cup of coffee")
         .Build())
     .Build()
@@ -407,7 +407,7 @@ UpdateCatalogImageAsync(
 
 ```csharp
 string imageId = "image_id4";
-Models.UpdateCatalogImageRequest request = new Models.UpdateCatalogImageRequest.Builder(
+UpdateCatalogImageRequest request = new UpdateCatalogImageRequest.Builder(
     "528dea59-7bfb-43c1-bd48-4a6bba7dd61f86"
 )
 .Build();
@@ -526,41 +526,41 @@ UpsertCatalogObjectAsync(
 ## Example Usage
 
 ```csharp
-Models.UpsertCatalogObjectRequest body = new Models.UpsertCatalogObjectRequest.Builder(
+UpsertCatalogObjectRequest body = new UpsertCatalogObjectRequest.Builder(
     "af3d1afc-7212-4300-b463-0bfc5314a5ae",
-    new Models.CatalogObject.Builder(
+    new CatalogObject.Builder(
         "ITEM",
         "#Cocoa"
     )
     .ItemData(
-        new Models.CatalogItem.Builder()
+        new CatalogItem.Builder()
         .Name("Cocoa")
         .Abbreviation("Ch")
         .Variations(
-            new List<Models.CatalogObject>
+            new List<CatalogObject>
             {
-                new Models.CatalogObject.Builder(
+                new CatalogObject.Builder(
                     "ITEM_VARIATION",
                     "#Small"
                 )
                 .ItemVariationData(
-                    new Models.CatalogItemVariation.Builder()
+                    new CatalogItemVariation.Builder()
                     .ItemId("#Cocoa")
                     .Name("Small")
                     .PricingType("VARIABLE_PRICING")
                     .Build())
                 .Build(),
-                new Models.CatalogObject.Builder(
+                new CatalogObject.Builder(
                     "ITEM_VARIATION",
                     "#Large"
                 )
                 .ItemVariationData(
-                    new Models.CatalogItemVariation.Builder()
+                    new CatalogItemVariation.Builder()
                     .ItemId("#Cocoa")
                     .Name("Large")
                     .PricingType("FIXED_PRICING")
                     .PriceMoney(
-                        new Models.Money.Builder()
+                        new Money.Builder()
                         .Amount(400L)
                         .Currency("USD")
                         .Build())
@@ -652,9 +652,9 @@ RetrieveCatalogObjectAsync(
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
 | `objectId` | `string` | Template, Required | The object ID of any type of catalog objects to be retrieved. |
-| `includeRelatedObjects` | `bool?` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field<br>of the response. These objects are put in the `related_objects` field. Setting this to `true` is<br>helpful when the objects are needed for immediate display to a user.<br>This process only goes one level deep. Objects referenced by the related objects will not be included. For example,<br><br>if the `objects` field of the response contains a CatalogItem, its associated<br>CatalogCategory objects, CatalogTax objects, CatalogImage objects and<br>CatalogModifierLists will be returned in the `related_objects` field of the<br>response. If the `objects` field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false` |
+| `includeRelatedObjects` | `bool?` | Query, Optional | If `true`, the response will include additional objects that are related to the<br>requested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field<br>of the response. These objects are put in the `related_objects` field. Setting this to `true` is<br>helpful when the objects are needed for immediate display to a user.<br>This process only goes one level deep. Objects referenced by the related objects will not be included. For example,<br><br>if the `objects` field of the response contains a CatalogItem, its associated<br>CatalogCategory objects, CatalogTax objects, CatalogImage objects and<br>CatalogModifierLists will be returned in the `related_objects` field of the<br>response. If the `objects` field of the response contains a CatalogItemVariation,<br>its parent CatalogItem will be returned in the `related_objects` field of<br>the response.<br><br>Default value: `false`<br>**Default**: `false` |
 | `catalogVersion` | `long?` | Query, Optional | Requests objects as of a specific version of the catalog. This allows you to retrieve historical<br>versions of objects. The value to retrieve a specific version of an object can be found<br>in the version field of [CatalogObject](../../doc/models/catalog-object.md)s. If not included, results will<br>be from the current version of the catalog. |
-| `includeCategoryPathToRoot` | `bool?` | Query, Optional | Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists<br>of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category<br>and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned<br>in the response payload. |
+| `includeCategoryPathToRoot` | `bool?` | Query, Optional | Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists<br>of `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category<br>and ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned<br>in the response payload.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -714,16 +714,16 @@ SearchCatalogObjectsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchCatalogObjectsRequest body = new Models.SearchCatalogObjectsRequest.Builder()
+SearchCatalogObjectsRequest body = new SearchCatalogObjectsRequest.Builder()
 .ObjectTypes(
     new List<string>
     {
         "ITEM",
     })
 .Query(
-    new Models.CatalogQuery.Builder()
+    new CatalogQuery.Builder()
     .PrefixQuery(
-        new Models.CatalogQueryPrefix.Builder(
+        new CatalogQueryPrefix.Builder(
             "name",
             "tea"
         )
@@ -775,7 +775,7 @@ SearchCatalogItemsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchCatalogItemsRequest body = new Models.SearchCatalogItemsRequest.Builder()
+SearchCatalogItemsRequest body = new SearchCatalogItemsRequest.Builder()
 .TextFilter("red")
 .CategoryIds(
     new List<string>
@@ -801,25 +801,25 @@ Models.SearchCatalogItemsRequest body = new Models.SearchCatalogItemsRequest.Bui
         "REGULAR",
     })
 .CustomAttributeFilters(
-    new List<Models.CustomAttributeFilter>
+    new List<CustomAttributeFilter>
     {
-        new Models.CustomAttributeFilter.Builder()
+        new CustomAttributeFilter.Builder()
         .CustomAttributeDefinitionId("VEGAN_DEFINITION_ID")
         .BoolFilter(true)
         .Build(),
-        new Models.CustomAttributeFilter.Builder()
+        new CustomAttributeFilter.Builder()
         .CustomAttributeDefinitionId("BRAND_DEFINITION_ID")
         .StringFilter("Dark Horse")
         .Build(),
-        new Models.CustomAttributeFilter.Builder()
+        new CustomAttributeFilter.Builder()
         .Key("VINTAGE")
         .NumberFilter(
-            new Models.Range.Builder()
+            new Range.Builder()
             .Min("2017")
             .Max("2018")
             .Build())
         .Build(),
-        new Models.CustomAttributeFilter.Builder()
+        new CustomAttributeFilter.Builder()
         .CustomAttributeDefinitionId("VARIETAL_DEFINITION_ID")
         .Build(),
     })
@@ -861,7 +861,7 @@ UpdateItemModifierListsAsync(
 ## Example Usage
 
 ```csharp
-Models.UpdateItemModifierListsRequest body = new Models.UpdateItemModifierListsRequest.Builder(
+UpdateItemModifierListsRequest body = new UpdateItemModifierListsRequest.Builder(
     new List<string>
     {
         "H42BRLUJ5KTZTTMPVSLFAACQ",
@@ -917,7 +917,7 @@ UpdateItemTaxesAsync(
 ## Example Usage
 
 ```csharp
-Models.UpdateItemTaxesRequest body = new Models.UpdateItemTaxesRequest.Builder(
+UpdateItemTaxesRequest body = new UpdateItemTaxesRequest.Builder(
     new List<string>
     {
         "H42BRLUJ5KTZTTMPVSLFAACQ",

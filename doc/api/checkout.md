@@ -54,69 +54,69 @@ CreateCheckoutAsync(
 
 ```csharp
 string locationId = "location_id4";
-Models.CreateCheckoutRequest body = new Models.CreateCheckoutRequest.Builder(
+CreateCheckoutRequest body = new CreateCheckoutRequest.Builder(
     "86ae1696-b1e3-4328-af6d-f1e04d947ad6",
-    new Models.CreateOrderRequest.Builder()
+    new CreateOrderRequest.Builder()
     .Order(
-        new Models.Order.Builder(
+        new Order.Builder(
             "location_id"
         )
         .ReferenceId("reference_id")
         .CustomerId("customer_id")
         .LineItems(
-            new List<Models.OrderLineItem>
+            new List<OrderLineItem>
             {
-                new Models.OrderLineItem.Builder(
+                new OrderLineItem.Builder(
                     "2"
                 )
                 .Name("Printed T Shirt")
                 .AppliedTaxes(
-                    new List<Models.OrderLineItemAppliedTax>
+                    new List<OrderLineItemAppliedTax>
                     {
-                        new Models.OrderLineItemAppliedTax.Builder(
+                        new OrderLineItemAppliedTax.Builder(
                             "38ze1696-z1e3-5628-af6d-f1e04d947fg3"
                         )
                         .Build(),
                     })
                 .AppliedDiscounts(
-                    new List<Models.OrderLineItemAppliedDiscount>
+                    new List<OrderLineItemAppliedDiscount>
                     {
-                        new Models.OrderLineItemAppliedDiscount.Builder(
+                        new OrderLineItemAppliedDiscount.Builder(
                             "56ae1696-z1e3-9328-af6d-f1e04d947gd4"
                         )
                         .Build(),
                     })
                 .BasePriceMoney(
-                    new Models.Money.Builder()
+                    new Money.Builder()
                     .Amount(1500L)
                     .Currency("USD")
                     .Build())
                 .Build(),
-                new Models.OrderLineItem.Builder(
+                new OrderLineItem.Builder(
                     "1"
                 )
                 .Name("Slim Jeans")
                 .BasePriceMoney(
-                    new Models.Money.Builder()
+                    new Money.Builder()
                     .Amount(2500L)
                     .Currency("USD")
                     .Build())
                 .Build(),
-                new Models.OrderLineItem.Builder(
+                new OrderLineItem.Builder(
                     "3"
                 )
                 .Name("Woven Sweater")
                 .BasePriceMoney(
-                    new Models.Money.Builder()
+                    new Money.Builder()
                     .Amount(3500L)
                     .Currency("USD")
                     .Build())
                 .Build(),
             })
         .Taxes(
-            new List<Models.OrderLineItemTax>
+            new List<OrderLineItemTax>
             {
-                new Models.OrderLineItemTax.Builder()
+                new OrderLineItemTax.Builder()
                 .Uid("38ze1696-z1e3-5628-af6d-f1e04d947fg3")
                 .Type("INCLUSIVE")
                 .Percentage("7.75")
@@ -124,13 +124,13 @@ Models.CreateCheckoutRequest body = new Models.CreateCheckoutRequest.Builder(
                 .Build(),
             })
         .Discounts(
-            new List<Models.OrderLineItemDiscount>
+            new List<OrderLineItemDiscount>
             {
-                new Models.OrderLineItemDiscount.Builder()
+                new OrderLineItemDiscount.Builder()
                 .Uid("56ae1696-z1e3-9328-af6d-f1e04d947gd4")
                 .Type("FIXED_AMOUNT")
                 .AmountMoney(
-                    new Models.Money.Builder()
+                    new Money.Builder()
                     .Amount(100L)
                     .Currency("USD")
                     .Build())
@@ -145,7 +145,7 @@ Models.CreateCheckoutRequest body = new Models.CreateCheckoutRequest.Builder(
 .MerchantSupportEmail("merchant+support@website.com")
 .PrePopulateBuyerEmail("example@email.com")
 .PrePopulateShippingAddress(
-    new Models.Address.Builder()
+    new Address.Builder()
     .AddressLine1("1455 Market St.")
     .AddressLine2("Suite 600")
     .Locality("San Francisco")
@@ -157,12 +157,12 @@ Models.CreateCheckoutRequest body = new Models.CreateCheckoutRequest.Builder(
     .Build())
 .RedirectUrl("https://merchant.website.com/order-confirm")
 .AdditionalRecipients(
-    new List<Models.ChargeRequestAdditionalRecipient>
+    new List<ChargeRequestAdditionalRecipient>
     {
-        new Models.ChargeRequestAdditionalRecipient.Builder(
+        new ChargeRequestAdditionalRecipient.Builder(
             "057P5VYJ4A5X1",
             "Application fees",
-            new Models.Money.Builder()
+            new Money.Builder()
             .Amount(60L)
             .Currency("USD")
             .Build()
@@ -246,8 +246,8 @@ UpdateLocationSettingsAsync(
 
 ```csharp
 string locationId = "location_id4";
-Models.UpdateLocationSettingsRequest body = new Models.UpdateLocationSettingsRequest.Builder(
-    new Models.CheckoutLocationSettings.Builder()
+UpdateLocationSettingsRequest body = new UpdateLocationSettingsRequest.Builder(
+    new CheckoutLocationSettings.Builder()
     .Build()
 )
 .Build();
@@ -316,8 +316,8 @@ UpdateMerchantSettingsAsync(
 ## Example Usage
 
 ```csharp
-Models.UpdateMerchantSettingsRequest body = new Models.UpdateMerchantSettingsRequest.Builder(
-    new Models.CheckoutMerchantSettings.Builder()
+UpdateMerchantSettingsRequest body = new UpdateMerchantSettingsRequest.Builder(
+    new CheckoutMerchantSettings.Builder()
     .Build()
 )
 .Build();
@@ -392,12 +392,12 @@ CreatePaymentLinkAsync(
 ## Example Usage
 
 ```csharp
-Models.CreatePaymentLinkRequest body = new Models.CreatePaymentLinkRequest.Builder()
+CreatePaymentLinkRequest body = new CreatePaymentLinkRequest.Builder()
 .IdempotencyKey("cd9e25dc-d9f2-4430-aedb-61605070e95f")
 .QuickPay(
-    new Models.QuickPay.Builder(
+    new QuickPay.Builder(
         "Auto Detailing",
-        new Models.Money.Builder()
+        new Money.Builder()
         .Amount(10000L)
         .Currency("USD")
         .Build(),
@@ -515,12 +515,12 @@ UpdatePaymentLinkAsync(
 
 ```csharp
 string id = "id0";
-Models.UpdatePaymentLinkRequest body = new Models.UpdatePaymentLinkRequest.Builder(
-    new Models.PaymentLink.Builder(
+UpdatePaymentLinkRequest body = new UpdatePaymentLinkRequest.Builder(
+    new PaymentLink.Builder(
         1
     )
     .CheckoutOptions(
-        new Models.CheckoutOptions.Builder()
+        new CheckoutOptions.Builder()
         .AskForShippingAddress(true)
         .Build())
     .Build()

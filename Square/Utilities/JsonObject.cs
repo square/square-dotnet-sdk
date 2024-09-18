@@ -1,11 +1,10 @@
+using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using APIMatic.Core.Types.Sdk;
 
 namespace Square.Utilities
 {
-    using System;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using APIMatic.Core.Types.Sdk;
-
     [JsonConverter(typeof(JsonObjectSerializer))]
     public class JsonObject : CoreJsonObject
     {

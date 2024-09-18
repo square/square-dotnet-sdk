@@ -1,18 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using APIMatic.Core.Utilities.Converters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Square;
+using Square.Utilities;
+
 namespace Square.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using APIMatic.Core.Utilities.Converters;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using Square;
-    using Square.Utilities;
-
     /// <summary>
     /// Booking.
     /// </summary>
@@ -38,6 +38,7 @@ namespace Square.Models
         /// <param name="locationType">location_type.</param>
         /// <param name="creatorDetails">creator_details.</param>
         /// <param name="source">source.</param>
+        /// <param name="address">address.</param>
         public Booking(
             string id = null,
             int? version = null,
@@ -54,7 +55,8 @@ namespace Square.Models
             bool? allDay = null,
             string locationType = null,
             Models.BookingCreatorDetails creatorDetails = null,
-            string source = null)
+            string source = null,
+            Models.Address address = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -112,6 +114,7 @@ namespace Square.Models
             this.LocationType = locationType;
             this.CreatorDetails = creatorDetails;
             this.Source = source;
+            this.Address = address;
         }
         internal Booking(Dictionary<string, bool> shouldSerialize,
             string id = null,
@@ -129,7 +132,8 @@ namespace Square.Models
             bool? allDay = null,
             string locationType = null,
             Models.BookingCreatorDetails creatorDetails = null,
-            string source = null)
+            string source = null,
+            Models.Address address = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -148,6 +152,7 @@ namespace Square.Models
             LocationType = locationType;
             CreatorDetails = creatorDetails;
             Source = source;
+            Address = address;
         }
 
         /// <summary>
@@ -248,6 +253,13 @@ namespace Square.Models
         [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)]
         public string Source { get; }
 
+        /// <summary>
+        /// Represents a postal address in a country.
+        /// For more information, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
+        /// </summary>
+        [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.Address Address { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -339,18 +351,19 @@ namespace Square.Models
                 ((this.AllDay == null && other.AllDay == null) || (this.AllDay?.Equals(other.AllDay) == true)) &&
                 ((this.LocationType == null && other.LocationType == null) || (this.LocationType?.Equals(other.LocationType) == true)) &&
                 ((this.CreatorDetails == null && other.CreatorDetails == null) || (this.CreatorDetails?.Equals(other.CreatorDetails) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true));
+                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
+                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 817434864;
+            int hashCode = -390805000;
             hashCode = HashCode.Combine(this.Id, this.Version, this.Status, this.CreatedAt, this.UpdatedAt, this.StartAt, this.LocationId);
 
             hashCode = HashCode.Combine(hashCode, this.CustomerId, this.CustomerNote, this.SellerNote, this.AppointmentSegments, this.TransitionTimeMinutes, this.AllDay, this.LocationType);
 
-            hashCode = HashCode.Combine(hashCode, this.CreatorDetails, this.Source);
+            hashCode = HashCode.Combine(hashCode, this.CreatorDetails, this.Source, this.Address);
 
             return hashCode;
         }
@@ -376,6 +389,7 @@ namespace Square.Models
             toStringOutput.Add($"this.LocationType = {(this.LocationType == null ? "null" : this.LocationType.ToString())}");
             toStringOutput.Add($"this.CreatorDetails = {(this.CreatorDetails == null ? "null" : this.CreatorDetails.ToString())}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
+            toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
         }
 
         /// <summary>
@@ -400,7 +414,8 @@ namespace Square.Models
                 .AllDay(this.AllDay)
                 .LocationType(this.LocationType)
                 .CreatorDetails(this.CreatorDetails)
-                .Source(this.Source);
+                .Source(this.Source)
+                .Address(this.Address);
             return builder;
         }
 
@@ -435,6 +450,7 @@ namespace Square.Models
             private string locationType;
             private Models.BookingCreatorDetails creatorDetails;
             private string source;
+            private Models.Address address;
 
              /// <summary>
              /// Id.
@@ -618,6 +634,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// Address.
+             /// </summary>
+             /// <param name="address"> address. </param>
+             /// <returns> Builder. </returns>
+            public Builder Address(Models.Address address)
+            {
+                this.address = address;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -689,7 +716,8 @@ namespace Square.Models
                     this.allDay,
                     this.locationType,
                     this.creatorDetails,
-                    this.source);
+                    this.source,
+                    this.address);
             }
         }
     }

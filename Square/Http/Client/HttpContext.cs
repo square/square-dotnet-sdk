@@ -1,9 +1,9 @@
+using APIMatic.Core.Types.Sdk;
+using Square.Http.Request;
+using Square.Http.Response;
+
 namespace Square.Http.Client
 {
-    using APIMatic.Core.Types.Sdk;
-    using Square.Http.Request;
-    using Square.Http.Response;
-    
     /// <summary>
     /// Represents the contextual information of HTTP request and response.
     /// </summary>

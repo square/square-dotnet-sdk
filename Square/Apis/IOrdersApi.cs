@@ -1,19 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Square;
+using Square.Http.Client;
+using Square.Http.Request;
+using Square.Http.Response;
+using Square.Utilities;
+
 namespace Square.Apis
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Dynamic;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Square;
-    using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Response;
-    using Square.Utilities;
-
     /// <summary>
     /// IOrdersApi.
     /// </summary>

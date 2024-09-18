@@ -1,10 +1,10 @@
+using System;
+using System.Net;
+using Square.Authentication;
+using Square.Models;
+
 namespace Square
 {
-    using System;
-    using System.Net;
-    using Square.Authentication;
-    using Square.Models;
-
     /// <summary>
     /// IConfiguration.
     /// </summary>

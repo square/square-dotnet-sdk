@@ -52,12 +52,12 @@ CreateLoyaltyAccountAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateLoyaltyAccountRequest body = new Models.CreateLoyaltyAccountRequest.Builder(
-    new Models.LoyaltyAccount.Builder(
+CreateLoyaltyAccountRequest body = new CreateLoyaltyAccountRequest.Builder(
+    new LoyaltyAccount.Builder(
         "d619f755-2d17-41f3-990d-c04ecedd64dd"
     )
     .Mapping(
-        new Models.LoyaltyAccountMapping.Builder()
+        new LoyaltyAccountMapping.Builder()
         .PhoneNumber("+14155551234")
         .Build())
     .Build(),
@@ -103,13 +103,13 @@ SearchLoyaltyAccountsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchLoyaltyAccountsRequest body = new Models.SearchLoyaltyAccountsRequest.Builder()
+SearchLoyaltyAccountsRequest body = new SearchLoyaltyAccountsRequest.Builder()
 .Query(
-    new Models.SearchLoyaltyAccountsRequestLoyaltyAccountQuery.Builder()
+    new SearchLoyaltyAccountsRequestLoyaltyAccountQuery.Builder()
     .Mappings(
-        new List<Models.LoyaltyAccountMapping>
+        new List<LoyaltyAccountMapping>
         {
-            new Models.LoyaltyAccountMapping.Builder()
+            new LoyaltyAccountMapping.Builder()
             .PhoneNumber("+14155551234")
             .Build(),
         })
@@ -202,8 +202,8 @@ AccumulateLoyaltyPointsAsync(
 
 ```csharp
 string accountId = "account_id2";
-Models.AccumulateLoyaltyPointsRequest body = new Models.AccumulateLoyaltyPointsRequest.Builder(
-    new Models.LoyaltyEventAccumulatePoints.Builder()
+AccumulateLoyaltyPointsRequest body = new AccumulateLoyaltyPointsRequest.Builder(
+    new LoyaltyEventAccumulatePoints.Builder()
     .OrderId("RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY")
     .Build(),
     "58b90739-c3e8-4b11-85f7-e636d48d72cb",
@@ -255,9 +255,9 @@ AdjustLoyaltyPointsAsync(
 
 ```csharp
 string accountId = "account_id2";
-Models.AdjustLoyaltyPointsRequest body = new Models.AdjustLoyaltyPointsRequest.Builder(
+AdjustLoyaltyPointsRequest body = new AdjustLoyaltyPointsRequest.Builder(
     "bc29a517-3dc9-450e-aa76-fae39ee849d1",
-    new Models.LoyaltyEventAdjustPoints.Builder(
+    new LoyaltyEventAdjustPoints.Builder(
         10
     )
     .Reason("Complimentary points")
@@ -309,13 +309,13 @@ SearchLoyaltyEventsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchLoyaltyEventsRequest body = new Models.SearchLoyaltyEventsRequest.Builder()
+SearchLoyaltyEventsRequest body = new SearchLoyaltyEventsRequest.Builder()
 .Query(
-    new Models.LoyaltyEventQuery.Builder()
+    new LoyaltyEventQuery.Builder()
     .Filter(
-        new Models.LoyaltyEventFilter.Builder()
+        new LoyaltyEventFilter.Builder()
         .OrderFilter(
-            new Models.LoyaltyEventOrderFilter.Builder(
+            new LoyaltyEventOrderFilter.Builder(
                 "PyATxhYLfsMqpVkcKJITPydgEYfZY"
             )
             .Build())
@@ -444,7 +444,7 @@ CalculateLoyaltyPointsAsync(
 
 ```csharp
 string programId = "program_id0";
-Models.CalculateLoyaltyPointsRequest body = new Models.CalculateLoyaltyPointsRequest.Builder()
+CalculateLoyaltyPointsRequest body = new CalculateLoyaltyPointsRequest.Builder()
 .OrderId("RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY")
 .LoyaltyAccountId("79b807d2-d786-46a9-933b-918028d7a8c5")
 .Build();
@@ -536,18 +536,18 @@ CreateLoyaltyPromotionAsync(
 
 ```csharp
 string programId = "program_id0";
-Models.CreateLoyaltyPromotionRequest body = new Models.CreateLoyaltyPromotionRequest.Builder(
-    new Models.LoyaltyPromotion.Builder(
+CreateLoyaltyPromotionRequest body = new CreateLoyaltyPromotionRequest.Builder(
+    new LoyaltyPromotion.Builder(
         "Tuesday Happy Hour Promo",
-        new Models.LoyaltyPromotionIncentive.Builder(
+        new LoyaltyPromotionIncentive.Builder(
             "POINTS_MULTIPLIER"
         )
         .PointsMultiplierData(
-            new Models.LoyaltyPromotionIncentivePointsMultiplierData.Builder()
+            new LoyaltyPromotionIncentivePointsMultiplierData.Builder()
             .Multiplier("3.0")
             .Build())
         .Build(),
-        new Models.LoyaltyPromotionAvailableTimeData.Builder(
+        new LoyaltyPromotionAvailableTimeData.Builder(
             new List<string>
             {
                 "BEGIN:VEVENT\nDTSTART:20220816T160000\nDURATION:PT2H\nRRULE:FREQ=WEEKLY;BYDAY=TU\nEND:VEVENT",
@@ -556,13 +556,13 @@ Models.CreateLoyaltyPromotionRequest body = new Models.CreateLoyaltyPromotionReq
         .Build()
     )
     .TriggerLimit(
-        new Models.LoyaltyPromotionTriggerLimit.Builder(
+        new LoyaltyPromotionTriggerLimit.Builder(
             1
         )
         .Interval("DAY")
         .Build())
     .MinimumSpendAmountMoney(
-        new Models.Money.Builder()
+        new Money.Builder()
         .Amount(2000L)
         .Currency("USD")
         .Build())
@@ -707,8 +707,8 @@ CreateLoyaltyRewardAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateLoyaltyRewardRequest body = new Models.CreateLoyaltyRewardRequest.Builder(
-    new Models.LoyaltyReward.Builder(
+CreateLoyaltyRewardRequest body = new CreateLoyaltyRewardRequest.Builder(
+    new LoyaltyReward.Builder(
         "5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd",
         "e1b39225-9da5-43d1-a5db-782cdd8ad94f"
     )
@@ -758,9 +758,9 @@ SearchLoyaltyRewardsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchLoyaltyRewardsRequest body = new Models.SearchLoyaltyRewardsRequest.Builder()
+SearchLoyaltyRewardsRequest body = new SearchLoyaltyRewardsRequest.Builder()
 .Query(
-    new Models.SearchLoyaltyRewardsRequestLoyaltyRewardQuery.Builder(
+    new SearchLoyaltyRewardsRequestLoyaltyRewardQuery.Builder(
         "5adcb100-07f1-4ee7-b8c6-6bb9ebc474bd"
     )
     .Build())
@@ -892,7 +892,7 @@ RedeemLoyaltyRewardAsync(
 
 ```csharp
 string rewardId = "reward_id4";
-Models.RedeemLoyaltyRewardRequest body = new Models.RedeemLoyaltyRewardRequest.Builder(
+RedeemLoyaltyRewardRequest body = new RedeemLoyaltyRewardRequest.Builder(
     "98adc7f7-6963-473b-b29c-f3c9cdd7d994",
     "P034NEENMD09F"
 )

@@ -1,16 +1,16 @@
-namespace Square.Authentication
-{
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Square.Http.Request;
 using APIMatic.Core.Authentication;
 
-/// <summary>
-/// BearerAuthManager.
-/// </summary>
-internal class BearerAuthManager : AuthManager, IBearerAuthCredentials
+namespace Square.Authentication
 {
+    /// <summary>
+    /// BearerAuthManager.
+    /// </summary>
+    internal class BearerAuthManager : AuthManager, IBearerAuthCredentials
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="BearerAuthManager"/> class.
         /// </summary>

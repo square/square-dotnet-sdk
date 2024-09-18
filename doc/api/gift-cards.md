@@ -88,10 +88,10 @@ CreateGiftCardAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateGiftCardRequest body = new Models.CreateGiftCardRequest.Builder(
+CreateGiftCardRequest body = new CreateGiftCardRequest.Builder(
     "NC9Tm69EjbjtConu",
     "81FN9BNFZTKS4",
-    new Models.GiftCard.Builder(
+    new GiftCard.Builder(
         "DIGITAL"
     )
     .Build()
@@ -132,7 +132,7 @@ RetrieveGiftCardFromGANAsync(
 ## Example Usage
 
 ```csharp
-Models.RetrieveGiftCardFromGANRequest body = new Models.RetrieveGiftCardFromGANRequest.Builder(
+RetrieveGiftCardFromGANRequest body = new RetrieveGiftCardFromGANRequest.Builder(
     "7783320001001635"
 )
 .Build();
@@ -171,7 +171,7 @@ RetrieveGiftCardFromNonceAsync(
 ## Example Usage
 
 ```csharp
-Models.RetrieveGiftCardFromNonceRequest body = new Models.RetrieveGiftCardFromNonceRequest.Builder(
+RetrieveGiftCardFromNonceRequest body = new RetrieveGiftCardFromNonceRequest.Builder(
     "cnon:7783322135245171"
 )
 .Build();
@@ -213,7 +213,7 @@ LinkCustomerToGiftCardAsync(
 
 ```csharp
 string giftCardId = "gift_card_id8";
-Models.LinkCustomerToGiftCardRequest body = new Models.LinkCustomerToGiftCardRequest.Builder(
+LinkCustomerToGiftCardRequest body = new LinkCustomerToGiftCardRequest.Builder(
     "GKY0FZ3V717AH8Q2D821PNT2ZW"
 )
 .Build();
@@ -258,7 +258,7 @@ UnlinkCustomerFromGiftCardAsync(
 
 ```csharp
 string giftCardId = "gift_card_id8";
-Models.UnlinkCustomerFromGiftCardRequest body = new Models.UnlinkCustomerFromGiftCardRequest.Builder(
+UnlinkCustomerFromGiftCardRequest body = new UnlinkCustomerFromGiftCardRequest.Builder(
     "GKY0FZ3V717AH8Q2D821PNT2ZW"
 )
 .Build();

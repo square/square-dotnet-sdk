@@ -1,9 +1,9 @@
+using APIMatic.Core.Types.Sdk;
+using System;
+using System.IO;
+
 namespace Square.Http.Client
 {
-    using APIMatic.Core.Types.Sdk;
-    using System;
-    using System.IO;
-
     /// <summary>
     /// An DTO class to capture information for file uploads.
     /// </summary>

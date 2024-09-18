@@ -48,40 +48,40 @@ CreateOrderAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateOrderRequest body = new Models.CreateOrderRequest.Builder()
+CreateOrderRequest body = new CreateOrderRequest.Builder()
 .Order(
-    new Models.Order.Builder(
+    new Order.Builder(
         "057P5VYJ4A5X1"
     )
     .ReferenceId("my-order-001")
     .LineItems(
-        new List<Models.OrderLineItem>
+        new List<OrderLineItem>
         {
-            new Models.OrderLineItem.Builder(
+            new OrderLineItem.Builder(
                 "1"
             )
             .Name("New York Strip Steak")
             .BasePriceMoney(
-                new Models.Money.Builder()
+                new Money.Builder()
                 .Amount(1599L)
                 .Currency("USD")
                 .Build())
             .Build(),
-            new Models.OrderLineItem.Builder(
+            new OrderLineItem.Builder(
                 "2"
             )
             .CatalogObjectId("BEMYCSMIJL46OCDV4KYIKXIB")
             .Modifiers(
-                new List<Models.OrderLineItemModifier>
+                new List<OrderLineItemModifier>
                 {
-                    new Models.OrderLineItemModifier.Builder()
+                    new OrderLineItemModifier.Builder()
                     .CatalogObjectId("CHQX7Y4KY6N5KINJKZCFURPZ")
                     .Build(),
                 })
             .AppliedDiscounts(
-                new List<Models.OrderLineItemAppliedDiscount>
+                new List<OrderLineItemAppliedDiscount>
                 {
-                    new Models.OrderLineItemAppliedDiscount.Builder(
+                    new OrderLineItemAppliedDiscount.Builder(
                         "one-dollar-off"
                     )
                     .Build(),
@@ -89,9 +89,9 @@ Models.CreateOrderRequest body = new Models.CreateOrderRequest.Builder()
             .Build(),
         })
     .Taxes(
-        new List<Models.OrderLineItemTax>
+        new List<OrderLineItemTax>
         {
-            new Models.OrderLineItemTax.Builder()
+            new OrderLineItemTax.Builder()
             .Uid("state-sales-tax")
             .Name("State Sales Tax")
             .Percentage("9")
@@ -99,24 +99,24 @@ Models.CreateOrderRequest body = new Models.CreateOrderRequest.Builder()
             .Build(),
         })
     .Discounts(
-        new List<Models.OrderLineItemDiscount>
+        new List<OrderLineItemDiscount>
         {
-            new Models.OrderLineItemDiscount.Builder()
+            new OrderLineItemDiscount.Builder()
             .Uid("labor-day-sale")
             .Name("Labor Day Sale")
             .Percentage("5")
             .Scope("ORDER")
             .Build(),
-            new Models.OrderLineItemDiscount.Builder()
+            new OrderLineItemDiscount.Builder()
             .Uid("membership-discount")
             .CatalogObjectId("DB7L55ZH2BGWI4H23ULIWOQ7")
             .Scope("ORDER")
             .Build(),
-            new Models.OrderLineItemDiscount.Builder()
+            new OrderLineItemDiscount.Builder()
             .Uid("one-dollar-off")
             .Name("Sale - $1.00 off")
             .AmountMoney(
-                new Models.Money.Builder()
+                new Money.Builder()
                 .Amount(100L)
                 .Currency("USD")
                 .Build())
@@ -163,7 +163,7 @@ BatchRetrieveOrdersAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchRetrieveOrdersRequest body = new Models.BatchRetrieveOrdersRequest.Builder(
+BatchRetrieveOrdersRequest body = new BatchRetrieveOrdersRequest.Builder(
     new List<string>
     {
         "CAISEM82RcpmcFBM0TfOyiHV3es",
@@ -207,38 +207,38 @@ CalculateOrderAsync(
 ## Example Usage
 
 ```csharp
-Models.CalculateOrderRequest body = new Models.CalculateOrderRequest.Builder(
-    new Models.Order.Builder(
+CalculateOrderRequest body = new CalculateOrderRequest.Builder(
+    new Order.Builder(
         "D7AVYMEAPJ3A3"
     )
     .LineItems(
-        new List<Models.OrderLineItem>
+        new List<OrderLineItem>
         {
-            new Models.OrderLineItem.Builder(
+            new OrderLineItem.Builder(
                 "1"
             )
             .Name("Item 1")
             .BasePriceMoney(
-                new Models.Money.Builder()
+                new Money.Builder()
                 .Amount(500L)
                 .Currency("USD")
                 .Build())
             .Build(),
-            new Models.OrderLineItem.Builder(
+            new OrderLineItem.Builder(
                 "2"
             )
             .Name("Item 2")
             .BasePriceMoney(
-                new Models.Money.Builder()
+                new Money.Builder()
                 .Amount(300L)
                 .Currency("USD")
                 .Build())
             .Build(),
         })
     .Discounts(
-        new List<Models.OrderLineItemDiscount>
+        new List<OrderLineItemDiscount>
         {
-            new Models.OrderLineItemDiscount.Builder()
+            new OrderLineItemDiscount.Builder()
             .Name("50% Off")
             .Percentage("50")
             .Scope("ORDER")
@@ -283,7 +283,7 @@ CloneOrderAsync(
 ## Example Usage
 
 ```csharp
-Models.CloneOrderRequest body = new Models.CloneOrderRequest.Builder(
+CloneOrderRequest body = new CloneOrderRequest.Builder(
     "ZAISEM52YcpmcWAzERDOyiWS123"
 )
 .Version(3)
@@ -340,7 +340,7 @@ SearchOrdersAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchOrdersRequest body = new Models.SearchOrdersRequest.Builder()
+SearchOrdersRequest body = new SearchOrdersRequest.Builder()
 .LocationIds(
     new List<string>
     {
@@ -348,11 +348,11 @@ Models.SearchOrdersRequest body = new Models.SearchOrdersRequest.Builder()
         "18YC4JDH91E1H",
     })
 .Query(
-    new Models.SearchOrdersQuery.Builder()
+    new SearchOrdersQuery.Builder()
     .Filter(
-        new Models.SearchOrdersFilter.Builder()
+        new SearchOrdersFilter.Builder()
         .StateFilter(
-            new Models.SearchOrdersStateFilter.Builder(
+            new SearchOrdersStateFilter.Builder(
                 new List<string>
                 {
                     "COMPLETED",
@@ -360,16 +360,16 @@ Models.SearchOrdersRequest body = new Models.SearchOrdersRequest.Builder()
             )
             .Build())
         .DateTimeFilter(
-            new Models.SearchOrdersDateTimeFilter.Builder()
+            new SearchOrdersDateTimeFilter.Builder()
             .ClosedAt(
-                new Models.TimeRange.Builder()
+                new TimeRange.Builder()
                 .StartAt("2018-03-03T20:00:00+00:00")
                 .EndAt("2019-03-04T21:54:45+00:00")
                 .Build())
             .Build())
         .Build())
     .Sort(
-        new Models.SearchOrdersSort.Builder(
+        new SearchOrdersSort.Builder(
             "CLOSED_AT"
         )
         .SortOrder("DESC")
@@ -465,7 +465,7 @@ UpdateOrderAsync(
 
 ```csharp
 string orderId = "order_id6";
-Models.UpdateOrderRequest body = new Models.UpdateOrderRequest.Builder()
+UpdateOrderRequest body = new UpdateOrderRequest.Builder()
 .Build();
 
 try
@@ -521,7 +521,7 @@ PayOrderAsync(
 
 ```csharp
 string orderId = "order_id6";
-Models.PayOrderRequest body = new Models.PayOrderRequest.Builder(
+PayOrderRequest body = new PayOrderRequest.Builder(
     "c043a359-7ad9-4136-82a9-c3f1d66dcbff"
 )
 .PaymentIds(

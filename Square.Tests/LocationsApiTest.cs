@@ -1,20 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Threading.Tasks;
+using APIMatic.Core.Utilities;
+using Newtonsoft.Json.Converters;
+using NUnit.Framework;
+using Square;
+using Square.Apis;
+using Square.Exceptions;
+using Square.Http.Client;
+using Square.Http.Response;
+using Square.Utilities;
+
 namespace Square
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.IO;
-    using System.Threading.Tasks;
-    using APIMatic.Core.Utilities;
-    using Newtonsoft.Json.Converters;
-    using NUnit.Framework;
-    using Square;
-    using Square.Apis;
-    using Square.Exceptions;
-    using Square.Http.Client;
-    using Square.Http.Response;
-    using Square.Utilities;
-
     /// <summary>
     /// LocationsApiTest.
     /// </summary>

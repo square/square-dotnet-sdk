@@ -92,8 +92,8 @@ CreateMerchantCustomAttributeDefinitionAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateMerchantCustomAttributeDefinitionRequest body = new Models.CreateMerchantCustomAttributeDefinitionRequest.Builder(
-    new Models.CustomAttributeDefinition.Builder()
+CreateMerchantCustomAttributeDefinitionRequest body = new CreateMerchantCustomAttributeDefinitionRequest.Builder(
+    new CustomAttributeDefinition.Builder()
     .Key("alternative_seller_name")
     .Name("Alternative Merchant Name")
     .Description("This is the other name this merchant goes by.")
@@ -219,8 +219,8 @@ UpdateMerchantCustomAttributeDefinitionAsync(
 
 ```csharp
 string key = "key0";
-Models.UpdateMerchantCustomAttributeDefinitionRequest body = new Models.UpdateMerchantCustomAttributeDefinitionRequest.Builder(
-    new Models.CustomAttributeDefinition.Builder()
+UpdateMerchantCustomAttributeDefinitionRequest body = new UpdateMerchantCustomAttributeDefinitionRequest.Builder(
+    new CustomAttributeDefinition.Builder()
     .Description("Update the description as desired.")
     .Visibility("VISIBILITY_READ_ONLY")
     .Build()
@@ -266,13 +266,13 @@ BulkDeleteMerchantCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkDeleteMerchantCustomAttributesRequest body = new Models.BulkDeleteMerchantCustomAttributesRequest.Builder(
-    new Dictionary<string, Models.BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest>
+BulkDeleteMerchantCustomAttributesRequest body = new BulkDeleteMerchantCustomAttributesRequest.Builder(
+    new Dictionary<string, BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest>
     {
-        ["id1"] = new Models.BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest.Builder()
+        ["id1"] = new BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest.Builder()
         .Key("alternative_seller_name")
         .Build(),
-        ["id2"] = new Models.BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest.Builder()
+        ["id2"] = new BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest.Builder()
         .Key("has_seen_tutorial")
         .Build(),
     }
@@ -322,18 +322,18 @@ BulkUpsertMerchantCustomAttributesAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkUpsertMerchantCustomAttributesRequest body = new Models.BulkUpsertMerchantCustomAttributesRequest.Builder(
-    new Dictionary<string, Models.BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest>
+BulkUpsertMerchantCustomAttributesRequest body = new BulkUpsertMerchantCustomAttributesRequest.Builder(
+    new Dictionary<string, BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest>
     {
-        ["key0"] = new Models.BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest.Builder(
+        ["key0"] = new BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest.Builder(
             "merchant_id0",
-            new Models.CustomAttribute.Builder()
+            new CustomAttribute.Builder()
             .Build()
         )
         .Build(),
-        ["key1"] = new Models.BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest.Builder(
+        ["key1"] = new BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest.Builder(
             "merchant_id0",
-            new Models.CustomAttribute.Builder()
+            new CustomAttribute.Builder()
             .Build()
         )
         .Build(),
@@ -379,7 +379,7 @@ ListMerchantCustomAttributesAsync(
 | `visibilityFilter` | [`string`](../../doc/models/visibility-filter.md) | Query, Optional | Filters the `CustomAttributeDefinition` results by their `visibility` values. |
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a single paged response. This limit is advisory.<br>The response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.<br>The default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `cursor` | `string` | Query, Optional | The cursor returned in the paged response from the previous call to this endpoint.<br>Provide this cursor to retrieve the next page of results for your original request. For more<br>information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
-| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`. |
+| `withDefinitions` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each<br>custom attribute. Set this parameter to `true` to get the name and description of each custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -473,7 +473,7 @@ RetrieveMerchantCustomAttributeAsync(
 |  --- | --- | --- | --- |
 | `merchantId` | `string` | Template, Required | The ID of the target [merchant](entity:Merchant). |
 | `key` | `string` | Template, Required | The key of the custom attribute to retrieve. This key must match the `key` of a custom<br>attribute definition in the Square seller account. If the requesting application is not the<br>definition owner, you must use the qualified key. |
-| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`. |
+| `withDefinition` | `bool?` | Query, Optional | Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of<br>the custom attribute. Set this parameter to `true` to get the name and description of the custom<br>attribute, information about the data type, or other definition details. The default value is `false`.<br>**Default**: `false` |
 | `version` | `int?` | Query, Optional | The current version of the custom attribute, which is used for strongly consistent reads to<br>guarantee that you receive the most up-to-date data. When included in the request, Square<br>returns the specified version or a higher version if one exists. If the specified version is<br>higher than the current version, Square returns a `BAD_REQUEST` error. |
 
 ## Response Type
@@ -535,8 +535,8 @@ UpsertMerchantCustomAttributeAsync(
 ```csharp
 string merchantId = "merchant_id0";
 string key = "key0";
-Models.UpsertMerchantCustomAttributeRequest body = new Models.UpsertMerchantCustomAttributeRequest.Builder(
-    new Models.CustomAttribute.Builder()
+UpsertMerchantCustomAttributeRequest body = new UpsertMerchantCustomAttributeRequest.Builder(
+    new CustomAttribute.Builder()
     .Build()
 )
 .Build();

@@ -101,8 +101,8 @@ CreateBreakTypeAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateBreakTypeRequest body = new Models.CreateBreakTypeRequest.Builder(
-    new Models.BreakType.Builder(
+CreateBreakTypeRequest body = new CreateBreakTypeRequest.Builder(
+    new BreakType.Builder(
         "CGJN03P1D08GF",
         "Lunch Break",
         "PT30M",
@@ -222,8 +222,8 @@ UpdateBreakTypeAsync(
 
 ```csharp
 string id = "id0";
-Models.UpdateBreakTypeRequest body = new Models.UpdateBreakTypeRequest.Builder(
-    new Models.BreakType.Builder(
+UpdateBreakTypeRequest body = new UpdateBreakTypeRequest.Builder(
+    new BreakType.Builder(
         "26M7H24AZ9N6R",
         "Lunch",
         "PT50M",
@@ -366,26 +366,26 @@ CreateShiftAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateShiftRequest body = new Models.CreateShiftRequest.Builder(
-    new Models.Shift.Builder(
+CreateShiftRequest body = new CreateShiftRequest.Builder(
+    new Shift.Builder(
         "PAA1RJZZKXBFG",
         "2019-01-25T03:11:00-05:00"
     )
     .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(
-        new Models.ShiftWage.Builder()
+        new ShiftWage.Builder()
         .Title("Barista")
         .HourlyRate(
-            new Models.Money.Builder()
+            new Money.Builder()
             .Amount(1100L)
             .Currency("USD")
             .Build())
         .TipEligible(true)
         .Build())
     .Breaks(
-        new List<Models.Break>
+        new List<Break>
         {
-            new Models.Break.Builder(
+            new Break.Builder(
                 "2019-01-25T06:11:00-05:00",
                 "REGS1EQR1TPZ5",
                 "Tea Break",
@@ -397,7 +397,7 @@ Models.CreateShiftRequest body = new Models.CreateShiftRequest.Builder(
         })
     .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
     .DeclaredCashTipMoney(
-        new Models.Money.Builder()
+        new Money.Builder()
         .Amount(500L)
         .Currency("USD")
         .Build())
@@ -455,15 +455,15 @@ SearchShiftsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchShiftsRequest body = new Models.SearchShiftsRequest.Builder()
+SearchShiftsRequest body = new SearchShiftsRequest.Builder()
 .Query(
-    new Models.ShiftQuery.Builder()
+    new ShiftQuery.Builder()
     .Filter(
-        new Models.ShiftFilter.Builder()
+        new ShiftFilter.Builder()
         .Workday(
-            new Models.ShiftWorkday.Builder()
+            new ShiftWorkday.Builder()
             .DateRange(
-                new Models.DateRange.Builder()
+                new DateRange.Builder()
                 .StartDate("2019-01-20")
                 .EndDate("2019-02-03")
                 .Build())
@@ -588,26 +588,26 @@ UpdateShiftAsync(
 
 ```csharp
 string id = "id0";
-Models.UpdateShiftRequest body = new Models.UpdateShiftRequest.Builder(
-    new Models.Shift.Builder(
+UpdateShiftRequest body = new UpdateShiftRequest.Builder(
+    new Shift.Builder(
         "PAA1RJZZKXBFG",
         "2019-01-25T03:11:00-05:00"
     )
     .EndAt("2019-01-25T13:11:00-05:00")
     .Wage(
-        new Models.ShiftWage.Builder()
+        new ShiftWage.Builder()
         .Title("Bartender")
         .HourlyRate(
-            new Models.Money.Builder()
+            new Money.Builder()
             .Amount(1500L)
             .Currency("USD")
             .Build())
         .TipEligible(true)
         .Build())
     .Breaks(
-        new List<Models.Break>
+        new List<Break>
         {
-            new Models.Break.Builder(
+            new Break.Builder(
                 "2019-01-25T06:11:00-05:00",
                 "REGS1EQR1TPZ5",
                 "Tea Break",
@@ -621,7 +621,7 @@ Models.UpdateShiftRequest body = new Models.UpdateShiftRequest.Builder(
     .Version(1)
     .TeamMemberId("ormj0jJJZ5OZIzxrZYJI")
     .DeclaredCashTipMoney(
-        new Models.Money.Builder()
+        new Money.Builder()
         .Amount(500L)
         .Currency("USD")
         .Build())
@@ -778,8 +778,8 @@ UpdateWorkweekConfigAsync(
 
 ```csharp
 string id = "id0";
-Models.UpdateWorkweekConfigRequest body = new Models.UpdateWorkweekConfigRequest.Builder(
-    new Models.WorkweekConfig.Builder(
+UpdateWorkweekConfigRequest body = new UpdateWorkweekConfigRequest.Builder(
+    new WorkweekConfig.Builder(
         "MON",
         "10:00"
     )

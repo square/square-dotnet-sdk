@@ -1,9 +1,9 @@
+using System.Net.Http;
+using System.Collections.Generic;
+using APIMatic.Core.Types.Sdk;
+
 namespace Square.Http.Request
 {
-    using System.Net.Http;
-    using System.Collections.Generic;
-    using APIMatic.Core.Types.Sdk;
-
     /// <summary>
     /// HttpRequest stores necessary information about the http request.
     /// </summary>

@@ -54,7 +54,7 @@ RevokeTokenAsync(
 ## Example Usage
 
 ```csharp
-Models.RevokeTokenRequest body = new Models.RevokeTokenRequest.Builder()
+RevokeTokenRequest body = new RevokeTokenRequest.Builder()
 .ClientId("CLIENT_ID")
 .AccessToken("ACCESS_TOKEN")
 .Build();
@@ -115,7 +115,7 @@ ObtainTokenAsync(
 ## Example Usage
 
 ```csharp
-Models.ObtainTokenRequest body = new Models.ObtainTokenRequest.Builder(
+ObtainTokenRequest body = new ObtainTokenRequest.Builder(
     "APPLICATION_ID",
     "authorization_code"
 )
