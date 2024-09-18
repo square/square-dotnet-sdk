@@ -77,8 +77,8 @@ CreateCustomerGroupAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateCustomerGroupRequest body = new Models.CreateCustomerGroupRequest.Builder(
-    new Models.CustomerGroup.Builder(
+CreateCustomerGroupRequest body = new CreateCustomerGroupRequest.Builder(
+    new CustomerGroup.Builder(
         "Loyal Customers"
     )
     .Build()
@@ -192,8 +192,8 @@ UpdateCustomerGroupAsync(
 
 ```csharp
 string groupId = "group_id0";
-Models.UpdateCustomerGroupRequest body = new Models.UpdateCustomerGroupRequest.Builder(
-    new Models.CustomerGroup.Builder(
+UpdateCustomerGroupRequest body = new UpdateCustomerGroupRequest.Builder(
+    new CustomerGroup.Builder(
         "Loyal Customers"
     )
     .Build()

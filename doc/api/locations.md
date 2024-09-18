@@ -72,12 +72,12 @@ CreateLocationAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateLocationRequest body = new Models.CreateLocationRequest.Builder()
+CreateLocationRequest body = new CreateLocationRequest.Builder()
 .Location(
-    new Models.Location.Builder()
+    new Location.Builder()
     .Name("Midtown")
     .Address(
-        new Models.Address.Builder()
+        new Address.Builder()
         .AddressLine1("1234 Peachtree St. NE")
         .Locality("Atlanta")
         .AdministrativeDistrictLevel1("GA")
@@ -160,25 +160,25 @@ UpdateLocationAsync(
 
 ```csharp
 string locationId = "location_id4";
-Models.UpdateLocationRequest body = new Models.UpdateLocationRequest.Builder()
+UpdateLocationRequest body = new UpdateLocationRequest.Builder()
 .Location(
-    new Models.Location.Builder()
+    new Location.Builder()
     .BusinessHours(
-        new Models.BusinessHours.Builder()
+        new BusinessHours.Builder()
         .Periods(
-            new List<Models.BusinessHoursPeriod>
+            new List<BusinessHoursPeriod>
             {
-                new Models.BusinessHoursPeriod.Builder()
+                new BusinessHoursPeriod.Builder()
                 .DayOfWeek("FRI")
                 .StartLocalTime("07:00")
                 .EndLocalTime("18:00")
                 .Build(),
-                new Models.BusinessHoursPeriod.Builder()
+                new BusinessHoursPeriod.Builder()
                 .DayOfWeek("SAT")
                 .StartLocalTime("07:00")
                 .EndLocalTime("18:00")
                 .Build(),
-                new Models.BusinessHoursPeriod.Builder()
+                new BusinessHoursPeriod.Builder()
                 .DayOfWeek("SUN")
                 .StartLocalTime("09:00")
                 .EndLocalTime("15:00")

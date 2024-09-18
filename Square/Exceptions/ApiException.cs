@@ -1,13 +1,13 @@
+using APIMatic.Core.Types.Sdk;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Square.Http.Client;
+using Square.Http.Request;
+using Square.Http.Response;
+using System.Collections.Generic;
+
 namespace Square.Exceptions
 {
-    using APIMatic.Core.Types.Sdk;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Response;
-    using System.Collections.Generic;
-
     /// <summary>
     /// This is the base class for all exceptions that represent an error response
     /// from the server.

@@ -121,9 +121,9 @@ CreateDeviceCodeAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateDeviceCodeRequest body = new Models.CreateDeviceCodeRequest.Builder(
+CreateDeviceCodeRequest body = new CreateDeviceCodeRequest.Builder(
     "01bb00a6-0c86-4770-94ed-f5fca973cd56",
-    new Models.DeviceCode.Builder(
+    new DeviceCode.Builder(
         "TERMINAL_API"
     )
     .Name("Counter 1")

@@ -44,7 +44,7 @@ RegisterDomainAsync(
 ## Example Usage
 
 ```csharp
-Models.RegisterDomainRequest body = new Models.RegisterDomainRequest.Builder(
+RegisterDomainRequest body = new RegisterDomainRequest.Builder(
     "example.com"
 )
 .Build();

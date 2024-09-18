@@ -1,15 +1,15 @@
+using APIMatic.Core;
+using APIMatic.Core.Http.Configuration;
+using APIMatic.Core.Response;
+using Square.Exceptions;
+using Square.Http.Client;
+using Square.Http.Request;
+using Square.Http.Response;
+using Square.Utilities;
+using System;
+
 namespace Square.Apis
 {
-    using APIMatic.Core;
-    using APIMatic.Core.Http.Configuration;
-    using APIMatic.Core.Response;
-    using Square.Exceptions;
-    using Square.Http.Client;
-    using Square.Http.Request;
-    using Square.Http.Response;
-    using Square.Utilities;
-    using System;
-
     /// <summary>
     /// The base class for all controller classes.
     /// </summary>

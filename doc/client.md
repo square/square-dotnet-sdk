@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2024-08-21"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2024-09-19"` |
 | `CustomUrl` | `string` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `"https://connect.squareup.com"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(60)` |
@@ -15,13 +15,13 @@ The following parameters are configurable for the API Client:
 The API client can be initialized as follows:
 
 ```csharp
-Square.SquareClient client = new Square.SquareClient.Builder()
+SquareClient client = new SquareClient.Builder()
     .BearerAuthCredentials(
         new BearerAuthModel.Builder(
             "AccessToken"
         )
         .Build())
-    .SquareVersion("2024-08-21")
+    .SquareVersion("2024-09-19")
     .Environment(Square.Environment.Production)
     .CustomUrl("https://connect.squareup.com")
     .Build();
@@ -30,6 +30,7 @@ Square.SquareClient client = new Square.SquareClient.Builder()
 ## Make Calls with the API Client
 
 ```csharp
+using Square;
 using Square.Apis;
 using Square.Authentication;
 using Square.Exceptions;
@@ -37,7 +38,7 @@ using Square.Models;
 using System;
 using System.Threading.Tasks;
 
-namespace Testing
+namespace TestConsoleProject
 {
     public class Program
     {
@@ -49,7 +50,9 @@ namespace Testing
                         "AccessToken"
                     )
                     .Build())
-                .SquareVersion("2024-08-21")
+                .SquareVersion("2024-09-19")
+                .Environment(Square.Environment.Production)
+                .CustomUrl("https://connect.squareup.com")
                 .Build();
 
             ILocationsApi locationsApi = client.LocationsApi;

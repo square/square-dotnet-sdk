@@ -53,7 +53,7 @@ CreateSubscriptionAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateSubscriptionRequest body = new Models.CreateSubscriptionRequest.Builder(
+CreateSubscriptionRequest body = new CreateSubscriptionRequest.Builder(
     "S8GWD5R9QB376",
     "CHFGVKYY8RSV93M5KCYTG4PN0G"
 )
@@ -63,13 +63,13 @@ Models.CreateSubscriptionRequest body = new Models.CreateSubscriptionRequest.Bui
 .CardId("ccof:qy5x8hHGYsgLrp4Q4GB")
 .Timezone("America/Los_Angeles")
 .Source(
-    new Models.SubscriptionSource.Builder()
+    new SubscriptionSource.Builder()
     .Name("My Application")
     .Build())
 .Phases(
-    new List<Models.Phase>
+    new List<Phase>
     {
-        new Models.Phase.Builder()
+        new Phase.Builder()
         .Ordinal(0L)
         .OrderTemplateId("U2NaowWxzXwpsZU697x7ZHOAnCNZY")
         .Build(),
@@ -111,7 +111,7 @@ BulkSwapPlanAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkSwapPlanRequest body = new Models.BulkSwapPlanRequest.Builder(
+BulkSwapPlanRequest body = new BulkSwapPlanRequest.Builder(
     "FQ7CDXXWSLUJRPM3GFJSJGZ7",
     "6JHXF3B2CW3YKHDV4XEM674H",
     "S8GWD5R9QB376"
@@ -165,11 +165,11 @@ SearchSubscriptionsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchSubscriptionsRequest body = new Models.SearchSubscriptionsRequest.Builder()
+SearchSubscriptionsRequest body = new SearchSubscriptionsRequest.Builder()
 .Query(
-    new Models.SearchSubscriptionsQuery.Builder()
+    new SearchSubscriptionsQuery.Builder()
     .Filter(
-        new Models.SearchSubscriptionsFilter.Builder()
+        new SearchSubscriptionsFilter.Builder()
         .CustomerIds(
             new List<string>
             {
@@ -264,9 +264,9 @@ UpdateSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-Models.UpdateSubscriptionRequest body = new Models.UpdateSubscriptionRequest.Builder()
+UpdateSubscriptionRequest body = new UpdateSubscriptionRequest.Builder()
 .Subscription(
-    new Models.Subscription.Builder()
+    new Subscription.Builder()
     .CanceledDate("canceled_date6")
     .CardId("{NEW CARD ID}")
     .Build())
@@ -354,7 +354,7 @@ ChangeBillingAnchorDateAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-Models.ChangeBillingAnchorDateRequest body = new Models.ChangeBillingAnchorDateRequest.Builder()
+ChangeBillingAnchorDateRequest body = new ChangeBillingAnchorDateRequest.Builder()
 .MonthlyBillingAnchorDate(1)
 .Build();
 
@@ -474,7 +474,7 @@ PauseSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-Models.PauseSubscriptionRequest body = new Models.PauseSubscriptionRequest.Builder()
+PauseSubscriptionRequest body = new PauseSubscriptionRequest.Builder()
 .Build();
 
 try
@@ -517,7 +517,7 @@ ResumeSubscriptionAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-Models.ResumeSubscriptionRequest body = new Models.ResumeSubscriptionRequest.Builder()
+ResumeSubscriptionRequest body = new ResumeSubscriptionRequest.Builder()
 .Build();
 
 try
@@ -561,12 +561,12 @@ SwapPlanAsync(
 
 ```csharp
 string subscriptionId = "subscription_id0";
-Models.SwapPlanRequest body = new Models.SwapPlanRequest.Builder()
+SwapPlanRequest body = new SwapPlanRequest.Builder()
 .NewPlanVariationId("FQ7CDXXWSLUJRPM3GFJSJGZ7")
 .Phases(
-    new List<Models.PhaseInput>
+    new List<PhaseInput>
     {
-        new Models.PhaseInput.Builder(
+        new PhaseInput.Builder(
             0L
         )
         .OrderTemplateId("uhhnjH9osVv3shUADwaC0b3hNxQZY")

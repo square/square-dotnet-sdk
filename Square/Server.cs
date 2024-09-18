@@ -1,3 +1,4 @@
+
 namespace Square
 {
     /// <summary>

@@ -57,7 +57,7 @@ ListPaymentsAsync(
 | `last4` | `string` | Query, Optional | The last four digits of a payment card. |
 | `cardBrand` | `string` | Query, Optional | The brand of the payment card (for example, VISA). |
 | `limit` | `int?` | Query, Optional | The maximum number of results to be returned in a single page.<br>It is possible to receive fewer results than the specified limit on a given page.<br><br>The default value of 100 is also the maximum allowed value. If the provided value is<br>greater than 100, it is ignored and the default value is used instead.<br><br>Default: `100` |
-| `isOfflinePayment` | `bool?` | Query, Optional | Whether the payment was taken offline or not. |
+| `isOfflinePayment` | `bool?` | Query, Optional | Whether the payment was taken offline or not.<br>**Default**: `false` |
 | `offlineBeginTime` | `string` | Query, Optional | Indicates the start of the time range for which to retrieve offline payments, in RFC 3339<br>format for timestamps. The range is determined using the<br>`offline_payment_details.client_created_at` field for each Payment. If set, payments without a<br>value set in `offline_payment_details.client_created_at` will not be returned.<br><br>Default: The current time. |
 | `offlineEndTime` | `string` | Query, Optional | Indicates the end of the time range for which to retrieve offline payments, in RFC 3339<br>format for timestamps. The range is determined using the<br>`offline_payment_details.client_created_at` field for each Payment. If set, payments without a<br>value set in `offline_payment_details.client_created_at` will not be returned.<br><br>Default: The current time. |
 
@@ -121,17 +121,17 @@ CreatePaymentAsync(
 ## Example Usage
 
 ```csharp
-Models.CreatePaymentRequest body = new Models.CreatePaymentRequest.Builder(
+CreatePaymentRequest body = new CreatePaymentRequest.Builder(
     "ccof:GaJGNaZa8x4OgDJn4GB",
     "7b0f3ec5-086a-4871-8f13-3c81b3875218"
 )
 .AmountMoney(
-    new Models.Money.Builder()
+    new Money.Builder()
     .Amount(1000L)
     .Currency("USD")
     .Build())
 .AppFeeMoney(
-    new Models.Money.Builder()
+    new Money.Builder()
     .Amount(10L)
     .Currency("USD")
     .Build())
@@ -186,7 +186,7 @@ CancelPaymentByIdempotencyKeyAsync(
 ## Example Usage
 
 ```csharp
-Models.CancelPaymentByIdempotencyKeyRequest body = new Models.CancelPaymentByIdempotencyKeyRequest.Builder(
+CancelPaymentByIdempotencyKeyRequest body = new CancelPaymentByIdempotencyKeyRequest.Builder(
     "a7e36d40-d24b-11e8-b568-0800200c9a66"
 )
 .Build();
@@ -264,18 +264,18 @@ UpdatePaymentAsync(
 
 ```csharp
 string paymentId = "payment_id0";
-Models.UpdatePaymentRequest body = new Models.UpdatePaymentRequest.Builder(
+UpdatePaymentRequest body = new UpdatePaymentRequest.Builder(
     "956f8b13-e4ec-45d6-85e8-d1d95ef0c5de"
 )
 .Payment(
-    new Models.Payment.Builder()
+    new Payment.Builder()
     .AmountMoney(
-        new Models.Money.Builder()
+        new Money.Builder()
         .Amount(1000L)
         .Currency("USD")
         .Build())
     .TipMoney(
-        new Models.Money.Builder()
+        new Money.Builder()
         .Amount(100L)
         .Currency("USD")
         .Build())
@@ -362,7 +362,7 @@ CompletePaymentAsync(
 
 ```csharp
 string paymentId = "payment_id0";
-Models.CompletePaymentRequest body = new Models.CompletePaymentRequest.Builder()
+CompletePaymentRequest body = new CompletePaymentRequest.Builder()
 .Build();
 
 try

@@ -110,8 +110,8 @@ CreateBookingAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateBookingRequest body = new Models.CreateBookingRequest.Builder(
-    new Models.Booking.Builder()
+CreateBookingRequest body = new CreateBookingRequest.Builder(
+    new Booking.Builder()
     .Build()
 )
 .Build();
@@ -153,10 +153,10 @@ SearchAvailabilityAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchAvailabilityRequest body = new Models.SearchAvailabilityRequest.Builder(
-    new Models.SearchAvailabilityQuery.Builder(
-        new Models.SearchAvailabilityFilter.Builder(
-            new Models.TimeRange.Builder()
+SearchAvailabilityRequest body = new SearchAvailabilityRequest.Builder(
+    new SearchAvailabilityQuery.Builder(
+        new SearchAvailabilityFilter.Builder(
+            new TimeRange.Builder()
             .Build()
         )
         .Build()
@@ -202,7 +202,7 @@ BulkRetrieveBookingsAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkRetrieveBookingsRequest body = new Models.BulkRetrieveBookingsRequest.Builder(
+BulkRetrieveBookingsRequest body = new BulkRetrieveBookingsRequest.Builder(
     new List<string>
     {
         "booking_ids8",
@@ -338,7 +338,7 @@ ListTeamMemberBookingProfilesAsync(
 
 | Parameter | Type | Tags | Description |
 |  --- | --- | --- | --- |
-| `bookableOnly` | `bool?` | Query, Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`). |
+| `bookableOnly` | `bool?` | Query, Optional | Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`).<br>**Default**: `false` |
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a paged response. |
 | `cursor` | `string` | Query, Optional | The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results. |
 | `locationId` | `string` | Query, Optional | Indicates whether to include only team members enabled at the given location in the returned result. |
@@ -385,7 +385,7 @@ BulkRetrieveTeamMemberBookingProfilesAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkRetrieveTeamMemberBookingProfilesRequest body = new Models.BulkRetrieveTeamMemberBookingProfilesRequest.Builder(
+BulkRetrieveTeamMemberBookingProfilesRequest body = new BulkRetrieveTeamMemberBookingProfilesRequest.Builder(
     new List<string>
     {
         "team_member_ids3",
@@ -511,8 +511,8 @@ UpdateBookingAsync(
 
 ```csharp
 string bookingId = "booking_id4";
-Models.UpdateBookingRequest body = new Models.UpdateBookingRequest.Builder(
-    new Models.Booking.Builder()
+UpdateBookingRequest body = new UpdateBookingRequest.Builder(
+    new Booking.Builder()
     .Build()
 )
 .Build();
@@ -563,7 +563,7 @@ CancelBookingAsync(
 
 ```csharp
 string bookingId = "booking_id4";
-Models.CancelBookingRequest body = new Models.CancelBookingRequest.Builder()
+CancelBookingRequest body = new CancelBookingRequest.Builder()
 .Build();
 
 try

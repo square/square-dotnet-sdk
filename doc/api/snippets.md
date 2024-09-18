@@ -123,8 +123,8 @@ UpsertSnippetAsync(
 
 ```csharp
 string siteId = "site_id6";
-Models.UpsertSnippetRequest body = new Models.UpsertSnippetRequest.Builder(
-    new Models.Snippet.Builder(
+UpsertSnippetRequest body = new UpsertSnippetRequest.Builder(
+    new Snippet.Builder(
         "<script>var js = 1;</script>"
     )
     .Build()

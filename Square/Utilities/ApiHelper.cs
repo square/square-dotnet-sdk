@@ -1,7 +1,7 @@
+using APIMatic.Core.Utilities;
+
 namespace Square.Utilities
 {
-    using APIMatic.Core.Utilities;
-
     /// <summary>
     /// ApiHelper class contains a bunch of helper methods.
     /// </summary>

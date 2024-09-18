@@ -93,15 +93,15 @@ RefundPaymentAsync(
 ## Example Usage
 
 ```csharp
-Models.RefundPaymentRequest body = new Models.RefundPaymentRequest.Builder(
+RefundPaymentRequest body = new RefundPaymentRequest.Builder(
     "9b7f2dcf-49da-4411-b23e-a2d6af21333a",
-    new Models.Money.Builder()
+    new Money.Builder()
     .Amount(1000L)
     .Currency("USD")
     .Build()
 )
 .AppFeeMoney(
-    new Models.Money.Builder()
+    new Money.Builder()
     .Amount(10L)
     .Currency("USD")
     .Build())

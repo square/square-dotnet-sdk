@@ -1,17 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using APIMatic.Core;
+using APIMatic.Core.Authentication;
+using APIMatic.Core.Request.Parameters;
+using Square.Apis;
+using Square.Authentication;
+using Square.Http.Client;
+using Square.Utilities;
+
 namespace Square
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using APIMatic.Core;
-    using APIMatic.Core.Authentication;
-    using APIMatic.Core.Request.Parameters;
-    using APIMatic.Core.Types;
-    using Square.Apis;
-    using Square.Authentication;
-    using Square.Http.Client;
-    using Square.Utilities;
-
     /// <summary>
     /// The gateway for the SDK. This class acts as a factory for Api and holds the
     /// configuration of the SDK.
@@ -43,8 +42,8 @@ namespace Square
         };
 
         private readonly GlobalConfiguration globalConfiguration;
-        private const string userAgent = "Square-DotNet-SDK/38.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
-        private readonly HttpCallBack httpCallBack;
+        private const string userAgent = "Square-DotNet-SDK/38.1.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+        private readonly HttpCallback httpCallback;
         private readonly IDictionary<string, List<string>> additionalHeaders;
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
         private readonly Lazy<IOAuthApi> oAuth;
@@ -95,7 +94,7 @@ namespace Square
             Environment environment,
             string customUrl,
             BearerAuthModel bearerAuthModel,
-            HttpCallBack httpCallBack,
+            HttpCallback httpCallback,
             IDictionary<string, List<string>> additionalHeaders,
             IHttpClientConfiguration httpClientConfiguration)
         {
@@ -103,7 +102,7 @@ namespace Square
             this.UserAgentDetail = userAgentDetail;
             this.Environment = environment;
             this.CustomUrl = customUrl;
-            this.httpCallBack = httpCallBack;
+            this.httpCallback = httpCallback;
             this.additionalHeaders = additionalHeaders;
             this.HttpClientConfiguration = httpClientConfiguration;
             BearerAuthModel = bearerAuthModel;
@@ -112,7 +111,7 @@ namespace Square
                 .AuthManagers(new Dictionary<string, AuthManager> {
                     {"global", bearerAuthManager},
                 })
-                .ApiCallback(httpCallBack)
+                .ApiCallback(httpCallback)
                 .HttpConfiguration(httpClientConfiguration)
                 .ServerUrls(EnvironmentsMap[environment], Server.Default)
                 .Parameters(globalParameter => globalParameter
@@ -428,7 +427,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "38.0.0";
+        public string SdkVersion => "38.1.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
@@ -462,7 +461,7 @@ namespace Square
         /// <summary>
         /// Gets http callback.
         /// </summary>
-        internal HttpCallBack HttpCallBack => this.httpCallBack;
+        public HttpCallback HttpCallback => this.httpCallback;
 
         /// <summary>
         /// Gets the credentials to use with BearerAuth.
@@ -502,7 +501,7 @@ namespace Square
                 .Environment(this.Environment)
                 .CustomUrl(this.CustomUrl)
                 .AdditionalHeaders(additionalHeaders)
-                .HttpCallBack(httpCallBack)
+                .HttpCallback(httpCallback)
                 .HttpClientConfig(config => config.Build());
 
             if (BearerAuthModel != null)
@@ -586,13 +585,13 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2024-08-21";
+            private string squareVersion = "2024-09-19";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
             private BearerAuthModel bearerAuthModel = new BearerAuthModel();
             private HttpClientConfiguration.Builder httpClientConfig = new HttpClientConfiguration.Builder();
-            private HttpCallBack httpCallBack;
+            private HttpCallback httpCallback;
             private IDictionary<string, List<string>> additionalHeaders = new Dictionary<string, List<string>>();
 
             /// <summary>
@@ -731,16 +730,15 @@ namespace Square
 
                 return this;
             }
-           
 
             /// <summary>
-            /// Sets the HttpCallBack for the Builder.
+            /// Sets the HttpCallback for the Builder.
             /// </summary>
-            /// <param name="httpCallBack"> http callback. </param>
+            /// <param name="httpCallback"> http callback. </param>
             /// <returns>Builder.</returns>
-            internal Builder HttpCallBack(HttpCallBack httpCallBack)
+            public Builder HttpCallback(HttpCallback httpCallback)
             {
-                this.httpCallBack = httpCallBack;
+                this.httpCallback = httpCallback;
                 return this;
             }
 
@@ -760,7 +758,7 @@ namespace Square
                     environment,
                     customUrl,
                     bearerAuthModel,
-                    httpCallBack,
+                    httpCallback,
                     additionalHeaders,
                     httpClientConfig.Build());
             }

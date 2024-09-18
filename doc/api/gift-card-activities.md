@@ -88,15 +88,15 @@ CreateGiftCardActivityAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateGiftCardActivityRequest body = new Models.CreateGiftCardActivityRequest.Builder(
+CreateGiftCardActivityRequest body = new CreateGiftCardActivityRequest.Builder(
     "U16kfr-kA70er-q4Rsym-7U7NnY",
-    new Models.GiftCardActivity.Builder(
+    new GiftCardActivity.Builder(
         "ACTIVATE",
         "81FN9BNFZTKS4"
     )
     .GiftCardId("gftc:6d55a72470d940c6ba09c0ab8ad08d20")
     .ActivateActivityDetails(
-        new Models.GiftCardActivityActivate.Builder()
+        new GiftCardActivityActivate.Builder()
         .OrderId("jJNGHm4gLI6XkFbwtiSLqK72KkAZY")
         .LineItemUid("eIWl7X0nMuO9Ewbh0ChIx")
         .Build())

@@ -1,9 +1,9 @@
+using System.IO;
+using System.Collections.Generic;
+using APIMatic.Core.Types.Sdk;
+
 namespace Square.Http.Response
 {
-    using System.IO;
-    using System.Collections.Generic;
-    using APIMatic.Core.Types.Sdk;
-
     /// <summary>
     /// HttpResponse stores necessary information about the http response.
     /// </summary>

@@ -1,18 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using APIMatic.Core.Utilities.Converters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Square;
+using Square.Utilities;
+
 namespace Square.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using APIMatic.Core.Utilities.Converters;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-    using Square;
-    using Square.Utilities;
-
     /// <summary>
     /// Payment.
     /// </summary>
@@ -52,6 +52,7 @@ namespace Square.Models
         /// <param name="teamMemberId">team_member_id.</param>
         /// <param name="refundIds">refund_ids.</param>
         /// <param name="riskEvaluation">risk_evaluation.</param>
+        /// <param name="terminalCheckoutId">terminal_checkout_id.</param>
         /// <param name="buyerEmailAddress">buyer_email_address.</param>
         /// <param name="billingAddress">billing_address.</param>
         /// <param name="shippingAddress">shipping_address.</param>
@@ -96,6 +97,7 @@ namespace Square.Models
             string teamMemberId = null,
             IList<string> refundIds = null,
             Models.RiskEvaluation riskEvaluation = null,
+            string terminalCheckoutId = null,
             string buyerEmailAddress = null,
             Models.Address billingAddress = null,
             Models.Address shippingAddress = null,
@@ -157,6 +159,7 @@ namespace Square.Models
 
             this.RefundIds = refundIds;
             this.RiskEvaluation = riskEvaluation;
+            this.TerminalCheckoutId = terminalCheckoutId;
             this.BuyerEmailAddress = buyerEmailAddress;
             this.BillingAddress = billingAddress;
             this.ShippingAddress = shippingAddress;
@@ -207,6 +210,7 @@ namespace Square.Models
             string teamMemberId = null,
             IList<string> refundIds = null,
             Models.RiskEvaluation riskEvaluation = null,
+            string terminalCheckoutId = null,
             string buyerEmailAddress = null,
             Models.Address billingAddress = null,
             Models.Address shippingAddress = null,
@@ -252,6 +256,7 @@ namespace Square.Models
             TeamMemberId = teamMemberId;
             RefundIds = refundIds;
             RiskEvaluation = riskEvaluation;
+            TerminalCheckoutId = terminalCheckoutId;
             BuyerEmailAddress = buyerEmailAddress;
             BillingAddress = billingAddress;
             ShippingAddress = shippingAddress;
@@ -516,6 +521,12 @@ namespace Square.Models
         public Models.RiskEvaluation RiskEvaluation { get; }
 
         /// <summary>
+        /// An optional ID for a Terminal checkout that is associated with the payment.
+        /// </summary>
+        [JsonProperty("terminal_checkout_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TerminalCheckoutId { get; }
+
+        /// <summary>
         /// The buyer's email address.
         /// </summary>
         [JsonProperty("buyer_email_address", NullValueHandling = NullValueHandling.Ignore)]
@@ -686,6 +697,7 @@ namespace Square.Models
                 ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
                 ((this.RefundIds == null && other.RefundIds == null) || (this.RefundIds?.Equals(other.RefundIds) == true)) &&
                 ((this.RiskEvaluation == null && other.RiskEvaluation == null) || (this.RiskEvaluation?.Equals(other.RiskEvaluation) == true)) &&
+                ((this.TerminalCheckoutId == null && other.TerminalCheckoutId == null) || (this.TerminalCheckoutId?.Equals(other.TerminalCheckoutId) == true)) &&
                 ((this.BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (this.BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
                 ((this.BillingAddress == null && other.BillingAddress == null) || (this.BillingAddress?.Equals(other.BillingAddress) == true)) &&
                 ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
@@ -704,7 +716,7 @@ namespace Square.Models
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1495287124;
+            int hashCode = 78765996;
             hashCode = HashCode.Combine(this.Id, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.TipMoney, this.TotalMoney, this.AppFeeMoney);
 
             hashCode = HashCode.Combine(hashCode, this.ApprovedMoney, this.ProcessingFee, this.RefundedMoney, this.Status, this.DelayDuration, this.DelayAction, this.DelayedUntil);
@@ -713,11 +725,11 @@ namespace Square.Models
 
             hashCode = HashCode.Combine(hashCode, this.SquareAccountDetails, this.LocationId, this.OrderId, this.ReferenceId, this.CustomerId, this.EmployeeId, this.TeamMemberId);
 
-            hashCode = HashCode.Combine(hashCode, this.RefundIds, this.RiskEvaluation, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier);
+            hashCode = HashCode.Combine(hashCode, this.RefundIds, this.RiskEvaluation, this.TerminalCheckoutId, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note);
 
-            hashCode = HashCode.Combine(hashCode, this.Capabilities, this.ReceiptNumber, this.ReceiptUrl, this.DeviceDetails, this.ApplicationDetails, this.IsOfflinePayment, this.OfflinePaymentDetails);
+            hashCode = HashCode.Combine(hashCode, this.StatementDescriptionIdentifier, this.Capabilities, this.ReceiptNumber, this.ReceiptUrl, this.DeviceDetails, this.ApplicationDetails, this.IsOfflinePayment);
 
-            hashCode = HashCode.Combine(hashCode, this.VersionToken);
+            hashCode = HashCode.Combine(hashCode, this.OfflinePaymentDetails, this.VersionToken);
 
             return hashCode;
         }
@@ -757,6 +769,7 @@ namespace Square.Models
             toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
             toStringOutput.Add($"this.RefundIds = {(this.RefundIds == null ? "null" : $"[{string.Join(", ", this.RefundIds)} ]")}");
             toStringOutput.Add($"this.RiskEvaluation = {(this.RiskEvaluation == null ? "null" : this.RiskEvaluation.ToString())}");
+            toStringOutput.Add($"this.TerminalCheckoutId = {(this.TerminalCheckoutId == null ? "null" : this.TerminalCheckoutId)}");
             toStringOutput.Add($"this.BuyerEmailAddress = {(this.BuyerEmailAddress == null ? "null" : this.BuyerEmailAddress)}");
             toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
             toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
@@ -809,6 +822,7 @@ namespace Square.Models
                 .TeamMemberId(this.TeamMemberId)
                 .RefundIds(this.RefundIds)
                 .RiskEvaluation(this.RiskEvaluation)
+                .TerminalCheckoutId(this.TerminalCheckoutId)
                 .BuyerEmailAddress(this.BuyerEmailAddress)
                 .BillingAddress(this.BillingAddress)
                 .ShippingAddress(this.ShippingAddress)
@@ -867,6 +881,7 @@ namespace Square.Models
             private string teamMemberId;
             private IList<string> refundIds;
             private Models.RiskEvaluation riskEvaluation;
+            private string terminalCheckoutId;
             private string buyerEmailAddress;
             private Models.Address billingAddress;
             private Models.Address shippingAddress;
@@ -1214,6 +1229,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// TerminalCheckoutId.
+             /// </summary>
+             /// <param name="terminalCheckoutId"> terminalCheckoutId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TerminalCheckoutId(string terminalCheckoutId)
+            {
+                this.terminalCheckoutId = terminalCheckoutId;
+                return this;
+            }
+
+             /// <summary>
              /// BuyerEmailAddress.
              /// </summary>
              /// <param name="buyerEmailAddress"> buyerEmailAddress. </param>
@@ -1419,6 +1445,7 @@ namespace Square.Models
                     this.teamMemberId,
                     this.refundIds,
                     this.riskEvaluation,
+                    this.terminalCheckoutId,
                     this.buyerEmailAddress,
                     this.billingAddress,
                     this.shippingAddress,

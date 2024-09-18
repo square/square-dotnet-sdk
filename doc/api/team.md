@@ -48,10 +48,10 @@ CreateTeamMemberAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateTeamMemberRequest body = new Models.CreateTeamMemberRequest.Builder()
+CreateTeamMemberRequest body = new CreateTeamMemberRequest.Builder()
 .IdempotencyKey("idempotency-key-0")
 .TeamMember(
-    new Models.TeamMember.Builder()
+    new TeamMember.Builder()
     .ReferenceId("reference_id_1")
     .Status("ACTIVE")
     .GivenName("Joe")
@@ -59,7 +59,7 @@ Models.CreateTeamMemberRequest body = new Models.CreateTeamMemberRequest.Builder
     .EmailAddress("joe_doe@gmail.com")
     .PhoneNumber("+14159283333")
     .AssignedLocations(
-        new Models.TeamMemberAssignedLocations.Builder()
+        new TeamMemberAssignedLocations.Builder()
         .AssignmentType("EXPLICIT_LOCATIONS")
         .LocationIds(
             new List<string>
@@ -110,19 +110,19 @@ BulkCreateTeamMembersAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkCreateTeamMembersRequest body = new Models.BulkCreateTeamMembersRequest.Builder(
-    new Dictionary<string, Models.CreateTeamMemberRequest>
+BulkCreateTeamMembersRequest body = new BulkCreateTeamMembersRequest.Builder(
+    new Dictionary<string, CreateTeamMemberRequest>
     {
-        ["idempotency-key-1"] = new Models.CreateTeamMemberRequest.Builder()
+        ["idempotency-key-1"] = new CreateTeamMemberRequest.Builder()
         .TeamMember(
-            new Models.TeamMember.Builder()
+            new TeamMember.Builder()
             .ReferenceId("reference_id_1")
             .GivenName("Joe")
             .FamilyName("Doe")
             .EmailAddress("joe_doe@gmail.com")
             .PhoneNumber("+14159283333")
             .AssignedLocations(
-                new Models.TeamMemberAssignedLocations.Builder()
+                new TeamMemberAssignedLocations.Builder()
                 .AssignmentType("EXPLICIT_LOCATIONS")
                 .LocationIds(
                     new List<string>
@@ -133,16 +133,16 @@ Models.BulkCreateTeamMembersRequest body = new Models.BulkCreateTeamMembersReque
                 .Build())
             .Build())
         .Build(),
-        ["idempotency-key-2"] = new Models.CreateTeamMemberRequest.Builder()
+        ["idempotency-key-2"] = new CreateTeamMemberRequest.Builder()
         .TeamMember(
-            new Models.TeamMember.Builder()
+            new TeamMember.Builder()
             .ReferenceId("reference_id_2")
             .GivenName("Jane")
             .FamilyName("Smith")
             .EmailAddress("jane_smith@gmail.com")
             .PhoneNumber("+14159223334")
             .AssignedLocations(
-                new Models.TeamMemberAssignedLocations.Builder()
+                new TeamMemberAssignedLocations.Builder()
                 .AssignmentType("ALL_CURRENT_AND_FUTURE_LOCATIONS")
                 .Build())
             .Build())
@@ -189,12 +189,12 @@ BulkUpdateTeamMembersAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkUpdateTeamMembersRequest body = new Models.BulkUpdateTeamMembersRequest.Builder(
-    new Dictionary<string, Models.UpdateTeamMemberRequest>
+BulkUpdateTeamMembersRequest body = new BulkUpdateTeamMembersRequest.Builder(
+    new Dictionary<string, UpdateTeamMemberRequest>
     {
-        ["AFMwA08kR-MIF-3Vs0OE"] = new Models.UpdateTeamMemberRequest.Builder()
+        ["AFMwA08kR-MIF-3Vs0OE"] = new UpdateTeamMemberRequest.Builder()
         .TeamMember(
-            new Models.TeamMember.Builder()
+            new TeamMember.Builder()
             .ReferenceId("reference_id_2")
             .IsOwner(false)
             .Status("ACTIVE")
@@ -203,14 +203,14 @@ Models.BulkUpdateTeamMembersRequest body = new Models.BulkUpdateTeamMembersReque
             .EmailAddress("jane_smith@gmail.com")
             .PhoneNumber("+14159223334")
             .AssignedLocations(
-                new Models.TeamMemberAssignedLocations.Builder()
+                new TeamMemberAssignedLocations.Builder()
                 .AssignmentType("ALL_CURRENT_AND_FUTURE_LOCATIONS")
                 .Build())
             .Build())
         .Build(),
-        ["fpgteZNMaf0qOK-a4t6P"] = new Models.UpdateTeamMemberRequest.Builder()
+        ["fpgteZNMaf0qOK-a4t6P"] = new UpdateTeamMemberRequest.Builder()
         .TeamMember(
-            new Models.TeamMember.Builder()
+            new TeamMember.Builder()
             .ReferenceId("reference_id_1")
             .IsOwner(false)
             .Status("ACTIVE")
@@ -219,7 +219,7 @@ Models.BulkUpdateTeamMembersRequest body = new Models.BulkUpdateTeamMembersReque
             .EmailAddress("joe_doe@gmail.com")
             .PhoneNumber("+14159283333")
             .AssignedLocations(
-                new Models.TeamMemberAssignedLocations.Builder()
+                new TeamMemberAssignedLocations.Builder()
                 .AssignmentType("EXPLICIT_LOCATIONS")
                 .LocationIds(
                     new List<string>
@@ -272,11 +272,11 @@ SearchTeamMembersAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchTeamMembersRequest body = new Models.SearchTeamMembersRequest.Builder()
+SearchTeamMembersRequest body = new SearchTeamMembersRequest.Builder()
 .Query(
-    new Models.SearchTeamMembersQuery.Builder()
+    new SearchTeamMembersQuery.Builder()
     .Filter(
-        new Models.SearchTeamMembersFilter.Builder()
+        new SearchTeamMembersFilter.Builder()
         .LocationIds(
             new List<string>
             {
@@ -362,9 +362,9 @@ UpdateTeamMemberAsync(
 
 ```csharp
 string teamMemberId = "team_member_id0";
-Models.UpdateTeamMemberRequest body = new Models.UpdateTeamMemberRequest.Builder()
+UpdateTeamMemberRequest body = new UpdateTeamMemberRequest.Builder()
 .TeamMember(
-    new Models.TeamMember.Builder()
+    new TeamMember.Builder()
     .ReferenceId("reference_id_1")
     .Status("ACTIVE")
     .GivenName("Joe")
@@ -372,7 +372,7 @@ Models.UpdateTeamMemberRequest body = new Models.UpdateTeamMemberRequest.Builder
     .EmailAddress("joe_doe@gmail.com")
     .PhoneNumber("+14159283333")
     .AssignedLocations(
-        new Models.TeamMemberAssignedLocations.Builder()
+        new TeamMemberAssignedLocations.Builder()
         .AssignmentType("EXPLICIT_LOCATIONS")
         .LocationIds(
             new List<string>
@@ -465,28 +465,28 @@ UpdateWageSettingAsync(
 
 ```csharp
 string teamMemberId = "team_member_id0";
-Models.UpdateWageSettingRequest body = new Models.UpdateWageSettingRequest.Builder(
-    new Models.WageSetting.Builder()
+UpdateWageSettingRequest body = new UpdateWageSettingRequest.Builder(
+    new WageSetting.Builder()
     .JobAssignments(
-        new List<Models.JobAssignment>
+        new List<JobAssignment>
         {
-            new Models.JobAssignment.Builder(
+            new JobAssignment.Builder(
                 "Manager",
                 "SALARY"
             )
             .AnnualRate(
-                new Models.Money.Builder()
+                new Money.Builder()
                 .Amount(3000000L)
                 .Currency("USD")
                 .Build())
             .WeeklyHours(40)
             .Build(),
-            new Models.JobAssignment.Builder(
+            new JobAssignment.Builder(
                 "Cashier",
                 "HOURLY"
             )
             .HourlyRate(
-                new Models.Money.Builder()
+                new Money.Builder()
                 .Amount(1200L)
                 .Currency("USD")
                 .Build())

@@ -42,7 +42,7 @@ CreateMobileAuthorizationCodeAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateMobileAuthorizationCodeRequest body = new Models.CreateMobileAuthorizationCodeRequest.Builder()
+CreateMobileAuthorizationCodeRequest body = new CreateMobileAuthorizationCodeRequest.Builder()
 .LocationId("YOUR_LOCATION_ID")
 .Build();
 

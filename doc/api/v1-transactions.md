@@ -131,7 +131,7 @@ V1UpdateOrderAsync(
 ```csharp
 string locationId = "location_id4";
 string orderId = "order_id6";
-Models.V1UpdateOrderRequest body = new Models.V1UpdateOrderRequest.Builder(
+V1UpdateOrderRequest body = new V1UpdateOrderRequest.Builder(
     "REFUND"
 )
 .Build();

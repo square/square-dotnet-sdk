@@ -124,16 +124,16 @@ DeprecatedBatchChangeInventoryAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchChangeInventoryRequest body = new Models.BatchChangeInventoryRequest.Builder(
+BatchChangeInventoryRequest body = new BatchChangeInventoryRequest.Builder(
     "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe"
 )
 .Changes(
-    new List<Models.InventoryChange>
+    new List<InventoryChange>
     {
-        new Models.InventoryChange.Builder()
+        new InventoryChange.Builder()
         .Type("PHYSICAL_COUNT")
         .PhysicalCount(
-            new Models.InventoryPhysicalCount.Builder()
+            new InventoryPhysicalCount.Builder()
             .ReferenceId("1536bfbf-efed-48bf-b17d-a197141b2a92")
             .CatalogObjectId("W62UWFY35CWMYGVWK6TWJDNI")
             .State("IN_STOCK")
@@ -184,7 +184,7 @@ DeprecatedBatchRetrieveInventoryChangesAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchRetrieveInventoryChangesRequest body = new Models.BatchRetrieveInventoryChangesRequest.Builder()
+BatchRetrieveInventoryChangesRequest body = new BatchRetrieveInventoryChangesRequest.Builder()
 .CatalogObjectIds(
     new List<string>
     {
@@ -246,7 +246,7 @@ DeprecatedBatchRetrieveInventoryCountsAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchRetrieveInventoryCountsRequest body = new Models.BatchRetrieveInventoryCountsRequest.Builder()
+BatchRetrieveInventoryCountsRequest body = new BatchRetrieveInventoryCountsRequest.Builder()
 .CatalogObjectIds(
     new List<string>
     {
@@ -298,16 +298,16 @@ BatchChangeInventoryAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchChangeInventoryRequest body = new Models.BatchChangeInventoryRequest.Builder(
+BatchChangeInventoryRequest body = new BatchChangeInventoryRequest.Builder(
     "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe"
 )
 .Changes(
-    new List<Models.InventoryChange>
+    new List<InventoryChange>
     {
-        new Models.InventoryChange.Builder()
+        new InventoryChange.Builder()
         .Type("PHYSICAL_COUNT")
         .PhysicalCount(
-            new Models.InventoryPhysicalCount.Builder()
+            new InventoryPhysicalCount.Builder()
             .ReferenceId("1536bfbf-efed-48bf-b17d-a197141b2a92")
             .CatalogObjectId("W62UWFY35CWMYGVWK6TWJDNI")
             .State("IN_STOCK")
@@ -362,7 +362,7 @@ BatchRetrieveInventoryChangesAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchRetrieveInventoryChangesRequest body = new Models.BatchRetrieveInventoryChangesRequest.Builder()
+BatchRetrieveInventoryChangesRequest body = new BatchRetrieveInventoryChangesRequest.Builder()
 .CatalogObjectIds(
     new List<string>
     {
@@ -431,7 +431,7 @@ BatchRetrieveInventoryCountsAsync(
 ## Example Usage
 
 ```csharp
-Models.BatchRetrieveInventoryCountsRequest body = new Models.BatchRetrieveInventoryCountsRequest.Builder()
+BatchRetrieveInventoryCountsRequest body = new BatchRetrieveInventoryCountsRequest.Builder()
 .CatalogObjectIds(
     new List<string>
     {

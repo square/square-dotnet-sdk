@@ -1,17 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NUnit.Framework;
+using Square;
+using Square.Authentication;
+using Square.Http.Client;
+using Square.Models;
+
 namespace Square
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using APIMatic.Core.Types;
-    using NUnit.Framework;
-    using Square;
-    using Square.Authentication;
-    using Square.Http.Client;
-    using Square.Models;
-
     /// <summary>
     /// ControllerTestBase Class.
     /// </summary>
@@ -26,7 +25,7 @@ namespace Square
         /// <summary>
         /// Gets HttpCallBackHandler.
         /// </summary>
-        internal HttpCallBack HttpCallBack { get; private set; } = new HttpCallBack();
+        internal HttpCallback HttpCallBack { get; private set; } = new HttpCallback();
 
         /// <summary>
         /// Gets SquareClient Client.
@@ -41,7 +40,7 @@ namespace Square
         {
             SquareClient config = SquareClient.CreateFromEnvironment();
             this.Client = config.ToBuilder()
-                .HttpCallBack(HttpCallBack)
+                .HttpCallback(HttpCallBack)
                 .Build();
         }
     }

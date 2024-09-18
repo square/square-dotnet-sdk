@@ -51,7 +51,7 @@ ListCustomersAsync(
 | `limit` | `int?` | Query, Optional | The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.<br>If the specified limit is less than 1 or greater than 100, Square returns a `400 VALUE_TOO_LOW` or `400 VALUE_TOO_HIGH` error. The default value is 100.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `sortField` | [`string`](../../doc/models/customer-sort-field.md) | Query, Optional | Indicates how customers should be sorted.<br><br>The default value is `DEFAULT`. |
 | `sortOrder` | [`string`](../../doc/models/sort-order.md) | Query, Optional | Indicates whether customers should be sorted in ascending (`ASC`) or<br>descending (`DESC`) order.<br><br>The default value is `ASC`. |
-| `count` | `bool?` | Query, Optional | Indicates whether to return the total count of customers in the `count` field of the response.<br><br>The default value is `false`. |
+| `count` | `bool?` | Query, Optional | Indicates whether to return the total count of customers in the `count` field of the response.<br><br>The default value is `false`.<br>**Default**: `false` |
 
 ## Response Type
 
@@ -110,12 +110,12 @@ CreateCustomerAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateCustomerRequest body = new Models.CreateCustomerRequest.Builder()
+CreateCustomerRequest body = new CreateCustomerRequest.Builder()
 .GivenName("Amelia")
 .FamilyName("Earhart")
 .EmailAddress("Amelia.Earhart@example.com")
 .Address(
-    new Models.Address.Builder()
+    new Address.Builder()
     .AddressLine1("500 Electric Ave")
     .AddressLine2("Suite 600")
     .Locality("New York")
@@ -172,15 +172,15 @@ BulkCreateCustomersAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkCreateCustomersRequest body = new Models.BulkCreateCustomersRequest.Builder(
-    new Dictionary<string, Models.BulkCreateCustomerData>
+BulkCreateCustomersRequest body = new BulkCreateCustomersRequest.Builder(
+    new Dictionary<string, BulkCreateCustomerData>
     {
-        ["8bb76c4f-e35d-4c5b-90de-1194cd9179f0"] = new Models.BulkCreateCustomerData.Builder()
+        ["8bb76c4f-e35d-4c5b-90de-1194cd9179f0"] = new BulkCreateCustomerData.Builder()
         .GivenName("Amelia")
         .FamilyName("Earhart")
         .EmailAddress("Amelia.Earhart@example.com")
         .Address(
-            new Models.Address.Builder()
+            new Address.Builder()
             .AddressLine1("500 Electric Ave")
             .AddressLine2("Suite 600")
             .Locality("New York")
@@ -192,12 +192,12 @@ Models.BulkCreateCustomersRequest body = new Models.BulkCreateCustomersRequest.B
         .ReferenceId("YOUR_REFERENCE_ID")
         .Note("a customer")
         .Build(),
-        ["d1689f23-b25d-4932-b2f0-aed00f5e2029"] = new Models.BulkCreateCustomerData.Builder()
+        ["d1689f23-b25d-4932-b2f0-aed00f5e2029"] = new BulkCreateCustomerData.Builder()
         .GivenName("Marie")
         .FamilyName("Curie")
         .EmailAddress("Marie.Curie@example.com")
         .Address(
-            new Models.Address.Builder()
+            new Address.Builder()
             .AddressLine1("500 Electric Ave")
             .AddressLine2("Suite 601")
             .Locality("New York")
@@ -249,7 +249,7 @@ BulkDeleteCustomersAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkDeleteCustomersRequest body = new Models.BulkDeleteCustomersRequest.Builder(
+BulkDeleteCustomersRequest body = new BulkDeleteCustomersRequest.Builder(
     new List<string>
     {
         "8DDA5NZVBZFGAX0V3HPF81HHE0",
@@ -295,7 +295,7 @@ BulkRetrieveCustomersAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkRetrieveCustomersRequest body = new Models.BulkRetrieveCustomersRequest.Builder(
+BulkRetrieveCustomersRequest body = new BulkRetrieveCustomersRequest.Builder(
     new List<string>
     {
         "8DDA5NZVBZFGAX0V3HPF81HHE0",
@@ -343,16 +343,16 @@ BulkUpdateCustomersAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkUpdateCustomersRequest body = new Models.BulkUpdateCustomersRequest.Builder(
-    new Dictionary<string, Models.BulkUpdateCustomerData>
+BulkUpdateCustomersRequest body = new BulkUpdateCustomersRequest.Builder(
+    new Dictionary<string, BulkUpdateCustomerData>
     {
-        ["8DDA5NZVBZFGAX0V3HPF81HHE0"] = new Models.BulkUpdateCustomerData.Builder()
+        ["8DDA5NZVBZFGAX0V3HPF81HHE0"] = new BulkUpdateCustomerData.Builder()
         .EmailAddress("New.Amelia.Earhart@example.com")
         .PhoneNumber("phone_number2")
         .Note("updated customer note")
         .Version(2L)
         .Build(),
-        ["N18CPRVXR5214XPBBA6BZQWF3C"] = new Models.BulkUpdateCustomerData.Builder()
+        ["N18CPRVXR5214XPBBA6BZQWF3C"] = new BulkUpdateCustomerData.Builder()
         .GivenName("Marie")
         .FamilyName("Curie")
         .Version(0L)
@@ -403,14 +403,14 @@ SearchCustomersAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchCustomersRequest body = new Models.SearchCustomersRequest.Builder()
+SearchCustomersRequest body = new SearchCustomersRequest.Builder()
 .Limit(2L)
 .Query(
-    new Models.CustomerQuery.Builder()
+    new CustomerQuery.Builder()
     .Filter(
-        new Models.CustomerFilter.Builder()
+        new CustomerFilter.Builder()
         .CreationSource(
-            new Models.CustomerCreationSourceFilter.Builder()
+            new CustomerCreationSourceFilter.Builder()
             .Values(
                 new List<string>
                 {
@@ -419,16 +419,16 @@ Models.SearchCustomersRequest body = new Models.SearchCustomersRequest.Builder()
             .Rule("INCLUDE")
             .Build())
         .CreatedAt(
-            new Models.TimeRange.Builder()
+            new TimeRange.Builder()
             .StartAt("2018-01-01T00:00:00-00:00")
             .EndAt("2018-02-01T00:00:00-00:00")
             .Build())
         .EmailAddress(
-            new Models.CustomerTextFilter.Builder()
+            new CustomerTextFilter.Builder()
             .Fuzzy("example.com")
             .Build())
         .GroupIds(
-            new Models.FilterValue.Builder()
+            new FilterValue.Builder()
             .All(
                 new List<string>
                 {
@@ -437,7 +437,7 @@ Models.SearchCustomersRequest body = new Models.SearchCustomersRequest.Builder()
             .Build())
         .Build())
     .Sort(
-        new Models.CustomerSort.Builder()
+        new CustomerSort.Builder()
         .Field("CREATED_AT")
         .Order("ASC")
         .Build())
@@ -560,7 +560,7 @@ UpdateCustomerAsync(
 
 ```csharp
 string customerId = "customer_id8";
-Models.UpdateCustomerRequest body = new Models.UpdateCustomerRequest.Builder()
+UpdateCustomerRequest body = new UpdateCustomerRequest.Builder()
 .EmailAddress("New.Amelia.Earhart@example.com")
 .PhoneNumber("phone_number2")
 .Note("updated customer note")
@@ -613,11 +613,11 @@ CreateCustomerCardAsync(
 
 ```csharp
 string customerId = "customer_id8";
-Models.CreateCustomerCardRequest body = new Models.CreateCustomerCardRequest.Builder(
+CreateCustomerCardRequest body = new CreateCustomerCardRequest.Builder(
     "YOUR_CARD_NONCE"
 )
 .BillingAddress(
-    new Models.Address.Builder()
+    new Address.Builder()
     .AddressLine1("500 Electric Ave")
     .AddressLine2("Suite 600")
     .Locality("New York")

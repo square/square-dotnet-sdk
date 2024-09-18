@@ -38,7 +38,7 @@ SearchEventsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchEventsRequest body = new Models.SearchEventsRequest.Builder()
+SearchEventsRequest body = new SearchEventsRequest.Builder()
 .Build();
 
 try

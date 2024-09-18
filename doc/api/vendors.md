@@ -41,12 +41,12 @@ BulkCreateVendorsAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkCreateVendorsRequest body = new Models.BulkCreateVendorsRequest.Builder(
-    new Dictionary<string, Models.Vendor>
+BulkCreateVendorsRequest body = new BulkCreateVendorsRequest.Builder(
+    new Dictionary<string, Vendor>
     {
-        ["key0"] = new Models.Vendor.Builder()
+        ["key0"] = new Vendor.Builder()
         .Build(),
-        ["key1"] = new Models.Vendor.Builder()
+        ["key1"] = new Vendor.Builder()
         .Build(),
     }
 )
@@ -86,7 +86,7 @@ BulkRetrieveVendorsAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkRetrieveVendorsRequest body = new Models.BulkRetrieveVendorsRequest.Builder()
+BulkRetrieveVendorsRequest body = new BulkRetrieveVendorsRequest.Builder()
 .VendorIds(
     new List<string>
     {
@@ -128,16 +128,16 @@ BulkUpdateVendorsAsync(
 ## Example Usage
 
 ```csharp
-Models.BulkUpdateVendorsRequest body = new Models.BulkUpdateVendorsRequest.Builder(
-    new Dictionary<string, Models.UpdateVendorRequest>
+BulkUpdateVendorsRequest body = new BulkUpdateVendorsRequest.Builder(
+    new Dictionary<string, UpdateVendorRequest>
     {
-        ["key0"] = new Models.UpdateVendorRequest.Builder(
-            new Models.Vendor.Builder()
+        ["key0"] = new UpdateVendorRequest.Builder(
+            new Vendor.Builder()
             .Build()
         )
         .Build(),
-        ["key1"] = new Models.UpdateVendorRequest.Builder(
-            new Models.Vendor.Builder()
+        ["key1"] = new UpdateVendorRequest.Builder(
+            new Vendor.Builder()
             .Build()
         )
         .Build(),
@@ -179,7 +179,7 @@ CreateVendorAsync(
 ## Example Usage
 
 ```csharp
-Models.CreateVendorRequest body = new Models.CreateVendorRequest.Builder(
+CreateVendorRequest body = new CreateVendorRequest.Builder(
     "idempotency_key2"
 )
 .Build();
@@ -218,7 +218,7 @@ SearchVendorsAsync(
 ## Example Usage
 
 ```csharp
-Models.SearchVendorsRequest body = new Models.SearchVendorsRequest.Builder()
+SearchVendorsRequest body = new SearchVendorsRequest.Builder()
 .Build();
 
 try
@@ -292,8 +292,8 @@ UpdateVendorAsync(
 ## Example Usage
 
 ```csharp
-Models.UpdateVendorRequest body = new Models.UpdateVendorRequest.Builder(
-    new Models.Vendor.Builder()
+UpdateVendorRequest body = new UpdateVendorRequest.Builder(
+    new Vendor.Builder()
     .Id("INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4")
     .Name("Jack's Chicken Shack")
     .Version(1)

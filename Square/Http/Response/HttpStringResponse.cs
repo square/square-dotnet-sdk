@@ -1,8 +1,8 @@
+using System.IO;
+using System.Collections.Generic;
+
 namespace Square.Http.Response
 {
-    using System.IO;
-    using System.Collections.Generic;
-
     /// <summary>
     /// HttpStringResponse inherits from HttpResponse and has additional property
     /// of string body.

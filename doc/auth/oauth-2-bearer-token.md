@@ -22,7 +22,7 @@ Documentation for accessing and setting credentials for global.
 You must provide credentials in the client as shown in the following code snippet.
 
 ```csharp
-Square.SquareClient client = new Square.SquareClient.Builder()
+SquareClient client = new SquareClient.Builder()
     .BearerAuthCredentials(
         new BearerAuthModel.Builder(
             "AccessToken"
