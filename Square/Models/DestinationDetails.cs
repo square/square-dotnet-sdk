@@ -22,10 +22,16 @@ namespace Square.Models
         /// Initializes a new instance of the <see cref="DestinationDetails"/> class.
         /// </summary>
         /// <param name="cardDetails">card_details.</param>
+        /// <param name="cashDetails">cash_details.</param>
+        /// <param name="externalDetails">external_details.</param>
         public DestinationDetails(
-            Models.DestinationDetailsCardRefundDetails cardDetails = null)
+            Models.DestinationDetailsCardRefundDetails cardDetails = null,
+            Models.DestinationDetailsCashRefundDetails cashDetails = null,
+            Models.DestinationDetailsExternalRefundDetails externalDetails = null)
         {
             this.CardDetails = cardDetails;
+            this.CashDetails = cashDetails;
+            this.ExternalDetails = externalDetails;
         }
 
         /// <summary>
@@ -33,6 +39,18 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("card_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.DestinationDetailsCardRefundDetails CardDetails { get; }
+
+        /// <summary>
+        /// Stores details about a cash refund. Contains only non-confidential information.
+        /// </summary>
+        [JsonProperty("cash_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.DestinationDetailsCashRefundDetails CashDetails { get; }
+
+        /// <summary>
+        /// Stores details about an external refund. Contains only non-confidential information.
+        /// </summary>
+        [JsonProperty("external_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.DestinationDetailsExternalRefundDetails ExternalDetails { get; }
 
         /// <inheritdoc/>
         public override string ToString()
@@ -56,14 +74,16 @@ namespace Square.Models
             {
                 return true;
             }
-            return obj is DestinationDetails other &&                ((this.CardDetails == null && other.CardDetails == null) || (this.CardDetails?.Equals(other.CardDetails) == true));
+            return obj is DestinationDetails other &&                ((this.CardDetails == null && other.CardDetails == null) || (this.CardDetails?.Equals(other.CardDetails) == true)) &&
+                ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
+                ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1174244865;
-            hashCode = HashCode.Combine(this.CardDetails);
+            int hashCode = -165986961;
+            hashCode = HashCode.Combine(this.CardDetails, this.CashDetails, this.ExternalDetails);
 
             return hashCode;
         }
@@ -74,6 +94,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.CardDetails = {(this.CardDetails == null ? "null" : this.CardDetails.ToString())}");
+            toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
+            toStringOutput.Add($"this.ExternalDetails = {(this.ExternalDetails == null ? "null" : this.ExternalDetails.ToString())}");
         }
 
         /// <summary>
@@ -83,7 +105,9 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder()
-                .CardDetails(this.CardDetails);
+                .CardDetails(this.CardDetails)
+                .CashDetails(this.CashDetails)
+                .ExternalDetails(this.ExternalDetails);
             return builder;
         }
 
@@ -93,6 +117,8 @@ namespace Square.Models
         public class Builder
         {
             private Models.DestinationDetailsCardRefundDetails cardDetails;
+            private Models.DestinationDetailsCashRefundDetails cashDetails;
+            private Models.DestinationDetailsExternalRefundDetails externalDetails;
 
              /// <summary>
              /// CardDetails.
@@ -105,6 +131,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// CashDetails.
+             /// </summary>
+             /// <param name="cashDetails"> cashDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder CashDetails(Models.DestinationDetailsCashRefundDetails cashDetails)
+            {
+                this.cashDetails = cashDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// ExternalDetails.
+             /// </summary>
+             /// <param name="externalDetails"> externalDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder ExternalDetails(Models.DestinationDetailsExternalRefundDetails externalDetails)
+            {
+                this.externalDetails = externalDetails;
+                return this;
+            }
+
             /// <summary>
             /// Builds class object.
             /// </summary>
@@ -112,7 +160,9 @@ namespace Square.Models
             public DestinationDetails Build()
             {
                 return new DestinationDetails(
-                    this.cardDetails);
+                    this.cardDetails,
+                    this.cashDetails,
+                    this.externalDetails);
             }
         }
     }
