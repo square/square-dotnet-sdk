@@ -270,13 +270,10 @@ BulkDeleteLocationCustomAttributesRequest body = new BulkDeleteLocationCustomAtt
     new Dictionary<string, BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest>
     {
         ["id1"] = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
-        .Key("bestseller")
         .Build(),
         ["id2"] = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
-        .Key("bestseller")
         .Build(),
         ["id3"] = new BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest.Builder()
-        .Key("phone-number")
         .Build(),
     }
 )

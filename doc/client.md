@@ -5,7 +5,7 @@ The following parameters are configurable for the API Client:
 
 | Parameter | Type | Description |
 |  --- | --- | --- |
-| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2024-10-17"` |
+| `SquareVersion` | `string` | Square Connect API versions<br>*Default*: `"2024-11-20"` |
 | `CustomUrl` | `string` | Sets the base URL requests are made to. Defaults to `https://connect.squareup.com`<br>*Default*: `"https://connect.squareup.com"` |
 | `Environment` | `string` | The API environment. <br> **Default: `production`** |
 | `Timeout` | `TimeSpan` | Http client timeout.<br>*Default*: `TimeSpan.FromSeconds(60)` |
@@ -21,7 +21,7 @@ SquareClient client = new SquareClient.Builder()
             "AccessToken"
         )
         .Build())
-    .SquareVersion("2024-10-17")
+    .SquareVersion("2024-11-20")
     .Environment(Square.Environment.Production)
     .CustomUrl("https://connect.squareup.com")
     .Build();
@@ -50,7 +50,7 @@ namespace TestConsoleProject
                         "AccessToken"
                     )
                     .Build())
-                .SquareVersion("2024-10-17")
+                .SquareVersion("2024-11-20")
                 .Environment(Square.Environment.Production)
                 .CustomUrl("https://connect.squareup.com")
                 .Build();

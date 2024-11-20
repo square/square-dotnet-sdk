@@ -35,6 +35,7 @@ namespace Square.Models
         /// <param name="typeAutomaticSavingsReversedDetails">type_automatic_savings_reversed_details.</param>
         /// <param name="typeChargeDetails">type_charge_details.</param>
         /// <param name="typeDepositFeeDetails">type_deposit_fee_details.</param>
+        /// <param name="typeDepositFeeReversedDetails">type_deposit_fee_reversed_details.</param>
         /// <param name="typeDisputeDetails">type_dispute_details.</param>
         /// <param name="typeFeeDetails">type_fee_details.</param>
         /// <param name="typeFreeProcessingDetails">type_free_processing_details.</param>
@@ -51,6 +52,8 @@ namespace Square.Models
         /// <param name="typeTaxOnFeeDetails">type_tax_on_fee_details.</param>
         /// <param name="typeThirdPartyFeeDetails">type_third_party_fee_details.</param>
         /// <param name="typeThirdPartyFeeRefundDetails">type_third_party_fee_refund_details.</param>
+        /// <param name="typeSquarePayrollTransferDetails">type_square_payroll_transfer_details.</param>
+        /// <param name="typeSquarePayrollTransferReversedDetails">type_square_payroll_transfer_reversed_details.</param>
         public PayoutEntry(
             string id,
             string payoutId,
@@ -65,6 +68,7 @@ namespace Square.Models
             Models.PaymentBalanceActivityAutomaticSavingsReversedDetail typeAutomaticSavingsReversedDetails = null,
             Models.PaymentBalanceActivityChargeDetail typeChargeDetails = null,
             Models.PaymentBalanceActivityDepositFeeDetail typeDepositFeeDetails = null,
+            Models.PaymentBalanceActivityDepositFeeReversedDetail typeDepositFeeReversedDetails = null,
             Models.PaymentBalanceActivityDisputeDetail typeDisputeDetails = null,
             Models.PaymentBalanceActivityFeeDetail typeFeeDetails = null,
             Models.PaymentBalanceActivityFreeProcessingDetail typeFreeProcessingDetails = null,
@@ -80,7 +84,9 @@ namespace Square.Models
             Models.PaymentBalanceActivitySquareCapitalReversedPaymentDetail typeSquareCapitalReversedPaymentDetails = null,
             Models.PaymentBalanceActivityTaxOnFeeDetail typeTaxOnFeeDetails = null,
             Models.PaymentBalanceActivityThirdPartyFeeDetail typeThirdPartyFeeDetails = null,
-            Models.PaymentBalanceActivityThirdPartyFeeRefundDetail typeThirdPartyFeeRefundDetails = null)
+            Models.PaymentBalanceActivityThirdPartyFeeRefundDetail typeThirdPartyFeeRefundDetails = null,
+            Models.PaymentBalanceActivitySquarePayrollTransferDetail typeSquarePayrollTransferDetails = null,
+            Models.PaymentBalanceActivitySquarePayrollTransferReversedDetail typeSquarePayrollTransferReversedDetails = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -105,6 +111,7 @@ namespace Square.Models
             this.TypeAutomaticSavingsReversedDetails = typeAutomaticSavingsReversedDetails;
             this.TypeChargeDetails = typeChargeDetails;
             this.TypeDepositFeeDetails = typeDepositFeeDetails;
+            this.TypeDepositFeeReversedDetails = typeDepositFeeReversedDetails;
             this.TypeDisputeDetails = typeDisputeDetails;
             this.TypeFeeDetails = typeFeeDetails;
             this.TypeFreeProcessingDetails = typeFreeProcessingDetails;
@@ -121,6 +128,8 @@ namespace Square.Models
             this.TypeTaxOnFeeDetails = typeTaxOnFeeDetails;
             this.TypeThirdPartyFeeDetails = typeThirdPartyFeeDetails;
             this.TypeThirdPartyFeeRefundDetails = typeThirdPartyFeeRefundDetails;
+            this.TypeSquarePayrollTransferDetails = typeSquarePayrollTransferDetails;
+            this.TypeSquarePayrollTransferReversedDetails = typeSquarePayrollTransferReversedDetails;
         }
         internal PayoutEntry(Dictionary<string, bool> shouldSerialize,
             string id,
@@ -136,6 +145,7 @@ namespace Square.Models
             Models.PaymentBalanceActivityAutomaticSavingsReversedDetail typeAutomaticSavingsReversedDetails = null,
             Models.PaymentBalanceActivityChargeDetail typeChargeDetails = null,
             Models.PaymentBalanceActivityDepositFeeDetail typeDepositFeeDetails = null,
+            Models.PaymentBalanceActivityDepositFeeReversedDetail typeDepositFeeReversedDetails = null,
             Models.PaymentBalanceActivityDisputeDetail typeDisputeDetails = null,
             Models.PaymentBalanceActivityFeeDetail typeFeeDetails = null,
             Models.PaymentBalanceActivityFreeProcessingDetail typeFreeProcessingDetails = null,
@@ -151,7 +161,9 @@ namespace Square.Models
             Models.PaymentBalanceActivitySquareCapitalReversedPaymentDetail typeSquareCapitalReversedPaymentDetails = null,
             Models.PaymentBalanceActivityTaxOnFeeDetail typeTaxOnFeeDetails = null,
             Models.PaymentBalanceActivityThirdPartyFeeDetail typeThirdPartyFeeDetails = null,
-            Models.PaymentBalanceActivityThirdPartyFeeRefundDetail typeThirdPartyFeeRefundDetails = null)
+            Models.PaymentBalanceActivityThirdPartyFeeRefundDetail typeThirdPartyFeeRefundDetails = null,
+            Models.PaymentBalanceActivitySquarePayrollTransferDetail typeSquarePayrollTransferDetails = null,
+            Models.PaymentBalanceActivitySquarePayrollTransferReversedDetail typeSquarePayrollTransferReversedDetails = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -167,6 +179,7 @@ namespace Square.Models
             TypeAutomaticSavingsReversedDetails = typeAutomaticSavingsReversedDetails;
             TypeChargeDetails = typeChargeDetails;
             TypeDepositFeeDetails = typeDepositFeeDetails;
+            TypeDepositFeeReversedDetails = typeDepositFeeReversedDetails;
             TypeDisputeDetails = typeDisputeDetails;
             TypeFeeDetails = typeFeeDetails;
             TypeFreeProcessingDetails = typeFreeProcessingDetails;
@@ -183,6 +196,8 @@ namespace Square.Models
             TypeTaxOnFeeDetails = typeTaxOnFeeDetails;
             TypeThirdPartyFeeDetails = typeThirdPartyFeeDetails;
             TypeThirdPartyFeeRefundDetails = typeThirdPartyFeeRefundDetails;
+            TypeSquarePayrollTransferDetails = typeSquarePayrollTransferDetails;
+            TypeSquarePayrollTransferReversedDetails = typeSquarePayrollTransferReversedDetails;
         }
 
         /// <summary>
@@ -277,6 +292,12 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("type_deposit_fee_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.PaymentBalanceActivityDepositFeeDetail TypeDepositFeeDetails { get; }
+
+        /// <summary>
+        /// Gets or sets TypeDepositFeeReversedDetails.
+        /// </summary>
+        [JsonProperty("type_deposit_fee_reversed_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.PaymentBalanceActivityDepositFeeReversedDetail TypeDepositFeeReversedDetails { get; }
 
         /// <summary>
         /// Gets or sets TypeDisputeDetails.
@@ -374,6 +395,18 @@ namespace Square.Models
         [JsonProperty("type_third_party_fee_refund_details", NullValueHandling = NullValueHandling.Ignore)]
         public Models.PaymentBalanceActivityThirdPartyFeeRefundDetail TypeThirdPartyFeeRefundDetails { get; }
 
+        /// <summary>
+        /// Gets or sets TypeSquarePayrollTransferDetails.
+        /// </summary>
+        [JsonProperty("type_square_payroll_transfer_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.PaymentBalanceActivitySquarePayrollTransferDetail TypeSquarePayrollTransferDetails { get; }
+
+        /// <summary>
+        /// Gets or sets TypeSquarePayrollTransferReversedDetails.
+        /// </summary>
+        [JsonProperty("type_square_payroll_transfer_reversed_details", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.PaymentBalanceActivitySquarePayrollTransferReversedDetail TypeSquarePayrollTransferReversedDetails { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -418,6 +451,7 @@ namespace Square.Models
                 ((this.TypeAutomaticSavingsReversedDetails == null && other.TypeAutomaticSavingsReversedDetails == null) || (this.TypeAutomaticSavingsReversedDetails?.Equals(other.TypeAutomaticSavingsReversedDetails) == true)) &&
                 ((this.TypeChargeDetails == null && other.TypeChargeDetails == null) || (this.TypeChargeDetails?.Equals(other.TypeChargeDetails) == true)) &&
                 ((this.TypeDepositFeeDetails == null && other.TypeDepositFeeDetails == null) || (this.TypeDepositFeeDetails?.Equals(other.TypeDepositFeeDetails) == true)) &&
+                ((this.TypeDepositFeeReversedDetails == null && other.TypeDepositFeeReversedDetails == null) || (this.TypeDepositFeeReversedDetails?.Equals(other.TypeDepositFeeReversedDetails) == true)) &&
                 ((this.TypeDisputeDetails == null && other.TypeDisputeDetails == null) || (this.TypeDisputeDetails?.Equals(other.TypeDisputeDetails) == true)) &&
                 ((this.TypeFeeDetails == null && other.TypeFeeDetails == null) || (this.TypeFeeDetails?.Equals(other.TypeFeeDetails) == true)) &&
                 ((this.TypeFreeProcessingDetails == null && other.TypeFreeProcessingDetails == null) || (this.TypeFreeProcessingDetails?.Equals(other.TypeFreeProcessingDetails) == true)) &&
@@ -433,22 +467,24 @@ namespace Square.Models
                 ((this.TypeSquareCapitalReversedPaymentDetails == null && other.TypeSquareCapitalReversedPaymentDetails == null) || (this.TypeSquareCapitalReversedPaymentDetails?.Equals(other.TypeSquareCapitalReversedPaymentDetails) == true)) &&
                 ((this.TypeTaxOnFeeDetails == null && other.TypeTaxOnFeeDetails == null) || (this.TypeTaxOnFeeDetails?.Equals(other.TypeTaxOnFeeDetails) == true)) &&
                 ((this.TypeThirdPartyFeeDetails == null && other.TypeThirdPartyFeeDetails == null) || (this.TypeThirdPartyFeeDetails?.Equals(other.TypeThirdPartyFeeDetails) == true)) &&
-                ((this.TypeThirdPartyFeeRefundDetails == null && other.TypeThirdPartyFeeRefundDetails == null) || (this.TypeThirdPartyFeeRefundDetails?.Equals(other.TypeThirdPartyFeeRefundDetails) == true));
+                ((this.TypeThirdPartyFeeRefundDetails == null && other.TypeThirdPartyFeeRefundDetails == null) || (this.TypeThirdPartyFeeRefundDetails?.Equals(other.TypeThirdPartyFeeRefundDetails) == true)) &&
+                ((this.TypeSquarePayrollTransferDetails == null && other.TypeSquarePayrollTransferDetails == null) || (this.TypeSquarePayrollTransferDetails?.Equals(other.TypeSquarePayrollTransferDetails) == true)) &&
+                ((this.TypeSquarePayrollTransferReversedDetails == null && other.TypeSquarePayrollTransferReversedDetails == null) || (this.TypeSquarePayrollTransferReversedDetails?.Equals(other.TypeSquarePayrollTransferReversedDetails) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2018225012;
+            int hashCode = 456729233;
             hashCode = HashCode.Combine(this.Id, this.PayoutId, this.EffectiveAt, this.Type, this.GrossAmountMoney, this.FeeAmountMoney, this.NetAmountMoney);
 
-            hashCode = HashCode.Combine(hashCode, this.TypeAppFeeRevenueDetails, this.TypeAppFeeRefundDetails, this.TypeAutomaticSavingsDetails, this.TypeAutomaticSavingsReversedDetails, this.TypeChargeDetails, this.TypeDepositFeeDetails, this.TypeDisputeDetails);
+            hashCode = HashCode.Combine(hashCode, this.TypeAppFeeRevenueDetails, this.TypeAppFeeRefundDetails, this.TypeAutomaticSavingsDetails, this.TypeAutomaticSavingsReversedDetails, this.TypeChargeDetails, this.TypeDepositFeeDetails, this.TypeDepositFeeReversedDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.TypeFeeDetails, this.TypeFreeProcessingDetails, this.TypeHoldAdjustmentDetails, this.TypeOpenDisputeDetails, this.TypeOtherDetails, this.TypeOtherAdjustmentDetails, this.TypeRefundDetails);
+            hashCode = HashCode.Combine(hashCode, this.TypeDisputeDetails, this.TypeFeeDetails, this.TypeFreeProcessingDetails, this.TypeHoldAdjustmentDetails, this.TypeOpenDisputeDetails, this.TypeOtherDetails, this.TypeOtherAdjustmentDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.TypeReleaseAdjustmentDetails, this.TypeReserveHoldDetails, this.TypeReserveReleaseDetails, this.TypeSquareCapitalPaymentDetails, this.TypeSquareCapitalReversedPaymentDetails, this.TypeTaxOnFeeDetails, this.TypeThirdPartyFeeDetails);
+            hashCode = HashCode.Combine(hashCode, this.TypeRefundDetails, this.TypeReleaseAdjustmentDetails, this.TypeReserveHoldDetails, this.TypeReserveReleaseDetails, this.TypeSquareCapitalPaymentDetails, this.TypeSquareCapitalReversedPaymentDetails, this.TypeTaxOnFeeDetails);
 
-            hashCode = HashCode.Combine(hashCode, this.TypeThirdPartyFeeRefundDetails);
+            hashCode = HashCode.Combine(hashCode, this.TypeThirdPartyFeeDetails, this.TypeThirdPartyFeeRefundDetails, this.TypeSquarePayrollTransferDetails, this.TypeSquarePayrollTransferReversedDetails);
 
             return hashCode;
         }
@@ -471,6 +507,7 @@ namespace Square.Models
             toStringOutput.Add($"this.TypeAutomaticSavingsReversedDetails = {(this.TypeAutomaticSavingsReversedDetails == null ? "null" : this.TypeAutomaticSavingsReversedDetails.ToString())}");
             toStringOutput.Add($"this.TypeChargeDetails = {(this.TypeChargeDetails == null ? "null" : this.TypeChargeDetails.ToString())}");
             toStringOutput.Add($"this.TypeDepositFeeDetails = {(this.TypeDepositFeeDetails == null ? "null" : this.TypeDepositFeeDetails.ToString())}");
+            toStringOutput.Add($"this.TypeDepositFeeReversedDetails = {(this.TypeDepositFeeReversedDetails == null ? "null" : this.TypeDepositFeeReversedDetails.ToString())}");
             toStringOutput.Add($"this.TypeDisputeDetails = {(this.TypeDisputeDetails == null ? "null" : this.TypeDisputeDetails.ToString())}");
             toStringOutput.Add($"this.TypeFeeDetails = {(this.TypeFeeDetails == null ? "null" : this.TypeFeeDetails.ToString())}");
             toStringOutput.Add($"this.TypeFreeProcessingDetails = {(this.TypeFreeProcessingDetails == null ? "null" : this.TypeFreeProcessingDetails.ToString())}");
@@ -487,6 +524,8 @@ namespace Square.Models
             toStringOutput.Add($"this.TypeTaxOnFeeDetails = {(this.TypeTaxOnFeeDetails == null ? "null" : this.TypeTaxOnFeeDetails.ToString())}");
             toStringOutput.Add($"this.TypeThirdPartyFeeDetails = {(this.TypeThirdPartyFeeDetails == null ? "null" : this.TypeThirdPartyFeeDetails.ToString())}");
             toStringOutput.Add($"this.TypeThirdPartyFeeRefundDetails = {(this.TypeThirdPartyFeeRefundDetails == null ? "null" : this.TypeThirdPartyFeeRefundDetails.ToString())}");
+            toStringOutput.Add($"this.TypeSquarePayrollTransferDetails = {(this.TypeSquarePayrollTransferDetails == null ? "null" : this.TypeSquarePayrollTransferDetails.ToString())}");
+            toStringOutput.Add($"this.TypeSquarePayrollTransferReversedDetails = {(this.TypeSquarePayrollTransferReversedDetails == null ? "null" : this.TypeSquarePayrollTransferReversedDetails.ToString())}");
         }
 
         /// <summary>
@@ -509,6 +548,7 @@ namespace Square.Models
                 .TypeAutomaticSavingsReversedDetails(this.TypeAutomaticSavingsReversedDetails)
                 .TypeChargeDetails(this.TypeChargeDetails)
                 .TypeDepositFeeDetails(this.TypeDepositFeeDetails)
+                .TypeDepositFeeReversedDetails(this.TypeDepositFeeReversedDetails)
                 .TypeDisputeDetails(this.TypeDisputeDetails)
                 .TypeFeeDetails(this.TypeFeeDetails)
                 .TypeFreeProcessingDetails(this.TypeFreeProcessingDetails)
@@ -524,7 +564,9 @@ namespace Square.Models
                 .TypeSquareCapitalReversedPaymentDetails(this.TypeSquareCapitalReversedPaymentDetails)
                 .TypeTaxOnFeeDetails(this.TypeTaxOnFeeDetails)
                 .TypeThirdPartyFeeDetails(this.TypeThirdPartyFeeDetails)
-                .TypeThirdPartyFeeRefundDetails(this.TypeThirdPartyFeeRefundDetails);
+                .TypeThirdPartyFeeRefundDetails(this.TypeThirdPartyFeeRefundDetails)
+                .TypeSquarePayrollTransferDetails(this.TypeSquarePayrollTransferDetails)
+                .TypeSquarePayrollTransferReversedDetails(this.TypeSquarePayrollTransferReversedDetails);
             return builder;
         }
 
@@ -551,6 +593,7 @@ namespace Square.Models
             private Models.PaymentBalanceActivityAutomaticSavingsReversedDetail typeAutomaticSavingsReversedDetails;
             private Models.PaymentBalanceActivityChargeDetail typeChargeDetails;
             private Models.PaymentBalanceActivityDepositFeeDetail typeDepositFeeDetails;
+            private Models.PaymentBalanceActivityDepositFeeReversedDetail typeDepositFeeReversedDetails;
             private Models.PaymentBalanceActivityDisputeDetail typeDisputeDetails;
             private Models.PaymentBalanceActivityFeeDetail typeFeeDetails;
             private Models.PaymentBalanceActivityFreeProcessingDetail typeFreeProcessingDetails;
@@ -567,6 +610,8 @@ namespace Square.Models
             private Models.PaymentBalanceActivityTaxOnFeeDetail typeTaxOnFeeDetails;
             private Models.PaymentBalanceActivityThirdPartyFeeDetail typeThirdPartyFeeDetails;
             private Models.PaymentBalanceActivityThirdPartyFeeRefundDetail typeThirdPartyFeeRefundDetails;
+            private Models.PaymentBalanceActivitySquarePayrollTransferDetail typeSquarePayrollTransferDetails;
+            private Models.PaymentBalanceActivitySquarePayrollTransferReversedDetail typeSquarePayrollTransferReversedDetails;
 
             /// <summary>
             /// Initialize Builder for PayoutEntry.
@@ -722,6 +767,17 @@ namespace Square.Models
             public Builder TypeDepositFeeDetails(Models.PaymentBalanceActivityDepositFeeDetail typeDepositFeeDetails)
             {
                 this.typeDepositFeeDetails = typeDepositFeeDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// TypeDepositFeeReversedDetails.
+             /// </summary>
+             /// <param name="typeDepositFeeReversedDetails"> typeDepositFeeReversedDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder TypeDepositFeeReversedDetails(Models.PaymentBalanceActivityDepositFeeReversedDetail typeDepositFeeReversedDetails)
+            {
+                this.typeDepositFeeReversedDetails = typeDepositFeeReversedDetails;
                 return this;
             }
 
@@ -901,6 +957,28 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TypeSquarePayrollTransferDetails.
+             /// </summary>
+             /// <param name="typeSquarePayrollTransferDetails"> typeSquarePayrollTransferDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder TypeSquarePayrollTransferDetails(Models.PaymentBalanceActivitySquarePayrollTransferDetail typeSquarePayrollTransferDetails)
+            {
+                this.typeSquarePayrollTransferDetails = typeSquarePayrollTransferDetails;
+                return this;
+            }
+
+             /// <summary>
+             /// TypeSquarePayrollTransferReversedDetails.
+             /// </summary>
+             /// <param name="typeSquarePayrollTransferReversedDetails"> typeSquarePayrollTransferReversedDetails. </param>
+             /// <returns> Builder. </returns>
+            public Builder TypeSquarePayrollTransferReversedDetails(Models.PaymentBalanceActivitySquarePayrollTransferReversedDetail typeSquarePayrollTransferReversedDetails)
+            {
+                this.typeSquarePayrollTransferReversedDetails = typeSquarePayrollTransferReversedDetails;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -930,6 +1008,7 @@ namespace Square.Models
                     this.typeAutomaticSavingsReversedDetails,
                     this.typeChargeDetails,
                     this.typeDepositFeeDetails,
+                    this.typeDepositFeeReversedDetails,
                     this.typeDisputeDetails,
                     this.typeFeeDetails,
                     this.typeFreeProcessingDetails,
@@ -945,7 +1024,9 @@ namespace Square.Models
                     this.typeSquareCapitalReversedPaymentDetails,
                     this.typeTaxOnFeeDetails,
                     this.typeThirdPartyFeeDetails,
-                    this.typeThirdPartyFeeRefundDetails);
+                    this.typeThirdPartyFeeRefundDetails,
+                    this.typeSquarePayrollTransferDetails,
+                    this.typeSquarePayrollTransferReversedDetails);
             }
         }
     }
