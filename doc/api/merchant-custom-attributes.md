@@ -270,10 +270,8 @@ BulkDeleteMerchantCustomAttributesRequest body = new BulkDeleteMerchantCustomAtt
     new Dictionary<string, BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest>
     {
         ["id1"] = new BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest.Builder()
-        .Key("alternative_seller_name")
         .Build(),
         ["id2"] = new BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest.Builder()
-        .Key("has_seen_tutorial")
         .Build(),
     }
 )

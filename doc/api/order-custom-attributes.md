@@ -286,12 +286,10 @@ BulkDeleteOrderCustomAttributesRequest body = new BulkDeleteOrderCustomAttribute
         ["cover-count"] = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
             "7BbXGEIWNldxAzrtGf9GPVZTwZ4F"
         )
-        .Key("cover-count")
         .Build(),
         ["table-number"] = new BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute.Builder(
             "7BbXGEIWNldxAzrtGf9GPVZTwZ4F"
         )
-        .Key("table-number")
         .Build(),
     }
 )

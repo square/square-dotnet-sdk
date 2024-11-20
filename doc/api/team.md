@@ -196,7 +196,6 @@ BulkUpdateTeamMembersRequest body = new BulkUpdateTeamMembersRequest.Builder(
         .TeamMember(
             new TeamMember.Builder()
             .ReferenceId("reference_id_2")
-            .IsOwner(false)
             .Status("ACTIVE")
             .GivenName("Jane")
             .FamilyName("Smith")
@@ -212,7 +211,6 @@ BulkUpdateTeamMembersRequest body = new BulkUpdateTeamMembersRequest.Builder(
         .TeamMember(
             new TeamMember.Builder()
             .ReferenceId("reference_id_1")
-            .IsOwner(false)
             .Status("ACTIVE")
             .GivenName("Joe")
             .FamilyName("Doe")

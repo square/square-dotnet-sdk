@@ -37,6 +37,7 @@ namespace Square.Models
         /// <param name="createdAt">created_at.</param>
         /// <param name="updatedAt">updated_at.</param>
         /// <param name="teamMemberId">team_member_id.</param>
+        /// <param name="terminalRefundId">terminal_refund_id.</param>
         public PaymentRefund(
             string id,
             Models.Money amountMoney,
@@ -52,7 +53,8 @@ namespace Square.Models
             string reason = null,
             string createdAt = null,
             string updatedAt = null,
-            string teamMemberId = null)
+            string teamMemberId = null,
+            string terminalRefundId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -115,6 +117,7 @@ namespace Square.Models
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.TeamMemberId = teamMemberId;
+            this.TerminalRefundId = terminalRefundId;
         }
         internal PaymentRefund(Dictionary<string, bool> shouldSerialize,
             string id,
@@ -131,7 +134,8 @@ namespace Square.Models
             string reason = null,
             string createdAt = null,
             string updatedAt = null,
-            string teamMemberId = null)
+            string teamMemberId = null,
+            string terminalRefundId = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -149,6 +153,7 @@ namespace Square.Models
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
             TeamMemberId = teamMemberId;
+            TerminalRefundId = terminalRefundId;
         }
 
         /// <summary>
@@ -257,6 +262,12 @@ namespace Square.Models
         [JsonProperty("team_member_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamMemberId { get; }
 
+        /// <summary>
+        /// An optional ID for a Terminal refund.
+        /// </summary>
+        [JsonProperty("terminal_refund_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string TerminalRefundId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
@@ -356,18 +367,19 @@ namespace Square.Models
                 ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
                 ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
                 ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true));
+                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
+                ((this.TerminalRefundId == null && other.TerminalRefundId == null) || (this.TerminalRefundId?.Equals(other.TerminalRefundId) == true));
         }
         
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 181999010;
+            int hashCode = -746989292;
             hashCode = HashCode.Combine(this.Id, this.Status, this.LocationId, this.Unlinked, this.DestinationType, this.DestinationDetails, this.AmountMoney);
 
             hashCode = HashCode.Combine(hashCode, this.AppFeeMoney, this.ProcessingFee, this.PaymentId, this.OrderId, this.Reason, this.CreatedAt, this.UpdatedAt);
 
-            hashCode = HashCode.Combine(hashCode, this.TeamMemberId);
+            hashCode = HashCode.Combine(hashCode, this.TeamMemberId, this.TerminalRefundId);
 
             return hashCode;
         }
@@ -392,6 +404,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
             toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
             toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.TerminalRefundId = {(this.TerminalRefundId == null ? "null" : this.TerminalRefundId)}");
         }
 
         /// <summary>
@@ -415,7 +428,8 @@ namespace Square.Models
                 .Reason(this.Reason)
                 .CreatedAt(this.CreatedAt)
                 .UpdatedAt(this.UpdatedAt)
-                .TeamMemberId(this.TeamMemberId);
+                .TeamMemberId(this.TeamMemberId)
+                .TerminalRefundId(this.TerminalRefundId);
             return builder;
         }
 
@@ -450,6 +464,7 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
             private string teamMemberId;
+            private string terminalRefundId;
 
             /// <summary>
             /// Initialize Builder for PaymentRefund.
@@ -636,6 +651,17 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// TerminalRefundId.
+             /// </summary>
+             /// <param name="terminalRefundId"> terminalRefundId. </param>
+             /// <returns> Builder. </returns>
+            public Builder TerminalRefundId(string terminalRefundId)
+            {
+                this.terminalRefundId = terminalRefundId;
+                return this;
+            }
+
             /// <summary>
             /// Marks the field to not be serailized.
             /// </summary>
@@ -714,7 +740,8 @@ namespace Square.Models
                     this.reason,
                     this.createdAt,
                     this.updatedAt,
-                    this.teamMemberId);
+                    this.teamMemberId,
+                    this.terminalRefundId);
             }
         }
     }
