@@ -71,45 +71,43 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchSubscriptionsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchSubscriptionsRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
-                ((this.Include == null && other.Include == null) || (this.Include?.Equals(other.Include) == true));
+            return obj is SearchSubscriptionsRequest other &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.Query == null && other.Query == null ||
+                 this.Query?.Equals(other.Query) == true) &&
+                (this.Include == null && other.Include == null ||
+                 this.Include?.Equals(other.Include) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 363002383;
-            hashCode = HashCode.Combine(this.Cursor, this.Limit, this.Query, this.Include);
+            var hashCode = 363002383;
+            hashCode = HashCode.Combine(hashCode, this.Cursor, this.Limit, this.Query, this.Include);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
             toStringOutput.Add($"this.Include = {(this.Include == null ? "null" : $"[{string.Join(", ", this.Include)} ]")}");

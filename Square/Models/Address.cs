@@ -134,8 +134,8 @@ namespace Square.Models
                 shouldSerialize["postal_code"] = true;
                 this.PostalCode = postalCode;
             }
-
             this.Country = country;
+
             if (firstName != null)
             {
                 shouldSerialize["first_name"] = true;
@@ -147,9 +147,10 @@ namespace Square.Models
                 shouldSerialize["last_name"] = true;
                 this.LastName = lastName;
             }
-
         }
-        internal Address(Dictionary<string, bool> shouldSerialize,
+
+        internal Address(
+            Dictionary<string, bool> shouldSerialize,
             string addressLine1 = null,
             string addressLine2 = null,
             string addressLine3 = null,
@@ -278,9 +279,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Address : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -404,61 +403,71 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Address other &&                ((this.AddressLine1 == null && other.AddressLine1 == null) || (this.AddressLine1?.Equals(other.AddressLine1) == true)) &&
-                ((this.AddressLine2 == null && other.AddressLine2 == null) || (this.AddressLine2?.Equals(other.AddressLine2) == true)) &&
-                ((this.AddressLine3 == null && other.AddressLine3 == null) || (this.AddressLine3?.Equals(other.AddressLine3) == true)) &&
-                ((this.Locality == null && other.Locality == null) || (this.Locality?.Equals(other.Locality) == true)) &&
-                ((this.Sublocality == null && other.Sublocality == null) || (this.Sublocality?.Equals(other.Sublocality) == true)) &&
-                ((this.Sublocality2 == null && other.Sublocality2 == null) || (this.Sublocality2?.Equals(other.Sublocality2) == true)) &&
-                ((this.Sublocality3 == null && other.Sublocality3 == null) || (this.Sublocality3?.Equals(other.Sublocality3) == true)) &&
-                ((this.AdministrativeDistrictLevel1 == null && other.AdministrativeDistrictLevel1 == null) || (this.AdministrativeDistrictLevel1?.Equals(other.AdministrativeDistrictLevel1) == true)) &&
-                ((this.AdministrativeDistrictLevel2 == null && other.AdministrativeDistrictLevel2 == null) || (this.AdministrativeDistrictLevel2?.Equals(other.AdministrativeDistrictLevel2) == true)) &&
-                ((this.AdministrativeDistrictLevel3 == null && other.AdministrativeDistrictLevel3 == null) || (this.AdministrativeDistrictLevel3?.Equals(other.AdministrativeDistrictLevel3) == true)) &&
-                ((this.PostalCode == null && other.PostalCode == null) || (this.PostalCode?.Equals(other.PostalCode) == true)) &&
-                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
-                ((this.FirstName == null && other.FirstName == null) || (this.FirstName?.Equals(other.FirstName) == true)) &&
-                ((this.LastName == null && other.LastName == null) || (this.LastName?.Equals(other.LastName) == true));
+            return obj is Address other &&
+                (this.AddressLine1 == null && other.AddressLine1 == null ||
+                 this.AddressLine1?.Equals(other.AddressLine1) == true) &&
+                (this.AddressLine2 == null && other.AddressLine2 == null ||
+                 this.AddressLine2?.Equals(other.AddressLine2) == true) &&
+                (this.AddressLine3 == null && other.AddressLine3 == null ||
+                 this.AddressLine3?.Equals(other.AddressLine3) == true) &&
+                (this.Locality == null && other.Locality == null ||
+                 this.Locality?.Equals(other.Locality) == true) &&
+                (this.Sublocality == null && other.Sublocality == null ||
+                 this.Sublocality?.Equals(other.Sublocality) == true) &&
+                (this.Sublocality2 == null && other.Sublocality2 == null ||
+                 this.Sublocality2?.Equals(other.Sublocality2) == true) &&
+                (this.Sublocality3 == null && other.Sublocality3 == null ||
+                 this.Sublocality3?.Equals(other.Sublocality3) == true) &&
+                (this.AdministrativeDistrictLevel1 == null && other.AdministrativeDistrictLevel1 == null ||
+                 this.AdministrativeDistrictLevel1?.Equals(other.AdministrativeDistrictLevel1) == true) &&
+                (this.AdministrativeDistrictLevel2 == null && other.AdministrativeDistrictLevel2 == null ||
+                 this.AdministrativeDistrictLevel2?.Equals(other.AdministrativeDistrictLevel2) == true) &&
+                (this.AdministrativeDistrictLevel3 == null && other.AdministrativeDistrictLevel3 == null ||
+                 this.AdministrativeDistrictLevel3?.Equals(other.AdministrativeDistrictLevel3) == true) &&
+                (this.PostalCode == null && other.PostalCode == null ||
+                 this.PostalCode?.Equals(other.PostalCode) == true) &&
+                (this.Country == null && other.Country == null ||
+                 this.Country?.Equals(other.Country) == true) &&
+                (this.FirstName == null && other.FirstName == null ||
+                 this.FirstName?.Equals(other.FirstName) == true) &&
+                (this.LastName == null && other.LastName == null ||
+                 this.LastName?.Equals(other.LastName) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1866796447;
-            hashCode = HashCode.Combine(this.AddressLine1, this.AddressLine2, this.AddressLine3, this.Locality, this.Sublocality, this.Sublocality2, this.Sublocality3);
+            var hashCode = 1866796447;
+            hashCode = HashCode.Combine(hashCode, this.AddressLine1, this.AddressLine2, this.AddressLine3, this.Locality, this.Sublocality, this.Sublocality2, this.Sublocality3);
 
             hashCode = HashCode.Combine(hashCode, this.AdministrativeDistrictLevel1, this.AdministrativeDistrictLevel2, this.AdministrativeDistrictLevel3, this.PostalCode, this.Country, this.FirstName, this.LastName);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.AddressLine1 = {(this.AddressLine1 == null ? "null" : this.AddressLine1)}");
-            toStringOutput.Add($"this.AddressLine2 = {(this.AddressLine2 == null ? "null" : this.AddressLine2)}");
-            toStringOutput.Add($"this.AddressLine3 = {(this.AddressLine3 == null ? "null" : this.AddressLine3)}");
-            toStringOutput.Add($"this.Locality = {(this.Locality == null ? "null" : this.Locality)}");
-            toStringOutput.Add($"this.Sublocality = {(this.Sublocality == null ? "null" : this.Sublocality)}");
-            toStringOutput.Add($"this.Sublocality2 = {(this.Sublocality2 == null ? "null" : this.Sublocality2)}");
-            toStringOutput.Add($"this.Sublocality3 = {(this.Sublocality3 == null ? "null" : this.Sublocality3)}");
-            toStringOutput.Add($"this.AdministrativeDistrictLevel1 = {(this.AdministrativeDistrictLevel1 == null ? "null" : this.AdministrativeDistrictLevel1)}");
-            toStringOutput.Add($"this.AdministrativeDistrictLevel2 = {(this.AdministrativeDistrictLevel2 == null ? "null" : this.AdministrativeDistrictLevel2)}");
-            toStringOutput.Add($"this.AdministrativeDistrictLevel3 = {(this.AdministrativeDistrictLevel3 == null ? "null" : this.AdministrativeDistrictLevel3)}");
-            toStringOutput.Add($"this.PostalCode = {(this.PostalCode == null ? "null" : this.PostalCode)}");
+            toStringOutput.Add($"this.AddressLine1 = {this.AddressLine1 ?? "null"}");
+            toStringOutput.Add($"this.AddressLine2 = {this.AddressLine2 ?? "null"}");
+            toStringOutput.Add($"this.AddressLine3 = {this.AddressLine3 ?? "null"}");
+            toStringOutput.Add($"this.Locality = {this.Locality ?? "null"}");
+            toStringOutput.Add($"this.Sublocality = {this.Sublocality ?? "null"}");
+            toStringOutput.Add($"this.Sublocality2 = {this.Sublocality2 ?? "null"}");
+            toStringOutput.Add($"this.Sublocality3 = {this.Sublocality3 ?? "null"}");
+            toStringOutput.Add($"this.AdministrativeDistrictLevel1 = {this.AdministrativeDistrictLevel1 ?? "null"}");
+            toStringOutput.Add($"this.AdministrativeDistrictLevel2 = {this.AdministrativeDistrictLevel2 ?? "null"}");
+            toStringOutput.Add($"this.AdministrativeDistrictLevel3 = {this.AdministrativeDistrictLevel3 ?? "null"}");
+            toStringOutput.Add($"this.PostalCode = {this.PostalCode ?? "null"}");
             toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country.ToString())}");
-            toStringOutput.Add($"this.FirstName = {(this.FirstName == null ? "null" : this.FirstName)}");
-            toStringOutput.Add($"this.LastName = {(this.LastName == null ? "null" : this.LastName)}");
+            toStringOutput.Add($"this.FirstName = {this.FirstName ?? "null"}");
+            toStringOutput.Add($"this.LastName = {this.LastName ?? "null"}");
         }
 
         /// <summary>
@@ -690,7 +699,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAddressLine1()
             {
@@ -698,7 +707,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAddressLine2()
             {
@@ -706,7 +715,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAddressLine3()
             {
@@ -714,7 +723,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocality()
             {
@@ -722,7 +731,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSublocality()
             {
@@ -730,7 +739,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSublocality2()
             {
@@ -738,7 +747,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSublocality3()
             {
@@ -746,7 +755,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAdministrativeDistrictLevel1()
             {
@@ -754,7 +763,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAdministrativeDistrictLevel2()
             {
@@ -762,7 +771,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAdministrativeDistrictLevel3()
             {
@@ -770,7 +779,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPostalCode()
             {
@@ -778,7 +787,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFirstName()
             {
@@ -786,7 +795,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLastName()
             {
@@ -800,7 +809,8 @@ namespace Square.Models
             /// <returns> Address. </returns>
             public Address Build()
             {
-                return new Address(shouldSerialize,
+                return new Address(
+                    shouldSerialize,
                     this.addressLine1,
                     this.addressLine2,
                     this.addressLine3,

@@ -73,44 +73,43 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchEventsResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchEventsResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Events == null && other.Events == null) || (this.Events?.Equals(other.Events) == true)) &&
-                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+            return obj is SearchEventsResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.Events == null && other.Events == null ||
+                 this.Events?.Equals(other.Events) == true) &&
+                (this.Metadata == null && other.Metadata == null ||
+                 this.Metadata?.Equals(other.Metadata) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 33093488;
+            var hashCode = 33093488;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.Events, this.Metadata, this.Cursor);
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.Events, this.Metadata, this.Cursor);
 
             return hashCode;
         }
+
         internal SearchEventsResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
@@ -126,7 +125,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
             toStringOutput.Add($"this.Events = {(this.Events == null ? "null" : $"[{string.Join(", ", this.Events)} ]")}");
             toStringOutput.Add($"this.Metadata = {(this.Metadata == null ? "null" : $"[{string.Join(", ", this.Metadata)} ]")}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
         }
 
         /// <summary>

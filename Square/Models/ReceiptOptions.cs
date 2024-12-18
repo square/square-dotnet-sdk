@@ -35,8 +35,8 @@ namespace Square.Models
                 { "print_only", false },
                 { "is_duplicate", false }
             };
-
             this.PaymentId = paymentId;
+
             if (printOnly != null)
             {
                 shouldSerialize["print_only"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["is_duplicate"] = true;
                 this.IsDuplicate = isDuplicate;
             }
-
         }
-        internal ReceiptOptions(Dictionary<string, bool> shouldSerialize,
+
+        internal ReceiptOptions(
+            Dictionary<string, bool> shouldSerialize,
             string paymentId,
             bool? printOnly = null,
             bool? isDuplicate = null)
@@ -86,9 +87,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ReceiptOptions : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -113,35 +112,34 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ReceiptOptions other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.PrintOnly == null && other.PrintOnly == null) || (this.PrintOnly?.Equals(other.PrintOnly) == true)) &&
-                ((this.IsDuplicate == null && other.IsDuplicate == null) || (this.IsDuplicate?.Equals(other.IsDuplicate) == true));
+            return obj is ReceiptOptions other &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true) &&
+                (this.PrintOnly == null && other.PrintOnly == null ||
+                 this.PrintOnly?.Equals(other.PrintOnly) == true) &&
+                (this.IsDuplicate == null && other.IsDuplicate == null ||
+                 this.IsDuplicate?.Equals(other.IsDuplicate) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 939247501;
-            hashCode = HashCode.Combine(this.PaymentId, this.PrintOnly, this.IsDuplicate);
+            var hashCode = 939247501;
+            hashCode = HashCode.Combine(hashCode, this.PaymentId, this.PrintOnly, this.IsDuplicate);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
             toStringOutput.Add($"this.PrintOnly = {(this.PrintOnly == null ? "null" : this.PrintOnly.ToString())}");
             toStringOutput.Add($"this.IsDuplicate = {(this.IsDuplicate == null ? "null" : this.IsDuplicate.ToString())}");
         }
@@ -220,7 +218,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPrintOnly()
             {
@@ -228,7 +226,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsDuplicate()
             {
@@ -242,7 +240,8 @@ namespace Square.Models
             /// <returns> ReceiptOptions. </returns>
             public ReceiptOptions Build()
             {
-                return new ReceiptOptions(shouldSerialize,
+                return new ReceiptOptions(
+                    shouldSerialize,
                     this.paymentId,
                     this.printOnly,
                     this.isDuplicate);

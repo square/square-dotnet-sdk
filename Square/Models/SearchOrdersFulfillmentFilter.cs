@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["fulfillment_states"] = true;
                 this.FulfillmentStates = fulfillmentStates;
             }
-
         }
-        internal SearchOrdersFulfillmentFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal SearchOrdersFulfillmentFilter(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> fulfillmentTypes = null,
             IList<string> fulfillmentStates = null)
         {
@@ -78,9 +79,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchOrdersFulfillmentFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -105,27 +104,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchOrdersFulfillmentFilter other &&                ((this.FulfillmentTypes == null && other.FulfillmentTypes == null) || (this.FulfillmentTypes?.Equals(other.FulfillmentTypes) == true)) &&
-                ((this.FulfillmentStates == null && other.FulfillmentStates == null) || (this.FulfillmentStates?.Equals(other.FulfillmentStates) == true));
+            return obj is SearchOrdersFulfillmentFilter other &&
+                (this.FulfillmentTypes == null && other.FulfillmentTypes == null ||
+                 this.FulfillmentTypes?.Equals(other.FulfillmentTypes) == true) &&
+                (this.FulfillmentStates == null && other.FulfillmentStates == null ||
+                 this.FulfillmentStates?.Equals(other.FulfillmentStates) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -747213754;
-            hashCode = HashCode.Combine(this.FulfillmentTypes, this.FulfillmentStates);
+            var hashCode = -747213754;
+            hashCode = HashCode.Combine(hashCode, this.FulfillmentTypes, this.FulfillmentStates);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -187,7 +184,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFulfillmentTypes()
             {
@@ -195,7 +192,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFulfillmentStates()
             {
@@ -209,7 +206,8 @@ namespace Square.Models
             /// <returns> SearchOrdersFulfillmentFilter. </returns>
             public SearchOrdersFulfillmentFilter Build()
             {
-                return new SearchOrdersFulfillmentFilter(shouldSerialize,
+                return new SearchOrdersFulfillmentFilter(
+                    shouldSerialize,
                     this.fulfillmentTypes,
                     this.fulfillmentStates);
             }

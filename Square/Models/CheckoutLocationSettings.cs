@@ -62,13 +62,14 @@ namespace Square.Models
                 shouldSerialize["policies"] = true;
                 this.Policies = policies;
             }
-
             this.Branding = branding;
             this.Tipping = tipping;
             this.Coupons = coupons;
             this.UpdatedAt = updatedAt;
         }
-        internal CheckoutLocationSettings(Dictionary<string, bool> shouldSerialize,
+
+        internal CheckoutLocationSettings(
+            Dictionary<string, bool> shouldSerialize,
             string locationId = null,
             bool? customerNotesEnabled = null,
             IList<Models.CheckoutLocationSettingsPolicy> policies = null,
@@ -137,9 +138,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CheckoutLocationSettings : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -173,45 +172,48 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CheckoutLocationSettings other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.CustomerNotesEnabled == null && other.CustomerNotesEnabled == null) || (this.CustomerNotesEnabled?.Equals(other.CustomerNotesEnabled) == true)) &&
-                ((this.Policies == null && other.Policies == null) || (this.Policies?.Equals(other.Policies) == true)) &&
-                ((this.Branding == null && other.Branding == null) || (this.Branding?.Equals(other.Branding) == true)) &&
-                ((this.Tipping == null && other.Tipping == null) || (this.Tipping?.Equals(other.Tipping) == true)) &&
-                ((this.Coupons == null && other.Coupons == null) || (this.Coupons?.Equals(other.Coupons) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
+            return obj is CheckoutLocationSettings other &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.CustomerNotesEnabled == null && other.CustomerNotesEnabled == null ||
+                 this.CustomerNotesEnabled?.Equals(other.CustomerNotesEnabled) == true) &&
+                (this.Policies == null && other.Policies == null ||
+                 this.Policies?.Equals(other.Policies) == true) &&
+                (this.Branding == null && other.Branding == null ||
+                 this.Branding?.Equals(other.Branding) == true) &&
+                (this.Tipping == null && other.Tipping == null ||
+                 this.Tipping?.Equals(other.Tipping) == true) &&
+                (this.Coupons == null && other.Coupons == null ||
+                 this.Coupons?.Equals(other.Coupons) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1080173946;
-            hashCode = HashCode.Combine(this.LocationId, this.CustomerNotesEnabled, this.Policies, this.Branding, this.Tipping, this.Coupons, this.UpdatedAt);
+            var hashCode = 1080173946;
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.CustomerNotesEnabled, this.Policies, this.Branding, this.Tipping, this.Coupons, this.UpdatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.CustomerNotesEnabled = {(this.CustomerNotesEnabled == null ? "null" : this.CustomerNotesEnabled.ToString())}");
             toStringOutput.Add($"this.Policies = {(this.Policies == null ? "null" : $"[{string.Join(", ", this.Policies)} ]")}");
             toStringOutput.Add($"this.Branding = {(this.Branding == null ? "null" : this.Branding.ToString())}");
             toStringOutput.Add($"this.Tipping = {(this.Tipping == null ? "null" : this.Tipping.ToString())}");
             toStringOutput.Add($"this.Coupons = {(this.Coupons == null ? "null" : this.Coupons.ToString())}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -332,7 +334,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -340,7 +342,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerNotesEnabled()
             {
@@ -348,7 +350,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPolicies()
             {
@@ -362,7 +364,8 @@ namespace Square.Models
             /// <returns> CheckoutLocationSettings. </returns>
             public CheckoutLocationSettings Build()
             {
-                return new CheckoutLocationSettings(shouldSerialize,
+                return new CheckoutLocationSettings(
+                    shouldSerialize,
                     this.locationId,
                     this.customerNotesEnabled,
                     this.policies,

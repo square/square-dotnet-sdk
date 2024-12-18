@@ -39,42 +39,37 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyProgramAccrualRuleCategoryData : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyProgramAccrualRuleCategoryData other &&                ((this.CategoryId == null && other.CategoryId == null) || (this.CategoryId?.Equals(other.CategoryId) == true));
+            return obj is LoyaltyProgramAccrualRuleCategoryData other &&
+                (this.CategoryId == null && other.CategoryId == null ||
+                 this.CategoryId?.Equals(other.CategoryId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 307764476;
-            hashCode = HashCode.Combine(this.CategoryId);
+            var hashCode = 307764476;
+            hashCode = HashCode.Combine(hashCode, this.CategoryId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CategoryId = {(this.CategoryId == null ? "null" : this.CategoryId)}");
+            toStringOutput.Add($"this.CategoryId = {this.CategoryId ?? "null"}");
         }
 
         /// <summary>

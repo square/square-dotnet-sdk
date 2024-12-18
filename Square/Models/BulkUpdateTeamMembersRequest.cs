@@ -29,7 +29,11 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The data used to update the `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`. The maximum number of update objects is 25.
+        /// The data used to update the `TeamMember` objects. Each key is the `team_member_id` that maps to the `UpdateTeamMemberRequest`.
+        /// The maximum number of update objects is 25.
+        /// For each team member, include the fields to add, change, or clear. Fields can be cleared using a null value.
+        /// To update `wage_setting.job_assignments`, you must provide the complete list of job assignments. If needed,
+        /// call [ListJobs](api-endpoint:Team-ListJobs) to get the required `job_id` values.
         /// </summary>
         [JsonProperty("team_members")]
         public IDictionary<string, Models.UpdateTeamMemberRequest> TeamMembers { get; }
@@ -38,35 +42,30 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BulkUpdateTeamMembersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BulkUpdateTeamMembersRequest other &&                ((this.TeamMembers == null && other.TeamMembers == null) || (this.TeamMembers?.Equals(other.TeamMembers) == true));
+            return obj is BulkUpdateTeamMembersRequest other &&
+                (this.TeamMembers == null && other.TeamMembers == null ||
+                 this.TeamMembers?.Equals(other.TeamMembers) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 676588886;
-            hashCode = HashCode.Combine(this.TeamMembers);
+            var hashCode = 676588886;
+            hashCode = HashCode.Combine(hashCode, this.TeamMembers);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

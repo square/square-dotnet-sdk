@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["subscription_plans"] = true;
                 this.SubscriptionPlans = subscriptionPlans;
             }
-
         }
-        internal PaymentLinkRelatedResources(Dictionary<string, bool> shouldSerialize,
+
+        internal PaymentLinkRelatedResources(
+            Dictionary<string, bool> shouldSerialize,
             IList<Models.Order> orders = null,
             IList<Models.CatalogObject> subscriptionPlans = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PaymentLinkRelatedResources : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,27 +98,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PaymentLinkRelatedResources other &&                ((this.Orders == null && other.Orders == null) || (this.Orders?.Equals(other.Orders) == true)) &&
-                ((this.SubscriptionPlans == null && other.SubscriptionPlans == null) || (this.SubscriptionPlans?.Equals(other.SubscriptionPlans) == true));
+            return obj is PaymentLinkRelatedResources other &&
+                (this.Orders == null && other.Orders == null ||
+                 this.Orders?.Equals(other.Orders) == true) &&
+                (this.SubscriptionPlans == null && other.SubscriptionPlans == null ||
+                 this.SubscriptionPlans?.Equals(other.SubscriptionPlans) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -255234939;
-            hashCode = HashCode.Combine(this.Orders, this.SubscriptionPlans);
+            var hashCode = -255234939;
+            hashCode = HashCode.Combine(hashCode, this.Orders, this.SubscriptionPlans);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrders()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSubscriptionPlans()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> PaymentLinkRelatedResources. </returns>
             public PaymentLinkRelatedResources Build()
             {
-                return new PaymentLinkRelatedResources(shouldSerialize,
+                return new PaymentLinkRelatedResources(
+                    shouldSerialize,
                     this.orders,
                     this.subscriptionPlans);
             }

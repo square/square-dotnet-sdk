@@ -86,16 +86,17 @@ namespace Square.Models
                 shouldSerialize["statement_description"] = true;
                 this.StatementDescription = statementDescription;
             }
-
             this.AchDetails = achDetails;
+
             if (errors != null)
             {
                 shouldSerialize["errors"] = true;
                 this.Errors = errors;
             }
-
         }
-        internal BankAccountPaymentDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal BankAccountPaymentDetails(
+            Dictionary<string, bool> shouldSerialize,
             string bankName = null,
             string transferType = null,
             string accountOwnershipType = null,
@@ -170,9 +171,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BankAccountPaymentDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -242,47 +241,51 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BankAccountPaymentDetails other &&                ((this.BankName == null && other.BankName == null) || (this.BankName?.Equals(other.BankName) == true)) &&
-                ((this.TransferType == null && other.TransferType == null) || (this.TransferType?.Equals(other.TransferType) == true)) &&
-                ((this.AccountOwnershipType == null && other.AccountOwnershipType == null) || (this.AccountOwnershipType?.Equals(other.AccountOwnershipType) == true)) &&
-                ((this.Fingerprint == null && other.Fingerprint == null) || (this.Fingerprint?.Equals(other.Fingerprint) == true)) &&
-                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
-                ((this.StatementDescription == null && other.StatementDescription == null) || (this.StatementDescription?.Equals(other.StatementDescription) == true)) &&
-                ((this.AchDetails == null && other.AchDetails == null) || (this.AchDetails?.Equals(other.AchDetails) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
+            return obj is BankAccountPaymentDetails other &&
+                (this.BankName == null && other.BankName == null ||
+                 this.BankName?.Equals(other.BankName) == true) &&
+                (this.TransferType == null && other.TransferType == null ||
+                 this.TransferType?.Equals(other.TransferType) == true) &&
+                (this.AccountOwnershipType == null && other.AccountOwnershipType == null ||
+                 this.AccountOwnershipType?.Equals(other.AccountOwnershipType) == true) &&
+                (this.Fingerprint == null && other.Fingerprint == null ||
+                 this.Fingerprint?.Equals(other.Fingerprint) == true) &&
+                (this.Country == null && other.Country == null ||
+                 this.Country?.Equals(other.Country) == true) &&
+                (this.StatementDescription == null && other.StatementDescription == null ||
+                 this.StatementDescription?.Equals(other.StatementDescription) == true) &&
+                (this.AchDetails == null && other.AchDetails == null ||
+                 this.AchDetails?.Equals(other.AchDetails) == true) &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 863047892;
-            hashCode = HashCode.Combine(this.BankName, this.TransferType, this.AccountOwnershipType, this.Fingerprint, this.Country, this.StatementDescription, this.AchDetails);
+            var hashCode = 863047892;
+            hashCode = HashCode.Combine(hashCode, this.BankName, this.TransferType, this.AccountOwnershipType, this.Fingerprint, this.Country, this.StatementDescription, this.AchDetails);
 
             hashCode = HashCode.Combine(hashCode, this.Errors);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BankName = {(this.BankName == null ? "null" : this.BankName)}");
-            toStringOutput.Add($"this.TransferType = {(this.TransferType == null ? "null" : this.TransferType)}");
-            toStringOutput.Add($"this.AccountOwnershipType = {(this.AccountOwnershipType == null ? "null" : this.AccountOwnershipType)}");
-            toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint)}");
-            toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country)}");
-            toStringOutput.Add($"this.StatementDescription = {(this.StatementDescription == null ? "null" : this.StatementDescription)}");
+            toStringOutput.Add($"this.BankName = {this.BankName ?? "null"}");
+            toStringOutput.Add($"this.TransferType = {this.TransferType ?? "null"}");
+            toStringOutput.Add($"this.AccountOwnershipType = {this.AccountOwnershipType ?? "null"}");
+            toStringOutput.Add($"this.Fingerprint = {this.Fingerprint ?? "null"}");
+            toStringOutput.Add($"this.Country = {this.Country ?? "null"}");
+            toStringOutput.Add($"this.StatementDescription = {this.StatementDescription ?? "null"}");
             toStringOutput.Add($"this.AchDetails = {(this.AchDetails == null ? "null" : this.AchDetails.ToString())}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
         }
@@ -426,7 +429,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBankName()
             {
@@ -434,7 +437,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTransferType()
             {
@@ -442,7 +445,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAccountOwnershipType()
             {
@@ -450,7 +453,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFingerprint()
             {
@@ -458,7 +461,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCountry()
             {
@@ -466,7 +469,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStatementDescription()
             {
@@ -474,7 +477,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetErrors()
             {
@@ -488,7 +491,8 @@ namespace Square.Models
             /// <returns> BankAccountPaymentDetails. </returns>
             public BankAccountPaymentDetails Build()
             {
-                return new BankAccountPaymentDetails(shouldSerialize,
+                return new BankAccountPaymentDetails(
+                    shouldSerialize,
                     this.bankName,
                     this.transferType,
                     this.accountOwnershipType,

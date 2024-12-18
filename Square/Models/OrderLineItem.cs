@@ -94,9 +94,9 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.Quantity = quantity;
             this.QuantityUnit = quantityUnit;
+
             if (note != null)
             {
                 shouldSerialize["note"] = true;
@@ -120,8 +120,8 @@ namespace Square.Models
                 shouldSerialize["variation_name"] = true;
                 this.VariationName = variationName;
             }
-
             this.ItemType = itemType;
+
             if (metadata != null)
             {
                 shouldSerialize["metadata"] = true;
@@ -151,7 +151,6 @@ namespace Square.Models
                 shouldSerialize["applied_service_charges"] = true;
                 this.AppliedServiceCharges = appliedServiceCharges;
             }
-
             this.BasePriceMoney = basePriceMoney;
             this.VariationTotalPriceMoney = variationTotalPriceMoney;
             this.GrossSalesMoney = grossSalesMoney;
@@ -161,7 +160,9 @@ namespace Square.Models
             this.PricingBlocklists = pricingBlocklists;
             this.TotalServiceChargeMoney = totalServiceChargeMoney;
         }
-        internal OrderLineItem(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderLineItem(
+            Dictionary<string, bool> shouldSerialize,
             string quantity,
             string uid = null,
             string name = null,
@@ -421,9 +422,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderLineItem : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -529,44 +528,61 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderLineItem other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
-                ((this.QuantityUnit == null && other.QuantityUnit == null) || (this.QuantityUnit?.Equals(other.QuantityUnit) == true)) &&
-                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
-                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
-                ((this.VariationName == null && other.VariationName == null) || (this.VariationName?.Equals(other.VariationName) == true)) &&
-                ((this.ItemType == null && other.ItemType == null) || (this.ItemType?.Equals(other.ItemType) == true)) &&
-                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
-                ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true)) &&
-                ((this.AppliedTaxes == null && other.AppliedTaxes == null) || (this.AppliedTaxes?.Equals(other.AppliedTaxes) == true)) &&
-                ((this.AppliedDiscounts == null && other.AppliedDiscounts == null) || (this.AppliedDiscounts?.Equals(other.AppliedDiscounts) == true)) &&
-                ((this.AppliedServiceCharges == null && other.AppliedServiceCharges == null) || (this.AppliedServiceCharges?.Equals(other.AppliedServiceCharges) == true)) &&
-                ((this.BasePriceMoney == null && other.BasePriceMoney == null) || (this.BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
-                ((this.VariationTotalPriceMoney == null && other.VariationTotalPriceMoney == null) || (this.VariationTotalPriceMoney?.Equals(other.VariationTotalPriceMoney) == true)) &&
-                ((this.GrossSalesMoney == null && other.GrossSalesMoney == null) || (this.GrossSalesMoney?.Equals(other.GrossSalesMoney) == true)) &&
-                ((this.TotalTaxMoney == null && other.TotalTaxMoney == null) || (this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
-                ((this.TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
-                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((this.PricingBlocklists == null && other.PricingBlocklists == null) || (this.PricingBlocklists?.Equals(other.PricingBlocklists) == true)) &&
-                ((this.TotalServiceChargeMoney == null && other.TotalServiceChargeMoney == null) || (this.TotalServiceChargeMoney?.Equals(other.TotalServiceChargeMoney) == true));
+            return obj is OrderLineItem other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Quantity == null && other.Quantity == null ||
+                 this.Quantity?.Equals(other.Quantity) == true) &&
+                (this.QuantityUnit == null && other.QuantityUnit == null ||
+                 this.QuantityUnit?.Equals(other.QuantityUnit) == true) &&
+                (this.Note == null && other.Note == null ||
+                 this.Note?.Equals(other.Note) == true) &&
+                (this.CatalogObjectId == null && other.CatalogObjectId == null ||
+                 this.CatalogObjectId?.Equals(other.CatalogObjectId) == true) &&
+                (this.CatalogVersion == null && other.CatalogVersion == null ||
+                 this.CatalogVersion?.Equals(other.CatalogVersion) == true) &&
+                (this.VariationName == null && other.VariationName == null ||
+                 this.VariationName?.Equals(other.VariationName) == true) &&
+                (this.ItemType == null && other.ItemType == null ||
+                 this.ItemType?.Equals(other.ItemType) == true) &&
+                (this.Metadata == null && other.Metadata == null ||
+                 this.Metadata?.Equals(other.Metadata) == true) &&
+                (this.Modifiers == null && other.Modifiers == null ||
+                 this.Modifiers?.Equals(other.Modifiers) == true) &&
+                (this.AppliedTaxes == null && other.AppliedTaxes == null ||
+                 this.AppliedTaxes?.Equals(other.AppliedTaxes) == true) &&
+                (this.AppliedDiscounts == null && other.AppliedDiscounts == null ||
+                 this.AppliedDiscounts?.Equals(other.AppliedDiscounts) == true) &&
+                (this.AppliedServiceCharges == null && other.AppliedServiceCharges == null ||
+                 this.AppliedServiceCharges?.Equals(other.AppliedServiceCharges) == true) &&
+                (this.BasePriceMoney == null && other.BasePriceMoney == null ||
+                 this.BasePriceMoney?.Equals(other.BasePriceMoney) == true) &&
+                (this.VariationTotalPriceMoney == null && other.VariationTotalPriceMoney == null ||
+                 this.VariationTotalPriceMoney?.Equals(other.VariationTotalPriceMoney) == true) &&
+                (this.GrossSalesMoney == null && other.GrossSalesMoney == null ||
+                 this.GrossSalesMoney?.Equals(other.GrossSalesMoney) == true) &&
+                (this.TotalTaxMoney == null && other.TotalTaxMoney == null ||
+                 this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true) &&
+                (this.TotalDiscountMoney == null && other.TotalDiscountMoney == null ||
+                 this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true) &&
+                (this.TotalMoney == null && other.TotalMoney == null ||
+                 this.TotalMoney?.Equals(other.TotalMoney) == true) &&
+                (this.PricingBlocklists == null && other.PricingBlocklists == null ||
+                 this.PricingBlocklists?.Equals(other.PricingBlocklists) == true) &&
+                (this.TotalServiceChargeMoney == null && other.TotalServiceChargeMoney == null ||
+                 this.TotalServiceChargeMoney?.Equals(other.TotalServiceChargeMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -144442363;
-            hashCode = HashCode.Combine(this.Uid, this.Name, this.Quantity, this.QuantityUnit, this.Note, this.CatalogObjectId, this.CatalogVersion);
+            var hashCode = -144442363;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.Name, this.Quantity, this.QuantityUnit, this.Note, this.CatalogObjectId, this.CatalogVersion);
 
             hashCode = HashCode.Combine(hashCode, this.VariationName, this.ItemType, this.Metadata, this.Modifiers, this.AppliedTaxes, this.AppliedDiscounts, this.AppliedServiceCharges);
 
@@ -576,20 +592,21 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.Quantity = {this.Quantity ?? "null"}");
             toStringOutput.Add($"this.QuantityUnit = {(this.QuantityUnit == null ? "null" : this.QuantityUnit.ToString())}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
-            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.Note = {this.Note ?? "null"}");
+            toStringOutput.Add($"this.CatalogObjectId = {this.CatalogObjectId ?? "null"}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
-            toStringOutput.Add($"this.VariationName = {(this.VariationName == null ? "null" : this.VariationName)}");
+            toStringOutput.Add($"this.VariationName = {this.VariationName ?? "null"}");
             toStringOutput.Add($"this.ItemType = {(this.ItemType == null ? "null" : this.ItemType.ToString())}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
             toStringOutput.Add($"this.Modifiers = {(this.Modifiers == null ? "null" : $"[{string.Join(", ", this.Modifiers)} ]")}");
@@ -945,7 +962,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -953,7 +970,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -961,7 +978,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNote()
             {
@@ -969,7 +986,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectId()
             {
@@ -977,7 +994,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogVersion()
             {
@@ -985,7 +1002,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVariationName()
             {
@@ -993,7 +1010,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMetadata()
             {
@@ -1001,7 +1018,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetModifiers()
             {
@@ -1009,7 +1026,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAppliedTaxes()
             {
@@ -1017,7 +1034,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAppliedDiscounts()
             {
@@ -1025,7 +1042,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAppliedServiceCharges()
             {
@@ -1039,7 +1056,8 @@ namespace Square.Models
             /// <returns> OrderLineItem. </returns>
             public OrderLineItem Build()
             {
-                return new OrderLineItem(shouldSerialize,
+                return new OrderLineItem(
+                    shouldSerialize,
                     this.quantity,
                     this.uid,
                     this.name,

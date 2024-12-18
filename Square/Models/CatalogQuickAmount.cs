@@ -37,9 +37,9 @@ namespace Square.Models
                 { "score", false },
                 { "ordinal", false }
             };
-
             this.Type = type;
             this.Amount = amount;
+
             if (score != null)
             {
                 shouldSerialize["score"] = true;
@@ -51,9 +51,10 @@ namespace Square.Models
                 shouldSerialize["ordinal"] = true;
                 this.Ordinal = ordinal;
             }
-
         }
-        internal CatalogQuickAmount(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogQuickAmount(
+            Dictionary<string, bool> shouldSerialize,
             string type,
             Models.Money amount,
             long? score = null,
@@ -100,9 +101,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogQuickAmount : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -127,29 +126,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogQuickAmount other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.Amount == null && other.Amount == null) || (this.Amount?.Equals(other.Amount) == true)) &&
-                ((this.Score == null && other.Score == null) || (this.Score?.Equals(other.Score) == true)) &&
-                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
+            return obj is CatalogQuickAmount other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.Amount == null && other.Amount == null ||
+                 this.Amount?.Equals(other.Amount) == true) &&
+                (this.Score == null && other.Score == null ||
+                 this.Score?.Equals(other.Score) == true) &&
+                (this.Ordinal == null && other.Ordinal == null ||
+                 this.Ordinal?.Equals(other.Ordinal) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1903352296;
-            hashCode = HashCode.Combine(this.Type, this.Amount, this.Score, this.Ordinal);
+            var hashCode = -1903352296;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.Amount, this.Score, this.Ordinal);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -252,7 +251,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetScore()
             {
@@ -260,7 +259,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrdinal()
             {
@@ -274,7 +273,8 @@ namespace Square.Models
             /// <returns> CatalogQuickAmount. </returns>
             public CatalogQuickAmount Build()
             {
-                return new CatalogQuickAmount(shouldSerialize,
+                return new CatalogQuickAmount(
+                    shouldSerialize,
                     this.type,
                     this.amount,
                     this.score,

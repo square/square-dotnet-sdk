@@ -38,8 +38,8 @@ namespace Square.Models
                 { "catalog_object_id", false },
                 { "catalog_version", false }
             };
-
             this.MeasurementUnit = measurementUnit;
+
             if (precision != null)
             {
                 shouldSerialize["precision"] = true;
@@ -57,9 +57,10 @@ namespace Square.Models
                 shouldSerialize["catalog_version"] = true;
                 this.CatalogVersion = catalogVersion;
             }
-
         }
-        internal OrderQuantityUnit(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderQuantityUnit(
+            Dictionary<string, bool> shouldSerialize,
             Models.MeasurementUnit measurementUnit = null,
             int? precision = null,
             string catalogObjectId = null,
@@ -108,9 +109,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderQuantityUnit : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -144,29 +143,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderQuantityUnit other &&                ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
-                ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true)) &&
-                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
+            return obj is OrderQuantityUnit other &&
+                (this.MeasurementUnit == null && other.MeasurementUnit == null ||
+                 this.MeasurementUnit?.Equals(other.MeasurementUnit) == true) &&
+                (this.Precision == null && other.Precision == null ||
+                 this.Precision?.Equals(other.Precision) == true) &&
+                (this.CatalogObjectId == null && other.CatalogObjectId == null ||
+                 this.CatalogObjectId?.Equals(other.CatalogObjectId) == true) &&
+                (this.CatalogVersion == null && other.CatalogVersion == null ||
+                 this.CatalogVersion?.Equals(other.CatalogVersion) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1360372013;
-            hashCode = HashCode.Combine(this.MeasurementUnit, this.Precision, this.CatalogObjectId, this.CatalogVersion);
+            var hashCode = -1360372013;
+            hashCode = HashCode.Combine(hashCode, this.MeasurementUnit, this.Precision, this.CatalogObjectId, this.CatalogVersion);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -175,7 +174,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.MeasurementUnit = {(this.MeasurementUnit == null ? "null" : this.MeasurementUnit.ToString())}");
             toStringOutput.Add($"this.Precision = {(this.Precision == null ? "null" : this.Precision.ToString())}");
-            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.CatalogObjectId = {this.CatalogObjectId ?? "null"}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
         }
 
@@ -258,7 +257,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPrecision()
             {
@@ -266,7 +265,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectId()
             {
@@ -274,7 +273,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogVersion()
             {
@@ -288,7 +287,8 @@ namespace Square.Models
             /// <returns> OrderQuantityUnit. </returns>
             public OrderQuantityUnit Build()
             {
-                return new OrderQuantityUnit(shouldSerialize,
+                return new OrderQuantityUnit(
+                    shouldSerialize,
                     this.measurementUnit,
                     this.precision,
                     this.catalogObjectId,

@@ -88,52 +88,52 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"WorkweekConfig : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is WorkweekConfig other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.StartOfWeek == null && other.StartOfWeek == null) || (this.StartOfWeek?.Equals(other.StartOfWeek) == true)) &&
-                ((this.StartOfDayLocalTime == null && other.StartOfDayLocalTime == null) || (this.StartOfDayLocalTime?.Equals(other.StartOfDayLocalTime) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
+            return obj is WorkweekConfig other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.StartOfWeek == null && other.StartOfWeek == null ||
+                 this.StartOfWeek?.Equals(other.StartOfWeek) == true) &&
+                (this.StartOfDayLocalTime == null && other.StartOfDayLocalTime == null ||
+                 this.StartOfDayLocalTime?.Equals(other.StartOfDayLocalTime) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1176790268;
-            hashCode = HashCode.Combine(this.Id, this.StartOfWeek, this.StartOfDayLocalTime, this.Version, this.CreatedAt, this.UpdatedAt);
+            var hashCode = 1176790268;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.StartOfWeek, this.StartOfDayLocalTime, this.Version, this.CreatedAt, this.UpdatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.StartOfWeek = {(this.StartOfWeek == null ? "null" : this.StartOfWeek.ToString())}");
-            toStringOutput.Add($"this.StartOfDayLocalTime = {(this.StartOfDayLocalTime == null ? "null" : this.StartOfDayLocalTime)}");
+            toStringOutput.Add($"this.StartOfDayLocalTime = {this.StartOfDayLocalTime ?? "null"}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
         }
 
         /// <summary>

@@ -38,35 +38,30 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"GiftCardActivityClearBalance : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is GiftCardActivityClearBalance other &&                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true));
+            return obj is GiftCardActivityClearBalance other &&
+                (this.Reason == null && other.Reason == null ||
+                 this.Reason?.Equals(other.Reason) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 462002023;
-            hashCode = HashCode.Combine(this.Reason);
+            var hashCode = 462002023;
+            hashCode = HashCode.Combine(hashCode, this.Reason);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

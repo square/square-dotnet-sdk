@@ -51,15 +51,14 @@ namespace Square.Models
                 { "description", false },
                 { "payment_note", false }
             };
-
             this.Id = id;
             this.Version = version;
+
             if (description != null)
             {
                 shouldSerialize["description"] = true;
                 this.Description = description;
             }
-
             this.OrderId = orderId;
             this.CheckoutOptions = checkoutOptions;
             this.PrePopulatedData = prePopulatedData;
@@ -67,14 +66,16 @@ namespace Square.Models
             this.LongUrl = longUrl;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+
             if (paymentNote != null)
             {
                 shouldSerialize["payment_note"] = true;
                 this.PaymentNote = paymentNote;
             }
-
         }
-        internal PaymentLink(Dictionary<string, bool> shouldSerialize,
+
+        internal PaymentLink(
+            Dictionary<string, bool> shouldSerialize,
             int version,
             string id = null,
             string description = null,
@@ -175,9 +176,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PaymentLink : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -202,55 +201,61 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PaymentLink other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                this.Version.Equals(other.Version) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
-                ((this.CheckoutOptions == null && other.CheckoutOptions == null) || (this.CheckoutOptions?.Equals(other.CheckoutOptions) == true)) &&
-                ((this.PrePopulatedData == null && other.PrePopulatedData == null) || (this.PrePopulatedData?.Equals(other.PrePopulatedData) == true)) &&
-                ((this.Url == null && other.Url == null) || (this.Url?.Equals(other.Url) == true)) &&
-                ((this.LongUrl == null && other.LongUrl == null) || (this.LongUrl?.Equals(other.LongUrl) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.PaymentNote == null && other.PaymentNote == null) || (this.PaymentNote?.Equals(other.PaymentNote) == true));
+            return obj is PaymentLink other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Version.Equals(other.Version)) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true) &&
+                (this.CheckoutOptions == null && other.CheckoutOptions == null ||
+                 this.CheckoutOptions?.Equals(other.CheckoutOptions) == true) &&
+                (this.PrePopulatedData == null && other.PrePopulatedData == null ||
+                 this.PrePopulatedData?.Equals(other.PrePopulatedData) == true) &&
+                (this.Url == null && other.Url == null ||
+                 this.Url?.Equals(other.Url) == true) &&
+                (this.LongUrl == null && other.LongUrl == null ||
+                 this.LongUrl?.Equals(other.LongUrl) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.PaymentNote == null && other.PaymentNote == null ||
+                 this.PaymentNote?.Equals(other.PaymentNote) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 766737082;
-            hashCode = HashCode.Combine(this.Id, this.Version, this.Description, this.OrderId, this.CheckoutOptions, this.PrePopulatedData, this.Url);
+            var hashCode = 766737082;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Version, this.Description, this.OrderId, this.CheckoutOptions, this.PrePopulatedData, this.Url);
 
             hashCode = HashCode.Combine(hashCode, this.LongUrl, this.CreatedAt, this.UpdatedAt, this.PaymentNote);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Version = {this.Version}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
             toStringOutput.Add($"this.CheckoutOptions = {(this.CheckoutOptions == null ? "null" : this.CheckoutOptions.ToString())}");
             toStringOutput.Add($"this.PrePopulatedData = {(this.PrePopulatedData == null ? "null" : this.PrePopulatedData.ToString())}");
-            toStringOutput.Add($"this.Url = {(this.Url == null ? "null" : this.Url)}");
-            toStringOutput.Add($"this.LongUrl = {(this.LongUrl == null ? "null" : this.LongUrl)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.PaymentNote = {(this.PaymentNote == null ? "null" : this.PaymentNote)}");
+            toStringOutput.Add($"this.Url = {this.Url ?? "null"}");
+            toStringOutput.Add($"this.LongUrl = {this.LongUrl ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.PaymentNote = {this.PaymentNote ?? "null"}");
         }
 
         /// <summary>
@@ -431,7 +436,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -439,7 +444,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentNote()
             {
@@ -453,7 +458,8 @@ namespace Square.Models
             /// <returns> PaymentLink. </returns>
             public PaymentLink Build()
             {
-                return new PaymentLink(shouldSerialize,
+                return new PaymentLink(
+                    shouldSerialize,
                     this.version,
                     this.id,
                     this.description,

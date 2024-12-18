@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["fuzzy"] = true;
                 this.Fuzzy = fuzzy;
             }
-
         }
-        internal CustomerTextFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal CustomerTextFilter(
+            Dictionary<string, bool> shouldSerialize,
             string exact = null,
             string fuzzy = null)
         {
@@ -75,9 +76,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomerTextFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -102,35 +101,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomerTextFilter other &&                ((this.Exact == null && other.Exact == null) || (this.Exact?.Equals(other.Exact) == true)) &&
-                ((this.Fuzzy == null && other.Fuzzy == null) || (this.Fuzzy?.Equals(other.Fuzzy) == true));
+            return obj is CustomerTextFilter other &&
+                (this.Exact == null && other.Exact == null ||
+                 this.Exact?.Equals(other.Exact) == true) &&
+                (this.Fuzzy == null && other.Fuzzy == null ||
+                 this.Fuzzy?.Equals(other.Fuzzy) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1444472756;
-            hashCode = HashCode.Combine(this.Exact, this.Fuzzy);
+            var hashCode = -1444472756;
+            hashCode = HashCode.Combine(hashCode, this.Exact, this.Fuzzy);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Exact = {(this.Exact == null ? "null" : this.Exact)}");
-            toStringOutput.Add($"this.Fuzzy = {(this.Fuzzy == null ? "null" : this.Fuzzy)}");
+            toStringOutput.Add($"this.Exact = {this.Exact ?? "null"}");
+            toStringOutput.Add($"this.Fuzzy = {this.Fuzzy ?? "null"}");
         }
 
         /// <summary>
@@ -184,7 +181,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetExact()
             {
@@ -192,7 +189,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFuzzy()
             {
@@ -206,7 +203,8 @@ namespace Square.Models
             /// <returns> CustomerTextFilter. </returns>
             public CustomerTextFilter Build()
             {
-                return new CustomerTextFilter(shouldSerialize,
+                return new CustomerTextFilter(
+                    shouldSerialize,
                     this.exact,
                     this.fuzzy);
             }

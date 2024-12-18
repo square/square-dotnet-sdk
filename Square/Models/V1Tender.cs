@@ -67,9 +67,9 @@ namespace Square.Models
                 { "settled_at", false },
                 { "is_exchange", false }
             };
-
             this.Id = id;
             this.Type = type;
+
             if (name != null)
             {
                 shouldSerialize["name"] = true;
@@ -87,23 +87,23 @@ namespace Square.Models
                 shouldSerialize["receipt_url"] = true;
                 this.ReceiptUrl = receiptUrl;
             }
-
             this.CardBrand = cardBrand;
+
             if (panSuffix != null)
             {
                 shouldSerialize["pan_suffix"] = true;
                 this.PanSuffix = panSuffix;
             }
-
             this.EntryMethod = entryMethod;
+
             if (paymentNote != null)
             {
                 shouldSerialize["payment_note"] = true;
                 this.PaymentNote = paymentNote;
             }
-
             this.TotalMoney = totalMoney;
             this.TenderedMoney = tenderedMoney;
+
             if (tenderedAt != null)
             {
                 shouldSerialize["tendered_at"] = true;
@@ -115,17 +115,18 @@ namespace Square.Models
                 shouldSerialize["settled_at"] = true;
                 this.SettledAt = settledAt;
             }
-
             this.ChangeBackMoney = changeBackMoney;
             this.RefundedMoney = refundedMoney;
+
             if (isExchange != null)
             {
                 shouldSerialize["is_exchange"] = true;
                 this.IsExchange = isExchange;
             }
-
         }
-        internal V1Tender(Dictionary<string, bool> shouldSerialize,
+
+        internal V1Tender(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string type = null,
             string name = null,
@@ -262,9 +263,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"V1Tender : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -343,38 +342,49 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is V1Tender other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((this.ReceiptUrl == null && other.ReceiptUrl == null) || (this.ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
-                ((this.CardBrand == null && other.CardBrand == null) || (this.CardBrand?.Equals(other.CardBrand) == true)) &&
-                ((this.PanSuffix == null && other.PanSuffix == null) || (this.PanSuffix?.Equals(other.PanSuffix) == true)) &&
-                ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true)) &&
-                ((this.PaymentNote == null && other.PaymentNote == null) || (this.PaymentNote?.Equals(other.PaymentNote) == true)) &&
-                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((this.TenderedMoney == null && other.TenderedMoney == null) || (this.TenderedMoney?.Equals(other.TenderedMoney) == true)) &&
-                ((this.TenderedAt == null && other.TenderedAt == null) || (this.TenderedAt?.Equals(other.TenderedAt) == true)) &&
-                ((this.SettledAt == null && other.SettledAt == null) || (this.SettledAt?.Equals(other.SettledAt) == true)) &&
-                ((this.ChangeBackMoney == null && other.ChangeBackMoney == null) || (this.ChangeBackMoney?.Equals(other.ChangeBackMoney) == true)) &&
-                ((this.RefundedMoney == null && other.RefundedMoney == null) || (this.RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
-                ((this.IsExchange == null && other.IsExchange == null) || (this.IsExchange?.Equals(other.IsExchange) == true));
+            return obj is V1Tender other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.EmployeeId == null && other.EmployeeId == null ||
+                 this.EmployeeId?.Equals(other.EmployeeId) == true) &&
+                (this.ReceiptUrl == null && other.ReceiptUrl == null ||
+                 this.ReceiptUrl?.Equals(other.ReceiptUrl) == true) &&
+                (this.CardBrand == null && other.CardBrand == null ||
+                 this.CardBrand?.Equals(other.CardBrand) == true) &&
+                (this.PanSuffix == null && other.PanSuffix == null ||
+                 this.PanSuffix?.Equals(other.PanSuffix) == true) &&
+                (this.EntryMethod == null && other.EntryMethod == null ||
+                 this.EntryMethod?.Equals(other.EntryMethod) == true) &&
+                (this.PaymentNote == null && other.PaymentNote == null ||
+                 this.PaymentNote?.Equals(other.PaymentNote) == true) &&
+                (this.TotalMoney == null && other.TotalMoney == null ||
+                 this.TotalMoney?.Equals(other.TotalMoney) == true) &&
+                (this.TenderedMoney == null && other.TenderedMoney == null ||
+                 this.TenderedMoney?.Equals(other.TenderedMoney) == true) &&
+                (this.TenderedAt == null && other.TenderedAt == null ||
+                 this.TenderedAt?.Equals(other.TenderedAt) == true) &&
+                (this.SettledAt == null && other.SettledAt == null ||
+                 this.SettledAt?.Equals(other.SettledAt) == true) &&
+                (this.ChangeBackMoney == null && other.ChangeBackMoney == null ||
+                 this.ChangeBackMoney?.Equals(other.ChangeBackMoney) == true) &&
+                (this.RefundedMoney == null && other.RefundedMoney == null ||
+                 this.RefundedMoney?.Equals(other.RefundedMoney) == true) &&
+                (this.IsExchange == null && other.IsExchange == null ||
+                 this.IsExchange?.Equals(other.IsExchange) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1002014939;
-            hashCode = HashCode.Combine(this.Id, this.Type, this.Name, this.EmployeeId, this.ReceiptUrl, this.CardBrand, this.PanSuffix);
+            var hashCode = 1002014939;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Type, this.Name, this.EmployeeId, this.ReceiptUrl, this.CardBrand, this.PanSuffix);
 
             hashCode = HashCode.Combine(hashCode, this.EntryMethod, this.PaymentNote, this.TotalMoney, this.TenderedMoney, this.TenderedAt, this.SettledAt, this.ChangeBackMoney);
 
@@ -382,25 +392,26 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId)}");
-            toStringOutput.Add($"this.ReceiptUrl = {(this.ReceiptUrl == null ? "null" : this.ReceiptUrl)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.EmployeeId = {this.EmployeeId ?? "null"}");
+            toStringOutput.Add($"this.ReceiptUrl = {this.ReceiptUrl ?? "null"}");
             toStringOutput.Add($"this.CardBrand = {(this.CardBrand == null ? "null" : this.CardBrand.ToString())}");
-            toStringOutput.Add($"this.PanSuffix = {(this.PanSuffix == null ? "null" : this.PanSuffix)}");
+            toStringOutput.Add($"this.PanSuffix = {this.PanSuffix ?? "null"}");
             toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod.ToString())}");
-            toStringOutput.Add($"this.PaymentNote = {(this.PaymentNote == null ? "null" : this.PaymentNote)}");
+            toStringOutput.Add($"this.PaymentNote = {this.PaymentNote ?? "null"}");
             toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
             toStringOutput.Add($"this.TenderedMoney = {(this.TenderedMoney == null ? "null" : this.TenderedMoney.ToString())}");
-            toStringOutput.Add($"this.TenderedAt = {(this.TenderedAt == null ? "null" : this.TenderedAt)}");
-            toStringOutput.Add($"this.SettledAt = {(this.SettledAt == null ? "null" : this.SettledAt)}");
+            toStringOutput.Add($"this.TenderedAt = {this.TenderedAt ?? "null"}");
+            toStringOutput.Add($"this.SettledAt = {this.SettledAt ?? "null"}");
             toStringOutput.Add($"this.ChangeBackMoney = {(this.ChangeBackMoney == null ? "null" : this.ChangeBackMoney.ToString())}");
             toStringOutput.Add($"this.RefundedMoney = {(this.RefundedMoney == null ? "null" : this.RefundedMoney.ToString())}");
             toStringOutput.Add($"this.IsExchange = {(this.IsExchange == null ? "null" : this.IsExchange.ToString())}");
@@ -651,7 +662,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -659,7 +670,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmployeeId()
             {
@@ -667,7 +678,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReceiptUrl()
             {
@@ -675,7 +686,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPanSuffix()
             {
@@ -683,7 +694,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentNote()
             {
@@ -691,7 +702,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTenderedAt()
             {
@@ -699,7 +710,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSettledAt()
             {
@@ -707,7 +718,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsExchange()
             {
@@ -721,7 +732,8 @@ namespace Square.Models
             /// <returns> V1Tender. </returns>
             public V1Tender Build()
             {
-                return new V1Tender(shouldSerialize,
+                return new V1Tender(
+                    shouldSerialize,
                     this.id,
                     this.type,
                     this.name,

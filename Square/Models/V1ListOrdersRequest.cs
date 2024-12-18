@@ -35,8 +35,8 @@ namespace Square.Models
                 { "limit", false },
                 { "batch_token", false }
             };
-
             this.Order = order;
+
             if (limit != null)
             {
                 shouldSerialize["limit"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["batch_token"] = true;
                 this.BatchToken = batchToken;
             }
-
         }
-        internal V1ListOrdersRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal V1ListOrdersRequest(
+            Dictionary<string, bool> shouldSerialize,
             string order = null,
             int? limit = null,
             string batchToken = null)
@@ -84,9 +85,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"V1ListOrdersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -111,28 +110,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is V1ListOrdersRequest other &&                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.BatchToken == null && other.BatchToken == null) || (this.BatchToken?.Equals(other.BatchToken) == true));
+            return obj is V1ListOrdersRequest other &&
+                (this.Order == null && other.Order == null ||
+                 this.Order?.Equals(other.Order) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.BatchToken == null && other.BatchToken == null ||
+                 this.BatchToken?.Equals(other.BatchToken) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 121264426;
-            hashCode = HashCode.Combine(this.Order, this.Limit, this.BatchToken);
+            var hashCode = 121264426;
+            hashCode = HashCode.Combine(hashCode, this.Order, this.Limit, this.BatchToken);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -141,7 +139,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.BatchToken = {(this.BatchToken == null ? "null" : this.BatchToken)}");
+            toStringOutput.Add($"this.BatchToken = {this.BatchToken ?? "null"}");
         }
 
         /// <summary>
@@ -208,7 +206,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -216,7 +214,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBatchToken()
             {
@@ -230,7 +228,8 @@ namespace Square.Models
             /// <returns> V1ListOrdersRequest. </returns>
             public V1ListOrdersRequest Build()
             {
-                return new V1ListOrdersRequest(shouldSerialize,
+                return new V1ListOrdersRequest(
+                    shouldSerialize,
                     this.order,
                     this.limit,
                     this.batchToken);

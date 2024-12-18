@@ -126,57 +126,61 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchCatalogItemsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchCatalogItemsRequest other &&                ((this.TextFilter == null && other.TextFilter == null) || (this.TextFilter?.Equals(other.TextFilter) == true)) &&
-                ((this.CategoryIds == null && other.CategoryIds == null) || (this.CategoryIds?.Equals(other.CategoryIds) == true)) &&
-                ((this.StockLevels == null && other.StockLevels == null) || (this.StockLevels?.Equals(other.StockLevels) == true)) &&
-                ((this.EnabledLocationIds == null && other.EnabledLocationIds == null) || (this.EnabledLocationIds?.Equals(other.EnabledLocationIds) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
-                ((this.ProductTypes == null && other.ProductTypes == null) || (this.ProductTypes?.Equals(other.ProductTypes) == true)) &&
-                ((this.CustomAttributeFilters == null && other.CustomAttributeFilters == null) || (this.CustomAttributeFilters?.Equals(other.CustomAttributeFilters) == true)) &&
-                ((this.ArchivedState == null && other.ArchivedState == null) || (this.ArchivedState?.Equals(other.ArchivedState) == true));
+            return obj is SearchCatalogItemsRequest other &&
+                (this.TextFilter == null && other.TextFilter == null ||
+                 this.TextFilter?.Equals(other.TextFilter) == true) &&
+                (this.CategoryIds == null && other.CategoryIds == null ||
+                 this.CategoryIds?.Equals(other.CategoryIds) == true) &&
+                (this.StockLevels == null && other.StockLevels == null ||
+                 this.StockLevels?.Equals(other.StockLevels) == true) &&
+                (this.EnabledLocationIds == null && other.EnabledLocationIds == null ||
+                 this.EnabledLocationIds?.Equals(other.EnabledLocationIds) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true) &&
+                (this.ProductTypes == null && other.ProductTypes == null ||
+                 this.ProductTypes?.Equals(other.ProductTypes) == true) &&
+                (this.CustomAttributeFilters == null && other.CustomAttributeFilters == null ||
+                 this.CustomAttributeFilters?.Equals(other.CustomAttributeFilters) == true) &&
+                (this.ArchivedState == null && other.ArchivedState == null ||
+                 this.ArchivedState?.Equals(other.ArchivedState) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 553649714;
-            hashCode = HashCode.Combine(this.TextFilter, this.CategoryIds, this.StockLevels, this.EnabledLocationIds, this.Cursor, this.Limit, this.SortOrder);
+            var hashCode = 553649714;
+            hashCode = HashCode.Combine(hashCode, this.TextFilter, this.CategoryIds, this.StockLevels, this.EnabledLocationIds, this.Cursor, this.Limit, this.SortOrder);
 
             hashCode = HashCode.Combine(hashCode, this.ProductTypes, this.CustomAttributeFilters, this.ArchivedState);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.TextFilter = {(this.TextFilter == null ? "null" : this.TextFilter)}");
+            toStringOutput.Add($"this.TextFilter = {this.TextFilter ?? "null"}");
             toStringOutput.Add($"this.CategoryIds = {(this.CategoryIds == null ? "null" : $"[{string.Join(", ", this.CategoryIds)} ]")}");
             toStringOutput.Add($"this.StockLevels = {(this.StockLevels == null ? "null" : $"[{string.Join(", ", this.StockLevels)} ]")}");
             toStringOutput.Add($"this.EnabledLocationIds = {(this.EnabledLocationIds == null ? "null" : $"[{string.Join(", ", this.EnabledLocationIds)} ]")}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
             toStringOutput.Add($"this.ProductTypes = {(this.ProductTypes == null ? "null" : $"[{string.Join(", ", this.ProductTypes)} ]")}");

@@ -55,8 +55,8 @@ namespace Square.Models
                 { "short_lived", false },
                 { "code_verifier", false }
             };
-
             this.ClientId = clientId;
+
             if (clientSecret != null)
             {
                 shouldSerialize["client_secret"] = true;
@@ -74,8 +74,8 @@ namespace Square.Models
                 shouldSerialize["redirect_uri"] = true;
                 this.RedirectUri = redirectUri;
             }
-
             this.GrantType = grantType;
+
             if (refreshToken != null)
             {
                 shouldSerialize["refresh_token"] = true;
@@ -105,9 +105,10 @@ namespace Square.Models
                 shouldSerialize["code_verifier"] = true;
                 this.CodeVerifier = codeVerifier;
             }
-
         }
-        internal ObtainTokenRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ObtainTokenRequest(
+            Dictionary<string, bool> shouldSerialize,
             string clientId,
             string grantType,
             string clientSecret = null,
@@ -217,9 +218,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ObtainTokenRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -298,53 +297,59 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ObtainTokenRequest other &&                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
-                ((this.ClientSecret == null && other.ClientSecret == null) || (this.ClientSecret?.Equals(other.ClientSecret) == true)) &&
-                ((this.Code == null && other.Code == null) || (this.Code?.Equals(other.Code) == true)) &&
-                ((this.RedirectUri == null && other.RedirectUri == null) || (this.RedirectUri?.Equals(other.RedirectUri) == true)) &&
-                ((this.GrantType == null && other.GrantType == null) || (this.GrantType?.Equals(other.GrantType) == true)) &&
-                ((this.RefreshToken == null && other.RefreshToken == null) || (this.RefreshToken?.Equals(other.RefreshToken) == true)) &&
-                ((this.MigrationToken == null && other.MigrationToken == null) || (this.MigrationToken?.Equals(other.MigrationToken) == true)) &&
-                ((this.Scopes == null && other.Scopes == null) || (this.Scopes?.Equals(other.Scopes) == true)) &&
-                ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true)) &&
-                ((this.CodeVerifier == null && other.CodeVerifier == null) || (this.CodeVerifier?.Equals(other.CodeVerifier) == true));
+            return obj is ObtainTokenRequest other &&
+                (this.ClientId == null && other.ClientId == null ||
+                 this.ClientId?.Equals(other.ClientId) == true) &&
+                (this.ClientSecret == null && other.ClientSecret == null ||
+                 this.ClientSecret?.Equals(other.ClientSecret) == true) &&
+                (this.Code == null && other.Code == null ||
+                 this.Code?.Equals(other.Code) == true) &&
+                (this.RedirectUri == null && other.RedirectUri == null ||
+                 this.RedirectUri?.Equals(other.RedirectUri) == true) &&
+                (this.GrantType == null && other.GrantType == null ||
+                 this.GrantType?.Equals(other.GrantType) == true) &&
+                (this.RefreshToken == null && other.RefreshToken == null ||
+                 this.RefreshToken?.Equals(other.RefreshToken) == true) &&
+                (this.MigrationToken == null && other.MigrationToken == null ||
+                 this.MigrationToken?.Equals(other.MigrationToken) == true) &&
+                (this.Scopes == null && other.Scopes == null ||
+                 this.Scopes?.Equals(other.Scopes) == true) &&
+                (this.ShortLived == null && other.ShortLived == null ||
+                 this.ShortLived?.Equals(other.ShortLived) == true) &&
+                (this.CodeVerifier == null && other.CodeVerifier == null ||
+                 this.CodeVerifier?.Equals(other.CodeVerifier) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -798532521;
-            hashCode = HashCode.Combine(this.ClientId, this.ClientSecret, this.Code, this.RedirectUri, this.GrantType, this.RefreshToken, this.MigrationToken);
+            var hashCode = -798532521;
+            hashCode = HashCode.Combine(hashCode, this.ClientId, this.ClientSecret, this.Code, this.RedirectUri, this.GrantType, this.RefreshToken, this.MigrationToken);
 
             hashCode = HashCode.Combine(hashCode, this.Scopes, this.ShortLived, this.CodeVerifier);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ClientId = {(this.ClientId == null ? "null" : this.ClientId)}");
-            toStringOutput.Add($"this.ClientSecret = {(this.ClientSecret == null ? "null" : this.ClientSecret)}");
-            toStringOutput.Add($"this.Code = {(this.Code == null ? "null" : this.Code)}");
-            toStringOutput.Add($"this.RedirectUri = {(this.RedirectUri == null ? "null" : this.RedirectUri)}");
-            toStringOutput.Add($"this.GrantType = {(this.GrantType == null ? "null" : this.GrantType)}");
-            toStringOutput.Add($"this.RefreshToken = {(this.RefreshToken == null ? "null" : this.RefreshToken)}");
-            toStringOutput.Add($"this.MigrationToken = {(this.MigrationToken == null ? "null" : this.MigrationToken)}");
+            toStringOutput.Add($"this.ClientId = {this.ClientId ?? "null"}");
+            toStringOutput.Add($"this.ClientSecret = {this.ClientSecret ?? "null"}");
+            toStringOutput.Add($"this.Code = {this.Code ?? "null"}");
+            toStringOutput.Add($"this.RedirectUri = {this.RedirectUri ?? "null"}");
+            toStringOutput.Add($"this.GrantType = {this.GrantType ?? "null"}");
+            toStringOutput.Add($"this.RefreshToken = {this.RefreshToken ?? "null"}");
+            toStringOutput.Add($"this.MigrationToken = {this.MigrationToken ?? "null"}");
             toStringOutput.Add($"this.Scopes = {(this.Scopes == null ? "null" : $"[{string.Join(", ", this.Scopes)} ]")}");
             toStringOutput.Add($"this.ShortLived = {(this.ShortLived == null ? "null" : this.ShortLived.ToString())}");
-            toStringOutput.Add($"this.CodeVerifier = {(this.CodeVerifier == null ? "null" : this.CodeVerifier)}");
+            toStringOutput.Add($"this.CodeVerifier = {this.CodeVerifier ?? "null"}");
         }
 
         /// <summary>
@@ -527,7 +532,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetClientSecret()
             {
@@ -535,7 +540,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCode()
             {
@@ -543,7 +548,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRedirectUri()
             {
@@ -551,7 +556,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRefreshToken()
             {
@@ -559,7 +564,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMigrationToken()
             {
@@ -567,7 +572,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetScopes()
             {
@@ -575,7 +580,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetShortLived()
             {
@@ -583,7 +588,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCodeVerifier()
             {
@@ -597,7 +602,8 @@ namespace Square.Models
             /// <returns> ObtainTokenRequest. </returns>
             public ObtainTokenRequest Build()
             {
-                return new ObtainTokenRequest(shouldSerialize,
+                return new ObtainTokenRequest(
+                    shouldSerialize,
                     this.clientId,
                     this.grantType,
                     this.clientSecret,

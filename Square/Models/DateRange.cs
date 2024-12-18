@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["end_date"] = true;
                 this.EndDate = endDate;
             }
-
         }
-        internal DateRange(Dictionary<string, bool> shouldSerialize,
+
+        internal DateRange(
+            Dictionary<string, bool> shouldSerialize,
             string startDate = null,
             string endDate = null)
         {
@@ -76,9 +77,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DateRange : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -103,35 +102,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DateRange other &&                ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
-                ((this.EndDate == null && other.EndDate == null) || (this.EndDate?.Equals(other.EndDate) == true));
+            return obj is DateRange other &&
+                (this.StartDate == null && other.StartDate == null ||
+                 this.StartDate?.Equals(other.StartDate) == true) &&
+                (this.EndDate == null && other.EndDate == null ||
+                 this.EndDate?.Equals(other.EndDate) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1178039224;
-            hashCode = HashCode.Combine(this.StartDate, this.EndDate);
+            var hashCode = -1178039224;
+            hashCode = HashCode.Combine(hashCode, this.StartDate, this.EndDate);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.StartDate = {(this.StartDate == null ? "null" : this.StartDate)}");
-            toStringOutput.Add($"this.EndDate = {(this.EndDate == null ? "null" : this.EndDate)}");
+            toStringOutput.Add($"this.StartDate = {this.StartDate ?? "null"}");
+            toStringOutput.Add($"this.EndDate = {this.EndDate ?? "null"}");
         }
 
         /// <summary>
@@ -185,7 +182,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStartDate()
             {
@@ -193,7 +190,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndDate()
             {
@@ -207,7 +204,8 @@ namespace Square.Models
             /// <returns> DateRange. </returns>
             public DateRange Build()
             {
-                return new DateRange(shouldSerialize,
+                return new DateRange(
+                    shouldSerialize,
                     this.startDate,
                     this.endDate);
             }

@@ -22,40 +22,57 @@ namespace Square.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="JobAssignment"/> class.
         /// </summary>
-        /// <param name="jobTitle">job_title.</param>
         /// <param name="payType">pay_type.</param>
+        /// <param name="jobTitle">job_title.</param>
         /// <param name="hourlyRate">hourly_rate.</param>
         /// <param name="annualRate">annual_rate.</param>
         /// <param name="weeklyHours">weekly_hours.</param>
+        /// <param name="jobId">job_id.</param>
         public JobAssignment(
-            string jobTitle,
             string payType,
+            string jobTitle = null,
             Models.Money hourlyRate = null,
             Models.Money annualRate = null,
-            int? weeklyHours = null)
+            int? weeklyHours = null,
+            string jobId = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
-                { "weekly_hours", false }
+                { "job_title", false },
+                { "weekly_hours", false },
+                { "job_id", false }
             };
 
-            this.JobTitle = jobTitle;
+            if (jobTitle != null)
+            {
+                shouldSerialize["job_title"] = true;
+                this.JobTitle = jobTitle;
+            }
             this.PayType = payType;
             this.HourlyRate = hourlyRate;
             this.AnnualRate = annualRate;
+
             if (weeklyHours != null)
             {
                 shouldSerialize["weekly_hours"] = true;
                 this.WeeklyHours = weeklyHours;
             }
 
+            if (jobId != null)
+            {
+                shouldSerialize["job_id"] = true;
+                this.JobId = jobId;
+            }
         }
-        internal JobAssignment(Dictionary<string, bool> shouldSerialize,
-            string jobTitle,
+
+        internal JobAssignment(
+            Dictionary<string, bool> shouldSerialize,
             string payType,
+            string jobTitle = null,
             Models.Money hourlyRate = null,
             Models.Money annualRate = null,
-            int? weeklyHours = null)
+            int? weeklyHours = null,
+            string jobId = null)
         {
             this.shouldSerialize = shouldSerialize;
             JobTitle = jobTitle;
@@ -63,6 +80,7 @@ namespace Square.Models
             HourlyRate = hourlyRate;
             AnnualRate = annualRate;
             WeeklyHours = weeklyHours;
+            JobId = jobId;
         }
 
         /// <summary>
@@ -105,14 +123,27 @@ namespace Square.Models
         [JsonProperty("weekly_hours")]
         public int? WeeklyHours { get; }
 
+        /// <summary>
+        /// The ID of the [job]($m/Job).
+        /// </summary>
+        [JsonProperty("job_id")]
+        public string JobId { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"JobAssignment : ({string.Join(", ", toStringOutput)})";
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeJobTitle()
+        {
+            return this.shouldSerialize["job_title"];
         }
 
         /// <summary>
@@ -124,44 +155,57 @@ namespace Square.Models
             return this.shouldSerialize["weekly_hours"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeJobId()
+        {
+            return this.shouldSerialize["job_id"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is JobAssignment other &&                ((this.JobTitle == null && other.JobTitle == null) || (this.JobTitle?.Equals(other.JobTitle) == true)) &&
-                ((this.PayType == null && other.PayType == null) || (this.PayType?.Equals(other.PayType) == true)) &&
-                ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true)) &&
-                ((this.AnnualRate == null && other.AnnualRate == null) || (this.AnnualRate?.Equals(other.AnnualRate) == true)) &&
-                ((this.WeeklyHours == null && other.WeeklyHours == null) || (this.WeeklyHours?.Equals(other.WeeklyHours) == true));
+            return obj is JobAssignment other &&
+                (this.JobTitle == null && other.JobTitle == null ||
+                 this.JobTitle?.Equals(other.JobTitle) == true) &&
+                (this.PayType == null && other.PayType == null ||
+                 this.PayType?.Equals(other.PayType) == true) &&
+                (this.HourlyRate == null && other.HourlyRate == null ||
+                 this.HourlyRate?.Equals(other.HourlyRate) == true) &&
+                (this.AnnualRate == null && other.AnnualRate == null ||
+                 this.AnnualRate?.Equals(other.AnnualRate) == true) &&
+                (this.WeeklyHours == null && other.WeeklyHours == null ||
+                 this.WeeklyHours?.Equals(other.WeeklyHours) == true) &&
+                (this.JobId == null && other.JobId == null ||
+                 this.JobId?.Equals(other.JobId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2078452856;
-            hashCode = HashCode.Combine(this.JobTitle, this.PayType, this.HourlyRate, this.AnnualRate, this.WeeklyHours);
+            var hashCode = -1238704248;
+            hashCode = HashCode.Combine(hashCode, this.JobTitle, this.PayType, this.HourlyRate, this.AnnualRate, this.WeeklyHours, this.JobId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.JobTitle = {(this.JobTitle == null ? "null" : this.JobTitle)}");
+            toStringOutput.Add($"this.JobTitle = {this.JobTitle ?? "null"}");
             toStringOutput.Add($"this.PayType = {(this.PayType == null ? "null" : this.PayType.ToString())}");
             toStringOutput.Add($"this.HourlyRate = {(this.HourlyRate == null ? "null" : this.HourlyRate.ToString())}");
             toStringOutput.Add($"this.AnnualRate = {(this.AnnualRate == null ? "null" : this.AnnualRate.ToString())}");
             toStringOutput.Add($"this.WeeklyHours = {(this.WeeklyHours == null ? "null" : this.WeeklyHours.ToString())}");
+            toStringOutput.Add($"this.JobId = {this.JobId ?? "null"}");
         }
 
         /// <summary>
@@ -171,11 +215,12 @@ namespace Square.Models
         public Builder ToBuilder()
         {
             var builder = new Builder(
-                this.JobTitle,
                 this.PayType)
+                .JobTitle(this.JobTitle)
                 .HourlyRate(this.HourlyRate)
                 .AnnualRate(this.AnnualRate)
-                .WeeklyHours(this.WeeklyHours);
+                .WeeklyHours(this.WeeklyHours)
+                .JobId(this.JobId);
             return builder;
         }
 
@@ -186,37 +231,26 @@ namespace Square.Models
         {
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
+                { "job_title", false },
                 { "weekly_hours", false },
+                { "job_id", false },
             };
 
-            private string jobTitle;
             private string payType;
+            private string jobTitle;
             private Models.Money hourlyRate;
             private Models.Money annualRate;
             private int? weeklyHours;
+            private string jobId;
 
             /// <summary>
             /// Initialize Builder for JobAssignment.
             /// </summary>
-            /// <param name="jobTitle"> jobTitle. </param>
             /// <param name="payType"> payType. </param>
             public Builder(
-                string jobTitle,
                 string payType)
             {
-                this.jobTitle = jobTitle;
                 this.payType = payType;
-            }
-
-             /// <summary>
-             /// JobTitle.
-             /// </summary>
-             /// <param name="jobTitle"> jobTitle. </param>
-             /// <returns> Builder. </returns>
-            public Builder JobTitle(string jobTitle)
-            {
-                this.jobTitle = jobTitle;
-                return this;
             }
 
              /// <summary>
@@ -227,6 +261,18 @@ namespace Square.Models
             public Builder PayType(string payType)
             {
                 this.payType = payType;
+                return this;
+            }
+
+             /// <summary>
+             /// JobTitle.
+             /// </summary>
+             /// <param name="jobTitle"> jobTitle. </param>
+             /// <returns> Builder. </returns>
+            public Builder JobTitle(string jobTitle)
+            {
+                shouldSerialize["job_title"] = true;
+                this.jobTitle = jobTitle;
                 return this;
             }
 
@@ -264,12 +310,40 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// JobId.
+             /// </summary>
+             /// <param name="jobId"> jobId. </param>
+             /// <returns> Builder. </returns>
+            public Builder JobId(string jobId)
+            {
+                shouldSerialize["job_id"] = true;
+                this.jobId = jobId;
+                return this;
+            }
+
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
+            /// </summary>
+            public void UnsetJobTitle()
+            {
+                this.shouldSerialize["job_title"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetWeeklyHours()
             {
                 this.shouldSerialize["weekly_hours"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serialized.
+            /// </summary>
+            public void UnsetJobId()
+            {
+                this.shouldSerialize["job_id"] = false;
             }
 
 
@@ -279,12 +353,14 @@ namespace Square.Models
             /// <returns> JobAssignment. </returns>
             public JobAssignment Build()
             {
-                return new JobAssignment(shouldSerialize,
-                    this.jobTitle,
+                return new JobAssignment(
+                    shouldSerialize,
                     this.payType,
+                    this.jobTitle,
                     this.hourlyRate,
                     this.annualRate,
-                    this.weeklyHours);
+                    this.weeklyHours,
+                    this.jobId);
             }
         }
     }

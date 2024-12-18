@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["account_type"] = true;
                 this.AccountType = accountType;
             }
-
         }
-        internal ACHDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal ACHDetails(
+            Dictionary<string, bool> shouldSerialize,
             string routingNumber = null,
             string accountNumberSuffix = null,
             string accountType = null)
@@ -90,9 +91,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ACHDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -126,37 +125,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ACHDetails other &&                ((this.RoutingNumber == null && other.RoutingNumber == null) || (this.RoutingNumber?.Equals(other.RoutingNumber) == true)) &&
-                ((this.AccountNumberSuffix == null && other.AccountNumberSuffix == null) || (this.AccountNumberSuffix?.Equals(other.AccountNumberSuffix) == true)) &&
-                ((this.AccountType == null && other.AccountType == null) || (this.AccountType?.Equals(other.AccountType) == true));
+            return obj is ACHDetails other &&
+                (this.RoutingNumber == null && other.RoutingNumber == null ||
+                 this.RoutingNumber?.Equals(other.RoutingNumber) == true) &&
+                (this.AccountNumberSuffix == null && other.AccountNumberSuffix == null ||
+                 this.AccountNumberSuffix?.Equals(other.AccountNumberSuffix) == true) &&
+                (this.AccountType == null && other.AccountType == null ||
+                 this.AccountType?.Equals(other.AccountType) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1480381198;
-            hashCode = HashCode.Combine(this.RoutingNumber, this.AccountNumberSuffix, this.AccountType);
+            var hashCode = -1480381198;
+            hashCode = HashCode.Combine(hashCode, this.RoutingNumber, this.AccountNumberSuffix, this.AccountType);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.RoutingNumber = {(this.RoutingNumber == null ? "null" : this.RoutingNumber)}");
-            toStringOutput.Add($"this.AccountNumberSuffix = {(this.AccountNumberSuffix == null ? "null" : this.AccountNumberSuffix)}");
-            toStringOutput.Add($"this.AccountType = {(this.AccountType == null ? "null" : this.AccountType)}");
+            toStringOutput.Add($"this.RoutingNumber = {this.RoutingNumber ?? "null"}");
+            toStringOutput.Add($"this.AccountNumberSuffix = {this.AccountNumberSuffix ?? "null"}");
+            toStringOutput.Add($"this.AccountType = {this.AccountType ?? "null"}");
         }
 
         /// <summary>
@@ -225,7 +223,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRoutingNumber()
             {
@@ -233,7 +231,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAccountNumberSuffix()
             {
@@ -241,7 +239,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAccountType()
             {
@@ -255,7 +253,8 @@ namespace Square.Models
             /// <returns> ACHDetails. </returns>
             public ACHDetails Build()
             {
-                return new ACHDetails(shouldSerialize,
+                return new ACHDetails(
+                    shouldSerialize,
                     this.routingNumber,
                     this.accountNumberSuffix,
                     this.accountType);

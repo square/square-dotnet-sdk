@@ -53,15 +53,15 @@ namespace Square.Models
                 { "client_id", false },
                 { "order_id", false }
             };
-
             this.Id = id;
+
             if (locationId != null)
             {
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
             this.CreatedAt = createdAt;
+
             if (tenders != null)
             {
                 shouldSerialize["tenders"] = true;
@@ -79,23 +79,24 @@ namespace Square.Models
                 shouldSerialize["reference_id"] = true;
                 this.ReferenceId = referenceId;
             }
-
             this.Product = product;
+
             if (clientId != null)
             {
                 shouldSerialize["client_id"] = true;
                 this.ClientId = clientId;
             }
-
             this.ShippingAddress = shippingAddress;
+
             if (orderId != null)
             {
                 shouldSerialize["order_id"] = true;
                 this.OrderId = orderId;
             }
-
         }
-        internal Transaction(Dictionary<string, bool> shouldSerialize,
+
+        internal Transaction(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string locationId = null,
             string createdAt = null,
@@ -194,9 +195,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Transaction : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -257,53 +256,59 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Transaction other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.Tenders == null && other.Tenders == null) || (this.Tenders?.Equals(other.Tenders) == true)) &&
-                ((this.Refunds == null && other.Refunds == null) || (this.Refunds?.Equals(other.Refunds) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.Product == null && other.Product == null) || (this.Product?.Equals(other.Product) == true)) &&
-                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
-                ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
+            return obj is Transaction other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.Tenders == null && other.Tenders == null ||
+                 this.Tenders?.Equals(other.Tenders) == true) &&
+                (this.Refunds == null && other.Refunds == null ||
+                 this.Refunds?.Equals(other.Refunds) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.Product == null && other.Product == null ||
+                 this.Product?.Equals(other.Product) == true) &&
+                (this.ClientId == null && other.ClientId == null ||
+                 this.ClientId?.Equals(other.ClientId) == true) &&
+                (this.ShippingAddress == null && other.ShippingAddress == null ||
+                 this.ShippingAddress?.Equals(other.ShippingAddress) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 226628405;
-            hashCode = HashCode.Combine(this.Id, this.LocationId, this.CreatedAt, this.Tenders, this.Refunds, this.ReferenceId, this.Product);
+            var hashCode = 226628405;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.LocationId, this.CreatedAt, this.Tenders, this.Refunds, this.ReferenceId, this.Product);
 
             hashCode = HashCode.Combine(hashCode, this.ClientId, this.ShippingAddress, this.OrderId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
             toStringOutput.Add($"this.Tenders = {(this.Tenders == null ? "null" : $"[{string.Join(", ", this.Tenders)} ]")}");
             toStringOutput.Add($"this.Refunds = {(this.Refunds == null ? "null" : $"[{string.Join(", ", this.Refunds)} ]")}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
             toStringOutput.Add($"this.Product = {(this.Product == null ? "null" : this.Product.ToString())}");
-            toStringOutput.Add($"this.ClientId = {(this.ClientId == null ? "null" : this.ClientId)}");
+            toStringOutput.Add($"this.ClientId = {this.ClientId ?? "null"}");
             toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
         }
 
         /// <summary>
@@ -469,7 +474,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -477,7 +482,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTenders()
             {
@@ -485,7 +490,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRefunds()
             {
@@ -493,7 +498,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -501,7 +506,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetClientId()
             {
@@ -509,7 +514,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderId()
             {
@@ -523,7 +528,8 @@ namespace Square.Models
             /// <returns> Transaction. </returns>
             public Transaction Build()
             {
-                return new Transaction(shouldSerialize,
+                return new Transaction(
+                    shouldSerialize,
                     this.id,
                     this.locationId,
                     this.createdAt,

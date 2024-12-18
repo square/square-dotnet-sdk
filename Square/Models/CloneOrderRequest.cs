@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "idempotency_key", false }
             };
-
             this.OrderId = orderId;
             this.Version = version;
+
             if (idempotencyKey != null)
             {
                 shouldSerialize["idempotency_key"] = true;
                 this.IdempotencyKey = idempotencyKey;
             }
-
         }
-        internal CloneOrderRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal CloneOrderRequest(
+            Dictionary<string, bool> shouldSerialize,
             string orderId,
             int? version = null,
             string idempotencyKey = null)
@@ -84,9 +85,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CloneOrderRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -102,37 +101,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CloneOrderRequest other &&                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+            return obj is CloneOrderRequest other &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1356195535;
-            hashCode = HashCode.Combine(this.OrderId, this.Version, this.IdempotencyKey);
+            var hashCode = -1356195535;
+            hashCode = HashCode.Combine(hashCode, this.OrderId, this.Version, this.IdempotencyKey);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
         }
 
         /// <summary>
@@ -207,7 +205,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIdempotencyKey()
             {
@@ -221,7 +219,8 @@ namespace Square.Models
             /// <returns> CloneOrderRequest. </returns>
             public CloneOrderRequest Build()
             {
-                return new CloneOrderRequest(shouldSerialize,
+                return new CloneOrderRequest(
+                    shouldSerialize,
                     this.orderId,
                     this.version,
                     this.idempotencyKey);

@@ -55,42 +55,39 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateInvoiceResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateInvoiceResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Invoice == null && other.Invoice == null) || (this.Invoice?.Equals(other.Invoice) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
+            return obj is UpdateInvoiceResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Invoice == null && other.Invoice == null ||
+                 this.Invoice?.Equals(other.Invoice) == true) &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 937427213;
+            var hashCode = 937427213;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Invoice, this.Errors);
+            hashCode = HashCode.Combine(hashCode, this.Invoice, this.Errors);
 
             return hashCode;
         }
+
         internal UpdateInvoiceResponse ContextSetter(HttpContext context)
         {
             this.Context = context;

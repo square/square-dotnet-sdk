@@ -35,8 +35,8 @@ namespace Square.Models
                 { "application_id", false },
                 { "name", false }
             };
-
             this.Product = product;
+
             if (applicationId != null)
             {
                 shouldSerialize["application_id"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
         }
-        internal SourceApplication(Dictionary<string, bool> shouldSerialize,
+
+        internal SourceApplication(
+            Dictionary<string, bool> shouldSerialize,
             string product = null,
             string applicationId = null,
             string name = null)
@@ -85,9 +86,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SourceApplication : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -112,28 +111,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SourceApplication other &&                ((this.Product == null && other.Product == null) || (this.Product?.Equals(other.Product) == true)) &&
-                ((this.ApplicationId == null && other.ApplicationId == null) || (this.ApplicationId?.Equals(other.ApplicationId) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
+            return obj is SourceApplication other &&
+                (this.Product == null && other.Product == null ||
+                 this.Product?.Equals(other.Product) == true) &&
+                (this.ApplicationId == null && other.ApplicationId == null ||
+                 this.ApplicationId?.Equals(other.ApplicationId) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -850254546;
-            hashCode = HashCode.Combine(this.Product, this.ApplicationId, this.Name);
+            var hashCode = -850254546;
+            hashCode = HashCode.Combine(hashCode, this.Product, this.ApplicationId, this.Name);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -141,8 +139,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Product = {(this.Product == null ? "null" : this.Product.ToString())}");
-            toStringOutput.Add($"this.ApplicationId = {(this.ApplicationId == null ? "null" : this.ApplicationId)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.ApplicationId = {this.ApplicationId ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
         }
 
         /// <summary>
@@ -209,7 +207,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApplicationId()
             {
@@ -217,7 +215,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -231,7 +229,8 @@ namespace Square.Models
             /// <returns> SourceApplication. </returns>
             public SourceApplication Build()
             {
-                return new SourceApplication(shouldSerialize,
+                return new SourceApplication(
+                    shouldSerialize,
                     this.product,
                     this.applicationId,
                     this.name);

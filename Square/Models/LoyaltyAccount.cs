@@ -50,11 +50,11 @@ namespace Square.Models
                 { "enrolled_at", false },
                 { "expiring_point_deadlines", false }
             };
-
             this.Id = id;
             this.ProgramId = programId;
             this.Balance = balance;
             this.LifetimePoints = lifetimePoints;
+
             if (customerId != null)
             {
                 shouldSerialize["customer_id"] = true;
@@ -66,18 +66,19 @@ namespace Square.Models
                 shouldSerialize["enrolled_at"] = true;
                 this.EnrolledAt = enrolledAt;
             }
-
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.Mapping = mapping;
+
             if (expiringPointDeadlines != null)
             {
                 shouldSerialize["expiring_point_deadlines"] = true;
                 this.ExpiringPointDeadlines = expiringPointDeadlines;
             }
-
         }
-        internal LoyaltyAccount(Dictionary<string, bool> shouldSerialize,
+
+        internal LoyaltyAccount(
+            Dictionary<string, bool> shouldSerialize,
             string programId,
             string id = null,
             int? balance = null,
@@ -174,9 +175,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyAccount : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -210,51 +209,57 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyAccount other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.ProgramId == null && other.ProgramId == null) || (this.ProgramId?.Equals(other.ProgramId) == true)) &&
-                ((this.Balance == null && other.Balance == null) || (this.Balance?.Equals(other.Balance) == true)) &&
-                ((this.LifetimePoints == null && other.LifetimePoints == null) || (this.LifetimePoints?.Equals(other.LifetimePoints) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.EnrolledAt == null && other.EnrolledAt == null) || (this.EnrolledAt?.Equals(other.EnrolledAt) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.Mapping == null && other.Mapping == null) || (this.Mapping?.Equals(other.Mapping) == true)) &&
-                ((this.ExpiringPointDeadlines == null && other.ExpiringPointDeadlines == null) || (this.ExpiringPointDeadlines?.Equals(other.ExpiringPointDeadlines) == true));
+            return obj is LoyaltyAccount other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.ProgramId == null && other.ProgramId == null ||
+                 this.ProgramId?.Equals(other.ProgramId) == true) &&
+                (this.Balance == null && other.Balance == null ||
+                 this.Balance?.Equals(other.Balance) == true) &&
+                (this.LifetimePoints == null && other.LifetimePoints == null ||
+                 this.LifetimePoints?.Equals(other.LifetimePoints) == true) &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.EnrolledAt == null && other.EnrolledAt == null ||
+                 this.EnrolledAt?.Equals(other.EnrolledAt) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.Mapping == null && other.Mapping == null ||
+                 this.Mapping?.Equals(other.Mapping) == true) &&
+                (this.ExpiringPointDeadlines == null && other.ExpiringPointDeadlines == null ||
+                 this.ExpiringPointDeadlines?.Equals(other.ExpiringPointDeadlines) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 302731941;
-            hashCode = HashCode.Combine(this.Id, this.ProgramId, this.Balance, this.LifetimePoints, this.CustomerId, this.EnrolledAt, this.CreatedAt);
+            var hashCode = 302731941;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.ProgramId, this.Balance, this.LifetimePoints, this.CustomerId, this.EnrolledAt, this.CreatedAt);
 
             hashCode = HashCode.Combine(hashCode, this.UpdatedAt, this.Mapping, this.ExpiringPointDeadlines);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.ProgramId = {(this.ProgramId == null ? "null" : this.ProgramId)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.ProgramId = {this.ProgramId ?? "null"}");
             toStringOutput.Add($"this.Balance = {(this.Balance == null ? "null" : this.Balance.ToString())}");
             toStringOutput.Add($"this.LifetimePoints = {(this.LifetimePoints == null ? "null" : this.LifetimePoints.ToString())}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
-            toStringOutput.Add($"this.EnrolledAt = {(this.EnrolledAt == null ? "null" : this.EnrolledAt)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
+            toStringOutput.Add($"this.EnrolledAt = {this.EnrolledAt ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
             toStringOutput.Add($"this.Mapping = {(this.Mapping == null ? "null" : this.Mapping.ToString())}");
             toStringOutput.Add($"this.ExpiringPointDeadlines = {(this.ExpiringPointDeadlines == null ? "null" : $"[{string.Join(", ", this.ExpiringPointDeadlines)} ]")}");
         }
@@ -426,7 +431,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerId()
             {
@@ -434,7 +439,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEnrolledAt()
             {
@@ -442,7 +447,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetExpiringPointDeadlines()
             {
@@ -456,7 +461,8 @@ namespace Square.Models
             /// <returns> LoyaltyAccount. </returns>
             public LoyaltyAccount Build()
             {
-                return new LoyaltyAccount(shouldSerialize,
+                return new LoyaltyAccount(
+                    shouldSerialize,
                     this.programId,
                     this.id,
                     this.balance,

@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "with_definition", false }
             };
-
             this.Version = version;
+
             if (withDefinition != null)
             {
                 shouldSerialize["with_definition"] = true;
                 this.WithDefinition = withDefinition;
             }
-
         }
-        internal RetrieveOrderCustomAttributeRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal RetrieveOrderCustomAttributeRequest(
+            Dictionary<string, bool> shouldSerialize,
             int? version = null,
             bool? withDefinition = null)
         {
@@ -69,9 +70,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RetrieveOrderCustomAttributeRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -87,27 +86,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RetrieveOrderCustomAttributeRequest other &&                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.WithDefinition == null && other.WithDefinition == null) || (this.WithDefinition?.Equals(other.WithDefinition) == true));
+            return obj is RetrieveOrderCustomAttributeRequest other &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.WithDefinition == null && other.WithDefinition == null ||
+                 this.WithDefinition?.Equals(other.WithDefinition) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -291006171;
-            hashCode = HashCode.Combine(this.Version, this.WithDefinition);
+            var hashCode = -291006171;
+            hashCode = HashCode.Combine(hashCode, this.Version, this.WithDefinition);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -167,7 +164,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetWithDefinition()
             {
@@ -181,7 +178,8 @@ namespace Square.Models
             /// <returns> RetrieveOrderCustomAttributeRequest. </returns>
             public RetrieveOrderCustomAttributeRequest Build()
             {
-                return new RetrieveOrderCustomAttributeRequest(shouldSerialize,
+                return new RetrieveOrderCustomAttributeRequest(
+                    shouldSerialize,
                     this.version,
                     this.withDefinition);
             }

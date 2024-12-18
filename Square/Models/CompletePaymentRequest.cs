@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["version_token"] = true;
                 this.VersionToken = versionToken;
             }
-
         }
-        internal CompletePaymentRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal CompletePaymentRequest(
+            Dictionary<string, bool> shouldSerialize,
             string versionToken = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -57,9 +58,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CompletePaymentRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -75,33 +74,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CompletePaymentRequest other &&                ((this.VersionToken == null && other.VersionToken == null) || (this.VersionToken?.Equals(other.VersionToken) == true));
+            return obj is CompletePaymentRequest other &&
+                (this.VersionToken == null && other.VersionToken == null ||
+                 this.VersionToken?.Equals(other.VersionToken) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 916056243;
-            hashCode = HashCode.Combine(this.VersionToken);
+            var hashCode = 916056243;
+            hashCode = HashCode.Combine(hashCode, this.VersionToken);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.VersionToken = {(this.VersionToken == null ? "null" : this.VersionToken)}");
+            toStringOutput.Add($"this.VersionToken = {this.VersionToken ?? "null"}");
         }
 
         /// <summary>
@@ -140,7 +136,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVersionToken()
             {
@@ -154,7 +150,8 @@ namespace Square.Models
             /// <returns> CompletePaymentRequest. </returns>
             public CompletePaymentRequest Build()
             {
-                return new CompletePaymentRequest(shouldSerialize,
+                return new CompletePaymentRequest(
+                    shouldSerialize,
                     this.versionToken);
             }
         }

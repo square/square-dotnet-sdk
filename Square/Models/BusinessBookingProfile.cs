@@ -53,31 +53,32 @@ namespace Square.Models
                 shouldSerialize["seller_id"] = true;
                 this.SellerId = sellerId;
             }
-
             this.CreatedAt = createdAt;
+
             if (bookingEnabled != null)
             {
                 shouldSerialize["booking_enabled"] = true;
                 this.BookingEnabled = bookingEnabled;
             }
-
             this.CustomerTimezoneChoice = customerTimezoneChoice;
             this.BookingPolicy = bookingPolicy;
+
             if (allowUserCancel != null)
             {
                 shouldSerialize["allow_user_cancel"] = true;
                 this.AllowUserCancel = allowUserCancel;
             }
-
             this.BusinessAppointmentSettings = businessAppointmentSettings;
+
             if (supportSellerLevelWrites != null)
             {
                 shouldSerialize["support_seller_level_writes"] = true;
                 this.SupportSellerLevelWrites = supportSellerLevelWrites;
             }
-
         }
-        internal BusinessBookingProfile(Dictionary<string, bool> shouldSerialize,
+
+        internal BusinessBookingProfile(
+            Dictionary<string, bool> shouldSerialize,
             string sellerId = null,
             string createdAt = null,
             bool? bookingEnabled = null,
@@ -150,9 +151,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BusinessBookingProfile : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -195,43 +194,47 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BusinessBookingProfile other &&                ((this.SellerId == null && other.SellerId == null) || (this.SellerId?.Equals(other.SellerId) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.BookingEnabled == null && other.BookingEnabled == null) || (this.BookingEnabled?.Equals(other.BookingEnabled) == true)) &&
-                ((this.CustomerTimezoneChoice == null && other.CustomerTimezoneChoice == null) || (this.CustomerTimezoneChoice?.Equals(other.CustomerTimezoneChoice) == true)) &&
-                ((this.BookingPolicy == null && other.BookingPolicy == null) || (this.BookingPolicy?.Equals(other.BookingPolicy) == true)) &&
-                ((this.AllowUserCancel == null && other.AllowUserCancel == null) || (this.AllowUserCancel?.Equals(other.AllowUserCancel) == true)) &&
-                ((this.BusinessAppointmentSettings == null && other.BusinessAppointmentSettings == null) || (this.BusinessAppointmentSettings?.Equals(other.BusinessAppointmentSettings) == true)) &&
-                ((this.SupportSellerLevelWrites == null && other.SupportSellerLevelWrites == null) || (this.SupportSellerLevelWrites?.Equals(other.SupportSellerLevelWrites) == true));
+            return obj is BusinessBookingProfile other &&
+                (this.SellerId == null && other.SellerId == null ||
+                 this.SellerId?.Equals(other.SellerId) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.BookingEnabled == null && other.BookingEnabled == null ||
+                 this.BookingEnabled?.Equals(other.BookingEnabled) == true) &&
+                (this.CustomerTimezoneChoice == null && other.CustomerTimezoneChoice == null ||
+                 this.CustomerTimezoneChoice?.Equals(other.CustomerTimezoneChoice) == true) &&
+                (this.BookingPolicy == null && other.BookingPolicy == null ||
+                 this.BookingPolicy?.Equals(other.BookingPolicy) == true) &&
+                (this.AllowUserCancel == null && other.AllowUserCancel == null ||
+                 this.AllowUserCancel?.Equals(other.AllowUserCancel) == true) &&
+                (this.BusinessAppointmentSettings == null && other.BusinessAppointmentSettings == null ||
+                 this.BusinessAppointmentSettings?.Equals(other.BusinessAppointmentSettings) == true) &&
+                (this.SupportSellerLevelWrites == null && other.SupportSellerLevelWrites == null ||
+                 this.SupportSellerLevelWrites?.Equals(other.SupportSellerLevelWrites) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -513318848;
-            hashCode = HashCode.Combine(this.SellerId, this.CreatedAt, this.BookingEnabled, this.CustomerTimezoneChoice, this.BookingPolicy, this.AllowUserCancel, this.BusinessAppointmentSettings);
+            var hashCode = -513318848;
+            hashCode = HashCode.Combine(hashCode, this.SellerId, this.CreatedAt, this.BookingEnabled, this.CustomerTimezoneChoice, this.BookingPolicy, this.AllowUserCancel, this.BusinessAppointmentSettings);
 
             hashCode = HashCode.Combine(hashCode, this.SupportSellerLevelWrites);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.SellerId = {(this.SellerId == null ? "null" : this.SellerId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.SellerId = {this.SellerId ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
             toStringOutput.Add($"this.BookingEnabled = {(this.BookingEnabled == null ? "null" : this.BookingEnabled.ToString())}");
             toStringOutput.Add($"this.CustomerTimezoneChoice = {(this.CustomerTimezoneChoice == null ? "null" : this.CustomerTimezoneChoice.ToString())}");
             toStringOutput.Add($"this.BookingPolicy = {(this.BookingPolicy == null ? "null" : this.BookingPolicy.ToString())}");
@@ -373,7 +376,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSellerId()
             {
@@ -381,7 +384,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBookingEnabled()
             {
@@ -389,7 +392,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAllowUserCancel()
             {
@@ -397,7 +400,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSupportSellerLevelWrites()
             {
@@ -411,7 +414,8 @@ namespace Square.Models
             /// <returns> BusinessBookingProfile. </returns>
             public BusinessBookingProfile Build()
             {
-                return new BusinessBookingProfile(shouldSerialize,
+                return new BusinessBookingProfile(
+                    shouldSerialize,
                     this.sellerId,
                     this.createdAt,
                     this.bookingEnabled,

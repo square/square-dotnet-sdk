@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "idempotency_key", false }
             };
-
             this.CustomAttributeDefinition = customAttributeDefinition;
+
             if (idempotencyKey != null)
             {
                 shouldSerialize["idempotency_key"] = true;
                 this.IdempotencyKey = idempotencyKey;
             }
-
         }
-        internal UpdateMerchantCustomAttributeDefinitionRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal UpdateMerchantCustomAttributeDefinitionRequest(
+            Dictionary<string, bool> shouldSerialize,
             Models.CustomAttributeDefinition customAttributeDefinition,
             string idempotencyKey = null)
         {
@@ -68,9 +69,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateMerchantCustomAttributeDefinitionRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -86,27 +85,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateMerchantCustomAttributeDefinitionRequest other &&                ((this.CustomAttributeDefinition == null && other.CustomAttributeDefinition == null) || (this.CustomAttributeDefinition?.Equals(other.CustomAttributeDefinition) == true)) &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+            return obj is UpdateMerchantCustomAttributeDefinitionRequest other &&
+                (this.CustomAttributeDefinition == null && other.CustomAttributeDefinition == null ||
+                 this.CustomAttributeDefinition?.Equals(other.CustomAttributeDefinition) == true) &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 404788044;
-            hashCode = HashCode.Combine(this.CustomAttributeDefinition, this.IdempotencyKey);
+            var hashCode = 404788044;
+            hashCode = HashCode.Combine(hashCode, this.CustomAttributeDefinition, this.IdempotencyKey);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -114,7 +111,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.CustomAttributeDefinition = {(this.CustomAttributeDefinition == null ? "null" : this.CustomAttributeDefinition.ToString())}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
         }
 
         /// <summary>
@@ -176,7 +173,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIdempotencyKey()
             {
@@ -190,7 +187,8 @@ namespace Square.Models
             /// <returns> UpdateMerchantCustomAttributeDefinitionRequest. </returns>
             public UpdateMerchantCustomAttributeDefinitionRequest Build()
             {
-                return new UpdateMerchantCustomAttributeDefinitionRequest(shouldSerialize,
+                return new UpdateMerchantCustomAttributeDefinitionRequest(
+                    shouldSerialize,
                     this.customAttributeDefinition,
                     this.idempotencyKey);
             }

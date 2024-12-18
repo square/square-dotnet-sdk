@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["customer_ids"] = true;
                 this.CustomerIds = customerIds;
             }
-
         }
-        internal SearchLoyaltyAccountsRequestLoyaltyAccountQuery(Dictionary<string, bool> shouldSerialize,
+
+        internal SearchLoyaltyAccountsRequestLoyaltyAccountQuery(
+            Dictionary<string, bool> shouldSerialize,
             IList<Models.LoyaltyAccountMapping> mappings = null,
             IList<string> customerIds = null)
         {
@@ -76,9 +77,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchLoyaltyAccountsRequestLoyaltyAccountQuery : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -103,27 +102,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchLoyaltyAccountsRequestLoyaltyAccountQuery other &&                ((this.Mappings == null && other.Mappings == null) || (this.Mappings?.Equals(other.Mappings) == true)) &&
-                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
+            return obj is SearchLoyaltyAccountsRequestLoyaltyAccountQuery other &&
+                (this.Mappings == null && other.Mappings == null ||
+                 this.Mappings?.Equals(other.Mappings) == true) &&
+                (this.CustomerIds == null && other.CustomerIds == null ||
+                 this.CustomerIds?.Equals(other.CustomerIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1219141926;
-            hashCode = HashCode.Combine(this.Mappings, this.CustomerIds);
+            var hashCode = -1219141926;
+            hashCode = HashCode.Combine(hashCode, this.Mappings, this.CustomerIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -185,7 +182,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMappings()
             {
@@ -193,7 +190,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerIds()
             {
@@ -207,7 +204,8 @@ namespace Square.Models
             /// <returns> SearchLoyaltyAccountsRequestLoyaltyAccountQuery. </returns>
             public SearchLoyaltyAccountsRequestLoyaltyAccountQuery Build()
             {
-                return new SearchLoyaltyAccountsRequestLoyaltyAccountQuery(shouldSerialize,
+                return new SearchLoyaltyAccountsRequestLoyaltyAccountQuery(
+                    shouldSerialize,
                     this.mappings,
                     this.customerIds);
             }

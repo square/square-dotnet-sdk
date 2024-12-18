@@ -77,8 +77,8 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.Type = type;
+
             if (percentage != null)
             {
                 shouldSerialize["percentage"] = true;
@@ -90,12 +90,13 @@ namespace Square.Models
                 shouldSerialize["metadata"] = true;
                 this.Metadata = metadata;
             }
-
             this.AppliedMoney = appliedMoney;
             this.Scope = scope;
             this.AutoApplied = autoApplied;
         }
-        internal OrderLineItemTax(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderLineItemTax(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             string catalogObjectId = null,
             long? catalogVersion = null,
@@ -205,9 +206,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderLineItemTax : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -268,49 +267,55 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderLineItemTax other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
-                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
-                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
-                ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true)) &&
-                ((this.AutoApplied == null && other.AutoApplied == null) || (this.AutoApplied?.Equals(other.AutoApplied) == true));
+            return obj is OrderLineItemTax other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.CatalogObjectId == null && other.CatalogObjectId == null ||
+                 this.CatalogObjectId?.Equals(other.CatalogObjectId) == true) &&
+                (this.CatalogVersion == null && other.CatalogVersion == null ||
+                 this.CatalogVersion?.Equals(other.CatalogVersion) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.Percentage == null && other.Percentage == null ||
+                 this.Percentage?.Equals(other.Percentage) == true) &&
+                (this.Metadata == null && other.Metadata == null ||
+                 this.Metadata?.Equals(other.Metadata) == true) &&
+                (this.AppliedMoney == null && other.AppliedMoney == null ||
+                 this.AppliedMoney?.Equals(other.AppliedMoney) == true) &&
+                (this.Scope == null && other.Scope == null ||
+                 this.Scope?.Equals(other.Scope) == true) &&
+                (this.AutoApplied == null && other.AutoApplied == null ||
+                 this.AutoApplied?.Equals(other.AutoApplied) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 670391105;
-            hashCode = HashCode.Combine(this.Uid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.Type, this.Percentage, this.Metadata);
+            var hashCode = 670391105;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.Type, this.Percentage, this.Metadata);
 
             hashCode = HashCode.Combine(hashCode, this.AppliedMoney, this.Scope, this.AutoApplied);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.CatalogObjectId = {this.CatalogObjectId ?? "null"}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage)}");
+            toStringOutput.Add($"this.Percentage = {this.Percentage ?? "null"}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
             toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
             toStringOutput.Add($"this.Scope = {(this.Scope == null ? "null" : this.Scope.ToString())}");
@@ -480,7 +485,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -488,7 +493,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectId()
             {
@@ -496,7 +501,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogVersion()
             {
@@ -504,7 +509,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -512,7 +517,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPercentage()
             {
@@ -520,7 +525,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMetadata()
             {
@@ -534,7 +539,8 @@ namespace Square.Models
             /// <returns> OrderLineItemTax. </returns>
             public OrderLineItemTax Build()
             {
-                return new OrderLineItemTax(shouldSerialize,
+                return new OrderLineItemTax(
+                    shouldSerialize,
                     this.uid,
                     this.catalogObjectId,
                     this.catalogVersion,

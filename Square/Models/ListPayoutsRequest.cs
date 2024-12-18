@@ -52,8 +52,8 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
             this.Status = status;
+
             if (beginTime != null)
             {
                 shouldSerialize["begin_time"] = true;
@@ -65,8 +65,8 @@ namespace Square.Models
                 shouldSerialize["end_time"] = true;
                 this.EndTime = endTime;
             }
-
             this.SortOrder = sortOrder;
+
             if (cursor != null)
             {
                 shouldSerialize["cursor"] = true;
@@ -78,9 +78,10 @@ namespace Square.Models
                 shouldSerialize["limit"] = true;
                 this.Limit = limit;
             }
-
         }
-        internal ListPayoutsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListPayoutsRequest(
+            Dictionary<string, bool> shouldSerialize,
             string locationId = null,
             string status = null,
             string beginTime = null,
@@ -155,9 +156,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListPayoutsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -209,44 +208,47 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListPayoutsRequest other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((this.EndTime == null && other.EndTime == null) || (this.EndTime?.Equals(other.EndTime) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
+            return obj is ListPayoutsRequest other &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.BeginTime == null && other.BeginTime == null ||
+                 this.BeginTime?.Equals(other.BeginTime) == true) &&
+                (this.EndTime == null && other.EndTime == null ||
+                 this.EndTime?.Equals(other.EndTime) == true) &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1508284185;
-            hashCode = HashCode.Combine(this.LocationId, this.Status, this.BeginTime, this.EndTime, this.SortOrder, this.Cursor, this.Limit);
+            var hashCode = -1508284185;
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.Status, this.BeginTime, this.EndTime, this.SortOrder, this.Cursor, this.Limit);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime)}");
-            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime)}");
+            toStringOutput.Add($"this.BeginTime = {this.BeginTime ?? "null"}");
+            toStringOutput.Add($"this.EndTime = {this.EndTime ?? "null"}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
         }
 
@@ -372,7 +374,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -380,7 +382,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBeginTime()
             {
@@ -388,7 +390,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndTime()
             {
@@ -396,7 +398,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -404,7 +406,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -418,7 +420,8 @@ namespace Square.Models
             /// <returns> ListPayoutsRequest. </returns>
             public ListPayoutsRequest Build()
             {
-                return new ListPayoutsRequest(shouldSerialize,
+                return new ListPayoutsRequest(
+                    shouldSerialize,
                     this.locationId,
                     this.status,
                     this.beginTime,

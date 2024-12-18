@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["none"] = true;
                 this.None = none;
             }
-
         }
-        internal FilterValue(Dictionary<string, bool> shouldSerialize,
+
+        internal FilterValue(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> all = null,
             IList<string> any = null,
             IList<string> none = null)
@@ -90,9 +91,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"FilterValue : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -126,28 +125,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is FilterValue other &&                ((this.All == null && other.All == null) || (this.All?.Equals(other.All) == true)) &&
-                ((this.Any == null && other.Any == null) || (this.Any?.Equals(other.Any) == true)) &&
-                ((this.None == null && other.None == null) || (this.None?.Equals(other.None) == true));
+            return obj is FilterValue other &&
+                (this.All == null && other.All == null ||
+                 this.All?.Equals(other.All) == true) &&
+                (this.Any == null && other.Any == null ||
+                 this.Any?.Equals(other.Any) == true) &&
+                (this.None == null && other.None == null ||
+                 this.None?.Equals(other.None) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 547827750;
-            hashCode = HashCode.Combine(this.All, this.Any, this.None);
+            var hashCode = 547827750;
+            hashCode = HashCode.Combine(hashCode, this.All, this.Any, this.None);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -225,7 +223,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAll()
             {
@@ -233,7 +231,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAny()
             {
@@ -241,7 +239,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNone()
             {
@@ -255,7 +253,8 @@ namespace Square.Models
             /// <returns> FilterValue. </returns>
             public FilterValue Build()
             {
-                return new FilterValue(shouldSerialize,
+                return new FilterValue(
+                    shouldSerialize,
                     this.all,
                     this.any,
                     this.none);

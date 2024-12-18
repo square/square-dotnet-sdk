@@ -52,43 +52,39 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"GiftCardActivityTransferBalanceTo : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is GiftCardActivityTransferBalanceTo other &&                ((this.TransferFromGiftCardId == null && other.TransferFromGiftCardId == null) || (this.TransferFromGiftCardId?.Equals(other.TransferFromGiftCardId) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true));
+            return obj is GiftCardActivityTransferBalanceTo other &&
+                (this.TransferFromGiftCardId == null && other.TransferFromGiftCardId == null ||
+                 this.TransferFromGiftCardId?.Equals(other.TransferFromGiftCardId) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1088403925;
-            hashCode = HashCode.Combine(this.TransferFromGiftCardId, this.AmountMoney);
+            var hashCode = -1088403925;
+            hashCode = HashCode.Combine(hashCode, this.TransferFromGiftCardId, this.AmountMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.TransferFromGiftCardId = {(this.TransferFromGiftCardId == null ? "null" : this.TransferFromGiftCardId)}");
+            toStringOutput.Add($"this.TransferFromGiftCardId = {this.TransferFromGiftCardId ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
         }
 

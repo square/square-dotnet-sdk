@@ -39,35 +39,30 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateWorkweekConfigRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateWorkweekConfigRequest other &&                ((this.WorkweekConfig == null && other.WorkweekConfig == null) || (this.WorkweekConfig?.Equals(other.WorkweekConfig) == true));
+            return obj is UpdateWorkweekConfigRequest other &&
+                (this.WorkweekConfig == null && other.WorkweekConfig == null ||
+                 this.WorkweekConfig?.Equals(other.WorkweekConfig) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -161126356;
-            hashCode = HashCode.Combine(this.WorkweekConfig);
+            var hashCode = -161126356;
+            hashCode = HashCode.Combine(hashCode, this.WorkweekConfig);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

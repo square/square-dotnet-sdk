@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["tax_rate_description"] = true;
                 this.TaxRateDescription = taxRateDescription;
             }
-
         }
-        internal PaymentBalanceActivityTaxOnFeeDetail(Dictionary<string, bool> shouldSerialize,
+
+        internal PaymentBalanceActivityTaxOnFeeDetail(
+            Dictionary<string, bool> shouldSerialize,
             string paymentId = null,
             string taxRateDescription = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PaymentBalanceActivityTaxOnFeeDetail : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,35 +98,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PaymentBalanceActivityTaxOnFeeDetail other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.TaxRateDescription == null && other.TaxRateDescription == null) || (this.TaxRateDescription?.Equals(other.TaxRateDescription) == true));
+            return obj is PaymentBalanceActivityTaxOnFeeDetail other &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true) &&
+                (this.TaxRateDescription == null && other.TaxRateDescription == null ||
+                 this.TaxRateDescription?.Equals(other.TaxRateDescription) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1979815303;
-            hashCode = HashCode.Combine(this.PaymentId, this.TaxRateDescription);
+            var hashCode = -1979815303;
+            hashCode = HashCode.Combine(hashCode, this.PaymentId, this.TaxRateDescription);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
-            toStringOutput.Add($"this.TaxRateDescription = {(this.TaxRateDescription == null ? "null" : this.TaxRateDescription)}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
+            toStringOutput.Add($"this.TaxRateDescription = {this.TaxRateDescription ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentId()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTaxRateDescription()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> PaymentBalanceActivityTaxOnFeeDetail. </returns>
             public PaymentBalanceActivityTaxOnFeeDetail Build()
             {
-                return new PaymentBalanceActivityTaxOnFeeDetail(shouldSerialize,
+                return new PaymentBalanceActivityTaxOnFeeDetail(
+                    shouldSerialize,
                     this.paymentId,
                     this.taxRateDescription);
             }

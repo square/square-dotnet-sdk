@@ -99,9 +99,10 @@ namespace Square.Models
                 shouldSerialize["sort_order"] = true;
                 this.SortOrder = sortOrder;
             }
-
         }
-        internal ListGiftCardActivitiesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListGiftCardActivitiesRequest(
+            Dictionary<string, bool> shouldSerialize,
             string giftCardId = null,
             string type = null,
             string locationId = null,
@@ -187,9 +188,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListGiftCardActivitiesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -268,49 +267,53 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListGiftCardActivitiesRequest other &&                ((this.GiftCardId == null && other.GiftCardId == null) || (this.GiftCardId?.Equals(other.GiftCardId) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((this.EndTime == null && other.EndTime == null) || (this.EndTime?.Equals(other.EndTime) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
+            return obj is ListGiftCardActivitiesRequest other &&
+                (this.GiftCardId == null && other.GiftCardId == null ||
+                 this.GiftCardId?.Equals(other.GiftCardId) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.BeginTime == null && other.BeginTime == null ||
+                 this.BeginTime?.Equals(other.BeginTime) == true) &&
+                (this.EndTime == null && other.EndTime == null ||
+                 this.EndTime?.Equals(other.EndTime) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 467092355;
-            hashCode = HashCode.Combine(this.GiftCardId, this.Type, this.LocationId, this.BeginTime, this.EndTime, this.Limit, this.Cursor);
+            var hashCode = 467092355;
+            hashCode = HashCode.Combine(hashCode, this.GiftCardId, this.Type, this.LocationId, this.BeginTime, this.EndTime, this.Limit, this.Cursor);
 
             hashCode = HashCode.Combine(hashCode, this.SortOrder);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.GiftCardId = {(this.GiftCardId == null ? "null" : this.GiftCardId)}");
-            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime)}");
-            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime)}");
+            toStringOutput.Add($"this.GiftCardId = {this.GiftCardId ?? "null"}");
+            toStringOutput.Add($"this.Type = {this.Type ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.BeginTime = {this.BeginTime ?? "null"}");
+            toStringOutput.Add($"this.EndTime = {this.EndTime ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
-            toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
+            toStringOutput.Add($"this.SortOrder = {this.SortOrder ?? "null"}");
         }
 
         /// <summary>
@@ -454,7 +457,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetGiftCardId()
             {
@@ -462,7 +465,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetType()
             {
@@ -470,7 +473,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -478,7 +481,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBeginTime()
             {
@@ -486,7 +489,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndTime()
             {
@@ -494,7 +497,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -502,7 +505,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -510,7 +513,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSortOrder()
             {
@@ -524,7 +527,8 @@ namespace Square.Models
             /// <returns> ListGiftCardActivitiesRequest. </returns>
             public ListGiftCardActivitiesRequest Build()
             {
-                return new ListGiftCardActivitiesRequest(shouldSerialize,
+                return new ListGiftCardActivitiesRequest(
+                    shouldSerialize,
                     this.giftCardId,
                     this.type,
                     this.locationId,

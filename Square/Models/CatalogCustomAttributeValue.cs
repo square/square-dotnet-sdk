@@ -60,9 +60,9 @@ namespace Square.Models
                 shouldSerialize["string_value"] = true;
                 this.StringValue = stringValue;
             }
-
             this.CustomAttributeDefinitionId = customAttributeDefinitionId;
             this.Type = type;
+
             if (numberValue != null)
             {
                 shouldSerialize["number_value"] = true;
@@ -80,10 +80,11 @@ namespace Square.Models
                 shouldSerialize["selection_uid_values"] = true;
                 this.SelectionUidValues = selectionUidValues;
             }
-
             this.Key = key;
         }
-        internal CatalogCustomAttributeValue(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogCustomAttributeValue(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             string stringValue = null,
             string customAttributeDefinitionId = null,
@@ -159,9 +160,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogCustomAttributeValue : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -213,49 +212,53 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogCustomAttributeValue other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.StringValue == null && other.StringValue == null) || (this.StringValue?.Equals(other.StringValue) == true)) &&
-                ((this.CustomAttributeDefinitionId == null && other.CustomAttributeDefinitionId == null) || (this.CustomAttributeDefinitionId?.Equals(other.CustomAttributeDefinitionId) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.NumberValue == null && other.NumberValue == null) || (this.NumberValue?.Equals(other.NumberValue) == true)) &&
-                ((this.BooleanValue == null && other.BooleanValue == null) || (this.BooleanValue?.Equals(other.BooleanValue) == true)) &&
-                ((this.SelectionUidValues == null && other.SelectionUidValues == null) || (this.SelectionUidValues?.Equals(other.SelectionUidValues) == true)) &&
-                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true));
+            return obj is CatalogCustomAttributeValue other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.StringValue == null && other.StringValue == null ||
+                 this.StringValue?.Equals(other.StringValue) == true) &&
+                (this.CustomAttributeDefinitionId == null && other.CustomAttributeDefinitionId == null ||
+                 this.CustomAttributeDefinitionId?.Equals(other.CustomAttributeDefinitionId) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.NumberValue == null && other.NumberValue == null ||
+                 this.NumberValue?.Equals(other.NumberValue) == true) &&
+                (this.BooleanValue == null && other.BooleanValue == null ||
+                 this.BooleanValue?.Equals(other.BooleanValue) == true) &&
+                (this.SelectionUidValues == null && other.SelectionUidValues == null ||
+                 this.SelectionUidValues?.Equals(other.SelectionUidValues) == true) &&
+                (this.Key == null && other.Key == null ||
+                 this.Key?.Equals(other.Key) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1910658984;
-            hashCode = HashCode.Combine(this.Name, this.StringValue, this.CustomAttributeDefinitionId, this.Type, this.NumberValue, this.BooleanValue, this.SelectionUidValues);
+            var hashCode = 1910658984;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.StringValue, this.CustomAttributeDefinitionId, this.Type, this.NumberValue, this.BooleanValue, this.SelectionUidValues);
 
             hashCode = HashCode.Combine(hashCode, this.Key);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.StringValue = {(this.StringValue == null ? "null" : this.StringValue)}");
-            toStringOutput.Add($"this.CustomAttributeDefinitionId = {(this.CustomAttributeDefinitionId == null ? "null" : this.CustomAttributeDefinitionId)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.StringValue = {this.StringValue ?? "null"}");
+            toStringOutput.Add($"this.CustomAttributeDefinitionId = {this.CustomAttributeDefinitionId ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.NumberValue = {(this.NumberValue == null ? "null" : this.NumberValue)}");
+            toStringOutput.Add($"this.NumberValue = {this.NumberValue ?? "null"}");
             toStringOutput.Add($"this.BooleanValue = {(this.BooleanValue == null ? "null" : this.BooleanValue.ToString())}");
             toStringOutput.Add($"this.SelectionUidValues = {(this.SelectionUidValues == null ? "null" : $"[{string.Join(", ", this.SelectionUidValues)} ]")}");
-            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key)}");
+            toStringOutput.Add($"this.Key = {this.Key ?? "null"}");
         }
 
         /// <summary>
@@ -393,7 +396,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -401,7 +404,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStringValue()
             {
@@ -409,7 +412,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNumberValue()
             {
@@ -417,7 +420,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBooleanValue()
             {
@@ -425,7 +428,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSelectionUidValues()
             {
@@ -439,7 +442,8 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeValue. </returns>
             public CatalogCustomAttributeValue Build()
             {
-                return new CatalogCustomAttributeValue(shouldSerialize,
+                return new CatalogCustomAttributeValue(
+                    shouldSerialize,
                     this.name,
                     this.stringValue,
                     this.customAttributeDefinitionId,

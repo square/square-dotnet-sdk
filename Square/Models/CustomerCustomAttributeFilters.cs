@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["filters"] = true;
                 this.Filters = filters;
             }
-
         }
-        internal CustomerCustomAttributeFilters(Dictionary<string, bool> shouldSerialize,
+
+        internal CustomerCustomAttributeFilters(
+            Dictionary<string, bool> shouldSerialize,
             IList<Models.CustomerCustomAttributeFilter> filters = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -56,9 +57,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomerCustomAttributeFilters : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -74,26 +73,23 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomerCustomAttributeFilters other &&                ((this.Filters == null && other.Filters == null) || (this.Filters?.Equals(other.Filters) == true));
+            return obj is CustomerCustomAttributeFilters other &&
+                (this.Filters == null && other.Filters == null ||
+                 this.Filters?.Equals(other.Filters) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1015790427;
-            hashCode = HashCode.Combine(this.Filters);
+            var hashCode = 1015790427;
+            hashCode = HashCode.Combine(hashCode, this.Filters);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -139,7 +135,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFilters()
             {
@@ -153,7 +149,8 @@ namespace Square.Models
             /// <returns> CustomerCustomAttributeFilters. </returns>
             public CustomerCustomAttributeFilters Build()
             {
-                return new CustomerCustomAttributeFilters(shouldSerialize,
+                return new CustomerCustomAttributeFilters(
+                    shouldSerialize,
                     this.filters);
             }
         }

@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["payment_id"] = true;
                 this.PaymentId = paymentId;
             }
-
         }
-        internal PaymentBalanceActivitySquareCapitalReversedPaymentDetail(Dictionary<string, bool> shouldSerialize,
+
+        internal PaymentBalanceActivitySquareCapitalReversedPaymentDetail(
+            Dictionary<string, bool> shouldSerialize,
             string paymentId = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -55,9 +56,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PaymentBalanceActivitySquareCapitalReversedPaymentDetail : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -73,33 +72,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PaymentBalanceActivitySquareCapitalReversedPaymentDetail other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
+            return obj is PaymentBalanceActivitySquareCapitalReversedPaymentDetail other &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1123156444;
-            hashCode = HashCode.Combine(this.PaymentId);
+            var hashCode = -1123156444;
+            hashCode = HashCode.Combine(hashCode, this.PaymentId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
         }
 
         /// <summary>
@@ -138,7 +134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentId()
             {
@@ -152,7 +148,8 @@ namespace Square.Models
             /// <returns> PaymentBalanceActivitySquareCapitalReversedPaymentDetail. </returns>
             public PaymentBalanceActivitySquareCapitalReversedPaymentDetail Build()
             {
-                return new PaymentBalanceActivitySquareCapitalReversedPaymentDetail(shouldSerialize,
+                return new PaymentBalanceActivitySquareCapitalReversedPaymentDetail(
+                    shouldSerialize,
                     this.paymentId);
             }
         }

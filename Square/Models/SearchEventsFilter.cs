@@ -56,10 +56,11 @@ namespace Square.Models
                 shouldSerialize["location_ids"] = true;
                 this.LocationIds = locationIds;
             }
-
             this.CreatedAt = createdAt;
         }
-        internal SearchEventsFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal SearchEventsFilter(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> eventTypes = null,
             IList<string> merchantIds = null,
             IList<string> locationIds = null,
@@ -104,9 +105,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchEventsFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -140,29 +139,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchEventsFilter other &&                ((this.EventTypes == null && other.EventTypes == null) || (this.EventTypes?.Equals(other.EventTypes) == true)) &&
-                ((this.MerchantIds == null && other.MerchantIds == null) || (this.MerchantIds?.Equals(other.MerchantIds) == true)) &&
-                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
+            return obj is SearchEventsFilter other &&
+                (this.EventTypes == null && other.EventTypes == null ||
+                 this.EventTypes?.Equals(other.EventTypes) == true) &&
+                (this.MerchantIds == null && other.MerchantIds == null ||
+                 this.MerchantIds?.Equals(other.MerchantIds) == true) &&
+                (this.LocationIds == null && other.LocationIds == null ||
+                 this.LocationIds?.Equals(other.LocationIds) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1776946700;
-            hashCode = HashCode.Combine(this.EventTypes, this.MerchantIds, this.LocationIds, this.CreatedAt);
+            var hashCode = 1776946700;
+            hashCode = HashCode.Combine(hashCode, this.EventTypes, this.MerchantIds, this.LocationIds, this.CreatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -254,7 +253,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEventTypes()
             {
@@ -262,7 +261,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMerchantIds()
             {
@@ -270,7 +269,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationIds()
             {
@@ -284,7 +283,8 @@ namespace Square.Models
             /// <returns> SearchEventsFilter. </returns>
             public SearchEventsFilter Build()
             {
-                return new SearchEventsFilter(shouldSerialize,
+                return new SearchEventsFilter(
+                    shouldSerialize,
                     this.eventTypes,
                     this.merchantIds,
                     this.locationIds,

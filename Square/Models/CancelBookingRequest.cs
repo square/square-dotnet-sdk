@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["booking_version"] = true;
                 this.BookingVersion = bookingVersion;
             }
-
         }
-        internal CancelBookingRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal CancelBookingRequest(
+            Dictionary<string, bool> shouldSerialize,
             string idempotencyKey = null,
             int? bookingVersion = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CancelBookingRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,34 +98,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CancelBookingRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.BookingVersion == null && other.BookingVersion == null) || (this.BookingVersion?.Equals(other.BookingVersion) == true));
+            return obj is CancelBookingRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.BookingVersion == null && other.BookingVersion == null ||
+                 this.BookingVersion?.Equals(other.BookingVersion) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1446943632;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.BookingVersion);
+            var hashCode = 1446943632;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.BookingVersion);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.BookingVersion = {(this.BookingVersion == null ? "null" : this.BookingVersion.ToString())}");
         }
 
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIdempotencyKey()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBookingVersion()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> CancelBookingRequest. </returns>
             public CancelBookingRequest Build()
             {
-                return new CancelBookingRequest(shouldSerialize,
+                return new CancelBookingRequest(
+                    shouldSerialize,
                     this.idempotencyKey,
                     this.bookingVersion);
             }

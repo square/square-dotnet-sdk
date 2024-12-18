@@ -49,43 +49,39 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CreateDeviceCodeRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CreateDeviceCodeRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.DeviceCode == null && other.DeviceCode == null) || (this.DeviceCode?.Equals(other.DeviceCode) == true));
+            return obj is CreateDeviceCodeRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.DeviceCode == null && other.DeviceCode == null ||
+                 this.DeviceCode?.Equals(other.DeviceCode) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1794633711;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.DeviceCode);
+            var hashCode = 1794633711;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.DeviceCode);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.DeviceCode = {(this.DeviceCode == null ? "null" : this.DeviceCode.ToString())}");
         }
 

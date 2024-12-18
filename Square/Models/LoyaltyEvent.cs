@@ -155,66 +155,74 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyEvent : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyEvent other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.AccumulatePoints == null && other.AccumulatePoints == null) || (this.AccumulatePoints?.Equals(other.AccumulatePoints) == true)) &&
-                ((this.CreateReward == null && other.CreateReward == null) || (this.CreateReward?.Equals(other.CreateReward) == true)) &&
-                ((this.RedeemReward == null && other.RedeemReward == null) || (this.RedeemReward?.Equals(other.RedeemReward) == true)) &&
-                ((this.DeleteReward == null && other.DeleteReward == null) || (this.DeleteReward?.Equals(other.DeleteReward) == true)) &&
-                ((this.AdjustPoints == null && other.AdjustPoints == null) || (this.AdjustPoints?.Equals(other.AdjustPoints) == true)) &&
-                ((this.LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
-                ((this.ExpirePoints == null && other.ExpirePoints == null) || (this.ExpirePoints?.Equals(other.ExpirePoints) == true)) &&
-                ((this.OtherEvent == null && other.OtherEvent == null) || (this.OtherEvent?.Equals(other.OtherEvent) == true)) &&
-                ((this.AccumulatePromotionPoints == null && other.AccumulatePromotionPoints == null) || (this.AccumulatePromotionPoints?.Equals(other.AccumulatePromotionPoints) == true));
+            return obj is LoyaltyEvent other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.AccumulatePoints == null && other.AccumulatePoints == null ||
+                 this.AccumulatePoints?.Equals(other.AccumulatePoints) == true) &&
+                (this.CreateReward == null && other.CreateReward == null ||
+                 this.CreateReward?.Equals(other.CreateReward) == true) &&
+                (this.RedeemReward == null && other.RedeemReward == null ||
+                 this.RedeemReward?.Equals(other.RedeemReward) == true) &&
+                (this.DeleteReward == null && other.DeleteReward == null ||
+                 this.DeleteReward?.Equals(other.DeleteReward) == true) &&
+                (this.AdjustPoints == null && other.AdjustPoints == null ||
+                 this.AdjustPoints?.Equals(other.AdjustPoints) == true) &&
+                (this.LoyaltyAccountId == null && other.LoyaltyAccountId == null ||
+                 this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Source == null && other.Source == null ||
+                 this.Source?.Equals(other.Source) == true) &&
+                (this.ExpirePoints == null && other.ExpirePoints == null ||
+                 this.ExpirePoints?.Equals(other.ExpirePoints) == true) &&
+                (this.OtherEvent == null && other.OtherEvent == null ||
+                 this.OtherEvent?.Equals(other.OtherEvent) == true) &&
+                (this.AccumulatePromotionPoints == null && other.AccumulatePromotionPoints == null ||
+                 this.AccumulatePromotionPoints?.Equals(other.AccumulatePromotionPoints) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1796206158;
-            hashCode = HashCode.Combine(this.Id, this.Type, this.CreatedAt, this.AccumulatePoints, this.CreateReward, this.RedeemReward, this.DeleteReward);
+            var hashCode = -1796206158;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Type, this.CreatedAt, this.AccumulatePoints, this.CreateReward, this.RedeemReward, this.DeleteReward);
 
             hashCode = HashCode.Combine(hashCode, this.AdjustPoints, this.LoyaltyAccountId, this.LocationId, this.Source, this.ExpirePoints, this.OtherEvent, this.AccumulatePromotionPoints);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
             toStringOutput.Add($"this.AccumulatePoints = {(this.AccumulatePoints == null ? "null" : this.AccumulatePoints.ToString())}");
             toStringOutput.Add($"this.CreateReward = {(this.CreateReward == null ? "null" : this.CreateReward.ToString())}");
             toStringOutput.Add($"this.RedeemReward = {(this.RedeemReward == null ? "null" : this.RedeemReward.ToString())}");
             toStringOutput.Add($"this.DeleteReward = {(this.DeleteReward == null ? "null" : this.DeleteReward.ToString())}");
             toStringOutput.Add($"this.AdjustPoints = {(this.AdjustPoints == null ? "null" : this.AdjustPoints.ToString())}");
-            toStringOutput.Add($"this.LoyaltyAccountId = {(this.LoyaltyAccountId == null ? "null" : this.LoyaltyAccountId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LoyaltyAccountId = {this.LoyaltyAccountId ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
             toStringOutput.Add($"this.ExpirePoints = {(this.ExpirePoints == null ? "null" : this.ExpirePoints.ToString())}");
             toStringOutput.Add($"this.OtherEvent = {(this.OtherEvent == null ? "null" : this.OtherEvent.ToString())}");

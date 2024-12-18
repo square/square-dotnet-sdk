@@ -64,43 +64,41 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListDisputeEvidenceResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListDisputeEvidenceResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Evidence == null && other.Evidence == null) || (this.Evidence?.Equals(other.Evidence) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+            return obj is ListDisputeEvidenceResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Evidence == null && other.Evidence == null ||
+                 this.Evidence?.Equals(other.Evidence) == true) &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1768925090;
+            var hashCode = -1768925090;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Evidence, this.Errors, this.Cursor);
+            hashCode = HashCode.Combine(hashCode, this.Evidence, this.Errors, this.Cursor);
 
             return hashCode;
         }
+
         internal ListDisputeEvidenceResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
@@ -115,7 +113,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Evidence = {(this.Evidence == null ? "null" : $"[{string.Join(", ", this.Evidence)} ]")}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
         }
 
         /// <summary>

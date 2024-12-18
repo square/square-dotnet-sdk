@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["seller_keyed_in"] = true;
                 this.SellerKeyedIn = sellerKeyedIn;
             }
-
         }
-        internal CustomerDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal CustomerDetails(
+            Dictionary<string, bool> shouldSerialize,
             bool? customerInitiated = null,
             bool? sellerKeyedIn = null)
         {
@@ -73,9 +74,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomerDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -100,27 +99,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomerDetails other &&                ((this.CustomerInitiated == null && other.CustomerInitiated == null) || (this.CustomerInitiated?.Equals(other.CustomerInitiated) == true)) &&
-                ((this.SellerKeyedIn == null && other.SellerKeyedIn == null) || (this.SellerKeyedIn?.Equals(other.SellerKeyedIn) == true));
+            return obj is CustomerDetails other &&
+                (this.CustomerInitiated == null && other.CustomerInitiated == null ||
+                 this.CustomerInitiated?.Equals(other.CustomerInitiated) == true) &&
+                (this.SellerKeyedIn == null && other.SellerKeyedIn == null ||
+                 this.SellerKeyedIn?.Equals(other.SellerKeyedIn) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1391775710;
-            hashCode = HashCode.Combine(this.CustomerInitiated, this.SellerKeyedIn);
+            var hashCode = -1391775710;
+            hashCode = HashCode.Combine(hashCode, this.CustomerInitiated, this.SellerKeyedIn);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -182,7 +179,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerInitiated()
             {
@@ -190,7 +187,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSellerKeyedIn()
             {
@@ -204,7 +201,8 @@ namespace Square.Models
             /// <returns> CustomerDetails. </returns>
             public CustomerDetails Build()
             {
-                return new CustomerDetails(shouldSerialize,
+                return new CustomerDetails(
+                    shouldSerialize,
                     this.customerInitiated,
                     this.sellerKeyedIn);
             }

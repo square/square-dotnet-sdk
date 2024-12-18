@@ -35,8 +35,8 @@ namespace Square.Models
                 { "fields_to_clear", false },
                 { "idempotency_key", false }
             };
-
             this.Order = order;
+
             if (fieldsToClear != null)
             {
                 shouldSerialize["fields_to_clear"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["idempotency_key"] = true;
                 this.IdempotencyKey = idempotencyKey;
             }
-
         }
-        internal UpdateOrderRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal UpdateOrderRequest(
+            Dictionary<string, bool> shouldSerialize,
             Models.Order order = null,
             IList<string> fieldsToClear = null,
             string idempotencyKey = null)
@@ -94,9 +95,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateOrderRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -121,28 +120,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateOrderRequest other &&                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
-                ((this.FieldsToClear == null && other.FieldsToClear == null) || (this.FieldsToClear?.Equals(other.FieldsToClear) == true)) &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+            return obj is UpdateOrderRequest other &&
+                (this.Order == null && other.Order == null ||
+                 this.Order?.Equals(other.Order) == true) &&
+                (this.FieldsToClear == null && other.FieldsToClear == null ||
+                 this.FieldsToClear?.Equals(other.FieldsToClear) == true) &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1953116001;
-            hashCode = HashCode.Combine(this.Order, this.FieldsToClear, this.IdempotencyKey);
+            var hashCode = -1953116001;
+            hashCode = HashCode.Combine(hashCode, this.Order, this.FieldsToClear, this.IdempotencyKey);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -151,7 +149,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
             toStringOutput.Add($"this.FieldsToClear = {(this.FieldsToClear == null ? "null" : $"[{string.Join(", ", this.FieldsToClear)} ]")}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
         }
 
         /// <summary>
@@ -218,7 +216,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFieldsToClear()
             {
@@ -226,7 +224,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIdempotencyKey()
             {
@@ -240,7 +238,8 @@ namespace Square.Models
             /// <returns> UpdateOrderRequest. </returns>
             public UpdateOrderRequest Build()
             {
-                return new UpdateOrderRequest(shouldSerialize,
+                return new UpdateOrderRequest(
+                    shouldSerialize,
                     this.order,
                     this.fieldsToClear,
                     this.idempotencyKey);

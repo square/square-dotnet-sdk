@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["refund_id"] = true;
                 this.RefundId = refundId;
             }
-
         }
-        internal PaymentBalanceActivityRefundDetail(Dictionary<string, bool> shouldSerialize,
+
+        internal PaymentBalanceActivityRefundDetail(
+            Dictionary<string, bool> shouldSerialize,
             string paymentId = null,
             string refundId = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PaymentBalanceActivityRefundDetail : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,35 +98,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PaymentBalanceActivityRefundDetail other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.RefundId == null && other.RefundId == null) || (this.RefundId?.Equals(other.RefundId) == true));
+            return obj is PaymentBalanceActivityRefundDetail other &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true) &&
+                (this.RefundId == null && other.RefundId == null ||
+                 this.RefundId?.Equals(other.RefundId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -405424502;
-            hashCode = HashCode.Combine(this.PaymentId, this.RefundId);
+            var hashCode = -405424502;
+            hashCode = HashCode.Combine(hashCode, this.PaymentId, this.RefundId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
-            toStringOutput.Add($"this.RefundId = {(this.RefundId == null ? "null" : this.RefundId)}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
+            toStringOutput.Add($"this.RefundId = {this.RefundId ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentId()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRefundId()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> PaymentBalanceActivityRefundDetail. </returns>
             public PaymentBalanceActivityRefundDetail Build()
             {
-                return new PaymentBalanceActivityRefundDetail(shouldSerialize,
+                return new PaymentBalanceActivityRefundDetail(
+                    shouldSerialize,
                     this.paymentId,
                     this.refundId);
             }

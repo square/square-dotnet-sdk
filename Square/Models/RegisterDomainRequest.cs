@@ -38,42 +38,37 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RegisterDomainRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RegisterDomainRequest other &&                ((this.DomainName == null && other.DomainName == null) || (this.DomainName?.Equals(other.DomainName) == true));
+            return obj is RegisterDomainRequest other &&
+                (this.DomainName == null && other.DomainName == null ||
+                 this.DomainName?.Equals(other.DomainName) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1345788057;
-            hashCode = HashCode.Combine(this.DomainName);
+            var hashCode = 1345788057;
+            hashCode = HashCode.Combine(hashCode, this.DomainName);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.DomainName = {(this.DomainName == null ? "null" : this.DomainName)}");
+            toStringOutput.Add($"this.DomainName = {this.DomainName ?? "null"}");
         }
 
         /// <summary>

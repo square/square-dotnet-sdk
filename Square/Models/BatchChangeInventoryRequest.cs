@@ -35,8 +35,8 @@ namespace Square.Models
                 { "changes", false },
                 { "ignore_unchanged_counts", false }
             };
-
             this.IdempotencyKey = idempotencyKey;
+
             if (changes != null)
             {
                 shouldSerialize["changes"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["ignore_unchanged_counts"] = true;
                 this.IgnoreUnchangedCounts = ignoreUnchangedCounts;
             }
-
         }
-        internal BatchChangeInventoryRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal BatchChangeInventoryRequest(
+            Dictionary<string, bool> shouldSerialize,
             string idempotencyKey,
             IList<Models.InventoryChange> changes = null,
             bool? ignoreUnchangedCounts = null)
@@ -90,9 +91,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BatchChangeInventoryRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -117,35 +116,34 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BatchChangeInventoryRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.Changes == null && other.Changes == null) || (this.Changes?.Equals(other.Changes) == true)) &&
-                ((this.IgnoreUnchangedCounts == null && other.IgnoreUnchangedCounts == null) || (this.IgnoreUnchangedCounts?.Equals(other.IgnoreUnchangedCounts) == true));
+            return obj is BatchChangeInventoryRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.Changes == null && other.Changes == null ||
+                 this.Changes?.Equals(other.Changes) == true) &&
+                (this.IgnoreUnchangedCounts == null && other.IgnoreUnchangedCounts == null ||
+                 this.IgnoreUnchangedCounts?.Equals(other.IgnoreUnchangedCounts) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1934758425;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.Changes, this.IgnoreUnchangedCounts);
+            var hashCode = 1934758425;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.Changes, this.IgnoreUnchangedCounts);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.Changes = {(this.Changes == null ? "null" : $"[{string.Join(", ", this.Changes)} ]")}");
             toStringOutput.Add($"this.IgnoreUnchangedCounts = {(this.IgnoreUnchangedCounts == null ? "null" : this.IgnoreUnchangedCounts.ToString())}");
         }
@@ -224,7 +222,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetChanges()
             {
@@ -232,7 +230,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIgnoreUnchangedCounts()
             {
@@ -246,7 +244,8 @@ namespace Square.Models
             /// <returns> BatchChangeInventoryRequest. </returns>
             public BatchChangeInventoryRequest Build()
             {
-                return new BatchChangeInventoryRequest(shouldSerialize,
+                return new BatchChangeInventoryRequest(
+                    shouldSerialize,
                     this.idempotencyKey,
                     this.changes,
                     this.ignoreUnchangedCounts);

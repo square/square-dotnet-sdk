@@ -43,17 +43,18 @@ namespace Square.Models
                 shouldSerialize["uid"] = true;
                 this.Uid = uid;
             }
-
             this.LineItemUid = lineItemUid;
             this.Quantity = quantity;
+
             if (metadata != null)
             {
                 shouldSerialize["metadata"] = true;
                 this.Metadata = metadata;
             }
-
         }
-        internal OrderFulfillmentFulfillmentEntry(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderFulfillmentFulfillmentEntry(
+            Dictionary<string, bool> shouldSerialize,
             string lineItemUid,
             string quantity,
             string uid = null,
@@ -109,9 +110,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderFulfillmentFulfillmentEntry : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -136,38 +135,38 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderFulfillmentFulfillmentEntry other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.LineItemUid == null && other.LineItemUid == null) || (this.LineItemUid?.Equals(other.LineItemUid) == true)) &&
-                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
-                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true));
+            return obj is OrderFulfillmentFulfillmentEntry other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.LineItemUid == null && other.LineItemUid == null ||
+                 this.LineItemUid?.Equals(other.LineItemUid) == true) &&
+                (this.Quantity == null && other.Quantity == null ||
+                 this.Quantity?.Equals(other.Quantity) == true) &&
+                (this.Metadata == null && other.Metadata == null ||
+                 this.Metadata?.Equals(other.Metadata) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2017821709;
-            hashCode = HashCode.Combine(this.Uid, this.LineItemUid, this.Quantity, this.Metadata);
+            var hashCode = 2017821709;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.LineItemUid, this.Quantity, this.Metadata);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.LineItemUid = {(this.LineItemUid == null ? "null" : this.LineItemUid)}");
-            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.LineItemUid = {this.LineItemUid ?? "null"}");
+            toStringOutput.Add($"this.Quantity = {this.Quantity ?? "null"}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
         }
 
@@ -261,7 +260,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -269,7 +268,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMetadata()
             {
@@ -283,7 +282,8 @@ namespace Square.Models
             /// <returns> OrderFulfillmentFulfillmentEntry. </returns>
             public OrderFulfillmentFulfillmentEntry Build()
             {
-                return new OrderFulfillmentFulfillmentEntry(shouldSerialize,
+                return new OrderFulfillmentFulfillmentEntry(
+                    shouldSerialize,
                     this.lineItemUid,
                     this.quantity,
                     this.uid,

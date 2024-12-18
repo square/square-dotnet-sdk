@@ -65,9 +65,9 @@ namespace Square.Models
                 { "additional_recipients", false },
                 { "verification_token", false }
             };
-
             this.IdempotencyKey = idempotencyKey;
             this.AmountMoney = amountMoney;
+
             if (cardNonce != null)
             {
                 shouldSerialize["card_nonce"] = true;
@@ -103,9 +103,9 @@ namespace Square.Models
                 shouldSerialize["customer_id"] = true;
                 this.CustomerId = customerId;
             }
-
             this.BillingAddress = billingAddress;
             this.ShippingAddress = shippingAddress;
+
             if (buyerEmailAddress != null)
             {
                 shouldSerialize["buyer_email_address"] = true;
@@ -129,9 +129,10 @@ namespace Square.Models
                 shouldSerialize["verification_token"] = true;
                 this.VerificationToken = verificationToken;
             }
-
         }
-        internal ChargeRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ChargeRequest(
+            Dictionary<string, bool> shouldSerialize,
             string idempotencyKey,
             Models.Money amountMoney,
             string cardNonce = null,
@@ -294,9 +295,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ChargeRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -393,61 +392,71 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ChargeRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.CardNonce == null && other.CardNonce == null) || (this.CardNonce?.Equals(other.CardNonce) == true)) &&
-                ((this.CustomerCardId == null && other.CustomerCardId == null) || (this.CustomerCardId?.Equals(other.CustomerCardId) == true)) &&
-                ((this.DelayCapture == null && other.DelayCapture == null) || (this.DelayCapture?.Equals(other.DelayCapture) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.BillingAddress == null && other.BillingAddress == null) || (this.BillingAddress?.Equals(other.BillingAddress) == true)) &&
-                ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
-                ((this.BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (this.BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
-                ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
-                ((this.VerificationToken == null && other.VerificationToken == null) || (this.VerificationToken?.Equals(other.VerificationToken) == true));
+            return obj is ChargeRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.CardNonce == null && other.CardNonce == null ||
+                 this.CardNonce?.Equals(other.CardNonce) == true) &&
+                (this.CustomerCardId == null && other.CustomerCardId == null ||
+                 this.CustomerCardId?.Equals(other.CustomerCardId) == true) &&
+                (this.DelayCapture == null && other.DelayCapture == null ||
+                 this.DelayCapture?.Equals(other.DelayCapture) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.Note == null && other.Note == null ||
+                 this.Note?.Equals(other.Note) == true) &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.BillingAddress == null && other.BillingAddress == null ||
+                 this.BillingAddress?.Equals(other.BillingAddress) == true) &&
+                (this.ShippingAddress == null && other.ShippingAddress == null ||
+                 this.ShippingAddress?.Equals(other.ShippingAddress) == true) &&
+                (this.BuyerEmailAddress == null && other.BuyerEmailAddress == null ||
+                 this.BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true) &&
+                (this.AdditionalRecipients == null && other.AdditionalRecipients == null ||
+                 this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true) &&
+                (this.VerificationToken == null && other.VerificationToken == null ||
+                 this.VerificationToken?.Equals(other.VerificationToken) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 851688088;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.AmountMoney, this.CardNonce, this.CustomerCardId, this.DelayCapture, this.ReferenceId, this.Note);
+            var hashCode = 851688088;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.AmountMoney, this.CardNonce, this.CustomerCardId, this.DelayCapture, this.ReferenceId, this.Note);
 
             hashCode = HashCode.Combine(hashCode, this.CustomerId, this.BillingAddress, this.ShippingAddress, this.BuyerEmailAddress, this.OrderId, this.AdditionalRecipients, this.VerificationToken);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
-            toStringOutput.Add($"this.CardNonce = {(this.CardNonce == null ? "null" : this.CardNonce)}");
-            toStringOutput.Add($"this.CustomerCardId = {(this.CustomerCardId == null ? "null" : this.CustomerCardId)}");
+            toStringOutput.Add($"this.CardNonce = {this.CardNonce ?? "null"}");
+            toStringOutput.Add($"this.CustomerCardId = {this.CustomerCardId ?? "null"}");
             toStringOutput.Add($"this.DelayCapture = {(this.DelayCapture == null ? "null" : this.DelayCapture.ToString())}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
+            toStringOutput.Add($"this.Note = {this.Note ?? "null"}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
             toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
             toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
-            toStringOutput.Add($"this.BuyerEmailAddress = {(this.BuyerEmailAddress == null ? "null" : this.BuyerEmailAddress)}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.BuyerEmailAddress = {this.BuyerEmailAddress ?? "null"}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
             toStringOutput.Add($"this.AdditionalRecipients = {(this.AdditionalRecipients == null ? "null" : $"[{string.Join(", ", this.AdditionalRecipients)} ]")}");
-            toStringOutput.Add($"this.VerificationToken = {(this.VerificationToken == null ? "null" : this.VerificationToken)}");
+            toStringOutput.Add($"this.VerificationToken = {this.VerificationToken ?? "null"}");
         }
 
         /// <summary>
@@ -686,7 +695,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCardNonce()
             {
@@ -694,7 +703,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerCardId()
             {
@@ -702,7 +711,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDelayCapture()
             {
@@ -710,7 +719,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -718,7 +727,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNote()
             {
@@ -726,7 +735,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerId()
             {
@@ -734,7 +743,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBuyerEmailAddress()
             {
@@ -742,7 +751,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderId()
             {
@@ -750,7 +759,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAdditionalRecipients()
             {
@@ -758,7 +767,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVerificationToken()
             {
@@ -772,7 +781,8 @@ namespace Square.Models
             /// <returns> ChargeRequest. </returns>
             public ChargeRequest Build()
             {
-                return new ChargeRequest(shouldSerialize,
+                return new ChargeRequest(
+                    shouldSerialize,
                     this.idempotencyKey,
                     this.amountMoney,
                     this.cardNonce,

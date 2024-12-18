@@ -35,8 +35,8 @@ namespace Square.Models
                 { "modifier_lists_to_enable", false },
                 { "modifier_lists_to_disable", false }
             };
-
             this.ItemIds = itemIds;
+
             if (modifierListsToEnable != null)
             {
                 shouldSerialize["modifier_lists_to_enable"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["modifier_lists_to_disable"] = true;
                 this.ModifierListsToDisable = modifierListsToDisable;
             }
-
         }
-        internal UpdateItemModifierListsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal UpdateItemModifierListsRequest(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> itemIds,
             IList<string> modifierListsToEnable = null,
             IList<string> modifierListsToDisable = null)
@@ -85,9 +86,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateItemModifierListsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -112,28 +111,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateItemModifierListsRequest other &&                ((this.ItemIds == null && other.ItemIds == null) || (this.ItemIds?.Equals(other.ItemIds) == true)) &&
-                ((this.ModifierListsToEnable == null && other.ModifierListsToEnable == null) || (this.ModifierListsToEnable?.Equals(other.ModifierListsToEnable) == true)) &&
-                ((this.ModifierListsToDisable == null && other.ModifierListsToDisable == null) || (this.ModifierListsToDisable?.Equals(other.ModifierListsToDisable) == true));
+            return obj is UpdateItemModifierListsRequest other &&
+                (this.ItemIds == null && other.ItemIds == null ||
+                 this.ItemIds?.Equals(other.ItemIds) == true) &&
+                (this.ModifierListsToEnable == null && other.ModifierListsToEnable == null ||
+                 this.ModifierListsToEnable?.Equals(other.ModifierListsToEnable) == true) &&
+                (this.ModifierListsToDisable == null && other.ModifierListsToDisable == null ||
+                 this.ModifierListsToDisable?.Equals(other.ModifierListsToDisable) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1248477288;
-            hashCode = HashCode.Combine(this.ItemIds, this.ModifierListsToEnable, this.ModifierListsToDisable);
+            var hashCode = 1248477288;
+            hashCode = HashCode.Combine(hashCode, this.ItemIds, this.ModifierListsToEnable, this.ModifierListsToDisable);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -219,7 +217,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetModifierListsToEnable()
             {
@@ -227,7 +225,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetModifierListsToDisable()
             {
@@ -241,7 +239,8 @@ namespace Square.Models
             /// <returns> UpdateItemModifierListsRequest. </returns>
             public UpdateItemModifierListsRequest Build()
             {
-                return new UpdateItemModifierListsRequest(shouldSerialize,
+                return new UpdateItemModifierListsRequest(
+                    shouldSerialize,
                     this.itemIds,
                     this.modifierListsToEnable,
                     this.modifierListsToDisable);

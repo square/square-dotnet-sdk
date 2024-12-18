@@ -64,43 +64,41 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeletePaymentLinkResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeletePaymentLinkResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.CancelledOrderId == null && other.CancelledOrderId == null) || (this.CancelledOrderId?.Equals(other.CancelledOrderId) == true));
+            return obj is DeletePaymentLinkResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.CancelledOrderId == null && other.CancelledOrderId == null ||
+                 this.CancelledOrderId?.Equals(other.CancelledOrderId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1625392411;
+            var hashCode = -1625392411;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.Id, this.CancelledOrderId);
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.Id, this.CancelledOrderId);
 
             return hashCode;
         }
+
         internal DeletePaymentLinkResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
@@ -114,8 +112,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.CancelledOrderId = {(this.CancelledOrderId == null ? "null" : this.CancelledOrderId)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.CancelledOrderId = {this.CancelledOrderId ?? "null"}");
         }
 
         /// <summary>

@@ -43,17 +43,18 @@ namespace Square.Models
                 shouldSerialize["title"] = true;
                 this.Title = title;
             }
-
             this.HourlyRate = hourlyRate;
             this.JobId = jobId;
+
             if (tipEligible != null)
             {
                 shouldSerialize["tip_eligible"] = true;
                 this.TipEligible = tipEligible;
             }
-
         }
-        internal ShiftWage(Dictionary<string, bool> shouldSerialize,
+
+        internal ShiftWage(
+            Dictionary<string, bool> shouldSerialize,
             string title = null,
             Models.Money hourlyRate = null,
             string jobId = null,
@@ -100,9 +101,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ShiftWage : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -127,38 +126,38 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ShiftWage other &&                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
-                ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true)) &&
-                ((this.JobId == null && other.JobId == null) || (this.JobId?.Equals(other.JobId) == true)) &&
-                ((this.TipEligible == null && other.TipEligible == null) || (this.TipEligible?.Equals(other.TipEligible) == true));
+            return obj is ShiftWage other &&
+                (this.Title == null && other.Title == null ||
+                 this.Title?.Equals(other.Title) == true) &&
+                (this.HourlyRate == null && other.HourlyRate == null ||
+                 this.HourlyRate?.Equals(other.HourlyRate) == true) &&
+                (this.JobId == null && other.JobId == null ||
+                 this.JobId?.Equals(other.JobId) == true) &&
+                (this.TipEligible == null && other.TipEligible == null ||
+                 this.TipEligible?.Equals(other.TipEligible) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1508043369;
-            hashCode = HashCode.Combine(this.Title, this.HourlyRate, this.JobId, this.TipEligible);
+            var hashCode = 1508043369;
+            hashCode = HashCode.Combine(hashCode, this.Title, this.HourlyRate, this.JobId, this.TipEligible);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
+            toStringOutput.Add($"this.Title = {this.Title ?? "null"}");
             toStringOutput.Add($"this.HourlyRate = {(this.HourlyRate == null ? "null" : this.HourlyRate.ToString())}");
-            toStringOutput.Add($"this.JobId = {(this.JobId == null ? "null" : this.JobId)}");
+            toStringOutput.Add($"this.JobId = {this.JobId ?? "null"}");
             toStringOutput.Add($"this.TipEligible = {(this.TipEligible == null ? "null" : this.TipEligible.ToString())}");
         }
 
@@ -239,7 +238,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTitle()
             {
@@ -247,7 +246,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTipEligible()
             {
@@ -261,7 +260,8 @@ namespace Square.Models
             /// <returns> ShiftWage. </returns>
             public ShiftWage Build()
             {
-                return new ShiftWage(shouldSerialize,
+                return new ShiftWage(
+                    shouldSerialize,
                     this.title,
                     this.hourlyRate,
                     this.jobId,

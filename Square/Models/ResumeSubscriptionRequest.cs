@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["resume_effective_date"] = true;
                 this.ResumeEffectiveDate = resumeEffectiveDate;
             }
-
             this.ResumeChangeTiming = resumeChangeTiming;
         }
-        internal ResumeSubscriptionRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ResumeSubscriptionRequest(
+            Dictionary<string, bool> shouldSerialize,
             string resumeEffectiveDate = null,
             string resumeChangeTiming = null)
         {
@@ -66,9 +67,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ResumeSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -84,34 +83,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ResumeSubscriptionRequest other &&                ((this.ResumeEffectiveDate == null && other.ResumeEffectiveDate == null) || (this.ResumeEffectiveDate?.Equals(other.ResumeEffectiveDate) == true)) &&
-                ((this.ResumeChangeTiming == null && other.ResumeChangeTiming == null) || (this.ResumeChangeTiming?.Equals(other.ResumeChangeTiming) == true));
+            return obj is ResumeSubscriptionRequest other &&
+                (this.ResumeEffectiveDate == null && other.ResumeEffectiveDate == null ||
+                 this.ResumeEffectiveDate?.Equals(other.ResumeEffectiveDate) == true) &&
+                (this.ResumeChangeTiming == null && other.ResumeChangeTiming == null ||
+                 this.ResumeChangeTiming?.Equals(other.ResumeChangeTiming) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1612746632;
-            hashCode = HashCode.Combine(this.ResumeEffectiveDate, this.ResumeChangeTiming);
+            var hashCode = 1612746632;
+            hashCode = HashCode.Combine(hashCode, this.ResumeEffectiveDate, this.ResumeChangeTiming);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ResumeEffectiveDate = {(this.ResumeEffectiveDate == null ? "null" : this.ResumeEffectiveDate)}");
+            toStringOutput.Add($"this.ResumeEffectiveDate = {this.ResumeEffectiveDate ?? "null"}");
             toStringOutput.Add($"this.ResumeChangeTiming = {(this.ResumeChangeTiming == null ? "null" : this.ResumeChangeTiming.ToString())}");
         }
 
@@ -164,7 +161,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetResumeEffectiveDate()
             {
@@ -178,7 +175,8 @@ namespace Square.Models
             /// <returns> ResumeSubscriptionRequest. </returns>
             public ResumeSubscriptionRequest Build()
             {
-                return new ResumeSubscriptionRequest(shouldSerialize,
+                return new ResumeSubscriptionRequest(
+                    shouldSerialize,
                     this.resumeEffectiveDate,
                     this.resumeChangeTiming);
             }

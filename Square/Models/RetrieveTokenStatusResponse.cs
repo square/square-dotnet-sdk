@@ -81,45 +81,45 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RetrieveTokenStatusResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RetrieveTokenStatusResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Scopes == null && other.Scopes == null) || (this.Scopes?.Equals(other.Scopes) == true)) &&
-                ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
-                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
-                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
+            return obj is RetrieveTokenStatusResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Scopes == null && other.Scopes == null ||
+                 this.Scopes?.Equals(other.Scopes) == true) &&
+                (this.ExpiresAt == null && other.ExpiresAt == null ||
+                 this.ExpiresAt?.Equals(other.ExpiresAt) == true) &&
+                (this.ClientId == null && other.ClientId == null ||
+                 this.ClientId?.Equals(other.ClientId) == true) &&
+                (this.MerchantId == null && other.MerchantId == null ||
+                 this.MerchantId?.Equals(other.MerchantId) == true) &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1908720599;
+            var hashCode = -1908720599;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Scopes, this.ExpiresAt, this.ClientId, this.MerchantId, this.Errors);
+            hashCode = HashCode.Combine(hashCode, this.Scopes, this.ExpiresAt, this.ClientId, this.MerchantId, this.Errors);
 
             return hashCode;
         }
+
         internal RetrieveTokenStatusResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
@@ -133,9 +133,9 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Scopes = {(this.Scopes == null ? "null" : $"[{string.Join(", ", this.Scopes)} ]")}");
-            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt)}");
-            toStringOutput.Add($"this.ClientId = {(this.ClientId == null ? "null" : this.ClientId)}");
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
+            toStringOutput.Add($"this.ExpiresAt = {this.ExpiresAt ?? "null"}");
+            toStringOutput.Add($"this.ClientId = {this.ClientId ?? "null"}");
+            toStringOutput.Add($"this.MerchantId = {this.MerchantId ?? "null"}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
         }
 

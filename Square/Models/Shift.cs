@@ -60,48 +60,49 @@ namespace Square.Models
                 { "breaks", false },
                 { "team_member_id", false }
             };
-
             this.Id = id;
+
             if (employeeId != null)
             {
                 shouldSerialize["employee_id"] = true;
                 this.EmployeeId = employeeId;
             }
-
             this.LocationId = locationId;
+
             if (timezone != null)
             {
                 shouldSerialize["timezone"] = true;
                 this.Timezone = timezone;
             }
-
             this.StartAt = startAt;
+
             if (endAt != null)
             {
                 shouldSerialize["end_at"] = true;
                 this.EndAt = endAt;
             }
-
             this.Wage = wage;
+
             if (breaks != null)
             {
                 shouldSerialize["breaks"] = true;
                 this.Breaks = breaks;
             }
-
             this.Status = status;
             this.Version = version;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+
             if (teamMemberId != null)
             {
                 shouldSerialize["team_member_id"] = true;
                 this.TeamMemberId = teamMemberId;
             }
-
             this.DeclaredCashTipMoney = declaredCashTipMoney;
         }
-        internal Shift(Dictionary<string, bool> shouldSerialize,
+
+        internal Shift(
+            Dictionary<string, bool> shouldSerialize,
             string locationId,
             string startAt,
             string id = null,
@@ -235,9 +236,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Shift : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -289,60 +288,70 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Shift other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
-                ((this.StartAt == null && other.StartAt == null) || (this.StartAt?.Equals(other.StartAt) == true)) &&
-                ((this.EndAt == null && other.EndAt == null) || (this.EndAt?.Equals(other.EndAt) == true)) &&
-                ((this.Wage == null && other.Wage == null) || (this.Wage?.Equals(other.Wage) == true)) &&
-                ((this.Breaks == null && other.Breaks == null) || (this.Breaks?.Equals(other.Breaks) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.DeclaredCashTipMoney == null && other.DeclaredCashTipMoney == null) || (this.DeclaredCashTipMoney?.Equals(other.DeclaredCashTipMoney) == true));
+            return obj is Shift other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.EmployeeId == null && other.EmployeeId == null ||
+                 this.EmployeeId?.Equals(other.EmployeeId) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Timezone == null && other.Timezone == null ||
+                 this.Timezone?.Equals(other.Timezone) == true) &&
+                (this.StartAt == null && other.StartAt == null ||
+                 this.StartAt?.Equals(other.StartAt) == true) &&
+                (this.EndAt == null && other.EndAt == null ||
+                 this.EndAt?.Equals(other.EndAt) == true) &&
+                (this.Wage == null && other.Wage == null ||
+                 this.Wage?.Equals(other.Wage) == true) &&
+                (this.Breaks == null && other.Breaks == null ||
+                 this.Breaks?.Equals(other.Breaks) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.DeclaredCashTipMoney == null && other.DeclaredCashTipMoney == null ||
+                 this.DeclaredCashTipMoney?.Equals(other.DeclaredCashTipMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1919717746;
-            hashCode = HashCode.Combine(this.Id, this.EmployeeId, this.LocationId, this.Timezone, this.StartAt, this.EndAt, this.Wage);
+            var hashCode = -1919717746;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.EmployeeId, this.LocationId, this.Timezone, this.StartAt, this.EndAt, this.Wage);
 
             hashCode = HashCode.Combine(hashCode, this.Breaks, this.Status, this.Version, this.CreatedAt, this.UpdatedAt, this.TeamMemberId, this.DeclaredCashTipMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone)}");
-            toStringOutput.Add($"this.StartAt = {(this.StartAt == null ? "null" : this.StartAt)}");
-            toStringOutput.Add($"this.EndAt = {(this.EndAt == null ? "null" : this.EndAt)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.EmployeeId = {this.EmployeeId ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.Timezone = {this.Timezone ?? "null"}");
+            toStringOutput.Add($"this.StartAt = {this.StartAt ?? "null"}");
+            toStringOutput.Add($"this.EndAt = {this.EndAt ?? "null"}");
             toStringOutput.Add($"this.Wage = {(this.Wage == null ? "null" : this.Wage.ToString())}");
             toStringOutput.Add($"this.Breaks = {(this.Breaks == null ? "null" : $"[{string.Join(", ", this.Breaks)} ]")}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
             toStringOutput.Add($"this.DeclaredCashTipMoney = {(this.DeclaredCashTipMoney == null ? "null" : this.DeclaredCashTipMoney.ToString())}");
         }
 
@@ -572,7 +581,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmployeeId()
             {
@@ -580,7 +589,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTimezone()
             {
@@ -588,7 +597,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndAt()
             {
@@ -596,7 +605,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBreaks()
             {
@@ -604,7 +613,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTeamMemberId()
             {
@@ -618,7 +627,8 @@ namespace Square.Models
             /// <returns> Shift. </returns>
             public Shift Build()
             {
-                return new Shift(shouldSerialize,
+                return new Shift(
+                    shouldSerialize,
                     this.locationId,
                     this.startAt,
                     this.id,

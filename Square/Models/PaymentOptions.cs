@@ -56,10 +56,11 @@ namespace Square.Models
                 shouldSerialize["accept_partial_authorization"] = true;
                 this.AcceptPartialAuthorization = acceptPartialAuthorization;
             }
-
             this.DelayAction = delayAction;
         }
-        internal PaymentOptions(Dictionary<string, bool> shouldSerialize,
+
+        internal PaymentOptions(
+            Dictionary<string, bool> shouldSerialize,
             bool? autocomplete = null,
             string delayDuration = null,
             bool? acceptPartialAuthorization = null,
@@ -120,9 +121,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PaymentOptions : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -156,29 +155,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PaymentOptions other &&                ((this.Autocomplete == null && other.Autocomplete == null) || (this.Autocomplete?.Equals(other.Autocomplete) == true)) &&
-                ((this.DelayDuration == null && other.DelayDuration == null) || (this.DelayDuration?.Equals(other.DelayDuration) == true)) &&
-                ((this.AcceptPartialAuthorization == null && other.AcceptPartialAuthorization == null) || (this.AcceptPartialAuthorization?.Equals(other.AcceptPartialAuthorization) == true)) &&
-                ((this.DelayAction == null && other.DelayAction == null) || (this.DelayAction?.Equals(other.DelayAction) == true));
+            return obj is PaymentOptions other &&
+                (this.Autocomplete == null && other.Autocomplete == null ||
+                 this.Autocomplete?.Equals(other.Autocomplete) == true) &&
+                (this.DelayDuration == null && other.DelayDuration == null ||
+                 this.DelayDuration?.Equals(other.DelayDuration) == true) &&
+                (this.AcceptPartialAuthorization == null && other.AcceptPartialAuthorization == null ||
+                 this.AcceptPartialAuthorization?.Equals(other.AcceptPartialAuthorization) == true) &&
+                (this.DelayAction == null && other.DelayAction == null ||
+                 this.DelayAction?.Equals(other.DelayAction) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 56745792;
-            hashCode = HashCode.Combine(this.Autocomplete, this.DelayDuration, this.AcceptPartialAuthorization, this.DelayAction);
+            var hashCode = 56745792;
+            hashCode = HashCode.Combine(hashCode, this.Autocomplete, this.DelayDuration, this.AcceptPartialAuthorization, this.DelayAction);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -186,7 +185,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Autocomplete = {(this.Autocomplete == null ? "null" : this.Autocomplete.ToString())}");
-            toStringOutput.Add($"this.DelayDuration = {(this.DelayDuration == null ? "null" : this.DelayDuration)}");
+            toStringOutput.Add($"this.DelayDuration = {this.DelayDuration ?? "null"}");
             toStringOutput.Add($"this.AcceptPartialAuthorization = {(this.AcceptPartialAuthorization == null ? "null" : this.AcceptPartialAuthorization.ToString())}");
             toStringOutput.Add($"this.DelayAction = {(this.DelayAction == null ? "null" : this.DelayAction.ToString())}");
         }
@@ -270,7 +269,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAutocomplete()
             {
@@ -278,7 +277,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDelayDuration()
             {
@@ -286,7 +285,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAcceptPartialAuthorization()
             {
@@ -300,7 +299,8 @@ namespace Square.Models
             /// <returns> PaymentOptions. </returns>
             public PaymentOptions Build()
             {
-                return new PaymentOptions(shouldSerialize,
+                return new PaymentOptions(
+                    shouldSerialize,
                     this.autocomplete,
                     this.delayDuration,
                     this.acceptPartialAuthorization,

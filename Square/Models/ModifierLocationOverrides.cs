@@ -40,11 +40,12 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
             this.PriceMoney = priceMoney;
             this.SoldOut = soldOut;
         }
-        internal ModifierLocationOverrides(Dictionary<string, bool> shouldSerialize,
+
+        internal ModifierLocationOverrides(
+            Dictionary<string, bool> shouldSerialize,
             string locationId = null,
             Models.Money priceMoney = null,
             bool? soldOut = null)
@@ -83,9 +84,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ModifierLocationOverrides : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -101,35 +100,34 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ModifierLocationOverrides other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true)) &&
-                ((this.SoldOut == null && other.SoldOut == null) || (this.SoldOut?.Equals(other.SoldOut) == true));
+            return obj is ModifierLocationOverrides other &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.PriceMoney == null && other.PriceMoney == null ||
+                 this.PriceMoney?.Equals(other.PriceMoney) == true) &&
+                (this.SoldOut == null && other.SoldOut == null ||
+                 this.SoldOut?.Equals(other.SoldOut) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1732964243;
-            hashCode = HashCode.Combine(this.LocationId, this.PriceMoney, this.SoldOut);
+            var hashCode = -1732964243;
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.PriceMoney, this.SoldOut);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
             toStringOutput.Add($"this.SoldOut = {(this.SoldOut == null ? "null" : this.SoldOut.ToString())}");
         }
@@ -196,7 +194,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -210,7 +208,8 @@ namespace Square.Models
             /// <returns> ModifierLocationOverrides. </returns>
             public ModifierLocationOverrides Build()
             {
-                return new ModifierLocationOverrides(shouldSerialize,
+                return new ModifierLocationOverrides(
+                    shouldSerialize,
                     this.locationId,
                     this.priceMoney,
                     this.soldOut);

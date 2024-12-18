@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
         }
-        internal CatalogV1Id(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogV1Id(
+            Dictionary<string, bool> shouldSerialize,
             string catalogV1IdProp = null,
             string locationId = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogV1Id : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,35 +98,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogV1Id other &&                ((this.CatalogV1IdProp == null && other.CatalogV1IdProp == null) || (this.CatalogV1IdProp?.Equals(other.CatalogV1IdProp) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
+            return obj is CatalogV1Id other &&
+                (this.CatalogV1IdProp == null && other.CatalogV1IdProp == null ||
+                 this.CatalogV1IdProp?.Equals(other.CatalogV1IdProp) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -908281753;
-            hashCode = HashCode.Combine(this.CatalogV1IdProp, this.LocationId);
+            var hashCode = -908281753;
+            hashCode = HashCode.Combine(hashCode, this.CatalogV1IdProp, this.LocationId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CatalogV1IdProp = {(this.CatalogV1IdProp == null ? "null" : this.CatalogV1IdProp)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.CatalogV1IdProp = {this.CatalogV1IdProp ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogV1Id()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> CatalogV1Id. </returns>
             public CatalogV1Id Build()
             {
-                return new CatalogV1Id(shouldSerialize,
+                return new CatalogV1Id(
+                    shouldSerialize,
                     this.catalogV1IdProp,
                     this.locationId);
             }

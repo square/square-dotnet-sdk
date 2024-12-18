@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "on_by_default", false }
             };
-
             this.ModifierId = modifierId;
+
             if (onByDefault != null)
             {
                 shouldSerialize["on_by_default"] = true;
                 this.OnByDefault = onByDefault;
             }
-
         }
-        internal CatalogModifierOverride(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogModifierOverride(
+            Dictionary<string, bool> shouldSerialize,
             string modifierId,
             bool? onByDefault = null)
         {
@@ -66,9 +67,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogModifierOverride : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -84,34 +83,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogModifierOverride other &&                ((this.ModifierId == null && other.ModifierId == null) || (this.ModifierId?.Equals(other.ModifierId) == true)) &&
-                ((this.OnByDefault == null && other.OnByDefault == null) || (this.OnByDefault?.Equals(other.OnByDefault) == true));
+            return obj is CatalogModifierOverride other &&
+                (this.ModifierId == null && other.ModifierId == null ||
+                 this.ModifierId?.Equals(other.ModifierId) == true) &&
+                (this.OnByDefault == null && other.OnByDefault == null ||
+                 this.OnByDefault?.Equals(other.OnByDefault) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1142174100;
-            hashCode = HashCode.Combine(this.ModifierId, this.OnByDefault);
+            var hashCode = -1142174100;
+            hashCode = HashCode.Combine(hashCode, this.ModifierId, this.OnByDefault);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ModifierId = {(this.ModifierId == null ? "null" : this.ModifierId)}");
+            toStringOutput.Add($"this.ModifierId = {this.ModifierId ?? "null"}");
             toStringOutput.Add($"this.OnByDefault = {(this.OnByDefault == null ? "null" : this.OnByDefault.ToString())}");
         }
 
@@ -174,7 +171,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOnByDefault()
             {
@@ -188,7 +185,8 @@ namespace Square.Models
             /// <returns> CatalogModifierOverride. </returns>
             public CatalogModifierOverride Build()
             {
-                return new CatalogModifierOverride(shouldSerialize,
+                return new CatalogModifierOverride(
+                    shouldSerialize,
                     this.modifierId,
                     this.onByDefault);
             }

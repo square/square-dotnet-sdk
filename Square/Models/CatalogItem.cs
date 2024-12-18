@@ -169,8 +169,8 @@ namespace Square.Models
                 shouldSerialize["variations"] = true;
                 this.Variations = variations;
             }
-
             this.ProductType = productType;
+
             if (skipModifierScreen != null)
             {
                 shouldSerialize["skip_modifier_screen"] = true;
@@ -206,8 +206,8 @@ namespace Square.Models
                 shouldSerialize["description_html"] = true;
                 this.DescriptionHtml = descriptionHtml;
             }
-
             this.DescriptionPlaintext = descriptionPlaintext;
+
             if (channels != null)
             {
                 shouldSerialize["channels"] = true;
@@ -219,12 +219,13 @@ namespace Square.Models
                 shouldSerialize["is_archived"] = true;
                 this.IsArchived = isArchived;
             }
-
             this.EcomSeoData = ecomSeoData;
             this.FoodAndBeverageDetails = foodAndBeverageDetails;
             this.ReportingCategory = reportingCategory;
         }
-        internal CatalogItem(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogItem(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             string description = null,
             string abbreviation = null,
@@ -478,9 +479,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogItem : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -667,47 +666,67 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogItem other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.Abbreviation == null && other.Abbreviation == null) || (this.Abbreviation?.Equals(other.Abbreviation) == true)) &&
-                ((this.LabelColor == null && other.LabelColor == null) || (this.LabelColor?.Equals(other.LabelColor) == true)) &&
-                ((this.IsTaxable == null && other.IsTaxable == null) || (this.IsTaxable?.Equals(other.IsTaxable) == true)) &&
-                ((this.AvailableOnline == null && other.AvailableOnline == null) || (this.AvailableOnline?.Equals(other.AvailableOnline) == true)) &&
-                ((this.AvailableForPickup == null && other.AvailableForPickup == null) || (this.AvailableForPickup?.Equals(other.AvailableForPickup) == true)) &&
-                ((this.AvailableElectronically == null && other.AvailableElectronically == null) || (this.AvailableElectronically?.Equals(other.AvailableElectronically) == true)) &&
-                ((this.CategoryId == null && other.CategoryId == null) || (this.CategoryId?.Equals(other.CategoryId) == true)) &&
-                ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true)) &&
-                ((this.ModifierListInfo == null && other.ModifierListInfo == null) || (this.ModifierListInfo?.Equals(other.ModifierListInfo) == true)) &&
-                ((this.Variations == null && other.Variations == null) || (this.Variations?.Equals(other.Variations) == true)) &&
-                ((this.ProductType == null && other.ProductType == null) || (this.ProductType?.Equals(other.ProductType) == true)) &&
-                ((this.SkipModifierScreen == null && other.SkipModifierScreen == null) || (this.SkipModifierScreen?.Equals(other.SkipModifierScreen) == true)) &&
-                ((this.ItemOptions == null && other.ItemOptions == null) || (this.ItemOptions?.Equals(other.ItemOptions) == true)) &&
-                ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
-                ((this.SortName == null && other.SortName == null) || (this.SortName?.Equals(other.SortName) == true)) &&
-                ((this.Categories == null && other.Categories == null) || (this.Categories?.Equals(other.Categories) == true)) &&
-                ((this.DescriptionHtml == null && other.DescriptionHtml == null) || (this.DescriptionHtml?.Equals(other.DescriptionHtml) == true)) &&
-                ((this.DescriptionPlaintext == null && other.DescriptionPlaintext == null) || (this.DescriptionPlaintext?.Equals(other.DescriptionPlaintext) == true)) &&
-                ((this.Channels == null && other.Channels == null) || (this.Channels?.Equals(other.Channels) == true)) &&
-                ((this.IsArchived == null && other.IsArchived == null) || (this.IsArchived?.Equals(other.IsArchived) == true)) &&
-                ((this.EcomSeoData == null && other.EcomSeoData == null) || (this.EcomSeoData?.Equals(other.EcomSeoData) == true)) &&
-                ((this.FoodAndBeverageDetails == null && other.FoodAndBeverageDetails == null) || (this.FoodAndBeverageDetails?.Equals(other.FoodAndBeverageDetails) == true)) &&
-                ((this.ReportingCategory == null && other.ReportingCategory == null) || (this.ReportingCategory?.Equals(other.ReportingCategory) == true));
+            return obj is CatalogItem other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.Abbreviation == null && other.Abbreviation == null ||
+                 this.Abbreviation?.Equals(other.Abbreviation) == true) &&
+                (this.LabelColor == null && other.LabelColor == null ||
+                 this.LabelColor?.Equals(other.LabelColor) == true) &&
+                (this.IsTaxable == null && other.IsTaxable == null ||
+                 this.IsTaxable?.Equals(other.IsTaxable) == true) &&
+                (this.AvailableOnline == null && other.AvailableOnline == null ||
+                 this.AvailableOnline?.Equals(other.AvailableOnline) == true) &&
+                (this.AvailableForPickup == null && other.AvailableForPickup == null ||
+                 this.AvailableForPickup?.Equals(other.AvailableForPickup) == true) &&
+                (this.AvailableElectronically == null && other.AvailableElectronically == null ||
+                 this.AvailableElectronically?.Equals(other.AvailableElectronically) == true) &&
+                (this.CategoryId == null && other.CategoryId == null ||
+                 this.CategoryId?.Equals(other.CategoryId) == true) &&
+                (this.TaxIds == null && other.TaxIds == null ||
+                 this.TaxIds?.Equals(other.TaxIds) == true) &&
+                (this.ModifierListInfo == null && other.ModifierListInfo == null ||
+                 this.ModifierListInfo?.Equals(other.ModifierListInfo) == true) &&
+                (this.Variations == null && other.Variations == null ||
+                 this.Variations?.Equals(other.Variations) == true) &&
+                (this.ProductType == null && other.ProductType == null ||
+                 this.ProductType?.Equals(other.ProductType) == true) &&
+                (this.SkipModifierScreen == null && other.SkipModifierScreen == null ||
+                 this.SkipModifierScreen?.Equals(other.SkipModifierScreen) == true) &&
+                (this.ItemOptions == null && other.ItemOptions == null ||
+                 this.ItemOptions?.Equals(other.ItemOptions) == true) &&
+                (this.ImageIds == null && other.ImageIds == null ||
+                 this.ImageIds?.Equals(other.ImageIds) == true) &&
+                (this.SortName == null && other.SortName == null ||
+                 this.SortName?.Equals(other.SortName) == true) &&
+                (this.Categories == null && other.Categories == null ||
+                 this.Categories?.Equals(other.Categories) == true) &&
+                (this.DescriptionHtml == null && other.DescriptionHtml == null ||
+                 this.DescriptionHtml?.Equals(other.DescriptionHtml) == true) &&
+                (this.DescriptionPlaintext == null && other.DescriptionPlaintext == null ||
+                 this.DescriptionPlaintext?.Equals(other.DescriptionPlaintext) == true) &&
+                (this.Channels == null && other.Channels == null ||
+                 this.Channels?.Equals(other.Channels) == true) &&
+                (this.IsArchived == null && other.IsArchived == null ||
+                 this.IsArchived?.Equals(other.IsArchived) == true) &&
+                (this.EcomSeoData == null && other.EcomSeoData == null ||
+                 this.EcomSeoData?.Equals(other.EcomSeoData) == true) &&
+                (this.FoodAndBeverageDetails == null && other.FoodAndBeverageDetails == null ||
+                 this.FoodAndBeverageDetails?.Equals(other.FoodAndBeverageDetails) == true) &&
+                (this.ReportingCategory == null && other.ReportingCategory == null ||
+                 this.ReportingCategory?.Equals(other.ReportingCategory) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -671057138;
-            hashCode = HashCode.Combine(this.Name, this.Description, this.Abbreviation, this.LabelColor, this.IsTaxable, this.AvailableOnline, this.AvailableForPickup);
+            var hashCode = -671057138;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.Description, this.Abbreviation, this.LabelColor, this.IsTaxable, this.AvailableOnline, this.AvailableForPickup);
 
             hashCode = HashCode.Combine(hashCode, this.AvailableElectronically, this.CategoryId, this.TaxIds, this.ModifierListInfo, this.Variations, this.ProductType, this.SkipModifierScreen);
 
@@ -717,21 +736,22 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
-            toStringOutput.Add($"this.Abbreviation = {(this.Abbreviation == null ? "null" : this.Abbreviation)}");
-            toStringOutput.Add($"this.LabelColor = {(this.LabelColor == null ? "null" : this.LabelColor)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
+            toStringOutput.Add($"this.Abbreviation = {this.Abbreviation ?? "null"}");
+            toStringOutput.Add($"this.LabelColor = {this.LabelColor ?? "null"}");
             toStringOutput.Add($"this.IsTaxable = {(this.IsTaxable == null ? "null" : this.IsTaxable.ToString())}");
             toStringOutput.Add($"this.AvailableOnline = {(this.AvailableOnline == null ? "null" : this.AvailableOnline.ToString())}");
             toStringOutput.Add($"this.AvailableForPickup = {(this.AvailableForPickup == null ? "null" : this.AvailableForPickup.ToString())}");
             toStringOutput.Add($"this.AvailableElectronically = {(this.AvailableElectronically == null ? "null" : this.AvailableElectronically.ToString())}");
-            toStringOutput.Add($"this.CategoryId = {(this.CategoryId == null ? "null" : this.CategoryId)}");
+            toStringOutput.Add($"this.CategoryId = {this.CategoryId ?? "null"}");
             toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : $"[{string.Join(", ", this.TaxIds)} ]")}");
             toStringOutput.Add($"this.ModifierListInfo = {(this.ModifierListInfo == null ? "null" : $"[{string.Join(", ", this.ModifierListInfo)} ]")}");
             toStringOutput.Add($"this.Variations = {(this.Variations == null ? "null" : $"[{string.Join(", ", this.Variations)} ]")}");
@@ -739,10 +759,10 @@ namespace Square.Models
             toStringOutput.Add($"this.SkipModifierScreen = {(this.SkipModifierScreen == null ? "null" : this.SkipModifierScreen.ToString())}");
             toStringOutput.Add($"this.ItemOptions = {(this.ItemOptions == null ? "null" : $"[{string.Join(", ", this.ItemOptions)} ]")}");
             toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
-            toStringOutput.Add($"this.SortName = {(this.SortName == null ? "null" : this.SortName)}");
+            toStringOutput.Add($"this.SortName = {this.SortName ?? "null"}");
             toStringOutput.Add($"this.Categories = {(this.Categories == null ? "null" : $"[{string.Join(", ", this.Categories)} ]")}");
-            toStringOutput.Add($"this.DescriptionHtml = {(this.DescriptionHtml == null ? "null" : this.DescriptionHtml)}");
-            toStringOutput.Add($"this.DescriptionPlaintext = {(this.DescriptionPlaintext == null ? "null" : this.DescriptionPlaintext)}");
+            toStringOutput.Add($"this.DescriptionHtml = {this.DescriptionHtml ?? "null"}");
+            toStringOutput.Add($"this.DescriptionPlaintext = {this.DescriptionPlaintext ?? "null"}");
             toStringOutput.Add($"this.Channels = {(this.Channels == null ? "null" : $"[{string.Join(", ", this.Channels)} ]")}");
             toStringOutput.Add($"this.IsArchived = {(this.IsArchived == null ? "null" : this.IsArchived.ToString())}");
             toStringOutput.Add($"this.EcomSeoData = {(this.EcomSeoData == null ? "null" : this.EcomSeoData.ToString())}");
@@ -1136,7 +1156,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -1144,7 +1164,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -1152,7 +1172,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAbbreviation()
             {
@@ -1160,7 +1180,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLabelColor()
             {
@@ -1168,7 +1188,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsTaxable()
             {
@@ -1176,7 +1196,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAvailableOnline()
             {
@@ -1184,7 +1204,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAvailableForPickup()
             {
@@ -1192,7 +1212,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAvailableElectronically()
             {
@@ -1200,7 +1220,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCategoryId()
             {
@@ -1208,7 +1228,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTaxIds()
             {
@@ -1216,7 +1236,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetModifierListInfo()
             {
@@ -1224,7 +1244,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVariations()
             {
@@ -1232,7 +1252,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSkipModifierScreen()
             {
@@ -1240,7 +1260,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetItemOptions()
             {
@@ -1248,7 +1268,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetImageIds()
             {
@@ -1256,7 +1276,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSortName()
             {
@@ -1264,7 +1284,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCategories()
             {
@@ -1272,7 +1292,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescriptionHtml()
             {
@@ -1280,7 +1300,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetChannels()
             {
@@ -1288,7 +1308,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsArchived()
             {
@@ -1302,7 +1322,8 @@ namespace Square.Models
             /// <returns> CatalogItem. </returns>
             public CatalogItem Build()
             {
-                return new CatalogItem(shouldSerialize,
+                return new CatalogItem(
+                    shouldSerialize,
                     this.name,
                     this.description,
                     this.abbreviation,

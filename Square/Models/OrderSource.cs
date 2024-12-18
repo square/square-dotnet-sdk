@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
         }
-        internal OrderSource(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderSource(
+            Dictionary<string, bool> shouldSerialize,
             string name = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -56,9 +57,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderSource : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -74,33 +73,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderSource other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
+            return obj is OrderSource other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2055021713;
-            hashCode = HashCode.Combine(this.Name);
+            var hashCode = 2055021713;
+            hashCode = HashCode.Combine(hashCode, this.Name);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
         }
 
         /// <summary>
@@ -139,7 +135,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -153,7 +149,8 @@ namespace Square.Models
             /// <returns> OrderSource. </returns>
             public OrderSource Build()
             {
-                return new OrderSource(shouldSerialize,
+                return new OrderSource(
+                    shouldSerialize,
                     this.name);
             }
         }

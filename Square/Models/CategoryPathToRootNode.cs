@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["category_name"] = true;
                 this.CategoryName = categoryName;
             }
-
         }
-        internal CategoryPathToRootNode(Dictionary<string, bool> shouldSerialize,
+
+        internal CategoryPathToRootNode(
+            Dictionary<string, bool> shouldSerialize,
             string categoryId = null,
             string categoryName = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CategoryPathToRootNode : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,35 +98,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CategoryPathToRootNode other &&                ((this.CategoryId == null && other.CategoryId == null) || (this.CategoryId?.Equals(other.CategoryId) == true)) &&
-                ((this.CategoryName == null && other.CategoryName == null) || (this.CategoryName?.Equals(other.CategoryName) == true));
+            return obj is CategoryPathToRootNode other &&
+                (this.CategoryId == null && other.CategoryId == null ||
+                 this.CategoryId?.Equals(other.CategoryId) == true) &&
+                (this.CategoryName == null && other.CategoryName == null ||
+                 this.CategoryName?.Equals(other.CategoryName) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 879731714;
-            hashCode = HashCode.Combine(this.CategoryId, this.CategoryName);
+            var hashCode = 879731714;
+            hashCode = HashCode.Combine(hashCode, this.CategoryId, this.CategoryName);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CategoryId = {(this.CategoryId == null ? "null" : this.CategoryId)}");
-            toStringOutput.Add($"this.CategoryName = {(this.CategoryName == null ? "null" : this.CategoryName)}");
+            toStringOutput.Add($"this.CategoryId = {this.CategoryId ?? "null"}");
+            toStringOutput.Add($"this.CategoryName = {this.CategoryName ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCategoryId()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCategoryName()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> CategoryPathToRootNode. </returns>
             public CategoryPathToRootNode Build()
             {
-                return new CategoryPathToRootNode(shouldSerialize,
+                return new CategoryPathToRootNode(
+                    shouldSerialize,
                     this.categoryId,
                     this.categoryName);
             }

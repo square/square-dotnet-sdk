@@ -37,8 +37,8 @@ namespace Square.Models
                 { "excluded_category_ids", false },
                 { "excluded_item_variation_ids", false }
             };
-
             this.AmountMoney = amountMoney;
+
             if (excludedCategoryIds != null)
             {
                 shouldSerialize["excluded_category_ids"] = true;
@@ -50,10 +50,11 @@ namespace Square.Models
                 shouldSerialize["excluded_item_variation_ids"] = true;
                 this.ExcludedItemVariationIds = excludedItemVariationIds;
             }
-
             this.TaxMode = taxMode;
         }
-        internal LoyaltyProgramAccrualRuleSpendData(Dictionary<string, bool> shouldSerialize,
+
+        internal LoyaltyProgramAccrualRuleSpendData(
+            Dictionary<string, bool> shouldSerialize,
             Models.Money amountMoney,
             string taxMode,
             IList<string> excludedCategoryIds = null,
@@ -104,9 +105,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyProgramAccrualRuleSpendData : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -131,29 +130,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyProgramAccrualRuleSpendData other &&                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.ExcludedCategoryIds == null && other.ExcludedCategoryIds == null) || (this.ExcludedCategoryIds?.Equals(other.ExcludedCategoryIds) == true)) &&
-                ((this.ExcludedItemVariationIds == null && other.ExcludedItemVariationIds == null) || (this.ExcludedItemVariationIds?.Equals(other.ExcludedItemVariationIds) == true)) &&
-                ((this.TaxMode == null && other.TaxMode == null) || (this.TaxMode?.Equals(other.TaxMode) == true));
+            return obj is LoyaltyProgramAccrualRuleSpendData other &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.ExcludedCategoryIds == null && other.ExcludedCategoryIds == null ||
+                 this.ExcludedCategoryIds?.Equals(other.ExcludedCategoryIds) == true) &&
+                (this.ExcludedItemVariationIds == null && other.ExcludedItemVariationIds == null ||
+                 this.ExcludedItemVariationIds?.Equals(other.ExcludedItemVariationIds) == true) &&
+                (this.TaxMode == null && other.TaxMode == null ||
+                 this.TaxMode?.Equals(other.TaxMode) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1684104925;
-            hashCode = HashCode.Combine(this.AmountMoney, this.ExcludedCategoryIds, this.ExcludedItemVariationIds, this.TaxMode);
+            var hashCode = 1684104925;
+            hashCode = HashCode.Combine(hashCode, this.AmountMoney, this.ExcludedCategoryIds, this.ExcludedItemVariationIds, this.TaxMode);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -256,7 +255,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetExcludedCategoryIds()
             {
@@ -264,7 +263,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetExcludedItemVariationIds()
             {
@@ -278,7 +277,8 @@ namespace Square.Models
             /// <returns> LoyaltyProgramAccrualRuleSpendData. </returns>
             public LoyaltyProgramAccrualRuleSpendData Build()
             {
-                return new LoyaltyProgramAccrualRuleSpendData(shouldSerialize,
+                return new LoyaltyProgramAccrualRuleSpendData(
+                    shouldSerialize,
                     this.amountMoney,
                     this.taxMode,
                     this.excludedCategoryIds,

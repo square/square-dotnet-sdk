@@ -57,8 +57,8 @@ namespace Square.Models
                 shouldSerialize["catalog_object_type"] = true;
                 this.CatalogObjectType = catalogObjectType;
             }
-
             this.State = state;
+
             if (locationId != null)
             {
                 shouldSerialize["location_id"] = true;
@@ -70,11 +70,12 @@ namespace Square.Models
                 shouldSerialize["quantity"] = true;
                 this.Quantity = quantity;
             }
-
             this.CalculatedAt = calculatedAt;
             this.IsEstimated = isEstimated;
         }
-        internal InventoryCount(Dictionary<string, bool> shouldSerialize,
+
+        internal InventoryCount(
+            Dictionary<string, bool> shouldSerialize,
             string catalogObjectId = null,
             string catalogObjectType = null,
             string state = null,
@@ -149,9 +150,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InventoryCount : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -194,44 +193,47 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InventoryCount other &&                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((this.CatalogObjectType == null && other.CatalogObjectType == null) || (this.CatalogObjectType?.Equals(other.CatalogObjectType) == true)) &&
-                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
-                ((this.CalculatedAt == null && other.CalculatedAt == null) || (this.CalculatedAt?.Equals(other.CalculatedAt) == true)) &&
-                ((this.IsEstimated == null && other.IsEstimated == null) || (this.IsEstimated?.Equals(other.IsEstimated) == true));
+            return obj is InventoryCount other &&
+                (this.CatalogObjectId == null && other.CatalogObjectId == null ||
+                 this.CatalogObjectId?.Equals(other.CatalogObjectId) == true) &&
+                (this.CatalogObjectType == null && other.CatalogObjectType == null ||
+                 this.CatalogObjectType?.Equals(other.CatalogObjectType) == true) &&
+                (this.State == null && other.State == null ||
+                 this.State?.Equals(other.State) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Quantity == null && other.Quantity == null ||
+                 this.Quantity?.Equals(other.Quantity) == true) &&
+                (this.CalculatedAt == null && other.CalculatedAt == null ||
+                 this.CalculatedAt?.Equals(other.CalculatedAt) == true) &&
+                (this.IsEstimated == null && other.IsEstimated == null ||
+                 this.IsEstimated?.Equals(other.IsEstimated) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1245291455;
-            hashCode = HashCode.Combine(this.CatalogObjectId, this.CatalogObjectType, this.State, this.LocationId, this.Quantity, this.CalculatedAt, this.IsEstimated);
+            var hashCode = 1245291455;
+            hashCode = HashCode.Combine(hashCode, this.CatalogObjectId, this.CatalogObjectType, this.State, this.LocationId, this.Quantity, this.CalculatedAt, this.IsEstimated);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId)}");
-            toStringOutput.Add($"this.CatalogObjectType = {(this.CatalogObjectType == null ? "null" : this.CatalogObjectType)}");
+            toStringOutput.Add($"this.CatalogObjectId = {this.CatalogObjectId ?? "null"}");
+            toStringOutput.Add($"this.CatalogObjectType = {this.CatalogObjectType ?? "null"}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity)}");
-            toStringOutput.Add($"this.CalculatedAt = {(this.CalculatedAt == null ? "null" : this.CalculatedAt)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.Quantity = {this.Quantity ?? "null"}");
+            toStringOutput.Add($"this.CalculatedAt = {this.CalculatedAt ?? "null"}");
             toStringOutput.Add($"this.IsEstimated = {(this.IsEstimated == null ? "null" : this.IsEstimated.ToString())}");
         }
 
@@ -355,7 +357,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectId()
             {
@@ -363,7 +365,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectType()
             {
@@ -371,7 +373,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -379,7 +381,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQuantity()
             {
@@ -393,7 +395,8 @@ namespace Square.Models
             /// <returns> InventoryCount. </returns>
             public InventoryCount Build()
             {
-                return new InventoryCount(shouldSerialize,
+                return new InventoryCount(
+                    shouldSerialize,
                     this.catalogObjectId,
                     this.catalogObjectType,
                     this.state,

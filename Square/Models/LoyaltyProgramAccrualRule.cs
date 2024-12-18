@@ -40,20 +40,21 @@ namespace Square.Models
             {
                 { "points", false }
             };
-
             this.AccrualType = accrualType;
+
             if (points != null)
             {
                 shouldSerialize["points"] = true;
                 this.Points = points;
             }
-
             this.VisitData = visitData;
             this.SpendData = spendData;
             this.ItemVariationData = itemVariationData;
             this.CategoryData = categoryData;
         }
-        internal LoyaltyProgramAccrualRule(Dictionary<string, bool> shouldSerialize,
+
+        internal LoyaltyProgramAccrualRule(
+            Dictionary<string, bool> shouldSerialize,
             string accrualType,
             int? points = null,
             Models.LoyaltyProgramAccrualRuleVisitData visitData = null,
@@ -111,9 +112,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyProgramAccrualRule : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -129,31 +128,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyProgramAccrualRule other &&                ((this.AccrualType == null && other.AccrualType == null) || (this.AccrualType?.Equals(other.AccrualType) == true)) &&
-                ((this.Points == null && other.Points == null) || (this.Points?.Equals(other.Points) == true)) &&
-                ((this.VisitData == null && other.VisitData == null) || (this.VisitData?.Equals(other.VisitData) == true)) &&
-                ((this.SpendData == null && other.SpendData == null) || (this.SpendData?.Equals(other.SpendData) == true)) &&
-                ((this.ItemVariationData == null && other.ItemVariationData == null) || (this.ItemVariationData?.Equals(other.ItemVariationData) == true)) &&
-                ((this.CategoryData == null && other.CategoryData == null) || (this.CategoryData?.Equals(other.CategoryData) == true));
+            return obj is LoyaltyProgramAccrualRule other &&
+                (this.AccrualType == null && other.AccrualType == null ||
+                 this.AccrualType?.Equals(other.AccrualType) == true) &&
+                (this.Points == null && other.Points == null ||
+                 this.Points?.Equals(other.Points) == true) &&
+                (this.VisitData == null && other.VisitData == null ||
+                 this.VisitData?.Equals(other.VisitData) == true) &&
+                (this.SpendData == null && other.SpendData == null ||
+                 this.SpendData?.Equals(other.SpendData) == true) &&
+                (this.ItemVariationData == null && other.ItemVariationData == null ||
+                 this.ItemVariationData?.Equals(other.ItemVariationData) == true) &&
+                (this.CategoryData == null && other.CategoryData == null ||
+                 this.CategoryData?.Equals(other.CategoryData) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1357142668;
-            hashCode = HashCode.Combine(this.AccrualType, this.Points, this.VisitData, this.SpendData, this.ItemVariationData, this.CategoryData);
+            var hashCode = 1357142668;
+            hashCode = HashCode.Combine(hashCode, this.AccrualType, this.Points, this.VisitData, this.SpendData, this.ItemVariationData, this.CategoryData);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -279,7 +280,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPoints()
             {
@@ -293,7 +294,8 @@ namespace Square.Models
             /// <returns> LoyaltyProgramAccrualRule. </returns>
             public LoyaltyProgramAccrualRule Build()
             {
-                return new LoyaltyProgramAccrualRule(shouldSerialize,
+                return new LoyaltyProgramAccrualRule(
+                    shouldSerialize,
                     this.accrualType,
                     this.points,
                     this.visitData,

@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["object_ids"] = true;
                 this.ObjectIds = objectIds;
             }
-
         }
-        internal BatchDeleteCatalogObjectsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal BatchDeleteCatalogObjectsRequest(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> objectIds = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -57,9 +58,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BatchDeleteCatalogObjectsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -75,26 +74,23 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BatchDeleteCatalogObjectsRequest other &&                ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true));
+            return obj is BatchDeleteCatalogObjectsRequest other &&
+                (this.ObjectIds == null && other.ObjectIds == null ||
+                 this.ObjectIds?.Equals(other.ObjectIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1606600759;
-            hashCode = HashCode.Combine(this.ObjectIds);
+            var hashCode = -1606600759;
+            hashCode = HashCode.Combine(hashCode, this.ObjectIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -140,7 +136,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetObjectIds()
             {
@@ -154,7 +150,8 @@ namespace Square.Models
             /// <returns> BatchDeleteCatalogObjectsRequest. </returns>
             public BatchDeleteCatalogObjectsRequest Build()
             {
-                return new BatchDeleteCatalogObjectsRequest(shouldSerialize,
+                return new BatchDeleteCatalogObjectsRequest(
+                    shouldSerialize,
                     this.objectIds);
             }
         }

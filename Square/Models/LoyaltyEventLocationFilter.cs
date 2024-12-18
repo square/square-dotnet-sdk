@@ -40,35 +40,30 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyEventLocationFilter : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyEventLocationFilter other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true));
+            return obj is LoyaltyEventLocationFilter other &&
+                (this.LocationIds == null && other.LocationIds == null ||
+                 this.LocationIds?.Equals(other.LocationIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1253354615;
-            hashCode = HashCode.Combine(this.LocationIds);
+            var hashCode = 1253354615;
+            hashCode = HashCode.Combine(hashCode, this.LocationIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

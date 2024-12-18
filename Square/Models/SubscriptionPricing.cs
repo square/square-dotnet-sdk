@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "discount_ids", false }
             };
-
             this.Type = type;
+
             if (discountIds != null)
             {
                 shouldSerialize["discount_ids"] = true;
                 this.DiscountIds = discountIds;
             }
-
             this.PriceMoney = priceMoney;
         }
-        internal SubscriptionPricing(Dictionary<string, bool> shouldSerialize,
+
+        internal SubscriptionPricing(
+            Dictionary<string, bool> shouldSerialize,
             string type = null,
             IList<string> discountIds = null,
             Models.Money priceMoney = null)
@@ -82,9 +83,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SubscriptionPricing : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -100,28 +99,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SubscriptionPricing other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.DiscountIds == null && other.DiscountIds == null) || (this.DiscountIds?.Equals(other.DiscountIds) == true)) &&
-                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true));
+            return obj is SubscriptionPricing other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.DiscountIds == null && other.DiscountIds == null ||
+                 this.DiscountIds?.Equals(other.DiscountIds) == true) &&
+                (this.PriceMoney == null && other.PriceMoney == null ||
+                 this.PriceMoney?.Equals(other.PriceMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -279861606;
-            hashCode = HashCode.Combine(this.Type, this.DiscountIds, this.PriceMoney);
+            var hashCode = -279861606;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.DiscountIds, this.PriceMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -195,7 +193,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDiscountIds()
             {
@@ -209,7 +207,8 @@ namespace Square.Models
             /// <returns> SubscriptionPricing. </returns>
             public SubscriptionPricing Build()
             {
-                return new SubscriptionPricing(shouldSerialize,
+                return new SubscriptionPricing(
+                    shouldSerialize,
                     this.type,
                     this.discountIds,
                     this.priceMoney);

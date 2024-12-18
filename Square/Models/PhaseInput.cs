@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "order_template_id", false }
             };
-
             this.Ordinal = ordinal;
+
             if (orderTemplateId != null)
             {
                 shouldSerialize["order_template_id"] = true;
                 this.OrderTemplateId = orderTemplateId;
             }
-
         }
-        internal PhaseInput(Dictionary<string, bool> shouldSerialize,
+
+        internal PhaseInput(
+            Dictionary<string, bool> shouldSerialize,
             long ordinal,
             string orderTemplateId = null)
         {
@@ -66,9 +67,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PhaseInput : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -84,27 +83,24 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PhaseInput other &&                this.Ordinal.Equals(other.Ordinal) &&
-                ((this.OrderTemplateId == null && other.OrderTemplateId == null) || (this.OrderTemplateId?.Equals(other.OrderTemplateId) == true));
+            return obj is PhaseInput other &&
+                (this.Ordinal.Equals(other.Ordinal)) &&
+                (this.OrderTemplateId == null && other.OrderTemplateId == null ||
+                 this.OrderTemplateId?.Equals(other.OrderTemplateId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -360399112;
-            hashCode = HashCode.Combine(this.Ordinal, this.OrderTemplateId);
+            var hashCode = -360399112;
+            hashCode = HashCode.Combine(hashCode, this.Ordinal, this.OrderTemplateId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -112,7 +108,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Ordinal = {this.Ordinal}");
-            toStringOutput.Add($"this.OrderTemplateId = {(this.OrderTemplateId == null ? "null" : this.OrderTemplateId)}");
+            toStringOutput.Add($"this.OrderTemplateId = {this.OrderTemplateId ?? "null"}");
         }
 
         /// <summary>
@@ -174,7 +170,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderTemplateId()
             {
@@ -188,7 +184,8 @@ namespace Square.Models
             /// <returns> PhaseInput. </returns>
             public PhaseInput Build()
             {
-                return new PhaseInput(shouldSerialize,
+                return new PhaseInput(
+                    shouldSerialize,
                     this.ordinal,
                     this.orderTemplateId);
             }

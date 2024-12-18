@@ -47,44 +47,40 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyProgramTerminology : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyProgramTerminology other &&                ((this.One == null && other.One == null) || (this.One?.Equals(other.One) == true)) &&
-                ((this.Other == null && other.Other == null) || (this.Other?.Equals(other.Other) == true));
+            return obj is LoyaltyProgramTerminology other &&
+                (this.One == null && other.One == null ||
+                 this.One?.Equals(other.One) == true) &&
+                (this.Other == null && other.Other == null ||
+                 this.Other?.Equals(other.Other) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 951751095;
-            hashCode = HashCode.Combine(this.One, this.Other);
+            var hashCode = 951751095;
+            hashCode = HashCode.Combine(hashCode, this.One, this.Other);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.One = {(this.One == null ? "null" : this.One)}");
-            toStringOutput.Add($"this.Other = {(this.Other == null ? "null" : this.Other)}");
+            toStringOutput.Add($"this.One = {this.One ?? "null"}");
+            toStringOutput.Add($"this.Other = {this.Other ?? "null"}");
         }
 
         /// <summary>

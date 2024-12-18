@@ -59,16 +59,17 @@ namespace Square.Models
                 shouldSerialize["resume_effective_date"] = true;
                 this.ResumeEffectiveDate = resumeEffectiveDate;
             }
-
             this.ResumeChangeTiming = resumeChangeTiming;
+
             if (pauseReason != null)
             {
                 shouldSerialize["pause_reason"] = true;
                 this.PauseReason = pauseReason;
             }
-
         }
-        internal PauseSubscriptionRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal PauseSubscriptionRequest(
+            Dictionary<string, bool> shouldSerialize,
             string pauseEffectiveDate = null,
             long? pauseCycleDuration = null,
             string resumeEffectiveDate = null,
@@ -123,9 +124,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PauseSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -168,41 +167,42 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PauseSubscriptionRequest other &&                ((this.PauseEffectiveDate == null && other.PauseEffectiveDate == null) || (this.PauseEffectiveDate?.Equals(other.PauseEffectiveDate) == true)) &&
-                ((this.PauseCycleDuration == null && other.PauseCycleDuration == null) || (this.PauseCycleDuration?.Equals(other.PauseCycleDuration) == true)) &&
-                ((this.ResumeEffectiveDate == null && other.ResumeEffectiveDate == null) || (this.ResumeEffectiveDate?.Equals(other.ResumeEffectiveDate) == true)) &&
-                ((this.ResumeChangeTiming == null && other.ResumeChangeTiming == null) || (this.ResumeChangeTiming?.Equals(other.ResumeChangeTiming) == true)) &&
-                ((this.PauseReason == null && other.PauseReason == null) || (this.PauseReason?.Equals(other.PauseReason) == true));
+            return obj is PauseSubscriptionRequest other &&
+                (this.PauseEffectiveDate == null && other.PauseEffectiveDate == null ||
+                 this.PauseEffectiveDate?.Equals(other.PauseEffectiveDate) == true) &&
+                (this.PauseCycleDuration == null && other.PauseCycleDuration == null ||
+                 this.PauseCycleDuration?.Equals(other.PauseCycleDuration) == true) &&
+                (this.ResumeEffectiveDate == null && other.ResumeEffectiveDate == null ||
+                 this.ResumeEffectiveDate?.Equals(other.ResumeEffectiveDate) == true) &&
+                (this.ResumeChangeTiming == null && other.ResumeChangeTiming == null ||
+                 this.ResumeChangeTiming?.Equals(other.ResumeChangeTiming) == true) &&
+                (this.PauseReason == null && other.PauseReason == null ||
+                 this.PauseReason?.Equals(other.PauseReason) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1939468888;
-            hashCode = HashCode.Combine(this.PauseEffectiveDate, this.PauseCycleDuration, this.ResumeEffectiveDate, this.ResumeChangeTiming, this.PauseReason);
+            var hashCode = -1939468888;
+            hashCode = HashCode.Combine(hashCode, this.PauseEffectiveDate, this.PauseCycleDuration, this.ResumeEffectiveDate, this.ResumeChangeTiming, this.PauseReason);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PauseEffectiveDate = {(this.PauseEffectiveDate == null ? "null" : this.PauseEffectiveDate)}");
+            toStringOutput.Add($"this.PauseEffectiveDate = {this.PauseEffectiveDate ?? "null"}");
             toStringOutput.Add($"this.PauseCycleDuration = {(this.PauseCycleDuration == null ? "null" : this.PauseCycleDuration.ToString())}");
-            toStringOutput.Add($"this.ResumeEffectiveDate = {(this.ResumeEffectiveDate == null ? "null" : this.ResumeEffectiveDate)}");
+            toStringOutput.Add($"this.ResumeEffectiveDate = {this.ResumeEffectiveDate ?? "null"}");
             toStringOutput.Add($"this.ResumeChangeTiming = {(this.ResumeChangeTiming == null ? "null" : this.ResumeChangeTiming.ToString())}");
-            toStringOutput.Add($"this.PauseReason = {(this.PauseReason == null ? "null" : this.PauseReason)}");
+            toStringOutput.Add($"this.PauseReason = {this.PauseReason ?? "null"}");
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPauseEffectiveDate()
             {
@@ -307,7 +307,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPauseCycleDuration()
             {
@@ -315,7 +315,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetResumeEffectiveDate()
             {
@@ -323,7 +323,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPauseReason()
             {
@@ -337,7 +337,8 @@ namespace Square.Models
             /// <returns> PauseSubscriptionRequest. </returns>
             public PauseSubscriptionRequest Build()
             {
-                return new PauseSubscriptionRequest(shouldSerialize,
+                return new PauseSubscriptionRequest(
+                    shouldSerialize,
                     this.pauseEffectiveDate,
                     this.pauseCycleDuration,
                     this.resumeEffectiveDate,

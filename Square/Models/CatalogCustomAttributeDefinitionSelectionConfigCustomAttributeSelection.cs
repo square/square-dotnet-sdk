@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["uid"] = true;
                 this.Uid = uid;
             }
-
             this.Name = name;
         }
-        internal CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(
+            Dictionary<string, bool> shouldSerialize,
             string name,
             string uid = null)
         {
@@ -66,9 +67,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -84,35 +83,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
+            return obj is CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 829627827;
-            hashCode = HashCode.Combine(this.Uid, this.Name);
+            var hashCode = 829627827;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.Name);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
         }
 
         /// <summary>
@@ -174,7 +171,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -188,7 +185,8 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection. </returns>
             public CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection Build()
             {
-                return new CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(shouldSerialize,
+                return new CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection(
+                    shouldSerialize,
                     this.name,
                     this.uid);
             }

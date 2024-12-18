@@ -35,8 +35,8 @@ namespace Square.Models
                 { "order_version", false },
                 { "payment_ids", false }
             };
-
             this.IdempotencyKey = idempotencyKey;
+
             if (orderVersion != null)
             {
                 shouldSerialize["order_version"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["payment_ids"] = true;
                 this.PaymentIds = paymentIds;
             }
-
         }
-        internal PayOrderRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal PayOrderRequest(
+            Dictionary<string, bool> shouldSerialize,
             string idempotencyKey,
             int? orderVersion = null,
             IList<string> paymentIds = null)
@@ -87,9 +88,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PayOrderRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -114,35 +113,34 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PayOrderRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.OrderVersion == null && other.OrderVersion == null) || (this.OrderVersion?.Equals(other.OrderVersion) == true)) &&
-                ((this.PaymentIds == null && other.PaymentIds == null) || (this.PaymentIds?.Equals(other.PaymentIds) == true));
+            return obj is PayOrderRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.OrderVersion == null && other.OrderVersion == null ||
+                 this.OrderVersion?.Equals(other.OrderVersion) == true) &&
+                (this.PaymentIds == null && other.PaymentIds == null ||
+                 this.PaymentIds?.Equals(other.PaymentIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -320446863;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.OrderVersion, this.PaymentIds);
+            var hashCode = -320446863;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.OrderVersion, this.PaymentIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.OrderVersion = {(this.OrderVersion == null ? "null" : this.OrderVersion.ToString())}");
             toStringOutput.Add($"this.PaymentIds = {(this.PaymentIds == null ? "null" : $"[{string.Join(", ", this.PaymentIds)} ]")}");
         }
@@ -221,7 +219,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderVersion()
             {
@@ -229,7 +227,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentIds()
             {
@@ -243,7 +241,8 @@ namespace Square.Models
             /// <returns> PayOrderRequest. </returns>
             public PayOrderRequest Build()
             {
-                return new PayOrderRequest(shouldSerialize,
+                return new PayOrderRequest(
+                    shouldSerialize,
                     this.idempotencyKey,
                     this.orderVersion,
                     this.paymentIds);

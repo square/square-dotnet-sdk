@@ -47,36 +47,32 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeprecatedCreateDisputeEvidenceTextResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeprecatedCreateDisputeEvidenceTextResponse other &&                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Evidence == null && other.Evidence == null) || (this.Evidence?.Equals(other.Evidence) == true));
+            return obj is DeprecatedCreateDisputeEvidenceTextResponse other &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.Evidence == null && other.Evidence == null ||
+                 this.Evidence?.Equals(other.Evidence) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1286420372;
-            hashCode = HashCode.Combine(this.Errors, this.Evidence);
+            var hashCode = 1286420372;
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.Evidence);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "ordinal", false }
             };
-
             this.Id = id;
+
             if (ordinal != null)
             {
                 shouldSerialize["ordinal"] = true;
                 this.Ordinal = ordinal;
             }
-
         }
-        internal CatalogObjectCategory(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogObjectCategory(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             long? ordinal = null)
         {
@@ -66,9 +67,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogObjectCategory : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -84,34 +83,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogObjectCategory other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
+            return obj is CatalogObjectCategory other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Ordinal == null && other.Ordinal == null ||
+                 this.Ordinal?.Equals(other.Ordinal) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 466131004;
-            hashCode = HashCode.Combine(this.Id, this.Ordinal);
+            var hashCode = 466131004;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Ordinal);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
         }
 
@@ -164,7 +161,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrdinal()
             {
@@ -178,7 +175,8 @@ namespace Square.Models
             /// <returns> CatalogObjectCategory. </returns>
             public CatalogObjectCategory Build()
             {
-                return new CatalogObjectCategory(shouldSerialize,
+                return new CatalogObjectCategory(
+                    shouldSerialize,
                     this.id,
                     this.ordinal);
             }

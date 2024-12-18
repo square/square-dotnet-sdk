@@ -90,8 +90,8 @@ namespace Square.Models
                 shouldSerialize["email_address"] = true;
                 this.EmailAddress = emailAddress;
             }
-
             this.Address = address;
+
             if (phoneNumber != null)
             {
                 shouldSerialize["phone_number"] = true;
@@ -115,11 +115,12 @@ namespace Square.Models
                 shouldSerialize["birthday"] = true;
                 this.Birthday = birthday;
             }
-
             this.Version = version;
             this.TaxIds = taxIds;
         }
-        internal UpdateCustomerRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal UpdateCustomerRequest(
+            Dictionary<string, bool> shouldSerialize,
             string givenName = null,
             string familyName = null,
             string companyName = null,
@@ -238,9 +239,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateCustomerRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -328,55 +327,63 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateCustomerRequest other &&                ((this.GivenName == null && other.GivenName == null) || (this.GivenName?.Equals(other.GivenName) == true)) &&
-                ((this.FamilyName == null && other.FamilyName == null) || (this.FamilyName?.Equals(other.FamilyName) == true)) &&
-                ((this.CompanyName == null && other.CompanyName == null) || (this.CompanyName?.Equals(other.CompanyName) == true)) &&
-                ((this.Nickname == null && other.Nickname == null) || (this.Nickname?.Equals(other.Nickname) == true)) &&
-                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true)) &&
-                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
-                ((this.Birthday == null && other.Birthday == null) || (this.Birthday?.Equals(other.Birthday) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true));
+            return obj is UpdateCustomerRequest other &&
+                (this.GivenName == null && other.GivenName == null ||
+                 this.GivenName?.Equals(other.GivenName) == true) &&
+                (this.FamilyName == null && other.FamilyName == null ||
+                 this.FamilyName?.Equals(other.FamilyName) == true) &&
+                (this.CompanyName == null && other.CompanyName == null ||
+                 this.CompanyName?.Equals(other.CompanyName) == true) &&
+                (this.Nickname == null && other.Nickname == null ||
+                 this.Nickname?.Equals(other.Nickname) == true) &&
+                (this.EmailAddress == null && other.EmailAddress == null ||
+                 this.EmailAddress?.Equals(other.EmailAddress) == true) &&
+                (this.Address == null && other.Address == null ||
+                 this.Address?.Equals(other.Address) == true) &&
+                (this.PhoneNumber == null && other.PhoneNumber == null ||
+                 this.PhoneNumber?.Equals(other.PhoneNumber) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.Note == null && other.Note == null ||
+                 this.Note?.Equals(other.Note) == true) &&
+                (this.Birthday == null && other.Birthday == null ||
+                 this.Birthday?.Equals(other.Birthday) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.TaxIds == null && other.TaxIds == null ||
+                 this.TaxIds?.Equals(other.TaxIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 939559978;
-            hashCode = HashCode.Combine(this.GivenName, this.FamilyName, this.CompanyName, this.Nickname, this.EmailAddress, this.Address, this.PhoneNumber);
+            var hashCode = 939559978;
+            hashCode = HashCode.Combine(hashCode, this.GivenName, this.FamilyName, this.CompanyName, this.Nickname, this.EmailAddress, this.Address, this.PhoneNumber);
 
             hashCode = HashCode.Combine(hashCode, this.ReferenceId, this.Note, this.Birthday, this.Version, this.TaxIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.GivenName = {(this.GivenName == null ? "null" : this.GivenName)}");
-            toStringOutput.Add($"this.FamilyName = {(this.FamilyName == null ? "null" : this.FamilyName)}");
-            toStringOutput.Add($"this.CompanyName = {(this.CompanyName == null ? "null" : this.CompanyName)}");
-            toStringOutput.Add($"this.Nickname = {(this.Nickname == null ? "null" : this.Nickname)}");
-            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress)}");
+            toStringOutput.Add($"this.GivenName = {this.GivenName ?? "null"}");
+            toStringOutput.Add($"this.FamilyName = {this.FamilyName ?? "null"}");
+            toStringOutput.Add($"this.CompanyName = {this.CompanyName ?? "null"}");
+            toStringOutput.Add($"this.Nickname = {this.Nickname ?? "null"}");
+            toStringOutput.Add($"this.EmailAddress = {this.EmailAddress ?? "null"}");
             toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
-            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
-            toStringOutput.Add($"this.Birthday = {(this.Birthday == null ? "null" : this.Birthday)}");
+            toStringOutput.Add($"this.PhoneNumber = {this.PhoneNumber ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
+            toStringOutput.Add($"this.Note = {this.Note ?? "null"}");
+            toStringOutput.Add($"this.Birthday = {this.Birthday ?? "null"}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : this.TaxIds.ToString())}");
         }
@@ -576,7 +583,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetGivenName()
             {
@@ -584,7 +591,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFamilyName()
             {
@@ -592,7 +599,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCompanyName()
             {
@@ -600,7 +607,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNickname()
             {
@@ -608,7 +615,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmailAddress()
             {
@@ -616,7 +623,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhoneNumber()
             {
@@ -624,7 +631,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -632,7 +639,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNote()
             {
@@ -640,7 +647,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBirthday()
             {
@@ -654,7 +661,8 @@ namespace Square.Models
             /// <returns> UpdateCustomerRequest. </returns>
             public UpdateCustomerRequest Build()
             {
-                return new UpdateCustomerRequest(shouldSerialize,
+                return new UpdateCustomerRequest(
+                    shouldSerialize,
                     this.givenName,
                     this.familyName,
                     this.companyName,

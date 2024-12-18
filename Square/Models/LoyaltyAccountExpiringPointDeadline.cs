@@ -47,36 +47,31 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyAccountExpiringPointDeadline : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyAccountExpiringPointDeadline other &&                this.Points.Equals(other.Points) &&
-                ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true));
+            return obj is LoyaltyAccountExpiringPointDeadline other &&
+                (this.Points.Equals(other.Points)) &&
+                (this.ExpiresAt == null && other.ExpiresAt == null ||
+                 this.ExpiresAt?.Equals(other.ExpiresAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1494271948;
-            hashCode = HashCode.Combine(this.Points, this.ExpiresAt);
+            var hashCode = 1494271948;
+            hashCode = HashCode.Combine(hashCode, this.Points, this.ExpiresAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -84,7 +79,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Points = {this.Points}");
-            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt)}");
+            toStringOutput.Add($"this.ExpiresAt = {this.ExpiresAt ?? "null"}");
         }
 
         /// <summary>

@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["effective_date"] = true;
                 this.EffectiveDate = effectiveDate;
             }
-
         }
-        internal ChangeBillingAnchorDateRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ChangeBillingAnchorDateRequest(
+            Dictionary<string, bool> shouldSerialize,
             int? monthlyBillingAnchorDate = null,
             string effectiveDate = null)
         {
@@ -75,9 +76,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ChangeBillingAnchorDateRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -102,27 +101,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ChangeBillingAnchorDateRequest other &&                ((this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null) || (this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true)) &&
-                ((this.EffectiveDate == null && other.EffectiveDate == null) || (this.EffectiveDate?.Equals(other.EffectiveDate) == true));
+            return obj is ChangeBillingAnchorDateRequest other &&
+                (this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null ||
+                 this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true) &&
+                (this.EffectiveDate == null && other.EffectiveDate == null ||
+                 this.EffectiveDate?.Equals(other.EffectiveDate) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 849567670;
-            hashCode = HashCode.Combine(this.MonthlyBillingAnchorDate, this.EffectiveDate);
+            var hashCode = 849567670;
+            hashCode = HashCode.Combine(hashCode, this.MonthlyBillingAnchorDate, this.EffectiveDate);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -130,7 +127,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.MonthlyBillingAnchorDate = {(this.MonthlyBillingAnchorDate == null ? "null" : this.MonthlyBillingAnchorDate.ToString())}");
-            toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate)}");
+            toStringOutput.Add($"this.EffectiveDate = {this.EffectiveDate ?? "null"}");
         }
 
         /// <summary>
@@ -184,7 +181,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMonthlyBillingAnchorDate()
             {
@@ -192,7 +189,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEffectiveDate()
             {
@@ -206,7 +203,8 @@ namespace Square.Models
             /// <returns> ChangeBillingAnchorDateRequest. </returns>
             public ChangeBillingAnchorDateRequest Build()
             {
-                return new ChangeBillingAnchorDateRequest(shouldSerialize,
+                return new ChangeBillingAnchorDateRequest(
+                    shouldSerialize,
                     this.monthlyBillingAnchorDate,
                     this.effectiveDate);
             }

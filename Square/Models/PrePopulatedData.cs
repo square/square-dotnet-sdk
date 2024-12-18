@@ -47,10 +47,11 @@ namespace Square.Models
                 shouldSerialize["buyer_phone_number"] = true;
                 this.BuyerPhoneNumber = buyerPhoneNumber;
             }
-
             this.BuyerAddress = buyerAddress;
         }
-        internal PrePopulatedData(Dictionary<string, bool> shouldSerialize,
+
+        internal PrePopulatedData(
+            Dictionary<string, bool> shouldSerialize,
             string buyerEmail = null,
             string buyerPhoneNumber = null,
             Models.Address buyerAddress = null)
@@ -84,9 +85,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PrePopulatedData : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -111,36 +110,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PrePopulatedData other &&                ((this.BuyerEmail == null && other.BuyerEmail == null) || (this.BuyerEmail?.Equals(other.BuyerEmail) == true)) &&
-                ((this.BuyerPhoneNumber == null && other.BuyerPhoneNumber == null) || (this.BuyerPhoneNumber?.Equals(other.BuyerPhoneNumber) == true)) &&
-                ((this.BuyerAddress == null && other.BuyerAddress == null) || (this.BuyerAddress?.Equals(other.BuyerAddress) == true));
+            return obj is PrePopulatedData other &&
+                (this.BuyerEmail == null && other.BuyerEmail == null ||
+                 this.BuyerEmail?.Equals(other.BuyerEmail) == true) &&
+                (this.BuyerPhoneNumber == null && other.BuyerPhoneNumber == null ||
+                 this.BuyerPhoneNumber?.Equals(other.BuyerPhoneNumber) == true) &&
+                (this.BuyerAddress == null && other.BuyerAddress == null ||
+                 this.BuyerAddress?.Equals(other.BuyerAddress) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1974752879;
-            hashCode = HashCode.Combine(this.BuyerEmail, this.BuyerPhoneNumber, this.BuyerAddress);
+            var hashCode = -1974752879;
+            hashCode = HashCode.Combine(hashCode, this.BuyerEmail, this.BuyerPhoneNumber, this.BuyerAddress);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BuyerEmail = {(this.BuyerEmail == null ? "null" : this.BuyerEmail)}");
-            toStringOutput.Add($"this.BuyerPhoneNumber = {(this.BuyerPhoneNumber == null ? "null" : this.BuyerPhoneNumber)}");
+            toStringOutput.Add($"this.BuyerEmail = {this.BuyerEmail ?? "null"}");
+            toStringOutput.Add($"this.BuyerPhoneNumber = {this.BuyerPhoneNumber ?? "null"}");
             toStringOutput.Add($"this.BuyerAddress = {(this.BuyerAddress == null ? "null" : this.BuyerAddress.ToString())}");
         }
 
@@ -208,7 +206,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBuyerEmail()
             {
@@ -216,7 +214,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBuyerPhoneNumber()
             {
@@ -230,7 +228,8 @@ namespace Square.Models
             /// <returns> PrePopulatedData. </returns>
             public PrePopulatedData Build()
             {
-                return new PrePopulatedData(shouldSerialize,
+                return new PrePopulatedData(
+                    shouldSerialize,
                     this.buyerEmail,
                     this.buyerPhoneNumber,
                     this.buyerAddress);

@@ -73,11 +73,11 @@ namespace Square.Models
                 { "gift_card_id", false },
                 { "gift_card_gan", false }
             };
-
             this.Id = id;
             this.Type = type;
             this.LocationId = locationId;
             this.CreatedAt = createdAt;
+
             if (giftCardId != null)
             {
                 shouldSerialize["gift_card_id"] = true;
@@ -89,7 +89,6 @@ namespace Square.Models
                 shouldSerialize["gift_card_gan"] = true;
                 this.GiftCardGan = giftCardGan;
             }
-
             this.GiftCardBalanceMoney = giftCardBalanceMoney;
             this.LoadActivityDetails = loadActivityDetails;
             this.ActivateActivityDetails = activateActivityDetails;
@@ -107,7 +106,9 @@ namespace Square.Models
             this.TransferBalanceToActivityDetails = transferBalanceToActivityDetails;
             this.TransferBalanceFromActivityDetails = transferBalanceFromActivityDetails;
         }
-        internal GiftCardActivity(Dictionary<string, bool> shouldSerialize,
+
+        internal GiftCardActivity(
+            Dictionary<string, bool> shouldSerialize,
             string type,
             string locationId,
             string id = null,
@@ -301,9 +302,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"GiftCardActivity : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -328,44 +327,61 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is GiftCardActivity other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.GiftCardId == null && other.GiftCardId == null) || (this.GiftCardId?.Equals(other.GiftCardId) == true)) &&
-                ((this.GiftCardGan == null && other.GiftCardGan == null) || (this.GiftCardGan?.Equals(other.GiftCardGan) == true)) &&
-                ((this.GiftCardBalanceMoney == null && other.GiftCardBalanceMoney == null) || (this.GiftCardBalanceMoney?.Equals(other.GiftCardBalanceMoney) == true)) &&
-                ((this.LoadActivityDetails == null && other.LoadActivityDetails == null) || (this.LoadActivityDetails?.Equals(other.LoadActivityDetails) == true)) &&
-                ((this.ActivateActivityDetails == null && other.ActivateActivityDetails == null) || (this.ActivateActivityDetails?.Equals(other.ActivateActivityDetails) == true)) &&
-                ((this.RedeemActivityDetails == null && other.RedeemActivityDetails == null) || (this.RedeemActivityDetails?.Equals(other.RedeemActivityDetails) == true)) &&
-                ((this.ClearBalanceActivityDetails == null && other.ClearBalanceActivityDetails == null) || (this.ClearBalanceActivityDetails?.Equals(other.ClearBalanceActivityDetails) == true)) &&
-                ((this.DeactivateActivityDetails == null && other.DeactivateActivityDetails == null) || (this.DeactivateActivityDetails?.Equals(other.DeactivateActivityDetails) == true)) &&
-                ((this.AdjustIncrementActivityDetails == null && other.AdjustIncrementActivityDetails == null) || (this.AdjustIncrementActivityDetails?.Equals(other.AdjustIncrementActivityDetails) == true)) &&
-                ((this.AdjustDecrementActivityDetails == null && other.AdjustDecrementActivityDetails == null) || (this.AdjustDecrementActivityDetails?.Equals(other.AdjustDecrementActivityDetails) == true)) &&
-                ((this.RefundActivityDetails == null && other.RefundActivityDetails == null) || (this.RefundActivityDetails?.Equals(other.RefundActivityDetails) == true)) &&
-                ((this.UnlinkedActivityRefundActivityDetails == null && other.UnlinkedActivityRefundActivityDetails == null) || (this.UnlinkedActivityRefundActivityDetails?.Equals(other.UnlinkedActivityRefundActivityDetails) == true)) &&
-                ((this.ImportActivityDetails == null && other.ImportActivityDetails == null) || (this.ImportActivityDetails?.Equals(other.ImportActivityDetails) == true)) &&
-                ((this.BlockActivityDetails == null && other.BlockActivityDetails == null) || (this.BlockActivityDetails?.Equals(other.BlockActivityDetails) == true)) &&
-                ((this.UnblockActivityDetails == null && other.UnblockActivityDetails == null) || (this.UnblockActivityDetails?.Equals(other.UnblockActivityDetails) == true)) &&
-                ((this.ImportReversalActivityDetails == null && other.ImportReversalActivityDetails == null) || (this.ImportReversalActivityDetails?.Equals(other.ImportReversalActivityDetails) == true)) &&
-                ((this.TransferBalanceToActivityDetails == null && other.TransferBalanceToActivityDetails == null) || (this.TransferBalanceToActivityDetails?.Equals(other.TransferBalanceToActivityDetails) == true)) &&
-                ((this.TransferBalanceFromActivityDetails == null && other.TransferBalanceFromActivityDetails == null) || (this.TransferBalanceFromActivityDetails?.Equals(other.TransferBalanceFromActivityDetails) == true));
+            return obj is GiftCardActivity other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.GiftCardId == null && other.GiftCardId == null ||
+                 this.GiftCardId?.Equals(other.GiftCardId) == true) &&
+                (this.GiftCardGan == null && other.GiftCardGan == null ||
+                 this.GiftCardGan?.Equals(other.GiftCardGan) == true) &&
+                (this.GiftCardBalanceMoney == null && other.GiftCardBalanceMoney == null ||
+                 this.GiftCardBalanceMoney?.Equals(other.GiftCardBalanceMoney) == true) &&
+                (this.LoadActivityDetails == null && other.LoadActivityDetails == null ||
+                 this.LoadActivityDetails?.Equals(other.LoadActivityDetails) == true) &&
+                (this.ActivateActivityDetails == null && other.ActivateActivityDetails == null ||
+                 this.ActivateActivityDetails?.Equals(other.ActivateActivityDetails) == true) &&
+                (this.RedeemActivityDetails == null && other.RedeemActivityDetails == null ||
+                 this.RedeemActivityDetails?.Equals(other.RedeemActivityDetails) == true) &&
+                (this.ClearBalanceActivityDetails == null && other.ClearBalanceActivityDetails == null ||
+                 this.ClearBalanceActivityDetails?.Equals(other.ClearBalanceActivityDetails) == true) &&
+                (this.DeactivateActivityDetails == null && other.DeactivateActivityDetails == null ||
+                 this.DeactivateActivityDetails?.Equals(other.DeactivateActivityDetails) == true) &&
+                (this.AdjustIncrementActivityDetails == null && other.AdjustIncrementActivityDetails == null ||
+                 this.AdjustIncrementActivityDetails?.Equals(other.AdjustIncrementActivityDetails) == true) &&
+                (this.AdjustDecrementActivityDetails == null && other.AdjustDecrementActivityDetails == null ||
+                 this.AdjustDecrementActivityDetails?.Equals(other.AdjustDecrementActivityDetails) == true) &&
+                (this.RefundActivityDetails == null && other.RefundActivityDetails == null ||
+                 this.RefundActivityDetails?.Equals(other.RefundActivityDetails) == true) &&
+                (this.UnlinkedActivityRefundActivityDetails == null && other.UnlinkedActivityRefundActivityDetails == null ||
+                 this.UnlinkedActivityRefundActivityDetails?.Equals(other.UnlinkedActivityRefundActivityDetails) == true) &&
+                (this.ImportActivityDetails == null && other.ImportActivityDetails == null ||
+                 this.ImportActivityDetails?.Equals(other.ImportActivityDetails) == true) &&
+                (this.BlockActivityDetails == null && other.BlockActivityDetails == null ||
+                 this.BlockActivityDetails?.Equals(other.BlockActivityDetails) == true) &&
+                (this.UnblockActivityDetails == null && other.UnblockActivityDetails == null ||
+                 this.UnblockActivityDetails?.Equals(other.UnblockActivityDetails) == true) &&
+                (this.ImportReversalActivityDetails == null && other.ImportReversalActivityDetails == null ||
+                 this.ImportReversalActivityDetails?.Equals(other.ImportReversalActivityDetails) == true) &&
+                (this.TransferBalanceToActivityDetails == null && other.TransferBalanceToActivityDetails == null ||
+                 this.TransferBalanceToActivityDetails?.Equals(other.TransferBalanceToActivityDetails) == true) &&
+                (this.TransferBalanceFromActivityDetails == null && other.TransferBalanceFromActivityDetails == null ||
+                 this.TransferBalanceFromActivityDetails?.Equals(other.TransferBalanceFromActivityDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1715056739;
-            hashCode = HashCode.Combine(this.Id, this.Type, this.LocationId, this.CreatedAt, this.GiftCardId, this.GiftCardGan, this.GiftCardBalanceMoney);
+            var hashCode = -1715056739;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Type, this.LocationId, this.CreatedAt, this.GiftCardId, this.GiftCardGan, this.GiftCardBalanceMoney);
 
             hashCode = HashCode.Combine(hashCode, this.LoadActivityDetails, this.ActivateActivityDetails, this.RedeemActivityDetails, this.ClearBalanceActivityDetails, this.DeactivateActivityDetails, this.AdjustIncrementActivityDetails, this.AdjustDecrementActivityDetails);
 
@@ -375,18 +391,19 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.GiftCardId = {(this.GiftCardId == null ? "null" : this.GiftCardId)}");
-            toStringOutput.Add($"this.GiftCardGan = {(this.GiftCardGan == null ? "null" : this.GiftCardGan)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.GiftCardId = {this.GiftCardId ?? "null"}");
+            toStringOutput.Add($"this.GiftCardGan = {this.GiftCardGan ?? "null"}");
             toStringOutput.Add($"this.GiftCardBalanceMoney = {(this.GiftCardBalanceMoney == null ? "null" : this.GiftCardBalanceMoney.ToString())}");
             toStringOutput.Add($"this.LoadActivityDetails = {(this.LoadActivityDetails == null ? "null" : this.LoadActivityDetails.ToString())}");
             toStringOutput.Add($"this.ActivateActivityDetails = {(this.ActivateActivityDetails == null ? "null" : this.ActivateActivityDetails.ToString())}");
@@ -729,7 +746,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetGiftCardId()
             {
@@ -737,7 +754,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetGiftCardGan()
             {
@@ -751,7 +768,8 @@ namespace Square.Models
             /// <returns> GiftCardActivity. </returns>
             public GiftCardActivity Build()
             {
-                return new GiftCardActivity(shouldSerialize,
+                return new GiftCardActivity(
+                    shouldSerialize,
                     this.type,
                     this.locationId,
                     this.id,

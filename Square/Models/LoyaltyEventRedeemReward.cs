@@ -58,46 +58,43 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyEventRedeemReward : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyEventRedeemReward other &&                ((this.LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
-                ((this.RewardId == null && other.RewardId == null) || (this.RewardId?.Equals(other.RewardId) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
+            return obj is LoyaltyEventRedeemReward other &&
+                (this.LoyaltyProgramId == null && other.LoyaltyProgramId == null ||
+                 this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true) &&
+                (this.RewardId == null && other.RewardId == null ||
+                 this.RewardId?.Equals(other.RewardId) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2041086926;
-            hashCode = HashCode.Combine(this.LoyaltyProgramId, this.RewardId, this.OrderId);
+            var hashCode = 2041086926;
+            hashCode = HashCode.Combine(hashCode, this.LoyaltyProgramId, this.RewardId, this.OrderId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LoyaltyProgramId = {(this.LoyaltyProgramId == null ? "null" : this.LoyaltyProgramId)}");
-            toStringOutput.Add($"this.RewardId = {(this.RewardId == null ? "null" : this.RewardId)}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.LoyaltyProgramId = {this.LoyaltyProgramId ?? "null"}");
+            toStringOutput.Add($"this.RewardId = {this.RewardId ?? "null"}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
         }
 
         /// <summary>

@@ -101,44 +101,46 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"MeasurementUnit : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is MeasurementUnit other &&                ((this.CustomUnit == null && other.CustomUnit == null) || (this.CustomUnit?.Equals(other.CustomUnit) == true)) &&
-                ((this.AreaUnit == null && other.AreaUnit == null) || (this.AreaUnit?.Equals(other.AreaUnit) == true)) &&
-                ((this.LengthUnit == null && other.LengthUnit == null) || (this.LengthUnit?.Equals(other.LengthUnit) == true)) &&
-                ((this.VolumeUnit == null && other.VolumeUnit == null) || (this.VolumeUnit?.Equals(other.VolumeUnit) == true)) &&
-                ((this.WeightUnit == null && other.WeightUnit == null) || (this.WeightUnit?.Equals(other.WeightUnit) == true)) &&
-                ((this.GenericUnit == null && other.GenericUnit == null) || (this.GenericUnit?.Equals(other.GenericUnit) == true)) &&
-                ((this.TimeUnit == null && other.TimeUnit == null) || (this.TimeUnit?.Equals(other.TimeUnit) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true));
+            return obj is MeasurementUnit other &&
+                (this.CustomUnit == null && other.CustomUnit == null ||
+                 this.CustomUnit?.Equals(other.CustomUnit) == true) &&
+                (this.AreaUnit == null && other.AreaUnit == null ||
+                 this.AreaUnit?.Equals(other.AreaUnit) == true) &&
+                (this.LengthUnit == null && other.LengthUnit == null ||
+                 this.LengthUnit?.Equals(other.LengthUnit) == true) &&
+                (this.VolumeUnit == null && other.VolumeUnit == null ||
+                 this.VolumeUnit?.Equals(other.VolumeUnit) == true) &&
+                (this.WeightUnit == null && other.WeightUnit == null ||
+                 this.WeightUnit?.Equals(other.WeightUnit) == true) &&
+                (this.GenericUnit == null && other.GenericUnit == null ||
+                 this.GenericUnit?.Equals(other.GenericUnit) == true) &&
+                (this.TimeUnit == null && other.TimeUnit == null ||
+                 this.TimeUnit?.Equals(other.TimeUnit) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1167462471;
-            hashCode = HashCode.Combine(this.CustomUnit, this.AreaUnit, this.LengthUnit, this.VolumeUnit, this.WeightUnit, this.GenericUnit, this.TimeUnit);
+            var hashCode = -1167462471;
+            hashCode = HashCode.Combine(hashCode, this.CustomUnit, this.AreaUnit, this.LengthUnit, this.VolumeUnit, this.WeightUnit, this.GenericUnit, this.TimeUnit);
 
             hashCode = HashCode.Combine(hashCode, this.Type);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

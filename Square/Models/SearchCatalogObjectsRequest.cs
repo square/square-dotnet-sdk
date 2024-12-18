@@ -151,55 +151,57 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchCatalogObjectsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchCatalogObjectsRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.ObjectTypes == null && other.ObjectTypes == null) || (this.ObjectTypes?.Equals(other.ObjectTypes) == true)) &&
-                ((this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true)) &&
-                ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
-                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.IncludeCategoryPathToRoot == null && other.IncludeCategoryPathToRoot == null) || (this.IncludeCategoryPathToRoot?.Equals(other.IncludeCategoryPathToRoot) == true));
+            return obj is SearchCatalogObjectsRequest other &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.ObjectTypes == null && other.ObjectTypes == null ||
+                 this.ObjectTypes?.Equals(other.ObjectTypes) == true) &&
+                (this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null ||
+                 this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true) &&
+                (this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null ||
+                 this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true) &&
+                (this.BeginTime == null && other.BeginTime == null ||
+                 this.BeginTime?.Equals(other.BeginTime) == true) &&
+                (this.Query == null && other.Query == null ||
+                 this.Query?.Equals(other.Query) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.IncludeCategoryPathToRoot == null && other.IncludeCategoryPathToRoot == null ||
+                 this.IncludeCategoryPathToRoot?.Equals(other.IncludeCategoryPathToRoot) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2076746851;
-            hashCode = HashCode.Combine(this.Cursor, this.ObjectTypes, this.IncludeDeletedObjects, this.IncludeRelatedObjects, this.BeginTime, this.Query, this.Limit);
+            var hashCode = -2076746851;
+            hashCode = HashCode.Combine(hashCode, this.Cursor, this.ObjectTypes, this.IncludeDeletedObjects, this.IncludeRelatedObjects, this.BeginTime, this.Query, this.Limit);
 
             hashCode = HashCode.Combine(hashCode, this.IncludeCategoryPathToRoot);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.ObjectTypes = {(this.ObjectTypes == null ? "null" : $"[{string.Join(", ", this.ObjectTypes)} ]")}");
             toStringOutput.Add($"this.IncludeDeletedObjects = {(this.IncludeDeletedObjects == null ? "null" : this.IncludeDeletedObjects.ToString())}");
             toStringOutput.Add($"this.IncludeRelatedObjects = {(this.IncludeRelatedObjects == null ? "null" : this.IncludeRelatedObjects.ToString())}");
-            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime)}");
+            toStringOutput.Add($"this.BeginTime = {this.BeginTime ?? "null"}");
             toStringOutput.Add($"this.Query = {(this.Query == null ? "null" : this.Query.ToString())}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.IncludeCategoryPathToRoot = {(this.IncludeCategoryPathToRoot == null ? "null" : this.IncludeCategoryPathToRoot.ToString())}");

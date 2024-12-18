@@ -50,16 +50,17 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
             this.ProductType = productType;
+
             if (status != null)
             {
                 shouldSerialize["status"] = true;
                 this.Status = status;
             }
-
         }
-        internal ListDeviceCodesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListDeviceCodesRequest(
+            Dictionary<string, bool> shouldSerialize,
             string cursor = null,
             string locationId = null,
             string productType = null,
@@ -105,9 +106,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListDeviceCodesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -141,37 +140,37 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListDeviceCodesRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.ProductType == null && other.ProductType == null) || (this.ProductType?.Equals(other.ProductType) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
+            return obj is ListDeviceCodesRequest other &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.ProductType == null && other.ProductType == null ||
+                 this.ProductType?.Equals(other.ProductType) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -400983667;
-            hashCode = HashCode.Combine(this.Cursor, this.LocationId, this.ProductType, this.Status);
+            var hashCode = -400983667;
+            hashCode = HashCode.Combine(hashCode, this.Cursor, this.LocationId, this.ProductType, this.Status);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.ProductType = {(this.ProductType == null ? "null" : this.ProductType.ToString())}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : $"[{string.Join(", ", this.Status)} ]")}");
         }
@@ -255,7 +254,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -263,7 +262,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -271,7 +270,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStatus()
             {
@@ -285,7 +284,8 @@ namespace Square.Models
             /// <returns> ListDeviceCodesRequest. </returns>
             public ListDeviceCodesRequest Build()
             {
-                return new ListDeviceCodesRequest(shouldSerialize,
+                return new ListDeviceCodesRequest(
+                    shouldSerialize,
                     this.cursor,
                     this.locationId,
                     this.productType,

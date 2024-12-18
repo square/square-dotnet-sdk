@@ -35,8 +35,8 @@ namespace Square.Models
                 { "cursor", false },
                 { "limit", false }
             };
-
             this.Status = status;
+
             if (cursor != null)
             {
                 shouldSerialize["cursor"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["limit"] = true;
                 this.Limit = limit;
             }
-
         }
-        internal ListLoyaltyPromotionsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListLoyaltyPromotionsRequest(
+            Dictionary<string, bool> shouldSerialize,
             string status = null,
             string cursor = null,
             int? limit = null)
@@ -87,9 +88,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListLoyaltyPromotionsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -114,28 +113,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListLoyaltyPromotionsRequest other &&                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
+            return obj is ListLoyaltyPromotionsRequest other &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -275372364;
-            hashCode = HashCode.Combine(this.Status, this.Cursor, this.Limit);
+            var hashCode = -275372364;
+            hashCode = HashCode.Combine(hashCode, this.Status, this.Cursor, this.Limit);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -143,7 +141,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
         }
 
@@ -211,7 +209,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -219,7 +217,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -233,7 +231,8 @@ namespace Square.Models
             /// <returns> ListLoyaltyPromotionsRequest. </returns>
             public ListLoyaltyPromotionsRequest Build()
             {
-                return new ListLoyaltyPromotionsRequest(shouldSerialize,
+                return new ListLoyaltyPromotionsRequest(
+                    shouldSerialize,
                     this.status,
                     this.cursor,
                     this.limit);

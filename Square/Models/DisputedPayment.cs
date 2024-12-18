@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["payment_id"] = true;
                 this.PaymentId = paymentId;
             }
-
         }
-        internal DisputedPayment(Dictionary<string, bool> shouldSerialize,
+
+        internal DisputedPayment(
+            Dictionary<string, bool> shouldSerialize,
             string paymentId = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -55,9 +56,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DisputedPayment : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -73,33 +72,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DisputedPayment other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
+            return obj is DisputedPayment other &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1880326021;
-            hashCode = HashCode.Combine(this.PaymentId);
+            var hashCode = 1880326021;
+            hashCode = HashCode.Combine(hashCode, this.PaymentId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
         }
 
         /// <summary>
@@ -138,7 +134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentId()
             {
@@ -152,7 +148,8 @@ namespace Square.Models
             /// <returns> DisputedPayment. </returns>
             public DisputedPayment Build()
             {
-                return new DisputedPayment(shouldSerialize,
+                return new DisputedPayment(
+                    shouldSerialize,
                     this.paymentId);
             }
         }

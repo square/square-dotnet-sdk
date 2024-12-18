@@ -143,53 +143,59 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ObtainTokenResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ObtainTokenResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.AccessToken == null && other.AccessToken == null) || (this.AccessToken?.Equals(other.AccessToken) == true)) &&
-                ((this.TokenType == null && other.TokenType == null) || (this.TokenType?.Equals(other.TokenType) == true)) &&
-                ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
-                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((this.SubscriptionId == null && other.SubscriptionId == null) || (this.SubscriptionId?.Equals(other.SubscriptionId) == true)) &&
-                ((this.PlanId == null && other.PlanId == null) || (this.PlanId?.Equals(other.PlanId) == true)) &&
-                ((this.IdToken == null && other.IdToken == null) || (this.IdToken?.Equals(other.IdToken) == true)) &&
-                ((this.RefreshToken == null && other.RefreshToken == null) || (this.RefreshToken?.Equals(other.RefreshToken) == true)) &&
-                ((this.ShortLived == null && other.ShortLived == null) || (this.ShortLived?.Equals(other.ShortLived) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.RefreshTokenExpiresAt == null && other.RefreshTokenExpiresAt == null) || (this.RefreshTokenExpiresAt?.Equals(other.RefreshTokenExpiresAt) == true));
+            return obj is ObtainTokenResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.AccessToken == null && other.AccessToken == null ||
+                 this.AccessToken?.Equals(other.AccessToken) == true) &&
+                (this.TokenType == null && other.TokenType == null ||
+                 this.TokenType?.Equals(other.TokenType) == true) &&
+                (this.ExpiresAt == null && other.ExpiresAt == null ||
+                 this.ExpiresAt?.Equals(other.ExpiresAt) == true) &&
+                (this.MerchantId == null && other.MerchantId == null ||
+                 this.MerchantId?.Equals(other.MerchantId) == true) &&
+                (this.SubscriptionId == null && other.SubscriptionId == null ||
+                 this.SubscriptionId?.Equals(other.SubscriptionId) == true) &&
+                (this.PlanId == null && other.PlanId == null ||
+                 this.PlanId?.Equals(other.PlanId) == true) &&
+                (this.IdToken == null && other.IdToken == null ||
+                 this.IdToken?.Equals(other.IdToken) == true) &&
+                (this.RefreshToken == null && other.RefreshToken == null ||
+                 this.RefreshToken?.Equals(other.RefreshToken) == true) &&
+                (this.ShortLived == null && other.ShortLived == null ||
+                 this.ShortLived?.Equals(other.ShortLived) == true) &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.RefreshTokenExpiresAt == null && other.RefreshTokenExpiresAt == null ||
+                 this.RefreshTokenExpiresAt?.Equals(other.RefreshTokenExpiresAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -62575650;
+            var hashCode = -62575650;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.AccessToken, this.TokenType, this.ExpiresAt, this.MerchantId, this.SubscriptionId, this.PlanId, this.IdToken);
+            hashCode = HashCode.Combine(hashCode, this.AccessToken, this.TokenType, this.ExpiresAt, this.MerchantId, this.SubscriptionId, this.PlanId, this.IdToken);
 
             hashCode = HashCode.Combine(hashCode, this.RefreshToken, this.ShortLived, this.Errors, this.RefreshTokenExpiresAt);
 
             return hashCode;
         }
+
         internal ObtainTokenResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
@@ -202,17 +208,17 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.AccessToken = {(this.AccessToken == null ? "null" : this.AccessToken)}");
-            toStringOutput.Add($"this.TokenType = {(this.TokenType == null ? "null" : this.TokenType)}");
-            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt)}");
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
-            toStringOutput.Add($"this.SubscriptionId = {(this.SubscriptionId == null ? "null" : this.SubscriptionId)}");
-            toStringOutput.Add($"this.PlanId = {(this.PlanId == null ? "null" : this.PlanId)}");
-            toStringOutput.Add($"this.IdToken = {(this.IdToken == null ? "null" : this.IdToken)}");
-            toStringOutput.Add($"this.RefreshToken = {(this.RefreshToken == null ? "null" : this.RefreshToken)}");
+            toStringOutput.Add($"this.AccessToken = {this.AccessToken ?? "null"}");
+            toStringOutput.Add($"this.TokenType = {this.TokenType ?? "null"}");
+            toStringOutput.Add($"this.ExpiresAt = {this.ExpiresAt ?? "null"}");
+            toStringOutput.Add($"this.MerchantId = {this.MerchantId ?? "null"}");
+            toStringOutput.Add($"this.SubscriptionId = {this.SubscriptionId ?? "null"}");
+            toStringOutput.Add($"this.PlanId = {this.PlanId ?? "null"}");
+            toStringOutput.Add($"this.IdToken = {this.IdToken ?? "null"}");
+            toStringOutput.Add($"this.RefreshToken = {this.RefreshToken ?? "null"}");
             toStringOutput.Add($"this.ShortLived = {(this.ShortLived == null ? "null" : this.ShortLived.ToString())}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.RefreshTokenExpiresAt = {(this.RefreshTokenExpiresAt == null ? "null" : this.RefreshTokenExpiresAt)}");
+            toStringOutput.Add($"this.RefreshTokenExpiresAt = {this.RefreshTokenExpiresAt ?? "null"}");
         }
 
         /// <summary>

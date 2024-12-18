@@ -47,10 +47,11 @@ namespace Square.Models
                 shouldSerialize["type"] = true;
                 this.Type = type;
             }
-
             this.AmountMoney = amountMoney;
         }
-        internal ProcessingFee(Dictionary<string, bool> shouldSerialize,
+
+        internal ProcessingFee(
+            Dictionary<string, bool> shouldSerialize,
             string effectiveAt = null,
             string type = null,
             Models.Money amountMoney = null)
@@ -88,9 +89,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ProcessingFee : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -115,36 +114,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ProcessingFee other &&                ((this.EffectiveAt == null && other.EffectiveAt == null) || (this.EffectiveAt?.Equals(other.EffectiveAt) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true));
+            return obj is ProcessingFee other &&
+                (this.EffectiveAt == null && other.EffectiveAt == null ||
+                 this.EffectiveAt?.Equals(other.EffectiveAt) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1083651961;
-            hashCode = HashCode.Combine(this.EffectiveAt, this.Type, this.AmountMoney);
+            var hashCode = 1083651961;
+            hashCode = HashCode.Combine(hashCode, this.EffectiveAt, this.Type, this.AmountMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.EffectiveAt = {(this.EffectiveAt == null ? "null" : this.EffectiveAt)}");
-            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type)}");
+            toStringOutput.Add($"this.EffectiveAt = {this.EffectiveAt ?? "null"}");
+            toStringOutput.Add($"this.Type = {this.Type ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
         }
 
@@ -212,7 +210,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEffectiveAt()
             {
@@ -220,7 +218,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetType()
             {
@@ -234,7 +232,8 @@ namespace Square.Models
             /// <returns> ProcessingFee. </returns>
             public ProcessingFee Build()
             {
-                return new ProcessingFee(shouldSerialize,
+                return new ProcessingFee(
+                    shouldSerialize,
                     this.effectiveAt,
                     this.type,
                     this.amountMoney);

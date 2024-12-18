@@ -35,8 +35,8 @@ namespace Square.Models
                 { "idempotency_key", false },
                 { "fields_to_clear", false }
             };
-
             this.Invoice = invoice;
+
             if (idempotencyKey != null)
             {
                 shouldSerialize["idempotency_key"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["fields_to_clear"] = true;
                 this.FieldsToClear = fieldsToClear;
             }
-
         }
-        internal UpdateInvoiceRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal UpdateInvoiceRequest(
+            Dictionary<string, bool> shouldSerialize,
             Models.Invoice invoice,
             string idempotencyKey = null,
             IList<string> fieldsToClear = null)
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateInvoiceRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -116,28 +115,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateInvoiceRequest other &&                ((this.Invoice == null && other.Invoice == null) || (this.Invoice?.Equals(other.Invoice) == true)) &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.FieldsToClear == null && other.FieldsToClear == null) || (this.FieldsToClear?.Equals(other.FieldsToClear) == true));
+            return obj is UpdateInvoiceRequest other &&
+                (this.Invoice == null && other.Invoice == null ||
+                 this.Invoice?.Equals(other.Invoice) == true) &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.FieldsToClear == null && other.FieldsToClear == null ||
+                 this.FieldsToClear?.Equals(other.FieldsToClear) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -281586426;
-            hashCode = HashCode.Combine(this.Invoice, this.IdempotencyKey, this.FieldsToClear);
+            var hashCode = -281586426;
+            hashCode = HashCode.Combine(hashCode, this.Invoice, this.IdempotencyKey, this.FieldsToClear);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -145,7 +143,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Invoice = {(this.Invoice == null ? "null" : this.Invoice.ToString())}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.FieldsToClear = {(this.FieldsToClear == null ? "null" : $"[{string.Join(", ", this.FieldsToClear)} ]")}");
         }
 
@@ -223,7 +221,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIdempotencyKey()
             {
@@ -231,7 +229,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFieldsToClear()
             {
@@ -245,7 +243,8 @@ namespace Square.Models
             /// <returns> UpdateInvoiceRequest. </returns>
             public UpdateInvoiceRequest Build()
             {
-                return new UpdateInvoiceRequest(shouldSerialize,
+                return new UpdateInvoiceRequest(
+                    shouldSerialize,
                     this.invoice,
                     this.idempotencyKey,
                     this.fieldsToClear);

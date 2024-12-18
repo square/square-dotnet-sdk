@@ -50,36 +50,32 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ChargeResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ChargeResponse other &&                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Transaction == null && other.Transaction == null) || (this.Transaction?.Equals(other.Transaction) == true));
+            return obj is ChargeResponse other &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.Transaction == null && other.Transaction == null ||
+                 this.Transaction?.Equals(other.Transaction) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1244238675;
-            hashCode = HashCode.Combine(this.Errors, this.Transaction);
+            var hashCode = -1244238675;
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.Transaction);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

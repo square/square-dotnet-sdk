@@ -44,8 +44,8 @@ namespace Square.Models
                 shouldSerialize["type"] = true;
                 this.Type = type;
             }
-
             this.Id = id;
+
             if (deleted != null)
             {
                 shouldSerialize["deleted"] = true;
@@ -57,9 +57,10 @@ namespace Square.Models
                 shouldSerialize["object"] = true;
                 this.MObject = mObject;
             }
-
         }
-        internal EventData(Dictionary<string, bool> shouldSerialize,
+
+        internal EventData(
+            Dictionary<string, bool> shouldSerialize,
             string type = null,
             string id = null,
             bool? deleted = null,
@@ -100,9 +101,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"EventData : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -136,37 +135,37 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is EventData other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Deleted == null && other.Deleted == null) || (this.Deleted?.Equals(other.Deleted) == true)) &&
-                ((this.MObject == null && other.MObject == null) || (this.MObject?.Equals(other.MObject) == true));
+            return obj is EventData other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Deleted == null && other.Deleted == null ||
+                 this.Deleted?.Equals(other.Deleted) == true) &&
+                (this.MObject == null && other.MObject == null ||
+                 this.MObject?.Equals(other.MObject) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1328601859;
-            hashCode = HashCode.Combine(this.Type, this.Id, this.Deleted, this.MObject);
+            var hashCode = -1328601859;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.Id, this.Deleted, this.MObject);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type)}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Type = {this.Type ?? "null"}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Deleted = {(this.Deleted == null ? "null" : this.Deleted.ToString())}");
             toStringOutput.Add($"MObject = {(this.MObject == null ? "null" : this.MObject.ToString())}");
         }
@@ -250,7 +249,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetType()
             {
@@ -258,7 +257,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeleted()
             {
@@ -266,7 +265,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMObject()
             {
@@ -280,7 +279,8 @@ namespace Square.Models
             /// <returns> EventData. </returns>
             public EventData Build()
             {
-                return new EventData(shouldSerialize,
+                return new EventData(
+                    shouldSerialize,
                     this.type,
                     this.id,
                     this.deleted,

@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "allow_negative_balance", false }
             };
-
             this.IdempotencyKey = idempotencyKey;
             this.AdjustPoints = adjustPoints;
+
             if (allowNegativeBalance != null)
             {
                 shouldSerialize["allow_negative_balance"] = true;
                 this.AllowNegativeBalance = allowNegativeBalance;
             }
-
         }
-        internal AdjustLoyaltyPointsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal AdjustLoyaltyPointsRequest(
+            Dictionary<string, bool> shouldSerialize,
             string idempotencyKey,
             Models.LoyaltyEventAdjustPoints adjustPoints,
             bool? allowNegativeBalance = null)
@@ -80,9 +81,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"AdjustLoyaltyPointsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -98,35 +97,34 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is AdjustLoyaltyPointsRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.AdjustPoints == null && other.AdjustPoints == null) || (this.AdjustPoints?.Equals(other.AdjustPoints) == true)) &&
-                ((this.AllowNegativeBalance == null && other.AllowNegativeBalance == null) || (this.AllowNegativeBalance?.Equals(other.AllowNegativeBalance) == true));
+            return obj is AdjustLoyaltyPointsRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.AdjustPoints == null && other.AdjustPoints == null ||
+                 this.AdjustPoints?.Equals(other.AdjustPoints) == true) &&
+                (this.AllowNegativeBalance == null && other.AllowNegativeBalance == null ||
+                 this.AllowNegativeBalance?.Equals(other.AllowNegativeBalance) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 134703595;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.AdjustPoints, this.AllowNegativeBalance);
+            var hashCode = 134703595;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.AdjustPoints, this.AllowNegativeBalance);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.AdjustPoints = {(this.AdjustPoints == null ? "null" : this.AdjustPoints.ToString())}");
             toStringOutput.Add($"this.AllowNegativeBalance = {(this.AllowNegativeBalance == null ? "null" : this.AllowNegativeBalance.ToString())}");
         }
@@ -206,7 +204,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAllowNegativeBalance()
             {
@@ -220,7 +218,8 @@ namespace Square.Models
             /// <returns> AdjustLoyaltyPointsRequest. </returns>
             public AdjustLoyaltyPointsRequest Build()
             {
-                return new AdjustLoyaltyPointsRequest(shouldSerialize,
+                return new AdjustLoyaltyPointsRequest(
+                    shouldSerialize,
                     this.idempotencyKey,
                     this.adjustPoints,
                     this.allowNegativeBalance);

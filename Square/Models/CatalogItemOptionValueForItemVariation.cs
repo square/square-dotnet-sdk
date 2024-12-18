@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["item_option_value_id"] = true;
                 this.ItemOptionValueId = itemOptionValueId;
             }
-
         }
-        internal CatalogItemOptionValueForItemVariation(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogItemOptionValueForItemVariation(
+            Dictionary<string, bool> shouldSerialize,
             string itemOptionId = null,
             string itemOptionValueId = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogItemOptionValueForItemVariation : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,35 +98,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogItemOptionValueForItemVariation other &&                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
-                ((this.ItemOptionValueId == null && other.ItemOptionValueId == null) || (this.ItemOptionValueId?.Equals(other.ItemOptionValueId) == true));
+            return obj is CatalogItemOptionValueForItemVariation other &&
+                (this.ItemOptionId == null && other.ItemOptionId == null ||
+                 this.ItemOptionId?.Equals(other.ItemOptionId) == true) &&
+                (this.ItemOptionValueId == null && other.ItemOptionValueId == null ||
+                 this.ItemOptionValueId?.Equals(other.ItemOptionValueId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -727857243;
-            hashCode = HashCode.Combine(this.ItemOptionId, this.ItemOptionValueId);
+            var hashCode = -727857243;
+            hashCode = HashCode.Combine(hashCode, this.ItemOptionId, this.ItemOptionValueId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ItemOptionId = {(this.ItemOptionId == null ? "null" : this.ItemOptionId)}");
-            toStringOutput.Add($"this.ItemOptionValueId = {(this.ItemOptionValueId == null ? "null" : this.ItemOptionValueId)}");
+            toStringOutput.Add($"this.ItemOptionId = {this.ItemOptionId ?? "null"}");
+            toStringOutput.Add($"this.ItemOptionValueId = {this.ItemOptionValueId ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetItemOptionId()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetItemOptionValueId()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> CatalogItemOptionValueForItemVariation. </returns>
             public CatalogItemOptionValueForItemVariation Build()
             {
-                return new CatalogItemOptionValueForItemVariation(shouldSerialize,
+                return new CatalogItemOptionValueForItemVariation(
+                    shouldSerialize,
                     this.itemOptionId,
                     this.itemOptionValueId);
             }

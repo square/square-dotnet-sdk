@@ -47,44 +47,40 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"V1PhoneNumber : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is V1PhoneNumber other &&                ((this.CallingCode == null && other.CallingCode == null) || (this.CallingCode?.Equals(other.CallingCode) == true)) &&
-                ((this.Number == null && other.Number == null) || (this.Number?.Equals(other.Number) == true));
+            return obj is V1PhoneNumber other &&
+                (this.CallingCode == null && other.CallingCode == null ||
+                 this.CallingCode?.Equals(other.CallingCode) == true) &&
+                (this.Number == null && other.Number == null ||
+                 this.Number?.Equals(other.Number) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 343986405;
-            hashCode = HashCode.Combine(this.CallingCode, this.Number);
+            var hashCode = 343986405;
+            hashCode = HashCode.Combine(hashCode, this.CallingCode, this.Number);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CallingCode = {(this.CallingCode == null ? "null" : this.CallingCode)}");
-            toStringOutput.Add($"this.Number = {(this.Number == null ? "null" : this.Number)}");
+            toStringOutput.Add($"this.CallingCode = {this.CallingCode ?? "null"}");
+            toStringOutput.Add($"this.Number = {this.Number ?? "null"}");
         }
 
         /// <summary>

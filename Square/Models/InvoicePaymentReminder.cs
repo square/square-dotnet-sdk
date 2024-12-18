@@ -39,8 +39,8 @@ namespace Square.Models
                 { "relative_scheduled_days", false },
                 { "message", false }
             };
-
             this.Uid = uid;
+
             if (relativeScheduledDays != null)
             {
                 shouldSerialize["relative_scheduled_days"] = true;
@@ -52,11 +52,12 @@ namespace Square.Models
                 shouldSerialize["message"] = true;
                 this.Message = message;
             }
-
             this.Status = status;
             this.SentAt = sentAt;
         }
-        internal InvoicePaymentReminder(Dictionary<string, bool> shouldSerialize,
+
+        internal InvoicePaymentReminder(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             int? relativeScheduledDays = null,
             string message = null,
@@ -108,9 +109,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InvoicePaymentReminder : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -135,41 +134,42 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InvoicePaymentReminder other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.RelativeScheduledDays == null && other.RelativeScheduledDays == null) || (this.RelativeScheduledDays?.Equals(other.RelativeScheduledDays) == true)) &&
-                ((this.Message == null && other.Message == null) || (this.Message?.Equals(other.Message) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.SentAt == null && other.SentAt == null) || (this.SentAt?.Equals(other.SentAt) == true));
+            return obj is InvoicePaymentReminder other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.RelativeScheduledDays == null && other.RelativeScheduledDays == null ||
+                 this.RelativeScheduledDays?.Equals(other.RelativeScheduledDays) == true) &&
+                (this.Message == null && other.Message == null ||
+                 this.Message?.Equals(other.Message) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.SentAt == null && other.SentAt == null ||
+                 this.SentAt?.Equals(other.SentAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1406942862;
-            hashCode = HashCode.Combine(this.Uid, this.RelativeScheduledDays, this.Message, this.Status, this.SentAt);
+            var hashCode = -1406942862;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.RelativeScheduledDays, this.Message, this.Status, this.SentAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
             toStringOutput.Add($"this.RelativeScheduledDays = {(this.RelativeScheduledDays == null ? "null" : this.RelativeScheduledDays.ToString())}");
-            toStringOutput.Add($"this.Message = {(this.Message == null ? "null" : this.Message)}");
+            toStringOutput.Add($"this.Message = {this.Message ?? "null"}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.SentAt = {(this.SentAt == null ? "null" : this.SentAt)}");
+            toStringOutput.Add($"this.SentAt = {this.SentAt ?? "null"}");
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRelativeScheduledDays()
             {
@@ -270,7 +270,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMessage()
             {
@@ -284,7 +284,8 @@ namespace Square.Models
             /// <returns> InvoicePaymentReminder. </returns>
             public InvoicePaymentReminder Build()
             {
-                return new InvoicePaymentReminder(shouldSerialize,
+                return new InvoicePaymentReminder(
+                    shouldSerialize,
                     this.uid,
                     this.relativeScheduledDays,
                     this.message,

@@ -90,9 +90,10 @@ namespace Square.Models
                 shouldSerialize["all_products"] = true;
                 this.AllProducts = allProducts;
             }
-
         }
-        internal CatalogProductSet(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogProductSet(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             IList<string> productIdsAny = null,
             IList<string> productIdsAll = null,
@@ -173,9 +174,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogProductSet : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -245,39 +244,42 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogProductSet other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.ProductIdsAny == null && other.ProductIdsAny == null) || (this.ProductIdsAny?.Equals(other.ProductIdsAny) == true)) &&
-                ((this.ProductIdsAll == null && other.ProductIdsAll == null) || (this.ProductIdsAll?.Equals(other.ProductIdsAll) == true)) &&
-                ((this.QuantityExact == null && other.QuantityExact == null) || (this.QuantityExact?.Equals(other.QuantityExact) == true)) &&
-                ((this.QuantityMin == null && other.QuantityMin == null) || (this.QuantityMin?.Equals(other.QuantityMin) == true)) &&
-                ((this.QuantityMax == null && other.QuantityMax == null) || (this.QuantityMax?.Equals(other.QuantityMax) == true)) &&
-                ((this.AllProducts == null && other.AllProducts == null) || (this.AllProducts?.Equals(other.AllProducts) == true));
+            return obj is CatalogProductSet other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.ProductIdsAny == null && other.ProductIdsAny == null ||
+                 this.ProductIdsAny?.Equals(other.ProductIdsAny) == true) &&
+                (this.ProductIdsAll == null && other.ProductIdsAll == null ||
+                 this.ProductIdsAll?.Equals(other.ProductIdsAll) == true) &&
+                (this.QuantityExact == null && other.QuantityExact == null ||
+                 this.QuantityExact?.Equals(other.QuantityExact) == true) &&
+                (this.QuantityMin == null && other.QuantityMin == null ||
+                 this.QuantityMin?.Equals(other.QuantityMin) == true) &&
+                (this.QuantityMax == null && other.QuantityMax == null ||
+                 this.QuantityMax?.Equals(other.QuantityMax) == true) &&
+                (this.AllProducts == null && other.AllProducts == null ||
+                 this.AllProducts?.Equals(other.AllProducts) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -600323794;
-            hashCode = HashCode.Combine(this.Name, this.ProductIdsAny, this.ProductIdsAll, this.QuantityExact, this.QuantityMin, this.QuantityMax, this.AllProducts);
+            var hashCode = -600323794;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.ProductIdsAny, this.ProductIdsAll, this.QuantityExact, this.QuantityMin, this.QuantityMax, this.AllProducts);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.ProductIdsAny = {(this.ProductIdsAny == null ? "null" : $"[{string.Join(", ", this.ProductIdsAny)} ]")}");
             toStringOutput.Add($"this.ProductIdsAll = {(this.ProductIdsAll == null ? "null" : $"[{string.Join(", ", this.ProductIdsAll)} ]")}");
             toStringOutput.Add($"this.QuantityExact = {(this.QuantityExact == null ? "null" : this.QuantityExact.ToString())}");
@@ -412,7 +414,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -420,7 +422,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetProductIdsAny()
             {
@@ -428,7 +430,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetProductIdsAll()
             {
@@ -436,7 +438,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQuantityExact()
             {
@@ -444,7 +446,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQuantityMin()
             {
@@ -452,7 +454,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQuantityMax()
             {
@@ -460,7 +462,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAllProducts()
             {
@@ -474,7 +476,8 @@ namespace Square.Models
             /// <returns> CatalogProductSet. </returns>
             public CatalogProductSet Build()
             {
-                return new CatalogProductSet(shouldSerialize,
+                return new CatalogProductSet(
+                    shouldSerialize,
                     this.name,
                     this.productIdsAny,
                     this.productIdsAll,

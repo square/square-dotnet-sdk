@@ -79,46 +79,44 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CreateCatalogImageRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CreateCatalogImageRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true)) &&
-                ((this.Image == null && other.Image == null) || (this.Image?.Equals(other.Image) == true)) &&
-                ((this.IsPrimary == null && other.IsPrimary == null) || (this.IsPrimary?.Equals(other.IsPrimary) == true));
+            return obj is CreateCatalogImageRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.ObjectId == null && other.ObjectId == null ||
+                 this.ObjectId?.Equals(other.ObjectId) == true) &&
+                (this.Image == null && other.Image == null ||
+                 this.Image?.Equals(other.Image) == true) &&
+                (this.IsPrimary == null && other.IsPrimary == null ||
+                 this.IsPrimary?.Equals(other.IsPrimary) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -432630368;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.ObjectId, this.Image, this.IsPrimary);
+            var hashCode = -432630368;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.ObjectId, this.Image, this.IsPrimary);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
-            toStringOutput.Add($"this.ObjectId = {(this.ObjectId == null ? "null" : this.ObjectId)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
+            toStringOutput.Add($"this.ObjectId = {this.ObjectId ?? "null"}");
             toStringOutput.Add($"this.Image = {(this.Image == null ? "null" : this.Image.ToString())}");
             toStringOutput.Add($"this.IsPrimary = {(this.IsPrimary == null ? "null" : this.IsPrimary.ToString())}");
         }

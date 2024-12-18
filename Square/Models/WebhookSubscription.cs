@@ -50,8 +50,8 @@ namespace Square.Models
                 { "notification_url", false },
                 { "api_version", false }
             };
-
             this.Id = id;
+
             if (name != null)
             {
                 shouldSerialize["name"] = true;
@@ -81,12 +81,13 @@ namespace Square.Models
                 shouldSerialize["api_version"] = true;
                 this.ApiVersion = apiVersion;
             }
-
             this.SignatureKey = signatureKey;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
         }
-        internal WebhookSubscription(Dictionary<string, bool> shouldSerialize,
+
+        internal WebhookSubscription(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string name = null,
             bool? enabled = null,
@@ -170,9 +171,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"WebhookSubscription : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -224,51 +223,56 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is WebhookSubscription other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true)) &&
-                ((this.EventTypes == null && other.EventTypes == null) || (this.EventTypes?.Equals(other.EventTypes) == true)) &&
-                ((this.NotificationUrl == null && other.NotificationUrl == null) || (this.NotificationUrl?.Equals(other.NotificationUrl) == true)) &&
-                ((this.ApiVersion == null && other.ApiVersion == null) || (this.ApiVersion?.Equals(other.ApiVersion) == true)) &&
-                ((this.SignatureKey == null && other.SignatureKey == null) || (this.SignatureKey?.Equals(other.SignatureKey) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
+            return obj is WebhookSubscription other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Enabled == null && other.Enabled == null ||
+                 this.Enabled?.Equals(other.Enabled) == true) &&
+                (this.EventTypes == null && other.EventTypes == null ||
+                 this.EventTypes?.Equals(other.EventTypes) == true) &&
+                (this.NotificationUrl == null && other.NotificationUrl == null ||
+                 this.NotificationUrl?.Equals(other.NotificationUrl) == true) &&
+                (this.ApiVersion == null && other.ApiVersion == null ||
+                 this.ApiVersion?.Equals(other.ApiVersion) == true) &&
+                (this.SignatureKey == null && other.SignatureKey == null ||
+                 this.SignatureKey?.Equals(other.SignatureKey) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -314056080;
-            hashCode = HashCode.Combine(this.Id, this.Name, this.Enabled, this.EventTypes, this.NotificationUrl, this.ApiVersion, this.SignatureKey);
+            var hashCode = -314056080;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Name, this.Enabled, this.EventTypes, this.NotificationUrl, this.ApiVersion, this.SignatureKey);
 
             hashCode = HashCode.Combine(hashCode, this.CreatedAt, this.UpdatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
             toStringOutput.Add($"this.EventTypes = {(this.EventTypes == null ? "null" : $"[{string.Join(", ", this.EventTypes)} ]")}");
-            toStringOutput.Add($"this.NotificationUrl = {(this.NotificationUrl == null ? "null" : this.NotificationUrl)}");
-            toStringOutput.Add($"this.ApiVersion = {(this.ApiVersion == null ? "null" : this.ApiVersion)}");
-            toStringOutput.Add($"this.SignatureKey = {(this.SignatureKey == null ? "null" : this.SignatureKey)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.NotificationUrl = {this.NotificationUrl ?? "null"}");
+            toStringOutput.Add($"this.ApiVersion = {this.ApiVersion ?? "null"}");
+            toStringOutput.Add($"this.SignatureKey = {this.SignatureKey ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -419,7 +423,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -427,7 +431,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEnabled()
             {
@@ -435,7 +439,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEventTypes()
             {
@@ -443,7 +447,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNotificationUrl()
             {
@@ -451,7 +455,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApiVersion()
             {
@@ -465,7 +469,8 @@ namespace Square.Models
             /// <returns> WebhookSubscription. </returns>
             public WebhookSubscription Build()
             {
-                return new WebhookSubscription(shouldSerialize,
+                return new WebhookSubscription(
+                    shouldSerialize,
                     this.id,
                     this.name,
                     this.enabled,

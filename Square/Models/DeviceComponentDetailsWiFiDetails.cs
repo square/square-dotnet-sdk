@@ -65,10 +65,11 @@ namespace Square.Models
                 shouldSerialize["secure_connection"] = true;
                 this.SecureConnection = secureConnection;
             }
-
             this.SignalStrength = signalStrength;
         }
-        internal DeviceComponentDetailsWiFiDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceComponentDetailsWiFiDetails(
+            Dictionary<string, bool> shouldSerialize,
             bool? active = null,
             string ssid = null,
             string ipAddressV4 = null,
@@ -118,9 +119,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceComponentDetailsWiFiDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -163,30 +162,31 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceComponentDetailsWiFiDetails other &&                ((this.Active == null && other.Active == null) || (this.Active?.Equals(other.Active) == true)) &&
-                ((this.Ssid == null && other.Ssid == null) || (this.Ssid?.Equals(other.Ssid) == true)) &&
-                ((this.IpAddressV4 == null && other.IpAddressV4 == null) || (this.IpAddressV4?.Equals(other.IpAddressV4) == true)) &&
-                ((this.SecureConnection == null && other.SecureConnection == null) || (this.SecureConnection?.Equals(other.SecureConnection) == true)) &&
-                ((this.SignalStrength == null && other.SignalStrength == null) || (this.SignalStrength?.Equals(other.SignalStrength) == true));
+            return obj is DeviceComponentDetailsWiFiDetails other &&
+                (this.Active == null && other.Active == null ||
+                 this.Active?.Equals(other.Active) == true) &&
+                (this.Ssid == null && other.Ssid == null ||
+                 this.Ssid?.Equals(other.Ssid) == true) &&
+                (this.IpAddressV4 == null && other.IpAddressV4 == null ||
+                 this.IpAddressV4?.Equals(other.IpAddressV4) == true) &&
+                (this.SecureConnection == null && other.SecureConnection == null ||
+                 this.SecureConnection?.Equals(other.SecureConnection) == true) &&
+                (this.SignalStrength == null && other.SignalStrength == null ||
+                 this.SignalStrength?.Equals(other.SignalStrength) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1526846131;
-            hashCode = HashCode.Combine(this.Active, this.Ssid, this.IpAddressV4, this.SecureConnection, this.SignalStrength);
+            var hashCode = 1526846131;
+            hashCode = HashCode.Combine(hashCode, this.Active, this.Ssid, this.IpAddressV4, this.SecureConnection, this.SignalStrength);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -194,9 +194,9 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Active = {(this.Active == null ? "null" : this.Active.ToString())}");
-            toStringOutput.Add($"this.Ssid = {(this.Ssid == null ? "null" : this.Ssid)}");
-            toStringOutput.Add($"this.IpAddressV4 = {(this.IpAddressV4 == null ? "null" : this.IpAddressV4)}");
-            toStringOutput.Add($"this.SecureConnection = {(this.SecureConnection == null ? "null" : this.SecureConnection)}");
+            toStringOutput.Add($"this.Ssid = {this.Ssid ?? "null"}");
+            toStringOutput.Add($"this.IpAddressV4 = {this.IpAddressV4 ?? "null"}");
+            toStringOutput.Add($"this.SecureConnection = {this.SecureConnection ?? "null"}");
             toStringOutput.Add($"this.SignalStrength = {(this.SignalStrength == null ? "null" : this.SignalStrength.ToString())}");
         }
 
@@ -294,7 +294,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetActive()
             {
@@ -302,7 +302,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSsid()
             {
@@ -310,7 +310,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIpAddressV4()
             {
@@ -318,7 +318,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSecureConnection()
             {
@@ -332,7 +332,8 @@ namespace Square.Models
             /// <returns> DeviceComponentDetailsWiFiDetails. </returns>
             public DeviceComponentDetailsWiFiDetails Build()
             {
-                return new DeviceComponentDetailsWiFiDetails(shouldSerialize,
+                return new DeviceComponentDetailsWiFiDetails(
+                    shouldSerialize,
                     this.active,
                     this.ssid,
                     this.ipAddressV4,

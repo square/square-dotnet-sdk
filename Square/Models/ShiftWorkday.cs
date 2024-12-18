@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "default_timezone", false }
             };
-
             this.DateRange = dateRange;
             this.MatchShiftsBy = matchShiftsBy;
+
             if (defaultTimezone != null)
             {
                 shouldSerialize["default_timezone"] = true;
                 this.DefaultTimezone = defaultTimezone;
             }
-
         }
-        internal ShiftWorkday(Dictionary<string, bool> shouldSerialize,
+
+        internal ShiftWorkday(
+            Dictionary<string, bool> shouldSerialize,
             Models.DateRange dateRange = null,
             string matchShiftsBy = null,
             string defaultTimezone = null)
@@ -81,9 +82,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ShiftWorkday : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,28 +98,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ShiftWorkday other &&                ((this.DateRange == null && other.DateRange == null) || (this.DateRange?.Equals(other.DateRange) == true)) &&
-                ((this.MatchShiftsBy == null && other.MatchShiftsBy == null) || (this.MatchShiftsBy?.Equals(other.MatchShiftsBy) == true)) &&
-                ((this.DefaultTimezone == null && other.DefaultTimezone == null) || (this.DefaultTimezone?.Equals(other.DefaultTimezone) == true));
+            return obj is ShiftWorkday other &&
+                (this.DateRange == null && other.DateRange == null ||
+                 this.DateRange?.Equals(other.DateRange) == true) &&
+                (this.MatchShiftsBy == null && other.MatchShiftsBy == null ||
+                 this.MatchShiftsBy?.Equals(other.MatchShiftsBy) == true) &&
+                (this.DefaultTimezone == null && other.DefaultTimezone == null ||
+                 this.DefaultTimezone?.Equals(other.DefaultTimezone) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1536716736;
-            hashCode = HashCode.Combine(this.DateRange, this.MatchShiftsBy, this.DefaultTimezone);
+            var hashCode = -1536716736;
+            hashCode = HashCode.Combine(hashCode, this.DateRange, this.MatchShiftsBy, this.DefaultTimezone);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -129,7 +127,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.DateRange = {(this.DateRange == null ? "null" : this.DateRange.ToString())}");
             toStringOutput.Add($"this.MatchShiftsBy = {(this.MatchShiftsBy == null ? "null" : this.MatchShiftsBy.ToString())}");
-            toStringOutput.Add($"this.DefaultTimezone = {(this.DefaultTimezone == null ? "null" : this.DefaultTimezone)}");
+            toStringOutput.Add($"this.DefaultTimezone = {this.DefaultTimezone ?? "null"}");
         }
 
         /// <summary>
@@ -194,7 +192,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDefaultTimezone()
             {
@@ -208,7 +206,8 @@ namespace Square.Models
             /// <returns> ShiftWorkday. </returns>
             public ShiftWorkday Build()
             {
-                return new ShiftWorkday(shouldSerialize,
+                return new ShiftWorkday(
+                    shouldSerialize,
                     this.dateRange,
                     this.matchShiftsBy,
                     this.defaultTimezone);

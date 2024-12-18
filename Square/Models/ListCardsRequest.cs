@@ -65,10 +65,11 @@ namespace Square.Models
                 shouldSerialize["reference_id"] = true;
                 this.ReferenceId = referenceId;
             }
-
             this.SortOrder = sortOrder;
         }
-        internal ListCardsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListCardsRequest(
+            Dictionary<string, bool> shouldSerialize,
             string cursor = null,
             string customerId = null,
             bool? includeDisabled = null,
@@ -121,9 +122,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListCardsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -166,40 +165,41 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListCardsRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.IncludeDisabled == null && other.IncludeDisabled == null) || (this.IncludeDisabled?.Equals(other.IncludeDisabled) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
+            return obj is ListCardsRequest other &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.IncludeDisabled == null && other.IncludeDisabled == null ||
+                 this.IncludeDisabled?.Equals(other.IncludeDisabled) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -418405116;
-            hashCode = HashCode.Combine(this.Cursor, this.CustomerId, this.IncludeDisabled, this.ReferenceId, this.SortOrder);
+            var hashCode = -418405116;
+            hashCode = HashCode.Combine(hashCode, this.Cursor, this.CustomerId, this.IncludeDisabled, this.ReferenceId, this.SortOrder);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
             toStringOutput.Add($"this.IncludeDisabled = {(this.IncludeDisabled == null ? "null" : this.IncludeDisabled.ToString())}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
         }
 
@@ -297,7 +297,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -305,7 +305,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerId()
             {
@@ -313,7 +313,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIncludeDisabled()
             {
@@ -321,7 +321,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -335,7 +335,8 @@ namespace Square.Models
             /// <returns> ListCardsRequest. </returns>
             public ListCardsRequest Build()
             {
-                return new ListCardsRequest(shouldSerialize,
+                return new ListCardsRequest(
+                    shouldSerialize,
                     this.cursor,
                     this.customerId,
                     this.includeDisabled,

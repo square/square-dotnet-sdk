@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["include_category_path_to_root"] = true;
                 this.IncludeCategoryPathToRoot = includeCategoryPathToRoot;
             }
-
         }
-        internal RetrieveCatalogObjectRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal RetrieveCatalogObjectRequest(
+            Dictionary<string, bool> shouldSerialize,
             bool? includeRelatedObjects = null,
             long? catalogVersion = null,
             bool? includeCategoryPathToRoot = null)
@@ -106,9 +107,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RetrieveCatalogObjectRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -142,28 +141,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RetrieveCatalogObjectRequest other &&                ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
-                ((this.IncludeCategoryPathToRoot == null && other.IncludeCategoryPathToRoot == null) || (this.IncludeCategoryPathToRoot?.Equals(other.IncludeCategoryPathToRoot) == true));
+            return obj is RetrieveCatalogObjectRequest other &&
+                (this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null ||
+                 this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true) &&
+                (this.CatalogVersion == null && other.CatalogVersion == null ||
+                 this.CatalogVersion?.Equals(other.CatalogVersion) == true) &&
+                (this.IncludeCategoryPathToRoot == null && other.IncludeCategoryPathToRoot == null ||
+                 this.IncludeCategoryPathToRoot?.Equals(other.IncludeCategoryPathToRoot) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1806046083;
-            hashCode = HashCode.Combine(this.IncludeRelatedObjects, this.CatalogVersion, this.IncludeCategoryPathToRoot);
+            var hashCode = -1806046083;
+            hashCode = HashCode.Combine(hashCode, this.IncludeRelatedObjects, this.CatalogVersion, this.IncludeCategoryPathToRoot);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -241,7 +239,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIncludeRelatedObjects()
             {
@@ -249,7 +247,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogVersion()
             {
@@ -257,7 +255,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIncludeCategoryPathToRoot()
             {
@@ -271,7 +269,8 @@ namespace Square.Models
             /// <returns> RetrieveCatalogObjectRequest. </returns>
             public RetrieveCatalogObjectRequest Build()
             {
-                return new RetrieveCatalogObjectRequest(shouldSerialize,
+                return new RetrieveCatalogObjectRequest(
+                    shouldSerialize,
                     this.includeRelatedObjects,
                     this.catalogVersion,
                     this.includeCategoryPathToRoot);

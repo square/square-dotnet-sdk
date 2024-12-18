@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["ingredients"] = true;
                 this.Ingredients = ingredients;
             }
-
         }
-        internal CatalogItemFoodAndBeverageDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogItemFoodAndBeverageDetails(
+            Dictionary<string, bool> shouldSerialize,
             int? calorieCount = null,
             IList<Models.CatalogItemFoodAndBeverageDetailsDietaryPreference> dietaryPreferences = null,
             IList<Models.CatalogItemFoodAndBeverageDetailsIngredient> ingredients = null)
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogItemFoodAndBeverageDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -125,28 +124,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogItemFoodAndBeverageDetails other &&                ((this.CalorieCount == null && other.CalorieCount == null) || (this.CalorieCount?.Equals(other.CalorieCount) == true)) &&
-                ((this.DietaryPreferences == null && other.DietaryPreferences == null) || (this.DietaryPreferences?.Equals(other.DietaryPreferences) == true)) &&
-                ((this.Ingredients == null && other.Ingredients == null) || (this.Ingredients?.Equals(other.Ingredients) == true));
+            return obj is CatalogItemFoodAndBeverageDetails other &&
+                (this.CalorieCount == null && other.CalorieCount == null ||
+                 this.CalorieCount?.Equals(other.CalorieCount) == true) &&
+                (this.DietaryPreferences == null && other.DietaryPreferences == null ||
+                 this.DietaryPreferences?.Equals(other.DietaryPreferences) == true) &&
+                (this.Ingredients == null && other.Ingredients == null ||
+                 this.Ingredients?.Equals(other.Ingredients) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 137316348;
-            hashCode = HashCode.Combine(this.CalorieCount, this.DietaryPreferences, this.Ingredients);
+            var hashCode = 137316348;
+            hashCode = HashCode.Combine(hashCode, this.CalorieCount, this.DietaryPreferences, this.Ingredients);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -224,7 +222,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCalorieCount()
             {
@@ -232,7 +230,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDietaryPreferences()
             {
@@ -240,7 +238,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIngredients()
             {
@@ -254,7 +252,8 @@ namespace Square.Models
             /// <returns> CatalogItemFoodAndBeverageDetails. </returns>
             public CatalogItemFoodAndBeverageDetails Build()
             {
-                return new CatalogItemFoodAndBeverageDetails(shouldSerialize,
+                return new CatalogItemFoodAndBeverageDetails(
+                    shouldSerialize,
                     this.calorieCount,
                     this.dietaryPreferences,
                     this.ingredients);

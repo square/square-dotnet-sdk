@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
             this.OrderIds = orderIds;
         }
-        internal BatchRetrieveOrdersRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal BatchRetrieveOrdersRequest(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> orderIds,
             string locationId = null)
         {
@@ -67,9 +68,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BatchRetrieveOrdersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -85,34 +84,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BatchRetrieveOrdersRequest other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.OrderIds == null && other.OrderIds == null) || (this.OrderIds?.Equals(other.OrderIds) == true));
+            return obj is BatchRetrieveOrdersRequest other &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.OrderIds == null && other.OrderIds == null ||
+                 this.OrderIds?.Equals(other.OrderIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 224728365;
-            hashCode = HashCode.Combine(this.LocationId, this.OrderIds);
+            var hashCode = 224728365;
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.OrderIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.OrderIds = {(this.OrderIds == null ? "null" : $"[{string.Join(", ", this.OrderIds)} ]")}");
         }
 
@@ -175,7 +172,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -189,7 +186,8 @@ namespace Square.Models
             /// <returns> BatchRetrieveOrdersRequest. </returns>
             public BatchRetrieveOrdersRequest Build()
             {
-                return new BatchRetrieveOrdersRequest(shouldSerialize,
+                return new BatchRetrieveOrdersRequest(
+                    shouldSerialize,
                     this.orderIds,
                     this.locationId);
             }

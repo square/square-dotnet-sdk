@@ -54,7 +54,6 @@ namespace Square.Models
                 { "arrival_date", false },
                 { "end_to_end_id", false }
             };
-
             this.Id = id;
             this.Status = status;
             this.LocationId = locationId;
@@ -64,6 +63,7 @@ namespace Square.Models
             this.Destination = destination;
             this.Version = version;
             this.Type = type;
+
             if (payoutFee != null)
             {
                 shouldSerialize["payout_fee"] = true;
@@ -81,9 +81,10 @@ namespace Square.Models
                 shouldSerialize["end_to_end_id"] = true;
                 this.EndToEndId = endToEndId;
             }
-
         }
-        internal Payout(Dictionary<string, bool> shouldSerialize,
+
+        internal Payout(
+            Dictionary<string, bool> shouldSerialize,
             string id,
             string locationId,
             string status = null,
@@ -197,9 +198,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Payout : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -233,57 +232,65 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Payout other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.Destination == null && other.Destination == null) || (this.Destination?.Equals(other.Destination) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.PayoutFee == null && other.PayoutFee == null) || (this.PayoutFee?.Equals(other.PayoutFee) == true)) &&
-                ((this.ArrivalDate == null && other.ArrivalDate == null) || (this.ArrivalDate?.Equals(other.ArrivalDate) == true)) &&
-                ((this.EndToEndId == null && other.EndToEndId == null) || (this.EndToEndId?.Equals(other.EndToEndId) == true));
+            return obj is Payout other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.Destination == null && other.Destination == null ||
+                 this.Destination?.Equals(other.Destination) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.PayoutFee == null && other.PayoutFee == null ||
+                 this.PayoutFee?.Equals(other.PayoutFee) == true) &&
+                (this.ArrivalDate == null && other.ArrivalDate == null ||
+                 this.ArrivalDate?.Equals(other.ArrivalDate) == true) &&
+                (this.EndToEndId == null && other.EndToEndId == null ||
+                 this.EndToEndId?.Equals(other.EndToEndId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -602201937;
-            hashCode = HashCode.Combine(this.Id, this.Status, this.LocationId, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.Destination);
+            var hashCode = -602201937;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Status, this.LocationId, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.Destination);
 
             hashCode = HashCode.Combine(hashCode, this.Version, this.Type, this.PayoutFee, this.ArrivalDate, this.EndToEndId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.Destination = {(this.Destination == null ? "null" : this.Destination.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.PayoutFee = {(this.PayoutFee == null ? "null" : $"[{string.Join(", ", this.PayoutFee)} ]")}");
-            toStringOutput.Add($"this.ArrivalDate = {(this.ArrivalDate == null ? "null" : this.ArrivalDate)}");
-            toStringOutput.Add($"this.EndToEndId = {(this.EndToEndId == null ? "null" : this.EndToEndId)}");
+            toStringOutput.Add($"this.ArrivalDate = {this.ArrivalDate ?? "null"}");
+            toStringOutput.Add($"this.EndToEndId = {this.EndToEndId ?? "null"}");
         }
 
         /// <summary>
@@ -482,7 +489,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPayoutFee()
             {
@@ -490,7 +497,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetArrivalDate()
             {
@@ -498,7 +505,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndToEndId()
             {
@@ -512,7 +519,8 @@ namespace Square.Models
             /// <returns> Payout. </returns>
             public Payout Build()
             {
-                return new Payout(shouldSerialize,
+                return new Payout(
+                    shouldSerialize,
                     this.id,
                     this.locationId,
                     this.status,

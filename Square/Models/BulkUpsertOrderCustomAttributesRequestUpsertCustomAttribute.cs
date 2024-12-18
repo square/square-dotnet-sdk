@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "idempotency_key", false }
             };
-
             this.CustomAttribute = customAttribute;
+
             if (idempotencyKey != null)
             {
                 shouldSerialize["idempotency_key"] = true;
                 this.IdempotencyKey = idempotencyKey;
             }
-
             this.OrderId = orderId;
         }
-        internal BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute(Dictionary<string, bool> shouldSerialize,
+
+        internal BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute(
+            Dictionary<string, bool> shouldSerialize,
             Models.CustomAttribute customAttribute,
             string orderId,
             string idempotencyKey = null)
@@ -79,9 +80,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -97,28 +96,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute other &&                ((this.CustomAttribute == null && other.CustomAttribute == null) || (this.CustomAttribute?.Equals(other.CustomAttribute) == true)) &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
+            return obj is BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute other &&
+                (this.CustomAttribute == null && other.CustomAttribute == null ||
+                 this.CustomAttribute?.Equals(other.CustomAttribute) == true) &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -575571452;
-            hashCode = HashCode.Combine(this.CustomAttribute, this.IdempotencyKey, this.OrderId);
+            var hashCode = -575571452;
+            hashCode = HashCode.Combine(hashCode, this.CustomAttribute, this.IdempotencyKey, this.OrderId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -126,8 +124,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.CustomAttribute = {(this.CustomAttribute == null ? "null" : this.CustomAttribute.ToString())}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
         }
 
         /// <summary>
@@ -205,7 +203,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIdempotencyKey()
             {
@@ -219,7 +217,8 @@ namespace Square.Models
             /// <returns> BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute. </returns>
             public BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute Build()
             {
-                return new BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute(shouldSerialize,
+                return new BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute(
+                    shouldSerialize,
                     this.customAttribute,
                     this.orderId,
                     this.idempotencyKey);

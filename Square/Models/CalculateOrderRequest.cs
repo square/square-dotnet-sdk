@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "proposed_rewards", false }
             };
-
             this.Order = order;
+
             if (proposedRewards != null)
             {
                 shouldSerialize["proposed_rewards"] = true;
                 this.ProposedRewards = proposedRewards;
             }
-
         }
-        internal CalculateOrderRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal CalculateOrderRequest(
+            Dictionary<string, bool> shouldSerialize,
             Models.Order order,
             IList<Models.OrderReward> proposedRewards = null)
         {
@@ -74,9 +75,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CalculateOrderRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -92,27 +91,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CalculateOrderRequest other &&                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
-                ((this.ProposedRewards == null && other.ProposedRewards == null) || (this.ProposedRewards?.Equals(other.ProposedRewards) == true));
+            return obj is CalculateOrderRequest other &&
+                (this.Order == null && other.Order == null ||
+                 this.Order?.Equals(other.Order) == true) &&
+                (this.ProposedRewards == null && other.ProposedRewards == null ||
+                 this.ProposedRewards?.Equals(other.ProposedRewards) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 653159834;
-            hashCode = HashCode.Combine(this.Order, this.ProposedRewards);
+            var hashCode = 653159834;
+            hashCode = HashCode.Combine(hashCode, this.Order, this.ProposedRewards);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -182,7 +179,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetProposedRewards()
             {
@@ -196,7 +193,8 @@ namespace Square.Models
             /// <returns> CalculateOrderRequest. </returns>
             public CalculateOrderRequest Build()
             {
-                return new CalculateOrderRequest(shouldSerialize,
+                return new CalculateOrderRequest(
+                    shouldSerialize,
                     this.order,
                     this.proposedRewards);
             }

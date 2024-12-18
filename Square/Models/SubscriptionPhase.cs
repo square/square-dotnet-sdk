@@ -48,24 +48,25 @@ namespace Square.Models
                 shouldSerialize["uid"] = true;
                 this.Uid = uid;
             }
-
             this.Cadence = cadence;
+
             if (periods != null)
             {
                 shouldSerialize["periods"] = true;
                 this.Periods = periods;
             }
-
             this.RecurringPriceMoney = recurringPriceMoney;
+
             if (ordinal != null)
             {
                 shouldSerialize["ordinal"] = true;
                 this.Ordinal = ordinal;
             }
-
             this.Pricing = pricing;
         }
-        internal SubscriptionPhase(Dictionary<string, bool> shouldSerialize,
+
+        internal SubscriptionPhase(
+            Dictionary<string, bool> shouldSerialize,
             string cadence,
             string uid = null,
             int? periods = null,
@@ -127,9 +128,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SubscriptionPhase : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -163,38 +162,40 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SubscriptionPhase other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.Cadence == null && other.Cadence == null) || (this.Cadence?.Equals(other.Cadence) == true)) &&
-                ((this.Periods == null && other.Periods == null) || (this.Periods?.Equals(other.Periods) == true)) &&
-                ((this.RecurringPriceMoney == null && other.RecurringPriceMoney == null) || (this.RecurringPriceMoney?.Equals(other.RecurringPriceMoney) == true)) &&
-                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
-                ((this.Pricing == null && other.Pricing == null) || (this.Pricing?.Equals(other.Pricing) == true));
+            return obj is SubscriptionPhase other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.Cadence == null && other.Cadence == null ||
+                 this.Cadence?.Equals(other.Cadence) == true) &&
+                (this.Periods == null && other.Periods == null ||
+                 this.Periods?.Equals(other.Periods) == true) &&
+                (this.RecurringPriceMoney == null && other.RecurringPriceMoney == null ||
+                 this.RecurringPriceMoney?.Equals(other.RecurringPriceMoney) == true) &&
+                (this.Ordinal == null && other.Ordinal == null ||
+                 this.Ordinal?.Equals(other.Ordinal) == true) &&
+                (this.Pricing == null && other.Pricing == null ||
+                 this.Pricing?.Equals(other.Pricing) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1288354424;
-            hashCode = HashCode.Combine(this.Uid, this.Cadence, this.Periods, this.RecurringPriceMoney, this.Ordinal, this.Pricing);
+            var hashCode = 1288354424;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.Cadence, this.Periods, this.RecurringPriceMoney, this.Ordinal, this.Pricing);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
             toStringOutput.Add($"this.Cadence = {(this.Cadence == null ? "null" : this.Cadence.ToString())}");
             toStringOutput.Add($"this.Periods = {(this.Periods == null ? "null" : this.Periods.ToString())}");
             toStringOutput.Add($"this.RecurringPriceMoney = {(this.RecurringPriceMoney == null ? "null" : this.RecurringPriceMoney.ToString())}");
@@ -317,7 +318,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -325,7 +326,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPeriods()
             {
@@ -333,7 +334,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrdinal()
             {
@@ -347,7 +348,8 @@ namespace Square.Models
             /// <returns> SubscriptionPhase. </returns>
             public SubscriptionPhase Build()
             {
-                return new SubscriptionPhase(shouldSerialize,
+                return new SubscriptionPhase(
+                    shouldSerialize,
                     this.cadence,
                     this.uid,
                     this.periods,

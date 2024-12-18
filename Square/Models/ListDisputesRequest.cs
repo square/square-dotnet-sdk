@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
         }
-        internal ListDisputesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListDisputesRequest(
+            Dictionary<string, bool> shouldSerialize,
             string cursor = null,
             IList<string> states = null,
             string locationId = null)
@@ -93,9 +94,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListDisputesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -129,37 +128,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListDisputesRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
+            return obj is ListDisputesRequest other &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.States == null && other.States == null ||
+                 this.States?.Equals(other.States) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1352803429;
-            hashCode = HashCode.Combine(this.Cursor, this.States, this.LocationId);
+            var hashCode = -1352803429;
+            hashCode = HashCode.Combine(hashCode, this.Cursor, this.States, this.LocationId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.States = {(this.States == null ? "null" : $"[{string.Join(", ", this.States)} ]")}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
         }
 
         /// <summary>
@@ -228,7 +226,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -236,7 +234,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStates()
             {
@@ -244,7 +242,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -258,7 +256,8 @@ namespace Square.Models
             /// <returns> ListDisputesRequest. </returns>
             public ListDisputesRequest Build()
             {
-                return new ListDisputesRequest(shouldSerialize,
+                return new ListDisputesRequest(
+                    shouldSerialize,
                     this.cursor,
                     this.states,
                     this.locationId);

@@ -59,8 +59,8 @@ namespace Square.Models
                 { "team_member_id", false },
                 { "occurred_at", false }
             };
-
             this.Id = id;
+
             if (referenceId != null)
             {
                 shouldSerialize["reference_id"] = true;
@@ -78,8 +78,8 @@ namespace Square.Models
                 shouldSerialize["catalog_object_type"] = true;
                 this.CatalogObjectType = catalogObjectType;
             }
-
             this.State = state;
+
             if (locationId != null)
             {
                 shouldSerialize["location_id"] = true;
@@ -91,8 +91,8 @@ namespace Square.Models
                 shouldSerialize["quantity"] = true;
                 this.Quantity = quantity;
             }
-
             this.Source = source;
+
             if (employeeId != null)
             {
                 shouldSerialize["employee_id"] = true;
@@ -110,10 +110,11 @@ namespace Square.Models
                 shouldSerialize["occurred_at"] = true;
                 this.OccurredAt = occurredAt;
             }
-
             this.CreatedAt = createdAt;
         }
-        internal InventoryPhysicalCount(Dictionary<string, bool> shouldSerialize,
+
+        internal InventoryPhysicalCount(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string referenceId = null,
             string catalogObjectId = null,
@@ -231,9 +232,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InventoryPhysicalCount : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -312,57 +311,65 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InventoryPhysicalCount other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((this.CatalogObjectType == null && other.CatalogObjectType == null) || (this.CatalogObjectType?.Equals(other.CatalogObjectType) == true)) &&
-                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
-                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.OccurredAt == null && other.OccurredAt == null) || (this.OccurredAt?.Equals(other.OccurredAt) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
+            return obj is InventoryPhysicalCount other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.CatalogObjectId == null && other.CatalogObjectId == null ||
+                 this.CatalogObjectId?.Equals(other.CatalogObjectId) == true) &&
+                (this.CatalogObjectType == null && other.CatalogObjectType == null ||
+                 this.CatalogObjectType?.Equals(other.CatalogObjectType) == true) &&
+                (this.State == null && other.State == null ||
+                 this.State?.Equals(other.State) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Quantity == null && other.Quantity == null ||
+                 this.Quantity?.Equals(other.Quantity) == true) &&
+                (this.Source == null && other.Source == null ||
+                 this.Source?.Equals(other.Source) == true) &&
+                (this.EmployeeId == null && other.EmployeeId == null ||
+                 this.EmployeeId?.Equals(other.EmployeeId) == true) &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.OccurredAt == null && other.OccurredAt == null ||
+                 this.OccurredAt?.Equals(other.OccurredAt) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1611758334;
-            hashCode = HashCode.Combine(this.Id, this.ReferenceId, this.CatalogObjectId, this.CatalogObjectType, this.State, this.LocationId, this.Quantity);
+            var hashCode = -1611758334;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.ReferenceId, this.CatalogObjectId, this.CatalogObjectType, this.State, this.LocationId, this.Quantity);
 
             hashCode = HashCode.Combine(hashCode, this.Source, this.EmployeeId, this.TeamMemberId, this.OccurredAt, this.CreatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
-            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId)}");
-            toStringOutput.Add($"this.CatalogObjectType = {(this.CatalogObjectType == null ? "null" : this.CatalogObjectType)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
+            toStringOutput.Add($"this.CatalogObjectId = {this.CatalogObjectId ?? "null"}");
+            toStringOutput.Add($"this.CatalogObjectType = {this.CatalogObjectType ?? "null"}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.Quantity = {this.Quantity ?? "null"}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
-            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
-            toStringOutput.Add($"this.OccurredAt = {(this.OccurredAt == null ? "null" : this.OccurredAt)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.EmployeeId = {this.EmployeeId ?? "null"}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
+            toStringOutput.Add($"this.OccurredAt = {this.OccurredAt ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -558,7 +565,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -566,7 +573,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectId()
             {
@@ -574,7 +581,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectType()
             {
@@ -582,7 +589,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -590,7 +597,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQuantity()
             {
@@ -598,7 +605,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmployeeId()
             {
@@ -606,7 +613,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTeamMemberId()
             {
@@ -614,7 +621,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOccurredAt()
             {
@@ -628,7 +635,8 @@ namespace Square.Models
             /// <returns> InventoryPhysicalCount. </returns>
             public InventoryPhysicalCount Build()
             {
-                return new InventoryPhysicalCount(shouldSerialize,
+                return new InventoryPhysicalCount(
+                    shouldSerialize,
                     this.id,
                     this.referenceId,
                     this.catalogObjectId,

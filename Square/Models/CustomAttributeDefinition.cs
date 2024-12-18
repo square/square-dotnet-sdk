@@ -71,13 +71,14 @@ namespace Square.Models
                 shouldSerialize["description"] = true;
                 this.Description = description;
             }
-
             this.Visibility = visibility;
             this.Version = version;
             this.UpdatedAt = updatedAt;
             this.CreatedAt = createdAt;
         }
-        internal CustomAttributeDefinition(Dictionary<string, bool> shouldSerialize,
+
+        internal CustomAttributeDefinition(
+            Dictionary<string, bool> shouldSerialize,
             string key = null,
             JsonObject schema = null,
             string name = null,
@@ -178,9 +179,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomAttributeDefinition : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -223,49 +222,53 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomAttributeDefinition other &&                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
-                ((this.Schema == null && other.Schema == null) || (this.Schema?.Equals(other.Schema) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.Visibility == null && other.Visibility == null) || (this.Visibility?.Equals(other.Visibility) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
+            return obj is CustomAttributeDefinition other &&
+                (this.Key == null && other.Key == null ||
+                 this.Key?.Equals(other.Key) == true) &&
+                (this.Schema == null && other.Schema == null ||
+                 this.Schema?.Equals(other.Schema) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.Visibility == null && other.Visibility == null ||
+                 this.Visibility?.Equals(other.Visibility) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1168711231;
-            hashCode = HashCode.Combine(this.Key, this.Schema, this.Name, this.Description, this.Visibility, this.Version, this.UpdatedAt);
+            var hashCode = 1168711231;
+            hashCode = HashCode.Combine(hashCode, this.Key, this.Schema, this.Name, this.Description, this.Visibility, this.Version, this.UpdatedAt);
 
             hashCode = HashCode.Combine(hashCode, this.CreatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key)}");
+            toStringOutput.Add($"this.Key = {this.Key ?? "null"}");
             toStringOutput.Add($"Schema = {(this.Schema == null ? "null" : this.Schema.ToString())}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
             toStringOutput.Add($"this.Visibility = {(this.Visibility == null ? "null" : this.Visibility.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -401,7 +404,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetKey()
             {
@@ -409,7 +412,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSchema()
             {
@@ -417,7 +420,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -425,7 +428,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -439,7 +442,8 @@ namespace Square.Models
             /// <returns> CustomAttributeDefinition. </returns>
             public CustomAttributeDefinition Build()
             {
-                return new CustomAttributeDefinition(shouldSerialize,
+                return new CustomAttributeDefinition(
+                    shouldSerialize,
                     this.key,
                     this.schema,
                     this.name,

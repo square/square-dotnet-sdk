@@ -41,16 +41,17 @@ namespace Square.Models
                 shouldSerialize["start_at"] = true;
                 this.StartAt = startAt;
             }
-
             this.LocationId = locationId;
+
             if (appointmentSegments != null)
             {
                 shouldSerialize["appointment_segments"] = true;
                 this.AppointmentSegments = appointmentSegments;
             }
-
         }
-        internal Availability(Dictionary<string, bool> shouldSerialize,
+
+        internal Availability(
+            Dictionary<string, bool> shouldSerialize,
             string startAt = null,
             string locationId = null,
             IList<Models.AppointmentSegment> appointmentSegments = null)
@@ -83,9 +84,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Availability : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -110,36 +109,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Availability other &&                ((this.StartAt == null && other.StartAt == null) || (this.StartAt?.Equals(other.StartAt) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.AppointmentSegments == null && other.AppointmentSegments == null) || (this.AppointmentSegments?.Equals(other.AppointmentSegments) == true));
+            return obj is Availability other &&
+                (this.StartAt == null && other.StartAt == null ||
+                 this.StartAt?.Equals(other.StartAt) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.AppointmentSegments == null && other.AppointmentSegments == null ||
+                 this.AppointmentSegments?.Equals(other.AppointmentSegments) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 133095493;
-            hashCode = HashCode.Combine(this.StartAt, this.LocationId, this.AppointmentSegments);
+            var hashCode = 133095493;
+            hashCode = HashCode.Combine(hashCode, this.StartAt, this.LocationId, this.AppointmentSegments);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.StartAt = {(this.StartAt == null ? "null" : this.StartAt)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.StartAt = {this.StartAt ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.AppointmentSegments = {(this.AppointmentSegments == null ? "null" : $"[{string.Join(", ", this.AppointmentSegments)} ]")}");
         }
 
@@ -207,7 +205,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStartAt()
             {
@@ -215,7 +213,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAppointmentSegments()
             {
@@ -229,7 +227,8 @@ namespace Square.Models
             /// <returns> Availability. </returns>
             public Availability Build()
             {
-                return new Availability(shouldSerialize,
+                return new Availability(
+                    shouldSerialize,
                     this.startAt,
                     this.locationId,
                     this.appointmentSegments);

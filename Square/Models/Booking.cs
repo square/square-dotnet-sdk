@@ -67,12 +67,12 @@ namespace Square.Models
                 { "seller_note", false },
                 { "appointment_segments", false }
             };
-
             this.Id = id;
             this.Version = version;
             this.Status = status;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+
             if (startAt != null)
             {
                 shouldSerialize["start_at"] = true;
@@ -108,7 +108,6 @@ namespace Square.Models
                 shouldSerialize["appointment_segments"] = true;
                 this.AppointmentSegments = appointmentSegments;
             }
-
             this.TransitionTimeMinutes = transitionTimeMinutes;
             this.AllDay = allDay;
             this.LocationType = locationType;
@@ -116,7 +115,9 @@ namespace Square.Models
             this.Source = source;
             this.Address = address;
         }
-        internal Booking(Dictionary<string, bool> shouldSerialize,
+
+        internal Booking(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             int? version = null,
             string status = null,
@@ -264,9 +265,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Booking : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -327,39 +326,51 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Booking other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.StartAt == null && other.StartAt == null) || (this.StartAt?.Equals(other.StartAt) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.CustomerNote == null && other.CustomerNote == null) || (this.CustomerNote?.Equals(other.CustomerNote) == true)) &&
-                ((this.SellerNote == null && other.SellerNote == null) || (this.SellerNote?.Equals(other.SellerNote) == true)) &&
-                ((this.AppointmentSegments == null && other.AppointmentSegments == null) || (this.AppointmentSegments?.Equals(other.AppointmentSegments) == true)) &&
-                ((this.TransitionTimeMinutes == null && other.TransitionTimeMinutes == null) || (this.TransitionTimeMinutes?.Equals(other.TransitionTimeMinutes) == true)) &&
-                ((this.AllDay == null && other.AllDay == null) || (this.AllDay?.Equals(other.AllDay) == true)) &&
-                ((this.LocationType == null && other.LocationType == null) || (this.LocationType?.Equals(other.LocationType) == true)) &&
-                ((this.CreatorDetails == null && other.CreatorDetails == null) || (this.CreatorDetails?.Equals(other.CreatorDetails) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
-                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true));
+            return obj is Booking other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.StartAt == null && other.StartAt == null ||
+                 this.StartAt?.Equals(other.StartAt) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.CustomerNote == null && other.CustomerNote == null ||
+                 this.CustomerNote?.Equals(other.CustomerNote) == true) &&
+                (this.SellerNote == null && other.SellerNote == null ||
+                 this.SellerNote?.Equals(other.SellerNote) == true) &&
+                (this.AppointmentSegments == null && other.AppointmentSegments == null ||
+                 this.AppointmentSegments?.Equals(other.AppointmentSegments) == true) &&
+                (this.TransitionTimeMinutes == null && other.TransitionTimeMinutes == null ||
+                 this.TransitionTimeMinutes?.Equals(other.TransitionTimeMinutes) == true) &&
+                (this.AllDay == null && other.AllDay == null ||
+                 this.AllDay?.Equals(other.AllDay) == true) &&
+                (this.LocationType == null && other.LocationType == null ||
+                 this.LocationType?.Equals(other.LocationType) == true) &&
+                (this.CreatorDetails == null && other.CreatorDetails == null ||
+                 this.CreatorDetails?.Equals(other.CreatorDetails) == true) &&
+                (this.Source == null && other.Source == null ||
+                 this.Source?.Equals(other.Source) == true) &&
+                (this.Address == null && other.Address == null ||
+                 this.Address?.Equals(other.Address) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -390805000;
-            hashCode = HashCode.Combine(this.Id, this.Version, this.Status, this.CreatedAt, this.UpdatedAt, this.StartAt, this.LocationId);
+            var hashCode = -390805000;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Version, this.Status, this.CreatedAt, this.UpdatedAt, this.StartAt, this.LocationId);
 
             hashCode = HashCode.Combine(hashCode, this.CustomerId, this.CustomerNote, this.SellerNote, this.AppointmentSegments, this.TransitionTimeMinutes, this.AllDay, this.LocationType);
 
@@ -367,22 +378,23 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.StartAt = {(this.StartAt == null ? "null" : this.StartAt)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
-            toStringOutput.Add($"this.CustomerNote = {(this.CustomerNote == null ? "null" : this.CustomerNote)}");
-            toStringOutput.Add($"this.SellerNote = {(this.SellerNote == null ? "null" : this.SellerNote)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.StartAt = {this.StartAt ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
+            toStringOutput.Add($"this.CustomerNote = {this.CustomerNote ?? "null"}");
+            toStringOutput.Add($"this.SellerNote = {this.SellerNote ?? "null"}");
             toStringOutput.Add($"this.AppointmentSegments = {(this.AppointmentSegments == null ? "null" : $"[{string.Join(", ", this.AppointmentSegments)} ]")}");
             toStringOutput.Add($"this.TransitionTimeMinutes = {(this.TransitionTimeMinutes == null ? "null" : this.TransitionTimeMinutes.ToString())}");
             toStringOutput.Add($"this.AllDay = {(this.AllDay == null ? "null" : this.AllDay.ToString())}");
@@ -646,7 +658,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStartAt()
             {
@@ -654,7 +666,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -662,7 +674,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerId()
             {
@@ -670,7 +682,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerNote()
             {
@@ -678,7 +690,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSellerNote()
             {
@@ -686,7 +698,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAppointmentSegments()
             {
@@ -700,7 +712,8 @@ namespace Square.Models
             /// <returns> Booking. </returns>
             public Booking Build()
             {
-                return new Booking(shouldSerialize,
+                return new Booking(
+                    shouldSerialize,
                     this.id,
                     this.version,
                     this.status,

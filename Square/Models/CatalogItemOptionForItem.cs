@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["item_option_id"] = true;
                 this.ItemOptionId = itemOptionId;
             }
-
         }
-        internal CatalogItemOptionForItem(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogItemOptionForItem(
+            Dictionary<string, bool> shouldSerialize,
             string itemOptionId = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -55,9 +56,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogItemOptionForItem : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -73,33 +72,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogItemOptionForItem other &&                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true));
+            return obj is CatalogItemOptionForItem other &&
+                (this.ItemOptionId == null && other.ItemOptionId == null ||
+                 this.ItemOptionId?.Equals(other.ItemOptionId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1801897765;
-            hashCode = HashCode.Combine(this.ItemOptionId);
+            var hashCode = 1801897765;
+            hashCode = HashCode.Combine(hashCode, this.ItemOptionId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ItemOptionId = {(this.ItemOptionId == null ? "null" : this.ItemOptionId)}");
+            toStringOutput.Add($"this.ItemOptionId = {this.ItemOptionId ?? "null"}");
         }
 
         /// <summary>
@@ -138,7 +134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetItemOptionId()
             {
@@ -152,7 +148,8 @@ namespace Square.Models
             /// <returns> CatalogItemOptionForItem. </returns>
             public CatalogItemOptionForItem Build()
             {
-                return new CatalogItemOptionForItem(shouldSerialize,
+                return new CatalogItemOptionForItem(
+                    shouldSerialize,
                     this.itemOptionId);
             }
         }

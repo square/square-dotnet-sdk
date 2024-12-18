@@ -41,35 +41,29 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyPromotionIncentivePointsAdditionData : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyPromotionIncentivePointsAdditionData other &&                this.PointsAddition.Equals(other.PointsAddition);
+            return obj is LoyaltyPromotionIncentivePointsAdditionData other &&
+                (this.PointsAddition.Equals(other.PointsAddition));
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1204465322;
-            hashCode = HashCode.Combine(this.PointsAddition);
+            var hashCode = 1204465322;
+            hashCode = HashCode.Combine(hashCode, this.PointsAddition);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

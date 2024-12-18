@@ -68,38 +68,36 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Error : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Error other &&                ((this.Category == null && other.Category == null) || (this.Category?.Equals(other.Category) == true)) &&
-                ((this.Code == null && other.Code == null) || (this.Code?.Equals(other.Code) == true)) &&
-                ((this.Detail == null && other.Detail == null) || (this.Detail?.Equals(other.Detail) == true)) &&
-                ((this.Field == null && other.Field == null) || (this.Field?.Equals(other.Field) == true));
+            return obj is Error other &&
+                (this.Category == null && other.Category == null ||
+                 this.Category?.Equals(other.Category) == true) &&
+                (this.Code == null && other.Code == null ||
+                 this.Code?.Equals(other.Code) == true) &&
+                (this.Detail == null && other.Detail == null ||
+                 this.Detail?.Equals(other.Detail) == true) &&
+                (this.Field == null && other.Field == null ||
+                 this.Field?.Equals(other.Field) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1665691664;
-            hashCode = HashCode.Combine(this.Category, this.Code, this.Detail, this.Field);
+            var hashCode = 1665691664;
+            hashCode = HashCode.Combine(hashCode, this.Category, this.Code, this.Detail, this.Field);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -108,8 +106,8 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Category = {(this.Category == null ? "null" : this.Category.ToString())}");
             toStringOutput.Add($"this.Code = {(this.Code == null ? "null" : this.Code.ToString())}");
-            toStringOutput.Add($"this.Detail = {(this.Detail == null ? "null" : this.Detail)}");
-            toStringOutput.Add($"this.Field = {(this.Field == null ? "null" : this.Field)}");
+            toStringOutput.Add($"this.Detail = {this.Detail ?? "null"}");
+            toStringOutput.Add($"this.Field = {this.Field ?? "null"}");
         }
 
         /// <summary>

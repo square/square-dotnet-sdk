@@ -38,42 +38,37 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomField : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomField other &&                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true));
+            return obj is CustomField other &&
+                (this.Title == null && other.Title == null ||
+                 this.Title?.Equals(other.Title) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -707260472;
-            hashCode = HashCode.Combine(this.Title);
+            var hashCode = -707260472;
+            hashCode = HashCode.Combine(hashCode, this.Title);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
+            toStringOutput.Add($"this.Title = {this.Title ?? "null"}");
         }
 
         /// <summary>

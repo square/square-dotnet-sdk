@@ -126,9 +126,10 @@ namespace Square.Models
                 shouldSerialize["update_item_modifier_lists_max_modifier_lists_to_disable"] = true;
                 this.UpdateItemModifierListsMaxModifierListsToDisable = updateItemModifierListsMaxModifierListsToDisable;
             }
-
         }
-        internal CatalogInfoResponseLimits(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogInfoResponseLimits(
+            Dictionary<string, bool> shouldSerialize,
             int? batchUpsertMaxObjectsPerBatch = null,
             int? batchUpsertMaxTotalObjects = null,
             int? batchRetrieveMaxObjectIds = null,
@@ -236,9 +237,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogInfoResponseLimits : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -344,38 +343,45 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogInfoResponseLimits other &&                ((this.BatchUpsertMaxObjectsPerBatch == null && other.BatchUpsertMaxObjectsPerBatch == null) || (this.BatchUpsertMaxObjectsPerBatch?.Equals(other.BatchUpsertMaxObjectsPerBatch) == true)) &&
-                ((this.BatchUpsertMaxTotalObjects == null && other.BatchUpsertMaxTotalObjects == null) || (this.BatchUpsertMaxTotalObjects?.Equals(other.BatchUpsertMaxTotalObjects) == true)) &&
-                ((this.BatchRetrieveMaxObjectIds == null && other.BatchRetrieveMaxObjectIds == null) || (this.BatchRetrieveMaxObjectIds?.Equals(other.BatchRetrieveMaxObjectIds) == true)) &&
-                ((this.SearchMaxPageLimit == null && other.SearchMaxPageLimit == null) || (this.SearchMaxPageLimit?.Equals(other.SearchMaxPageLimit) == true)) &&
-                ((this.BatchDeleteMaxObjectIds == null && other.BatchDeleteMaxObjectIds == null) || (this.BatchDeleteMaxObjectIds?.Equals(other.BatchDeleteMaxObjectIds) == true)) &&
-                ((this.UpdateItemTaxesMaxItemIds == null && other.UpdateItemTaxesMaxItemIds == null) || (this.UpdateItemTaxesMaxItemIds?.Equals(other.UpdateItemTaxesMaxItemIds) == true)) &&
-                ((this.UpdateItemTaxesMaxTaxesToEnable == null && other.UpdateItemTaxesMaxTaxesToEnable == null) || (this.UpdateItemTaxesMaxTaxesToEnable?.Equals(other.UpdateItemTaxesMaxTaxesToEnable) == true)) &&
-                ((this.UpdateItemTaxesMaxTaxesToDisable == null && other.UpdateItemTaxesMaxTaxesToDisable == null) || (this.UpdateItemTaxesMaxTaxesToDisable?.Equals(other.UpdateItemTaxesMaxTaxesToDisable) == true)) &&
-                ((this.UpdateItemModifierListsMaxItemIds == null && other.UpdateItemModifierListsMaxItemIds == null) || (this.UpdateItemModifierListsMaxItemIds?.Equals(other.UpdateItemModifierListsMaxItemIds) == true)) &&
-                ((this.UpdateItemModifierListsMaxModifierListsToEnable == null && other.UpdateItemModifierListsMaxModifierListsToEnable == null) || (this.UpdateItemModifierListsMaxModifierListsToEnable?.Equals(other.UpdateItemModifierListsMaxModifierListsToEnable) == true)) &&
-                ((this.UpdateItemModifierListsMaxModifierListsToDisable == null && other.UpdateItemModifierListsMaxModifierListsToDisable == null) || (this.UpdateItemModifierListsMaxModifierListsToDisable?.Equals(other.UpdateItemModifierListsMaxModifierListsToDisable) == true));
+            return obj is CatalogInfoResponseLimits other &&
+                (this.BatchUpsertMaxObjectsPerBatch == null && other.BatchUpsertMaxObjectsPerBatch == null ||
+                 this.BatchUpsertMaxObjectsPerBatch?.Equals(other.BatchUpsertMaxObjectsPerBatch) == true) &&
+                (this.BatchUpsertMaxTotalObjects == null && other.BatchUpsertMaxTotalObjects == null ||
+                 this.BatchUpsertMaxTotalObjects?.Equals(other.BatchUpsertMaxTotalObjects) == true) &&
+                (this.BatchRetrieveMaxObjectIds == null && other.BatchRetrieveMaxObjectIds == null ||
+                 this.BatchRetrieveMaxObjectIds?.Equals(other.BatchRetrieveMaxObjectIds) == true) &&
+                (this.SearchMaxPageLimit == null && other.SearchMaxPageLimit == null ||
+                 this.SearchMaxPageLimit?.Equals(other.SearchMaxPageLimit) == true) &&
+                (this.BatchDeleteMaxObjectIds == null && other.BatchDeleteMaxObjectIds == null ||
+                 this.BatchDeleteMaxObjectIds?.Equals(other.BatchDeleteMaxObjectIds) == true) &&
+                (this.UpdateItemTaxesMaxItemIds == null && other.UpdateItemTaxesMaxItemIds == null ||
+                 this.UpdateItemTaxesMaxItemIds?.Equals(other.UpdateItemTaxesMaxItemIds) == true) &&
+                (this.UpdateItemTaxesMaxTaxesToEnable == null && other.UpdateItemTaxesMaxTaxesToEnable == null ||
+                 this.UpdateItemTaxesMaxTaxesToEnable?.Equals(other.UpdateItemTaxesMaxTaxesToEnable) == true) &&
+                (this.UpdateItemTaxesMaxTaxesToDisable == null && other.UpdateItemTaxesMaxTaxesToDisable == null ||
+                 this.UpdateItemTaxesMaxTaxesToDisable?.Equals(other.UpdateItemTaxesMaxTaxesToDisable) == true) &&
+                (this.UpdateItemModifierListsMaxItemIds == null && other.UpdateItemModifierListsMaxItemIds == null ||
+                 this.UpdateItemModifierListsMaxItemIds?.Equals(other.UpdateItemModifierListsMaxItemIds) == true) &&
+                (this.UpdateItemModifierListsMaxModifierListsToEnable == null && other.UpdateItemModifierListsMaxModifierListsToEnable == null ||
+                 this.UpdateItemModifierListsMaxModifierListsToEnable?.Equals(other.UpdateItemModifierListsMaxModifierListsToEnable) == true) &&
+                (this.UpdateItemModifierListsMaxModifierListsToDisable == null && other.UpdateItemModifierListsMaxModifierListsToDisable == null ||
+                 this.UpdateItemModifierListsMaxModifierListsToDisable?.Equals(other.UpdateItemModifierListsMaxModifierListsToDisable) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 163529302;
-            hashCode = HashCode.Combine(this.BatchUpsertMaxObjectsPerBatch, this.BatchUpsertMaxTotalObjects, this.BatchRetrieveMaxObjectIds, this.SearchMaxPageLimit, this.BatchDeleteMaxObjectIds, this.UpdateItemTaxesMaxItemIds, this.UpdateItemTaxesMaxTaxesToEnable);
+            var hashCode = 163529302;
+            hashCode = HashCode.Combine(hashCode, this.BatchUpsertMaxObjectsPerBatch, this.BatchUpsertMaxTotalObjects, this.BatchRetrieveMaxObjectIds, this.SearchMaxPageLimit, this.BatchDeleteMaxObjectIds, this.UpdateItemTaxesMaxItemIds, this.UpdateItemTaxesMaxTaxesToEnable);
 
             hashCode = HashCode.Combine(hashCode, this.UpdateItemTaxesMaxTaxesToDisable, this.UpdateItemModifierListsMaxItemIds, this.UpdateItemModifierListsMaxModifierListsToEnable, this.UpdateItemModifierListsMaxModifierListsToDisable);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -581,7 +587,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBatchUpsertMaxObjectsPerBatch()
             {
@@ -589,7 +595,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBatchUpsertMaxTotalObjects()
             {
@@ -597,7 +603,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBatchRetrieveMaxObjectIds()
             {
@@ -605,7 +611,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSearchMaxPageLimit()
             {
@@ -613,7 +619,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBatchDeleteMaxObjectIds()
             {
@@ -621,7 +627,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUpdateItemTaxesMaxItemIds()
             {
@@ -629,7 +635,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUpdateItemTaxesMaxTaxesToEnable()
             {
@@ -637,7 +643,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUpdateItemTaxesMaxTaxesToDisable()
             {
@@ -645,7 +651,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUpdateItemModifierListsMaxItemIds()
             {
@@ -653,7 +659,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUpdateItemModifierListsMaxModifierListsToEnable()
             {
@@ -661,7 +667,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUpdateItemModifierListsMaxModifierListsToDisable()
             {
@@ -675,7 +681,8 @@ namespace Square.Models
             /// <returns> CatalogInfoResponseLimits. </returns>
             public CatalogInfoResponseLimits Build()
             {
-                return new CatalogInfoResponseLimits(shouldSerialize,
+                return new CatalogInfoResponseLimits(
+                    shouldSerialize,
                     this.batchUpsertMaxObjectsPerBatch,
                     this.batchUpsertMaxTotalObjects,
                     this.batchRetrieveMaxObjectIds,

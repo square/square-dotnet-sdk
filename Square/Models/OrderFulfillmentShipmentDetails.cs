@@ -66,8 +66,8 @@ namespace Square.Models
                 { "cancel_reason", false },
                 { "failure_reason", false }
             };
-
             this.Recipient = recipient;
+
             if (carrier != null)
             {
                 shouldSerialize["carrier"] = true;
@@ -97,17 +97,17 @@ namespace Square.Models
                 shouldSerialize["tracking_url"] = true;
                 this.TrackingUrl = trackingUrl;
             }
-
             this.PlacedAt = placedAt;
             this.InProgressAt = inProgressAt;
             this.PackagedAt = packagedAt;
+
             if (expectedShippedAt != null)
             {
                 shouldSerialize["expected_shipped_at"] = true;
                 this.ExpectedShippedAt = expectedShippedAt;
             }
-
             this.ShippedAt = shippedAt;
+
             if (canceledAt != null)
             {
                 shouldSerialize["canceled_at"] = true;
@@ -119,16 +119,17 @@ namespace Square.Models
                 shouldSerialize["cancel_reason"] = true;
                 this.CancelReason = cancelReason;
             }
-
             this.FailedAt = failedAt;
+
             if (failureReason != null)
             {
                 shouldSerialize["failure_reason"] = true;
                 this.FailureReason = failureReason;
             }
-
         }
-        internal OrderFulfillmentShipmentDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderFulfillmentShipmentDetails(
+            Dictionary<string, bool> shouldSerialize,
             Models.OrderFulfillmentRecipient recipient = null,
             string carrier = null,
             string shippingNote = null,
@@ -273,9 +274,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderFulfillmentShipmentDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -363,37 +362,47 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderFulfillmentShipmentDetails other &&                ((this.Recipient == null && other.Recipient == null) || (this.Recipient?.Equals(other.Recipient) == true)) &&
-                ((this.Carrier == null && other.Carrier == null) || (this.Carrier?.Equals(other.Carrier) == true)) &&
-                ((this.ShippingNote == null && other.ShippingNote == null) || (this.ShippingNote?.Equals(other.ShippingNote) == true)) &&
-                ((this.ShippingType == null && other.ShippingType == null) || (this.ShippingType?.Equals(other.ShippingType) == true)) &&
-                ((this.TrackingNumber == null && other.TrackingNumber == null) || (this.TrackingNumber?.Equals(other.TrackingNumber) == true)) &&
-                ((this.TrackingUrl == null && other.TrackingUrl == null) || (this.TrackingUrl?.Equals(other.TrackingUrl) == true)) &&
-                ((this.PlacedAt == null && other.PlacedAt == null) || (this.PlacedAt?.Equals(other.PlacedAt) == true)) &&
-                ((this.InProgressAt == null && other.InProgressAt == null) || (this.InProgressAt?.Equals(other.InProgressAt) == true)) &&
-                ((this.PackagedAt == null && other.PackagedAt == null) || (this.PackagedAt?.Equals(other.PackagedAt) == true)) &&
-                ((this.ExpectedShippedAt == null && other.ExpectedShippedAt == null) || (this.ExpectedShippedAt?.Equals(other.ExpectedShippedAt) == true)) &&
-                ((this.ShippedAt == null && other.ShippedAt == null) || (this.ShippedAt?.Equals(other.ShippedAt) == true)) &&
-                ((this.CanceledAt == null && other.CanceledAt == null) || (this.CanceledAt?.Equals(other.CanceledAt) == true)) &&
-                ((this.CancelReason == null && other.CancelReason == null) || (this.CancelReason?.Equals(other.CancelReason) == true)) &&
-                ((this.FailedAt == null && other.FailedAt == null) || (this.FailedAt?.Equals(other.FailedAt) == true)) &&
-                ((this.FailureReason == null && other.FailureReason == null) || (this.FailureReason?.Equals(other.FailureReason) == true));
+            return obj is OrderFulfillmentShipmentDetails other &&
+                (this.Recipient == null && other.Recipient == null ||
+                 this.Recipient?.Equals(other.Recipient) == true) &&
+                (this.Carrier == null && other.Carrier == null ||
+                 this.Carrier?.Equals(other.Carrier) == true) &&
+                (this.ShippingNote == null && other.ShippingNote == null ||
+                 this.ShippingNote?.Equals(other.ShippingNote) == true) &&
+                (this.ShippingType == null && other.ShippingType == null ||
+                 this.ShippingType?.Equals(other.ShippingType) == true) &&
+                (this.TrackingNumber == null && other.TrackingNumber == null ||
+                 this.TrackingNumber?.Equals(other.TrackingNumber) == true) &&
+                (this.TrackingUrl == null && other.TrackingUrl == null ||
+                 this.TrackingUrl?.Equals(other.TrackingUrl) == true) &&
+                (this.PlacedAt == null && other.PlacedAt == null ||
+                 this.PlacedAt?.Equals(other.PlacedAt) == true) &&
+                (this.InProgressAt == null && other.InProgressAt == null ||
+                 this.InProgressAt?.Equals(other.InProgressAt) == true) &&
+                (this.PackagedAt == null && other.PackagedAt == null ||
+                 this.PackagedAt?.Equals(other.PackagedAt) == true) &&
+                (this.ExpectedShippedAt == null && other.ExpectedShippedAt == null ||
+                 this.ExpectedShippedAt?.Equals(other.ExpectedShippedAt) == true) &&
+                (this.ShippedAt == null && other.ShippedAt == null ||
+                 this.ShippedAt?.Equals(other.ShippedAt) == true) &&
+                (this.CanceledAt == null && other.CanceledAt == null ||
+                 this.CanceledAt?.Equals(other.CanceledAt) == true) &&
+                (this.CancelReason == null && other.CancelReason == null ||
+                 this.CancelReason?.Equals(other.CancelReason) == true) &&
+                (this.FailedAt == null && other.FailedAt == null ||
+                 this.FailedAt?.Equals(other.FailedAt) == true) &&
+                (this.FailureReason == null && other.FailureReason == null ||
+                 this.FailureReason?.Equals(other.FailureReason) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1108362053;
-            hashCode = HashCode.Combine(this.Recipient, this.Carrier, this.ShippingNote, this.ShippingType, this.TrackingNumber, this.TrackingUrl, this.PlacedAt);
+            var hashCode = 1108362053;
+            hashCode = HashCode.Combine(hashCode, this.Recipient, this.Carrier, this.ShippingNote, this.ShippingType, this.TrackingNumber, this.TrackingUrl, this.PlacedAt);
 
             hashCode = HashCode.Combine(hashCode, this.InProgressAt, this.PackagedAt, this.ExpectedShippedAt, this.ShippedAt, this.CanceledAt, this.CancelReason, this.FailedAt);
 
@@ -401,6 +410,7 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -408,20 +418,20 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Recipient = {(this.Recipient == null ? "null" : this.Recipient.ToString())}");
-            toStringOutput.Add($"this.Carrier = {(this.Carrier == null ? "null" : this.Carrier)}");
-            toStringOutput.Add($"this.ShippingNote = {(this.ShippingNote == null ? "null" : this.ShippingNote)}");
-            toStringOutput.Add($"this.ShippingType = {(this.ShippingType == null ? "null" : this.ShippingType)}");
-            toStringOutput.Add($"this.TrackingNumber = {(this.TrackingNumber == null ? "null" : this.TrackingNumber)}");
-            toStringOutput.Add($"this.TrackingUrl = {(this.TrackingUrl == null ? "null" : this.TrackingUrl)}");
-            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt)}");
-            toStringOutput.Add($"this.InProgressAt = {(this.InProgressAt == null ? "null" : this.InProgressAt)}");
-            toStringOutput.Add($"this.PackagedAt = {(this.PackagedAt == null ? "null" : this.PackagedAt)}");
-            toStringOutput.Add($"this.ExpectedShippedAt = {(this.ExpectedShippedAt == null ? "null" : this.ExpectedShippedAt)}");
-            toStringOutput.Add($"this.ShippedAt = {(this.ShippedAt == null ? "null" : this.ShippedAt)}");
-            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt)}");
-            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason)}");
-            toStringOutput.Add($"this.FailedAt = {(this.FailedAt == null ? "null" : this.FailedAt)}");
-            toStringOutput.Add($"this.FailureReason = {(this.FailureReason == null ? "null" : this.FailureReason)}");
+            toStringOutput.Add($"this.Carrier = {this.Carrier ?? "null"}");
+            toStringOutput.Add($"this.ShippingNote = {this.ShippingNote ?? "null"}");
+            toStringOutput.Add($"this.ShippingType = {this.ShippingType ?? "null"}");
+            toStringOutput.Add($"this.TrackingNumber = {this.TrackingNumber ?? "null"}");
+            toStringOutput.Add($"this.TrackingUrl = {this.TrackingUrl ?? "null"}");
+            toStringOutput.Add($"this.PlacedAt = {this.PlacedAt ?? "null"}");
+            toStringOutput.Add($"this.InProgressAt = {this.InProgressAt ?? "null"}");
+            toStringOutput.Add($"this.PackagedAt = {this.PackagedAt ?? "null"}");
+            toStringOutput.Add($"this.ExpectedShippedAt = {this.ExpectedShippedAt ?? "null"}");
+            toStringOutput.Add($"this.ShippedAt = {this.ShippedAt ?? "null"}");
+            toStringOutput.Add($"this.CanceledAt = {this.CanceledAt ?? "null"}");
+            toStringOutput.Add($"this.CancelReason = {this.CancelReason ?? "null"}");
+            toStringOutput.Add($"this.FailedAt = {this.FailedAt ?? "null"}");
+            toStringOutput.Add($"this.FailureReason = {this.FailureReason ?? "null"}");
         }
 
         /// <summary>
@@ -658,7 +668,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCarrier()
             {
@@ -666,7 +676,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetShippingNote()
             {
@@ -674,7 +684,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetShippingType()
             {
@@ -682,7 +692,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTrackingNumber()
             {
@@ -690,7 +700,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTrackingUrl()
             {
@@ -698,7 +708,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetExpectedShippedAt()
             {
@@ -706,7 +716,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCanceledAt()
             {
@@ -714,7 +724,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCancelReason()
             {
@@ -722,7 +732,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFailureReason()
             {
@@ -736,7 +746,8 @@ namespace Square.Models
             /// <returns> OrderFulfillmentShipmentDetails. </returns>
             public OrderFulfillmentShipmentDetails Build()
             {
-                return new OrderFulfillmentShipmentDetails(shouldSerialize,
+                return new OrderFulfillmentShipmentDetails(
+                    shouldSerialize,
                     this.recipient,
                     this.carrier,
                     this.shippingNote,

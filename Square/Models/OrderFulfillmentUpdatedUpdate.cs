@@ -40,11 +40,12 @@ namespace Square.Models
                 shouldSerialize["fulfillment_uid"] = true;
                 this.FulfillmentUid = fulfillmentUid;
             }
-
             this.OldState = oldState;
             this.NewState = newState;
         }
-        internal OrderFulfillmentUpdatedUpdate(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderFulfillmentUpdatedUpdate(
+            Dictionary<string, bool> shouldSerialize,
             string fulfillmentUid = null,
             string oldState = null,
             string newState = null)
@@ -77,9 +78,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderFulfillmentUpdatedUpdate : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -95,35 +94,34 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderFulfillmentUpdatedUpdate other &&                ((this.FulfillmentUid == null && other.FulfillmentUid == null) || (this.FulfillmentUid?.Equals(other.FulfillmentUid) == true)) &&
-                ((this.OldState == null && other.OldState == null) || (this.OldState?.Equals(other.OldState) == true)) &&
-                ((this.NewState == null && other.NewState == null) || (this.NewState?.Equals(other.NewState) == true));
+            return obj is OrderFulfillmentUpdatedUpdate other &&
+                (this.FulfillmentUid == null && other.FulfillmentUid == null ||
+                 this.FulfillmentUid?.Equals(other.FulfillmentUid) == true) &&
+                (this.OldState == null && other.OldState == null ||
+                 this.OldState?.Equals(other.OldState) == true) &&
+                (this.NewState == null && other.NewState == null ||
+                 this.NewState?.Equals(other.NewState) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1020384167;
-            hashCode = HashCode.Combine(this.FulfillmentUid, this.OldState, this.NewState);
+            var hashCode = 1020384167;
+            hashCode = HashCode.Combine(hashCode, this.FulfillmentUid, this.OldState, this.NewState);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.FulfillmentUid = {(this.FulfillmentUid == null ? "null" : this.FulfillmentUid)}");
+            toStringOutput.Add($"this.FulfillmentUid = {this.FulfillmentUid ?? "null"}");
             toStringOutput.Add($"this.OldState = {(this.OldState == null ? "null" : this.OldState.ToString())}");
             toStringOutput.Add($"this.NewState = {(this.NewState == null ? "null" : this.NewState.ToString())}");
         }
@@ -190,7 +188,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFulfillmentUid()
             {
@@ -204,7 +202,8 @@ namespace Square.Models
             /// <returns> OrderFulfillmentUpdatedUpdate. </returns>
             public OrderFulfillmentUpdatedUpdate Build()
             {
-                return new OrderFulfillmentUpdatedUpdate(shouldSerialize,
+                return new OrderFulfillmentUpdatedUpdate(
+                    shouldSerialize,
                     this.fulfillmentUid,
                     this.oldState,
                     this.newState);

@@ -41,8 +41,8 @@ namespace Square.Models
                 { "include_deleted_objects", false },
                 { "include_category_path_to_root", false }
             };
-
             this.ObjectIds = objectIds;
+
             if (includeRelatedObjects != null)
             {
                 shouldSerialize["include_related_objects"] = true;
@@ -66,9 +66,10 @@ namespace Square.Models
                 shouldSerialize["include_category_path_to_root"] = true;
                 this.IncludeCategoryPathToRoot = includeCategoryPathToRoot;
             }
-
         }
-        internal BatchRetrieveCatalogObjectsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal BatchRetrieveCatalogObjectsRequest(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> objectIds,
             bool? includeRelatedObjects = null,
             long? catalogVersion = null,
@@ -134,9 +135,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BatchRetrieveCatalogObjectsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -179,30 +178,31 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BatchRetrieveCatalogObjectsRequest other &&                ((this.ObjectIds == null && other.ObjectIds == null) || (this.ObjectIds?.Equals(other.ObjectIds) == true)) &&
-                ((this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null) || (this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
-                ((this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null) || (this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true)) &&
-                ((this.IncludeCategoryPathToRoot == null && other.IncludeCategoryPathToRoot == null) || (this.IncludeCategoryPathToRoot?.Equals(other.IncludeCategoryPathToRoot) == true));
+            return obj is BatchRetrieveCatalogObjectsRequest other &&
+                (this.ObjectIds == null && other.ObjectIds == null ||
+                 this.ObjectIds?.Equals(other.ObjectIds) == true) &&
+                (this.IncludeRelatedObjects == null && other.IncludeRelatedObjects == null ||
+                 this.IncludeRelatedObjects?.Equals(other.IncludeRelatedObjects) == true) &&
+                (this.CatalogVersion == null && other.CatalogVersion == null ||
+                 this.CatalogVersion?.Equals(other.CatalogVersion) == true) &&
+                (this.IncludeDeletedObjects == null && other.IncludeDeletedObjects == null ||
+                 this.IncludeDeletedObjects?.Equals(other.IncludeDeletedObjects) == true) &&
+                (this.IncludeCategoryPathToRoot == null && other.IncludeCategoryPathToRoot == null ||
+                 this.IncludeCategoryPathToRoot?.Equals(other.IncludeCategoryPathToRoot) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 10343946;
-            hashCode = HashCode.Combine(this.ObjectIds, this.IncludeRelatedObjects, this.CatalogVersion, this.IncludeDeletedObjects, this.IncludeCategoryPathToRoot);
+            var hashCode = 10343946;
+            hashCode = HashCode.Combine(hashCode, this.ObjectIds, this.IncludeRelatedObjects, this.CatalogVersion, this.IncludeDeletedObjects, this.IncludeCategoryPathToRoot);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -320,7 +320,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIncludeRelatedObjects()
             {
@@ -328,7 +328,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogVersion()
             {
@@ -336,7 +336,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIncludeDeletedObjects()
             {
@@ -344,7 +344,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIncludeCategoryPathToRoot()
             {
@@ -358,7 +358,8 @@ namespace Square.Models
             /// <returns> BatchRetrieveCatalogObjectsRequest. </returns>
             public BatchRetrieveCatalogObjectsRequest Build()
             {
-                return new BatchRetrieveCatalogObjectsRequest(shouldSerialize,
+                return new BatchRetrieveCatalogObjectsRequest(
+                    shouldSerialize,
                     this.objectIds,
                     this.includeRelatedObjects,
                     this.catalogVersion,

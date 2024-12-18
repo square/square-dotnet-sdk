@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["voided_at"] = true;
                 this.VoidedAt = voidedAt;
             }
-
         }
-        internal CardPaymentTimeline(Dictionary<string, bool> shouldSerialize,
+
+        internal CardPaymentTimeline(
+            Dictionary<string, bool> shouldSerialize,
             string authorizedAt = null,
             string capturedAt = null,
             string voidedAt = null)
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CardPaymentTimeline : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -125,37 +124,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CardPaymentTimeline other &&                ((this.AuthorizedAt == null && other.AuthorizedAt == null) || (this.AuthorizedAt?.Equals(other.AuthorizedAt) == true)) &&
-                ((this.CapturedAt == null && other.CapturedAt == null) || (this.CapturedAt?.Equals(other.CapturedAt) == true)) &&
-                ((this.VoidedAt == null && other.VoidedAt == null) || (this.VoidedAt?.Equals(other.VoidedAt) == true));
+            return obj is CardPaymentTimeline other &&
+                (this.AuthorizedAt == null && other.AuthorizedAt == null ||
+                 this.AuthorizedAt?.Equals(other.AuthorizedAt) == true) &&
+                (this.CapturedAt == null && other.CapturedAt == null ||
+                 this.CapturedAt?.Equals(other.CapturedAt) == true) &&
+                (this.VoidedAt == null && other.VoidedAt == null ||
+                 this.VoidedAt?.Equals(other.VoidedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1762221342;
-            hashCode = HashCode.Combine(this.AuthorizedAt, this.CapturedAt, this.VoidedAt);
+            var hashCode = -1762221342;
+            hashCode = HashCode.Combine(hashCode, this.AuthorizedAt, this.CapturedAt, this.VoidedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.AuthorizedAt = {(this.AuthorizedAt == null ? "null" : this.AuthorizedAt)}");
-            toStringOutput.Add($"this.CapturedAt = {(this.CapturedAt == null ? "null" : this.CapturedAt)}");
-            toStringOutput.Add($"this.VoidedAt = {(this.VoidedAt == null ? "null" : this.VoidedAt)}");
+            toStringOutput.Add($"this.AuthorizedAt = {this.AuthorizedAt ?? "null"}");
+            toStringOutput.Add($"this.CapturedAt = {this.CapturedAt ?? "null"}");
+            toStringOutput.Add($"this.VoidedAt = {this.VoidedAt ?? "null"}");
         }
 
         /// <summary>
@@ -224,7 +222,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAuthorizedAt()
             {
@@ -232,7 +230,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCapturedAt()
             {
@@ -240,7 +238,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVoidedAt()
             {
@@ -254,7 +252,8 @@ namespace Square.Models
             /// <returns> CardPaymentTimeline. </returns>
             public CardPaymentTimeline Build()
             {
-                return new CardPaymentTimeline(shouldSerialize,
+                return new CardPaymentTimeline(
+                    shouldSerialize,
                     this.authorizedAt,
                     this.capturedAt,
                     this.voidedAt);

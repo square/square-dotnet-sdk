@@ -38,35 +38,30 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchAvailabilityRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchAvailabilityRequest other &&                ((this.Query == null && other.Query == null) || (this.Query?.Equals(other.Query) == true));
+            return obj is SearchAvailabilityRequest other &&
+                (this.Query == null && other.Query == null ||
+                 this.Query?.Equals(other.Query) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1074083477;
-            hashCode = HashCode.Combine(this.Query);
+            var hashCode = -1074083477;
+            hashCode = HashCode.Combine(hashCode, this.Query);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["catalog_version"] = true;
                 this.CatalogVersion = catalogVersion;
             }
-
         }
-        internal CatalogObjectReference(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogObjectReference(
+            Dictionary<string, bool> shouldSerialize,
             string objectId = null,
             long? catalogVersion = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogObjectReference : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,34 +98,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogObjectReference other &&                ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
+            return obj is CatalogObjectReference other &&
+                (this.ObjectId == null && other.ObjectId == null ||
+                 this.ObjectId?.Equals(other.ObjectId) == true) &&
+                (this.CatalogVersion == null && other.CatalogVersion == null ||
+                 this.CatalogVersion?.Equals(other.CatalogVersion) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -703569584;
-            hashCode = HashCode.Combine(this.ObjectId, this.CatalogVersion);
+            var hashCode = -703569584;
+            hashCode = HashCode.Combine(hashCode, this.ObjectId, this.CatalogVersion);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ObjectId = {(this.ObjectId == null ? "null" : this.ObjectId)}");
+            toStringOutput.Add($"this.ObjectId = {this.ObjectId ?? "null"}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
         }
 
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetObjectId()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogVersion()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> CatalogObjectReference. </returns>
             public CatalogObjectReference Build()
             {
-                return new CatalogObjectReference(shouldSerialize,
+                return new CatalogObjectReference(
+                    shouldSerialize,
                     this.objectId,
                     this.catalogVersion);
             }

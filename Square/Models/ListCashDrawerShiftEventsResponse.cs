@@ -65,43 +65,41 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListCashDrawerShiftEventsResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListCashDrawerShiftEventsResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.CashDrawerShiftEvents == null && other.CashDrawerShiftEvents == null) || (this.CashDrawerShiftEvents?.Equals(other.CashDrawerShiftEvents) == true));
+            return obj is ListCashDrawerShiftEventsResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.CashDrawerShiftEvents == null && other.CashDrawerShiftEvents == null ||
+                 this.CashDrawerShiftEvents?.Equals(other.CashDrawerShiftEvents) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 249739654;
+            var hashCode = 249739654;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Cursor, this.Errors, this.CashDrawerShiftEvents);
+            hashCode = HashCode.Combine(hashCode, this.Cursor, this.Errors, this.CashDrawerShiftEvents);
 
             return hashCode;
         }
+
         internal ListCashDrawerShiftEventsResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
@@ -114,7 +112,7 @@ namespace Square.Models
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
             toStringOutput.Add($"this.CashDrawerShiftEvents = {(this.CashDrawerShiftEvents == null ? "null" : $"[{string.Join(", ", this.CashDrawerShiftEvents)} ]")}");
         }

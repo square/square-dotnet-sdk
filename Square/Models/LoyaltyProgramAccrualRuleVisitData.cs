@@ -53,36 +53,32 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyProgramAccrualRuleVisitData : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyProgramAccrualRuleVisitData other &&                ((this.MinimumAmountMoney == null && other.MinimumAmountMoney == null) || (this.MinimumAmountMoney?.Equals(other.MinimumAmountMoney) == true)) &&
-                ((this.TaxMode == null && other.TaxMode == null) || (this.TaxMode?.Equals(other.TaxMode) == true));
+            return obj is LoyaltyProgramAccrualRuleVisitData other &&
+                (this.MinimumAmountMoney == null && other.MinimumAmountMoney == null ||
+                 this.MinimumAmountMoney?.Equals(other.MinimumAmountMoney) == true) &&
+                (this.TaxMode == null && other.TaxMode == null ||
+                 this.TaxMode?.Equals(other.TaxMode) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 768112372;
-            hashCode = HashCode.Combine(this.MinimumAmountMoney, this.TaxMode);
+            var hashCode = 768112372;
+            hashCode = HashCode.Combine(hashCode, this.MinimumAmountMoney, this.TaxMode);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

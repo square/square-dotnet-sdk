@@ -55,7 +55,6 @@ namespace Square.Models
                 { "qualifying_item_variation_ids", false },
                 { "qualifying_category_ids", false }
             };
-
             this.Id = id;
             this.Name = name;
             this.Incentive = incentive;
@@ -67,6 +66,7 @@ namespace Square.Models
             this.UpdatedAt = updatedAt;
             this.LoyaltyProgramId = loyaltyProgramId;
             this.MinimumSpendAmountMoney = minimumSpendAmountMoney;
+
             if (qualifyingItemVariationIds != null)
             {
                 shouldSerialize["qualifying_item_variation_ids"] = true;
@@ -78,9 +78,10 @@ namespace Square.Models
                 shouldSerialize["qualifying_category_ids"] = true;
                 this.QualifyingCategoryIds = qualifyingCategoryIds;
             }
-
         }
-        internal LoyaltyPromotion(Dictionary<string, bool> shouldSerialize,
+
+        internal LoyaltyPromotion(
+            Dictionary<string, bool> shouldSerialize,
             string name,
             Models.LoyaltyPromotionIncentive incentive,
             Models.LoyaltyPromotionAvailableTimeData availableTime,
@@ -212,9 +213,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyPromotion : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -239,56 +238,65 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyPromotion other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Incentive == null && other.Incentive == null) || (this.Incentive?.Equals(other.Incentive) == true)) &&
-                ((this.AvailableTime == null && other.AvailableTime == null) || (this.AvailableTime?.Equals(other.AvailableTime) == true)) &&
-                ((this.TriggerLimit == null && other.TriggerLimit == null) || (this.TriggerLimit?.Equals(other.TriggerLimit) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.CanceledAt == null && other.CanceledAt == null) || (this.CanceledAt?.Equals(other.CanceledAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
-                ((this.MinimumSpendAmountMoney == null && other.MinimumSpendAmountMoney == null) || (this.MinimumSpendAmountMoney?.Equals(other.MinimumSpendAmountMoney) == true)) &&
-                ((this.QualifyingItemVariationIds == null && other.QualifyingItemVariationIds == null) || (this.QualifyingItemVariationIds?.Equals(other.QualifyingItemVariationIds) == true)) &&
-                ((this.QualifyingCategoryIds == null && other.QualifyingCategoryIds == null) || (this.QualifyingCategoryIds?.Equals(other.QualifyingCategoryIds) == true));
+            return obj is LoyaltyPromotion other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Incentive == null && other.Incentive == null ||
+                 this.Incentive?.Equals(other.Incentive) == true) &&
+                (this.AvailableTime == null && other.AvailableTime == null ||
+                 this.AvailableTime?.Equals(other.AvailableTime) == true) &&
+                (this.TriggerLimit == null && other.TriggerLimit == null ||
+                 this.TriggerLimit?.Equals(other.TriggerLimit) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.CanceledAt == null && other.CanceledAt == null ||
+                 this.CanceledAt?.Equals(other.CanceledAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.LoyaltyProgramId == null && other.LoyaltyProgramId == null ||
+                 this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true) &&
+                (this.MinimumSpendAmountMoney == null && other.MinimumSpendAmountMoney == null ||
+                 this.MinimumSpendAmountMoney?.Equals(other.MinimumSpendAmountMoney) == true) &&
+                (this.QualifyingItemVariationIds == null && other.QualifyingItemVariationIds == null ||
+                 this.QualifyingItemVariationIds?.Equals(other.QualifyingItemVariationIds) == true) &&
+                (this.QualifyingCategoryIds == null && other.QualifyingCategoryIds == null ||
+                 this.QualifyingCategoryIds?.Equals(other.QualifyingCategoryIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2086043308;
-            hashCode = HashCode.Combine(this.Id, this.Name, this.Incentive, this.AvailableTime, this.TriggerLimit, this.Status, this.CreatedAt);
+            var hashCode = -2086043308;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Name, this.Incentive, this.AvailableTime, this.TriggerLimit, this.Status, this.CreatedAt);
 
             hashCode = HashCode.Combine(hashCode, this.CanceledAt, this.UpdatedAt, this.LoyaltyProgramId, this.MinimumSpendAmountMoney, this.QualifyingItemVariationIds, this.QualifyingCategoryIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.Incentive = {(this.Incentive == null ? "null" : this.Incentive.ToString())}");
             toStringOutput.Add($"this.AvailableTime = {(this.AvailableTime == null ? "null" : this.AvailableTime.ToString())}");
             toStringOutput.Add($"this.TriggerLimit = {(this.TriggerLimit == null ? "null" : this.TriggerLimit.ToString())}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.LoyaltyProgramId = {(this.LoyaltyProgramId == null ? "null" : this.LoyaltyProgramId)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.CanceledAt = {this.CanceledAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.LoyaltyProgramId = {this.LoyaltyProgramId ?? "null"}");
             toStringOutput.Add($"this.MinimumSpendAmountMoney = {(this.MinimumSpendAmountMoney == null ? "null" : this.MinimumSpendAmountMoney.ToString())}");
             toStringOutput.Add($"this.QualifyingItemVariationIds = {(this.QualifyingItemVariationIds == null ? "null" : $"[{string.Join(", ", this.QualifyingItemVariationIds)} ]")}");
             toStringOutput.Add($"this.QualifyingCategoryIds = {(this.QualifyingCategoryIds == null ? "null" : $"[{string.Join(", ", this.QualifyingCategoryIds)} ]")}");
@@ -504,7 +512,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQualifyingItemVariationIds()
             {
@@ -512,7 +520,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQualifyingCategoryIds()
             {
@@ -526,7 +534,8 @@ namespace Square.Models
             /// <returns> LoyaltyPromotion. </returns>
             public LoyaltyPromotion Build()
             {
-                return new LoyaltyPromotion(shouldSerialize,
+                return new LoyaltyPromotion(
+                    shouldSerialize,
                     this.name,
                     this.incentive,
                     this.availableTime,

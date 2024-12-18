@@ -63,43 +63,41 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogInfoResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogInfoResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Limits == null && other.Limits == null) || (this.Limits?.Equals(other.Limits) == true)) &&
-                ((this.StandardUnitDescriptionGroup == null && other.StandardUnitDescriptionGroup == null) || (this.StandardUnitDescriptionGroup?.Equals(other.StandardUnitDescriptionGroup) == true));
+            return obj is CatalogInfoResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.Limits == null && other.Limits == null ||
+                 this.Limits?.Equals(other.Limits) == true) &&
+                (this.StandardUnitDescriptionGroup == null && other.StandardUnitDescriptionGroup == null ||
+                 this.StandardUnitDescriptionGroup?.Equals(other.StandardUnitDescriptionGroup) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -614027011;
+            var hashCode = -614027011;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.Limits, this.StandardUnitDescriptionGroup);
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.Limits, this.StandardUnitDescriptionGroup);
 
             return hashCode;
         }
+
         internal CatalogInfoResponse ContextSetter(HttpContext context)
         {
             this.Context = context;

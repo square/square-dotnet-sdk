@@ -35,8 +35,8 @@ namespace Square.Models
                 { "limit", false },
                 { "cursor", false }
             };
-
             this.VisibilityFilter = visibilityFilter;
+
             if (limit != null)
             {
                 shouldSerialize["limit"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["cursor"] = true;
                 this.Cursor = cursor;
             }
-
         }
-        internal ListLocationCustomAttributeDefinitionsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListLocationCustomAttributeDefinitionsRequest(
+            Dictionary<string, bool> shouldSerialize,
             string visibilityFilter = null,
             int? limit = null,
             string cursor = null)
@@ -87,9 +88,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListLocationCustomAttributeDefinitionsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -114,28 +113,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListLocationCustomAttributeDefinitionsRequest other &&                ((this.VisibilityFilter == null && other.VisibilityFilter == null) || (this.VisibilityFilter?.Equals(other.VisibilityFilter) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+            return obj is ListLocationCustomAttributeDefinitionsRequest other &&
+                (this.VisibilityFilter == null && other.VisibilityFilter == null ||
+                 this.VisibilityFilter?.Equals(other.VisibilityFilter) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2038488401;
-            hashCode = HashCode.Combine(this.VisibilityFilter, this.Limit, this.Cursor);
+            var hashCode = -2038488401;
+            hashCode = HashCode.Combine(hashCode, this.VisibilityFilter, this.Limit, this.Cursor);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -144,7 +142,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.VisibilityFilter = {(this.VisibilityFilter == null ? "null" : this.VisibilityFilter.ToString())}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
         }
 
         /// <summary>
@@ -211,7 +209,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -219,7 +217,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -233,7 +231,8 @@ namespace Square.Models
             /// <returns> ListLocationCustomAttributeDefinitionsRequest. </returns>
             public ListLocationCustomAttributeDefinitionsRequest Build()
             {
-                return new ListLocationCustomAttributeDefinitionsRequest(shouldSerialize,
+                return new ListLocationCustomAttributeDefinitionsRequest(
+                    shouldSerialize,
                     this.visibilityFilter,
                     this.limit,
                     this.cursor);

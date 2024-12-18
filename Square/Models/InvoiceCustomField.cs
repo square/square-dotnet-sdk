@@ -47,10 +47,11 @@ namespace Square.Models
                 shouldSerialize["value"] = true;
                 this.MValue = mValue;
             }
-
             this.Placement = placement;
         }
-        internal InvoiceCustomField(Dictionary<string, bool> shouldSerialize,
+
+        internal InvoiceCustomField(
+            Dictionary<string, bool> shouldSerialize,
             string label = null,
             string mValue = null,
             string placement = null)
@@ -84,9 +85,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InvoiceCustomField : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -111,36 +110,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InvoiceCustomField other &&                ((this.Label == null && other.Label == null) || (this.Label?.Equals(other.Label) == true)) &&
-                ((this.MValue == null && other.MValue == null) || (this.MValue?.Equals(other.MValue) == true)) &&
-                ((this.Placement == null && other.Placement == null) || (this.Placement?.Equals(other.Placement) == true));
+            return obj is InvoiceCustomField other &&
+                (this.Label == null && other.Label == null ||
+                 this.Label?.Equals(other.Label) == true) &&
+                (this.MValue == null && other.MValue == null ||
+                 this.MValue?.Equals(other.MValue) == true) &&
+                (this.Placement == null && other.Placement == null ||
+                 this.Placement?.Equals(other.Placement) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -295655815;
-            hashCode = HashCode.Combine(this.Label, this.MValue, this.Placement);
+            var hashCode = -295655815;
+            hashCode = HashCode.Combine(hashCode, this.Label, this.MValue, this.Placement);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Label = {(this.Label == null ? "null" : this.Label)}");
-            toStringOutput.Add($"this.MValue = {(this.MValue == null ? "null" : this.MValue)}");
+            toStringOutput.Add($"this.Label = {this.Label ?? "null"}");
+            toStringOutput.Add($"this.MValue = {this.MValue ?? "null"}");
             toStringOutput.Add($"this.Placement = {(this.Placement == null ? "null" : this.Placement.ToString())}");
         }
 
@@ -208,7 +206,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLabel()
             {
@@ -216,7 +214,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMValue()
             {
@@ -230,7 +228,8 @@ namespace Square.Models
             /// <returns> InvoiceCustomField. </returns>
             public InvoiceCustomField Build()
             {
-                return new InvoiceCustomField(shouldSerialize,
+                return new InvoiceCustomField(
+                    shouldSerialize,
                     this.label,
                     this.mValue,
                     this.placement);

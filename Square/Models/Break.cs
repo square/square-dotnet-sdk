@@ -42,21 +42,22 @@ namespace Square.Models
             {
                 { "end_at", false }
             };
-
             this.Id = id;
             this.StartAt = startAt;
+
             if (endAt != null)
             {
                 shouldSerialize["end_at"] = true;
                 this.EndAt = endAt;
             }
-
             this.BreakTypeId = breakTypeId;
             this.Name = name;
             this.ExpectedDuration = expectedDuration;
             this.IsPaid = isPaid;
         }
-        internal Break(Dictionary<string, bool> shouldSerialize,
+
+        internal Break(
+            Dictionary<string, bool> shouldSerialize,
             string startAt,
             string breakTypeId,
             string name,
@@ -125,9 +126,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Break : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -143,44 +142,46 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Break other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.StartAt == null && other.StartAt == null) || (this.StartAt?.Equals(other.StartAt) == true)) &&
-                ((this.EndAt == null && other.EndAt == null) || (this.EndAt?.Equals(other.EndAt) == true)) &&
-                ((this.BreakTypeId == null && other.BreakTypeId == null) || (this.BreakTypeId?.Equals(other.BreakTypeId) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.ExpectedDuration == null && other.ExpectedDuration == null) || (this.ExpectedDuration?.Equals(other.ExpectedDuration) == true)) &&
-                this.IsPaid.Equals(other.IsPaid);
+            return obj is Break other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.StartAt == null && other.StartAt == null ||
+                 this.StartAt?.Equals(other.StartAt) == true) &&
+                (this.EndAt == null && other.EndAt == null ||
+                 this.EndAt?.Equals(other.EndAt) == true) &&
+                (this.BreakTypeId == null && other.BreakTypeId == null ||
+                 this.BreakTypeId?.Equals(other.BreakTypeId) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.ExpectedDuration == null && other.ExpectedDuration == null ||
+                 this.ExpectedDuration?.Equals(other.ExpectedDuration) == true) &&
+                (this.IsPaid.Equals(other.IsPaid));
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 168552180;
-            hashCode = HashCode.Combine(this.Id, this.StartAt, this.EndAt, this.BreakTypeId, this.Name, this.ExpectedDuration, this.IsPaid);
+            var hashCode = 168552180;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.StartAt, this.EndAt, this.BreakTypeId, this.Name, this.ExpectedDuration, this.IsPaid);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.StartAt = {(this.StartAt == null ? "null" : this.StartAt)}");
-            toStringOutput.Add($"this.EndAt = {(this.EndAt == null ? "null" : this.EndAt)}");
-            toStringOutput.Add($"this.BreakTypeId = {(this.BreakTypeId == null ? "null" : this.BreakTypeId)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.ExpectedDuration = {(this.ExpectedDuration == null ? "null" : this.ExpectedDuration)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.StartAt = {this.StartAt ?? "null"}");
+            toStringOutput.Add($"this.EndAt = {this.EndAt ?? "null"}");
+            toStringOutput.Add($"this.BreakTypeId = {this.BreakTypeId ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.ExpectedDuration = {this.ExpectedDuration ?? "null"}");
             toStringOutput.Add($"this.IsPaid = {this.IsPaid}");
         }
 
@@ -320,7 +321,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndAt()
             {
@@ -334,7 +335,8 @@ namespace Square.Models
             /// <returns> Break. </returns>
             public Break Build()
             {
-                return new Break(shouldSerialize,
+                return new Break(
+                    shouldSerialize,
                     this.startAt,
                     this.breakTypeId,
                     this.name,

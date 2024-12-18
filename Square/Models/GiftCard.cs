@@ -44,22 +44,23 @@ namespace Square.Models
             {
                 { "gan", false }
             };
-
             this.Id = id;
             this.Type = type;
             this.GanSource = ganSource;
             this.State = state;
             this.BalanceMoney = balanceMoney;
+
             if (gan != null)
             {
                 shouldSerialize["gan"] = true;
                 this.Gan = gan;
             }
-
             this.CreatedAt = createdAt;
             this.CustomerIds = customerIds;
         }
-        internal GiftCard(Dictionary<string, bool> shouldSerialize,
+
+        internal GiftCard(
+            Dictionary<string, bool> shouldSerialize,
             string type,
             string id = null,
             string ganSource = null,
@@ -143,9 +144,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"GiftCard : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -161,48 +160,52 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is GiftCard other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.GanSource == null && other.GanSource == null) || (this.GanSource?.Equals(other.GanSource) == true)) &&
-                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
-                ((this.BalanceMoney == null && other.BalanceMoney == null) || (this.BalanceMoney?.Equals(other.BalanceMoney) == true)) &&
-                ((this.Gan == null && other.Gan == null) || (this.Gan?.Equals(other.Gan) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
+            return obj is GiftCard other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.GanSource == null && other.GanSource == null ||
+                 this.GanSource?.Equals(other.GanSource) == true) &&
+                (this.State == null && other.State == null ||
+                 this.State?.Equals(other.State) == true) &&
+                (this.BalanceMoney == null && other.BalanceMoney == null ||
+                 this.BalanceMoney?.Equals(other.BalanceMoney) == true) &&
+                (this.Gan == null && other.Gan == null ||
+                 this.Gan?.Equals(other.Gan) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.CustomerIds == null && other.CustomerIds == null ||
+                 this.CustomerIds?.Equals(other.CustomerIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2027493314;
-            hashCode = HashCode.Combine(this.Id, this.Type, this.GanSource, this.State, this.BalanceMoney, this.Gan, this.CreatedAt);
+            var hashCode = -2027493314;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Type, this.GanSource, this.State, this.BalanceMoney, this.Gan, this.CreatedAt);
 
             hashCode = HashCode.Combine(hashCode, this.CustomerIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.GanSource = {(this.GanSource == null ? "null" : this.GanSource.ToString())}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
             toStringOutput.Add($"this.BalanceMoney = {(this.BalanceMoney == null ? "null" : this.BalanceMoney.ToString())}");
-            toStringOutput.Add($"this.Gan = {(this.Gan == null ? "null" : this.Gan)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.Gan = {this.Gan ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
             toStringOutput.Add($"this.CustomerIds = {(this.CustomerIds == null ? "null" : $"[{string.Join(", ", this.CustomerIds)} ]")}");
         }
 
@@ -343,7 +346,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetGan()
             {
@@ -357,7 +360,8 @@ namespace Square.Models
             /// <returns> GiftCard. </returns>
             public GiftCard Build()
             {
-                return new GiftCard(shouldSerialize,
+                return new GiftCard(
+                    shouldSerialize,
                     this.type,
                     this.id,
                     this.ganSource,

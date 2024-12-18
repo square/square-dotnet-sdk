@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["cursor"] = true;
                 this.Cursor = cursor;
             }
-
         }
-        internal ListBreakTypesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListBreakTypesRequest(
+            Dictionary<string, bool> shouldSerialize,
             string locationId = null,
             int? limit = null,
             string cursor = null)
@@ -91,9 +92,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListBreakTypesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -127,37 +126,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListBreakTypesRequest other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+            return obj is ListBreakTypesRequest other &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1110829719;
-            hashCode = HashCode.Combine(this.LocationId, this.Limit, this.Cursor);
+            var hashCode = -1110829719;
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.Limit, this.Cursor);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
         }
 
         /// <summary>
@@ -226,7 +224,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -234,7 +232,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -242,7 +240,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -256,7 +254,8 @@ namespace Square.Models
             /// <returns> ListBreakTypesRequest. </returns>
             public ListBreakTypesRequest Build()
             {
-                return new ListBreakTypesRequest(shouldSerialize,
+                return new ListBreakTypesRequest(
+                    shouldSerialize,
                     this.locationId,
                     this.limit,
                     this.cursor);

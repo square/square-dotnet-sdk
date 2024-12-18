@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "idempotency_key", false }
             };
-
             this.MerchantId = merchantId;
             this.CustomAttribute = customAttribute;
+
             if (idempotencyKey != null)
             {
                 shouldSerialize["idempotency_key"] = true;
                 this.IdempotencyKey = idempotencyKey;
             }
-
         }
-        internal BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest(
+            Dictionary<string, bool> shouldSerialize,
             string merchantId,
             Models.CustomAttribute customAttribute,
             string idempotencyKey = null)
@@ -79,9 +80,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -97,37 +96,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest other &&                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((this.CustomAttribute == null && other.CustomAttribute == null) || (this.CustomAttribute?.Equals(other.CustomAttribute) == true)) &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+            return obj is BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest other &&
+                (this.MerchantId == null && other.MerchantId == null ||
+                 this.MerchantId?.Equals(other.MerchantId) == true) &&
+                (this.CustomAttribute == null && other.CustomAttribute == null ||
+                 this.CustomAttribute?.Equals(other.CustomAttribute) == true) &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1927345765;
-            hashCode = HashCode.Combine(this.MerchantId, this.CustomAttribute, this.IdempotencyKey);
+            var hashCode = 1927345765;
+            hashCode = HashCode.Combine(hashCode, this.MerchantId, this.CustomAttribute, this.IdempotencyKey);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
+            toStringOutput.Add($"this.MerchantId = {this.MerchantId ?? "null"}");
             toStringOutput.Add($"this.CustomAttribute = {(this.CustomAttribute == null ? "null" : this.CustomAttribute.ToString())}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
         }
 
         /// <summary>
@@ -205,7 +203,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIdempotencyKey()
             {
@@ -219,7 +217,8 @@ namespace Square.Models
             /// <returns> BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest. </returns>
             public BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest Build()
             {
-                return new BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest(shouldSerialize,
+                return new BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest(
+                    shouldSerialize,
                     this.merchantId,
                     this.customAttribute,
                     this.idempotencyKey);

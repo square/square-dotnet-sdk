@@ -65,16 +65,16 @@ namespace Square.Models
                 shouldSerialize["uid"] = true;
                 this.Uid = uid;
             }
-
             this.RequestMethod = requestMethod;
             this.RequestType = requestType;
+
             if (dueDate != null)
             {
                 shouldSerialize["due_date"] = true;
                 this.DueDate = dueDate;
             }
-
             this.FixedAmountRequestedMoney = fixedAmountRequestedMoney;
+
             if (percentageRequested != null)
             {
                 shouldSerialize["percentage_requested"] = true;
@@ -86,8 +86,8 @@ namespace Square.Models
                 shouldSerialize["tipping_enabled"] = true;
                 this.TippingEnabled = tippingEnabled;
             }
-
             this.AutomaticPaymentSource = automaticPaymentSource;
+
             if (cardId != null)
             {
                 shouldSerialize["card_id"] = true;
@@ -99,12 +99,13 @@ namespace Square.Models
                 shouldSerialize["reminders"] = true;
                 this.Reminders = reminders;
             }
-
             this.ComputedAmountMoney = computedAmountMoney;
             this.TotalCompletedAmountMoney = totalCompletedAmountMoney;
             this.RoundingAdjustmentIncludedMoney = roundingAdjustmentIncludedMoney;
         }
-        internal InvoicePaymentRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal InvoicePaymentRequest(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             string requestMethod = null,
             string requestType = null,
@@ -256,9 +257,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InvoicePaymentRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -319,55 +318,64 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InvoicePaymentRequest other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.RequestMethod == null && other.RequestMethod == null) || (this.RequestMethod?.Equals(other.RequestMethod) == true)) &&
-                ((this.RequestType == null && other.RequestType == null) || (this.RequestType?.Equals(other.RequestType) == true)) &&
-                ((this.DueDate == null && other.DueDate == null) || (this.DueDate?.Equals(other.DueDate) == true)) &&
-                ((this.FixedAmountRequestedMoney == null && other.FixedAmountRequestedMoney == null) || (this.FixedAmountRequestedMoney?.Equals(other.FixedAmountRequestedMoney) == true)) &&
-                ((this.PercentageRequested == null && other.PercentageRequested == null) || (this.PercentageRequested?.Equals(other.PercentageRequested) == true)) &&
-                ((this.TippingEnabled == null && other.TippingEnabled == null) || (this.TippingEnabled?.Equals(other.TippingEnabled) == true)) &&
-                ((this.AutomaticPaymentSource == null && other.AutomaticPaymentSource == null) || (this.AutomaticPaymentSource?.Equals(other.AutomaticPaymentSource) == true)) &&
-                ((this.CardId == null && other.CardId == null) || (this.CardId?.Equals(other.CardId) == true)) &&
-                ((this.Reminders == null && other.Reminders == null) || (this.Reminders?.Equals(other.Reminders) == true)) &&
-                ((this.ComputedAmountMoney == null && other.ComputedAmountMoney == null) || (this.ComputedAmountMoney?.Equals(other.ComputedAmountMoney) == true)) &&
-                ((this.TotalCompletedAmountMoney == null && other.TotalCompletedAmountMoney == null) || (this.TotalCompletedAmountMoney?.Equals(other.TotalCompletedAmountMoney) == true)) &&
-                ((this.RoundingAdjustmentIncludedMoney == null && other.RoundingAdjustmentIncludedMoney == null) || (this.RoundingAdjustmentIncludedMoney?.Equals(other.RoundingAdjustmentIncludedMoney) == true));
+            return obj is InvoicePaymentRequest other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.RequestMethod == null && other.RequestMethod == null ||
+                 this.RequestMethod?.Equals(other.RequestMethod) == true) &&
+                (this.RequestType == null && other.RequestType == null ||
+                 this.RequestType?.Equals(other.RequestType) == true) &&
+                (this.DueDate == null && other.DueDate == null ||
+                 this.DueDate?.Equals(other.DueDate) == true) &&
+                (this.FixedAmountRequestedMoney == null && other.FixedAmountRequestedMoney == null ||
+                 this.FixedAmountRequestedMoney?.Equals(other.FixedAmountRequestedMoney) == true) &&
+                (this.PercentageRequested == null && other.PercentageRequested == null ||
+                 this.PercentageRequested?.Equals(other.PercentageRequested) == true) &&
+                (this.TippingEnabled == null && other.TippingEnabled == null ||
+                 this.TippingEnabled?.Equals(other.TippingEnabled) == true) &&
+                (this.AutomaticPaymentSource == null && other.AutomaticPaymentSource == null ||
+                 this.AutomaticPaymentSource?.Equals(other.AutomaticPaymentSource) == true) &&
+                (this.CardId == null && other.CardId == null ||
+                 this.CardId?.Equals(other.CardId) == true) &&
+                (this.Reminders == null && other.Reminders == null ||
+                 this.Reminders?.Equals(other.Reminders) == true) &&
+                (this.ComputedAmountMoney == null && other.ComputedAmountMoney == null ||
+                 this.ComputedAmountMoney?.Equals(other.ComputedAmountMoney) == true) &&
+                (this.TotalCompletedAmountMoney == null && other.TotalCompletedAmountMoney == null ||
+                 this.TotalCompletedAmountMoney?.Equals(other.TotalCompletedAmountMoney) == true) &&
+                (this.RoundingAdjustmentIncludedMoney == null && other.RoundingAdjustmentIncludedMoney == null ||
+                 this.RoundingAdjustmentIncludedMoney?.Equals(other.RoundingAdjustmentIncludedMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 772730141;
-            hashCode = HashCode.Combine(this.Uid, this.RequestMethod, this.RequestType, this.DueDate, this.FixedAmountRequestedMoney, this.PercentageRequested, this.TippingEnabled);
+            var hashCode = 772730141;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.RequestMethod, this.RequestType, this.DueDate, this.FixedAmountRequestedMoney, this.PercentageRequested, this.TippingEnabled);
 
             hashCode = HashCode.Combine(hashCode, this.AutomaticPaymentSource, this.CardId, this.Reminders, this.ComputedAmountMoney, this.TotalCompletedAmountMoney, this.RoundingAdjustmentIncludedMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
             toStringOutput.Add($"this.RequestMethod = {(this.RequestMethod == null ? "null" : this.RequestMethod.ToString())}");
             toStringOutput.Add($"this.RequestType = {(this.RequestType == null ? "null" : this.RequestType.ToString())}");
-            toStringOutput.Add($"this.DueDate = {(this.DueDate == null ? "null" : this.DueDate)}");
+            toStringOutput.Add($"this.DueDate = {this.DueDate ?? "null"}");
             toStringOutput.Add($"this.FixedAmountRequestedMoney = {(this.FixedAmountRequestedMoney == null ? "null" : this.FixedAmountRequestedMoney.ToString())}");
-            toStringOutput.Add($"this.PercentageRequested = {(this.PercentageRequested == null ? "null" : this.PercentageRequested)}");
+            toStringOutput.Add($"this.PercentageRequested = {this.PercentageRequested ?? "null"}");
             toStringOutput.Add($"this.TippingEnabled = {(this.TippingEnabled == null ? "null" : this.TippingEnabled.ToString())}");
             toStringOutput.Add($"this.AutomaticPaymentSource = {(this.AutomaticPaymentSource == null ? "null" : this.AutomaticPaymentSource.ToString())}");
-            toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId)}");
+            toStringOutput.Add($"this.CardId = {this.CardId ?? "null"}");
             toStringOutput.Add($"this.Reminders = {(this.Reminders == null ? "null" : $"[{string.Join(", ", this.Reminders)} ]")}");
             toStringOutput.Add($"this.ComputedAmountMoney = {(this.ComputedAmountMoney == null ? "null" : this.ComputedAmountMoney.ToString())}");
             toStringOutput.Add($"this.TotalCompletedAmountMoney = {(this.TotalCompletedAmountMoney == null ? "null" : this.TotalCompletedAmountMoney.ToString())}");
@@ -576,7 +584,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -584,7 +592,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDueDate()
             {
@@ -592,7 +600,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPercentageRequested()
             {
@@ -600,7 +608,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTippingEnabled()
             {
@@ -608,7 +616,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCardId()
             {
@@ -616,7 +624,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReminders()
             {
@@ -630,7 +638,8 @@ namespace Square.Models
             /// <returns> InvoicePaymentRequest. </returns>
             public InvoicePaymentRequest Build()
             {
-                return new InvoicePaymentRequest(shouldSerialize,
+                return new InvoicePaymentRequest(
+                    shouldSerialize,
                     this.uid,
                     this.requestMethod,
                     this.requestType,

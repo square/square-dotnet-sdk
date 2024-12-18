@@ -45,18 +45,19 @@ namespace Square.Models
                 shouldSerialize["order_id"] = true;
                 this.OrderId = orderId;
             }
-
             this.Version = version;
+
             if (locationId != null)
             {
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
             this.State = state;
             this.CreatedAt = createdAt;
         }
-        internal OrderCreated(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderCreated(
+            Dictionary<string, bool> shouldSerialize,
             string orderId = null,
             int? version = null,
             string locationId = null,
@@ -108,9 +109,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderCreated : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -135,41 +134,42 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderCreated other &&                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
+            return obj is OrderCreated other &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.State == null && other.State == null ||
+                 this.State?.Equals(other.State) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1605817888;
-            hashCode = HashCode.Combine(this.OrderId, this.Version, this.LocationId, this.State, this.CreatedAt);
+            var hashCode = 1605817888;
+            hashCode = HashCode.Combine(hashCode, this.OrderId, this.Version, this.LocationId, this.State, this.CreatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderId()
             {
@@ -270,7 +270,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -284,7 +284,8 @@ namespace Square.Models
             /// <returns> OrderCreated. </returns>
             public OrderCreated Build()
             {
-                return new OrderCreated(shouldSerialize,
+                return new OrderCreated(
+                    shouldSerialize,
                     this.orderId,
                     this.version,
                     this.locationId,

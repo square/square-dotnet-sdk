@@ -40,20 +40,21 @@ namespace Square.Models
             {
                 { "description", false }
             };
-
             this.Id = id;
             this.EventType = eventType;
             this.EventMoney = eventMoney;
             this.CreatedAt = createdAt;
+
             if (description != null)
             {
                 shouldSerialize["description"] = true;
                 this.Description = description;
             }
-
             this.TeamMemberId = teamMemberId;
         }
-        internal CashDrawerShiftEvent(Dictionary<string, bool> shouldSerialize,
+
+        internal CashDrawerShiftEvent(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string eventType = null,
             Models.Money eventMoney = null,
@@ -118,9 +119,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CashDrawerShiftEvent : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -136,43 +135,45 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CashDrawerShiftEvent other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.EventType == null && other.EventType == null) || (this.EventType?.Equals(other.EventType) == true)) &&
-                ((this.EventMoney == null && other.EventMoney == null) || (this.EventMoney?.Equals(other.EventMoney) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true));
+            return obj is CashDrawerShiftEvent other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.EventType == null && other.EventType == null ||
+                 this.EventType?.Equals(other.EventType) == true) &&
+                (this.EventMoney == null && other.EventMoney == null ||
+                 this.EventMoney?.Equals(other.EventMoney) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1698426286;
-            hashCode = HashCode.Combine(this.Id, this.EventType, this.EventMoney, this.CreatedAt, this.Description, this.TeamMemberId);
+            var hashCode = 1698426286;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.EventType, this.EventMoney, this.CreatedAt, this.Description, this.TeamMemberId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.EventType = {(this.EventType == null ? "null" : this.EventType.ToString())}");
             toStringOutput.Add($"this.EventMoney = {(this.EventMoney == null ? "null" : this.EventMoney.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
         }
 
         /// <summary>
@@ -276,7 +277,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -290,7 +291,8 @@ namespace Square.Models
             /// <returns> CashDrawerShiftEvent. </returns>
             public CashDrawerShiftEvent Build()
             {
-                return new CashDrawerShiftEvent(shouldSerialize,
+                return new CashDrawerShiftEvent(
+                    shouldSerialize,
                     this.id,
                     this.eventType,
                     this.eventMoney,

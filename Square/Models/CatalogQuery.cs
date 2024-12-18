@@ -120,46 +120,50 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogQuery : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogQuery other &&                ((this.SortedAttributeQuery == null && other.SortedAttributeQuery == null) || (this.SortedAttributeQuery?.Equals(other.SortedAttributeQuery) == true)) &&
-                ((this.ExactQuery == null && other.ExactQuery == null) || (this.ExactQuery?.Equals(other.ExactQuery) == true)) &&
-                ((this.SetQuery == null && other.SetQuery == null) || (this.SetQuery?.Equals(other.SetQuery) == true)) &&
-                ((this.PrefixQuery == null && other.PrefixQuery == null) || (this.PrefixQuery?.Equals(other.PrefixQuery) == true)) &&
-                ((this.RangeQuery == null && other.RangeQuery == null) || (this.RangeQuery?.Equals(other.RangeQuery) == true)) &&
-                ((this.TextQuery == null && other.TextQuery == null) || (this.TextQuery?.Equals(other.TextQuery) == true)) &&
-                ((this.ItemsForTaxQuery == null && other.ItemsForTaxQuery == null) || (this.ItemsForTaxQuery?.Equals(other.ItemsForTaxQuery) == true)) &&
-                ((this.ItemsForModifierListQuery == null && other.ItemsForModifierListQuery == null) || (this.ItemsForModifierListQuery?.Equals(other.ItemsForModifierListQuery) == true)) &&
-                ((this.ItemsForItemOptionsQuery == null && other.ItemsForItemOptionsQuery == null) || (this.ItemsForItemOptionsQuery?.Equals(other.ItemsForItemOptionsQuery) == true)) &&
-                ((this.ItemVariationsForItemOptionValuesQuery == null && other.ItemVariationsForItemOptionValuesQuery == null) || (this.ItemVariationsForItemOptionValuesQuery?.Equals(other.ItemVariationsForItemOptionValuesQuery) == true));
+            return obj is CatalogQuery other &&
+                (this.SortedAttributeQuery == null && other.SortedAttributeQuery == null ||
+                 this.SortedAttributeQuery?.Equals(other.SortedAttributeQuery) == true) &&
+                (this.ExactQuery == null && other.ExactQuery == null ||
+                 this.ExactQuery?.Equals(other.ExactQuery) == true) &&
+                (this.SetQuery == null && other.SetQuery == null ||
+                 this.SetQuery?.Equals(other.SetQuery) == true) &&
+                (this.PrefixQuery == null && other.PrefixQuery == null ||
+                 this.PrefixQuery?.Equals(other.PrefixQuery) == true) &&
+                (this.RangeQuery == null && other.RangeQuery == null ||
+                 this.RangeQuery?.Equals(other.RangeQuery) == true) &&
+                (this.TextQuery == null && other.TextQuery == null ||
+                 this.TextQuery?.Equals(other.TextQuery) == true) &&
+                (this.ItemsForTaxQuery == null && other.ItemsForTaxQuery == null ||
+                 this.ItemsForTaxQuery?.Equals(other.ItemsForTaxQuery) == true) &&
+                (this.ItemsForModifierListQuery == null && other.ItemsForModifierListQuery == null ||
+                 this.ItemsForModifierListQuery?.Equals(other.ItemsForModifierListQuery) == true) &&
+                (this.ItemsForItemOptionsQuery == null && other.ItemsForItemOptionsQuery == null ||
+                 this.ItemsForItemOptionsQuery?.Equals(other.ItemsForItemOptionsQuery) == true) &&
+                (this.ItemVariationsForItemOptionValuesQuery == null && other.ItemVariationsForItemOptionValuesQuery == null ||
+                 this.ItemVariationsForItemOptionValuesQuery?.Equals(other.ItemVariationsForItemOptionValuesQuery) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1871698487;
-            hashCode = HashCode.Combine(this.SortedAttributeQuery, this.ExactQuery, this.SetQuery, this.PrefixQuery, this.RangeQuery, this.TextQuery, this.ItemsForTaxQuery);
+            var hashCode = 1871698487;
+            hashCode = HashCode.Combine(hashCode, this.SortedAttributeQuery, this.ExactQuery, this.SetQuery, this.PrefixQuery, this.RangeQuery, this.TextQuery, this.ItemsForTaxQuery);
 
             hashCode = HashCode.Combine(hashCode, this.ItemsForModifierListQuery, this.ItemsForItemOptionsQuery, this.ItemVariationsForItemOptionValuesQuery);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

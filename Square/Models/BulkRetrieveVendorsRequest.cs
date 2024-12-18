@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["vendor_ids"] = true;
                 this.VendorIds = vendorIds;
             }
-
         }
-        internal BulkRetrieveVendorsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal BulkRetrieveVendorsRequest(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> vendorIds = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -55,9 +56,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BulkRetrieveVendorsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -73,26 +72,23 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BulkRetrieveVendorsRequest other &&                ((this.VendorIds == null && other.VendorIds == null) || (this.VendorIds?.Equals(other.VendorIds) == true));
+            return obj is BulkRetrieveVendorsRequest other &&
+                (this.VendorIds == null && other.VendorIds == null ||
+                 this.VendorIds?.Equals(other.VendorIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 615646763;
-            hashCode = HashCode.Combine(this.VendorIds);
+            var hashCode = 615646763;
+            hashCode = HashCode.Combine(hashCode, this.VendorIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -138,7 +134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVendorIds()
             {
@@ -152,7 +148,8 @@ namespace Square.Models
             /// <returns> BulkRetrieveVendorsRequest. </returns>
             public BulkRetrieveVendorsRequest Build()
             {
-                return new BulkRetrieveVendorsRequest(shouldSerialize,
+                return new BulkRetrieveVendorsRequest(
+                    shouldSerialize,
                     this.vendorIds);
             }
         }

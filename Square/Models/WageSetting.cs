@@ -60,12 +60,13 @@ namespace Square.Models
                 shouldSerialize["is_overtime_exempt"] = true;
                 this.IsOvertimeExempt = isOvertimeExempt;
             }
-
             this.Version = version;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
         }
-        internal WageSetting(Dictionary<string, bool> shouldSerialize,
+
+        internal WageSetting(
+            Dictionary<string, bool> shouldSerialize,
             string teamMemberId = null,
             IList<Models.JobAssignment> jobAssignments = null,
             bool? isOvertimeExempt = null,
@@ -83,15 +84,14 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The unique ID of the `TeamMember` whom this wage setting describes.
+        /// The ID of the team member associated with the wage setting.
         /// </summary>
         [JsonProperty("team_member_id")]
         public string TeamMemberId { get; }
 
         /// <summary>
-        /// Required. The ordered list of jobs that the team member is assigned to.
+        /// **Required** The ordered list of jobs that the team member is assigned to.
         /// The first job assignment is considered the team member's primary job.
-        /// The minimum length is 1 and the maximum length is 12.
         /// </summary>
         [JsonProperty("job_assignments")]
         public IList<Models.JobAssignment> JobAssignments { get; }
@@ -103,7 +103,7 @@ namespace Square.Models
         public bool? IsOvertimeExempt { get; }
 
         /// <summary>
-        /// Used for resolving concurrency issues. The request fails if the version
+        /// **Read only** Used for resolving concurrency issues. The request fails if the version
         /// provided does not match the server version at the time of the request. If not provided,
         /// Square executes a blind write, potentially overwriting data from another write. For more information,
         /// see [optimistic concurrency](https://developer.squareup.com/docs/working-with-apis/optimistic-concurrency).
@@ -112,15 +112,13 @@ namespace Square.Models
         public int? Version { get; }
 
         /// <summary>
-        /// The timestamp, in RFC 3339 format, describing when the wage setting object was created.
-        /// For example, "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z".
+        /// The timestamp when the wage setting was created, in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The timestamp, in RFC 3339 format, describing when the wage setting object was last updated.
-        /// For example, "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z".
+        /// The timestamp when the wage setting was last updated, in RFC 3339 format.
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
@@ -129,9 +127,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"WageSetting : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -165,43 +161,45 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is WageSetting other &&                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.JobAssignments == null && other.JobAssignments == null) || (this.JobAssignments?.Equals(other.JobAssignments) == true)) &&
-                ((this.IsOvertimeExempt == null && other.IsOvertimeExempt == null) || (this.IsOvertimeExempt?.Equals(other.IsOvertimeExempt) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
+            return obj is WageSetting other &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.JobAssignments == null && other.JobAssignments == null ||
+                 this.JobAssignments?.Equals(other.JobAssignments) == true) &&
+                (this.IsOvertimeExempt == null && other.IsOvertimeExempt == null ||
+                 this.IsOvertimeExempt?.Equals(other.IsOvertimeExempt) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -742786902;
-            hashCode = HashCode.Combine(this.TeamMemberId, this.JobAssignments, this.IsOvertimeExempt, this.Version, this.CreatedAt, this.UpdatedAt);
+            var hashCode = -742786902;
+            hashCode = HashCode.Combine(hashCode, this.TeamMemberId, this.JobAssignments, this.IsOvertimeExempt, this.Version, this.CreatedAt, this.UpdatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
             toStringOutput.Add($"this.JobAssignments = {(this.JobAssignments == null ? "null" : $"[{string.Join(", ", this.JobAssignments)} ]")}");
             toStringOutput.Add($"this.IsOvertimeExempt = {(this.IsOvertimeExempt == null ? "null" : this.IsOvertimeExempt.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -309,7 +307,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTeamMemberId()
             {
@@ -317,7 +315,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetJobAssignments()
             {
@@ -325,7 +323,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsOvertimeExempt()
             {
@@ -339,7 +337,8 @@ namespace Square.Models
             /// <returns> WageSetting. </returns>
             public WageSetting Build()
             {
-                return new WageSetting(shouldSerialize,
+                return new WageSetting(
+                    shouldSerialize,
                     this.teamMemberId,
                     this.jobAssignments,
                     this.isOvertimeExempt,

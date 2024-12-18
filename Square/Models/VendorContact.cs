@@ -43,8 +43,8 @@ namespace Square.Models
                 { "phone_number", false },
                 { "removed", false }
             };
-
             this.Id = id;
+
             if (name != null)
             {
                 shouldSerialize["name"] = true;
@@ -68,10 +68,11 @@ namespace Square.Models
                 shouldSerialize["removed"] = true;
                 this.Removed = removed;
             }
-
             this.Ordinal = ordinal;
         }
-        internal VendorContact(Dictionary<string, bool> shouldSerialize,
+
+        internal VendorContact(
+            Dictionary<string, bool> shouldSerialize,
             int ordinal,
             string id = null,
             string name = null,
@@ -130,9 +131,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"VendorContact : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -175,41 +174,42 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is VendorContact other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((this.Removed == null && other.Removed == null) || (this.Removed?.Equals(other.Removed) == true)) &&
-                this.Ordinal.Equals(other.Ordinal);
+            return obj is VendorContact other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.EmailAddress == null && other.EmailAddress == null ||
+                 this.EmailAddress?.Equals(other.EmailAddress) == true) &&
+                (this.PhoneNumber == null && other.PhoneNumber == null ||
+                 this.PhoneNumber?.Equals(other.PhoneNumber) == true) &&
+                (this.Removed == null && other.Removed == null ||
+                 this.Removed?.Equals(other.Removed) == true) &&
+                (this.Ordinal.Equals(other.Ordinal));
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 156233878;
-            hashCode = HashCode.Combine(this.Id, this.Name, this.EmailAddress, this.PhoneNumber, this.Removed, this.Ordinal);
+            var hashCode = 156233878;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Name, this.EmailAddress, this.PhoneNumber, this.Removed, this.Ordinal);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress)}");
-            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.EmailAddress = {this.EmailAddress ?? "null"}");
+            toStringOutput.Add($"this.PhoneNumber = {this.PhoneNumber ?? "null"}");
             toStringOutput.Add($"this.Removed = {(this.Removed == null ? "null" : this.Removed.ToString())}");
             toStringOutput.Add($"this.Ordinal = {this.Ordinal}");
         }
@@ -331,7 +331,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -339,7 +339,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmailAddress()
             {
@@ -347,7 +347,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhoneNumber()
             {
@@ -355,7 +355,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRemoved()
             {
@@ -369,7 +369,8 @@ namespace Square.Models
             /// <returns> VendorContact. </returns>
             public VendorContact Build()
             {
-                return new VendorContact(shouldSerialize,
+                return new VendorContact(
+                    shouldSerialize,
                     this.ordinal,
                     this.id,
                     this.name,

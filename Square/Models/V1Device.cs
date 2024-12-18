@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "name", false }
             };
-
             this.Id = id;
+
             if (name != null)
             {
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
         }
-        internal V1Device(Dictionary<string, bool> shouldSerialize,
+
+        internal V1Device(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string name = null)
         {
@@ -66,9 +67,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"V1Device : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -84,35 +83,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is V1Device other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true));
+            return obj is V1Device other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1502443483;
-            hashCode = HashCode.Combine(this.Id, this.Name);
+            var hashCode = -1502443483;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Name);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
         }
 
         /// <summary>
@@ -164,7 +161,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -178,7 +175,8 @@ namespace Square.Models
             /// <returns> V1Device. </returns>
             public V1Device Build()
             {
-                return new V1Device(shouldSerialize,
+                return new V1Device(
+                    shouldSerialize,
                     this.id,
                     this.name);
             }

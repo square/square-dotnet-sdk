@@ -56,7 +56,6 @@ namespace Square.Models
             {
                 { "deadline_duration", false }
             };
-
             this.Id = id;
             this.RefundId = refundId;
             this.PaymentId = paymentId;
@@ -64,12 +63,12 @@ namespace Square.Models
             this.AmountMoney = amountMoney;
             this.Reason = reason;
             this.DeviceId = deviceId;
+
             if (deadlineDuration != null)
             {
                 shouldSerialize["deadline_duration"] = true;
                 this.DeadlineDuration = deadlineDuration;
             }
-
             this.Status = status;
             this.CancelReason = cancelReason;
             this.CreatedAt = createdAt;
@@ -77,7 +76,9 @@ namespace Square.Models
             this.AppId = appId;
             this.LocationId = locationId;
         }
-        internal TerminalRefund(Dictionary<string, bool> shouldSerialize,
+
+        internal TerminalRefund(
+            Dictionary<string, bool> shouldSerialize,
             string paymentId,
             Models.Money amountMoney,
             string reason,
@@ -209,9 +210,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TerminalRefund : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -227,61 +226,71 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TerminalRefund other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.RefundId == null && other.RefundId == null) || (this.RefundId?.Equals(other.RefundId) == true)) &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
-                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((this.DeadlineDuration == null && other.DeadlineDuration == null) || (this.DeadlineDuration?.Equals(other.DeadlineDuration) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.CancelReason == null && other.CancelReason == null) || (this.CancelReason?.Equals(other.CancelReason) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
+            return obj is TerminalRefund other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.RefundId == null && other.RefundId == null ||
+                 this.RefundId?.Equals(other.RefundId) == true) &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.Reason == null && other.Reason == null ||
+                 this.Reason?.Equals(other.Reason) == true) &&
+                (this.DeviceId == null && other.DeviceId == null ||
+                 this.DeviceId?.Equals(other.DeviceId) == true) &&
+                (this.DeadlineDuration == null && other.DeadlineDuration == null ||
+                 this.DeadlineDuration?.Equals(other.DeadlineDuration) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.CancelReason == null && other.CancelReason == null ||
+                 this.CancelReason?.Equals(other.CancelReason) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.AppId == null && other.AppId == null ||
+                 this.AppId?.Equals(other.AppId) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 973053086;
-            hashCode = HashCode.Combine(this.Id, this.RefundId, this.PaymentId, this.OrderId, this.AmountMoney, this.Reason, this.DeviceId);
+            var hashCode = 973053086;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.RefundId, this.PaymentId, this.OrderId, this.AmountMoney, this.Reason, this.DeviceId);
 
             hashCode = HashCode.Combine(hashCode, this.DeadlineDuration, this.Status, this.CancelReason, this.CreatedAt, this.UpdatedAt, this.AppId, this.LocationId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.RefundId = {(this.RefundId == null ? "null" : this.RefundId)}");
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.RefundId = {this.RefundId ?? "null"}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
-            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason)}");
-            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId)}");
-            toStringOutput.Add($"this.DeadlineDuration = {(this.DeadlineDuration == null ? "null" : this.DeadlineDuration)}");
-            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status)}");
+            toStringOutput.Add($"this.Reason = {this.Reason ?? "null"}");
+            toStringOutput.Add($"this.DeviceId = {this.DeviceId ?? "null"}");
+            toStringOutput.Add($"this.DeadlineDuration = {this.DeadlineDuration ?? "null"}");
+            toStringOutput.Add($"this.Status = {this.Status ?? "null"}");
             toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.AppId = {(this.AppId == null ? "null" : this.AppId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.AppId = {this.AppId ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
         }
 
         /// <summary>
@@ -508,7 +517,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeadlineDuration()
             {
@@ -522,7 +531,8 @@ namespace Square.Models
             /// <returns> TerminalRefund. </returns>
             public TerminalRefund Build()
             {
-                return new TerminalRefund(shouldSerialize,
+                return new TerminalRefund(
+                    shouldSerialize,
                     this.paymentId,
                     this.amountMoney,
                     this.reason,

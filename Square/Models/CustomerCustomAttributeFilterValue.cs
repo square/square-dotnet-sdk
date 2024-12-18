@@ -44,22 +44,23 @@ namespace Square.Models
             {
                 { "boolean", false }
             };
-
             this.Email = email;
             this.Phone = phone;
             this.Text = text;
             this.Selection = selection;
             this.Date = date;
             this.Number = number;
+
             if (boolean != null)
             {
                 shouldSerialize["boolean"] = true;
                 this.Boolean = boolean;
             }
-
             this.Address = address;
         }
-        internal CustomerCustomAttributeFilterValue(Dictionary<string, bool> shouldSerialize,
+
+        internal CustomerCustomAttributeFilterValue(
+            Dictionary<string, bool> shouldSerialize,
             Models.CustomerTextFilter email = null,
             Models.CustomerTextFilter phone = null,
             Models.CustomerTextFilter text = null,
@@ -146,9 +147,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomerCustomAttributeFilterValue : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -164,35 +163,39 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomerCustomAttributeFilterValue other &&                ((this.Email == null && other.Email == null) || (this.Email?.Equals(other.Email) == true)) &&
-                ((this.Phone == null && other.Phone == null) || (this.Phone?.Equals(other.Phone) == true)) &&
-                ((this.Text == null && other.Text == null) || (this.Text?.Equals(other.Text) == true)) &&
-                ((this.Selection == null && other.Selection == null) || (this.Selection?.Equals(other.Selection) == true)) &&
-                ((this.Date == null && other.Date == null) || (this.Date?.Equals(other.Date) == true)) &&
-                ((this.Number == null && other.Number == null) || (this.Number?.Equals(other.Number) == true)) &&
-                ((this.Boolean == null && other.Boolean == null) || (this.Boolean?.Equals(other.Boolean) == true)) &&
-                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true));
+            return obj is CustomerCustomAttributeFilterValue other &&
+                (this.Email == null && other.Email == null ||
+                 this.Email?.Equals(other.Email) == true) &&
+                (this.Phone == null && other.Phone == null ||
+                 this.Phone?.Equals(other.Phone) == true) &&
+                (this.Text == null && other.Text == null ||
+                 this.Text?.Equals(other.Text) == true) &&
+                (this.Selection == null && other.Selection == null ||
+                 this.Selection?.Equals(other.Selection) == true) &&
+                (this.Date == null && other.Date == null ||
+                 this.Date?.Equals(other.Date) == true) &&
+                (this.Number == null && other.Number == null ||
+                 this.Number?.Equals(other.Number) == true) &&
+                (this.Boolean == null && other.Boolean == null ||
+                 this.Boolean?.Equals(other.Boolean) == true) &&
+                (this.Address == null && other.Address == null ||
+                 this.Address?.Equals(other.Address) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -907077881;
-            hashCode = HashCode.Combine(this.Email, this.Phone, this.Text, this.Selection, this.Date, this.Number, this.Boolean);
+            var hashCode = -907077881;
+            hashCode = HashCode.Combine(hashCode, this.Email, this.Phone, this.Text, this.Selection, this.Date, this.Number, this.Boolean);
 
             hashCode = HashCode.Combine(hashCode, this.Address);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -336,7 +339,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBoolean()
             {
@@ -350,7 +353,8 @@ namespace Square.Models
             /// <returns> CustomerCustomAttributeFilterValue. </returns>
             public CustomerCustomAttributeFilterValue Build()
             {
-                return new CustomerCustomAttributeFilterValue(shouldSerialize,
+                return new CustomerCustomAttributeFilterValue(
+                    shouldSerialize,
                     this.email,
                     this.phone,
                     this.text,

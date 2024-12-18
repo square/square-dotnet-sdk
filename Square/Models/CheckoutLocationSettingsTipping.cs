@@ -65,10 +65,11 @@ namespace Square.Models
                 shouldSerialize["smart_tips"] = true;
                 this.SmartTips = smartTips;
             }
-
             this.DefaultSmartTip = defaultSmartTip;
         }
-        internal CheckoutLocationSettingsTipping(Dictionary<string, bool> shouldSerialize,
+
+        internal CheckoutLocationSettingsTipping(
+            Dictionary<string, bool> shouldSerialize,
             IList<int> percentages = null,
             bool? smartTippingEnabled = null,
             int? defaultPercent = null,
@@ -125,9 +126,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CheckoutLocationSettingsTipping : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -170,30 +169,31 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CheckoutLocationSettingsTipping other &&                ((this.Percentages == null && other.Percentages == null) || (this.Percentages?.Equals(other.Percentages) == true)) &&
-                ((this.SmartTippingEnabled == null && other.SmartTippingEnabled == null) || (this.SmartTippingEnabled?.Equals(other.SmartTippingEnabled) == true)) &&
-                ((this.DefaultPercent == null && other.DefaultPercent == null) || (this.DefaultPercent?.Equals(other.DefaultPercent) == true)) &&
-                ((this.SmartTips == null && other.SmartTips == null) || (this.SmartTips?.Equals(other.SmartTips) == true)) &&
-                ((this.DefaultSmartTip == null && other.DefaultSmartTip == null) || (this.DefaultSmartTip?.Equals(other.DefaultSmartTip) == true));
+            return obj is CheckoutLocationSettingsTipping other &&
+                (this.Percentages == null && other.Percentages == null ||
+                 this.Percentages?.Equals(other.Percentages) == true) &&
+                (this.SmartTippingEnabled == null && other.SmartTippingEnabled == null ||
+                 this.SmartTippingEnabled?.Equals(other.SmartTippingEnabled) == true) &&
+                (this.DefaultPercent == null && other.DefaultPercent == null ||
+                 this.DefaultPercent?.Equals(other.DefaultPercent) == true) &&
+                (this.SmartTips == null && other.SmartTips == null ||
+                 this.SmartTips?.Equals(other.SmartTips) == true) &&
+                (this.DefaultSmartTip == null && other.DefaultSmartTip == null ||
+                 this.DefaultSmartTip?.Equals(other.DefaultSmartTip) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1257901161;
-            hashCode = HashCode.Combine(this.Percentages, this.SmartTippingEnabled, this.DefaultPercent, this.SmartTips, this.DefaultSmartTip);
+            var hashCode = -1257901161;
+            hashCode = HashCode.Combine(hashCode, this.Percentages, this.SmartTippingEnabled, this.DefaultPercent, this.SmartTips, this.DefaultSmartTip);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -301,7 +301,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPercentages()
             {
@@ -309,7 +309,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSmartTippingEnabled()
             {
@@ -317,7 +317,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDefaultPercent()
             {
@@ -325,7 +325,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSmartTips()
             {
@@ -339,7 +339,8 @@ namespace Square.Models
             /// <returns> CheckoutLocationSettingsTipping. </returns>
             public CheckoutLocationSettingsTipping Build()
             {
-                return new CheckoutLocationSettingsTipping(shouldSerialize,
+                return new CheckoutLocationSettingsTipping(
+                    shouldSerialize,
                     this.percentages,
                     this.smartTippingEnabled,
                     this.defaultPercent,

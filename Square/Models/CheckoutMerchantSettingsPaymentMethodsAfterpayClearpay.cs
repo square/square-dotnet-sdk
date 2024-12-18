@@ -56,37 +56,34 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CheckoutMerchantSettingsPaymentMethodsAfterpayClearpay : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CheckoutMerchantSettingsPaymentMethodsAfterpayClearpay other &&                ((this.OrderEligibilityRange == null && other.OrderEligibilityRange == null) || (this.OrderEligibilityRange?.Equals(other.OrderEligibilityRange) == true)) &&
-                ((this.ItemEligibilityRange == null && other.ItemEligibilityRange == null) || (this.ItemEligibilityRange?.Equals(other.ItemEligibilityRange) == true)) &&
-                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true));
+            return obj is CheckoutMerchantSettingsPaymentMethodsAfterpayClearpay other &&
+                (this.OrderEligibilityRange == null && other.OrderEligibilityRange == null ||
+                 this.OrderEligibilityRange?.Equals(other.OrderEligibilityRange) == true) &&
+                (this.ItemEligibilityRange == null && other.ItemEligibilityRange == null ||
+                 this.ItemEligibilityRange?.Equals(other.ItemEligibilityRange) == true) &&
+                (this.Enabled == null && other.Enabled == null ||
+                 this.Enabled?.Equals(other.Enabled) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 136387679;
-            hashCode = HashCode.Combine(this.OrderEligibilityRange, this.ItemEligibilityRange, this.Enabled);
+            var hashCode = 136387679;
+            hashCode = HashCode.Combine(hashCode, this.OrderEligibilityRange, this.ItemEligibilityRange, this.Enabled);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -43,9 +43,9 @@ namespace Square.Models
                 { "can_prorate", false },
                 { "successor_plan_variation_id", false }
             };
-
             this.Name = name;
             this.Phases = phases;
+
             if (subscriptionPlanId != null)
             {
                 shouldSerialize["subscription_plan_id"] = true;
@@ -69,9 +69,10 @@ namespace Square.Models
                 shouldSerialize["successor_plan_variation_id"] = true;
                 this.SuccessorPlanVariationId = successorPlanVariationId;
             }
-
         }
-        internal CatalogSubscriptionPlanVariation(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogSubscriptionPlanVariation(
+            Dictionary<string, bool> shouldSerialize,
             string name,
             IList<Models.SubscriptionPhase> phases,
             string subscriptionPlanId = null,
@@ -130,9 +131,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogSubscriptionPlanVariation : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -175,43 +174,45 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogSubscriptionPlanVariation other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true)) &&
-                ((this.SubscriptionPlanId == null && other.SubscriptionPlanId == null) || (this.SubscriptionPlanId?.Equals(other.SubscriptionPlanId) == true)) &&
-                ((this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null) || (this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true)) &&
-                ((this.CanProrate == null && other.CanProrate == null) || (this.CanProrate?.Equals(other.CanProrate) == true)) &&
-                ((this.SuccessorPlanVariationId == null && other.SuccessorPlanVariationId == null) || (this.SuccessorPlanVariationId?.Equals(other.SuccessorPlanVariationId) == true));
+            return obj is CatalogSubscriptionPlanVariation other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Phases == null && other.Phases == null ||
+                 this.Phases?.Equals(other.Phases) == true) &&
+                (this.SubscriptionPlanId == null && other.SubscriptionPlanId == null ||
+                 this.SubscriptionPlanId?.Equals(other.SubscriptionPlanId) == true) &&
+                (this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null ||
+                 this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true) &&
+                (this.CanProrate == null && other.CanProrate == null ||
+                 this.CanProrate?.Equals(other.CanProrate) == true) &&
+                (this.SuccessorPlanVariationId == null && other.SuccessorPlanVariationId == null ||
+                 this.SuccessorPlanVariationId?.Equals(other.SuccessorPlanVariationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1471838762;
-            hashCode = HashCode.Combine(this.Name, this.Phases, this.SubscriptionPlanId, this.MonthlyBillingAnchorDate, this.CanProrate, this.SuccessorPlanVariationId);
+            var hashCode = -1471838762;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.Phases, this.SubscriptionPlanId, this.MonthlyBillingAnchorDate, this.CanProrate, this.SuccessorPlanVariationId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
-            toStringOutput.Add($"this.SubscriptionPlanId = {(this.SubscriptionPlanId == null ? "null" : this.SubscriptionPlanId)}");
+            toStringOutput.Add($"this.SubscriptionPlanId = {this.SubscriptionPlanId ?? "null"}");
             toStringOutput.Add($"this.MonthlyBillingAnchorDate = {(this.MonthlyBillingAnchorDate == null ? "null" : this.MonthlyBillingAnchorDate.ToString())}");
             toStringOutput.Add($"this.CanProrate = {(this.CanProrate == null ? "null" : this.CanProrate.ToString())}");
-            toStringOutput.Add($"this.SuccessorPlanVariationId = {(this.SuccessorPlanVariationId == null ? "null" : this.SuccessorPlanVariationId)}");
+            toStringOutput.Add($"this.SuccessorPlanVariationId = {this.SuccessorPlanVariationId ?? "null"}");
         }
 
         /// <summary>
@@ -334,7 +335,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSubscriptionPlanId()
             {
@@ -342,7 +343,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMonthlyBillingAnchorDate()
             {
@@ -350,7 +351,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCanProrate()
             {
@@ -358,7 +359,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSuccessorPlanVariationId()
             {
@@ -372,7 +373,8 @@ namespace Square.Models
             /// <returns> CatalogSubscriptionPlanVariation. </returns>
             public CatalogSubscriptionPlanVariation Build()
             {
-                return new CatalogSubscriptionPlanVariation(shouldSerialize,
+                return new CatalogSubscriptionPlanVariation(
+                    shouldSerialize,
                     this.name,
                     this.phases,
                     this.subscriptionPlanId,

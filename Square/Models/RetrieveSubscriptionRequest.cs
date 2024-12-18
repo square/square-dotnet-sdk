@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["include"] = true;
                 this.Include = include;
             }
-
         }
-        internal RetrieveSubscriptionRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal RetrieveSubscriptionRequest(
+            Dictionary<string, bool> shouldSerialize,
             string include = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -57,9 +58,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RetrieveSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -75,33 +74,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RetrieveSubscriptionRequest other &&                ((this.Include == null && other.Include == null) || (this.Include?.Equals(other.Include) == true));
+            return obj is RetrieveSubscriptionRequest other &&
+                (this.Include == null && other.Include == null ||
+                 this.Include?.Equals(other.Include) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 791482379;
-            hashCode = HashCode.Combine(this.Include);
+            var hashCode = 791482379;
+            hashCode = HashCode.Combine(hashCode, this.Include);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Include = {(this.Include == null ? "null" : this.Include)}");
+            toStringOutput.Add($"this.Include = {this.Include ?? "null"}");
         }
 
         /// <summary>
@@ -140,7 +136,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetInclude()
             {
@@ -154,7 +150,8 @@ namespace Square.Models
             /// <returns> RetrieveSubscriptionRequest. </returns>
             public RetrieveSubscriptionRequest Build()
             {
-                return new RetrieveSubscriptionRequest(shouldSerialize,
+                return new RetrieveSubscriptionRequest(
+                    shouldSerialize,
                     this.include);
             }
         }

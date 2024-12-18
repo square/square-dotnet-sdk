@@ -40,8 +40,8 @@ namespace Square.Models
                 { "collect_signature", false },
                 { "show_itemized_cart", false }
             };
-
             this.DeviceId = deviceId;
+
             if (skipReceiptScreen != null)
             {
                 shouldSerialize["skip_receipt_screen"] = true;
@@ -53,16 +53,17 @@ namespace Square.Models
                 shouldSerialize["collect_signature"] = true;
                 this.CollectSignature = collectSignature;
             }
-
             this.TipSettings = tipSettings;
+
             if (showItemizedCart != null)
             {
                 shouldSerialize["show_itemized_cart"] = true;
                 this.ShowItemizedCart = showItemizedCart;
             }
-
         }
-        internal DeviceCheckoutOptions(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceCheckoutOptions(
+            Dictionary<string, bool> shouldSerialize,
             string deviceId,
             bool? skipReceiptScreen = null,
             bool? collectSignature = null,
@@ -114,9 +115,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceCheckoutOptions : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -150,37 +149,38 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceCheckoutOptions other &&                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((this.SkipReceiptScreen == null && other.SkipReceiptScreen == null) || (this.SkipReceiptScreen?.Equals(other.SkipReceiptScreen) == true)) &&
-                ((this.CollectSignature == null && other.CollectSignature == null) || (this.CollectSignature?.Equals(other.CollectSignature) == true)) &&
-                ((this.TipSettings == null && other.TipSettings == null) || (this.TipSettings?.Equals(other.TipSettings) == true)) &&
-                ((this.ShowItemizedCart == null && other.ShowItemizedCart == null) || (this.ShowItemizedCart?.Equals(other.ShowItemizedCart) == true));
+            return obj is DeviceCheckoutOptions other &&
+                (this.DeviceId == null && other.DeviceId == null ||
+                 this.DeviceId?.Equals(other.DeviceId) == true) &&
+                (this.SkipReceiptScreen == null && other.SkipReceiptScreen == null ||
+                 this.SkipReceiptScreen?.Equals(other.SkipReceiptScreen) == true) &&
+                (this.CollectSignature == null && other.CollectSignature == null ||
+                 this.CollectSignature?.Equals(other.CollectSignature) == true) &&
+                (this.TipSettings == null && other.TipSettings == null ||
+                 this.TipSettings?.Equals(other.TipSettings) == true) &&
+                (this.ShowItemizedCart == null && other.ShowItemizedCart == null ||
+                 this.ShowItemizedCart?.Equals(other.ShowItemizedCart) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1038046407;
-            hashCode = HashCode.Combine(this.DeviceId, this.SkipReceiptScreen, this.CollectSignature, this.TipSettings, this.ShowItemizedCart);
+            var hashCode = 1038046407;
+            hashCode = HashCode.Combine(hashCode, this.DeviceId, this.SkipReceiptScreen, this.CollectSignature, this.TipSettings, this.ShowItemizedCart);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId)}");
+            toStringOutput.Add($"this.DeviceId = {this.DeviceId ?? "null"}");
             toStringOutput.Add($"this.SkipReceiptScreen = {(this.SkipReceiptScreen == null ? "null" : this.SkipReceiptScreen.ToString())}");
             toStringOutput.Add($"this.CollectSignature = {(this.CollectSignature == null ? "null" : this.CollectSignature.ToString())}");
             toStringOutput.Add($"this.TipSettings = {(this.TipSettings == null ? "null" : this.TipSettings.ToString())}");
@@ -289,7 +289,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSkipReceiptScreen()
             {
@@ -297,7 +297,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCollectSignature()
             {
@@ -305,7 +305,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetShowItemizedCart()
             {
@@ -319,7 +319,8 @@ namespace Square.Models
             /// <returns> DeviceCheckoutOptions. </returns>
             public DeviceCheckoutOptions Build()
             {
-                return new DeviceCheckoutOptions(shouldSerialize,
+                return new DeviceCheckoutOptions(
+                    shouldSerialize,
                     this.deviceId,
                     this.skipReceiptScreen,
                     this.collectSignature,

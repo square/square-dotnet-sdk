@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["device_name"] = true;
                 this.DeviceName = deviceName;
             }
-
         }
-        internal DeviceDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceDetails(
+            Dictionary<string, bool> shouldSerialize,
             string deviceId = null,
             string deviceInstallationId = null,
             string deviceName = null)
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -125,37 +124,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceDetails other &&                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((this.DeviceInstallationId == null && other.DeviceInstallationId == null) || (this.DeviceInstallationId?.Equals(other.DeviceInstallationId) == true)) &&
-                ((this.DeviceName == null && other.DeviceName == null) || (this.DeviceName?.Equals(other.DeviceName) == true));
+            return obj is DeviceDetails other &&
+                (this.DeviceId == null && other.DeviceId == null ||
+                 this.DeviceId?.Equals(other.DeviceId) == true) &&
+                (this.DeviceInstallationId == null && other.DeviceInstallationId == null ||
+                 this.DeviceInstallationId?.Equals(other.DeviceInstallationId) == true) &&
+                (this.DeviceName == null && other.DeviceName == null ||
+                 this.DeviceName?.Equals(other.DeviceName) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -363727408;
-            hashCode = HashCode.Combine(this.DeviceId, this.DeviceInstallationId, this.DeviceName);
+            var hashCode = -363727408;
+            hashCode = HashCode.Combine(hashCode, this.DeviceId, this.DeviceInstallationId, this.DeviceName);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId)}");
-            toStringOutput.Add($"this.DeviceInstallationId = {(this.DeviceInstallationId == null ? "null" : this.DeviceInstallationId)}");
-            toStringOutput.Add($"this.DeviceName = {(this.DeviceName == null ? "null" : this.DeviceName)}");
+            toStringOutput.Add($"this.DeviceId = {this.DeviceId ?? "null"}");
+            toStringOutput.Add($"this.DeviceInstallationId = {this.DeviceInstallationId ?? "null"}");
+            toStringOutput.Add($"this.DeviceName = {this.DeviceName ?? "null"}");
         }
 
         /// <summary>
@@ -224,7 +222,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeviceId()
             {
@@ -232,7 +230,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeviceInstallationId()
             {
@@ -240,7 +238,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeviceName()
             {
@@ -254,7 +252,8 @@ namespace Square.Models
             /// <returns> DeviceDetails. </returns>
             public DeviceDetails Build()
             {
-                return new DeviceDetails(shouldSerialize,
+                return new DeviceDetails(
+                    shouldSerialize,
                     this.deviceId,
                     this.deviceInstallationId,
                     this.deviceName);

@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["value"] = true;
                 this.MValue = mValue;
             }
-
         }
-        internal DeviceComponentDetailsMeasurement(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceComponentDetailsMeasurement(
+            Dictionary<string, bool> shouldSerialize,
             int? mValue = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -55,9 +56,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceComponentDetailsMeasurement : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -73,26 +72,23 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceComponentDetailsMeasurement other &&                ((this.MValue == null && other.MValue == null) || (this.MValue?.Equals(other.MValue) == true));
+            return obj is DeviceComponentDetailsMeasurement other &&
+                (this.MValue == null && other.MValue == null ||
+                 this.MValue?.Equals(other.MValue) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 953563516;
-            hashCode = HashCode.Combine(this.MValue);
+            var hashCode = 953563516;
+            hashCode = HashCode.Combine(hashCode, this.MValue);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -138,7 +134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMValue()
             {
@@ -152,7 +148,8 @@ namespace Square.Models
             /// <returns> DeviceComponentDetailsMeasurement. </returns>
             public DeviceComponentDetailsMeasurement Build()
             {
-                return new DeviceComponentDetailsMeasurement(shouldSerialize,
+                return new DeviceComponentDetailsMeasurement(
+                    shouldSerialize,
                     this.mValue);
             }
         }

@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "source_id", false }
             };
-
             this.Type = type;
             this.Source = source;
+
             if (sourceId != null)
             {
                 shouldSerialize["source_id"] = true;
                 this.SourceId = sourceId;
             }
-
         }
-        internal DestinationDetailsExternalRefundDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal DestinationDetailsExternalRefundDetails(
+            Dictionary<string, bool> shouldSerialize,
             string type,
             string source,
             string sourceId = null)
@@ -91,9 +92,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DestinationDetailsExternalRefundDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -109,37 +108,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DestinationDetailsExternalRefundDetails other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
-                ((this.SourceId == null && other.SourceId == null) || (this.SourceId?.Equals(other.SourceId) == true));
+            return obj is DestinationDetailsExternalRefundDetails other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.Source == null && other.Source == null ||
+                 this.Source?.Equals(other.Source) == true) &&
+                (this.SourceId == null && other.SourceId == null ||
+                 this.SourceId?.Equals(other.SourceId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -687379938;
-            hashCode = HashCode.Combine(this.Type, this.Source, this.SourceId);
+            var hashCode = -687379938;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.Source, this.SourceId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type)}");
-            toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source)}");
-            toStringOutput.Add($"this.SourceId = {(this.SourceId == null ? "null" : this.SourceId)}");
+            toStringOutput.Add($"this.Type = {this.Type ?? "null"}");
+            toStringOutput.Add($"this.Source = {this.Source ?? "null"}");
+            toStringOutput.Add($"this.SourceId = {this.SourceId ?? "null"}");
         }
 
         /// <summary>
@@ -217,7 +215,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSourceId()
             {
@@ -231,7 +229,8 @@ namespace Square.Models
             /// <returns> DestinationDetailsExternalRefundDetails. </returns>
             public DestinationDetailsExternalRefundDetails Build()
             {
-                return new DestinationDetailsExternalRefundDetails(shouldSerialize,
+                return new DestinationDetailsExternalRefundDetails(
+                    shouldSerialize,
                     this.type,
                     this.source,
                     this.sourceId);

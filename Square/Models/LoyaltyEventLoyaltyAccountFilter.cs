@@ -38,42 +38,37 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyEventLoyaltyAccountFilter : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyEventLoyaltyAccountFilter other &&                ((this.LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true));
+            return obj is LoyaltyEventLoyaltyAccountFilter other &&
+                (this.LoyaltyAccountId == null && other.LoyaltyAccountId == null ||
+                 this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1399145156;
-            hashCode = HashCode.Combine(this.LoyaltyAccountId);
+            var hashCode = 1399145156;
+            hashCode = HashCode.Combine(hashCode, this.LoyaltyAccountId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LoyaltyAccountId = {(this.LoyaltyAccountId == null ? "null" : this.LoyaltyAccountId)}");
+            toStringOutput.Add($"this.LoyaltyAccountId = {this.LoyaltyAccountId ?? "null"}");
         }
 
         /// <summary>

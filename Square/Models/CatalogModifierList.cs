@@ -64,8 +64,8 @@ namespace Square.Models
                 shouldSerialize["ordinal"] = true;
                 this.Ordinal = ordinal;
             }
-
             this.SelectionType = selectionType;
+
             if (modifiers != null)
             {
                 shouldSerialize["modifiers"] = true;
@@ -77,8 +77,8 @@ namespace Square.Models
                 shouldSerialize["image_ids"] = true;
                 this.ImageIds = imageIds;
             }
-
             this.ModifierType = modifierType;
+
             if (maxLength != null)
             {
                 shouldSerialize["max_length"] = true;
@@ -96,9 +96,10 @@ namespace Square.Models
                 shouldSerialize["internal_name"] = true;
                 this.InternalName = internalName;
             }
-
         }
-        internal CatalogModifierList(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogModifierList(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             int? ordinal = null,
             string selectionType = null,
@@ -197,9 +198,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogModifierList : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -269,43 +268,48 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogModifierList other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
-                ((this.SelectionType == null && other.SelectionType == null) || (this.SelectionType?.Equals(other.SelectionType) == true)) &&
-                ((this.Modifiers == null && other.Modifiers == null) || (this.Modifiers?.Equals(other.Modifiers) == true)) &&
-                ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
-                ((this.ModifierType == null && other.ModifierType == null) || (this.ModifierType?.Equals(other.ModifierType) == true)) &&
-                ((this.MaxLength == null && other.MaxLength == null) || (this.MaxLength?.Equals(other.MaxLength) == true)) &&
-                ((this.TextRequired == null && other.TextRequired == null) || (this.TextRequired?.Equals(other.TextRequired) == true)) &&
-                ((this.InternalName == null && other.InternalName == null) || (this.InternalName?.Equals(other.InternalName) == true));
+            return obj is CatalogModifierList other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Ordinal == null && other.Ordinal == null ||
+                 this.Ordinal?.Equals(other.Ordinal) == true) &&
+                (this.SelectionType == null && other.SelectionType == null ||
+                 this.SelectionType?.Equals(other.SelectionType) == true) &&
+                (this.Modifiers == null && other.Modifiers == null ||
+                 this.Modifiers?.Equals(other.Modifiers) == true) &&
+                (this.ImageIds == null && other.ImageIds == null ||
+                 this.ImageIds?.Equals(other.ImageIds) == true) &&
+                (this.ModifierType == null && other.ModifierType == null ||
+                 this.ModifierType?.Equals(other.ModifierType) == true) &&
+                (this.MaxLength == null && other.MaxLength == null ||
+                 this.MaxLength?.Equals(other.MaxLength) == true) &&
+                (this.TextRequired == null && other.TextRequired == null ||
+                 this.TextRequired?.Equals(other.TextRequired) == true) &&
+                (this.InternalName == null && other.InternalName == null ||
+                 this.InternalName?.Equals(other.InternalName) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 35199234;
-            hashCode = HashCode.Combine(this.Name, this.Ordinal, this.SelectionType, this.Modifiers, this.ImageIds, this.ModifierType, this.MaxLength);
+            var hashCode = 35199234;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.Ordinal, this.SelectionType, this.Modifiers, this.ImageIds, this.ModifierType, this.MaxLength);
 
             hashCode = HashCode.Combine(hashCode, this.TextRequired, this.InternalName);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
             toStringOutput.Add($"this.SelectionType = {(this.SelectionType == null ? "null" : this.SelectionType.ToString())}");
             toStringOutput.Add($"this.Modifiers = {(this.Modifiers == null ? "null" : $"[{string.Join(", ", this.Modifiers)} ]")}");
@@ -313,7 +317,7 @@ namespace Square.Models
             toStringOutput.Add($"this.ModifierType = {(this.ModifierType == null ? "null" : this.ModifierType.ToString())}");
             toStringOutput.Add($"this.MaxLength = {(this.MaxLength == null ? "null" : this.MaxLength.ToString())}");
             toStringOutput.Add($"this.TextRequired = {(this.TextRequired == null ? "null" : this.TextRequired.ToString())}");
-            toStringOutput.Add($"this.InternalName = {(this.InternalName == null ? "null" : this.InternalName)}");
+            toStringOutput.Add($"this.InternalName = {this.InternalName ?? "null"}");
         }
 
         /// <summary>
@@ -468,7 +472,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -476,7 +480,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrdinal()
             {
@@ -484,7 +488,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetModifiers()
             {
@@ -492,7 +496,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetImageIds()
             {
@@ -500,7 +504,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMaxLength()
             {
@@ -508,7 +512,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTextRequired()
             {
@@ -516,7 +520,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetInternalName()
             {
@@ -530,7 +534,8 @@ namespace Square.Models
             /// <returns> CatalogModifierList. </returns>
             public CatalogModifierList Build()
             {
-                return new CatalogModifierList(shouldSerialize,
+                return new CatalogModifierList(
+                    shouldSerialize,
                     this.name,
                     this.ordinal,
                     this.selectionType,

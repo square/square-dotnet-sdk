@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["api_version"] = true;
                 this.ApiVersion = apiVersion;
             }
-
         }
-        internal ListEventTypesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListEventTypesRequest(
+            Dictionary<string, bool> shouldSerialize,
             string apiVersion = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -55,9 +56,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListEventTypesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -73,33 +72,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListEventTypesRequest other &&                ((this.ApiVersion == null && other.ApiVersion == null) || (this.ApiVersion?.Equals(other.ApiVersion) == true));
+            return obj is ListEventTypesRequest other &&
+                (this.ApiVersion == null && other.ApiVersion == null ||
+                 this.ApiVersion?.Equals(other.ApiVersion) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2071481040;
-            hashCode = HashCode.Combine(this.ApiVersion);
+            var hashCode = 2071481040;
+            hashCode = HashCode.Combine(hashCode, this.ApiVersion);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ApiVersion = {(this.ApiVersion == null ? "null" : this.ApiVersion)}");
+            toStringOutput.Add($"this.ApiVersion = {this.ApiVersion ?? "null"}");
         }
 
         /// <summary>
@@ -138,7 +134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApiVersion()
             {
@@ -152,7 +148,8 @@ namespace Square.Models
             /// <returns> ListEventTypesRequest. </returns>
             public ListEventTypesRequest Build()
             {
-                return new ListEventTypesRequest(shouldSerialize,
+                return new ListEventTypesRequest(
+                    shouldSerialize,
                     this.apiVersion);
             }
         }

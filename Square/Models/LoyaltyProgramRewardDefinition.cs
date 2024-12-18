@@ -101,40 +101,40 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyProgramRewardDefinition : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyProgramRewardDefinition other &&                ((this.Scope == null && other.Scope == null) || (this.Scope?.Equals(other.Scope) == true)) &&
-                ((this.DiscountType == null && other.DiscountType == null) || (this.DiscountType?.Equals(other.DiscountType) == true)) &&
-                ((this.PercentageDiscount == null && other.PercentageDiscount == null) || (this.PercentageDiscount?.Equals(other.PercentageDiscount) == true)) &&
-                ((this.CatalogObjectIds == null && other.CatalogObjectIds == null) || (this.CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&
-                ((this.FixedDiscountMoney == null && other.FixedDiscountMoney == null) || (this.FixedDiscountMoney?.Equals(other.FixedDiscountMoney) == true)) &&
-                ((this.MaxDiscountMoney == null && other.MaxDiscountMoney == null) || (this.MaxDiscountMoney?.Equals(other.MaxDiscountMoney) == true));
+            return obj is LoyaltyProgramRewardDefinition other &&
+                (this.Scope == null && other.Scope == null ||
+                 this.Scope?.Equals(other.Scope) == true) &&
+                (this.DiscountType == null && other.DiscountType == null ||
+                 this.DiscountType?.Equals(other.DiscountType) == true) &&
+                (this.PercentageDiscount == null && other.PercentageDiscount == null ||
+                 this.PercentageDiscount?.Equals(other.PercentageDiscount) == true) &&
+                (this.CatalogObjectIds == null && other.CatalogObjectIds == null ||
+                 this.CatalogObjectIds?.Equals(other.CatalogObjectIds) == true) &&
+                (this.FixedDiscountMoney == null && other.FixedDiscountMoney == null ||
+                 this.FixedDiscountMoney?.Equals(other.FixedDiscountMoney) == true) &&
+                (this.MaxDiscountMoney == null && other.MaxDiscountMoney == null ||
+                 this.MaxDiscountMoney?.Equals(other.MaxDiscountMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1536175793;
-            hashCode = HashCode.Combine(this.Scope, this.DiscountType, this.PercentageDiscount, this.CatalogObjectIds, this.FixedDiscountMoney, this.MaxDiscountMoney);
+            var hashCode = 1536175793;
+            hashCode = HashCode.Combine(hashCode, this.Scope, this.DiscountType, this.PercentageDiscount, this.CatalogObjectIds, this.FixedDiscountMoney, this.MaxDiscountMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -143,7 +143,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Scope = {(this.Scope == null ? "null" : this.Scope.ToString())}");
             toStringOutput.Add($"this.DiscountType = {(this.DiscountType == null ? "null" : this.DiscountType.ToString())}");
-            toStringOutput.Add($"this.PercentageDiscount = {(this.PercentageDiscount == null ? "null" : this.PercentageDiscount)}");
+            toStringOutput.Add($"this.PercentageDiscount = {this.PercentageDiscount ?? "null"}");
             toStringOutput.Add($"this.CatalogObjectIds = {(this.CatalogObjectIds == null ? "null" : $"[{string.Join(", ", this.CatalogObjectIds)} ]")}");
             toStringOutput.Add($"this.FixedDiscountMoney = {(this.FixedDiscountMoney == null ? "null" : this.FixedDiscountMoney.ToString())}");
             toStringOutput.Add($"this.MaxDiscountMoney = {(this.MaxDiscountMoney == null ? "null" : this.MaxDiscountMoney.ToString())}");

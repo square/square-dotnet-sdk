@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["ip_address_v4"] = true;
                 this.IpAddressV4 = ipAddressV4;
             }
-
         }
-        internal DeviceComponentDetailsNetworkInterfaceDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceComponentDetailsNetworkInterfaceDetails(
+            Dictionary<string, bool> shouldSerialize,
             string ipAddressV4 = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -55,9 +56,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceComponentDetailsNetworkInterfaceDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -73,33 +72,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceComponentDetailsNetworkInterfaceDetails other &&                ((this.IpAddressV4 == null && other.IpAddressV4 == null) || (this.IpAddressV4?.Equals(other.IpAddressV4) == true));
+            return obj is DeviceComponentDetailsNetworkInterfaceDetails other &&
+                (this.IpAddressV4 == null && other.IpAddressV4 == null ||
+                 this.IpAddressV4?.Equals(other.IpAddressV4) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 202623540;
-            hashCode = HashCode.Combine(this.IpAddressV4);
+            var hashCode = 202623540;
+            hashCode = HashCode.Combine(hashCode, this.IpAddressV4);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IpAddressV4 = {(this.IpAddressV4 == null ? "null" : this.IpAddressV4)}");
+            toStringOutput.Add($"this.IpAddressV4 = {this.IpAddressV4 ?? "null"}");
         }
 
         /// <summary>
@@ -138,7 +134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIpAddressV4()
             {
@@ -152,7 +148,8 @@ namespace Square.Models
             /// <returns> DeviceComponentDetailsNetworkInterfaceDetails. </returns>
             public DeviceComponentDetailsNetworkInterfaceDetails Build()
             {
-                return new DeviceComponentDetailsNetworkInterfaceDetails(shouldSerialize,
+                return new DeviceComponentDetailsNetworkInterfaceDetails(
+                    shouldSerialize,
                     this.ipAddressV4);
             }
         }

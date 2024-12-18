@@ -29,7 +29,8 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// An object representing a team member's wage information.
+        /// Represents information about the overtime exemption status, job assignments, and compensation
+        /// for a [team member]($m/TeamMember).
         /// </summary>
         [JsonProperty("wage_setting")]
         public Models.WageSetting WageSetting { get; }
@@ -38,35 +39,30 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateWageSettingRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateWageSettingRequest other &&                ((this.WageSetting == null && other.WageSetting == null) || (this.WageSetting?.Equals(other.WageSetting) == true));
+            return obj is UpdateWageSettingRequest other &&
+                (this.WageSetting == null && other.WageSetting == null ||
+                 this.WageSetting?.Equals(other.WageSetting) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 316748925;
-            hashCode = HashCode.Combine(this.WageSetting);
+            var hashCode = 316748925;
+            hashCode = HashCode.Combine(hashCode, this.WageSetting);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

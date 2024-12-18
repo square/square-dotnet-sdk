@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "effective_at", false }
             };
-
             this.AmountMoney = amountMoney;
+
             if (effectiveAt != null)
             {
                 shouldSerialize["effective_at"] = true;
                 this.EffectiveAt = effectiveAt;
             }
-
             this.Type = type;
         }
-        internal PayoutFee(Dictionary<string, bool> shouldSerialize,
+
+        internal PayoutFee(
+            Dictionary<string, bool> shouldSerialize,
             Models.Money amountMoney = null,
             string effectiveAt = null,
             string type = null)
@@ -82,9 +83,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PayoutFee : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -100,28 +99,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PayoutFee other &&                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.EffectiveAt == null && other.EffectiveAt == null) || (this.EffectiveAt?.Equals(other.EffectiveAt) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true));
+            return obj is PayoutFee other &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.EffectiveAt == null && other.EffectiveAt == null ||
+                 this.EffectiveAt?.Equals(other.EffectiveAt) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1005601132;
-            hashCode = HashCode.Combine(this.AmountMoney, this.EffectiveAt, this.Type);
+            var hashCode = 1005601132;
+            hashCode = HashCode.Combine(hashCode, this.AmountMoney, this.EffectiveAt, this.Type);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -129,7 +127,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
-            toStringOutput.Add($"this.EffectiveAt = {(this.EffectiveAt == null ? "null" : this.EffectiveAt)}");
+            toStringOutput.Add($"this.EffectiveAt = {this.EffectiveAt ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
         }
 
@@ -195,7 +193,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEffectiveAt()
             {
@@ -209,7 +207,8 @@ namespace Square.Models
             /// <returns> PayoutFee. </returns>
             public PayoutFee Build()
             {
-                return new PayoutFee(shouldSerialize,
+                return new PayoutFee(
+                    shouldSerialize,
                     this.amountMoney,
                     this.effectiveAt,
                     this.type);

@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["dispute_id"] = true;
                 this.DisputeId = disputeId;
             }
-
         }
-        internal PaymentBalanceActivityOpenDisputeDetail(Dictionary<string, bool> shouldSerialize,
+
+        internal PaymentBalanceActivityOpenDisputeDetail(
+            Dictionary<string, bool> shouldSerialize,
             string paymentId = null,
             string disputeId = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PaymentBalanceActivityOpenDisputeDetail : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,35 +98,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PaymentBalanceActivityOpenDisputeDetail other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.DisputeId == null && other.DisputeId == null) || (this.DisputeId?.Equals(other.DisputeId) == true));
+            return obj is PaymentBalanceActivityOpenDisputeDetail other &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true) &&
+                (this.DisputeId == null && other.DisputeId == null ||
+                 this.DisputeId?.Equals(other.DisputeId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1315062164;
-            hashCode = HashCode.Combine(this.PaymentId, this.DisputeId);
+            var hashCode = 1315062164;
+            hashCode = HashCode.Combine(hashCode, this.PaymentId, this.DisputeId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
-            toStringOutput.Add($"this.DisputeId = {(this.DisputeId == null ? "null" : this.DisputeId)}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
+            toStringOutput.Add($"this.DisputeId = {this.DisputeId ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentId()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDisputeId()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> PaymentBalanceActivityOpenDisputeDetail. </returns>
             public PaymentBalanceActivityOpenDisputeDetail Build()
             {
-                return new PaymentBalanceActivityOpenDisputeDetail(shouldSerialize,
+                return new PaymentBalanceActivityOpenDisputeDetail(
+                    shouldSerialize,
                     this.paymentId,
                     this.disputeId);
             }

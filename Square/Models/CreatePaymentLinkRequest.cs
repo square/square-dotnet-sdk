@@ -104,54 +104,55 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CreatePaymentLinkRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CreatePaymentLinkRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.QuickPay == null && other.QuickPay == null) || (this.QuickPay?.Equals(other.QuickPay) == true)) &&
-                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
-                ((this.CheckoutOptions == null && other.CheckoutOptions == null) || (this.CheckoutOptions?.Equals(other.CheckoutOptions) == true)) &&
-                ((this.PrePopulatedData == null && other.PrePopulatedData == null) || (this.PrePopulatedData?.Equals(other.PrePopulatedData) == true)) &&
-                ((this.PaymentNote == null && other.PaymentNote == null) || (this.PaymentNote?.Equals(other.PaymentNote) == true));
+            return obj is CreatePaymentLinkRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.QuickPay == null && other.QuickPay == null ||
+                 this.QuickPay?.Equals(other.QuickPay) == true) &&
+                (this.Order == null && other.Order == null ||
+                 this.Order?.Equals(other.Order) == true) &&
+                (this.CheckoutOptions == null && other.CheckoutOptions == null ||
+                 this.CheckoutOptions?.Equals(other.CheckoutOptions) == true) &&
+                (this.PrePopulatedData == null && other.PrePopulatedData == null ||
+                 this.PrePopulatedData?.Equals(other.PrePopulatedData) == true) &&
+                (this.PaymentNote == null && other.PaymentNote == null ||
+                 this.PaymentNote?.Equals(other.PaymentNote) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1695889538;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.Description, this.QuickPay, this.Order, this.CheckoutOptions, this.PrePopulatedData, this.PaymentNote);
+            var hashCode = 1695889538;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.Description, this.QuickPay, this.Order, this.CheckoutOptions, this.PrePopulatedData, this.PaymentNote);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
             toStringOutput.Add($"this.QuickPay = {(this.QuickPay == null ? "null" : this.QuickPay.ToString())}");
             toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
             toStringOutput.Add($"this.CheckoutOptions = {(this.CheckoutOptions == null ? "null" : this.CheckoutOptions.ToString())}");
             toStringOutput.Add($"this.PrePopulatedData = {(this.PrePopulatedData == null ? "null" : this.PrePopulatedData.ToString())}");
-            toStringOutput.Add($"this.PaymentNote = {(this.PaymentNote == null ? "null" : this.PaymentNote)}");
+            toStringOutput.Add($"this.PaymentNote = {this.PaymentNote ?? "null"}");
         }
 
         /// <summary>

@@ -13,6 +13,10 @@ ITeamApi teamApi = client.TeamApi;
 * [Create Team Member](../../doc/api/team.md#create-team-member)
 * [Bulk Create Team Members](../../doc/api/team.md#bulk-create-team-members)
 * [Bulk Update Team Members](../../doc/api/team.md#bulk-update-team-members)
+* [List Jobs](../../doc/api/team.md#list-jobs)
+* [Create Job](../../doc/api/team.md#create-job)
+* [Retrieve Job](../../doc/api/team.md#retrieve-job)
+* [Update Job](../../doc/api/team.md#update-job)
 * [Search Team Members](../../doc/api/team.md#search-team-members)
 * [Retrieve Team Member](../../doc/api/team.md#retrieve-team-member)
 * [Update Team Member](../../doc/api/team.md#update-team-member)
@@ -67,6 +71,35 @@ CreateTeamMemberRequest body = new CreateTeamMemberRequest.Builder()
                 "YSGH2WBKG94QZ",
                 "GA2Y9HSJ8KRYT",
             })
+        .Build())
+    .WageSetting(
+        new WageSetting.Builder()
+        .JobAssignments(
+            new List<JobAssignment>
+            {
+                new JobAssignment.Builder(
+                    "SALARY"
+                )
+                .AnnualRate(
+                    new Money.Builder()
+                    .Amount(3000000L)
+                    .Currency("USD")
+                    .Build())
+                .WeeklyHours(40)
+                .JobId("FjS8x95cqHiMenw4f1NAUH4P")
+                .Build(),
+                new JobAssignment.Builder(
+                    "HOURLY"
+                )
+                .HourlyRate(
+                    new Money.Builder()
+                    .Amount(2000L)
+                    .Currency("USD")
+                    .Build())
+                .JobId("VDNpRv8da51NU8qZFC5zDWpF")
+                .Build(),
+            })
+        .IsOvertimeExempt(true)
         .Build())
     .Build())
 .Build();
@@ -244,13 +277,174 @@ catch (ApiException e)
 ```
 
 
+# List Jobs
+
+Lists jobs in a seller account. Results are sorted by title in ascending order.
+
+```csharp
+ListJobsAsync(
+    string cursor = null)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `cursor` | `string` | Query, Optional | The pagination cursor returned by the previous call to this endpoint. Provide this<br>cursor to retrieve the next page of results for your original request. For more information,<br>see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
+
+## Response Type
+
+[`Task<Models.ListJobsResponse>`](../../doc/models/list-jobs-response.md)
+
+## Example Usage
+
+```csharp
+try
+{
+    ListJobsResponse result = await teamApi.ListJobsAsync();
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Create Job
+
+Creates a job in a seller account. A job defines a title and tip eligibility. Note that
+compensation is defined in a [job assignment](../../doc/models/job-assignment.md) in a team member's wage setting.
+
+```csharp
+CreateJobAsync(
+    Models.CreateJobRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `body` | [`CreateJobRequest`](../../doc/models/create-job-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.CreateJobResponse>`](../../doc/models/create-job-response.md)
+
+## Example Usage
+
+```csharp
+CreateJobRequest body = new CreateJobRequest.Builder(
+    new Job.Builder()
+    .Title("Cashier")
+    .IsTipEligible(true)
+    .Build(),
+    "idempotency-key-0"
+)
+.Build();
+
+try
+{
+    CreateJobResponse result = await teamApi.CreateJobAsync(body);
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Retrieve Job
+
+Retrieves a specified job.
+
+```csharp
+RetrieveJobAsync(
+    string jobId)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `jobId` | `string` | Template, Required | The ID of the job to retrieve. |
+
+## Response Type
+
+[`Task<Models.RetrieveJobResponse>`](../../doc/models/retrieve-job-response.md)
+
+## Example Usage
+
+```csharp
+string jobId = "job_id2";
+try
+{
+    RetrieveJobResponse result = await teamApi.RetrieveJobAsync(jobId);
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
+# Update Job
+
+Updates the title or tip eligibility of a job. Changes to the title propagate to all
+`JobAssignment`, `Shift`, and `TeamMemberWage` objects that reference the job ID. Changes to
+tip eligibility propagate to all `TeamMemberWage` objects that reference the job ID.
+
+```csharp
+UpdateJobAsync(
+    string jobId,
+    Models.UpdateJobRequest body)
+```
+
+## Parameters
+
+| Parameter | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `jobId` | `string` | Template, Required | The ID of the job to update. |
+| `body` | [`UpdateJobRequest`](../../doc/models/update-job-request.md) | Body, Required | An object containing the fields to POST for the request.<br><br>See the corresponding object definition for field details. |
+
+## Response Type
+
+[`Task<Models.UpdateJobResponse>`](../../doc/models/update-job-response.md)
+
+## Example Usage
+
+```csharp
+string jobId = "job_id2";
+UpdateJobRequest body = new UpdateJobRequest.Builder(
+    new Job.Builder()
+    .Title("Cashier 1")
+    .IsTipEligible(true)
+    .Build()
+)
+.Build();
+
+try
+{
+    UpdateJobResponse result = await teamApi.UpdateJobAsync(
+        jobId,
+        body
+    );
+}
+catch (ApiException e)
+{
+    // TODO: Handle exception here
+    Console.WriteLine(e.Message);
+}
+```
+
+
 # Search Team Members
 
 Returns a paginated list of `TeamMember` objects for a business.
-The list can be filtered by the following:
-
-- location IDs
-- `status`
+The list can be filtered by location IDs, `ACTIVE` or `INACTIVE` status, or whether
+the team member is the Square account owner.
 
 ```csharp
 SearchTeamMembersAsync(
@@ -400,8 +594,11 @@ catch (ApiException e)
 # Retrieve Wage Setting
 
 Retrieves a `WageSetting` object for a team member specified
-by `TeamMember.id`.
-Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
+by `TeamMember.id`. For more information, see
+[Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
+
+Square recommends using [RetrieveTeamMember](../../doc/api/team.md#retrieve-team-member) or [SearchTeamMembers](../../doc/api/team.md#search-team-members)
+to get this information directly from the `TeamMember.wage_setting` field.
 
 ```csharp
 RetrieveWageSettingAsync(
@@ -437,10 +634,13 @@ catch (ApiException e)
 # Update Wage Setting
 
 Creates or updates a `WageSetting` object. The object is created if a
-`WageSetting` with the specified `team_member_id` does not exist. Otherwise,
+`WageSetting` with the specified `team_member_id` doesn't exist. Otherwise,
 it fully replaces the `WageSetting` object for the team member.
-The `WageSetting` is returned on a successful update.
-Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).
+The `WageSetting` is returned on a successful update. For more information, see
+[Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).
+
+Square recommends using [CreateTeamMember](../../doc/api/team.md#create-team-member) or [UpdateTeamMember](../../doc/api/team.md#update-team-member)
+to manage the `TeamMember.wage_setting` field directly.
 
 ```csharp
 UpdateWageSettingAsync(
@@ -469,9 +669,9 @@ UpdateWageSettingRequest body = new UpdateWageSettingRequest.Builder(
         new List<JobAssignment>
         {
             new JobAssignment.Builder(
-                "Manager",
                 "SALARY"
             )
+            .JobTitle("Manager")
             .AnnualRate(
                 new Money.Builder()
                 .Amount(3000000L)
@@ -480,12 +680,12 @@ UpdateWageSettingRequest body = new UpdateWageSettingRequest.Builder(
             .WeeklyHours(40)
             .Build(),
             new JobAssignment.Builder(
-                "Cashier",
                 "HOURLY"
             )
+            .JobTitle("Cashier")
             .HourlyRate(
                 new Money.Builder()
-                .Amount(1200L)
+                .Amount(2000L)
                 .Currency("USD")
                 .Build())
             .Build(),

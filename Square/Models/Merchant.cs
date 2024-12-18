@@ -46,32 +46,33 @@ namespace Square.Models
                 { "language_code", false },
                 { "main_location_id", false }
             };
-
             this.Id = id;
+
             if (businessName != null)
             {
                 shouldSerialize["business_name"] = true;
                 this.BusinessName = businessName;
             }
-
             this.Country = country;
+
             if (languageCode != null)
             {
                 shouldSerialize["language_code"] = true;
                 this.LanguageCode = languageCode;
             }
-
             this.Currency = currency;
             this.Status = status;
+
             if (mainLocationId != null)
             {
                 shouldSerialize["main_location_id"] = true;
                 this.MainLocationId = mainLocationId;
             }
-
             this.CreatedAt = createdAt;
         }
-        internal Merchant(Dictionary<string, bool> shouldSerialize,
+
+        internal Merchant(
+            Dictionary<string, bool> shouldSerialize,
             string country,
             string id = null,
             string businessName = null,
@@ -147,9 +148,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Merchant : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -183,49 +182,53 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Merchant other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.BusinessName == null && other.BusinessName == null) || (this.BusinessName?.Equals(other.BusinessName) == true)) &&
-                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
-                ((this.LanguageCode == null && other.LanguageCode == null) || (this.LanguageCode?.Equals(other.LanguageCode) == true)) &&
-                ((this.Currency == null && other.Currency == null) || (this.Currency?.Equals(other.Currency) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.MainLocationId == null && other.MainLocationId == null) || (this.MainLocationId?.Equals(other.MainLocationId) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
+            return obj is Merchant other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.BusinessName == null && other.BusinessName == null ||
+                 this.BusinessName?.Equals(other.BusinessName) == true) &&
+                (this.Country == null && other.Country == null ||
+                 this.Country?.Equals(other.Country) == true) &&
+                (this.LanguageCode == null && other.LanguageCode == null ||
+                 this.LanguageCode?.Equals(other.LanguageCode) == true) &&
+                (this.Currency == null && other.Currency == null ||
+                 this.Currency?.Equals(other.Currency) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.MainLocationId == null && other.MainLocationId == null ||
+                 this.MainLocationId?.Equals(other.MainLocationId) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1868202221;
-            hashCode = HashCode.Combine(this.Id, this.BusinessName, this.Country, this.LanguageCode, this.Currency, this.Status, this.MainLocationId);
+            var hashCode = -1868202221;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.BusinessName, this.Country, this.LanguageCode, this.Currency, this.Status, this.MainLocationId);
 
             hashCode = HashCode.Combine(hashCode, this.CreatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.BusinessName = {(this.BusinessName == null ? "null" : this.BusinessName)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.BusinessName = {this.BusinessName ?? "null"}");
             toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country.ToString())}");
-            toStringOutput.Add($"this.LanguageCode = {(this.LanguageCode == null ? "null" : this.LanguageCode)}");
+            toStringOutput.Add($"this.LanguageCode = {this.LanguageCode ?? "null"}");
             toStringOutput.Add($"this.Currency = {(this.Currency == null ? "null" : this.Currency.ToString())}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.MainLocationId = {(this.MainLocationId == null ? "null" : this.MainLocationId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.MainLocationId = {this.MainLocationId ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -369,7 +372,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBusinessName()
             {
@@ -377,7 +380,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLanguageCode()
             {
@@ -385,7 +388,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMainLocationId()
             {
@@ -399,7 +402,8 @@ namespace Square.Models
             /// <returns> Merchant. </returns>
             public Merchant Build()
             {
-                return new Merchant(shouldSerialize,
+                return new Merchant(
+                    shouldSerialize,
                     this.country,
                     this.id,
                     this.businessName,

@@ -53,15 +53,15 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.DiscountType = discountType;
+
             if (percentage != null)
             {
                 shouldSerialize["percentage"] = true;
                 this.Percentage = percentage;
             }
-
             this.AmountMoney = amountMoney;
+
             if (pinRequired != null)
             {
                 shouldSerialize["pin_required"] = true;
@@ -73,11 +73,12 @@ namespace Square.Models
                 shouldSerialize["label_color"] = true;
                 this.LabelColor = labelColor;
             }
-
             this.ModifyTaxBasis = modifyTaxBasis;
             this.MaximumAmountMoney = maximumAmountMoney;
         }
-        internal CatalogDiscount(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogDiscount(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             string discountType = null,
             string percentage = null,
@@ -164,9 +165,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogDiscount : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -209,47 +208,51 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogDiscount other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.DiscountType == null && other.DiscountType == null) || (this.DiscountType?.Equals(other.DiscountType) == true)) &&
-                ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.PinRequired == null && other.PinRequired == null) || (this.PinRequired?.Equals(other.PinRequired) == true)) &&
-                ((this.LabelColor == null && other.LabelColor == null) || (this.LabelColor?.Equals(other.LabelColor) == true)) &&
-                ((this.ModifyTaxBasis == null && other.ModifyTaxBasis == null) || (this.ModifyTaxBasis?.Equals(other.ModifyTaxBasis) == true)) &&
-                ((this.MaximumAmountMoney == null && other.MaximumAmountMoney == null) || (this.MaximumAmountMoney?.Equals(other.MaximumAmountMoney) == true));
+            return obj is CatalogDiscount other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.DiscountType == null && other.DiscountType == null ||
+                 this.DiscountType?.Equals(other.DiscountType) == true) &&
+                (this.Percentage == null && other.Percentage == null ||
+                 this.Percentage?.Equals(other.Percentage) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.PinRequired == null && other.PinRequired == null ||
+                 this.PinRequired?.Equals(other.PinRequired) == true) &&
+                (this.LabelColor == null && other.LabelColor == null ||
+                 this.LabelColor?.Equals(other.LabelColor) == true) &&
+                (this.ModifyTaxBasis == null && other.ModifyTaxBasis == null ||
+                 this.ModifyTaxBasis?.Equals(other.ModifyTaxBasis) == true) &&
+                (this.MaximumAmountMoney == null && other.MaximumAmountMoney == null ||
+                 this.MaximumAmountMoney?.Equals(other.MaximumAmountMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1315753358;
-            hashCode = HashCode.Combine(this.Name, this.DiscountType, this.Percentage, this.AmountMoney, this.PinRequired, this.LabelColor, this.ModifyTaxBasis);
+            var hashCode = 1315753358;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.DiscountType, this.Percentage, this.AmountMoney, this.PinRequired, this.LabelColor, this.ModifyTaxBasis);
 
             hashCode = HashCode.Combine(hashCode, this.MaximumAmountMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.DiscountType = {(this.DiscountType == null ? "null" : this.DiscountType.ToString())}");
-            toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage)}");
+            toStringOutput.Add($"this.Percentage = {this.Percentage ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.PinRequired = {(this.PinRequired == null ? "null" : this.PinRequired.ToString())}");
-            toStringOutput.Add($"this.LabelColor = {(this.LabelColor == null ? "null" : this.LabelColor)}");
+            toStringOutput.Add($"this.LabelColor = {this.LabelColor ?? "null"}");
             toStringOutput.Add($"this.ModifyTaxBasis = {(this.ModifyTaxBasis == null ? "null" : this.ModifyTaxBasis.ToString())}");
             toStringOutput.Add($"this.MaximumAmountMoney = {(this.MaximumAmountMoney == null ? "null" : this.MaximumAmountMoney.ToString())}");
         }
@@ -387,7 +390,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -395,7 +398,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPercentage()
             {
@@ -403,7 +406,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPinRequired()
             {
@@ -411,7 +414,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLabelColor()
             {
@@ -425,7 +428,8 @@ namespace Square.Models
             /// <returns> CatalogDiscount. </returns>
             public CatalogDiscount Build()
             {
-                return new CatalogDiscount(shouldSerialize,
+                return new CatalogDiscount(
+                    shouldSerialize,
                     this.name,
                     this.discountType,
                     this.percentage,

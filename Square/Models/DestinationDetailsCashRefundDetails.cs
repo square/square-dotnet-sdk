@@ -57,36 +57,32 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DestinationDetailsCashRefundDetails : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DestinationDetailsCashRefundDetails other &&                ((this.SellerSuppliedMoney == null && other.SellerSuppliedMoney == null) || (this.SellerSuppliedMoney?.Equals(other.SellerSuppliedMoney) == true)) &&
-                ((this.ChangeBackMoney == null && other.ChangeBackMoney == null) || (this.ChangeBackMoney?.Equals(other.ChangeBackMoney) == true));
+            return obj is DestinationDetailsCashRefundDetails other &&
+                (this.SellerSuppliedMoney == null && other.SellerSuppliedMoney == null ||
+                 this.SellerSuppliedMoney?.Equals(other.SellerSuppliedMoney) == true) &&
+                (this.ChangeBackMoney == null && other.ChangeBackMoney == null ||
+                 this.ChangeBackMoney?.Equals(other.ChangeBackMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2083907783;
-            hashCode = HashCode.Combine(this.SellerSuppliedMoney, this.ChangeBackMoney);
+            var hashCode = -2083907783;
+            hashCode = HashCode.Combine(hashCode, this.SellerSuppliedMoney, this.ChangeBackMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

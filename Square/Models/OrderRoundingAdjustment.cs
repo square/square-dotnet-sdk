@@ -47,10 +47,11 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.AmountMoney = amountMoney;
         }
-        internal OrderRoundingAdjustment(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderRoundingAdjustment(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             string name = null,
             Models.Money amountMoney = null)
@@ -88,9 +89,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderRoundingAdjustment : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -115,36 +114,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderRoundingAdjustment other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true));
+            return obj is OrderRoundingAdjustment other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1589528681;
-            hashCode = HashCode.Combine(this.Uid, this.Name, this.AmountMoney);
+            var hashCode = 1589528681;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.Name, this.AmountMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
         }
 
@@ -212,7 +210,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -220,7 +218,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -234,7 +232,8 @@ namespace Square.Models
             /// <returns> OrderRoundingAdjustment. </returns>
             public OrderRoundingAdjustment Build()
             {
-                return new OrderRoundingAdjustment(shouldSerialize,
+                return new OrderRoundingAdjustment(
+                    shouldSerialize,
                     this.uid,
                     this.name,
                     this.amountMoney);

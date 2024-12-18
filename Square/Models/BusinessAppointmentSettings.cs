@@ -68,8 +68,8 @@ namespace Square.Models
                 shouldSerialize["location_types"] = true;
                 this.LocationTypes = locationTypes;
             }
-
             this.AlignmentTime = alignmentTime;
+
             if (minBookingLeadTimeSeconds != null)
             {
                 shouldSerialize["min_booking_lead_time_seconds"] = true;
@@ -93,8 +93,8 @@ namespace Square.Models
                 shouldSerialize["multiple_service_booking_enabled"] = true;
                 this.MultipleServiceBookingEnabled = multipleServiceBookingEnabled;
             }
-
             this.MaxAppointmentsPerDayLimitType = maxAppointmentsPerDayLimitType;
+
             if (maxAppointmentsPerDayLimit != null)
             {
                 shouldSerialize["max_appointments_per_day_limit"] = true;
@@ -106,9 +106,9 @@ namespace Square.Models
                 shouldSerialize["cancellation_window_seconds"] = true;
                 this.CancellationWindowSeconds = cancellationWindowSeconds;
             }
-
             this.CancellationFeeMoney = cancellationFeeMoney;
             this.CancellationPolicy = cancellationPolicy;
+
             if (cancellationPolicyText != null)
             {
                 shouldSerialize["cancellation_policy_text"] = true;
@@ -120,9 +120,10 @@ namespace Square.Models
                 shouldSerialize["skip_booking_flow_staff_selection"] = true;
                 this.SkipBookingFlowStaffSelection = skipBookingFlowStaffSelection;
             }
-
         }
-        internal BusinessAppointmentSettings(Dictionary<string, bool> shouldSerialize,
+
+        internal BusinessAppointmentSettings(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> locationTypes = null,
             string alignmentTime = null,
             int? minBookingLeadTimeSeconds = null,
@@ -242,9 +243,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BusinessAppointmentSettings : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -332,40 +331,49 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BusinessAppointmentSettings other &&                ((this.LocationTypes == null && other.LocationTypes == null) || (this.LocationTypes?.Equals(other.LocationTypes) == true)) &&
-                ((this.AlignmentTime == null && other.AlignmentTime == null) || (this.AlignmentTime?.Equals(other.AlignmentTime) == true)) &&
-                ((this.MinBookingLeadTimeSeconds == null && other.MinBookingLeadTimeSeconds == null) || (this.MinBookingLeadTimeSeconds?.Equals(other.MinBookingLeadTimeSeconds) == true)) &&
-                ((this.MaxBookingLeadTimeSeconds == null && other.MaxBookingLeadTimeSeconds == null) || (this.MaxBookingLeadTimeSeconds?.Equals(other.MaxBookingLeadTimeSeconds) == true)) &&
-                ((this.AnyTeamMemberBookingEnabled == null && other.AnyTeamMemberBookingEnabled == null) || (this.AnyTeamMemberBookingEnabled?.Equals(other.AnyTeamMemberBookingEnabled) == true)) &&
-                ((this.MultipleServiceBookingEnabled == null && other.MultipleServiceBookingEnabled == null) || (this.MultipleServiceBookingEnabled?.Equals(other.MultipleServiceBookingEnabled) == true)) &&
-                ((this.MaxAppointmentsPerDayLimitType == null && other.MaxAppointmentsPerDayLimitType == null) || (this.MaxAppointmentsPerDayLimitType?.Equals(other.MaxAppointmentsPerDayLimitType) == true)) &&
-                ((this.MaxAppointmentsPerDayLimit == null && other.MaxAppointmentsPerDayLimit == null) || (this.MaxAppointmentsPerDayLimit?.Equals(other.MaxAppointmentsPerDayLimit) == true)) &&
-                ((this.CancellationWindowSeconds == null && other.CancellationWindowSeconds == null) || (this.CancellationWindowSeconds?.Equals(other.CancellationWindowSeconds) == true)) &&
-                ((this.CancellationFeeMoney == null && other.CancellationFeeMoney == null) || (this.CancellationFeeMoney?.Equals(other.CancellationFeeMoney) == true)) &&
-                ((this.CancellationPolicy == null && other.CancellationPolicy == null) || (this.CancellationPolicy?.Equals(other.CancellationPolicy) == true)) &&
-                ((this.CancellationPolicyText == null && other.CancellationPolicyText == null) || (this.CancellationPolicyText?.Equals(other.CancellationPolicyText) == true)) &&
-                ((this.SkipBookingFlowStaffSelection == null && other.SkipBookingFlowStaffSelection == null) || (this.SkipBookingFlowStaffSelection?.Equals(other.SkipBookingFlowStaffSelection) == true));
+            return obj is BusinessAppointmentSettings other &&
+                (this.LocationTypes == null && other.LocationTypes == null ||
+                 this.LocationTypes?.Equals(other.LocationTypes) == true) &&
+                (this.AlignmentTime == null && other.AlignmentTime == null ||
+                 this.AlignmentTime?.Equals(other.AlignmentTime) == true) &&
+                (this.MinBookingLeadTimeSeconds == null && other.MinBookingLeadTimeSeconds == null ||
+                 this.MinBookingLeadTimeSeconds?.Equals(other.MinBookingLeadTimeSeconds) == true) &&
+                (this.MaxBookingLeadTimeSeconds == null && other.MaxBookingLeadTimeSeconds == null ||
+                 this.MaxBookingLeadTimeSeconds?.Equals(other.MaxBookingLeadTimeSeconds) == true) &&
+                (this.AnyTeamMemberBookingEnabled == null && other.AnyTeamMemberBookingEnabled == null ||
+                 this.AnyTeamMemberBookingEnabled?.Equals(other.AnyTeamMemberBookingEnabled) == true) &&
+                (this.MultipleServiceBookingEnabled == null && other.MultipleServiceBookingEnabled == null ||
+                 this.MultipleServiceBookingEnabled?.Equals(other.MultipleServiceBookingEnabled) == true) &&
+                (this.MaxAppointmentsPerDayLimitType == null && other.MaxAppointmentsPerDayLimitType == null ||
+                 this.MaxAppointmentsPerDayLimitType?.Equals(other.MaxAppointmentsPerDayLimitType) == true) &&
+                (this.MaxAppointmentsPerDayLimit == null && other.MaxAppointmentsPerDayLimit == null ||
+                 this.MaxAppointmentsPerDayLimit?.Equals(other.MaxAppointmentsPerDayLimit) == true) &&
+                (this.CancellationWindowSeconds == null && other.CancellationWindowSeconds == null ||
+                 this.CancellationWindowSeconds?.Equals(other.CancellationWindowSeconds) == true) &&
+                (this.CancellationFeeMoney == null && other.CancellationFeeMoney == null ||
+                 this.CancellationFeeMoney?.Equals(other.CancellationFeeMoney) == true) &&
+                (this.CancellationPolicy == null && other.CancellationPolicy == null ||
+                 this.CancellationPolicy?.Equals(other.CancellationPolicy) == true) &&
+                (this.CancellationPolicyText == null && other.CancellationPolicyText == null ||
+                 this.CancellationPolicyText?.Equals(other.CancellationPolicyText) == true) &&
+                (this.SkipBookingFlowStaffSelection == null && other.SkipBookingFlowStaffSelection == null ||
+                 this.SkipBookingFlowStaffSelection?.Equals(other.SkipBookingFlowStaffSelection) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 114929036;
-            hashCode = HashCode.Combine(this.LocationTypes, this.AlignmentTime, this.MinBookingLeadTimeSeconds, this.MaxBookingLeadTimeSeconds, this.AnyTeamMemberBookingEnabled, this.MultipleServiceBookingEnabled, this.MaxAppointmentsPerDayLimitType);
+            var hashCode = 114929036;
+            hashCode = HashCode.Combine(hashCode, this.LocationTypes, this.AlignmentTime, this.MinBookingLeadTimeSeconds, this.MaxBookingLeadTimeSeconds, this.AnyTeamMemberBookingEnabled, this.MultipleServiceBookingEnabled, this.MaxAppointmentsPerDayLimitType);
 
             hashCode = HashCode.Combine(hashCode, this.MaxAppointmentsPerDayLimit, this.CancellationWindowSeconds, this.CancellationFeeMoney, this.CancellationPolicy, this.CancellationPolicyText, this.SkipBookingFlowStaffSelection);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -383,7 +391,7 @@ namespace Square.Models
             toStringOutput.Add($"this.CancellationWindowSeconds = {(this.CancellationWindowSeconds == null ? "null" : this.CancellationWindowSeconds.ToString())}");
             toStringOutput.Add($"this.CancellationFeeMoney = {(this.CancellationFeeMoney == null ? "null" : this.CancellationFeeMoney.ToString())}");
             toStringOutput.Add($"this.CancellationPolicy = {(this.CancellationPolicy == null ? "null" : this.CancellationPolicy.ToString())}");
-            toStringOutput.Add($"this.CancellationPolicyText = {(this.CancellationPolicyText == null ? "null" : this.CancellationPolicyText)}");
+            toStringOutput.Add($"this.CancellationPolicyText = {this.CancellationPolicyText ?? "null"}");
             toStringOutput.Add($"this.SkipBookingFlowStaffSelection = {(this.SkipBookingFlowStaffSelection == null ? "null" : this.SkipBookingFlowStaffSelection.ToString())}");
         }
 
@@ -595,7 +603,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationTypes()
             {
@@ -603,7 +611,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMinBookingLeadTimeSeconds()
             {
@@ -611,7 +619,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMaxBookingLeadTimeSeconds()
             {
@@ -619,7 +627,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAnyTeamMemberBookingEnabled()
             {
@@ -627,7 +635,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMultipleServiceBookingEnabled()
             {
@@ -635,7 +643,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMaxAppointmentsPerDayLimit()
             {
@@ -643,7 +651,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCancellationWindowSeconds()
             {
@@ -651,7 +659,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCancellationPolicyText()
             {
@@ -659,7 +667,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSkipBookingFlowStaffSelection()
             {
@@ -673,7 +681,8 @@ namespace Square.Models
             /// <returns> BusinessAppointmentSettings. </returns>
             public BusinessAppointmentSettings Build()
             {
-                return new BusinessAppointmentSettings(shouldSerialize,
+                return new BusinessAppointmentSettings(
+                    shouldSerialize,
                     this.locationTypes,
                     this.alignmentTime,
                     this.minBookingLeadTimeSeconds,

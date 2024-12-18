@@ -118,7 +118,6 @@ namespace Square.Models
                 { "team_member_id", false },
                 { "version_token", false }
             };
-
             this.Id = id;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
@@ -131,12 +130,12 @@ namespace Square.Models
             this.RefundedMoney = refundedMoney;
             this.Status = status;
             this.DelayDuration = delayDuration;
+
             if (delayAction != null)
             {
                 shouldSerialize["delay_action"] = true;
                 this.DelayAction = delayAction;
             }
-
             this.DelayedUntil = delayedUntil;
             this.SourceType = sourceType;
             this.CardDetails = cardDetails;
@@ -151,12 +150,12 @@ namespace Square.Models
             this.ReferenceId = referenceId;
             this.CustomerId = customerId;
             this.EmployeeId = employeeId;
+
             if (teamMemberId != null)
             {
                 shouldSerialize["team_member_id"] = true;
                 this.TeamMemberId = teamMemberId;
             }
-
             this.RefundIds = refundIds;
             this.RiskEvaluation = riskEvaluation;
             this.TerminalCheckoutId = terminalCheckoutId;
@@ -172,14 +171,16 @@ namespace Square.Models
             this.ApplicationDetails = applicationDetails;
             this.IsOfflinePayment = isOfflinePayment;
             this.OfflinePaymentDetails = offlinePaymentDetails;
+
             if (versionToken != null)
             {
                 shouldSerialize["version_token"] = true;
                 this.VersionToken = versionToken;
             }
-
         }
-        internal Payment(Dictionary<string, bool> shouldSerialize,
+
+        internal Payment(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string createdAt = null,
             string updatedAt = null,
@@ -622,9 +623,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Payment : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -658,66 +657,105 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Payment other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.TipMoney == null && other.TipMoney == null) || (this.TipMoney?.Equals(other.TipMoney) == true)) &&
-                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
-                ((this.ApprovedMoney == null && other.ApprovedMoney == null) || (this.ApprovedMoney?.Equals(other.ApprovedMoney) == true)) &&
-                ((this.ProcessingFee == null && other.ProcessingFee == null) || (this.ProcessingFee?.Equals(other.ProcessingFee) == true)) &&
-                ((this.RefundedMoney == null && other.RefundedMoney == null) || (this.RefundedMoney?.Equals(other.RefundedMoney) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.DelayDuration == null && other.DelayDuration == null) || (this.DelayDuration?.Equals(other.DelayDuration) == true)) &&
-                ((this.DelayAction == null && other.DelayAction == null) || (this.DelayAction?.Equals(other.DelayAction) == true)) &&
-                ((this.DelayedUntil == null && other.DelayedUntil == null) || (this.DelayedUntil?.Equals(other.DelayedUntil) == true)) &&
-                ((this.SourceType == null && other.SourceType == null) || (this.SourceType?.Equals(other.SourceType) == true)) &&
-                ((this.CardDetails == null && other.CardDetails == null) || (this.CardDetails?.Equals(other.CardDetails) == true)) &&
-                ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
-                ((this.BankAccountDetails == null && other.BankAccountDetails == null) || (this.BankAccountDetails?.Equals(other.BankAccountDetails) == true)) &&
-                ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true)) &&
-                ((this.WalletDetails == null && other.WalletDetails == null) || (this.WalletDetails?.Equals(other.WalletDetails) == true)) &&
-                ((this.BuyNowPayLaterDetails == null && other.BuyNowPayLaterDetails == null) || (this.BuyNowPayLaterDetails?.Equals(other.BuyNowPayLaterDetails) == true)) &&
-                ((this.SquareAccountDetails == null && other.SquareAccountDetails == null) || (this.SquareAccountDetails?.Equals(other.SquareAccountDetails) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.RefundIds == null && other.RefundIds == null) || (this.RefundIds?.Equals(other.RefundIds) == true)) &&
-                ((this.RiskEvaluation == null && other.RiskEvaluation == null) || (this.RiskEvaluation?.Equals(other.RiskEvaluation) == true)) &&
-                ((this.TerminalCheckoutId == null && other.TerminalCheckoutId == null) || (this.TerminalCheckoutId?.Equals(other.TerminalCheckoutId) == true)) &&
-                ((this.BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (this.BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
-                ((this.BillingAddress == null && other.BillingAddress == null) || (this.BillingAddress?.Equals(other.BillingAddress) == true)) &&
-                ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
-                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
-                ((this.StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (this.StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true)) &&
-                ((this.Capabilities == null && other.Capabilities == null) || (this.Capabilities?.Equals(other.Capabilities) == true)) &&
-                ((this.ReceiptNumber == null && other.ReceiptNumber == null) || (this.ReceiptNumber?.Equals(other.ReceiptNumber) == true)) &&
-                ((this.ReceiptUrl == null && other.ReceiptUrl == null) || (this.ReceiptUrl?.Equals(other.ReceiptUrl) == true)) &&
-                ((this.DeviceDetails == null && other.DeviceDetails == null) || (this.DeviceDetails?.Equals(other.DeviceDetails) == true)) &&
-                ((this.ApplicationDetails == null && other.ApplicationDetails == null) || (this.ApplicationDetails?.Equals(other.ApplicationDetails) == true)) &&
-                ((this.IsOfflinePayment == null && other.IsOfflinePayment == null) || (this.IsOfflinePayment?.Equals(other.IsOfflinePayment) == true)) &&
-                ((this.OfflinePaymentDetails == null && other.OfflinePaymentDetails == null) || (this.OfflinePaymentDetails?.Equals(other.OfflinePaymentDetails) == true)) &&
-                ((this.VersionToken == null && other.VersionToken == null) || (this.VersionToken?.Equals(other.VersionToken) == true));
+            return obj is Payment other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.TipMoney == null && other.TipMoney == null ||
+                 this.TipMoney?.Equals(other.TipMoney) == true) &&
+                (this.TotalMoney == null && other.TotalMoney == null ||
+                 this.TotalMoney?.Equals(other.TotalMoney) == true) &&
+                (this.AppFeeMoney == null && other.AppFeeMoney == null ||
+                 this.AppFeeMoney?.Equals(other.AppFeeMoney) == true) &&
+                (this.ApprovedMoney == null && other.ApprovedMoney == null ||
+                 this.ApprovedMoney?.Equals(other.ApprovedMoney) == true) &&
+                (this.ProcessingFee == null && other.ProcessingFee == null ||
+                 this.ProcessingFee?.Equals(other.ProcessingFee) == true) &&
+                (this.RefundedMoney == null && other.RefundedMoney == null ||
+                 this.RefundedMoney?.Equals(other.RefundedMoney) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.DelayDuration == null && other.DelayDuration == null ||
+                 this.DelayDuration?.Equals(other.DelayDuration) == true) &&
+                (this.DelayAction == null && other.DelayAction == null ||
+                 this.DelayAction?.Equals(other.DelayAction) == true) &&
+                (this.DelayedUntil == null && other.DelayedUntil == null ||
+                 this.DelayedUntil?.Equals(other.DelayedUntil) == true) &&
+                (this.SourceType == null && other.SourceType == null ||
+                 this.SourceType?.Equals(other.SourceType) == true) &&
+                (this.CardDetails == null && other.CardDetails == null ||
+                 this.CardDetails?.Equals(other.CardDetails) == true) &&
+                (this.CashDetails == null && other.CashDetails == null ||
+                 this.CashDetails?.Equals(other.CashDetails) == true) &&
+                (this.BankAccountDetails == null && other.BankAccountDetails == null ||
+                 this.BankAccountDetails?.Equals(other.BankAccountDetails) == true) &&
+                (this.ExternalDetails == null && other.ExternalDetails == null ||
+                 this.ExternalDetails?.Equals(other.ExternalDetails) == true) &&
+                (this.WalletDetails == null && other.WalletDetails == null ||
+                 this.WalletDetails?.Equals(other.WalletDetails) == true) &&
+                (this.BuyNowPayLaterDetails == null && other.BuyNowPayLaterDetails == null ||
+                 this.BuyNowPayLaterDetails?.Equals(other.BuyNowPayLaterDetails) == true) &&
+                (this.SquareAccountDetails == null && other.SquareAccountDetails == null ||
+                 this.SquareAccountDetails?.Equals(other.SquareAccountDetails) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.EmployeeId == null && other.EmployeeId == null ||
+                 this.EmployeeId?.Equals(other.EmployeeId) == true) &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.RefundIds == null && other.RefundIds == null ||
+                 this.RefundIds?.Equals(other.RefundIds) == true) &&
+                (this.RiskEvaluation == null && other.RiskEvaluation == null ||
+                 this.RiskEvaluation?.Equals(other.RiskEvaluation) == true) &&
+                (this.TerminalCheckoutId == null && other.TerminalCheckoutId == null ||
+                 this.TerminalCheckoutId?.Equals(other.TerminalCheckoutId) == true) &&
+                (this.BuyerEmailAddress == null && other.BuyerEmailAddress == null ||
+                 this.BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true) &&
+                (this.BillingAddress == null && other.BillingAddress == null ||
+                 this.BillingAddress?.Equals(other.BillingAddress) == true) &&
+                (this.ShippingAddress == null && other.ShippingAddress == null ||
+                 this.ShippingAddress?.Equals(other.ShippingAddress) == true) &&
+                (this.Note == null && other.Note == null ||
+                 this.Note?.Equals(other.Note) == true) &&
+                (this.StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null ||
+                 this.StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true) &&
+                (this.Capabilities == null && other.Capabilities == null ||
+                 this.Capabilities?.Equals(other.Capabilities) == true) &&
+                (this.ReceiptNumber == null && other.ReceiptNumber == null ||
+                 this.ReceiptNumber?.Equals(other.ReceiptNumber) == true) &&
+                (this.ReceiptUrl == null && other.ReceiptUrl == null ||
+                 this.ReceiptUrl?.Equals(other.ReceiptUrl) == true) &&
+                (this.DeviceDetails == null && other.DeviceDetails == null ||
+                 this.DeviceDetails?.Equals(other.DeviceDetails) == true) &&
+                (this.ApplicationDetails == null && other.ApplicationDetails == null ||
+                 this.ApplicationDetails?.Equals(other.ApplicationDetails) == true) &&
+                (this.IsOfflinePayment == null && other.IsOfflinePayment == null ||
+                 this.IsOfflinePayment?.Equals(other.IsOfflinePayment) == true) &&
+                (this.OfflinePaymentDetails == null && other.OfflinePaymentDetails == null ||
+                 this.OfflinePaymentDetails?.Equals(other.OfflinePaymentDetails) == true) &&
+                (this.VersionToken == null && other.VersionToken == null ||
+                 this.VersionToken?.Equals(other.VersionToken) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 78765996;
-            hashCode = HashCode.Combine(this.Id, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.TipMoney, this.TotalMoney, this.AppFeeMoney);
+            var hashCode = 78765996;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.CreatedAt, this.UpdatedAt, this.AmountMoney, this.TipMoney, this.TotalMoney, this.AppFeeMoney);
 
             hashCode = HashCode.Combine(hashCode, this.ApprovedMoney, this.ProcessingFee, this.RefundedMoney, this.Status, this.DelayDuration, this.DelayAction, this.DelayedUntil);
 
@@ -733,15 +771,16 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.TipMoney = {(this.TipMoney == null ? "null" : this.TipMoney.ToString())}");
             toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
@@ -749,11 +788,11 @@ namespace Square.Models
             toStringOutput.Add($"this.ApprovedMoney = {(this.ApprovedMoney == null ? "null" : this.ApprovedMoney.ToString())}");
             toStringOutput.Add($"this.ProcessingFee = {(this.ProcessingFee == null ? "null" : $"[{string.Join(", ", this.ProcessingFee)} ]")}");
             toStringOutput.Add($"this.RefundedMoney = {(this.RefundedMoney == null ? "null" : this.RefundedMoney.ToString())}");
-            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status)}");
-            toStringOutput.Add($"this.DelayDuration = {(this.DelayDuration == null ? "null" : this.DelayDuration)}");
-            toStringOutput.Add($"this.DelayAction = {(this.DelayAction == null ? "null" : this.DelayAction)}");
-            toStringOutput.Add($"this.DelayedUntil = {(this.DelayedUntil == null ? "null" : this.DelayedUntil)}");
-            toStringOutput.Add($"this.SourceType = {(this.SourceType == null ? "null" : this.SourceType)}");
+            toStringOutput.Add($"this.Status = {this.Status ?? "null"}");
+            toStringOutput.Add($"this.DelayDuration = {this.DelayDuration ?? "null"}");
+            toStringOutput.Add($"this.DelayAction = {this.DelayAction ?? "null"}");
+            toStringOutput.Add($"this.DelayedUntil = {this.DelayedUntil ?? "null"}");
+            toStringOutput.Add($"this.SourceType = {this.SourceType ?? "null"}");
             toStringOutput.Add($"this.CardDetails = {(this.CardDetails == null ? "null" : this.CardDetails.ToString())}");
             toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
             toStringOutput.Add($"this.BankAccountDetails = {(this.BankAccountDetails == null ? "null" : this.BankAccountDetails.ToString())}");
@@ -761,28 +800,28 @@ namespace Square.Models
             toStringOutput.Add($"this.WalletDetails = {(this.WalletDetails == null ? "null" : this.WalletDetails.ToString())}");
             toStringOutput.Add($"this.BuyNowPayLaterDetails = {(this.BuyNowPayLaterDetails == null ? "null" : this.BuyNowPayLaterDetails.ToString())}");
             toStringOutput.Add($"this.SquareAccountDetails = {(this.SquareAccountDetails == null ? "null" : this.SquareAccountDetails.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
-            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
+            toStringOutput.Add($"this.EmployeeId = {this.EmployeeId ?? "null"}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
             toStringOutput.Add($"this.RefundIds = {(this.RefundIds == null ? "null" : $"[{string.Join(", ", this.RefundIds)} ]")}");
             toStringOutput.Add($"this.RiskEvaluation = {(this.RiskEvaluation == null ? "null" : this.RiskEvaluation.ToString())}");
-            toStringOutput.Add($"this.TerminalCheckoutId = {(this.TerminalCheckoutId == null ? "null" : this.TerminalCheckoutId)}");
-            toStringOutput.Add($"this.BuyerEmailAddress = {(this.BuyerEmailAddress == null ? "null" : this.BuyerEmailAddress)}");
+            toStringOutput.Add($"this.TerminalCheckoutId = {this.TerminalCheckoutId ?? "null"}");
+            toStringOutput.Add($"this.BuyerEmailAddress = {this.BuyerEmailAddress ?? "null"}");
             toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
             toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
-            toStringOutput.Add($"this.StatementDescriptionIdentifier = {(this.StatementDescriptionIdentifier == null ? "null" : this.StatementDescriptionIdentifier)}");
+            toStringOutput.Add($"this.Note = {this.Note ?? "null"}");
+            toStringOutput.Add($"this.StatementDescriptionIdentifier = {this.StatementDescriptionIdentifier ?? "null"}");
             toStringOutput.Add($"this.Capabilities = {(this.Capabilities == null ? "null" : $"[{string.Join(", ", this.Capabilities)} ]")}");
-            toStringOutput.Add($"this.ReceiptNumber = {(this.ReceiptNumber == null ? "null" : this.ReceiptNumber)}");
-            toStringOutput.Add($"this.ReceiptUrl = {(this.ReceiptUrl == null ? "null" : this.ReceiptUrl)}");
+            toStringOutput.Add($"this.ReceiptNumber = {this.ReceiptNumber ?? "null"}");
+            toStringOutput.Add($"this.ReceiptUrl = {this.ReceiptUrl ?? "null"}");
             toStringOutput.Add($"this.DeviceDetails = {(this.DeviceDetails == null ? "null" : this.DeviceDetails.ToString())}");
             toStringOutput.Add($"this.ApplicationDetails = {(this.ApplicationDetails == null ? "null" : this.ApplicationDetails.ToString())}");
             toStringOutput.Add($"this.IsOfflinePayment = {(this.IsOfflinePayment == null ? "null" : this.IsOfflinePayment.ToString())}");
             toStringOutput.Add($"this.OfflinePaymentDetails = {(this.OfflinePaymentDetails == null ? "null" : this.OfflinePaymentDetails.ToString())}");
-            toStringOutput.Add($"this.VersionToken = {(this.VersionToken == null ? "null" : this.VersionToken)}");
+            toStringOutput.Add($"this.VersionToken = {this.VersionToken ?? "null"}");
         }
 
         /// <summary>
@@ -1384,7 +1423,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDelayAction()
             {
@@ -1392,7 +1431,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTeamMemberId()
             {
@@ -1400,7 +1439,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVersionToken()
             {
@@ -1414,7 +1453,8 @@ namespace Square.Models
             /// <returns> Payment. </returns>
             public Payment Build()
             {
-                return new Payment(shouldSerialize,
+                return new Payment(
+                    shouldSerialize,
                     this.id,
                     this.createdAt,
                     this.updatedAt,

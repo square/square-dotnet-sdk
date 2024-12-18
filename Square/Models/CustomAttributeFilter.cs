@@ -62,8 +62,8 @@ namespace Square.Models
                 shouldSerialize["string_filter"] = true;
                 this.StringFilter = stringFilter;
             }
-
             this.NumberFilter = numberFilter;
+
             if (selectionUidsFilter != null)
             {
                 shouldSerialize["selection_uids_filter"] = true;
@@ -75,9 +75,10 @@ namespace Square.Models
                 shouldSerialize["bool_filter"] = true;
                 this.BoolFilter = boolFilter;
             }
-
         }
-        internal CustomAttributeFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal CustomAttributeFilter(
+            Dictionary<string, bool> shouldSerialize,
             string customAttributeDefinitionId = null,
             string key = null,
             string stringFilter = null,
@@ -144,9 +145,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomAttributeFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -198,40 +197,42 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomAttributeFilter other &&                ((this.CustomAttributeDefinitionId == null && other.CustomAttributeDefinitionId == null) || (this.CustomAttributeDefinitionId?.Equals(other.CustomAttributeDefinitionId) == true)) &&
-                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
-                ((this.StringFilter == null && other.StringFilter == null) || (this.StringFilter?.Equals(other.StringFilter) == true)) &&
-                ((this.NumberFilter == null && other.NumberFilter == null) || (this.NumberFilter?.Equals(other.NumberFilter) == true)) &&
-                ((this.SelectionUidsFilter == null && other.SelectionUidsFilter == null) || (this.SelectionUidsFilter?.Equals(other.SelectionUidsFilter) == true)) &&
-                ((this.BoolFilter == null && other.BoolFilter == null) || (this.BoolFilter?.Equals(other.BoolFilter) == true));
+            return obj is CustomAttributeFilter other &&
+                (this.CustomAttributeDefinitionId == null && other.CustomAttributeDefinitionId == null ||
+                 this.CustomAttributeDefinitionId?.Equals(other.CustomAttributeDefinitionId) == true) &&
+                (this.Key == null && other.Key == null ||
+                 this.Key?.Equals(other.Key) == true) &&
+                (this.StringFilter == null && other.StringFilter == null ||
+                 this.StringFilter?.Equals(other.StringFilter) == true) &&
+                (this.NumberFilter == null && other.NumberFilter == null ||
+                 this.NumberFilter?.Equals(other.NumberFilter) == true) &&
+                (this.SelectionUidsFilter == null && other.SelectionUidsFilter == null ||
+                 this.SelectionUidsFilter?.Equals(other.SelectionUidsFilter) == true) &&
+                (this.BoolFilter == null && other.BoolFilter == null ||
+                 this.BoolFilter?.Equals(other.BoolFilter) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1810299489;
-            hashCode = HashCode.Combine(this.CustomAttributeDefinitionId, this.Key, this.StringFilter, this.NumberFilter, this.SelectionUidsFilter, this.BoolFilter);
+            var hashCode = 1810299489;
+            hashCode = HashCode.Combine(hashCode, this.CustomAttributeDefinitionId, this.Key, this.StringFilter, this.NumberFilter, this.SelectionUidsFilter, this.BoolFilter);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CustomAttributeDefinitionId = {(this.CustomAttributeDefinitionId == null ? "null" : this.CustomAttributeDefinitionId)}");
-            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key)}");
-            toStringOutput.Add($"this.StringFilter = {(this.StringFilter == null ? "null" : this.StringFilter)}");
+            toStringOutput.Add($"this.CustomAttributeDefinitionId = {this.CustomAttributeDefinitionId ?? "null"}");
+            toStringOutput.Add($"this.Key = {this.Key ?? "null"}");
+            toStringOutput.Add($"this.StringFilter = {this.StringFilter ?? "null"}");
             toStringOutput.Add($"this.NumberFilter = {(this.NumberFilter == null ? "null" : this.NumberFilter.ToString())}");
             toStringOutput.Add($"this.SelectionUidsFilter = {(this.SelectionUidsFilter == null ? "null" : $"[{string.Join(", ", this.SelectionUidsFilter)} ]")}");
             toStringOutput.Add($"this.BoolFilter = {(this.BoolFilter == null ? "null" : this.BoolFilter.ToString())}");
@@ -346,7 +347,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomAttributeDefinitionId()
             {
@@ -354,7 +355,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetKey()
             {
@@ -362,7 +363,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStringFilter()
             {
@@ -370,7 +371,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSelectionUidsFilter()
             {
@@ -378,7 +379,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBoolFilter()
             {
@@ -392,7 +393,8 @@ namespace Square.Models
             /// <returns> CustomAttributeFilter. </returns>
             public CustomAttributeFilter Build()
             {
-                return new CustomAttributeFilter(shouldSerialize,
+                return new CustomAttributeFilter(
+                    shouldSerialize,
                     this.customAttributeDefinitionId,
                     this.key,
                     this.stringFilter,

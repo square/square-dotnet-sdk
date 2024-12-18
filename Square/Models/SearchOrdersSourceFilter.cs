@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["source_names"] = true;
                 this.SourceNames = sourceNames;
             }
-
         }
-        internal SearchOrdersSourceFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal SearchOrdersSourceFilter(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> sourceNames = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -57,9 +58,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchOrdersSourceFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -75,26 +74,23 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchOrdersSourceFilter other &&                ((this.SourceNames == null && other.SourceNames == null) || (this.SourceNames?.Equals(other.SourceNames) == true));
+            return obj is SearchOrdersSourceFilter other &&
+                (this.SourceNames == null && other.SourceNames == null ||
+                 this.SourceNames?.Equals(other.SourceNames) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -530513052;
-            hashCode = HashCode.Combine(this.SourceNames);
+            var hashCode = -530513052;
+            hashCode = HashCode.Combine(hashCode, this.SourceNames);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -140,7 +136,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSourceNames()
             {
@@ -154,7 +150,8 @@ namespace Square.Models
             /// <returns> SearchOrdersSourceFilter. </returns>
             public SearchOrdersSourceFilter Build()
             {
-                return new SearchOrdersSourceFilter(shouldSerialize,
+                return new SearchOrdersSourceFilter(
+                    shouldSerialize,
                     this.sourceNames);
             }
         }

@@ -67,7 +67,6 @@ namespace Square.Models
                 { "fingerprint", false },
                 { "bank_name", false }
             };
-
             this.Id = id;
             this.AccountNumberSuffix = accountNumberSuffix;
             this.Country = country;
@@ -75,6 +74,7 @@ namespace Square.Models
             this.AccountType = accountType;
             this.HolderName = holderName;
             this.PrimaryBankIdentificationNumber = primaryBankIdentificationNumber;
+
             if (secondaryBankIdentificationNumber != null)
             {
                 shouldSerialize["secondary_bank_identification_number"] = true;
@@ -98,25 +98,26 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
             this.Status = status;
             this.Creditable = creditable;
             this.Debitable = debitable;
+
             if (fingerprint != null)
             {
                 shouldSerialize["fingerprint"] = true;
                 this.Fingerprint = fingerprint;
             }
-
             this.Version = version;
+
             if (bankName != null)
             {
                 shouldSerialize["bank_name"] = true;
                 this.BankName = bankName;
             }
-
         }
-        internal BankAccount(Dictionary<string, bool> shouldSerialize,
+
+        internal BankAccount(
+            Dictionary<string, bool> shouldSerialize,
             string id,
             string accountNumberSuffix,
             string country,
@@ -272,9 +273,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BankAccount : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -335,39 +334,49 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BankAccount other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.AccountNumberSuffix == null && other.AccountNumberSuffix == null) || (this.AccountNumberSuffix?.Equals(other.AccountNumberSuffix) == true)) &&
-                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
-                ((this.Currency == null && other.Currency == null) || (this.Currency?.Equals(other.Currency) == true)) &&
-                ((this.AccountType == null && other.AccountType == null) || (this.AccountType?.Equals(other.AccountType) == true)) &&
-                ((this.HolderName == null && other.HolderName == null) || (this.HolderName?.Equals(other.HolderName) == true)) &&
-                ((this.PrimaryBankIdentificationNumber == null && other.PrimaryBankIdentificationNumber == null) || (this.PrimaryBankIdentificationNumber?.Equals(other.PrimaryBankIdentificationNumber) == true)) &&
-                ((this.SecondaryBankIdentificationNumber == null && other.SecondaryBankIdentificationNumber == null) || (this.SecondaryBankIdentificationNumber?.Equals(other.SecondaryBankIdentificationNumber) == true)) &&
-                ((this.DebitMandateReferenceId == null && other.DebitMandateReferenceId == null) || (this.DebitMandateReferenceId?.Equals(other.DebitMandateReferenceId) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                this.Creditable.Equals(other.Creditable) &&
-                this.Debitable.Equals(other.Debitable) &&
-                ((this.Fingerprint == null && other.Fingerprint == null) || (this.Fingerprint?.Equals(other.Fingerprint) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.BankName == null && other.BankName == null) || (this.BankName?.Equals(other.BankName) == true));
+            return obj is BankAccount other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.AccountNumberSuffix == null && other.AccountNumberSuffix == null ||
+                 this.AccountNumberSuffix?.Equals(other.AccountNumberSuffix) == true) &&
+                (this.Country == null && other.Country == null ||
+                 this.Country?.Equals(other.Country) == true) &&
+                (this.Currency == null && other.Currency == null ||
+                 this.Currency?.Equals(other.Currency) == true) &&
+                (this.AccountType == null && other.AccountType == null ||
+                 this.AccountType?.Equals(other.AccountType) == true) &&
+                (this.HolderName == null && other.HolderName == null ||
+                 this.HolderName?.Equals(other.HolderName) == true) &&
+                (this.PrimaryBankIdentificationNumber == null && other.PrimaryBankIdentificationNumber == null ||
+                 this.PrimaryBankIdentificationNumber?.Equals(other.PrimaryBankIdentificationNumber) == true) &&
+                (this.SecondaryBankIdentificationNumber == null && other.SecondaryBankIdentificationNumber == null ||
+                 this.SecondaryBankIdentificationNumber?.Equals(other.SecondaryBankIdentificationNumber) == true) &&
+                (this.DebitMandateReferenceId == null && other.DebitMandateReferenceId == null ||
+                 this.DebitMandateReferenceId?.Equals(other.DebitMandateReferenceId) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.Creditable.Equals(other.Creditable)) &&
+                (this.Debitable.Equals(other.Debitable)) &&
+                (this.Fingerprint == null && other.Fingerprint == null ||
+                 this.Fingerprint?.Equals(other.Fingerprint) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.BankName == null && other.BankName == null ||
+                 this.BankName?.Equals(other.BankName) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 424336074;
-            hashCode = HashCode.Combine(this.Id, this.AccountNumberSuffix, this.Country, this.Currency, this.AccountType, this.HolderName, this.PrimaryBankIdentificationNumber);
+            var hashCode = 424336074;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.AccountNumberSuffix, this.Country, this.Currency, this.AccountType, this.HolderName, this.PrimaryBankIdentificationNumber);
 
             hashCode = HashCode.Combine(hashCode, this.SecondaryBankIdentificationNumber, this.DebitMandateReferenceId, this.ReferenceId, this.LocationId, this.Status, this.Creditable, this.Debitable);
 
@@ -375,29 +384,30 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.AccountNumberSuffix = {(this.AccountNumberSuffix == null ? "null" : this.AccountNumberSuffix)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.AccountNumberSuffix = {this.AccountNumberSuffix ?? "null"}");
             toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country.ToString())}");
             toStringOutput.Add($"this.Currency = {(this.Currency == null ? "null" : this.Currency.ToString())}");
             toStringOutput.Add($"this.AccountType = {(this.AccountType == null ? "null" : this.AccountType.ToString())}");
-            toStringOutput.Add($"this.HolderName = {(this.HolderName == null ? "null" : this.HolderName)}");
-            toStringOutput.Add($"this.PrimaryBankIdentificationNumber = {(this.PrimaryBankIdentificationNumber == null ? "null" : this.PrimaryBankIdentificationNumber)}");
-            toStringOutput.Add($"this.SecondaryBankIdentificationNumber = {(this.SecondaryBankIdentificationNumber == null ? "null" : this.SecondaryBankIdentificationNumber)}");
-            toStringOutput.Add($"this.DebitMandateReferenceId = {(this.DebitMandateReferenceId == null ? "null" : this.DebitMandateReferenceId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.HolderName = {this.HolderName ?? "null"}");
+            toStringOutput.Add($"this.PrimaryBankIdentificationNumber = {this.PrimaryBankIdentificationNumber ?? "null"}");
+            toStringOutput.Add($"this.SecondaryBankIdentificationNumber = {this.SecondaryBankIdentificationNumber ?? "null"}");
+            toStringOutput.Add($"this.DebitMandateReferenceId = {this.DebitMandateReferenceId ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
             toStringOutput.Add($"this.Creditable = {this.Creditable}");
             toStringOutput.Add($"this.Debitable = {this.Debitable}");
-            toStringOutput.Add($"this.Fingerprint = {(this.Fingerprint == null ? "null" : this.Fingerprint)}");
+            toStringOutput.Add($"this.Fingerprint = {this.Fingerprint ?? "null"}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.BankName = {(this.BankName == null ? "null" : this.BankName)}");
+            toStringOutput.Add($"this.BankName = {this.BankName ?? "null"}");
         }
 
         /// <summary>
@@ -691,7 +701,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSecondaryBankIdentificationNumber()
             {
@@ -699,7 +709,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDebitMandateReferenceId()
             {
@@ -707,7 +717,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -715,7 +725,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -723,7 +733,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFingerprint()
             {
@@ -731,7 +741,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBankName()
             {
@@ -745,7 +755,8 @@ namespace Square.Models
             /// <returns> BankAccount. </returns>
             public BankAccount Build()
             {
-                return new BankAccount(shouldSerialize,
+                return new BankAccount(
+                    shouldSerialize,
                     this.id,
                     this.accountNumberSuffix,
                     this.country,

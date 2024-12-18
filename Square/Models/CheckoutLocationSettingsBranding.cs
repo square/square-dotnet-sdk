@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "button_color", false }
             };
-
             this.HeaderType = headerType;
+
             if (buttonColor != null)
             {
                 shouldSerialize["button_color"] = true;
                 this.ButtonColor = buttonColor;
             }
-
             this.ButtonShape = buttonShape;
         }
-        internal CheckoutLocationSettingsBranding(Dictionary<string, bool> shouldSerialize,
+
+        internal CheckoutLocationSettingsBranding(
+            Dictionary<string, bool> shouldSerialize,
             string headerType = null,
             string buttonColor = null,
             string buttonShape = null)
@@ -77,9 +78,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CheckoutLocationSettingsBranding : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -95,28 +94,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CheckoutLocationSettingsBranding other &&                ((this.HeaderType == null && other.HeaderType == null) || (this.HeaderType?.Equals(other.HeaderType) == true)) &&
-                ((this.ButtonColor == null && other.ButtonColor == null) || (this.ButtonColor?.Equals(other.ButtonColor) == true)) &&
-                ((this.ButtonShape == null && other.ButtonShape == null) || (this.ButtonShape?.Equals(other.ButtonShape) == true));
+            return obj is CheckoutLocationSettingsBranding other &&
+                (this.HeaderType == null && other.HeaderType == null ||
+                 this.HeaderType?.Equals(other.HeaderType) == true) &&
+                (this.ButtonColor == null && other.ButtonColor == null ||
+                 this.ButtonColor?.Equals(other.ButtonColor) == true) &&
+                (this.ButtonShape == null && other.ButtonShape == null ||
+                 this.ButtonShape?.Equals(other.ButtonShape) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1434657644;
-            hashCode = HashCode.Combine(this.HeaderType, this.ButtonColor, this.ButtonShape);
+            var hashCode = -1434657644;
+            hashCode = HashCode.Combine(hashCode, this.HeaderType, this.ButtonColor, this.ButtonShape);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -124,7 +122,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.HeaderType = {(this.HeaderType == null ? "null" : this.HeaderType.ToString())}");
-            toStringOutput.Add($"this.ButtonColor = {(this.ButtonColor == null ? "null" : this.ButtonColor)}");
+            toStringOutput.Add($"this.ButtonColor = {this.ButtonColor ?? "null"}");
             toStringOutput.Add($"this.ButtonShape = {(this.ButtonShape == null ? "null" : this.ButtonShape.ToString())}");
         }
 
@@ -190,7 +188,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetButtonColor()
             {
@@ -204,7 +202,8 @@ namespace Square.Models
             /// <returns> CheckoutLocationSettingsBranding. </returns>
             public CheckoutLocationSettingsBranding Build()
             {
-                return new CheckoutLocationSettingsBranding(shouldSerialize,
+                return new CheckoutLocationSettingsBranding(
+                    shouldSerialize,
                     this.headerType,
                     this.buttonColor,
                     this.buttonShape);

@@ -63,9 +63,10 @@ namespace Square.Models
                 shouldSerialize["revoke_only_access_token"] = true;
                 this.RevokeOnlyAccessToken = revokeOnlyAccessToken;
             }
-
         }
-        internal RevokeTokenRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal RevokeTokenRequest(
+            Dictionary<string, bool> shouldSerialize,
             string clientId = null,
             string accessToken = null,
             string merchantId = null,
@@ -111,9 +112,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RevokeTokenRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -156,38 +155,38 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RevokeTokenRequest other &&                ((this.ClientId == null && other.ClientId == null) || (this.ClientId?.Equals(other.ClientId) == true)) &&
-                ((this.AccessToken == null && other.AccessToken == null) || (this.AccessToken?.Equals(other.AccessToken) == true)) &&
-                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((this.RevokeOnlyAccessToken == null && other.RevokeOnlyAccessToken == null) || (this.RevokeOnlyAccessToken?.Equals(other.RevokeOnlyAccessToken) == true));
+            return obj is RevokeTokenRequest other &&
+                (this.ClientId == null && other.ClientId == null ||
+                 this.ClientId?.Equals(other.ClientId) == true) &&
+                (this.AccessToken == null && other.AccessToken == null ||
+                 this.AccessToken?.Equals(other.AccessToken) == true) &&
+                (this.MerchantId == null && other.MerchantId == null ||
+                 this.MerchantId?.Equals(other.MerchantId) == true) &&
+                (this.RevokeOnlyAccessToken == null && other.RevokeOnlyAccessToken == null ||
+                 this.RevokeOnlyAccessToken?.Equals(other.RevokeOnlyAccessToken) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1546864389;
-            hashCode = HashCode.Combine(this.ClientId, this.AccessToken, this.MerchantId, this.RevokeOnlyAccessToken);
+            var hashCode = 1546864389;
+            hashCode = HashCode.Combine(hashCode, this.ClientId, this.AccessToken, this.MerchantId, this.RevokeOnlyAccessToken);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ClientId = {(this.ClientId == null ? "null" : this.ClientId)}");
-            toStringOutput.Add($"this.AccessToken = {(this.AccessToken == null ? "null" : this.AccessToken)}");
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
+            toStringOutput.Add($"this.ClientId = {this.ClientId ?? "null"}");
+            toStringOutput.Add($"this.AccessToken = {this.AccessToken ?? "null"}");
+            toStringOutput.Add($"this.MerchantId = {this.MerchantId ?? "null"}");
             toStringOutput.Add($"this.RevokeOnlyAccessToken = {(this.RevokeOnlyAccessToken == null ? "null" : this.RevokeOnlyAccessToken.ToString())}");
         }
 
@@ -272,7 +271,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetClientId()
             {
@@ -280,7 +279,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAccessToken()
             {
@@ -288,7 +287,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMerchantId()
             {
@@ -296,7 +295,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRevokeOnlyAccessToken()
             {
@@ -310,7 +309,8 @@ namespace Square.Models
             /// <returns> RevokeTokenRequest. </returns>
             public RevokeTokenRequest Build()
             {
-                return new RevokeTokenRequest(shouldSerialize,
+                return new RevokeTokenRequest(
+                    shouldSerialize,
                     this.clientId,
                     this.accessToken,
                     this.merchantId,

@@ -95,54 +95,55 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InvoiceAttachment : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InvoiceAttachment other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Filename == null && other.Filename == null) || (this.Filename?.Equals(other.Filename) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.Filesize == null && other.Filesize == null) || (this.Filesize?.Equals(other.Filesize) == true)) &&
-                ((this.Hash == null && other.Hash == null) || (this.Hash?.Equals(other.Hash) == true)) &&
-                ((this.MimeType == null && other.MimeType == null) || (this.MimeType?.Equals(other.MimeType) == true)) &&
-                ((this.UploadedAt == null && other.UploadedAt == null) || (this.UploadedAt?.Equals(other.UploadedAt) == true));
+            return obj is InvoiceAttachment other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Filename == null && other.Filename == null ||
+                 this.Filename?.Equals(other.Filename) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.Filesize == null && other.Filesize == null ||
+                 this.Filesize?.Equals(other.Filesize) == true) &&
+                (this.Hash == null && other.Hash == null ||
+                 this.Hash?.Equals(other.Hash) == true) &&
+                (this.MimeType == null && other.MimeType == null ||
+                 this.MimeType?.Equals(other.MimeType) == true) &&
+                (this.UploadedAt == null && other.UploadedAt == null ||
+                 this.UploadedAt?.Equals(other.UploadedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -700483952;
-            hashCode = HashCode.Combine(this.Id, this.Filename, this.Description, this.Filesize, this.Hash, this.MimeType, this.UploadedAt);
+            var hashCode = -700483952;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Filename, this.Description, this.Filesize, this.Hash, this.MimeType, this.UploadedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.Filename = {(this.Filename == null ? "null" : this.Filename)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.Filename = {this.Filename ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
             toStringOutput.Add($"this.Filesize = {(this.Filesize == null ? "null" : this.Filesize.ToString())}");
-            toStringOutput.Add($"this.Hash = {(this.Hash == null ? "null" : this.Hash)}");
-            toStringOutput.Add($"this.MimeType = {(this.MimeType == null ? "null" : this.MimeType)}");
-            toStringOutput.Add($"this.UploadedAt = {(this.UploadedAt == null ? "null" : this.UploadedAt)}");
+            toStringOutput.Add($"this.Hash = {this.Hash ?? "null"}");
+            toStringOutput.Add($"this.MimeType = {this.MimeType ?? "null"}");
+            toStringOutput.Add($"this.UploadedAt = {this.UploadedAt ?? "null"}");
         }
 
         /// <summary>

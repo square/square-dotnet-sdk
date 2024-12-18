@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["max"] = true;
                 this.Max = max;
             }
-
         }
-        internal Range(Dictionary<string, bool> shouldSerialize,
+
+        internal Range(
+            Dictionary<string, bool> shouldSerialize,
             string min = null,
             string max = null)
         {
@@ -74,9 +75,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Range : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -101,35 +100,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Range other &&                ((this.Min == null && other.Min == null) || (this.Min?.Equals(other.Min) == true)) &&
-                ((this.Max == null && other.Max == null) || (this.Max?.Equals(other.Max) == true));
+            return obj is Range other &&
+                (this.Min == null && other.Min == null ||
+                 this.Min?.Equals(other.Min) == true) &&
+                (this.Max == null && other.Max == null ||
+                 this.Max?.Equals(other.Max) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1130495975;
-            hashCode = HashCode.Combine(this.Min, this.Max);
+            var hashCode = -1130495975;
+            hashCode = HashCode.Combine(hashCode, this.Min, this.Max);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Min = {(this.Min == null ? "null" : this.Min)}");
-            toStringOutput.Add($"this.Max = {(this.Max == null ? "null" : this.Max)}");
+            toStringOutput.Add($"this.Min = {this.Min ?? "null"}");
+            toStringOutput.Add($"this.Max = {this.Max ?? "null"}");
         }
 
         /// <summary>
@@ -183,7 +180,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMin()
             {
@@ -191,7 +188,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMax()
             {
@@ -205,7 +202,8 @@ namespace Square.Models
             /// <returns> Range. </returns>
             public Range Build()
             {
-                return new Range(shouldSerialize,
+                return new Range(
+                    shouldSerialize,
                     this.min,
                     this.max);
             }

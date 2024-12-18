@@ -47,10 +47,11 @@ namespace Square.Models
                 shouldSerialize["brand"] = true;
                 this.Brand = brand;
             }
-
             this.CashAppDetails = cashAppDetails;
         }
-        internal DigitalWalletDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal DigitalWalletDetails(
+            Dictionary<string, bool> shouldSerialize,
             string status = null,
             string brand = null,
             Models.CashAppDetails cashAppDetails = null)
@@ -85,9 +86,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DigitalWalletDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -112,36 +111,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DigitalWalletDetails other &&                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.Brand == null && other.Brand == null) || (this.Brand?.Equals(other.Brand) == true)) &&
-                ((this.CashAppDetails == null && other.CashAppDetails == null) || (this.CashAppDetails?.Equals(other.CashAppDetails) == true));
+            return obj is DigitalWalletDetails other &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.Brand == null && other.Brand == null ||
+                 this.Brand?.Equals(other.Brand) == true) &&
+                (this.CashAppDetails == null && other.CashAppDetails == null ||
+                 this.CashAppDetails?.Equals(other.CashAppDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1321495610;
-            hashCode = HashCode.Combine(this.Status, this.Brand, this.CashAppDetails);
+            var hashCode = -1321495610;
+            hashCode = HashCode.Combine(hashCode, this.Status, this.Brand, this.CashAppDetails);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status)}");
-            toStringOutput.Add($"this.Brand = {(this.Brand == null ? "null" : this.Brand)}");
+            toStringOutput.Add($"this.Status = {this.Status ?? "null"}");
+            toStringOutput.Add($"this.Brand = {this.Brand ?? "null"}");
             toStringOutput.Add($"this.CashAppDetails = {(this.CashAppDetails == null ? "null" : this.CashAppDetails.ToString())}");
         }
 
@@ -209,7 +207,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStatus()
             {
@@ -217,7 +215,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBrand()
             {
@@ -231,7 +229,8 @@ namespace Square.Models
             /// <returns> DigitalWalletDetails. </returns>
             public DigitalWalletDetails Build()
             {
-                return new DigitalWalletDetails(shouldSerialize,
+                return new DigitalWalletDetails(
+                    shouldSerialize,
                     this.status,
                     this.brand,
                     this.cashAppDetails);
