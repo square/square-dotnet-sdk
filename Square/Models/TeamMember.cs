@@ -33,6 +33,7 @@ namespace Square.Models
         /// <param name="createdAt">created_at.</param>
         /// <param name="updatedAt">updated_at.</param>
         /// <param name="assignedLocations">assigned_locations.</param>
+        /// <param name="wageSetting">wage_setting.</param>
         public TeamMember(
             string id = null,
             string referenceId = null,
@@ -44,7 +45,8 @@ namespace Square.Models
             string phoneNumber = null,
             string createdAt = null,
             string updatedAt = null,
-            Models.TeamMemberAssignedLocations assignedLocations = null)
+            Models.TeamMemberAssignedLocations assignedLocations = null,
+            Models.WageSetting wageSetting = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -54,16 +56,16 @@ namespace Square.Models
                 { "email_address", false },
                 { "phone_number", false }
             };
-
             this.Id = id;
+
             if (referenceId != null)
             {
                 shouldSerialize["reference_id"] = true;
                 this.ReferenceId = referenceId;
             }
-
             this.IsOwner = isOwner;
             this.Status = status;
+
             if (givenName != null)
             {
                 shouldSerialize["given_name"] = true;
@@ -87,12 +89,14 @@ namespace Square.Models
                 shouldSerialize["phone_number"] = true;
                 this.PhoneNumber = phoneNumber;
             }
-
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.AssignedLocations = assignedLocations;
+            this.WageSetting = wageSetting;
         }
-        internal TeamMember(Dictionary<string, bool> shouldSerialize,
+
+        internal TeamMember(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string referenceId = null,
             bool? isOwner = null,
@@ -103,7 +107,8 @@ namespace Square.Models
             string phoneNumber = null,
             string createdAt = null,
             string updatedAt = null,
-            Models.TeamMemberAssignedLocations assignedLocations = null)
+            Models.TeamMemberAssignedLocations assignedLocations = null,
+            Models.WageSetting wageSetting = null)
         {
             this.shouldSerialize = shouldSerialize;
             Id = id;
@@ -117,6 +122,7 @@ namespace Square.Models
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
             AssignedLocations = assignedLocations;
+            WageSetting = wageSetting;
         }
 
         /// <summary>
@@ -156,7 +162,8 @@ namespace Square.Models
         public string FamilyName { get; }
 
         /// <summary>
-        /// The email address associated with the team member.
+        /// The email address associated with the team member. After accepting the invitation
+        /// from Square, only the team member can change this value.
         /// </summary>
         [JsonProperty("email_address")]
         public string EmailAddress { get; }
@@ -170,15 +177,13 @@ namespace Square.Models
         public string PhoneNumber { get; }
 
         /// <summary>
-        /// The timestamp, in RFC 3339 format, describing when the team member was created.
-        /// For example, "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z".
+        /// The timestamp when the team member was created, in RFC 3339 format.
         /// </summary>
         [JsonProperty("created_at", NullValueHandling = NullValueHandling.Ignore)]
         public string CreatedAt { get; }
 
         /// <summary>
-        /// The timestamp, in RFC 3339 format, describing when the team member was last updated.
-        /// For example, "2018-10-04T04:00:00-07:00" or "2019-02-05T12:00:00Z".
+        /// The timestamp when the team member was last updated, in RFC 3339 format.
         /// </summary>
         [JsonProperty("updated_at", NullValueHandling = NullValueHandling.Ignore)]
         public string UpdatedAt { get; }
@@ -189,13 +194,18 @@ namespace Square.Models
         [JsonProperty("assigned_locations", NullValueHandling = NullValueHandling.Ignore)]
         public Models.TeamMemberAssignedLocations AssignedLocations { get; }
 
+        /// <summary>
+        /// Represents information about the overtime exemption status, job assignments, and compensation
+        /// for a [team member]($m/TeamMember).
+        /// </summary>
+        [JsonProperty("wage_setting", NullValueHandling = NullValueHandling.Ignore)]
+        public Models.WageSetting WageSetting { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TeamMember : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -247,55 +257,65 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TeamMember other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.IsOwner == null && other.IsOwner == null) || (this.IsOwner?.Equals(other.IsOwner) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.GivenName == null && other.GivenName == null) || (this.GivenName?.Equals(other.GivenName) == true)) &&
-                ((this.FamilyName == null && other.FamilyName == null) || (this.FamilyName?.Equals(other.FamilyName) == true)) &&
-                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.AssignedLocations == null && other.AssignedLocations == null) || (this.AssignedLocations?.Equals(other.AssignedLocations) == true));
+            return obj is TeamMember other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.IsOwner == null && other.IsOwner == null ||
+                 this.IsOwner?.Equals(other.IsOwner) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.GivenName == null && other.GivenName == null ||
+                 this.GivenName?.Equals(other.GivenName) == true) &&
+                (this.FamilyName == null && other.FamilyName == null ||
+                 this.FamilyName?.Equals(other.FamilyName) == true) &&
+                (this.EmailAddress == null && other.EmailAddress == null ||
+                 this.EmailAddress?.Equals(other.EmailAddress) == true) &&
+                (this.PhoneNumber == null && other.PhoneNumber == null ||
+                 this.PhoneNumber?.Equals(other.PhoneNumber) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.AssignedLocations == null && other.AssignedLocations == null ||
+                 this.AssignedLocations?.Equals(other.AssignedLocations) == true) &&
+                (this.WageSetting == null && other.WageSetting == null ||
+                 this.WageSetting?.Equals(other.WageSetting) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1084182002;
-            hashCode = HashCode.Combine(this.Id, this.ReferenceId, this.IsOwner, this.Status, this.GivenName, this.FamilyName, this.EmailAddress);
+            var hashCode = 116363009;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.ReferenceId, this.IsOwner, this.Status, this.GivenName, this.FamilyName, this.EmailAddress);
 
-            hashCode = HashCode.Combine(hashCode, this.PhoneNumber, this.CreatedAt, this.UpdatedAt, this.AssignedLocations);
+            hashCode = HashCode.Combine(hashCode, this.PhoneNumber, this.CreatedAt, this.UpdatedAt, this.AssignedLocations, this.WageSetting);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
             toStringOutput.Add($"this.IsOwner = {(this.IsOwner == null ? "null" : this.IsOwner.ToString())}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.GivenName = {(this.GivenName == null ? "null" : this.GivenName)}");
-            toStringOutput.Add($"this.FamilyName = {(this.FamilyName == null ? "null" : this.FamilyName)}");
-            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress)}");
-            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.GivenName = {this.GivenName ?? "null"}");
+            toStringOutput.Add($"this.FamilyName = {this.FamilyName ?? "null"}");
+            toStringOutput.Add($"this.EmailAddress = {this.EmailAddress ?? "null"}");
+            toStringOutput.Add($"this.PhoneNumber = {this.PhoneNumber ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
             toStringOutput.Add($"this.AssignedLocations = {(this.AssignedLocations == null ? "null" : this.AssignedLocations.ToString())}");
+            toStringOutput.Add($"this.WageSetting = {(this.WageSetting == null ? "null" : this.WageSetting.ToString())}");
         }
 
         /// <summary>
@@ -315,7 +335,8 @@ namespace Square.Models
                 .PhoneNumber(this.PhoneNumber)
                 .CreatedAt(this.CreatedAt)
                 .UpdatedAt(this.UpdatedAt)
-                .AssignedLocations(this.AssignedLocations);
+                .AssignedLocations(this.AssignedLocations)
+                .WageSetting(this.WageSetting);
             return builder;
         }
 
@@ -344,6 +365,7 @@ namespace Square.Models
             private string createdAt;
             private string updatedAt;
             private Models.TeamMemberAssignedLocations assignedLocations;
+            private Models.WageSetting wageSetting;
 
              /// <summary>
              /// Id.
@@ -471,8 +493,19 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// WageSetting.
+             /// </summary>
+             /// <param name="wageSetting"> wageSetting. </param>
+             /// <returns> Builder. </returns>
+            public Builder WageSetting(Models.WageSetting wageSetting)
+            {
+                this.wageSetting = wageSetting;
+                return this;
+            }
+
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -480,7 +513,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetGivenName()
             {
@@ -488,7 +521,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFamilyName()
             {
@@ -496,7 +529,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmailAddress()
             {
@@ -504,7 +537,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhoneNumber()
             {
@@ -518,7 +551,8 @@ namespace Square.Models
             /// <returns> TeamMember. </returns>
             public TeamMember Build()
             {
-                return new TeamMember(shouldSerialize,
+                return new TeamMember(
+                    shouldSerialize,
                     this.id,
                     this.referenceId,
                     this.isOwner,
@@ -529,7 +563,8 @@ namespace Square.Models
                     this.phoneNumber,
                     this.createdAt,
                     this.updatedAt,
-                    this.assignedLocations);
+                    this.assignedLocations,
+                    this.wageSetting);
             }
         }
     }

@@ -124,17 +124,18 @@ namespace Square.Models
                 shouldSerialize["valid_until_local_time"] = true;
                 this.ValidUntilLocalTime = validUntilLocalTime;
             }
-
             this.ExcludeStrategy = excludeStrategy;
             this.MinimumOrderSubtotalMoney = minimumOrderSubtotalMoney;
+
             if (customerGroupIdsAny != null)
             {
                 shouldSerialize["customer_group_ids_any"] = true;
                 this.CustomerGroupIdsAny = customerGroupIdsAny;
             }
-
         }
-        internal CatalogPricingRule(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogPricingRule(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             IList<string> timePeriodIds = null,
             string discountId = null,
@@ -275,9 +276,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogPricingRule : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -383,56 +382,65 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogPricingRule other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.TimePeriodIds == null && other.TimePeriodIds == null) || (this.TimePeriodIds?.Equals(other.TimePeriodIds) == true)) &&
-                ((this.DiscountId == null && other.DiscountId == null) || (this.DiscountId?.Equals(other.DiscountId) == true)) &&
-                ((this.MatchProductsId == null && other.MatchProductsId == null) || (this.MatchProductsId?.Equals(other.MatchProductsId) == true)) &&
-                ((this.ApplyProductsId == null && other.ApplyProductsId == null) || (this.ApplyProductsId?.Equals(other.ApplyProductsId) == true)) &&
-                ((this.ExcludeProductsId == null && other.ExcludeProductsId == null) || (this.ExcludeProductsId?.Equals(other.ExcludeProductsId) == true)) &&
-                ((this.ValidFromDate == null && other.ValidFromDate == null) || (this.ValidFromDate?.Equals(other.ValidFromDate) == true)) &&
-                ((this.ValidFromLocalTime == null && other.ValidFromLocalTime == null) || (this.ValidFromLocalTime?.Equals(other.ValidFromLocalTime) == true)) &&
-                ((this.ValidUntilDate == null && other.ValidUntilDate == null) || (this.ValidUntilDate?.Equals(other.ValidUntilDate) == true)) &&
-                ((this.ValidUntilLocalTime == null && other.ValidUntilLocalTime == null) || (this.ValidUntilLocalTime?.Equals(other.ValidUntilLocalTime) == true)) &&
-                ((this.ExcludeStrategy == null && other.ExcludeStrategy == null) || (this.ExcludeStrategy?.Equals(other.ExcludeStrategy) == true)) &&
-                ((this.MinimumOrderSubtotalMoney == null && other.MinimumOrderSubtotalMoney == null) || (this.MinimumOrderSubtotalMoney?.Equals(other.MinimumOrderSubtotalMoney) == true)) &&
-                ((this.CustomerGroupIdsAny == null && other.CustomerGroupIdsAny == null) || (this.CustomerGroupIdsAny?.Equals(other.CustomerGroupIdsAny) == true));
+            return obj is CatalogPricingRule other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.TimePeriodIds == null && other.TimePeriodIds == null ||
+                 this.TimePeriodIds?.Equals(other.TimePeriodIds) == true) &&
+                (this.DiscountId == null && other.DiscountId == null ||
+                 this.DiscountId?.Equals(other.DiscountId) == true) &&
+                (this.MatchProductsId == null && other.MatchProductsId == null ||
+                 this.MatchProductsId?.Equals(other.MatchProductsId) == true) &&
+                (this.ApplyProductsId == null && other.ApplyProductsId == null ||
+                 this.ApplyProductsId?.Equals(other.ApplyProductsId) == true) &&
+                (this.ExcludeProductsId == null && other.ExcludeProductsId == null ||
+                 this.ExcludeProductsId?.Equals(other.ExcludeProductsId) == true) &&
+                (this.ValidFromDate == null && other.ValidFromDate == null ||
+                 this.ValidFromDate?.Equals(other.ValidFromDate) == true) &&
+                (this.ValidFromLocalTime == null && other.ValidFromLocalTime == null ||
+                 this.ValidFromLocalTime?.Equals(other.ValidFromLocalTime) == true) &&
+                (this.ValidUntilDate == null && other.ValidUntilDate == null ||
+                 this.ValidUntilDate?.Equals(other.ValidUntilDate) == true) &&
+                (this.ValidUntilLocalTime == null && other.ValidUntilLocalTime == null ||
+                 this.ValidUntilLocalTime?.Equals(other.ValidUntilLocalTime) == true) &&
+                (this.ExcludeStrategy == null && other.ExcludeStrategy == null ||
+                 this.ExcludeStrategy?.Equals(other.ExcludeStrategy) == true) &&
+                (this.MinimumOrderSubtotalMoney == null && other.MinimumOrderSubtotalMoney == null ||
+                 this.MinimumOrderSubtotalMoney?.Equals(other.MinimumOrderSubtotalMoney) == true) &&
+                (this.CustomerGroupIdsAny == null && other.CustomerGroupIdsAny == null ||
+                 this.CustomerGroupIdsAny?.Equals(other.CustomerGroupIdsAny) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1599740416;
-            hashCode = HashCode.Combine(this.Name, this.TimePeriodIds, this.DiscountId, this.MatchProductsId, this.ApplyProductsId, this.ExcludeProductsId, this.ValidFromDate);
+            var hashCode = 1599740416;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.TimePeriodIds, this.DiscountId, this.MatchProductsId, this.ApplyProductsId, this.ExcludeProductsId, this.ValidFromDate);
 
             hashCode = HashCode.Combine(hashCode, this.ValidFromLocalTime, this.ValidUntilDate, this.ValidUntilLocalTime, this.ExcludeStrategy, this.MinimumOrderSubtotalMoney, this.CustomerGroupIdsAny);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.TimePeriodIds = {(this.TimePeriodIds == null ? "null" : $"[{string.Join(", ", this.TimePeriodIds)} ]")}");
-            toStringOutput.Add($"this.DiscountId = {(this.DiscountId == null ? "null" : this.DiscountId)}");
-            toStringOutput.Add($"this.MatchProductsId = {(this.MatchProductsId == null ? "null" : this.MatchProductsId)}");
-            toStringOutput.Add($"this.ApplyProductsId = {(this.ApplyProductsId == null ? "null" : this.ApplyProductsId)}");
-            toStringOutput.Add($"this.ExcludeProductsId = {(this.ExcludeProductsId == null ? "null" : this.ExcludeProductsId)}");
-            toStringOutput.Add($"this.ValidFromDate = {(this.ValidFromDate == null ? "null" : this.ValidFromDate)}");
-            toStringOutput.Add($"this.ValidFromLocalTime = {(this.ValidFromLocalTime == null ? "null" : this.ValidFromLocalTime)}");
-            toStringOutput.Add($"this.ValidUntilDate = {(this.ValidUntilDate == null ? "null" : this.ValidUntilDate)}");
-            toStringOutput.Add($"this.ValidUntilLocalTime = {(this.ValidUntilLocalTime == null ? "null" : this.ValidUntilLocalTime)}");
+            toStringOutput.Add($"this.DiscountId = {this.DiscountId ?? "null"}");
+            toStringOutput.Add($"this.MatchProductsId = {this.MatchProductsId ?? "null"}");
+            toStringOutput.Add($"this.ApplyProductsId = {this.ApplyProductsId ?? "null"}");
+            toStringOutput.Add($"this.ExcludeProductsId = {this.ExcludeProductsId ?? "null"}");
+            toStringOutput.Add($"this.ValidFromDate = {this.ValidFromDate ?? "null"}");
+            toStringOutput.Add($"this.ValidFromLocalTime = {this.ValidFromLocalTime ?? "null"}");
+            toStringOutput.Add($"this.ValidUntilDate = {this.ValidUntilDate ?? "null"}");
+            toStringOutput.Add($"this.ValidUntilLocalTime = {this.ValidUntilLocalTime ?? "null"}");
             toStringOutput.Add($"this.ExcludeStrategy = {(this.ExcludeStrategy == null ? "null" : this.ExcludeStrategy.ToString())}");
             toStringOutput.Add($"this.MinimumOrderSubtotalMoney = {(this.MinimumOrderSubtotalMoney == null ? "null" : this.MinimumOrderSubtotalMoney.ToString())}");
             toStringOutput.Add($"this.CustomerGroupIdsAny = {(this.CustomerGroupIdsAny == null ? "null" : $"[{string.Join(", ", this.CustomerGroupIdsAny)} ]")}");
@@ -650,7 +658,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -658,7 +666,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTimePeriodIds()
             {
@@ -666,7 +674,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDiscountId()
             {
@@ -674,7 +682,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMatchProductsId()
             {
@@ -682,7 +690,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApplyProductsId()
             {
@@ -690,7 +698,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetExcludeProductsId()
             {
@@ -698,7 +706,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetValidFromDate()
             {
@@ -706,7 +714,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetValidFromLocalTime()
             {
@@ -714,7 +722,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetValidUntilDate()
             {
@@ -722,7 +730,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetValidUntilLocalTime()
             {
@@ -730,7 +738,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerGroupIdsAny()
             {
@@ -744,7 +752,8 @@ namespace Square.Models
             /// <returns> CatalogPricingRule. </returns>
             public CatalogPricingRule Build()
             {
-                return new CatalogPricingRule(shouldSerialize,
+                return new CatalogPricingRule(
+                    shouldSerialize,
                     this.name,
                     this.timePeriodIds,
                     this.discountId,

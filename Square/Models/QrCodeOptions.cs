@@ -57,46 +57,43 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"QrCodeOptions : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is QrCodeOptions other &&                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
-                ((this.Body == null && other.Body == null) || (this.Body?.Equals(other.Body) == true)) &&
-                ((this.BarcodeContents == null && other.BarcodeContents == null) || (this.BarcodeContents?.Equals(other.BarcodeContents) == true));
+            return obj is QrCodeOptions other &&
+                (this.Title == null && other.Title == null ||
+                 this.Title?.Equals(other.Title) == true) &&
+                (this.Body == null && other.Body == null ||
+                 this.Body?.Equals(other.Body) == true) &&
+                (this.BarcodeContents == null && other.BarcodeContents == null ||
+                 this.BarcodeContents?.Equals(other.BarcodeContents) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 674934960;
-            hashCode = HashCode.Combine(this.Title, this.Body, this.BarcodeContents);
+            var hashCode = 674934960;
+            hashCode = HashCode.Combine(hashCode, this.Title, this.Body, this.BarcodeContents);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
-            toStringOutput.Add($"this.Body = {(this.Body == null ? "null" : this.Body)}");
-            toStringOutput.Add($"this.BarcodeContents = {(this.BarcodeContents == null ? "null" : this.BarcodeContents)}");
+            toStringOutput.Add($"this.Title = {this.Title ?? "null"}");
+            toStringOutput.Add($"this.Body = {this.Body ?? "null"}");
+            toStringOutput.Add($"this.BarcodeContents = {this.BarcodeContents ?? "null"}");
         }
 
         /// <summary>

@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "custom_name", false }
             };
-
             this.Type = type;
             this.StandardName = standardName;
+
             if (customName != null)
             {
                 shouldSerialize["custom_name"] = true;
                 this.CustomName = customName;
             }
-
         }
-        internal CatalogItemFoodAndBeverageDetailsIngredient(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogItemFoodAndBeverageDetailsIngredient(
+            Dictionary<string, bool> shouldSerialize,
             string type = null,
             string standardName = null,
             string customName = null)
@@ -77,9 +78,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogItemFoodAndBeverageDetailsIngredient : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -95,28 +94,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogItemFoodAndBeverageDetailsIngredient other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.StandardName == null && other.StandardName == null) || (this.StandardName?.Equals(other.StandardName) == true)) &&
-                ((this.CustomName == null && other.CustomName == null) || (this.CustomName?.Equals(other.CustomName) == true));
+            return obj is CatalogItemFoodAndBeverageDetailsIngredient other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.StandardName == null && other.StandardName == null ||
+                 this.StandardName?.Equals(other.StandardName) == true) &&
+                (this.CustomName == null && other.CustomName == null ||
+                 this.CustomName?.Equals(other.CustomName) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2030150242;
-            hashCode = HashCode.Combine(this.Type, this.StandardName, this.CustomName);
+            var hashCode = 2030150242;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.StandardName, this.CustomName);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -125,7 +123,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.StandardName = {(this.StandardName == null ? "null" : this.StandardName.ToString())}");
-            toStringOutput.Add($"this.CustomName = {(this.CustomName == null ? "null" : this.CustomName)}");
+            toStringOutput.Add($"this.CustomName = {this.CustomName ?? "null"}");
         }
 
         /// <summary>
@@ -190,7 +188,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomName()
             {
@@ -204,7 +202,8 @@ namespace Square.Models
             /// <returns> CatalogItemFoodAndBeverageDetailsIngredient. </returns>
             public CatalogItemFoodAndBeverageDetailsIngredient Build()
             {
-                return new CatalogItemFoodAndBeverageDetailsIngredient(shouldSerialize,
+                return new CatalogItemFoodAndBeverageDetailsIngredient(
+                    shouldSerialize,
                     this.type,
                     this.standardName,
                     this.customName);

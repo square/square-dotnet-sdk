@@ -35,8 +35,8 @@ namespace Square.Models
                 { "name", false },
                 { "abbreviation", false }
             };
-
             this.Unit = unit;
+
             if (name != null)
             {
                 shouldSerialize["name"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["abbreviation"] = true;
                 this.Abbreviation = abbreviation;
             }
-
         }
-        internal StandardUnitDescription(Dictionary<string, bool> shouldSerialize,
+
+        internal StandardUnitDescription(
+            Dictionary<string, bool> shouldSerialize,
             Models.MeasurementUnit unit = null,
             string name = null,
             string abbreviation = null)
@@ -85,9 +86,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"StandardUnitDescription : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -112,28 +111,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is StandardUnitDescription other &&                ((this.Unit == null && other.Unit == null) || (this.Unit?.Equals(other.Unit) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Abbreviation == null && other.Abbreviation == null) || (this.Abbreviation?.Equals(other.Abbreviation) == true));
+            return obj is StandardUnitDescription other &&
+                (this.Unit == null && other.Unit == null ||
+                 this.Unit?.Equals(other.Unit) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Abbreviation == null && other.Abbreviation == null ||
+                 this.Abbreviation?.Equals(other.Abbreviation) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -845994350;
-            hashCode = HashCode.Combine(this.Unit, this.Name, this.Abbreviation);
+            var hashCode = -845994350;
+            hashCode = HashCode.Combine(hashCode, this.Unit, this.Name, this.Abbreviation);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -141,8 +139,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Unit = {(this.Unit == null ? "null" : this.Unit.ToString())}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.Abbreviation = {(this.Abbreviation == null ? "null" : this.Abbreviation)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.Abbreviation = {this.Abbreviation ?? "null"}");
         }
 
         /// <summary>
@@ -209,7 +207,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -217,7 +215,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAbbreviation()
             {
@@ -231,7 +229,8 @@ namespace Square.Models
             /// <returns> StandardUnitDescription. </returns>
             public StandardUnitDescription Build()
             {
-                return new StandardUnitDescription(shouldSerialize,
+                return new StandardUnitDescription(
+                    shouldSerialize,
                     this.unit,
                     this.name,
                     this.abbreviation);

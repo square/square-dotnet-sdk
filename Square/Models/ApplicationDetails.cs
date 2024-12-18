@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "application_id", false }
             };
-
             this.SquareProduct = squareProduct;
+
             if (applicationId != null)
             {
                 shouldSerialize["application_id"] = true;
                 this.ApplicationId = applicationId;
             }
-
         }
-        internal ApplicationDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal ApplicationDetails(
+            Dictionary<string, bool> shouldSerialize,
             string squareProduct = null,
             string applicationId = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ApplicationDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -90,27 +89,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ApplicationDetails other &&                ((this.SquareProduct == null && other.SquareProduct == null) || (this.SquareProduct?.Equals(other.SquareProduct) == true)) &&
-                ((this.ApplicationId == null && other.ApplicationId == null) || (this.ApplicationId?.Equals(other.ApplicationId) == true));
+            return obj is ApplicationDetails other &&
+                (this.SquareProduct == null && other.SquareProduct == null ||
+                 this.SquareProduct?.Equals(other.SquareProduct) == true) &&
+                (this.ApplicationId == null && other.ApplicationId == null ||
+                 this.ApplicationId?.Equals(other.ApplicationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1983703019;
-            hashCode = HashCode.Combine(this.SquareProduct, this.ApplicationId);
+            var hashCode = 1983703019;
+            hashCode = HashCode.Combine(hashCode, this.SquareProduct, this.ApplicationId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -118,7 +115,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.SquareProduct = {(this.SquareProduct == null ? "null" : this.SquareProduct.ToString())}");
-            toStringOutput.Add($"this.ApplicationId = {(this.ApplicationId == null ? "null" : this.ApplicationId)}");
+            toStringOutput.Add($"this.ApplicationId = {this.ApplicationId ?? "null"}");
         }
 
         /// <summary>
@@ -170,7 +167,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApplicationId()
             {
@@ -184,7 +181,8 @@ namespace Square.Models
             /// <returns> ApplicationDetails. </returns>
             public ApplicationDetails Build()
             {
-                return new ApplicationDetails(shouldSerialize,
+                return new ApplicationDetails(
+                    shouldSerialize,
                     this.squareProduct,
                     this.applicationId);
             }

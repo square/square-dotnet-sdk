@@ -74,39 +74,38 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyEventFilter : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyEventFilter other &&                ((this.LoyaltyAccountFilter == null && other.LoyaltyAccountFilter == null) || (this.LoyaltyAccountFilter?.Equals(other.LoyaltyAccountFilter) == true)) &&
-                ((this.TypeFilter == null && other.TypeFilter == null) || (this.TypeFilter?.Equals(other.TypeFilter) == true)) &&
-                ((this.DateTimeFilter == null && other.DateTimeFilter == null) || (this.DateTimeFilter?.Equals(other.DateTimeFilter) == true)) &&
-                ((this.LocationFilter == null && other.LocationFilter == null) || (this.LocationFilter?.Equals(other.LocationFilter) == true)) &&
-                ((this.OrderFilter == null && other.OrderFilter == null) || (this.OrderFilter?.Equals(other.OrderFilter) == true));
+            return obj is LoyaltyEventFilter other &&
+                (this.LoyaltyAccountFilter == null && other.LoyaltyAccountFilter == null ||
+                 this.LoyaltyAccountFilter?.Equals(other.LoyaltyAccountFilter) == true) &&
+                (this.TypeFilter == null && other.TypeFilter == null ||
+                 this.TypeFilter?.Equals(other.TypeFilter) == true) &&
+                (this.DateTimeFilter == null && other.DateTimeFilter == null ||
+                 this.DateTimeFilter?.Equals(other.DateTimeFilter) == true) &&
+                (this.LocationFilter == null && other.LocationFilter == null ||
+                 this.LocationFilter?.Equals(other.LocationFilter) == true) &&
+                (this.OrderFilter == null && other.OrderFilter == null ||
+                 this.OrderFilter?.Equals(other.OrderFilter) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1266972041;
-            hashCode = HashCode.Combine(this.LoyaltyAccountFilter, this.TypeFilter, this.DateTimeFilter, this.LocationFilter, this.OrderFilter);
+            var hashCode = 1266972041;
+            hashCode = HashCode.Combine(hashCode, this.LoyaltyAccountFilter, this.TypeFilter, this.DateTimeFilter, this.LocationFilter, this.OrderFilter);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

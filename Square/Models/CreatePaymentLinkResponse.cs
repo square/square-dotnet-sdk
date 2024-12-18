@@ -63,43 +63,41 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CreatePaymentLinkResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CreatePaymentLinkResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.PaymentLink == null && other.PaymentLink == null) || (this.PaymentLink?.Equals(other.PaymentLink) == true)) &&
-                ((this.RelatedResources == null && other.RelatedResources == null) || (this.RelatedResources?.Equals(other.RelatedResources) == true));
+            return obj is CreatePaymentLinkResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.PaymentLink == null && other.PaymentLink == null ||
+                 this.PaymentLink?.Equals(other.PaymentLink) == true) &&
+                (this.RelatedResources == null && other.RelatedResources == null ||
+                 this.RelatedResources?.Equals(other.RelatedResources) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 383213681;
+            var hashCode = 383213681;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.PaymentLink, this.RelatedResources);
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.PaymentLink, this.RelatedResources);
 
             return hashCode;
         }
+
         internal CreatePaymentLinkResponse ContextSetter(HttpContext context)
         {
             this.Context = context;

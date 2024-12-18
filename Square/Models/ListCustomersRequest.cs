@@ -52,17 +52,18 @@ namespace Square.Models
                 shouldSerialize["limit"] = true;
                 this.Limit = limit;
             }
-
             this.SortField = sortField;
             this.SortOrder = sortOrder;
+
             if (count != null)
             {
                 shouldSerialize["count"] = true;
                 this.Count = count;
             }
-
         }
-        internal ListCustomersRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListCustomersRequest(
+            Dictionary<string, bool> shouldSerialize,
             string cursor = null,
             int? limit = null,
             string sortField = null,
@@ -116,9 +117,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListCustomersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -152,37 +151,38 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListCustomersRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.SortField == null && other.SortField == null) || (this.SortField?.Equals(other.SortField) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
-                ((this.Count == null && other.Count == null) || (this.Count?.Equals(other.Count) == true));
+            return obj is ListCustomersRequest other &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.SortField == null && other.SortField == null ||
+                 this.SortField?.Equals(other.SortField) == true) &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true) &&
+                (this.Count == null && other.Count == null ||
+                 this.Count?.Equals(other.Count) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2144515002;
-            hashCode = HashCode.Combine(this.Cursor, this.Limit, this.SortField, this.SortOrder, this.Count);
+            var hashCode = -2144515002;
+            hashCode = HashCode.Combine(hashCode, this.Cursor, this.Limit, this.SortField, this.SortOrder, this.Count);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.SortField = {(this.SortField == null ? "null" : this.SortField.ToString())}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
@@ -281,7 +281,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -289,7 +289,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -297,7 +297,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCount()
             {
@@ -311,7 +311,8 @@ namespace Square.Models
             /// <returns> ListCustomersRequest. </returns>
             public ListCustomersRequest Build()
             {
-                return new ListCustomersRequest(shouldSerialize,
+                return new ListCustomersRequest(
+                    shouldSerialize,
                     this.cursor,
                     this.limit,
                     this.sortField,

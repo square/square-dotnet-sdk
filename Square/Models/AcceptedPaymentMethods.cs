@@ -63,9 +63,10 @@ namespace Square.Models
                 shouldSerialize["afterpay_clearpay"] = true;
                 this.AfterpayClearpay = afterpayClearpay;
             }
-
         }
-        internal AcceptedPaymentMethods(Dictionary<string, bool> shouldSerialize,
+
+        internal AcceptedPaymentMethods(
+            Dictionary<string, bool> shouldSerialize,
             bool? applePay = null,
             bool? googlePay = null,
             bool? cashAppPay = null,
@@ -106,9 +107,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"AcceptedPaymentMethods : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -151,29 +150,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is AcceptedPaymentMethods other &&                ((this.ApplePay == null && other.ApplePay == null) || (this.ApplePay?.Equals(other.ApplePay) == true)) &&
-                ((this.GooglePay == null && other.GooglePay == null) || (this.GooglePay?.Equals(other.GooglePay) == true)) &&
-                ((this.CashAppPay == null && other.CashAppPay == null) || (this.CashAppPay?.Equals(other.CashAppPay) == true)) &&
-                ((this.AfterpayClearpay == null && other.AfterpayClearpay == null) || (this.AfterpayClearpay?.Equals(other.AfterpayClearpay) == true));
+            return obj is AcceptedPaymentMethods other &&
+                (this.ApplePay == null && other.ApplePay == null ||
+                 this.ApplePay?.Equals(other.ApplePay) == true) &&
+                (this.GooglePay == null && other.GooglePay == null ||
+                 this.GooglePay?.Equals(other.GooglePay) == true) &&
+                (this.CashAppPay == null && other.CashAppPay == null ||
+                 this.CashAppPay?.Equals(other.CashAppPay) == true) &&
+                (this.AfterpayClearpay == null && other.AfterpayClearpay == null ||
+                 this.AfterpayClearpay?.Equals(other.AfterpayClearpay) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1012972110;
-            hashCode = HashCode.Combine(this.ApplePay, this.GooglePay, this.CashAppPay, this.AfterpayClearpay);
+            var hashCode = -1012972110;
+            hashCode = HashCode.Combine(hashCode, this.ApplePay, this.GooglePay, this.CashAppPay, this.AfterpayClearpay);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -267,7 +266,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApplePay()
             {
@@ -275,7 +274,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetGooglePay()
             {
@@ -283,7 +282,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCashAppPay()
             {
@@ -291,7 +290,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAfterpayClearpay()
             {
@@ -305,7 +304,8 @@ namespace Square.Models
             /// <returns> AcceptedPaymentMethods. </returns>
             public AcceptedPaymentMethods Build()
             {
-                return new AcceptedPaymentMethods(shouldSerialize,
+                return new AcceptedPaymentMethods(
+                    shouldSerialize,
                     this.applePay,
                     this.googlePay,
                     this.cashAppPay,

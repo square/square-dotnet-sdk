@@ -47,44 +47,40 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogQueryPrefix : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogQueryPrefix other &&                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
-                ((this.AttributePrefix == null && other.AttributePrefix == null) || (this.AttributePrefix?.Equals(other.AttributePrefix) == true));
+            return obj is CatalogQueryPrefix other &&
+                (this.AttributeName == null && other.AttributeName == null ||
+                 this.AttributeName?.Equals(other.AttributeName) == true) &&
+                (this.AttributePrefix == null && other.AttributePrefix == null ||
+                 this.AttributePrefix?.Equals(other.AttributePrefix) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -167354518;
-            hashCode = HashCode.Combine(this.AttributeName, this.AttributePrefix);
+            var hashCode = -167354518;
+            hashCode = HashCode.Combine(hashCode, this.AttributeName, this.AttributePrefix);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.AttributeName = {(this.AttributeName == null ? "null" : this.AttributeName)}");
-            toStringOutput.Add($"this.AttributePrefix = {(this.AttributePrefix == null ? "null" : this.AttributePrefix)}");
+            toStringOutput.Add($"this.AttributeName = {this.AttributeName ?? "null"}");
+            toStringOutput.Add($"this.AttributePrefix = {this.AttributePrefix ?? "null"}");
         }
 
         /// <summary>

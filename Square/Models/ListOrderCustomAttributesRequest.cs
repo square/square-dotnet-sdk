@@ -38,8 +38,8 @@ namespace Square.Models
                 { "limit", false },
                 { "with_definitions", false }
             };
-
             this.VisibilityFilter = visibilityFilter;
+
             if (cursor != null)
             {
                 shouldSerialize["cursor"] = true;
@@ -57,9 +57,10 @@ namespace Square.Models
                 shouldSerialize["with_definitions"] = true;
                 this.WithDefinitions = withDefinitions;
             }
-
         }
-        internal ListOrderCustomAttributesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListOrderCustomAttributesRequest(
+            Dictionary<string, bool> shouldSerialize,
             string visibilityFilter = null,
             string cursor = null,
             int? limit = null,
@@ -107,9 +108,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListOrderCustomAttributesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -143,29 +142,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListOrderCustomAttributesRequest other &&                ((this.VisibilityFilter == null && other.VisibilityFilter == null) || (this.VisibilityFilter?.Equals(other.VisibilityFilter) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.WithDefinitions == null && other.WithDefinitions == null) || (this.WithDefinitions?.Equals(other.WithDefinitions) == true));
+            return obj is ListOrderCustomAttributesRequest other &&
+                (this.VisibilityFilter == null && other.VisibilityFilter == null ||
+                 this.VisibilityFilter?.Equals(other.VisibilityFilter) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.WithDefinitions == null && other.WithDefinitions == null ||
+                 this.WithDefinitions?.Equals(other.WithDefinitions) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 57973103;
-            hashCode = HashCode.Combine(this.VisibilityFilter, this.Cursor, this.Limit, this.WithDefinitions);
+            var hashCode = 57973103;
+            hashCode = HashCode.Combine(hashCode, this.VisibilityFilter, this.Cursor, this.Limit, this.WithDefinitions);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -173,7 +172,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.VisibilityFilter = {(this.VisibilityFilter == null ? "null" : this.VisibilityFilter.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.WithDefinitions = {(this.WithDefinitions == null ? "null" : this.WithDefinitions.ToString())}");
         }
@@ -257,7 +256,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -265,7 +264,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -273,7 +272,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetWithDefinitions()
             {
@@ -287,7 +286,8 @@ namespace Square.Models
             /// <returns> ListOrderCustomAttributesRequest. </returns>
             public ListOrderCustomAttributesRequest Build()
             {
-                return new ListOrderCustomAttributesRequest(shouldSerialize,
+                return new ListOrderCustomAttributesRequest(
+                    shouldSerialize,
                     this.visibilityFilter,
                     this.cursor,
                     this.limit,

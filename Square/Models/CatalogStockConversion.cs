@@ -67,46 +67,43 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogStockConversion : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogStockConversion other &&                ((this.StockableItemVariationId == null && other.StockableItemVariationId == null) || (this.StockableItemVariationId?.Equals(other.StockableItemVariationId) == true)) &&
-                ((this.StockableQuantity == null && other.StockableQuantity == null) || (this.StockableQuantity?.Equals(other.StockableQuantity) == true)) &&
-                ((this.NonstockableQuantity == null && other.NonstockableQuantity == null) || (this.NonstockableQuantity?.Equals(other.NonstockableQuantity) == true));
+            return obj is CatalogStockConversion other &&
+                (this.StockableItemVariationId == null && other.StockableItemVariationId == null ||
+                 this.StockableItemVariationId?.Equals(other.StockableItemVariationId) == true) &&
+                (this.StockableQuantity == null && other.StockableQuantity == null ||
+                 this.StockableQuantity?.Equals(other.StockableQuantity) == true) &&
+                (this.NonstockableQuantity == null && other.NonstockableQuantity == null ||
+                 this.NonstockableQuantity?.Equals(other.NonstockableQuantity) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -670296029;
-            hashCode = HashCode.Combine(this.StockableItemVariationId, this.StockableQuantity, this.NonstockableQuantity);
+            var hashCode = -670296029;
+            hashCode = HashCode.Combine(hashCode, this.StockableItemVariationId, this.StockableQuantity, this.NonstockableQuantity);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.StockableItemVariationId = {(this.StockableItemVariationId == null ? "null" : this.StockableItemVariationId)}");
-            toStringOutput.Add($"this.StockableQuantity = {(this.StockableQuantity == null ? "null" : this.StockableQuantity)}");
-            toStringOutput.Add($"this.NonstockableQuantity = {(this.NonstockableQuantity == null ? "null" : this.NonstockableQuantity)}");
+            toStringOutput.Add($"this.StockableItemVariationId = {this.StockableItemVariationId ?? "null"}");
+            toStringOutput.Add($"this.StockableQuantity = {this.StockableQuantity ?? "null"}");
+            toStringOutput.Add($"this.NonstockableQuantity = {this.NonstockableQuantity ?? "null"}");
         }
 
         /// <summary>

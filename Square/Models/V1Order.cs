@@ -98,8 +98,8 @@ namespace Square.Models
                 shouldSerialize["errors"] = true;
                 this.Errors = errors;
             }
-
             this.Id = id;
+
             if (buyerEmail != null)
             {
                 shouldSerialize["buyer_email"] = true;
@@ -117,7 +117,6 @@ namespace Square.Models
                 shouldSerialize["recipient_phone_number"] = true;
                 this.RecipientPhoneNumber = recipientPhoneNumber;
             }
-
             this.State = state;
             this.ShippingAddress = shippingAddress;
             this.SubtotalMoney = subtotalMoney;
@@ -127,6 +126,7 @@ namespace Square.Models
             this.TotalDiscountMoney = totalDiscountMoney;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+
             if (expiresAt != null)
             {
                 shouldSerialize["expires_at"] = true;
@@ -162,8 +162,8 @@ namespace Square.Models
                 shouldSerialize["canceled_note"] = true;
                 this.CanceledNote = canceledNote;
             }
-
             this.Tender = tender;
+
             if (orderHistory != null)
             {
                 shouldSerialize["order_history"] = true;
@@ -187,9 +187,10 @@ namespace Square.Models
                 shouldSerialize["btc_price_satoshi"] = true;
                 this.BtcPriceSatoshi = btcPriceSatoshi;
             }
-
         }
-        internal V1Order(Dictionary<string, bool> shouldSerialize,
+
+        internal V1Order(
+            Dictionary<string, bool> shouldSerialize,
             IList<Models.Error> errors = null,
             string id = null,
             string buyerEmail = null,
@@ -421,9 +422,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"V1Order : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -556,53 +555,74 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is V1Order other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.BuyerEmail == null && other.BuyerEmail == null) || (this.BuyerEmail?.Equals(other.BuyerEmail) == true)) &&
-                ((this.RecipientName == null && other.RecipientName == null) || (this.RecipientName?.Equals(other.RecipientName) == true)) &&
-                ((this.RecipientPhoneNumber == null && other.RecipientPhoneNumber == null) || (this.RecipientPhoneNumber?.Equals(other.RecipientPhoneNumber) == true)) &&
-                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
-                ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
-                ((this.SubtotalMoney == null && other.SubtotalMoney == null) || (this.SubtotalMoney?.Equals(other.SubtotalMoney) == true)) &&
-                ((this.TotalShippingMoney == null && other.TotalShippingMoney == null) || (this.TotalShippingMoney?.Equals(other.TotalShippingMoney) == true)) &&
-                ((this.TotalTaxMoney == null && other.TotalTaxMoney == null) || (this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
-                ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
-                ((this.TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.BuyerNote == null && other.BuyerNote == null) || (this.BuyerNote?.Equals(other.BuyerNote) == true)) &&
-                ((this.CompletedNote == null && other.CompletedNote == null) || (this.CompletedNote?.Equals(other.CompletedNote) == true)) &&
-                ((this.RefundedNote == null && other.RefundedNote == null) || (this.RefundedNote?.Equals(other.RefundedNote) == true)) &&
-                ((this.CanceledNote == null && other.CanceledNote == null) || (this.CanceledNote?.Equals(other.CanceledNote) == true)) &&
-                ((this.Tender == null && other.Tender == null) || (this.Tender?.Equals(other.Tender) == true)) &&
-                ((this.OrderHistory == null && other.OrderHistory == null) || (this.OrderHistory?.Equals(other.OrderHistory) == true)) &&
-                ((this.PromoCode == null && other.PromoCode == null) || (this.PromoCode?.Equals(other.PromoCode) == true)) &&
-                ((this.BtcReceiveAddress == null && other.BtcReceiveAddress == null) || (this.BtcReceiveAddress?.Equals(other.BtcReceiveAddress) == true)) &&
-                ((this.BtcPriceSatoshi == null && other.BtcPriceSatoshi == null) || (this.BtcPriceSatoshi?.Equals(other.BtcPriceSatoshi) == true));
+            return obj is V1Order other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.BuyerEmail == null && other.BuyerEmail == null ||
+                 this.BuyerEmail?.Equals(other.BuyerEmail) == true) &&
+                (this.RecipientName == null && other.RecipientName == null ||
+                 this.RecipientName?.Equals(other.RecipientName) == true) &&
+                (this.RecipientPhoneNumber == null && other.RecipientPhoneNumber == null ||
+                 this.RecipientPhoneNumber?.Equals(other.RecipientPhoneNumber) == true) &&
+                (this.State == null && other.State == null ||
+                 this.State?.Equals(other.State) == true) &&
+                (this.ShippingAddress == null && other.ShippingAddress == null ||
+                 this.ShippingAddress?.Equals(other.ShippingAddress) == true) &&
+                (this.SubtotalMoney == null && other.SubtotalMoney == null ||
+                 this.SubtotalMoney?.Equals(other.SubtotalMoney) == true) &&
+                (this.TotalShippingMoney == null && other.TotalShippingMoney == null ||
+                 this.TotalShippingMoney?.Equals(other.TotalShippingMoney) == true) &&
+                (this.TotalTaxMoney == null && other.TotalTaxMoney == null ||
+                 this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true) &&
+                (this.TotalPriceMoney == null && other.TotalPriceMoney == null ||
+                 this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true) &&
+                (this.TotalDiscountMoney == null && other.TotalDiscountMoney == null ||
+                 this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.ExpiresAt == null && other.ExpiresAt == null ||
+                 this.ExpiresAt?.Equals(other.ExpiresAt) == true) &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true) &&
+                (this.BuyerNote == null && other.BuyerNote == null ||
+                 this.BuyerNote?.Equals(other.BuyerNote) == true) &&
+                (this.CompletedNote == null && other.CompletedNote == null ||
+                 this.CompletedNote?.Equals(other.CompletedNote) == true) &&
+                (this.RefundedNote == null && other.RefundedNote == null ||
+                 this.RefundedNote?.Equals(other.RefundedNote) == true) &&
+                (this.CanceledNote == null && other.CanceledNote == null ||
+                 this.CanceledNote?.Equals(other.CanceledNote) == true) &&
+                (this.Tender == null && other.Tender == null ||
+                 this.Tender?.Equals(other.Tender) == true) &&
+                (this.OrderHistory == null && other.OrderHistory == null ||
+                 this.OrderHistory?.Equals(other.OrderHistory) == true) &&
+                (this.PromoCode == null && other.PromoCode == null ||
+                 this.PromoCode?.Equals(other.PromoCode) == true) &&
+                (this.BtcReceiveAddress == null && other.BtcReceiveAddress == null ||
+                 this.BtcReceiveAddress?.Equals(other.BtcReceiveAddress) == true) &&
+                (this.BtcPriceSatoshi == null && other.BtcPriceSatoshi == null ||
+                 this.BtcPriceSatoshi?.Equals(other.BtcPriceSatoshi) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 820864276;
+            var hashCode = 820864276;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.Id, this.BuyerEmail, this.RecipientName, this.RecipientPhoneNumber, this.State, this.ShippingAddress);
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.Id, this.BuyerEmail, this.RecipientName, this.RecipientPhoneNumber, this.State, this.ShippingAddress);
 
             hashCode = HashCode.Combine(hashCode, this.SubtotalMoney, this.TotalShippingMoney, this.TotalTaxMoney, this.TotalPriceMoney, this.TotalDiscountMoney, this.CreatedAt, this.UpdatedAt);
 
@@ -612,6 +632,7 @@ namespace Square.Models
 
             return hashCode;
         }
+
         internal V1Order ContextSetter(HttpContext context)
         {
             this.Context = context;
@@ -625,10 +646,10 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.BuyerEmail = {(this.BuyerEmail == null ? "null" : this.BuyerEmail)}");
-            toStringOutput.Add($"this.RecipientName = {(this.RecipientName == null ? "null" : this.RecipientName)}");
-            toStringOutput.Add($"this.RecipientPhoneNumber = {(this.RecipientPhoneNumber == null ? "null" : this.RecipientPhoneNumber)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.BuyerEmail = {this.BuyerEmail ?? "null"}");
+            toStringOutput.Add($"this.RecipientName = {this.RecipientName ?? "null"}");
+            toStringOutput.Add($"this.RecipientPhoneNumber = {this.RecipientPhoneNumber ?? "null"}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
             toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
             toStringOutput.Add($"this.SubtotalMoney = {(this.SubtotalMoney == null ? "null" : this.SubtotalMoney.ToString())}");
@@ -636,18 +657,18 @@ namespace Square.Models
             toStringOutput.Add($"this.TotalTaxMoney = {(this.TotalTaxMoney == null ? "null" : this.TotalTaxMoney.ToString())}");
             toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
             toStringOutput.Add($"this.TotalDiscountMoney = {(this.TotalDiscountMoney == null ? "null" : this.TotalDiscountMoney.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt)}");
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
-            toStringOutput.Add($"this.BuyerNote = {(this.BuyerNote == null ? "null" : this.BuyerNote)}");
-            toStringOutput.Add($"this.CompletedNote = {(this.CompletedNote == null ? "null" : this.CompletedNote)}");
-            toStringOutput.Add($"this.RefundedNote = {(this.RefundedNote == null ? "null" : this.RefundedNote)}");
-            toStringOutput.Add($"this.CanceledNote = {(this.CanceledNote == null ? "null" : this.CanceledNote)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.ExpiresAt = {this.ExpiresAt ?? "null"}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
+            toStringOutput.Add($"this.BuyerNote = {this.BuyerNote ?? "null"}");
+            toStringOutput.Add($"this.CompletedNote = {this.CompletedNote ?? "null"}");
+            toStringOutput.Add($"this.RefundedNote = {this.RefundedNote ?? "null"}");
+            toStringOutput.Add($"this.CanceledNote = {this.CanceledNote ?? "null"}");
             toStringOutput.Add($"this.Tender = {(this.Tender == null ? "null" : this.Tender.ToString())}");
             toStringOutput.Add($"this.OrderHistory = {(this.OrderHistory == null ? "null" : $"[{string.Join(", ", this.OrderHistory)} ]")}");
-            toStringOutput.Add($"this.PromoCode = {(this.PromoCode == null ? "null" : this.PromoCode)}");
-            toStringOutput.Add($"this.BtcReceiveAddress = {(this.BtcReceiveAddress == null ? "null" : this.BtcReceiveAddress)}");
+            toStringOutput.Add($"this.PromoCode = {this.PromoCode ?? "null"}");
+            toStringOutput.Add($"this.BtcReceiveAddress = {this.BtcReceiveAddress ?? "null"}");
             toStringOutput.Add($"this.BtcPriceSatoshi = {(this.BtcPriceSatoshi == null ? "null" : this.BtcPriceSatoshi.ToString())}");
         }
 
@@ -1025,7 +1046,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetErrors()
             {
@@ -1033,7 +1054,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBuyerEmail()
             {
@@ -1041,7 +1062,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRecipientName()
             {
@@ -1049,7 +1070,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRecipientPhoneNumber()
             {
@@ -1057,7 +1078,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetExpiresAt()
             {
@@ -1065,7 +1086,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentId()
             {
@@ -1073,7 +1094,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBuyerNote()
             {
@@ -1081,7 +1102,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCompletedNote()
             {
@@ -1089,7 +1110,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRefundedNote()
             {
@@ -1097,7 +1118,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCanceledNote()
             {
@@ -1105,7 +1126,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderHistory()
             {
@@ -1113,7 +1134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPromoCode()
             {
@@ -1121,7 +1142,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBtcReceiveAddress()
             {
@@ -1129,7 +1150,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBtcPriceSatoshi()
             {
@@ -1143,7 +1164,8 @@ namespace Square.Models
             /// <returns> V1Order. </returns>
             public V1Order Build()
             {
-                return new V1Order(shouldSerialize,
+                return new V1Order(
+                    shouldSerialize,
                     this.errors,
                     this.id,
                     this.buyerEmail,

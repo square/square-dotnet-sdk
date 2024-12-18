@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["with_definition"] = true;
                 this.WithDefinition = withDefinition;
             }
-
             this.Version = version;
         }
-        internal RetrieveLocationCustomAttributeRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal RetrieveLocationCustomAttributeRequest(
+            Dictionary<string, bool> shouldSerialize,
             bool? withDefinition = null,
             int? version = null)
         {
@@ -71,9 +72,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RetrieveLocationCustomAttributeRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -89,27 +88,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RetrieveLocationCustomAttributeRequest other &&                ((this.WithDefinition == null && other.WithDefinition == null) || (this.WithDefinition?.Equals(other.WithDefinition) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true));
+            return obj is RetrieveLocationCustomAttributeRequest other &&
+                (this.WithDefinition == null && other.WithDefinition == null ||
+                 this.WithDefinition?.Equals(other.WithDefinition) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -959507788;
-            hashCode = HashCode.Combine(this.WithDefinition, this.Version);
+            var hashCode = -959507788;
+            hashCode = HashCode.Combine(hashCode, this.WithDefinition, this.Version);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -169,7 +166,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetWithDefinition()
             {
@@ -183,7 +180,8 @@ namespace Square.Models
             /// <returns> RetrieveLocationCustomAttributeRequest. </returns>
             public RetrieveLocationCustomAttributeRequest Build()
             {
-                return new RetrieveLocationCustomAttributeRequest(shouldSerialize,
+                return new RetrieveLocationCustomAttributeRequest(
+                    shouldSerialize,
                     this.withDefinition,
                     this.version);
             }

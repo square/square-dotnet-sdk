@@ -47,9 +47,9 @@ namespace Square.Models
                 { "manufacturers_id", false },
                 { "merchant_token", false }
             };
-
             this.Type = type;
             this.Manufacturer = manufacturer;
+
             if (model != null)
             {
                 shouldSerialize["model"] = true;
@@ -67,17 +67,18 @@ namespace Square.Models
                 shouldSerialize["manufacturers_id"] = true;
                 this.ManufacturersId = manufacturersId;
             }
-
             this.UpdatedAt = updatedAt;
             this.Version = version;
+
             if (merchantToken != null)
             {
                 shouldSerialize["merchant_token"] = true;
                 this.MerchantToken = merchantToken;
             }
-
         }
-        internal DeviceAttributes(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceAttributes(
+            Dictionary<string, bool> shouldSerialize,
             string type,
             string manufacturer,
             string model = null,
@@ -152,9 +153,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceAttributes : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -197,49 +196,53 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceAttributes other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.Manufacturer == null && other.Manufacturer == null) || (this.Manufacturer?.Equals(other.Manufacturer) == true)) &&
-                ((this.Model == null && other.Model == null) || (this.Model?.Equals(other.Model) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.ManufacturersId == null && other.ManufacturersId == null) || (this.ManufacturersId?.Equals(other.ManufacturersId) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.MerchantToken == null && other.MerchantToken == null) || (this.MerchantToken?.Equals(other.MerchantToken) == true));
+            return obj is DeviceAttributes other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.Manufacturer == null && other.Manufacturer == null ||
+                 this.Manufacturer?.Equals(other.Manufacturer) == true) &&
+                (this.Model == null && other.Model == null ||
+                 this.Model?.Equals(other.Model) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.ManufacturersId == null && other.ManufacturersId == null ||
+                 this.ManufacturersId?.Equals(other.ManufacturersId) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.MerchantToken == null && other.MerchantToken == null ||
+                 this.MerchantToken?.Equals(other.MerchantToken) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1577650539;
-            hashCode = HashCode.Combine(this.Type, this.Manufacturer, this.Model, this.Name, this.ManufacturersId, this.UpdatedAt, this.Version);
+            var hashCode = 1577650539;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.Manufacturer, this.Model, this.Name, this.ManufacturersId, this.UpdatedAt, this.Version);
 
             hashCode = HashCode.Combine(hashCode, this.MerchantToken);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type)}");
-            toStringOutput.Add($"this.Manufacturer = {(this.Manufacturer == null ? "null" : this.Manufacturer)}");
-            toStringOutput.Add($"this.Model = {(this.Model == null ? "null" : this.Model)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.ManufacturersId = {(this.ManufacturersId == null ? "null" : this.ManufacturersId)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version)}");
-            toStringOutput.Add($"this.MerchantToken = {(this.MerchantToken == null ? "null" : this.MerchantToken)}");
+            toStringOutput.Add($"this.Type = {this.Type ?? "null"}");
+            toStringOutput.Add($"this.Manufacturer = {this.Manufacturer ?? "null"}");
+            toStringOutput.Add($"this.Model = {this.Model ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.ManufacturersId = {this.ManufacturersId ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.Version = {this.Version ?? "null"}");
+            toStringOutput.Add($"this.MerchantToken = {this.MerchantToken ?? "null"}");
         }
 
         /// <summary>
@@ -388,7 +391,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetModel()
             {
@@ -396,7 +399,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -404,7 +407,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetManufacturersId()
             {
@@ -412,7 +415,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMerchantToken()
             {
@@ -426,7 +429,8 @@ namespace Square.Models
             /// <returns> DeviceAttributes. </returns>
             public DeviceAttributes Build()
             {
-                return new DeviceAttributes(shouldSerialize,
+                return new DeviceAttributes(
+                    shouldSerialize,
                     this.type,
                     this.manufacturer,
                     this.model,

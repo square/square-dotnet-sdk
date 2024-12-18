@@ -52,26 +52,27 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
             this.PriceMoney = priceMoney;
             this.PricingType = pricingType;
+
             if (trackInventory != null)
             {
                 shouldSerialize["track_inventory"] = true;
                 this.TrackInventory = trackInventory;
             }
-
             this.InventoryAlertType = inventoryAlertType;
+
             if (inventoryAlertThreshold != null)
             {
                 shouldSerialize["inventory_alert_threshold"] = true;
                 this.InventoryAlertThreshold = inventoryAlertThreshold;
             }
-
             this.SoldOut = soldOut;
             this.SoldOutValidUntil = soldOutValidUntil;
         }
-        internal ItemVariationLocationOverrides(Dictionary<string, bool> shouldSerialize,
+
+        internal ItemVariationLocationOverrides(
+            Dictionary<string, bool> shouldSerialize,
             string locationId = null,
             Models.Money priceMoney = null,
             string pricingType = null,
@@ -158,9 +159,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ItemVariationLocationOverrides : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -194,49 +193,53 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ItemVariationLocationOverrides other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true)) &&
-                ((this.PricingType == null && other.PricingType == null) || (this.PricingType?.Equals(other.PricingType) == true)) &&
-                ((this.TrackInventory == null && other.TrackInventory == null) || (this.TrackInventory?.Equals(other.TrackInventory) == true)) &&
-                ((this.InventoryAlertType == null && other.InventoryAlertType == null) || (this.InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
-                ((this.InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (this.InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true)) &&
-                ((this.SoldOut == null && other.SoldOut == null) || (this.SoldOut?.Equals(other.SoldOut) == true)) &&
-                ((this.SoldOutValidUntil == null && other.SoldOutValidUntil == null) || (this.SoldOutValidUntil?.Equals(other.SoldOutValidUntil) == true));
+            return obj is ItemVariationLocationOverrides other &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.PriceMoney == null && other.PriceMoney == null ||
+                 this.PriceMoney?.Equals(other.PriceMoney) == true) &&
+                (this.PricingType == null && other.PricingType == null ||
+                 this.PricingType?.Equals(other.PricingType) == true) &&
+                (this.TrackInventory == null && other.TrackInventory == null ||
+                 this.TrackInventory?.Equals(other.TrackInventory) == true) &&
+                (this.InventoryAlertType == null && other.InventoryAlertType == null ||
+                 this.InventoryAlertType?.Equals(other.InventoryAlertType) == true) &&
+                (this.InventoryAlertThreshold == null && other.InventoryAlertThreshold == null ||
+                 this.InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true) &&
+                (this.SoldOut == null && other.SoldOut == null ||
+                 this.SoldOut?.Equals(other.SoldOut) == true) &&
+                (this.SoldOutValidUntil == null && other.SoldOutValidUntil == null ||
+                 this.SoldOutValidUntil?.Equals(other.SoldOutValidUntil) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -292188840;
-            hashCode = HashCode.Combine(this.LocationId, this.PriceMoney, this.PricingType, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold, this.SoldOut);
+            var hashCode = -292188840;
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.PriceMoney, this.PricingType, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold, this.SoldOut);
 
             hashCode = HashCode.Combine(hashCode, this.SoldOutValidUntil);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
             toStringOutput.Add($"this.PricingType = {(this.PricingType == null ? "null" : this.PricingType.ToString())}");
             toStringOutput.Add($"this.TrackInventory = {(this.TrackInventory == null ? "null" : this.TrackInventory.ToString())}");
             toStringOutput.Add($"this.InventoryAlertType = {(this.InventoryAlertType == null ? "null" : this.InventoryAlertType.ToString())}");
             toStringOutput.Add($"this.InventoryAlertThreshold = {(this.InventoryAlertThreshold == null ? "null" : this.InventoryAlertThreshold.ToString())}");
             toStringOutput.Add($"this.SoldOut = {(this.SoldOut == null ? "null" : this.SoldOut.ToString())}");
-            toStringOutput.Add($"this.SoldOutValidUntil = {(this.SoldOutValidUntil == null ? "null" : this.SoldOutValidUntil)}");
+            toStringOutput.Add($"this.SoldOutValidUntil = {this.SoldOutValidUntil ?? "null"}");
         }
 
         /// <summary>
@@ -370,7 +373,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -378,7 +381,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTrackInventory()
             {
@@ -386,7 +389,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetInventoryAlertThreshold()
             {
@@ -400,7 +403,8 @@ namespace Square.Models
             /// <returns> ItemVariationLocationOverrides. </returns>
             public ItemVariationLocationOverrides Build()
             {
-                return new ItemVariationLocationOverrides(shouldSerialize,
+                return new ItemVariationLocationOverrides(
+                    shouldSerialize,
                     this.locationId,
                     this.priceMoney,
                     this.pricingType,

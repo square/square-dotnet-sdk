@@ -52,9 +52,9 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.CalculationPhase = calculationPhase;
             this.InclusionType = inclusionType;
+
             if (percentage != null)
             {
                 shouldSerialize["percentage"] = true;
@@ -78,9 +78,10 @@ namespace Square.Models
                 shouldSerialize["applies_to_product_set_id"] = true;
                 this.AppliesToProductSetId = appliesToProductSetId;
             }
-
         }
-        internal CatalogTax(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogTax(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             string calculationPhase = null,
             string inclusionType = null,
@@ -147,9 +148,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogTax : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -201,45 +200,48 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogTax other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.CalculationPhase == null && other.CalculationPhase == null) || (this.CalculationPhase?.Equals(other.CalculationPhase) == true)) &&
-                ((this.InclusionType == null && other.InclusionType == null) || (this.InclusionType?.Equals(other.InclusionType) == true)) &&
-                ((this.Percentage == null && other.Percentage == null) || (this.Percentage?.Equals(other.Percentage) == true)) &&
-                ((this.AppliesToCustomAmounts == null && other.AppliesToCustomAmounts == null) || (this.AppliesToCustomAmounts?.Equals(other.AppliesToCustomAmounts) == true)) &&
-                ((this.Enabled == null && other.Enabled == null) || (this.Enabled?.Equals(other.Enabled) == true)) &&
-                ((this.AppliesToProductSetId == null && other.AppliesToProductSetId == null) || (this.AppliesToProductSetId?.Equals(other.AppliesToProductSetId) == true));
+            return obj is CatalogTax other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.CalculationPhase == null && other.CalculationPhase == null ||
+                 this.CalculationPhase?.Equals(other.CalculationPhase) == true) &&
+                (this.InclusionType == null && other.InclusionType == null ||
+                 this.InclusionType?.Equals(other.InclusionType) == true) &&
+                (this.Percentage == null && other.Percentage == null ||
+                 this.Percentage?.Equals(other.Percentage) == true) &&
+                (this.AppliesToCustomAmounts == null && other.AppliesToCustomAmounts == null ||
+                 this.AppliesToCustomAmounts?.Equals(other.AppliesToCustomAmounts) == true) &&
+                (this.Enabled == null && other.Enabled == null ||
+                 this.Enabled?.Equals(other.Enabled) == true) &&
+                (this.AppliesToProductSetId == null && other.AppliesToProductSetId == null ||
+                 this.AppliesToProductSetId?.Equals(other.AppliesToProductSetId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -36050816;
-            hashCode = HashCode.Combine(this.Name, this.CalculationPhase, this.InclusionType, this.Percentage, this.AppliesToCustomAmounts, this.Enabled, this.AppliesToProductSetId);
+            var hashCode = -36050816;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.CalculationPhase, this.InclusionType, this.Percentage, this.AppliesToCustomAmounts, this.Enabled, this.AppliesToProductSetId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.CalculationPhase = {(this.CalculationPhase == null ? "null" : this.CalculationPhase.ToString())}");
             toStringOutput.Add($"this.InclusionType = {(this.InclusionType == null ? "null" : this.InclusionType.ToString())}");
-            toStringOutput.Add($"this.Percentage = {(this.Percentage == null ? "null" : this.Percentage)}");
+            toStringOutput.Add($"this.Percentage = {this.Percentage ?? "null"}");
             toStringOutput.Add($"this.AppliesToCustomAmounts = {(this.AppliesToCustomAmounts == null ? "null" : this.AppliesToCustomAmounts.ToString())}");
             toStringOutput.Add($"this.Enabled = {(this.Enabled == null ? "null" : this.Enabled.ToString())}");
-            toStringOutput.Add($"this.AppliesToProductSetId = {(this.AppliesToProductSetId == null ? "null" : this.AppliesToProductSetId)}");
+            toStringOutput.Add($"this.AppliesToProductSetId = {this.AppliesToProductSetId ?? "null"}");
         }
 
         /// <summary>
@@ -364,7 +366,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -372,7 +374,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPercentage()
             {
@@ -380,7 +382,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAppliesToCustomAmounts()
             {
@@ -388,7 +390,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEnabled()
             {
@@ -396,7 +398,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAppliesToProductSetId()
             {
@@ -410,7 +412,8 @@ namespace Square.Models
             /// <returns> CatalogTax. </returns>
             public CatalogTax Build()
             {
-                return new CatalogTax(shouldSerialize,
+                return new CatalogTax(
+                    shouldSerialize,
                     this.name,
                     this.calculationPhase,
                     this.inclusionType,

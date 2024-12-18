@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["cursor"] = true;
                 this.Cursor = cursor;
             }
-
         }
-        internal RetrieveInventoryCountRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal RetrieveInventoryCountRequest(
+            Dictionary<string, bool> shouldSerialize,
             string locationIds = null,
             string cursor = null)
         {
@@ -75,9 +76,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RetrieveInventoryCountRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -102,35 +101,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RetrieveInventoryCountRequest other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+            return obj is RetrieveInventoryCountRequest other &&
+                (this.LocationIds == null && other.LocationIds == null ||
+                 this.LocationIds?.Equals(other.LocationIds) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -618098554;
-            hashCode = HashCode.Combine(this.LocationIds, this.Cursor);
+            var hashCode = -618098554;
+            hashCode = HashCode.Combine(hashCode, this.LocationIds, this.Cursor);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : this.LocationIds)}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.LocationIds = {this.LocationIds ?? "null"}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
         }
 
         /// <summary>
@@ -184,7 +181,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationIds()
             {
@@ -192,7 +189,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -206,7 +203,8 @@ namespace Square.Models
             /// <returns> RetrieveInventoryCountRequest. </returns>
             public RetrieveInventoryCountRequest Build()
             {
-                return new RetrieveInventoryCountRequest(shouldSerialize,
+                return new RetrieveInventoryCountRequest(
+                    shouldSerialize,
                     this.locationIds,
                     this.cursor);
             }

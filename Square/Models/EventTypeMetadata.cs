@@ -56,46 +56,43 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"EventTypeMetadata : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is EventTypeMetadata other &&                ((this.EventType == null && other.EventType == null) || (this.EventType?.Equals(other.EventType) == true)) &&
-                ((this.ApiVersionIntroduced == null && other.ApiVersionIntroduced == null) || (this.ApiVersionIntroduced?.Equals(other.ApiVersionIntroduced) == true)) &&
-                ((this.ReleaseStatus == null && other.ReleaseStatus == null) || (this.ReleaseStatus?.Equals(other.ReleaseStatus) == true));
+            return obj is EventTypeMetadata other &&
+                (this.EventType == null && other.EventType == null ||
+                 this.EventType?.Equals(other.EventType) == true) &&
+                (this.ApiVersionIntroduced == null && other.ApiVersionIntroduced == null ||
+                 this.ApiVersionIntroduced?.Equals(other.ApiVersionIntroduced) == true) &&
+                (this.ReleaseStatus == null && other.ReleaseStatus == null ||
+                 this.ReleaseStatus?.Equals(other.ReleaseStatus) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 863420362;
-            hashCode = HashCode.Combine(this.EventType, this.ApiVersionIntroduced, this.ReleaseStatus);
+            var hashCode = 863420362;
+            hashCode = HashCode.Combine(hashCode, this.EventType, this.ApiVersionIntroduced, this.ReleaseStatus);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.EventType = {(this.EventType == null ? "null" : this.EventType)}");
-            toStringOutput.Add($"this.ApiVersionIntroduced = {(this.ApiVersionIntroduced == null ? "null" : this.ApiVersionIntroduced)}");
-            toStringOutput.Add($"this.ReleaseStatus = {(this.ReleaseStatus == null ? "null" : this.ReleaseStatus)}");
+            toStringOutput.Add($"this.EventType = {this.EventType ?? "null"}");
+            toStringOutput.Add($"this.ApiVersionIntroduced = {this.ApiVersionIntroduced ?? "null"}");
+            toStringOutput.Add($"this.ReleaseStatus = {this.ReleaseStatus ?? "null"}");
         }
 
         /// <summary>

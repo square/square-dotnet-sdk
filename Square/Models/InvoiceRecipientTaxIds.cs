@@ -38,42 +38,37 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InvoiceRecipientTaxIds : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InvoiceRecipientTaxIds other &&                ((this.EuVat == null && other.EuVat == null) || (this.EuVat?.Equals(other.EuVat) == true));
+            return obj is InvoiceRecipientTaxIds other &&
+                (this.EuVat == null && other.EuVat == null ||
+                 this.EuVat?.Equals(other.EuVat) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 631412968;
-            hashCode = HashCode.Combine(this.EuVat);
+            var hashCode = 631412968;
+            hashCode = HashCode.Combine(hashCode, this.EuVat);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.EuVat = {(this.EuVat == null ? "null" : this.EuVat)}");
+            toStringOutput.Add($"this.EuVat = {this.EuVat ?? "null"}");
         }
 
         /// <summary>

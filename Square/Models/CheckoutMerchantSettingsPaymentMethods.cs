@@ -65,38 +65,36 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CheckoutMerchantSettingsPaymentMethods : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CheckoutMerchantSettingsPaymentMethods other &&                ((this.ApplePay == null && other.ApplePay == null) || (this.ApplePay?.Equals(other.ApplePay) == true)) &&
-                ((this.GooglePay == null && other.GooglePay == null) || (this.GooglePay?.Equals(other.GooglePay) == true)) &&
-                ((this.CashApp == null && other.CashApp == null) || (this.CashApp?.Equals(other.CashApp) == true)) &&
-                ((this.AfterpayClearpay == null && other.AfterpayClearpay == null) || (this.AfterpayClearpay?.Equals(other.AfterpayClearpay) == true));
+            return obj is CheckoutMerchantSettingsPaymentMethods other &&
+                (this.ApplePay == null && other.ApplePay == null ||
+                 this.ApplePay?.Equals(other.ApplePay) == true) &&
+                (this.GooglePay == null && other.GooglePay == null ||
+                 this.GooglePay?.Equals(other.GooglePay) == true) &&
+                (this.CashApp == null && other.CashApp == null ||
+                 this.CashApp?.Equals(other.CashApp) == true) &&
+                (this.AfterpayClearpay == null && other.AfterpayClearpay == null ||
+                 this.AfterpayClearpay?.Equals(other.AfterpayClearpay) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 761016599;
-            hashCode = HashCode.Combine(this.ApplePay, this.GooglePay, this.CashApp, this.AfterpayClearpay);
+            var hashCode = 761016599;
+            hashCode = HashCode.Combine(hashCode, this.ApplePay, this.GooglePay, this.CashApp, this.AfterpayClearpay);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

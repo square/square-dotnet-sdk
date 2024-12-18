@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["filetype"] = true;
                 this.Filetype = filetype;
             }
-
         }
-        internal DisputeEvidenceFile(Dictionary<string, bool> shouldSerialize,
+
+        internal DisputeEvidenceFile(
+            Dictionary<string, bool> shouldSerialize,
             string filename = null,
             string filetype = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DisputeEvidenceFile : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,35 +98,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DisputeEvidenceFile other &&                ((this.Filename == null && other.Filename == null) || (this.Filename?.Equals(other.Filename) == true)) &&
-                ((this.Filetype == null && other.Filetype == null) || (this.Filetype?.Equals(other.Filetype) == true));
+            return obj is DisputeEvidenceFile other &&
+                (this.Filename == null && other.Filename == null ||
+                 this.Filename?.Equals(other.Filename) == true) &&
+                (this.Filetype == null && other.Filetype == null ||
+                 this.Filetype?.Equals(other.Filetype) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 868250934;
-            hashCode = HashCode.Combine(this.Filename, this.Filetype);
+            var hashCode = 868250934;
+            hashCode = HashCode.Combine(hashCode, this.Filename, this.Filetype);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Filename = {(this.Filename == null ? "null" : this.Filename)}");
-            toStringOutput.Add($"this.Filetype = {(this.Filetype == null ? "null" : this.Filetype)}");
+            toStringOutput.Add($"this.Filename = {this.Filename ?? "null"}");
+            toStringOutput.Add($"this.Filetype = {this.Filetype ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFilename()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFiletype()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> DisputeEvidenceFile. </returns>
             public DisputeEvidenceFile Build()
             {
-                return new DisputeEvidenceFile(shouldSerialize,
+                return new DisputeEvidenceFile(
+                    shouldSerialize,
                     this.filename,
                     this.filetype);
             }

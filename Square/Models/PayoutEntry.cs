@@ -92,15 +92,14 @@ namespace Square.Models
             {
                 { "effective_at", false }
             };
-
             this.Id = id;
             this.PayoutId = payoutId;
+
             if (effectiveAt != null)
             {
                 shouldSerialize["effective_at"] = true;
                 this.EffectiveAt = effectiveAt;
             }
-
             this.Type = type;
             this.GrossAmountMoney = grossAmountMoney;
             this.FeeAmountMoney = feeAmountMoney;
@@ -131,7 +130,9 @@ namespace Square.Models
             this.TypeSquarePayrollTransferDetails = typeSquarePayrollTransferDetails;
             this.TypeSquarePayrollTransferReversedDetails = typeSquarePayrollTransferReversedDetails;
         }
-        internal PayoutEntry(Dictionary<string, bool> shouldSerialize,
+
+        internal PayoutEntry(
+            Dictionary<string, bool> shouldSerialize,
             string id,
             string payoutId,
             string effectiveAt = null,
@@ -411,9 +412,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PayoutEntry : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -429,54 +428,81 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PayoutEntry other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.PayoutId == null && other.PayoutId == null) || (this.PayoutId?.Equals(other.PayoutId) == true)) &&
-                ((this.EffectiveAt == null && other.EffectiveAt == null) || (this.EffectiveAt?.Equals(other.EffectiveAt) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.GrossAmountMoney == null && other.GrossAmountMoney == null) || (this.GrossAmountMoney?.Equals(other.GrossAmountMoney) == true)) &&
-                ((this.FeeAmountMoney == null && other.FeeAmountMoney == null) || (this.FeeAmountMoney?.Equals(other.FeeAmountMoney) == true)) &&
-                ((this.NetAmountMoney == null && other.NetAmountMoney == null) || (this.NetAmountMoney?.Equals(other.NetAmountMoney) == true)) &&
-                ((this.TypeAppFeeRevenueDetails == null && other.TypeAppFeeRevenueDetails == null) || (this.TypeAppFeeRevenueDetails?.Equals(other.TypeAppFeeRevenueDetails) == true)) &&
-                ((this.TypeAppFeeRefundDetails == null && other.TypeAppFeeRefundDetails == null) || (this.TypeAppFeeRefundDetails?.Equals(other.TypeAppFeeRefundDetails) == true)) &&
-                ((this.TypeAutomaticSavingsDetails == null && other.TypeAutomaticSavingsDetails == null) || (this.TypeAutomaticSavingsDetails?.Equals(other.TypeAutomaticSavingsDetails) == true)) &&
-                ((this.TypeAutomaticSavingsReversedDetails == null && other.TypeAutomaticSavingsReversedDetails == null) || (this.TypeAutomaticSavingsReversedDetails?.Equals(other.TypeAutomaticSavingsReversedDetails) == true)) &&
-                ((this.TypeChargeDetails == null && other.TypeChargeDetails == null) || (this.TypeChargeDetails?.Equals(other.TypeChargeDetails) == true)) &&
-                ((this.TypeDepositFeeDetails == null && other.TypeDepositFeeDetails == null) || (this.TypeDepositFeeDetails?.Equals(other.TypeDepositFeeDetails) == true)) &&
-                ((this.TypeDepositFeeReversedDetails == null && other.TypeDepositFeeReversedDetails == null) || (this.TypeDepositFeeReversedDetails?.Equals(other.TypeDepositFeeReversedDetails) == true)) &&
-                ((this.TypeDisputeDetails == null && other.TypeDisputeDetails == null) || (this.TypeDisputeDetails?.Equals(other.TypeDisputeDetails) == true)) &&
-                ((this.TypeFeeDetails == null && other.TypeFeeDetails == null) || (this.TypeFeeDetails?.Equals(other.TypeFeeDetails) == true)) &&
-                ((this.TypeFreeProcessingDetails == null && other.TypeFreeProcessingDetails == null) || (this.TypeFreeProcessingDetails?.Equals(other.TypeFreeProcessingDetails) == true)) &&
-                ((this.TypeHoldAdjustmentDetails == null && other.TypeHoldAdjustmentDetails == null) || (this.TypeHoldAdjustmentDetails?.Equals(other.TypeHoldAdjustmentDetails) == true)) &&
-                ((this.TypeOpenDisputeDetails == null && other.TypeOpenDisputeDetails == null) || (this.TypeOpenDisputeDetails?.Equals(other.TypeOpenDisputeDetails) == true)) &&
-                ((this.TypeOtherDetails == null && other.TypeOtherDetails == null) || (this.TypeOtherDetails?.Equals(other.TypeOtherDetails) == true)) &&
-                ((this.TypeOtherAdjustmentDetails == null && other.TypeOtherAdjustmentDetails == null) || (this.TypeOtherAdjustmentDetails?.Equals(other.TypeOtherAdjustmentDetails) == true)) &&
-                ((this.TypeRefundDetails == null && other.TypeRefundDetails == null) || (this.TypeRefundDetails?.Equals(other.TypeRefundDetails) == true)) &&
-                ((this.TypeReleaseAdjustmentDetails == null && other.TypeReleaseAdjustmentDetails == null) || (this.TypeReleaseAdjustmentDetails?.Equals(other.TypeReleaseAdjustmentDetails) == true)) &&
-                ((this.TypeReserveHoldDetails == null && other.TypeReserveHoldDetails == null) || (this.TypeReserveHoldDetails?.Equals(other.TypeReserveHoldDetails) == true)) &&
-                ((this.TypeReserveReleaseDetails == null && other.TypeReserveReleaseDetails == null) || (this.TypeReserveReleaseDetails?.Equals(other.TypeReserveReleaseDetails) == true)) &&
-                ((this.TypeSquareCapitalPaymentDetails == null && other.TypeSquareCapitalPaymentDetails == null) || (this.TypeSquareCapitalPaymentDetails?.Equals(other.TypeSquareCapitalPaymentDetails) == true)) &&
-                ((this.TypeSquareCapitalReversedPaymentDetails == null && other.TypeSquareCapitalReversedPaymentDetails == null) || (this.TypeSquareCapitalReversedPaymentDetails?.Equals(other.TypeSquareCapitalReversedPaymentDetails) == true)) &&
-                ((this.TypeTaxOnFeeDetails == null && other.TypeTaxOnFeeDetails == null) || (this.TypeTaxOnFeeDetails?.Equals(other.TypeTaxOnFeeDetails) == true)) &&
-                ((this.TypeThirdPartyFeeDetails == null && other.TypeThirdPartyFeeDetails == null) || (this.TypeThirdPartyFeeDetails?.Equals(other.TypeThirdPartyFeeDetails) == true)) &&
-                ((this.TypeThirdPartyFeeRefundDetails == null && other.TypeThirdPartyFeeRefundDetails == null) || (this.TypeThirdPartyFeeRefundDetails?.Equals(other.TypeThirdPartyFeeRefundDetails) == true)) &&
-                ((this.TypeSquarePayrollTransferDetails == null && other.TypeSquarePayrollTransferDetails == null) || (this.TypeSquarePayrollTransferDetails?.Equals(other.TypeSquarePayrollTransferDetails) == true)) &&
-                ((this.TypeSquarePayrollTransferReversedDetails == null && other.TypeSquarePayrollTransferReversedDetails == null) || (this.TypeSquarePayrollTransferReversedDetails?.Equals(other.TypeSquarePayrollTransferReversedDetails) == true));
+            return obj is PayoutEntry other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.PayoutId == null && other.PayoutId == null ||
+                 this.PayoutId?.Equals(other.PayoutId) == true) &&
+                (this.EffectiveAt == null && other.EffectiveAt == null ||
+                 this.EffectiveAt?.Equals(other.EffectiveAt) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.GrossAmountMoney == null && other.GrossAmountMoney == null ||
+                 this.GrossAmountMoney?.Equals(other.GrossAmountMoney) == true) &&
+                (this.FeeAmountMoney == null && other.FeeAmountMoney == null ||
+                 this.FeeAmountMoney?.Equals(other.FeeAmountMoney) == true) &&
+                (this.NetAmountMoney == null && other.NetAmountMoney == null ||
+                 this.NetAmountMoney?.Equals(other.NetAmountMoney) == true) &&
+                (this.TypeAppFeeRevenueDetails == null && other.TypeAppFeeRevenueDetails == null ||
+                 this.TypeAppFeeRevenueDetails?.Equals(other.TypeAppFeeRevenueDetails) == true) &&
+                (this.TypeAppFeeRefundDetails == null && other.TypeAppFeeRefundDetails == null ||
+                 this.TypeAppFeeRefundDetails?.Equals(other.TypeAppFeeRefundDetails) == true) &&
+                (this.TypeAutomaticSavingsDetails == null && other.TypeAutomaticSavingsDetails == null ||
+                 this.TypeAutomaticSavingsDetails?.Equals(other.TypeAutomaticSavingsDetails) == true) &&
+                (this.TypeAutomaticSavingsReversedDetails == null && other.TypeAutomaticSavingsReversedDetails == null ||
+                 this.TypeAutomaticSavingsReversedDetails?.Equals(other.TypeAutomaticSavingsReversedDetails) == true) &&
+                (this.TypeChargeDetails == null && other.TypeChargeDetails == null ||
+                 this.TypeChargeDetails?.Equals(other.TypeChargeDetails) == true) &&
+                (this.TypeDepositFeeDetails == null && other.TypeDepositFeeDetails == null ||
+                 this.TypeDepositFeeDetails?.Equals(other.TypeDepositFeeDetails) == true) &&
+                (this.TypeDepositFeeReversedDetails == null && other.TypeDepositFeeReversedDetails == null ||
+                 this.TypeDepositFeeReversedDetails?.Equals(other.TypeDepositFeeReversedDetails) == true) &&
+                (this.TypeDisputeDetails == null && other.TypeDisputeDetails == null ||
+                 this.TypeDisputeDetails?.Equals(other.TypeDisputeDetails) == true) &&
+                (this.TypeFeeDetails == null && other.TypeFeeDetails == null ||
+                 this.TypeFeeDetails?.Equals(other.TypeFeeDetails) == true) &&
+                (this.TypeFreeProcessingDetails == null && other.TypeFreeProcessingDetails == null ||
+                 this.TypeFreeProcessingDetails?.Equals(other.TypeFreeProcessingDetails) == true) &&
+                (this.TypeHoldAdjustmentDetails == null && other.TypeHoldAdjustmentDetails == null ||
+                 this.TypeHoldAdjustmentDetails?.Equals(other.TypeHoldAdjustmentDetails) == true) &&
+                (this.TypeOpenDisputeDetails == null && other.TypeOpenDisputeDetails == null ||
+                 this.TypeOpenDisputeDetails?.Equals(other.TypeOpenDisputeDetails) == true) &&
+                (this.TypeOtherDetails == null && other.TypeOtherDetails == null ||
+                 this.TypeOtherDetails?.Equals(other.TypeOtherDetails) == true) &&
+                (this.TypeOtherAdjustmentDetails == null && other.TypeOtherAdjustmentDetails == null ||
+                 this.TypeOtherAdjustmentDetails?.Equals(other.TypeOtherAdjustmentDetails) == true) &&
+                (this.TypeRefundDetails == null && other.TypeRefundDetails == null ||
+                 this.TypeRefundDetails?.Equals(other.TypeRefundDetails) == true) &&
+                (this.TypeReleaseAdjustmentDetails == null && other.TypeReleaseAdjustmentDetails == null ||
+                 this.TypeReleaseAdjustmentDetails?.Equals(other.TypeReleaseAdjustmentDetails) == true) &&
+                (this.TypeReserveHoldDetails == null && other.TypeReserveHoldDetails == null ||
+                 this.TypeReserveHoldDetails?.Equals(other.TypeReserveHoldDetails) == true) &&
+                (this.TypeReserveReleaseDetails == null && other.TypeReserveReleaseDetails == null ||
+                 this.TypeReserveReleaseDetails?.Equals(other.TypeReserveReleaseDetails) == true) &&
+                (this.TypeSquareCapitalPaymentDetails == null && other.TypeSquareCapitalPaymentDetails == null ||
+                 this.TypeSquareCapitalPaymentDetails?.Equals(other.TypeSquareCapitalPaymentDetails) == true) &&
+                (this.TypeSquareCapitalReversedPaymentDetails == null && other.TypeSquareCapitalReversedPaymentDetails == null ||
+                 this.TypeSquareCapitalReversedPaymentDetails?.Equals(other.TypeSquareCapitalReversedPaymentDetails) == true) &&
+                (this.TypeTaxOnFeeDetails == null && other.TypeTaxOnFeeDetails == null ||
+                 this.TypeTaxOnFeeDetails?.Equals(other.TypeTaxOnFeeDetails) == true) &&
+                (this.TypeThirdPartyFeeDetails == null && other.TypeThirdPartyFeeDetails == null ||
+                 this.TypeThirdPartyFeeDetails?.Equals(other.TypeThirdPartyFeeDetails) == true) &&
+                (this.TypeThirdPartyFeeRefundDetails == null && other.TypeThirdPartyFeeRefundDetails == null ||
+                 this.TypeThirdPartyFeeRefundDetails?.Equals(other.TypeThirdPartyFeeRefundDetails) == true) &&
+                (this.TypeSquarePayrollTransferDetails == null && other.TypeSquarePayrollTransferDetails == null ||
+                 this.TypeSquarePayrollTransferDetails?.Equals(other.TypeSquarePayrollTransferDetails) == true) &&
+                (this.TypeSquarePayrollTransferReversedDetails == null && other.TypeSquarePayrollTransferReversedDetails == null ||
+                 this.TypeSquarePayrollTransferReversedDetails?.Equals(other.TypeSquarePayrollTransferReversedDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 456729233;
-            hashCode = HashCode.Combine(this.Id, this.PayoutId, this.EffectiveAt, this.Type, this.GrossAmountMoney, this.FeeAmountMoney, this.NetAmountMoney);
+            var hashCode = 456729233;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.PayoutId, this.EffectiveAt, this.Type, this.GrossAmountMoney, this.FeeAmountMoney, this.NetAmountMoney);
 
             hashCode = HashCode.Combine(hashCode, this.TypeAppFeeRevenueDetails, this.TypeAppFeeRefundDetails, this.TypeAutomaticSavingsDetails, this.TypeAutomaticSavingsReversedDetails, this.TypeChargeDetails, this.TypeDepositFeeDetails, this.TypeDepositFeeReversedDetails);
 
@@ -488,15 +514,16 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.PayoutId = {(this.PayoutId == null ? "null" : this.PayoutId)}");
-            toStringOutput.Add($"this.EffectiveAt = {(this.EffectiveAt == null ? "null" : this.EffectiveAt)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.PayoutId = {this.PayoutId ?? "null"}");
+            toStringOutput.Add($"this.EffectiveAt = {this.EffectiveAt ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.GrossAmountMoney = {(this.GrossAmountMoney == null ? "null" : this.GrossAmountMoney.ToString())}");
             toStringOutput.Add($"this.FeeAmountMoney = {(this.FeeAmountMoney == null ? "null" : this.FeeAmountMoney.ToString())}");
@@ -980,7 +1007,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEffectiveAt()
             {
@@ -994,7 +1021,8 @@ namespace Square.Models
             /// <returns> PayoutEntry. </returns>
             public PayoutEntry Build()
             {
-                return new PayoutEntry(shouldSerialize,
+                return new PayoutEntry(
+                    shouldSerialize,
                     this.id,
                     this.payoutId,
                     this.effectiveAt,

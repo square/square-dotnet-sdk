@@ -46,23 +46,24 @@ namespace Square.Models
             {
                 { "order_id", false }
             };
-
             this.Id = id;
             this.Status = status;
             this.LoyaltyAccountId = loyaltyAccountId;
             this.RewardTierId = rewardTierId;
             this.Points = points;
+
             if (orderId != null)
             {
                 shouldSerialize["order_id"] = true;
                 this.OrderId = orderId;
             }
-
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.RedeemedAt = redeemedAt;
         }
-        internal LoyaltyReward(Dictionary<string, bool> shouldSerialize,
+
+        internal LoyaltyReward(
+            Dictionary<string, bool> shouldSerialize,
             string loyaltyAccountId,
             string rewardTierId,
             string id = null,
@@ -143,9 +144,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyReward : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -161,51 +160,56 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyReward other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.LoyaltyAccountId == null && other.LoyaltyAccountId == null) || (this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true)) &&
-                ((this.RewardTierId == null && other.RewardTierId == null) || (this.RewardTierId?.Equals(other.RewardTierId) == true)) &&
-                ((this.Points == null && other.Points == null) || (this.Points?.Equals(other.Points) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.RedeemedAt == null && other.RedeemedAt == null) || (this.RedeemedAt?.Equals(other.RedeemedAt) == true));
+            return obj is LoyaltyReward other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.LoyaltyAccountId == null && other.LoyaltyAccountId == null ||
+                 this.LoyaltyAccountId?.Equals(other.LoyaltyAccountId) == true) &&
+                (this.RewardTierId == null && other.RewardTierId == null ||
+                 this.RewardTierId?.Equals(other.RewardTierId) == true) &&
+                (this.Points == null && other.Points == null ||
+                 this.Points?.Equals(other.Points) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.RedeemedAt == null && other.RedeemedAt == null ||
+                 this.RedeemedAt?.Equals(other.RedeemedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1604808841;
-            hashCode = HashCode.Combine(this.Id, this.Status, this.LoyaltyAccountId, this.RewardTierId, this.Points, this.OrderId, this.CreatedAt);
+            var hashCode = -1604808841;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Status, this.LoyaltyAccountId, this.RewardTierId, this.Points, this.OrderId, this.CreatedAt);
 
             hashCode = HashCode.Combine(hashCode, this.UpdatedAt, this.RedeemedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.LoyaltyAccountId = {(this.LoyaltyAccountId == null ? "null" : this.LoyaltyAccountId)}");
-            toStringOutput.Add($"this.RewardTierId = {(this.RewardTierId == null ? "null" : this.RewardTierId)}");
+            toStringOutput.Add($"this.LoyaltyAccountId = {this.LoyaltyAccountId ?? "null"}");
+            toStringOutput.Add($"this.RewardTierId = {this.RewardTierId ?? "null"}");
             toStringOutput.Add($"this.Points = {(this.Points == null ? "null" : this.Points.ToString())}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.RedeemedAt = {(this.RedeemedAt == null ? "null" : this.RedeemedAt)}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.RedeemedAt = {this.RedeemedAt ?? "null"}");
         }
 
         /// <summary>
@@ -361,7 +365,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderId()
             {
@@ -375,7 +379,8 @@ namespace Square.Models
             /// <returns> LoyaltyReward. </returns>
             public LoyaltyReward Build()
             {
-                return new LoyaltyReward(shouldSerialize,
+                return new LoyaltyReward(
+                    shouldSerialize,
                     this.loyaltyAccountId,
                     this.rewardTierId,
                     this.id,

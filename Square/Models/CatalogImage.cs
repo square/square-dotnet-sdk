@@ -63,9 +63,10 @@ namespace Square.Models
                 shouldSerialize["photo_studio_order_id"] = true;
                 this.PhotoStudioOrderId = photoStudioOrderId;
             }
-
         }
-        internal CatalogImage(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogImage(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             string url = null,
             string caption = null,
@@ -113,9 +114,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogImage : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -158,39 +157,39 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogImage other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Url == null && other.Url == null) || (this.Url?.Equals(other.Url) == true)) &&
-                ((this.Caption == null && other.Caption == null) || (this.Caption?.Equals(other.Caption) == true)) &&
-                ((this.PhotoStudioOrderId == null && other.PhotoStudioOrderId == null) || (this.PhotoStudioOrderId?.Equals(other.PhotoStudioOrderId) == true));
+            return obj is CatalogImage other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Url == null && other.Url == null ||
+                 this.Url?.Equals(other.Url) == true) &&
+                (this.Caption == null && other.Caption == null ||
+                 this.Caption?.Equals(other.Caption) == true) &&
+                (this.PhotoStudioOrderId == null && other.PhotoStudioOrderId == null ||
+                 this.PhotoStudioOrderId?.Equals(other.PhotoStudioOrderId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1007024352;
-            hashCode = HashCode.Combine(this.Name, this.Url, this.Caption, this.PhotoStudioOrderId);
+            var hashCode = 1007024352;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.Url, this.Caption, this.PhotoStudioOrderId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.Url = {(this.Url == null ? "null" : this.Url)}");
-            toStringOutput.Add($"this.Caption = {(this.Caption == null ? "null" : this.Caption)}");
-            toStringOutput.Add($"this.PhotoStudioOrderId = {(this.PhotoStudioOrderId == null ? "null" : this.PhotoStudioOrderId)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.Url = {this.Url ?? "null"}");
+            toStringOutput.Add($"this.Caption = {this.Caption ?? "null"}");
+            toStringOutput.Add($"this.PhotoStudioOrderId = {this.PhotoStudioOrderId ?? "null"}");
         }
 
         /// <summary>
@@ -274,7 +273,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -282,7 +281,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUrl()
             {
@@ -290,7 +289,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCaption()
             {
@@ -298,7 +297,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhotoStudioOrderId()
             {
@@ -312,7 +311,8 @@ namespace Square.Models
             /// <returns> CatalogImage. </returns>
             public CatalogImage Build()
             {
-                return new CatalogImage(shouldSerialize,
+                return new CatalogImage(
+                    shouldSerialize,
                     this.name,
                     this.url,
                     this.caption,

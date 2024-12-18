@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["online_booking_enabled"] = true;
                 this.OnlineBookingEnabled = onlineBookingEnabled;
             }
-
         }
-        internal LocationBookingProfile(Dictionary<string, bool> shouldSerialize,
+
+        internal LocationBookingProfile(
+            Dictionary<string, bool> shouldSerialize,
             string locationId = null,
             string bookingSiteUrl = null,
             bool? onlineBookingEnabled = null)
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LocationBookingProfile : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -125,36 +124,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LocationBookingProfile other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.BookingSiteUrl == null && other.BookingSiteUrl == null) || (this.BookingSiteUrl?.Equals(other.BookingSiteUrl) == true)) &&
-                ((this.OnlineBookingEnabled == null && other.OnlineBookingEnabled == null) || (this.OnlineBookingEnabled?.Equals(other.OnlineBookingEnabled) == true));
+            return obj is LocationBookingProfile other &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.BookingSiteUrl == null && other.BookingSiteUrl == null ||
+                 this.BookingSiteUrl?.Equals(other.BookingSiteUrl) == true) &&
+                (this.OnlineBookingEnabled == null && other.OnlineBookingEnabled == null ||
+                 this.OnlineBookingEnabled?.Equals(other.OnlineBookingEnabled) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1041209173;
-            hashCode = HashCode.Combine(this.LocationId, this.BookingSiteUrl, this.OnlineBookingEnabled);
+            var hashCode = -1041209173;
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.BookingSiteUrl, this.OnlineBookingEnabled);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.BookingSiteUrl = {(this.BookingSiteUrl == null ? "null" : this.BookingSiteUrl)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.BookingSiteUrl = {this.BookingSiteUrl ?? "null"}");
             toStringOutput.Add($"this.OnlineBookingEnabled = {(this.OnlineBookingEnabled == null ? "null" : this.OnlineBookingEnabled.ToString())}");
         }
 
@@ -224,7 +222,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -232,7 +230,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBookingSiteUrl()
             {
@@ -240,7 +238,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOnlineBookingEnabled()
             {
@@ -254,7 +252,8 @@ namespace Square.Models
             /// <returns> LocationBookingProfile. </returns>
             public LocationBookingProfile Build()
             {
-                return new LocationBookingProfile(shouldSerialize,
+                return new LocationBookingProfile(
+                    shouldSerialize,
                     this.locationId,
                     this.bookingSiteUrl,
                     this.onlineBookingEnabled);

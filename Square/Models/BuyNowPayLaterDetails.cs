@@ -40,11 +40,12 @@ namespace Square.Models
                 shouldSerialize["brand"] = true;
                 this.Brand = brand;
             }
-
             this.AfterpayDetails = afterpayDetails;
             this.ClearpayDetails = clearpayDetails;
         }
-        internal BuyNowPayLaterDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal BuyNowPayLaterDetails(
+            Dictionary<string, bool> shouldSerialize,
             string brand = null,
             Models.AfterpayDetails afterpayDetails = null,
             Models.ClearpayDetails clearpayDetails = null)
@@ -78,9 +79,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BuyNowPayLaterDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -96,35 +95,34 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BuyNowPayLaterDetails other &&                ((this.Brand == null && other.Brand == null) || (this.Brand?.Equals(other.Brand) == true)) &&
-                ((this.AfterpayDetails == null && other.AfterpayDetails == null) || (this.AfterpayDetails?.Equals(other.AfterpayDetails) == true)) &&
-                ((this.ClearpayDetails == null && other.ClearpayDetails == null) || (this.ClearpayDetails?.Equals(other.ClearpayDetails) == true));
+            return obj is BuyNowPayLaterDetails other &&
+                (this.Brand == null && other.Brand == null ||
+                 this.Brand?.Equals(other.Brand) == true) &&
+                (this.AfterpayDetails == null && other.AfterpayDetails == null ||
+                 this.AfterpayDetails?.Equals(other.AfterpayDetails) == true) &&
+                (this.ClearpayDetails == null && other.ClearpayDetails == null ||
+                 this.ClearpayDetails?.Equals(other.ClearpayDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1757190860;
-            hashCode = HashCode.Combine(this.Brand, this.AfterpayDetails, this.ClearpayDetails);
+            var hashCode = -1757190860;
+            hashCode = HashCode.Combine(hashCode, this.Brand, this.AfterpayDetails, this.ClearpayDetails);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Brand = {(this.Brand == null ? "null" : this.Brand)}");
+            toStringOutput.Add($"this.Brand = {this.Brand ?? "null"}");
             toStringOutput.Add($"this.AfterpayDetails = {(this.AfterpayDetails == null ? "null" : this.AfterpayDetails.ToString())}");
             toStringOutput.Add($"this.ClearpayDetails = {(this.ClearpayDetails == null ? "null" : this.ClearpayDetails.ToString())}");
         }
@@ -191,7 +189,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBrand()
             {
@@ -205,7 +203,8 @@ namespace Square.Models
             /// <returns> BuyNowPayLaterDetails. </returns>
             public BuyNowPayLaterDetails Build()
             {
-                return new BuyNowPayLaterDetails(shouldSerialize,
+                return new BuyNowPayLaterDetails(
+                    shouldSerialize,
                     this.brand,
                     this.afterpayDetails,
                     this.clearpayDetails);

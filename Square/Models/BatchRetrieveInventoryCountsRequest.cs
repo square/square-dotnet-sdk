@@ -81,9 +81,10 @@ namespace Square.Models
                 shouldSerialize["limit"] = true;
                 this.Limit = limit;
             }
-
         }
-        internal BatchRetrieveInventoryCountsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal BatchRetrieveInventoryCountsRequest(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> catalogObjectIds = null,
             IList<string> locationIds = null,
             string updatedAfter = null,
@@ -148,9 +149,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BatchRetrieveInventoryCountsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -211,31 +210,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BatchRetrieveInventoryCountsRequest other &&                ((this.CatalogObjectIds == null && other.CatalogObjectIds == null) || (this.CatalogObjectIds?.Equals(other.CatalogObjectIds) == true)) &&
-                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((this.UpdatedAfter == null && other.UpdatedAfter == null) || (this.UpdatedAfter?.Equals(other.UpdatedAfter) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
+            return obj is BatchRetrieveInventoryCountsRequest other &&
+                (this.CatalogObjectIds == null && other.CatalogObjectIds == null ||
+                 this.CatalogObjectIds?.Equals(other.CatalogObjectIds) == true) &&
+                (this.LocationIds == null && other.LocationIds == null ||
+                 this.LocationIds?.Equals(other.LocationIds) == true) &&
+                (this.UpdatedAfter == null && other.UpdatedAfter == null ||
+                 this.UpdatedAfter?.Equals(other.UpdatedAfter) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.States == null && other.States == null ||
+                 this.States?.Equals(other.States) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -189950820;
-            hashCode = HashCode.Combine(this.CatalogObjectIds, this.LocationIds, this.UpdatedAfter, this.Cursor, this.States, this.Limit);
+            var hashCode = -189950820;
+            hashCode = HashCode.Combine(hashCode, this.CatalogObjectIds, this.LocationIds, this.UpdatedAfter, this.Cursor, this.States, this.Limit);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -244,8 +245,8 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.CatalogObjectIds = {(this.CatalogObjectIds == null ? "null" : $"[{string.Join(", ", this.CatalogObjectIds)} ]")}");
             toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
-            toStringOutput.Add($"this.UpdatedAfter = {(this.UpdatedAfter == null ? "null" : this.UpdatedAfter)}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.UpdatedAfter = {this.UpdatedAfter ?? "null"}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.States = {(this.States == null ? "null" : $"[{string.Join(", ", this.States)} ]")}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
         }
@@ -361,7 +362,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectIds()
             {
@@ -369,7 +370,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationIds()
             {
@@ -377,7 +378,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUpdatedAfter()
             {
@@ -385,7 +386,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -393,7 +394,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStates()
             {
@@ -401,7 +402,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -415,7 +416,8 @@ namespace Square.Models
             /// <returns> BatchRetrieveInventoryCountsRequest. </returns>
             public BatchRetrieveInventoryCountsRequest Build()
             {
-                return new BatchRetrieveInventoryCountsRequest(shouldSerialize,
+                return new BatchRetrieveInventoryCountsRequest(
+                    shouldSerialize,
                     this.catalogObjectIds,
                     this.locationIds,
                     this.updatedAfter,

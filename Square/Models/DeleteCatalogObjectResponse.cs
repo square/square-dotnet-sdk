@@ -67,43 +67,41 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeleteCatalogObjectResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeleteCatalogObjectResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.DeletedObjectIds == null && other.DeletedObjectIds == null) || (this.DeletedObjectIds?.Equals(other.DeletedObjectIds) == true)) &&
-                ((this.DeletedAt == null && other.DeletedAt == null) || (this.DeletedAt?.Equals(other.DeletedAt) == true));
+            return obj is DeleteCatalogObjectResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.DeletedObjectIds == null && other.DeletedObjectIds == null ||
+                 this.DeletedObjectIds?.Equals(other.DeletedObjectIds) == true) &&
+                (this.DeletedAt == null && other.DeletedAt == null ||
+                 this.DeletedAt?.Equals(other.DeletedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 98566356;
+            var hashCode = 98566356;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.DeletedObjectIds, this.DeletedAt);
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.DeletedObjectIds, this.DeletedAt);
 
             return hashCode;
         }
+
         internal DeleteCatalogObjectResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
@@ -118,7 +116,7 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
             toStringOutput.Add($"this.DeletedObjectIds = {(this.DeletedObjectIds == null ? "null" : $"[{string.Join(", ", this.DeletedObjectIds)} ]")}");
-            toStringOutput.Add($"this.DeletedAt = {(this.DeletedAt == null ? "null" : this.DeletedAt)}");
+            toStringOutput.Add($"this.DeletedAt = {this.DeletedAt ?? "null"}");
         }
 
         /// <summary>

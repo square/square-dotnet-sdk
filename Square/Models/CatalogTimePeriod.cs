@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["event"] = true;
                 this.MEvent = mEvent;
             }
-
         }
-        internal CatalogTimePeriod(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogTimePeriod(
+            Dictionary<string, bool> shouldSerialize,
             string mEvent = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -66,9 +67,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogTimePeriod : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -84,33 +83,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogTimePeriod other &&                ((this.MEvent == null && other.MEvent == null) || (this.MEvent?.Equals(other.MEvent) == true));
+            return obj is CatalogTimePeriod other &&
+                (this.MEvent == null && other.MEvent == null ||
+                 this.MEvent?.Equals(other.MEvent) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1787594864;
-            hashCode = HashCode.Combine(this.MEvent);
+            var hashCode = 1787594864;
+            hashCode = HashCode.Combine(hashCode, this.MEvent);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.MEvent = {(this.MEvent == null ? "null" : this.MEvent)}");
+            toStringOutput.Add($"this.MEvent = {this.MEvent ?? "null"}");
         }
 
         /// <summary>
@@ -149,7 +145,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEvent()
             {
@@ -163,7 +159,8 @@ namespace Square.Models
             /// <returns> CatalogTimePeriod. </returns>
             public CatalogTimePeriod Build()
             {
-                return new CatalogTimePeriod(shouldSerialize,
+                return new CatalogTimePeriod(
+                    shouldSerialize,
                     this.mEvent);
             }
         }

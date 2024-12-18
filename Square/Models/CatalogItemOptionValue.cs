@@ -72,9 +72,10 @@ namespace Square.Models
                 shouldSerialize["ordinal"] = true;
                 this.Ordinal = ordinal;
             }
-
         }
-        internal CatalogItemOptionValue(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogItemOptionValue(
+            Dictionary<string, bool> shouldSerialize,
             string itemOptionId = null,
             string name = null,
             string description = null,
@@ -126,9 +127,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogItemOptionValue : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -180,40 +179,41 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogItemOptionValue other &&                ((this.ItemOptionId == null && other.ItemOptionId == null) || (this.ItemOptionId?.Equals(other.ItemOptionId) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.Color == null && other.Color == null) || (this.Color?.Equals(other.Color) == true)) &&
-                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true));
+            return obj is CatalogItemOptionValue other &&
+                (this.ItemOptionId == null && other.ItemOptionId == null ||
+                 this.ItemOptionId?.Equals(other.ItemOptionId) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.Color == null && other.Color == null ||
+                 this.Color?.Equals(other.Color) == true) &&
+                (this.Ordinal == null && other.Ordinal == null ||
+                 this.Ordinal?.Equals(other.Ordinal) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1107154058;
-            hashCode = HashCode.Combine(this.ItemOptionId, this.Name, this.Description, this.Color, this.Ordinal);
+            var hashCode = -1107154058;
+            hashCode = HashCode.Combine(hashCode, this.ItemOptionId, this.Name, this.Description, this.Color, this.Ordinal);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ItemOptionId = {(this.ItemOptionId == null ? "null" : this.ItemOptionId)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
-            toStringOutput.Add($"this.Color = {(this.Color == null ? "null" : this.Color)}");
+            toStringOutput.Add($"this.ItemOptionId = {this.ItemOptionId ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
+            toStringOutput.Add($"this.Color = {this.Color ?? "null"}");
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
         }
 
@@ -313,7 +313,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetItemOptionId()
             {
@@ -321,7 +321,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -329,7 +329,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -337,7 +337,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetColor()
             {
@@ -345,7 +345,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrdinal()
             {
@@ -359,7 +359,8 @@ namespace Square.Models
             /// <returns> CatalogItemOptionValue. </returns>
             public CatalogItemOptionValue Build()
             {
-                return new CatalogItemOptionValue(shouldSerialize,
+                return new CatalogItemOptionValue(
+                    shouldSerialize,
                     this.itemOptionId,
                     this.name,
                     this.description,

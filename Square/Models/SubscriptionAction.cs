@@ -43,9 +43,9 @@ namespace Square.Models
                 { "phases", false },
                 { "new_plan_variation_id", false }
             };
-
             this.Id = id;
             this.Type = type;
+
             if (effectiveDate != null)
             {
                 shouldSerialize["effective_date"] = true;
@@ -69,9 +69,10 @@ namespace Square.Models
                 shouldSerialize["new_plan_variation_id"] = true;
                 this.NewPlanVariationId = newPlanVariationId;
             }
-
         }
-        internal SubscriptionAction(Dictionary<string, bool> shouldSerialize,
+
+        internal SubscriptionAction(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string type = null,
             string effectiveDate = null,
@@ -128,9 +129,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SubscriptionAction : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -173,43 +172,45 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SubscriptionAction other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.EffectiveDate == null && other.EffectiveDate == null) || (this.EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
-                ((this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null) || (this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true)) &&
-                ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true)) &&
-                ((this.NewPlanVariationId == null && other.NewPlanVariationId == null) || (this.NewPlanVariationId?.Equals(other.NewPlanVariationId) == true));
+            return obj is SubscriptionAction other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.EffectiveDate == null && other.EffectiveDate == null ||
+                 this.EffectiveDate?.Equals(other.EffectiveDate) == true) &&
+                (this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null ||
+                 this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true) &&
+                (this.Phases == null && other.Phases == null ||
+                 this.Phases?.Equals(other.Phases) == true) &&
+                (this.NewPlanVariationId == null && other.NewPlanVariationId == null ||
+                 this.NewPlanVariationId?.Equals(other.NewPlanVariationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -904463000;
-            hashCode = HashCode.Combine(this.Id, this.Type, this.EffectiveDate, this.MonthlyBillingAnchorDate, this.Phases, this.NewPlanVariationId);
+            var hashCode = -904463000;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Type, this.EffectiveDate, this.MonthlyBillingAnchorDate, this.Phases, this.NewPlanVariationId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate)}");
+            toStringOutput.Add($"this.EffectiveDate = {this.EffectiveDate ?? "null"}");
             toStringOutput.Add($"this.MonthlyBillingAnchorDate = {(this.MonthlyBillingAnchorDate == null ? "null" : this.MonthlyBillingAnchorDate.ToString())}");
             toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
-            toStringOutput.Add($"this.NewPlanVariationId = {(this.NewPlanVariationId == null ? "null" : this.NewPlanVariationId)}");
+            toStringOutput.Add($"this.NewPlanVariationId = {this.NewPlanVariationId ?? "null"}");
         }
 
         /// <summary>
@@ -319,7 +320,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEffectiveDate()
             {
@@ -327,7 +328,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMonthlyBillingAnchorDate()
             {
@@ -335,7 +336,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhases()
             {
@@ -343,7 +344,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNewPlanVariationId()
             {
@@ -357,7 +358,8 @@ namespace Square.Models
             /// <returns> SubscriptionAction. </returns>
             public SubscriptionAction Build()
             {
-                return new SubscriptionAction(shouldSerialize,
+                return new SubscriptionAction(
+                    shouldSerialize,
                     this.id,
                     this.type,
                     this.effectiveDate,

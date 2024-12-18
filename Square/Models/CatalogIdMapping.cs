@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["object_id"] = true;
                 this.ObjectId = objectId;
             }
-
         }
-        internal CatalogIdMapping(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogIdMapping(
+            Dictionary<string, bool> shouldSerialize,
             string clientObjectId = null,
             string objectId = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogIdMapping : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,35 +98,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogIdMapping other &&                ((this.ClientObjectId == null && other.ClientObjectId == null) || (this.ClientObjectId?.Equals(other.ClientObjectId) == true)) &&
-                ((this.ObjectId == null && other.ObjectId == null) || (this.ObjectId?.Equals(other.ObjectId) == true));
+            return obj is CatalogIdMapping other &&
+                (this.ClientObjectId == null && other.ClientObjectId == null ||
+                 this.ClientObjectId?.Equals(other.ClientObjectId) == true) &&
+                (this.ObjectId == null && other.ObjectId == null ||
+                 this.ObjectId?.Equals(other.ObjectId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2090188884;
-            hashCode = HashCode.Combine(this.ClientObjectId, this.ObjectId);
+            var hashCode = -2090188884;
+            hashCode = HashCode.Combine(hashCode, this.ClientObjectId, this.ObjectId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ClientObjectId = {(this.ClientObjectId == null ? "null" : this.ClientObjectId)}");
-            toStringOutput.Add($"this.ObjectId = {(this.ObjectId == null ? "null" : this.ObjectId)}");
+            toStringOutput.Add($"this.ClientObjectId = {this.ClientObjectId ?? "null"}");
+            toStringOutput.Add($"this.ObjectId = {this.ObjectId ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetClientObjectId()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetObjectId()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> CatalogIdMapping. </returns>
             public CatalogIdMapping Build()
             {
-                return new CatalogIdMapping(shouldSerialize,
+                return new CatalogIdMapping(
+                    shouldSerialize,
                     this.clientObjectId,
                     this.objectId);
             }

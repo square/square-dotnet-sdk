@@ -69,48 +69,49 @@ namespace Square.Models
                 { "card_id", false },
                 { "actions", false }
             };
-
             this.Id = id;
             this.LocationId = locationId;
             this.PlanVariationId = planVariationId;
             this.CustomerId = customerId;
             this.StartDate = startDate;
+
             if (canceledDate != null)
             {
                 shouldSerialize["canceled_date"] = true;
                 this.CanceledDate = canceledDate;
             }
-
             this.ChargedThroughDate = chargedThroughDate;
             this.Status = status;
+
             if (taxPercentage != null)
             {
                 shouldSerialize["tax_percentage"] = true;
                 this.TaxPercentage = taxPercentage;
             }
-
             this.InvoiceIds = invoiceIds;
             this.PriceOverrideMoney = priceOverrideMoney;
             this.Version = version;
             this.CreatedAt = createdAt;
+
             if (cardId != null)
             {
                 shouldSerialize["card_id"] = true;
                 this.CardId = cardId;
             }
-
             this.Timezone = timezone;
             this.Source = source;
+
             if (actions != null)
             {
                 shouldSerialize["actions"] = true;
                 this.Actions = actions;
             }
-
             this.MonthlyBillingAnchorDate = monthlyBillingAnchorDate;
             this.Phases = phases;
         }
-        internal Subscription(Dictionary<string, bool> shouldSerialize,
+
+        internal Subscription(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string locationId = null,
             string planVariationId = null,
@@ -300,9 +301,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Subscription : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -345,41 +344,55 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Subscription other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.PlanVariationId == null && other.PlanVariationId == null) || (this.PlanVariationId?.Equals(other.PlanVariationId) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
-                ((this.CanceledDate == null && other.CanceledDate == null) || (this.CanceledDate?.Equals(other.CanceledDate) == true)) &&
-                ((this.ChargedThroughDate == null && other.ChargedThroughDate == null) || (this.ChargedThroughDate?.Equals(other.ChargedThroughDate) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.TaxPercentage == null && other.TaxPercentage == null) || (this.TaxPercentage?.Equals(other.TaxPercentage) == true)) &&
-                ((this.InvoiceIds == null && other.InvoiceIds == null) || (this.InvoiceIds?.Equals(other.InvoiceIds) == true)) &&
-                ((this.PriceOverrideMoney == null && other.PriceOverrideMoney == null) || (this.PriceOverrideMoney?.Equals(other.PriceOverrideMoney) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.CardId == null && other.CardId == null) || (this.CardId?.Equals(other.CardId) == true)) &&
-                ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
-                ((this.Actions == null && other.Actions == null) || (this.Actions?.Equals(other.Actions) == true)) &&
-                ((this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null) || (this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true)) &&
-                ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true));
+            return obj is Subscription other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.PlanVariationId == null && other.PlanVariationId == null ||
+                 this.PlanVariationId?.Equals(other.PlanVariationId) == true) &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.StartDate == null && other.StartDate == null ||
+                 this.StartDate?.Equals(other.StartDate) == true) &&
+                (this.CanceledDate == null && other.CanceledDate == null ||
+                 this.CanceledDate?.Equals(other.CanceledDate) == true) &&
+                (this.ChargedThroughDate == null && other.ChargedThroughDate == null ||
+                 this.ChargedThroughDate?.Equals(other.ChargedThroughDate) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.TaxPercentage == null && other.TaxPercentage == null ||
+                 this.TaxPercentage?.Equals(other.TaxPercentage) == true) &&
+                (this.InvoiceIds == null && other.InvoiceIds == null ||
+                 this.InvoiceIds?.Equals(other.InvoiceIds) == true) &&
+                (this.PriceOverrideMoney == null && other.PriceOverrideMoney == null ||
+                 this.PriceOverrideMoney?.Equals(other.PriceOverrideMoney) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.CardId == null && other.CardId == null ||
+                 this.CardId?.Equals(other.CardId) == true) &&
+                (this.Timezone == null && other.Timezone == null ||
+                 this.Timezone?.Equals(other.Timezone) == true) &&
+                (this.Source == null && other.Source == null ||
+                 this.Source?.Equals(other.Source) == true) &&
+                (this.Actions == null && other.Actions == null ||
+                 this.Actions?.Equals(other.Actions) == true) &&
+                (this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null ||
+                 this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true) &&
+                (this.Phases == null && other.Phases == null ||
+                 this.Phases?.Equals(other.Phases) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -186566747;
-            hashCode = HashCode.Combine(this.Id, this.LocationId, this.PlanVariationId, this.CustomerId, this.StartDate, this.CanceledDate, this.ChargedThroughDate);
+            var hashCode = -186566747;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.LocationId, this.PlanVariationId, this.CustomerId, this.StartDate, this.CanceledDate, this.ChargedThroughDate);
 
             hashCode = HashCode.Combine(hashCode, this.Status, this.TaxPercentage, this.InvoiceIds, this.PriceOverrideMoney, this.Version, this.CreatedAt, this.CardId);
 
@@ -387,27 +400,28 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.PlanVariationId = {(this.PlanVariationId == null ? "null" : this.PlanVariationId)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
-            toStringOutput.Add($"this.StartDate = {(this.StartDate == null ? "null" : this.StartDate)}");
-            toStringOutput.Add($"this.CanceledDate = {(this.CanceledDate == null ? "null" : this.CanceledDate)}");
-            toStringOutput.Add($"this.ChargedThroughDate = {(this.ChargedThroughDate == null ? "null" : this.ChargedThroughDate)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.PlanVariationId = {this.PlanVariationId ?? "null"}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
+            toStringOutput.Add($"this.StartDate = {this.StartDate ?? "null"}");
+            toStringOutput.Add($"this.CanceledDate = {this.CanceledDate ?? "null"}");
+            toStringOutput.Add($"this.ChargedThroughDate = {this.ChargedThroughDate ?? "null"}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.TaxPercentage = {(this.TaxPercentage == null ? "null" : this.TaxPercentage)}");
+            toStringOutput.Add($"this.TaxPercentage = {this.TaxPercentage ?? "null"}");
             toStringOutput.Add($"this.InvoiceIds = {(this.InvoiceIds == null ? "null" : $"[{string.Join(", ", this.InvoiceIds)} ]")}");
             toStringOutput.Add($"this.PriceOverrideMoney = {(this.PriceOverrideMoney == null ? "null" : this.PriceOverrideMoney.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId)}");
-            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.CardId = {this.CardId ?? "null"}");
+            toStringOutput.Add($"this.Timezone = {this.Timezone ?? "null"}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
             toStringOutput.Add($"this.Actions = {(this.Actions == null ? "null" : $"[{string.Join(", ", this.Actions)} ]")}");
             toStringOutput.Add($"this.MonthlyBillingAnchorDate = {(this.MonthlyBillingAnchorDate == null ? "null" : this.MonthlyBillingAnchorDate.ToString())}");
@@ -690,7 +704,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCanceledDate()
             {
@@ -698,7 +712,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTaxPercentage()
             {
@@ -706,7 +720,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCardId()
             {
@@ -714,7 +728,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetActions()
             {
@@ -728,7 +742,8 @@ namespace Square.Models
             /// <returns> Subscription. </returns>
             public Subscription Build()
             {
-                return new Subscription(shouldSerialize,
+                return new Subscription(
+                    shouldSerialize,
                     this.id,
                     this.locationId,
                     this.planVariationId,

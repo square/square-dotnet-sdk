@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["sort_order"] = true;
                 this.SortOrder = sortOrder;
             }
-
         }
-        internal TerminalRefundQuerySort(Dictionary<string, bool> shouldSerialize,
+
+        internal TerminalRefundQuerySort(
+            Dictionary<string, bool> shouldSerialize,
             string sortOrder = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -57,9 +58,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TerminalRefundQuerySort : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -75,33 +74,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TerminalRefundQuerySort other &&                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
+            return obj is TerminalRefundQuerySort other &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -926271698;
-            hashCode = HashCode.Combine(this.SortOrder);
+            var hashCode = -926271698;
+            hashCode = HashCode.Combine(hashCode, this.SortOrder);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder)}");
+            toStringOutput.Add($"this.SortOrder = {this.SortOrder ?? "null"}");
         }
 
         /// <summary>
@@ -140,7 +136,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSortOrder()
             {
@@ -154,7 +150,8 @@ namespace Square.Models
             /// <returns> TerminalRefundQuerySort. </returns>
             public TerminalRefundQuerySort Build()
             {
-                return new TerminalRefundQuerySort(shouldSerialize,
+                return new TerminalRefundQuerySort(
+                    shouldSerialize,
                     this.sortOrder);
             }
         }

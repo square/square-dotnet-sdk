@@ -51,15 +51,15 @@ namespace Square.Models
                 shouldSerialize["evidence_id"] = true;
                 this.EvidenceId = evidenceId;
             }
-
             this.Id = id;
+
             if (disputeId != null)
             {
                 shouldSerialize["dispute_id"] = true;
                 this.DisputeId = disputeId;
             }
-
             this.EvidenceFile = evidenceFile;
+
             if (evidenceText != null)
             {
                 shouldSerialize["evidence_text"] = true;
@@ -71,10 +71,11 @@ namespace Square.Models
                 shouldSerialize["uploaded_at"] = true;
                 this.UploadedAt = uploadedAt;
             }
-
             this.EvidenceType = evidenceType;
         }
-        internal DisputeEvidence(Dictionary<string, bool> shouldSerialize,
+
+        internal DisputeEvidence(
+            Dictionary<string, bool> shouldSerialize,
             string evidenceId = null,
             string id = null,
             string disputeId = null,
@@ -139,9 +140,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DisputeEvidence : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -184,44 +183,47 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DisputeEvidence other &&                ((this.EvidenceId == null && other.EvidenceId == null) || (this.EvidenceId?.Equals(other.EvidenceId) == true)) &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.DisputeId == null && other.DisputeId == null) || (this.DisputeId?.Equals(other.DisputeId) == true)) &&
-                ((this.EvidenceFile == null && other.EvidenceFile == null) || (this.EvidenceFile?.Equals(other.EvidenceFile) == true)) &&
-                ((this.EvidenceText == null && other.EvidenceText == null) || (this.EvidenceText?.Equals(other.EvidenceText) == true)) &&
-                ((this.UploadedAt == null && other.UploadedAt == null) || (this.UploadedAt?.Equals(other.UploadedAt) == true)) &&
-                ((this.EvidenceType == null && other.EvidenceType == null) || (this.EvidenceType?.Equals(other.EvidenceType) == true));
+            return obj is DisputeEvidence other &&
+                (this.EvidenceId == null && other.EvidenceId == null ||
+                 this.EvidenceId?.Equals(other.EvidenceId) == true) &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.DisputeId == null && other.DisputeId == null ||
+                 this.DisputeId?.Equals(other.DisputeId) == true) &&
+                (this.EvidenceFile == null && other.EvidenceFile == null ||
+                 this.EvidenceFile?.Equals(other.EvidenceFile) == true) &&
+                (this.EvidenceText == null && other.EvidenceText == null ||
+                 this.EvidenceText?.Equals(other.EvidenceText) == true) &&
+                (this.UploadedAt == null && other.UploadedAt == null ||
+                 this.UploadedAt?.Equals(other.UploadedAt) == true) &&
+                (this.EvidenceType == null && other.EvidenceType == null ||
+                 this.EvidenceType?.Equals(other.EvidenceType) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 139359175;
-            hashCode = HashCode.Combine(this.EvidenceId, this.Id, this.DisputeId, this.EvidenceFile, this.EvidenceText, this.UploadedAt, this.EvidenceType);
+            var hashCode = 139359175;
+            hashCode = HashCode.Combine(hashCode, this.EvidenceId, this.Id, this.DisputeId, this.EvidenceFile, this.EvidenceText, this.UploadedAt, this.EvidenceType);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.EvidenceId = {(this.EvidenceId == null ? "null" : this.EvidenceId)}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.DisputeId = {(this.DisputeId == null ? "null" : this.DisputeId)}");
+            toStringOutput.Add($"this.EvidenceId = {this.EvidenceId ?? "null"}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.DisputeId = {this.DisputeId ?? "null"}");
             toStringOutput.Add($"this.EvidenceFile = {(this.EvidenceFile == null ? "null" : this.EvidenceFile.ToString())}");
-            toStringOutput.Add($"this.EvidenceText = {(this.EvidenceText == null ? "null" : this.EvidenceText)}");
-            toStringOutput.Add($"this.UploadedAt = {(this.UploadedAt == null ? "null" : this.UploadedAt)}");
+            toStringOutput.Add($"this.EvidenceText = {this.EvidenceText ?? "null"}");
+            toStringOutput.Add($"this.UploadedAt = {this.UploadedAt ?? "null"}");
             toStringOutput.Add($"this.EvidenceType = {(this.EvidenceType == null ? "null" : this.EvidenceType.ToString())}");
         }
 
@@ -345,7 +347,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEvidenceId()
             {
@@ -353,7 +355,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDisputeId()
             {
@@ -361,7 +363,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEvidenceText()
             {
@@ -369,7 +371,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUploadedAt()
             {
@@ -383,7 +385,8 @@ namespace Square.Models
             /// <returns> DisputeEvidence. </returns>
             public DisputeEvidence Build()
             {
-                return new DisputeEvidence(shouldSerialize,
+                return new DisputeEvidence(
+                    shouldSerialize,
                     this.evidenceId,
                     this.id,
                     this.disputeId,

@@ -93,33 +93,33 @@ namespace Square.Models
                 { "facebook_url", false },
                 { "mcc", false }
             };
-
             this.Id = id;
+
             if (name != null)
             {
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.Address = address;
+
             if (timezone != null)
             {
                 shouldSerialize["timezone"] = true;
                 this.Timezone = timezone;
             }
-
             this.Capabilities = capabilities;
             this.Status = status;
             this.CreatedAt = createdAt;
             this.MerchantId = merchantId;
             this.Country = country;
+
             if (languageCode != null)
             {
                 shouldSerialize["language_code"] = true;
                 this.LanguageCode = languageCode;
             }
-
             this.Currency = currency;
+
             if (phoneNumber != null)
             {
                 shouldSerialize["phone_number"] = true;
@@ -131,15 +131,15 @@ namespace Square.Models
                 shouldSerialize["business_name"] = true;
                 this.BusinessName = businessName;
             }
-
             this.Type = type;
+
             if (websiteUrl != null)
             {
                 shouldSerialize["website_url"] = true;
                 this.WebsiteUrl = websiteUrl;
             }
-
             this.BusinessHours = businessHours;
+
             if (businessEmail != null)
             {
                 shouldSerialize["business_email"] = true;
@@ -169,20 +169,21 @@ namespace Square.Models
                 shouldSerialize["facebook_url"] = true;
                 this.FacebookUrl = facebookUrl;
             }
-
             this.Coordinates = coordinates;
             this.LogoUrl = logoUrl;
             this.PosBackgroundUrl = posBackgroundUrl;
+
             if (mcc != null)
             {
                 shouldSerialize["mcc"] = true;
                 this.Mcc = mcc;
             }
-
             this.FullFormatLogoUrl = fullFormatLogoUrl;
             this.TaxIds = taxIds;
         }
-        internal Location(Dictionary<string, bool> shouldSerialize,
+
+        internal Location(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string name = null,
             Models.Address address = null,
@@ -424,9 +425,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Location : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -541,49 +540,71 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Location other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true)) &&
-                ((this.Timezone == null && other.Timezone == null) || (this.Timezone?.Equals(other.Timezone) == true)) &&
-                ((this.Capabilities == null && other.Capabilities == null) || (this.Capabilities?.Equals(other.Capabilities) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true)) &&
-                ((this.LanguageCode == null && other.LanguageCode == null) || (this.LanguageCode?.Equals(other.LanguageCode) == true)) &&
-                ((this.Currency == null && other.Currency == null) || (this.Currency?.Equals(other.Currency) == true)) &&
-                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((this.BusinessName == null && other.BusinessName == null) || (this.BusinessName?.Equals(other.BusinessName) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.WebsiteUrl == null && other.WebsiteUrl == null) || (this.WebsiteUrl?.Equals(other.WebsiteUrl) == true)) &&
-                ((this.BusinessHours == null && other.BusinessHours == null) || (this.BusinessHours?.Equals(other.BusinessHours) == true)) &&
-                ((this.BusinessEmail == null && other.BusinessEmail == null) || (this.BusinessEmail?.Equals(other.BusinessEmail) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.TwitterUsername == null && other.TwitterUsername == null) || (this.TwitterUsername?.Equals(other.TwitterUsername) == true)) &&
-                ((this.InstagramUsername == null && other.InstagramUsername == null) || (this.InstagramUsername?.Equals(other.InstagramUsername) == true)) &&
-                ((this.FacebookUrl == null && other.FacebookUrl == null) || (this.FacebookUrl?.Equals(other.FacebookUrl) == true)) &&
-                ((this.Coordinates == null && other.Coordinates == null) || (this.Coordinates?.Equals(other.Coordinates) == true)) &&
-                ((this.LogoUrl == null && other.LogoUrl == null) || (this.LogoUrl?.Equals(other.LogoUrl) == true)) &&
-                ((this.PosBackgroundUrl == null && other.PosBackgroundUrl == null) || (this.PosBackgroundUrl?.Equals(other.PosBackgroundUrl) == true)) &&
-                ((this.Mcc == null && other.Mcc == null) || (this.Mcc?.Equals(other.Mcc) == true)) &&
-                ((this.FullFormatLogoUrl == null && other.FullFormatLogoUrl == null) || (this.FullFormatLogoUrl?.Equals(other.FullFormatLogoUrl) == true)) &&
-                ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true));
+            return obj is Location other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Address == null && other.Address == null ||
+                 this.Address?.Equals(other.Address) == true) &&
+                (this.Timezone == null && other.Timezone == null ||
+                 this.Timezone?.Equals(other.Timezone) == true) &&
+                (this.Capabilities == null && other.Capabilities == null ||
+                 this.Capabilities?.Equals(other.Capabilities) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.MerchantId == null && other.MerchantId == null ||
+                 this.MerchantId?.Equals(other.MerchantId) == true) &&
+                (this.Country == null && other.Country == null ||
+                 this.Country?.Equals(other.Country) == true) &&
+                (this.LanguageCode == null && other.LanguageCode == null ||
+                 this.LanguageCode?.Equals(other.LanguageCode) == true) &&
+                (this.Currency == null && other.Currency == null ||
+                 this.Currency?.Equals(other.Currency) == true) &&
+                (this.PhoneNumber == null && other.PhoneNumber == null ||
+                 this.PhoneNumber?.Equals(other.PhoneNumber) == true) &&
+                (this.BusinessName == null && other.BusinessName == null ||
+                 this.BusinessName?.Equals(other.BusinessName) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.WebsiteUrl == null && other.WebsiteUrl == null ||
+                 this.WebsiteUrl?.Equals(other.WebsiteUrl) == true) &&
+                (this.BusinessHours == null && other.BusinessHours == null ||
+                 this.BusinessHours?.Equals(other.BusinessHours) == true) &&
+                (this.BusinessEmail == null && other.BusinessEmail == null ||
+                 this.BusinessEmail?.Equals(other.BusinessEmail) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.TwitterUsername == null && other.TwitterUsername == null ||
+                 this.TwitterUsername?.Equals(other.TwitterUsername) == true) &&
+                (this.InstagramUsername == null && other.InstagramUsername == null ||
+                 this.InstagramUsername?.Equals(other.InstagramUsername) == true) &&
+                (this.FacebookUrl == null && other.FacebookUrl == null ||
+                 this.FacebookUrl?.Equals(other.FacebookUrl) == true) &&
+                (this.Coordinates == null && other.Coordinates == null ||
+                 this.Coordinates?.Equals(other.Coordinates) == true) &&
+                (this.LogoUrl == null && other.LogoUrl == null ||
+                 this.LogoUrl?.Equals(other.LogoUrl) == true) &&
+                (this.PosBackgroundUrl == null && other.PosBackgroundUrl == null ||
+                 this.PosBackgroundUrl?.Equals(other.PosBackgroundUrl) == true) &&
+                (this.Mcc == null && other.Mcc == null ||
+                 this.Mcc?.Equals(other.Mcc) == true) &&
+                (this.FullFormatLogoUrl == null && other.FullFormatLogoUrl == null ||
+                 this.FullFormatLogoUrl?.Equals(other.FullFormatLogoUrl) == true) &&
+                (this.TaxIds == null && other.TaxIds == null ||
+                 this.TaxIds?.Equals(other.TaxIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 232879438;
-            hashCode = HashCode.Combine(this.Id, this.Name, this.Address, this.Timezone, this.Capabilities, this.Status, this.CreatedAt);
+            var hashCode = 232879438;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Name, this.Address, this.Timezone, this.Capabilities, this.Status, this.CreatedAt);
 
             hashCode = HashCode.Combine(hashCode, this.MerchantId, this.Country, this.LanguageCode, this.Currency, this.PhoneNumber, this.BusinessName, this.Type);
 
@@ -593,38 +614,39 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
-            toStringOutput.Add($"this.Timezone = {(this.Timezone == null ? "null" : this.Timezone)}");
+            toStringOutput.Add($"this.Timezone = {this.Timezone ?? "null"}");
             toStringOutput.Add($"this.Capabilities = {(this.Capabilities == null ? "null" : $"[{string.Join(", ", this.Capabilities)} ]")}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.MerchantId = {this.MerchantId ?? "null"}");
             toStringOutput.Add($"this.Country = {(this.Country == null ? "null" : this.Country.ToString())}");
-            toStringOutput.Add($"this.LanguageCode = {(this.LanguageCode == null ? "null" : this.LanguageCode)}");
+            toStringOutput.Add($"this.LanguageCode = {this.LanguageCode ?? "null"}");
             toStringOutput.Add($"this.Currency = {(this.Currency == null ? "null" : this.Currency.ToString())}");
-            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber)}");
-            toStringOutput.Add($"this.BusinessName = {(this.BusinessName == null ? "null" : this.BusinessName)}");
+            toStringOutput.Add($"this.PhoneNumber = {this.PhoneNumber ?? "null"}");
+            toStringOutput.Add($"this.BusinessName = {this.BusinessName ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.WebsiteUrl = {(this.WebsiteUrl == null ? "null" : this.WebsiteUrl)}");
+            toStringOutput.Add($"this.WebsiteUrl = {this.WebsiteUrl ?? "null"}");
             toStringOutput.Add($"this.BusinessHours = {(this.BusinessHours == null ? "null" : this.BusinessHours.ToString())}");
-            toStringOutput.Add($"this.BusinessEmail = {(this.BusinessEmail == null ? "null" : this.BusinessEmail)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
-            toStringOutput.Add($"this.TwitterUsername = {(this.TwitterUsername == null ? "null" : this.TwitterUsername)}");
-            toStringOutput.Add($"this.InstagramUsername = {(this.InstagramUsername == null ? "null" : this.InstagramUsername)}");
-            toStringOutput.Add($"this.FacebookUrl = {(this.FacebookUrl == null ? "null" : this.FacebookUrl)}");
+            toStringOutput.Add($"this.BusinessEmail = {this.BusinessEmail ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
+            toStringOutput.Add($"this.TwitterUsername = {this.TwitterUsername ?? "null"}");
+            toStringOutput.Add($"this.InstagramUsername = {this.InstagramUsername ?? "null"}");
+            toStringOutput.Add($"this.FacebookUrl = {this.FacebookUrl ?? "null"}");
             toStringOutput.Add($"this.Coordinates = {(this.Coordinates == null ? "null" : this.Coordinates.ToString())}");
-            toStringOutput.Add($"this.LogoUrl = {(this.LogoUrl == null ? "null" : this.LogoUrl)}");
-            toStringOutput.Add($"this.PosBackgroundUrl = {(this.PosBackgroundUrl == null ? "null" : this.PosBackgroundUrl)}");
-            toStringOutput.Add($"this.Mcc = {(this.Mcc == null ? "null" : this.Mcc)}");
-            toStringOutput.Add($"this.FullFormatLogoUrl = {(this.FullFormatLogoUrl == null ? "null" : this.FullFormatLogoUrl)}");
+            toStringOutput.Add($"this.LogoUrl = {this.LogoUrl ?? "null"}");
+            toStringOutput.Add($"this.PosBackgroundUrl = {this.PosBackgroundUrl ?? "null"}");
+            toStringOutput.Add($"this.Mcc = {this.Mcc ?? "null"}");
+            toStringOutput.Add($"this.FullFormatLogoUrl = {this.FullFormatLogoUrl ?? "null"}");
             toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : this.TaxIds.ToString())}");
         }
 
@@ -1024,7 +1046,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -1032,7 +1054,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTimezone()
             {
@@ -1040,7 +1062,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLanguageCode()
             {
@@ -1048,7 +1070,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhoneNumber()
             {
@@ -1056,7 +1078,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBusinessName()
             {
@@ -1064,7 +1086,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetWebsiteUrl()
             {
@@ -1072,7 +1094,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBusinessEmail()
             {
@@ -1080,7 +1102,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -1088,7 +1110,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTwitterUsername()
             {
@@ -1096,7 +1118,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetInstagramUsername()
             {
@@ -1104,7 +1126,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFacebookUrl()
             {
@@ -1112,7 +1134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMcc()
             {
@@ -1126,7 +1148,8 @@ namespace Square.Models
             /// <returns> Location. </returns>
             public Location Build()
             {
-                return new Location(shouldSerialize,
+                return new Location(
+                    shouldSerialize,
                     this.id,
                     this.name,
                     this.address,

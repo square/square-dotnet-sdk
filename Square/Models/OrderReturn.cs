@@ -74,19 +74,20 @@ namespace Square.Models
                 shouldSerialize["return_service_charges"] = true;
                 this.ReturnServiceCharges = returnServiceCharges;
             }
-
             this.ReturnTaxes = returnTaxes;
             this.ReturnDiscounts = returnDiscounts;
+
             if (returnTips != null)
             {
                 shouldSerialize["return_tips"] = true;
                 this.ReturnTips = returnTips;
             }
-
             this.RoundingAdjustment = roundingAdjustment;
             this.ReturnAmounts = returnAmounts;
         }
-        internal OrderReturn(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderReturn(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             string sourceOrderId = null,
             IList<Models.OrderReturnLineItem> returnLineItems = null,
@@ -173,9 +174,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderReturn : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -227,44 +226,49 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderReturn other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.SourceOrderId == null && other.SourceOrderId == null) || (this.SourceOrderId?.Equals(other.SourceOrderId) == true)) &&
-                ((this.ReturnLineItems == null && other.ReturnLineItems == null) || (this.ReturnLineItems?.Equals(other.ReturnLineItems) == true)) &&
-                ((this.ReturnServiceCharges == null && other.ReturnServiceCharges == null) || (this.ReturnServiceCharges?.Equals(other.ReturnServiceCharges) == true)) &&
-                ((this.ReturnTaxes == null && other.ReturnTaxes == null) || (this.ReturnTaxes?.Equals(other.ReturnTaxes) == true)) &&
-                ((this.ReturnDiscounts == null && other.ReturnDiscounts == null) || (this.ReturnDiscounts?.Equals(other.ReturnDiscounts) == true)) &&
-                ((this.ReturnTips == null && other.ReturnTips == null) || (this.ReturnTips?.Equals(other.ReturnTips) == true)) &&
-                ((this.RoundingAdjustment == null && other.RoundingAdjustment == null) || (this.RoundingAdjustment?.Equals(other.RoundingAdjustment) == true)) &&
-                ((this.ReturnAmounts == null && other.ReturnAmounts == null) || (this.ReturnAmounts?.Equals(other.ReturnAmounts) == true));
+            return obj is OrderReturn other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.SourceOrderId == null && other.SourceOrderId == null ||
+                 this.SourceOrderId?.Equals(other.SourceOrderId) == true) &&
+                (this.ReturnLineItems == null && other.ReturnLineItems == null ||
+                 this.ReturnLineItems?.Equals(other.ReturnLineItems) == true) &&
+                (this.ReturnServiceCharges == null && other.ReturnServiceCharges == null ||
+                 this.ReturnServiceCharges?.Equals(other.ReturnServiceCharges) == true) &&
+                (this.ReturnTaxes == null && other.ReturnTaxes == null ||
+                 this.ReturnTaxes?.Equals(other.ReturnTaxes) == true) &&
+                (this.ReturnDiscounts == null && other.ReturnDiscounts == null ||
+                 this.ReturnDiscounts?.Equals(other.ReturnDiscounts) == true) &&
+                (this.ReturnTips == null && other.ReturnTips == null ||
+                 this.ReturnTips?.Equals(other.ReturnTips) == true) &&
+                (this.RoundingAdjustment == null && other.RoundingAdjustment == null ||
+                 this.RoundingAdjustment?.Equals(other.RoundingAdjustment) == true) &&
+                (this.ReturnAmounts == null && other.ReturnAmounts == null ||
+                 this.ReturnAmounts?.Equals(other.ReturnAmounts) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1922557900;
-            hashCode = HashCode.Combine(this.Uid, this.SourceOrderId, this.ReturnLineItems, this.ReturnServiceCharges, this.ReturnTaxes, this.ReturnDiscounts, this.ReturnTips);
+            var hashCode = 1922557900;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.SourceOrderId, this.ReturnLineItems, this.ReturnServiceCharges, this.ReturnTaxes, this.ReturnDiscounts, this.ReturnTips);
 
             hashCode = HashCode.Combine(hashCode, this.RoundingAdjustment, this.ReturnAmounts);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.SourceOrderId = {(this.SourceOrderId == null ? "null" : this.SourceOrderId)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.SourceOrderId = {this.SourceOrderId ?? "null"}");
             toStringOutput.Add($"this.ReturnLineItems = {(this.ReturnLineItems == null ? "null" : $"[{string.Join(", ", this.ReturnLineItems)} ]")}");
             toStringOutput.Add($"this.ReturnServiceCharges = {(this.ReturnServiceCharges == null ? "null" : $"[{string.Join(", ", this.ReturnServiceCharges)} ]")}");
             toStringOutput.Add($"this.ReturnTaxes = {(this.ReturnTaxes == null ? "null" : $"[{string.Join(", ", this.ReturnTaxes)} ]")}");
@@ -422,7 +426,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -430,7 +434,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSourceOrderId()
             {
@@ -438,7 +442,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReturnLineItems()
             {
@@ -446,7 +450,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReturnServiceCharges()
             {
@@ -454,7 +458,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReturnTips()
             {
@@ -468,7 +472,8 @@ namespace Square.Models
             /// <returns> OrderReturn. </returns>
             public OrderReturn Build()
             {
-                return new OrderReturn(shouldSerialize,
+                return new OrderReturn(
+                    shouldSerialize,
                     this.uid,
                     this.sourceOrderId,
                     this.returnLineItems,

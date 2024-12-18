@@ -35,8 +35,8 @@ namespace Square.Models
                 { "eligible_for_auto_amounts", false },
                 { "amounts", false }
             };
-
             this.Option = option;
+
             if (eligibleForAutoAmounts != null)
             {
                 shouldSerialize["eligible_for_auto_amounts"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["amounts"] = true;
                 this.Amounts = amounts;
             }
-
         }
-        internal CatalogQuickAmountsSettings(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogQuickAmountsSettings(
+            Dictionary<string, bool> shouldSerialize,
             string option,
             bool? eligibleForAutoAmounts = null,
             IList<Models.CatalogQuickAmount> amounts = null)
@@ -84,9 +85,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogQuickAmountsSettings : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -111,28 +110,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogQuickAmountsSettings other &&                ((this.Option == null && other.Option == null) || (this.Option?.Equals(other.Option) == true)) &&
-                ((this.EligibleForAutoAmounts == null && other.EligibleForAutoAmounts == null) || (this.EligibleForAutoAmounts?.Equals(other.EligibleForAutoAmounts) == true)) &&
-                ((this.Amounts == null && other.Amounts == null) || (this.Amounts?.Equals(other.Amounts) == true));
+            return obj is CatalogQuickAmountsSettings other &&
+                (this.Option == null && other.Option == null ||
+                 this.Option?.Equals(other.Option) == true) &&
+                (this.EligibleForAutoAmounts == null && other.EligibleForAutoAmounts == null ||
+                 this.EligibleForAutoAmounts?.Equals(other.EligibleForAutoAmounts) == true) &&
+                (this.Amounts == null && other.Amounts == null ||
+                 this.Amounts?.Equals(other.Amounts) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1326255280;
-            hashCode = HashCode.Combine(this.Option, this.EligibleForAutoAmounts, this.Amounts);
+            var hashCode = -1326255280;
+            hashCode = HashCode.Combine(hashCode, this.Option, this.EligibleForAutoAmounts, this.Amounts);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -218,7 +216,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEligibleForAutoAmounts()
             {
@@ -226,7 +224,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAmounts()
             {
@@ -240,7 +238,8 @@ namespace Square.Models
             /// <returns> CatalogQuickAmountsSettings. </returns>
             public CatalogQuickAmountsSettings Build()
             {
-                return new CatalogQuickAmountsSettings(shouldSerialize,
+                return new CatalogQuickAmountsSettings(
+                    shouldSerialize,
                     this.option,
                     this.eligibleForAutoAmounts,
                     this.amounts);

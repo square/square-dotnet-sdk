@@ -55,14 +55,15 @@ namespace Square.Models
                 shouldSerialize["value"] = true;
                 this.MValue = mValue;
             }
-
             this.Version = version;
             this.Visibility = visibility;
             this.Definition = definition;
             this.UpdatedAt = updatedAt;
             this.CreatedAt = createdAt;
         }
-        internal CustomAttribute(Dictionary<string, bool> shouldSerialize,
+
+        internal CustomAttribute(
+            Dictionary<string, bool> shouldSerialize,
             string key = null,
             JsonValue mValue = null,
             int? version = null,
@@ -149,9 +150,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomAttribute : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -176,45 +175,48 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomAttribute other &&                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true)) &&
-                ((this.MValue == null && other.MValue == null) || (this.MValue?.Equals(other.MValue) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.Visibility == null && other.Visibility == null) || (this.Visibility?.Equals(other.Visibility) == true)) &&
-                ((this.Definition == null && other.Definition == null) || (this.Definition?.Equals(other.Definition) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true));
+            return obj is CustomAttribute other &&
+                (this.Key == null && other.Key == null ||
+                 this.Key?.Equals(other.Key) == true) &&
+                (this.MValue == null && other.MValue == null ||
+                 this.MValue?.Equals(other.MValue) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.Visibility == null && other.Visibility == null ||
+                 this.Visibility?.Equals(other.Visibility) == true) &&
+                (this.Definition == null && other.Definition == null ||
+                 this.Definition?.Equals(other.Definition) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -616949174;
-            hashCode = HashCode.Combine(this.Key, this.MValue, this.Version, this.Visibility, this.Definition, this.UpdatedAt, this.CreatedAt);
+            var hashCode = -616949174;
+            hashCode = HashCode.Combine(hashCode, this.Key, this.MValue, this.Version, this.Visibility, this.Definition, this.UpdatedAt, this.CreatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key)}");
+            toStringOutput.Add($"this.Key = {this.Key ?? "null"}");
             toStringOutput.Add($"MValue = {(this.MValue == null ? "null" : this.MValue.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.Visibility = {(this.Visibility == null ? "null" : this.Visibility.ToString())}");
             toStringOutput.Add($"this.Definition = {(this.Definition == null ? "null" : this.Definition.ToString())}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -333,7 +335,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetKey()
             {
@@ -341,7 +343,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMValue()
             {
@@ -355,7 +357,8 @@ namespace Square.Models
             /// <returns> CustomAttribute. </returns>
             public CustomAttribute Build()
             {
-                return new CustomAttribute(shouldSerialize,
+                return new CustomAttribute(
+                    shouldSerialize,
                     this.key,
                     this.mValue,
                     this.version,

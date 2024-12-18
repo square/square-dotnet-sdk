@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["idempotency_key"] = true;
                 this.IdempotencyKey = idempotencyKey;
             }
-
             this.Vendor = vendor;
         }
-        internal UpdateVendorRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal UpdateVendorRequest(
+            Dictionary<string, bool> shouldSerialize,
             Models.Vendor vendor,
             string idempotencyKey = null)
         {
@@ -70,9 +71,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateVendorRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -88,34 +87,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateVendorRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.Vendor == null && other.Vendor == null) || (this.Vendor?.Equals(other.Vendor) == true));
+            return obj is UpdateVendorRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.Vendor == null && other.Vendor == null ||
+                 this.Vendor?.Equals(other.Vendor) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -111759500;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.Vendor);
+            var hashCode = -111759500;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.Vendor);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.Vendor = {(this.Vendor == null ? "null" : this.Vendor.ToString())}");
         }
 
@@ -178,7 +175,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIdempotencyKey()
             {
@@ -192,7 +189,8 @@ namespace Square.Models
             /// <returns> UpdateVendorRequest. </returns>
             public UpdateVendorRequest Build()
             {
-                return new UpdateVendorRequest(shouldSerialize,
+                return new UpdateVendorRequest(
+                    shouldSerialize,
                     this.vendor,
                     this.idempotencyKey);
             }

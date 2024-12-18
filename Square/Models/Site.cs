@@ -42,8 +42,8 @@ namespace Square.Models
                 { "domain", false },
                 { "is_published", false }
             };
-
             this.Id = id;
+
             if (siteTitle != null)
             {
                 shouldSerialize["site_title"] = true;
@@ -61,11 +61,12 @@ namespace Square.Models
                 shouldSerialize["is_published"] = true;
                 this.IsPublished = isPublished;
             }
-
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
         }
-        internal Site(Dictionary<string, bool> shouldSerialize,
+
+        internal Site(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string siteTitle = null,
             string domain = null,
@@ -122,9 +123,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Site : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -158,43 +157,45 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Site other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.SiteTitle == null && other.SiteTitle == null) || (this.SiteTitle?.Equals(other.SiteTitle) == true)) &&
-                ((this.Domain == null && other.Domain == null) || (this.Domain?.Equals(other.Domain) == true)) &&
-                ((this.IsPublished == null && other.IsPublished == null) || (this.IsPublished?.Equals(other.IsPublished) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
+            return obj is Site other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.SiteTitle == null && other.SiteTitle == null ||
+                 this.SiteTitle?.Equals(other.SiteTitle) == true) &&
+                (this.Domain == null && other.Domain == null ||
+                 this.Domain?.Equals(other.Domain) == true) &&
+                (this.IsPublished == null && other.IsPublished == null ||
+                 this.IsPublished?.Equals(other.IsPublished) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1874716552;
-            hashCode = HashCode.Combine(this.Id, this.SiteTitle, this.Domain, this.IsPublished, this.CreatedAt, this.UpdatedAt);
+            var hashCode = -1874716552;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.SiteTitle, this.Domain, this.IsPublished, this.CreatedAt, this.UpdatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.SiteTitle = {(this.SiteTitle == null ? "null" : this.SiteTitle)}");
-            toStringOutput.Add($"this.Domain = {(this.Domain == null ? "null" : this.Domain)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.SiteTitle = {this.SiteTitle ?? "null"}");
+            toStringOutput.Add($"this.Domain = {this.Domain ?? "null"}");
             toStringOutput.Add($"this.IsPublished = {(this.IsPublished == null ? "null" : this.IsPublished.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -302,7 +303,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSiteTitle()
             {
@@ -310,7 +311,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDomain()
             {
@@ -318,7 +319,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsPublished()
             {
@@ -332,7 +333,8 @@ namespace Square.Models
             /// <returns> Site. </returns>
             public Site Build()
             {
-                return new Site(shouldSerialize,
+                return new Site(
+                    shouldSerialize,
                     this.id,
                     this.siteTitle,
                     this.domain,

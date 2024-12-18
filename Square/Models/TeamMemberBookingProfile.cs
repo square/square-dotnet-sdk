@@ -38,19 +38,20 @@ namespace Square.Models
             {
                 { "is_bookable", false }
             };
-
             this.TeamMemberId = teamMemberId;
             this.Description = description;
             this.DisplayName = displayName;
+
             if (isBookable != null)
             {
                 shouldSerialize["is_bookable"] = true;
                 this.IsBookable = isBookable;
             }
-
             this.ProfileImageUrl = profileImageUrl;
         }
-        internal TeamMemberBookingProfile(Dictionary<string, bool> shouldSerialize,
+
+        internal TeamMemberBookingProfile(
+            Dictionary<string, bool> shouldSerialize,
             string teamMemberId = null,
             string description = null,
             string displayName = null,
@@ -99,9 +100,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TeamMemberBookingProfile : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -117,41 +116,42 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TeamMemberBookingProfile other &&                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.DisplayName == null && other.DisplayName == null) || (this.DisplayName?.Equals(other.DisplayName) == true)) &&
-                ((this.IsBookable == null && other.IsBookable == null) || (this.IsBookable?.Equals(other.IsBookable) == true)) &&
-                ((this.ProfileImageUrl == null && other.ProfileImageUrl == null) || (this.ProfileImageUrl?.Equals(other.ProfileImageUrl) == true));
+            return obj is TeamMemberBookingProfile other &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.DisplayName == null && other.DisplayName == null ||
+                 this.DisplayName?.Equals(other.DisplayName) == true) &&
+                (this.IsBookable == null && other.IsBookable == null ||
+                 this.IsBookable?.Equals(other.IsBookable) == true) &&
+                (this.ProfileImageUrl == null && other.ProfileImageUrl == null ||
+                 this.ProfileImageUrl?.Equals(other.ProfileImageUrl) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1821243729;
-            hashCode = HashCode.Combine(this.TeamMemberId, this.Description, this.DisplayName, this.IsBookable, this.ProfileImageUrl);
+            var hashCode = -1821243729;
+            hashCode = HashCode.Combine(hashCode, this.TeamMemberId, this.Description, this.DisplayName, this.IsBookable, this.ProfileImageUrl);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
-            toStringOutput.Add($"this.DisplayName = {(this.DisplayName == null ? "null" : this.DisplayName)}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
+            toStringOutput.Add($"this.DisplayName = {this.DisplayName ?? "null"}");
             toStringOutput.Add($"this.IsBookable = {(this.IsBookable == null ? "null" : this.IsBookable.ToString())}");
-            toStringOutput.Add($"this.ProfileImageUrl = {(this.ProfileImageUrl == null ? "null" : this.ProfileImageUrl)}");
+            toStringOutput.Add($"this.ProfileImageUrl = {this.ProfileImageUrl ?? "null"}");
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsBookable()
             {
@@ -256,7 +256,8 @@ namespace Square.Models
             /// <returns> TeamMemberBookingProfile. </returns>
             public TeamMemberBookingProfile Build()
             {
-                return new TeamMemberBookingProfile(shouldSerialize,
+                return new TeamMemberBookingProfile(
+                    shouldSerialize,
                     this.teamMemberId,
                     this.description,
                     this.displayName,

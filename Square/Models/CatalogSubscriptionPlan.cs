@@ -44,8 +44,8 @@ namespace Square.Models
                 { "eligible_category_ids", false },
                 { "all_items", false }
             };
-
             this.Name = name;
+
             if (phases != null)
             {
                 shouldSerialize["phases"] = true;
@@ -75,9 +75,10 @@ namespace Square.Models
                 shouldSerialize["all_items"] = true;
                 this.AllItems = allItems;
             }
-
         }
-        internal CatalogSubscriptionPlan(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogSubscriptionPlan(
+            Dictionary<string, bool> shouldSerialize,
             string name,
             IList<Models.SubscriptionPhase> phases = null,
             IList<Models.CatalogObject> subscriptionPlanVariations = null,
@@ -135,9 +136,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogSubscriptionPlan : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -189,38 +188,40 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogSubscriptionPlan other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true)) &&
-                ((this.SubscriptionPlanVariations == null && other.SubscriptionPlanVariations == null) || (this.SubscriptionPlanVariations?.Equals(other.SubscriptionPlanVariations) == true)) &&
-                ((this.EligibleItemIds == null && other.EligibleItemIds == null) || (this.EligibleItemIds?.Equals(other.EligibleItemIds) == true)) &&
-                ((this.EligibleCategoryIds == null && other.EligibleCategoryIds == null) || (this.EligibleCategoryIds?.Equals(other.EligibleCategoryIds) == true)) &&
-                ((this.AllItems == null && other.AllItems == null) || (this.AllItems?.Equals(other.AllItems) == true));
+            return obj is CatalogSubscriptionPlan other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Phases == null && other.Phases == null ||
+                 this.Phases?.Equals(other.Phases) == true) &&
+                (this.SubscriptionPlanVariations == null && other.SubscriptionPlanVariations == null ||
+                 this.SubscriptionPlanVariations?.Equals(other.SubscriptionPlanVariations) == true) &&
+                (this.EligibleItemIds == null && other.EligibleItemIds == null ||
+                 this.EligibleItemIds?.Equals(other.EligibleItemIds) == true) &&
+                (this.EligibleCategoryIds == null && other.EligibleCategoryIds == null ||
+                 this.EligibleCategoryIds?.Equals(other.EligibleCategoryIds) == true) &&
+                (this.AllItems == null && other.AllItems == null ||
+                 this.AllItems?.Equals(other.AllItems) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1680873033;
-            hashCode = HashCode.Combine(this.Name, this.Phases, this.SubscriptionPlanVariations, this.EligibleItemIds, this.EligibleCategoryIds, this.AllItems);
+            var hashCode = 1680873033;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.Phases, this.SubscriptionPlanVariations, this.EligibleItemIds, this.EligibleCategoryIds, this.AllItems);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
             toStringOutput.Add($"this.SubscriptionPlanVariations = {(this.SubscriptionPlanVariations == null ? "null" : $"[{string.Join(", ", this.SubscriptionPlanVariations)} ]")}");
             toStringOutput.Add($"this.EligibleItemIds = {(this.EligibleItemIds == null ? "null" : $"[{string.Join(", ", this.EligibleItemIds)} ]")}");
@@ -347,7 +348,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhases()
             {
@@ -355,7 +356,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSubscriptionPlanVariations()
             {
@@ -363,7 +364,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEligibleItemIds()
             {
@@ -371,7 +372,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEligibleCategoryIds()
             {
@@ -379,7 +380,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAllItems()
             {
@@ -393,7 +394,8 @@ namespace Square.Models
             /// <returns> CatalogSubscriptionPlan. </returns>
             public CatalogSubscriptionPlan Build()
             {
-                return new CatalogSubscriptionPlan(shouldSerialize,
+                return new CatalogSubscriptionPlan(
+                    shouldSerialize,
                     this.name,
                     this.phases,
                     this.subscriptionPlanVariations,

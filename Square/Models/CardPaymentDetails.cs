@@ -78,8 +78,8 @@ namespace Square.Models
                 shouldSerialize["status"] = true;
                 this.Status = status;
             }
-
             this.Card = card;
+
             if (entryMethod != null)
             {
                 shouldSerialize["entry_method"] = true;
@@ -139,9 +139,9 @@ namespace Square.Models
                 shouldSerialize["statement_description"] = true;
                 this.StatementDescription = statementDescription;
             }
-
             this.DeviceDetails = deviceDetails;
             this.CardPaymentTimeline = cardPaymentTimeline;
+
             if (refundRequiresCardPresence != null)
             {
                 shouldSerialize["refund_requires_card_presence"] = true;
@@ -153,9 +153,10 @@ namespace Square.Models
                 shouldSerialize["errors"] = true;
                 this.Errors = errors;
             }
-
         }
-        internal CardPaymentDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal CardPaymentDetails(
+            Dictionary<string, bool> shouldSerialize,
             string status = null,
             Models.Card card = null,
             string entryMethod = null,
@@ -303,9 +304,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CardPaymentDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -429,38 +428,49 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CardPaymentDetails other &&                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
-                ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true)) &&
-                ((this.CvvStatus == null && other.CvvStatus == null) || (this.CvvStatus?.Equals(other.CvvStatus) == true)) &&
-                ((this.AvsStatus == null && other.AvsStatus == null) || (this.AvsStatus?.Equals(other.AvsStatus) == true)) &&
-                ((this.AuthResultCode == null && other.AuthResultCode == null) || (this.AuthResultCode?.Equals(other.AuthResultCode) == true)) &&
-                ((this.ApplicationIdentifier == null && other.ApplicationIdentifier == null) || (this.ApplicationIdentifier?.Equals(other.ApplicationIdentifier) == true)) &&
-                ((this.ApplicationName == null && other.ApplicationName == null) || (this.ApplicationName?.Equals(other.ApplicationName) == true)) &&
-                ((this.ApplicationCryptogram == null && other.ApplicationCryptogram == null) || (this.ApplicationCryptogram?.Equals(other.ApplicationCryptogram) == true)) &&
-                ((this.VerificationMethod == null && other.VerificationMethod == null) || (this.VerificationMethod?.Equals(other.VerificationMethod) == true)) &&
-                ((this.VerificationResults == null && other.VerificationResults == null) || (this.VerificationResults?.Equals(other.VerificationResults) == true)) &&
-                ((this.StatementDescription == null && other.StatementDescription == null) || (this.StatementDescription?.Equals(other.StatementDescription) == true)) &&
-                ((this.DeviceDetails == null && other.DeviceDetails == null) || (this.DeviceDetails?.Equals(other.DeviceDetails) == true)) &&
-                ((this.CardPaymentTimeline == null && other.CardPaymentTimeline == null) || (this.CardPaymentTimeline?.Equals(other.CardPaymentTimeline) == true)) &&
-                ((this.RefundRequiresCardPresence == null && other.RefundRequiresCardPresence == null) || (this.RefundRequiresCardPresence?.Equals(other.RefundRequiresCardPresence) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
+            return obj is CardPaymentDetails other &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.Card == null && other.Card == null ||
+                 this.Card?.Equals(other.Card) == true) &&
+                (this.EntryMethod == null && other.EntryMethod == null ||
+                 this.EntryMethod?.Equals(other.EntryMethod) == true) &&
+                (this.CvvStatus == null && other.CvvStatus == null ||
+                 this.CvvStatus?.Equals(other.CvvStatus) == true) &&
+                (this.AvsStatus == null && other.AvsStatus == null ||
+                 this.AvsStatus?.Equals(other.AvsStatus) == true) &&
+                (this.AuthResultCode == null && other.AuthResultCode == null ||
+                 this.AuthResultCode?.Equals(other.AuthResultCode) == true) &&
+                (this.ApplicationIdentifier == null && other.ApplicationIdentifier == null ||
+                 this.ApplicationIdentifier?.Equals(other.ApplicationIdentifier) == true) &&
+                (this.ApplicationName == null && other.ApplicationName == null ||
+                 this.ApplicationName?.Equals(other.ApplicationName) == true) &&
+                (this.ApplicationCryptogram == null && other.ApplicationCryptogram == null ||
+                 this.ApplicationCryptogram?.Equals(other.ApplicationCryptogram) == true) &&
+                (this.VerificationMethod == null && other.VerificationMethod == null ||
+                 this.VerificationMethod?.Equals(other.VerificationMethod) == true) &&
+                (this.VerificationResults == null && other.VerificationResults == null ||
+                 this.VerificationResults?.Equals(other.VerificationResults) == true) &&
+                (this.StatementDescription == null && other.StatementDescription == null ||
+                 this.StatementDescription?.Equals(other.StatementDescription) == true) &&
+                (this.DeviceDetails == null && other.DeviceDetails == null ||
+                 this.DeviceDetails?.Equals(other.DeviceDetails) == true) &&
+                (this.CardPaymentTimeline == null && other.CardPaymentTimeline == null ||
+                 this.CardPaymentTimeline?.Equals(other.CardPaymentTimeline) == true) &&
+                (this.RefundRequiresCardPresence == null && other.RefundRequiresCardPresence == null ||
+                 this.RefundRequiresCardPresence?.Equals(other.RefundRequiresCardPresence) == true) &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1465447186;
-            hashCode = HashCode.Combine(this.Status, this.Card, this.EntryMethod, this.CvvStatus, this.AvsStatus, this.AuthResultCode, this.ApplicationIdentifier);
+            var hashCode = 1465447186;
+            hashCode = HashCode.Combine(hashCode, this.Status, this.Card, this.EntryMethod, this.CvvStatus, this.AvsStatus, this.AuthResultCode, this.ApplicationIdentifier);
 
             hashCode = HashCode.Combine(hashCode, this.ApplicationName, this.ApplicationCryptogram, this.VerificationMethod, this.VerificationResults, this.StatementDescription, this.DeviceDetails, this.CardPaymentTimeline);
 
@@ -468,24 +478,25 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status)}");
+            toStringOutput.Add($"this.Status = {this.Status ?? "null"}");
             toStringOutput.Add($"this.Card = {(this.Card == null ? "null" : this.Card.ToString())}");
-            toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod)}");
-            toStringOutput.Add($"this.CvvStatus = {(this.CvvStatus == null ? "null" : this.CvvStatus)}");
-            toStringOutput.Add($"this.AvsStatus = {(this.AvsStatus == null ? "null" : this.AvsStatus)}");
-            toStringOutput.Add($"this.AuthResultCode = {(this.AuthResultCode == null ? "null" : this.AuthResultCode)}");
-            toStringOutput.Add($"this.ApplicationIdentifier = {(this.ApplicationIdentifier == null ? "null" : this.ApplicationIdentifier)}");
-            toStringOutput.Add($"this.ApplicationName = {(this.ApplicationName == null ? "null" : this.ApplicationName)}");
-            toStringOutput.Add($"this.ApplicationCryptogram = {(this.ApplicationCryptogram == null ? "null" : this.ApplicationCryptogram)}");
-            toStringOutput.Add($"this.VerificationMethod = {(this.VerificationMethod == null ? "null" : this.VerificationMethod)}");
-            toStringOutput.Add($"this.VerificationResults = {(this.VerificationResults == null ? "null" : this.VerificationResults)}");
-            toStringOutput.Add($"this.StatementDescription = {(this.StatementDescription == null ? "null" : this.StatementDescription)}");
+            toStringOutput.Add($"this.EntryMethod = {this.EntryMethod ?? "null"}");
+            toStringOutput.Add($"this.CvvStatus = {this.CvvStatus ?? "null"}");
+            toStringOutput.Add($"this.AvsStatus = {this.AvsStatus ?? "null"}");
+            toStringOutput.Add($"this.AuthResultCode = {this.AuthResultCode ?? "null"}");
+            toStringOutput.Add($"this.ApplicationIdentifier = {this.ApplicationIdentifier ?? "null"}");
+            toStringOutput.Add($"this.ApplicationName = {this.ApplicationName ?? "null"}");
+            toStringOutput.Add($"this.ApplicationCryptogram = {this.ApplicationCryptogram ?? "null"}");
+            toStringOutput.Add($"this.VerificationMethod = {this.VerificationMethod ?? "null"}");
+            toStringOutput.Add($"this.VerificationResults = {this.VerificationResults ?? "null"}");
+            toStringOutput.Add($"this.StatementDescription = {this.StatementDescription ?? "null"}");
             toStringOutput.Add($"this.DeviceDetails = {(this.DeviceDetails == null ? "null" : this.DeviceDetails.ToString())}");
             toStringOutput.Add($"this.CardPaymentTimeline = {(this.CardPaymentTimeline == null ? "null" : this.CardPaymentTimeline.ToString())}");
             toStringOutput.Add($"this.RefundRequiresCardPresence = {(this.RefundRequiresCardPresence == null ? "null" : this.RefundRequiresCardPresence.ToString())}");
@@ -747,7 +758,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStatus()
             {
@@ -755,7 +766,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEntryMethod()
             {
@@ -763,7 +774,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCvvStatus()
             {
@@ -771,7 +782,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAvsStatus()
             {
@@ -779,7 +790,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAuthResultCode()
             {
@@ -787,7 +798,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApplicationIdentifier()
             {
@@ -795,7 +806,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApplicationName()
             {
@@ -803,7 +814,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApplicationCryptogram()
             {
@@ -811,7 +822,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVerificationMethod()
             {
@@ -819,7 +830,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVerificationResults()
             {
@@ -827,7 +838,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStatementDescription()
             {
@@ -835,7 +846,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRefundRequiresCardPresence()
             {
@@ -843,7 +854,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetErrors()
             {
@@ -857,7 +868,8 @@ namespace Square.Models
             /// <returns> CardPaymentDetails. </returns>
             public CardPaymentDetails Build()
             {
-                return new CardPaymentDetails(shouldSerialize,
+                return new CardPaymentDetails(
+                    shouldSerialize,
                     this.status,
                     this.card,
                     this.entryMethod,

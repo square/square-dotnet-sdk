@@ -63,9 +63,10 @@ namespace Square.Models
                 shouldSerialize["plan_phase_uid"] = true;
                 this.PlanPhaseUid = planPhaseUid;
             }
-
         }
-        internal Phase(Dictionary<string, bool> shouldSerialize,
+
+        internal Phase(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             long? ordinal = null,
             string orderTemplateId = null,
@@ -106,9 +107,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Phase : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -151,39 +150,39 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Phase other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
-                ((this.OrderTemplateId == null && other.OrderTemplateId == null) || (this.OrderTemplateId?.Equals(other.OrderTemplateId) == true)) &&
-                ((this.PlanPhaseUid == null && other.PlanPhaseUid == null) || (this.PlanPhaseUid?.Equals(other.PlanPhaseUid) == true));
+            return obj is Phase other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.Ordinal == null && other.Ordinal == null ||
+                 this.Ordinal?.Equals(other.Ordinal) == true) &&
+                (this.OrderTemplateId == null && other.OrderTemplateId == null ||
+                 this.OrderTemplateId?.Equals(other.OrderTemplateId) == true) &&
+                (this.PlanPhaseUid == null && other.PlanPhaseUid == null ||
+                 this.PlanPhaseUid?.Equals(other.PlanPhaseUid) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1608566409;
-            hashCode = HashCode.Combine(this.Uid, this.Ordinal, this.OrderTemplateId, this.PlanPhaseUid);
+            var hashCode = -1608566409;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.Ordinal, this.OrderTemplateId, this.PlanPhaseUid);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
-            toStringOutput.Add($"this.OrderTemplateId = {(this.OrderTemplateId == null ? "null" : this.OrderTemplateId)}");
-            toStringOutput.Add($"this.PlanPhaseUid = {(this.PlanPhaseUid == null ? "null" : this.PlanPhaseUid)}");
+            toStringOutput.Add($"this.OrderTemplateId = {this.OrderTemplateId ?? "null"}");
+            toStringOutput.Add($"this.PlanPhaseUid = {this.PlanPhaseUid ?? "null"}");
         }
 
         /// <summary>
@@ -267,7 +266,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -275,7 +274,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrdinal()
             {
@@ -283,7 +282,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderTemplateId()
             {
@@ -291,7 +290,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPlanPhaseUid()
             {
@@ -305,7 +304,8 @@ namespace Square.Models
             /// <returns> Phase. </returns>
             public Phase Build()
             {
-                return new Phase(shouldSerialize,
+                return new Phase(
+                    shouldSerialize,
                     this.uid,
                     this.ordinal,
                     this.orderTemplateId,

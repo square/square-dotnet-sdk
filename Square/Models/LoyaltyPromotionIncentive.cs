@@ -57,37 +57,34 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyPromotionIncentive : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyPromotionIncentive other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.PointsMultiplierData == null && other.PointsMultiplierData == null) || (this.PointsMultiplierData?.Equals(other.PointsMultiplierData) == true)) &&
-                ((this.PointsAdditionData == null && other.PointsAdditionData == null) || (this.PointsAdditionData?.Equals(other.PointsAdditionData) == true));
+            return obj is LoyaltyPromotionIncentive other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.PointsMultiplierData == null && other.PointsMultiplierData == null ||
+                 this.PointsMultiplierData?.Equals(other.PointsMultiplierData) == true) &&
+                (this.PointsAdditionData == null && other.PointsAdditionData == null ||
+                 this.PointsAdditionData?.Equals(other.PointsAdditionData) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -440874065;
-            hashCode = HashCode.Combine(this.Type, this.PointsMultiplierData, this.PointsAdditionData);
+            var hashCode = -440874065;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.PointsMultiplierData, this.PointsAdditionData);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

@@ -93,10 +93,10 @@ namespace Square.Models
                 shouldSerialize["ask_for_shipping_address"] = true;
                 this.AskForShippingAddress = askForShippingAddress;
             }
-
             this.AcceptedPaymentMethods = acceptedPaymentMethods;
             this.AppFeeMoney = appFeeMoney;
             this.ShippingFee = shippingFee;
+
             if (enableCoupon != null)
             {
                 shouldSerialize["enable_coupon"] = true;
@@ -108,9 +108,10 @@ namespace Square.Models
                 shouldSerialize["enable_loyalty"] = true;
                 this.EnableLoyalty = enableLoyalty;
             }
-
         }
-        internal CheckoutOptions(Dictionary<string, bool> shouldSerialize,
+
+        internal CheckoutOptions(
+            Dictionary<string, bool> shouldSerialize,
             bool? allowTipping = null,
             IList<Models.CustomField> customFields = null,
             string subscriptionPlanId = null,
@@ -213,9 +214,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CheckoutOptions : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -294,38 +293,45 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CheckoutOptions other &&                ((this.AllowTipping == null && other.AllowTipping == null) || (this.AllowTipping?.Equals(other.AllowTipping) == true)) &&
-                ((this.CustomFields == null && other.CustomFields == null) || (this.CustomFields?.Equals(other.CustomFields) == true)) &&
-                ((this.SubscriptionPlanId == null && other.SubscriptionPlanId == null) || (this.SubscriptionPlanId?.Equals(other.SubscriptionPlanId) == true)) &&
-                ((this.RedirectUrl == null && other.RedirectUrl == null) || (this.RedirectUrl?.Equals(other.RedirectUrl) == true)) &&
-                ((this.MerchantSupportEmail == null && other.MerchantSupportEmail == null) || (this.MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true)) &&
-                ((this.AskForShippingAddress == null && other.AskForShippingAddress == null) || (this.AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
-                ((this.AcceptedPaymentMethods == null && other.AcceptedPaymentMethods == null) || (this.AcceptedPaymentMethods?.Equals(other.AcceptedPaymentMethods) == true)) &&
-                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
-                ((this.ShippingFee == null && other.ShippingFee == null) || (this.ShippingFee?.Equals(other.ShippingFee) == true)) &&
-                ((this.EnableCoupon == null && other.EnableCoupon == null) || (this.EnableCoupon?.Equals(other.EnableCoupon) == true)) &&
-                ((this.EnableLoyalty == null && other.EnableLoyalty == null) || (this.EnableLoyalty?.Equals(other.EnableLoyalty) == true));
+            return obj is CheckoutOptions other &&
+                (this.AllowTipping == null && other.AllowTipping == null ||
+                 this.AllowTipping?.Equals(other.AllowTipping) == true) &&
+                (this.CustomFields == null && other.CustomFields == null ||
+                 this.CustomFields?.Equals(other.CustomFields) == true) &&
+                (this.SubscriptionPlanId == null && other.SubscriptionPlanId == null ||
+                 this.SubscriptionPlanId?.Equals(other.SubscriptionPlanId) == true) &&
+                (this.RedirectUrl == null && other.RedirectUrl == null ||
+                 this.RedirectUrl?.Equals(other.RedirectUrl) == true) &&
+                (this.MerchantSupportEmail == null && other.MerchantSupportEmail == null ||
+                 this.MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true) &&
+                (this.AskForShippingAddress == null && other.AskForShippingAddress == null ||
+                 this.AskForShippingAddress?.Equals(other.AskForShippingAddress) == true) &&
+                (this.AcceptedPaymentMethods == null && other.AcceptedPaymentMethods == null ||
+                 this.AcceptedPaymentMethods?.Equals(other.AcceptedPaymentMethods) == true) &&
+                (this.AppFeeMoney == null && other.AppFeeMoney == null ||
+                 this.AppFeeMoney?.Equals(other.AppFeeMoney) == true) &&
+                (this.ShippingFee == null && other.ShippingFee == null ||
+                 this.ShippingFee?.Equals(other.ShippingFee) == true) &&
+                (this.EnableCoupon == null && other.EnableCoupon == null ||
+                 this.EnableCoupon?.Equals(other.EnableCoupon) == true) &&
+                (this.EnableLoyalty == null && other.EnableLoyalty == null ||
+                 this.EnableLoyalty?.Equals(other.EnableLoyalty) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 570031906;
-            hashCode = HashCode.Combine(this.AllowTipping, this.CustomFields, this.SubscriptionPlanId, this.RedirectUrl, this.MerchantSupportEmail, this.AskForShippingAddress, this.AcceptedPaymentMethods);
+            var hashCode = 570031906;
+            hashCode = HashCode.Combine(hashCode, this.AllowTipping, this.CustomFields, this.SubscriptionPlanId, this.RedirectUrl, this.MerchantSupportEmail, this.AskForShippingAddress, this.AcceptedPaymentMethods);
 
             hashCode = HashCode.Combine(hashCode, this.AppFeeMoney, this.ShippingFee, this.EnableCoupon, this.EnableLoyalty);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -334,9 +340,9 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.AllowTipping = {(this.AllowTipping == null ? "null" : this.AllowTipping.ToString())}");
             toStringOutput.Add($"this.CustomFields = {(this.CustomFields == null ? "null" : $"[{string.Join(", ", this.CustomFields)} ]")}");
-            toStringOutput.Add($"this.SubscriptionPlanId = {(this.SubscriptionPlanId == null ? "null" : this.SubscriptionPlanId)}");
-            toStringOutput.Add($"this.RedirectUrl = {(this.RedirectUrl == null ? "null" : this.RedirectUrl)}");
-            toStringOutput.Add($"this.MerchantSupportEmail = {(this.MerchantSupportEmail == null ? "null" : this.MerchantSupportEmail)}");
+            toStringOutput.Add($"this.SubscriptionPlanId = {this.SubscriptionPlanId ?? "null"}");
+            toStringOutput.Add($"this.RedirectUrl = {this.RedirectUrl ?? "null"}");
+            toStringOutput.Add($"this.MerchantSupportEmail = {this.MerchantSupportEmail ?? "null"}");
             toStringOutput.Add($"this.AskForShippingAddress = {(this.AskForShippingAddress == null ? "null" : this.AskForShippingAddress.ToString())}");
             toStringOutput.Add($"this.AcceptedPaymentMethods = {(this.AcceptedPaymentMethods == null ? "null" : this.AcceptedPaymentMethods.ToString())}");
             toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
@@ -525,7 +531,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAllowTipping()
             {
@@ -533,7 +539,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomFields()
             {
@@ -541,7 +547,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSubscriptionPlanId()
             {
@@ -549,7 +555,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRedirectUrl()
             {
@@ -557,7 +563,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMerchantSupportEmail()
             {
@@ -565,7 +571,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAskForShippingAddress()
             {
@@ -573,7 +579,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEnableCoupon()
             {
@@ -581,7 +587,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEnableLoyalty()
             {
@@ -595,7 +601,8 @@ namespace Square.Models
             /// <returns> CheckoutOptions. </returns>
             public CheckoutOptions Build()
             {
-                return new CheckoutOptions(shouldSerialize,
+                return new CheckoutOptions(
+                    shouldSerialize,
                     this.allowTipping,
                     this.customFields,
                     this.subscriptionPlanId,

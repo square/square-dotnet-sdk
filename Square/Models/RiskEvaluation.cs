@@ -47,43 +47,39 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RiskEvaluation : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RiskEvaluation other &&                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.RiskLevel == null && other.RiskLevel == null) || (this.RiskLevel?.Equals(other.RiskLevel) == true));
+            return obj is RiskEvaluation other &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.RiskLevel == null && other.RiskLevel == null ||
+                 this.RiskLevel?.Equals(other.RiskLevel) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 692810603;
-            hashCode = HashCode.Combine(this.CreatedAt, this.RiskLevel);
+            var hashCode = 692810603;
+            hashCode = HashCode.Combine(hashCode, this.CreatedAt, this.RiskLevel);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
             toStringOutput.Add($"this.RiskLevel = {(this.RiskLevel == null ? "null" : this.RiskLevel.ToString())}");
         }
 

@@ -72,9 +72,10 @@ namespace Square.Models
                 shouldSerialize["smart_tipping"] = true;
                 this.SmartTipping = smartTipping;
             }
-
         }
-        internal TipSettings(Dictionary<string, bool> shouldSerialize,
+
+        internal TipSettings(
+            Dictionary<string, bool> shouldSerialize,
             bool? allowTipping = null,
             bool? separateTipScreen = null,
             bool? customTipField = null,
@@ -131,9 +132,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TipSettings : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -185,30 +184,31 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TipSettings other &&                ((this.AllowTipping == null && other.AllowTipping == null) || (this.AllowTipping?.Equals(other.AllowTipping) == true)) &&
-                ((this.SeparateTipScreen == null && other.SeparateTipScreen == null) || (this.SeparateTipScreen?.Equals(other.SeparateTipScreen) == true)) &&
-                ((this.CustomTipField == null && other.CustomTipField == null) || (this.CustomTipField?.Equals(other.CustomTipField) == true)) &&
-                ((this.TipPercentages == null && other.TipPercentages == null) || (this.TipPercentages?.Equals(other.TipPercentages) == true)) &&
-                ((this.SmartTipping == null && other.SmartTipping == null) || (this.SmartTipping?.Equals(other.SmartTipping) == true));
+            return obj is TipSettings other &&
+                (this.AllowTipping == null && other.AllowTipping == null ||
+                 this.AllowTipping?.Equals(other.AllowTipping) == true) &&
+                (this.SeparateTipScreen == null && other.SeparateTipScreen == null ||
+                 this.SeparateTipScreen?.Equals(other.SeparateTipScreen) == true) &&
+                (this.CustomTipField == null && other.CustomTipField == null ||
+                 this.CustomTipField?.Equals(other.CustomTipField) == true) &&
+                (this.TipPercentages == null && other.TipPercentages == null ||
+                 this.TipPercentages?.Equals(other.TipPercentages) == true) &&
+                (this.SmartTipping == null && other.SmartTipping == null ||
+                 this.SmartTipping?.Equals(other.SmartTipping) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 464455539;
-            hashCode = HashCode.Combine(this.AllowTipping, this.SeparateTipScreen, this.CustomTipField, this.TipPercentages, this.SmartTipping);
+            var hashCode = 464455539;
+            hashCode = HashCode.Combine(hashCode, this.AllowTipping, this.SeparateTipScreen, this.CustomTipField, this.TipPercentages, this.SmartTipping);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -318,7 +318,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAllowTipping()
             {
@@ -326,7 +326,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSeparateTipScreen()
             {
@@ -334,7 +334,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomTipField()
             {
@@ -342,7 +342,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTipPercentages()
             {
@@ -350,7 +350,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSmartTipping()
             {
@@ -364,7 +364,8 @@ namespace Square.Models
             /// <returns> TipSettings. </returns>
             public TipSettings Build()
             {
-                return new TipSettings(shouldSerialize,
+                return new TipSettings(
+                    shouldSerialize,
                     this.allowTipping,
                     this.separateTipScreen,
                     this.customTipField,

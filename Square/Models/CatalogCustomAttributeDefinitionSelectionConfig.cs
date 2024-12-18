@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["allowed_selections"] = true;
                 this.AllowedSelections = allowedSelections;
             }
-
         }
-        internal CatalogCustomAttributeDefinitionSelectionConfig(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogCustomAttributeDefinitionSelectionConfig(
+            Dictionary<string, bool> shouldSerialize,
             int? maxAllowedSelections = null,
             IList<Models.CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection> allowedSelections = null)
         {
@@ -76,9 +77,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogCustomAttributeDefinitionSelectionConfig : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -103,27 +102,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogCustomAttributeDefinitionSelectionConfig other &&                ((this.MaxAllowedSelections == null && other.MaxAllowedSelections == null) || (this.MaxAllowedSelections?.Equals(other.MaxAllowedSelections) == true)) &&
-                ((this.AllowedSelections == null && other.AllowedSelections == null) || (this.AllowedSelections?.Equals(other.AllowedSelections) == true));
+            return obj is CatalogCustomAttributeDefinitionSelectionConfig other &&
+                (this.MaxAllowedSelections == null && other.MaxAllowedSelections == null ||
+                 this.MaxAllowedSelections?.Equals(other.MaxAllowedSelections) == true) &&
+                (this.AllowedSelections == null && other.AllowedSelections == null ||
+                 this.AllowedSelections?.Equals(other.AllowedSelections) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 960165059;
-            hashCode = HashCode.Combine(this.MaxAllowedSelections, this.AllowedSelections);
+            var hashCode = 960165059;
+            hashCode = HashCode.Combine(hashCode, this.MaxAllowedSelections, this.AllowedSelections);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -185,7 +182,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMaxAllowedSelections()
             {
@@ -193,7 +190,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAllowedSelections()
             {
@@ -207,7 +204,8 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeDefinitionSelectionConfig. </returns>
             public CatalogCustomAttributeDefinitionSelectionConfig Build()
             {
-                return new CatalogCustomAttributeDefinitionSelectionConfig(shouldSerialize,
+                return new CatalogCustomAttributeDefinitionSelectionConfig(
+                    shouldSerialize,
                     this.maxAllowedSelections,
                     this.allowedSelections);
             }

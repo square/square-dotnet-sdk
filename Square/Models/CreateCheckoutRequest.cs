@@ -142,60 +142,63 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CreateCheckoutRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CreateCheckoutRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.Order == null && other.Order == null) || (this.Order?.Equals(other.Order) == true)) &&
-                ((this.AskForShippingAddress == null && other.AskForShippingAddress == null) || (this.AskForShippingAddress?.Equals(other.AskForShippingAddress) == true)) &&
-                ((this.MerchantSupportEmail == null && other.MerchantSupportEmail == null) || (this.MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true)) &&
-                ((this.PrePopulateBuyerEmail == null && other.PrePopulateBuyerEmail == null) || (this.PrePopulateBuyerEmail?.Equals(other.PrePopulateBuyerEmail) == true)) &&
-                ((this.PrePopulateShippingAddress == null && other.PrePopulateShippingAddress == null) || (this.PrePopulateShippingAddress?.Equals(other.PrePopulateShippingAddress) == true)) &&
-                ((this.RedirectUrl == null && other.RedirectUrl == null) || (this.RedirectUrl?.Equals(other.RedirectUrl) == true)) &&
-                ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true)) &&
-                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true));
+            return obj is CreateCheckoutRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.Order == null && other.Order == null ||
+                 this.Order?.Equals(other.Order) == true) &&
+                (this.AskForShippingAddress == null && other.AskForShippingAddress == null ||
+                 this.AskForShippingAddress?.Equals(other.AskForShippingAddress) == true) &&
+                (this.MerchantSupportEmail == null && other.MerchantSupportEmail == null ||
+                 this.MerchantSupportEmail?.Equals(other.MerchantSupportEmail) == true) &&
+                (this.PrePopulateBuyerEmail == null && other.PrePopulateBuyerEmail == null ||
+                 this.PrePopulateBuyerEmail?.Equals(other.PrePopulateBuyerEmail) == true) &&
+                (this.PrePopulateShippingAddress == null && other.PrePopulateShippingAddress == null ||
+                 this.PrePopulateShippingAddress?.Equals(other.PrePopulateShippingAddress) == true) &&
+                (this.RedirectUrl == null && other.RedirectUrl == null ||
+                 this.RedirectUrl?.Equals(other.RedirectUrl) == true) &&
+                (this.AdditionalRecipients == null && other.AdditionalRecipients == null ||
+                 this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true) &&
+                (this.Note == null && other.Note == null ||
+                 this.Note?.Equals(other.Note) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1270416416;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.Order, this.AskForShippingAddress, this.MerchantSupportEmail, this.PrePopulateBuyerEmail, this.PrePopulateShippingAddress, this.RedirectUrl);
+            var hashCode = 1270416416;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.Order, this.AskForShippingAddress, this.MerchantSupportEmail, this.PrePopulateBuyerEmail, this.PrePopulateShippingAddress, this.RedirectUrl);
 
             hashCode = HashCode.Combine(hashCode, this.AdditionalRecipients, this.Note);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.Order = {(this.Order == null ? "null" : this.Order.ToString())}");
             toStringOutput.Add($"this.AskForShippingAddress = {(this.AskForShippingAddress == null ? "null" : this.AskForShippingAddress.ToString())}");
-            toStringOutput.Add($"this.MerchantSupportEmail = {(this.MerchantSupportEmail == null ? "null" : this.MerchantSupportEmail)}");
-            toStringOutput.Add($"this.PrePopulateBuyerEmail = {(this.PrePopulateBuyerEmail == null ? "null" : this.PrePopulateBuyerEmail)}");
+            toStringOutput.Add($"this.MerchantSupportEmail = {this.MerchantSupportEmail ?? "null"}");
+            toStringOutput.Add($"this.PrePopulateBuyerEmail = {this.PrePopulateBuyerEmail ?? "null"}");
             toStringOutput.Add($"this.PrePopulateShippingAddress = {(this.PrePopulateShippingAddress == null ? "null" : this.PrePopulateShippingAddress.ToString())}");
-            toStringOutput.Add($"this.RedirectUrl = {(this.RedirectUrl == null ? "null" : this.RedirectUrl)}");
+            toStringOutput.Add($"this.RedirectUrl = {this.RedirectUrl ?? "null"}");
             toStringOutput.Add($"this.AdditionalRecipients = {(this.AdditionalRecipients == null ? "null" : $"[{string.Join(", ", this.AdditionalRecipients)} ]")}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
+            toStringOutput.Add($"this.Note = {this.Note ?? "null"}");
         }
 
         /// <summary>

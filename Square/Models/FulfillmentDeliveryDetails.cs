@@ -88,10 +88,10 @@ namespace Square.Models
                 { "external_delivery_id", false },
                 { "managed_delivery", false }
             };
-
             this.Recipient = recipient;
             this.ScheduleType = scheduleType;
             this.PlacedAt = placedAt;
+
             if (deliverAt != null)
             {
                 shouldSerialize["deliver_at"] = true;
@@ -121,12 +121,12 @@ namespace Square.Models
                 shouldSerialize["completed_at"] = true;
                 this.CompletedAt = completedAt;
             }
-
             this.InProgressAt = inProgressAt;
             this.RejectedAt = rejectedAt;
             this.ReadyAt = readyAt;
             this.DeliveredAt = deliveredAt;
             this.CanceledAt = canceledAt;
+
             if (cancelReason != null)
             {
                 shouldSerialize["cancel_reason"] = true;
@@ -186,9 +186,10 @@ namespace Square.Models
                 shouldSerialize["managed_delivery"] = true;
                 this.ManagedDelivery = managedDelivery;
             }
-
         }
-        internal FulfillmentDeliveryDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal FulfillmentDeliveryDetails(
+            Dictionary<string, bool> shouldSerialize,
             Models.FulfillmentRecipient recipient = null,
             string scheduleType = null,
             string placedAt = null,
@@ -420,9 +421,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"FulfillmentDeliveryDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -564,45 +563,63 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is FulfillmentDeliveryDetails other &&                ((this.Recipient == null && other.Recipient == null) || (this.Recipient?.Equals(other.Recipient) == true)) &&
-                ((this.ScheduleType == null && other.ScheduleType == null) || (this.ScheduleType?.Equals(other.ScheduleType) == true)) &&
-                ((this.PlacedAt == null && other.PlacedAt == null) || (this.PlacedAt?.Equals(other.PlacedAt) == true)) &&
-                ((this.DeliverAt == null && other.DeliverAt == null) || (this.DeliverAt?.Equals(other.DeliverAt) == true)) &&
-                ((this.PrepTimeDuration == null && other.PrepTimeDuration == null) || (this.PrepTimeDuration?.Equals(other.PrepTimeDuration) == true)) &&
-                ((this.DeliveryWindowDuration == null && other.DeliveryWindowDuration == null) || (this.DeliveryWindowDuration?.Equals(other.DeliveryWindowDuration) == true)) &&
-                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
-                ((this.CompletedAt == null && other.CompletedAt == null) || (this.CompletedAt?.Equals(other.CompletedAt) == true)) &&
-                ((this.InProgressAt == null && other.InProgressAt == null) || (this.InProgressAt?.Equals(other.InProgressAt) == true)) &&
-                ((this.RejectedAt == null && other.RejectedAt == null) || (this.RejectedAt?.Equals(other.RejectedAt) == true)) &&
-                ((this.ReadyAt == null && other.ReadyAt == null) || (this.ReadyAt?.Equals(other.ReadyAt) == true)) &&
-                ((this.DeliveredAt == null && other.DeliveredAt == null) || (this.DeliveredAt?.Equals(other.DeliveredAt) == true)) &&
-                ((this.CanceledAt == null && other.CanceledAt == null) || (this.CanceledAt?.Equals(other.CanceledAt) == true)) &&
-                ((this.CancelReason == null && other.CancelReason == null) || (this.CancelReason?.Equals(other.CancelReason) == true)) &&
-                ((this.CourierPickupAt == null && other.CourierPickupAt == null) || (this.CourierPickupAt?.Equals(other.CourierPickupAt) == true)) &&
-                ((this.CourierPickupWindowDuration == null && other.CourierPickupWindowDuration == null) || (this.CourierPickupWindowDuration?.Equals(other.CourierPickupWindowDuration) == true)) &&
-                ((this.IsNoContactDelivery == null && other.IsNoContactDelivery == null) || (this.IsNoContactDelivery?.Equals(other.IsNoContactDelivery) == true)) &&
-                ((this.DropoffNotes == null && other.DropoffNotes == null) || (this.DropoffNotes?.Equals(other.DropoffNotes) == true)) &&
-                ((this.CourierProviderName == null && other.CourierProviderName == null) || (this.CourierProviderName?.Equals(other.CourierProviderName) == true)) &&
-                ((this.CourierSupportPhoneNumber == null && other.CourierSupportPhoneNumber == null) || (this.CourierSupportPhoneNumber?.Equals(other.CourierSupportPhoneNumber) == true)) &&
-                ((this.SquareDeliveryId == null && other.SquareDeliveryId == null) || (this.SquareDeliveryId?.Equals(other.SquareDeliveryId) == true)) &&
-                ((this.ExternalDeliveryId == null && other.ExternalDeliveryId == null) || (this.ExternalDeliveryId?.Equals(other.ExternalDeliveryId) == true)) &&
-                ((this.ManagedDelivery == null && other.ManagedDelivery == null) || (this.ManagedDelivery?.Equals(other.ManagedDelivery) == true));
+            return obj is FulfillmentDeliveryDetails other &&
+                (this.Recipient == null && other.Recipient == null ||
+                 this.Recipient?.Equals(other.Recipient) == true) &&
+                (this.ScheduleType == null && other.ScheduleType == null ||
+                 this.ScheduleType?.Equals(other.ScheduleType) == true) &&
+                (this.PlacedAt == null && other.PlacedAt == null ||
+                 this.PlacedAt?.Equals(other.PlacedAt) == true) &&
+                (this.DeliverAt == null && other.DeliverAt == null ||
+                 this.DeliverAt?.Equals(other.DeliverAt) == true) &&
+                (this.PrepTimeDuration == null && other.PrepTimeDuration == null ||
+                 this.PrepTimeDuration?.Equals(other.PrepTimeDuration) == true) &&
+                (this.DeliveryWindowDuration == null && other.DeliveryWindowDuration == null ||
+                 this.DeliveryWindowDuration?.Equals(other.DeliveryWindowDuration) == true) &&
+                (this.Note == null && other.Note == null ||
+                 this.Note?.Equals(other.Note) == true) &&
+                (this.CompletedAt == null && other.CompletedAt == null ||
+                 this.CompletedAt?.Equals(other.CompletedAt) == true) &&
+                (this.InProgressAt == null && other.InProgressAt == null ||
+                 this.InProgressAt?.Equals(other.InProgressAt) == true) &&
+                (this.RejectedAt == null && other.RejectedAt == null ||
+                 this.RejectedAt?.Equals(other.RejectedAt) == true) &&
+                (this.ReadyAt == null && other.ReadyAt == null ||
+                 this.ReadyAt?.Equals(other.ReadyAt) == true) &&
+                (this.DeliveredAt == null && other.DeliveredAt == null ||
+                 this.DeliveredAt?.Equals(other.DeliveredAt) == true) &&
+                (this.CanceledAt == null && other.CanceledAt == null ||
+                 this.CanceledAt?.Equals(other.CanceledAt) == true) &&
+                (this.CancelReason == null && other.CancelReason == null ||
+                 this.CancelReason?.Equals(other.CancelReason) == true) &&
+                (this.CourierPickupAt == null && other.CourierPickupAt == null ||
+                 this.CourierPickupAt?.Equals(other.CourierPickupAt) == true) &&
+                (this.CourierPickupWindowDuration == null && other.CourierPickupWindowDuration == null ||
+                 this.CourierPickupWindowDuration?.Equals(other.CourierPickupWindowDuration) == true) &&
+                (this.IsNoContactDelivery == null && other.IsNoContactDelivery == null ||
+                 this.IsNoContactDelivery?.Equals(other.IsNoContactDelivery) == true) &&
+                (this.DropoffNotes == null && other.DropoffNotes == null ||
+                 this.DropoffNotes?.Equals(other.DropoffNotes) == true) &&
+                (this.CourierProviderName == null && other.CourierProviderName == null ||
+                 this.CourierProviderName?.Equals(other.CourierProviderName) == true) &&
+                (this.CourierSupportPhoneNumber == null && other.CourierSupportPhoneNumber == null ||
+                 this.CourierSupportPhoneNumber?.Equals(other.CourierSupportPhoneNumber) == true) &&
+                (this.SquareDeliveryId == null && other.SquareDeliveryId == null ||
+                 this.SquareDeliveryId?.Equals(other.SquareDeliveryId) == true) &&
+                (this.ExternalDeliveryId == null && other.ExternalDeliveryId == null ||
+                 this.ExternalDeliveryId?.Equals(other.ExternalDeliveryId) == true) &&
+                (this.ManagedDelivery == null && other.ManagedDelivery == null ||
+                 this.ManagedDelivery?.Equals(other.ManagedDelivery) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1134318388;
-            hashCode = HashCode.Combine(this.Recipient, this.ScheduleType, this.PlacedAt, this.DeliverAt, this.PrepTimeDuration, this.DeliveryWindowDuration, this.Note);
+            var hashCode = -1134318388;
+            hashCode = HashCode.Combine(hashCode, this.Recipient, this.ScheduleType, this.PlacedAt, this.DeliverAt, this.PrepTimeDuration, this.DeliveryWindowDuration, this.Note);
 
             hashCode = HashCode.Combine(hashCode, this.CompletedAt, this.InProgressAt, this.RejectedAt, this.ReadyAt, this.DeliveredAt, this.CanceledAt, this.CancelReason);
 
@@ -612,6 +629,7 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -620,26 +638,26 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.Recipient = {(this.Recipient == null ? "null" : this.Recipient.ToString())}");
             toStringOutput.Add($"this.ScheduleType = {(this.ScheduleType == null ? "null" : this.ScheduleType.ToString())}");
-            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt)}");
-            toStringOutput.Add($"this.DeliverAt = {(this.DeliverAt == null ? "null" : this.DeliverAt)}");
-            toStringOutput.Add($"this.PrepTimeDuration = {(this.PrepTimeDuration == null ? "null" : this.PrepTimeDuration)}");
-            toStringOutput.Add($"this.DeliveryWindowDuration = {(this.DeliveryWindowDuration == null ? "null" : this.DeliveryWindowDuration)}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
-            toStringOutput.Add($"this.CompletedAt = {(this.CompletedAt == null ? "null" : this.CompletedAt)}");
-            toStringOutput.Add($"this.InProgressAt = {(this.InProgressAt == null ? "null" : this.InProgressAt)}");
-            toStringOutput.Add($"this.RejectedAt = {(this.RejectedAt == null ? "null" : this.RejectedAt)}");
-            toStringOutput.Add($"this.ReadyAt = {(this.ReadyAt == null ? "null" : this.ReadyAt)}");
-            toStringOutput.Add($"this.DeliveredAt = {(this.DeliveredAt == null ? "null" : this.DeliveredAt)}");
-            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt)}");
-            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason)}");
-            toStringOutput.Add($"this.CourierPickupAt = {(this.CourierPickupAt == null ? "null" : this.CourierPickupAt)}");
-            toStringOutput.Add($"this.CourierPickupWindowDuration = {(this.CourierPickupWindowDuration == null ? "null" : this.CourierPickupWindowDuration)}");
+            toStringOutput.Add($"this.PlacedAt = {this.PlacedAt ?? "null"}");
+            toStringOutput.Add($"this.DeliverAt = {this.DeliverAt ?? "null"}");
+            toStringOutput.Add($"this.PrepTimeDuration = {this.PrepTimeDuration ?? "null"}");
+            toStringOutput.Add($"this.DeliveryWindowDuration = {this.DeliveryWindowDuration ?? "null"}");
+            toStringOutput.Add($"this.Note = {this.Note ?? "null"}");
+            toStringOutput.Add($"this.CompletedAt = {this.CompletedAt ?? "null"}");
+            toStringOutput.Add($"this.InProgressAt = {this.InProgressAt ?? "null"}");
+            toStringOutput.Add($"this.RejectedAt = {this.RejectedAt ?? "null"}");
+            toStringOutput.Add($"this.ReadyAt = {this.ReadyAt ?? "null"}");
+            toStringOutput.Add($"this.DeliveredAt = {this.DeliveredAt ?? "null"}");
+            toStringOutput.Add($"this.CanceledAt = {this.CanceledAt ?? "null"}");
+            toStringOutput.Add($"this.CancelReason = {this.CancelReason ?? "null"}");
+            toStringOutput.Add($"this.CourierPickupAt = {this.CourierPickupAt ?? "null"}");
+            toStringOutput.Add($"this.CourierPickupWindowDuration = {this.CourierPickupWindowDuration ?? "null"}");
             toStringOutput.Add($"this.IsNoContactDelivery = {(this.IsNoContactDelivery == null ? "null" : this.IsNoContactDelivery.ToString())}");
-            toStringOutput.Add($"this.DropoffNotes = {(this.DropoffNotes == null ? "null" : this.DropoffNotes)}");
-            toStringOutput.Add($"this.CourierProviderName = {(this.CourierProviderName == null ? "null" : this.CourierProviderName)}");
-            toStringOutput.Add($"this.CourierSupportPhoneNumber = {(this.CourierSupportPhoneNumber == null ? "null" : this.CourierSupportPhoneNumber)}");
-            toStringOutput.Add($"this.SquareDeliveryId = {(this.SquareDeliveryId == null ? "null" : this.SquareDeliveryId)}");
-            toStringOutput.Add($"this.ExternalDeliveryId = {(this.ExternalDeliveryId == null ? "null" : this.ExternalDeliveryId)}");
+            toStringOutput.Add($"this.DropoffNotes = {this.DropoffNotes ?? "null"}");
+            toStringOutput.Add($"this.CourierProviderName = {this.CourierProviderName ?? "null"}");
+            toStringOutput.Add($"this.CourierSupportPhoneNumber = {this.CourierSupportPhoneNumber ?? "null"}");
+            toStringOutput.Add($"this.SquareDeliveryId = {this.SquareDeliveryId ?? "null"}");
+            toStringOutput.Add($"this.ExternalDeliveryId = {this.ExternalDeliveryId ?? "null"}");
             toStringOutput.Add($"this.ManagedDelivery = {(this.ManagedDelivery == null ? "null" : this.ManagedDelivery.ToString())}");
         }
 
@@ -993,7 +1011,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeliverAt()
             {
@@ -1001,7 +1019,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPrepTimeDuration()
             {
@@ -1009,7 +1027,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeliveryWindowDuration()
             {
@@ -1017,7 +1035,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNote()
             {
@@ -1025,7 +1043,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCompletedAt()
             {
@@ -1033,7 +1051,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCancelReason()
             {
@@ -1041,7 +1059,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCourierPickupAt()
             {
@@ -1049,7 +1067,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCourierPickupWindowDuration()
             {
@@ -1057,7 +1075,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsNoContactDelivery()
             {
@@ -1065,7 +1083,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDropoffNotes()
             {
@@ -1073,7 +1091,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCourierProviderName()
             {
@@ -1081,7 +1099,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCourierSupportPhoneNumber()
             {
@@ -1089,7 +1107,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSquareDeliveryId()
             {
@@ -1097,7 +1115,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetExternalDeliveryId()
             {
@@ -1105,7 +1123,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetManagedDelivery()
             {
@@ -1119,7 +1137,8 @@ namespace Square.Models
             /// <returns> FulfillmentDeliveryDetails. </returns>
             public FulfillmentDeliveryDetails Build()
             {
-                return new FulfillmentDeliveryDetails(shouldSerialize,
+                return new FulfillmentDeliveryDetails(
+                    shouldSerialize,
                     this.recipient,
                     this.scheduleType,
                     this.placedAt,

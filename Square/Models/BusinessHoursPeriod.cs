@@ -35,8 +35,8 @@ namespace Square.Models
                 { "start_local_time", false },
                 { "end_local_time", false }
             };
-
             this.DayOfWeek = dayOfWeek;
+
             if (startLocalTime != null)
             {
                 shouldSerialize["start_local_time"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["end_local_time"] = true;
                 this.EndLocalTime = endLocalTime;
             }
-
         }
-        internal BusinessHoursPeriod(Dictionary<string, bool> shouldSerialize,
+
+        internal BusinessHoursPeriod(
+            Dictionary<string, bool> shouldSerialize,
             string dayOfWeek = null,
             string startLocalTime = null,
             string endLocalTime = null)
@@ -87,9 +88,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BusinessHoursPeriod : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -114,28 +113,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BusinessHoursPeriod other &&                ((this.DayOfWeek == null && other.DayOfWeek == null) || (this.DayOfWeek?.Equals(other.DayOfWeek) == true)) &&
-                ((this.StartLocalTime == null && other.StartLocalTime == null) || (this.StartLocalTime?.Equals(other.StartLocalTime) == true)) &&
-                ((this.EndLocalTime == null && other.EndLocalTime == null) || (this.EndLocalTime?.Equals(other.EndLocalTime) == true));
+            return obj is BusinessHoursPeriod other &&
+                (this.DayOfWeek == null && other.DayOfWeek == null ||
+                 this.DayOfWeek?.Equals(other.DayOfWeek) == true) &&
+                (this.StartLocalTime == null && other.StartLocalTime == null ||
+                 this.StartLocalTime?.Equals(other.StartLocalTime) == true) &&
+                (this.EndLocalTime == null && other.EndLocalTime == null ||
+                 this.EndLocalTime?.Equals(other.EndLocalTime) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 870467587;
-            hashCode = HashCode.Combine(this.DayOfWeek, this.StartLocalTime, this.EndLocalTime);
+            var hashCode = 870467587;
+            hashCode = HashCode.Combine(hashCode, this.DayOfWeek, this.StartLocalTime, this.EndLocalTime);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -143,8 +141,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.DayOfWeek = {(this.DayOfWeek == null ? "null" : this.DayOfWeek.ToString())}");
-            toStringOutput.Add($"this.StartLocalTime = {(this.StartLocalTime == null ? "null" : this.StartLocalTime)}");
-            toStringOutput.Add($"this.EndLocalTime = {(this.EndLocalTime == null ? "null" : this.EndLocalTime)}");
+            toStringOutput.Add($"this.StartLocalTime = {this.StartLocalTime ?? "null"}");
+            toStringOutput.Add($"this.EndLocalTime = {this.EndLocalTime ?? "null"}");
         }
 
         /// <summary>
@@ -211,7 +209,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStartLocalTime()
             {
@@ -219,7 +217,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndLocalTime()
             {
@@ -233,7 +231,8 @@ namespace Square.Models
             /// <returns> BusinessHoursPeriod. </returns>
             public BusinessHoursPeriod Build()
             {
-                return new BusinessHoursPeriod(shouldSerialize,
+                return new BusinessHoursPeriod(
+                    shouldSerialize,
                     this.dayOfWeek,
                     this.startLocalTime,
                     this.endLocalTime);

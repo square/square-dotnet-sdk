@@ -41,16 +41,17 @@ namespace Square.Models
                 shouldSerialize["location_ids"] = true;
                 this.LocationIds = locationIds;
             }
-
             this.Status = status;
+
             if (isOwner != null)
             {
                 shouldSerialize["is_owner"] = true;
                 this.IsOwner = isOwner;
             }
-
         }
-        internal SearchTeamMembersFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal SearchTeamMembersFilter(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> locationIds = null,
             string status = null,
             bool? isOwner = null)
@@ -84,9 +85,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchTeamMembersFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -111,28 +110,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchTeamMembersFilter other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.IsOwner == null && other.IsOwner == null) || (this.IsOwner?.Equals(other.IsOwner) == true));
+            return obj is SearchTeamMembersFilter other &&
+                (this.LocationIds == null && other.LocationIds == null ||
+                 this.LocationIds?.Equals(other.LocationIds) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.IsOwner == null && other.IsOwner == null ||
+                 this.IsOwner?.Equals(other.IsOwner) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1386663614;
-            hashCode = HashCode.Combine(this.LocationIds, this.Status, this.IsOwner);
+            var hashCode = 1386663614;
+            hashCode = HashCode.Combine(hashCode, this.LocationIds, this.Status, this.IsOwner);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -208,7 +206,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationIds()
             {
@@ -216,7 +214,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsOwner()
             {
@@ -230,7 +228,8 @@ namespace Square.Models
             /// <returns> SearchTeamMembersFilter. </returns>
             public SearchTeamMembersFilter Build()
             {
-                return new SearchTeamMembersFilter(shouldSerialize,
+                return new SearchTeamMembersFilter(
+                    shouldSerialize,
                     this.locationIds,
                     this.status,
                     this.isOwner);

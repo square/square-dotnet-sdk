@@ -71,8 +71,8 @@ namespace Square.Models
                 { "cancel_reason", false },
                 { "is_curbside_pickup", false }
             };
-
             this.Recipient = recipient;
+
             if (expiresAt != null)
             {
                 shouldSerialize["expires_at"] = true;
@@ -84,8 +84,8 @@ namespace Square.Models
                 shouldSerialize["auto_complete_duration"] = true;
                 this.AutoCompleteDuration = autoCompleteDuration;
             }
-
             this.ScheduleType = scheduleType;
+
             if (pickupAt != null)
             {
                 shouldSerialize["pickup_at"] = true;
@@ -109,7 +109,6 @@ namespace Square.Models
                 shouldSerialize["note"] = true;
                 this.Note = note;
             }
-
             this.PlacedAt = placedAt;
             this.AcceptedAt = acceptedAt;
             this.RejectedAt = rejectedAt;
@@ -117,6 +116,7 @@ namespace Square.Models
             this.ExpiredAt = expiredAt;
             this.PickedUpAt = pickedUpAt;
             this.CanceledAt = canceledAt;
+
             if (cancelReason != null)
             {
                 shouldSerialize["cancel_reason"] = true;
@@ -128,10 +128,11 @@ namespace Square.Models
                 shouldSerialize["is_curbside_pickup"] = true;
                 this.IsCurbsidePickup = isCurbsidePickup;
             }
-
             this.CurbsidePickupDetails = curbsidePickupDetails;
         }
-        internal FulfillmentPickupDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal FulfillmentPickupDetails(
+            Dictionary<string, bool> shouldSerialize,
             Models.FulfillmentRecipient recipient = null,
             string expiresAt = null,
             string autoCompleteDuration = null,
@@ -312,9 +313,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"FulfillmentPickupDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -393,40 +392,53 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is FulfillmentPickupDetails other &&                ((this.Recipient == null && other.Recipient == null) || (this.Recipient?.Equals(other.Recipient) == true)) &&
-                ((this.ExpiresAt == null && other.ExpiresAt == null) || (this.ExpiresAt?.Equals(other.ExpiresAt) == true)) &&
-                ((this.AutoCompleteDuration == null && other.AutoCompleteDuration == null) || (this.AutoCompleteDuration?.Equals(other.AutoCompleteDuration) == true)) &&
-                ((this.ScheduleType == null && other.ScheduleType == null) || (this.ScheduleType?.Equals(other.ScheduleType) == true)) &&
-                ((this.PickupAt == null && other.PickupAt == null) || (this.PickupAt?.Equals(other.PickupAt) == true)) &&
-                ((this.PickupWindowDuration == null && other.PickupWindowDuration == null) || (this.PickupWindowDuration?.Equals(other.PickupWindowDuration) == true)) &&
-                ((this.PrepTimeDuration == null && other.PrepTimeDuration == null) || (this.PrepTimeDuration?.Equals(other.PrepTimeDuration) == true)) &&
-                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
-                ((this.PlacedAt == null && other.PlacedAt == null) || (this.PlacedAt?.Equals(other.PlacedAt) == true)) &&
-                ((this.AcceptedAt == null && other.AcceptedAt == null) || (this.AcceptedAt?.Equals(other.AcceptedAt) == true)) &&
-                ((this.RejectedAt == null && other.RejectedAt == null) || (this.RejectedAt?.Equals(other.RejectedAt) == true)) &&
-                ((this.ReadyAt == null && other.ReadyAt == null) || (this.ReadyAt?.Equals(other.ReadyAt) == true)) &&
-                ((this.ExpiredAt == null && other.ExpiredAt == null) || (this.ExpiredAt?.Equals(other.ExpiredAt) == true)) &&
-                ((this.PickedUpAt == null && other.PickedUpAt == null) || (this.PickedUpAt?.Equals(other.PickedUpAt) == true)) &&
-                ((this.CanceledAt == null && other.CanceledAt == null) || (this.CanceledAt?.Equals(other.CanceledAt) == true)) &&
-                ((this.CancelReason == null && other.CancelReason == null) || (this.CancelReason?.Equals(other.CancelReason) == true)) &&
-                ((this.IsCurbsidePickup == null && other.IsCurbsidePickup == null) || (this.IsCurbsidePickup?.Equals(other.IsCurbsidePickup) == true)) &&
-                ((this.CurbsidePickupDetails == null && other.CurbsidePickupDetails == null) || (this.CurbsidePickupDetails?.Equals(other.CurbsidePickupDetails) == true));
+            return obj is FulfillmentPickupDetails other &&
+                (this.Recipient == null && other.Recipient == null ||
+                 this.Recipient?.Equals(other.Recipient) == true) &&
+                (this.ExpiresAt == null && other.ExpiresAt == null ||
+                 this.ExpiresAt?.Equals(other.ExpiresAt) == true) &&
+                (this.AutoCompleteDuration == null && other.AutoCompleteDuration == null ||
+                 this.AutoCompleteDuration?.Equals(other.AutoCompleteDuration) == true) &&
+                (this.ScheduleType == null && other.ScheduleType == null ||
+                 this.ScheduleType?.Equals(other.ScheduleType) == true) &&
+                (this.PickupAt == null && other.PickupAt == null ||
+                 this.PickupAt?.Equals(other.PickupAt) == true) &&
+                (this.PickupWindowDuration == null && other.PickupWindowDuration == null ||
+                 this.PickupWindowDuration?.Equals(other.PickupWindowDuration) == true) &&
+                (this.PrepTimeDuration == null && other.PrepTimeDuration == null ||
+                 this.PrepTimeDuration?.Equals(other.PrepTimeDuration) == true) &&
+                (this.Note == null && other.Note == null ||
+                 this.Note?.Equals(other.Note) == true) &&
+                (this.PlacedAt == null && other.PlacedAt == null ||
+                 this.PlacedAt?.Equals(other.PlacedAt) == true) &&
+                (this.AcceptedAt == null && other.AcceptedAt == null ||
+                 this.AcceptedAt?.Equals(other.AcceptedAt) == true) &&
+                (this.RejectedAt == null && other.RejectedAt == null ||
+                 this.RejectedAt?.Equals(other.RejectedAt) == true) &&
+                (this.ReadyAt == null && other.ReadyAt == null ||
+                 this.ReadyAt?.Equals(other.ReadyAt) == true) &&
+                (this.ExpiredAt == null && other.ExpiredAt == null ||
+                 this.ExpiredAt?.Equals(other.ExpiredAt) == true) &&
+                (this.PickedUpAt == null && other.PickedUpAt == null ||
+                 this.PickedUpAt?.Equals(other.PickedUpAt) == true) &&
+                (this.CanceledAt == null && other.CanceledAt == null ||
+                 this.CanceledAt?.Equals(other.CanceledAt) == true) &&
+                (this.CancelReason == null && other.CancelReason == null ||
+                 this.CancelReason?.Equals(other.CancelReason) == true) &&
+                (this.IsCurbsidePickup == null && other.IsCurbsidePickup == null ||
+                 this.IsCurbsidePickup?.Equals(other.IsCurbsidePickup) == true) &&
+                (this.CurbsidePickupDetails == null && other.CurbsidePickupDetails == null ||
+                 this.CurbsidePickupDetails?.Equals(other.CurbsidePickupDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1772356817;
-            hashCode = HashCode.Combine(this.Recipient, this.ExpiresAt, this.AutoCompleteDuration, this.ScheduleType, this.PickupAt, this.PickupWindowDuration, this.PrepTimeDuration);
+            var hashCode = -1772356817;
+            hashCode = HashCode.Combine(hashCode, this.Recipient, this.ExpiresAt, this.AutoCompleteDuration, this.ScheduleType, this.PickupAt, this.PickupWindowDuration, this.PrepTimeDuration);
 
             hashCode = HashCode.Combine(hashCode, this.Note, this.PlacedAt, this.AcceptedAt, this.RejectedAt, this.ReadyAt, this.ExpiredAt, this.PickedUpAt);
 
@@ -434,6 +446,7 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -441,21 +454,21 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Recipient = {(this.Recipient == null ? "null" : this.Recipient.ToString())}");
-            toStringOutput.Add($"this.ExpiresAt = {(this.ExpiresAt == null ? "null" : this.ExpiresAt)}");
-            toStringOutput.Add($"this.AutoCompleteDuration = {(this.AutoCompleteDuration == null ? "null" : this.AutoCompleteDuration)}");
+            toStringOutput.Add($"this.ExpiresAt = {this.ExpiresAt ?? "null"}");
+            toStringOutput.Add($"this.AutoCompleteDuration = {this.AutoCompleteDuration ?? "null"}");
             toStringOutput.Add($"this.ScheduleType = {(this.ScheduleType == null ? "null" : this.ScheduleType.ToString())}");
-            toStringOutput.Add($"this.PickupAt = {(this.PickupAt == null ? "null" : this.PickupAt)}");
-            toStringOutput.Add($"this.PickupWindowDuration = {(this.PickupWindowDuration == null ? "null" : this.PickupWindowDuration)}");
-            toStringOutput.Add($"this.PrepTimeDuration = {(this.PrepTimeDuration == null ? "null" : this.PrepTimeDuration)}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
-            toStringOutput.Add($"this.PlacedAt = {(this.PlacedAt == null ? "null" : this.PlacedAt)}");
-            toStringOutput.Add($"this.AcceptedAt = {(this.AcceptedAt == null ? "null" : this.AcceptedAt)}");
-            toStringOutput.Add($"this.RejectedAt = {(this.RejectedAt == null ? "null" : this.RejectedAt)}");
-            toStringOutput.Add($"this.ReadyAt = {(this.ReadyAt == null ? "null" : this.ReadyAt)}");
-            toStringOutput.Add($"this.ExpiredAt = {(this.ExpiredAt == null ? "null" : this.ExpiredAt)}");
-            toStringOutput.Add($"this.PickedUpAt = {(this.PickedUpAt == null ? "null" : this.PickedUpAt)}");
-            toStringOutput.Add($"this.CanceledAt = {(this.CanceledAt == null ? "null" : this.CanceledAt)}");
-            toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason)}");
+            toStringOutput.Add($"this.PickupAt = {this.PickupAt ?? "null"}");
+            toStringOutput.Add($"this.PickupWindowDuration = {this.PickupWindowDuration ?? "null"}");
+            toStringOutput.Add($"this.PrepTimeDuration = {this.PrepTimeDuration ?? "null"}");
+            toStringOutput.Add($"this.Note = {this.Note ?? "null"}");
+            toStringOutput.Add($"this.PlacedAt = {this.PlacedAt ?? "null"}");
+            toStringOutput.Add($"this.AcceptedAt = {this.AcceptedAt ?? "null"}");
+            toStringOutput.Add($"this.RejectedAt = {this.RejectedAt ?? "null"}");
+            toStringOutput.Add($"this.ReadyAt = {this.ReadyAt ?? "null"}");
+            toStringOutput.Add($"this.ExpiredAt = {this.ExpiredAt ?? "null"}");
+            toStringOutput.Add($"this.PickedUpAt = {this.PickedUpAt ?? "null"}");
+            toStringOutput.Add($"this.CanceledAt = {this.CanceledAt ?? "null"}");
+            toStringOutput.Add($"this.CancelReason = {this.CancelReason ?? "null"}");
             toStringOutput.Add($"this.IsCurbsidePickup = {(this.IsCurbsidePickup == null ? "null" : this.IsCurbsidePickup.ToString())}");
             toStringOutput.Add($"this.CurbsidePickupDetails = {(this.CurbsidePickupDetails == null ? "null" : this.CurbsidePickupDetails.ToString())}");
         }
@@ -731,7 +744,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetExpiresAt()
             {
@@ -739,7 +752,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAutoCompleteDuration()
             {
@@ -747,7 +760,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPickupAt()
             {
@@ -755,7 +768,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPickupWindowDuration()
             {
@@ -763,7 +776,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPrepTimeDuration()
             {
@@ -771,7 +784,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNote()
             {
@@ -779,7 +792,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCancelReason()
             {
@@ -787,7 +800,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsCurbsidePickup()
             {
@@ -801,7 +814,8 @@ namespace Square.Models
             /// <returns> FulfillmentPickupDetails. </returns>
             public FulfillmentPickupDetails Build()
             {
-                return new FulfillmentPickupDetails(shouldSerialize,
+                return new FulfillmentPickupDetails(
+                    shouldSerialize,
                     this.recipient,
                     this.expiresAt,
                     this.autoCompleteDuration,

@@ -40,42 +40,37 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RetrieveGiftCardFromGANRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RetrieveGiftCardFromGANRequest other &&                ((this.Gan == null && other.Gan == null) || (this.Gan?.Equals(other.Gan) == true));
+            return obj is RetrieveGiftCardFromGANRequest other &&
+                (this.Gan == null && other.Gan == null ||
+                 this.Gan?.Equals(other.Gan) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -506152524;
-            hashCode = HashCode.Combine(this.Gan);
+            var hashCode = -506152524;
+            hashCode = HashCode.Combine(hashCode, this.Gan);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Gan = {(this.Gan == null ? "null" : this.Gan)}");
+            toStringOutput.Add($"this.Gan = {this.Gan ?? "null"}");
         }
 
         /// <summary>

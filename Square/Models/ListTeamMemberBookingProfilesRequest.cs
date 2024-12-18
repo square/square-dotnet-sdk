@@ -63,9 +63,10 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
         }
-        internal ListTeamMemberBookingProfilesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListTeamMemberBookingProfilesRequest(
+            Dictionary<string, bool> shouldSerialize,
             bool? bookableOnly = null,
             int? limit = null,
             string cursor = null,
@@ -106,9 +107,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListTeamMemberBookingProfilesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -151,29 +150,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListTeamMemberBookingProfilesRequest other &&                ((this.BookableOnly == null && other.BookableOnly == null) || (this.BookableOnly?.Equals(other.BookableOnly) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
+            return obj is ListTeamMemberBookingProfilesRequest other &&
+                (this.BookableOnly == null && other.BookableOnly == null ||
+                 this.BookableOnly?.Equals(other.BookableOnly) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -294097730;
-            hashCode = HashCode.Combine(this.BookableOnly, this.Limit, this.Cursor, this.LocationId);
+            var hashCode = -294097730;
+            hashCode = HashCode.Combine(hashCode, this.BookableOnly, this.Limit, this.Cursor, this.LocationId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -182,8 +181,8 @@ namespace Square.Models
         {
             toStringOutput.Add($"this.BookableOnly = {(this.BookableOnly == null ? "null" : this.BookableOnly.ToString())}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
         }
 
         /// <summary>
@@ -267,7 +266,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBookableOnly()
             {
@@ -275,7 +274,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -283,7 +282,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -291,7 +290,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -305,7 +304,8 @@ namespace Square.Models
             /// <returns> ListTeamMemberBookingProfilesRequest. </returns>
             public ListTeamMemberBookingProfilesRequest Build()
             {
-                return new ListTeamMemberBookingProfilesRequest(shouldSerialize,
+                return new ListTeamMemberBookingProfilesRequest(
+                    shouldSerialize,
                     this.bookableOnly,
                     this.limit,
                     this.cursor,

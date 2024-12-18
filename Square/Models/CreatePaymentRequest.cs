@@ -37,6 +37,7 @@ namespace Square.Models
         /// <param name="verificationToken">verification_token.</param>
         /// <param name="acceptPartialAuthorization">accept_partial_authorization.</param>
         /// <param name="buyerEmailAddress">buyer_email_address.</param>
+        /// <param name="buyerPhoneNumber">buyer_phone_number.</param>
         /// <param name="billingAddress">billing_address.</param>
         /// <param name="shippingAddress">shipping_address.</param>
         /// <param name="note">note.</param>
@@ -62,6 +63,7 @@ namespace Square.Models
             string verificationToken = null,
             bool? acceptPartialAuthorization = null,
             string buyerEmailAddress = null,
+            string buyerPhoneNumber = null,
             Models.Address billingAddress = null,
             Models.Address shippingAddress = null,
             string note = null,
@@ -87,6 +89,7 @@ namespace Square.Models
             this.VerificationToken = verificationToken;
             this.AcceptPartialAuthorization = acceptPartialAuthorization;
             this.BuyerEmailAddress = buyerEmailAddress;
+            this.BuyerPhoneNumber = buyerPhoneNumber;
             this.BillingAddress = billingAddress;
             this.ShippingAddress = shippingAddress;
             this.Note = note;
@@ -250,6 +253,17 @@ namespace Square.Models
         public string BuyerEmailAddress { get; }
 
         /// <summary>
+        /// The buyer's phone number.
+        /// Must follow the following format:
+        /// 1. A leading + symbol (followed by a country code)
+        /// 2. The phone number can contain spaces and the special characters `(` , `)` , `-` , and `.`.
+        /// Alphabetical characters aren't allowed.
+        /// 3. The phone number must contain between 9 and 16 digits.
+        /// </summary>
+        [JsonProperty("buyer_phone_number", NullValueHandling = NullValueHandling.Ignore)]
+        public string BuyerPhoneNumber { get; }
+
+        /// <summary>
         /// Represents a postal address in a country.
         /// For more information, see [Working with Addresses](https://developer.squareup.com/docs/build-basics/working-with-addresses).
         /// </summary>
@@ -311,90 +325,111 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CreatePaymentRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CreatePaymentRequest other &&                ((this.SourceId == null && other.SourceId == null) || (this.SourceId?.Equals(other.SourceId) == true)) &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.TipMoney == null && other.TipMoney == null) || (this.TipMoney?.Equals(other.TipMoney) == true)) &&
-                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
-                ((this.DelayDuration == null && other.DelayDuration == null) || (this.DelayDuration?.Equals(other.DelayDuration) == true)) &&
-                ((this.DelayAction == null && other.DelayAction == null) || (this.DelayAction?.Equals(other.DelayAction) == true)) &&
-                ((this.Autocomplete == null && other.Autocomplete == null) || (this.Autocomplete?.Equals(other.Autocomplete) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.VerificationToken == null && other.VerificationToken == null) || (this.VerificationToken?.Equals(other.VerificationToken) == true)) &&
-                ((this.AcceptPartialAuthorization == null && other.AcceptPartialAuthorization == null) || (this.AcceptPartialAuthorization?.Equals(other.AcceptPartialAuthorization) == true)) &&
-                ((this.BuyerEmailAddress == null && other.BuyerEmailAddress == null) || (this.BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true)) &&
-                ((this.BillingAddress == null && other.BillingAddress == null) || (this.BillingAddress?.Equals(other.BillingAddress) == true)) &&
-                ((this.ShippingAddress == null && other.ShippingAddress == null) || (this.ShippingAddress?.Equals(other.ShippingAddress) == true)) &&
-                ((this.Note == null && other.Note == null) || (this.Note?.Equals(other.Note) == true)) &&
-                ((this.StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null) || (this.StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true)) &&
-                ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
-                ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true)) &&
-                ((this.CustomerDetails == null && other.CustomerDetails == null) || (this.CustomerDetails?.Equals(other.CustomerDetails) == true)) &&
-                ((this.OfflinePaymentDetails == null && other.OfflinePaymentDetails == null) || (this.OfflinePaymentDetails?.Equals(other.OfflinePaymentDetails) == true));
+            return obj is CreatePaymentRequest other &&
+                (this.SourceId == null && other.SourceId == null ||
+                 this.SourceId?.Equals(other.SourceId) == true) &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.TipMoney == null && other.TipMoney == null ||
+                 this.TipMoney?.Equals(other.TipMoney) == true) &&
+                (this.AppFeeMoney == null && other.AppFeeMoney == null ||
+                 this.AppFeeMoney?.Equals(other.AppFeeMoney) == true) &&
+                (this.DelayDuration == null && other.DelayDuration == null ||
+                 this.DelayDuration?.Equals(other.DelayDuration) == true) &&
+                (this.DelayAction == null && other.DelayAction == null ||
+                 this.DelayAction?.Equals(other.DelayAction) == true) &&
+                (this.Autocomplete == null && other.Autocomplete == null ||
+                 this.Autocomplete?.Equals(other.Autocomplete) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true) &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.VerificationToken == null && other.VerificationToken == null ||
+                 this.VerificationToken?.Equals(other.VerificationToken) == true) &&
+                (this.AcceptPartialAuthorization == null && other.AcceptPartialAuthorization == null ||
+                 this.AcceptPartialAuthorization?.Equals(other.AcceptPartialAuthorization) == true) &&
+                (this.BuyerEmailAddress == null && other.BuyerEmailAddress == null ||
+                 this.BuyerEmailAddress?.Equals(other.BuyerEmailAddress) == true) &&
+                (this.BuyerPhoneNumber == null && other.BuyerPhoneNumber == null ||
+                 this.BuyerPhoneNumber?.Equals(other.BuyerPhoneNumber) == true) &&
+                (this.BillingAddress == null && other.BillingAddress == null ||
+                 this.BillingAddress?.Equals(other.BillingAddress) == true) &&
+                (this.ShippingAddress == null && other.ShippingAddress == null ||
+                 this.ShippingAddress?.Equals(other.ShippingAddress) == true) &&
+                (this.Note == null && other.Note == null ||
+                 this.Note?.Equals(other.Note) == true) &&
+                (this.StatementDescriptionIdentifier == null && other.StatementDescriptionIdentifier == null ||
+                 this.StatementDescriptionIdentifier?.Equals(other.StatementDescriptionIdentifier) == true) &&
+                (this.CashDetails == null && other.CashDetails == null ||
+                 this.CashDetails?.Equals(other.CashDetails) == true) &&
+                (this.ExternalDetails == null && other.ExternalDetails == null ||
+                 this.ExternalDetails?.Equals(other.ExternalDetails) == true) &&
+                (this.CustomerDetails == null && other.CustomerDetails == null ||
+                 this.CustomerDetails?.Equals(other.CustomerDetails) == true) &&
+                (this.OfflinePaymentDetails == null && other.OfflinePaymentDetails == null ||
+                 this.OfflinePaymentDetails?.Equals(other.OfflinePaymentDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1886306356;
-            hashCode = HashCode.Combine(this.SourceId, this.IdempotencyKey, this.AmountMoney, this.TipMoney, this.AppFeeMoney, this.DelayDuration, this.DelayAction);
+            var hashCode = -256787625;
+            hashCode = HashCode.Combine(hashCode, this.SourceId, this.IdempotencyKey, this.AmountMoney, this.TipMoney, this.AppFeeMoney, this.DelayDuration, this.DelayAction);
 
             hashCode = HashCode.Combine(hashCode, this.Autocomplete, this.OrderId, this.CustomerId, this.LocationId, this.TeamMemberId, this.ReferenceId, this.VerificationToken);
 
-            hashCode = HashCode.Combine(hashCode, this.AcceptPartialAuthorization, this.BuyerEmailAddress, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier, this.CashDetails);
+            hashCode = HashCode.Combine(hashCode, this.AcceptPartialAuthorization, this.BuyerEmailAddress, this.BuyerPhoneNumber, this.BillingAddress, this.ShippingAddress, this.Note, this.StatementDescriptionIdentifier);
 
-            hashCode = HashCode.Combine(hashCode, this.ExternalDetails, this.CustomerDetails, this.OfflinePaymentDetails);
+            hashCode = HashCode.Combine(hashCode, this.CashDetails, this.ExternalDetails, this.CustomerDetails, this.OfflinePaymentDetails);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.SourceId = {(this.SourceId == null ? "null" : this.SourceId)}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.SourceId = {this.SourceId ?? "null"}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.TipMoney = {(this.TipMoney == null ? "null" : this.TipMoney.ToString())}");
             toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
-            toStringOutput.Add($"this.DelayDuration = {(this.DelayDuration == null ? "null" : this.DelayDuration)}");
-            toStringOutput.Add($"this.DelayAction = {(this.DelayAction == null ? "null" : this.DelayAction)}");
+            toStringOutput.Add($"this.DelayDuration = {this.DelayDuration ?? "null"}");
+            toStringOutput.Add($"this.DelayAction = {this.DelayAction ?? "null"}");
             toStringOutput.Add($"this.Autocomplete = {(this.Autocomplete == null ? "null" : this.Autocomplete.ToString())}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
-            toStringOutput.Add($"this.VerificationToken = {(this.VerificationToken == null ? "null" : this.VerificationToken)}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
+            toStringOutput.Add($"this.VerificationToken = {this.VerificationToken ?? "null"}");
             toStringOutput.Add($"this.AcceptPartialAuthorization = {(this.AcceptPartialAuthorization == null ? "null" : this.AcceptPartialAuthorization.ToString())}");
-            toStringOutput.Add($"this.BuyerEmailAddress = {(this.BuyerEmailAddress == null ? "null" : this.BuyerEmailAddress)}");
+            toStringOutput.Add($"this.BuyerEmailAddress = {this.BuyerEmailAddress ?? "null"}");
+            toStringOutput.Add($"this.BuyerPhoneNumber = {this.BuyerPhoneNumber ?? "null"}");
             toStringOutput.Add($"this.BillingAddress = {(this.BillingAddress == null ? "null" : this.BillingAddress.ToString())}");
             toStringOutput.Add($"this.ShippingAddress = {(this.ShippingAddress == null ? "null" : this.ShippingAddress.ToString())}");
-            toStringOutput.Add($"this.Note = {(this.Note == null ? "null" : this.Note)}");
-            toStringOutput.Add($"this.StatementDescriptionIdentifier = {(this.StatementDescriptionIdentifier == null ? "null" : this.StatementDescriptionIdentifier)}");
+            toStringOutput.Add($"this.Note = {this.Note ?? "null"}");
+            toStringOutput.Add($"this.StatementDescriptionIdentifier = {this.StatementDescriptionIdentifier ?? "null"}");
             toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
             toStringOutput.Add($"this.ExternalDetails = {(this.ExternalDetails == null ? "null" : this.ExternalDetails.ToString())}");
             toStringOutput.Add($"this.CustomerDetails = {(this.CustomerDetails == null ? "null" : this.CustomerDetails.ToString())}");
@@ -424,6 +459,7 @@ namespace Square.Models
                 .VerificationToken(this.VerificationToken)
                 .AcceptPartialAuthorization(this.AcceptPartialAuthorization)
                 .BuyerEmailAddress(this.BuyerEmailAddress)
+                .BuyerPhoneNumber(this.BuyerPhoneNumber)
                 .BillingAddress(this.BillingAddress)
                 .ShippingAddress(this.ShippingAddress)
                 .Note(this.Note)
@@ -456,6 +492,7 @@ namespace Square.Models
             private string verificationToken;
             private bool? acceptPartialAuthorization;
             private string buyerEmailAddress;
+            private string buyerPhoneNumber;
             private Models.Address billingAddress;
             private Models.Address shippingAddress;
             private string note;
@@ -655,6 +692,17 @@ namespace Square.Models
             }
 
              /// <summary>
+             /// BuyerPhoneNumber.
+             /// </summary>
+             /// <param name="buyerPhoneNumber"> buyerPhoneNumber. </param>
+             /// <returns> Builder. </returns>
+            public Builder BuyerPhoneNumber(string buyerPhoneNumber)
+            {
+                this.buyerPhoneNumber = buyerPhoneNumber;
+                return this;
+            }
+
+             /// <summary>
              /// BillingAddress.
              /// </summary>
              /// <param name="billingAddress"> billingAddress. </param>
@@ -765,6 +813,7 @@ namespace Square.Models
                     this.verificationToken,
                     this.acceptPartialAuthorization,
                     this.buyerEmailAddress,
+                    this.buyerPhoneNumber,
                     this.billingAddress,
                     this.shippingAddress,
                     this.note,

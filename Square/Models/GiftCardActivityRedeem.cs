@@ -36,18 +36,19 @@ namespace Square.Models
             {
                 { "reference_id", false }
             };
-
             this.AmountMoney = amountMoney;
             this.PaymentId = paymentId;
+
             if (referenceId != null)
             {
                 shouldSerialize["reference_id"] = true;
                 this.ReferenceId = referenceId;
             }
-
             this.Status = status;
         }
-        internal GiftCardActivityRedeem(Dictionary<string, bool> shouldSerialize,
+
+        internal GiftCardActivityRedeem(
+            Dictionary<string, bool> shouldSerialize,
             Models.Money amountMoney,
             string paymentId = null,
             string referenceId = null,
@@ -98,9 +99,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"GiftCardActivityRedeem : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -116,29 +115,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is GiftCardActivityRedeem other &&                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
+            return obj is GiftCardActivityRedeem other &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1898558398;
-            hashCode = HashCode.Combine(this.AmountMoney, this.PaymentId, this.ReferenceId, this.Status);
+            var hashCode = 1898558398;
+            hashCode = HashCode.Combine(hashCode, this.AmountMoney, this.PaymentId, this.ReferenceId, this.Status);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -146,8 +145,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
         }
 
@@ -236,7 +235,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -250,7 +249,8 @@ namespace Square.Models
             /// <returns> GiftCardActivityRedeem. </returns>
             public GiftCardActivityRedeem Build()
             {
-                return new GiftCardActivityRedeem(shouldSerialize,
+                return new GiftCardActivityRedeem(
+                    shouldSerialize,
                     this.amountMoney,
                     this.paymentId,
                     this.referenceId,

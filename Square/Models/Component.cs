@@ -83,40 +83,40 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Component : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Component other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.ApplicationDetails == null && other.ApplicationDetails == null) || (this.ApplicationDetails?.Equals(other.ApplicationDetails) == true)) &&
-                ((this.CardReaderDetails == null && other.CardReaderDetails == null) || (this.CardReaderDetails?.Equals(other.CardReaderDetails) == true)) &&
-                ((this.BatteryDetails == null && other.BatteryDetails == null) || (this.BatteryDetails?.Equals(other.BatteryDetails) == true)) &&
-                ((this.WifiDetails == null && other.WifiDetails == null) || (this.WifiDetails?.Equals(other.WifiDetails) == true)) &&
-                ((this.EthernetDetails == null && other.EthernetDetails == null) || (this.EthernetDetails?.Equals(other.EthernetDetails) == true));
+            return obj is Component other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.ApplicationDetails == null && other.ApplicationDetails == null ||
+                 this.ApplicationDetails?.Equals(other.ApplicationDetails) == true) &&
+                (this.CardReaderDetails == null && other.CardReaderDetails == null ||
+                 this.CardReaderDetails?.Equals(other.CardReaderDetails) == true) &&
+                (this.BatteryDetails == null && other.BatteryDetails == null ||
+                 this.BatteryDetails?.Equals(other.BatteryDetails) == true) &&
+                (this.WifiDetails == null && other.WifiDetails == null ||
+                 this.WifiDetails?.Equals(other.WifiDetails) == true) &&
+                (this.EthernetDetails == null && other.EthernetDetails == null ||
+                 this.EthernetDetails?.Equals(other.EthernetDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 958922299;
-            hashCode = HashCode.Combine(this.Type, this.ApplicationDetails, this.CardReaderDetails, this.BatteryDetails, this.WifiDetails, this.EthernetDetails);
+            var hashCode = 958922299;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.ApplicationDetails, this.CardReaderDetails, this.BatteryDetails, this.WifiDetails, this.EthernetDetails);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

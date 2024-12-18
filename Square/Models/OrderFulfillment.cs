@@ -53,22 +53,23 @@ namespace Square.Models
                 shouldSerialize["uid"] = true;
                 this.Uid = uid;
             }
-
             this.Type = type;
             this.State = state;
             this.LineItemApplication = lineItemApplication;
             this.Entries = entries;
+
             if (metadata != null)
             {
                 shouldSerialize["metadata"] = true;
                 this.Metadata = metadata;
             }
-
             this.PickupDetails = pickupDetails;
             this.ShipmentDetails = shipmentDetails;
             this.DeliveryDetails = deliveryDetails;
         }
-        internal OrderFulfillment(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderFulfillment(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             string type = null,
             string state = null,
@@ -170,9 +171,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderFulfillment : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -197,43 +196,48 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderFulfillment other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
-                ((this.LineItemApplication == null && other.LineItemApplication == null) || (this.LineItemApplication?.Equals(other.LineItemApplication) == true)) &&
-                ((this.Entries == null && other.Entries == null) || (this.Entries?.Equals(other.Entries) == true)) &&
-                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
-                ((this.PickupDetails == null && other.PickupDetails == null) || (this.PickupDetails?.Equals(other.PickupDetails) == true)) &&
-                ((this.ShipmentDetails == null && other.ShipmentDetails == null) || (this.ShipmentDetails?.Equals(other.ShipmentDetails) == true)) &&
-                ((this.DeliveryDetails == null && other.DeliveryDetails == null) || (this.DeliveryDetails?.Equals(other.DeliveryDetails) == true));
+            return obj is OrderFulfillment other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.State == null && other.State == null ||
+                 this.State?.Equals(other.State) == true) &&
+                (this.LineItemApplication == null && other.LineItemApplication == null ||
+                 this.LineItemApplication?.Equals(other.LineItemApplication) == true) &&
+                (this.Entries == null && other.Entries == null ||
+                 this.Entries?.Equals(other.Entries) == true) &&
+                (this.Metadata == null && other.Metadata == null ||
+                 this.Metadata?.Equals(other.Metadata) == true) &&
+                (this.PickupDetails == null && other.PickupDetails == null ||
+                 this.PickupDetails?.Equals(other.PickupDetails) == true) &&
+                (this.ShipmentDetails == null && other.ShipmentDetails == null ||
+                 this.ShipmentDetails?.Equals(other.ShipmentDetails) == true) &&
+                (this.DeliveryDetails == null && other.DeliveryDetails == null ||
+                 this.DeliveryDetails?.Equals(other.DeliveryDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1224947640;
-            hashCode = HashCode.Combine(this.Uid, this.Type, this.State, this.LineItemApplication, this.Entries, this.Metadata, this.PickupDetails);
+            var hashCode = -1224947640;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.Type, this.State, this.LineItemApplication, this.Entries, this.Metadata, this.PickupDetails);
 
             hashCode = HashCode.Combine(hashCode, this.ShipmentDetails, this.DeliveryDetails);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
             toStringOutput.Add($"this.LineItemApplication = {(this.LineItemApplication == null ? "null" : this.LineItemApplication.ToString())}");
@@ -386,7 +390,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -394,7 +398,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMetadata()
             {
@@ -408,7 +412,8 @@ namespace Square.Models
             /// <returns> OrderFulfillment. </returns>
             public OrderFulfillment Build()
             {
-                return new OrderFulfillment(shouldSerialize,
+                return new OrderFulfillment(
+                    shouldSerialize,
                     this.uid,
                     this.type,
                     this.state,

@@ -35,8 +35,8 @@ namespace Square.Models
                 { "entry_method", false },
                 { "auth_result_code", false }
             };
-
             this.Card = card;
+
             if (entryMethod != null)
             {
                 shouldSerialize["entry_method"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["auth_result_code"] = true;
                 this.AuthResultCode = authResultCode;
             }
-
         }
-        internal DestinationDetailsCardRefundDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal DestinationDetailsCardRefundDetails(
+            Dictionary<string, bool> shouldSerialize,
             Models.Card card = null,
             string entryMethod = null,
             string authResultCode = null)
@@ -85,9 +86,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DestinationDetailsCardRefundDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -112,28 +111,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DestinationDetailsCardRefundDetails other &&                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
-                ((this.EntryMethod == null && other.EntryMethod == null) || (this.EntryMethod?.Equals(other.EntryMethod) == true)) &&
-                ((this.AuthResultCode == null && other.AuthResultCode == null) || (this.AuthResultCode?.Equals(other.AuthResultCode) == true));
+            return obj is DestinationDetailsCardRefundDetails other &&
+                (this.Card == null && other.Card == null ||
+                 this.Card?.Equals(other.Card) == true) &&
+                (this.EntryMethod == null && other.EntryMethod == null ||
+                 this.EntryMethod?.Equals(other.EntryMethod) == true) &&
+                (this.AuthResultCode == null && other.AuthResultCode == null ||
+                 this.AuthResultCode?.Equals(other.AuthResultCode) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 603022044;
-            hashCode = HashCode.Combine(this.Card, this.EntryMethod, this.AuthResultCode);
+            var hashCode = 603022044;
+            hashCode = HashCode.Combine(hashCode, this.Card, this.EntryMethod, this.AuthResultCode);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -141,8 +139,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Card = {(this.Card == null ? "null" : this.Card.ToString())}");
-            toStringOutput.Add($"this.EntryMethod = {(this.EntryMethod == null ? "null" : this.EntryMethod)}");
-            toStringOutput.Add($"this.AuthResultCode = {(this.AuthResultCode == null ? "null" : this.AuthResultCode)}");
+            toStringOutput.Add($"this.EntryMethod = {this.EntryMethod ?? "null"}");
+            toStringOutput.Add($"this.AuthResultCode = {this.AuthResultCode ?? "null"}");
         }
 
         /// <summary>
@@ -209,7 +207,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEntryMethod()
             {
@@ -217,7 +215,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAuthResultCode()
             {
@@ -231,7 +229,8 @@ namespace Square.Models
             /// <returns> DestinationDetailsCardRefundDetails. </returns>
             public DestinationDetailsCardRefundDetails Build()
             {
-                return new DestinationDetailsCardRefundDetails(shouldSerialize,
+                return new DestinationDetailsCardRefundDetails(
+                    shouldSerialize,
                     this.card,
                     this.entryMethod,
                     this.authResultCode);

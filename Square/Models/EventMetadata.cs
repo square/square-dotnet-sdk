@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["api_version"] = true;
                 this.ApiVersion = apiVersion;
             }
-
         }
-        internal EventMetadata(Dictionary<string, bool> shouldSerialize,
+
+        internal EventMetadata(
+            Dictionary<string, bool> shouldSerialize,
             string eventId = null,
             string apiVersion = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"EventMetadata : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,35 +98,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is EventMetadata other &&                ((this.EventId == null && other.EventId == null) || (this.EventId?.Equals(other.EventId) == true)) &&
-                ((this.ApiVersion == null && other.ApiVersion == null) || (this.ApiVersion?.Equals(other.ApiVersion) == true));
+            return obj is EventMetadata other &&
+                (this.EventId == null && other.EventId == null ||
+                 this.EventId?.Equals(other.EventId) == true) &&
+                (this.ApiVersion == null && other.ApiVersion == null ||
+                 this.ApiVersion?.Equals(other.ApiVersion) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 930343962;
-            hashCode = HashCode.Combine(this.EventId, this.ApiVersion);
+            var hashCode = 930343962;
+            hashCode = HashCode.Combine(hashCode, this.EventId, this.ApiVersion);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.EventId = {(this.EventId == null ? "null" : this.EventId)}");
-            toStringOutput.Add($"this.ApiVersion = {(this.ApiVersion == null ? "null" : this.ApiVersion)}");
+            toStringOutput.Add($"this.EventId = {this.EventId ?? "null"}");
+            toStringOutput.Add($"this.ApiVersion = {this.ApiVersion ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEventId()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetApiVersion()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> EventMetadata. </returns>
             public EventMetadata Build()
             {
-                return new EventMetadata(shouldSerialize,
+                return new EventMetadata(
+                    shouldSerialize,
                     this.eventId,
                     this.apiVersion);
             }

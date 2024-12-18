@@ -51,30 +51,31 @@ namespace Square.Models
                 { "name", false },
                 { "location_id", false }
             };
-
             this.Id = id;
+
             if (name != null)
             {
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.Code = code;
             this.DeviceId = deviceId;
             this.ProductType = productType;
+
             if (locationId != null)
             {
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
             this.Status = status;
             this.PairBy = pairBy;
             this.CreatedAt = createdAt;
             this.StatusChangedAt = statusChangedAt;
             this.PairedAt = pairedAt;
         }
-        internal DeviceCode(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceCode(
+            Dictionary<string, bool> shouldSerialize,
             string productType,
             string id = null,
             string name = null,
@@ -171,9 +172,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceCode : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -198,55 +197,62 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceCode other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Code == null && other.Code == null) || (this.Code?.Equals(other.Code) == true)) &&
-                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((this.ProductType == null && other.ProductType == null) || (this.ProductType?.Equals(other.ProductType) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.PairBy == null && other.PairBy == null) || (this.PairBy?.Equals(other.PairBy) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.StatusChangedAt == null && other.StatusChangedAt == null) || (this.StatusChangedAt?.Equals(other.StatusChangedAt) == true)) &&
-                ((this.PairedAt == null && other.PairedAt == null) || (this.PairedAt?.Equals(other.PairedAt) == true));
+            return obj is DeviceCode other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Code == null && other.Code == null ||
+                 this.Code?.Equals(other.Code) == true) &&
+                (this.DeviceId == null && other.DeviceId == null ||
+                 this.DeviceId?.Equals(other.DeviceId) == true) &&
+                (this.ProductType == null && other.ProductType == null ||
+                 this.ProductType?.Equals(other.ProductType) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.PairBy == null && other.PairBy == null ||
+                 this.PairBy?.Equals(other.PairBy) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.StatusChangedAt == null && other.StatusChangedAt == null ||
+                 this.StatusChangedAt?.Equals(other.StatusChangedAt) == true) &&
+                (this.PairedAt == null && other.PairedAt == null ||
+                 this.PairedAt?.Equals(other.PairedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1978949756;
-            hashCode = HashCode.Combine(this.Id, this.Name, this.Code, this.DeviceId, this.ProductType, this.LocationId, this.Status);
+            var hashCode = -1978949756;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Name, this.Code, this.DeviceId, this.ProductType, this.LocationId, this.Status);
 
             hashCode = HashCode.Combine(hashCode, this.PairBy, this.CreatedAt, this.StatusChangedAt, this.PairedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.Code = {(this.Code == null ? "null" : this.Code)}");
-            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId)}");
-            toStringOutput.Add($"this.ProductType = {(this.ProductType == null ? "null" : this.ProductType)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.Code = {this.Code ?? "null"}");
+            toStringOutput.Add($"this.DeviceId = {this.DeviceId ?? "null"}");
+            toStringOutput.Add($"this.ProductType = {this.ProductType ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
-            toStringOutput.Add($"this.PairBy = {(this.PairBy == null ? "null" : this.PairBy)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.StatusChangedAt = {(this.StatusChangedAt == null ? "null" : this.StatusChangedAt)}");
-            toStringOutput.Add($"this.PairedAt = {(this.PairedAt == null ? "null" : this.PairedAt)}");
+            toStringOutput.Add($"this.PairBy = {this.PairBy ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.StatusChangedAt = {this.StatusChangedAt ?? "null"}");
+            toStringOutput.Add($"this.PairedAt = {this.PairedAt ?? "null"}");
         }
 
         /// <summary>
@@ -427,7 +433,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -435,7 +441,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -449,7 +455,8 @@ namespace Square.Models
             /// <returns> DeviceCode. </returns>
             public DeviceCode Build()
             {
-                return new DeviceCode(shouldSerialize,
+                return new DeviceCode(
+                    shouldSerialize,
                     this.productType,
                     this.id,
                     this.name,

@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["longitude"] = true;
                 this.Longitude = longitude;
             }
-
         }
-        internal Coordinates(Dictionary<string, bool> shouldSerialize,
+
+        internal Coordinates(
+            Dictionary<string, bool> shouldSerialize,
             double? latitude = null,
             double? longitude = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Coordinates : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,27 +98,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Coordinates other &&                ((this.Latitude == null && other.Latitude == null) || (this.Latitude?.Equals(other.Latitude) == true)) &&
-                ((this.Longitude == null && other.Longitude == null) || (this.Longitude?.Equals(other.Longitude) == true));
+            return obj is Coordinates other &&
+                (this.Latitude == null && other.Latitude == null ||
+                 this.Latitude?.Equals(other.Latitude) == true) &&
+                (this.Longitude == null && other.Longitude == null ||
+                 this.Longitude?.Equals(other.Longitude) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1577606388;
-            hashCode = HashCode.Combine(this.Latitude, this.Longitude);
+            var hashCode = -1577606388;
+            hashCode = HashCode.Combine(hashCode, this.Latitude, this.Longitude);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLatitude()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLongitude()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> Coordinates. </returns>
             public Coordinates Build()
             {
-                return new Coordinates(shouldSerialize,
+                return new Coordinates(
+                    shouldSerialize,
                     this.latitude,
                     this.longitude);
             }

@@ -98,16 +98,16 @@ namespace Square.Models
                 { "metadata", false },
                 { "ticket_name", false }
             };
-
             this.Id = id;
             this.LocationId = locationId;
+
             if (referenceId != null)
             {
                 shouldSerialize["reference_id"] = true;
                 this.ReferenceId = referenceId;
             }
-
             this.Source = source;
+
             if (customerId != null)
             {
                 shouldSerialize["customer_id"] = true;
@@ -143,19 +143,18 @@ namespace Square.Models
                 shouldSerialize["fulfillments"] = true;
                 this.Fulfillments = fulfillments;
             }
-
             this.Returns = returns;
             this.ReturnAmounts = returnAmounts;
             this.NetAmounts = netAmounts;
             this.RoundingAdjustment = roundingAdjustment;
             this.Tenders = tenders;
             this.Refunds = refunds;
+
             if (metadata != null)
             {
                 shouldSerialize["metadata"] = true;
                 this.Metadata = metadata;
             }
-
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
             this.ClosedAt = closedAt;
@@ -166,17 +165,19 @@ namespace Square.Models
             this.TotalDiscountMoney = totalDiscountMoney;
             this.TotalTipMoney = totalTipMoney;
             this.TotalServiceChargeMoney = totalServiceChargeMoney;
+
             if (ticketName != null)
             {
                 shouldSerialize["ticket_name"] = true;
                 this.TicketName = ticketName;
             }
-
             this.PricingOptions = pricingOptions;
             this.Rewards = rewards;
             this.NetAmountDueMoney = netAmountDueMoney;
         }
-        internal Order(Dictionary<string, bool> shouldSerialize,
+
+        internal Order(
+            Dictionary<string, bool> shouldSerialize,
             string locationId,
             string id = null,
             string referenceId = null,
@@ -504,9 +505,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Order : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -594,53 +593,79 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Order other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.LineItems == null && other.LineItems == null) || (this.LineItems?.Equals(other.LineItems) == true)) &&
-                ((this.Taxes == null && other.Taxes == null) || (this.Taxes?.Equals(other.Taxes) == true)) &&
-                ((this.Discounts == null && other.Discounts == null) || (this.Discounts?.Equals(other.Discounts) == true)) &&
-                ((this.ServiceCharges == null && other.ServiceCharges == null) || (this.ServiceCharges?.Equals(other.ServiceCharges) == true)) &&
-                ((this.Fulfillments == null && other.Fulfillments == null) || (this.Fulfillments?.Equals(other.Fulfillments) == true)) &&
-                ((this.Returns == null && other.Returns == null) || (this.Returns?.Equals(other.Returns) == true)) &&
-                ((this.ReturnAmounts == null && other.ReturnAmounts == null) || (this.ReturnAmounts?.Equals(other.ReturnAmounts) == true)) &&
-                ((this.NetAmounts == null && other.NetAmounts == null) || (this.NetAmounts?.Equals(other.NetAmounts) == true)) &&
-                ((this.RoundingAdjustment == null && other.RoundingAdjustment == null) || (this.RoundingAdjustment?.Equals(other.RoundingAdjustment) == true)) &&
-                ((this.Tenders == null && other.Tenders == null) || (this.Tenders?.Equals(other.Tenders) == true)) &&
-                ((this.Refunds == null && other.Refunds == null) || (this.Refunds?.Equals(other.Refunds) == true)) &&
-                ((this.Metadata == null && other.Metadata == null) || (this.Metadata?.Equals(other.Metadata) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.ClosedAt == null && other.ClosedAt == null) || (this.ClosedAt?.Equals(other.ClosedAt) == true)) &&
-                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.TotalMoney == null && other.TotalMoney == null) || (this.TotalMoney?.Equals(other.TotalMoney) == true)) &&
-                ((this.TotalTaxMoney == null && other.TotalTaxMoney == null) || (this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true)) &&
-                ((this.TotalDiscountMoney == null && other.TotalDiscountMoney == null) || (this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true)) &&
-                ((this.TotalTipMoney == null && other.TotalTipMoney == null) || (this.TotalTipMoney?.Equals(other.TotalTipMoney) == true)) &&
-                ((this.TotalServiceChargeMoney == null && other.TotalServiceChargeMoney == null) || (this.TotalServiceChargeMoney?.Equals(other.TotalServiceChargeMoney) == true)) &&
-                ((this.TicketName == null && other.TicketName == null) || (this.TicketName?.Equals(other.TicketName) == true)) &&
-                ((this.PricingOptions == null && other.PricingOptions == null) || (this.PricingOptions?.Equals(other.PricingOptions) == true)) &&
-                ((this.Rewards == null && other.Rewards == null) || (this.Rewards?.Equals(other.Rewards) == true)) &&
-                ((this.NetAmountDueMoney == null && other.NetAmountDueMoney == null) || (this.NetAmountDueMoney?.Equals(other.NetAmountDueMoney) == true));
+            return obj is Order other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.Source == null && other.Source == null ||
+                 this.Source?.Equals(other.Source) == true) &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.LineItems == null && other.LineItems == null ||
+                 this.LineItems?.Equals(other.LineItems) == true) &&
+                (this.Taxes == null && other.Taxes == null ||
+                 this.Taxes?.Equals(other.Taxes) == true) &&
+                (this.Discounts == null && other.Discounts == null ||
+                 this.Discounts?.Equals(other.Discounts) == true) &&
+                (this.ServiceCharges == null && other.ServiceCharges == null ||
+                 this.ServiceCharges?.Equals(other.ServiceCharges) == true) &&
+                (this.Fulfillments == null && other.Fulfillments == null ||
+                 this.Fulfillments?.Equals(other.Fulfillments) == true) &&
+                (this.Returns == null && other.Returns == null ||
+                 this.Returns?.Equals(other.Returns) == true) &&
+                (this.ReturnAmounts == null && other.ReturnAmounts == null ||
+                 this.ReturnAmounts?.Equals(other.ReturnAmounts) == true) &&
+                (this.NetAmounts == null && other.NetAmounts == null ||
+                 this.NetAmounts?.Equals(other.NetAmounts) == true) &&
+                (this.RoundingAdjustment == null && other.RoundingAdjustment == null ||
+                 this.RoundingAdjustment?.Equals(other.RoundingAdjustment) == true) &&
+                (this.Tenders == null && other.Tenders == null ||
+                 this.Tenders?.Equals(other.Tenders) == true) &&
+                (this.Refunds == null && other.Refunds == null ||
+                 this.Refunds?.Equals(other.Refunds) == true) &&
+                (this.Metadata == null && other.Metadata == null ||
+                 this.Metadata?.Equals(other.Metadata) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.ClosedAt == null && other.ClosedAt == null ||
+                 this.ClosedAt?.Equals(other.ClosedAt) == true) &&
+                (this.State == null && other.State == null ||
+                 this.State?.Equals(other.State) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.TotalMoney == null && other.TotalMoney == null ||
+                 this.TotalMoney?.Equals(other.TotalMoney) == true) &&
+                (this.TotalTaxMoney == null && other.TotalTaxMoney == null ||
+                 this.TotalTaxMoney?.Equals(other.TotalTaxMoney) == true) &&
+                (this.TotalDiscountMoney == null && other.TotalDiscountMoney == null ||
+                 this.TotalDiscountMoney?.Equals(other.TotalDiscountMoney) == true) &&
+                (this.TotalTipMoney == null && other.TotalTipMoney == null ||
+                 this.TotalTipMoney?.Equals(other.TotalTipMoney) == true) &&
+                (this.TotalServiceChargeMoney == null && other.TotalServiceChargeMoney == null ||
+                 this.TotalServiceChargeMoney?.Equals(other.TotalServiceChargeMoney) == true) &&
+                (this.TicketName == null && other.TicketName == null ||
+                 this.TicketName?.Equals(other.TicketName) == true) &&
+                (this.PricingOptions == null && other.PricingOptions == null ||
+                 this.PricingOptions?.Equals(other.PricingOptions) == true) &&
+                (this.Rewards == null && other.Rewards == null ||
+                 this.Rewards?.Equals(other.Rewards) == true) &&
+                (this.NetAmountDueMoney == null && other.NetAmountDueMoney == null ||
+                 this.NetAmountDueMoney?.Equals(other.NetAmountDueMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1044839112;
-            hashCode = HashCode.Combine(this.Id, this.LocationId, this.ReferenceId, this.Source, this.CustomerId, this.LineItems, this.Taxes);
+            var hashCode = -1044839112;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.LocationId, this.ReferenceId, this.Source, this.CustomerId, this.LineItems, this.Taxes);
 
             hashCode = HashCode.Combine(hashCode, this.Discounts, this.ServiceCharges, this.Fulfillments, this.Returns, this.ReturnAmounts, this.NetAmounts, this.RoundingAdjustment);
 
@@ -652,17 +677,18 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
             toStringOutput.Add($"this.LineItems = {(this.LineItems == null ? "null" : $"[{string.Join(", ", this.LineItems)} ]")}");
             toStringOutput.Add($"this.Taxes = {(this.Taxes == null ? "null" : $"[{string.Join(", ", this.Taxes)} ]")}");
             toStringOutput.Add($"this.Discounts = {(this.Discounts == null ? "null" : $"[{string.Join(", ", this.Discounts)} ]")}");
@@ -675,9 +701,9 @@ namespace Square.Models
             toStringOutput.Add($"this.Tenders = {(this.Tenders == null ? "null" : $"[{string.Join(", ", this.Tenders)} ]")}");
             toStringOutput.Add($"this.Refunds = {(this.Refunds == null ? "null" : $"[{string.Join(", ", this.Refunds)} ]")}");
             toStringOutput.Add($"Metadata = {(this.Metadata == null ? "null" : this.Metadata.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.ClosedAt = {(this.ClosedAt == null ? "null" : this.ClosedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.ClosedAt = {this.ClosedAt ?? "null"}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.TotalMoney = {(this.TotalMoney == null ? "null" : this.TotalMoney.ToString())}");
@@ -685,7 +711,7 @@ namespace Square.Models
             toStringOutput.Add($"this.TotalDiscountMoney = {(this.TotalDiscountMoney == null ? "null" : this.TotalDiscountMoney.ToString())}");
             toStringOutput.Add($"this.TotalTipMoney = {(this.TotalTipMoney == null ? "null" : this.TotalTipMoney.ToString())}");
             toStringOutput.Add($"this.TotalServiceChargeMoney = {(this.TotalServiceChargeMoney == null ? "null" : this.TotalServiceChargeMoney.ToString())}");
-            toStringOutput.Add($"this.TicketName = {(this.TicketName == null ? "null" : this.TicketName)}");
+            toStringOutput.Add($"this.TicketName = {this.TicketName ?? "null"}");
             toStringOutput.Add($"this.PricingOptions = {(this.PricingOptions == null ? "null" : this.PricingOptions.ToString())}");
             toStringOutput.Add($"this.Rewards = {(this.Rewards == null ? "null" : $"[{string.Join(", ", this.Rewards)} ]")}");
             toStringOutput.Add($"this.NetAmountDueMoney = {(this.NetAmountDueMoney == null ? "null" : this.NetAmountDueMoney.ToString())}");
@@ -1143,7 +1169,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -1151,7 +1177,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerId()
             {
@@ -1159,7 +1185,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLineItems()
             {
@@ -1167,7 +1193,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTaxes()
             {
@@ -1175,7 +1201,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDiscounts()
             {
@@ -1183,7 +1209,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetServiceCharges()
             {
@@ -1191,7 +1217,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetFulfillments()
             {
@@ -1199,7 +1225,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMetadata()
             {
@@ -1207,7 +1233,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTicketName()
             {
@@ -1221,7 +1247,8 @@ namespace Square.Models
             /// <returns> Order. </returns>
             public Order Build()
             {
-                return new Order(shouldSerialize,
+                return new Order(
+                    shouldSerialize,
                     this.locationId,
                     this.id,
                     this.referenceId,

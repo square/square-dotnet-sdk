@@ -36,18 +36,19 @@ namespace Square.Models
             {
                 { "source_id", false }
             };
-
             this.Type = type;
             this.Source = source;
+
             if (sourceId != null)
             {
                 shouldSerialize["source_id"] = true;
                 this.SourceId = sourceId;
             }
-
             this.SourceFeeMoney = sourceFeeMoney;
         }
-        internal ExternalPaymentDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal ExternalPaymentDetails(
+            Dictionary<string, bool> shouldSerialize,
             string type,
             string source,
             string sourceId = null,
@@ -106,9 +107,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ExternalPaymentDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -124,38 +123,38 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ExternalPaymentDetails other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
-                ((this.SourceId == null && other.SourceId == null) || (this.SourceId?.Equals(other.SourceId) == true)) &&
-                ((this.SourceFeeMoney == null && other.SourceFeeMoney == null) || (this.SourceFeeMoney?.Equals(other.SourceFeeMoney) == true));
+            return obj is ExternalPaymentDetails other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.Source == null && other.Source == null ||
+                 this.Source?.Equals(other.Source) == true) &&
+                (this.SourceId == null && other.SourceId == null ||
+                 this.SourceId?.Equals(other.SourceId) == true) &&
+                (this.SourceFeeMoney == null && other.SourceFeeMoney == null ||
+                 this.SourceFeeMoney?.Equals(other.SourceFeeMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2146282005;
-            hashCode = HashCode.Combine(this.Type, this.Source, this.SourceId, this.SourceFeeMoney);
+            var hashCode = 2146282005;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.Source, this.SourceId, this.SourceFeeMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type)}");
-            toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source)}");
-            toStringOutput.Add($"this.SourceId = {(this.SourceId == null ? "null" : this.SourceId)}");
+            toStringOutput.Add($"this.Type = {this.Type ?? "null"}");
+            toStringOutput.Add($"this.Source = {this.Source ?? "null"}");
+            toStringOutput.Add($"this.SourceId = {this.SourceId ?? "null"}");
             toStringOutput.Add($"this.SourceFeeMoney = {(this.SourceFeeMoney == null ? "null" : this.SourceFeeMoney.ToString())}");
         }
 
@@ -247,7 +246,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSourceId()
             {
@@ -261,7 +260,8 @@ namespace Square.Models
             /// <returns> ExternalPaymentDetails. </returns>
             public ExternalPaymentDetails Build()
             {
-                return new ExternalPaymentDetails(shouldSerialize,
+                return new ExternalPaymentDetails(
+                    shouldSerialize,
                     this.type,
                     this.source,
                     this.sourceId,

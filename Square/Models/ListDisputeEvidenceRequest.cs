@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["cursor"] = true;
                 this.Cursor = cursor;
             }
-
         }
-        internal ListDisputeEvidenceRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListDisputeEvidenceRequest(
+            Dictionary<string, bool> shouldSerialize,
             string cursor = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -57,9 +58,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListDisputeEvidenceRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -75,33 +74,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListDisputeEvidenceRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+            return obj is ListDisputeEvidenceRequest other &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2105833187;
-            hashCode = HashCode.Combine(this.Cursor);
+            var hashCode = -2105833187;
+            hashCode = HashCode.Combine(hashCode, this.Cursor);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
         }
 
         /// <summary>
@@ -140,7 +136,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -154,7 +150,8 @@ namespace Square.Models
             /// <returns> ListDisputeEvidenceRequest. </returns>
             public ListDisputeEvidenceRequest Build()
             {
-                return new ListDisputeEvidenceRequest(shouldSerialize,
+                return new ListDisputeEvidenceRequest(
+                    shouldSerialize,
                     this.cursor);
             }
         }

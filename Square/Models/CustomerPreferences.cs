@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["email_unsubscribed"] = true;
                 this.EmailUnsubscribed = emailUnsubscribed;
             }
-
         }
-        internal CustomerPreferences(Dictionary<string, bool> shouldSerialize,
+
+        internal CustomerPreferences(
+            Dictionary<string, bool> shouldSerialize,
             bool? emailUnsubscribed = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -55,9 +56,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomerPreferences : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -73,26 +72,23 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomerPreferences other &&                ((this.EmailUnsubscribed == null && other.EmailUnsubscribed == null) || (this.EmailUnsubscribed?.Equals(other.EmailUnsubscribed) == true));
+            return obj is CustomerPreferences other &&
+                (this.EmailUnsubscribed == null && other.EmailUnsubscribed == null ||
+                 this.EmailUnsubscribed?.Equals(other.EmailUnsubscribed) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1448015667;
-            hashCode = HashCode.Combine(this.EmailUnsubscribed);
+            var hashCode = -1448015667;
+            hashCode = HashCode.Combine(hashCode, this.EmailUnsubscribed);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -138,7 +134,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmailUnsubscribed()
             {
@@ -152,7 +148,8 @@ namespace Square.Models
             /// <returns> CustomerPreferences. </returns>
             public CustomerPreferences Build()
             {
-                return new CustomerPreferences(shouldSerialize,
+                return new CustomerPreferences(
+                    shouldSerialize,
                     this.emailUnsubscribed);
             }
         }

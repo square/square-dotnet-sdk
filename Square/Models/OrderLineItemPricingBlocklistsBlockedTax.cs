@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["tax_catalog_object_id"] = true;
                 this.TaxCatalogObjectId = taxCatalogObjectId;
             }
-
         }
-        internal OrderLineItemPricingBlocklistsBlockedTax(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderLineItemPricingBlocklistsBlockedTax(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             string taxUid = null,
             string taxCatalogObjectId = null)
@@ -92,9 +93,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderLineItemPricingBlocklistsBlockedTax : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -128,37 +127,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderLineItemPricingBlocklistsBlockedTax other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.TaxUid == null && other.TaxUid == null) || (this.TaxUid?.Equals(other.TaxUid) == true)) &&
-                ((this.TaxCatalogObjectId == null && other.TaxCatalogObjectId == null) || (this.TaxCatalogObjectId?.Equals(other.TaxCatalogObjectId) == true));
+            return obj is OrderLineItemPricingBlocklistsBlockedTax other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.TaxUid == null && other.TaxUid == null ||
+                 this.TaxUid?.Equals(other.TaxUid) == true) &&
+                (this.TaxCatalogObjectId == null && other.TaxCatalogObjectId == null ||
+                 this.TaxCatalogObjectId?.Equals(other.TaxCatalogObjectId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 91458610;
-            hashCode = HashCode.Combine(this.Uid, this.TaxUid, this.TaxCatalogObjectId);
+            var hashCode = 91458610;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.TaxUid, this.TaxCatalogObjectId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.TaxUid = {(this.TaxUid == null ? "null" : this.TaxUid)}");
-            toStringOutput.Add($"this.TaxCatalogObjectId = {(this.TaxCatalogObjectId == null ? "null" : this.TaxCatalogObjectId)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.TaxUid = {this.TaxUid ?? "null"}");
+            toStringOutput.Add($"this.TaxCatalogObjectId = {this.TaxCatalogObjectId ?? "null"}");
         }
 
         /// <summary>
@@ -227,7 +225,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -235,7 +233,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTaxUid()
             {
@@ -243,7 +241,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTaxCatalogObjectId()
             {
@@ -257,7 +255,8 @@ namespace Square.Models
             /// <returns> OrderLineItemPricingBlocklistsBlockedTax. </returns>
             public OrderLineItemPricingBlocklistsBlockedTax Build()
             {
-                return new OrderLineItemPricingBlocklistsBlockedTax(shouldSerialize,
+                return new OrderLineItemPricingBlocklistsBlockedTax(
+                    shouldSerialize,
                     this.uid,
                     this.taxUid,
                     this.taxCatalogObjectId);

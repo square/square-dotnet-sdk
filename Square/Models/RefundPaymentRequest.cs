@@ -61,10 +61,10 @@ namespace Square.Models
                 { "payment_version_token", false },
                 { "team_member_id", false }
             };
-
             this.IdempotencyKey = idempotencyKey;
             this.AmountMoney = amountMoney;
             this.AppFeeMoney = appFeeMoney;
+
             if (paymentId != null)
             {
                 shouldSerialize["payment_id"] = true;
@@ -112,11 +112,12 @@ namespace Square.Models
                 shouldSerialize["team_member_id"] = true;
                 this.TeamMemberId = teamMemberId;
             }
-
             this.CashDetails = cashDetails;
             this.ExternalDetails = externalDetails;
         }
-        internal RefundPaymentRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal RefundPaymentRequest(
+            Dictionary<string, bool> shouldSerialize,
             string idempotencyKey,
             Models.Money amountMoney,
             Models.Money appFeeMoney = null,
@@ -258,9 +259,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RefundPaymentRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -339,57 +338,66 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RefundPaymentRequest other &&                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.AppFeeMoney == null && other.AppFeeMoney == null) || (this.AppFeeMoney?.Equals(other.AppFeeMoney) == true)) &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.DestinationId == null && other.DestinationId == null) || (this.DestinationId?.Equals(other.DestinationId) == true)) &&
-                ((this.Unlinked == null && other.Unlinked == null) || (this.Unlinked?.Equals(other.Unlinked) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
-                ((this.PaymentVersionToken == null && other.PaymentVersionToken == null) || (this.PaymentVersionToken?.Equals(other.PaymentVersionToken) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
-                ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true));
+            return obj is RefundPaymentRequest other &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.AppFeeMoney == null && other.AppFeeMoney == null ||
+                 this.AppFeeMoney?.Equals(other.AppFeeMoney) == true) &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true) &&
+                (this.DestinationId == null && other.DestinationId == null ||
+                 this.DestinationId?.Equals(other.DestinationId) == true) &&
+                (this.Unlinked == null && other.Unlinked == null ||
+                 this.Unlinked?.Equals(other.Unlinked) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.Reason == null && other.Reason == null ||
+                 this.Reason?.Equals(other.Reason) == true) &&
+                (this.PaymentVersionToken == null && other.PaymentVersionToken == null ||
+                 this.PaymentVersionToken?.Equals(other.PaymentVersionToken) == true) &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.CashDetails == null && other.CashDetails == null ||
+                 this.CashDetails?.Equals(other.CashDetails) == true) &&
+                (this.ExternalDetails == null && other.ExternalDetails == null ||
+                 this.ExternalDetails?.Equals(other.ExternalDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1595674031;
-            hashCode = HashCode.Combine(this.IdempotencyKey, this.AmountMoney, this.AppFeeMoney, this.PaymentId, this.DestinationId, this.Unlinked, this.LocationId);
+            var hashCode = 1595674031;
+            hashCode = HashCode.Combine(hashCode, this.IdempotencyKey, this.AmountMoney, this.AppFeeMoney, this.PaymentId, this.DestinationId, this.Unlinked, this.LocationId);
 
             hashCode = HashCode.Combine(hashCode, this.CustomerId, this.Reason, this.PaymentVersionToken, this.TeamMemberId, this.CashDetails, this.ExternalDetails);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.AppFeeMoney = {(this.AppFeeMoney == null ? "null" : this.AppFeeMoney.ToString())}");
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
-            toStringOutput.Add($"this.DestinationId = {(this.DestinationId == null ? "null" : this.DestinationId)}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
+            toStringOutput.Add($"this.DestinationId = {this.DestinationId ?? "null"}");
             toStringOutput.Add($"this.Unlinked = {(this.Unlinked == null ? "null" : this.Unlinked.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
-            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason)}");
-            toStringOutput.Add($"this.PaymentVersionToken = {(this.PaymentVersionToken == null ? "null" : this.PaymentVersionToken)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
+            toStringOutput.Add($"this.Reason = {this.Reason ?? "null"}");
+            toStringOutput.Add($"this.PaymentVersionToken = {this.PaymentVersionToken ?? "null"}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
             toStringOutput.Add($"this.CashDetails = {(this.CashDetails == null ? "null" : this.CashDetails.ToString())}");
             toStringOutput.Add($"this.ExternalDetails = {(this.ExternalDetails == null ? "null" : this.ExternalDetails.ToString())}");
         }
@@ -613,7 +621,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentId()
             {
@@ -621,7 +629,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDestinationId()
             {
@@ -629,7 +637,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUnlinked()
             {
@@ -637,7 +645,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -645,7 +653,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerId()
             {
@@ -653,7 +661,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReason()
             {
@@ -661,7 +669,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentVersionToken()
             {
@@ -669,7 +677,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTeamMemberId()
             {
@@ -683,7 +691,8 @@ namespace Square.Models
             /// <returns> RefundPaymentRequest. </returns>
             public RefundPaymentRequest Build()
             {
-                return new RefundPaymentRequest(shouldSerialize,
+                return new RefundPaymentRequest(
+                    shouldSerialize,
                     this.idempotencyKey,
                     this.amountMoney,
                     this.appFeeMoney,

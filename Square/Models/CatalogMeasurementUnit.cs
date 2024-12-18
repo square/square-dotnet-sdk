@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "precision", false }
             };
-
             this.MeasurementUnit = measurementUnit;
+
             if (precision != null)
             {
                 shouldSerialize["precision"] = true;
                 this.Precision = precision;
             }
-
         }
-        internal CatalogMeasurementUnit(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogMeasurementUnit(
+            Dictionary<string, bool> shouldSerialize,
             Models.MeasurementUnit measurementUnit = null,
             int? precision = null)
         {
@@ -74,9 +75,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogMeasurementUnit : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -92,27 +91,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogMeasurementUnit other &&                ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
-                ((this.Precision == null && other.Precision == null) || (this.Precision?.Equals(other.Precision) == true));
+            return obj is CatalogMeasurementUnit other &&
+                (this.MeasurementUnit == null && other.MeasurementUnit == null ||
+                 this.MeasurementUnit?.Equals(other.MeasurementUnit) == true) &&
+                (this.Precision == null && other.Precision == null ||
+                 this.Precision?.Equals(other.Precision) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1544642162;
-            hashCode = HashCode.Combine(this.MeasurementUnit, this.Precision);
+            var hashCode = 1544642162;
+            hashCode = HashCode.Combine(hashCode, this.MeasurementUnit, this.Precision);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -172,7 +169,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPrecision()
             {
@@ -186,7 +183,8 @@ namespace Square.Models
             /// <returns> CatalogMeasurementUnit. </returns>
             public CatalogMeasurementUnit Build()
             {
-                return new CatalogMeasurementUnit(shouldSerialize,
+                return new CatalogMeasurementUnit(
+                    shouldSerialize,
                     this.measurementUnit,
                     this.precision);
             }

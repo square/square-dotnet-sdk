@@ -38,8 +38,8 @@ namespace Square.Models
                 { "segment_filters", false },
                 { "booking_id", false }
             };
-
             this.StartAtRange = startAtRange;
+
             if (locationId != null)
             {
                 shouldSerialize["location_id"] = true;
@@ -57,9 +57,10 @@ namespace Square.Models
                 shouldSerialize["booking_id"] = true;
                 this.BookingId = bookingId;
             }
-
         }
-        internal SearchAvailabilityFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal SearchAvailabilityFilter(
+            Dictionary<string, bool> shouldSerialize,
             Models.TimeRange startAtRange,
             string locationId = null,
             IList<Models.SegmentFilter> segmentFilters = null,
@@ -109,9 +110,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchAvailabilityFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -145,29 +144,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchAvailabilityFilter other &&                ((this.StartAtRange == null && other.StartAtRange == null) || (this.StartAtRange?.Equals(other.StartAtRange) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.SegmentFilters == null && other.SegmentFilters == null) || (this.SegmentFilters?.Equals(other.SegmentFilters) == true)) &&
-                ((this.BookingId == null && other.BookingId == null) || (this.BookingId?.Equals(other.BookingId) == true));
+            return obj is SearchAvailabilityFilter other &&
+                (this.StartAtRange == null && other.StartAtRange == null ||
+                 this.StartAtRange?.Equals(other.StartAtRange) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.SegmentFilters == null && other.SegmentFilters == null ||
+                 this.SegmentFilters?.Equals(other.SegmentFilters) == true) &&
+                (this.BookingId == null && other.BookingId == null ||
+                 this.BookingId?.Equals(other.BookingId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -735515174;
-            hashCode = HashCode.Combine(this.StartAtRange, this.LocationId, this.SegmentFilters, this.BookingId);
+            var hashCode = -735515174;
+            hashCode = HashCode.Combine(hashCode, this.StartAtRange, this.LocationId, this.SegmentFilters, this.BookingId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -175,9 +174,9 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.StartAtRange = {(this.StartAtRange == null ? "null" : this.StartAtRange.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.SegmentFilters = {(this.SegmentFilters == null ? "null" : $"[{string.Join(", ", this.SegmentFilters)} ]")}");
-            toStringOutput.Add($"this.BookingId = {(this.BookingId == null ? "null" : this.BookingId)}");
+            toStringOutput.Add($"this.BookingId = {this.BookingId ?? "null"}");
         }
 
         /// <summary>
@@ -269,7 +268,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -277,7 +276,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSegmentFilters()
             {
@@ -285,7 +284,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBookingId()
             {
@@ -299,7 +298,8 @@ namespace Square.Models
             /// <returns> SearchAvailabilityFilter. </returns>
             public SearchAvailabilityFilter Build()
             {
-                return new SearchAvailabilityFilter(shouldSerialize,
+                return new SearchAvailabilityFilter(
+                    shouldSerialize,
                     this.startAtRange,
                     this.locationId,
                     this.segmentFilters,

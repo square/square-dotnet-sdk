@@ -83,45 +83,45 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchCatalogObjectsResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchCatalogObjectsResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Objects == null && other.Objects == null) || (this.Objects?.Equals(other.Objects) == true)) &&
-                ((this.RelatedObjects == null && other.RelatedObjects == null) || (this.RelatedObjects?.Equals(other.RelatedObjects) == true)) &&
-                ((this.LatestTime == null && other.LatestTime == null) || (this.LatestTime?.Equals(other.LatestTime) == true));
+            return obj is SearchCatalogObjectsResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Objects == null && other.Objects == null ||
+                 this.Objects?.Equals(other.Objects) == true) &&
+                (this.RelatedObjects == null && other.RelatedObjects == null ||
+                 this.RelatedObjects?.Equals(other.RelatedObjects) == true) &&
+                (this.LatestTime == null && other.LatestTime == null ||
+                 this.LatestTime?.Equals(other.LatestTime) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -544883463;
+            var hashCode = -544883463;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.Cursor, this.Objects, this.RelatedObjects, this.LatestTime);
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.Cursor, this.Objects, this.RelatedObjects, this.LatestTime);
 
             return hashCode;
         }
+
         internal SearchCatalogObjectsResponse ContextSetter(HttpContext context)
         {
             this.Context = context;
@@ -135,10 +135,10 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Errors = {(this.Errors == null ? "null" : $"[{string.Join(", ", this.Errors)} ]")}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.Objects = {(this.Objects == null ? "null" : $"[{string.Join(", ", this.Objects)} ]")}");
             toStringOutput.Add($"this.RelatedObjects = {(this.RelatedObjects == null ? "null" : $"[{string.Join(", ", this.RelatedObjects)} ]")}");
-            toStringOutput.Add($"this.LatestTime = {(this.LatestTime == null ? "null" : this.LatestTime)}");
+            toStringOutput.Add($"this.LatestTime = {this.LatestTime ?? "null"}");
         }
 
         /// <summary>

@@ -79,17 +79,18 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.BasePriceMoney = basePriceMoney;
             this.TotalPriceMoney = totalPriceMoney;
+
             if (quantity != null)
             {
                 shouldSerialize["quantity"] = true;
                 this.Quantity = quantity;
             }
-
         }
-        internal OrderReturnLineItemModifier(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderReturnLineItemModifier(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             string sourceModifierUid = null,
             string catalogObjectId = null,
@@ -179,9 +180,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderReturnLineItemModifier : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -242,49 +241,53 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderReturnLineItemModifier other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.SourceModifierUid == null && other.SourceModifierUid == null) || (this.SourceModifierUid?.Equals(other.SourceModifierUid) == true)) &&
-                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.BasePriceMoney == null && other.BasePriceMoney == null) || (this.BasePriceMoney?.Equals(other.BasePriceMoney) == true)) &&
-                ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
-                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true));
+            return obj is OrderReturnLineItemModifier other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.SourceModifierUid == null && other.SourceModifierUid == null ||
+                 this.SourceModifierUid?.Equals(other.SourceModifierUid) == true) &&
+                (this.CatalogObjectId == null && other.CatalogObjectId == null ||
+                 this.CatalogObjectId?.Equals(other.CatalogObjectId) == true) &&
+                (this.CatalogVersion == null && other.CatalogVersion == null ||
+                 this.CatalogVersion?.Equals(other.CatalogVersion) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.BasePriceMoney == null && other.BasePriceMoney == null ||
+                 this.BasePriceMoney?.Equals(other.BasePriceMoney) == true) &&
+                (this.TotalPriceMoney == null && other.TotalPriceMoney == null ||
+                 this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true) &&
+                (this.Quantity == null && other.Quantity == null ||
+                 this.Quantity?.Equals(other.Quantity) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1048986708;
-            hashCode = HashCode.Combine(this.Uid, this.SourceModifierUid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.BasePriceMoney, this.TotalPriceMoney);
+            var hashCode = -1048986708;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.SourceModifierUid, this.CatalogObjectId, this.CatalogVersion, this.Name, this.BasePriceMoney, this.TotalPriceMoney);
 
             hashCode = HashCode.Combine(hashCode, this.Quantity);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.SourceModifierUid = {(this.SourceModifierUid == null ? "null" : this.SourceModifierUid)}");
-            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.SourceModifierUid = {this.SourceModifierUid ?? "null"}");
+            toStringOutput.Add($"this.CatalogObjectId = {this.CatalogObjectId ?? "null"}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.BasePriceMoney = {(this.BasePriceMoney == null ? "null" : this.BasePriceMoney.ToString())}");
             toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
-            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity)}");
+            toStringOutput.Add($"this.Quantity = {this.Quantity ?? "null"}");
         }
 
         /// <summary>
@@ -424,7 +427,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -432,7 +435,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSourceModifierUid()
             {
@@ -440,7 +443,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectId()
             {
@@ -448,7 +451,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogVersion()
             {
@@ -456,7 +459,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -464,7 +467,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQuantity()
             {
@@ -478,7 +481,8 @@ namespace Square.Models
             /// <returns> OrderReturnLineItemModifier. </returns>
             public OrderReturnLineItemModifier Build()
             {
-                return new OrderReturnLineItemModifier(shouldSerialize,
+                return new OrderReturnLineItemModifier(
+                    shouldSerialize,
                     this.uid,
                     this.sourceModifierUid,
                     this.catalogObjectId,

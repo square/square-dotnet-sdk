@@ -54,42 +54,39 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateLocationSettingsResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateLocationSettingsResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.LocationSettings == null && other.LocationSettings == null) || (this.LocationSettings?.Equals(other.LocationSettings) == true));
+            return obj is UpdateLocationSettingsResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.LocationSettings == null && other.LocationSettings == null ||
+                 this.LocationSettings?.Equals(other.LocationSettings) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -946865123;
+            var hashCode = -946865123;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.Errors, this.LocationSettings);
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.LocationSettings);
 
             return hashCode;
         }
+
         internal UpdateLocationSettingsResponse ContextSetter(HttpContext context)
         {
             this.Context = context;

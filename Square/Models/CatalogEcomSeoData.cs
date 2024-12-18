@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["permalink"] = true;
                 this.Permalink = permalink;
             }
-
         }
-        internal CatalogEcomSeoData(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogEcomSeoData(
+            Dictionary<string, bool> shouldSerialize,
             string pageTitle = null,
             string pageDescription = null,
             string permalink = null)
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogEcomSeoData : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -125,37 +124,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogEcomSeoData other &&                ((this.PageTitle == null && other.PageTitle == null) || (this.PageTitle?.Equals(other.PageTitle) == true)) &&
-                ((this.PageDescription == null && other.PageDescription == null) || (this.PageDescription?.Equals(other.PageDescription) == true)) &&
-                ((this.Permalink == null && other.Permalink == null) || (this.Permalink?.Equals(other.Permalink) == true));
+            return obj is CatalogEcomSeoData other &&
+                (this.PageTitle == null && other.PageTitle == null ||
+                 this.PageTitle?.Equals(other.PageTitle) == true) &&
+                (this.PageDescription == null && other.PageDescription == null ||
+                 this.PageDescription?.Equals(other.PageDescription) == true) &&
+                (this.Permalink == null && other.Permalink == null ||
+                 this.Permalink?.Equals(other.Permalink) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1727403244;
-            hashCode = HashCode.Combine(this.PageTitle, this.PageDescription, this.Permalink);
+            var hashCode = 1727403244;
+            hashCode = HashCode.Combine(hashCode, this.PageTitle, this.PageDescription, this.Permalink);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PageTitle = {(this.PageTitle == null ? "null" : this.PageTitle)}");
-            toStringOutput.Add($"this.PageDescription = {(this.PageDescription == null ? "null" : this.PageDescription)}");
-            toStringOutput.Add($"this.Permalink = {(this.Permalink == null ? "null" : this.Permalink)}");
+            toStringOutput.Add($"this.PageTitle = {this.PageTitle ?? "null"}");
+            toStringOutput.Add($"this.PageDescription = {this.PageDescription ?? "null"}");
+            toStringOutput.Add($"this.Permalink = {this.Permalink ?? "null"}");
         }
 
         /// <summary>
@@ -224,7 +222,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPageTitle()
             {
@@ -232,7 +230,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPageDescription()
             {
@@ -240,7 +238,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPermalink()
             {
@@ -254,7 +252,8 @@ namespace Square.Models
             /// <returns> CatalogEcomSeoData. </returns>
             public CatalogEcomSeoData Build()
             {
-                return new CatalogEcomSeoData(shouldSerialize,
+                return new CatalogEcomSeoData(
+                    shouldSerialize,
                     this.pageTitle,
                     this.pageDescription,
                     this.permalink);

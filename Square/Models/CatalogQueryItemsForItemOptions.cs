@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["item_option_ids"] = true;
                 this.ItemOptionIds = itemOptionIds;
             }
-
         }
-        internal CatalogQueryItemsForItemOptions(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogQueryItemsForItemOptions(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> itemOptionIds = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -57,9 +58,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogQueryItemsForItemOptions : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -75,26 +74,23 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogQueryItemsForItemOptions other &&                ((this.ItemOptionIds == null && other.ItemOptionIds == null) || (this.ItemOptionIds?.Equals(other.ItemOptionIds) == true));
+            return obj is CatalogQueryItemsForItemOptions other &&
+                (this.ItemOptionIds == null && other.ItemOptionIds == null ||
+                 this.ItemOptionIds?.Equals(other.ItemOptionIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 447703827;
-            hashCode = HashCode.Combine(this.ItemOptionIds);
+            var hashCode = 447703827;
+            hashCode = HashCode.Combine(hashCode, this.ItemOptionIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -140,7 +136,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetItemOptionIds()
             {
@@ -154,7 +150,8 @@ namespace Square.Models
             /// <returns> CatalogQueryItemsForItemOptions. </returns>
             public CatalogQueryItemsForItemOptions Build()
             {
-                return new CatalogQueryItemsForItemOptions(shouldSerialize,
+                return new CatalogQueryItemsForItemOptions(
+                    shouldSerialize,
                     this.itemOptionIds);
             }
         }

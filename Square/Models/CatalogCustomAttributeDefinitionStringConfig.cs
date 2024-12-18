@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["enforce_uniqueness"] = true;
                 this.EnforceUniqueness = enforceUniqueness;
             }
-
         }
-        internal CatalogCustomAttributeDefinitionStringConfig(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogCustomAttributeDefinitionStringConfig(
+            Dictionary<string, bool> shouldSerialize,
             bool? enforceUniqueness = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -59,9 +60,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogCustomAttributeDefinitionStringConfig : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -77,26 +76,23 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogCustomAttributeDefinitionStringConfig other &&                ((this.EnforceUniqueness == null && other.EnforceUniqueness == null) || (this.EnforceUniqueness?.Equals(other.EnforceUniqueness) == true));
+            return obj is CatalogCustomAttributeDefinitionStringConfig other &&
+                (this.EnforceUniqueness == null && other.EnforceUniqueness == null ||
+                 this.EnforceUniqueness?.Equals(other.EnforceUniqueness) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 209404828;
-            hashCode = HashCode.Combine(this.EnforceUniqueness);
+            var hashCode = 209404828;
+            hashCode = HashCode.Combine(hashCode, this.EnforceUniqueness);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -142,7 +138,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEnforceUniqueness()
             {
@@ -156,7 +152,8 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeDefinitionStringConfig. </returns>
             public CatalogCustomAttributeDefinitionStringConfig Build()
             {
-                return new CatalogCustomAttributeDefinitionStringConfig(shouldSerialize,
+                return new CatalogCustomAttributeDefinitionStringConfig(
+                    shouldSerialize,
                     this.enforceUniqueness);
             }
         }

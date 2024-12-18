@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["catalog_version"] = true;
                 this.CatalogVersion = catalogVersion;
             }
-
         }
-        internal ListCatalogRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListCatalogRequest(
+            Dictionary<string, bool> shouldSerialize,
             string cursor = null,
             string types = null,
             long? catalogVersion = null)
@@ -104,9 +105,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListCatalogRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -140,36 +139,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListCatalogRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Types == null && other.Types == null) || (this.Types?.Equals(other.Types) == true)) &&
-                ((this.CatalogVersion == null && other.CatalogVersion == null) || (this.CatalogVersion?.Equals(other.CatalogVersion) == true));
+            return obj is ListCatalogRequest other &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Types == null && other.Types == null ||
+                 this.Types?.Equals(other.Types) == true) &&
+                (this.CatalogVersion == null && other.CatalogVersion == null ||
+                 this.CatalogVersion?.Equals(other.CatalogVersion) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1348170902;
-            hashCode = HashCode.Combine(this.Cursor, this.Types, this.CatalogVersion);
+            var hashCode = -1348170902;
+            hashCode = HashCode.Combine(hashCode, this.Cursor, this.Types, this.CatalogVersion);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
-            toStringOutput.Add($"this.Types = {(this.Types == null ? "null" : this.Types)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
+            toStringOutput.Add($"this.Types = {this.Types ?? "null"}");
             toStringOutput.Add($"this.CatalogVersion = {(this.CatalogVersion == null ? "null" : this.CatalogVersion.ToString())}");
         }
 
@@ -239,7 +237,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -247,7 +245,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTypes()
             {
@@ -255,7 +253,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogVersion()
             {
@@ -269,7 +267,8 @@ namespace Square.Models
             /// <returns> ListCatalogRequest. </returns>
             public ListCatalogRequest Build()
             {
-                return new ListCatalogRequest(shouldSerialize,
+                return new ListCatalogRequest(
+                    shouldSerialize,
                     this.cursor,
                     this.types,
                     this.catalogVersion);

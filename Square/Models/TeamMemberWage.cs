@@ -43,8 +43,8 @@ namespace Square.Models
                 { "job_id", false },
                 { "tip_eligible", false }
             };
-
             this.Id = id;
+
             if (teamMemberId != null)
             {
                 shouldSerialize["team_member_id"] = true;
@@ -56,8 +56,8 @@ namespace Square.Models
                 shouldSerialize["title"] = true;
                 this.Title = title;
             }
-
             this.HourlyRate = hourlyRate;
+
             if (jobId != null)
             {
                 shouldSerialize["job_id"] = true;
@@ -69,9 +69,10 @@ namespace Square.Models
                 shouldSerialize["tip_eligible"] = true;
                 this.TipEligible = tipEligible;
             }
-
         }
-        internal TeamMemberWage(Dictionary<string, bool> shouldSerialize,
+
+        internal TeamMemberWage(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string teamMemberId = null,
             string title = null,
@@ -134,9 +135,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TeamMemberWage : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -179,42 +178,44 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TeamMemberWage other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
-                ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true)) &&
-                ((this.JobId == null && other.JobId == null) || (this.JobId?.Equals(other.JobId) == true)) &&
-                ((this.TipEligible == null && other.TipEligible == null) || (this.TipEligible?.Equals(other.TipEligible) == true));
+            return obj is TeamMemberWage other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.Title == null && other.Title == null ||
+                 this.Title?.Equals(other.Title) == true) &&
+                (this.HourlyRate == null && other.HourlyRate == null ||
+                 this.HourlyRate?.Equals(other.HourlyRate) == true) &&
+                (this.JobId == null && other.JobId == null ||
+                 this.JobId?.Equals(other.JobId) == true) &&
+                (this.TipEligible == null && other.TipEligible == null ||
+                 this.TipEligible?.Equals(other.TipEligible) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1986265837;
-            hashCode = HashCode.Combine(this.Id, this.TeamMemberId, this.Title, this.HourlyRate, this.JobId, this.TipEligible);
+            var hashCode = 1986265837;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.TeamMemberId, this.Title, this.HourlyRate, this.JobId, this.TipEligible);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
-            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
+            toStringOutput.Add($"this.Title = {this.Title ?? "null"}");
             toStringOutput.Add($"this.HourlyRate = {(this.HourlyRate == null ? "null" : this.HourlyRate.ToString())}");
-            toStringOutput.Add($"this.JobId = {(this.JobId == null ? "null" : this.JobId)}");
+            toStringOutput.Add($"this.JobId = {this.JobId ?? "null"}");
             toStringOutput.Add($"this.TipEligible = {(this.TipEligible == null ? "null" : this.TipEligible.ToString())}");
         }
 
@@ -325,7 +326,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTeamMemberId()
             {
@@ -333,7 +334,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTitle()
             {
@@ -341,7 +342,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetJobId()
             {
@@ -349,7 +350,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTipEligible()
             {
@@ -363,7 +364,8 @@ namespace Square.Models
             /// <returns> TeamMemberWage. </returns>
             public TeamMemberWage Build()
             {
-                return new TeamMemberWage(shouldSerialize,
+                return new TeamMemberWage(
+                    shouldSerialize,
                     this.id,
                     this.teamMemberId,
                     this.title,

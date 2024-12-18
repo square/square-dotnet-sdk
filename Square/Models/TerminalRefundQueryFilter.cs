@@ -41,16 +41,17 @@ namespace Square.Models
                 shouldSerialize["device_id"] = true;
                 this.DeviceId = deviceId;
             }
-
             this.CreatedAt = createdAt;
+
             if (status != null)
             {
                 shouldSerialize["status"] = true;
                 this.Status = status;
             }
-
         }
-        internal TerminalRefundQueryFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal TerminalRefundQueryFilter(
+            Dictionary<string, bool> shouldSerialize,
             string deviceId = null,
             Models.TimeRange createdAt = null,
             string status = null)
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TerminalRefundQueryFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -116,37 +115,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TerminalRefundQueryFilter other &&                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
+            return obj is TerminalRefundQueryFilter other &&
+                (this.DeviceId == null && other.DeviceId == null ||
+                 this.DeviceId?.Equals(other.DeviceId) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 227219520;
-            hashCode = HashCode.Combine(this.DeviceId, this.CreatedAt, this.Status);
+            var hashCode = 227219520;
+            hashCode = HashCode.Combine(hashCode, this.DeviceId, this.CreatedAt, this.Status);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId)}");
+            toStringOutput.Add($"this.DeviceId = {this.DeviceId ?? "null"}");
             toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt.ToString())}");
-            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status)}");
+            toStringOutput.Add($"this.Status = {this.Status ?? "null"}");
         }
 
         /// <summary>
@@ -213,7 +211,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeviceId()
             {
@@ -221,7 +219,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStatus()
             {
@@ -235,7 +233,8 @@ namespace Square.Models
             /// <returns> TerminalRefundQueryFilter. </returns>
             public TerminalRefundQueryFilter Build()
             {
-                return new TerminalRefundQueryFilter(shouldSerialize,
+                return new TerminalRefundQueryFilter(
+                    shouldSerialize,
                     this.deviceId,
                     this.createdAt,
                     this.status);

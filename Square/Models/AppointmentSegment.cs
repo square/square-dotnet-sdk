@@ -56,19 +56,20 @@ namespace Square.Models
                 shouldSerialize["service_variation_id"] = true;
                 this.ServiceVariationId = serviceVariationId;
             }
-
             this.TeamMemberId = teamMemberId;
+
             if (serviceVariationVersion != null)
             {
                 shouldSerialize["service_variation_version"] = true;
                 this.ServiceVariationVersion = serviceVariationVersion;
             }
-
             this.IntermissionMinutes = intermissionMinutes;
             this.AnyTeamMember = anyTeamMember;
             this.ResourceIds = resourceIds;
         }
-        internal AppointmentSegment(Dictionary<string, bool> shouldSerialize,
+
+        internal AppointmentSegment(
+            Dictionary<string, bool> shouldSerialize,
             string teamMemberId,
             int? durationMinutes = null,
             string serviceVariationId = null,
@@ -133,9 +134,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"AppointmentSegment : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -169,32 +168,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is AppointmentSegment other &&                ((this.DurationMinutes == null && other.DurationMinutes == null) || (this.DurationMinutes?.Equals(other.DurationMinutes) == true)) &&
-                ((this.ServiceVariationId == null && other.ServiceVariationId == null) || (this.ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.ServiceVariationVersion == null && other.ServiceVariationVersion == null) || (this.ServiceVariationVersion?.Equals(other.ServiceVariationVersion) == true)) &&
-                ((this.IntermissionMinutes == null && other.IntermissionMinutes == null) || (this.IntermissionMinutes?.Equals(other.IntermissionMinutes) == true)) &&
-                ((this.AnyTeamMember == null && other.AnyTeamMember == null) || (this.AnyTeamMember?.Equals(other.AnyTeamMember) == true)) &&
-                ((this.ResourceIds == null && other.ResourceIds == null) || (this.ResourceIds?.Equals(other.ResourceIds) == true));
+            return obj is AppointmentSegment other &&
+                (this.DurationMinutes == null && other.DurationMinutes == null ||
+                 this.DurationMinutes?.Equals(other.DurationMinutes) == true) &&
+                (this.ServiceVariationId == null && other.ServiceVariationId == null ||
+                 this.ServiceVariationId?.Equals(other.ServiceVariationId) == true) &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.ServiceVariationVersion == null && other.ServiceVariationVersion == null ||
+                 this.ServiceVariationVersion?.Equals(other.ServiceVariationVersion) == true) &&
+                (this.IntermissionMinutes == null && other.IntermissionMinutes == null ||
+                 this.IntermissionMinutes?.Equals(other.IntermissionMinutes) == true) &&
+                (this.AnyTeamMember == null && other.AnyTeamMember == null ||
+                 this.AnyTeamMember?.Equals(other.AnyTeamMember) == true) &&
+                (this.ResourceIds == null && other.ResourceIds == null ||
+                 this.ResourceIds?.Equals(other.ResourceIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -489097029;
-            hashCode = HashCode.Combine(this.DurationMinutes, this.ServiceVariationId, this.TeamMemberId, this.ServiceVariationVersion, this.IntermissionMinutes, this.AnyTeamMember, this.ResourceIds);
+            var hashCode = -489097029;
+            hashCode = HashCode.Combine(hashCode, this.DurationMinutes, this.ServiceVariationId, this.TeamMemberId, this.ServiceVariationVersion, this.IntermissionMinutes, this.AnyTeamMember, this.ResourceIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -202,8 +204,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.DurationMinutes = {(this.DurationMinutes == null ? "null" : this.DurationMinutes.ToString())}");
-            toStringOutput.Add($"this.ServiceVariationId = {(this.ServiceVariationId == null ? "null" : this.ServiceVariationId)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
+            toStringOutput.Add($"this.ServiceVariationId = {this.ServiceVariationId ?? "null"}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
             toStringOutput.Add($"this.ServiceVariationVersion = {(this.ServiceVariationVersion == null ? "null" : this.ServiceVariationVersion.ToString())}");
             toStringOutput.Add($"this.IntermissionMinutes = {(this.IntermissionMinutes == null ? "null" : this.IntermissionMinutes.ToString())}");
             toStringOutput.Add($"this.AnyTeamMember = {(this.AnyTeamMember == null ? "null" : this.AnyTeamMember.ToString())}");
@@ -338,7 +340,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDurationMinutes()
             {
@@ -346,7 +348,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetServiceVariationId()
             {
@@ -354,7 +356,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetServiceVariationVersion()
             {
@@ -368,7 +370,8 @@ namespace Square.Models
             /// <returns> AppointmentSegment. </returns>
             public AppointmentSegment Build()
             {
-                return new AppointmentSegment(shouldSerialize,
+                return new AppointmentSegment(
+                    shouldSerialize,
                     this.teamMemberId,
                     this.durationMinutes,
                     this.serviceVariationId,

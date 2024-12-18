@@ -135,9 +135,10 @@ namespace Square.Models
                 shouldSerialize["ip_address"] = true;
                 this.IpAddress = ipAddress;
             }
-
         }
-        internal DeviceMetadata(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceMetadata(
+            Dictionary<string, bool> shouldSerialize,
             string batteryPercentage = null,
             string chargingState = null,
             string locationId = null,
@@ -246,9 +247,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceMetadata : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -363,57 +362,65 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceMetadata other &&                ((this.BatteryPercentage == null && other.BatteryPercentage == null) || (this.BatteryPercentage?.Equals(other.BatteryPercentage) == true)) &&
-                ((this.ChargingState == null && other.ChargingState == null) || (this.ChargingState?.Equals(other.ChargingState) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((this.NetworkConnectionType == null && other.NetworkConnectionType == null) || (this.NetworkConnectionType?.Equals(other.NetworkConnectionType) == true)) &&
-                ((this.PaymentRegion == null && other.PaymentRegion == null) || (this.PaymentRegion?.Equals(other.PaymentRegion) == true)) &&
-                ((this.SerialNumber == null && other.SerialNumber == null) || (this.SerialNumber?.Equals(other.SerialNumber) == true)) &&
-                ((this.OsVersion == null && other.OsVersion == null) || (this.OsVersion?.Equals(other.OsVersion) == true)) &&
-                ((this.AppVersion == null && other.AppVersion == null) || (this.AppVersion?.Equals(other.AppVersion) == true)) &&
-                ((this.WifiNetworkName == null && other.WifiNetworkName == null) || (this.WifiNetworkName?.Equals(other.WifiNetworkName) == true)) &&
-                ((this.WifiNetworkStrength == null && other.WifiNetworkStrength == null) || (this.WifiNetworkStrength?.Equals(other.WifiNetworkStrength) == true)) &&
-                ((this.IpAddress == null && other.IpAddress == null) || (this.IpAddress?.Equals(other.IpAddress) == true));
+            return obj is DeviceMetadata other &&
+                (this.BatteryPercentage == null && other.BatteryPercentage == null ||
+                 this.BatteryPercentage?.Equals(other.BatteryPercentage) == true) &&
+                (this.ChargingState == null && other.ChargingState == null ||
+                 this.ChargingState?.Equals(other.ChargingState) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.MerchantId == null && other.MerchantId == null ||
+                 this.MerchantId?.Equals(other.MerchantId) == true) &&
+                (this.NetworkConnectionType == null && other.NetworkConnectionType == null ||
+                 this.NetworkConnectionType?.Equals(other.NetworkConnectionType) == true) &&
+                (this.PaymentRegion == null && other.PaymentRegion == null ||
+                 this.PaymentRegion?.Equals(other.PaymentRegion) == true) &&
+                (this.SerialNumber == null && other.SerialNumber == null ||
+                 this.SerialNumber?.Equals(other.SerialNumber) == true) &&
+                (this.OsVersion == null && other.OsVersion == null ||
+                 this.OsVersion?.Equals(other.OsVersion) == true) &&
+                (this.AppVersion == null && other.AppVersion == null ||
+                 this.AppVersion?.Equals(other.AppVersion) == true) &&
+                (this.WifiNetworkName == null && other.WifiNetworkName == null ||
+                 this.WifiNetworkName?.Equals(other.WifiNetworkName) == true) &&
+                (this.WifiNetworkStrength == null && other.WifiNetworkStrength == null ||
+                 this.WifiNetworkStrength?.Equals(other.WifiNetworkStrength) == true) &&
+                (this.IpAddress == null && other.IpAddress == null ||
+                 this.IpAddress?.Equals(other.IpAddress) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1914687649;
-            hashCode = HashCode.Combine(this.BatteryPercentage, this.ChargingState, this.LocationId, this.MerchantId, this.NetworkConnectionType, this.PaymentRegion, this.SerialNumber);
+            var hashCode = -1914687649;
+            hashCode = HashCode.Combine(hashCode, this.BatteryPercentage, this.ChargingState, this.LocationId, this.MerchantId, this.NetworkConnectionType, this.PaymentRegion, this.SerialNumber);
 
             hashCode = HashCode.Combine(hashCode, this.OsVersion, this.AppVersion, this.WifiNetworkName, this.WifiNetworkStrength, this.IpAddress);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BatteryPercentage = {(this.BatteryPercentage == null ? "null" : this.BatteryPercentage)}");
-            toStringOutput.Add($"this.ChargingState = {(this.ChargingState == null ? "null" : this.ChargingState)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
-            toStringOutput.Add($"this.NetworkConnectionType = {(this.NetworkConnectionType == null ? "null" : this.NetworkConnectionType)}");
-            toStringOutput.Add($"this.PaymentRegion = {(this.PaymentRegion == null ? "null" : this.PaymentRegion)}");
-            toStringOutput.Add($"this.SerialNumber = {(this.SerialNumber == null ? "null" : this.SerialNumber)}");
-            toStringOutput.Add($"this.OsVersion = {(this.OsVersion == null ? "null" : this.OsVersion)}");
-            toStringOutput.Add($"this.AppVersion = {(this.AppVersion == null ? "null" : this.AppVersion)}");
-            toStringOutput.Add($"this.WifiNetworkName = {(this.WifiNetworkName == null ? "null" : this.WifiNetworkName)}");
-            toStringOutput.Add($"this.WifiNetworkStrength = {(this.WifiNetworkStrength == null ? "null" : this.WifiNetworkStrength)}");
-            toStringOutput.Add($"this.IpAddress = {(this.IpAddress == null ? "null" : this.IpAddress)}");
+            toStringOutput.Add($"this.BatteryPercentage = {this.BatteryPercentage ?? "null"}");
+            toStringOutput.Add($"this.ChargingState = {this.ChargingState ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.MerchantId = {this.MerchantId ?? "null"}");
+            toStringOutput.Add($"this.NetworkConnectionType = {this.NetworkConnectionType ?? "null"}");
+            toStringOutput.Add($"this.PaymentRegion = {this.PaymentRegion ?? "null"}");
+            toStringOutput.Add($"this.SerialNumber = {this.SerialNumber ?? "null"}");
+            toStringOutput.Add($"this.OsVersion = {this.OsVersion ?? "null"}");
+            toStringOutput.Add($"this.AppVersion = {this.AppVersion ?? "null"}");
+            toStringOutput.Add($"this.WifiNetworkName = {this.WifiNetworkName ?? "null"}");
+            toStringOutput.Add($"this.WifiNetworkStrength = {this.WifiNetworkStrength ?? "null"}");
+            toStringOutput.Add($"this.IpAddress = {this.IpAddress ?? "null"}");
         }
 
         /// <summary>
@@ -617,7 +624,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBatteryPercentage()
             {
@@ -625,7 +632,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetChargingState()
             {
@@ -633,7 +640,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -641,7 +648,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMerchantId()
             {
@@ -649,7 +656,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNetworkConnectionType()
             {
@@ -657,7 +664,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentRegion()
             {
@@ -665,7 +672,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSerialNumber()
             {
@@ -673,7 +680,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOsVersion()
             {
@@ -681,7 +688,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAppVersion()
             {
@@ -689,7 +696,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetWifiNetworkName()
             {
@@ -697,7 +704,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetWifiNetworkStrength()
             {
@@ -705,7 +712,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIpAddress()
             {
@@ -719,7 +726,8 @@ namespace Square.Models
             /// <returns> DeviceMetadata. </returns>
             public DeviceMetadata Build()
             {
-                return new DeviceMetadata(shouldSerialize,
+                return new DeviceMetadata(
+                    shouldSerialize,
                     this.batteryPercentage,
                     this.chargingState,
                     this.locationId,

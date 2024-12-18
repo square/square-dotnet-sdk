@@ -40,11 +40,12 @@ namespace Square.Models
                 shouldSerialize["uid"] = true;
                 this.Uid = uid;
             }
-
             this.DiscountUid = discountUid;
             this.AppliedMoney = appliedMoney;
         }
-        internal OrderLineItemAppliedDiscount(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderLineItemAppliedDiscount(
+            Dictionary<string, bool> shouldSerialize,
             string discountUid,
             string uid = null,
             Models.Money appliedMoney = null)
@@ -85,9 +86,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderLineItemAppliedDiscount : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -103,36 +102,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderLineItemAppliedDiscount other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.DiscountUid == null && other.DiscountUid == null) || (this.DiscountUid?.Equals(other.DiscountUid) == true)) &&
-                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true));
+            return obj is OrderLineItemAppliedDiscount other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.DiscountUid == null && other.DiscountUid == null ||
+                 this.DiscountUid?.Equals(other.DiscountUid) == true) &&
+                (this.AppliedMoney == null && other.AppliedMoney == null ||
+                 this.AppliedMoney?.Equals(other.AppliedMoney) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -855225717;
-            hashCode = HashCode.Combine(this.Uid, this.DiscountUid, this.AppliedMoney);
+            var hashCode = -855225717;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.DiscountUid, this.AppliedMoney);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.DiscountUid = {(this.DiscountUid == null ? "null" : this.DiscountUid)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.DiscountUid = {this.DiscountUid ?? "null"}");
             toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
         }
 
@@ -208,7 +206,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -222,7 +220,8 @@ namespace Square.Models
             /// <returns> OrderLineItemAppliedDiscount. </returns>
             public OrderLineItemAppliedDiscount Build()
             {
-                return new OrderLineItemAppliedDiscount(shouldSerialize,
+                return new OrderLineItemAppliedDiscount(
+                    shouldSerialize,
                     this.discountUid,
                     this.uid,
                     this.appliedMoney);

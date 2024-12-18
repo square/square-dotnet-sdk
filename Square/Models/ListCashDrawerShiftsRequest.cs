@@ -43,9 +43,9 @@ namespace Square.Models
                 { "limit", false },
                 { "cursor", false }
             };
-
             this.LocationId = locationId;
             this.SortOrder = sortOrder;
+
             if (beginTime != null)
             {
                 shouldSerialize["begin_time"] = true;
@@ -69,9 +69,10 @@ namespace Square.Models
                 shouldSerialize["cursor"] = true;
                 this.Cursor = cursor;
             }
-
         }
-        internal ListCashDrawerShiftsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListCashDrawerShiftsRequest(
+            Dictionary<string, bool> shouldSerialize,
             string locationId,
             string sortOrder = null,
             string beginTime = null,
@@ -129,9 +130,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListCashDrawerShiftsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -174,43 +173,45 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListCashDrawerShiftsRequest other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
-                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((this.EndTime == null && other.EndTime == null) || (this.EndTime?.Equals(other.EndTime) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+            return obj is ListCashDrawerShiftsRequest other &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true) &&
+                (this.BeginTime == null && other.BeginTime == null ||
+                 this.BeginTime?.Equals(other.BeginTime) == true) &&
+                (this.EndTime == null && other.EndTime == null ||
+                 this.EndTime?.Equals(other.EndTime) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1449210230;
-            hashCode = HashCode.Combine(this.LocationId, this.SortOrder, this.BeginTime, this.EndTime, this.Limit, this.Cursor);
+            var hashCode = -1449210230;
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.SortOrder, this.BeginTime, this.EndTime, this.Limit, this.Cursor);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
-            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime)}");
-            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime)}");
+            toStringOutput.Add($"this.BeginTime = {this.BeginTime ?? "null"}");
+            toStringOutput.Add($"this.EndTime = {this.EndTime ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
         }
 
         /// <summary>
@@ -330,7 +331,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBeginTime()
             {
@@ -338,7 +339,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndTime()
             {
@@ -346,7 +347,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -354,7 +355,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -368,7 +369,8 @@ namespace Square.Models
             /// <returns> ListCashDrawerShiftsRequest. </returns>
             public ListCashDrawerShiftsRequest Build()
             {
-                return new ListCashDrawerShiftsRequest(shouldSerialize,
+                return new ListCashDrawerShiftsRequest(
+                    shouldSerialize,
                     this.locationId,
                     this.sortOrder,
                     this.beginTime,

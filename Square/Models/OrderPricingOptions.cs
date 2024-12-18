@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["auto_apply_taxes"] = true;
                 this.AutoApplyTaxes = autoApplyTaxes;
             }
-
         }
-        internal OrderPricingOptions(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderPricingOptions(
+            Dictionary<string, bool> shouldSerialize,
             bool? autoApplyDiscounts = null,
             bool? autoApplyTaxes = null)
         {
@@ -74,9 +75,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderPricingOptions : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -101,27 +100,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderPricingOptions other &&                ((this.AutoApplyDiscounts == null && other.AutoApplyDiscounts == null) || (this.AutoApplyDiscounts?.Equals(other.AutoApplyDiscounts) == true)) &&
-                ((this.AutoApplyTaxes == null && other.AutoApplyTaxes == null) || (this.AutoApplyTaxes?.Equals(other.AutoApplyTaxes) == true));
+            return obj is OrderPricingOptions other &&
+                (this.AutoApplyDiscounts == null && other.AutoApplyDiscounts == null ||
+                 this.AutoApplyDiscounts?.Equals(other.AutoApplyDiscounts) == true) &&
+                (this.AutoApplyTaxes == null && other.AutoApplyTaxes == null ||
+                 this.AutoApplyTaxes?.Equals(other.AutoApplyTaxes) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1105954045;
-            hashCode = HashCode.Combine(this.AutoApplyDiscounts, this.AutoApplyTaxes);
+            var hashCode = -1105954045;
+            hashCode = HashCode.Combine(hashCode, this.AutoApplyDiscounts, this.AutoApplyTaxes);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -183,7 +180,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAutoApplyDiscounts()
             {
@@ -191,7 +188,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAutoApplyTaxes()
             {
@@ -205,7 +202,8 @@ namespace Square.Models
             /// <returns> OrderPricingOptions. </returns>
             public OrderPricingOptions Build()
             {
-                return new OrderPricingOptions(shouldSerialize,
+                return new OrderPricingOptions(
+                    shouldSerialize,
                     this.autoApplyDiscounts,
                     this.autoApplyTaxes);
             }

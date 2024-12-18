@@ -50,36 +50,32 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomerAddressFilter : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomerAddressFilter other &&                ((this.PostalCode == null && other.PostalCode == null) || (this.PostalCode?.Equals(other.PostalCode) == true)) &&
-                ((this.Country == null && other.Country == null) || (this.Country?.Equals(other.Country) == true));
+            return obj is CustomerAddressFilter other &&
+                (this.PostalCode == null && other.PostalCode == null ||
+                 this.PostalCode?.Equals(other.PostalCode) == true) &&
+                (this.Country == null && other.Country == null ||
+                 this.Country?.Equals(other.Country) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1115755655;
-            hashCode = HashCode.Combine(this.PostalCode, this.Country);
+            var hashCode = -1115755655;
+            hashCode = HashCode.Combine(hashCode, this.PostalCode, this.Country);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

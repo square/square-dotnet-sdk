@@ -38,19 +38,20 @@ namespace Square.Models
             {
                 { "disagree_button_text", false }
             };
-
             this.Title = title;
             this.Body = body;
             this.AgreeButtonText = agreeButtonText;
+
             if (disagreeButtonText != null)
             {
                 shouldSerialize["disagree_button_text"] = true;
                 this.DisagreeButtonText = disagreeButtonText;
             }
-
             this.Decision = decision;
         }
-        internal ConfirmationOptions(Dictionary<string, bool> shouldSerialize,
+
+        internal ConfirmationOptions(
+            Dictionary<string, bool> shouldSerialize,
             string title,
             string body,
             string agreeButtonText,
@@ -99,9 +100,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ConfirmationOptions : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -117,40 +116,41 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ConfirmationOptions other &&                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
-                ((this.Body == null && other.Body == null) || (this.Body?.Equals(other.Body) == true)) &&
-                ((this.AgreeButtonText == null && other.AgreeButtonText == null) || (this.AgreeButtonText?.Equals(other.AgreeButtonText) == true)) &&
-                ((this.DisagreeButtonText == null && other.DisagreeButtonText == null) || (this.DisagreeButtonText?.Equals(other.DisagreeButtonText) == true)) &&
-                ((this.Decision == null && other.Decision == null) || (this.Decision?.Equals(other.Decision) == true));
+            return obj is ConfirmationOptions other &&
+                (this.Title == null && other.Title == null ||
+                 this.Title?.Equals(other.Title) == true) &&
+                (this.Body == null && other.Body == null ||
+                 this.Body?.Equals(other.Body) == true) &&
+                (this.AgreeButtonText == null && other.AgreeButtonText == null ||
+                 this.AgreeButtonText?.Equals(other.AgreeButtonText) == true) &&
+                (this.DisagreeButtonText == null && other.DisagreeButtonText == null ||
+                 this.DisagreeButtonText?.Equals(other.DisagreeButtonText) == true) &&
+                (this.Decision == null && other.Decision == null ||
+                 this.Decision?.Equals(other.Decision) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -300469146;
-            hashCode = HashCode.Combine(this.Title, this.Body, this.AgreeButtonText, this.DisagreeButtonText, this.Decision);
+            var hashCode = -300469146;
+            hashCode = HashCode.Combine(hashCode, this.Title, this.Body, this.AgreeButtonText, this.DisagreeButtonText, this.Decision);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
-            toStringOutput.Add($"this.Body = {(this.Body == null ? "null" : this.Body)}");
-            toStringOutput.Add($"this.AgreeButtonText = {(this.AgreeButtonText == null ? "null" : this.AgreeButtonText)}");
-            toStringOutput.Add($"this.DisagreeButtonText = {(this.DisagreeButtonText == null ? "null" : this.DisagreeButtonText)}");
+            toStringOutput.Add($"this.Title = {this.Title ?? "null"}");
+            toStringOutput.Add($"this.Body = {this.Body ?? "null"}");
+            toStringOutput.Add($"this.AgreeButtonText = {this.AgreeButtonText ?? "null"}");
+            toStringOutput.Add($"this.DisagreeButtonText = {this.DisagreeButtonText ?? "null"}");
             toStringOutput.Add($"this.Decision = {(this.Decision == null ? "null" : this.Decision.ToString())}");
         }
 
@@ -258,7 +258,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDisagreeButtonText()
             {
@@ -272,7 +272,8 @@ namespace Square.Models
             /// <returns> ConfirmationOptions. </returns>
             public ConfirmationOptions Build()
             {
-                return new ConfirmationOptions(shouldSerialize,
+                return new ConfirmationOptions(
+                    shouldSerialize,
                     this.title,
                     this.body,
                     this.agreeButtonText,

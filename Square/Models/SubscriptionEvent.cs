@@ -42,21 +42,22 @@ namespace Square.Models
             {
                 { "phases", false }
             };
-
             this.Id = id;
             this.SubscriptionEventType = subscriptionEventType;
             this.EffectiveDate = effectiveDate;
             this.MonthlyBillingAnchorDate = monthlyBillingAnchorDate;
             this.Info = info;
+
             if (phases != null)
             {
                 shouldSerialize["phases"] = true;
                 this.Phases = phases;
             }
-
             this.PlanVariationId = planVariationId;
         }
-        internal SubscriptionEvent(Dictionary<string, bool> shouldSerialize,
+
+        internal SubscriptionEvent(
+            Dictionary<string, bool> shouldSerialize,
             string id,
             string subscriptionEventType,
             string effectiveDate,
@@ -121,9 +122,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SubscriptionEvent : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -139,45 +138,48 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SubscriptionEvent other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.SubscriptionEventType == null && other.SubscriptionEventType == null) || (this.SubscriptionEventType?.Equals(other.SubscriptionEventType) == true)) &&
-                ((this.EffectiveDate == null && other.EffectiveDate == null) || (this.EffectiveDate?.Equals(other.EffectiveDate) == true)) &&
-                ((this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null) || (this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true)) &&
-                ((this.Info == null && other.Info == null) || (this.Info?.Equals(other.Info) == true)) &&
-                ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true)) &&
-                ((this.PlanVariationId == null && other.PlanVariationId == null) || (this.PlanVariationId?.Equals(other.PlanVariationId) == true));
+            return obj is SubscriptionEvent other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.SubscriptionEventType == null && other.SubscriptionEventType == null ||
+                 this.SubscriptionEventType?.Equals(other.SubscriptionEventType) == true) &&
+                (this.EffectiveDate == null && other.EffectiveDate == null ||
+                 this.EffectiveDate?.Equals(other.EffectiveDate) == true) &&
+                (this.MonthlyBillingAnchorDate == null && other.MonthlyBillingAnchorDate == null ||
+                 this.MonthlyBillingAnchorDate?.Equals(other.MonthlyBillingAnchorDate) == true) &&
+                (this.Info == null && other.Info == null ||
+                 this.Info?.Equals(other.Info) == true) &&
+                (this.Phases == null && other.Phases == null ||
+                 this.Phases?.Equals(other.Phases) == true) &&
+                (this.PlanVariationId == null && other.PlanVariationId == null ||
+                 this.PlanVariationId?.Equals(other.PlanVariationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1755317815;
-            hashCode = HashCode.Combine(this.Id, this.SubscriptionEventType, this.EffectiveDate, this.MonthlyBillingAnchorDate, this.Info, this.Phases, this.PlanVariationId);
+            var hashCode = -1755317815;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.SubscriptionEventType, this.EffectiveDate, this.MonthlyBillingAnchorDate, this.Info, this.Phases, this.PlanVariationId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.SubscriptionEventType = {(this.SubscriptionEventType == null ? "null" : this.SubscriptionEventType.ToString())}");
-            toStringOutput.Add($"this.EffectiveDate = {(this.EffectiveDate == null ? "null" : this.EffectiveDate)}");
+            toStringOutput.Add($"this.EffectiveDate = {this.EffectiveDate ?? "null"}");
             toStringOutput.Add($"this.MonthlyBillingAnchorDate = {(this.MonthlyBillingAnchorDate == null ? "null" : this.MonthlyBillingAnchorDate.ToString())}");
             toStringOutput.Add($"this.Info = {(this.Info == null ? "null" : this.Info.ToString())}");
             toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
-            toStringOutput.Add($"this.PlanVariationId = {(this.PlanVariationId == null ? "null" : this.PlanVariationId)}");
+            toStringOutput.Add($"this.PlanVariationId = {this.PlanVariationId ?? "null"}");
         }
 
         /// <summary>
@@ -313,7 +315,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhases()
             {
@@ -327,7 +329,8 @@ namespace Square.Models
             /// <returns> SubscriptionEvent. </returns>
             public SubscriptionEvent Build()
             {
-                return new SubscriptionEvent(shouldSerialize,
+                return new SubscriptionEvent(
+                    shouldSerialize,
                     this.id,
                     this.subscriptionEventType,
                     this.effectiveDate,

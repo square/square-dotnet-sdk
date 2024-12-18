@@ -73,9 +73,9 @@ namespace Square.Models
                 { "closed_at", false },
                 { "description", false }
             };
-
             this.Id = id;
             this.State = state;
+
             if (openedAt != null)
             {
                 shouldSerialize["opened_at"] = true;
@@ -99,7 +99,6 @@ namespace Square.Models
                 shouldSerialize["description"] = true;
                 this.Description = description;
             }
-
             this.OpenedCashMoney = openedCashMoney;
             this.CashPaymentMoney = cashPaymentMoney;
             this.CashRefundsMoney = cashRefundsMoney;
@@ -116,7 +115,9 @@ namespace Square.Models
             this.EndingTeamMemberId = endingTeamMemberId;
             this.ClosingTeamMemberId = closingTeamMemberId;
         }
-        internal CashDrawerShift(Dictionary<string, bool> shouldSerialize,
+
+        internal CashDrawerShift(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string state = null,
             string openedAt = null,
@@ -330,9 +331,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CashDrawerShift : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -375,43 +374,59 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CashDrawerShift other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
-                ((this.OpenedAt == null && other.OpenedAt == null) || (this.OpenedAt?.Equals(other.OpenedAt) == true)) &&
-                ((this.EndedAt == null && other.EndedAt == null) || (this.EndedAt?.Equals(other.EndedAt) == true)) &&
-                ((this.ClosedAt == null && other.ClosedAt == null) || (this.ClosedAt?.Equals(other.ClosedAt) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.OpenedCashMoney == null && other.OpenedCashMoney == null) || (this.OpenedCashMoney?.Equals(other.OpenedCashMoney) == true)) &&
-                ((this.CashPaymentMoney == null && other.CashPaymentMoney == null) || (this.CashPaymentMoney?.Equals(other.CashPaymentMoney) == true)) &&
-                ((this.CashRefundsMoney == null && other.CashRefundsMoney == null) || (this.CashRefundsMoney?.Equals(other.CashRefundsMoney) == true)) &&
-                ((this.CashPaidInMoney == null && other.CashPaidInMoney == null) || (this.CashPaidInMoney?.Equals(other.CashPaidInMoney) == true)) &&
-                ((this.CashPaidOutMoney == null && other.CashPaidOutMoney == null) || (this.CashPaidOutMoney?.Equals(other.CashPaidOutMoney) == true)) &&
-                ((this.ExpectedCashMoney == null && other.ExpectedCashMoney == null) || (this.ExpectedCashMoney?.Equals(other.ExpectedCashMoney) == true)) &&
-                ((this.ClosedCashMoney == null && other.ClosedCashMoney == null) || (this.ClosedCashMoney?.Equals(other.ClosedCashMoney) == true)) &&
-                ((this.Device == null && other.Device == null) || (this.Device?.Equals(other.Device) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true)) &&
-                ((this.OpeningTeamMemberId == null && other.OpeningTeamMemberId == null) || (this.OpeningTeamMemberId?.Equals(other.OpeningTeamMemberId) == true)) &&
-                ((this.EndingTeamMemberId == null && other.EndingTeamMemberId == null) || (this.EndingTeamMemberId?.Equals(other.EndingTeamMemberId) == true)) &&
-                ((this.ClosingTeamMemberId == null && other.ClosingTeamMemberId == null) || (this.ClosingTeamMemberId?.Equals(other.ClosingTeamMemberId) == true));
+            return obj is CashDrawerShift other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.State == null && other.State == null ||
+                 this.State?.Equals(other.State) == true) &&
+                (this.OpenedAt == null && other.OpenedAt == null ||
+                 this.OpenedAt?.Equals(other.OpenedAt) == true) &&
+                (this.EndedAt == null && other.EndedAt == null ||
+                 this.EndedAt?.Equals(other.EndedAt) == true) &&
+                (this.ClosedAt == null && other.ClosedAt == null ||
+                 this.ClosedAt?.Equals(other.ClosedAt) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.OpenedCashMoney == null && other.OpenedCashMoney == null ||
+                 this.OpenedCashMoney?.Equals(other.OpenedCashMoney) == true) &&
+                (this.CashPaymentMoney == null && other.CashPaymentMoney == null ||
+                 this.CashPaymentMoney?.Equals(other.CashPaymentMoney) == true) &&
+                (this.CashRefundsMoney == null && other.CashRefundsMoney == null ||
+                 this.CashRefundsMoney?.Equals(other.CashRefundsMoney) == true) &&
+                (this.CashPaidInMoney == null && other.CashPaidInMoney == null ||
+                 this.CashPaidInMoney?.Equals(other.CashPaidInMoney) == true) &&
+                (this.CashPaidOutMoney == null && other.CashPaidOutMoney == null ||
+                 this.CashPaidOutMoney?.Equals(other.CashPaidOutMoney) == true) &&
+                (this.ExpectedCashMoney == null && other.ExpectedCashMoney == null ||
+                 this.ExpectedCashMoney?.Equals(other.ExpectedCashMoney) == true) &&
+                (this.ClosedCashMoney == null && other.ClosedCashMoney == null ||
+                 this.ClosedCashMoney?.Equals(other.ClosedCashMoney) == true) &&
+                (this.Device == null && other.Device == null ||
+                 this.Device?.Equals(other.Device) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.TeamMemberIds == null && other.TeamMemberIds == null ||
+                 this.TeamMemberIds?.Equals(other.TeamMemberIds) == true) &&
+                (this.OpeningTeamMemberId == null && other.OpeningTeamMemberId == null ||
+                 this.OpeningTeamMemberId?.Equals(other.OpeningTeamMemberId) == true) &&
+                (this.EndingTeamMemberId == null && other.EndingTeamMemberId == null ||
+                 this.EndingTeamMemberId?.Equals(other.EndingTeamMemberId) == true) &&
+                (this.ClosingTeamMemberId == null && other.ClosingTeamMemberId == null ||
+                 this.ClosingTeamMemberId?.Equals(other.ClosingTeamMemberId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1388764759;
-            hashCode = HashCode.Combine(this.Id, this.State, this.OpenedAt, this.EndedAt, this.ClosedAt, this.Description, this.OpenedCashMoney);
+            var hashCode = 1388764759;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.State, this.OpenedAt, this.EndedAt, this.ClosedAt, this.Description, this.OpenedCashMoney);
 
             hashCode = HashCode.Combine(hashCode, this.CashPaymentMoney, this.CashRefundsMoney, this.CashPaidInMoney, this.CashPaidOutMoney, this.ExpectedCashMoney, this.ClosedCashMoney, this.Device);
 
@@ -419,18 +434,19 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
-            toStringOutput.Add($"this.OpenedAt = {(this.OpenedAt == null ? "null" : this.OpenedAt)}");
-            toStringOutput.Add($"this.EndedAt = {(this.EndedAt == null ? "null" : this.EndedAt)}");
-            toStringOutput.Add($"this.ClosedAt = {(this.ClosedAt == null ? "null" : this.ClosedAt)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.OpenedAt = {this.OpenedAt ?? "null"}");
+            toStringOutput.Add($"this.EndedAt = {this.EndedAt ?? "null"}");
+            toStringOutput.Add($"this.ClosedAt = {this.ClosedAt ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
             toStringOutput.Add($"this.OpenedCashMoney = {(this.OpenedCashMoney == null ? "null" : this.OpenedCashMoney.ToString())}");
             toStringOutput.Add($"this.CashPaymentMoney = {(this.CashPaymentMoney == null ? "null" : this.CashPaymentMoney.ToString())}");
             toStringOutput.Add($"this.CashRefundsMoney = {(this.CashRefundsMoney == null ? "null" : this.CashRefundsMoney.ToString())}");
@@ -439,13 +455,13 @@ namespace Square.Models
             toStringOutput.Add($"this.ExpectedCashMoney = {(this.ExpectedCashMoney == null ? "null" : this.ExpectedCashMoney.ToString())}");
             toStringOutput.Add($"this.ClosedCashMoney = {(this.ClosedCashMoney == null ? "null" : this.ClosedCashMoney.ToString())}");
             toStringOutput.Add($"this.Device = {(this.Device == null ? "null" : this.Device.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.TeamMemberIds = {(this.TeamMemberIds == null ? "null" : $"[{string.Join(", ", this.TeamMemberIds)} ]")}");
-            toStringOutput.Add($"this.OpeningTeamMemberId = {(this.OpeningTeamMemberId == null ? "null" : this.OpeningTeamMemberId)}");
-            toStringOutput.Add($"this.EndingTeamMemberId = {(this.EndingTeamMemberId == null ? "null" : this.EndingTeamMemberId)}");
-            toStringOutput.Add($"this.ClosingTeamMemberId = {(this.ClosingTeamMemberId == null ? "null" : this.ClosingTeamMemberId)}");
+            toStringOutput.Add($"this.OpeningTeamMemberId = {this.OpeningTeamMemberId ?? "null"}");
+            toStringOutput.Add($"this.EndingTeamMemberId = {this.EndingTeamMemberId ?? "null"}");
+            toStringOutput.Add($"this.ClosingTeamMemberId = {this.ClosingTeamMemberId ?? "null"}");
         }
 
         /// <summary>
@@ -750,7 +766,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOpenedAt()
             {
@@ -758,7 +774,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndedAt()
             {
@@ -766,7 +782,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetClosedAt()
             {
@@ -774,7 +790,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -788,7 +804,8 @@ namespace Square.Models
             /// <returns> CashDrawerShift. </returns>
             public CashDrawerShift Build()
             {
-                return new CashDrawerShift(shouldSerialize,
+                return new CashDrawerShift(
+                    shouldSerialize,
                     this.id,
                     this.state,
                     this.openedAt,

@@ -109,10 +109,10 @@ namespace Square.Models
                 shouldSerialize["upc"] = true;
                 this.Upc = upc;
             }
-
             this.Ordinal = ordinal;
             this.PricingType = pricingType;
             this.PriceMoney = priceMoney;
+
             if (locationOverrides != null)
             {
                 shouldSerialize["location_overrides"] = true;
@@ -124,8 +124,8 @@ namespace Square.Models
                 shouldSerialize["track_inventory"] = true;
                 this.TrackInventory = trackInventory;
             }
-
             this.InventoryAlertType = inventoryAlertType;
+
             if (inventoryAlertThreshold != null)
             {
                 shouldSerialize["inventory_alert_threshold"] = true;
@@ -185,10 +185,11 @@ namespace Square.Models
                 shouldSerialize["team_member_ids"] = true;
                 this.TeamMemberIds = teamMemberIds;
             }
-
             this.StockableConversion = stockableConversion;
         }
-        internal CatalogItemVariation(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogItemVariation(
+            Dictionary<string, bool> shouldSerialize,
             string itemId = null,
             string name = null,
             string sku = null,
@@ -396,9 +397,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogItemVariation : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -549,43 +548,59 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogItemVariation other &&                ((this.ItemId == null && other.ItemId == null) || (this.ItemId?.Equals(other.ItemId) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Sku == null && other.Sku == null) || (this.Sku?.Equals(other.Sku) == true)) &&
-                ((this.Upc == null && other.Upc == null) || (this.Upc?.Equals(other.Upc) == true)) &&
-                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
-                ((this.PricingType == null && other.PricingType == null) || (this.PricingType?.Equals(other.PricingType) == true)) &&
-                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true)) &&
-                ((this.LocationOverrides == null && other.LocationOverrides == null) || (this.LocationOverrides?.Equals(other.LocationOverrides) == true)) &&
-                ((this.TrackInventory == null && other.TrackInventory == null) || (this.TrackInventory?.Equals(other.TrackInventory) == true)) &&
-                ((this.InventoryAlertType == null && other.InventoryAlertType == null) || (this.InventoryAlertType?.Equals(other.InventoryAlertType) == true)) &&
-                ((this.InventoryAlertThreshold == null && other.InventoryAlertThreshold == null) || (this.InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true)) &&
-                ((this.UserData == null && other.UserData == null) || (this.UserData?.Equals(other.UserData) == true)) &&
-                ((this.ServiceDuration == null && other.ServiceDuration == null) || (this.ServiceDuration?.Equals(other.ServiceDuration) == true)) &&
-                ((this.AvailableForBooking == null && other.AvailableForBooking == null) || (this.AvailableForBooking?.Equals(other.AvailableForBooking) == true)) &&
-                ((this.ItemOptionValues == null && other.ItemOptionValues == null) || (this.ItemOptionValues?.Equals(other.ItemOptionValues) == true)) &&
-                ((this.MeasurementUnitId == null && other.MeasurementUnitId == null) || (this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true)) &&
-                ((this.Sellable == null && other.Sellable == null) || (this.Sellable?.Equals(other.Sellable) == true)) &&
-                ((this.Stockable == null && other.Stockable == null) || (this.Stockable?.Equals(other.Stockable) == true)) &&
-                ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
-                ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true)) &&
-                ((this.StockableConversion == null && other.StockableConversion == null) || (this.StockableConversion?.Equals(other.StockableConversion) == true));
+            return obj is CatalogItemVariation other &&
+                (this.ItemId == null && other.ItemId == null ||
+                 this.ItemId?.Equals(other.ItemId) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Sku == null && other.Sku == null ||
+                 this.Sku?.Equals(other.Sku) == true) &&
+                (this.Upc == null && other.Upc == null ||
+                 this.Upc?.Equals(other.Upc) == true) &&
+                (this.Ordinal == null && other.Ordinal == null ||
+                 this.Ordinal?.Equals(other.Ordinal) == true) &&
+                (this.PricingType == null && other.PricingType == null ||
+                 this.PricingType?.Equals(other.PricingType) == true) &&
+                (this.PriceMoney == null && other.PriceMoney == null ||
+                 this.PriceMoney?.Equals(other.PriceMoney) == true) &&
+                (this.LocationOverrides == null && other.LocationOverrides == null ||
+                 this.LocationOverrides?.Equals(other.LocationOverrides) == true) &&
+                (this.TrackInventory == null && other.TrackInventory == null ||
+                 this.TrackInventory?.Equals(other.TrackInventory) == true) &&
+                (this.InventoryAlertType == null && other.InventoryAlertType == null ||
+                 this.InventoryAlertType?.Equals(other.InventoryAlertType) == true) &&
+                (this.InventoryAlertThreshold == null && other.InventoryAlertThreshold == null ||
+                 this.InventoryAlertThreshold?.Equals(other.InventoryAlertThreshold) == true) &&
+                (this.UserData == null && other.UserData == null ||
+                 this.UserData?.Equals(other.UserData) == true) &&
+                (this.ServiceDuration == null && other.ServiceDuration == null ||
+                 this.ServiceDuration?.Equals(other.ServiceDuration) == true) &&
+                (this.AvailableForBooking == null && other.AvailableForBooking == null ||
+                 this.AvailableForBooking?.Equals(other.AvailableForBooking) == true) &&
+                (this.ItemOptionValues == null && other.ItemOptionValues == null ||
+                 this.ItemOptionValues?.Equals(other.ItemOptionValues) == true) &&
+                (this.MeasurementUnitId == null && other.MeasurementUnitId == null ||
+                 this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true) &&
+                (this.Sellable == null && other.Sellable == null ||
+                 this.Sellable?.Equals(other.Sellable) == true) &&
+                (this.Stockable == null && other.Stockable == null ||
+                 this.Stockable?.Equals(other.Stockable) == true) &&
+                (this.ImageIds == null && other.ImageIds == null ||
+                 this.ImageIds?.Equals(other.ImageIds) == true) &&
+                (this.TeamMemberIds == null && other.TeamMemberIds == null ||
+                 this.TeamMemberIds?.Equals(other.TeamMemberIds) == true) &&
+                (this.StockableConversion == null && other.StockableConversion == null ||
+                 this.StockableConversion?.Equals(other.StockableConversion) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1883269802;
-            hashCode = HashCode.Combine(this.ItemId, this.Name, this.Sku, this.Upc, this.Ordinal, this.PricingType, this.PriceMoney);
+            var hashCode = -1883269802;
+            hashCode = HashCode.Combine(hashCode, this.ItemId, this.Name, this.Sku, this.Upc, this.Ordinal, this.PricingType, this.PriceMoney);
 
             hashCode = HashCode.Combine(hashCode, this.LocationOverrides, this.TrackInventory, this.InventoryAlertType, this.InventoryAlertThreshold, this.UserData, this.ServiceDuration, this.AvailableForBooking);
 
@@ -593,16 +608,17 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ItemId = {(this.ItemId == null ? "null" : this.ItemId)}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.Sku = {(this.Sku == null ? "null" : this.Sku)}");
-            toStringOutput.Add($"this.Upc = {(this.Upc == null ? "null" : this.Upc)}");
+            toStringOutput.Add($"this.ItemId = {this.ItemId ?? "null"}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.Sku = {this.Sku ?? "null"}");
+            toStringOutput.Add($"this.Upc = {this.Upc ?? "null"}");
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
             toStringOutput.Add($"this.PricingType = {(this.PricingType == null ? "null" : this.PricingType.ToString())}");
             toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
@@ -610,11 +626,11 @@ namespace Square.Models
             toStringOutput.Add($"this.TrackInventory = {(this.TrackInventory == null ? "null" : this.TrackInventory.ToString())}");
             toStringOutput.Add($"this.InventoryAlertType = {(this.InventoryAlertType == null ? "null" : this.InventoryAlertType.ToString())}");
             toStringOutput.Add($"this.InventoryAlertThreshold = {(this.InventoryAlertThreshold == null ? "null" : this.InventoryAlertThreshold.ToString())}");
-            toStringOutput.Add($"this.UserData = {(this.UserData == null ? "null" : this.UserData)}");
+            toStringOutput.Add($"this.UserData = {this.UserData ?? "null"}");
             toStringOutput.Add($"this.ServiceDuration = {(this.ServiceDuration == null ? "null" : this.ServiceDuration.ToString())}");
             toStringOutput.Add($"this.AvailableForBooking = {(this.AvailableForBooking == null ? "null" : this.AvailableForBooking.ToString())}");
             toStringOutput.Add($"this.ItemOptionValues = {(this.ItemOptionValues == null ? "null" : $"[{string.Join(", ", this.ItemOptionValues)} ]")}");
-            toStringOutput.Add($"this.MeasurementUnitId = {(this.MeasurementUnitId == null ? "null" : this.MeasurementUnitId)}");
+            toStringOutput.Add($"this.MeasurementUnitId = {this.MeasurementUnitId ?? "null"}");
             toStringOutput.Add($"this.Sellable = {(this.Sellable == null ? "null" : this.Sellable.ToString())}");
             toStringOutput.Add($"this.Stockable = {(this.Stockable == null ? "null" : this.Stockable.ToString())}");
             toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
@@ -948,7 +964,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetItemId()
             {
@@ -956,7 +972,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -964,7 +980,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSku()
             {
@@ -972,7 +988,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUpc()
             {
@@ -980,7 +996,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationOverrides()
             {
@@ -988,7 +1004,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTrackInventory()
             {
@@ -996,7 +1012,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetInventoryAlertThreshold()
             {
@@ -1004,7 +1020,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUserData()
             {
@@ -1012,7 +1028,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetServiceDuration()
             {
@@ -1020,7 +1036,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAvailableForBooking()
             {
@@ -1028,7 +1044,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetItemOptionValues()
             {
@@ -1036,7 +1052,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMeasurementUnitId()
             {
@@ -1044,7 +1060,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSellable()
             {
@@ -1052,7 +1068,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStockable()
             {
@@ -1060,7 +1076,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetImageIds()
             {
@@ -1068,7 +1084,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTeamMemberIds()
             {
@@ -1082,7 +1098,8 @@ namespace Square.Models
             /// <returns> CatalogItemVariation. </returns>
             public CatalogItemVariation Build()
             {
-                return new CatalogItemVariation(shouldSerialize,
+                return new CatalogItemVariation(
+                    shouldSerialize,
                     this.itemId,
                     this.name,
                     this.sku,

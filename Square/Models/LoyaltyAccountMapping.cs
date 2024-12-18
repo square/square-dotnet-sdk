@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "phone_number", false }
             };
-
             this.Id = id;
             this.CreatedAt = createdAt;
+
             if (phoneNumber != null)
             {
                 shouldSerialize["phone_number"] = true;
                 this.PhoneNumber = phoneNumber;
             }
-
         }
-        internal LoyaltyAccountMapping(Dictionary<string, bool> shouldSerialize,
+
+        internal LoyaltyAccountMapping(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string createdAt = null,
             string phoneNumber = null)
@@ -77,9 +78,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyAccountMapping : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -95,37 +94,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyAccountMapping other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true));
+            return obj is LoyaltyAccountMapping other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.PhoneNumber == null && other.PhoneNumber == null ||
+                 this.PhoneNumber?.Equals(other.PhoneNumber) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -516821165;
-            hashCode = HashCode.Combine(this.Id, this.CreatedAt, this.PhoneNumber);
+            var hashCode = -516821165;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.CreatedAt, this.PhoneNumber);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.PhoneNumber = {this.PhoneNumber ?? "null"}");
         }
 
         /// <summary>
@@ -190,7 +188,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhoneNumber()
             {
@@ -204,7 +202,8 @@ namespace Square.Models
             /// <returns> LoyaltyAccountMapping. </returns>
             public LoyaltyAccountMapping Build()
             {
-                return new LoyaltyAccountMapping(shouldSerialize,
+                return new LoyaltyAccountMapping(
+                    shouldSerialize,
                     this.id,
                     this.createdAt,
                     this.phoneNumber);

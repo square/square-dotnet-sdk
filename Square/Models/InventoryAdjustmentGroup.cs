@@ -66,46 +66,44 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InventoryAdjustmentGroup : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InventoryAdjustmentGroup other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.RootAdjustmentId == null && other.RootAdjustmentId == null) || (this.RootAdjustmentId?.Equals(other.RootAdjustmentId) == true)) &&
-                ((this.FromState == null && other.FromState == null) || (this.FromState?.Equals(other.FromState) == true)) &&
-                ((this.ToState == null && other.ToState == null) || (this.ToState?.Equals(other.ToState) == true));
+            return obj is InventoryAdjustmentGroup other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.RootAdjustmentId == null && other.RootAdjustmentId == null ||
+                 this.RootAdjustmentId?.Equals(other.RootAdjustmentId) == true) &&
+                (this.FromState == null && other.FromState == null ||
+                 this.FromState?.Equals(other.FromState) == true) &&
+                (this.ToState == null && other.ToState == null ||
+                 this.ToState?.Equals(other.ToState) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1783874998;
-            hashCode = HashCode.Combine(this.Id, this.RootAdjustmentId, this.FromState, this.ToState);
+            var hashCode = -1783874998;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.RootAdjustmentId, this.FromState, this.ToState);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.RootAdjustmentId = {(this.RootAdjustmentId == null ? "null" : this.RootAdjustmentId)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.RootAdjustmentId = {this.RootAdjustmentId ?? "null"}");
             toStringOutput.Add($"this.FromState = {(this.FromState == null ? "null" : this.FromState.ToString())}");
             toStringOutput.Add($"this.ToState = {(this.ToState == null ? "null" : this.ToState.ToString())}");
         }

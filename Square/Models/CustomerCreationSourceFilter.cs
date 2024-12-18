@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["values"] = true;
                 this.Values = values;
             }
-
             this.Rule = rule;
         }
-        internal CustomerCreationSourceFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal CustomerCreationSourceFilter(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> values = null,
             string rule = null)
         {
@@ -68,9 +69,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CustomerCreationSourceFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -86,27 +85,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CustomerCreationSourceFilter other &&                ((this.Values == null && other.Values == null) || (this.Values?.Equals(other.Values) == true)) &&
-                ((this.Rule == null && other.Rule == null) || (this.Rule?.Equals(other.Rule) == true));
+            return obj is CustomerCreationSourceFilter other &&
+                (this.Values == null && other.Values == null ||
+                 this.Values?.Equals(other.Values) == true) &&
+                (this.Rule == null && other.Rule == null ||
+                 this.Rule?.Equals(other.Rule) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2051047657;
-            hashCode = HashCode.Combine(this.Values, this.Rule);
+            var hashCode = 2051047657;
+            hashCode = HashCode.Combine(hashCode, this.Values, this.Rule);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -166,7 +163,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetValues()
             {
@@ -180,7 +177,8 @@ namespace Square.Models
             /// <returns> CustomerCreationSourceFilter. </returns>
             public CustomerCreationSourceFilter Build()
             {
-                return new CustomerCreationSourceFilter(shouldSerialize,
+                return new CustomerCreationSourceFilter(
+                    shouldSerialize,
                     this.values,
                     this.rule);
             }

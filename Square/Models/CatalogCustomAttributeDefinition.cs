@@ -53,15 +53,14 @@ namespace Square.Models
                 { "description", false },
                 { "key", false }
             };
-
             this.Type = type;
             this.Name = name;
+
             if (description != null)
             {
                 shouldSerialize["description"] = true;
                 this.Description = description;
             }
-
             this.SourceApplication = sourceApplication;
             this.AllowedObjectTypes = allowedObjectTypes;
             this.SellerVisibility = sellerVisibility;
@@ -70,14 +69,16 @@ namespace Square.Models
             this.NumberConfig = numberConfig;
             this.SelectionConfig = selectionConfig;
             this.CustomAttributeUsageCount = customAttributeUsageCount;
+
             if (key != null)
             {
                 shouldSerialize["key"] = true;
                 this.Key = key;
             }
-
         }
-        internal CatalogCustomAttributeDefinition(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogCustomAttributeDefinition(
+            Dictionary<string, bool> shouldSerialize,
             string type,
             string name,
             IList<string> allowedObjectTypes,
@@ -196,9 +197,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogCustomAttributeDefinition : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -223,39 +222,47 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogCustomAttributeDefinition other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.SourceApplication == null && other.SourceApplication == null) || (this.SourceApplication?.Equals(other.SourceApplication) == true)) &&
-                ((this.AllowedObjectTypes == null && other.AllowedObjectTypes == null) || (this.AllowedObjectTypes?.Equals(other.AllowedObjectTypes) == true)) &&
-                ((this.SellerVisibility == null && other.SellerVisibility == null) || (this.SellerVisibility?.Equals(other.SellerVisibility) == true)) &&
-                ((this.AppVisibility == null && other.AppVisibility == null) || (this.AppVisibility?.Equals(other.AppVisibility) == true)) &&
-                ((this.StringConfig == null && other.StringConfig == null) || (this.StringConfig?.Equals(other.StringConfig) == true)) &&
-                ((this.NumberConfig == null && other.NumberConfig == null) || (this.NumberConfig?.Equals(other.NumberConfig) == true)) &&
-                ((this.SelectionConfig == null && other.SelectionConfig == null) || (this.SelectionConfig?.Equals(other.SelectionConfig) == true)) &&
-                ((this.CustomAttributeUsageCount == null && other.CustomAttributeUsageCount == null) || (this.CustomAttributeUsageCount?.Equals(other.CustomAttributeUsageCount) == true)) &&
-                ((this.Key == null && other.Key == null) || (this.Key?.Equals(other.Key) == true));
+            return obj is CatalogCustomAttributeDefinition other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.SourceApplication == null && other.SourceApplication == null ||
+                 this.SourceApplication?.Equals(other.SourceApplication) == true) &&
+                (this.AllowedObjectTypes == null && other.AllowedObjectTypes == null ||
+                 this.AllowedObjectTypes?.Equals(other.AllowedObjectTypes) == true) &&
+                (this.SellerVisibility == null && other.SellerVisibility == null ||
+                 this.SellerVisibility?.Equals(other.SellerVisibility) == true) &&
+                (this.AppVisibility == null && other.AppVisibility == null ||
+                 this.AppVisibility?.Equals(other.AppVisibility) == true) &&
+                (this.StringConfig == null && other.StringConfig == null ||
+                 this.StringConfig?.Equals(other.StringConfig) == true) &&
+                (this.NumberConfig == null && other.NumberConfig == null ||
+                 this.NumberConfig?.Equals(other.NumberConfig) == true) &&
+                (this.SelectionConfig == null && other.SelectionConfig == null ||
+                 this.SelectionConfig?.Equals(other.SelectionConfig) == true) &&
+                (this.CustomAttributeUsageCount == null && other.CustomAttributeUsageCount == null ||
+                 this.CustomAttributeUsageCount?.Equals(other.CustomAttributeUsageCount) == true) &&
+                (this.Key == null && other.Key == null ||
+                 this.Key?.Equals(other.Key) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1892852076;
-            hashCode = HashCode.Combine(this.Type, this.Name, this.Description, this.SourceApplication, this.AllowedObjectTypes, this.SellerVisibility, this.AppVisibility);
+            var hashCode = 1892852076;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.Name, this.Description, this.SourceApplication, this.AllowedObjectTypes, this.SellerVisibility, this.AppVisibility);
 
             hashCode = HashCode.Combine(hashCode, this.StringConfig, this.NumberConfig, this.SelectionConfig, this.CustomAttributeUsageCount, this.Key);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -263,8 +270,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
             toStringOutput.Add($"this.SourceApplication = {(this.SourceApplication == null ? "null" : this.SourceApplication.ToString())}");
             toStringOutput.Add($"this.AllowedObjectTypes = {(this.AllowedObjectTypes == null ? "null" : $"[{string.Join(", ", this.AllowedObjectTypes)} ]")}");
             toStringOutput.Add($"this.SellerVisibility = {(this.SellerVisibility == null ? "null" : this.SellerVisibility.ToString())}");
@@ -273,7 +280,7 @@ namespace Square.Models
             toStringOutput.Add($"this.NumberConfig = {(this.NumberConfig == null ? "null" : this.NumberConfig.ToString())}");
             toStringOutput.Add($"this.SelectionConfig = {(this.SelectionConfig == null ? "null" : this.SelectionConfig.ToString())}");
             toStringOutput.Add($"this.CustomAttributeUsageCount = {(this.CustomAttributeUsageCount == null ? "null" : this.CustomAttributeUsageCount.ToString())}");
-            toStringOutput.Add($"this.Key = {(this.Key == null ? "null" : this.Key)}");
+            toStringOutput.Add($"this.Key = {this.Key ?? "null"}");
         }
 
         /// <summary>
@@ -473,7 +480,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -481,7 +488,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetKey()
             {
@@ -495,7 +502,8 @@ namespace Square.Models
             /// <returns> CatalogCustomAttributeDefinition. </returns>
             public CatalogCustomAttributeDefinition Build()
             {
-                return new CatalogCustomAttributeDefinition(shouldSerialize,
+                return new CatalogCustomAttributeDefinition(
+                    shouldSerialize,
                     this.type,
                     this.name,
                     this.allowedObjectTypes,

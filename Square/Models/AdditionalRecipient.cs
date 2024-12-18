@@ -37,23 +37,24 @@ namespace Square.Models
                 { "description", false },
                 { "receivable_id", false }
             };
-
             this.LocationId = locationId;
+
             if (description != null)
             {
                 shouldSerialize["description"] = true;
                 this.Description = description;
             }
-
             this.AmountMoney = amountMoney;
+
             if (receivableId != null)
             {
                 shouldSerialize["receivable_id"] = true;
                 this.ReceivableId = receivableId;
             }
-
         }
-        internal AdditionalRecipient(Dictionary<string, bool> shouldSerialize,
+
+        internal AdditionalRecipient(
+            Dictionary<string, bool> shouldSerialize,
             string locationId,
             Models.Money amountMoney,
             string description = null,
@@ -99,9 +100,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"AdditionalRecipient : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -126,39 +125,39 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is AdditionalRecipient other &&                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.ReceivableId == null && other.ReceivableId == null) || (this.ReceivableId?.Equals(other.ReceivableId) == true));
+            return obj is AdditionalRecipient other &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.ReceivableId == null && other.ReceivableId == null ||
+                 this.ReceivableId?.Equals(other.ReceivableId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1717136415;
-            hashCode = HashCode.Combine(this.LocationId, this.Description, this.AmountMoney, this.ReceivableId);
+            var hashCode = -1717136415;
+            hashCode = HashCode.Combine(hashCode, this.LocationId, this.Description, this.AmountMoney, this.ReceivableId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
-            toStringOutput.Add($"this.ReceivableId = {(this.ReceivableId == null ? "null" : this.ReceivableId)}");
+            toStringOutput.Add($"this.ReceivableId = {this.ReceivableId ?? "null"}");
         }
 
         /// <summary>
@@ -251,7 +250,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -259,7 +258,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReceivableId()
             {
@@ -273,7 +272,8 @@ namespace Square.Models
             /// <returns> AdditionalRecipient. </returns>
             public AdditionalRecipient Build()
             {
-                return new AdditionalRecipient(shouldSerialize,
+                return new AdditionalRecipient(
+                    shouldSerialize,
                     this.locationId,
                     this.amountMoney,
                     this.description,

@@ -66,48 +66,45 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyEventAccumulatePromotionPoints : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyEventAccumulatePromotionPoints other &&                ((this.LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
-                ((this.LoyaltyPromotionId == null && other.LoyaltyPromotionId == null) || (this.LoyaltyPromotionId?.Equals(other.LoyaltyPromotionId) == true)) &&
-                this.Points.Equals(other.Points) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
+            return obj is LoyaltyEventAccumulatePromotionPoints other &&
+                (this.LoyaltyProgramId == null && other.LoyaltyProgramId == null ||
+                 this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true) &&
+                (this.LoyaltyPromotionId == null && other.LoyaltyPromotionId == null ||
+                 this.LoyaltyPromotionId?.Equals(other.LoyaltyPromotionId) == true) &&
+                (this.Points.Equals(other.Points)) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -346811038;
-            hashCode = HashCode.Combine(this.LoyaltyProgramId, this.LoyaltyPromotionId, this.Points, this.OrderId);
+            var hashCode = -346811038;
+            hashCode = HashCode.Combine(hashCode, this.LoyaltyProgramId, this.LoyaltyPromotionId, this.Points, this.OrderId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LoyaltyProgramId = {(this.LoyaltyProgramId == null ? "null" : this.LoyaltyProgramId)}");
-            toStringOutput.Add($"this.LoyaltyPromotionId = {(this.LoyaltyPromotionId == null ? "null" : this.LoyaltyPromotionId)}");
+            toStringOutput.Add($"this.LoyaltyProgramId = {this.LoyaltyProgramId ?? "null"}");
+            toStringOutput.Add($"this.LoyaltyPromotionId = {this.LoyaltyPromotionId ?? "null"}");
             toStringOutput.Add($"this.Points = {this.Points}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
         }
 
         /// <summary>

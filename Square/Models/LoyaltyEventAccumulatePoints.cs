@@ -35,8 +35,8 @@ namespace Square.Models
                 { "points", false },
                 { "order_id", false }
             };
-
             this.LoyaltyProgramId = loyaltyProgramId;
+
             if (points != null)
             {
                 shouldSerialize["points"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["order_id"] = true;
                 this.OrderId = orderId;
             }
-
         }
-        internal LoyaltyEventAccumulatePoints(Dictionary<string, bool> shouldSerialize,
+
+        internal LoyaltyEventAccumulatePoints(
+            Dictionary<string, bool> shouldSerialize,
             string loyaltyProgramId = null,
             int? points = null,
             string orderId = null)
@@ -84,9 +85,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyEventAccumulatePoints : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -111,37 +110,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyEventAccumulatePoints other &&                ((this.LoyaltyProgramId == null && other.LoyaltyProgramId == null) || (this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true)) &&
-                ((this.Points == null && other.Points == null) || (this.Points?.Equals(other.Points) == true)) &&
-                ((this.OrderId == null && other.OrderId == null) || (this.OrderId?.Equals(other.OrderId) == true));
+            return obj is LoyaltyEventAccumulatePoints other &&
+                (this.LoyaltyProgramId == null && other.LoyaltyProgramId == null ||
+                 this.LoyaltyProgramId?.Equals(other.LoyaltyProgramId) == true) &&
+                (this.Points == null && other.Points == null ||
+                 this.Points?.Equals(other.Points) == true) &&
+                (this.OrderId == null && other.OrderId == null ||
+                 this.OrderId?.Equals(other.OrderId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 893046875;
-            hashCode = HashCode.Combine(this.LoyaltyProgramId, this.Points, this.OrderId);
+            var hashCode = 893046875;
+            hashCode = HashCode.Combine(hashCode, this.LoyaltyProgramId, this.Points, this.OrderId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.LoyaltyProgramId = {(this.LoyaltyProgramId == null ? "null" : this.LoyaltyProgramId)}");
+            toStringOutput.Add($"this.LoyaltyProgramId = {this.LoyaltyProgramId ?? "null"}");
             toStringOutput.Add($"this.Points = {(this.Points == null ? "null" : this.Points.ToString())}");
-            toStringOutput.Add($"this.OrderId = {(this.OrderId == null ? "null" : this.OrderId)}");
+            toStringOutput.Add($"this.OrderId = {this.OrderId ?? "null"}");
         }
 
         /// <summary>
@@ -208,7 +206,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPoints()
             {
@@ -216,7 +214,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderId()
             {
@@ -230,7 +228,8 @@ namespace Square.Models
             /// <returns> LoyaltyEventAccumulatePoints. </returns>
             public LoyaltyEventAccumulatePoints Build()
             {
-                return new LoyaltyEventAccumulatePoints(shouldSerialize,
+                return new LoyaltyEventAccumulatePoints(
+                    shouldSerialize,
                     this.loyaltyProgramId,
                     this.points,
                     this.orderId);

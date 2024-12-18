@@ -34,6 +34,9 @@ namespace Square.Models
         /// <param name="isOfflinePayment">is_offline_payment.</param>
         /// <param name="offlineBeginTime">offline_begin_time.</param>
         /// <param name="offlineEndTime">offline_end_time.</param>
+        /// <param name="updatedAtBeginTime">updated_at_begin_time.</param>
+        /// <param name="updatedAtEndTime">updated_at_end_time.</param>
+        /// <param name="sortField">sort_field.</param>
         public ListPaymentsRequest(
             string beginTime = null,
             string endTime = null,
@@ -46,7 +49,10 @@ namespace Square.Models
             int? limit = null,
             bool? isOfflinePayment = null,
             string offlineBeginTime = null,
-            string offlineEndTime = null)
+            string offlineEndTime = null,
+            string updatedAtBeginTime = null,
+            string updatedAtEndTime = null,
+            string sortField = null)
         {
             shouldSerialize = new Dictionary<string, bool>
             {
@@ -61,7 +67,9 @@ namespace Square.Models
                 { "limit", false },
                 { "is_offline_payment", false },
                 { "offline_begin_time", false },
-                { "offline_end_time", false }
+                { "offline_end_time", false },
+                { "updated_at_begin_time", false },
+                { "updated_at_end_time", false }
             };
 
             if (beginTime != null)
@@ -136,8 +144,22 @@ namespace Square.Models
                 this.OfflineEndTime = offlineEndTime;
             }
 
+            if (updatedAtBeginTime != null)
+            {
+                shouldSerialize["updated_at_begin_time"] = true;
+                this.UpdatedAtBeginTime = updatedAtBeginTime;
+            }
+
+            if (updatedAtEndTime != null)
+            {
+                shouldSerialize["updated_at_end_time"] = true;
+                this.UpdatedAtEndTime = updatedAtEndTime;
+            }
+            this.SortField = sortField;
         }
-        internal ListPaymentsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListPaymentsRequest(
+            Dictionary<string, bool> shouldSerialize,
             string beginTime = null,
             string endTime = null,
             string sortOrder = null,
@@ -149,7 +171,10 @@ namespace Square.Models
             int? limit = null,
             bool? isOfflinePayment = null,
             string offlineBeginTime = null,
-            string offlineEndTime = null)
+            string offlineEndTime = null,
+            string updatedAtBeginTime = null,
+            string updatedAtEndTime = null,
+            string sortField = null)
         {
             this.shouldSerialize = shouldSerialize;
             BeginTime = beginTime;
@@ -164,6 +189,9 @@ namespace Square.Models
             IsOfflinePayment = isOfflinePayment;
             OfflineBeginTime = offlineBeginTime;
             OfflineEndTime = offlineEndTime;
+            UpdatedAtBeginTime = updatedAtBeginTime;
+            UpdatedAtEndTime = updatedAtEndTime;
+            SortField = sortField;
         }
 
         /// <summary>
@@ -183,7 +211,7 @@ namespace Square.Models
         public string EndTime { get; }
 
         /// <summary>
-        /// The order in which results are listed by `Payment.created_at`:
+        /// The order in which results are listed by `ListPaymentsRequest.sort_field`:
         /// - `ASC` - Oldest to newest.
         /// - `DESC` - Newest to oldest (default).
         /// </summary>
@@ -259,13 +287,31 @@ namespace Square.Models
         [JsonProperty("offline_end_time")]
         public string OfflineEndTime { get; }
 
+        /// <summary>
+        /// Indicates the start of the time range to retrieve payments for, in RFC 3339 format.  The
+        /// range is determined using the `updated_at` field for each Payment.
+        /// </summary>
+        [JsonProperty("updated_at_begin_time")]
+        public string UpdatedAtBeginTime { get; }
+
+        /// <summary>
+        /// Indicates the end of the time range to retrieve payments for, in RFC 3339 format.  The
+        /// range is determined using the `updated_at` field for each Payment.
+        /// </summary>
+        [JsonProperty("updated_at_end_time")]
+        public string UpdatedAtEndTime { get; }
+
+        /// <summary>
+        /// Gets or sets SortField.
+        /// </summary>
+        [JsonProperty("sort_field", NullValueHandling = NullValueHandling.Ignore)]
+        public string SortField { get; }
+
         /// <inheritdoc/>
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListPaymentsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -377,60 +423,97 @@ namespace Square.Models
             return this.shouldSerialize["offline_end_time"];
         }
 
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdatedAtBeginTime()
+        {
+            return this.shouldSerialize["updated_at_begin_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdatedAtEndTime()
+        {
+            return this.shouldSerialize["updated_at_end_time"];
+        }
+
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListPaymentsRequest other &&                ((this.BeginTime == null && other.BeginTime == null) || (this.BeginTime?.Equals(other.BeginTime) == true)) &&
-                ((this.EndTime == null && other.EndTime == null) || (this.EndTime?.Equals(other.EndTime) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Total == null && other.Total == null) || (this.Total?.Equals(other.Total) == true)) &&
-                ((this.Last4 == null && other.Last4 == null) || (this.Last4?.Equals(other.Last4) == true)) &&
-                ((this.CardBrand == null && other.CardBrand == null) || (this.CardBrand?.Equals(other.CardBrand) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.IsOfflinePayment == null && other.IsOfflinePayment == null) || (this.IsOfflinePayment?.Equals(other.IsOfflinePayment) == true)) &&
-                ((this.OfflineBeginTime == null && other.OfflineBeginTime == null) || (this.OfflineBeginTime?.Equals(other.OfflineBeginTime) == true)) &&
-                ((this.OfflineEndTime == null && other.OfflineEndTime == null) || (this.OfflineEndTime?.Equals(other.OfflineEndTime) == true));
+            return obj is ListPaymentsRequest other &&
+                (this.BeginTime == null && other.BeginTime == null ||
+                 this.BeginTime?.Equals(other.BeginTime) == true) &&
+                (this.EndTime == null && other.EndTime == null ||
+                 this.EndTime?.Equals(other.EndTime) == true) &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Total == null && other.Total == null ||
+                 this.Total?.Equals(other.Total) == true) &&
+                (this.Last4 == null && other.Last4 == null ||
+                 this.Last4?.Equals(other.Last4) == true) &&
+                (this.CardBrand == null && other.CardBrand == null ||
+                 this.CardBrand?.Equals(other.CardBrand) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.IsOfflinePayment == null && other.IsOfflinePayment == null ||
+                 this.IsOfflinePayment?.Equals(other.IsOfflinePayment) == true) &&
+                (this.OfflineBeginTime == null && other.OfflineBeginTime == null ||
+                 this.OfflineBeginTime?.Equals(other.OfflineBeginTime) == true) &&
+                (this.OfflineEndTime == null && other.OfflineEndTime == null ||
+                 this.OfflineEndTime?.Equals(other.OfflineEndTime) == true) &&
+                (this.UpdatedAtBeginTime == null && other.UpdatedAtBeginTime == null ||
+                 this.UpdatedAtBeginTime?.Equals(other.UpdatedAtBeginTime) == true) &&
+                (this.UpdatedAtEndTime == null && other.UpdatedAtEndTime == null ||
+                 this.UpdatedAtEndTime?.Equals(other.UpdatedAtEndTime) == true) &&
+                (this.SortField == null && other.SortField == null ||
+                 this.SortField?.Equals(other.SortField) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 973903656;
-            hashCode = HashCode.Combine(this.BeginTime, this.EndTime, this.SortOrder, this.Cursor, this.LocationId, this.Total, this.Last4);
+            var hashCode = 1051626534;
+            hashCode = HashCode.Combine(hashCode, this.BeginTime, this.EndTime, this.SortOrder, this.Cursor, this.LocationId, this.Total, this.Last4);
 
-            hashCode = HashCode.Combine(hashCode, this.CardBrand, this.Limit, this.IsOfflinePayment, this.OfflineBeginTime, this.OfflineEndTime);
+            hashCode = HashCode.Combine(hashCode, this.CardBrand, this.Limit, this.IsOfflinePayment, this.OfflineBeginTime, this.OfflineEndTime, this.UpdatedAtBeginTime, this.UpdatedAtEndTime);
+
+            hashCode = HashCode.Combine(hashCode, this.SortField);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BeginTime = {(this.BeginTime == null ? "null" : this.BeginTime)}");
-            toStringOutput.Add($"this.EndTime = {(this.EndTime == null ? "null" : this.EndTime)}");
-            toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder)}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.BeginTime = {this.BeginTime ?? "null"}");
+            toStringOutput.Add($"this.EndTime = {this.EndTime ?? "null"}");
+            toStringOutput.Add($"this.SortOrder = {this.SortOrder ?? "null"}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.Total = {(this.Total == null ? "null" : this.Total.ToString())}");
-            toStringOutput.Add($"this.Last4 = {(this.Last4 == null ? "null" : this.Last4)}");
-            toStringOutput.Add($"this.CardBrand = {(this.CardBrand == null ? "null" : this.CardBrand)}");
+            toStringOutput.Add($"this.Last4 = {this.Last4 ?? "null"}");
+            toStringOutput.Add($"this.CardBrand = {this.CardBrand ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
             toStringOutput.Add($"this.IsOfflinePayment = {(this.IsOfflinePayment == null ? "null" : this.IsOfflinePayment.ToString())}");
-            toStringOutput.Add($"this.OfflineBeginTime = {(this.OfflineBeginTime == null ? "null" : this.OfflineBeginTime)}");
-            toStringOutput.Add($"this.OfflineEndTime = {(this.OfflineEndTime == null ? "null" : this.OfflineEndTime)}");
+            toStringOutput.Add($"this.OfflineBeginTime = {this.OfflineBeginTime ?? "null"}");
+            toStringOutput.Add($"this.OfflineEndTime = {this.OfflineEndTime ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAtBeginTime = {this.UpdatedAtBeginTime ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAtEndTime = {this.UpdatedAtEndTime ?? "null"}");
+            toStringOutput.Add($"this.SortField = {(this.SortField == null ? "null" : this.SortField.ToString())}");
         }
 
         /// <summary>
@@ -451,7 +534,10 @@ namespace Square.Models
                 .Limit(this.Limit)
                 .IsOfflinePayment(this.IsOfflinePayment)
                 .OfflineBeginTime(this.OfflineBeginTime)
-                .OfflineEndTime(this.OfflineEndTime);
+                .OfflineEndTime(this.OfflineEndTime)
+                .UpdatedAtBeginTime(this.UpdatedAtBeginTime)
+                .UpdatedAtEndTime(this.UpdatedAtEndTime)
+                .SortField(this.SortField);
             return builder;
         }
 
@@ -474,6 +560,8 @@ namespace Square.Models
                 { "is_offline_payment", false },
                 { "offline_begin_time", false },
                 { "offline_end_time", false },
+                { "updated_at_begin_time", false },
+                { "updated_at_end_time", false },
             };
 
             private string beginTime;
@@ -488,6 +576,9 @@ namespace Square.Models
             private bool? isOfflinePayment;
             private string offlineBeginTime;
             private string offlineEndTime;
+            private string updatedAtBeginTime;
+            private string updatedAtEndTime;
+            private string sortField;
 
              /// <summary>
              /// BeginTime.
@@ -633,8 +724,43 @@ namespace Square.Models
                 return this;
             }
 
+             /// <summary>
+             /// UpdatedAtBeginTime.
+             /// </summary>
+             /// <param name="updatedAtBeginTime"> updatedAtBeginTime. </param>
+             /// <returns> Builder. </returns>
+            public Builder UpdatedAtBeginTime(string updatedAtBeginTime)
+            {
+                shouldSerialize["updated_at_begin_time"] = true;
+                this.updatedAtBeginTime = updatedAtBeginTime;
+                return this;
+            }
+
+             /// <summary>
+             /// UpdatedAtEndTime.
+             /// </summary>
+             /// <param name="updatedAtEndTime"> updatedAtEndTime. </param>
+             /// <returns> Builder. </returns>
+            public Builder UpdatedAtEndTime(string updatedAtEndTime)
+            {
+                shouldSerialize["updated_at_end_time"] = true;
+                this.updatedAtEndTime = updatedAtEndTime;
+                return this;
+            }
+
+             /// <summary>
+             /// SortField.
+             /// </summary>
+             /// <param name="sortField"> sortField. </param>
+             /// <returns> Builder. </returns>
+            public Builder SortField(string sortField)
+            {
+                this.sortField = sortField;
+                return this;
+            }
+
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBeginTime()
             {
@@ -642,7 +768,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndTime()
             {
@@ -650,7 +776,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSortOrder()
             {
@@ -658,7 +784,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -666,7 +792,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -674,7 +800,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTotal()
             {
@@ -682,7 +808,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLast4()
             {
@@ -690,7 +816,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCardBrand()
             {
@@ -698,7 +824,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -706,7 +832,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsOfflinePayment()
             {
@@ -714,7 +840,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOfflineBeginTime()
             {
@@ -722,11 +848,27 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOfflineEndTime()
             {
                 this.shouldSerialize["offline_end_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serialized.
+            /// </summary>
+            public void UnsetUpdatedAtBeginTime()
+            {
+                this.shouldSerialize["updated_at_begin_time"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serialized.
+            /// </summary>
+            public void UnsetUpdatedAtEndTime()
+            {
+                this.shouldSerialize["updated_at_end_time"] = false;
             }
 
 
@@ -736,7 +878,8 @@ namespace Square.Models
             /// <returns> ListPaymentsRequest. </returns>
             public ListPaymentsRequest Build()
             {
-                return new ListPaymentsRequest(shouldSerialize,
+                return new ListPaymentsRequest(
+                    shouldSerialize,
                     this.beginTime,
                     this.endTime,
                     this.sortOrder,
@@ -748,7 +891,10 @@ namespace Square.Models
                     this.limit,
                     this.isOfflinePayment,
                     this.offlineBeginTime,
-                    this.offlineEndTime);
+                    this.offlineEndTime,
+                    this.updatedAtBeginTime,
+                    this.updatedAtEndTime,
+                    this.sortField);
             }
         }
     }

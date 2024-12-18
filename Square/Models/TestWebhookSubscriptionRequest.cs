@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["event_type"] = true;
                 this.EventType = eventType;
             }
-
         }
-        internal TestWebhookSubscriptionRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal TestWebhookSubscriptionRequest(
+            Dictionary<string, bool> shouldSerialize,
             string eventType = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -56,9 +57,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TestWebhookSubscriptionRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -74,33 +73,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TestWebhookSubscriptionRequest other &&                ((this.EventType == null && other.EventType == null) || (this.EventType?.Equals(other.EventType) == true));
+            return obj is TestWebhookSubscriptionRequest other &&
+                (this.EventType == null && other.EventType == null ||
+                 this.EventType?.Equals(other.EventType) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 133393697;
-            hashCode = HashCode.Combine(this.EventType);
+            var hashCode = 133393697;
+            hashCode = HashCode.Combine(hashCode, this.EventType);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.EventType = {(this.EventType == null ? "null" : this.EventType)}");
+            toStringOutput.Add($"this.EventType = {this.EventType ?? "null"}");
         }
 
         /// <summary>
@@ -139,7 +135,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEventType()
             {
@@ -153,7 +149,8 @@ namespace Square.Models
             /// <returns> TestWebhookSubscriptionRequest. </returns>
             public TestWebhookSubscriptionRequest Build()
             {
-                return new TestWebhookSubscriptionRequest(shouldSerialize,
+                return new TestWebhookSubscriptionRequest(
+                    shouldSerialize,
                     this.eventType);
             }
         }

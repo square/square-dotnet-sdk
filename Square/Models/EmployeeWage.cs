@@ -37,8 +37,8 @@ namespace Square.Models
                 { "employee_id", false },
                 { "title", false }
             };
-
             this.Id = id;
+
             if (employeeId != null)
             {
                 shouldSerialize["employee_id"] = true;
@@ -50,10 +50,11 @@ namespace Square.Models
                 shouldSerialize["title"] = true;
                 this.Title = title;
             }
-
             this.HourlyRate = hourlyRate;
         }
-        internal EmployeeWage(Dictionary<string, bool> shouldSerialize,
+
+        internal EmployeeWage(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string employeeId = null,
             string title = null,
@@ -99,9 +100,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"EmployeeWage : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -126,38 +125,38 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is EmployeeWage other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
-                ((this.HourlyRate == null && other.HourlyRate == null) || (this.HourlyRate?.Equals(other.HourlyRate) == true));
+            return obj is EmployeeWage other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.EmployeeId == null && other.EmployeeId == null ||
+                 this.EmployeeId?.Equals(other.EmployeeId) == true) &&
+                (this.Title == null && other.Title == null ||
+                 this.Title?.Equals(other.Title) == true) &&
+                (this.HourlyRate == null && other.HourlyRate == null ||
+                 this.HourlyRate?.Equals(other.HourlyRate) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -159635792;
-            hashCode = HashCode.Combine(this.Id, this.EmployeeId, this.Title, this.HourlyRate);
+            var hashCode = -159635792;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.EmployeeId, this.Title, this.HourlyRate);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId)}");
-            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.EmployeeId = {this.EmployeeId ?? "null"}");
+            toStringOutput.Add($"this.Title = {this.Title ?? "null"}");
             toStringOutput.Add($"this.HourlyRate = {(this.HourlyRate == null ? "null" : this.HourlyRate.ToString())}");
         }
 
@@ -238,7 +237,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmployeeId()
             {
@@ -246,7 +245,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTitle()
             {
@@ -260,7 +259,8 @@ namespace Square.Models
             /// <returns> EmployeeWage. </returns>
             public EmployeeWage Build()
             {
-                return new EmployeeWage(shouldSerialize,
+                return new EmployeeWage(
+                    shouldSerialize,
                     this.id,
                     this.employeeId,
                     this.title,

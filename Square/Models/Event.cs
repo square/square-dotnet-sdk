@@ -67,11 +67,12 @@ namespace Square.Models
                 shouldSerialize["event_id"] = true;
                 this.EventId = eventId;
             }
-
             this.CreatedAt = createdAt;
             this.Data = data;
         }
-        internal Event(Dictionary<string, bool> shouldSerialize,
+
+        internal Event(
+            Dictionary<string, bool> shouldSerialize,
             string merchantId = null,
             string locationId = null,
             string type = null,
@@ -128,9 +129,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Event : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -173,42 +172,44 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Event other &&                ((this.MerchantId == null && other.MerchantId == null) || (this.MerchantId?.Equals(other.MerchantId) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.EventId == null && other.EventId == null) || (this.EventId?.Equals(other.EventId) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.Data == null && other.Data == null) || (this.Data?.Equals(other.Data) == true));
+            return obj is Event other &&
+                (this.MerchantId == null && other.MerchantId == null ||
+                 this.MerchantId?.Equals(other.MerchantId) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.EventId == null && other.EventId == null ||
+                 this.EventId?.Equals(other.EventId) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.Data == null && other.Data == null ||
+                 this.Data?.Equals(other.Data) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1541969600;
-            hashCode = HashCode.Combine(this.MerchantId, this.LocationId, this.Type, this.EventId, this.CreatedAt, this.Data);
+            var hashCode = 1541969600;
+            hashCode = HashCode.Combine(hashCode, this.MerchantId, this.LocationId, this.Type, this.EventId, this.CreatedAt, this.Data);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.MerchantId = {(this.MerchantId == null ? "null" : this.MerchantId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type)}");
-            toStringOutput.Add($"this.EventId = {(this.EventId == null ? "null" : this.EventId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.MerchantId = {this.MerchantId ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.Type = {this.Type ?? "null"}");
+            toStringOutput.Add($"this.EventId = {this.EventId ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
             toStringOutput.Add($"this.Data = {(this.Data == null ? "null" : this.Data.ToString())}");
         }
 
@@ -319,7 +320,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMerchantId()
             {
@@ -327,7 +328,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -335,7 +336,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetType()
             {
@@ -343,7 +344,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEventId()
             {
@@ -357,7 +358,8 @@ namespace Square.Models
             /// <returns> Event. </returns>
             public Event Build()
             {
-                return new Event(shouldSerialize,
+                return new Event(
+                    shouldSerialize,
                     this.merchantId,
                     this.locationId,
                     this.type,

@@ -91,11 +91,11 @@ namespace Square.Models
                 { "present_at_location_ids", false },
                 { "absent_at_location_ids", false }
             };
-
             this.Type = type;
             this.Id = id;
             this.UpdatedAt = updatedAt;
             this.Version = version;
+
             if (isDeleted != null)
             {
                 shouldSerialize["is_deleted"] = true;
@@ -131,7 +131,6 @@ namespace Square.Models
                 shouldSerialize["absent_at_location_ids"] = true;
                 this.AbsentAtLocationIds = absentAtLocationIds;
             }
-
             this.ItemData = itemData;
             this.CategoryData = categoryData;
             this.ItemVariationData = itemVariationData;
@@ -152,7 +151,9 @@ namespace Square.Models
             this.SubscriptionPlanVariationData = subscriptionPlanVariationData;
             this.AvailabilityPeriodData = availabilityPeriodData;
         }
-        internal CatalogObject(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogObject(
+            Dictionary<string, bool> shouldSerialize,
             string type,
             string id,
             string updatedAt = null,
@@ -457,9 +458,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogObject : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -520,51 +519,75 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogObject other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.IsDeleted == null && other.IsDeleted == null) || (this.IsDeleted?.Equals(other.IsDeleted) == true)) &&
-                ((this.CustomAttributeValues == null && other.CustomAttributeValues == null) || (this.CustomAttributeValues?.Equals(other.CustomAttributeValues) == true)) &&
-                ((this.CatalogV1Ids == null && other.CatalogV1Ids == null) || (this.CatalogV1Ids?.Equals(other.CatalogV1Ids) == true)) &&
-                ((this.PresentAtAllLocations == null && other.PresentAtAllLocations == null) || (this.PresentAtAllLocations?.Equals(other.PresentAtAllLocations) == true)) &&
-                ((this.PresentAtLocationIds == null && other.PresentAtLocationIds == null) || (this.PresentAtLocationIds?.Equals(other.PresentAtLocationIds) == true)) &&
-                ((this.AbsentAtLocationIds == null && other.AbsentAtLocationIds == null) || (this.AbsentAtLocationIds?.Equals(other.AbsentAtLocationIds) == true)) &&
-                ((this.ItemData == null && other.ItemData == null) || (this.ItemData?.Equals(other.ItemData) == true)) &&
-                ((this.CategoryData == null && other.CategoryData == null) || (this.CategoryData?.Equals(other.CategoryData) == true)) &&
-                ((this.ItemVariationData == null && other.ItemVariationData == null) || (this.ItemVariationData?.Equals(other.ItemVariationData) == true)) &&
-                ((this.TaxData == null && other.TaxData == null) || (this.TaxData?.Equals(other.TaxData) == true)) &&
-                ((this.DiscountData == null && other.DiscountData == null) || (this.DiscountData?.Equals(other.DiscountData) == true)) &&
-                ((this.ModifierListData == null && other.ModifierListData == null) || (this.ModifierListData?.Equals(other.ModifierListData) == true)) &&
-                ((this.ModifierData == null && other.ModifierData == null) || (this.ModifierData?.Equals(other.ModifierData) == true)) &&
-                ((this.TimePeriodData == null && other.TimePeriodData == null) || (this.TimePeriodData?.Equals(other.TimePeriodData) == true)) &&
-                ((this.ProductSetData == null && other.ProductSetData == null) || (this.ProductSetData?.Equals(other.ProductSetData) == true)) &&
-                ((this.PricingRuleData == null && other.PricingRuleData == null) || (this.PricingRuleData?.Equals(other.PricingRuleData) == true)) &&
-                ((this.ImageData == null && other.ImageData == null) || (this.ImageData?.Equals(other.ImageData) == true)) &&
-                ((this.MeasurementUnitData == null && other.MeasurementUnitData == null) || (this.MeasurementUnitData?.Equals(other.MeasurementUnitData) == true)) &&
-                ((this.SubscriptionPlanData == null && other.SubscriptionPlanData == null) || (this.SubscriptionPlanData?.Equals(other.SubscriptionPlanData) == true)) &&
-                ((this.ItemOptionData == null && other.ItemOptionData == null) || (this.ItemOptionData?.Equals(other.ItemOptionData) == true)) &&
-                ((this.ItemOptionValueData == null && other.ItemOptionValueData == null) || (this.ItemOptionValueData?.Equals(other.ItemOptionValueData) == true)) &&
-                ((this.CustomAttributeDefinitionData == null && other.CustomAttributeDefinitionData == null) || (this.CustomAttributeDefinitionData?.Equals(other.CustomAttributeDefinitionData) == true)) &&
-                ((this.QuickAmountsSettingsData == null && other.QuickAmountsSettingsData == null) || (this.QuickAmountsSettingsData?.Equals(other.QuickAmountsSettingsData) == true)) &&
-                ((this.SubscriptionPlanVariationData == null && other.SubscriptionPlanVariationData == null) || (this.SubscriptionPlanVariationData?.Equals(other.SubscriptionPlanVariationData) == true)) &&
-                ((this.AvailabilityPeriodData == null && other.AvailabilityPeriodData == null) || (this.AvailabilityPeriodData?.Equals(other.AvailabilityPeriodData) == true));
+            return obj is CatalogObject other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.IsDeleted == null && other.IsDeleted == null ||
+                 this.IsDeleted?.Equals(other.IsDeleted) == true) &&
+                (this.CustomAttributeValues == null && other.CustomAttributeValues == null ||
+                 this.CustomAttributeValues?.Equals(other.CustomAttributeValues) == true) &&
+                (this.CatalogV1Ids == null && other.CatalogV1Ids == null ||
+                 this.CatalogV1Ids?.Equals(other.CatalogV1Ids) == true) &&
+                (this.PresentAtAllLocations == null && other.PresentAtAllLocations == null ||
+                 this.PresentAtAllLocations?.Equals(other.PresentAtAllLocations) == true) &&
+                (this.PresentAtLocationIds == null && other.PresentAtLocationIds == null ||
+                 this.PresentAtLocationIds?.Equals(other.PresentAtLocationIds) == true) &&
+                (this.AbsentAtLocationIds == null && other.AbsentAtLocationIds == null ||
+                 this.AbsentAtLocationIds?.Equals(other.AbsentAtLocationIds) == true) &&
+                (this.ItemData == null && other.ItemData == null ||
+                 this.ItemData?.Equals(other.ItemData) == true) &&
+                (this.CategoryData == null && other.CategoryData == null ||
+                 this.CategoryData?.Equals(other.CategoryData) == true) &&
+                (this.ItemVariationData == null && other.ItemVariationData == null ||
+                 this.ItemVariationData?.Equals(other.ItemVariationData) == true) &&
+                (this.TaxData == null && other.TaxData == null ||
+                 this.TaxData?.Equals(other.TaxData) == true) &&
+                (this.DiscountData == null && other.DiscountData == null ||
+                 this.DiscountData?.Equals(other.DiscountData) == true) &&
+                (this.ModifierListData == null && other.ModifierListData == null ||
+                 this.ModifierListData?.Equals(other.ModifierListData) == true) &&
+                (this.ModifierData == null && other.ModifierData == null ||
+                 this.ModifierData?.Equals(other.ModifierData) == true) &&
+                (this.TimePeriodData == null && other.TimePeriodData == null ||
+                 this.TimePeriodData?.Equals(other.TimePeriodData) == true) &&
+                (this.ProductSetData == null && other.ProductSetData == null ||
+                 this.ProductSetData?.Equals(other.ProductSetData) == true) &&
+                (this.PricingRuleData == null && other.PricingRuleData == null ||
+                 this.PricingRuleData?.Equals(other.PricingRuleData) == true) &&
+                (this.ImageData == null && other.ImageData == null ||
+                 this.ImageData?.Equals(other.ImageData) == true) &&
+                (this.MeasurementUnitData == null && other.MeasurementUnitData == null ||
+                 this.MeasurementUnitData?.Equals(other.MeasurementUnitData) == true) &&
+                (this.SubscriptionPlanData == null && other.SubscriptionPlanData == null ||
+                 this.SubscriptionPlanData?.Equals(other.SubscriptionPlanData) == true) &&
+                (this.ItemOptionData == null && other.ItemOptionData == null ||
+                 this.ItemOptionData?.Equals(other.ItemOptionData) == true) &&
+                (this.ItemOptionValueData == null && other.ItemOptionValueData == null ||
+                 this.ItemOptionValueData?.Equals(other.ItemOptionValueData) == true) &&
+                (this.CustomAttributeDefinitionData == null && other.CustomAttributeDefinitionData == null ||
+                 this.CustomAttributeDefinitionData?.Equals(other.CustomAttributeDefinitionData) == true) &&
+                (this.QuickAmountsSettingsData == null && other.QuickAmountsSettingsData == null ||
+                 this.QuickAmountsSettingsData?.Equals(other.QuickAmountsSettingsData) == true) &&
+                (this.SubscriptionPlanVariationData == null && other.SubscriptionPlanVariationData == null ||
+                 this.SubscriptionPlanVariationData?.Equals(other.SubscriptionPlanVariationData) == true) &&
+                (this.AvailabilityPeriodData == null && other.AvailabilityPeriodData == null ||
+                 this.AvailabilityPeriodData?.Equals(other.AvailabilityPeriodData) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1511989397;
-            hashCode = HashCode.Combine(this.Type, this.Id, this.UpdatedAt, this.Version, this.IsDeleted, this.CustomAttributeValues, this.CatalogV1Ids);
+            var hashCode = 1511989397;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.Id, this.UpdatedAt, this.Version, this.IsDeleted, this.CustomAttributeValues, this.CatalogV1Ids);
 
             hashCode = HashCode.Combine(hashCode, this.PresentAtAllLocations, this.PresentAtLocationIds, this.AbsentAtLocationIds, this.ItemData, this.CategoryData, this.ItemVariationData, this.TaxData);
 
@@ -576,6 +599,7 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -583,8 +607,8 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
             toStringOutput.Add($"this.IsDeleted = {(this.IsDeleted == null ? "null" : this.IsDeleted.ToString())}");
             toStringOutput.Add($"CustomAttributeValues = {(this.CustomAttributeValues == null ? "null" : this.CustomAttributeValues.ToString())}");
@@ -1036,7 +1060,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsDeleted()
             {
@@ -1044,7 +1068,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomAttributeValues()
             {
@@ -1052,7 +1076,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogV1Ids()
             {
@@ -1060,7 +1084,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPresentAtAllLocations()
             {
@@ -1068,7 +1092,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPresentAtLocationIds()
             {
@@ -1076,7 +1100,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAbsentAtLocationIds()
             {
@@ -1090,7 +1114,8 @@ namespace Square.Models
             /// <returns> CatalogObject. </returns>
             public CatalogObject Build()
             {
-                return new CatalogObject(shouldSerialize,
+                return new CatalogObject(
+                    shouldSerialize,
                     this.type,
                     this.id,
                     this.updatedAt,

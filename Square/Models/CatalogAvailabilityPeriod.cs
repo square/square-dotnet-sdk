@@ -47,10 +47,11 @@ namespace Square.Models
                 shouldSerialize["end_local_time"] = true;
                 this.EndLocalTime = endLocalTime;
             }
-
             this.DayOfWeek = dayOfWeek;
         }
-        internal CatalogAvailabilityPeriod(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogAvailabilityPeriod(
+            Dictionary<string, bool> shouldSerialize,
             string startLocalTime = null,
             string endLocalTime = null,
             string dayOfWeek = null)
@@ -87,9 +88,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogAvailabilityPeriod : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -114,36 +113,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogAvailabilityPeriod other &&                ((this.StartLocalTime == null && other.StartLocalTime == null) || (this.StartLocalTime?.Equals(other.StartLocalTime) == true)) &&
-                ((this.EndLocalTime == null && other.EndLocalTime == null) || (this.EndLocalTime?.Equals(other.EndLocalTime) == true)) &&
-                ((this.DayOfWeek == null && other.DayOfWeek == null) || (this.DayOfWeek?.Equals(other.DayOfWeek) == true));
+            return obj is CatalogAvailabilityPeriod other &&
+                (this.StartLocalTime == null && other.StartLocalTime == null ||
+                 this.StartLocalTime?.Equals(other.StartLocalTime) == true) &&
+                (this.EndLocalTime == null && other.EndLocalTime == null ||
+                 this.EndLocalTime?.Equals(other.EndLocalTime) == true) &&
+                (this.DayOfWeek == null && other.DayOfWeek == null ||
+                 this.DayOfWeek?.Equals(other.DayOfWeek) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -965005458;
-            hashCode = HashCode.Combine(this.StartLocalTime, this.EndLocalTime, this.DayOfWeek);
+            var hashCode = -965005458;
+            hashCode = HashCode.Combine(hashCode, this.StartLocalTime, this.EndLocalTime, this.DayOfWeek);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.StartLocalTime = {(this.StartLocalTime == null ? "null" : this.StartLocalTime)}");
-            toStringOutput.Add($"this.EndLocalTime = {(this.EndLocalTime == null ? "null" : this.EndLocalTime)}");
+            toStringOutput.Add($"this.StartLocalTime = {this.StartLocalTime ?? "null"}");
+            toStringOutput.Add($"this.EndLocalTime = {this.EndLocalTime ?? "null"}");
             toStringOutput.Add($"this.DayOfWeek = {(this.DayOfWeek == null ? "null" : this.DayOfWeek.ToString())}");
         }
 
@@ -211,7 +209,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStartLocalTime()
             {
@@ -219,7 +217,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEndLocalTime()
             {
@@ -233,7 +231,8 @@ namespace Square.Models
             /// <returns> CatalogAvailabilityPeriod. </returns>
             public CatalogAvailabilityPeriod Build()
             {
-                return new CatalogAvailabilityPeriod(shouldSerialize,
+                return new CatalogAvailabilityPeriod(
+                    shouldSerialize,
                     this.startLocalTime,
                     this.endLocalTime,
                     this.dayOfWeek);

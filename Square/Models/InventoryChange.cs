@@ -89,40 +89,40 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InventoryChange : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InventoryChange other &&                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.PhysicalCount == null && other.PhysicalCount == null) || (this.PhysicalCount?.Equals(other.PhysicalCount) == true)) &&
-                ((this.Adjustment == null && other.Adjustment == null) || (this.Adjustment?.Equals(other.Adjustment) == true)) &&
-                ((this.Transfer == null && other.Transfer == null) || (this.Transfer?.Equals(other.Transfer) == true)) &&
-                ((this.MeasurementUnit == null && other.MeasurementUnit == null) || (this.MeasurementUnit?.Equals(other.MeasurementUnit) == true)) &&
-                ((this.MeasurementUnitId == null && other.MeasurementUnitId == null) || (this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true));
+            return obj is InventoryChange other &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.PhysicalCount == null && other.PhysicalCount == null ||
+                 this.PhysicalCount?.Equals(other.PhysicalCount) == true) &&
+                (this.Adjustment == null && other.Adjustment == null ||
+                 this.Adjustment?.Equals(other.Adjustment) == true) &&
+                (this.Transfer == null && other.Transfer == null ||
+                 this.Transfer?.Equals(other.Transfer) == true) &&
+                (this.MeasurementUnit == null && other.MeasurementUnit == null ||
+                 this.MeasurementUnit?.Equals(other.MeasurementUnit) == true) &&
+                (this.MeasurementUnitId == null && other.MeasurementUnitId == null ||
+                 this.MeasurementUnitId?.Equals(other.MeasurementUnitId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1147135160;
-            hashCode = HashCode.Combine(this.Type, this.PhysicalCount, this.Adjustment, this.Transfer, this.MeasurementUnit, this.MeasurementUnitId);
+            var hashCode = -1147135160;
+            hashCode = HashCode.Combine(hashCode, this.Type, this.PhysicalCount, this.Adjustment, this.Transfer, this.MeasurementUnit, this.MeasurementUnitId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -134,7 +134,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Adjustment = {(this.Adjustment == null ? "null" : this.Adjustment.ToString())}");
             toStringOutput.Add($"this.Transfer = {(this.Transfer == null ? "null" : this.Transfer.ToString())}");
             toStringOutput.Add($"this.MeasurementUnit = {(this.MeasurementUnit == null ? "null" : this.MeasurementUnit.ToString())}");
-            toStringOutput.Add($"this.MeasurementUnitId = {(this.MeasurementUnitId == null ? "null" : this.MeasurementUnitId)}");
+            toStringOutput.Add($"this.MeasurementUnitId = {this.MeasurementUnitId ?? "null"}");
         }
 
         /// <summary>

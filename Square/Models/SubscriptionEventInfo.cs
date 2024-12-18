@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["detail"] = true;
                 this.Detail = detail;
             }
-
             this.Code = code;
         }
-        internal SubscriptionEventInfo(Dictionary<string, bool> shouldSerialize,
+
+        internal SubscriptionEventInfo(
+            Dictionary<string, bool> shouldSerialize,
             string detail = null,
             string code = null)
         {
@@ -66,9 +67,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SubscriptionEventInfo : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -84,34 +83,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SubscriptionEventInfo other &&                ((this.Detail == null && other.Detail == null) || (this.Detail?.Equals(other.Detail) == true)) &&
-                ((this.Code == null && other.Code == null) || (this.Code?.Equals(other.Code) == true));
+            return obj is SubscriptionEventInfo other &&
+                (this.Detail == null && other.Detail == null ||
+                 this.Detail?.Equals(other.Detail) == true) &&
+                (this.Code == null && other.Code == null ||
+                 this.Code?.Equals(other.Code) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -150881047;
-            hashCode = HashCode.Combine(this.Detail, this.Code);
+            var hashCode = -150881047;
+            hashCode = HashCode.Combine(hashCode, this.Detail, this.Code);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Detail = {(this.Detail == null ? "null" : this.Detail)}");
+            toStringOutput.Add($"this.Detail = {this.Detail ?? "null"}");
             toStringOutput.Add($"this.Code = {(this.Code == null ? "null" : this.Code.ToString())}");
         }
 
@@ -164,7 +161,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDetail()
             {
@@ -178,7 +175,8 @@ namespace Square.Models
             /// <returns> SubscriptionEventInfo. </returns>
             public SubscriptionEventInfo Build()
             {
-                return new SubscriptionEventInfo(shouldSerialize,
+                return new SubscriptionEventInfo(
+                    shouldSerialize,
                     this.detail,
                     this.code);
             }

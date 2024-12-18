@@ -50,7 +50,6 @@ namespace Square.Models
                 shouldSerialize["customer_id"] = true;
                 this.CustomerId = customerId;
             }
-
             this.GivenName = givenName;
             this.FamilyName = familyName;
             this.EmailAddress = emailAddress;
@@ -59,7 +58,9 @@ namespace Square.Models
             this.CompanyName = companyName;
             this.TaxIds = taxIds;
         }
-        internal InvoiceRecipient(Dictionary<string, bool> shouldSerialize,
+
+        internal InvoiceRecipient(
+            Dictionary<string, bool> shouldSerialize,
             string customerId = null,
             string givenName = null,
             string familyName = null,
@@ -136,9 +137,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InvoiceRecipient : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -154,48 +153,52 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InvoiceRecipient other &&                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.GivenName == null && other.GivenName == null) || (this.GivenName?.Equals(other.GivenName) == true)) &&
-                ((this.FamilyName == null && other.FamilyName == null) || (this.FamilyName?.Equals(other.FamilyName) == true)) &&
-                ((this.EmailAddress == null && other.EmailAddress == null) || (this.EmailAddress?.Equals(other.EmailAddress) == true)) &&
-                ((this.Address == null && other.Address == null) || (this.Address?.Equals(other.Address) == true)) &&
-                ((this.PhoneNumber == null && other.PhoneNumber == null) || (this.PhoneNumber?.Equals(other.PhoneNumber) == true)) &&
-                ((this.CompanyName == null && other.CompanyName == null) || (this.CompanyName?.Equals(other.CompanyName) == true)) &&
-                ((this.TaxIds == null && other.TaxIds == null) || (this.TaxIds?.Equals(other.TaxIds) == true));
+            return obj is InvoiceRecipient other &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.GivenName == null && other.GivenName == null ||
+                 this.GivenName?.Equals(other.GivenName) == true) &&
+                (this.FamilyName == null && other.FamilyName == null ||
+                 this.FamilyName?.Equals(other.FamilyName) == true) &&
+                (this.EmailAddress == null && other.EmailAddress == null ||
+                 this.EmailAddress?.Equals(other.EmailAddress) == true) &&
+                (this.Address == null && other.Address == null ||
+                 this.Address?.Equals(other.Address) == true) &&
+                (this.PhoneNumber == null && other.PhoneNumber == null ||
+                 this.PhoneNumber?.Equals(other.PhoneNumber) == true) &&
+                (this.CompanyName == null && other.CompanyName == null ||
+                 this.CompanyName?.Equals(other.CompanyName) == true) &&
+                (this.TaxIds == null && other.TaxIds == null ||
+                 this.TaxIds?.Equals(other.TaxIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 570259352;
-            hashCode = HashCode.Combine(this.CustomerId, this.GivenName, this.FamilyName, this.EmailAddress, this.Address, this.PhoneNumber, this.CompanyName);
+            var hashCode = 570259352;
+            hashCode = HashCode.Combine(hashCode, this.CustomerId, this.GivenName, this.FamilyName, this.EmailAddress, this.Address, this.PhoneNumber, this.CompanyName);
 
             hashCode = HashCode.Combine(hashCode, this.TaxIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
-            toStringOutput.Add($"this.GivenName = {(this.GivenName == null ? "null" : this.GivenName)}");
-            toStringOutput.Add($"this.FamilyName = {(this.FamilyName == null ? "null" : this.FamilyName)}");
-            toStringOutput.Add($"this.EmailAddress = {(this.EmailAddress == null ? "null" : this.EmailAddress)}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
+            toStringOutput.Add($"this.GivenName = {this.GivenName ?? "null"}");
+            toStringOutput.Add($"this.FamilyName = {this.FamilyName ?? "null"}");
+            toStringOutput.Add($"this.EmailAddress = {this.EmailAddress ?? "null"}");
             toStringOutput.Add($"this.Address = {(this.Address == null ? "null" : this.Address.ToString())}");
-            toStringOutput.Add($"this.PhoneNumber = {(this.PhoneNumber == null ? "null" : this.PhoneNumber)}");
-            toStringOutput.Add($"this.CompanyName = {(this.CompanyName == null ? "null" : this.CompanyName)}");
+            toStringOutput.Add($"this.PhoneNumber = {this.PhoneNumber ?? "null"}");
+            toStringOutput.Add($"this.CompanyName = {this.CompanyName ?? "null"}");
             toStringOutput.Add($"this.TaxIds = {(this.TaxIds == null ? "null" : this.TaxIds.ToString())}");
         }
 
@@ -326,7 +329,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerId()
             {
@@ -340,7 +343,8 @@ namespace Square.Models
             /// <returns> InvoiceRecipient. </returns>
             public InvoiceRecipient Build()
             {
-                return new InvoiceRecipient(shouldSerialize,
+                return new InvoiceRecipient(
+                    shouldSerialize,
                     this.customerId,
                     this.givenName,
                     this.familyName,

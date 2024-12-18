@@ -44,8 +44,8 @@ namespace Square.Models
                 shouldSerialize["uid"] = true;
                 this.Uid = uid;
             }
-
             this.AppliedMoney = appliedMoney;
+
             if (sourceTenderUid != null)
             {
                 shouldSerialize["source_tender_uid"] = true;
@@ -57,9 +57,10 @@ namespace Square.Models
                 shouldSerialize["source_tender_id"] = true;
                 this.SourceTenderId = sourceTenderId;
             }
-
         }
-        internal OrderReturnTip(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderReturnTip(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             Models.Money appliedMoney = null,
             string sourceTenderUid = null,
@@ -105,9 +106,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderReturnTip : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -141,39 +140,39 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderReturnTip other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.AppliedMoney == null && other.AppliedMoney == null) || (this.AppliedMoney?.Equals(other.AppliedMoney) == true)) &&
-                ((this.SourceTenderUid == null && other.SourceTenderUid == null) || (this.SourceTenderUid?.Equals(other.SourceTenderUid) == true)) &&
-                ((this.SourceTenderId == null && other.SourceTenderId == null) || (this.SourceTenderId?.Equals(other.SourceTenderId) == true));
+            return obj is OrderReturnTip other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.AppliedMoney == null && other.AppliedMoney == null ||
+                 this.AppliedMoney?.Equals(other.AppliedMoney) == true) &&
+                (this.SourceTenderUid == null && other.SourceTenderUid == null ||
+                 this.SourceTenderUid?.Equals(other.SourceTenderUid) == true) &&
+                (this.SourceTenderId == null && other.SourceTenderId == null ||
+                 this.SourceTenderId?.Equals(other.SourceTenderId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1771795951;
-            hashCode = HashCode.Combine(this.Uid, this.AppliedMoney, this.SourceTenderUid, this.SourceTenderId);
+            var hashCode = -1771795951;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.AppliedMoney, this.SourceTenderUid, this.SourceTenderId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
             toStringOutput.Add($"this.AppliedMoney = {(this.AppliedMoney == null ? "null" : this.AppliedMoney.ToString())}");
-            toStringOutput.Add($"this.SourceTenderUid = {(this.SourceTenderUid == null ? "null" : this.SourceTenderUid)}");
-            toStringOutput.Add($"this.SourceTenderId = {(this.SourceTenderId == null ? "null" : this.SourceTenderId)}");
+            toStringOutput.Add($"this.SourceTenderUid = {this.SourceTenderUid ?? "null"}");
+            toStringOutput.Add($"this.SourceTenderId = {this.SourceTenderId ?? "null"}");
         }
 
         /// <summary>
@@ -255,7 +254,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -263,7 +262,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSourceTenderUid()
             {
@@ -271,7 +270,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSourceTenderId()
             {
@@ -285,7 +284,8 @@ namespace Square.Models
             /// <returns> OrderReturnTip. </returns>
             public OrderReturnTip Build()
             {
-                return new OrderReturnTip(shouldSerialize,
+                return new OrderReturnTip(
+                    shouldSerialize,
                     this.uid,
                     this.appliedMoney,
                     this.sourceTenderUid,

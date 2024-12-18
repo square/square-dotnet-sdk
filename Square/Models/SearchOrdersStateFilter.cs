@@ -39,35 +39,30 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchOrdersStateFilter : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchOrdersStateFilter other &&                ((this.States == null && other.States == null) || (this.States?.Equals(other.States) == true));
+            return obj is SearchOrdersStateFilter other &&
+                (this.States == null && other.States == null ||
+                 this.States?.Equals(other.States) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 615021182;
-            hashCode = HashCode.Combine(this.States);
+            var hashCode = 615021182;
+            hashCode = HashCode.Combine(hashCode, this.States);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

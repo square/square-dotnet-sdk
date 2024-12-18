@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["amount"] = true;
                 this.Amount = amount;
             }
-
             this.Currency = currency;
         }
-        internal Money(Dictionary<string, bool> shouldSerialize,
+
+        internal Money(
+            Dictionary<string, bool> shouldSerialize,
             long? amount = null,
             string currency = null)
         {
@@ -70,9 +71,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Money : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -88,27 +87,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Money other &&                ((this.Amount == null && other.Amount == null) || (this.Amount?.Equals(other.Amount) == true)) &&
-                ((this.Currency == null && other.Currency == null) || (this.Currency?.Equals(other.Currency) == true));
+            return obj is Money other &&
+                (this.Amount == null && other.Amount == null ||
+                 this.Amount?.Equals(other.Amount) == true) &&
+                (this.Currency == null && other.Currency == null ||
+                 this.Currency?.Equals(other.Currency) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -205100821;
-            hashCode = HashCode.Combine(this.Amount, this.Currency);
+            var hashCode = -205100821;
+            hashCode = HashCode.Combine(hashCode, this.Amount, this.Currency);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -168,7 +165,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAmount()
             {
@@ -182,7 +179,8 @@ namespace Square.Models
             /// <returns> Money. </returns>
             public Money Build()
             {
-                return new Money(shouldSerialize,
+                return new Money(
+                    shouldSerialize,
                     this.amount,
                     this.currency);
             }

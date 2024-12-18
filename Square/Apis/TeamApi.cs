@@ -141,10 +141,134 @@ namespace Square.Apis
               .ExecuteAsync(cancellationToken).ConfigureAwait(false);
 
         /// <summary>
-        /// Returns a paginated list of `TeamMember` objects for a business.
-        /// The list can be filtered by the following:.
-        /// - location IDs.
-        /// - `status`.
+        /// Lists jobs in a seller account. Results are sorted by title in ascending order.
+        /// </summary>
+        /// <param name="cursor">Optional parameter: The pagination cursor returned by the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
+        /// <returns>Returns the Models.ListJobsResponse response from the API call.</returns>
+        public Models.ListJobsResponse ListJobs(
+                string cursor = null)
+            => CoreHelper.RunTask(ListJobsAsync(cursor));
+
+        /// <summary>
+        /// Lists jobs in a seller account. Results are sorted by title in ascending order.
+        /// </summary>
+        /// <param name="cursor">Optional parameter: The pagination cursor returned by the previous call to this endpoint. Provide this cursor to retrieve the next page of results for your original request. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.ListJobsResponse response from the API call.</returns>
+        public async Task<Models.ListJobsResponse> ListJobsAsync(
+                string cursor = null,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.ListJobsResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/team-members/jobs")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Query(_query => _query.Setup("cursor", cursor))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Creates a job in a seller account. A job defines a title and tip eligibility. Note that.
+        /// compensation is defined in a [job assignment]($m/JobAssignment) in a team member's wage setting.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.CreateJobResponse response from the API call.</returns>
+        public Models.CreateJobResponse CreateJob(
+                Models.CreateJobRequest body)
+            => CoreHelper.RunTask(CreateJobAsync(body));
+
+        /// <summary>
+        /// Creates a job in a seller account. A job defines a title and tip eligibility. Note that.
+        /// compensation is defined in a [job assignment]($m/JobAssignment) in a team member's wage setting.
+        /// </summary>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.CreateJobResponse response from the API call.</returns>
+        public async Task<Models.CreateJobResponse> CreateJobAsync(
+                Models.CreateJobRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.CreateJobResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Post, "/v2/team-members/jobs")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Retrieves a specified job.
+        /// </summary>
+        /// <param name="jobId">Required parameter: The ID of the job to retrieve..</param>
+        /// <returns>Returns the Models.RetrieveJobResponse response from the API call.</returns>
+        public Models.RetrieveJobResponse RetrieveJob(
+                string jobId)
+            => CoreHelper.RunTask(RetrieveJobAsync(jobId));
+
+        /// <summary>
+        /// Retrieves a specified job.
+        /// </summary>
+        /// <param name="jobId">Required parameter: The ID of the job to retrieve..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.RetrieveJobResponse response from the API call.</returns>
+        public async Task<Models.RetrieveJobResponse> RetrieveJobAsync(
+                string jobId,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.RetrieveJobResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Get, "/v2/team-members/jobs/{job_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Template(_template => _template.Setup("job_id", jobId))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Updates the title or tip eligibility of a job. Changes to the title propagate to all.
+        /// `JobAssignment`, `Shift`, and `TeamMemberWage` objects that reference the job ID. Changes to.
+        /// tip eligibility propagate to all `TeamMemberWage` objects that reference the job ID.
+        /// </summary>
+        /// <param name="jobId">Required parameter: The ID of the job to update..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <returns>Returns the Models.UpdateJobResponse response from the API call.</returns>
+        public Models.UpdateJobResponse UpdateJob(
+                string jobId,
+                Models.UpdateJobRequest body)
+            => CoreHelper.RunTask(UpdateJobAsync(jobId, body));
+
+        /// <summary>
+        /// Updates the title or tip eligibility of a job. Changes to the title propagate to all.
+        /// `JobAssignment`, `Shift`, and `TeamMemberWage` objects that reference the job ID. Changes to.
+        /// tip eligibility propagate to all `TeamMemberWage` objects that reference the job ID.
+        /// </summary>
+        /// <param name="jobId">Required parameter: The ID of the job to update..</param>
+        /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
+        /// <param name="cancellationToken"> cancellationToken. </param>
+        /// <returns>Returns the Models.UpdateJobResponse response from the API call.</returns>
+        public async Task<Models.UpdateJobResponse> UpdateJobAsync(
+                string jobId,
+                Models.UpdateJobRequest body,
+                CancellationToken cancellationToken = default)
+            => await CreateApiCall<Models.UpdateJobResponse>()
+              .RequestBuilder(_requestBuilder => _requestBuilder
+                  .Setup(HttpMethod.Put, "/v2/team-members/jobs/{job_id}")
+                  .WithAuth("global")
+                  .Parameters(_parameters => _parameters
+                      .Body(_bodyParameter => _bodyParameter.Setup(body))
+                      .Template(_template => _template.Setup("job_id", jobId))
+                      .Header(_header => _header.Setup("Content-Type", "application/json"))))
+              .ResponseHandler(_responseHandler => _responseHandler
+                  .ContextAdder((_result, _context) => _result.ContextSetter(_context)))
+              .ExecuteAsync(cancellationToken).ConfigureAwait(false);
+
+        /// <summary>
+        /// Returns a paginated list of `TeamMember` objects for a business. .
+        /// The list can be filtered by location IDs, `ACTIVE` or `INACTIVE` status, or whether.
+        /// the team member is the Square account owner.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <returns>Returns the Models.SearchTeamMembersResponse response from the API call.</returns>
@@ -153,10 +277,9 @@ namespace Square.Apis
             => CoreHelper.RunTask(SearchTeamMembersAsync(body));
 
         /// <summary>
-        /// Returns a paginated list of `TeamMember` objects for a business.
-        /// The list can be filtered by the following:.
-        /// - location IDs.
-        /// - `status`.
+        /// Returns a paginated list of `TeamMember` objects for a business. .
+        /// The list can be filtered by location IDs, `ACTIVE` or `INACTIVE` status, or whether.
+        /// the team member is the Square account owner.
         /// </summary>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -243,8 +366,10 @@ namespace Square.Apis
 
         /// <summary>
         /// Retrieves a `WageSetting` object for a team member specified.
-        /// by `TeamMember.id`.
-        /// Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
+        /// by `TeamMember.id`. For more information, see.
+        /// [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
+        /// Square recommends using [RetrieveTeamMember]($e/Team/RetrieveTeamMember) or [SearchTeamMembers]($e/Team/SearchTeamMembers).
+        /// to get this information directly from the `TeamMember.wage_setting` field.
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member for which to retrieve the wage setting..</param>
         /// <returns>Returns the Models.RetrieveWageSettingResponse response from the API call.</returns>
@@ -254,8 +379,10 @@ namespace Square.Apis
 
         /// <summary>
         /// Retrieves a `WageSetting` object for a team member specified.
-        /// by `TeamMember.id`.
-        /// Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
+        /// by `TeamMember.id`. For more information, see.
+        /// [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).
+        /// Square recommends using [RetrieveTeamMember]($e/Team/RetrieveTeamMember) or [SearchTeamMembers]($e/Team/SearchTeamMembers).
+        /// to get this information directly from the `TeamMember.wage_setting` field.
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member for which to retrieve the wage setting..</param>
         /// <param name="cancellationToken"> cancellationToken. </param>
@@ -275,10 +402,12 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates or updates a `WageSetting` object. The object is created if a.
-        /// `WageSetting` with the specified `team_member_id` does not exist. Otherwise,.
+        /// `WageSetting` with the specified `team_member_id` doesn't exist. Otherwise,.
         /// it fully replaces the `WageSetting` object for the team member.
-        /// The `WageSetting` is returned on a successful update.
-        /// Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).
+        /// The `WageSetting` is returned on a successful update. For more information, see.
+        /// [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).
+        /// Square recommends using [CreateTeamMember]($e/Team/CreateTeamMember) or [UpdateTeamMember]($e/Team/UpdateTeamMember).
+        /// to manage the `TeamMember.wage_setting` field directly.
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member for which to update the `WageSetting` object..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>
@@ -290,10 +419,12 @@ namespace Square.Apis
 
         /// <summary>
         /// Creates or updates a `WageSetting` object. The object is created if a.
-        /// `WageSetting` with the specified `team_member_id` does not exist. Otherwise,.
+        /// `WageSetting` with the specified `team_member_id` doesn't exist. Otherwise,.
         /// it fully replaces the `WageSetting` object for the team member.
-        /// The `WageSetting` is returned on a successful update.
-        /// Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).
+        /// The `WageSetting` is returned on a successful update. For more information, see.
+        /// [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).
+        /// Square recommends using [CreateTeamMember]($e/Team/CreateTeamMember) or [UpdateTeamMember]($e/Team/UpdateTeamMember).
+        /// to manage the `TeamMember.wage_setting` field directly.
         /// </summary>
         /// <param name="teamMemberId">Required parameter: The ID of the team member for which to update the `WageSetting` object..</param>
         /// <param name="body">Required parameter: An object containing the fields to POST for the request.  See the corresponding object definition for field details..</param>

@@ -81,50 +81,49 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TaxIds : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TaxIds other &&                ((this.EuVat == null && other.EuVat == null) || (this.EuVat?.Equals(other.EuVat) == true)) &&
-                ((this.FrSiret == null && other.FrSiret == null) || (this.FrSiret?.Equals(other.FrSiret) == true)) &&
-                ((this.FrNaf == null && other.FrNaf == null) || (this.FrNaf?.Equals(other.FrNaf) == true)) &&
-                ((this.EsNif == null && other.EsNif == null) || (this.EsNif?.Equals(other.EsNif) == true)) &&
-                ((this.JpQii == null && other.JpQii == null) || (this.JpQii?.Equals(other.JpQii) == true));
+            return obj is TaxIds other &&
+                (this.EuVat == null && other.EuVat == null ||
+                 this.EuVat?.Equals(other.EuVat) == true) &&
+                (this.FrSiret == null && other.FrSiret == null ||
+                 this.FrSiret?.Equals(other.FrSiret) == true) &&
+                (this.FrNaf == null && other.FrNaf == null ||
+                 this.FrNaf?.Equals(other.FrNaf) == true) &&
+                (this.EsNif == null && other.EsNif == null ||
+                 this.EsNif?.Equals(other.EsNif) == true) &&
+                (this.JpQii == null && other.JpQii == null ||
+                 this.JpQii?.Equals(other.JpQii) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1902523062;
-            hashCode = HashCode.Combine(this.EuVat, this.FrSiret, this.FrNaf, this.EsNif, this.JpQii);
+            var hashCode = 1902523062;
+            hashCode = HashCode.Combine(hashCode, this.EuVat, this.FrSiret, this.FrNaf, this.EsNif, this.JpQii);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.EuVat = {(this.EuVat == null ? "null" : this.EuVat)}");
-            toStringOutput.Add($"this.FrSiret = {(this.FrSiret == null ? "null" : this.FrSiret)}");
-            toStringOutput.Add($"this.FrNaf = {(this.FrNaf == null ? "null" : this.FrNaf)}");
-            toStringOutput.Add($"this.EsNif = {(this.EsNif == null ? "null" : this.EsNif)}");
-            toStringOutput.Add($"this.JpQii = {(this.JpQii == null ? "null" : this.JpQii)}");
+            toStringOutput.Add($"this.EuVat = {this.EuVat ?? "null"}");
+            toStringOutput.Add($"this.FrSiret = {this.FrSiret ?? "null"}");
+            toStringOutput.Add($"this.FrNaf = {this.FrNaf ?? "null"}");
+            toStringOutput.Add($"this.EsNif = {this.EsNif ?? "null"}");
+            toStringOutput.Add($"this.JpQii = {this.JpQii ?? "null"}");
         }
 
         /// <summary>

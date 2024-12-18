@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["with_definitions"] = true;
                 this.WithDefinitions = withDefinitions;
             }
-
         }
-        internal ListCustomerCustomAttributesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListCustomerCustomAttributesRequest(
+            Dictionary<string, bool> shouldSerialize,
             int? limit = null,
             string cursor = null,
             bool? withDefinitions = null)
@@ -95,9 +96,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListCustomerCustomAttributesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -131,28 +130,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListCustomerCustomAttributesRequest other &&                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.WithDefinitions == null && other.WithDefinitions == null) || (this.WithDefinitions?.Equals(other.WithDefinitions) == true));
+            return obj is ListCustomerCustomAttributesRequest other &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.WithDefinitions == null && other.WithDefinitions == null ||
+                 this.WithDefinitions?.Equals(other.WithDefinitions) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -113426727;
-            hashCode = HashCode.Combine(this.Limit, this.Cursor, this.WithDefinitions);
+            var hashCode = -113426727;
+            hashCode = HashCode.Combine(hashCode, this.Limit, this.Cursor, this.WithDefinitions);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -160,7 +158,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.WithDefinitions = {(this.WithDefinitions == null ? "null" : this.WithDefinitions.ToString())}");
         }
 
@@ -230,7 +228,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -238,7 +236,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -246,7 +244,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetWithDefinitions()
             {
@@ -260,7 +258,8 @@ namespace Square.Models
             /// <returns> ListCustomerCustomAttributesRequest. </returns>
             public ListCustomerCustomAttributesRequest Build()
             {
-                return new ListCustomerCustomAttributesRequest(shouldSerialize,
+                return new ListCustomerCustomAttributesRequest(
+                    shouldSerialize,
                     this.limit,
                     this.cursor,
                     this.withDefinitions);

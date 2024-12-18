@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.Charge = charge;
         }
-        internal ShippingFee(Dictionary<string, bool> shouldSerialize,
+
+        internal ShippingFee(
+            Dictionary<string, bool> shouldSerialize,
             Models.Money charge,
             string name = null)
         {
@@ -71,9 +72,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ShippingFee : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -89,34 +88,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ShippingFee other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.Charge == null && other.Charge == null) || (this.Charge?.Equals(other.Charge) == true));
+            return obj is ShippingFee other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.Charge == null && other.Charge == null ||
+                 this.Charge?.Equals(other.Charge) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 643719762;
-            hashCode = HashCode.Combine(this.Name, this.Charge);
+            var hashCode = 643719762;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.Charge);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.Charge = {(this.Charge == null ? "null" : this.Charge.ToString())}");
         }
 
@@ -179,7 +176,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -193,7 +190,8 @@ namespace Square.Models
             /// <returns> ShippingFee. </returns>
             public ShippingFee Build()
             {
-                return new ShippingFee(shouldSerialize,
+                return new ShippingFee(
+                    shouldSerialize,
                     this.charge,
                     this.name);
             }

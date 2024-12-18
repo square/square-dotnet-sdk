@@ -50,36 +50,32 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CreateLoyaltyPromotionRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CreateLoyaltyPromotionRequest other &&                ((this.LoyaltyPromotion == null && other.LoyaltyPromotion == null) || (this.LoyaltyPromotion?.Equals(other.LoyaltyPromotion) == true)) &&
-                ((this.IdempotencyKey == null && other.IdempotencyKey == null) || (this.IdempotencyKey?.Equals(other.IdempotencyKey) == true));
+            return obj is CreateLoyaltyPromotionRequest other &&
+                (this.LoyaltyPromotion == null && other.LoyaltyPromotion == null ||
+                 this.LoyaltyPromotion?.Equals(other.LoyaltyPromotion) == true) &&
+                (this.IdempotencyKey == null && other.IdempotencyKey == null ||
+                 this.IdempotencyKey?.Equals(other.IdempotencyKey) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1974663227;
-            hashCode = HashCode.Combine(this.LoyaltyPromotion, this.IdempotencyKey);
+            var hashCode = -1974663227;
+            hashCode = HashCode.Combine(hashCode, this.LoyaltyPromotion, this.IdempotencyKey);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -87,7 +83,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.LoyaltyPromotion = {(this.LoyaltyPromotion == null ? "null" : this.LoyaltyPromotion.ToString())}");
-            toStringOutput.Add($"this.IdempotencyKey = {(this.IdempotencyKey == null ? "null" : this.IdempotencyKey)}");
+            toStringOutput.Add($"this.IdempotencyKey = {this.IdempotencyKey ?? "null"}");
         }
 
         /// <summary>

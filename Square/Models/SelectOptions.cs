@@ -65,46 +65,44 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SelectOptions : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SelectOptions other &&                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
-                ((this.Body == null && other.Body == null) || (this.Body?.Equals(other.Body) == true)) &&
-                ((this.Options == null && other.Options == null) || (this.Options?.Equals(other.Options) == true)) &&
-                ((this.SelectedOption == null && other.SelectedOption == null) || (this.SelectedOption?.Equals(other.SelectedOption) == true));
+            return obj is SelectOptions other &&
+                (this.Title == null && other.Title == null ||
+                 this.Title?.Equals(other.Title) == true) &&
+                (this.Body == null && other.Body == null ||
+                 this.Body?.Equals(other.Body) == true) &&
+                (this.Options == null && other.Options == null ||
+                 this.Options?.Equals(other.Options) == true) &&
+                (this.SelectedOption == null && other.SelectedOption == null ||
+                 this.SelectedOption?.Equals(other.SelectedOption) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -488182536;
-            hashCode = HashCode.Combine(this.Title, this.Body, this.Options, this.SelectedOption);
+            var hashCode = -488182536;
+            hashCode = HashCode.Combine(hashCode, this.Title, this.Body, this.Options, this.SelectedOption);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
-            toStringOutput.Add($"this.Body = {(this.Body == null ? "null" : this.Body)}");
+            toStringOutput.Add($"this.Title = {this.Title ?? "null"}");
+            toStringOutput.Add($"this.Body = {this.Body ?? "null"}");
             toStringOutput.Add($"this.Options = {(this.Options == null ? "null" : $"[{string.Join(", ", this.Options)} ]")}");
             toStringOutput.Add($"this.SelectedOption = {(this.SelectedOption == null ? "null" : this.SelectedOption.ToString())}");
         }

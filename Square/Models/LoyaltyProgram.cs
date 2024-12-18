@@ -48,33 +48,34 @@ namespace Square.Models
                 { "location_ids", false },
                 { "accrual_rules", false }
             };
-
             this.Id = id;
             this.Status = status;
+
             if (rewardTiers != null)
             {
                 shouldSerialize["reward_tiers"] = true;
                 this.RewardTiers = rewardTiers;
             }
-
             this.ExpirationPolicy = expirationPolicy;
             this.Terminology = terminology;
+
             if (locationIds != null)
             {
                 shouldSerialize["location_ids"] = true;
                 this.LocationIds = locationIds;
             }
-
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+
             if (accrualRules != null)
             {
                 shouldSerialize["accrual_rules"] = true;
                 this.AccrualRules = accrualRules;
             }
-
         }
-        internal LoyaltyProgram(Dictionary<string, bool> shouldSerialize,
+
+        internal LoyaltyProgram(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string status = null,
             IList<Models.LoyaltyProgramRewardTier> rewardTiers = null,
@@ -158,9 +159,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyProgram : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -194,50 +193,55 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyProgram other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.RewardTiers == null && other.RewardTiers == null) || (this.RewardTiers?.Equals(other.RewardTiers) == true)) &&
-                ((this.ExpirationPolicy == null && other.ExpirationPolicy == null) || (this.ExpirationPolicy?.Equals(other.ExpirationPolicy) == true)) &&
-                ((this.Terminology == null && other.Terminology == null) || (this.Terminology?.Equals(other.Terminology) == true)) &&
-                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.AccrualRules == null && other.AccrualRules == null) || (this.AccrualRules?.Equals(other.AccrualRules) == true));
+            return obj is LoyaltyProgram other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.RewardTiers == null && other.RewardTiers == null ||
+                 this.RewardTiers?.Equals(other.RewardTiers) == true) &&
+                (this.ExpirationPolicy == null && other.ExpirationPolicy == null ||
+                 this.ExpirationPolicy?.Equals(other.ExpirationPolicy) == true) &&
+                (this.Terminology == null && other.Terminology == null ||
+                 this.Terminology?.Equals(other.Terminology) == true) &&
+                (this.LocationIds == null && other.LocationIds == null ||
+                 this.LocationIds?.Equals(other.LocationIds) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.AccrualRules == null && other.AccrualRules == null ||
+                 this.AccrualRules?.Equals(other.AccrualRules) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2031047851;
-            hashCode = HashCode.Combine(this.Id, this.Status, this.RewardTiers, this.ExpirationPolicy, this.Terminology, this.LocationIds, this.CreatedAt);
+            var hashCode = 2031047851;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Status, this.RewardTiers, this.ExpirationPolicy, this.Terminology, this.LocationIds, this.CreatedAt);
 
             hashCode = HashCode.Combine(hashCode, this.UpdatedAt, this.AccrualRules);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
             toStringOutput.Add($"this.RewardTiers = {(this.RewardTiers == null ? "null" : $"[{string.Join(", ", this.RewardTiers)} ]")}");
             toStringOutput.Add($"this.ExpirationPolicy = {(this.ExpirationPolicy == null ? "null" : this.ExpirationPolicy.ToString())}");
             toStringOutput.Add($"this.Terminology = {(this.Terminology == null ? "null" : this.Terminology.ToString())}");
             toStringOutput.Add($"this.LocationIds = {(this.LocationIds == null ? "null" : $"[{string.Join(", ", this.LocationIds)} ]")}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
             toStringOutput.Add($"this.AccrualRules = {(this.AccrualRules == null ? "null" : $"[{string.Join(", ", this.AccrualRules)} ]")}");
         }
 
@@ -385,7 +389,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRewardTiers()
             {
@@ -393,7 +397,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationIds()
             {
@@ -401,7 +405,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAccrualRules()
             {
@@ -415,7 +419,8 @@ namespace Square.Models
             /// <returns> LoyaltyProgram. </returns>
             public LoyaltyProgram Build()
             {
-                return new LoyaltyProgram(shouldSerialize,
+                return new LoyaltyProgram(
+                    shouldSerialize,
                     this.id,
                     this.status,
                     this.rewardTiers,

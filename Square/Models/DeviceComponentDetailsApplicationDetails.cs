@@ -37,9 +37,9 @@ namespace Square.Models
                 { "session_location", false },
                 { "device_code_id", false }
             };
-
             this.ApplicationType = applicationType;
             this.Version = version;
+
             if (sessionLocation != null)
             {
                 shouldSerialize["session_location"] = true;
@@ -51,9 +51,10 @@ namespace Square.Models
                 shouldSerialize["device_code_id"] = true;
                 this.DeviceCodeId = deviceCodeId;
             }
-
         }
-        internal DeviceComponentDetailsApplicationDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceComponentDetailsApplicationDetails(
+            Dictionary<string, bool> shouldSerialize,
             string applicationType = null,
             string version = null,
             string sessionLocation = null,
@@ -94,9 +95,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceComponentDetailsApplicationDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -121,29 +120,29 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceComponentDetailsApplicationDetails other &&                ((this.ApplicationType == null && other.ApplicationType == null) || (this.ApplicationType?.Equals(other.ApplicationType) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.SessionLocation == null && other.SessionLocation == null) || (this.SessionLocation?.Equals(other.SessionLocation) == true)) &&
-                ((this.DeviceCodeId == null && other.DeviceCodeId == null) || (this.DeviceCodeId?.Equals(other.DeviceCodeId) == true));
+            return obj is DeviceComponentDetailsApplicationDetails other &&
+                (this.ApplicationType == null && other.ApplicationType == null ||
+                 this.ApplicationType?.Equals(other.ApplicationType) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.SessionLocation == null && other.SessionLocation == null ||
+                 this.SessionLocation?.Equals(other.SessionLocation) == true) &&
+                (this.DeviceCodeId == null && other.DeviceCodeId == null ||
+                 this.DeviceCodeId?.Equals(other.DeviceCodeId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1410667962;
-            hashCode = HashCode.Combine(this.ApplicationType, this.Version, this.SessionLocation, this.DeviceCodeId);
+            var hashCode = -1410667962;
+            hashCode = HashCode.Combine(hashCode, this.ApplicationType, this.Version, this.SessionLocation, this.DeviceCodeId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -151,9 +150,9 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.ApplicationType = {(this.ApplicationType == null ? "null" : this.ApplicationType.ToString())}");
-            toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version)}");
-            toStringOutput.Add($"this.SessionLocation = {(this.SessionLocation == null ? "null" : this.SessionLocation)}");
-            toStringOutput.Add($"this.DeviceCodeId = {(this.DeviceCodeId == null ? "null" : this.DeviceCodeId)}");
+            toStringOutput.Add($"this.Version = {this.Version ?? "null"}");
+            toStringOutput.Add($"this.SessionLocation = {this.SessionLocation ?? "null"}");
+            toStringOutput.Add($"this.DeviceCodeId = {this.DeviceCodeId ?? "null"}");
         }
 
         /// <summary>
@@ -233,7 +232,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSessionLocation()
             {
@@ -241,7 +240,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeviceCodeId()
             {
@@ -255,7 +254,8 @@ namespace Square.Models
             /// <returns> DeviceComponentDetailsApplicationDetails. </returns>
             public DeviceComponentDetailsApplicationDetails Build()
             {
-                return new DeviceComponentDetailsApplicationDetails(shouldSerialize,
+                return new DeviceComponentDetailsApplicationDetails(
+                    shouldSerialize,
                     this.applicationType,
                     this.version,
                     this.sessionLocation,

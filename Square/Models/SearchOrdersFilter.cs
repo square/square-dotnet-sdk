@@ -87,39 +87,38 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SearchOrdersFilter : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SearchOrdersFilter other &&                ((this.StateFilter == null && other.StateFilter == null) || (this.StateFilter?.Equals(other.StateFilter) == true)) &&
-                ((this.DateTimeFilter == null && other.DateTimeFilter == null) || (this.DateTimeFilter?.Equals(other.DateTimeFilter) == true)) &&
-                ((this.FulfillmentFilter == null && other.FulfillmentFilter == null) || (this.FulfillmentFilter?.Equals(other.FulfillmentFilter) == true)) &&
-                ((this.SourceFilter == null && other.SourceFilter == null) || (this.SourceFilter?.Equals(other.SourceFilter) == true)) &&
-                ((this.CustomerFilter == null && other.CustomerFilter == null) || (this.CustomerFilter?.Equals(other.CustomerFilter) == true));
+            return obj is SearchOrdersFilter other &&
+                (this.StateFilter == null && other.StateFilter == null ||
+                 this.StateFilter?.Equals(other.StateFilter) == true) &&
+                (this.DateTimeFilter == null && other.DateTimeFilter == null ||
+                 this.DateTimeFilter?.Equals(other.DateTimeFilter) == true) &&
+                (this.FulfillmentFilter == null && other.FulfillmentFilter == null ||
+                 this.FulfillmentFilter?.Equals(other.FulfillmentFilter) == true) &&
+                (this.SourceFilter == null && other.SourceFilter == null ||
+                 this.SourceFilter?.Equals(other.SourceFilter) == true) &&
+                (this.CustomerFilter == null && other.CustomerFilter == null ||
+                 this.CustomerFilter?.Equals(other.CustomerFilter) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -566134060;
-            hashCode = HashCode.Combine(this.StateFilter, this.DateTimeFilter, this.FulfillmentFilter, this.SourceFilter, this.CustomerFilter);
+            var hashCode = -566134060;
+            hashCode = HashCode.Combine(hashCode, this.StateFilter, this.DateTimeFilter, this.FulfillmentFilter, this.SourceFilter, this.CustomerFilter);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

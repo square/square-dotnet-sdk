@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["language_code"] = true;
                 this.LanguageCode = languageCode;
             }
-
         }
-        internal StandardUnitDescriptionGroup(Dictionary<string, bool> shouldSerialize,
+
+        internal StandardUnitDescriptionGroup(
+            Dictionary<string, bool> shouldSerialize,
             IList<Models.StandardUnitDescription> standardUnitDescriptions = null,
             string languageCode = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"StandardUnitDescriptionGroup : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,27 +98,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is StandardUnitDescriptionGroup other &&                ((this.StandardUnitDescriptions == null && other.StandardUnitDescriptions == null) || (this.StandardUnitDescriptions?.Equals(other.StandardUnitDescriptions) == true)) &&
-                ((this.LanguageCode == null && other.LanguageCode == null) || (this.LanguageCode?.Equals(other.LanguageCode) == true));
+            return obj is StandardUnitDescriptionGroup other &&
+                (this.StandardUnitDescriptions == null && other.StandardUnitDescriptions == null ||
+                 this.StandardUnitDescriptions?.Equals(other.StandardUnitDescriptions) == true) &&
+                (this.LanguageCode == null && other.LanguageCode == null ||
+                 this.LanguageCode?.Equals(other.LanguageCode) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1512557629;
-            hashCode = HashCode.Combine(this.StandardUnitDescriptions, this.LanguageCode);
+            var hashCode = -1512557629;
+            hashCode = HashCode.Combine(hashCode, this.StandardUnitDescriptions, this.LanguageCode);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -127,7 +124,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.StandardUnitDescriptions = {(this.StandardUnitDescriptions == null ? "null" : $"[{string.Join(", ", this.StandardUnitDescriptions)} ]")}");
-            toStringOutput.Add($"this.LanguageCode = {(this.LanguageCode == null ? "null" : this.LanguageCode)}");
+            toStringOutput.Add($"this.LanguageCode = {this.LanguageCode ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStandardUnitDescriptions()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLanguageCode()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> StandardUnitDescriptionGroup. </returns>
             public StandardUnitDescriptionGroup Build()
             {
-                return new StandardUnitDescriptionGroup(shouldSerialize,
+                return new StandardUnitDescriptionGroup(
+                    shouldSerialize,
                     this.standardUnitDescriptions,
                     this.languageCode);
             }

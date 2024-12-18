@@ -36,9 +36,10 @@ namespace Square.Models
                 shouldSerialize["order_value"] = true;
                 this.OrderValue = orderValue;
             }
-
         }
-        internal PaginationCursor(Dictionary<string, bool> shouldSerialize,
+
+        internal PaginationCursor(
+            Dictionary<string, bool> shouldSerialize,
             string orderValue = null)
         {
             this.shouldSerialize = shouldSerialize;
@@ -56,9 +57,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PaginationCursor : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -74,33 +73,30 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PaginationCursor other &&                ((this.OrderValue == null && other.OrderValue == null) || (this.OrderValue?.Equals(other.OrderValue) == true));
+            return obj is PaginationCursor other &&
+                (this.OrderValue == null && other.OrderValue == null ||
+                 this.OrderValue?.Equals(other.OrderValue) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1764629089;
-            hashCode = HashCode.Combine(this.OrderValue);
+            var hashCode = 1764629089;
+            hashCode = HashCode.Combine(hashCode, this.OrderValue);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.OrderValue = {(this.OrderValue == null ? "null" : this.OrderValue)}");
+            toStringOutput.Add($"this.OrderValue = {this.OrderValue ?? "null"}");
         }
 
         /// <summary>
@@ -139,7 +135,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrderValue()
             {
@@ -153,7 +149,8 @@ namespace Square.Models
             /// <returns> PaginationCursor. </returns>
             public PaginationCursor Build()
             {
-                return new PaginationCursor(shouldSerialize,
+                return new PaginationCursor(
+                    shouldSerialize,
                     this.orderValue);
             }
         }

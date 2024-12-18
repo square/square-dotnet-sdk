@@ -56,19 +56,20 @@ namespace Square.Models
                 shouldSerialize["employee_ids"] = true;
                 this.EmployeeIds = employeeIds;
             }
-
             this.Status = status;
             this.Start = start;
             this.End = end;
             this.Workday = workday;
+
             if (teamMemberIds != null)
             {
                 shouldSerialize["team_member_ids"] = true;
                 this.TeamMemberIds = teamMemberIds;
             }
-
         }
-        internal ShiftFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal ShiftFilter(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> locationIds = null,
             IList<string> employeeIds = null,
             string status = null,
@@ -142,9 +143,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ShiftFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -178,32 +177,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ShiftFilter other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((this.EmployeeIds == null && other.EmployeeIds == null) || (this.EmployeeIds?.Equals(other.EmployeeIds) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.Start == null && other.Start == null) || (this.Start?.Equals(other.Start) == true)) &&
-                ((this.End == null && other.End == null) || (this.End?.Equals(other.End) == true)) &&
-                ((this.Workday == null && other.Workday == null) || (this.Workday?.Equals(other.Workday) == true)) &&
-                ((this.TeamMemberIds == null && other.TeamMemberIds == null) || (this.TeamMemberIds?.Equals(other.TeamMemberIds) == true));
+            return obj is ShiftFilter other &&
+                (this.LocationIds == null && other.LocationIds == null ||
+                 this.LocationIds?.Equals(other.LocationIds) == true) &&
+                (this.EmployeeIds == null && other.EmployeeIds == null ||
+                 this.EmployeeIds?.Equals(other.EmployeeIds) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.Start == null && other.Start == null ||
+                 this.Start?.Equals(other.Start) == true) &&
+                (this.End == null && other.End == null ||
+                 this.End?.Equals(other.End) == true) &&
+                (this.Workday == null && other.Workday == null ||
+                 this.Workday?.Equals(other.Workday) == true) &&
+                (this.TeamMemberIds == null && other.TeamMemberIds == null ||
+                 this.TeamMemberIds?.Equals(other.TeamMemberIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 432854802;
-            hashCode = HashCode.Combine(this.LocationIds, this.EmployeeIds, this.Status, this.Start, this.End, this.Workday, this.TeamMemberIds);
+            var hashCode = 432854802;
+            hashCode = HashCode.Combine(hashCode, this.LocationIds, this.EmployeeIds, this.Status, this.Start, this.End, this.Workday, this.TeamMemberIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -337,7 +339,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationIds()
             {
@@ -345,7 +347,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmployeeIds()
             {
@@ -353,7 +355,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTeamMemberIds()
             {
@@ -367,7 +369,8 @@ namespace Square.Models
             /// <returns> ShiftFilter. </returns>
             public ShiftFilter Build()
             {
-                return new ShiftFilter(shouldSerialize,
+                return new ShiftFilter(
+                    shouldSerialize,
                     this.locationIds,
                     this.employeeIds,
                     this.status,

@@ -39,8 +39,8 @@ namespace Square.Models
                 { "status_code", false },
                 { "payload", false }
             };
-
             this.Id = id;
+
             if (statusCode != null)
             {
                 shouldSerialize["status_code"] = true;
@@ -52,11 +52,12 @@ namespace Square.Models
                 shouldSerialize["payload"] = true;
                 this.Payload = payload;
             }
-
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
         }
-        internal SubscriptionTestResult(Dictionary<string, bool> shouldSerialize,
+
+        internal SubscriptionTestResult(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             int? statusCode = null,
             string payload = null,
@@ -107,9 +108,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SubscriptionTestResult : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -134,41 +133,42 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SubscriptionTestResult other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.StatusCode == null && other.StatusCode == null) || (this.StatusCode?.Equals(other.StatusCode) == true)) &&
-                ((this.Payload == null && other.Payload == null) || (this.Payload?.Equals(other.Payload) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true));
+            return obj is SubscriptionTestResult other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.StatusCode == null && other.StatusCode == null ||
+                 this.StatusCode?.Equals(other.StatusCode) == true) &&
+                (this.Payload == null && other.Payload == null ||
+                 this.Payload?.Equals(other.Payload) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 675695494;
-            hashCode = HashCode.Combine(this.Id, this.StatusCode, this.Payload, this.CreatedAt, this.UpdatedAt);
+            var hashCode = 675695494;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.StatusCode, this.Payload, this.CreatedAt, this.UpdatedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.StatusCode = {(this.StatusCode == null ? "null" : this.StatusCode.ToString())}");
-            toStringOutput.Add($"this.Payload = {(this.Payload == null ? "null" : this.Payload)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
+            toStringOutput.Add($"this.Payload = {this.Payload ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetStatusCode()
             {
@@ -269,7 +269,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPayload()
             {
@@ -283,7 +283,8 @@ namespace Square.Models
             /// <returns> SubscriptionTestResult. </returns>
             public SubscriptionTestResult Build()
             {
-                return new SubscriptionTestResult(shouldSerialize,
+                return new SubscriptionTestResult(
+                    shouldSerialize,
                     this.id,
                     this.statusCode,
                     this.payload,

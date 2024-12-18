@@ -39,7 +39,8 @@ namespace Square.Models
         public HttpContext Context { get; internal set; }
 
         /// <summary>
-        /// An object representing a team member's wage information.
+        /// Represents information about the overtime exemption status, job assignments, and compensation
+        /// for a [team member]($m/TeamMember).
         /// </summary>
         [JsonProperty("wage_setting", NullValueHandling = NullValueHandling.Ignore)]
         public Models.WageSetting WageSetting { get; }
@@ -54,42 +55,39 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"RetrieveWageSettingResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is RetrieveWageSettingResponse other &&                ((this.Context == null && other.Context == null) || (this.Context?.Equals(other.Context) == true)) &&
-                ((this.WageSetting == null && other.WageSetting == null) || (this.WageSetting?.Equals(other.WageSetting) == true)) &&
-                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true));
+            return obj is RetrieveWageSettingResponse other && 
+                ((this.Context == null && other.Context == null) 
+                 || this.Context?.Equals(other.Context) == true) && 
+                (this.WageSetting == null && other.WageSetting == null ||
+                 this.WageSetting?.Equals(other.WageSetting) == true) &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -635387084;
+            var hashCode = -635387084;
 
             if (this.Context != null)
             {
                 hashCode += this.Context.GetHashCode();
             }
-            hashCode = HashCode.Combine(this.WageSetting, this.Errors);
+            hashCode = HashCode.Combine(hashCode, this.WageSetting, this.Errors);
 
             return hashCode;
         }
+
         internal RetrieveWageSettingResponse ContextSetter(HttpContext context)
         {
             this.Context = context;

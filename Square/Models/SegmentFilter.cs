@@ -50,43 +50,39 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SegmentFilter : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SegmentFilter other &&                ((this.ServiceVariationId == null && other.ServiceVariationId == null) || (this.ServiceVariationId?.Equals(other.ServiceVariationId) == true)) &&
-                ((this.TeamMemberIdFilter == null && other.TeamMemberIdFilter == null) || (this.TeamMemberIdFilter?.Equals(other.TeamMemberIdFilter) == true));
+            return obj is SegmentFilter other &&
+                (this.ServiceVariationId == null && other.ServiceVariationId == null ||
+                 this.ServiceVariationId?.Equals(other.ServiceVariationId) == true) &&
+                (this.TeamMemberIdFilter == null && other.TeamMemberIdFilter == null ||
+                 this.TeamMemberIdFilter?.Equals(other.TeamMemberIdFilter) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -2080323319;
-            hashCode = HashCode.Combine(this.ServiceVariationId, this.TeamMemberIdFilter);
+            var hashCode = -2080323319;
+            hashCode = HashCode.Combine(hashCode, this.ServiceVariationId, this.TeamMemberIdFilter);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.ServiceVariationId = {(this.ServiceVariationId == null ? "null" : this.ServiceVariationId)}");
+            toStringOutput.Add($"this.ServiceVariationId = {this.ServiceVariationId ?? "null"}");
             toStringOutput.Add($"this.TeamMemberIdFilter = {(this.TeamMemberIdFilter == null ? "null" : this.TeamMemberIdFilter.ToString())}");
         }
 

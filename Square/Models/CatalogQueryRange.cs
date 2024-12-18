@@ -35,8 +35,8 @@ namespace Square.Models
                 { "attribute_min_value", false },
                 { "attribute_max_value", false }
             };
-
             this.AttributeName = attributeName;
+
             if (attributeMinValue != null)
             {
                 shouldSerialize["attribute_min_value"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["attribute_max_value"] = true;
                 this.AttributeMaxValue = attributeMaxValue;
             }
-
         }
-        internal CatalogQueryRange(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogQueryRange(
+            Dictionary<string, bool> shouldSerialize,
             string attributeName,
             long? attributeMinValue = null,
             long? attributeMaxValue = null)
@@ -83,9 +84,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogQueryRange : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -110,35 +109,34 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogQueryRange other &&                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
-                ((this.AttributeMinValue == null && other.AttributeMinValue == null) || (this.AttributeMinValue?.Equals(other.AttributeMinValue) == true)) &&
-                ((this.AttributeMaxValue == null && other.AttributeMaxValue == null) || (this.AttributeMaxValue?.Equals(other.AttributeMaxValue) == true));
+            return obj is CatalogQueryRange other &&
+                (this.AttributeName == null && other.AttributeName == null ||
+                 this.AttributeName?.Equals(other.AttributeName) == true) &&
+                (this.AttributeMinValue == null && other.AttributeMinValue == null ||
+                 this.AttributeMinValue?.Equals(other.AttributeMinValue) == true) &&
+                (this.AttributeMaxValue == null && other.AttributeMaxValue == null ||
+                 this.AttributeMaxValue?.Equals(other.AttributeMaxValue) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 946255455;
-            hashCode = HashCode.Combine(this.AttributeName, this.AttributeMinValue, this.AttributeMaxValue);
+            var hashCode = 946255455;
+            hashCode = HashCode.Combine(hashCode, this.AttributeName, this.AttributeMinValue, this.AttributeMaxValue);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.AttributeName = {(this.AttributeName == null ? "null" : this.AttributeName)}");
+            toStringOutput.Add($"this.AttributeName = {this.AttributeName ?? "null"}");
             toStringOutput.Add($"this.AttributeMinValue = {(this.AttributeMinValue == null ? "null" : this.AttributeMinValue.ToString())}");
             toStringOutput.Add($"this.AttributeMaxValue = {(this.AttributeMaxValue == null ? "null" : this.AttributeMaxValue.ToString())}");
         }
@@ -217,7 +215,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAttributeMinValue()
             {
@@ -225,7 +223,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAttributeMaxValue()
             {
@@ -239,7 +237,8 @@ namespace Square.Models
             /// <returns> CatalogQueryRange. </returns>
             public CatalogQueryRange Build()
             {
-                return new CatalogQueryRange(shouldSerialize,
+                return new CatalogQueryRange(
+                    shouldSerialize,
                     this.attributeName,
                     this.attributeMinValue,
                     this.attributeMaxValue);

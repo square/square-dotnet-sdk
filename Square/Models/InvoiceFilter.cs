@@ -32,16 +32,17 @@ namespace Square.Models
             {
                 { "customer_ids", false }
             };
-
             this.LocationIds = locationIds;
+
             if (customerIds != null)
             {
                 shouldSerialize["customer_ids"] = true;
                 this.CustomerIds = customerIds;
             }
-
         }
-        internal InvoiceFilter(Dictionary<string, bool> shouldSerialize,
+
+        internal InvoiceFilter(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> locationIds,
             IList<string> customerIds = null)
         {
@@ -69,9 +70,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InvoiceFilter : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -87,27 +86,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InvoiceFilter other &&                ((this.LocationIds == null && other.LocationIds == null) || (this.LocationIds?.Equals(other.LocationIds) == true)) &&
-                ((this.CustomerIds == null && other.CustomerIds == null) || (this.CustomerIds?.Equals(other.CustomerIds) == true));
+            return obj is InvoiceFilter other &&
+                (this.LocationIds == null && other.LocationIds == null ||
+                 this.LocationIds?.Equals(other.LocationIds) == true) &&
+                (this.CustomerIds == null && other.CustomerIds == null ||
+                 this.CustomerIds?.Equals(other.CustomerIds) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 829641128;
-            hashCode = HashCode.Combine(this.LocationIds, this.CustomerIds);
+            var hashCode = 829641128;
+            hashCode = HashCode.Combine(hashCode, this.LocationIds, this.CustomerIds);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -177,7 +174,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCustomerIds()
             {
@@ -191,7 +188,8 @@ namespace Square.Models
             /// <returns> InvoiceFilter. </returns>
             public InvoiceFilter Build()
             {
-                return new InvoiceFilter(shouldSerialize,
+                return new InvoiceFilter(
+                    shouldSerialize,
                     this.locationIds,
                     this.customerIds);
             }

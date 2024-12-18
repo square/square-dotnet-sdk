@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["description"] = true;
                 this.Description = description;
             }
-
         }
-        internal CheckoutLocationSettingsPolicy(Dictionary<string, bool> shouldSerialize,
+
+        internal CheckoutLocationSettingsPolicy(
+            Dictionary<string, bool> shouldSerialize,
             string uid = null,
             string title = null,
             string description = null)
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CheckoutLocationSettingsPolicy : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -125,37 +124,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CheckoutLocationSettingsPolicy other &&                ((this.Uid == null && other.Uid == null) || (this.Uid?.Equals(other.Uid) == true)) &&
-                ((this.Title == null && other.Title == null) || (this.Title?.Equals(other.Title) == true)) &&
-                ((this.Description == null && other.Description == null) || (this.Description?.Equals(other.Description) == true));
+            return obj is CheckoutLocationSettingsPolicy other &&
+                (this.Uid == null && other.Uid == null ||
+                 this.Uid?.Equals(other.Uid) == true) &&
+                (this.Title == null && other.Title == null ||
+                 this.Title?.Equals(other.Title) == true) &&
+                (this.Description == null && other.Description == null ||
+                 this.Description?.Equals(other.Description) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1755412995;
-            hashCode = HashCode.Combine(this.Uid, this.Title, this.Description);
+            var hashCode = 1755412995;
+            hashCode = HashCode.Combine(hashCode, this.Uid, this.Title, this.Description);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Uid = {(this.Uid == null ? "null" : this.Uid)}");
-            toStringOutput.Add($"this.Title = {(this.Title == null ? "null" : this.Title)}");
-            toStringOutput.Add($"this.Description = {(this.Description == null ? "null" : this.Description)}");
+            toStringOutput.Add($"this.Uid = {this.Uid ?? "null"}");
+            toStringOutput.Add($"this.Title = {this.Title ?? "null"}");
+            toStringOutput.Add($"this.Description = {this.Description ?? "null"}");
         }
 
         /// <summary>
@@ -224,7 +222,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetUid()
             {
@@ -232,7 +230,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTitle()
             {
@@ -240,7 +238,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDescription()
             {
@@ -254,7 +252,8 @@ namespace Square.Models
             /// <returns> CheckoutLocationSettingsPolicy. </returns>
             public CheckoutLocationSettingsPolicy Build()
             {
-                return new CheckoutLocationSettingsPolicy(shouldSerialize,
+                return new CheckoutLocationSettingsPolicy(
+                    shouldSerialize,
                     this.uid,
                     this.title,
                     this.description);

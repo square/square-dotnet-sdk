@@ -36,18 +36,19 @@ namespace Square.Models
             {
                 { "components", false }
             };
-
             this.Id = id;
             this.Attributes = attributes;
+
             if (components != null)
             {
                 shouldSerialize["components"] = true;
                 this.Components = components;
             }
-
             this.Status = status;
         }
-        internal Device(Dictionary<string, bool> shouldSerialize,
+
+        internal Device(
+            Dictionary<string, bool> shouldSerialize,
             Models.DeviceAttributes attributes,
             string id = null,
             IList<Models.Component> components = null,
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Device : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -107,36 +106,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Device other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.Attributes == null && other.Attributes == null) || (this.Attributes?.Equals(other.Attributes) == true)) &&
-                ((this.Components == null && other.Components == null) || (this.Components?.Equals(other.Components) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true));
+            return obj is Device other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.Attributes == null && other.Attributes == null ||
+                 this.Attributes?.Equals(other.Attributes) == true) &&
+                (this.Components == null && other.Components == null ||
+                 this.Components?.Equals(other.Components) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 936950560;
-            hashCode = HashCode.Combine(this.Id, this.Attributes, this.Components, this.Status);
+            var hashCode = 936950560;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.Attributes, this.Components, this.Status);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.Attributes = {(this.Attributes == null ? "null" : this.Attributes.ToString())}");
             toStringOutput.Add($"this.Components = {(this.Components == null ? "null" : $"[{string.Join(", ", this.Components)} ]")}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
@@ -227,7 +226,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetComponents()
             {
@@ -241,7 +240,8 @@ namespace Square.Models
             /// <returns> Device. </returns>
             public Device Build()
             {
-                return new Device(shouldSerialize,
+                return new Device(
+                    shouldSerialize,
                     this.attributes,
                     this.id,
                     this.components,

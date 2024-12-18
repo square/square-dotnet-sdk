@@ -56,37 +56,34 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DestinationDetails : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DestinationDetails other &&                ((this.CardDetails == null && other.CardDetails == null) || (this.CardDetails?.Equals(other.CardDetails) == true)) &&
-                ((this.CashDetails == null && other.CashDetails == null) || (this.CashDetails?.Equals(other.CashDetails) == true)) &&
-                ((this.ExternalDetails == null && other.ExternalDetails == null) || (this.ExternalDetails?.Equals(other.ExternalDetails) == true));
+            return obj is DestinationDetails other &&
+                (this.CardDetails == null && other.CardDetails == null ||
+                 this.CardDetails?.Equals(other.CardDetails) == true) &&
+                (this.CashDetails == null && other.CashDetails == null ||
+                 this.CashDetails?.Equals(other.CashDetails) == true) &&
+                (this.ExternalDetails == null && other.ExternalDetails == null ||
+                 this.ExternalDetails?.Equals(other.ExternalDetails) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -165986961;
-            hashCode = HashCode.Combine(this.CardDetails, this.CashDetails, this.ExternalDetails);
+            var hashCode = -165986961;
+            hashCode = HashCode.Combine(hashCode, this.CardDetails, this.CashDetails, this.ExternalDetails);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

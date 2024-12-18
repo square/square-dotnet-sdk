@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["quantity_denominator"] = true;
                 this.QuantityDenominator = quantityDenominator;
             }
-
         }
-        internal QuantityRatio(Dictionary<string, bool> shouldSerialize,
+
+        internal QuantityRatio(
+            Dictionary<string, bool> shouldSerialize,
             int? quantity = null,
             int? quantityDenominator = null)
         {
@@ -75,9 +76,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"QuantityRatio : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -102,27 +101,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is QuantityRatio other &&                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
-                ((this.QuantityDenominator == null && other.QuantityDenominator == null) || (this.QuantityDenominator?.Equals(other.QuantityDenominator) == true));
+            return obj is QuantityRatio other &&
+                (this.Quantity == null && other.Quantity == null ||
+                 this.Quantity?.Equals(other.Quantity) == true) &&
+                (this.QuantityDenominator == null && other.QuantityDenominator == null ||
+                 this.QuantityDenominator?.Equals(other.QuantityDenominator) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -151581231;
-            hashCode = HashCode.Combine(this.Quantity, this.QuantityDenominator);
+            var hashCode = -151581231;
+            hashCode = HashCode.Combine(hashCode, this.Quantity, this.QuantityDenominator);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -184,7 +181,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQuantity()
             {
@@ -192,7 +189,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQuantityDenominator()
             {
@@ -206,7 +203,8 @@ namespace Square.Models
             /// <returns> QuantityRatio. </returns>
             public QuantityRatio Build()
             {
-                return new QuantityRatio(shouldSerialize,
+                return new QuantityRatio(
+                    shouldSerialize,
                     this.quantity,
                     this.quantityDenominator);
             }

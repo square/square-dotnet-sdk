@@ -68,9 +68,9 @@ namespace Square.Models
                 shouldSerialize["image_ids"] = true;
                 this.ImageIds = imageIds;
             }
-
             this.CategoryType = categoryType;
             this.ParentCategory = parentCategory;
+
             if (isTopLevel != null)
             {
                 shouldSerialize["is_top_level"] = true;
@@ -94,17 +94,18 @@ namespace Square.Models
                 shouldSerialize["online_visibility"] = true;
                 this.OnlineVisibility = onlineVisibility;
             }
-
             this.RootCategory = rootCategory;
             this.EcomSeoData = ecomSeoData;
+
             if (pathToRoot != null)
             {
                 shouldSerialize["path_to_root"] = true;
                 this.PathToRoot = pathToRoot;
             }
-
         }
-        internal CatalogCategory(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogCategory(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             IList<string> imageIds = null,
             string categoryType = null,
@@ -205,9 +206,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogCategory : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -277,45 +276,52 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogCategory other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.ImageIds == null && other.ImageIds == null) || (this.ImageIds?.Equals(other.ImageIds) == true)) &&
-                ((this.CategoryType == null && other.CategoryType == null) || (this.CategoryType?.Equals(other.CategoryType) == true)) &&
-                ((this.ParentCategory == null && other.ParentCategory == null) || (this.ParentCategory?.Equals(other.ParentCategory) == true)) &&
-                ((this.IsTopLevel == null && other.IsTopLevel == null) || (this.IsTopLevel?.Equals(other.IsTopLevel) == true)) &&
-                ((this.Channels == null && other.Channels == null) || (this.Channels?.Equals(other.Channels) == true)) &&
-                ((this.AvailabilityPeriodIds == null && other.AvailabilityPeriodIds == null) || (this.AvailabilityPeriodIds?.Equals(other.AvailabilityPeriodIds) == true)) &&
-                ((this.OnlineVisibility == null && other.OnlineVisibility == null) || (this.OnlineVisibility?.Equals(other.OnlineVisibility) == true)) &&
-                ((this.RootCategory == null && other.RootCategory == null) || (this.RootCategory?.Equals(other.RootCategory) == true)) &&
-                ((this.EcomSeoData == null && other.EcomSeoData == null) || (this.EcomSeoData?.Equals(other.EcomSeoData) == true)) &&
-                ((this.PathToRoot == null && other.PathToRoot == null) || (this.PathToRoot?.Equals(other.PathToRoot) == true));
+            return obj is CatalogCategory other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.ImageIds == null && other.ImageIds == null ||
+                 this.ImageIds?.Equals(other.ImageIds) == true) &&
+                (this.CategoryType == null && other.CategoryType == null ||
+                 this.CategoryType?.Equals(other.CategoryType) == true) &&
+                (this.ParentCategory == null && other.ParentCategory == null ||
+                 this.ParentCategory?.Equals(other.ParentCategory) == true) &&
+                (this.IsTopLevel == null && other.IsTopLevel == null ||
+                 this.IsTopLevel?.Equals(other.IsTopLevel) == true) &&
+                (this.Channels == null && other.Channels == null ||
+                 this.Channels?.Equals(other.Channels) == true) &&
+                (this.AvailabilityPeriodIds == null && other.AvailabilityPeriodIds == null ||
+                 this.AvailabilityPeriodIds?.Equals(other.AvailabilityPeriodIds) == true) &&
+                (this.OnlineVisibility == null && other.OnlineVisibility == null ||
+                 this.OnlineVisibility?.Equals(other.OnlineVisibility) == true) &&
+                (this.RootCategory == null && other.RootCategory == null ||
+                 this.RootCategory?.Equals(other.RootCategory) == true) &&
+                (this.EcomSeoData == null && other.EcomSeoData == null ||
+                 this.EcomSeoData?.Equals(other.EcomSeoData) == true) &&
+                (this.PathToRoot == null && other.PathToRoot == null ||
+                 this.PathToRoot?.Equals(other.PathToRoot) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1335470543;
-            hashCode = HashCode.Combine(this.Name, this.ImageIds, this.CategoryType, this.ParentCategory, this.IsTopLevel, this.Channels, this.AvailabilityPeriodIds);
+            var hashCode = -1335470543;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.ImageIds, this.CategoryType, this.ParentCategory, this.IsTopLevel, this.Channels, this.AvailabilityPeriodIds);
 
             hashCode = HashCode.Combine(hashCode, this.OnlineVisibility, this.RootCategory, this.EcomSeoData, this.PathToRoot);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.ImageIds = {(this.ImageIds == null ? "null" : $"[{string.Join(", ", this.ImageIds)} ]")}");
             toStringOutput.Add($"this.CategoryType = {(this.CategoryType == null ? "null" : this.CategoryType.ToString())}");
             toStringOutput.Add($"this.ParentCategory = {(this.ParentCategory == null ? "null" : this.ParentCategory.ToString())}");
@@ -323,7 +329,7 @@ namespace Square.Models
             toStringOutput.Add($"this.Channels = {(this.Channels == null ? "null" : $"[{string.Join(", ", this.Channels)} ]")}");
             toStringOutput.Add($"this.AvailabilityPeriodIds = {(this.AvailabilityPeriodIds == null ? "null" : $"[{string.Join(", ", this.AvailabilityPeriodIds)} ]")}");
             toStringOutput.Add($"this.OnlineVisibility = {(this.OnlineVisibility == null ? "null" : this.OnlineVisibility.ToString())}");
-            toStringOutput.Add($"this.RootCategory = {(this.RootCategory == null ? "null" : this.RootCategory)}");
+            toStringOutput.Add($"this.RootCategory = {this.RootCategory ?? "null"}");
             toStringOutput.Add($"this.EcomSeoData = {(this.EcomSeoData == null ? "null" : this.EcomSeoData.ToString())}");
             toStringOutput.Add($"this.PathToRoot = {(this.PathToRoot == null ? "null" : $"[{string.Join(", ", this.PathToRoot)} ]")}");
         }
@@ -506,7 +512,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -514,7 +520,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetImageIds()
             {
@@ -522,7 +528,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIsTopLevel()
             {
@@ -530,7 +536,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetChannels()
             {
@@ -538,7 +544,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAvailabilityPeriodIds()
             {
@@ -546,7 +552,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOnlineVisibility()
             {
@@ -554,7 +560,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPathToRoot()
             {
@@ -568,7 +574,8 @@ namespace Square.Models
             /// <returns> CatalogCategory. </returns>
             public CatalogCategory Build()
             {
-                return new CatalogCategory(shouldSerialize,
+                return new CatalogCategory(
+                    shouldSerialize,
                     this.name,
                     this.imageIds,
                     this.categoryType,

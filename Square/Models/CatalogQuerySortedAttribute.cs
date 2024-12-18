@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "initial_attribute_value", false }
             };
-
             this.AttributeName = attributeName;
+
             if (initialAttributeValue != null)
             {
                 shouldSerialize["initial_attribute_value"] = true;
                 this.InitialAttributeValue = initialAttributeValue;
             }
-
             this.SortOrder = sortOrder;
         }
-        internal CatalogQuerySortedAttribute(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogQuerySortedAttribute(
+            Dictionary<string, bool> shouldSerialize,
             string attributeName,
             string initialAttributeValue = null,
             string sortOrder = null)
@@ -79,9 +80,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogQuerySortedAttribute : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -97,36 +96,35 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogQuerySortedAttribute other &&                ((this.AttributeName == null && other.AttributeName == null) || (this.AttributeName?.Equals(other.AttributeName) == true)) &&
-                ((this.InitialAttributeValue == null && other.InitialAttributeValue == null) || (this.InitialAttributeValue?.Equals(other.InitialAttributeValue) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true));
+            return obj is CatalogQuerySortedAttribute other &&
+                (this.AttributeName == null && other.AttributeName == null ||
+                 this.AttributeName?.Equals(other.AttributeName) == true) &&
+                (this.InitialAttributeValue == null && other.InitialAttributeValue == null ||
+                 this.InitialAttributeValue?.Equals(other.InitialAttributeValue) == true) &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -406098695;
-            hashCode = HashCode.Combine(this.AttributeName, this.InitialAttributeValue, this.SortOrder);
+            var hashCode = -406098695;
+            hashCode = HashCode.Combine(hashCode, this.AttributeName, this.InitialAttributeValue, this.SortOrder);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.AttributeName = {(this.AttributeName == null ? "null" : this.AttributeName)}");
-            toStringOutput.Add($"this.InitialAttributeValue = {(this.InitialAttributeValue == null ? "null" : this.InitialAttributeValue)}");
+            toStringOutput.Add($"this.AttributeName = {this.AttributeName ?? "null"}");
+            toStringOutput.Add($"this.InitialAttributeValue = {this.InitialAttributeValue ?? "null"}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
         }
 
@@ -202,7 +200,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetInitialAttributeValue()
             {
@@ -216,7 +214,8 @@ namespace Square.Models
             /// <returns> CatalogQuerySortedAttribute. </returns>
             public CatalogQuerySortedAttribute Build()
             {
-                return new CatalogQuerySortedAttribute(shouldSerialize,
+                return new CatalogQuerySortedAttribute(
+                    shouldSerialize,
                     this.attributeName,
                     this.initialAttributeValue,
                     this.sortOrder);

@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["phases"] = true;
                 this.Phases = phases;
             }
-
         }
-        internal SwapPlanRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal SwapPlanRequest(
+            Dictionary<string, bool> shouldSerialize,
             string newPlanVariationId = null,
             IList<Models.PhaseInput> phases = null)
         {
@@ -73,9 +74,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SwapPlanRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -100,34 +99,32 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SwapPlanRequest other &&                ((this.NewPlanVariationId == null && other.NewPlanVariationId == null) || (this.NewPlanVariationId?.Equals(other.NewPlanVariationId) == true)) &&
-                ((this.Phases == null && other.Phases == null) || (this.Phases?.Equals(other.Phases) == true));
+            return obj is SwapPlanRequest other &&
+                (this.NewPlanVariationId == null && other.NewPlanVariationId == null ||
+                 this.NewPlanVariationId?.Equals(other.NewPlanVariationId) == true) &&
+                (this.Phases == null && other.Phases == null ||
+                 this.Phases?.Equals(other.Phases) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 888035690;
-            hashCode = HashCode.Combine(this.NewPlanVariationId, this.Phases);
+            var hashCode = 888035690;
+            hashCode = HashCode.Combine(hashCode, this.NewPlanVariationId, this.Phases);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.NewPlanVariationId = {(this.NewPlanVariationId == null ? "null" : this.NewPlanVariationId)}");
+            toStringOutput.Add($"this.NewPlanVariationId = {this.NewPlanVariationId ?? "null"}");
             toStringOutput.Add($"this.Phases = {(this.Phases == null ? "null" : $"[{string.Join(", ", this.Phases)} ]")}");
         }
 
@@ -182,7 +179,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetNewPlanVariationId()
             {
@@ -190,7 +187,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPhases()
             {
@@ -204,7 +201,8 @@ namespace Square.Models
             /// <returns> SwapPlanRequest. </returns>
             public SwapPlanRequest Build()
             {
-                return new SwapPlanRequest(shouldSerialize,
+                return new SwapPlanRequest(
+                    shouldSerialize,
                     this.newPlanVariationId,
                     this.phases);
             }

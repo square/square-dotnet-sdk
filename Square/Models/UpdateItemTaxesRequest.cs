@@ -35,8 +35,8 @@ namespace Square.Models
                 { "taxes_to_enable", false },
                 { "taxes_to_disable", false }
             };
-
             this.ItemIds = itemIds;
+
             if (taxesToEnable != null)
             {
                 shouldSerialize["taxes_to_enable"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["taxes_to_disable"] = true;
                 this.TaxesToDisable = taxesToDisable;
             }
-
         }
-        internal UpdateItemTaxesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal UpdateItemTaxesRequest(
+            Dictionary<string, bool> shouldSerialize,
             IList<string> itemIds,
             IList<string> taxesToEnable = null,
             IList<string> taxesToDisable = null)
@@ -86,9 +87,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateItemTaxesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -113,28 +112,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateItemTaxesRequest other &&                ((this.ItemIds == null && other.ItemIds == null) || (this.ItemIds?.Equals(other.ItemIds) == true)) &&
-                ((this.TaxesToEnable == null && other.TaxesToEnable == null) || (this.TaxesToEnable?.Equals(other.TaxesToEnable) == true)) &&
-                ((this.TaxesToDisable == null && other.TaxesToDisable == null) || (this.TaxesToDisable?.Equals(other.TaxesToDisable) == true));
+            return obj is UpdateItemTaxesRequest other &&
+                (this.ItemIds == null && other.ItemIds == null ||
+                 this.ItemIds?.Equals(other.ItemIds) == true) &&
+                (this.TaxesToEnable == null && other.TaxesToEnable == null ||
+                 this.TaxesToEnable?.Equals(other.TaxesToEnable) == true) &&
+                (this.TaxesToDisable == null && other.TaxesToDisable == null ||
+                 this.TaxesToDisable?.Equals(other.TaxesToDisable) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 651000777;
-            hashCode = HashCode.Combine(this.ItemIds, this.TaxesToEnable, this.TaxesToDisable);
+            var hashCode = 651000777;
+            hashCode = HashCode.Combine(hashCode, this.ItemIds, this.TaxesToEnable, this.TaxesToDisable);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -220,7 +218,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTaxesToEnable()
             {
@@ -228,7 +226,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTaxesToDisable()
             {
@@ -242,7 +240,8 @@ namespace Square.Models
             /// <returns> UpdateItemTaxesRequest. </returns>
             public UpdateItemTaxesRequest Build()
             {
-                return new UpdateItemTaxesRequest(shouldSerialize,
+                return new UpdateItemTaxesRequest(
+                    shouldSerialize,
                     this.itemIds,
                     this.taxesToEnable,
                     this.taxesToDisable);

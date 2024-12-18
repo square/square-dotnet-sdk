@@ -71,8 +71,8 @@ namespace Square.Models
                 { "await_next_action", false },
                 { "await_next_action_duration", false }
             };
-
             this.Id = id;
+
             if (deviceId != null)
             {
                 shouldSerialize["device_id"] = true;
@@ -84,7 +84,6 @@ namespace Square.Models
                 shouldSerialize["deadline_duration"] = true;
                 this.DeadlineDuration = deadlineDuration;
             }
-
             this.Status = status;
             this.CancelReason = cancelReason;
             this.CreatedAt = createdAt;
@@ -100,6 +99,7 @@ namespace Square.Models
             this.DataCollectionOptions = dataCollectionOptions;
             this.SelectOptions = selectOptions;
             this.DeviceMetadata = deviceMetadata;
+
             if (awaitNextAction != null)
             {
                 shouldSerialize["await_next_action"] = true;
@@ -111,9 +111,10 @@ namespace Square.Models
                 shouldSerialize["await_next_action_duration"] = true;
                 this.AwaitNextActionDuration = awaitNextActionDuration;
             }
-
         }
-        internal TerminalAction(Dictionary<string, bool> shouldSerialize,
+
+        internal TerminalAction(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string deviceId = null,
             string deadlineDuration = null,
@@ -293,9 +294,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TerminalAction : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -338,42 +337,57 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TerminalAction other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.DeviceId == null && other.DeviceId == null) || (this.DeviceId?.Equals(other.DeviceId) == true)) &&
-                ((this.DeadlineDuration == null && other.DeadlineDuration == null) || (this.DeadlineDuration?.Equals(other.DeadlineDuration) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.CancelReason == null && other.CancelReason == null) || (this.CancelReason?.Equals(other.CancelReason) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.AppId == null && other.AppId == null) || (this.AppId?.Equals(other.AppId) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.Type == null && other.Type == null) || (this.Type?.Equals(other.Type) == true)) &&
-                ((this.QrCodeOptions == null && other.QrCodeOptions == null) || (this.QrCodeOptions?.Equals(other.QrCodeOptions) == true)) &&
-                ((this.SaveCardOptions == null && other.SaveCardOptions == null) || (this.SaveCardOptions?.Equals(other.SaveCardOptions) == true)) &&
-                ((this.SignatureOptions == null && other.SignatureOptions == null) || (this.SignatureOptions?.Equals(other.SignatureOptions) == true)) &&
-                ((this.ConfirmationOptions == null && other.ConfirmationOptions == null) || (this.ConfirmationOptions?.Equals(other.ConfirmationOptions) == true)) &&
-                ((this.ReceiptOptions == null && other.ReceiptOptions == null) || (this.ReceiptOptions?.Equals(other.ReceiptOptions) == true)) &&
-                ((this.DataCollectionOptions == null && other.DataCollectionOptions == null) || (this.DataCollectionOptions?.Equals(other.DataCollectionOptions) == true)) &&
-                ((this.SelectOptions == null && other.SelectOptions == null) || (this.SelectOptions?.Equals(other.SelectOptions) == true)) &&
-                ((this.DeviceMetadata == null && other.DeviceMetadata == null) || (this.DeviceMetadata?.Equals(other.DeviceMetadata) == true)) &&
-                ((this.AwaitNextAction == null && other.AwaitNextAction == null) || (this.AwaitNextAction?.Equals(other.AwaitNextAction) == true)) &&
-                ((this.AwaitNextActionDuration == null && other.AwaitNextActionDuration == null) || (this.AwaitNextActionDuration?.Equals(other.AwaitNextActionDuration) == true));
+            return obj is TerminalAction other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.DeviceId == null && other.DeviceId == null ||
+                 this.DeviceId?.Equals(other.DeviceId) == true) &&
+                (this.DeadlineDuration == null && other.DeadlineDuration == null ||
+                 this.DeadlineDuration?.Equals(other.DeadlineDuration) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.CancelReason == null && other.CancelReason == null ||
+                 this.CancelReason?.Equals(other.CancelReason) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.AppId == null && other.AppId == null ||
+                 this.AppId?.Equals(other.AppId) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.Type == null && other.Type == null ||
+                 this.Type?.Equals(other.Type) == true) &&
+                (this.QrCodeOptions == null && other.QrCodeOptions == null ||
+                 this.QrCodeOptions?.Equals(other.QrCodeOptions) == true) &&
+                (this.SaveCardOptions == null && other.SaveCardOptions == null ||
+                 this.SaveCardOptions?.Equals(other.SaveCardOptions) == true) &&
+                (this.SignatureOptions == null && other.SignatureOptions == null ||
+                 this.SignatureOptions?.Equals(other.SignatureOptions) == true) &&
+                (this.ConfirmationOptions == null && other.ConfirmationOptions == null ||
+                 this.ConfirmationOptions?.Equals(other.ConfirmationOptions) == true) &&
+                (this.ReceiptOptions == null && other.ReceiptOptions == null ||
+                 this.ReceiptOptions?.Equals(other.ReceiptOptions) == true) &&
+                (this.DataCollectionOptions == null && other.DataCollectionOptions == null ||
+                 this.DataCollectionOptions?.Equals(other.DataCollectionOptions) == true) &&
+                (this.SelectOptions == null && other.SelectOptions == null ||
+                 this.SelectOptions?.Equals(other.SelectOptions) == true) &&
+                (this.DeviceMetadata == null && other.DeviceMetadata == null ||
+                 this.DeviceMetadata?.Equals(other.DeviceMetadata) == true) &&
+                (this.AwaitNextAction == null && other.AwaitNextAction == null ||
+                 this.AwaitNextAction?.Equals(other.AwaitNextAction) == true) &&
+                (this.AwaitNextActionDuration == null && other.AwaitNextActionDuration == null ||
+                 this.AwaitNextActionDuration?.Equals(other.AwaitNextActionDuration) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 820116250;
-            hashCode = HashCode.Combine(this.Id, this.DeviceId, this.DeadlineDuration, this.Status, this.CancelReason, this.CreatedAt, this.UpdatedAt);
+            var hashCode = 820116250;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.DeviceId, this.DeadlineDuration, this.Status, this.CancelReason, this.CreatedAt, this.UpdatedAt);
 
             hashCode = HashCode.Combine(hashCode, this.AppId, this.LocationId, this.Type, this.QrCodeOptions, this.SaveCardOptions, this.SignatureOptions, this.ConfirmationOptions);
 
@@ -381,21 +395,22 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.DeviceId = {(this.DeviceId == null ? "null" : this.DeviceId)}");
-            toStringOutput.Add($"this.DeadlineDuration = {(this.DeadlineDuration == null ? "null" : this.DeadlineDuration)}");
-            toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.DeviceId = {this.DeviceId ?? "null"}");
+            toStringOutput.Add($"this.DeadlineDuration = {this.DeadlineDuration ?? "null"}");
+            toStringOutput.Add($"this.Status = {this.Status ?? "null"}");
             toStringOutput.Add($"this.CancelReason = {(this.CancelReason == null ? "null" : this.CancelReason.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.AppId = {(this.AppId == null ? "null" : this.AppId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.AppId = {this.AppId ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
             toStringOutput.Add($"this.Type = {(this.Type == null ? "null" : this.Type.ToString())}");
             toStringOutput.Add($"this.QrCodeOptions = {(this.QrCodeOptions == null ? "null" : this.QrCodeOptions.ToString())}");
             toStringOutput.Add($"this.SaveCardOptions = {(this.SaveCardOptions == null ? "null" : this.SaveCardOptions.ToString())}");
@@ -406,7 +421,7 @@ namespace Square.Models
             toStringOutput.Add($"this.SelectOptions = {(this.SelectOptions == null ? "null" : this.SelectOptions.ToString())}");
             toStringOutput.Add($"this.DeviceMetadata = {(this.DeviceMetadata == null ? "null" : this.DeviceMetadata.ToString())}");
             toStringOutput.Add($"this.AwaitNextAction = {(this.AwaitNextAction == null ? "null" : this.AwaitNextAction.ToString())}");
-            toStringOutput.Add($"this.AwaitNextActionDuration = {(this.AwaitNextActionDuration == null ? "null" : this.AwaitNextActionDuration)}");
+            toStringOutput.Add($"this.AwaitNextActionDuration = {this.AwaitNextActionDuration ?? "null"}");
         }
 
         /// <summary>
@@ -698,7 +713,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeviceId()
             {
@@ -706,7 +721,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDeadlineDuration()
             {
@@ -714,7 +729,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAwaitNextAction()
             {
@@ -722,7 +737,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAwaitNextActionDuration()
             {
@@ -736,7 +751,8 @@ namespace Square.Models
             /// <returns> TerminalAction. </returns>
             public TerminalAction Build()
             {
-                return new TerminalAction(shouldSerialize,
+                return new TerminalAction(
+                    shouldSerialize,
                     this.id,
                     this.deviceId,
                     this.deadlineDuration,

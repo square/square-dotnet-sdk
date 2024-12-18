@@ -67,45 +67,42 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyPromotionAvailableTimeData : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyPromotionAvailableTimeData other &&                ((this.StartDate == null && other.StartDate == null) || (this.StartDate?.Equals(other.StartDate) == true)) &&
-                ((this.EndDate == null && other.EndDate == null) || (this.EndDate?.Equals(other.EndDate) == true)) &&
-                ((this.TimePeriods == null && other.TimePeriods == null) || (this.TimePeriods?.Equals(other.TimePeriods) == true));
+            return obj is LoyaltyPromotionAvailableTimeData other &&
+                (this.StartDate == null && other.StartDate == null ||
+                 this.StartDate?.Equals(other.StartDate) == true) &&
+                (this.EndDate == null && other.EndDate == null ||
+                 this.EndDate?.Equals(other.EndDate) == true) &&
+                (this.TimePeriods == null && other.TimePeriods == null ||
+                 this.TimePeriods?.Equals(other.TimePeriods) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 185496256;
-            hashCode = HashCode.Combine(this.StartDate, this.EndDate, this.TimePeriods);
+            var hashCode = 185496256;
+            hashCode = HashCode.Combine(hashCode, this.StartDate, this.EndDate, this.TimePeriods);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.StartDate = {(this.StartDate == null ? "null" : this.StartDate)}");
-            toStringOutput.Add($"this.EndDate = {(this.EndDate == null ? "null" : this.EndDate)}");
+            toStringOutput.Add($"this.StartDate = {this.StartDate ?? "null"}");
+            toStringOutput.Add($"this.EndDate = {this.EndDate ?? "null"}");
             toStringOutput.Add($"this.TimePeriods = {(this.TimePeriods == null ? "null" : $"[{string.Join(", ", this.TimePeriods)} ]")}");
         }
 

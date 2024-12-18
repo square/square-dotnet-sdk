@@ -72,27 +72,27 @@ namespace Square.Models
                 shouldSerialize["dispute_id"] = true;
                 this.DisputeId = disputeId;
             }
-
             this.Id = id;
             this.AmountMoney = amountMoney;
             this.Reason = reason;
             this.State = state;
+
             if (dueAt != null)
             {
                 shouldSerialize["due_at"] = true;
                 this.DueAt = dueAt;
             }
-
             this.DisputedPayment = disputedPayment;
+
             if (evidenceIds != null)
             {
                 shouldSerialize["evidence_ids"] = true;
                 this.EvidenceIds = evidenceIds;
             }
-
             this.CardBrand = cardBrand;
             this.CreatedAt = createdAt;
             this.UpdatedAt = updatedAt;
+
             if (brandDisputeId != null)
             {
                 shouldSerialize["brand_dispute_id"] = true;
@@ -110,16 +110,17 @@ namespace Square.Models
                 shouldSerialize["reported_at"] = true;
                 this.ReportedAt = reportedAt;
             }
-
             this.Version = version;
+
             if (locationId != null)
             {
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
         }
-        internal Dispute(Dictionary<string, bool> shouldSerialize,
+
+        internal Dispute(
+            Dictionary<string, bool> shouldSerialize,
             string disputeId = null,
             string id = null,
             Models.Money amountMoney = null,
@@ -262,9 +263,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Dispute : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -334,38 +333,49 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Dispute other &&                ((this.DisputeId == null && other.DisputeId == null) || (this.DisputeId?.Equals(other.DisputeId) == true)) &&
-                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
-                ((this.State == null && other.State == null) || (this.State?.Equals(other.State) == true)) &&
-                ((this.DueAt == null && other.DueAt == null) || (this.DueAt?.Equals(other.DueAt) == true)) &&
-                ((this.DisputedPayment == null && other.DisputedPayment == null) || (this.DisputedPayment?.Equals(other.DisputedPayment) == true)) &&
-                ((this.EvidenceIds == null && other.EvidenceIds == null) || (this.EvidenceIds?.Equals(other.EvidenceIds) == true)) &&
-                ((this.CardBrand == null && other.CardBrand == null) || (this.CardBrand?.Equals(other.CardBrand) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.UpdatedAt == null && other.UpdatedAt == null) || (this.UpdatedAt?.Equals(other.UpdatedAt) == true)) &&
-                ((this.BrandDisputeId == null && other.BrandDisputeId == null) || (this.BrandDisputeId?.Equals(other.BrandDisputeId) == true)) &&
-                ((this.ReportedDate == null && other.ReportedDate == null) || (this.ReportedDate?.Equals(other.ReportedDate) == true)) &&
-                ((this.ReportedAt == null && other.ReportedAt == null) || (this.ReportedAt?.Equals(other.ReportedAt) == true)) &&
-                ((this.Version == null && other.Version == null) || (this.Version?.Equals(other.Version) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
+            return obj is Dispute other &&
+                (this.DisputeId == null && other.DisputeId == null ||
+                 this.DisputeId?.Equals(other.DisputeId) == true) &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.Reason == null && other.Reason == null ||
+                 this.Reason?.Equals(other.Reason) == true) &&
+                (this.State == null && other.State == null ||
+                 this.State?.Equals(other.State) == true) &&
+                (this.DueAt == null && other.DueAt == null ||
+                 this.DueAt?.Equals(other.DueAt) == true) &&
+                (this.DisputedPayment == null && other.DisputedPayment == null ||
+                 this.DisputedPayment?.Equals(other.DisputedPayment) == true) &&
+                (this.EvidenceIds == null && other.EvidenceIds == null ||
+                 this.EvidenceIds?.Equals(other.EvidenceIds) == true) &&
+                (this.CardBrand == null && other.CardBrand == null ||
+                 this.CardBrand?.Equals(other.CardBrand) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.UpdatedAt == null && other.UpdatedAt == null ||
+                 this.UpdatedAt?.Equals(other.UpdatedAt) == true) &&
+                (this.BrandDisputeId == null && other.BrandDisputeId == null ||
+                 this.BrandDisputeId?.Equals(other.BrandDisputeId) == true) &&
+                (this.ReportedDate == null && other.ReportedDate == null ||
+                 this.ReportedDate?.Equals(other.ReportedDate) == true) &&
+                (this.ReportedAt == null && other.ReportedAt == null ||
+                 this.ReportedAt?.Equals(other.ReportedAt) == true) &&
+                (this.Version == null && other.Version == null ||
+                 this.Version?.Equals(other.Version) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1811133941;
-            hashCode = HashCode.Combine(this.DisputeId, this.Id, this.AmountMoney, this.Reason, this.State, this.DueAt, this.DisputedPayment);
+            var hashCode = 1811133941;
+            hashCode = HashCode.Combine(hashCode, this.DisputeId, this.Id, this.AmountMoney, this.Reason, this.State, this.DueAt, this.DisputedPayment);
 
             hashCode = HashCode.Combine(hashCode, this.EvidenceIds, this.CardBrand, this.CreatedAt, this.UpdatedAt, this.BrandDisputeId, this.ReportedDate, this.ReportedAt);
 
@@ -373,28 +383,29 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.DisputeId = {(this.DisputeId == null ? "null" : this.DisputeId)}");
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
+            toStringOutput.Add($"this.DisputeId = {this.DisputeId ?? "null"}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason.ToString())}");
             toStringOutput.Add($"this.State = {(this.State == null ? "null" : this.State.ToString())}");
-            toStringOutput.Add($"this.DueAt = {(this.DueAt == null ? "null" : this.DueAt)}");
+            toStringOutput.Add($"this.DueAt = {this.DueAt ?? "null"}");
             toStringOutput.Add($"this.DisputedPayment = {(this.DisputedPayment == null ? "null" : this.DisputedPayment.ToString())}");
             toStringOutput.Add($"this.EvidenceIds = {(this.EvidenceIds == null ? "null" : $"[{string.Join(", ", this.EvidenceIds)} ]")}");
             toStringOutput.Add($"this.CardBrand = {(this.CardBrand == null ? "null" : this.CardBrand.ToString())}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.UpdatedAt = {(this.UpdatedAt == null ? "null" : this.UpdatedAt)}");
-            toStringOutput.Add($"this.BrandDisputeId = {(this.BrandDisputeId == null ? "null" : this.BrandDisputeId)}");
-            toStringOutput.Add($"this.ReportedDate = {(this.ReportedDate == null ? "null" : this.ReportedDate)}");
-            toStringOutput.Add($"this.ReportedAt = {(this.ReportedAt == null ? "null" : this.ReportedAt)}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.UpdatedAt = {this.UpdatedAt ?? "null"}");
+            toStringOutput.Add($"this.BrandDisputeId = {this.BrandDisputeId ?? "null"}");
+            toStringOutput.Add($"this.ReportedDate = {this.ReportedDate ?? "null"}");
+            toStringOutput.Add($"this.ReportedAt = {this.ReportedAt ?? "null"}");
             toStringOutput.Add($"this.Version = {(this.Version == null ? "null" : this.Version.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
         }
 
         /// <summary>
@@ -640,7 +651,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDisputeId()
             {
@@ -648,7 +659,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetDueAt()
             {
@@ -656,7 +667,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEvidenceIds()
             {
@@ -664,7 +675,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBrandDisputeId()
             {
@@ -672,7 +683,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReportedDate()
             {
@@ -680,7 +691,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReportedAt()
             {
@@ -688,7 +699,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -702,7 +713,8 @@ namespace Square.Models
             /// <returns> Dispute. </returns>
             public Dispute Build()
             {
-                return new Dispute(shouldSerialize,
+                return new Dispute(
+                    shouldSerialize,
                     this.disputeId,
                     this.id,
                     this.amountMoney,

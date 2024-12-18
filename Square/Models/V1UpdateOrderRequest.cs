@@ -41,8 +41,8 @@ namespace Square.Models
                 { "refunded_note", false },
                 { "canceled_note", false }
             };
-
             this.Action = action;
+
             if (shippedTrackingNumber != null)
             {
                 shouldSerialize["shipped_tracking_number"] = true;
@@ -66,9 +66,10 @@ namespace Square.Models
                 shouldSerialize["canceled_note"] = true;
                 this.CanceledNote = canceledNote;
             }
-
         }
-        internal V1UpdateOrderRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal V1UpdateOrderRequest(
+            Dictionary<string, bool> shouldSerialize,
             string action,
             string shippedTrackingNumber = null,
             string completedNote = null,
@@ -117,9 +118,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"V1UpdateOrderRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -162,30 +161,31 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is V1UpdateOrderRequest other &&                ((this.Action == null && other.Action == null) || (this.Action?.Equals(other.Action) == true)) &&
-                ((this.ShippedTrackingNumber == null && other.ShippedTrackingNumber == null) || (this.ShippedTrackingNumber?.Equals(other.ShippedTrackingNumber) == true)) &&
-                ((this.CompletedNote == null && other.CompletedNote == null) || (this.CompletedNote?.Equals(other.CompletedNote) == true)) &&
-                ((this.RefundedNote == null && other.RefundedNote == null) || (this.RefundedNote?.Equals(other.RefundedNote) == true)) &&
-                ((this.CanceledNote == null && other.CanceledNote == null) || (this.CanceledNote?.Equals(other.CanceledNote) == true));
+            return obj is V1UpdateOrderRequest other &&
+                (this.Action == null && other.Action == null ||
+                 this.Action?.Equals(other.Action) == true) &&
+                (this.ShippedTrackingNumber == null && other.ShippedTrackingNumber == null ||
+                 this.ShippedTrackingNumber?.Equals(other.ShippedTrackingNumber) == true) &&
+                (this.CompletedNote == null && other.CompletedNote == null ||
+                 this.CompletedNote?.Equals(other.CompletedNote) == true) &&
+                (this.RefundedNote == null && other.RefundedNote == null ||
+                 this.RefundedNote?.Equals(other.RefundedNote) == true) &&
+                (this.CanceledNote == null && other.CanceledNote == null ||
+                 this.CanceledNote?.Equals(other.CanceledNote) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -553282521;
-            hashCode = HashCode.Combine(this.Action, this.ShippedTrackingNumber, this.CompletedNote, this.RefundedNote, this.CanceledNote);
+            var hashCode = -553282521;
+            hashCode = HashCode.Combine(hashCode, this.Action, this.ShippedTrackingNumber, this.CompletedNote, this.RefundedNote, this.CanceledNote);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -193,10 +193,10 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Action = {(this.Action == null ? "null" : this.Action.ToString())}");
-            toStringOutput.Add($"this.ShippedTrackingNumber = {(this.ShippedTrackingNumber == null ? "null" : this.ShippedTrackingNumber)}");
-            toStringOutput.Add($"this.CompletedNote = {(this.CompletedNote == null ? "null" : this.CompletedNote)}");
-            toStringOutput.Add($"this.RefundedNote = {(this.RefundedNote == null ? "null" : this.RefundedNote)}");
-            toStringOutput.Add($"this.CanceledNote = {(this.CanceledNote == null ? "null" : this.CanceledNote)}");
+            toStringOutput.Add($"this.ShippedTrackingNumber = {this.ShippedTrackingNumber ?? "null"}");
+            toStringOutput.Add($"this.CompletedNote = {this.CompletedNote ?? "null"}");
+            toStringOutput.Add($"this.RefundedNote = {this.RefundedNote ?? "null"}");
+            toStringOutput.Add($"this.CanceledNote = {this.CanceledNote ?? "null"}");
         }
 
         /// <summary>
@@ -303,7 +303,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetShippedTrackingNumber()
             {
@@ -311,7 +311,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCompletedNote()
             {
@@ -319,7 +319,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRefundedNote()
             {
@@ -327,7 +327,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCanceledNote()
             {
@@ -341,7 +341,8 @@ namespace Square.Models
             /// <returns> V1UpdateOrderRequest. </returns>
             public V1UpdateOrderRequest Build()
             {
-                return new V1UpdateOrderRequest(shouldSerialize,
+                return new V1UpdateOrderRequest(
+                    shouldSerialize,
                     this.action,
                     this.shippedTrackingNumber,
                     this.completedNote,

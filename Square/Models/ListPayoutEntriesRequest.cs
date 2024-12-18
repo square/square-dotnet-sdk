@@ -35,8 +35,8 @@ namespace Square.Models
                 { "cursor", false },
                 { "limit", false }
             };
-
             this.SortOrder = sortOrder;
+
             if (cursor != null)
             {
                 shouldSerialize["cursor"] = true;
@@ -48,9 +48,10 @@ namespace Square.Models
                 shouldSerialize["limit"] = true;
                 this.Limit = limit;
             }
-
         }
-        internal ListPayoutEntriesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListPayoutEntriesRequest(
+            Dictionary<string, bool> shouldSerialize,
             string sortOrder = null,
             string cursor = null,
             int? limit = null)
@@ -90,9 +91,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListPayoutEntriesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -117,28 +116,27 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListPayoutEntriesRequest other &&                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
+            return obj is ListPayoutEntriesRequest other &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1105396933;
-            hashCode = HashCode.Combine(this.SortOrder, this.Cursor, this.Limit);
+            var hashCode = 1105396933;
+            hashCode = HashCode.Combine(hashCode, this.SortOrder, this.Cursor, this.Limit);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -146,7 +144,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
         }
 
@@ -214,7 +212,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -222,7 +220,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -236,7 +234,8 @@ namespace Square.Models
             /// <returns> ListPayoutEntriesRequest. </returns>
             public ListPayoutEntriesRequest Build()
             {
-                return new ListPayoutEntriesRequest(shouldSerialize,
+                return new ListPayoutEntriesRequest(
+                    shouldSerialize,
                     this.sortOrder,
                     this.cursor,
                     this.limit);

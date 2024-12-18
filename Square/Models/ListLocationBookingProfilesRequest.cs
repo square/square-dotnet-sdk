@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["cursor"] = true;
                 this.Cursor = cursor;
             }
-
         }
-        internal ListLocationBookingProfilesRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListLocationBookingProfilesRequest(
+            Dictionary<string, bool> shouldSerialize,
             int? limit = null,
             string cursor = null)
         {
@@ -72,9 +73,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListLocationBookingProfilesRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -99,27 +98,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListLocationBookingProfilesRequest other &&                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true)) &&
-                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true));
+            return obj is ListLocationBookingProfilesRequest other &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true) &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1380832633;
-            hashCode = HashCode.Combine(this.Limit, this.Cursor);
+            var hashCode = -1380832633;
+            hashCode = HashCode.Combine(hashCode, this.Limit, this.Cursor);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -127,7 +124,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -189,7 +186,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -203,7 +200,8 @@ namespace Square.Models
             /// <returns> ListLocationBookingProfilesRequest. </returns>
             public ListLocationBookingProfilesRequest Build()
             {
-                return new ListLocationBookingProfilesRequest(shouldSerialize,
+                return new ListLocationBookingProfilesRequest(
+                    shouldSerialize,
                     this.limit,
                     this.cursor);
             }

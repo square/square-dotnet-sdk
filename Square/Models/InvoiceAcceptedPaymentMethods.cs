@@ -72,9 +72,10 @@ namespace Square.Models
                 shouldSerialize["cash_app_pay"] = true;
                 this.CashAppPay = cashAppPay;
             }
-
         }
-        internal InvoiceAcceptedPaymentMethods(Dictionary<string, bool> shouldSerialize,
+
+        internal InvoiceAcceptedPaymentMethods(
+            Dictionary<string, bool> shouldSerialize,
             bool? card = null,
             bool? squareGiftCard = null,
             bool? bankAccount = null,
@@ -129,9 +130,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InvoiceAcceptedPaymentMethods : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -183,30 +182,31 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InvoiceAcceptedPaymentMethods other &&                ((this.Card == null && other.Card == null) || (this.Card?.Equals(other.Card) == true)) &&
-                ((this.SquareGiftCard == null && other.SquareGiftCard == null) || (this.SquareGiftCard?.Equals(other.SquareGiftCard) == true)) &&
-                ((this.BankAccount == null && other.BankAccount == null) || (this.BankAccount?.Equals(other.BankAccount) == true)) &&
-                ((this.BuyNowPayLater == null && other.BuyNowPayLater == null) || (this.BuyNowPayLater?.Equals(other.BuyNowPayLater) == true)) &&
-                ((this.CashAppPay == null && other.CashAppPay == null) || (this.CashAppPay?.Equals(other.CashAppPay) == true));
+            return obj is InvoiceAcceptedPaymentMethods other &&
+                (this.Card == null && other.Card == null ||
+                 this.Card?.Equals(other.Card) == true) &&
+                (this.SquareGiftCard == null && other.SquareGiftCard == null ||
+                 this.SquareGiftCard?.Equals(other.SquareGiftCard) == true) &&
+                (this.BankAccount == null && other.BankAccount == null ||
+                 this.BankAccount?.Equals(other.BankAccount) == true) &&
+                (this.BuyNowPayLater == null && other.BuyNowPayLater == null ||
+                 this.BuyNowPayLater?.Equals(other.BuyNowPayLater) == true) &&
+                (this.CashAppPay == null && other.CashAppPay == null ||
+                 this.CashAppPay?.Equals(other.CashAppPay) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 74998553;
-            hashCode = HashCode.Combine(this.Card, this.SquareGiftCard, this.BankAccount, this.BuyNowPayLater, this.CashAppPay);
+            var hashCode = 74998553;
+            hashCode = HashCode.Combine(hashCode, this.Card, this.SquareGiftCard, this.BankAccount, this.BuyNowPayLater, this.CashAppPay);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -316,7 +316,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCard()
             {
@@ -324,7 +324,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetSquareGiftCard()
             {
@@ -332,7 +332,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBankAccount()
             {
@@ -340,7 +340,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBuyNowPayLater()
             {
@@ -348,7 +348,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCashAppPay()
             {
@@ -362,7 +362,8 @@ namespace Square.Models
             /// <returns> InvoiceAcceptedPaymentMethods. </returns>
             public InvoiceAcceptedPaymentMethods Build()
             {
-                return new InvoiceAcceptedPaymentMethods(shouldSerialize,
+                return new InvoiceAcceptedPaymentMethods(
+                    shouldSerialize,
                     this.card,
                     this.squareGiftCard,
                     this.bankAccount,

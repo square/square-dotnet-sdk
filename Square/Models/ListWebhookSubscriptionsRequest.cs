@@ -50,16 +50,17 @@ namespace Square.Models
                 shouldSerialize["include_disabled"] = true;
                 this.IncludeDisabled = includeDisabled;
             }
-
             this.SortOrder = sortOrder;
+
             if (limit != null)
             {
                 shouldSerialize["limit"] = true;
                 this.Limit = limit;
             }
-
         }
-        internal ListWebhookSubscriptionsRequest(Dictionary<string, bool> shouldSerialize,
+
+        internal ListWebhookSubscriptionsRequest(
+            Dictionary<string, bool> shouldSerialize,
             string cursor = null,
             bool? includeDisabled = null,
             string sortOrder = null,
@@ -106,9 +107,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"ListWebhookSubscriptionsRequest : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -142,36 +141,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is ListWebhookSubscriptionsRequest other &&                ((this.Cursor == null && other.Cursor == null) || (this.Cursor?.Equals(other.Cursor) == true)) &&
-                ((this.IncludeDisabled == null && other.IncludeDisabled == null) || (this.IncludeDisabled?.Equals(other.IncludeDisabled) == true)) &&
-                ((this.SortOrder == null && other.SortOrder == null) || (this.SortOrder?.Equals(other.SortOrder) == true)) &&
-                ((this.Limit == null && other.Limit == null) || (this.Limit?.Equals(other.Limit) == true));
+            return obj is ListWebhookSubscriptionsRequest other &&
+                (this.Cursor == null && other.Cursor == null ||
+                 this.Cursor?.Equals(other.Cursor) == true) &&
+                (this.IncludeDisabled == null && other.IncludeDisabled == null ||
+                 this.IncludeDisabled?.Equals(other.IncludeDisabled) == true) &&
+                (this.SortOrder == null && other.SortOrder == null ||
+                 this.SortOrder?.Equals(other.SortOrder) == true) &&
+                (this.Limit == null && other.Limit == null ||
+                 this.Limit?.Equals(other.Limit) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 1378989180;
-            hashCode = HashCode.Combine(this.Cursor, this.IncludeDisabled, this.SortOrder, this.Limit);
+            var hashCode = 1378989180;
+            hashCode = HashCode.Combine(hashCode, this.Cursor, this.IncludeDisabled, this.SortOrder, this.Limit);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Cursor = {(this.Cursor == null ? "null" : this.Cursor)}");
+            toStringOutput.Add($"this.Cursor = {this.Cursor ?? "null"}");
             toStringOutput.Add($"this.IncludeDisabled = {(this.IncludeDisabled == null ? "null" : this.IncludeDisabled.ToString())}");
             toStringOutput.Add($"this.SortOrder = {(this.SortOrder == null ? "null" : this.SortOrder.ToString())}");
             toStringOutput.Add($"this.Limit = {(this.Limit == null ? "null" : this.Limit.ToString())}");
@@ -256,7 +255,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCursor()
             {
@@ -264,7 +263,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetIncludeDisabled()
             {
@@ -272,7 +271,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLimit()
             {
@@ -286,7 +285,8 @@ namespace Square.Models
             /// <returns> ListWebhookSubscriptionsRequest. </returns>
             public ListWebhookSubscriptionsRequest Build()
             {
-                return new ListWebhookSubscriptionsRequest(shouldSerialize,
+                return new ListWebhookSubscriptionsRequest(
+                    shouldSerialize,
                     this.cursor,
                     this.includeDisabled,
                     this.sortOrder,

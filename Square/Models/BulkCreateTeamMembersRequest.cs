@@ -29,7 +29,10 @@ namespace Square.Models
         }
 
         /// <summary>
-        /// The data used to create the `TeamMember` objects. Each key is the `idempotency_key` that maps to the `CreateTeamMemberRequest`. The maximum number of create objects is 25.
+        /// The data used to create the `TeamMember` objects. Each key is the `idempotency_key` that maps to the `CreateTeamMemberRequest`.
+        /// The maximum number of create objects is 25.
+        /// If you include a team member's `wage_setting`, you must provide `job_id` for each job assignment. To get job IDs,
+        /// call [ListJobs](api-endpoint:Team-ListJobs).
         /// </summary>
         [JsonProperty("team_members")]
         public IDictionary<string, Models.CreateTeamMemberRequest> TeamMembers { get; }
@@ -38,35 +41,30 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"BulkCreateTeamMembersRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is BulkCreateTeamMembersRequest other &&                ((this.TeamMembers == null && other.TeamMembers == null) || (this.TeamMembers?.Equals(other.TeamMembers) == true));
+            return obj is BulkCreateTeamMembersRequest other &&
+                (this.TeamMembers == null && other.TeamMembers == null ||
+                 this.TeamMembers?.Equals(other.TeamMembers) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1170567582;
-            hashCode = HashCode.Combine(this.TeamMembers);
+            var hashCode = -1170567582;
+            hashCode = HashCode.Combine(hashCode, this.TeamMembers);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

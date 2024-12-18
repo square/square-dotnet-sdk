@@ -47,36 +47,32 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"TerminalCheckoutQuery : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is TerminalCheckoutQuery other &&                ((this.Filter == null && other.Filter == null) || (this.Filter?.Equals(other.Filter) == true)) &&
-                ((this.Sort == null && other.Sort == null) || (this.Sort?.Equals(other.Sort) == true));
+            return obj is TerminalCheckoutQuery other &&
+                (this.Filter == null && other.Filter == null ||
+                 this.Filter?.Equals(other.Filter) == true) &&
+                (this.Sort == null && other.Sort == null ||
+                 this.Sort?.Equals(other.Sort) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 2068917898;
-            hashCode = HashCode.Combine(this.Filter, this.Sort);
+            var hashCode = 2068917898;
+            hashCode = HashCode.Combine(hashCode, this.Filter, this.Sort);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

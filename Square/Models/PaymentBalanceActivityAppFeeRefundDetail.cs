@@ -54,9 +54,10 @@ namespace Square.Models
                 shouldSerialize["location_id"] = true;
                 this.LocationId = locationId;
             }
-
         }
-        internal PaymentBalanceActivityAppFeeRefundDetail(Dictionary<string, bool> shouldSerialize,
+
+        internal PaymentBalanceActivityAppFeeRefundDetail(
+            Dictionary<string, bool> shouldSerialize,
             string paymentId = null,
             string refundId = null,
             string locationId = null)
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"PaymentBalanceActivityAppFeeRefundDetail : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -125,37 +124,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is PaymentBalanceActivityAppFeeRefundDetail other &&                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true)) &&
-                ((this.RefundId == null && other.RefundId == null) || (this.RefundId?.Equals(other.RefundId) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true));
+            return obj is PaymentBalanceActivityAppFeeRefundDetail other &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true) &&
+                (this.RefundId == null && other.RefundId == null ||
+                 this.RefundId?.Equals(other.RefundId) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 657301819;
-            hashCode = HashCode.Combine(this.PaymentId, this.RefundId, this.LocationId);
+            var hashCode = 657301819;
+            hashCode = HashCode.Combine(hashCode, this.PaymentId, this.RefundId, this.LocationId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
-            toStringOutput.Add($"this.RefundId = {(this.RefundId == null ? "null" : this.RefundId)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
+            toStringOutput.Add($"this.RefundId = {this.RefundId ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
         }
 
         /// <summary>
@@ -224,7 +222,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPaymentId()
             {
@@ -232,7 +230,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRefundId()
             {
@@ -240,7 +238,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -254,7 +252,8 @@ namespace Square.Models
             /// <returns> PaymentBalanceActivityAppFeeRefundDetail. </returns>
             public PaymentBalanceActivityAppFeeRefundDetail Build()
             {
-                return new PaymentBalanceActivityAppFeeRefundDetail(shouldSerialize,
+                return new PaymentBalanceActivityAppFeeRefundDetail(
+                    shouldSerialize,
                     this.paymentId,
                     this.refundId,
                     this.locationId);

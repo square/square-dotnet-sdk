@@ -43,17 +43,18 @@ namespace Square.Models
                 shouldSerialize["redeem_activity_id"] = true;
                 this.RedeemActivityId = redeemActivityId;
             }
-
             this.AmountMoney = amountMoney;
+
             if (referenceId != null)
             {
                 shouldSerialize["reference_id"] = true;
                 this.ReferenceId = referenceId;
             }
-
             this.PaymentId = paymentId;
         }
-        internal GiftCardActivityRefund(Dictionary<string, bool> shouldSerialize,
+
+        internal GiftCardActivityRefund(
+            Dictionary<string, bool> shouldSerialize,
             string redeemActivityId = null,
             Models.Money amountMoney = null,
             string referenceId = null,
@@ -105,9 +106,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"GiftCardActivityRefund : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -132,39 +131,39 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is GiftCardActivityRefund other &&                ((this.RedeemActivityId == null && other.RedeemActivityId == null) || (this.RedeemActivityId?.Equals(other.RedeemActivityId) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.PaymentId == null && other.PaymentId == null) || (this.PaymentId?.Equals(other.PaymentId) == true));
+            return obj is GiftCardActivityRefund other &&
+                (this.RedeemActivityId == null && other.RedeemActivityId == null ||
+                 this.RedeemActivityId?.Equals(other.RedeemActivityId) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.PaymentId == null && other.PaymentId == null ||
+                 this.PaymentId?.Equals(other.PaymentId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 53973684;
-            hashCode = HashCode.Combine(this.RedeemActivityId, this.AmountMoney, this.ReferenceId, this.PaymentId);
+            var hashCode = 53973684;
+            hashCode = HashCode.Combine(hashCode, this.RedeemActivityId, this.AmountMoney, this.ReferenceId, this.PaymentId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.RedeemActivityId = {(this.RedeemActivityId == null ? "null" : this.RedeemActivityId)}");
+            toStringOutput.Add($"this.RedeemActivityId = {this.RedeemActivityId ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
-            toStringOutput.Add($"this.PaymentId = {(this.PaymentId == null ? "null" : this.PaymentId)}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
+            toStringOutput.Add($"this.PaymentId = {this.PaymentId ?? "null"}");
         }
 
         /// <summary>
@@ -244,7 +243,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetRedeemActivityId()
             {
@@ -252,7 +251,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -266,7 +265,8 @@ namespace Square.Models
             /// <returns> GiftCardActivityRefund. </returns>
             public GiftCardActivityRefund Build()
             {
-                return new GiftCardActivityRefund(shouldSerialize,
+                return new GiftCardActivityRefund(
+                    shouldSerialize,
                     this.redeemActivityId,
                     this.amountMoney,
                     this.referenceId,

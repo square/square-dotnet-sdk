@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["blocked_taxes"] = true;
                 this.BlockedTaxes = blockedTaxes;
             }
-
         }
-        internal OrderLineItemPricingBlocklists(Dictionary<string, bool> shouldSerialize,
+
+        internal OrderLineItemPricingBlocklists(
+            Dictionary<string, bool> shouldSerialize,
             IList<Models.OrderLineItemPricingBlocklistsBlockedDiscount> blockedDiscounts = null,
             IList<Models.OrderLineItemPricingBlocklistsBlockedTax> blockedTaxes = null)
         {
@@ -76,9 +77,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"OrderLineItemPricingBlocklists : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -103,27 +102,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is OrderLineItemPricingBlocklists other &&                ((this.BlockedDiscounts == null && other.BlockedDiscounts == null) || (this.BlockedDiscounts?.Equals(other.BlockedDiscounts) == true)) &&
-                ((this.BlockedTaxes == null && other.BlockedTaxes == null) || (this.BlockedTaxes?.Equals(other.BlockedTaxes) == true));
+            return obj is OrderLineItemPricingBlocklists other &&
+                (this.BlockedDiscounts == null && other.BlockedDiscounts == null ||
+                 this.BlockedDiscounts?.Equals(other.BlockedDiscounts) == true) &&
+                (this.BlockedTaxes == null && other.BlockedTaxes == null ||
+                 this.BlockedTaxes?.Equals(other.BlockedTaxes) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = 497511120;
-            hashCode = HashCode.Combine(this.BlockedDiscounts, this.BlockedTaxes);
+            var hashCode = 497511120;
+            hashCode = HashCode.Combine(hashCode, this.BlockedDiscounts, this.BlockedTaxes);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -185,7 +182,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBlockedDiscounts()
             {
@@ -193,7 +190,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBlockedTaxes()
             {
@@ -207,7 +204,8 @@ namespace Square.Models
             /// <returns> OrderLineItemPricingBlocklists. </returns>
             public OrderLineItemPricingBlocklists Build()
             {
-                return new OrderLineItemPricingBlocklists(shouldSerialize,
+                return new OrderLineItemPricingBlocklists(
+                    shouldSerialize,
                     this.blockedDiscounts,
                     this.blockedTaxes);
             }

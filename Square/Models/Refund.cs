@@ -49,29 +49,30 @@ namespace Square.Models
                 { "transaction_id", false },
                 { "additional_recipients", false }
             };
-
             this.Id = id;
             this.LocationId = locationId;
+
             if (transactionId != null)
             {
                 shouldSerialize["transaction_id"] = true;
                 this.TransactionId = transactionId;
             }
-
             this.TenderId = tenderId;
             this.CreatedAt = createdAt;
             this.Reason = reason;
             this.AmountMoney = amountMoney;
             this.Status = status;
             this.ProcessingFeeMoney = processingFeeMoney;
+
             if (additionalRecipients != null)
             {
                 shouldSerialize["additional_recipients"] = true;
                 this.AdditionalRecipients = additionalRecipients;
             }
-
         }
-        internal Refund(Dictionary<string, bool> shouldSerialize,
+
+        internal Refund(
+            Dictionary<string, bool> shouldSerialize,
             string id,
             string locationId,
             string tenderId,
@@ -171,9 +172,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"Refund : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -198,49 +197,55 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is Refund other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.TransactionId == null && other.TransactionId == null) || (this.TransactionId?.Equals(other.TransactionId) == true)) &&
-                ((this.TenderId == null && other.TenderId == null) || (this.TenderId?.Equals(other.TenderId) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.Reason == null && other.Reason == null) || (this.Reason?.Equals(other.Reason) == true)) &&
-                ((this.AmountMoney == null && other.AmountMoney == null) || (this.AmountMoney?.Equals(other.AmountMoney) == true)) &&
-                ((this.Status == null && other.Status == null) || (this.Status?.Equals(other.Status) == true)) &&
-                ((this.ProcessingFeeMoney == null && other.ProcessingFeeMoney == null) || (this.ProcessingFeeMoney?.Equals(other.ProcessingFeeMoney) == true)) &&
-                ((this.AdditionalRecipients == null && other.AdditionalRecipients == null) || (this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true));
+            return obj is Refund other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.TransactionId == null && other.TransactionId == null ||
+                 this.TransactionId?.Equals(other.TransactionId) == true) &&
+                (this.TenderId == null && other.TenderId == null ||
+                 this.TenderId?.Equals(other.TenderId) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.Reason == null && other.Reason == null ||
+                 this.Reason?.Equals(other.Reason) == true) &&
+                (this.AmountMoney == null && other.AmountMoney == null ||
+                 this.AmountMoney?.Equals(other.AmountMoney) == true) &&
+                (this.Status == null && other.Status == null ||
+                 this.Status?.Equals(other.Status) == true) &&
+                (this.ProcessingFeeMoney == null && other.ProcessingFeeMoney == null ||
+                 this.ProcessingFeeMoney?.Equals(other.ProcessingFeeMoney) == true) &&
+                (this.AdditionalRecipients == null && other.AdditionalRecipients == null ||
+                 this.AdditionalRecipients?.Equals(other.AdditionalRecipients) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -772282082;
-            hashCode = HashCode.Combine(this.Id, this.LocationId, this.TransactionId, this.TenderId, this.CreatedAt, this.Reason, this.AmountMoney);
+            var hashCode = -772282082;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.LocationId, this.TransactionId, this.TenderId, this.CreatedAt, this.Reason, this.AmountMoney);
 
             hashCode = HashCode.Combine(hashCode, this.Status, this.ProcessingFeeMoney, this.AdditionalRecipients);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.TransactionId = {(this.TransactionId == null ? "null" : this.TransactionId)}");
-            toStringOutput.Add($"this.TenderId = {(this.TenderId == null ? "null" : this.TenderId)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
-            toStringOutput.Add($"this.Reason = {(this.Reason == null ? "null" : this.Reason)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.TransactionId = {this.TransactionId ?? "null"}");
+            toStringOutput.Add($"this.TenderId = {this.TenderId ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
+            toStringOutput.Add($"this.Reason = {this.Reason ?? "null"}");
             toStringOutput.Add($"this.AmountMoney = {(this.AmountMoney == null ? "null" : this.AmountMoney.ToString())}");
             toStringOutput.Add($"this.Status = {(this.Status == null ? "null" : this.Status.ToString())}");
             toStringOutput.Add($"this.ProcessingFeeMoney = {(this.ProcessingFeeMoney == null ? "null" : this.ProcessingFeeMoney.ToString())}");
@@ -427,7 +432,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTransactionId()
             {
@@ -435,7 +440,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetAdditionalRecipients()
             {
@@ -449,7 +454,8 @@ namespace Square.Models
             /// <returns> Refund. </returns>
             public Refund Build()
             {
-                return new Refund(shouldSerialize,
+                return new Refund(
+                    shouldSerialize,
                     this.id,
                     this.locationId,
                     this.tenderId,

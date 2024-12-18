@@ -50,8 +50,8 @@ namespace Square.Models
                 shouldSerialize["name"] = true;
                 this.Name = name;
             }
-
             this.PriceMoney = priceMoney;
+
             if (ordinal != null)
             {
                 shouldSerialize["ordinal"] = true;
@@ -75,9 +75,10 @@ namespace Square.Models
                 shouldSerialize["image_id"] = true;
                 this.ImageId = imageId;
             }
-
         }
-        internal CatalogModifier(Dictionary<string, bool> shouldSerialize,
+
+        internal CatalogModifier(
+            Dictionary<string, bool> shouldSerialize,
             string name = null,
             Models.Money priceMoney = null,
             int? ordinal = null,
@@ -140,9 +141,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CatalogModifier : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -194,43 +193,45 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CatalogModifier other &&                ((this.Name == null && other.Name == null) || (this.Name?.Equals(other.Name) == true)) &&
-                ((this.PriceMoney == null && other.PriceMoney == null) || (this.PriceMoney?.Equals(other.PriceMoney) == true)) &&
-                ((this.Ordinal == null && other.Ordinal == null) || (this.Ordinal?.Equals(other.Ordinal) == true)) &&
-                ((this.ModifierListId == null && other.ModifierListId == null) || (this.ModifierListId?.Equals(other.ModifierListId) == true)) &&
-                ((this.LocationOverrides == null && other.LocationOverrides == null) || (this.LocationOverrides?.Equals(other.LocationOverrides) == true)) &&
-                ((this.ImageId == null && other.ImageId == null) || (this.ImageId?.Equals(other.ImageId) == true));
+            return obj is CatalogModifier other &&
+                (this.Name == null && other.Name == null ||
+                 this.Name?.Equals(other.Name) == true) &&
+                (this.PriceMoney == null && other.PriceMoney == null ||
+                 this.PriceMoney?.Equals(other.PriceMoney) == true) &&
+                (this.Ordinal == null && other.Ordinal == null ||
+                 this.Ordinal?.Equals(other.Ordinal) == true) &&
+                (this.ModifierListId == null && other.ModifierListId == null ||
+                 this.ModifierListId?.Equals(other.ModifierListId) == true) &&
+                (this.LocationOverrides == null && other.LocationOverrides == null ||
+                 this.LocationOverrides?.Equals(other.LocationOverrides) == true) &&
+                (this.ImageId == null && other.ImageId == null ||
+                 this.ImageId?.Equals(other.ImageId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1040481339;
-            hashCode = HashCode.Combine(this.Name, this.PriceMoney, this.Ordinal, this.ModifierListId, this.LocationOverrides, this.ImageId);
+            var hashCode = -1040481339;
+            hashCode = HashCode.Combine(hashCode, this.Name, this.PriceMoney, this.Ordinal, this.ModifierListId, this.LocationOverrides, this.ImageId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Name = {(this.Name == null ? "null" : this.Name)}");
+            toStringOutput.Add($"this.Name = {this.Name ?? "null"}");
             toStringOutput.Add($"this.PriceMoney = {(this.PriceMoney == null ? "null" : this.PriceMoney.ToString())}");
             toStringOutput.Add($"this.Ordinal = {(this.Ordinal == null ? "null" : this.Ordinal.ToString())}");
-            toStringOutput.Add($"this.ModifierListId = {(this.ModifierListId == null ? "null" : this.ModifierListId)}");
+            toStringOutput.Add($"this.ModifierListId = {this.ModifierListId ?? "null"}");
             toStringOutput.Add($"this.LocationOverrides = {(this.LocationOverrides == null ? "null" : $"[{string.Join(", ", this.LocationOverrides)} ]")}");
-            toStringOutput.Add($"this.ImageId = {(this.ImageId == null ? "null" : this.ImageId)}");
+            toStringOutput.Add($"this.ImageId = {this.ImageId ?? "null"}");
         }
 
         /// <summary>
@@ -342,7 +343,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetName()
             {
@@ -350,7 +351,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOrdinal()
             {
@@ -358,7 +359,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetModifierListId()
             {
@@ -366,7 +367,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationOverrides()
             {
@@ -374,7 +375,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetImageId()
             {
@@ -388,7 +389,8 @@ namespace Square.Models
             /// <returns> CatalogModifier. </returns>
             public CatalogModifier Build()
             {
-                return new CatalogModifier(shouldSerialize,
+                return new CatalogModifier(
+                    shouldSerialize,
                     this.name,
                     this.priceMoney,
                     this.ordinal,

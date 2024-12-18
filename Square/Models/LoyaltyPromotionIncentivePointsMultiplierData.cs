@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["multiplier"] = true;
                 this.Multiplier = multiplier;
             }
-
         }
-        internal LoyaltyPromotionIncentivePointsMultiplierData(Dictionary<string, bool> shouldSerialize,
+
+        internal LoyaltyPromotionIncentivePointsMultiplierData(
+            Dictionary<string, bool> shouldSerialize,
             int? pointsMultiplier = null,
             string multiplier = null)
         {
@@ -89,9 +90,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"LoyaltyPromotionIncentivePointsMultiplierData : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -116,27 +115,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is LoyaltyPromotionIncentivePointsMultiplierData other &&                ((this.PointsMultiplier == null && other.PointsMultiplier == null) || (this.PointsMultiplier?.Equals(other.PointsMultiplier) == true)) &&
-                ((this.Multiplier == null && other.Multiplier == null) || (this.Multiplier?.Equals(other.Multiplier) == true));
+            return obj is LoyaltyPromotionIncentivePointsMultiplierData other &&
+                (this.PointsMultiplier == null && other.PointsMultiplier == null ||
+                 this.PointsMultiplier?.Equals(other.PointsMultiplier) == true) &&
+                (this.Multiplier == null && other.Multiplier == null ||
+                 this.Multiplier?.Equals(other.Multiplier) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -79851321;
-            hashCode = HashCode.Combine(this.PointsMultiplier, this.Multiplier);
+            var hashCode = -79851321;
+            hashCode = HashCode.Combine(hashCode, this.PointsMultiplier, this.Multiplier);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -144,7 +141,7 @@ namespace Square.Models
         protected void ToString(List<string> toStringOutput)
         {
             toStringOutput.Add($"this.PointsMultiplier = {(this.PointsMultiplier == null ? "null" : this.PointsMultiplier.ToString())}");
-            toStringOutput.Add($"this.Multiplier = {(this.Multiplier == null ? "null" : this.Multiplier)}");
+            toStringOutput.Add($"this.Multiplier = {this.Multiplier ?? "null"}");
         }
 
         /// <summary>
@@ -198,7 +195,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetPointsMultiplier()
             {
@@ -206,7 +203,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetMultiplier()
             {
@@ -220,7 +217,8 @@ namespace Square.Models
             /// <returns> LoyaltyPromotionIncentivePointsMultiplierData. </returns>
             public LoyaltyPromotionIncentivePointsMultiplierData Build()
             {
-                return new LoyaltyPromotionIncentivePointsMultiplierData(shouldSerialize,
+                return new LoyaltyPromotionIncentivePointsMultiplierData(
+                    shouldSerialize,
                     this.pointsMultiplier,
                     this.multiplier);
             }

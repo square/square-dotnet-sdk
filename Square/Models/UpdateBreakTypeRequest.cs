@@ -39,35 +39,30 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"UpdateBreakTypeRequest : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is UpdateBreakTypeRequest other &&                ((this.BreakType == null && other.BreakType == null) || (this.BreakType?.Equals(other.BreakType) == true));
+            return obj is UpdateBreakTypeRequest other &&
+                (this.BreakType == null && other.BreakType == null ||
+                 this.BreakType?.Equals(other.BreakType) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -934394320;
-            hashCode = HashCode.Combine(this.BreakType);
+            var hashCode = -934394320;
+            hashCode = HashCode.Combine(hashCode, this.BreakType);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

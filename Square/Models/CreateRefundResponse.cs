@@ -47,36 +47,32 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CreateRefundResponse : ({string.Join(", ", toStringOutput)})";
         }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CreateRefundResponse other &&                ((this.Errors == null && other.Errors == null) || (this.Errors?.Equals(other.Errors) == true)) &&
-                ((this.Refund == null && other.Refund == null) || (this.Refund?.Equals(other.Refund) == true));
+            return obj is CreateRefundResponse other &&
+                (this.Errors == null && other.Errors == null ||
+                 this.Errors?.Equals(other.Errors) == true) &&
+                (this.Refund == null && other.Refund == null ||
+                 this.Refund?.Equals(other.Refund) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1017134499;
-            hashCode = HashCode.Combine(this.Errors, this.Refund);
+            var hashCode = -1017134499;
+            hashCode = HashCode.Combine(hashCode, this.Errors, this.Refund);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>

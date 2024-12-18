@@ -73,16 +73,16 @@ namespace Square.Models
                 { "employee_id", false },
                 { "team_member_id", false }
             };
-
             this.Id = id;
+
             if (referenceId != null)
             {
                 shouldSerialize["reference_id"] = true;
                 this.ReferenceId = referenceId;
             }
-
             this.FromState = fromState;
             this.ToState = toState;
+
             if (locationId != null)
             {
                 shouldSerialize["location_id"] = true;
@@ -106,16 +106,16 @@ namespace Square.Models
                 shouldSerialize["quantity"] = true;
                 this.Quantity = quantity;
             }
-
             this.TotalPriceMoney = totalPriceMoney;
+
             if (occurredAt != null)
             {
                 shouldSerialize["occurred_at"] = true;
                 this.OccurredAt = occurredAt;
             }
-
             this.CreatedAt = createdAt;
             this.Source = source;
+
             if (employeeId != null)
             {
                 shouldSerialize["employee_id"] = true;
@@ -127,14 +127,15 @@ namespace Square.Models
                 shouldSerialize["team_member_id"] = true;
                 this.TeamMemberId = teamMemberId;
             }
-
             this.TransactionId = transactionId;
             this.RefundId = refundId;
             this.PurchaseOrderId = purchaseOrderId;
             this.GoodsReceiptId = goodsReceiptId;
             this.AdjustmentGroup = adjustmentGroup;
         }
-        internal InventoryAdjustment(Dictionary<string, bool> shouldSerialize,
+
+        internal InventoryAdjustment(
+            Dictionary<string, bool> shouldSerialize,
             string id = null,
             string referenceId = null,
             string fromState = null,
@@ -321,9 +322,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"InventoryAdjustment : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -402,41 +401,55 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is InventoryAdjustment other &&                ((this.Id == null && other.Id == null) || (this.Id?.Equals(other.Id) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true)) &&
-                ((this.FromState == null && other.FromState == null) || (this.FromState?.Equals(other.FromState) == true)) &&
-                ((this.ToState == null && other.ToState == null) || (this.ToState?.Equals(other.ToState) == true)) &&
-                ((this.LocationId == null && other.LocationId == null) || (this.LocationId?.Equals(other.LocationId) == true)) &&
-                ((this.CatalogObjectId == null && other.CatalogObjectId == null) || (this.CatalogObjectId?.Equals(other.CatalogObjectId) == true)) &&
-                ((this.CatalogObjectType == null && other.CatalogObjectType == null) || (this.CatalogObjectType?.Equals(other.CatalogObjectType) == true)) &&
-                ((this.Quantity == null && other.Quantity == null) || (this.Quantity?.Equals(other.Quantity) == true)) &&
-                ((this.TotalPriceMoney == null && other.TotalPriceMoney == null) || (this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true)) &&
-                ((this.OccurredAt == null && other.OccurredAt == null) || (this.OccurredAt?.Equals(other.OccurredAt) == true)) &&
-                ((this.CreatedAt == null && other.CreatedAt == null) || (this.CreatedAt?.Equals(other.CreatedAt) == true)) &&
-                ((this.Source == null && other.Source == null) || (this.Source?.Equals(other.Source) == true)) &&
-                ((this.EmployeeId == null && other.EmployeeId == null) || (this.EmployeeId?.Equals(other.EmployeeId) == true)) &&
-                ((this.TeamMemberId == null && other.TeamMemberId == null) || (this.TeamMemberId?.Equals(other.TeamMemberId) == true)) &&
-                ((this.TransactionId == null && other.TransactionId == null) || (this.TransactionId?.Equals(other.TransactionId) == true)) &&
-                ((this.RefundId == null && other.RefundId == null) || (this.RefundId?.Equals(other.RefundId) == true)) &&
-                ((this.PurchaseOrderId == null && other.PurchaseOrderId == null) || (this.PurchaseOrderId?.Equals(other.PurchaseOrderId) == true)) &&
-                ((this.GoodsReceiptId == null && other.GoodsReceiptId == null) || (this.GoodsReceiptId?.Equals(other.GoodsReceiptId) == true)) &&
-                ((this.AdjustmentGroup == null && other.AdjustmentGroup == null) || (this.AdjustmentGroup?.Equals(other.AdjustmentGroup) == true));
+            return obj is InventoryAdjustment other &&
+                (this.Id == null && other.Id == null ||
+                 this.Id?.Equals(other.Id) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true) &&
+                (this.FromState == null && other.FromState == null ||
+                 this.FromState?.Equals(other.FromState) == true) &&
+                (this.ToState == null && other.ToState == null ||
+                 this.ToState?.Equals(other.ToState) == true) &&
+                (this.LocationId == null && other.LocationId == null ||
+                 this.LocationId?.Equals(other.LocationId) == true) &&
+                (this.CatalogObjectId == null && other.CatalogObjectId == null ||
+                 this.CatalogObjectId?.Equals(other.CatalogObjectId) == true) &&
+                (this.CatalogObjectType == null && other.CatalogObjectType == null ||
+                 this.CatalogObjectType?.Equals(other.CatalogObjectType) == true) &&
+                (this.Quantity == null && other.Quantity == null ||
+                 this.Quantity?.Equals(other.Quantity) == true) &&
+                (this.TotalPriceMoney == null && other.TotalPriceMoney == null ||
+                 this.TotalPriceMoney?.Equals(other.TotalPriceMoney) == true) &&
+                (this.OccurredAt == null && other.OccurredAt == null ||
+                 this.OccurredAt?.Equals(other.OccurredAt) == true) &&
+                (this.CreatedAt == null && other.CreatedAt == null ||
+                 this.CreatedAt?.Equals(other.CreatedAt) == true) &&
+                (this.Source == null && other.Source == null ||
+                 this.Source?.Equals(other.Source) == true) &&
+                (this.EmployeeId == null && other.EmployeeId == null ||
+                 this.EmployeeId?.Equals(other.EmployeeId) == true) &&
+                (this.TeamMemberId == null && other.TeamMemberId == null ||
+                 this.TeamMemberId?.Equals(other.TeamMemberId) == true) &&
+                (this.TransactionId == null && other.TransactionId == null ||
+                 this.TransactionId?.Equals(other.TransactionId) == true) &&
+                (this.RefundId == null && other.RefundId == null ||
+                 this.RefundId?.Equals(other.RefundId) == true) &&
+                (this.PurchaseOrderId == null && other.PurchaseOrderId == null ||
+                 this.PurchaseOrderId?.Equals(other.PurchaseOrderId) == true) &&
+                (this.GoodsReceiptId == null && other.GoodsReceiptId == null ||
+                 this.GoodsReceiptId?.Equals(other.GoodsReceiptId) == true) &&
+                (this.AdjustmentGroup == null && other.AdjustmentGroup == null ||
+                 this.AdjustmentGroup?.Equals(other.AdjustmentGroup) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1008310977;
-            hashCode = HashCode.Combine(this.Id, this.ReferenceId, this.FromState, this.ToState, this.LocationId, this.CatalogObjectId, this.CatalogObjectType);
+            var hashCode = -1008310977;
+            hashCode = HashCode.Combine(hashCode, this.Id, this.ReferenceId, this.FromState, this.ToState, this.LocationId, this.CatalogObjectId, this.CatalogObjectType);
 
             hashCode = HashCode.Combine(hashCode, this.Quantity, this.TotalPriceMoney, this.OccurredAt, this.CreatedAt, this.Source, this.EmployeeId, this.TeamMemberId);
 
@@ -444,30 +457,31 @@ namespace Square.Models
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.Id = {(this.Id == null ? "null" : this.Id)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
+            toStringOutput.Add($"this.Id = {this.Id ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
             toStringOutput.Add($"this.FromState = {(this.FromState == null ? "null" : this.FromState.ToString())}");
             toStringOutput.Add($"this.ToState = {(this.ToState == null ? "null" : this.ToState.ToString())}");
-            toStringOutput.Add($"this.LocationId = {(this.LocationId == null ? "null" : this.LocationId)}");
-            toStringOutput.Add($"this.CatalogObjectId = {(this.CatalogObjectId == null ? "null" : this.CatalogObjectId)}");
-            toStringOutput.Add($"this.CatalogObjectType = {(this.CatalogObjectType == null ? "null" : this.CatalogObjectType)}");
-            toStringOutput.Add($"this.Quantity = {(this.Quantity == null ? "null" : this.Quantity)}");
+            toStringOutput.Add($"this.LocationId = {this.LocationId ?? "null"}");
+            toStringOutput.Add($"this.CatalogObjectId = {this.CatalogObjectId ?? "null"}");
+            toStringOutput.Add($"this.CatalogObjectType = {this.CatalogObjectType ?? "null"}");
+            toStringOutput.Add($"this.Quantity = {this.Quantity ?? "null"}");
             toStringOutput.Add($"this.TotalPriceMoney = {(this.TotalPriceMoney == null ? "null" : this.TotalPriceMoney.ToString())}");
-            toStringOutput.Add($"this.OccurredAt = {(this.OccurredAt == null ? "null" : this.OccurredAt)}");
-            toStringOutput.Add($"this.CreatedAt = {(this.CreatedAt == null ? "null" : this.CreatedAt)}");
+            toStringOutput.Add($"this.OccurredAt = {this.OccurredAt ?? "null"}");
+            toStringOutput.Add($"this.CreatedAt = {this.CreatedAt ?? "null"}");
             toStringOutput.Add($"this.Source = {(this.Source == null ? "null" : this.Source.ToString())}");
-            toStringOutput.Add($"this.EmployeeId = {(this.EmployeeId == null ? "null" : this.EmployeeId)}");
-            toStringOutput.Add($"this.TeamMemberId = {(this.TeamMemberId == null ? "null" : this.TeamMemberId)}");
-            toStringOutput.Add($"this.TransactionId = {(this.TransactionId == null ? "null" : this.TransactionId)}");
-            toStringOutput.Add($"this.RefundId = {(this.RefundId == null ? "null" : this.RefundId)}");
-            toStringOutput.Add($"this.PurchaseOrderId = {(this.PurchaseOrderId == null ? "null" : this.PurchaseOrderId)}");
-            toStringOutput.Add($"this.GoodsReceiptId = {(this.GoodsReceiptId == null ? "null" : this.GoodsReceiptId)}");
+            toStringOutput.Add($"this.EmployeeId = {this.EmployeeId ?? "null"}");
+            toStringOutput.Add($"this.TeamMemberId = {this.TeamMemberId ?? "null"}");
+            toStringOutput.Add($"this.TransactionId = {this.TransactionId ?? "null"}");
+            toStringOutput.Add($"this.RefundId = {this.RefundId ?? "null"}");
+            toStringOutput.Add($"this.PurchaseOrderId = {this.PurchaseOrderId ?? "null"}");
+            toStringOutput.Add($"this.GoodsReceiptId = {this.GoodsReceiptId ?? "null"}");
             toStringOutput.Add($"this.AdjustmentGroup = {(this.AdjustmentGroup == null ? "null" : this.AdjustmentGroup.ToString())}");
         }
 
@@ -755,7 +769,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -763,7 +777,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetLocationId()
             {
@@ -771,7 +785,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectId()
             {
@@ -779,7 +793,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCatalogObjectType()
             {
@@ -787,7 +801,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetQuantity()
             {
@@ -795,7 +809,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetOccurredAt()
             {
@@ -803,7 +817,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetEmployeeId()
             {
@@ -811,7 +825,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetTeamMemberId()
             {
@@ -825,7 +839,8 @@ namespace Square.Models
             /// <returns> InventoryAdjustment. </returns>
             public InventoryAdjustment Build()
             {
-                return new InventoryAdjustment(shouldSerialize,
+                return new InventoryAdjustment(
+                    shouldSerialize,
                     this.id,
                     this.referenceId,
                     this.fromState,

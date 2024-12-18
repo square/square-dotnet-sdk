@@ -38,10 +38,11 @@ namespace Square.Models
                 shouldSerialize["visible_percent"] = true;
                 this.VisiblePercent = visiblePercent;
             }
-
             this.ExternalPower = externalPower;
         }
-        internal DeviceComponentDetailsBatteryDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal DeviceComponentDetailsBatteryDetails(
+            Dictionary<string, bool> shouldSerialize,
             int? visiblePercent = null,
             string externalPower = null)
         {
@@ -66,9 +67,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"DeviceComponentDetailsBatteryDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -84,27 +83,25 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is DeviceComponentDetailsBatteryDetails other &&                ((this.VisiblePercent == null && other.VisiblePercent == null) || (this.VisiblePercent?.Equals(other.VisiblePercent) == true)) &&
-                ((this.ExternalPower == null && other.ExternalPower == null) || (this.ExternalPower?.Equals(other.ExternalPower) == true));
+            return obj is DeviceComponentDetailsBatteryDetails other &&
+                (this.VisiblePercent == null && other.VisiblePercent == null ||
+                 this.VisiblePercent?.Equals(other.VisiblePercent) == true) &&
+                (this.ExternalPower == null && other.ExternalPower == null ||
+                 this.ExternalPower?.Equals(other.ExternalPower) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -94624096;
-            hashCode = HashCode.Combine(this.VisiblePercent, this.ExternalPower);
+            var hashCode = -94624096;
+            hashCode = HashCode.Combine(hashCode, this.VisiblePercent, this.ExternalPower);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
@@ -164,7 +161,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetVisiblePercent()
             {
@@ -178,7 +175,8 @@ namespace Square.Models
             /// <returns> DeviceComponentDetailsBatteryDetails. </returns>
             public DeviceComponentDetailsBatteryDetails Build()
             {
-                return new DeviceComponentDetailsBatteryDetails(shouldSerialize,
+                return new DeviceComponentDetailsBatteryDetails(
+                    shouldSerialize,
                     this.visiblePercent,
                     this.externalPower);
             }

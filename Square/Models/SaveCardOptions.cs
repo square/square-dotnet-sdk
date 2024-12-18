@@ -34,17 +34,18 @@ namespace Square.Models
             {
                 { "reference_id", false }
             };
-
             this.CustomerId = customerId;
             this.CardId = cardId;
+
             if (referenceId != null)
             {
                 shouldSerialize["reference_id"] = true;
                 this.ReferenceId = referenceId;
             }
-
         }
-        internal SaveCardOptions(Dictionary<string, bool> shouldSerialize,
+
+        internal SaveCardOptions(
+            Dictionary<string, bool> shouldSerialize,
             string customerId,
             string cardId = null,
             string referenceId = null)
@@ -79,9 +80,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"SaveCardOptions : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -97,37 +96,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is SaveCardOptions other &&                ((this.CustomerId == null && other.CustomerId == null) || (this.CustomerId?.Equals(other.CustomerId) == true)) &&
-                ((this.CardId == null && other.CardId == null) || (this.CardId?.Equals(other.CardId) == true)) &&
-                ((this.ReferenceId == null && other.ReferenceId == null) || (this.ReferenceId?.Equals(other.ReferenceId) == true));
+            return obj is SaveCardOptions other &&
+                (this.CustomerId == null && other.CustomerId == null ||
+                 this.CustomerId?.Equals(other.CustomerId) == true) &&
+                (this.CardId == null && other.CardId == null ||
+                 this.CardId?.Equals(other.CardId) == true) &&
+                (this.ReferenceId == null && other.ReferenceId == null ||
+                 this.ReferenceId?.Equals(other.ReferenceId) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1521790821;
-            hashCode = HashCode.Combine(this.CustomerId, this.CardId, this.ReferenceId);
+            var hashCode = -1521790821;
+            hashCode = HashCode.Combine(hashCode, this.CustomerId, this.CardId, this.ReferenceId);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CustomerId = {(this.CustomerId == null ? "null" : this.CustomerId)}");
-            toStringOutput.Add($"this.CardId = {(this.CardId == null ? "null" : this.CardId)}");
-            toStringOutput.Add($"this.ReferenceId = {(this.ReferenceId == null ? "null" : this.ReferenceId)}");
+            toStringOutput.Add($"this.CustomerId = {this.CustomerId ?? "null"}");
+            toStringOutput.Add($"this.CardId = {this.CardId ?? "null"}");
+            toStringOutput.Add($"this.ReferenceId = {this.ReferenceId ?? "null"}");
         }
 
         /// <summary>
@@ -202,7 +200,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetReferenceId()
             {
@@ -216,7 +214,8 @@ namespace Square.Models
             /// <returns> SaveCardOptions. </returns>
             public SaveCardOptions Build()
             {
-                return new SaveCardOptions(shouldSerialize,
+                return new SaveCardOptions(
+                    shouldSerialize,
                     this.customerId,
                     this.cardId,
                     this.referenceId);

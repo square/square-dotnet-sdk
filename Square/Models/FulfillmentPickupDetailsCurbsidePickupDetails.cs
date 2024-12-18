@@ -45,9 +45,10 @@ namespace Square.Models
                 shouldSerialize["buyer_arrived_at"] = true;
                 this.BuyerArrivedAt = buyerArrivedAt;
             }
-
         }
-        internal FulfillmentPickupDetailsCurbsidePickupDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal FulfillmentPickupDetailsCurbsidePickupDetails(
+            Dictionary<string, bool> shouldSerialize,
             string curbsideDetails = null,
             string buyerArrivedAt = null)
         {
@@ -74,9 +75,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"FulfillmentPickupDetailsCurbsidePickupDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -101,35 +100,33 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is FulfillmentPickupDetailsCurbsidePickupDetails other &&                ((this.CurbsideDetails == null && other.CurbsideDetails == null) || (this.CurbsideDetails?.Equals(other.CurbsideDetails) == true)) &&
-                ((this.BuyerArrivedAt == null && other.BuyerArrivedAt == null) || (this.BuyerArrivedAt?.Equals(other.BuyerArrivedAt) == true));
+            return obj is FulfillmentPickupDetailsCurbsidePickupDetails other &&
+                (this.CurbsideDetails == null && other.CurbsideDetails == null ||
+                 this.CurbsideDetails?.Equals(other.CurbsideDetails) == true) &&
+                (this.BuyerArrivedAt == null && other.BuyerArrivedAt == null ||
+                 this.BuyerArrivedAt?.Equals(other.BuyerArrivedAt) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1397619008;
-            hashCode = HashCode.Combine(this.CurbsideDetails, this.BuyerArrivedAt);
+            var hashCode = -1397619008;
+            hashCode = HashCode.Combine(hashCode, this.CurbsideDetails, this.BuyerArrivedAt);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.CurbsideDetails = {(this.CurbsideDetails == null ? "null" : this.CurbsideDetails)}");
-            toStringOutput.Add($"this.BuyerArrivedAt = {(this.BuyerArrivedAt == null ? "null" : this.BuyerArrivedAt)}");
+            toStringOutput.Add($"this.CurbsideDetails = {this.CurbsideDetails ?? "null"}");
+            toStringOutput.Add($"this.BuyerArrivedAt = {this.BuyerArrivedAt ?? "null"}");
         }
 
         /// <summary>
@@ -183,7 +180,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetCurbsideDetails()
             {
@@ -191,7 +188,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBuyerArrivedAt()
             {
@@ -205,7 +202,8 @@ namespace Square.Models
             /// <returns> FulfillmentPickupDetailsCurbsidePickupDetails. </returns>
             public FulfillmentPickupDetailsCurbsidePickupDetails Build()
             {
-                return new FulfillmentPickupDetailsCurbsidePickupDetails(shouldSerialize,
+                return new FulfillmentPickupDetailsCurbsidePickupDetails(
+                    shouldSerialize,
                     this.curbsideDetails,
                     this.buyerArrivedAt);
             }

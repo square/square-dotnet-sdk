@@ -47,10 +47,11 @@ namespace Square.Models
                 shouldSerialize["buyer_country_code"] = true;
                 this.BuyerCountryCode = buyerCountryCode;
             }
-
             this.BuyerCashtag = buyerCashtag;
         }
-        internal CashAppDetails(Dictionary<string, bool> shouldSerialize,
+
+        internal CashAppDetails(
+            Dictionary<string, bool> shouldSerialize,
             string buyerFullName = null,
             string buyerCountryCode = null,
             string buyerCashtag = null)
@@ -84,9 +85,7 @@ namespace Square.Models
         public override string ToString()
         {
             var toStringOutput = new List<string>();
-
             this.ToString(toStringOutput);
-
             return $"CashAppDetails : ({string.Join(", ", toStringOutput)})";
         }
 
@@ -111,37 +110,36 @@ namespace Square.Models
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
+            if (obj is null) return false;
+            if (ReferenceEquals(this, obj)) return true;
 
-            if (obj == this)
-            {
-                return true;
-            }
-            return obj is CashAppDetails other &&                ((this.BuyerFullName == null && other.BuyerFullName == null) || (this.BuyerFullName?.Equals(other.BuyerFullName) == true)) &&
-                ((this.BuyerCountryCode == null && other.BuyerCountryCode == null) || (this.BuyerCountryCode?.Equals(other.BuyerCountryCode) == true)) &&
-                ((this.BuyerCashtag == null && other.BuyerCashtag == null) || (this.BuyerCashtag?.Equals(other.BuyerCashtag) == true));
+            return obj is CashAppDetails other &&
+                (this.BuyerFullName == null && other.BuyerFullName == null ||
+                 this.BuyerFullName?.Equals(other.BuyerFullName) == true) &&
+                (this.BuyerCountryCode == null && other.BuyerCountryCode == null ||
+                 this.BuyerCountryCode?.Equals(other.BuyerCountryCode) == true) &&
+                (this.BuyerCashtag == null && other.BuyerCashtag == null ||
+                 this.BuyerCashtag?.Equals(other.BuyerCashtag) == true);
         }
-        
+
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            int hashCode = -1138097825;
-            hashCode = HashCode.Combine(this.BuyerFullName, this.BuyerCountryCode, this.BuyerCashtag);
+            var hashCode = -1138097825;
+            hashCode = HashCode.Combine(hashCode, this.BuyerFullName, this.BuyerCountryCode, this.BuyerCashtag);
 
             return hashCode;
         }
+
         /// <summary>
         /// ToString overload.
         /// </summary>
         /// <param name="toStringOutput">List of strings.</param>
         protected void ToString(List<string> toStringOutput)
         {
-            toStringOutput.Add($"this.BuyerFullName = {(this.BuyerFullName == null ? "null" : this.BuyerFullName)}");
-            toStringOutput.Add($"this.BuyerCountryCode = {(this.BuyerCountryCode == null ? "null" : this.BuyerCountryCode)}");
-            toStringOutput.Add($"this.BuyerCashtag = {(this.BuyerCashtag == null ? "null" : this.BuyerCashtag)}");
+            toStringOutput.Add($"this.BuyerFullName = {this.BuyerFullName ?? "null"}");
+            toStringOutput.Add($"this.BuyerCountryCode = {this.BuyerCountryCode ?? "null"}");
+            toStringOutput.Add($"this.BuyerCashtag = {this.BuyerCashtag ?? "null"}");
         }
 
         /// <summary>
@@ -208,7 +206,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBuyerFullName()
             {
@@ -216,7 +214,7 @@ namespace Square.Models
             }
 
             /// <summary>
-            /// Marks the field to not be serailized.
+            /// Marks the field to not be serialized.
             /// </summary>
             public void UnsetBuyerCountryCode()
             {
@@ -230,7 +228,8 @@ namespace Square.Models
             /// <returns> CashAppDetails. </returns>
             public CashAppDetails Build()
             {
-                return new CashAppDetails(shouldSerialize,
+                return new CashAppDetails(
+                    shouldSerialize,
                     this.buyerFullName,
                     this.buyerCountryCode,
                     this.buyerCashtag);
