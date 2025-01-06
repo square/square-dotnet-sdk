@@ -24,10 +24,10 @@ namespace Square.Models
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="locationId">location_id.</param>
-        /// <param name="tenderId">tender_id.</param>
         /// <param name="reason">reason.</param>
         /// <param name="amountMoney">amount_money.</param>
         /// <param name="status">status.</param>
+        /// <param name="tenderId">tender_id.</param>
         /// <param name="transactionId">transaction_id.</param>
         /// <param name="createdAt">created_at.</param>
         /// <param name="processingFeeMoney">processing_fee_money.</param>
@@ -35,10 +35,10 @@ namespace Square.Models
         public Refund(
             string id,
             string locationId,
-            string tenderId,
             string reason,
             Models.Money amountMoney,
             string status,
+            string tenderId = null,
             string transactionId = null,
             string createdAt = null,
             Models.Money processingFeeMoney = null,
@@ -47,6 +47,7 @@ namespace Square.Models
             shouldSerialize = new Dictionary<string, bool>
             {
                 { "transaction_id", false },
+                { "tender_id", false },
                 { "additional_recipients", false }
             };
             this.Id = id;
@@ -57,7 +58,11 @@ namespace Square.Models
                 shouldSerialize["transaction_id"] = true;
                 this.TransactionId = transactionId;
             }
-            this.TenderId = tenderId;
+            if (tenderId != null)
+            {
+                shouldSerialize["tender_id"] = true;
+                this.TenderId = tenderId;
+            }
             this.CreatedAt = createdAt;
             this.Reason = reason;
             this.AmountMoney = amountMoney;
@@ -189,6 +194,15 @@ namespace Square.Models
         /// Checks if the field should be serialized or not.
         /// </summary>
         /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeTenderId()
+        {
+            return this.shouldSerialize["tender_id"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
         public bool ShouldSerializeAdditionalRecipients()
         {
             return this.shouldSerialize["additional_recipients"];
@@ -261,10 +275,10 @@ namespace Square.Models
             var builder = new Builder(
                 this.Id,
                 this.LocationId,
-                this.TenderId,
                 this.Reason,
                 this.AmountMoney,
                 this.Status)
+                .TenderId(this.TenderId)
                 .TransactionId(this.TransactionId)
                 .CreatedAt(this.CreatedAt)
                 .ProcessingFeeMoney(this.ProcessingFeeMoney)
@@ -280,6 +294,7 @@ namespace Square.Models
             private Dictionary<string, bool> shouldSerialize = new Dictionary<string, bool>
             {
                 { "transaction_id", false },
+                { "tender_id", false },
                 { "additional_recipients", false },
             };
 
@@ -299,21 +314,18 @@ namespace Square.Models
             /// </summary>
             /// <param name="id"> id. </param>
             /// <param name="locationId"> locationId. </param>
-            /// <param name="tenderId"> tenderId. </param>
             /// <param name="reason"> reason. </param>
             /// <param name="amountMoney"> amountMoney. </param>
             /// <param name="status"> status. </param>
             public Builder(
                 string id,
                 string locationId,
-                string tenderId,
                 string reason,
                 Models.Money amountMoney,
                 string status)
             {
                 this.id = id;
                 this.locationId = locationId;
-                this.tenderId = tenderId;
                 this.reason = reason;
                 this.amountMoney = amountMoney;
                 this.status = status;
@@ -348,6 +360,7 @@ namespace Square.Models
              /// <returns> Builder. </returns>
             public Builder TenderId(string tenderId)
             {
+                shouldSerialize["tender_id"] = true;
                 this.tenderId = tenderId;
                 return this;
             }
@@ -437,6 +450,14 @@ namespace Square.Models
             public void UnsetTransactionId()
             {
                 this.shouldSerialize["transaction_id"] = false;
+            }
+
+            /// <summary>
+            /// Marks the field to not be serialized.
+            /// </summary>
+            public void UnsetTenderId()
+            {
+                this.shouldSerialize["tender_id"] = false;
             }
 
             /// <summary>
