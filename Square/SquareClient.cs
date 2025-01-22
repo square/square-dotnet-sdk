@@ -585,7 +585,7 @@ namespace Square
         /// </summary>
         public class Builder
         {
-            private string squareVersion = "2024-12-18";
+            private string squareVersion = "2025-01-23";
             private string userAgentDetail = null;
             private Environment environment = Square.Environment.Production;
             private string customUrl = "https://connect.squareup.com";
