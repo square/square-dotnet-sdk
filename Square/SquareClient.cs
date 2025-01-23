@@ -42,7 +42,7 @@ namespace Square
         };
 
         private readonly GlobalConfiguration globalConfiguration;
-        private const string userAgent = "Square-DotNet-SDK/39.1.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
+        private const string userAgent = "Square-DotNet-SDK/40.0.0 ({api-version}) {engine}/{engine-version} ({os-info}) {detail}";
         private readonly HttpCallback httpCallback;
         private readonly IDictionary<string, List<string>> additionalHeaders;
         private readonly Lazy<IMobileAuthorizationApi> mobileAuthorization;
@@ -427,7 +427,7 @@ namespace Square
         /// <summary>
         /// Gets the current version of the SDK.
         /// </summary>
-        public string SdkVersion => "39.1.0";
+        public string SdkVersion => "40.0.0";
 
         /// <summary>
         /// Gets the configuration of the Http Client associated with this client.
