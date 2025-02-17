@@ -27,6 +27,9 @@ namespace Square.Apis
         /// </summary>
         /// <param name="beginTime">Optional parameter: Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339  format.  The range is determined using the `created_at` field for each `PaymentRefund`.   Default: The current time minus one year..</param>
         /// <param name="endTime">Optional parameter: Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339  format.  The range is determined using the `created_at` field for each `PaymentRefund`.  Default: The current time..</param>
+        /// <param name="updatedAtBeginTime">Optional parameter: Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339  format.  The range is determined using the `updated_at` field for each `PaymentRefund`.  Default: if omitted, the time range starts at `beginTime`..</param>
+        /// <param name="updatedAtEndTime">Optional parameter: Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339  format.  The range is determined using the `updated_at` field for each `PaymentRefund`.  Default: The current time..</param>
+        /// <param name="sortField">Optional parameter: The field used to sort results by. The default is `CREATED_AT`. Current values include `CREATED_AT` and `UPDATED_AT`..</param>
         /// <param name="sortOrder">Optional parameter: The order in which results are listed by `PaymentRefund.created_at`: - `ASC` - Oldest to newest. - `DESC` - Newest to oldest (default)..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query.  For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="locationId">Optional parameter: Limit results to the location supplied. By default, results are returned for all locations associated with the seller..</param>
@@ -37,6 +40,9 @@ namespace Square.Apis
         Models.ListPaymentRefundsResponse ListPaymentRefunds(
                 string beginTime = null,
                 string endTime = null,
+                string updatedAtBeginTime = null,
+                string updatedAtEndTime = null,
+                string sortField = null,
                 string sortOrder = null,
                 string cursor = null,
                 string locationId = null,
@@ -52,6 +58,9 @@ namespace Square.Apis
         /// </summary>
         /// <param name="beginTime">Optional parameter: Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339  format.  The range is determined using the `created_at` field for each `PaymentRefund`.   Default: The current time minus one year..</param>
         /// <param name="endTime">Optional parameter: Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339  format.  The range is determined using the `created_at` field for each `PaymentRefund`.  Default: The current time..</param>
+        /// <param name="updatedAtBeginTime">Optional parameter: Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339  format.  The range is determined using the `updated_at` field for each `PaymentRefund`.  Default: if omitted, the time range starts at `beginTime`..</param>
+        /// <param name="updatedAtEndTime">Optional parameter: Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339  format.  The range is determined using the `updated_at` field for each `PaymentRefund`.  Default: The current time..</param>
+        /// <param name="sortField">Optional parameter: The field used to sort results by. The default is `CREATED_AT`. Current values include `CREATED_AT` and `UPDATED_AT`..</param>
         /// <param name="sortOrder">Optional parameter: The order in which results are listed by `PaymentRefund.created_at`: - `ASC` - Oldest to newest. - `DESC` - Newest to oldest (default)..</param>
         /// <param name="cursor">Optional parameter: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query.  For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)..</param>
         /// <param name="locationId">Optional parameter: Limit results to the location supplied. By default, results are returned for all locations associated with the seller..</param>
@@ -63,6 +72,9 @@ namespace Square.Apis
         Task<Models.ListPaymentRefundsResponse> ListPaymentRefundsAsync(
                 string beginTime = null,
                 string endTime = null,
+                string updatedAtBeginTime = null,
+                string updatedAtEndTime = null,
+                string sortField = null,
                 string sortOrder = null,
                 string cursor = null,
                 string locationId = null,

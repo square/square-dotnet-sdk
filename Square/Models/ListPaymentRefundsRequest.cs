@@ -24,6 +24,9 @@ namespace Square.Models
         /// </summary>
         /// <param name="beginTime">begin_time.</param>
         /// <param name="endTime">end_time.</param>
+        /// <param name="updatedAtBeginTime">updated_at_begin_time.</param>
+        /// <param name="updatedAtEndTime">updated_at_end_time.</param>
+        /// <param name="sortField">sort_field.</param>
         /// <param name="sortOrder">sort_order.</param>
         /// <param name="cursor">cursor.</param>
         /// <param name="locationId">location_id.</param>
@@ -33,6 +36,9 @@ namespace Square.Models
         public ListPaymentRefundsRequest(
             string beginTime = null,
             string endTime = null,
+            string updatedAtBeginTime = null,
+            string updatedAtEndTime = null,
+            string sortField = null,
             string sortOrder = null,
             string cursor = null,
             string locationId = null,
@@ -44,6 +50,9 @@ namespace Square.Models
             {
                 { "begin_time", false },
                 { "end_time", false },
+                { "updated_at_begin_time", false },
+                { "updated_at_end_time", false },
+                { "sort_field", false },
                 { "sort_order", false },
                 { "cursor", false },
                 { "location_id", false },
@@ -62,6 +71,24 @@ namespace Square.Models
             {
                 shouldSerialize["end_time"] = true;
                 this.EndTime = endTime;
+            }
+
+            if (updatedAtBeginTime != null)
+            {
+                shouldSerialize["updated_at_begin_time"] = true;
+                this.UpdatedAtBeginTime = updatedAtBeginTime;
+            }
+
+            if (updatedAtEndTime != null)
+            {
+                shouldSerialize["updated_at_end_time"] = true;
+                this.UpdatedAtEndTime = updatedAtEndTime;
+            }
+
+            if (sortField != null)
+            {
+                shouldSerialize["sort_field"] = true;
+                this.SortField = sortField;
             }
 
             if (sortOrder != null)
@@ -105,6 +132,9 @@ namespace Square.Models
             Dictionary<string, bool> shouldSerialize,
             string beginTime = null,
             string endTime = null,
+            string updatedAtBeginTime = null,
+            string updatedAtEndTime = null,
+            string sortField = null,
             string sortOrder = null,
             string cursor = null,
             string locationId = null,
@@ -115,6 +145,9 @@ namespace Square.Models
             this.shouldSerialize = shouldSerialize;
             BeginTime = beginTime;
             EndTime = endTime;
+            UpdatedAtBeginTime = updatedAtBeginTime;
+            UpdatedAtEndTime = updatedAtEndTime;
+            SortField = sortField;
             SortOrder = sortOrder;
             Cursor = cursor;
             LocationId = locationId;
@@ -138,6 +171,29 @@ namespace Square.Models
         /// </summary>
         [JsonProperty("end_time")]
         public string EndTime { get; }
+
+        /// <summary>
+        /// Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339
+        /// format.  The range is determined using the `updated_at` field for each `PaymentRefund`.
+        /// Default: if omitted, the time range starts at `beginTime`.
+        /// </summary>
+        [JsonProperty("updated_at_begin_time")]
+        public string UpdatedAtBeginTime { get; }
+
+        /// <summary>
+        /// Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339
+        /// format.  The range is determined using the `updated_at` field for each `PaymentRefund`.
+        /// Default: The current time.
+        /// </summary>
+        [JsonProperty("updated_at_end_time")]
+        public string UpdatedAtEndTime { get; }
+
+        /// <summary>
+        /// The field used to sort results by. The default is `CREATED_AT`.
+        /// Current values include `CREATED_AT` and `UPDATED_AT`.
+        /// </summary>
+        [JsonProperty("sort_field")]
+        public string SortField { get; }
 
         /// <summary>
         /// The order in which results are listed by `PaymentRefund.created_at`:
@@ -215,6 +271,33 @@ namespace Square.Models
             return this.shouldSerialize["end_time"];
         }
 
+        /// <summary> 
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdatedAtBeginTime()
+        {
+            return this.shouldSerialize["updated_at_begin_time"];
+        }
+
+        /// <summary>   
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeUpdatedAtEndTime()
+        {
+            return this.shouldSerialize["updated_at_end_time"];
+        }
+
+        /// <summary>
+        /// Checks if the field should be serialized or not.
+        /// </summary>
+        /// <returns>A boolean weather the field should be serialized or not.</returns>
+        public bool ShouldSerializeSortField()
+        {
+            return this.shouldSerialize["sort_field"];
+        }
+
         /// <summary>
         /// Checks if the field should be serialized or not.
         /// </summary>
@@ -280,6 +363,12 @@ namespace Square.Models
                  this.BeginTime?.Equals(other.BeginTime) == true) &&
                 (this.EndTime == null && other.EndTime == null ||
                  this.EndTime?.Equals(other.EndTime) == true) &&
+                (this.UpdatedAtBeginTime == null && other.UpdatedAtBeginTime == null ||
+                 this.UpdatedAtBeginTime?.Equals(other.UpdatedAtBeginTime) == true) &&
+                (this.UpdatedAtEndTime == null && other.UpdatedAtEndTime == null ||
+                 this.UpdatedAtEndTime?.Equals(other.UpdatedAtEndTime) == true) &&
+                (this.SortField == null && other.SortField == null ||
+                 this.SortField?.Equals(other.SortField) == true) &&
                 (this.SortOrder == null && other.SortOrder == null ||
                  this.SortOrder?.Equals(other.SortOrder) == true) &&
                 (this.Cursor == null && other.Cursor == null ||
@@ -536,6 +625,9 @@ namespace Square.Models
                     shouldSerialize,
                     this.beginTime,
                     this.endTime,
+                    this.updatedAtBeginTime,
+                    this.updatedAtEndTime,
+                    this.sortField,
                     this.sortOrder,
                     this.cursor,
                     this.locationId,

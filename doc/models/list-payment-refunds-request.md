@@ -16,6 +16,9 @@ The maximum results per page is 100.
 |  --- | --- | --- | --- |
 | `BeginTime` | `string` | Optional | Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339<br>format.  The range is determined using the `created_at` field for each `PaymentRefund`.<br><br>Default: The current time minus one year. |
 | `EndTime` | `string` | Optional | Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339<br>format.  The range is determined using the `created_at` field for each `PaymentRefund`.<br><br>Default: The current time. |
+| `UpdatedAtBeginTime` | `string` | Optional | Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339<br>format.  The range is determined using the `updated_at` field for each `PaymentRefund`.<br><br>Default: if omitted, the time range starts at `BeginTime`. |
+| `UpdatedAtEndTime` | `string` | Optional | Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339<br>format.  The range is determined using the `updated_at` field for each `PaymentRefund`.<br><br>Default: The current time. |
+| `SortField` | `string` | Optional | The field used to sort results by. The default is `CREATED_AT`.<br>Current values include `CREATED_AT` and `UPDATED_AT`.<br> |
 | `SortOrder` | `string` | Optional | The order in which results are listed by `PaymentRefund.created_at`:<br><br>- `ASC` - Oldest to newest.<br>- `DESC` - Newest to oldest (default). |
 | `Cursor` | `string` | Optional | A pagination cursor returned by a previous call to this endpoint.<br>Provide this cursor to retrieve the next set of results for the original query.<br><br>For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination). |
 | `LocationId` | `string` | Optional | Limit results to the location supplied. By default, results are returned<br>for all locations associated with the seller. |
