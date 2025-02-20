@@ -387,9 +387,9 @@ namespace Square.Models
         public override int GetHashCode()
         {
             var hashCode = -211695136;
-            hashCode = HashCode.Combine(hashCode, this.BeginTime, this.EndTime, this.SortOrder, this.Cursor, this.LocationId, this.Status, this.SourceType, this.UpdatedAtBeginTime, this.UpdatedAtEndTime, this.SortField);
+            hashCode = HashCode.Combine(hashCode, this.BeginTime, this.EndTime, this.SortOrder, this.Cursor, this.LocationId, this.Status, this.SourceType);
 
-            hashCode = HashCode.Combine(hashCode, this.Limit);
+            hashCode = HashCode.Combine(hashCode, this.Limit, this.UpdatedAtBeginTime, this.UpdatedAtEndTime, this.SortField);
 
             return hashCode;
         }
