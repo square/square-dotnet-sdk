@@ -1,11 +1,9 @@
 > **Important Note:** This is the README for the legacy .NET SDK. For the latest version, please refer to the [Square .NET SDK documentation](https://developer.squareup.com/docs/sdks/dotnet).
 
-![Square logo]
-
 # Legacy Square .NET SDK
 
-[![Build](https://github.com/square/square-dotnet-sdk/actions/workflows/dotnet.yml/badge.svg)](https://github.com/square/square-dotnet-sdk/actions/workflows/dotnet.yml)
-[![NuGet](https://badge.fury.io/nu/Square.svg)](https://badge.fury.io/nu/Square)
+[![Build](https://github.com/square/square-dotnet-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/square/square-dotnet-sdk/actions/workflows/ci.yml)
+[![NuGet](https://badge.fury.io/nu/Square.Legacy.svg)](https://badge.fury.io/nu/Square.Legacy)
 [![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 Use this library to integrate Square payments into your app and grow your business with Square APIs including Catalog, Customers, Employees, Inventory, Labor, Locations, and Orders.
