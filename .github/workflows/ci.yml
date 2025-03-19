@@ -45,4 +45,4 @@ jobs:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           dotnet pack SquareWithLegacy.sln --no-build --no-restore -c Release -o dist
-          dotnet nuget push dist/*.nupkg --api-key $NUGET_API_KEY --source "nuget.org"
+          dotnet nuget push dist/*.nupkg --api-key $NUGET_API_KEY --source "nuget.org" --skip-duplicate
