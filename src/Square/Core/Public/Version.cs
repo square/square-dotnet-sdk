@@ -2,5 +2,5 @@ namespace Square;
 
 internal class Version
 {
-    public const string Current = "40.0.1";
+    public const string Current = "41.0.0";
 }
