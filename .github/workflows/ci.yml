@@ -32,7 +32,7 @@ jobs:
         run: dotnet build SquareWithLegacy.sln -c Release /p:ContinuousIntegrationBuild=true
 
       - name: Run Tests
-        run: dotnet test SquareWithLegacy.sln --no-restore --no-build /p:ContinuousIntegrationBuild=true
+        run: dotnet test SquareWithLegacy.sln --no-restore /p:ContinuousIntegrationBuild=true
         continue-on-error: true
         env:
           TEST_SQUARE_TOKEN: ${{ secrets.TEST_SQUARE_TOKEN }}
