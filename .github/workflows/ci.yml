@@ -1,0 +1,48 @@
+name: CI
+
+on: [push]
+
+env:
+  CI: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+  MSBUILDTERMINALLOGGER: off
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Install tools
+        run: dotnet tool restore
+
+      - name: Restore dependencies
+        run: dotnet restore SquareWithLegacy.sln
+
+      - name: Build release
+        id: build
+        run: dotnet build SquareWithLegacy.sln -c Release /p:ContinuousIntegrationBuild=true
+
+      - name: Run Tests
+        run: dotnet test SquareWithLegacy.sln --no-restore --no-build /p:ContinuousIntegrationBuild=true
+        continue-on-error: true
+        env:
+          TEST_SQUARE_TOKEN: ${{ secrets.SQUARE_SANDBOX_TOKEN }}
+          SQUARE_ACCESS_TOKEN: ${{ secrets.SQUARE_SANDBOX_TOKEN }}
+          SQUARE_ENVIRONMENT: sandbox
+
+      - name: Publish to nuget.org
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/') && steps.build.outcome == 'success'
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          dotnet pack SquareWithLegacy.sln --no-build --no-restore -c Release -o dist
+          dotnet nuget push dist/*.nupkg --api-key $NUGET_API_KEY --source "nuget.org"

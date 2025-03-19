@@ -1,0 +1,23 @@
+# Specify files that shouldn't be modified by Fern
+.github/workflows/ci.yml
+.github/ISSUE_TEMPLATE
+.github/labeler.yml
+.github/pull_request_template.md
+.gitignore
+README.md
+CONTRIBUTING.md
+CHANGELOG.md
+legacy
+icon.png
+SquareWithLegacy.sln
+src/Square.sln
+src/Square/Square.Custom.props
+src/Square/WebhooksHelper.cs
+src/Square/Core/Public/SquareApiException.cs
+src/Square.Test/WebhooksHelperTests.cs
+src/Square.Test/Unit/SquareErrorTest.cs
+src/Square.Test/Unit/WebhooksHelperTests.cs
+src/Square.Test/Unit/MockServer/BatchDeleteTest.cs
+src/Square.Test/Integration
+src/Square.Test/Files
+src/Square.Test/Square.Test.Custom.props

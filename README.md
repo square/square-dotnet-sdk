@@ -1,184 +1,276 @@
-![Square logo]
+# Square C# Library
 
-# Square .NET SDK
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Ffern-demo%2Fsquare-dotnet-sdk)
+[![nuget shield](https://img.shields.io/nuget/v/Square)](https://nuget.org/packages/Square)
 
-[![Build](https://github.com/square/square-dotnet-sdk/actions/workflows/dotnet.yml/badge.svg)](https://github.com/square/square-dotnet-sdk/actions/workflows/dotnet.yml)
-[![NuGet](https://badge.fury.io/nu/Square.svg)](https://badge.fury.io/nu/Square)
-[![Apache-2 license](https://img.shields.io/badge/license-Apache2-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-
-Use this library to integrate Square payments into your app and grow your business with Square APIs including Catalog, Customers, Employees, Inventory, Labor, Locations, and Orders.
-
-* [Requirements](#requirements)
-* [Installation](#installation)
-* [Quickstart](#quickstart)
-* [Usage](#usage)
-* [Tests](#tests)
-* [SDK Reference](#sdk-reference)
-* [Deprecated APIs](#deprecated-apis)
+The Square .NET library provides convenient access to the Square API from C#, VB.NET, and F#.
 
 ## Requirements
 
-Use of the Square .NET SDK requires:
-
-* NET Standard 2.0 or higher
+The Square .NET SDK is supported with the following target frameworks:
+* .NET 8 and above
+* .NET Framework 4.6.2 and above
+* .NET Standard 2.0 and above
 
 ## Installation
 
-For more information, see [Install Square packages](https://developer.squareup.com/docs/sdks/dotnet/setup-project#install-square-packages).
-
-## Quickstart
-
-For more information, see [Square .NET SDK Quickstart](https://developer.squareup.com/docs/sdks/dotnet/quick-start).
+```sh
+dotnet add package Square
+```
 
 ## Usage
-For more information, see [Using the Square .NET SDK](https://developer.squareup.com/docs/sdks/dotnet/using-dot-net-sdk).
 
-## Tests
+Instantiate and use the client with the following:
 
-First, clone the repo locally and `cd` into the directory.
+```csharp
+using Square.Payments;
+using Square;
 
-```sh
-git clone https://github.com/square/square-dotnet-sdk.git
-cd square-dotnet-sdk
+var client = new SquareClient();
+await client.Payments.CreateAsync(
+    new CreatePaymentRequest
+    {
+        SourceId = "ccof:GaJGNaZa8x4OgDJn4GB",
+        IdempotencyKey = "7b0f3ec5-086a-4871-8f13-3c81b3875218",
+        AmountMoney = new Money { Amount = 1000, Currency = Currency.Usd },
+        AppFeeMoney = new Money { Amount = 10, Currency = Currency.Usd },
+        Autocomplete = true,
+        CustomerId = "W92WH6P11H4Z77CTET0RNTGFW8",
+        LocationId = "L88917AVBK2S5",
+        ReferenceId = "123456",
+        Note = "Brief description",
+    }
+);
 ```
 
-Before running the tests, find a sandbox token in your [Developer Dashboard] and set a `SQUARE_ACCESS_TOKEN` environment variable.
+## Instantiation
 
-```sh
-export SQUARE_ENVIRONMENT=sandbox
-export SQUARE_ACCESS_TOKEN="YOUR_SANDBOX_ACCESS_TOKEN"
+To get started with the Square SDK, instantiate the `SquareClient` class as follows:
+
+```csharp
+using Square;
+
+var client = new SquareClient("SQUARE_TOKEN");
 ```
 
-Run the tests with below command
+Alternatively, you can omit the token when constructing the client.
+In this case, the SDK will automatically read the token from the
+`SQUARE_TOKEN` environment variable:
 
-```sh
-dotnet test
+```csharp
+using Square;
+
+var client = new SquareClient(); // Token is read from the SQUARE_TOKEN environment variable.
 ```
 
-## SDK Reference
+### Environment and Custom URLs
 
-### Payments
-* [Payments]
-* [Refunds]
-* [Disputes]
-* [Checkout]
-* [Apple Pay]
-* [Cards]
-* [Payouts]
+This SDK allows you to configure different environments or custom URLs for API requests.
+You can either use the predefined environments or specify your own custom URL.
 
-### Terminal
-* [Terminal]
+#### Environments
 
-### Orders
-* [Orders]
-* [Order Custom Attributes]
+```csharp
+using Square;
 
-### Subscriptions
-* [Subscriptions]
+var client = new SquareClient(clientOptions: new ClientOptions
+{
+    BaseUrl = SquareEnvironment.Production // Used by default
+});
+```
 
-### Invoices
-* [Invoices]
+#### Custom URL
 
-### Items
-* [Catalog]
-* [Inventory]
+```csharp
+using Square;
 
-### Customers
-* [Customers]
-* [Customer Custom Attributes]
-* [Customer Groups]
-* [Customer Segments]
+var client = new SquareClient(clientOptions: new ClientOptions
+{
+    BaseUrl = "https://custom-staging.com"
+});
+```
 
-### Loyalty
-* [Loyalty]
+## Enums
 
-### Gift Cards
-* [Gift Cards]
-* [Gift Card Activities]
+This SDK uses forward-compatible enums that provide type safety while maintaining forward compatibility with API updates.
 
-### Bookings
-* [Bookings]
-* [Booking Custom Attributes]
+```csharp
+// Use predefined enum values
+var accountType = BankAccountType.Checking;
 
+// Use unknown/future enum values
+var customType = BankAccountType.FromCustom("FUTURE_VALUE");
 
-### Business
-* [Merchants]
-* [Merchant Custom Attributes]
-* [Locations]
-* [Location Custom Attributes]
-* [Devices]
-* [Cash Drawers]
-* [Vendors]
+// String conversions and equality
+string typeString = accountType.ToString();  // Returns "CHECKING"
+var isChecking = accountType == "CHECKING"; // Returns true
 
-### Team
-* [Team]
-* [Labor]
+// When writing switch statements, always include a default case
+switch (accountType.Value) {
+    case BankAccountType.Values.Checking:
+        // Handle checking accounts
+        break;
+    case BankAccountType.Values.BusinessChecking:
+        // Handle business checking accounts
+        break;
+    default:
+        // Handle unknown values for forward compatibility
+        break;
+}
+```
 
-### Financials
-* [Bank Accounts]
+## Pagination
 
-### Online
-* [Sites]
-* [Snippets]
+List endpoints are paginated. The SDK provides an async enumerable so that you can simply loop over the items:
 
-### Authorization
-* [Mobile Authorization]
-* [OAuth]
+```csharp
+using Square.BankAccounts;
+using Square;
 
-### Webhook Subscriptions
-* [Webhook Subscriptions]
-## Deprecated APIs
- 
-The following Square APIs are [deprecated](https://developer.squareup.com/docs/build-basics/api-lifecycle):
- 
-* [Employees] - replaced by the [Team] API. For more information, see [Migrate from the Employees API](https://developer.squareup.com/docs/team/migrate-from-v2-employees).
- 
-* [Transactions] - replaced by the [Orders] and [Payments] APIs.  For more information, see [Migrate from the Transactions API](https://developer.squareup.com/docs/payments-api/migrate-from-transactions-api).
- 
+var client = new SquareClient();
+var pager = await client.BankAccounts.ListAsync(new ListBankAccountsRequest());
 
-[//]: # "Link anchor definitions"
-[Square Logo]: https://docs.connect.squareup.com/images/github/github-square-logo.svg
-[Developer Dashboard]: https://developer.squareup.com/apps
-[Square API]: https://squareup.com/developers
-[sign up for a developer account]: https://squareup.com/signup?v=developers
-[Client]: doc/client.md
-[Devices]: doc/api/devices.md
-[Disputes]: doc/api/disputes.md
-[Terminal]: doc/api/terminal.md
-[Cash Drawers]: doc/api/cash-drawers.md
-[Vendors]: doc/api/vendors.md
-[Customer Groups]: doc/api/customer-groups.md
-[Customer Segments]: doc/api/customer-segments.md
-[Bank Accounts]: doc/api/bank-accounts.md
-[Payments]: doc/api/payments.md
-[Checkout]: doc/api/checkout.md
-[Catalog]: doc/api/catalog.md
-[Customers]: doc/api/customers.md
-[Customer Custom Attributes]: doc/api/customer-custom-attributes.md
-[Inventory]: doc/api/inventory.md
-[Labor]: doc/api/labor.md
-[Loyalty]: doc/api/loyalty.md
-[Bookings]: doc/api/bookings.md
-[Booking Custom Attributes]: doc/api/booking-custom-attributes.md
-[Locations]: doc/api/locations.md
-[Location Custom Attributes]: doc/api/location-custom-attributes.md
-[Merchants]: doc/api/merchants.md
-[Merchant Custom Attributes]: doc/api/merchant-custom-attributes.md
-[Orders]: doc/api/orders.md
-[Order Custom Attributes]: doc/api/order-custom-attributes.md
-[Invoices]: doc/api/invoices.md
-[Apple Pay]: doc/api/apple-pay.md
-[Refunds]: doc/api/refunds.md
-[Subscriptions]: doc/api/subscriptions.md
-[Mobile Authorization]: doc/api/mobile-authorization.md
-[OAuth]: doc/api/o-auth.md
-[Team]: doc/api/team.md
-[Sites]: doc/api/sites.md
-[Snippets]: doc/api/snippets.md
-[Cards]: doc/api/cards.md
-[Payouts]: doc/api/payouts.md
-[Gift Cards]: doc/api/gift-cards.md
-[Gift Card Activities]: doc/api/gift-card-activities.md
-[Employees]: doc/api/employees.md
-[Transactions]: doc/api/transactions.md
-[Webhook Subscriptions]: doc/api/webhook-subscriptions.md
+await foreach (var item in pager)
+{
+    // do something with item
+}
+```
+
+## Exception Handling
+
+When the API returns a non-success status code (4xx or 5xx response), a `SquareApiException` will be thrown.
+
+```csharp
+using Square;
+
+try {
+    var response = await client.Payments.CreateAsync(...);
+} catch (SquareApiException e) {
+    Console.WriteLine(e.Body);
+    Console.WriteLine(e.StatusCode);
+
+    // Access the parsed error objects
+    foreach (var error in e.Errors) {
+        Console.WriteLine($"Category: {error.Category}");
+        Console.WriteLine($"Code: {error.Code}");
+        Console.WriteLine($"Detail: {error.Detail}");
+        Console.WriteLine($"Field: {error.Field}");
+    }
+}
+```
+
+## Webhook Signature Verification
+
+The SDK provides utility methods that allow you to verify webhook signatures and ensure
+that all webhook events originate from Square. The `WebhooksHelper.verifySignature` method
+can be used to verify the signature like so:
+
+```csharp
+using Microsoft.AspNetCore.Http;
+using Square;
+
+public static async Task CheckWebhooksEvent(
+    HttpRequest request,
+    string signatureKey,
+    string notificationUrl
+)
+{
+    var signature = request.Headers["x-square-hmacsha256-signature"].ToString();
+    using var reader = new StreamReader(request.Body, System.Text.Encoding.UTF8);
+    var requestBody = await reader.ReadToEndAsync();
+    if (!WebhooksHelper.VerifySignature(requestBody, signature, signatureKey, notificationUrl))
+    {
+        throw new Exception("A webhook event was received that was not from Square.");
+    }
+}
+```
+
+In .NET 6 and above, there are also overloads using spans for allocation free webhook verification.
+
+## Legacy SDK
+
+While the new SDK has a lot of improvements, we at Square understand that it takes time to upgrade when there are breaking changes.
+To make the migration easier, the legacy SDK is available as a separate NuGet package `Square.Legacy` with all functionality under the `Square.Legacy` namespace. Here's an example of how you can use the legacy SDK alongside the new SDK inside a single file:
+
+```csharp
+using Square;
+using Square.Legacy.Authentication;
+
+var accessToken = "YOUR_SQUARE_TOKEN";
+// NEW
+var client = new SquareClient(accessToken);
+// LEGACY
+var legacyClient = new Square.Legacy.SquareClient.Builder()
+    .BearerAuthCredentials(
+        new BearerAuthModel.Builder(accessToken)
+            .Build())
+    .Environment(Square.Legacy.Environment.Production)
+    .Build();
+```
+
+We recommend migrating to the new SDK using the following steps:
+
+1. Install the `Square.Legacy` NuGet package alongside your existing Square SDK
+2. Search and replace all using statements from `Square` to `Square.Legacy`
+3. Gradually move over to use the new SDK by importing it from the `Square` namespace.
+
+## Advanced
+
+### Retries
+
+The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
+retry limit (default: 2).
+
+A request is deemed retryable when any of the following HTTP status codes is returned:
+
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) (Internal Server Errors)
+
+Use the `MaxRetries` request option to configure this behavior.
+
+```csharp
+var response = await client.Payments.CreateAsync(
+    ...,
+    new RequestOptions {
+        MaxRetries: 0 // Override MaxRetries at the request level
+    }
+);
+```
+
+### Timeouts
+
+The SDK defaults to a 30 second timeout. Use the `Timeout` option to configure this behavior.
+
+```csharp
+var response = await client.Payments.CreateAsync(
+    ...,
+    new RequestOptions {
+        Timeout: TimeSpan.FromSeconds(3) // Override timeout to 3s
+    }
+);
+```
+
+### Receive Additional Properties
+
+Every response type includes the `AdditionalProperties` property, which returns an `IDictionary<string, JsonElement>` that contains any properties in the JSON response that were not specified in the returned class. Similar to the use case for sending additional parameters, this can be useful for API features not present in the SDK yet.
+
+You can access the additional properties like so:
+
+```csharp
+var payments = client.Payments.Create(...);
+IDictionary<string, JsonElement> additionalProperties = payments.AdditionalProperties;
+```
+
+The `AdditionalProperties` dictionary is populated automatically during deserialization using the `[JsonExtensionData]` attribute. This provides you with access to any fields that may be added to the API response in the future before they're formally added to the SDK models.
+
+## Contributing
+
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
+
+On the other hand, contributions to the README are always very welcome!
