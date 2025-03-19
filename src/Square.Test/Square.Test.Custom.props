@@ -1,0 +1,7 @@
+<Project>
+    <ItemGroup>
+        <None Update="Files/image.jpeg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+</Project>

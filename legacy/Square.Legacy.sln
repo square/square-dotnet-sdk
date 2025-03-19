@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Square.Legacy", "Square.Legacy/Square.Legacy.csproj", "{6bccf34f-038f-431c-b39d-5c73d976e98f}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Square.Legacy.Tests", "Square.Legacy.Tests/Square.Legacy.Tests.csproj", "{4d8c8ef8-6d44-4e15-aef9-d9b2f3da75bf}"
+EndProject
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+        {6bccf34f-038f-431c-b39d-5c73d976e98f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {6bccf34f-038f-431c-b39d-5c73d976e98f}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {6bccf34f-038f-431c-b39d-5c73d976e98f}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {6bccf34f-038f-431c-b39d-5c73d976e98f}.Release|Any CPU.Build.0 = Release|Any CPU
+        {4d8c8ef8-6d44-4e15-aef9-d9b2f3da75bf}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {4d8c8ef8-6d44-4e15-aef9-d9b2f3da75bf}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {4d8c8ef8-6d44-4e15-aef9-d9b2f3da75bf}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {4d8c8ef8-6d44-4e15-aef9-d9b2f3da75bf}.Release|Any CPU.Build.0 = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(SolutionProperties) = preSolution
+        HideSolutionNode = FALSE
+    EndGlobalSection
+EndGlobal

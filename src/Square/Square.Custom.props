@@ -1,0 +1,33 @@
+<Project>
+  <PropertyGroup>
+    <AssemblyName>Square</AssemblyName>
+    <Product>Square</Product>
+    <Authors>Square Developer Platform</Authors>
+    <Owners>Square Developer Platform</Owners>
+    <Company>Block, Inc.</Company>
+    <Copyright>© 2025 Block, Inc. $([System.DateTime]::Now.Year)</Copyright>
+    <Description>Use Square APIs to manage and run business including payment, customer, product, inventory, and employee management.</Description>
+    <ErrorReportUrl>https://developer.squareup.com</ErrorReportUrl>
+    <SupportUrl>https://developer.squareup.com</SupportUrl>
+    <RepositoryUrl>https://github.com/square/square-dotnet-sdk</RepositoryUrl>
+    <PackageTags>square;block;payments;pos;commerce;credit-card;payment-processing;point-of-sale;merchant;transaction</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl>https://avatars2.githubusercontent.com/u/82592</PackageIconUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
+    <None Remove="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,19 @@
+using System.Text.Json.Serialization;
+using Square.Core;
+
+namespace Square.TeamMembers;
+
+public record GetTeamMembersRequest
+{
+    /// <summary>
+    /// The ID of the team member to retrieve.
+    /// </summary>
+    [JsonIgnore]
+    public required string TeamMemberId { get; set; }
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return JsonUtils.Serialize(this);
+    }
+}
