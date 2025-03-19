@@ -6,12 +6,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>12</LangVersion>
         <Nullable>enable</Nullable>
-        <Version>0.0.380</Version>
+        <Version>40.0.1</Version>
         <AssemblyVersion>$(Version)</AssemblyVersion>
         <FileVersion>$(Version)</FileVersion>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/fern-demo/square-dotnet-sdk</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/square/square-dotnet-sdk</PackageProjectUrl>
         <PolySharpIncludeRuntimeSupportedAttributes>true</PolySharpIncludeRuntimeSupportedAttributes>
     </PropertyGroup>
 
