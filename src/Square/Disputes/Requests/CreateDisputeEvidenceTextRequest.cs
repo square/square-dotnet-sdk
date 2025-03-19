@@ -31,7 +31,6 @@ public record CreateDisputeEvidenceTextRequest
     [JsonPropertyName("evidence_text")]
     public required string EvidenceText { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

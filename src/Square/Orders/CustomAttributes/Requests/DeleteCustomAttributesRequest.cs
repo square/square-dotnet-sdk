@@ -18,7 +18,6 @@ public record DeleteCustomAttributesRequest
     [JsonIgnore]
     public required string CustomAttributeKey { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

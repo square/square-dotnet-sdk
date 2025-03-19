@@ -17,7 +17,6 @@ public record BatchCreateTeamMembersRequest
     public Dictionary<string, CreateTeamMemberRequest> TeamMembers { get; set; } =
         new Dictionary<string, CreateTeamMemberRequest>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

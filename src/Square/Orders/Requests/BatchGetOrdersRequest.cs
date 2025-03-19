@@ -18,7 +18,6 @@ public record BatchGetOrdersRequest
     [JsonPropertyName("order_ids")]
     public IEnumerable<string> OrderIds { get; set; } = new List<string>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

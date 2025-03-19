@@ -42,7 +42,6 @@ public record ListCardsRequest
     [JsonIgnore]
     public SortOrder? SortOrder { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

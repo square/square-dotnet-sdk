@@ -49,7 +49,6 @@ public record CreateCustomerCardRequest
     [JsonPropertyName("verification_token")]
     public string? VerificationToken { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

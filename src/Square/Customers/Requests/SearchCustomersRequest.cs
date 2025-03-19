@@ -39,7 +39,6 @@ public record SearchCustomersRequest
     [JsonPropertyName("count")]
     public bool? Count { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

@@ -14,7 +14,6 @@ public record BatchUpdateVendorsRequest
     public Dictionary<string, UpdateVendorRequest> Vendors { get; set; } =
         new Dictionary<string, UpdateVendorRequest>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

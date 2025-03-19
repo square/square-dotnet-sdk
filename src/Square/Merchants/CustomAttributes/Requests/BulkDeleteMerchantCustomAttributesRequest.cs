@@ -20,7 +20,6 @@ public record BulkDeleteMerchantCustomAttributesRequest
             BulkDeleteMerchantCustomAttributesRequestMerchantCustomAttributeDeleteRequest
         >();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

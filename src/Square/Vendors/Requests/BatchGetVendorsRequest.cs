@@ -11,7 +11,6 @@ public record BatchGetVendorsRequest
     [JsonPropertyName("vendor_ids")]
     public IEnumerable<string>? VendorIds { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

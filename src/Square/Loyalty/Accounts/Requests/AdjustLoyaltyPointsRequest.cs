@@ -34,7 +34,6 @@ public record AdjustLoyaltyPointsRequest
     [JsonPropertyName("allow_negative_balance")]
     public bool? AllowNegativeBalance { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

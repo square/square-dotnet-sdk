@@ -41,7 +41,6 @@ public record ListCatalogRequest
     [JsonIgnore]
     public long? CatalogVersion { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

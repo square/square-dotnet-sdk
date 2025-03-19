@@ -20,7 +20,6 @@ public record UpdateSubscriptionRequest
     [JsonPropertyName("subscription")]
     public Subscription? Subscription { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

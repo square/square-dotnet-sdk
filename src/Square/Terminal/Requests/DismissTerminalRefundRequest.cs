@@ -11,7 +11,6 @@ public record DismissTerminalRefundRequest
     [JsonIgnore]
     public required string TerminalRefundId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

@@ -18,7 +18,6 @@ public record BulkCreateCustomersRequest
     public Dictionary<string, BulkCreateCustomerData> Customers { get; set; } =
         new Dictionary<string, BulkCreateCustomerData>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

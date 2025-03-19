@@ -21,7 +21,6 @@ public record CreateDeviceCodeRequest
     [JsonPropertyName("device_code")]
     public required DeviceCode DeviceCode { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

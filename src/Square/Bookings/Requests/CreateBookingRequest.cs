@@ -18,7 +18,6 @@ public record CreateBookingRequest
     [JsonPropertyName("booking")]
     public required Booking Booking { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

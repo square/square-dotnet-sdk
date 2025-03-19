@@ -11,7 +11,6 @@ public record GetBankAccountsRequest
     [JsonIgnore]
     public required string BankAccountId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

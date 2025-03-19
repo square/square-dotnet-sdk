@@ -7,12 +7,19 @@ namespace Square.Test.Core.Pagination;
 [TestFixture(Category = "Pagination")]
 public class GuidCursorTest
 {
+    [Test]
+    public async SystemTask CursorPagerShouldWorkWithGuidCursors()
+    {
+        var pager = await CreatePagerAsync();
+        await AssertPagerAsync(pager);
+    }
+
     private static readonly Guid? Cursor1 = null;
     private static readonly Guid Cursor2 = new("00000000-0000-0000-0000-000000000001");
     private static readonly Guid Cursor3 = new("00000000-0000-0000-0000-000000000002");
+    private Guid? _cursorCopy;
 
-    [Test]
-    public async SystemTask CursorPagerShouldWorkWithGuidCursors()
+    private async Task<Pager<object>> CreatePagerAsync()
     {
         var responses = new List<Response>
         {
@@ -32,7 +39,7 @@ public class GuidCursorTest
                 Cursor = new() { Next = null },
             },
         }.GetEnumerator();
-        var cursorCopy = Cursor1;
+        _cursorCopy = Cursor1;
         Pager<object> pager = await CursorPager<
             Request,
             object?,
@@ -40,7 +47,7 @@ public class GuidCursorTest
             Guid?,
             object
         >.CreateInstanceAsync(
-            new Request { Cursor = Cursor1 },
+            new() { Cursor = Cursor1 },
             null,
             (_, _, _) =>
             {
@@ -50,31 +57,35 @@ public class GuidCursorTest
             (request, cursor) =>
             {
                 request.Cursor = cursor;
-                cursorCopy = cursor;
+                _cursorCopy = cursor;
             },
             response => response?.Cursor?.Next,
             response => response?.Data?.Items?.ToList()
         );
+        return pager;
+    }
 
+    private async SystemTask AssertPagerAsync(Pager<object> pager)
+    {
         var pageEnumerator = pager.AsPagesAsync().GetAsyncEnumerator();
 
         // first page
         Assert.That(await pageEnumerator.MoveNextAsync(), Is.True);
         var page = pageEnumerator.Current;
         Assert.That(page.Items, Has.Count.EqualTo(2));
-        Assert.That(cursorCopy, Is.EqualTo(Cursor2));
+        Assert.That(_cursorCopy, Is.EqualTo(Cursor2));
 
         // second page
         Assert.That(await pageEnumerator.MoveNextAsync(), Is.True);
         page = pageEnumerator.Current;
         Assert.That(page.Items, Has.Count.EqualTo(1));
-        Assert.That(cursorCopy, Is.EqualTo(Cursor3));
+        Assert.That(_cursorCopy, Is.EqualTo(Cursor3));
 
         // third page
         Assert.That(await pageEnumerator.MoveNextAsync(), Is.True);
         page = pageEnumerator.Current;
         Assert.That(page.Items, Has.Count.EqualTo(0));
-        Assert.That(cursorCopy, Is.Null);
+        Assert.That(_cursorCopy, Is.Null);
 
         // no more
         Assert.That(await pageEnumerator.MoveNextAsync(), Is.False);

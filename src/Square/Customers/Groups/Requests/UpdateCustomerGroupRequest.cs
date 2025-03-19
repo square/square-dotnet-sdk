@@ -18,7 +18,6 @@ public record UpdateCustomerGroupRequest
     [JsonPropertyName("group")]
     public required CustomerGroup Group { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

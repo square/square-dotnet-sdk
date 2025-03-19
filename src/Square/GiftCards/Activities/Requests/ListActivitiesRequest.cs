@@ -66,7 +66,6 @@ public record ListActivitiesRequest
     [JsonIgnore]
     public string? SortOrder { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

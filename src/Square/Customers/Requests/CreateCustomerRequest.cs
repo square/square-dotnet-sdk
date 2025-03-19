@@ -100,7 +100,6 @@ public record CreateCustomerRequest
     [JsonPropertyName("tax_ids")]
     public CustomerTaxIds? TaxIds { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

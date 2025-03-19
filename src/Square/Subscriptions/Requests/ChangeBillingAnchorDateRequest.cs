@@ -27,7 +27,6 @@ public record ChangeBillingAnchorDateRequest
     [JsonPropertyName("effective_date")]
     public string? EffectiveDate { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

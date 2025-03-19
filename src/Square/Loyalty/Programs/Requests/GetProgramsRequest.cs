@@ -11,7 +11,6 @@ public record GetProgramsRequest
     [JsonIgnore]
     public required string ProgramId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

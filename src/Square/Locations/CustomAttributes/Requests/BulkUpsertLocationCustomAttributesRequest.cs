@@ -21,7 +21,6 @@ public record BulkUpsertLocationCustomAttributesRequest
             BulkUpsertLocationCustomAttributesRequestLocationCustomAttributeUpsertRequest
         >();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

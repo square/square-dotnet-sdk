@@ -15,7 +15,6 @@ public record BulkUpsertBookingCustomAttributesRequest
     public Dictionary<string, BookingCustomAttributeUpsertRequest> Values { get; set; } =
         new Dictionary<string, BookingCustomAttributeUpsertRequest>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

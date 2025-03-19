@@ -17,7 +17,6 @@ public record V1RetrieveOrderRequest
     [JsonIgnore]
     public required string OrderId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

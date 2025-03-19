@@ -103,7 +103,6 @@ public record ObtainTokenRequest
     [JsonPropertyName("code_verifier")]
     public string? CodeVerifier { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

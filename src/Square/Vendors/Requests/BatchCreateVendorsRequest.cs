@@ -12,7 +12,6 @@ public record BatchCreateVendorsRequest
     [JsonPropertyName("vendors")]
     public Dictionary<string, Vendor> Vendors { get; set; } = new Dictionary<string, Vendor>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

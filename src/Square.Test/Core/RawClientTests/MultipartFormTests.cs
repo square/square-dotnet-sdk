@@ -62,7 +62,7 @@ public class MultipartFormTests
         var boundary = GetBoundary(multipartContent);
         var expected = $"""
             --{boundary}
-            Content-Type: text/plain
+            Content-Type: text/plain; charset=utf-8
             Content-Disposition: form-data; name=string
 
             {partInput}
@@ -84,12 +84,12 @@ public class MultipartFormTests
         var boundary = GetBoundary(multipartContent);
         var expected = $"""
             --{boundary}
-            Content-Type: text/plain
+            Content-Type: text/plain; charset=utf-8
             Content-Disposition: form-data; name=strings
 
             {partInput}
             --{boundary}
-            Content-Type: text/plain
+            Content-Type: text/plain; charset=utf-8
             Content-Disposition: form-data; name=strings
 
             {partInput}
@@ -128,12 +128,12 @@ public class MultipartFormTests
         var boundary = GetBoundary(multipartContent);
         var expected = $"""
             --{boundary}
-            Content-Type: text/plain
+            Content-Type: text/plain; charset=utf-8
             Content-Disposition: form-data; name=strings
 
             {partInput}
             --{boundary}
-            Content-Type: text/plain
+            Content-Type: text/plain; charset=utf-8
             Content-Disposition: form-data; name=strings
 
             {partInput}
@@ -149,28 +149,6 @@ public class MultipartFormTests
         const string partInput = "<XML>string content</XML>";
         var multipartFormRequest = CreateMultipartFormRequest();
         multipartFormRequest.AddStringPart("string", partInput, "text/xml");
-        var httpContent = multipartFormRequest.CreateContent();
-        Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
-        var multipartContent = (MultipartFormDataContent)httpContent;
-        var boundary = GetBoundary(multipartContent);
-        var expected = $"""
-            --{boundary}
-            Content-Type: text/xml
-            Content-Disposition: form-data; name=string
-
-            {partInput}
-             --{boundary}--
-            """;
-        var actual = await multipartContent.ReadAsStringAsync();
-        Assert.That(actual, Is.EqualTo(expected).IgnoreWhiteSpace);
-    }
-
-    [Test]
-    public async SystemTask ShouldAddStringPart_WithContentTypeAndCharset()
-    {
-        const string partInput = "<XML>string content</XML>";
-        var multipartFormRequest = CreateMultipartFormRequest();
-        multipartFormRequest.AddStringPart("string", partInput, "text/xml; charset=utf-8");
         var httpContent = multipartFormRequest.CreateContent();
         Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
         var multipartContent = (MultipartFormDataContent)httpContent;
@@ -193,37 +171,6 @@ public class MultipartFormTests
         const string partInput = "<XML>string content</XML>";
         var multipartFormRequest = CreateMultipartFormRequest();
         multipartFormRequest.AddStringParts("strings", [partInput, partInput], "text/xml");
-        var httpContent = multipartFormRequest.CreateContent();
-        Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
-        var multipartContent = (MultipartFormDataContent)httpContent;
-        var boundary = GetBoundary(multipartContent);
-        var expected = $"""
-            --{boundary}
-            Content-Type: text/xml
-            Content-Disposition: form-data; name=strings
-
-            {partInput}
-            --{boundary}
-            Content-Type: text/xml
-            Content-Disposition: form-data; name=strings
-
-            {partInput}
-             --{boundary}--
-            """;
-        var actual = await multipartContent.ReadAsStringAsync();
-        Assert.That(actual, Is.EqualTo(expected).IgnoreWhiteSpace);
-    }
-
-    [Test]
-    public async SystemTask ShouldAddStringParts_WithContentTypeAndCharset()
-    {
-        const string partInput = "<XML>string content</XML>";
-        var multipartFormRequest = CreateMultipartFormRequest();
-        multipartFormRequest.AddStringParts(
-            "strings",
-            [partInput, partInput],
-            "text/xml; charset=utf-8"
-        );
         var httpContent = multipartFormRequest.CreateContent();
         Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
         var multipartContent = (MultipartFormDataContent)httpContent;
@@ -328,37 +275,6 @@ public class MultipartFormTests
     }
 
     [Test]
-    public async SystemTask ShouldAddFileParameter_WithContentTypeAndCharset()
-    {
-        var (partInput, partExpectedString) = GetFileParameterTestData();
-        var file = new FileParameter
-        {
-            Stream = partInput,
-            FileName = "test.txt",
-            ContentType = "text/plain; charset=utf-8",
-        };
-        var multipartFormRequest = CreateMultipartFormRequest();
-        multipartFormRequest.AddFileParameterPart("file", file, "ignored-fallback-content-type");
-
-        var httpContent = multipartFormRequest.CreateContent();
-        Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
-        var multipartContent = (MultipartFormDataContent)httpContent;
-
-        var boundary = GetBoundary(multipartContent);
-        var expected = $"""
-            --{boundary}
-            Content-Type: text/plain; charset=utf-8
-            Content-Disposition: form-data; name=file; filename=test.txt; filename*=utf-8''test.txt
-
-            {partExpectedString}
-             --{boundary}--
-            """;
-
-        var actual = await multipartContent.ReadAsStringAsync();
-        Assert.That(actual, Is.EqualTo(expected).IgnoreWhiteSpace);
-    }
-
-    [Test]
     public async SystemTask ShouldAddFileParameter_WithFallbackContentType()
     {
         var (partInput, partExpectedString) = GetFileParameterTestData();
@@ -374,32 +290,6 @@ public class MultipartFormTests
         var expected = $"""
             --{boundary}
             Content-Type: text/plain
-            Content-Disposition: form-data; name=file; filename=test.txt; filename*=utf-8''test.txt
-
-            {partExpectedString}
-             --{boundary}--
-            """;
-
-        var actual = await multipartContent.ReadAsStringAsync();
-        Assert.That(actual, Is.EqualTo(expected).IgnoreWhiteSpace);
-    }
-
-    [Test]
-    public async SystemTask ShouldAddFileParameter_WithFallbackContentTypeAndCharset()
-    {
-        var (partInput, partExpectedString) = GetFileParameterTestData();
-        var file = new FileParameter { Stream = partInput, FileName = "test.txt" };
-        var multipartFormRequest = CreateMultipartFormRequest();
-        multipartFormRequest.AddFileParameterPart("file", file, "text/plain; charset=utf-8");
-
-        var httpContent = multipartFormRequest.CreateContent();
-        Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
-        var multipartContent = (MultipartFormDataContent)httpContent;
-
-        var boundary = GetBoundary(multipartContent);
-        var expected = $"""
-            --{boundary}
-            Content-Type: text/plain; charset=utf-8
             Content-Disposition: form-data; name=file; filename=test.txt; filename*=utf-8''test.txt
 
             {partExpectedString}
@@ -509,7 +399,7 @@ public class MultipartFormTests
         var boundary = GetBoundary(multipartContent);
         var expected = $"""
             --{boundary}
-            Content-Type: application/json
+            Content-Type: application/json; charset=utf-8
             Content-Disposition: form-data; name=object
 
             {_complexJson}
@@ -533,12 +423,12 @@ public class MultipartFormTests
         var boundary = GetBoundary(multipartContent);
         var expected = $"""
             --{boundary}
-            Content-Type: application/json
+            Content-Type: application/json; charset=utf-8
             Content-Disposition: form-data; name=objects
 
             {_complexJson}
             --{boundary}
-            Content-Type: application/json
+            Content-Type: application/json; charset=utf-8
             Content-Disposition: form-data; name=objects
 
             {_complexJson}
@@ -582,7 +472,7 @@ public class MultipartFormTests
         var boundary = GetBoundary(multipartContent);
         var expected = $"""
             --{boundary}
-            Content-Type: application/json
+            Content-Type: application/json; charset=utf-8
             Content-Disposition: form-data; name=objects
 
             {_complexJson}
@@ -606,7 +496,7 @@ public class MultipartFormTests
         var boundary = GetBoundary(multipartContent);
         var expected = $$"""
             --{{boundary}}
-            Content-Type: application/json-patch+json
+            Content-Type: application/json-patch+json; charset=utf-8
             Content-Disposition: form-data; name=objects
 
             {}
@@ -721,34 +611,6 @@ public class MultipartFormTests
         multipartFormRequest.AddFormEncodedPart(
             "objects",
             new { foo = "bar" },
-            "application/x-www-form-urlencoded"
-        );
-
-        var httpContent = multipartFormRequest.CreateContent();
-        Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
-        var multipartContent = (MultipartFormDataContent)httpContent;
-
-        var boundary = GetBoundary(multipartContent);
-        var expected = $"""
-            --{boundary}
-            Content-Type: application/x-www-form-urlencoded
-            Content-Disposition: form-data; name=objects
-
-            foo=bar
-            --{boundary}--
-            """;
-
-        var actual = await multipartContent.ReadAsStringAsync();
-        Assert.That(actual, Is.EqualTo(expected).IgnoreWhiteSpace);
-    }
-
-    [Test]
-    public async SystemTask ShouldAddFormEncodedPart_WithContentTypeAndCharset()
-    {
-        var multipartFormRequest = CreateMultipartFormRequest();
-        multipartFormRequest.AddFormEncodedPart(
-            "objects",
-            new { foo = "bar" },
             "application/x-www-form-urlencoded; charset=utf-8"
         );
 
@@ -772,34 +634,6 @@ public class MultipartFormTests
 
     [Test]
     public async SystemTask ShouldAddFormEncodedParts_WithContentType()
-    {
-        var multipartFormRequest = CreateMultipartFormRequest();
-        multipartFormRequest.AddFormEncodedParts(
-            "objects",
-            [new { foo = "bar" }],
-            "application/x-www-form-urlencoded"
-        );
-
-        var httpContent = multipartFormRequest.CreateContent();
-        Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
-        var multipartContent = (MultipartFormDataContent)httpContent;
-
-        var boundary = GetBoundary(multipartContent);
-        var expected = $"""
-            --{boundary}
-            Content-Type: application/x-www-form-urlencoded
-            Content-Disposition: form-data; name=objects
-
-            foo=bar
-            --{boundary}--
-            """;
-
-        var actual = await multipartContent.ReadAsStringAsync();
-        Assert.That(actual, Is.EqualTo(expected).IgnoreWhiteSpace);
-    }
-
-    [Test]
-    public async SystemTask ShouldAddFormEncodedParts_WithContentTypeAndCharset()
     {
         var multipartFormRequest = CreateMultipartFormRequest();
         multipartFormRequest.AddFormEncodedParts(
@@ -930,34 +764,6 @@ public class MultipartFormTests
         multipartFormRequest.AddExplodedFormEncodedPart(
             "objects",
             new { foo = "bar" },
-            "application/x-www-form-urlencoded"
-        );
-
-        var httpContent = multipartFormRequest.CreateContent();
-        Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
-        var multipartContent = (MultipartFormDataContent)httpContent;
-
-        var boundary = GetBoundary(multipartContent);
-        var expected = $"""
-            --{boundary}
-            Content-Type: application/x-www-form-urlencoded
-            Content-Disposition: form-data; name=objects
-
-            foo=bar
-            --{boundary}--
-            """;
-
-        var actual = await multipartContent.ReadAsStringAsync();
-        Assert.That(actual, Is.EqualTo(expected).IgnoreWhiteSpace);
-    }
-
-    [Test]
-    public async SystemTask ShouldAddExplodedFormEncodedPart_WithContentTypeAndCharset()
-    {
-        var multipartFormRequest = CreateMultipartFormRequest();
-        multipartFormRequest.AddExplodedFormEncodedPart(
-            "objects",
-            new { foo = "bar" },
             "application/x-www-form-urlencoded; charset=utf-8"
         );
 
@@ -981,34 +787,6 @@ public class MultipartFormTests
 
     [Test]
     public async SystemTask ShouldAddExplodedFormEncodedParts_WithContentType()
-    {
-        var multipartFormRequest = CreateMultipartFormRequest();
-        multipartFormRequest.AddExplodedFormEncodedParts(
-            "objects",
-            [new { foo = "bar" }],
-            "application/x-www-form-urlencoded"
-        );
-
-        var httpContent = multipartFormRequest.CreateContent();
-        Assert.That(httpContent, Is.InstanceOf<MultipartFormDataContent>());
-        var multipartContent = (MultipartFormDataContent)httpContent;
-
-        var boundary = GetBoundary(multipartContent);
-        var expected = $"""
-            --{boundary}
-            Content-Type: application/x-www-form-urlencoded
-            Content-Disposition: form-data; name=objects
-
-            foo=bar
-            --{boundary}--
-            """;
-
-        var actual = await multipartContent.ReadAsStringAsync();
-        Assert.That(actual, Is.EqualTo(expected).IgnoreWhiteSpace);
-    }
-
-    [Test]
-    public async SystemTask ShouldAddExplodedFormEncodedParts_WithContentTypeAndCharset()
     {
         var multipartFormRequest = CreateMultipartFormRequest();
         multipartFormRequest.AddExplodedFormEncodedParts(

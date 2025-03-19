@@ -49,7 +49,6 @@ public record V1UpdateOrderRequest
     [JsonPropertyName("canceled_note")]
     public string? CanceledNote { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

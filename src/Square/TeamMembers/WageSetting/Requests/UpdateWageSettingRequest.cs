@@ -21,7 +21,6 @@ public record UpdateWageSettingRequest
     [JsonPropertyName("wage_setting")]
     public required Square.WageSetting WageSetting { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

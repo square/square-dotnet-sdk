@@ -12,7 +12,6 @@ public record GetMerchantsRequest
     [JsonIgnore]
     public required string MerchantId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

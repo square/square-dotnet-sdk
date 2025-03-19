@@ -16,7 +16,6 @@ public record BulkDeleteOrderCustomAttributesRequest
     > Values { get; set; } =
         new Dictionary<string, BulkDeleteOrderCustomAttributesRequestDeleteCustomAttribute>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

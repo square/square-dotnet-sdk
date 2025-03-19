@@ -11,7 +11,6 @@ public record GetDevicesRequest
     [JsonIgnore]
     public required string DeviceId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

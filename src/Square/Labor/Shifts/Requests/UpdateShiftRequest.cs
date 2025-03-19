@@ -18,7 +18,6 @@ public record UpdateShiftRequest
     [JsonPropertyName("shift")]
     public required Shift Shift { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

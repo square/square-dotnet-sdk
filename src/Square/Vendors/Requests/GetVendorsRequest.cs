@@ -11,7 +11,6 @@ public record GetVendorsRequest
     [JsonIgnore]
     public required string VendorId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

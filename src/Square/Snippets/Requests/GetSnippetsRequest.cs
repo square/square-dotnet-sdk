@@ -11,7 +11,6 @@ public record GetSnippetsRequest
     [JsonIgnore]
     public required string SiteId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

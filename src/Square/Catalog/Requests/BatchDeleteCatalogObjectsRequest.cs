@@ -13,7 +13,6 @@ public record BatchDeleteCatalogObjectsRequest
     [JsonPropertyName("object_ids")]
     public IEnumerable<string>? ObjectIds { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

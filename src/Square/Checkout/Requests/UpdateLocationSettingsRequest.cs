@@ -18,7 +18,6 @@ public record UpdateLocationSettingsRequest
     [JsonPropertyName("location_settings")]
     public required CheckoutLocationSettings LocationSettings { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

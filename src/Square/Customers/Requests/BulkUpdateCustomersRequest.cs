@@ -20,7 +20,6 @@ public record BulkUpdateCustomersRequest
     public Dictionary<string, BulkUpdateCustomerData> Customers { get; set; } =
         new Dictionary<string, BulkUpdateCustomerData>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

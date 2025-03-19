@@ -19,7 +19,6 @@ public record CreateGiftCardActivityRequest
     [JsonPropertyName("gift_card_activity")]
     public required GiftCardActivity GiftCardActivity { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

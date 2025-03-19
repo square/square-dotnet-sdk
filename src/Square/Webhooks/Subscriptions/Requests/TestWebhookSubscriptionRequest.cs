@@ -18,7 +18,6 @@ public record TestWebhookSubscriptionRequest
     [JsonPropertyName("event_type")]
     public string? EventType { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

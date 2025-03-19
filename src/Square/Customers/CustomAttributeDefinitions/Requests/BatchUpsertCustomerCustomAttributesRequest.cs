@@ -21,7 +21,6 @@ public record BatchUpsertCustomerCustomAttributesRequest
             BatchUpsertCustomerCustomAttributesRequestCustomerCustomAttributeUpsertRequest
         >();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

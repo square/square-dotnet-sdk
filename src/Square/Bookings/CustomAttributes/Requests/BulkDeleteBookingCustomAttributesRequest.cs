@@ -15,7 +15,6 @@ public record BulkDeleteBookingCustomAttributesRequest
     public Dictionary<string, BookingCustomAttributeDeleteRequest> Values { get; set; } =
         new Dictionary<string, BookingCustomAttributeDeleteRequest>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

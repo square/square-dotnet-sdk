@@ -21,7 +21,6 @@ public record CreateTerminalCheckoutRequest
     [JsonPropertyName("checkout")]
     public required TerminalCheckout Checkout { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

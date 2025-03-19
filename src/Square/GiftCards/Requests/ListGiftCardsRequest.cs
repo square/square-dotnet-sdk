@@ -42,7 +42,6 @@ public record ListGiftCardsRequest
     [JsonIgnore]
     public string? CustomerId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

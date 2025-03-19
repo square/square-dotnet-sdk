@@ -18,7 +18,6 @@ public record GetPromotionsRequest
     [JsonIgnore]
     public required string ProgramId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

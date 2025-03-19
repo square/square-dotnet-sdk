@@ -22,7 +22,6 @@ public record CreateTerminalActionRequest
     [JsonPropertyName("action")]
     public required TerminalAction Action { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

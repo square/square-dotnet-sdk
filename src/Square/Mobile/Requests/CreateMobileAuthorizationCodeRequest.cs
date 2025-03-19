@@ -11,7 +11,6 @@ public record CreateMobileAuthorizationCodeRequest
     [JsonPropertyName("location_id")]
     public string? LocationId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

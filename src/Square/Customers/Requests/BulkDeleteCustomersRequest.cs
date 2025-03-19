@@ -11,7 +11,6 @@ public record BulkDeleteCustomersRequest
     [JsonPropertyName("customer_ids")]
     public IEnumerable<string> CustomerIds { get; set; } = new List<string>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

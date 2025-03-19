@@ -106,7 +106,6 @@ public record CreateSubscriptionRequest
     [JsonPropertyName("phases")]
     public IEnumerable<Phase>? Phases { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

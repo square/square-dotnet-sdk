@@ -18,7 +18,6 @@ public record UpsertSnippetRequest
     [JsonPropertyName("snippet")]
     public required Snippet Snippet { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

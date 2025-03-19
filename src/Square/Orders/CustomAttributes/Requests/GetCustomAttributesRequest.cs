@@ -33,7 +33,6 @@ public record GetCustomAttributesRequest
     [JsonIgnore]
     public bool? WithDefinition { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

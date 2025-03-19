@@ -12,7 +12,6 @@ public record DeprecatedGetPhysicalCountInventoryRequest
     [JsonIgnore]
     public required string PhysicalCountId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

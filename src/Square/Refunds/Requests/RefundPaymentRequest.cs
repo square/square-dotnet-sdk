@@ -128,7 +128,6 @@ public record RefundPaymentRequest
     [JsonPropertyName("external_details")]
     public DestinationDetailsExternalRefundDetails? ExternalDetails { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

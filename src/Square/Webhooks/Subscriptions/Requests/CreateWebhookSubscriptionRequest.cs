@@ -18,7 +18,6 @@ public record CreateWebhookSubscriptionRequest
     [JsonPropertyName("subscription")]
     public required WebhookSubscription Subscription { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

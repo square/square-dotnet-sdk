@@ -26,7 +26,6 @@ public record UpdateItemTaxesRequest
     [JsonPropertyName("taxes_to_disable")]
     public IEnumerable<string>? TaxesToDisable { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

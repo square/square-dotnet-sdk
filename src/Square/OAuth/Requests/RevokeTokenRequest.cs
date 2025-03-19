@@ -34,7 +34,6 @@ public record RevokeTokenRequest
     [JsonPropertyName("revoke_only_access_token")]
     public bool? RevokeOnlyAccessToken { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

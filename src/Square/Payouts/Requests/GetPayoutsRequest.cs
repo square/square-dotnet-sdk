@@ -11,7 +11,6 @@ public record GetPayoutsRequest
     [JsonIgnore]
     public required string PayoutId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

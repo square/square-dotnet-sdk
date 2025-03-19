@@ -21,7 +21,6 @@ public record CreateTerminalRefundRequest
     [JsonPropertyName("refund")]
     public TerminalRefund? Refund { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

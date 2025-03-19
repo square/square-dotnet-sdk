@@ -10,6 +10,12 @@ public class NoRequestOffsetTest
     [Test]
     public async SystemTask OffsetPagerShouldWorkWithoutRequest()
     {
+        var pager = await CreatePagerAsync();
+        await AssertPagerAsync(pager);
+    }
+
+    private async Task<Pager<object>> CreatePagerAsync()
+    {
         var responses = new List<Response>
         {
             new() { Data = new() { Items = ["item1", "item2"] } },
@@ -41,7 +47,11 @@ public class NoRequestOffsetTest
             response => response?.Data?.Items?.ToList(),
             null
         );
+        return pager;
+    }
 
+    public async SystemTask AssertPagerAsync(Pager<object> pager)
+    {
         var pageCounter = 0;
         var itemCounter = 0;
         await foreach (var page in pager.AsPagesAsync())
@@ -59,7 +69,7 @@ public class NoRequestOffsetTest
 
     private class Request
     {
-        public Pagination? Pagination { get; set; }
+        public Pagination Pagination { get; set; }
     }
 
     private class Pagination
@@ -69,11 +79,11 @@ public class NoRequestOffsetTest
 
     private class Response
     {
-        public Data? Data { get; set; }
+        public Data Data { get; set; }
     }
 
     private class Data
     {
-        public IEnumerable<string>? Items { get; set; }
+        public IEnumerable<string> Items { get; set; }
     }
 }

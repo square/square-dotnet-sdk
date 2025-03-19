@@ -28,7 +28,6 @@ public record SearchTerminalActionsRequest
     [JsonPropertyName("limit")]
     public int? Limit { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

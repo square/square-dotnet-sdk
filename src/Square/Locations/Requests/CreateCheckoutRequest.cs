@@ -114,7 +114,6 @@ public record CreateCheckoutRequest
     [JsonPropertyName("note")]
     public string? Note { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

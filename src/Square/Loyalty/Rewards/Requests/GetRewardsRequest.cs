@@ -11,7 +11,6 @@ public record GetRewardsRequest
     [JsonIgnore]
     public required string RewardId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

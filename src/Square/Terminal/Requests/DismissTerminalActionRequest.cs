@@ -11,7 +11,6 @@ public record DismissTerminalActionRequest
     [JsonIgnore]
     public required string ActionId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

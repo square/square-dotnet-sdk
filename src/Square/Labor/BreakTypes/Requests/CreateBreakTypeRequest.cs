@@ -18,7 +18,6 @@ public record CreateBreakTypeRequest
     [JsonPropertyName("break_type")]
     public required BreakType BreakType { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

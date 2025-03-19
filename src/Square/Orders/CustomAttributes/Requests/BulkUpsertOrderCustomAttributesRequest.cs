@@ -16,7 +16,6 @@ public record BulkUpsertOrderCustomAttributesRequest
     > Values { get; set; } =
         new Dictionary<string, BulkUpsertOrderCustomAttributesRequestUpsertCustomAttribute>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

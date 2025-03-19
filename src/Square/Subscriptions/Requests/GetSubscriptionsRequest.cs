@@ -21,7 +21,6 @@ public record GetSubscriptionsRequest
     [JsonIgnore]
     public string? Include { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

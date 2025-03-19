@@ -15,7 +15,6 @@ public record UpdateTeamMembersRequest
     [JsonIgnore]
     public required UpdateTeamMemberRequest Body { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

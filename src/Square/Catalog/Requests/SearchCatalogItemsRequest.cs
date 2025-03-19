@@ -72,7 +72,6 @@ public record SearchCatalogItemsRequest
     [JsonPropertyName("archived_state")]
     public ArchivedState? ArchivedState { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

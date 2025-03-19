@@ -12,7 +12,6 @@ public record GetGiftCardFromNonceRequest
     [JsonPropertyName("nonce")]
     public required string Nonce { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

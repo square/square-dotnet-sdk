@@ -11,7 +11,6 @@ public record RetrieveJobRequest
     [JsonIgnore]
     public required string JobId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

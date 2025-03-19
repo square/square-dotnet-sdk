@@ -20,7 +20,6 @@ public record BulkDeleteLocationCustomAttributesRequest
             BulkDeleteLocationCustomAttributesRequestLocationCustomAttributeDeleteRequest
         >();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

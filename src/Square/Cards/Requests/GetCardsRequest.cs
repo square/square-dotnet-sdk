@@ -11,7 +11,6 @@ public record GetCardsRequest
     [JsonIgnore]
     public required string CardId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

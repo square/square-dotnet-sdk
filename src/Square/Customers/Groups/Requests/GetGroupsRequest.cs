@@ -11,7 +11,6 @@ public record GetGroupsRequest
     [JsonIgnore]
     public required string GroupId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

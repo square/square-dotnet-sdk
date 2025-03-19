@@ -17,7 +17,6 @@ public record LinkCustomerToGiftCardRequest
     [JsonPropertyName("customer_id")]
     public required string CustomerId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

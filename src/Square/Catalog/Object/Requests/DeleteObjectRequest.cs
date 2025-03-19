@@ -13,7 +13,6 @@ public record DeleteObjectRequest
     [JsonIgnore]
     public required string ObjectId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

@@ -22,7 +22,6 @@ public record CreateVendorRequest
     [JsonPropertyName("vendor")]
     public Vendor? Vendor { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

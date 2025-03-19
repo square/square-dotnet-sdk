@@ -12,7 +12,6 @@ public record SearchAvailabilityRequest
     [JsonPropertyName("query")]
     public required SearchAvailabilityQuery Query { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

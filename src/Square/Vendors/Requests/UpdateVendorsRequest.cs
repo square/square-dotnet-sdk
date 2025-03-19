@@ -15,7 +15,6 @@ public record UpdateVendorsRequest
     [JsonIgnore]
     public required UpdateVendorRequest Body { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

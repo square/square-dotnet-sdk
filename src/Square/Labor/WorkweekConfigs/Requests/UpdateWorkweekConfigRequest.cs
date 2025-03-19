@@ -18,7 +18,6 @@ public record UpdateWorkweekConfigRequest
     [JsonPropertyName("workweek_config")]
     public required WorkweekConfig WorkweekConfig { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

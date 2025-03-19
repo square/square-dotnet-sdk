@@ -11,7 +11,6 @@ public record GetDisputesRequest
     [JsonIgnore]
     public required string DisputeId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

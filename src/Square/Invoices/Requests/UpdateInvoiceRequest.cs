@@ -39,7 +39,6 @@ public record UpdateInvoiceRequest
     [JsonPropertyName("fields_to_clear")]
     public IEnumerable<string>? FieldsToClear { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

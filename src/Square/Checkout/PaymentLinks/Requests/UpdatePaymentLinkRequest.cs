@@ -19,7 +19,6 @@ public record UpdatePaymentLinkRequest
     [JsonPropertyName("payment_link")]
     public required PaymentLink PaymentLink { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

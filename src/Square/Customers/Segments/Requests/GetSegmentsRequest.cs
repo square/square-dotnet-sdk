@@ -11,7 +11,6 @@ public record GetSegmentsRequest
     [JsonIgnore]
     public required string SegmentId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

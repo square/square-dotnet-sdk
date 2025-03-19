@@ -29,7 +29,6 @@ public record SearchLoyaltyAccountsRequest
     [JsonPropertyName("cursor")]
     public string? Cursor { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

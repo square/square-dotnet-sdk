@@ -253,7 +253,6 @@ public record CreatePaymentRequest
     [JsonPropertyName("offline_payment_details")]
     public OfflinePaymentDetails? OfflinePaymentDetails { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

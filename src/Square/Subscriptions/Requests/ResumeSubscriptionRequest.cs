@@ -26,7 +26,6 @@ public record ResumeSubscriptionRequest
     [JsonPropertyName("resume_change_timing")]
     public ChangeTiming? ResumeChangeTiming { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

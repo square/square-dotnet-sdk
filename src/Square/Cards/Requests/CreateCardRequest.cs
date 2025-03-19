@@ -39,7 +39,6 @@ public record CreateCardRequest
     [JsonPropertyName("card")]
     public required Card Card { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

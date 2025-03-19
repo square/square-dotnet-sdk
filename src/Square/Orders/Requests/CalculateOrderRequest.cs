@@ -22,7 +22,6 @@ public record CalculateOrderRequest
     [JsonPropertyName("proposed_rewards")]
     public IEnumerable<OrderReward>? ProposedRewards { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

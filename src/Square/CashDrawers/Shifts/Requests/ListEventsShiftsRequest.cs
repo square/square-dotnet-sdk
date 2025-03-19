@@ -30,7 +30,6 @@ public record ListEventsShiftsRequest
     [JsonIgnore]
     public string? Cursor { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

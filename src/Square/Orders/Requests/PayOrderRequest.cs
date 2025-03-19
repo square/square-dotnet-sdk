@@ -34,7 +34,6 @@ public record PayOrderRequest
     [JsonPropertyName("payment_ids")]
     public IEnumerable<string>? PaymentIds { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

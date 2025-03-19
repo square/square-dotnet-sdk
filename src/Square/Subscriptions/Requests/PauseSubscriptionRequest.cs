@@ -52,7 +52,6 @@ public record PauseSubscriptionRequest
     [JsonPropertyName("pause_reason")]
     public string? PauseReason { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

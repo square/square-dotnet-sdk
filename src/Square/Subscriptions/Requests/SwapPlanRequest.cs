@@ -26,7 +26,6 @@ public record SwapPlanRequest
     [JsonPropertyName("phases")]
     public IEnumerable<PhaseInput>? Phases { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

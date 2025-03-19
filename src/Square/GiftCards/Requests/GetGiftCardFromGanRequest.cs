@@ -13,7 +13,6 @@ public record GetGiftCardFromGanRequest
     [JsonPropertyName("gan")]
     public required string Gan { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

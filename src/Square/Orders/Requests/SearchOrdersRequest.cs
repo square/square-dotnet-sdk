@@ -49,7 +49,6 @@ public record SearchOrdersRequest
     [JsonPropertyName("return_entries")]
     public bool? ReturnEntries { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

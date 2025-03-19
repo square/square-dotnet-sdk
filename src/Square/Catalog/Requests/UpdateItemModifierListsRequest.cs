@@ -25,7 +25,6 @@ public record UpdateItemModifierListsRequest
     [JsonPropertyName("modifier_lists_to_disable")]
     public IEnumerable<string>? ModifierListsToDisable { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

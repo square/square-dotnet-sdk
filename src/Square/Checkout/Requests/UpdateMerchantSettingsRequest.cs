@@ -12,7 +12,6 @@ public record UpdateMerchantSettingsRequest
     [JsonPropertyName("merchant_settings")]
     public required CheckoutMerchantSettings MerchantSettings { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

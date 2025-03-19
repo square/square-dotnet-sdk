@@ -41,7 +41,6 @@ public record CalculateLoyaltyPointsRequest
     [JsonPropertyName("loyalty_account_id")]
     public string? LoyaltyAccountId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

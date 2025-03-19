@@ -40,7 +40,6 @@ public record UpsertBookingCustomAttributeRequest
     [JsonPropertyName("idempotency_key")]
     public string? IdempotencyKey { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

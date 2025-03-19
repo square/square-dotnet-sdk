@@ -30,7 +30,6 @@ public record UpsertCatalogObjectRequest
     [JsonPropertyName("object")]
     public required CatalogObject Object { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

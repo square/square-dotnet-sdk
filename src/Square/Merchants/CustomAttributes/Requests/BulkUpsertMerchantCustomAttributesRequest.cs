@@ -21,7 +21,6 @@ public record BulkUpsertMerchantCustomAttributesRequest
             BulkUpsertMerchantCustomAttributesRequestMerchantCustomAttributeUpsertRequest
         >();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

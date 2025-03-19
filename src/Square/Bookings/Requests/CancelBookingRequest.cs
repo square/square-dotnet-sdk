@@ -23,7 +23,6 @@ public record CancelBookingRequest
     [JsonPropertyName("booking_version")]
     public int? BookingVersion { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

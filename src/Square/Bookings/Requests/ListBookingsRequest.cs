@@ -47,7 +47,6 @@ public record ListBookingsRequest
     [JsonIgnore]
     public string? StartAtMax { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

@@ -54,7 +54,6 @@ public record BatchGetCatalogObjectsRequest
     [JsonPropertyName("include_category_path_to_root")]
     public bool? IncludeCategoryPathToRoot { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

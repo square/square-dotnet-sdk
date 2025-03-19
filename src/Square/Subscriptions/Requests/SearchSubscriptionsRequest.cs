@@ -41,7 +41,6 @@ public record SearchSubscriptionsRequest
     [JsonPropertyName("include")]
     public IEnumerable<string>? Include { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

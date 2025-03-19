@@ -11,7 +11,6 @@ public record GetInvoicesRequest
     [JsonIgnore]
     public required string InvoiceId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

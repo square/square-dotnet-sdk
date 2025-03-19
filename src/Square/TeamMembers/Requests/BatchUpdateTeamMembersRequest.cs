@@ -18,7 +18,6 @@ public record BatchUpdateTeamMembersRequest
     public Dictionary<string, UpdateTeamMemberRequest> TeamMembers { get; set; } =
         new Dictionary<string, UpdateTeamMemberRequest>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

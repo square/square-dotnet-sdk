@@ -36,7 +36,6 @@ public record GetCustomAttributesRequest
     [JsonIgnore]
     public int? Version { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

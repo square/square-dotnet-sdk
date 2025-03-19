@@ -11,7 +11,6 @@ public record GetTeamMembersRequest
     [JsonIgnore]
     public required string TeamMemberId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

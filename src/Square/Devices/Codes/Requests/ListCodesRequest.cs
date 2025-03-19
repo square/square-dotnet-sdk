@@ -36,7 +36,6 @@ public record ListCodesRequest
     [JsonIgnore]
     public DeviceCodeStatus? Status { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

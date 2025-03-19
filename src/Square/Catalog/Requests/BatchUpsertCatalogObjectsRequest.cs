@@ -46,7 +46,6 @@ public record BatchUpsertCatalogObjectsRequest
     [JsonPropertyName("batches")]
     public IEnumerable<CatalogObjectBatch> Batches { get; set; } = new List<CatalogObjectBatch>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

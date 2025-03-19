@@ -60,7 +60,6 @@ public record CreatePaymentLinkRequest
     [JsonPropertyName("payment_note")]
     public string? PaymentNote { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

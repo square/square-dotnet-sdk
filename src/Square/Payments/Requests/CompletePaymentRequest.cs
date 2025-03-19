@@ -19,7 +19,6 @@ public record CompletePaymentRequest
     [JsonPropertyName("version_token")]
     public string? VersionToken { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

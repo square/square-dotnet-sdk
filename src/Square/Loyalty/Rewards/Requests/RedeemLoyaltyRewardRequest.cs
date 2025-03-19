@@ -24,7 +24,6 @@ public record RedeemLoyaltyRewardRequest
     [JsonPropertyName("location_id")]
     public required string LocationId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

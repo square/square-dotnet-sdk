@@ -11,7 +11,6 @@ public record RegisterDomainRequest
     [JsonPropertyName("domain_name")]
     public required string DomainName { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

@@ -16,7 +16,6 @@ public record UpdateImagesRequest
 
     public FileParameter? ImageFile { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

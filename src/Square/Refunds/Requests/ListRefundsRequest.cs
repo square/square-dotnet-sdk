@@ -104,7 +104,6 @@ public record ListRefundsRequest
     [JsonIgnore]
     public ListPaymentRefundsRequestSortField? SortField { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

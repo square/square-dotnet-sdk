@@ -41,7 +41,6 @@ public record CreateGiftCardRequest
     [JsonPropertyName("gift_card")]
     public required GiftCard GiftCard { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

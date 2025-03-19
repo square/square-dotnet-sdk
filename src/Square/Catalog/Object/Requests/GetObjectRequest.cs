@@ -48,7 +48,6 @@ public record GetObjectRequest
     [JsonIgnore]
     public bool? IncludeCategoryPathToRoot { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

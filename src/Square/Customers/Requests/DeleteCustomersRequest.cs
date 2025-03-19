@@ -19,7 +19,6 @@ public record DeleteCustomersRequest
     [JsonIgnore]
     public long? Version { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

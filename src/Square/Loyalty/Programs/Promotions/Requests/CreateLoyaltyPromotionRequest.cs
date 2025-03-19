@@ -27,7 +27,6 @@ public record CreateLoyaltyPromotionRequest
     [JsonPropertyName("idempotency_key")]
     public required string IdempotencyKey { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

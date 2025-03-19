@@ -31,7 +31,6 @@ public record V1ListOrdersRequest
     [JsonIgnore]
     public string? BatchToken { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

@@ -11,7 +11,6 @@ public record GetCustomersRequest
     [JsonIgnore]
     public required string CustomerId { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

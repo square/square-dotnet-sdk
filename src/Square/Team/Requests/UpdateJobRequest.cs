@@ -19,7 +19,6 @@ public record UpdateJobRequest
     [JsonPropertyName("job")]
     public required Job Job { get; set; }
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);

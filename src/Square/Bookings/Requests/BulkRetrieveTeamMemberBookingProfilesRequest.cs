@@ -11,7 +11,6 @@ public record BulkRetrieveTeamMemberBookingProfilesRequest
     [JsonPropertyName("team_member_ids")]
     public IEnumerable<string> TeamMemberIds { get; set; } = new List<string>();
 
-    /// <inheritdoc />
     public override string ToString()
     {
         return JsonUtils.Serialize(this);
