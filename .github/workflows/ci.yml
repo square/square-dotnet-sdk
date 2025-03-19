@@ -35,8 +35,8 @@ jobs:
         run: dotnet test SquareWithLegacy.sln --no-restore --no-build /p:ContinuousIntegrationBuild=true
         continue-on-error: true
         env:
-          TEST_SQUARE_TOKEN: ${{ secrets.SQUARE_SANDBOX_TOKEN }}
-          SQUARE_ACCESS_TOKEN: ${{ secrets.SQUARE_SANDBOX_TOKEN }}
+          TEST_SQUARE_TOKEN: ${{ secrets.TEST_SQUARE_TOKEN }}
+          SQUARE_ACCESS_TOKEN: ${{ secrets.TEST_SQUARE_TOKEN }}
           SQUARE_ENVIRONMENT: sandbox
 
       - name: Publish to nuget.org
