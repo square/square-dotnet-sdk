@@ -10,6 +10,9 @@ on:
       - '*'
       - '!*Legacy*'    # Exclude tags containing "Legacy"
   pull_request:
+    branches:
+      - main
+      - master
     paths-ignore:
       - 'legacy/**'
 
@@ -21,9 +24,6 @@ env:
 
 jobs:
   ci:
-    # Skip this job if it's a pull request and there's also a push for the same commit
-    # This effectively runs the workflow only once per commit
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
