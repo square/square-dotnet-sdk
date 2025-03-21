@@ -5,7 +5,8 @@ on:
     paths-ignore:
       - 'legacy/**'
     branches:
-      - '**'
+      - main
+      - master
     tags:
       - '*'
       - '!*Legacy*'    # Exclude tags containing "Legacy"

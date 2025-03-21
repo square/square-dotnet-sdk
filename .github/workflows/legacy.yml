@@ -5,7 +5,8 @@ on:
     paths:
       - 'legacy/**'
     branches:
-      - '**'
+      - main
+      - master
     tags:
       - '*Legacy*'  # Only run for tags containing "Legacy"
   pull_request:
