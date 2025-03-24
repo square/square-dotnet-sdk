@@ -1,20 +1,19 @@
-name: CI
+name: Legacy CI
 
 on:
   push:
-    paths-ignore:
+    paths:
       - 'legacy/**'
     branches:
       - main
       - master
     tags:
-      - '*'
-      - '!*Legacy*'    # Exclude tags containing "Legacy"
+      - '*Legacy*'  # Only run for tags containing "Legacy"
   pull_request:
     branches:
       - main
       - master
-    paths-ignore:
+    paths:
       - 'legacy/**'
 
 env:
@@ -24,7 +23,7 @@ env:
   MSBUILDTERMINALLOGGER: off
 
 jobs:
-  ci:
+  legacy-ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -39,22 +38,24 @@ jobs:
         run: dotnet tool restore
 
       - name: Restore dependencies
-        run: dotnet restore src/Square.sln
+        run: dotnet restore legacy/Square.Legacy.sln
 
       - name: Build release
         id: build
-        run: dotnet build src/Square.sln -c Release /p:ContinuousIntegrationBuild=true
+        run: dotnet build legacy/Square.Legacy.sln -c Release /p:ContinuousIntegrationBuild=true
 
       - name: Run Tests
-        run: dotnet test src/Square.sln --no-restore  /p:ContinuousIntegrationBuild=true
+        run: dotnet test legacy/Square.Legacy.sln --no-restore --no-build -c Release /p:ContinuousIntegrationBuild=true
         continue-on-error: true
         env:
-          TEST_SQUARE_TOKEN: ${{ secrets.TEST_SQUARE_TOKEN }}
+          SQUARE_ACCESS_TOKEN: ${{ secrets.TEST_SQUARE_TOKEN }}
+          SQUARE_ENVIRONMENT: sandbox
 
       - name: Publish to nuget.org
+        # Now we only need to check if it's a tag push and the build succeeded
         if: github.event_name == 'push' && contains(github.ref, 'refs/tags/') && steps.build.outcome == 'success'
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
-          dotnet pack src/Square.sln --no-build --no-restore -c Release -o dist
+          dotnet pack legacy/Square.Legacy.sln --no-build --no-restore -c Release -o dist
           dotnet nuget push dist/*.nupkg --api-key $NUGET_API_KEY --source "nuget.org"
