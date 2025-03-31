@@ -58,16 +58,12 @@ public class DeprecatedGetPhysicalCountTest : BaseMockServerTest
             );
 
         var response = await Client.Inventory.DeprecatedGetPhysicalCountAsync(
-            new DeprecatedGetPhysicalCountInventoryRequest
-            {
-                PhysicalCountId = "physical_count_id",
-            },
-            RequestOptions
+            new DeprecatedGetPhysicalCountInventoryRequest { PhysicalCountId = "physical_count_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetInventoryPhysicalCountResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

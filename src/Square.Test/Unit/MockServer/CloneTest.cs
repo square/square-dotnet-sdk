@@ -358,13 +358,11 @@ public class CloneTest : BaseMockServerTest
                 OrderId = "ZAISEM52YcpmcWAzERDOyiWS123",
                 Version = 3,
                 IdempotencyKey = "UNIQUE_STRING",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<CloneOrderResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<CloneOrderResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

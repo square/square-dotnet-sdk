@@ -14,6 +14,6 @@ public class AuthorizeTest : BaseMockServerTest
             )
             .RespondWith(WireMock.ResponseBuilders.Response.Create().WithStatusCode(200));
 
-        Assert.DoesNotThrowAsync(async () => await Client.OAuth.AuthorizeAsync(RequestOptions));
+        Assert.DoesNotThrowAsync(async () => await Client.OAuth.AuthorizeAsync());
     }
 }

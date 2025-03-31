@@ -101,13 +101,12 @@ public class RedeemTest : BaseMockServerTest
                 RewardId = "reward_id",
                 IdempotencyKey = "98adc7f7-6963-473b-b29c-f3c9cdd7d994",
                 LocationId = "P034NEENMD09F",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<RedeemLoyaltyRewardResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

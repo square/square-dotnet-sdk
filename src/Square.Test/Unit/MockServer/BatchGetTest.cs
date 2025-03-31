@@ -90,13 +90,11 @@ public class BatchGetTest : BaseMockServerTest
             new BatchGetVendorsRequest
             {
                 VendorIds = new List<string>() { "INV_V_JDKYHBWT1D4F8MFH63DBMEN8Y4" },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<BatchGetVendorsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<BatchGetVendorsResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

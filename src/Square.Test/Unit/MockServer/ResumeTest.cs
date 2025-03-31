@@ -95,13 +95,12 @@ public class ResumeTest : BaseMockServerTest
             );
 
         var response = await Client.Subscriptions.ResumeAsync(
-            new ResumeSubscriptionRequest { SubscriptionId = "subscription_id" },
-            RequestOptions
+            new ResumeSubscriptionRequest { SubscriptionId = "subscription_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<ResumeSubscriptionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

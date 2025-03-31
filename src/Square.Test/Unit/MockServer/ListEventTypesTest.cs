@@ -46,14 +46,10 @@ public class ListEventTypesTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Events.ListEventTypesAsync(
-            new ListEventTypesRequest(),
-            RequestOptions
-        );
+        var response = await Client.Events.ListEventTypesAsync(new ListEventTypesRequest());
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<ListEventTypesResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<ListEventTypesResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

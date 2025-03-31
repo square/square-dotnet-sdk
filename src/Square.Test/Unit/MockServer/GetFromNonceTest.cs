@@ -63,13 +63,12 @@ public class GetFromNonceTest : BaseMockServerTest
             );
 
         var response = await Client.GiftCards.GetFromNonceAsync(
-            new GetGiftCardFromNonceRequest { Nonce = "cnon:7783322135245171" },
-            RequestOptions
+            new GetGiftCardFromNonceRequest { Nonce = "cnon:7783322135245171" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetGiftCardFromNonceResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

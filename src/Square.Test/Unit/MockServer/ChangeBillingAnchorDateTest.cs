@@ -101,13 +101,12 @@ public class ChangeBillingAnchorDateTest : BaseMockServerTest
             {
                 SubscriptionId = "subscription_id",
                 MonthlyBillingAnchorDate = 1,
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<ChangeBillingAnchorDateResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

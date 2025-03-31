@@ -54,13 +54,12 @@ public class GetTest : BaseMockServerTest
             );
 
         var response = await Client.Webhooks.Subscriptions.GetAsync(
-            new GetSubscriptionsRequest { SubscriptionId = "subscription_id" },
-            RequestOptions
+            new GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetWebhookSubscriptionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

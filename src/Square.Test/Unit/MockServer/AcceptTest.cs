@@ -65,13 +65,11 @@ public class AcceptTest : BaseMockServerTest
             );
 
         var response = await Client.Disputes.AcceptAsync(
-            new AcceptDisputesRequest { DisputeId = "dispute_id" },
-            RequestOptions
+            new AcceptDisputesRequest { DisputeId = "dispute_id" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<AcceptDisputeResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<AcceptDisputeResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

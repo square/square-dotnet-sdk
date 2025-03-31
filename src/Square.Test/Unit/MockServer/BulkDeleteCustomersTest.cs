@@ -87,13 +87,12 @@ public class BulkDeleteCustomersTest : BaseMockServerTest
                     "N18CPRVXR5214XPBBA6BZQWF3C",
                     "2GYD7WNXF7BJZW1PMGNXZ3Y8M8",
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<BulkDeleteCustomersResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

@@ -53,8 +53,7 @@ public class UpdateSignatureKeyTest : BaseMockServerTest
             {
                 SubscriptionId = "subscription_id",
                 IdempotencyKey = "ed80ae6b-0654-473b-bbab-a39aee89a60d",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
@@ -63,7 +62,7 @@ public class UpdateSignatureKeyTest : BaseMockServerTest
                         mockResponse
                     )
                 )
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

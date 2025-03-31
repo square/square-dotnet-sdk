@@ -134,13 +134,11 @@ public class PublishTest : BaseMockServerTest
                 InvoiceId = "invoice_id",
                 Version = 1,
                 IdempotencyKey = "32da42d0-1997-41b0-826b-f09464fc2c2e",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<PublishInvoiceResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<PublishInvoiceResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

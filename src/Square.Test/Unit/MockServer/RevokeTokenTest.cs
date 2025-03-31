@@ -50,13 +50,11 @@ public class RevokeTokenTest : BaseMockServerTest
             );
 
         var response = await Client.OAuth.RevokeTokenAsync(
-            new RevokeTokenRequest { ClientId = "CLIENT_ID", AccessToken = "ACCESS_TOKEN" },
-            RequestOptions
+            new RevokeTokenRequest { ClientId = "CLIENT_ID", AccessToken = "ACCESS_TOKEN" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<RevokeTokenResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<RevokeTokenResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

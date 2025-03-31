@@ -59,13 +59,12 @@ public class DismissTerminalRefundTest : BaseMockServerTest
             );
 
         var response = await Client.Terminal.DismissTerminalRefundAsync(
-            new DismissTerminalRefundRequest { TerminalRefundId = "terminal_refund_id" },
-            RequestOptions
+            new DismissTerminalRefundRequest { TerminalRefundId = "terminal_refund_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<DismissTerminalRefundResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

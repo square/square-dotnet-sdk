@@ -72,11 +72,11 @@ public class RetrieveMerchantSettingsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Checkout.RetrieveMerchantSettingsAsync(RequestOptions);
+        var response = await Client.Checkout.RetrieveMerchantSettingsAsync();
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<RetrieveMerchantSettingsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

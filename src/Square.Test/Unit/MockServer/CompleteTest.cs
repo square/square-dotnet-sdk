@@ -230,13 +230,11 @@ public class CompleteTest : BaseMockServerTest
             );
 
         var response = await Client.Payments.CompleteAsync(
-            new CompletePaymentRequest { PaymentId = "payment_id" },
-            RequestOptions
+            new CompletePaymentRequest { PaymentId = "payment_id" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<CompletePaymentResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<CompletePaymentResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

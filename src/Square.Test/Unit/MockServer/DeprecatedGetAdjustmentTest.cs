@@ -73,13 +73,12 @@ public class DeprecatedGetAdjustmentTest : BaseMockServerTest
             );
 
         var response = await Client.Inventory.DeprecatedGetAdjustmentAsync(
-            new DeprecatedGetAdjustmentInventoryRequest { AdjustmentId = "adjustment_id" },
-            RequestOptions
+            new DeprecatedGetAdjustmentInventoryRequest { AdjustmentId = "adjustment_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetInventoryAdjustmentResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

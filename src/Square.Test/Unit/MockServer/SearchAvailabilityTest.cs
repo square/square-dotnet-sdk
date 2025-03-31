@@ -276,13 +276,12 @@ public class SearchAvailabilityTest : BaseMockServerTest
                 {
                     Filter = new SearchAvailabilityFilter { StartAtRange = new TimeRange() },
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<SearchAvailabilityResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

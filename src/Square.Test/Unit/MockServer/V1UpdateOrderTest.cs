@@ -141,12 +141,11 @@ public class V1UpdateOrderTest : BaseMockServerTest
                 LocationId = "location_id",
                 OrderId = "order_id",
                 Action = V1UpdateOrderRequestAction.Complete,
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<V1Order>(mockResponse)).UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<V1Order>(mockResponse)).UsingDefaults()
         );
     }
 }

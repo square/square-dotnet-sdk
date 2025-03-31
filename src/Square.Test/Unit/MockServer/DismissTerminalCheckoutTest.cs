@@ -89,13 +89,12 @@ public class DismissTerminalCheckoutTest : BaseMockServerTest
             );
 
         var response = await Client.Terminal.DismissTerminalCheckoutAsync(
-            new DismissTerminalCheckoutRequest { CheckoutId = "checkout_id" },
-            RequestOptions
+            new DismissTerminalCheckoutRequest { CheckoutId = "checkout_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<DismissTerminalCheckoutResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

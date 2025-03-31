@@ -59,13 +59,12 @@ public class GetByV1IdTest : BaseMockServerTest
             );
 
         var response = await Client.BankAccounts.GetByV1IdAsync(
-            new GetByV1IdBankAccountsRequest { V1BankAccountId = "v1_bank_account_id" },
-            RequestOptions
+            new GetByV1IdBankAccountsRequest { V1BankAccountId = "v1_bank_account_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetBankAccountByV1IdResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

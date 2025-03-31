@@ -131,13 +131,12 @@ public class BatchUpsertTest : BaseMockServerTest
                         }
                     },
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<BulkUpsertOrderCustomAttributesResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

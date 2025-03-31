@@ -137,13 +137,12 @@ public class BatchUpdateTest : BaseMockServerTest
                         new UpdateVendorRequest { Vendor = new Vendor() }
                     },
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<BatchUpdateVendorsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

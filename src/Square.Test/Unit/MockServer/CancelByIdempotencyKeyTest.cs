@@ -51,13 +51,12 @@ public class CancelByIdempotencyKeyTest : BaseMockServerTest
             new CancelPaymentByIdempotencyKeyRequest
             {
                 IdempotencyKey = "a7e36d40-d24b-11e8-b568-0800200c9a66",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<CancelPaymentByIdempotencyKeyResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

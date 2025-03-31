@@ -82,13 +82,12 @@ public class SearchTest : BaseMockServerTest
                     Filter = new TerminalRefundQueryFilter { Status = "COMPLETED" },
                 },
                 Limit = 1,
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<SearchTerminalRefundsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

@@ -54,7 +54,7 @@ public partial class SquareClient
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Square" },
                 { "X-Fern-SDK-Version", Version.Current },
-                { "User-Agent", "Square/41.0.1" },
+                { "User-Agent", "Square/41.0.2" },
             }
         );
         clientOptions ??= new ClientOptions();
@@ -106,73 +106,73 @@ public partial class SquareClient
         Webhooks = new WebhooksClient(_client);
     }
 
-    public MobileClient Mobile { get; init; }
+    public MobileClient Mobile { get; }
 
-    public OAuthClient OAuth { get; init; }
+    public OAuthClient OAuth { get; }
 
-    public V1TransactionsClient V1Transactions { get; init; }
+    public V1TransactionsClient V1Transactions { get; }
 
-    public ApplePayClient ApplePay { get; init; }
+    public ApplePayClient ApplePay { get; }
 
-    public BankAccountsClient BankAccounts { get; init; }
+    public BankAccountsClient BankAccounts { get; }
 
-    public BookingsClient Bookings { get; init; }
+    public BookingsClient Bookings { get; }
 
-    public CardsClient Cards { get; init; }
+    public CardsClient Cards { get; }
 
-    public CatalogClient Catalog { get; init; }
+    public CatalogClient Catalog { get; }
 
-    public CustomersClient Customers { get; init; }
+    public CustomersClient Customers { get; }
 
-    public DevicesClient Devices { get; init; }
+    public DevicesClient Devices { get; }
 
-    public DisputesClient Disputes { get; init; }
+    public DisputesClient Disputes { get; }
 
-    public EmployeesClient Employees { get; init; }
+    public EmployeesClient Employees { get; }
 
-    public EventsClient Events { get; init; }
+    public EventsClient Events { get; }
 
-    public GiftCardsClient GiftCards { get; init; }
+    public GiftCardsClient GiftCards { get; }
 
-    public InventoryClient Inventory { get; init; }
+    public InventoryClient Inventory { get; }
 
-    public InvoicesClient Invoices { get; init; }
+    public InvoicesClient Invoices { get; }
 
-    public LocationsClient Locations { get; init; }
+    public LocationsClient Locations { get; }
 
-    public LoyaltyClient Loyalty { get; init; }
+    public LoyaltyClient Loyalty { get; }
 
-    public MerchantsClient Merchants { get; init; }
+    public MerchantsClient Merchants { get; }
 
-    public CheckoutClient Checkout { get; init; }
+    public CheckoutClient Checkout { get; }
 
-    public OrdersClient Orders { get; init; }
+    public OrdersClient Orders { get; }
 
-    public PaymentsClient Payments { get; init; }
+    public PaymentsClient Payments { get; }
 
-    public PayoutsClient Payouts { get; init; }
+    public PayoutsClient Payouts { get; }
 
-    public RefundsClient Refunds { get; init; }
+    public RefundsClient Refunds { get; }
 
-    public SitesClient Sites { get; init; }
+    public SitesClient Sites { get; }
 
-    public SnippetsClient Snippets { get; init; }
+    public SnippetsClient Snippets { get; }
 
-    public SubscriptionsClient Subscriptions { get; init; }
+    public SubscriptionsClient Subscriptions { get; }
 
-    public TeamMembersClient TeamMembers { get; init; }
+    public TeamMembersClient TeamMembers { get; }
 
-    public TeamClient Team { get; init; }
+    public TeamClient Team { get; }
 
-    public TerminalClient Terminal { get; init; }
+    public TerminalClient Terminal { get; }
 
-    public VendorsClient Vendors { get; init; }
+    public VendorsClient Vendors { get; }
 
-    public CashDrawersClient CashDrawers { get; init; }
+    public CashDrawersClient CashDrawers { get; }
 
-    public LaborClient Labor { get; init; }
+    public LaborClient Labor { get; }
 
-    public WebhooksClient Webhooks { get; init; }
+    public WebhooksClient Webhooks { get; }
 
     private static string GetFromEnvironmentOrThrow(string env, string message)
     {

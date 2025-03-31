@@ -73,13 +73,12 @@ public class UpdateTest : BaseMockServerTest
                     Name = "Updated Example Webhook Subscription",
                     Enabled = false,
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<UpdateWebhookSubscriptionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

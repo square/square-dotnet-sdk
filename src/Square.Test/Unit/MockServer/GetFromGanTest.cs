@@ -63,13 +63,12 @@ public class GetFromGanTest : BaseMockServerTest
             );
 
         var response = await Client.GiftCards.GetFromGanAsync(
-            new GetGiftCardFromGanRequest { Gan = "7783320001001635" },
-            RequestOptions
+            new GetGiftCardFromGanRequest { Gan = "7783320001001635" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetGiftCardFromGanResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

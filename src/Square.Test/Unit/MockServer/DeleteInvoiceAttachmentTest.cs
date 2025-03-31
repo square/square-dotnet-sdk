@@ -44,13 +44,12 @@ public class DeleteInvoiceAttachmentTest : BaseMockServerTest
             {
                 InvoiceId = "invoice_id",
                 AttachmentId = "attachment_id",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<DeleteInvoiceAttachmentResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

@@ -90,8 +90,7 @@ public class BulkRetrieveTeamMemberBookingProfilesTest : BaseMockServerTest
             new BulkRetrieveTeamMemberBookingProfilesRequest
             {
                 TeamMemberIds = new List<string>() { "team_member_ids" },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
@@ -100,7 +99,7 @@ public class BulkRetrieveTeamMemberBookingProfilesTest : BaseMockServerTest
                         mockResponse
                     )
                 )
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

@@ -45,11 +45,11 @@ public class RetrieveTokenStatusTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.OAuth.RetrieveTokenStatusAsync(RequestOptions);
+        var response = await Client.OAuth.RetrieveTokenStatusAsync();
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<RetrieveTokenStatusResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

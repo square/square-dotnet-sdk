@@ -66,11 +66,11 @@ public class GetBusinessProfileTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Bookings.GetBusinessProfileAsync(RequestOptions);
+        var response = await Client.Bookings.GetBusinessProfileAsync();
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetBusinessBookingProfileResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

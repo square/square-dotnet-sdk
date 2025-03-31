@@ -72,13 +72,12 @@ public class RetrieveLocationSettingsTest : BaseMockServerTest
             );
 
         var response = await Client.Checkout.RetrieveLocationSettingsAsync(
-            new RetrieveLocationSettingsRequest { LocationId = "location_id" },
-            RequestOptions
+            new RetrieveLocationSettingsRequest { LocationId = "location_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<RetrieveLocationSettingsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

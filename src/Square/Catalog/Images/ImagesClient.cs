@@ -29,7 +29,7 @@ public partial class ImagesClient
         CancellationToken cancellationToken = default
     )
     {
-        var multipartFormRequest_ = new RawClient.MultipartFormRequest
+        var multipartFormRequest_ = new MultipartFormRequest
         {
             BaseUrl = _client.Options.BaseUrl,
             Method = HttpMethod.Post,
@@ -80,7 +80,7 @@ public partial class ImagesClient
         CancellationToken cancellationToken = default
     )
     {
-        var multipartFormRequest_ = new RawClient.MultipartFormRequest
+        var multipartFormRequest_ = new MultipartFormRequest
         {
             BaseUrl = _client.Options.BaseUrl,
             Method = HttpMethod.Put,

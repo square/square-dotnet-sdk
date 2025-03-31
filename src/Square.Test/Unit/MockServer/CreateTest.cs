@@ -81,13 +81,12 @@ public class CreateTest : BaseMockServerTest
                     NotificationUrl = "https://example-webhook-url.com",
                     ApiVersion = "2021-12-15",
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<CreateWebhookSubscriptionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

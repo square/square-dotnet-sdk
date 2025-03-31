@@ -44,13 +44,12 @@ public class CaptureTest : BaseMockServerTest
             {
                 LocationId = "location_id",
                 TransactionId = "transaction_id",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<CaptureTransactionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

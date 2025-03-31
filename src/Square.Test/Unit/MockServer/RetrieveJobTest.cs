@@ -48,13 +48,11 @@ public class RetrieveJobTest : BaseMockServerTest
             );
 
         var response = await Client.Team.RetrieveJobAsync(
-            new RetrieveJobRequest { JobId = "job_id" },
-            RequestOptions
+            new RetrieveJobRequest { JobId = "job_id" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<RetrieveJobResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<RetrieveJobResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

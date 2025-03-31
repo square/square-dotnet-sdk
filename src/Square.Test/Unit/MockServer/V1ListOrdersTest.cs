@@ -109,13 +109,11 @@ public class V1ListOrdersTest : BaseMockServerTest
             );
 
         var response = await Client.V1Transactions.V1ListOrdersAsync(
-            new V1ListOrdersRequest { LocationId = "location_id" },
-            RequestOptions
+            new V1ListOrdersRequest { LocationId = "location_id" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<IEnumerable<V1Order>>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<IEnumerable<V1Order>>(mockResponse)).UsingDefaults()
         );
     }
 }

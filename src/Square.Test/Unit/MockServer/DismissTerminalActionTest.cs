@@ -118,13 +118,12 @@ public class DismissTerminalActionTest : BaseMockServerTest
             );
 
         var response = await Client.Terminal.DismissTerminalActionAsync(
-            new DismissTerminalActionRequest { ActionId = "action_id" },
-            RequestOptions
+            new DismissTerminalActionRequest { ActionId = "action_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<DismissTerminalActionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

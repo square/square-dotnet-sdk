@@ -95,13 +95,12 @@ public class PauseTest : BaseMockServerTest
             );
 
         var response = await Client.Subscriptions.PauseAsync(
-            new PauseSubscriptionRequest { SubscriptionId = "subscription_id" },
-            RequestOptions
+            new PauseSubscriptionRequest { SubscriptionId = "subscription_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<PauseSubscriptionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

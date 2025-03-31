@@ -77,13 +77,12 @@ public class DeleteActionTest : BaseMockServerTest
             {
                 SubscriptionId = "subscription_id",
                 ActionId = "action_id",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<DeleteSubscriptionActionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

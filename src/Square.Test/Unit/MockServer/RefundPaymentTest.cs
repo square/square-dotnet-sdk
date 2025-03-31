@@ -99,13 +99,11 @@ public class RefundPaymentTest : BaseMockServerTest
                 AppFeeMoney = new Money { Amount = 10, Currency = Currency.Usd },
                 PaymentId = "R2B3Z8WMVt3EAmzYWLZvz7Y69EbZY",
                 Reason = "Example",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<RefundPaymentResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<RefundPaymentResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

@@ -40,13 +40,12 @@ public class AddTest : BaseMockServerTest
             );
 
         var response = await Client.Customers.Groups.AddAsync(
-            new AddGroupsRequest { CustomerId = "customer_id", GroupId = "group_id" },
-            RequestOptions
+            new AddGroupsRequest { CustomerId = "customer_id", GroupId = "group_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<AddGroupToCustomerResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

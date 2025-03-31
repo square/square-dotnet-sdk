@@ -89,13 +89,12 @@ public class UpdateLocationSettingsTest : BaseMockServerTest
             {
                 LocationId = "location_id",
                 LocationSettings = new CheckoutLocationSettings(),
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<UpdateLocationSettingsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

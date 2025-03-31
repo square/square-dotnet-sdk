@@ -127,13 +127,12 @@ public class BulkUpdateCustomersTest : BaseMockServerTest
                         }
                     },
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<BulkUpdateCustomersResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

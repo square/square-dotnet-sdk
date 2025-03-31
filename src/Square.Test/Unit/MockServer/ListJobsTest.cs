@@ -58,11 +58,10 @@ public class ListJobsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Team.ListJobsAsync(new ListJobsRequest(), RequestOptions);
+        var response = await Client.Team.ListJobsAsync(new ListJobsRequest());
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<ListJobsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<ListJobsResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

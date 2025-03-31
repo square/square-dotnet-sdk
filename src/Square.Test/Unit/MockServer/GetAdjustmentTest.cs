@@ -73,13 +73,12 @@ public class GetAdjustmentTest : BaseMockServerTest
             );
 
         var response = await Client.Inventory.GetAdjustmentAsync(
-            new GetAdjustmentInventoryRequest { AdjustmentId = "adjustment_id" },
-            RequestOptions
+            new GetAdjustmentInventoryRequest { AdjustmentId = "adjustment_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetInventoryAdjustmentResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }
