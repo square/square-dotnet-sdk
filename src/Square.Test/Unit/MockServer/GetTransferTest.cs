@@ -59,13 +59,12 @@ public class GetTransferTest : BaseMockServerTest
             );
 
         var response = await Client.Inventory.GetTransferAsync(
-            new GetTransferInventoryRequest { TransferId = "transfer_id" },
-            RequestOptions
+            new GetTransferInventoryRequest { TransferId = "transfer_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetInventoryTransferResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

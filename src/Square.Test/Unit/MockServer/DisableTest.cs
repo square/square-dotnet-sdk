@@ -77,13 +77,11 @@ public class DisableTest : BaseMockServerTest
             );
 
         var response = await Client.Cards.DisableAsync(
-            new DisableCardsRequest { CardId = "card_id" },
-            RequestOptions
+            new DisableCardsRequest { CardId = "card_id" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<DisableCardResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<DisableCardResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

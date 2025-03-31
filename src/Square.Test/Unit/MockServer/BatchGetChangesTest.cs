@@ -91,8 +91,7 @@ public class BatchGetChangesTest : BaseMockServerTest
                 States = new List<InventoryState>() { InventoryState.InStock },
                 UpdatedAfter = "2016-11-01T00:00:00.000Z",
                 UpdatedBefore = "2016-12-01T00:00:00.000Z",
-            },
-            RequestOptions
+            }
         );
         await foreach (var item in pager)
         {

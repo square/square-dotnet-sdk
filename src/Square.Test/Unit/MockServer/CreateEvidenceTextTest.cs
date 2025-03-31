@@ -68,13 +68,12 @@ public class CreateEvidenceTextTest : BaseMockServerTest
                 IdempotencyKey = "ed3ee3933d946f1514d505d173c82648",
                 EvidenceType = DisputeEvidenceType.TrackingNumber,
                 EvidenceText = "1Z8888888888888888",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<CreateDisputeEvidenceTextResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

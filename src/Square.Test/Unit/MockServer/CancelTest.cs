@@ -59,13 +59,12 @@ public class CancelTest : BaseMockServerTest
             );
 
         var response = await Client.Terminal.Refunds.CancelAsync(
-            new CancelRefundsRequest { TerminalRefundId = "terminal_refund_id" },
-            RequestOptions
+            new CancelRefundsRequest { TerminalRefundId = "terminal_refund_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<CancelTerminalRefundResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

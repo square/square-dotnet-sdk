@@ -68,8 +68,7 @@ public class ChangesTest : BaseMockServerTest
             );
 
         var pager = await Client.Inventory.ChangesAsync(
-            new ChangesInventoryRequest { CatalogObjectId = "catalog_object_id" },
-            RequestOptions
+            new ChangesInventoryRequest { CatalogObjectId = "catalog_object_id" }
         );
         await foreach (var item in pager)
         {

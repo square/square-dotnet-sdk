@@ -92,13 +92,12 @@ public class DeprecatedBatchGetChangesTest : BaseMockServerTest
                 States = new List<InventoryState>() { InventoryState.InStock },
                 UpdatedAfter = "2016-11-01T00:00:00.000Z",
                 UpdatedBefore = "2016-12-01T00:00:00.000Z",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<BatchGetInventoryChangesResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

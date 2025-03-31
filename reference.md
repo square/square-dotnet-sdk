@@ -18302,3 +18302,1208 @@ await client.TeamMembers.WageSetting.UpdateAsync(
 
 </dd>
 </dl>
+</details>
+
+## Terminal Actions
+<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">CreateAsync</a>(CreateTerminalActionRequest { ... }) -> CreateTerminalActionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a Terminal action request and sends it to the specified device.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Actions.CreateAsync(
+    new CreateTerminalActionRequest
+    {
+        IdempotencyKey = "thahn-70e75c10-47f7-4ab6-88cc-aaa4076d065e",
+        Action = new TerminalAction
+        {
+            DeviceId = "{{DEVICE_ID}}",
+            DeadlineDuration = "PT5M",
+            Type = TerminalActionActionType.SaveCard,
+            SaveCardOptions = new SaveCardOptions
+            {
+                CustomerId = "{{CUSTOMER_ID}}",
+                ReferenceId = "user-id-1",
+            },
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateTerminalActionRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">SearchAsync</a>(SearchTerminalActionsRequest { ... }) -> SearchTerminalActionsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a filtered list of Terminal action requests created by the account making the request. Terminal action requests are available for 30 days.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Actions.SearchAsync(
+    new SearchTerminalActionsRequest
+    {
+        Query = new TerminalActionQuery
+        {
+            Filter = new TerminalActionQueryFilter
+            {
+                CreatedAt = new TimeRange { StartAt = "2022-04-01T00:00:00.000Z" },
+            },
+            Sort = new TerminalActionQuerySort { SortOrder = SortOrder.Desc },
+        },
+        Limit = 2,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `SearchTerminalActionsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">GetAsync</a>(GetActionsRequest { ... }) -> GetTerminalActionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a Terminal action request by `action_id`. Terminal action requests are available for 30 days.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Actions.GetAsync(new GetActionsRequest { ActionId = "action_id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `GetActionsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">CancelAsync</a>(CancelActionsRequest { ... }) -> CancelTerminalActionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancels a Terminal action request if the status of the request permits it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Actions.CancelAsync(new CancelActionsRequest { ActionId = "action_id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CancelActionsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Terminal Checkouts
+<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">CreateAsync</a>(CreateTerminalCheckoutRequest { ... }) -> CreateTerminalCheckoutResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a Terminal checkout request and sends it to the specified device to take a payment
+for the requested amount.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Checkouts.CreateAsync(
+    new CreateTerminalCheckoutRequest
+    {
+        IdempotencyKey = "28a0c3bc-7839-11ea-bc55-0242ac130003",
+        Checkout = new TerminalCheckout
+        {
+            AmountMoney = new Money { Amount = 2610, Currency = Currency.Usd },
+            ReferenceId = "id11572",
+            Note = "A brief note",
+            DeviceOptions = new DeviceCheckoutOptions
+            {
+                DeviceId = "dbb5d83a-7838-11ea-bc55-0242ac130003",
+            },
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateTerminalCheckoutRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">SearchAsync</a>(SearchTerminalCheckoutsRequest { ... }) -> SearchTerminalCheckoutsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a filtered list of Terminal checkout requests created by the application making the request. Only Terminal checkout requests created for the merchant scoped to the OAuth token are returned. Terminal checkout requests are available for 30 days.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Checkouts.SearchAsync(
+    new SearchTerminalCheckoutsRequest
+    {
+        Query = new TerminalCheckoutQuery
+        {
+            Filter = new TerminalCheckoutQueryFilter { Status = "COMPLETED" },
+        },
+        Limit = 2,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `SearchTerminalCheckoutsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">GetAsync</a>(GetCheckoutsRequest { ... }) -> GetTerminalCheckoutResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a Terminal checkout request by `checkout_id`. Terminal checkout requests are available for 30 days.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Checkouts.GetAsync(new GetCheckoutsRequest { CheckoutId = "checkout_id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `GetCheckoutsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">CancelAsync</a>(CancelCheckoutsRequest { ... }) -> CancelTerminalCheckoutResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancels a Terminal checkout request if the status of the request permits it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Checkouts.CancelAsync(
+    new CancelCheckoutsRequest { CheckoutId = "checkout_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CancelCheckoutsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Terminal Refunds
+<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">CreateAsync</a>(CreateTerminalRefundRequest { ... }) -> CreateTerminalRefundResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a request to refund an Interac payment completed on a Square Terminal. Refunds for Interac payments on a Square Terminal are supported only for Interac debit cards in Canada. Other refunds for Terminal payments should use the Refunds API. For more information, see [Refunds API](api:Refunds).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Refunds.CreateAsync(
+    new CreateTerminalRefundRequest
+    {
+        IdempotencyKey = "402a640b-b26f-401f-b406-46f839590c04",
+        Refund = new TerminalRefund
+        {
+            PaymentId = "5O5OvgkcNUhl7JBuINflcjKqUzXZY",
+            AmountMoney = new Money { Amount = 111, Currency = Currency.Cad },
+            Reason = "Returning items",
+            DeviceId = "f72dfb8e-4d65-4e56-aade-ec3fb8d33291",
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateTerminalRefundRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">SearchAsync</a>(SearchTerminalRefundsRequest { ... }) -> SearchTerminalRefundsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a filtered list of Interac Terminal refund requests created by the seller making the request. Terminal refund requests are available for 30 days.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Refunds.SearchAsync(
+    new SearchTerminalRefundsRequest
+    {
+        Query = new TerminalRefundQuery
+        {
+            Filter = new TerminalRefundQueryFilter { Status = "COMPLETED" },
+        },
+        Limit = 1,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `SearchTerminalRefundsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">GetAsync</a>(GetRefundsRequest { ... }) -> GetTerminalRefundResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves an Interac Terminal refund object by ID. Terminal refund objects are available for 30 days.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Refunds.GetAsync(
+    new GetRefundsRequest { TerminalRefundId = "terminal_refund_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `GetRefundsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">CancelAsync</a>(CancelRefundsRequest { ... }) -> CancelTerminalRefundResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancels an Interac Terminal refund request by refund request ID if the status of the request permits it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Terminal.Refunds.CancelAsync(
+    new CancelRefundsRequest { TerminalRefundId = "terminal_refund_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CancelRefundsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Webhooks EventTypes
+<details><summary><code>client.Webhooks.EventTypes.<a href="/src/Square/Webhooks/EventTypes/EventTypesClient.cs">ListAsync</a>(ListEventTypesRequest { ... }) -> ListWebhookEventTypesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists all webhook event types that can be subscribed to.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Webhooks.EventTypes.ListAsync(new ListEventTypesRequest());
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListEventTypesRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Webhooks Subscriptions
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">ListAsync</a>(ListSubscriptionsRequest { ... }) -> Pager<WebhookSubscription></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists all webhook subscriptions owned by your application.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Webhooks.Subscriptions.ListAsync(new ListSubscriptionsRequest());
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListSubscriptionsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">CreateAsync</a>(CreateWebhookSubscriptionRequest { ... }) -> CreateWebhookSubscriptionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a webhook subscription.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Webhooks.Subscriptions.CreateAsync(
+    new CreateWebhookSubscriptionRequest
+    {
+        IdempotencyKey = "63f84c6c-2200-4c99-846c-2670a1311fbf",
+        Subscription = new WebhookSubscription
+        {
+            Name = "Example Webhook Subscription",
+            EventTypes = new List<string>() { "payment.created", "payment.updated" },
+            NotificationUrl = "https://example-webhook-url.com",
+            ApiVersion = "2021-12-15",
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateWebhookSubscriptionRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">GetAsync</a>(GetSubscriptionsRequest { ... }) -> GetWebhookSubscriptionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a webhook subscription identified by its ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Webhooks.Subscriptions.GetAsync(
+    new GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `GetSubscriptionsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">UpdateAsync</a>(UpdateWebhookSubscriptionRequest { ... }) -> UpdateWebhookSubscriptionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates a webhook subscription.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Webhooks.Subscriptions.UpdateAsync(
+    new UpdateWebhookSubscriptionRequest
+    {
+        SubscriptionId = "subscription_id",
+        Subscription = new WebhookSubscription
+        {
+            Name = "Updated Example Webhook Subscription",
+            Enabled = false,
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `UpdateWebhookSubscriptionRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">DeleteAsync</a>(DeleteSubscriptionsRequest { ... }) -> DeleteWebhookSubscriptionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a webhook subscription.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Webhooks.Subscriptions.DeleteAsync(
+    new DeleteSubscriptionsRequest { SubscriptionId = "subscription_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `DeleteSubscriptionsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">UpdateSignatureKeyAsync</a>(UpdateWebhookSubscriptionSignatureKeyRequest { ... }) -> UpdateWebhookSubscriptionSignatureKeyResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates a webhook subscription by replacing the existing signature key with a new one.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Webhooks.Subscriptions.UpdateSignatureKeyAsync(
+    new UpdateWebhookSubscriptionSignatureKeyRequest
+    {
+        SubscriptionId = "subscription_id",
+        IdempotencyKey = "ed80ae6b-0654-473b-bbab-a39aee89a60d",
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `UpdateWebhookSubscriptionSignatureKeyRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">TestAsync</a>(TestWebhookSubscriptionRequest { ... }) -> TestWebhookSubscriptionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Tests a webhook subscription by sending a test event to the notification URL.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Webhooks.Subscriptions.TestAsync(
+    new TestWebhookSubscriptionRequest
+    {
+        SubscriptionId = "subscription_id",
+        EventType = "payment.created",
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `TestWebhookSubscriptionRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>

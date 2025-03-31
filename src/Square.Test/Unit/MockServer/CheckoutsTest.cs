@@ -416,13 +416,11 @@ public class CheckoutsTest : BaseMockServerTest
                         AmountMoney = new Money { Amount = 60, Currency = Currency.Usd },
                     },
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<CreateCheckoutResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<CreateCheckoutResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

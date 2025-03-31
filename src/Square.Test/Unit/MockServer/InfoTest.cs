@@ -54,11 +54,10 @@ public class InfoTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Catalog.InfoAsync(RequestOptions);
+        var response = await Client.Catalog.InfoAsync();
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<CatalogInfoResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<CatalogInfoResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

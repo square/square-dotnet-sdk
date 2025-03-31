@@ -56,13 +56,12 @@ public class CalculateTest : BaseMockServerTest
                 ProgramId = "program_id",
                 OrderId = "RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY",
                 LoyaltyAccountId = "79b807d2-d786-46a9-933b-918028d7a8c5",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<CalculateLoyaltyPointsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

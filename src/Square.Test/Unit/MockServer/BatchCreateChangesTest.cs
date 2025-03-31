@@ -100,13 +100,12 @@ public class BatchCreateChangesTest : BaseMockServerTest
                     },
                 },
                 IgnoreUnchangedCounts = true,
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<BatchChangeInventoryResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

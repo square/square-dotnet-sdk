@@ -82,13 +82,12 @@ public class UpdateMerchantSettingsTest : BaseMockServerTest
             );
 
         var response = await Client.Checkout.UpdateMerchantSettingsAsync(
-            new UpdateMerchantSettingsRequest { MerchantSettings = new CheckoutMerchantSettings() },
-            RequestOptions
+            new UpdateMerchantSettingsRequest { MerchantSettings = new CheckoutMerchantSettings() }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<UpdateMerchantSettingsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

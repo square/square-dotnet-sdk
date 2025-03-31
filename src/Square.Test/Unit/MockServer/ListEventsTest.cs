@@ -108,8 +108,7 @@ public class ListEventsTest : BaseMockServerTest
             );
 
         var pager = await Client.CashDrawers.Shifts.ListEventsAsync(
-            new ListEventsShiftsRequest { ShiftId = "shift_id", LocationId = "location_id" },
-            RequestOptions
+            new ListEventsShiftsRequest { ShiftId = "shift_id", LocationId = "location_id" }
         );
         await foreach (var item in pager)
         {

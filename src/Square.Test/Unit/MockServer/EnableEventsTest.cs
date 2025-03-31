@@ -35,11 +35,10 @@ public class EnableEventsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Events.EnableEventsAsync(RequestOptions);
+        var response = await Client.Events.EnableEventsAsync();
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<EnableEventsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<EnableEventsResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

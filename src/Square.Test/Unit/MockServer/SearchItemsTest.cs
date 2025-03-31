@@ -148,13 +148,12 @@ public class SearchItemsTest : BaseMockServerTest
                         CustomAttributeDefinitionId = "VARIETAL_DEFINITION_ID",
                     },
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<SearchCatalogItemsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

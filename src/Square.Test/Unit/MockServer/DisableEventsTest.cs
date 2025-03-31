@@ -35,11 +35,10 @@ public class DisableEventsTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Events.DisableEventsAsync(RequestOptions);
+        var response = await Client.Events.DisableEventsAsync();
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<DisableEventsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<DisableEventsResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

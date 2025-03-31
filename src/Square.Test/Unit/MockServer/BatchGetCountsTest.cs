@@ -69,8 +69,7 @@ public class BatchGetCountsTest : BaseMockServerTest
                 CatalogObjectIds = new List<string>() { "W62UWFY35CWMYGVWK6TWJDNI" },
                 LocationIds = new List<string>() { "59TNP9SA8VGDA" },
                 UpdatedAfter = "2016-11-16T00:00:00.000Z",
-            },
-            RequestOptions
+            }
         );
         await foreach (var item in pager)
         {

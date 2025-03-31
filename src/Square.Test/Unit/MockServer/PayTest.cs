@@ -272,13 +272,11 @@ public class PayTest : BaseMockServerTest
                     "EnZdNAlWCmfh6Mt5FMNST1o7taB",
                     "0LRiVlbXVwe8ozu4KbZxd12mvaB",
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<PayOrderResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<PayOrderResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

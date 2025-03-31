@@ -67,13 +67,11 @@ public class ObtainTokenTest : BaseMockServerTest
                 ClientSecret = "sq0csp-30a-4C_tVOnTh14Piza2BfTPBXyLafLPWSzY1qAjeBfM",
                 Code = "sq0cgb-l0SBqxs4uwxErTVyYOdemg",
                 GrantType = "authorization_code",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<ObtainTokenResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<ObtainTokenResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

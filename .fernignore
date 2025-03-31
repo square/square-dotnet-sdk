@@ -1,5 +1,6 @@
 # Specify files that shouldn't be modified by Fern
 .github/workflows/ci.yml
+.github/workflows/legacy.yml
 .github/ISSUE_TEMPLATE
 .github/labeler.yml
 .github/pull_request_template.md

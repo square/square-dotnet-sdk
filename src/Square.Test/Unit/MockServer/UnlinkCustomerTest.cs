@@ -67,13 +67,12 @@ public class UnlinkCustomerTest : BaseMockServerTest
             {
                 GiftCardId = "gift_card_id",
                 CustomerId = "GKY0FZ3V717AH8Q2D821PNT2ZW",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<UnlinkCustomerFromGiftCardResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

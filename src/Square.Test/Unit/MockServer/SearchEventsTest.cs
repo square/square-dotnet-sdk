@@ -181,13 +181,12 @@ public class SearchEventsTest : BaseMockServerTest
                     },
                 },
                 Limit = 30,
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<SearchLoyaltyEventsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

@@ -49,13 +49,11 @@ public class RegisterDomainTest : BaseMockServerTest
             );
 
         var response = await Client.ApplePay.RegisterDomainAsync(
-            new RegisterDomainRequest { DomainName = "example.com" },
-            RequestOptions
+            new RegisterDomainRequest { DomainName = "example.com" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<RegisterDomainResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<RegisterDomainResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

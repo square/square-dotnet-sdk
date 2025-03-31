@@ -40,13 +40,12 @@ public class DeleteTest : BaseMockServerTest
             );
 
         var response = await Client.Webhooks.Subscriptions.DeleteAsync(
-            new DeleteSubscriptionsRequest { SubscriptionId = "subscription_id" },
-            RequestOptions
+            new DeleteSubscriptionsRequest { SubscriptionId = "subscription_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<DeleteWebhookSubscriptionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

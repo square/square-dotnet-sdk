@@ -56,13 +56,11 @@ public class BulkSwapPlanTest : BaseMockServerTest
                 NewPlanVariationId = "FQ7CDXXWSLUJRPM3GFJSJGZ7",
                 OldPlanVariationId = "6JHXF3B2CW3YKHDV4XEM674H",
                 LocationId = "S8GWD5R9QB376",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<BulkSwapPlanResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<BulkSwapPlanResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

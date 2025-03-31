@@ -64,13 +64,11 @@ public class CreateJobTest : BaseMockServerTest
             {
                 Job = new Job { Title = "Cashier", IsTipEligible = true },
                 IdempotencyKey = "idempotency-key-0",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<CreateJobResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<CreateJobResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

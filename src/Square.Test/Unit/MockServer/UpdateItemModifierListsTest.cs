@@ -72,13 +72,12 @@ public class UpdateItemModifierListsTest : BaseMockServerTest
                     "2JXOBJIHCWBQ4NZ3RIXQGJA6",
                 },
                 ModifierListsToDisable = new List<string>() { "7WRC16CJZDVLSNDQ35PP6YAD" },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<UpdateItemModifierListsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

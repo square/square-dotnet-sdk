@@ -38,7 +38,7 @@ public partial class InvoicesClient
         }
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Get,
@@ -190,7 +190,7 @@ public partial class InvoicesClient
     {
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Post,
@@ -259,7 +259,7 @@ public partial class InvoicesClient
     {
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Post,
@@ -308,7 +308,7 @@ public partial class InvoicesClient
     {
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Get,
@@ -379,7 +379,7 @@ public partial class InvoicesClient
     {
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Put,
@@ -438,7 +438,7 @@ public partial class InvoicesClient
         }
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Delete,
@@ -491,7 +491,7 @@ public partial class InvoicesClient
         CancellationToken cancellationToken = default
     )
     {
-        var multipartFormRequest_ = new RawClient.MultipartFormRequest
+        var multipartFormRequest_ = new MultipartFormRequest
         {
             BaseUrl = _client.Options.BaseUrl,
             Method = HttpMethod.Post,
@@ -550,7 +550,7 @@ public partial class InvoicesClient
     {
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Delete,
@@ -606,7 +606,7 @@ public partial class InvoicesClient
     {
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Post,
@@ -678,7 +678,7 @@ public partial class InvoicesClient
     {
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Post,

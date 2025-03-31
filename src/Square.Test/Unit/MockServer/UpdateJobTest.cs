@@ -63,13 +63,11 @@ public class UpdateJobTest : BaseMockServerTest
             {
                 JobId = "job_id",
                 Job = new Job { Title = "Cashier 1", IsTipEligible = true },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<UpdateJobResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<UpdateJobResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

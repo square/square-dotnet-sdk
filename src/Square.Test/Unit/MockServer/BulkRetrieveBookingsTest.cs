@@ -118,13 +118,12 @@ public class BulkRetrieveBookingsTest : BaseMockServerTest
             );
 
         var response = await Client.Bookings.BulkRetrieveBookingsAsync(
-            new BulkRetrieveBookingsRequest { BookingIds = new List<string>() { "booking_ids" } },
-            RequestOptions
+            new BulkRetrieveBookingsRequest { BookingIds = new List<string>() { "booking_ids" } }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<BulkRetrieveBookingsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

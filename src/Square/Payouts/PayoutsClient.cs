@@ -57,7 +57,7 @@ public partial class PayoutsClient
         }
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Get,
@@ -116,7 +116,7 @@ public partial class PayoutsClient
         }
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Get,
@@ -209,7 +209,7 @@ public partial class PayoutsClient
     {
         var response = await _client
             .SendRequestAsync(
-                new RawClient.JsonApiRequest
+                new JsonRequest
                 {
                     BaseUrl = _client.Options.BaseUrl,
                     Method = HttpMethod.Get,

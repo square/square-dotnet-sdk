@@ -82,13 +82,12 @@ public class UpsertTest : BaseMockServerTest
                     Value = "42",
                     Version = 1,
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<UpsertOrderCustomAttributeResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

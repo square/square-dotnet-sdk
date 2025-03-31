@@ -50,13 +50,12 @@ public class AuthorizationCodeTest : BaseMockServerTest
             );
 
         var response = await Client.Mobile.AuthorizationCodeAsync(
-            new CreateMobileAuthorizationCodeRequest { LocationId = "YOUR_LOCATION_ID" },
-            RequestOptions
+            new CreateMobileAuthorizationCodeRequest { LocationId = "YOUR_LOCATION_ID" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<CreateMobileAuthorizationCodeResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

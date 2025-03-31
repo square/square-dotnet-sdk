@@ -140,13 +140,12 @@ public class BatchCreateTest : BaseMockServerTest
                         }
                     },
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<BatchCreateVendorsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

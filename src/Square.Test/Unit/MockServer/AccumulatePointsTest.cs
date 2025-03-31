@@ -149,13 +149,12 @@ public class AccumulatePointsTest : BaseMockServerTest
                 },
                 IdempotencyKey = "58b90739-c3e8-4b11-85f7-e636d48d72cb",
                 LocationId = "P034NEENMD09F",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<AccumulateLoyaltyPointsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

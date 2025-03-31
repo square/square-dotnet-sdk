@@ -44,13 +44,11 @@ public class VoidTest : BaseMockServerTest
             {
                 LocationId = "location_id",
                 TransactionId = "transaction_id",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<VoidTransactionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<VoidTransactionResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

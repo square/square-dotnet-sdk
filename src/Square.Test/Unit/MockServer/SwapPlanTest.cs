@@ -118,13 +118,11 @@ public class SwapPlanTest : BaseMockServerTest
                         OrderTemplateId = "uhhnjH9osVv3shUADwaC0b3hNxQZY",
                     },
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<SwapPlanResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<SwapPlanResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

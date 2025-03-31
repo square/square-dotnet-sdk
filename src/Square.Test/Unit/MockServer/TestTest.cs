@@ -59,13 +59,12 @@ public class TestTest : BaseMockServerTest
             {
                 SubscriptionId = "subscription_id",
                 EventType = "payment.created",
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<TestWebhookSubscriptionResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

@@ -54,10 +54,7 @@ public class ListTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var pager = await Client.Webhooks.Subscriptions.ListAsync(
-            new ListSubscriptionsRequest(),
-            RequestOptions
-        );
+        var pager = await Client.Webhooks.Subscriptions.ListAsync(new ListSubscriptionsRequest());
         await foreach (var item in pager)
         {
             Assert.That(item, Is.Not.Null);

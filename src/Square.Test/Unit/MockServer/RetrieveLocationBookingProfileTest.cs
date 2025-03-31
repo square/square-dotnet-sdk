@@ -45,13 +45,12 @@ public class RetrieveLocationBookingProfileTest : BaseMockServerTest
             );
 
         var response = await Client.Bookings.RetrieveLocationBookingProfileAsync(
-            new RetrieveLocationBookingProfileRequest { LocationId = "location_id" },
-            RequestOptions
+            new RetrieveLocationBookingProfileRequest { LocationId = "location_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<RetrieveLocationBookingProfileResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

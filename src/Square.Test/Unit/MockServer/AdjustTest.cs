@@ -108,13 +108,12 @@ public class AdjustTest : BaseMockServerTest
                     Points = 10,
                     Reason = "Complimentary points",
                 },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<AdjustLoyaltyPointsResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

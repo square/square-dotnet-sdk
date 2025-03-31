@@ -128,12 +128,11 @@ public class V1RetrieveOrderTest : BaseMockServerTest
             );
 
         var response = await Client.V1Transactions.V1RetrieveOrderAsync(
-            new V1RetrieveOrderRequest { LocationId = "location_id", OrderId = "order_id" },
-            RequestOptions
+            new V1RetrieveOrderRequest { LocationId = "location_id", OrderId = "order_id" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<V1Order>(mockResponse)).UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<V1Order>(mockResponse)).UsingDefaults()
         );
     }
 }

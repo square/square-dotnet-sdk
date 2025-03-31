@@ -67,13 +67,11 @@ public class UpdateItemTaxesTest : BaseMockServerTest
                 },
                 TaxesToEnable = new List<string>() { "4WRCNHCJZDVLSNDQ35PP6YAD" },
                 TaxesToDisable = new List<string>() { "AQCEGCEBBQONINDOHRGZISEX" },
-            },
-            RequestOptions
+            }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<UpdateItemTaxesResponse>(mockResponse))
-                .UsingPropertiesComparer()
+            Is.EqualTo(JsonUtils.Deserialize<UpdateItemTaxesResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

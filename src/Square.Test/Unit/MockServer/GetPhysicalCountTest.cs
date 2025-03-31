@@ -58,13 +58,12 @@ public class GetPhysicalCountTest : BaseMockServerTest
             );
 
         var response = await Client.Inventory.GetPhysicalCountAsync(
-            new GetPhysicalCountInventoryRequest { PhysicalCountId = "physical_count_id" },
-            RequestOptions
+            new GetPhysicalCountInventoryRequest { PhysicalCountId = "physical_count_id" }
         );
         Assert.That(
             response,
             Is.EqualTo(JsonUtils.Deserialize<GetInventoryPhysicalCountResponse>(mockResponse))
-                .UsingPropertiesComparer()
+                .UsingDefaults()
         );
     }
 }

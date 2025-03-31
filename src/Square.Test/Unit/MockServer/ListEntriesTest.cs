@@ -78,8 +78,7 @@ public class ListEntriesTest : BaseMockServerTest
             );
 
         var pager = await Client.Payouts.ListEntriesAsync(
-            new ListEntriesPayoutsRequest { PayoutId = "payout_id" },
-            RequestOptions
+            new ListEntriesPayoutsRequest { PayoutId = "payout_id" }
         );
         await foreach (var item in pager)
         {
