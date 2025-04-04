@@ -264,6 +264,24 @@ public record CatalogObject
     }
 
     /// <summary>
+    /// Create an instance of CatalogObject with <see cref="CatalogObject.SubscriptionPlanVariation"/>.
+    /// </summary>
+    public CatalogObject(CatalogObject.SubscriptionPlanVariation value)
+    {
+        Type = "SUBSCRIPTION_PLAN_VARIATION";
+        Value = value.Value;
+    }
+
+    /// <summary>
+    /// Create an instance of CatalogObject with <see cref="CatalogObject.AvailabilityPeriod"/>.
+    /// </summary>
+    public CatalogObject(CatalogObject.AvailabilityPeriod value)
+    {
+        Type = "AVAILABILITY_PERIOD";
+        Value = value.Value;
+    }
+
+    /// <summary>
     /// Discriminant value
     /// </summary>
     [JsonPropertyName("type")]
@@ -403,6 +421,16 @@ public record CatalogObject
     /// Returns true if <see cref="Type"/> is "SUBSCRIPTION_PRODUCT"
     /// </summary>
     public bool IsSubscriptionProduct => Type == "SUBSCRIPTION_PRODUCT";
+
+    /// <summary>
+    /// Returns true if <see cref="Type"/> is "SUBSCRIPTION_PLAN_VARIATION"
+    /// </summary>
+    public bool IsSubscriptionPlanVariation => Type == "SUBSCRIPTION_PLAN_VARIATION";
+
+    /// <summary>
+    /// Returns true if <see cref="Type"/> is "AVAILABILITY_PERIOD"
+    /// </summary>
+    public bool IsAvailabilityPeriod => Type == "AVAILABILITY_PERIOD";
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectItem"/> if <see cref="Type"/> is 'ITEM', otherwise throws an exception.
@@ -638,6 +666,24 @@ public record CatalogObject
             ? (Square.CatalogObjectSubscriptionProduct)Value!
             : throw new Exception("CatalogObject.Type is not 'SUBSCRIPTION_PRODUCT'");
 
+    /// <summary>
+    /// Returns the value as a <see cref="Square.CatalogObjectSubscriptionPlanVariation"/> if <see cref="Type"/> is 'SUBSCRIPTION_PLAN_VARIATION', otherwise throws an exception.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'SUBSCRIPTION_PLAN_VARIATION'.</exception>
+    public Square.CatalogObjectSubscriptionPlanVariation AsSubscriptionPlanVariation() =>
+        IsSubscriptionPlanVariation
+            ? (Square.CatalogObjectSubscriptionPlanVariation)Value!
+            : throw new Exception("CatalogObject.Type is not 'SUBSCRIPTION_PLAN_VARIATION'");
+
+    /// <summary>
+    /// Returns the value as a <see cref="Square.CatalogObjectAvailabilityPeriod"/> if <see cref="Type"/> is 'AVAILABILITY_PERIOD', otherwise throws an exception.
+    /// </summary>
+    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'AVAILABILITY_PERIOD'.</exception>
+    public Square.CatalogObjectAvailabilityPeriod AsAvailabilityPeriod() =>
+        IsAvailabilityPeriod
+            ? (Square.CatalogObjectAvailabilityPeriod)Value!
+            : throw new Exception("CatalogObject.Type is not 'AVAILABILITY_PERIOD'");
+
     public T Match<T>(
         Func<Square.CatalogObjectItem, T> onItem,
         Func<Square.CatalogObjectImage, T> onImage,
@@ -665,6 +711,8 @@ public record CatalogObject
         Func<Square.CatalogObjectCheckoutLink, T> onCheckoutLink,
         Func<Square.CatalogObjectAddress, T> onAddress,
         Func<Square.CatalogObjectSubscriptionProduct, T> onSubscriptionProduct,
+        Func<Square.CatalogObjectSubscriptionPlanVariation, T> onSubscriptionPlanVariation,
+        Func<Square.CatalogObjectAvailabilityPeriod, T> onAvailabilityPeriod,
         Func<string, object?, T> onUnknown_
     )
     {
@@ -698,6 +746,10 @@ public record CatalogObject
             "CHECKOUT_LINK" => onCheckoutLink(AsCheckoutLink()),
             "ADDRESS" => onAddress(AsAddress()),
             "SUBSCRIPTION_PRODUCT" => onSubscriptionProduct(AsSubscriptionProduct()),
+            "SUBSCRIPTION_PLAN_VARIATION" => onSubscriptionPlanVariation(
+                AsSubscriptionPlanVariation()
+            ),
+            "AVAILABILITY_PERIOD" => onAvailabilityPeriod(AsAvailabilityPeriod()),
             _ => onUnknown_(Type, Value),
         };
     }
@@ -729,6 +781,8 @@ public record CatalogObject
         Action<Square.CatalogObjectCheckoutLink> onCheckoutLink,
         Action<Square.CatalogObjectAddress> onAddress,
         Action<Square.CatalogObjectSubscriptionProduct> onSubscriptionProduct,
+        Action<Square.CatalogObjectSubscriptionPlanVariation> onSubscriptionPlanVariation,
+        Action<Square.CatalogObjectAvailabilityPeriod> onAvailabilityPeriod,
         Action<string, object?> onUnknown_
     )
     {
@@ -811,6 +865,12 @@ public record CatalogObject
                 break;
             case "SUBSCRIPTION_PRODUCT":
                 onSubscriptionProduct(AsSubscriptionProduct());
+                break;
+            case "SUBSCRIPTION_PLAN_VARIATION":
+                onSubscriptionPlanVariation(AsSubscriptionPlanVariation());
+                break;
+            case "AVAILABILITY_PERIOD":
+                onAvailabilityPeriod(AsAvailabilityPeriod());
                 break;
             default:
                 onUnknown_(Type, Value);
@@ -1184,6 +1244,36 @@ public record CatalogObject
         return false;
     }
 
+    /// <summary>
+    /// Attempts to cast the value to a <see cref="Square.CatalogObjectSubscriptionPlanVariation"/> and returns true if successful.
+    /// </summary>
+    public bool TryAsSubscriptionPlanVariation(
+        out Square.CatalogObjectSubscriptionPlanVariation? value
+    )
+    {
+        if (Type == "SUBSCRIPTION_PLAN_VARIATION")
+        {
+            value = (Square.CatalogObjectSubscriptionPlanVariation)Value!;
+            return true;
+        }
+        value = null;
+        return false;
+    }
+
+    /// <summary>
+    /// Attempts to cast the value to a <see cref="Square.CatalogObjectAvailabilityPeriod"/> and returns true if successful.
+    /// </summary>
+    public bool TryAsAvailabilityPeriod(out Square.CatalogObjectAvailabilityPeriod? value)
+    {
+        if (Type == "AVAILABILITY_PERIOD")
+        {
+            value = (Square.CatalogObjectAvailabilityPeriod)Value!;
+            return true;
+        }
+        value = null;
+        return false;
+    }
+
     public override string ToString() => JsonUtils.Serialize(this);
 
     public static implicit operator CatalogObject(CatalogObject.Item value) => new(value);
@@ -1241,6 +1331,12 @@ public record CatalogObject
     public static implicit operator CatalogObject(CatalogObject.Address value) => new(value);
 
     public static implicit operator CatalogObject(CatalogObject.SubscriptionProduct value) =>
+        new(value);
+
+    public static implicit operator CatalogObject(CatalogObject.SubscriptionPlanVariation value) =>
+        new(value);
+
+    public static implicit operator CatalogObject(CatalogObject.AvailabilityPeriod value) =>
         new(value);
 
     internal sealed class JsonConverter : JsonConverter<CatalogObject>
@@ -1379,6 +1475,17 @@ public record CatalogObject
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectSubscriptionProduct"
                     ),
+                "SUBSCRIPTION_PLAN_VARIATION" =>
+                    json.Deserialize<Square.CatalogObjectSubscriptionPlanVariation>(options)
+                        ?? throw new JsonException(
+                            "Failed to deserialize Square.CatalogObjectSubscriptionPlanVariation"
+                        ),
+                "AVAILABILITY_PERIOD" => json.Deserialize<Square.CatalogObjectAvailabilityPeriod>(
+                    options
+                )
+                    ?? throw new JsonException(
+                        "Failed to deserialize Square.CatalogObjectAvailabilityPeriod"
+                    ),
                 _ => json.Deserialize<object?>(options),
             };
             return new CatalogObject(discriminator, value);
@@ -1425,6 +1532,11 @@ public record CatalogObject
                     "CHECKOUT_LINK" => JsonSerializer.SerializeToNode(value.Value, options),
                     "ADDRESS" => JsonSerializer.SerializeToNode(value.Value, options),
                     "SUBSCRIPTION_PRODUCT" => JsonSerializer.SerializeToNode(value.Value, options),
+                    "SUBSCRIPTION_PLAN_VARIATION" => JsonSerializer.SerializeToNode(
+                        value.Value,
+                        options
+                    ),
+                    "AVAILABILITY_PERIOD" => JsonSerializer.SerializeToNode(value.Value, options),
                     _ => JsonSerializer.SerializeToNode(value.Value, options),
                 } ?? new JsonObject();
             json["type"] = value.Type;
@@ -1894,6 +2006,44 @@ public record CatalogObject
 
         public static implicit operator SubscriptionProduct(
             Square.CatalogObjectSubscriptionProduct value
+        ) => new(value);
+    }
+
+    /// <summary>
+    /// Discriminated union type for SUBSCRIPTION_PLAN_VARIATION
+    /// </summary>
+    public struct SubscriptionPlanVariation
+    {
+        public SubscriptionPlanVariation(Square.CatalogObjectSubscriptionPlanVariation value)
+        {
+            Value = value;
+        }
+
+        internal Square.CatalogObjectSubscriptionPlanVariation Value { get; set; }
+
+        public override string ToString() => Value.ToString();
+
+        public static implicit operator SubscriptionPlanVariation(
+            Square.CatalogObjectSubscriptionPlanVariation value
+        ) => new(value);
+    }
+
+    /// <summary>
+    /// Discriminated union type for AVAILABILITY_PERIOD
+    /// </summary>
+    public struct AvailabilityPeriod
+    {
+        public AvailabilityPeriod(Square.CatalogObjectAvailabilityPeriod value)
+        {
+            Value = value;
+        }
+
+        internal Square.CatalogObjectAvailabilityPeriod Value { get; set; }
+
+        public override string ToString() => Value.ToString();
+
+        public static implicit operator AvailabilityPeriod(
+            Square.CatalogObjectAvailabilityPeriod value
         ) => new(value);
     }
 }
