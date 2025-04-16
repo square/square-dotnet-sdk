@@ -64,7 +64,7 @@ public class PublishTest : BaseMockServerTest
                 "title": "Event Planning Services",
                 "description": "We appreciate your business!",
                 "scheduled_at": "2030-01-13T10:00:00.000Z",
-                "public_url": "https://squareup.com/pay-invoice/inv:0-ChCHu2mZEabLeeHahQnXDjZQECY",
+                "public_url": "https://squareup.com/pay-invoice/invtmp:5e22a2c2-47c1-46d6-b061-808764dfe2b9",
                 "next_payment_amount_money": {
                   "amount": 1000000,
                   "currency": "UNKNOWN_CURRENCY"
