@@ -11,7 +11,7 @@ public record BatchDeleteCatalogObjectsRequest
     /// CatalogItem will delete its CatalogItemVariation.
     /// </summary>
     [JsonPropertyName("object_ids")]
-    public IEnumerable<string>? ObjectIds { get; set; }
+    public IEnumerable<string> ObjectIds { get; set; } = new List<string>();
 
     /// <inheritdoc />
     public override string ToString()

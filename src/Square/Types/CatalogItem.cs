@@ -109,6 +109,18 @@ public record CatalogItem
     public IEnumerable<CatalogItemOptionForItem>? ItemOptions { get; set; }
 
     /// <summary>
+    /// Deprecated; see go/ecomUriUseCases. A URI pointing to a published e-commerce product page for the Item.
+    /// </summary>
+    [JsonPropertyName("ecom_uri")]
+    public string? EcomUri { get; set; }
+
+    /// <summary>
+    /// Deprecated; see go/ecomUriUseCases. A comma-separated list of encoded URIs pointing to a set of published e-commerce images for the Item.
+    /// </summary>
+    [JsonPropertyName("ecom_image_uris")]
+    public IEnumerable<string>? EcomImageUris { get; set; }
+
+    /// <summary>
     /// The IDs of images associated with this `CatalogItem` instance.
     /// These images will be shown to customers in Square Online Store.
     /// The first image will show up as the icon for this item in POS.
@@ -197,6 +209,12 @@ public record CatalogItem
     /// </summary>
     [JsonPropertyName("reporting_category")]
     public CatalogObjectCategory? ReportingCategory { get; set; }
+
+    /// <summary>
+    /// Indicates whether this item is alcoholic (`true`) or not (`false`).
+    /// </summary>
+    [JsonPropertyName("is_alcoholic")]
+    public bool? IsAlcoholic { get; set; }
 
     /// <summary>
     /// Additional properties received from the response, if any.
