@@ -50,11 +50,11 @@ public partial class SquareClient
             new Dictionary<string, string>()
             {
                 { "Authorization", $"Bearer {token}" },
-                { "Square-Version", "2025-04-16" },
+                { "Square-Version", "2025-05-21" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Square" },
                 { "X-Fern-SDK-Version", Version.Current },
-                { "User-Agent", "Square/41.1.0" },
+                { "User-Agent", "Square/41.2.0" },
             }
         );
         clientOptions ??= new ClientOptions();
@@ -86,6 +86,7 @@ public partial class SquareClient
         GiftCards = new GiftCardsClient(_client);
         Inventory = new InventoryClient(_client);
         Invoices = new InvoicesClient(_client);
+        Labor = new LaborClient(_client);
         Locations = new LocationsClient(_client);
         Loyalty = new LoyaltyClient(_client);
         Merchants = new MerchantsClient(_client);
@@ -102,7 +103,6 @@ public partial class SquareClient
         Terminal = new TerminalClient(_client);
         Vendors = new VendorsClient(_client);
         CashDrawers = new CashDrawersClient(_client);
-        Labor = new LaborClient(_client);
         Webhooks = new WebhooksClient(_client);
     }
 
@@ -138,6 +138,8 @@ public partial class SquareClient
 
     public InvoicesClient Invoices { get; }
 
+    public LaborClient Labor { get; }
+
     public LocationsClient Locations { get; }
 
     public LoyaltyClient Loyalty { get; }
@@ -169,8 +171,6 @@ public partial class SquareClient
     public VendorsClient Vendors { get; }
 
     public CashDrawersClient CashDrawers { get; }
-
-    public LaborClient Labor { get; }
 
     public WebhooksClient Webhooks { get; }
 

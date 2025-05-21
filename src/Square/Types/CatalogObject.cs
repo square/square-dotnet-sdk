@@ -102,33 +102,6 @@ public record CatalogObject
     }
 
     /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.DiningOption"/>.
-    /// </summary>
-    public CatalogObject(CatalogObject.DiningOption value)
-    {
-        Type = "DINING_OPTION";
-        Value = value.Value;
-    }
-
-    /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.TaxExemption"/>.
-    /// </summary>
-    public CatalogObject(CatalogObject.TaxExemption value)
-    {
-        Type = "TAX_EXEMPTION";
-        Value = value.Value;
-    }
-
-    /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.ServiceCharge"/>.
-    /// </summary>
-    public CatalogObject(CatalogObject.ServiceCharge value)
-    {
-        Type = "SERVICE_CHARGE";
-        Value = value.Value;
-    }
-
-    /// <summary>
     /// Create an instance of CatalogObject with <see cref="CatalogObject.PricingRule"/>.
     /// </summary>
     public CatalogObject(CatalogObject.PricingRule value)
@@ -165,11 +138,11 @@ public record CatalogObject
     }
 
     /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.SubscriptionPlan"/>.
+    /// Create an instance of CatalogObject with <see cref="CatalogObject.SubscriptionPlanVariation"/>.
     /// </summary>
-    public CatalogObject(CatalogObject.SubscriptionPlan value)
+    public CatalogObject(CatalogObject.SubscriptionPlanVariation value)
     {
-        Type = "SUBSCRIPTION_PLAN";
+        Type = "SUBSCRIPTION_PLAN_VARIATION";
         Value = value.Value;
     }
 
@@ -210,65 +183,11 @@ public record CatalogObject
     }
 
     /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.Component"/>.
+    /// Create an instance of CatalogObject with <see cref="CatalogObject.SubscriptionPlan"/>.
     /// </summary>
-    public CatalogObject(CatalogObject.Component value)
+    public CatalogObject(CatalogObject.SubscriptionPlan value)
     {
-        Type = "COMPONENT";
-        Value = value.Value;
-    }
-
-    /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.Composition"/>.
-    /// </summary>
-    public CatalogObject(CatalogObject.Composition value)
-    {
-        Type = "COMPOSITION";
-        Value = value.Value;
-    }
-
-    /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.Resource"/>.
-    /// </summary>
-    public CatalogObject(CatalogObject.Resource value)
-    {
-        Type = "RESOURCE";
-        Value = value.Value;
-    }
-
-    /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.CheckoutLink"/>.
-    /// </summary>
-    public CatalogObject(CatalogObject.CheckoutLink value)
-    {
-        Type = "CHECKOUT_LINK";
-        Value = value.Value;
-    }
-
-    /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.Address"/>.
-    /// </summary>
-    public CatalogObject(CatalogObject.Address value)
-    {
-        Type = "ADDRESS";
-        Value = value.Value;
-    }
-
-    /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.SubscriptionProduct"/>.
-    /// </summary>
-    public CatalogObject(CatalogObject.SubscriptionProduct value)
-    {
-        Type = "SUBSCRIPTION_PRODUCT";
-        Value = value.Value;
-    }
-
-    /// <summary>
-    /// Create an instance of CatalogObject with <see cref="CatalogObject.SubscriptionPlanVariation"/>.
-    /// </summary>
-    public CatalogObject(CatalogObject.SubscriptionPlanVariation value)
-    {
-        Type = "SUBSCRIPTION_PLAN_VARIATION";
+        Type = "SUBSCRIPTION_PLAN";
         Value = value.Value;
     }
 
@@ -333,21 +252,6 @@ public record CatalogObject
     public bool IsModifier => Type == "MODIFIER";
 
     /// <summary>
-    /// Returns true if <see cref="Type"/> is "DINING_OPTION"
-    /// </summary>
-    public bool IsDiningOption => Type == "DINING_OPTION";
-
-    /// <summary>
-    /// Returns true if <see cref="Type"/> is "TAX_EXEMPTION"
-    /// </summary>
-    public bool IsTaxExemption => Type == "TAX_EXEMPTION";
-
-    /// <summary>
-    /// Returns true if <see cref="Type"/> is "SERVICE_CHARGE"
-    /// </summary>
-    public bool IsServiceCharge => Type == "SERVICE_CHARGE";
-
-    /// <summary>
     /// Returns true if <see cref="Type"/> is "PRICING_RULE"
     /// </summary>
     public bool IsPricingRule => Type == "PRICING_RULE";
@@ -368,9 +272,9 @@ public record CatalogObject
     public bool IsMeasurementUnit => Type == "MEASUREMENT_UNIT";
 
     /// <summary>
-    /// Returns true if <see cref="Type"/> is "SUBSCRIPTION_PLAN"
+    /// Returns true if <see cref="Type"/> is "SUBSCRIPTION_PLAN_VARIATION"
     /// </summary>
-    public bool IsSubscriptionPlan => Type == "SUBSCRIPTION_PLAN";
+    public bool IsSubscriptionPlanVariation => Type == "SUBSCRIPTION_PLAN_VARIATION";
 
     /// <summary>
     /// Returns true if <see cref="Type"/> is "ITEM_OPTION"
@@ -393,39 +297,9 @@ public record CatalogObject
     public bool IsQuickAmountsSettings => Type == "QUICK_AMOUNTS_SETTINGS";
 
     /// <summary>
-    /// Returns true if <see cref="Type"/> is "COMPONENT"
+    /// Returns true if <see cref="Type"/> is "SUBSCRIPTION_PLAN"
     /// </summary>
-    public bool IsComponent => Type == "COMPONENT";
-
-    /// <summary>
-    /// Returns true if <see cref="Type"/> is "COMPOSITION"
-    /// </summary>
-    public bool IsComposition => Type == "COMPOSITION";
-
-    /// <summary>
-    /// Returns true if <see cref="Type"/> is "RESOURCE"
-    /// </summary>
-    public bool IsResource => Type == "RESOURCE";
-
-    /// <summary>
-    /// Returns true if <see cref="Type"/> is "CHECKOUT_LINK"
-    /// </summary>
-    public bool IsCheckoutLink => Type == "CHECKOUT_LINK";
-
-    /// <summary>
-    /// Returns true if <see cref="Type"/> is "ADDRESS"
-    /// </summary>
-    public bool IsAddress => Type == "ADDRESS";
-
-    /// <summary>
-    /// Returns true if <see cref="Type"/> is "SUBSCRIPTION_PRODUCT"
-    /// </summary>
-    public bool IsSubscriptionProduct => Type == "SUBSCRIPTION_PRODUCT";
-
-    /// <summary>
-    /// Returns true if <see cref="Type"/> is "SUBSCRIPTION_PLAN_VARIATION"
-    /// </summary>
-    public bool IsSubscriptionPlanVariation => Type == "SUBSCRIPTION_PLAN_VARIATION";
+    public bool IsSubscriptionPlan => Type == "SUBSCRIPTION_PLAN";
 
     /// <summary>
     /// Returns true if <see cref="Type"/> is "AVAILABILITY_PERIOD"
@@ -505,33 +379,6 @@ public record CatalogObject
             : throw new Exception("CatalogObject.Type is not 'MODIFIER'");
 
     /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectDiningOption"/> if <see cref="Type"/> is 'DINING_OPTION', otherwise throws an exception.
-    /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'DINING_OPTION'.</exception>
-    public Square.CatalogObjectDiningOption AsDiningOption() =>
-        IsDiningOption
-            ? (Square.CatalogObjectDiningOption)Value!
-            : throw new Exception("CatalogObject.Type is not 'DINING_OPTION'");
-
-    /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectTaxExemption"/> if <see cref="Type"/> is 'TAX_EXEMPTION', otherwise throws an exception.
-    /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'TAX_EXEMPTION'.</exception>
-    public Square.CatalogObjectTaxExemption AsTaxExemption() =>
-        IsTaxExemption
-            ? (Square.CatalogObjectTaxExemption)Value!
-            : throw new Exception("CatalogObject.Type is not 'TAX_EXEMPTION'");
-
-    /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectServiceCharge"/> if <see cref="Type"/> is 'SERVICE_CHARGE', otherwise throws an exception.
-    /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'SERVICE_CHARGE'.</exception>
-    public Square.CatalogObjectServiceCharge AsServiceCharge() =>
-        IsServiceCharge
-            ? (Square.CatalogObjectServiceCharge)Value!
-            : throw new Exception("CatalogObject.Type is not 'SERVICE_CHARGE'");
-
-    /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectPricingRule"/> if <see cref="Type"/> is 'PRICING_RULE', otherwise throws an exception.
     /// </summary>
     /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'PRICING_RULE'.</exception>
@@ -568,13 +415,13 @@ public record CatalogObject
             : throw new Exception("CatalogObject.Type is not 'MEASUREMENT_UNIT'");
 
     /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectSubscriptionPlan"/> if <see cref="Type"/> is 'SUBSCRIPTION_PLAN', otherwise throws an exception.
+    /// Returns the value as a <see cref="Square.CatalogObjectSubscriptionPlanVariation"/> if <see cref="Type"/> is 'SUBSCRIPTION_PLAN_VARIATION', otherwise throws an exception.
     /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'SUBSCRIPTION_PLAN'.</exception>
-    public Square.CatalogObjectSubscriptionPlan AsSubscriptionPlan() =>
-        IsSubscriptionPlan
-            ? (Square.CatalogObjectSubscriptionPlan)Value!
-            : throw new Exception("CatalogObject.Type is not 'SUBSCRIPTION_PLAN'");
+    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'SUBSCRIPTION_PLAN_VARIATION'.</exception>
+    public Square.CatalogObjectSubscriptionPlanVariation AsSubscriptionPlanVariation() =>
+        IsSubscriptionPlanVariation
+            ? (Square.CatalogObjectSubscriptionPlanVariation)Value!
+            : throw new Exception("CatalogObject.Type is not 'SUBSCRIPTION_PLAN_VARIATION'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectItemOption"/> if <see cref="Type"/> is 'ITEM_OPTION', otherwise throws an exception.
@@ -613,67 +460,13 @@ public record CatalogObject
             : throw new Exception("CatalogObject.Type is not 'QUICK_AMOUNTS_SETTINGS'");
 
     /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectComponent"/> if <see cref="Type"/> is 'COMPONENT', otherwise throws an exception.
+    /// Returns the value as a <see cref="Square.CatalogObjectSubscriptionPlan"/> if <see cref="Type"/> is 'SUBSCRIPTION_PLAN', otherwise throws an exception.
     /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'COMPONENT'.</exception>
-    public Square.CatalogObjectComponent AsComponent() =>
-        IsComponent
-            ? (Square.CatalogObjectComponent)Value!
-            : throw new Exception("CatalogObject.Type is not 'COMPONENT'");
-
-    /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectComposition"/> if <see cref="Type"/> is 'COMPOSITION', otherwise throws an exception.
-    /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'COMPOSITION'.</exception>
-    public Square.CatalogObjectComposition AsComposition() =>
-        IsComposition
-            ? (Square.CatalogObjectComposition)Value!
-            : throw new Exception("CatalogObject.Type is not 'COMPOSITION'");
-
-    /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectResource"/> if <see cref="Type"/> is 'RESOURCE', otherwise throws an exception.
-    /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'RESOURCE'.</exception>
-    public Square.CatalogObjectResource AsResource() =>
-        IsResource
-            ? (Square.CatalogObjectResource)Value!
-            : throw new Exception("CatalogObject.Type is not 'RESOURCE'");
-
-    /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectCheckoutLink"/> if <see cref="Type"/> is 'CHECKOUT_LINK', otherwise throws an exception.
-    /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'CHECKOUT_LINK'.</exception>
-    public Square.CatalogObjectCheckoutLink AsCheckoutLink() =>
-        IsCheckoutLink
-            ? (Square.CatalogObjectCheckoutLink)Value!
-            : throw new Exception("CatalogObject.Type is not 'CHECKOUT_LINK'");
-
-    /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectAddress"/> if <see cref="Type"/> is 'ADDRESS', otherwise throws an exception.
-    /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'ADDRESS'.</exception>
-    public Square.CatalogObjectAddress AsAddress() =>
-        IsAddress
-            ? (Square.CatalogObjectAddress)Value!
-            : throw new Exception("CatalogObject.Type is not 'ADDRESS'");
-
-    /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectSubscriptionProduct"/> if <see cref="Type"/> is 'SUBSCRIPTION_PRODUCT', otherwise throws an exception.
-    /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'SUBSCRIPTION_PRODUCT'.</exception>
-    public Square.CatalogObjectSubscriptionProduct AsSubscriptionProduct() =>
-        IsSubscriptionProduct
-            ? (Square.CatalogObjectSubscriptionProduct)Value!
-            : throw new Exception("CatalogObject.Type is not 'SUBSCRIPTION_PRODUCT'");
-
-    /// <summary>
-    /// Returns the value as a <see cref="Square.CatalogObjectSubscriptionPlanVariation"/> if <see cref="Type"/> is 'SUBSCRIPTION_PLAN_VARIATION', otherwise throws an exception.
-    /// </summary>
-    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'SUBSCRIPTION_PLAN_VARIATION'.</exception>
-    public Square.CatalogObjectSubscriptionPlanVariation AsSubscriptionPlanVariation() =>
-        IsSubscriptionPlanVariation
-            ? (Square.CatalogObjectSubscriptionPlanVariation)Value!
-            : throw new Exception("CatalogObject.Type is not 'SUBSCRIPTION_PLAN_VARIATION'");
+    /// <exception cref="Exception">Thrown when <see cref="Type"/> is not 'SUBSCRIPTION_PLAN'.</exception>
+    public Square.CatalogObjectSubscriptionPlan AsSubscriptionPlan() =>
+        IsSubscriptionPlan
+            ? (Square.CatalogObjectSubscriptionPlan)Value!
+            : throw new Exception("CatalogObject.Type is not 'SUBSCRIPTION_PLAN'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectAvailabilityPeriod"/> if <see cref="Type"/> is 'AVAILABILITY_PERIOD', otherwise throws an exception.
@@ -693,25 +486,16 @@ public record CatalogObject
         Func<Square.CatalogObjectDiscount, T> onDiscount,
         Func<Square.CatalogObjectModifierList, T> onModifierList,
         Func<Square.CatalogObjectModifier, T> onModifier,
-        Func<Square.CatalogObjectDiningOption, T> onDiningOption,
-        Func<Square.CatalogObjectTaxExemption, T> onTaxExemption,
-        Func<Square.CatalogObjectServiceCharge, T> onServiceCharge,
         Func<Square.CatalogObjectPricingRule, T> onPricingRule,
         Func<Square.CatalogObjectProductSet, T> onProductSet,
         Func<Square.CatalogObjectTimePeriod, T> onTimePeriod,
         Func<Square.CatalogObjectMeasurementUnit, T> onMeasurementUnit,
-        Func<Square.CatalogObjectSubscriptionPlan, T> onSubscriptionPlan,
+        Func<Square.CatalogObjectSubscriptionPlanVariation, T> onSubscriptionPlanVariation,
         Func<Square.CatalogObjectItemOption, T> onItemOption,
         Func<Square.CatalogObjectItemOptionValue, T> onItemOptionVal,
         Func<Square.CatalogObjectCustomAttributeDefinition, T> onCustomAttributeDefinition,
         Func<Square.CatalogObjectQuickAmountsSettings, T> onQuickAmountsSettings,
-        Func<Square.CatalogObjectComponent, T> onComponent,
-        Func<Square.CatalogObjectComposition, T> onComposition,
-        Func<Square.CatalogObjectResource, T> onResource,
-        Func<Square.CatalogObjectCheckoutLink, T> onCheckoutLink,
-        Func<Square.CatalogObjectAddress, T> onAddress,
-        Func<Square.CatalogObjectSubscriptionProduct, T> onSubscriptionProduct,
-        Func<Square.CatalogObjectSubscriptionPlanVariation, T> onSubscriptionPlanVariation,
+        Func<Square.CatalogObjectSubscriptionPlan, T> onSubscriptionPlan,
         Func<Square.CatalogObjectAvailabilityPeriod, T> onAvailabilityPeriod,
         Func<string, object?, T> onUnknown_
     )
@@ -726,29 +510,20 @@ public record CatalogObject
             "DISCOUNT" => onDiscount(AsDiscount()),
             "MODIFIER_LIST" => onModifierList(AsModifierList()),
             "MODIFIER" => onModifier(AsModifier()),
-            "DINING_OPTION" => onDiningOption(AsDiningOption()),
-            "TAX_EXEMPTION" => onTaxExemption(AsTaxExemption()),
-            "SERVICE_CHARGE" => onServiceCharge(AsServiceCharge()),
             "PRICING_RULE" => onPricingRule(AsPricingRule()),
             "PRODUCT_SET" => onProductSet(AsProductSet()),
             "TIME_PERIOD" => onTimePeriod(AsTimePeriod()),
             "MEASUREMENT_UNIT" => onMeasurementUnit(AsMeasurementUnit()),
-            "SUBSCRIPTION_PLAN" => onSubscriptionPlan(AsSubscriptionPlan()),
+            "SUBSCRIPTION_PLAN_VARIATION" => onSubscriptionPlanVariation(
+                AsSubscriptionPlanVariation()
+            ),
             "ITEM_OPTION" => onItemOption(AsItemOption()),
             "ITEM_OPTION_VAL" => onItemOptionVal(AsItemOptionVal()),
             "CUSTOM_ATTRIBUTE_DEFINITION" => onCustomAttributeDefinition(
                 AsCustomAttributeDefinition()
             ),
             "QUICK_AMOUNTS_SETTINGS" => onQuickAmountsSettings(AsQuickAmountsSettings()),
-            "COMPONENT" => onComponent(AsComponent()),
-            "COMPOSITION" => onComposition(AsComposition()),
-            "RESOURCE" => onResource(AsResource()),
-            "CHECKOUT_LINK" => onCheckoutLink(AsCheckoutLink()),
-            "ADDRESS" => onAddress(AsAddress()),
-            "SUBSCRIPTION_PRODUCT" => onSubscriptionProduct(AsSubscriptionProduct()),
-            "SUBSCRIPTION_PLAN_VARIATION" => onSubscriptionPlanVariation(
-                AsSubscriptionPlanVariation()
-            ),
+            "SUBSCRIPTION_PLAN" => onSubscriptionPlan(AsSubscriptionPlan()),
             "AVAILABILITY_PERIOD" => onAvailabilityPeriod(AsAvailabilityPeriod()),
             _ => onUnknown_(Type, Value),
         };
@@ -763,25 +538,16 @@ public record CatalogObject
         Action<Square.CatalogObjectDiscount> onDiscount,
         Action<Square.CatalogObjectModifierList> onModifierList,
         Action<Square.CatalogObjectModifier> onModifier,
-        Action<Square.CatalogObjectDiningOption> onDiningOption,
-        Action<Square.CatalogObjectTaxExemption> onTaxExemption,
-        Action<Square.CatalogObjectServiceCharge> onServiceCharge,
         Action<Square.CatalogObjectPricingRule> onPricingRule,
         Action<Square.CatalogObjectProductSet> onProductSet,
         Action<Square.CatalogObjectTimePeriod> onTimePeriod,
         Action<Square.CatalogObjectMeasurementUnit> onMeasurementUnit,
-        Action<Square.CatalogObjectSubscriptionPlan> onSubscriptionPlan,
+        Action<Square.CatalogObjectSubscriptionPlanVariation> onSubscriptionPlanVariation,
         Action<Square.CatalogObjectItemOption> onItemOption,
         Action<Square.CatalogObjectItemOptionValue> onItemOptionVal,
         Action<Square.CatalogObjectCustomAttributeDefinition> onCustomAttributeDefinition,
         Action<Square.CatalogObjectQuickAmountsSettings> onQuickAmountsSettings,
-        Action<Square.CatalogObjectComponent> onComponent,
-        Action<Square.CatalogObjectComposition> onComposition,
-        Action<Square.CatalogObjectResource> onResource,
-        Action<Square.CatalogObjectCheckoutLink> onCheckoutLink,
-        Action<Square.CatalogObjectAddress> onAddress,
-        Action<Square.CatalogObjectSubscriptionProduct> onSubscriptionProduct,
-        Action<Square.CatalogObjectSubscriptionPlanVariation> onSubscriptionPlanVariation,
+        Action<Square.CatalogObjectSubscriptionPlan> onSubscriptionPlan,
         Action<Square.CatalogObjectAvailabilityPeriod> onAvailabilityPeriod,
         Action<string, object?> onUnknown_
     )
@@ -812,15 +578,6 @@ public record CatalogObject
             case "MODIFIER":
                 onModifier(AsModifier());
                 break;
-            case "DINING_OPTION":
-                onDiningOption(AsDiningOption());
-                break;
-            case "TAX_EXEMPTION":
-                onTaxExemption(AsTaxExemption());
-                break;
-            case "SERVICE_CHARGE":
-                onServiceCharge(AsServiceCharge());
-                break;
             case "PRICING_RULE":
                 onPricingRule(AsPricingRule());
                 break;
@@ -833,8 +590,8 @@ public record CatalogObject
             case "MEASUREMENT_UNIT":
                 onMeasurementUnit(AsMeasurementUnit());
                 break;
-            case "SUBSCRIPTION_PLAN":
-                onSubscriptionPlan(AsSubscriptionPlan());
+            case "SUBSCRIPTION_PLAN_VARIATION":
+                onSubscriptionPlanVariation(AsSubscriptionPlanVariation());
                 break;
             case "ITEM_OPTION":
                 onItemOption(AsItemOption());
@@ -848,26 +605,8 @@ public record CatalogObject
             case "QUICK_AMOUNTS_SETTINGS":
                 onQuickAmountsSettings(AsQuickAmountsSettings());
                 break;
-            case "COMPONENT":
-                onComponent(AsComponent());
-                break;
-            case "COMPOSITION":
-                onComposition(AsComposition());
-                break;
-            case "RESOURCE":
-                onResource(AsResource());
-                break;
-            case "CHECKOUT_LINK":
-                onCheckoutLink(AsCheckoutLink());
-                break;
-            case "ADDRESS":
-                onAddress(AsAddress());
-                break;
-            case "SUBSCRIPTION_PRODUCT":
-                onSubscriptionProduct(AsSubscriptionProduct());
-                break;
-            case "SUBSCRIPTION_PLAN_VARIATION":
-                onSubscriptionPlanVariation(AsSubscriptionPlanVariation());
+            case "SUBSCRIPTION_PLAN":
+                onSubscriptionPlan(AsSubscriptionPlan());
                 break;
             case "AVAILABILITY_PERIOD":
                 onAvailabilityPeriod(AsAvailabilityPeriod());
@@ -991,48 +730,6 @@ public record CatalogObject
     }
 
     /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectDiningOption"/> and returns true if successful.
-    /// </summary>
-    public bool TryAsDiningOption(out Square.CatalogObjectDiningOption? value)
-    {
-        if (Type == "DINING_OPTION")
-        {
-            value = (Square.CatalogObjectDiningOption)Value!;
-            return true;
-        }
-        value = null;
-        return false;
-    }
-
-    /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectTaxExemption"/> and returns true if successful.
-    /// </summary>
-    public bool TryAsTaxExemption(out Square.CatalogObjectTaxExemption? value)
-    {
-        if (Type == "TAX_EXEMPTION")
-        {
-            value = (Square.CatalogObjectTaxExemption)Value!;
-            return true;
-        }
-        value = null;
-        return false;
-    }
-
-    /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectServiceCharge"/> and returns true if successful.
-    /// </summary>
-    public bool TryAsServiceCharge(out Square.CatalogObjectServiceCharge? value)
-    {
-        if (Type == "SERVICE_CHARGE")
-        {
-            value = (Square.CatalogObjectServiceCharge)Value!;
-            return true;
-        }
-        value = null;
-        return false;
-    }
-
-    /// <summary>
     /// Attempts to cast the value to a <see cref="Square.CatalogObjectPricingRule"/> and returns true if successful.
     /// </summary>
     public bool TryAsPricingRule(out Square.CatalogObjectPricingRule? value)
@@ -1089,13 +786,15 @@ public record CatalogObject
     }
 
     /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectSubscriptionPlan"/> and returns true if successful.
+    /// Attempts to cast the value to a <see cref="Square.CatalogObjectSubscriptionPlanVariation"/> and returns true if successful.
     /// </summary>
-    public bool TryAsSubscriptionPlan(out Square.CatalogObjectSubscriptionPlan? value)
+    public bool TryAsSubscriptionPlanVariation(
+        out Square.CatalogObjectSubscriptionPlanVariation? value
+    )
     {
-        if (Type == "SUBSCRIPTION_PLAN")
+        if (Type == "SUBSCRIPTION_PLAN_VARIATION")
         {
-            value = (Square.CatalogObjectSubscriptionPlan)Value!;
+            value = (Square.CatalogObjectSubscriptionPlanVariation)Value!;
             return true;
         }
         value = null;
@@ -1161,99 +860,13 @@ public record CatalogObject
     }
 
     /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectComponent"/> and returns true if successful.
+    /// Attempts to cast the value to a <see cref="Square.CatalogObjectSubscriptionPlan"/> and returns true if successful.
     /// </summary>
-    public bool TryAsComponent(out Square.CatalogObjectComponent? value)
+    public bool TryAsSubscriptionPlan(out Square.CatalogObjectSubscriptionPlan? value)
     {
-        if (Type == "COMPONENT")
+        if (Type == "SUBSCRIPTION_PLAN")
         {
-            value = (Square.CatalogObjectComponent)Value!;
-            return true;
-        }
-        value = null;
-        return false;
-    }
-
-    /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectComposition"/> and returns true if successful.
-    /// </summary>
-    public bool TryAsComposition(out Square.CatalogObjectComposition? value)
-    {
-        if (Type == "COMPOSITION")
-        {
-            value = (Square.CatalogObjectComposition)Value!;
-            return true;
-        }
-        value = null;
-        return false;
-    }
-
-    /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectResource"/> and returns true if successful.
-    /// </summary>
-    public bool TryAsResource(out Square.CatalogObjectResource? value)
-    {
-        if (Type == "RESOURCE")
-        {
-            value = (Square.CatalogObjectResource)Value!;
-            return true;
-        }
-        value = null;
-        return false;
-    }
-
-    /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectCheckoutLink"/> and returns true if successful.
-    /// </summary>
-    public bool TryAsCheckoutLink(out Square.CatalogObjectCheckoutLink? value)
-    {
-        if (Type == "CHECKOUT_LINK")
-        {
-            value = (Square.CatalogObjectCheckoutLink)Value!;
-            return true;
-        }
-        value = null;
-        return false;
-    }
-
-    /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectAddress"/> and returns true if successful.
-    /// </summary>
-    public bool TryAsAddress(out Square.CatalogObjectAddress? value)
-    {
-        if (Type == "ADDRESS")
-        {
-            value = (Square.CatalogObjectAddress)Value!;
-            return true;
-        }
-        value = null;
-        return false;
-    }
-
-    /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectSubscriptionProduct"/> and returns true if successful.
-    /// </summary>
-    public bool TryAsSubscriptionProduct(out Square.CatalogObjectSubscriptionProduct? value)
-    {
-        if (Type == "SUBSCRIPTION_PRODUCT")
-        {
-            value = (Square.CatalogObjectSubscriptionProduct)Value!;
-            return true;
-        }
-        value = null;
-        return false;
-    }
-
-    /// <summary>
-    /// Attempts to cast the value to a <see cref="Square.CatalogObjectSubscriptionPlanVariation"/> and returns true if successful.
-    /// </summary>
-    public bool TryAsSubscriptionPlanVariation(
-        out Square.CatalogObjectSubscriptionPlanVariation? value
-    )
-    {
-        if (Type == "SUBSCRIPTION_PLAN_VARIATION")
-        {
-            value = (Square.CatalogObjectSubscriptionPlanVariation)Value!;
+            value = (Square.CatalogObjectSubscriptionPlan)Value!;
             return true;
         }
         value = null;
@@ -1292,12 +905,6 @@ public record CatalogObject
 
     public static implicit operator CatalogObject(CatalogObject.Modifier value) => new(value);
 
-    public static implicit operator CatalogObject(CatalogObject.DiningOption value) => new(value);
-
-    public static implicit operator CatalogObject(CatalogObject.TaxExemption value) => new(value);
-
-    public static implicit operator CatalogObject(CatalogObject.ServiceCharge value) => new(value);
-
     public static implicit operator CatalogObject(CatalogObject.PricingRule value) => new(value);
 
     public static implicit operator CatalogObject(CatalogObject.ProductSet value) => new(value);
@@ -1307,7 +914,7 @@ public record CatalogObject
     public static implicit operator CatalogObject(CatalogObject.MeasurementUnit value) =>
         new(value);
 
-    public static implicit operator CatalogObject(CatalogObject.SubscriptionPlan value) =>
+    public static implicit operator CatalogObject(CatalogObject.SubscriptionPlanVariation value) =>
         new(value);
 
     public static implicit operator CatalogObject(CatalogObject.ItemOption value) => new(value);
@@ -1320,20 +927,7 @@ public record CatalogObject
     public static implicit operator CatalogObject(CatalogObject.QuickAmountsSettings value) =>
         new(value);
 
-    public static implicit operator CatalogObject(CatalogObject.Component value) => new(value);
-
-    public static implicit operator CatalogObject(CatalogObject.Composition value) => new(value);
-
-    public static implicit operator CatalogObject(CatalogObject.Resource value) => new(value);
-
-    public static implicit operator CatalogObject(CatalogObject.CheckoutLink value) => new(value);
-
-    public static implicit operator CatalogObject(CatalogObject.Address value) => new(value);
-
-    public static implicit operator CatalogObject(CatalogObject.SubscriptionProduct value) =>
-        new(value);
-
-    public static implicit operator CatalogObject(CatalogObject.SubscriptionPlanVariation value) =>
+    public static implicit operator CatalogObject(CatalogObject.SubscriptionPlan value) =>
         new(value);
 
     public static implicit operator CatalogObject(CatalogObject.AvailabilityPeriod value) =>
@@ -1399,18 +993,6 @@ public record CatalogObject
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectModifier"
                     ),
-                "DINING_OPTION" => json.Deserialize<Square.CatalogObjectDiningOption>(options)
-                    ?? throw new JsonException(
-                        "Failed to deserialize Square.CatalogObjectDiningOption"
-                    ),
-                "TAX_EXEMPTION" => json.Deserialize<Square.CatalogObjectTaxExemption>(options)
-                    ?? throw new JsonException(
-                        "Failed to deserialize Square.CatalogObjectTaxExemption"
-                    ),
-                "SERVICE_CHARGE" => json.Deserialize<Square.CatalogObjectServiceCharge>(options)
-                    ?? throw new JsonException(
-                        "Failed to deserialize Square.CatalogObjectServiceCharge"
-                    ),
                 "PRICING_RULE" => json.Deserialize<Square.CatalogObjectPricingRule>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectPricingRule"
@@ -1427,12 +1009,11 @@ public record CatalogObject
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectMeasurementUnit"
                     ),
-                "SUBSCRIPTION_PLAN" => json.Deserialize<Square.CatalogObjectSubscriptionPlan>(
-                    options
-                )
-                    ?? throw new JsonException(
-                        "Failed to deserialize Square.CatalogObjectSubscriptionPlan"
-                    ),
+                "SUBSCRIPTION_PLAN_VARIATION" =>
+                    json.Deserialize<Square.CatalogObjectSubscriptionPlanVariation>(options)
+                        ?? throw new JsonException(
+                            "Failed to deserialize Square.CatalogObjectSubscriptionPlanVariation"
+                        ),
                 "ITEM_OPTION" => json.Deserialize<Square.CatalogObjectItemOption>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectItemOption"
@@ -1451,35 +1032,12 @@ public record CatalogObject
                         ?? throw new JsonException(
                             "Failed to deserialize Square.CatalogObjectQuickAmountsSettings"
                         ),
-                "COMPONENT" => json.Deserialize<Square.CatalogObjectComponent>(options)
-                    ?? throw new JsonException(
-                        "Failed to deserialize Square.CatalogObjectComponent"
-                    ),
-                "COMPOSITION" => json.Deserialize<Square.CatalogObjectComposition>(options)
-                    ?? throw new JsonException(
-                        "Failed to deserialize Square.CatalogObjectComposition"
-                    ),
-                "RESOURCE" => json.Deserialize<Square.CatalogObjectResource>(options)
-                    ?? throw new JsonException(
-                        "Failed to deserialize Square.CatalogObjectResource"
-                    ),
-                "CHECKOUT_LINK" => json.Deserialize<Square.CatalogObjectCheckoutLink>(options)
-                    ?? throw new JsonException(
-                        "Failed to deserialize Square.CatalogObjectCheckoutLink"
-                    ),
-                "ADDRESS" => json.Deserialize<Square.CatalogObjectAddress>(options)
-                    ?? throw new JsonException("Failed to deserialize Square.CatalogObjectAddress"),
-                "SUBSCRIPTION_PRODUCT" => json.Deserialize<Square.CatalogObjectSubscriptionProduct>(
+                "SUBSCRIPTION_PLAN" => json.Deserialize<Square.CatalogObjectSubscriptionPlan>(
                     options
                 )
                     ?? throw new JsonException(
-                        "Failed to deserialize Square.CatalogObjectSubscriptionProduct"
+                        "Failed to deserialize Square.CatalogObjectSubscriptionPlan"
                     ),
-                "SUBSCRIPTION_PLAN_VARIATION" =>
-                    json.Deserialize<Square.CatalogObjectSubscriptionPlanVariation>(options)
-                        ?? throw new JsonException(
-                            "Failed to deserialize Square.CatalogObjectSubscriptionPlanVariation"
-                        ),
                 "AVAILABILITY_PERIOD" => json.Deserialize<Square.CatalogObjectAvailabilityPeriod>(
                     options
                 )
@@ -1508,14 +1066,14 @@ public record CatalogObject
                     "DISCOUNT" => JsonSerializer.SerializeToNode(value.Value, options),
                     "MODIFIER_LIST" => JsonSerializer.SerializeToNode(value.Value, options),
                     "MODIFIER" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "DINING_OPTION" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "TAX_EXEMPTION" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "SERVICE_CHARGE" => JsonSerializer.SerializeToNode(value.Value, options),
                     "PRICING_RULE" => JsonSerializer.SerializeToNode(value.Value, options),
                     "PRODUCT_SET" => JsonSerializer.SerializeToNode(value.Value, options),
                     "TIME_PERIOD" => JsonSerializer.SerializeToNode(value.Value, options),
                     "MEASUREMENT_UNIT" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "SUBSCRIPTION_PLAN" => JsonSerializer.SerializeToNode(value.Value, options),
+                    "SUBSCRIPTION_PLAN_VARIATION" => JsonSerializer.SerializeToNode(
+                        value.Value,
+                        options
+                    ),
                     "ITEM_OPTION" => JsonSerializer.SerializeToNode(value.Value, options),
                     "ITEM_OPTION_VAL" => JsonSerializer.SerializeToNode(value.Value, options),
                     "CUSTOM_ATTRIBUTE_DEFINITION" => JsonSerializer.SerializeToNode(
@@ -1526,16 +1084,7 @@ public record CatalogObject
                         value.Value,
                         options
                     ),
-                    "COMPONENT" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "COMPOSITION" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "RESOURCE" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "CHECKOUT_LINK" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "ADDRESS" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "SUBSCRIPTION_PRODUCT" => JsonSerializer.SerializeToNode(value.Value, options),
-                    "SUBSCRIPTION_PLAN_VARIATION" => JsonSerializer.SerializeToNode(
-                        value.Value,
-                        options
-                    ),
+                    "SUBSCRIPTION_PLAN" => JsonSerializer.SerializeToNode(value.Value, options),
                     "AVAILABILITY_PERIOD" => JsonSerializer.SerializeToNode(value.Value, options),
                     _ => JsonSerializer.SerializeToNode(value.Value, options),
                 } ?? new JsonObject();
@@ -1683,60 +1232,6 @@ public record CatalogObject
     }
 
     /// <summary>
-    /// Discriminated union type for DINING_OPTION
-    /// </summary>
-    public struct DiningOption
-    {
-        public DiningOption(Square.CatalogObjectDiningOption value)
-        {
-            Value = value;
-        }
-
-        internal Square.CatalogObjectDiningOption Value { get; set; }
-
-        public override string ToString() => Value.ToString();
-
-        public static implicit operator DiningOption(Square.CatalogObjectDiningOption value) =>
-            new(value);
-    }
-
-    /// <summary>
-    /// Discriminated union type for TAX_EXEMPTION
-    /// </summary>
-    public struct TaxExemption
-    {
-        public TaxExemption(Square.CatalogObjectTaxExemption value)
-        {
-            Value = value;
-        }
-
-        internal Square.CatalogObjectTaxExemption Value { get; set; }
-
-        public override string ToString() => Value.ToString();
-
-        public static implicit operator TaxExemption(Square.CatalogObjectTaxExemption value) =>
-            new(value);
-    }
-
-    /// <summary>
-    /// Discriminated union type for SERVICE_CHARGE
-    /// </summary>
-    public struct ServiceCharge
-    {
-        public ServiceCharge(Square.CatalogObjectServiceCharge value)
-        {
-            Value = value;
-        }
-
-        internal Square.CatalogObjectServiceCharge Value { get; set; }
-
-        public override string ToString() => Value.ToString();
-
-        public static implicit operator ServiceCharge(Square.CatalogObjectServiceCharge value) =>
-            new(value);
-    }
-
-    /// <summary>
     /// Discriminated union type for PRICING_RULE
     /// </summary>
     public struct PricingRule
@@ -1810,21 +1305,21 @@ public record CatalogObject
     }
 
     /// <summary>
-    /// Discriminated union type for SUBSCRIPTION_PLAN
+    /// Discriminated union type for SUBSCRIPTION_PLAN_VARIATION
     /// </summary>
-    public struct SubscriptionPlan
+    public struct SubscriptionPlanVariation
     {
-        public SubscriptionPlan(Square.CatalogObjectSubscriptionPlan value)
+        public SubscriptionPlanVariation(Square.CatalogObjectSubscriptionPlanVariation value)
         {
             Value = value;
         }
 
-        internal Square.CatalogObjectSubscriptionPlan Value { get; set; }
+        internal Square.CatalogObjectSubscriptionPlanVariation Value { get; set; }
 
         public override string ToString() => Value.ToString();
 
-        public static implicit operator SubscriptionPlan(
-            Square.CatalogObjectSubscriptionPlan value
+        public static implicit operator SubscriptionPlanVariation(
+            Square.CatalogObjectSubscriptionPlanVariation value
         ) => new(value);
     }
 
@@ -1903,128 +1398,21 @@ public record CatalogObject
     }
 
     /// <summary>
-    /// Discriminated union type for COMPONENT
+    /// Discriminated union type for SUBSCRIPTION_PLAN
     /// </summary>
-    public struct Component
+    public struct SubscriptionPlan
     {
-        public Component(Square.CatalogObjectComponent value)
+        public SubscriptionPlan(Square.CatalogObjectSubscriptionPlan value)
         {
             Value = value;
         }
 
-        internal Square.CatalogObjectComponent Value { get; set; }
+        internal Square.CatalogObjectSubscriptionPlan Value { get; set; }
 
         public override string ToString() => Value.ToString();
 
-        public static implicit operator Component(Square.CatalogObjectComponent value) =>
-            new(value);
-    }
-
-    /// <summary>
-    /// Discriminated union type for COMPOSITION
-    /// </summary>
-    public struct Composition
-    {
-        public Composition(Square.CatalogObjectComposition value)
-        {
-            Value = value;
-        }
-
-        internal Square.CatalogObjectComposition Value { get; set; }
-
-        public override string ToString() => Value.ToString();
-
-        public static implicit operator Composition(Square.CatalogObjectComposition value) =>
-            new(value);
-    }
-
-    /// <summary>
-    /// Discriminated union type for RESOURCE
-    /// </summary>
-    public struct Resource
-    {
-        public Resource(Square.CatalogObjectResource value)
-        {
-            Value = value;
-        }
-
-        internal Square.CatalogObjectResource Value { get; set; }
-
-        public override string ToString() => Value.ToString();
-
-        public static implicit operator Resource(Square.CatalogObjectResource value) => new(value);
-    }
-
-    /// <summary>
-    /// Discriminated union type for CHECKOUT_LINK
-    /// </summary>
-    public struct CheckoutLink
-    {
-        public CheckoutLink(Square.CatalogObjectCheckoutLink value)
-        {
-            Value = value;
-        }
-
-        internal Square.CatalogObjectCheckoutLink Value { get; set; }
-
-        public override string ToString() => Value.ToString();
-
-        public static implicit operator CheckoutLink(Square.CatalogObjectCheckoutLink value) =>
-            new(value);
-    }
-
-    /// <summary>
-    /// Discriminated union type for ADDRESS
-    /// </summary>
-    public struct Address
-    {
-        public Address(Square.CatalogObjectAddress value)
-        {
-            Value = value;
-        }
-
-        internal Square.CatalogObjectAddress Value { get; set; }
-
-        public override string ToString() => Value.ToString();
-
-        public static implicit operator Address(Square.CatalogObjectAddress value) => new(value);
-    }
-
-    /// <summary>
-    /// Discriminated union type for SUBSCRIPTION_PRODUCT
-    /// </summary>
-    public struct SubscriptionProduct
-    {
-        public SubscriptionProduct(Square.CatalogObjectSubscriptionProduct value)
-        {
-            Value = value;
-        }
-
-        internal Square.CatalogObjectSubscriptionProduct Value { get; set; }
-
-        public override string ToString() => Value.ToString();
-
-        public static implicit operator SubscriptionProduct(
-            Square.CatalogObjectSubscriptionProduct value
-        ) => new(value);
-    }
-
-    /// <summary>
-    /// Discriminated union type for SUBSCRIPTION_PLAN_VARIATION
-    /// </summary>
-    public struct SubscriptionPlanVariation
-    {
-        public SubscriptionPlanVariation(Square.CatalogObjectSubscriptionPlanVariation value)
-        {
-            Value = value;
-        }
-
-        internal Square.CatalogObjectSubscriptionPlanVariation Value { get; set; }
-
-        public override string ToString() => Value.ToString();
-
-        public static implicit operator SubscriptionPlanVariation(
-            Square.CatalogObjectSubscriptionPlanVariation value
+        public static implicit operator SubscriptionPlan(
+            Square.CatalogObjectSubscriptionPlan value
         ) => new(value);
     }
 

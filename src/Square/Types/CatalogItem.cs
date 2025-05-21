@@ -109,13 +109,13 @@ public record CatalogItem
     public IEnumerable<CatalogItemOptionForItem>? ItemOptions { get; set; }
 
     /// <summary>
-    /// Deprecated; see go/ecomUriUseCases. A URI pointing to a published e-commerce product page for the Item.
+    /// Deprecated. A URI pointing to a published e-commerce product page for the Item.
     /// </summary>
     [JsonPropertyName("ecom_uri")]
     public string? EcomUri { get; set; }
 
     /// <summary>
-    /// Deprecated; see go/ecomUriUseCases. A comma-separated list of encoded URIs pointing to a set of published e-commerce images for the Item.
+    /// Deprecated. A comma-separated list of encoded URIs pointing to a set of published e-commerce images for the Item.
     /// </summary>
     [JsonPropertyName("ecom_image_uris")]
     public IEnumerable<string>? EcomImageUris { get; set; }

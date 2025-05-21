@@ -6,6 +6,8 @@ namespace Square;
 
 /// <summary>
 /// The parameters of a `Shift` search query, which includes filter and sort options.
+///
+/// Deprecated at Square API version 2025-05-21. See the [migration notes](https://developer.squareup.com/docs/labor-api/what-it-does#migration-notes).
 /// </summary>
 public record ShiftQuery
 {
