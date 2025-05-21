@@ -5,7 +5,7 @@ using Square.Core;
 namespace Square;
 
 /// <summary>
-/// A record of an employee's break during a shift.
+/// A record of a team member's break on a [timecard](entity:Timecard).
 /// </summary>
 public record Break
 {
@@ -16,21 +16,21 @@ public record Break
     public string? Id { get; set; }
 
     /// <summary>
-    /// RFC 3339; follows the same timezone information as `Shift`. Precision up to
+    /// RFC 3339; follows the same timezone information as the [timecard](entity:Timecard). Precision up to
     /// the minute is respected; seconds are truncated.
     /// </summary>
     [JsonPropertyName("start_at")]
     public required string StartAt { get; set; }
 
     /// <summary>
-    /// RFC 3339; follows the same timezone information as `Shift`. Precision up to
+    /// RFC 3339; follows the same timezone information as the [timecard](entity:Timecard). Precision up to
     /// the minute is respected; seconds are truncated.
     /// </summary>
     [JsonPropertyName("end_at")]
     public string? EndAt { get; set; }
 
     /// <summary>
-    /// The `BreakType` that this `Break` was templated on.
+    /// The [BreakType](entity:BreakType) that this break was templated on.
     /// </summary>
     [JsonPropertyName("break_type_id")]
     public required string BreakTypeId { get; set; }
@@ -44,6 +44,8 @@ public record Break
     /// <summary>
     /// Format: RFC-3339 P[n]Y[n]M[n]DT[n]H[n]M[n]S. The expected length of
     /// the break.
+    ///
+    /// Example for break expected duration of 15 minutes: PT15M
     /// </summary>
     [JsonPropertyName("expected_duration")]
     public required string ExpectedDuration { get; set; }

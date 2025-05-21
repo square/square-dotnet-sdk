@@ -5,7 +5,7 @@ using Square.Core;
 namespace Square;
 
 /// <summary>
-/// A modifier applicable to items at the time of sale. An example of a modifier is a Cheese add-on to a Burger item.
+/// A modifier that can be applied to items at the time of sale. For example, a cheese modifier for a burger, or a flavor modifier for a serving of ice cream.
 /// </summary>
 public record CatalogModifier
 {
@@ -20,6 +20,13 @@ public record CatalogModifier
     /// </summary>
     [JsonPropertyName("price_money")]
     public Money? PriceMoney { get; set; }
+
+    /// <summary>
+    /// When `true`, this modifier is selected by default when displaying the modifier list.
+    /// This setting can be overridden at the item level using `CatalogModifierListInfo.modifier_overrides`.
+    /// </summary>
+    [JsonPropertyName("on_by_default")]
+    public bool? OnByDefault { get; set; }
 
     /// <summary>
     /// Determines where this `CatalogModifier` appears in the `CatalogModifierList`.
@@ -45,6 +52,12 @@ public record CatalogModifier
     /// </summary>
     [JsonPropertyName("image_id")]
     public string? ImageId { get; set; }
+
+    /// <summary>
+    /// When `true`, this modifier is hidden from online ordering channels. This setting can be overridden at the item level using `CatalogModifierListInfo.modifier_overrides`.
+    /// </summary>
+    [JsonPropertyName("hidden_online")]
+    public bool? HiddenOnline { get; set; }
 
     /// <summary>
     /// Additional properties received from the response, if any.

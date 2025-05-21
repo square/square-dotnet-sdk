@@ -12,7 +12,7 @@ public record CreateInvoiceAttachmentRequest
     [JsonIgnore]
     public required string InvoiceId { get; set; }
 
-    public object? Request { get; set; }
+    public CreateInvoiceAttachmentRequestData? Request { get; set; }
 
     public FileParameter? ImageFile { get; set; }
 

@@ -5458,6 +5458,814 @@ await client.Invoices.PublishAsync(
 </dl>
 </details>
 
+## Labor
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">CreateScheduledShiftAsync</a>(CreateScheduledShiftRequest { ... }) -> CreateScheduledShiftResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a scheduled shift by providing draft shift details such as job ID,
+team member assignment, and start and end times.
+
+The following `draft_shift_details` fields are required:
+- `location_id`
+- `job_id`
+- `start_at`
+- `end_at`
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.CreateScheduledShiftAsync(
+    new CreateScheduledShiftRequest
+    {
+        IdempotencyKey = "HIDSNG5KS478L",
+        ScheduledShift = new ScheduledShift
+        {
+            DraftShiftDetails = new ScheduledShiftDetails
+            {
+                TeamMemberId = "ormj0jJJZ5OZIzxrZYJI",
+                LocationId = "PAA1RJZZKXBFG",
+                JobId = "FzbJAtt9qEWncK1BWgVCxQ6M",
+                StartAt = "2019-01-25T03:11:00-05:00",
+                EndAt = "2019-01-25T13:11:00-05:00",
+                Notes = "Dont forget to prep the vegetables",
+                IsDeleted = false,
+            },
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateScheduledShiftRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">BulkPublishScheduledShiftsAsync</a>(BulkPublishScheduledShiftsRequest { ... }) -> BulkPublishScheduledShiftsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Publishes 1 - 100 scheduled shifts. This endpoint takes a map of individual publish
+requests and returns a map of responses. When a scheduled shift is published, Square keeps
+the `draft_shift_details` field as is and copies it to the `published_shift_details` field.
+
+The minimum `start_at` and maximum `end_at` timestamps of all shifts in a
+`BulkPublishScheduledShifts` request must fall within a two-week period.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.BulkPublishScheduledShiftsAsync(
+    new BulkPublishScheduledShiftsRequest
+    {
+        ScheduledShifts = new Dictionary<string, BulkPublishScheduledShiftsData>()
+        {
+            { "key", new BulkPublishScheduledShiftsData() },
+        },
+        ScheduledShiftNotificationAudience = ScheduledShiftNotificationAudience.Affected,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `BulkPublishScheduledShiftsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">SearchScheduledShiftsAsync</a>(SearchScheduledShiftsRequest { ... }) -> SearchScheduledShiftsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a paginated list of scheduled shifts, with optional filter and sort settings.
+By default, results are sorted by `start_at` in ascending order.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.SearchScheduledShiftsAsync(
+    new SearchScheduledShiftsRequest
+    {
+        Query = new ScheduledShiftQuery
+        {
+            Filter = new ScheduledShiftFilter
+            {
+                AssignmentStatus = ScheduledShiftFilterAssignmentStatus.Assigned,
+            },
+            Sort = new ScheduledShiftSort
+            {
+                Field = ScheduledShiftSortField.CreatedAt,
+                Order = SortOrder.Asc,
+            },
+        },
+        Limit = 2,
+        Cursor = "xoxp-1234-5678-90123",
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `SearchScheduledShiftsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">RetrieveScheduledShiftAsync</a>(RetrieveScheduledShiftRequest { ... }) -> RetrieveScheduledShiftResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a scheduled shift by ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.RetrieveScheduledShiftAsync(new RetrieveScheduledShiftRequest { Id = "id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `RetrieveScheduledShiftRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">UpdateScheduledShiftAsync</a>(UpdateScheduledShiftRequest { ... }) -> UpdateScheduledShiftResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates the draft shift details for a scheduled shift. This endpoint supports
+sparse updates, so only new, changed, or removed fields are required in the request.
+You must publish the shift to make updates public.
+
+You can make the following updates to `draft_shift_details`:
+- Change the `location_id`, `job_id`, `start_at`, and `end_at` fields.
+- Add, change, or clear the `team_member_id` and `notes` fields. To clear these fields,
+set the value to null.
+- Change the `is_deleted` field. To delete a scheduled shift, set `is_deleted` to true
+and then publish the shift.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.UpdateScheduledShiftAsync(
+    new UpdateScheduledShiftRequest
+    {
+        Id = "id",
+        ScheduledShift = new ScheduledShift
+        {
+            DraftShiftDetails = new ScheduledShiftDetails
+            {
+                TeamMemberId = "ormj0jJJZ5OZIzxrZYJI",
+                LocationId = "PAA1RJZZKXBFG",
+                JobId = "FzbJAtt9qEWncK1BWgVCxQ6M",
+                StartAt = "2019-03-25T03:11:00-05:00",
+                EndAt = "2019-03-25T13:18:00-05:00",
+                Notes = "Dont forget to prep the vegetables",
+                IsDeleted = false,
+            },
+            Version = 1,
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `UpdateScheduledShiftRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">PublishScheduledShiftAsync</a>(PublishScheduledShiftRequest { ... }) -> PublishScheduledShiftResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Publishes a scheduled shift. When a scheduled shift is published, Square keeps the
+`draft_shift_details` field as is and copies it to the `published_shift_details` field.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.PublishScheduledShiftAsync(
+    new PublishScheduledShiftRequest
+    {
+        Id = "id",
+        IdempotencyKey = "HIDSNG5KS478L",
+        Version = 2,
+        ScheduledShiftNotificationAudience = ScheduledShiftNotificationAudience.All,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `PublishScheduledShiftRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">CreateTimecardAsync</a>(CreateTimecardRequest { ... }) -> CreateTimecardResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new `Timecard`.
+
+A `Timecard` represents a complete workday for a single team member.
+You must provide the following values in your request to this
+endpoint:
+
+- `location_id`
+- `team_member_id`
+- `start_at`
+
+An attempt to create a new `Timecard` can result in a `BAD_REQUEST` error when:
+- The `status` of the new `Timecard` is `OPEN` and the team member has another
+timecard with an `OPEN` status.
+- The `start_at` date is in the future.
+- The `start_at` or `end_at` date overlaps another timecard for the same team member.
+- The `Break` instances are set in the request and a break `start_at`
+is before the `Timecard.start_at`, a break `end_at` is after
+the `Timecard.end_at`, or both.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.CreateTimecardAsync(
+    new CreateTimecardRequest
+    {
+        IdempotencyKey = "HIDSNG5KS478L",
+        Timecard = new Timecard
+        {
+            LocationId = "PAA1RJZZKXBFG",
+            StartAt = "2019-01-25T03:11:00-05:00",
+            EndAt = "2019-01-25T13:11:00-05:00",
+            Wage = new TimecardWage
+            {
+                Title = "Barista",
+                HourlyRate = new Money { Amount = 1100, Currency = Currency.Usd },
+                TipEligible = true,
+            },
+            Breaks = new List<Break>()
+            {
+                new Break
+                {
+                    StartAt = "2019-01-25T06:11:00-05:00",
+                    EndAt = "2019-01-25T06:16:00-05:00",
+                    BreakTypeId = "REGS1EQR1TPZ5",
+                    Name = "Tea Break",
+                    ExpectedDuration = "PT5M",
+                    IsPaid = true,
+                },
+            },
+            TeamMemberId = "ormj0jJJZ5OZIzxrZYJI",
+            DeclaredCashTipMoney = new Money { Amount = 500, Currency = Currency.Usd },
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateTimecardRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">SearchTimecardsAsync</a>(SearchTimecardsRequest { ... }) -> SearchTimecardsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a paginated list of `Timecard` records for a business.
+The list to be returned can be filtered by:
+- Location IDs
+- Team member IDs
+- Timecard status (`OPEN` or `CLOSED`)
+- Timecard start
+- Timecard end
+- Workday details
+
+The list can be sorted by:
+- `START_AT`
+- `END_AT`
+- `CREATED_AT`
+- `UPDATED_AT`
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.SearchTimecardsAsync(
+    new SearchTimecardsRequest
+    {
+        Query = new TimecardQuery
+        {
+            Filter = new TimecardFilter
+            {
+                Workday = new TimecardWorkday
+                {
+                    DateRange = new DateRange { StartDate = "2019-01-20", EndDate = "2019-02-03" },
+                    MatchTimecardsBy = TimecardWorkdayMatcher.StartAt,
+                    DefaultTimezone = "America/Los_Angeles",
+                },
+            },
+        },
+        Limit = 100,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `SearchTimecardsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">RetrieveTimecardAsync</a>(RetrieveTimecardRequest { ... }) -> RetrieveTimecardResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a single `Timecard` specified by `id`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.RetrieveTimecardAsync(new RetrieveTimecardRequest { Id = "id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `RetrieveTimecardRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">UpdateTimecardAsync</a>(UpdateTimecardRequest { ... }) -> UpdateTimecardResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates an existing `Timecard`.
+
+When adding a `Break` to a `Timecard`, any earlier `Break` instances in the `Timecard` have
+the `end_at` property set to a valid RFC-3339 datetime string.
+
+When closing a `Timecard`, all `Break` instances in the `Timecard` must be complete with `end_at`
+set on each `Break`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.UpdateTimecardAsync(
+    new UpdateTimecardRequest
+    {
+        Id = "id",
+        Timecard = new Timecard
+        {
+            LocationId = "PAA1RJZZKXBFG",
+            StartAt = "2019-01-25T03:11:00-05:00",
+            EndAt = "2019-01-25T13:11:00-05:00",
+            Wage = new TimecardWage
+            {
+                Title = "Bartender",
+                HourlyRate = new Money { Amount = 1500, Currency = Currency.Usd },
+                TipEligible = true,
+            },
+            Breaks = new List<Break>()
+            {
+                new Break
+                {
+                    Id = "X7GAQYVVRRG6P",
+                    StartAt = "2019-01-25T06:11:00-05:00",
+                    EndAt = "2019-01-25T06:16:00-05:00",
+                    BreakTypeId = "REGS1EQR1TPZ5",
+                    Name = "Tea Break",
+                    ExpectedDuration = "PT5M",
+                    IsPaid = true,
+                },
+            },
+            Status = TimecardStatus.Closed,
+            Version = 1,
+            TeamMemberId = "ormj0jJJZ5OZIzxrZYJI",
+            DeclaredCashTipMoney = new Money { Amount = 500, Currency = Currency.Usd },
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `UpdateTimecardRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">DeleteTimecardAsync</a>(DeleteTimecardRequest { ... }) -> DeleteTimecardResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a `Timecard`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Labor.DeleteTimecardAsync(new DeleteTimecardRequest { Id = "id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `DeleteTimecardRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Locations
 <details><summary><code>client.Locations.<a href="/src/Square/Locations/LocationsClient.cs">ListAsync</a>() -> ListLocationsResponse</code></summary>
 <dl>

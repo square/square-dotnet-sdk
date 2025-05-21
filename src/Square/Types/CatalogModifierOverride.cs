@@ -16,10 +16,16 @@ public record CatalogModifierOverride
     public required string ModifierId { get; set; }
 
     /// <summary>
-    /// If `true`, this `CatalogModifier` should be selected by default for this `CatalogItem`.
+    /// __Deprecated__: Use `on_by_default_override` instead.
     /// </summary>
     [JsonPropertyName("on_by_default")]
     public bool? OnByDefault { get; set; }
+
+    [JsonPropertyName("hidden_online_override")]
+    public object? HiddenOnlineOverride { get; set; }
+
+    [JsonPropertyName("on_by_default_override")]
+    public object? OnByDefaultOverride { get; set; }
 
     /// <summary>
     /// Additional properties received from the response, if any.
