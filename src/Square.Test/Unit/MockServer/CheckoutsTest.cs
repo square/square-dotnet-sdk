@@ -240,7 +240,6 @@ public class CheckoutsTest : BaseMockServerTest
                     {
                       "id": "id",
                       "location_id": "location_id",
-                      "tender_id": "tender_id",
                       "reason": "reason",
                       "amount_money": {},
                       "status": "PENDING"

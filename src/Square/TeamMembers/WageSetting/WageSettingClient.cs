@@ -25,7 +25,7 @@ public partial class WageSettingClient
     /// </summary>
     /// <example><code>
     /// await client.TeamMembers.WageSetting.GetAsync(
-    ///     new GetWageSettingRequest { TeamMemberId = "team_member_id" }
+    ///     new Square.TeamMembers.WageSetting.GetWageSettingRequest { TeamMemberId = "team_member_id" }
     /// );
     /// </code></example>
     public async Task<GetWageSettingResponse> GetAsync(
