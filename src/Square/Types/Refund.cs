@@ -31,7 +31,7 @@ public record Refund
     /// The ID of the refunded tender.
     /// </summary>
     [JsonPropertyName("tender_id")]
-    public required string TenderId { get; set; }
+    public string? TenderId { get; set; }
 
     /// <summary>
     /// The timestamp for when the refund was created, in RFC 3339 format.

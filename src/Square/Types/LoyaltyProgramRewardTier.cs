@@ -30,13 +30,6 @@ public record LoyaltyProgramRewardTier
     public string? Name { get; set; }
 
     /// <summary>
-    /// Provides details about the reward tier definition.
-    /// DEPRECATED at version 2020-12-16. Replaced by the `pricing_rule_reference` field.
-    /// </summary>
-    [JsonPropertyName("definition")]
-    public LoyaltyProgramRewardDefinition? Definition { get; set; }
-
-    /// <summary>
     /// The timestamp when the reward tier was created, in RFC 3339 format.
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]

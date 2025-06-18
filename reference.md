@@ -18965,7 +18965,7 @@ await client.Orders.CustomAttributes.DeleteAsync(
 </details>
 
 ## TeamMembers WageSetting
-<details><summary><code>client.TeamMembers.WageSetting.<a href="/src/Square/TeamMembers/WageSetting/WageSettingClient.cs">GetAsync</a>(GetWageSettingRequest { ... }) -> GetWageSettingResponse</code></summary>
+<details><summary><code>client.TeamMembers.WageSetting.<a href="/src/Square/TeamMembers/WageSetting/WageSettingClient.cs">GetAsync</a>(TeamMembers.WageSetting.GetWageSettingRequest { ... }) -> GetWageSettingResponse</code></summary>
 <dl>
 <dd>
 
@@ -18998,7 +18998,7 @@ to get this information directly from the `TeamMember.wage_setting` field.
 
 ```csharp
 await client.TeamMembers.WageSetting.GetAsync(
-    new GetWageSettingRequest { TeamMemberId = "team_member_id" }
+    new Square.TeamMembers.WageSetting.GetWageSettingRequest { TeamMemberId = "team_member_id" }
 );
 ```
 </dd>
@@ -19014,7 +19014,7 @@ await client.TeamMembers.WageSetting.GetAsync(
 <dl>
 <dd>
 
-**request:** `GetWageSettingRequest` 
+**request:** `TeamMembers.WageSetting.GetWageSettingRequest` 
     
 </dd>
 </dl>
