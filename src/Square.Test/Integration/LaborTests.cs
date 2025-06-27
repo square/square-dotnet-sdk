@@ -2,6 +2,7 @@ using NUnit.Framework;
 using Square.Labor.BreakTypes;
 using Square.Labor.Shifts;
 using Square.Labor.WorkweekConfigs;
+using Square.TeamMembers;
 
 // ReSharper disable NullableWarningSuppressionIsUsed
 
@@ -19,7 +20,26 @@ public class LaborTests
     [SetUp]
     public async Task SetUp()
     {
+        // Get first available location
         _locationId = await Helpers.GetDefaultLocationIdAsync(_client);
+
+        // Get first available team member at this location
+        var teamResponse = await _client.TeamMembers.SearchAsync(
+            new SearchTeamMembersRequest
+            {
+                Limit = 1,
+                Query = new SearchTeamMembersQuery
+                {
+                    Filter = new SearchTeamMembersFilter
+                    {
+                        LocationIds = new[] { _locationId! },
+                        Status = TeamMemberStatus.Active
+                    }
+                }
+            }
+        );
+        _memberId = teamResponse.TeamMembers?.FirstOrDefault()?.Id 
+            ?? throw new Exception($"No team members available at location {_locationId}");
 
         // Delete existing breaks to avoid exceeding the limit
         var existingBreaks = await _client.Labor.BreakTypes.ListAsync(new ListBreakTypesRequest());
@@ -29,17 +49,6 @@ public class LaborTests
                 new DeleteBreakTypesRequest { Id = breakType.Id! }
             );
         }
-
-        // Create team member for testing
-        var teamResponse = await _client.TeamMembers.CreateAsync(
-            new CreateTeamMemberRequest
-            {
-                IdempotencyKey = Guid.NewGuid().ToString(),
-                TeamMember = new TeamMember { GivenName = "Sherlock", FamilyName = "Holmes" },
-            }
-        );
-        _memberId =
-            teamResponse.TeamMember?.Id ?? throw new Exception("Failed to create team member.");
 
         // Create break type for testing
         var breakResponse = await _client.Labor.BreakTypes.CreateAsync(
@@ -199,16 +208,38 @@ public class LaborTests
     [Test]
     public async Task TestDeleteShift()
     {
-        // create team member
-        var teamMemberResponse = await _client.TeamMembers.CreateAsync(
-            new CreateTeamMemberRequest
+        // First search for existing shifts for this team member
+        var existingShifts = await _client.Labor.Shifts.SearchAsync(
+            new SearchShiftsRequest
             {
-                IdempotencyKey = Guid.NewGuid().ToString(),
-                TeamMember = new TeamMember { GivenName = "Sherlock", FamilyName = "Holmes" },
+                Query = new ShiftQuery
+                {
+                    Filter = new ShiftFilter
+                    {
+                        TeamMemberIds = new[] { _memberId! }
+                    }
+                },
+                Limit = 100
             }
         );
 
-        // create shift
+        // Delete any existing shifts
+        if (existingShifts.Shifts != null)
+        {
+            foreach (var shift in existingShifts.Shifts)
+            {
+                if (!string.IsNullOrEmpty(shift.Id))
+                {
+                    await _client.Labor.Shifts.DeleteAsync(new DeleteShiftsRequest { Id = shift.Id });
+                }
+            }
+        }
+
+        // Start the shift 10 seconds from now and end it 20 seconds from now
+        var startTime = DateTimeOffset.Now.AddSeconds(10);
+        var endTime = startTime.AddSeconds(10);
+
+        // Create shift
         var shiftResponse = await _client.Labor.Shifts.CreateAsync(
             new CreateShiftRequest
             {
@@ -216,17 +247,20 @@ public class LaborTests
                 Shift = new Shift
                 {
                     LocationId = _locationId!,
-                    StartAt = DateTimeOffset.Now.ToString("o"),
-                    TeamMemberId =
-                        teamMemberResponse.TeamMember?.Id
-                        ?? throw new Exception("Failed to create team member."),
+                    StartAt = startTime.ToString("o"),
+                    EndAt = endTime.ToString("o"),
+                    TeamMemberId = _memberId,
                 },
             }
         );
 
-        _shiftId = shiftResponse.Shift?.Id ?? throw new Exception("Failed to create shift.");
+        var shiftId = shiftResponse.Shift?.Id ?? throw new Exception("Failed to create shift.");
+
+        // Add a small delay to ensure the shift is fully created
+        await Task.Delay(1000);
+
         var response = await _client.Labor.Shifts.DeleteAsync(
-            new DeleteShiftsRequest { Id = _shiftId! }
+            new DeleteShiftsRequest { Id = shiftId }
         );
         Assert.That(response, Is.Not.Null);
     }
