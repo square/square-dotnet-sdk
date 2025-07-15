@@ -45,17 +45,6 @@ public class SearchEventsTest : BaseMockServerTest
                     "points": 5,
                     "order_id": "PyATxhYLfsMqpVkcKJITPydgEYfZY"
                   },
-                  "create_reward": {
-                    "loyalty_program_id": "loyalty_program_id",
-                    "points": 1
-                  },
-                  "redeem_reward": {
-                    "loyalty_program_id": "loyalty_program_id"
-                  },
-                  "delete_reward": {
-                    "loyalty_program_id": "loyalty_program_id",
-                    "points": 1
-                  },
                   "adjust_points": {
                     "points": 1
                   },
@@ -63,34 +52,20 @@ public class SearchEventsTest : BaseMockServerTest
                   "location_id": "P034NEENMD09F",
                   "source": "LOYALTY_API",
                   "expire_points": {
-                    "loyalty_program_id": "loyalty_program_id",
                     "points": 1
                   },
                   "other_event": {
-                    "loyalty_program_id": "loyalty_program_id",
                     "points": 1
-                  },
-                  "accumulate_promotion_points": {
-                    "points": 1,
-                    "order_id": "order_id"
                   }
                 },
                 {
                   "id": "e4a5cbc3-a4d0-3779-98e9-e578885d9430",
                   "type": "REDEEM_REWARD",
                   "created_at": "2020-05-08T22:01:15.000Z",
-                  "create_reward": {
-                    "loyalty_program_id": "loyalty_program_id",
-                    "points": 1
-                  },
                   "redeem_reward": {
                     "loyalty_program_id": "d619f755-2d17-41f3-990d-c04ecedd64dd",
                     "reward_id": "d03f79f4-815f-3500-b851-cc1e68a457f9",
                     "order_id": "PyATxhYLfsMqpVkcKJITPydgEYfZY"
-                  },
-                  "delete_reward": {
-                    "loyalty_program_id": "loyalty_program_id",
-                    "points": 1
                   },
                   "adjust_points": {
                     "points": 1
@@ -99,16 +74,10 @@ public class SearchEventsTest : BaseMockServerTest
                   "location_id": "P034NEENMD09F",
                   "source": "LOYALTY_API",
                   "expire_points": {
-                    "loyalty_program_id": "loyalty_program_id",
                     "points": 1
                   },
                   "other_event": {
-                    "loyalty_program_id": "loyalty_program_id",
                     "points": 1
-                  },
-                  "accumulate_promotion_points": {
-                    "points": 1,
-                    "order_id": "order_id"
                   }
                 },
                 {
@@ -120,13 +89,6 @@ public class SearchEventsTest : BaseMockServerTest
                     "reward_id": "d03f79f4-815f-3500-b851-cc1e68a457f9",
                     "points": -10
                   },
-                  "redeem_reward": {
-                    "loyalty_program_id": "loyalty_program_id"
-                  },
-                  "delete_reward": {
-                    "loyalty_program_id": "loyalty_program_id",
-                    "points": 1
-                  },
                   "adjust_points": {
                     "points": 1
                   },
@@ -134,16 +96,10 @@ public class SearchEventsTest : BaseMockServerTest
                   "location_id": "location_id",
                   "source": "LOYALTY_API",
                   "expire_points": {
-                    "loyalty_program_id": "loyalty_program_id",
                     "points": 1
                   },
                   "other_event": {
-                    "loyalty_program_id": "loyalty_program_id",
                     "points": 1
-                  },
-                  "accumulate_promotion_points": {
-                    "points": 1,
-                    "order_id": "order_id"
                   }
                 }
               ],

@@ -15,7 +15,7 @@ public record LoyaltyEvent
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("id")]
-    public required string Id { get; set; }
+    public string? Id { get; set; }
 
     /// <summary>
     /// The type of the loyalty event.
@@ -29,7 +29,7 @@ public record LoyaltyEvent
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("created_at")]
-    public required string CreatedAt { get; set; }
+    public string? CreatedAt { get; set; }
 
     /// <summary>
     /// Provides metadata when the event `type` is `ACCUMULATE_POINTS`.
@@ -66,7 +66,7 @@ public record LoyaltyEvent
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("loyalty_account_id")]
-    public required string LoyaltyAccountId { get; set; }
+    public string? LoyaltyAccountId { get; set; }
 
     /// <summary>
     /// The ID of the [location](entity:Location) where the event occurred.

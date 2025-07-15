@@ -24,7 +24,7 @@ public record CustomerSegment
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("name")]
-    public required string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// The timestamp when the segment was created, in RFC 3339 format.

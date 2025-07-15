@@ -14,7 +14,7 @@ public record LoyaltyEventExpirePoints
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("loyalty_program_id")]
-    public required string LoyaltyProgramId { get; set; }
+    public string? LoyaltyProgramId { get; set; }
 
     /// <summary>
     /// The number of points expired.
