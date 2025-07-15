@@ -14,7 +14,7 @@ public record LoyaltyEventCreateReward
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("loyalty_program_id")]
-    public required string LoyaltyProgramId { get; set; }
+    public string? LoyaltyProgramId { get; set; }
 
     /// <summary>
     /// The Square-assigned ID of the created [loyalty reward](entity:LoyaltyReward).
@@ -29,7 +29,7 @@ public record LoyaltyEventCreateReward
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("points")]
-    public required int Points { get; set; }
+    public int? Points { get; set; }
 
     /// <summary>
     /// Additional properties received from the response, if any.

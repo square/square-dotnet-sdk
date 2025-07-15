@@ -28,7 +28,7 @@ public record LoyaltyEventAccumulatePromotionPoints
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("points")]
-    public required int Points { get; set; }
+    public int? Points { get; set; }
 
     /// <summary>
     /// The ID of the [order](entity:Order) for which the buyer earned the promotion points.
@@ -36,7 +36,7 @@ public record LoyaltyEventAccumulatePromotionPoints
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("order_id")]
-    public required string OrderId { get; set; }
+    public string? OrderId { get; set; }
 
     /// <summary>
     /// Additional properties received from the response, if any.

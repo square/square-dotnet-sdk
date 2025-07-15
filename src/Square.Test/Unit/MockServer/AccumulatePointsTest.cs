@@ -89,17 +89,6 @@ public class AccumulatePointsTest : BaseMockServerTest
                     "points": 6,
                     "order_id": "RFZfrdtm3mhO1oGzf5Cx7fEMsmGZY"
                   },
-                  "create_reward": {
-                    "loyalty_program_id": "loyalty_program_id",
-                    "points": 1
-                  },
-                  "redeem_reward": {
-                    "loyalty_program_id": "loyalty_program_id"
-                  },
-                  "delete_reward": {
-                    "loyalty_program_id": "loyalty_program_id",
-                    "points": 1
-                  },
                   "adjust_points": {
                     "points": 1
                   },
@@ -107,16 +96,10 @@ public class AccumulatePointsTest : BaseMockServerTest
                   "location_id": "P034NEENMD09F",
                   "source": "LOYALTY_API",
                   "expire_points": {
-                    "loyalty_program_id": "loyalty_program_id",
                     "points": 1
                   },
                   "other_event": {
-                    "loyalty_program_id": "loyalty_program_id",
                     "points": 1
-                  },
-                  "accumulate_promotion_points": {
-                    "points": 1,
-                    "order_id": "order_id"
                   }
                 }
               ]
