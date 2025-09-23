@@ -141,7 +141,7 @@ public partial class CustomAttributeDefinitionsClient
     ///             Schema = new Dictionary&lt;string, object&gt;()
     ///             {
     ///                 {
-    ///                     "ref",
+    ///                     "$ref",
     ///                     "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
     ///                 },
     ///             },

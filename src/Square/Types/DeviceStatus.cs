@@ -7,6 +7,7 @@ namespace Square;
 public record DeviceStatus
 {
     /// <summary>
+    /// Category of the device status.
     /// See [Category](#type-category) for possible values
     /// </summary>
     [JsonPropertyName("category")]

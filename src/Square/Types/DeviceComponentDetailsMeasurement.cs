@@ -9,6 +9,9 @@ namespace Square;
 /// </summary>
 public record DeviceComponentDetailsMeasurement
 {
+    /// <summary>
+    /// Value of measure.
+    /// </summary>
     [JsonPropertyName("value")]
     public int? Value { get; set; }
 

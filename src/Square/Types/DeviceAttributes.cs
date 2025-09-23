@@ -11,7 +11,7 @@ public record DeviceAttributes
     /// See [DeviceType](#type-devicetype) for possible values
     /// </summary>
     [JsonPropertyName("type")]
-    public string Type { get; set; } = "TERMINAL";
+    public required DeviceAttributesDeviceType Type { get; set; }
 
     /// <summary>
     /// The maker of the device.
@@ -42,6 +42,7 @@ public record DeviceAttributes
     /// The RFC 3339-formatted value of the most recent update to the device information.
     /// (Could represent any field update on the device.)
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("updated_at")]
     public string? UpdatedAt { get; set; }
 
