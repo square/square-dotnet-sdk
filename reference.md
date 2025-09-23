@@ -12557,7 +12557,7 @@ await client.Customers.CustomAttributeDefinitions.CreateAsync(
             Schema = new Dictionary<string, object>()
             {
                 {
-                    "ref",
+                    "$ref",
                     "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
                 },
             },
@@ -15421,7 +15421,7 @@ await client.Locations.CustomAttributeDefinitions.CreateAsync(
             Schema = new Dictionary<string, object>()
             {
                 {
-                    "ref",
+                    "$ref",
                     "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
                 },
             },
@@ -17531,7 +17531,7 @@ await client.Merchants.CustomAttributeDefinitions.CreateAsync(
             Schema = new Dictionary<string, object>()
             {
                 {
-                    "ref",
+                    "$ref",
                     "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
                 },
             },
@@ -18276,7 +18276,7 @@ await client.Orders.CustomAttributeDefinitions.CreateAsync(
             Schema = new Dictionary<string, object>()
             {
                 {
-                    "ref",
+                    "$ref",
                     "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
                 },
             },

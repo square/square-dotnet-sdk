@@ -16,6 +16,8 @@ public readonly record struct SubscriptionStatus : IStringEnum
 
     public static readonly SubscriptionStatus Paused = new(Values.Paused);
 
+    public static readonly SubscriptionStatus Completed = new(Values.Completed);
+
     public SubscriptionStatus(string value)
     {
         Value = value;
@@ -71,5 +73,7 @@ public readonly record struct SubscriptionStatus : IStringEnum
         public const string Deactivated = "DEACTIVATED";
 
         public const string Paused = "PAUSED";
+
+        public const string Completed = "COMPLETED";
     }
 }

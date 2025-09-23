@@ -168,6 +168,12 @@ public record Subscription
     public IEnumerable<Phase>? Phases { get; set; }
 
     /// <summary>
+    /// The `YYYY-MM-DD`-formatted date when the subscription enters a terminal state.
+    /// </summary>
+    [JsonPropertyName("completed_date")]
+    public string? CompletedDate { get; set; }
+
+    /// <summary>
     /// Additional properties received from the response, if any.
     /// </summary>
     /// <remarks>

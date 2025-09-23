@@ -38,6 +38,12 @@ public record DeviceComponentDetailsWiFiDetails
     public DeviceComponentDetailsMeasurement? SignalStrength { get; set; }
 
     /// <summary>
+    /// The mac address of the device in this network.
+    /// </summary>
+    [JsonPropertyName("mac_address")]
+    public string? MacAddress { get; set; }
+
+    /// <summary>
     /// Additional properties received from the response, if any.
     /// </summary>
     /// <remarks>

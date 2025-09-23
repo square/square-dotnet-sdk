@@ -18,6 +18,8 @@ public readonly record struct SubscriptionActionType : IStringEnum
         Values.ChangeBillingAnchorDate
     );
 
+    public static readonly SubscriptionActionType Complete = new(Values.Complete);
+
     public SubscriptionActionType(string value)
     {
         Value = value;
@@ -73,5 +75,7 @@ public readonly record struct SubscriptionActionType : IStringEnum
         public const string SwapPlan = "SWAP_PLAN";
 
         public const string ChangeBillingAnchorDate = "CHANGE_BILLING_ANCHOR_DATE";
+
+        public const string Complete = "COMPLETE";
     }
 }
