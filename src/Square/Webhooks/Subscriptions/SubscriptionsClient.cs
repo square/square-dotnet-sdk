@@ -81,7 +81,15 @@ public partial class SubscriptionsClient
     /// Lists all webhook subscriptions owned by your application.
     /// </summary>
     /// <example><code>
-    /// await client.Webhooks.Subscriptions.ListAsync(new ListSubscriptionsRequest());
+    /// await client.Webhooks.Subscriptions.ListAsync(
+    ///     new ListSubscriptionsRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         IncludeDisabled = true,
+    ///         SortOrder = SortOrder.Desc,
+    ///         Limit = 1,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<WebhookSubscription>> ListAsync(
         ListSubscriptionsRequest request,

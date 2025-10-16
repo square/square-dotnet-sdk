@@ -86,7 +86,12 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributeDefinitions.ListAsync(
-    ///     new ListCustomAttributeDefinitionsRequest()
+    ///     new ListCustomAttributeDefinitionsRequest
+    ///     {
+    ///         VisibilityFilter = VisibilityFilter.All,
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttributeDefinition>> ListAsync(
@@ -204,7 +209,7 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributeDefinitions.GetAsync(
-    ///     new GetCustomAttributeDefinitionsRequest { Key = "key" }
+    ///     new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
     /// );
     /// </code></example>
     public async Task<RetrieveMerchantCustomAttributeDefinitionResponse> GetAsync(

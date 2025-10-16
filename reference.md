@@ -328,7 +328,13 @@ Provides summary information for a merchant's online store orders.
 
 ```csharp
 await client.V1Transactions.V1ListOrdersAsync(
-    new V1ListOrdersRequest { LocationId = "location_id" }
+    new V1ListOrdersRequest
+    {
+        LocationId = "location_id",
+        Order = SortOrder.Desc,
+        Limit = 1,
+        BatchToken = "batch_token",
+    }
 );
 ```
 </dd>
@@ -569,7 +575,14 @@ Returns a list of [BankAccount](entity:BankAccount) objects linked to a Square a
 <dd>
 
 ```csharp
-await client.BankAccounts.ListAsync(new ListBankAccountsRequest());
+await client.BankAccounts.ListAsync(
+    new ListBankAccountsRequest
+    {
+        Cursor = "cursor",
+        Limit = 1,
+        LocationId = "location_id",
+    }
+);
 ```
 </dd>
 </dl>
@@ -740,7 +753,18 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 <dd>
 
 ```csharp
-await client.Bookings.ListAsync(new ListBookingsRequest());
+await client.Bookings.ListAsync(
+    new ListBookingsRequest
+    {
+        Limit = 1,
+        Cursor = "cursor",
+        CustomerId = "customer_id",
+        TeamMemberId = "team_member_id",
+        LocationId = "location_id",
+        StartAtMin = "start_at_min",
+        StartAtMax = "start_at_max",
+    }
+);
 ```
 </dd>
 </dl>
@@ -1320,7 +1344,16 @@ A max of 25 cards will be returned.
 <dd>
 
 ```csharp
-await client.Cards.ListAsync(new ListCardsRequest());
+await client.Cards.ListAsync(
+    new ListCardsRequest
+    {
+        Cursor = "cursor",
+        CustomerId = "customer_id",
+        IncludeDisabled = true,
+        ReferenceId = "reference_id",
+        SortOrder = SortOrder.Desc,
+    }
+);
 ```
 </dd>
 </dl>
@@ -1827,7 +1860,14 @@ and set the `include_deleted_objects` attribute value to `true`.
 <dd>
 
 ```csharp
-await client.Catalog.ListAsync(new ListCatalogRequest());
+await client.Catalog.ListAsync(
+    new ListCatalogRequest
+    {
+        Cursor = "cursor",
+        Types = "types",
+        CatalogVersion = 1000000,
+    }
+);
 ```
 </dd>
 </dl>
@@ -2158,6 +2198,183 @@ await client.Catalog.UpdateItemTaxesAsync(
 </dl>
 </details>
 
+## Channels
+<details><summary><code>client.Channels.<a href="/src/Square/Channels/ChannelsClient.cs">ListAsync</a>(ListChannelsRequest { ... }) -> Pager<Channel></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Channels.ListAsync(
+    new ListChannelsRequest
+    {
+        ReferenceType = ReferenceType.UnknownType,
+        ReferenceId = "reference_id",
+        Status = ChannelStatus.Active,
+        Cursor = "cursor",
+        Limit = 1,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ListChannelsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Channels.<a href="/src/Square/Channels/ChannelsClient.cs">BulkRetrieveAsync</a>(BulkRetrieveChannelsRequest { ... }) -> BulkRetrieveChannelsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Channels.BulkRetrieveAsync(
+    new BulkRetrieveChannelsRequest
+    {
+        ChannelIds = new List<string>() { "CH_9C03D0B59", "CH_6X139B5MN", "NOT_EXISTING" },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `BulkRetrieveChannelsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Channels.<a href="/src/Square/Channels/ChannelsClient.cs">GetAsync</a>(GetChannelsRequest { ... }) -> RetrieveChannelResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Channels.GetAsync(new GetChannelsRequest { ChannelId = "channel_id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `GetChannelsRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Customers
 <details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">ListAsync</a>(ListCustomersRequest { ... }) -> Pager<Customer></code></summary>
 <dl>
@@ -2190,7 +2407,16 @@ profiles can take closer to one minute or longer, especially during network inci
 <dd>
 
 ```csharp
-await client.Customers.ListAsync(new ListCustomersRequest());
+await client.Customers.ListAsync(
+    new ListCustomersRequest
+    {
+        Cursor = "cursor",
+        Limit = 1,
+        SortField = CustomerSortField.Default,
+        SortOrder = SortOrder.Desc,
+        Count = true,
+    }
+);
 ```
 </dd>
 </dl>
@@ -2865,7 +3091,9 @@ To delete a customer profile that was created by merging existing profiles, you 
 <dd>
 
 ```csharp
-await client.Customers.DeleteAsync(new DeleteCustomersRequest { CustomerId = "customer_id" });
+await client.Customers.DeleteAsync(
+    new DeleteCustomersRequest { CustomerId = "customer_id", Version = 1000000 }
+);
 ```
 </dd>
 </dl>
@@ -2921,7 +3149,15 @@ devices are supported.
 <dd>
 
 ```csharp
-await client.Devices.ListAsync(new ListDevicesRequest());
+await client.Devices.ListAsync(
+    new ListDevicesRequest
+    {
+        Cursor = "cursor",
+        SortOrder = SortOrder.Desc,
+        Limit = 1,
+        LocationId = "location_id",
+    }
+);
 ```
 </dd>
 </dl>
@@ -3030,7 +3266,14 @@ Returns a list of disputes associated with a particular account.
 <dd>
 
 ```csharp
-await client.Disputes.ListAsync(new ListDisputesRequest());
+await client.Disputes.ListAsync(
+    new ListDisputesRequest
+    {
+        Cursor = "cursor",
+        States = DisputeState.InquiryEvidenceRequired,
+        LocationId = "location_id",
+    }
+);
 ```
 </dd>
 </dl>
@@ -3321,7 +3564,15 @@ await client.Disputes.SubmitEvidenceAsync(
 <dd>
 
 ```csharp
-await client.Employees.ListAsync(new ListEmployeesRequest());
+await client.Employees.ListAsync(
+    new ListEmployeesRequest
+    {
+        LocationId = "location_id",
+        Status = EmployeeStatus.Active,
+        Limit = 1,
+        Cursor = "cursor",
+    }
+);
 ```
 </dd>
 </dl>
@@ -3564,7 +3815,7 @@ Lists all event types that you can subscribe to as webhooks or query using the E
 <dd>
 
 ```csharp
-await client.Events.ListEventTypesAsync(new ListEventTypesRequest());
+await client.Events.ListEventTypesAsync(new ListEventTypesRequest { ApiVersion = "api_version" });
 ```
 </dd>
 </dl>
@@ -3620,7 +3871,16 @@ a subset of the gift cards. Results are sorted by `created_at` in ascending orde
 <dd>
 
 ```csharp
-await client.GiftCards.ListAsync(new ListGiftCardsRequest());
+await client.GiftCards.ListAsync(
+    new ListGiftCardsRequest
+    {
+        Type = "type",
+        State = "state",
+        Limit = 1,
+        Cursor = "cursor",
+        CustomerId = "customer_id",
+    }
+);
 ```
 </dd>
 </dl>
@@ -4740,7 +5000,14 @@ For more sophisticated queries, use a batch endpoint.
 <dd>
 
 ```csharp
-await client.Inventory.GetAsync(new GetInventoryRequest { CatalogObjectId = "catalog_object_id" });
+await client.Inventory.GetAsync(
+    new GetInventoryRequest
+    {
+        CatalogObjectId = "catalog_object_id",
+        LocationIds = "location_ids",
+        Cursor = "cursor",
+    }
+);
 ```
 </dd>
 </dl>
@@ -4807,7 +5074,12 @@ sophisticated queries, use a batch endpoint.
 
 ```csharp
 await client.Inventory.ChangesAsync(
-    new ChangesInventoryRequest { CatalogObjectId = "catalog_object_id" }
+    new ChangesInventoryRequest
+    {
+        CatalogObjectId = "catalog_object_id",
+        LocationIds = "location_ids",
+        Cursor = "cursor",
+    }
 );
 ```
 </dd>
@@ -4865,7 +5137,14 @@ use in a subsequent request to retrieve the next set of invoices.
 <dd>
 
 ```csharp
-await client.Invoices.ListAsync(new ListInvoicesRequest { LocationId = "location_id" });
+await client.Invoices.ListAsync(
+    new ListInvoicesRequest
+    {
+        LocationId = "location_id",
+        Cursor = "cursor",
+        Limit = 1,
+    }
+);
 ```
 </dd>
 </dl>
@@ -5241,7 +5520,9 @@ invoice (you cannot delete a published invoice, including one that is scheduled 
 <dd>
 
 ```csharp
-await client.Invoices.DeleteAsync(new DeleteInvoicesRequest { InvoiceId = "invoice_id" });
+await client.Invoices.DeleteAsync(
+    new DeleteInvoicesRequest { InvoiceId = "invoice_id", Version = 1 }
+);
 ```
 </dd>
 </dl>
@@ -6794,7 +7075,7 @@ endpoint to retrieve the merchant information.
 <dd>
 
 ```csharp
-await client.Merchants.ListAsync(new ListMerchantsRequest());
+await client.Merchants.ListAsync(new ListMerchantsRequest { Cursor = 1 });
 ```
 </dd>
 </dl>
@@ -7782,7 +8063,26 @@ The maximum results per page is 100.
 <dd>
 
 ```csharp
-await client.Payments.ListAsync(new ListPaymentsRequest());
+await client.Payments.ListAsync(
+    new ListPaymentsRequest
+    {
+        BeginTime = "begin_time",
+        EndTime = "end_time",
+        SortOrder = "sort_order",
+        Cursor = "cursor",
+        LocationId = "location_id",
+        Total = 1000000,
+        Last4 = "last_4",
+        CardBrand = "card_brand",
+        Limit = 1,
+        IsOfflinePayment = true,
+        OfflineBeginTime = "offline_begin_time",
+        OfflineEndTime = "offline_end_time",
+        UpdatedAtBeginTime = "updated_at_begin_time",
+        UpdatedAtEndTime = "updated_at_end_time",
+        SortField = ListPaymentsRequestSortField.CreatedAt,
+    }
+);
 ```
 </dd>
 </dl>
@@ -8215,7 +8515,18 @@ To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
 <dd>
 
 ```csharp
-await client.Payouts.ListAsync(new ListPayoutsRequest());
+await client.Payouts.ListAsync(
+    new ListPayoutsRequest
+    {
+        LocationId = "location_id",
+        Status = PayoutStatus.Sent,
+        BeginTime = "begin_time",
+        EndTime = "end_time",
+        SortOrder = SortOrder.Desc,
+        Cursor = "cursor",
+        Limit = 1,
+    }
+);
 ```
 </dd>
 </dl>
@@ -8325,7 +8636,15 @@ To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
 <dd>
 
 ```csharp
-await client.Payouts.ListEntriesAsync(new ListEntriesPayoutsRequest { PayoutId = "payout_id" });
+await client.Payouts.ListEntriesAsync(
+    new ListEntriesPayoutsRequest
+    {
+        PayoutId = "payout_id",
+        SortOrder = SortOrder.Desc,
+        Cursor = "cursor",
+        Limit = 1,
+    }
+);
 ```
 </dd>
 </dl>
@@ -8385,7 +8704,22 @@ The maximum results per page is 100.
 <dd>
 
 ```csharp
-await client.Refunds.ListAsync(new ListRefundsRequest());
+await client.Refunds.ListAsync(
+    new ListRefundsRequest
+    {
+        BeginTime = "begin_time",
+        EndTime = "end_time",
+        SortOrder = "sort_order",
+        Cursor = "cursor",
+        LocationId = "location_id",
+        Status = "status",
+        SourceType = "source_type",
+        Limit = 1,
+        UpdatedAtBeginTime = "updated_at_begin_time",
+        UpdatedAtEndTime = "updated_at_end_time",
+        SortField = ListPaymentRefundsRequestSortField.CreatedAt,
+    }
+);
 ```
 </dd>
 </dl>
@@ -9008,7 +9342,7 @@ Retrieves a specific subscription.
 
 ```csharp
 await client.Subscriptions.GetAsync(
-    new GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
+    new GetSubscriptionsRequest { SubscriptionId = "subscription_id", Include = "include" }
 );
 ```
 </dd>
@@ -9304,7 +9638,12 @@ Lists all [events](https://developer.squareup.com/docs/subscriptions-api/actions
 
 ```csharp
 await client.Subscriptions.ListEventsAsync(
-    new ListEventsSubscriptionsRequest { SubscriptionId = "subscription_id" }
+    new ListEventsSubscriptionsRequest
+    {
+        SubscriptionId = "subscription_id",
+        Cursor = "cursor",
+        Limit = 1,
+    }
 );
 ```
 </dd>
@@ -10070,7 +10409,7 @@ Lists jobs in a seller account. Results are sorted by title in ascending order.
 <dd>
 
 ```csharp
-await client.Team.ListJobsAsync(new ListJobsRequest());
+await client.Team.ListJobsAsync(new ListJobsRequest { Cursor = "cursor" });
 ```
 </dd>
 </dl>
@@ -10434,6 +10773,628 @@ await client.Terminal.DismissTerminalRefundAsync(
 <dd>
 
 **request:** `DismissTerminalRefundRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## TransferOrders
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">CreateAsync</a>(CreateTransferOrderRequest { ... }) -> CreateTransferOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new transfer order in [DRAFT](entity:TransferOrderStatus) status. A transfer order represents the intent 
+to move [CatalogItemVariation](entity:CatalogItemVariation)s from one [Location](entity:Location) to another. 
+The source and destination locations must be different and must belong to your Square account.
+
+In [DRAFT](entity:TransferOrderStatus) status, you can:
+- Add or remove items
+- Modify quantities
+- Update shipping information
+- Delete the entire order via [DeleteTransferOrder](api-endpoint:TransferOrders-DeleteTransferOrder)
+
+The request requires source_location_id and destination_location_id.
+Inventory levels are not affected until the order is started via 
+[StartTransferOrder](api-endpoint:TransferOrders-StartTransferOrder).
+
+Common integration points:
+- Sync with warehouse management systems
+- Automate regular stock transfers
+- Initialize transfers from inventory optimization systems
+
+Creates a [transfer_order.created](webhook:transfer_order.created) webhook event.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.TransferOrders.CreateAsync(
+    new CreateTransferOrderRequest
+    {
+        IdempotencyKey = "65cc0586-3e82-384s-b524-3885cffd52",
+        TransferOrder = new CreateTransferOrderData
+        {
+            SourceLocationId = "EXAMPLE_SOURCE_LOCATION_ID_123",
+            DestinationLocationId = "EXAMPLE_DEST_LOCATION_ID_456",
+            ExpectedAt = "2025-11-09T05:00:00Z",
+            Notes = "Example transfer order for inventory redistribution between locations",
+            TrackingNumber = "TRACK123456789",
+            CreatedByTeamMemberId = "EXAMPLE_TEAM_MEMBER_ID_789",
+            LineItems = new List<CreateTransferOrderLineData>()
+            {
+                new CreateTransferOrderLineData
+                {
+                    ItemVariationId = "EXAMPLE_ITEM_VARIATION_ID_001",
+                    QuantityOrdered = "5",
+                },
+                new CreateTransferOrderLineData
+                {
+                    ItemVariationId = "EXAMPLE_ITEM_VARIATION_ID_002",
+                    QuantityOrdered = "3",
+                },
+            },
+        },
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateTransferOrderRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">SearchAsync</a>(SearchTransferOrdersRequest { ... }) -> Pager<TransferOrder></code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Searches for transfer orders using filters. Returns a paginated list of matching
+[TransferOrder](entity:TransferOrder)s sorted by creation date.
+
+Common search scenarios:
+- Find orders for a source [Location](entity:Location)
+- Find orders for a destination [Location](entity:Location)
+- Find orders in a particular [TransferOrderStatus](entity:TransferOrderStatus)
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.TransferOrders.SearchAsync(
+    new SearchTransferOrdersRequest
+    {
+        Query = new TransferOrderQuery
+        {
+            Filter = new TransferOrderFilter
+            {
+                SourceLocationIds = new List<string>() { "EXAMPLE_SOURCE_LOCATION_ID_123" },
+                DestinationLocationIds = new List<string>() { "EXAMPLE_DEST_LOCATION_ID_456" },
+                Statuses = new List<TransferOrderStatus>()
+                {
+                    TransferOrderStatus.Started,
+                    TransferOrderStatus.PartiallyReceived,
+                },
+            },
+            Sort = new TransferOrderSort
+            {
+                Field = TransferOrderSortField.UpdatedAt,
+                Order = SortOrder.Desc,
+            },
+        },
+        Cursor = "eyJsYXN0X3VwZGF0ZWRfYXQiOjE3NTMxMTg2NjQ4NzN9",
+        Limit = 10,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `SearchTransferOrdersRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">GetAsync</a>(GetTransferOrdersRequest { ... }) -> RetrieveTransferOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a specific [TransferOrder](entity:TransferOrder) by ID. Returns the complete
+order details including:
+
+- Basic information (status, dates, notes)
+- Line items with ordered and received quantities
+- Source and destination [Location](entity:Location)s
+- Tracking information (if available)
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.TransferOrders.GetAsync(
+    new GetTransferOrdersRequest { TransferOrderId = "transfer_order_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `GetTransferOrdersRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">UpdateAsync</a>(UpdateTransferOrderRequest { ... }) -> UpdateTransferOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Updates an existing transfer order. This endpoint supports sparse updates,
+allowing you to modify specific fields without affecting others.
+
+Creates a [transfer_order.updated](webhook:transfer_order.updated) webhook event.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.TransferOrders.UpdateAsync(
+    new UpdateTransferOrderRequest
+    {
+        TransferOrderId = "transfer_order_id",
+        IdempotencyKey = "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+        TransferOrder = new UpdateTransferOrderData
+        {
+            SourceLocationId = "EXAMPLE_SOURCE_LOCATION_ID_789",
+            DestinationLocationId = "EXAMPLE_DEST_LOCATION_ID_101",
+            ExpectedAt = "2025-11-10T08:00:00Z",
+            Notes = "Updated: Priority transfer due to low stock at destination",
+            TrackingNumber = "TRACK987654321",
+            LineItems = new List<UpdateTransferOrderLineData>()
+            {
+                new UpdateTransferOrderLineData { Uid = "1", QuantityOrdered = "7" },
+                new UpdateTransferOrderLineData
+                {
+                    ItemVariationId = "EXAMPLE_NEW_ITEM_VARIATION_ID_003",
+                    QuantityOrdered = "2",
+                },
+                new UpdateTransferOrderLineData { Uid = "2", Remove = true },
+            },
+        },
+        Version = 1753109537351,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `UpdateTransferOrderRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">DeleteAsync</a>(DeleteTransferOrdersRequest { ... }) -> DeleteTransferOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Deletes a transfer order in [DRAFT](entity:TransferOrderStatus) status.
+Only draft orders can be deleted. Once an order is started via 
+[StartTransferOrder](api-endpoint:TransferOrders-StartTransferOrder), it can no longer be deleted.
+
+Creates a [transfer_order.deleted](webhook:transfer_order.deleted) webhook event.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.TransferOrders.DeleteAsync(
+    new DeleteTransferOrdersRequest { TransferOrderId = "transfer_order_id", Version = 1000000 }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `DeleteTransferOrdersRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">CancelAsync</a>(CancelTransferOrderRequest { ... }) -> CancelTransferOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancels a transfer order in [STARTED](entity:TransferOrderStatus) or 
+[PARTIALLY_RECEIVED](entity:TransferOrderStatus) status. Any unreceived quantities will no
+longer be receivable and will be immediately returned to the source [Location](entity:Location)'s inventory.
+
+Common reasons for cancellation:
+- Items no longer needed at destination
+- Source location needs the inventory
+- Order created in error
+
+Creates a [transfer_order.updated](webhook:transfer_order.updated) webhook event.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.TransferOrders.CancelAsync(
+    new CancelTransferOrderRequest
+    {
+        TransferOrderId = "transfer_order_id",
+        IdempotencyKey = "65cc0586-3e82-4d08-b524-3885cffd52",
+        Version = 1753117449752,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CancelTransferOrderRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">ReceiveAsync</a>(ReceiveTransferOrderRequest { ... }) -> ReceiveTransferOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Records receipt of [CatalogItemVariation](entity:CatalogItemVariation)s for a transfer order.
+This endpoint supports partial receiving - you can receive items in multiple batches.
+
+For each line item, you can specify:
+- Quantity received in good condition (added to destination inventory with [InventoryState](entity:InventoryState) of IN_STOCK)
+- Quantity damaged during transit/handling (added to destination inventory with [InventoryState](entity:InventoryState) of WASTE)
+- Quantity canceled (returned to source location's inventory)
+
+The order must be in [STARTED](entity:TransferOrderStatus) or [PARTIALLY_RECEIVED](entity:TransferOrderStatus) status.
+Received quantities are added to the destination [Location](entity:Location)'s inventory according to their condition.
+Canceled quantities are immediately returned to the source [Location](entity:Location)'s inventory.
+
+When all items are either received, damaged, or canceled, the order moves to
+[COMPLETED](entity:TransferOrderStatus) status.
+
+Creates a [transfer_order.updated](webhook:transfer_order.updated) webhook event.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.TransferOrders.ReceiveAsync(
+    new ReceiveTransferOrderRequest
+    {
+        TransferOrderId = "transfer_order_id",
+        IdempotencyKey = "EXAMPLE_IDEMPOTENCY_KEY_101",
+        Receipt = new TransferOrderGoodsReceipt
+        {
+            LineItems = new List<TransferOrderGoodsReceiptLineItem>()
+            {
+                new TransferOrderGoodsReceiptLineItem
+                {
+                    TransferOrderLineUid = "transfer_order_line_uid",
+                    QuantityReceived = "3",
+                    QuantityDamaged = "1",
+                    QuantityCanceled = "1",
+                },
+                new TransferOrderGoodsReceiptLineItem
+                {
+                    TransferOrderLineUid = "transfer_order_line_uid",
+                    QuantityReceived = "2",
+                    QuantityCanceled = "1",
+                },
+            },
+        },
+        Version = 1753118664873,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `ReceiveTransferOrderRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">StartAsync</a>(StartTransferOrderRequest { ... }) -> StartTransferOrderResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Changes a [DRAFT](entity:TransferOrderStatus) transfer order to [STARTED](entity:TransferOrderStatus) status.
+This decrements inventory at the source [Location](entity:Location) and marks it as in-transit.
+
+The order must be in [DRAFT](entity:TransferOrderStatus) status and have all required fields populated.
+Once started, the order can no longer be deleted, but it can be canceled via 
+[CancelTransferOrder](api-endpoint:TransferOrders-CancelTransferOrder).
+
+Creates a [transfer_order.updated](webhook:transfer_order.updated) webhook event.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.TransferOrders.StartAsync(
+    new StartTransferOrderRequest
+    {
+        TransferOrderId = "transfer_order_id",
+        IdempotencyKey = "EXAMPLE_IDEMPOTENCY_KEY_789",
+        Version = 1753109537351,
+    }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `StartTransferOrderRequest` 
     
 </dd>
 </dl>
@@ -10957,7 +11918,7 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 
 ```csharp
 await client.Bookings.CustomAttributeDefinitions.ListAsync(
-    new ListCustomAttributeDefinitionsRequest()
+    new ListCustomAttributeDefinitionsRequest { Limit = 1, Cursor = "cursor" }
 );
 ```
 </dd>
@@ -11081,7 +12042,7 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 
 ```csharp
 await client.Bookings.CustomAttributeDefinitions.GetAsync(
-    new GetCustomAttributeDefinitionsRequest { Key = "key" }
+    new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
 );
 ```
 </dd>
@@ -11415,7 +12376,13 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 
 ```csharp
 await client.Bookings.CustomAttributes.ListAsync(
-    new ListCustomAttributesRequest { BookingId = "booking_id" }
+    new ListCustomAttributesRequest
+    {
+        BookingId = "booking_id",
+        Limit = 1,
+        Cursor = "cursor",
+        WithDefinitions = true,
+    }
 );
 ```
 </dd>
@@ -11474,7 +12441,13 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 
 ```csharp
 await client.Bookings.CustomAttributes.GetAsync(
-    new GetCustomAttributesRequest { BookingId = "booking_id", Key = "key" }
+    new GetCustomAttributesRequest
+    {
+        BookingId = "booking_id",
+        Key = "key",
+        WithDefinition = true,
+        Version = 1,
+    }
 );
 ```
 </dd>
@@ -11659,7 +12632,9 @@ Lists location booking profiles of a seller.
 <dd>
 
 ```csharp
-await client.Bookings.LocationProfiles.ListAsync(new ListLocationProfilesRequest());
+await client.Bookings.LocationProfiles.ListAsync(
+    new ListLocationProfilesRequest { Limit = 1, Cursor = "cursor" }
+);
 ```
 </dd>
 </dl>
@@ -11714,7 +12689,15 @@ Lists booking profiles for team members.
 <dd>
 
 ```csharp
-await client.Bookings.TeamMemberProfiles.ListAsync(new ListTeamMemberProfilesRequest());
+await client.Bookings.TeamMemberProfiles.ListAsync(
+    new ListTeamMemberProfilesRequest
+    {
+        BookableOnly = true,
+        Limit = 1,
+        Cursor = "cursor",
+        LocationId = "location_id",
+    }
+);
 ```
 </dd>
 </dl>
@@ -11826,7 +12809,17 @@ in a date range.
 <dd>
 
 ```csharp
-await client.CashDrawers.Shifts.ListAsync(new ListShiftsRequest { LocationId = "location_id" });
+await client.CashDrawers.Shifts.ListAsync(
+    new ListShiftsRequest
+    {
+        LocationId = "location_id",
+        SortOrder = SortOrder.Desc,
+        BeginTime = "begin_time",
+        EndTime = "end_time",
+        Limit = 1,
+        Cursor = "cursor",
+    }
+);
 ```
 </dd>
 </dl>
@@ -11938,7 +12931,13 @@ Provides a paginated list of events for a single cash drawer shift.
 
 ```csharp
 await client.CashDrawers.Shifts.ListEventsAsync(
-    new ListEventsShiftsRequest { ShiftId = "shift_id", LocationId = "location_id" }
+    new ListEventsShiftsRequest
+    {
+        ShiftId = "shift_id",
+        LocationId = "location_id",
+        Limit = 1,
+        Cursor = "cursor",
+    }
 );
 ```
 </dd>
@@ -12065,7 +13064,15 @@ any [CatalogTax](entity:CatalogTax) objects that apply to it.
 <dd>
 
 ```csharp
-await client.Catalog.Object.GetAsync(new GetObjectRequest { ObjectId = "object_id" });
+await client.Catalog.Object.GetAsync(
+    new GetObjectRequest
+    {
+        ObjectId = "object_id",
+        IncludeRelatedObjects = true,
+        CatalogVersion = 1000000,
+        IncludeCategoryPathToRoot = true,
+    }
+);
 ```
 </dd>
 </dl>
@@ -12183,7 +13190,9 @@ Lists all payment links.
 <dd>
 
 ```csharp
-await client.Checkout.PaymentLinks.ListAsync(new ListPaymentLinksRequest());
+await client.Checkout.PaymentLinks.ListAsync(
+    new ListPaymentLinksRequest { Cursor = "cursor", Limit = 1 }
+);
 ```
 </dd>
 </dl>
@@ -12483,7 +13492,7 @@ seller-defined custom attributes (also known as custom fields) are always set to
 
 ```csharp
 await client.Customers.CustomAttributeDefinitions.ListAsync(
-    new ListCustomAttributeDefinitionsRequest()
+    new ListCustomAttributeDefinitionsRequest { Limit = 1, Cursor = "cursor" }
 );
 ```
 </dd>
@@ -12625,7 +13634,7 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note t
 
 ```csharp
 await client.Customers.CustomAttributeDefinitions.GetAsync(
-    new GetCustomAttributeDefinitionsRequest { Key = "key" }
+    new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
 );
 ```
 </dd>
@@ -12941,7 +13950,7 @@ Retrieves the list of customer groups of a business.
 <dd>
 
 ```csharp
-await client.Customers.Groups.ListAsync(new ListGroupsRequest());
+await client.Customers.Groups.ListAsync(new ListGroupsRequest { Cursor = "cursor", Limit = 1 });
 ```
 </dd>
 </dl>
@@ -13340,7 +14349,7 @@ Retrieves the list of customer segments of a business.
 <dd>
 
 ```csharp
-await client.Customers.Segments.ListAsync(new ListSegmentsRequest());
+await client.Customers.Segments.ListAsync(new ListSegmentsRequest { Cursor = "cursor", Limit = 1 });
 ```
 </dd>
 </dl>
@@ -13588,7 +14597,13 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Customers.CustomAttributes.ListAsync(
-    new ListCustomAttributesRequest { CustomerId = "customer_id" }
+    new ListCustomAttributesRequest
+    {
+        CustomerId = "customer_id",
+        Limit = 1,
+        Cursor = "cursor",
+        WithDefinitions = true,
+    }
 );
 ```
 </dd>
@@ -13651,7 +14666,13 @@ To retrieve a custom attribute owned by another application, the `visibility` se
 
 ```csharp
 await client.Customers.CustomAttributes.GetAsync(
-    new GetCustomAttributesRequest { CustomerId = "customer_id", Key = "key" }
+    new GetCustomAttributesRequest
+    {
+        CustomerId = "customer_id",
+        Key = "key",
+        WithDefinition = true,
+        Version = 1,
+    }
 );
 ```
 </dd>
@@ -13836,7 +14857,15 @@ Lists all DeviceCodes associated with the merchant.
 <dd>
 
 ```csharp
-await client.Devices.Codes.ListAsync(new ListCodesRequest());
+await client.Devices.Codes.ListAsync(
+    new ListCodesRequest
+    {
+        Cursor = "cursor",
+        LocationId = "location_id",
+        ProductType = "TERMINAL_API",
+        Status = DeviceCodeStatus.Unknown,
+    }
+);
 ```
 </dd>
 </dl>
@@ -14011,7 +15040,9 @@ Returns a list of evidence associated with a dispute.
 <dd>
 
 ```csharp
-await client.Disputes.Evidence.ListAsync(new ListEvidenceRequest { DisputeId = "dispute_id" });
+await client.Disputes.Evidence.ListAsync(
+    new ListEvidenceRequest { DisputeId = "dispute_id", Cursor = "cursor" }
+);
 ```
 </dd>
 </dl>
@@ -14184,7 +15215,19 @@ for all gift cards in a specific region, or for activities within a time window.
 <dd>
 
 ```csharp
-await client.GiftCards.Activities.ListAsync(new ListActivitiesRequest());
+await client.GiftCards.Activities.ListAsync(
+    new ListActivitiesRequest
+    {
+        GiftCardId = "gift_card_id",
+        Type = "type",
+        LocationId = "location_id",
+        BeginTime = "begin_time",
+        EndTime = "end_time",
+        Limit = 1,
+        Cursor = "cursor",
+        SortOrder = "sort_order",
+    }
+);
 ```
 </dd>
 </dl>
@@ -14310,7 +15353,14 @@ Returns a paginated list of `BreakType` instances for a business.
 <dd>
 
 ```csharp
-await client.Labor.BreakTypes.ListAsync(new ListBreakTypesRequest());
+await client.Labor.BreakTypes.ListAsync(
+    new ListBreakTypesRequest
+    {
+        LocationId = "location_id",
+        Limit = 1,
+        Cursor = "cursor",
+    }
+);
 ```
 </dd>
 </dl>
@@ -14621,7 +15671,14 @@ Returns a paginated list of `EmployeeWage` instances for a business.
 <dd>
 
 ```csharp
-await client.Labor.EmployeeWages.ListAsync(new ListEmployeeWagesRequest());
+await client.Labor.EmployeeWages.ListAsync(
+    new ListEmployeeWagesRequest
+    {
+        EmployeeId = "employee_id",
+        Limit = 1,
+        Cursor = "cursor",
+    }
+);
 ```
 </dd>
 </dl>
@@ -15118,7 +16175,14 @@ Returns a paginated list of `TeamMemberWage` instances for a business.
 <dd>
 
 ```csharp
-await client.Labor.TeamMemberWages.ListAsync(new ListTeamMemberWagesRequest());
+await client.Labor.TeamMemberWages.ListAsync(
+    new ListTeamMemberWagesRequest
+    {
+        TeamMemberId = "team_member_id",
+        Limit = 1,
+        Cursor = "cursor",
+    }
+);
 ```
 </dd>
 </dl>
@@ -15227,7 +16291,9 @@ Returns a list of `WorkweekConfig` instances for a business.
 <dd>
 
 ```csharp
-await client.Labor.WorkweekConfigs.ListAsync(new ListWorkweekConfigsRequest());
+await client.Labor.WorkweekConfigs.ListAsync(
+    new ListWorkweekConfigsRequest { Limit = 1, Cursor = "cursor" }
+);
 ```
 </dd>
 </dl>
@@ -15351,7 +16417,12 @@ applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`
 
 ```csharp
 await client.Locations.CustomAttributeDefinitions.ListAsync(
-    new ListCustomAttributeDefinitionsRequest()
+    new ListCustomAttributeDefinitionsRequest
+    {
+        VisibilityFilter = VisibilityFilter.All,
+        Limit = 1,
+        Cursor = "cursor",
+    }
 );
 ```
 </dd>
@@ -15487,7 +16558,7 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Locations.CustomAttributeDefinitions.GetAsync(
-    new GetCustomAttributeDefinitionsRequest { Key = "key" }
+    new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
 );
 ```
 </dd>
@@ -15871,7 +16942,14 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Locations.CustomAttributes.ListAsync(
-    new ListCustomAttributesRequest { LocationId = "location_id" }
+    new ListCustomAttributesRequest
+    {
+        LocationId = "location_id",
+        VisibilityFilter = VisibilityFilter.All,
+        Limit = 1,
+        Cursor = "cursor",
+        WithDefinitions = true,
+    }
 );
 ```
 </dd>
@@ -15931,7 +17009,13 @@ To retrieve a custom attribute owned by another application, the `visibility` se
 
 ```csharp
 await client.Locations.CustomAttributes.GetAsync(
-    new GetCustomAttributesRequest { LocationId = "location_id", Key = "key" }
+    new GetCustomAttributesRequest
+    {
+        LocationId = "location_id",
+        Key = "key",
+        WithDefinition = true,
+        Version = 1,
+    }
 );
 ```
 </dd>
@@ -16117,7 +17201,14 @@ Max results per [page](https://developer.squareup.com/docs/working-with-apis/pag
 
 ```csharp
 await client.Locations.Transactions.ListAsync(
-    new ListTransactionsRequest { LocationId = "location_id" }
+    new ListTransactionsRequest
+    {
+        LocationId = "location_id",
+        BeginTime = "begin_time",
+        EndTime = "end_time",
+        SortOrder = SortOrder.Desc,
+        Cursor = "cursor",
+    }
 );
 ```
 </dd>
@@ -17193,7 +18284,13 @@ Results are sorted by the `created_at` date in descending order (newest to oldes
 
 ```csharp
 await client.Loyalty.Programs.Promotions.ListAsync(
-    new ListPromotionsRequest { ProgramId = "program_id" }
+    new ListPromotionsRequest
+    {
+        ProgramId = "program_id",
+        Status = LoyaltyPromotionStatus.Active,
+        Cursor = "cursor",
+        Limit = 1,
+    }
 );
 ```
 </dd>
@@ -17340,7 +18437,7 @@ Retrieves a loyalty promotion.
 
 ```csharp
 await client.Loyalty.Programs.Promotions.GetAsync(
-    new GetPromotionsRequest { PromotionId = "promotion_id", ProgramId = "program_id" }
+    new GetPromotionsRequest { ProgramId = "program_id", PromotionId = "promotion_id" }
 );
 ```
 </dd>
@@ -17401,7 +18498,7 @@ This endpoint sets the loyalty promotion to the `CANCELED` state
 
 ```csharp
 await client.Loyalty.Programs.Promotions.CancelAsync(
-    new CancelPromotionsRequest { PromotionId = "promotion_id", ProgramId = "program_id" }
+    new CancelPromotionsRequest { ProgramId = "program_id", PromotionId = "promotion_id" }
 );
 ```
 </dd>
@@ -17461,7 +18558,12 @@ applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`
 
 ```csharp
 await client.Merchants.CustomAttributeDefinitions.ListAsync(
-    new ListCustomAttributeDefinitionsRequest()
+    new ListCustomAttributeDefinitionsRequest
+    {
+        VisibilityFilter = VisibilityFilter.All,
+        Limit = 1,
+        Cursor = "cursor",
+    }
 );
 ```
 </dd>
@@ -17597,7 +18699,7 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Merchants.CustomAttributeDefinitions.GetAsync(
-    new GetCustomAttributeDefinitionsRequest { Key = "key" }
+    new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
 );
 ```
 </dd>
@@ -17962,7 +19064,14 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Merchants.CustomAttributes.ListAsync(
-    new ListCustomAttributesRequest { MerchantId = "merchant_id" }
+    new ListCustomAttributesRequest
+    {
+        MerchantId = "merchant_id",
+        VisibilityFilter = VisibilityFilter.All,
+        Limit = 1,
+        Cursor = "cursor",
+        WithDefinitions = true,
+    }
 );
 ```
 </dd>
@@ -18022,7 +19131,13 @@ To retrieve a custom attribute owned by another application, the `visibility` se
 
 ```csharp
 await client.Merchants.CustomAttributes.GetAsync(
-    new GetCustomAttributesRequest { MerchantId = "merchant_id", Key = "key" }
+    new GetCustomAttributesRequest
+    {
+        MerchantId = "merchant_id",
+        Key = "key",
+        WithDefinition = true,
+        Version = 1,
+    }
 );
 ```
 </dd>
@@ -18208,7 +19323,12 @@ seller-defined custom attributes (also known as custom fields) are always set to
 
 ```csharp
 await client.Orders.CustomAttributeDefinitions.ListAsync(
-    new ListCustomAttributeDefinitionsRequest()
+    new ListCustomAttributeDefinitionsRequest
+    {
+        VisibilityFilter = VisibilityFilter.All,
+        Cursor = "cursor",
+        Limit = 1,
+    }
 );
 ```
 </dd>
@@ -18345,7 +19465,7 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note t
 
 ```csharp
 await client.Orders.CustomAttributeDefinitions.GetAsync(
-    new GetCustomAttributeDefinitionsRequest { Key = "key" }
+    new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
 );
 ```
 </dd>
@@ -18731,7 +19851,14 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Orders.CustomAttributes.ListAsync(
-    new ListCustomAttributesRequest { OrderId = "order_id" }
+    new ListCustomAttributesRequest
+    {
+        OrderId = "order_id",
+        VisibilityFilter = VisibilityFilter.All,
+        Cursor = "cursor",
+        Limit = 1,
+        WithDefinitions = true,
+    }
 );
 ```
 </dd>
@@ -18798,6 +19925,8 @@ await client.Orders.CustomAttributes.GetAsync(
     {
         OrderId = "order_id",
         CustomAttributeKey = "custom_attribute_key",
+        Version = 1,
+        WithDefinition = true,
     }
 );
 ```
@@ -19872,7 +21001,9 @@ Lists all webhook event types that can be subscribed to.
 <dd>
 
 ```csharp
-await client.Webhooks.EventTypes.ListAsync(new ListEventTypesRequest());
+await client.Webhooks.EventTypes.ListAsync(
+    new ListEventTypesRequest { ApiVersion = "api_version" }
+);
 ```
 </dd>
 </dl>
@@ -19927,7 +21058,15 @@ Lists all webhook subscriptions owned by your application.
 <dd>
 
 ```csharp
-await client.Webhooks.Subscriptions.ListAsync(new ListSubscriptionsRequest());
+await client.Webhooks.Subscriptions.ListAsync(
+    new ListSubscriptionsRequest
+    {
+        Cursor = "cursor",
+        IncludeDisabled = true,
+        SortOrder = SortOrder.Desc,
+        Limit = 1,
+    }
+);
 ```
 </dd>
 </dl>

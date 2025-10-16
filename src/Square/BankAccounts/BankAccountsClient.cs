@@ -77,7 +77,14 @@ public partial class BankAccountsClient
     /// Returns a list of [BankAccount](entity:BankAccount) objects linked to a Square account.
     /// </summary>
     /// <example><code>
-    /// await client.BankAccounts.ListAsync(new ListBankAccountsRequest());
+    /// await client.BankAccounts.ListAsync(
+    ///     new ListBankAccountsRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///         LocationId = "location_id",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<BankAccount>> ListAsync(
         ListBankAccountsRequest request,

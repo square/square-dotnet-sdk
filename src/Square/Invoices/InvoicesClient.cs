@@ -78,7 +78,14 @@ public partial class InvoicesClient
     /// use in a subsequent request to retrieve the next set of invoices.
     /// </summary>
     /// <example><code>
-    /// await client.Invoices.ListAsync(new ListInvoicesRequest { LocationId = "location_id" });
+    /// await client.Invoices.ListAsync(
+    ///     new ListInvoicesRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Invoice>> ListAsync(
         ListInvoicesRequest request,
@@ -423,7 +430,9 @@ public partial class InvoicesClient
     /// invoice (you cannot delete a published invoice, including one that is scheduled for processing).
     /// </summary>
     /// <example><code>
-    /// await client.Invoices.DeleteAsync(new DeleteInvoicesRequest { InvoiceId = "invoice_id" });
+    /// await client.Invoices.DeleteAsync(
+    ///     new DeleteInvoicesRequest { InvoiceId = "invoice_id", Version = 1 }
+    /// );
     /// </code></example>
     public async Task<DeleteInvoiceResponse> DeleteAsync(
         DeleteInvoicesRequest request,

@@ -281,7 +281,7 @@ public partial class SubscriptionsClient
     /// </summary>
     /// <example><code>
     /// await client.Subscriptions.GetAsync(
-    ///     new GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
+    ///     new GetSubscriptionsRequest { SubscriptionId = "subscription_id", Include = "include" }
     /// );
     /// </code></example>
     public async Task<GetSubscriptionResponse> GetAsync(
@@ -568,7 +568,12 @@ public partial class SubscriptionsClient
     /// </summary>
     /// <example><code>
     /// await client.Subscriptions.ListEventsAsync(
-    ///     new ListEventsSubscriptionsRequest { SubscriptionId = "subscription_id" }
+    ///     new ListEventsSubscriptionsRequest
+    ///     {
+    ///         SubscriptionId = "subscription_id",
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<SubscriptionEvent>> ListEventsAsync(

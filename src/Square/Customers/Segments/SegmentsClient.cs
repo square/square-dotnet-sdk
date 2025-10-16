@@ -73,7 +73,7 @@ public partial class SegmentsClient
     /// Retrieves the list of customer segments of a business.
     /// </summary>
     /// <example><code>
-    /// await client.Customers.Segments.ListAsync(new ListSegmentsRequest());
+    /// await client.Customers.Segments.ListAsync(new ListSegmentsRequest { Cursor = "cursor", Limit = 1 });
     /// </code></example>
     public async Task<Pager<CustomerSegment>> ListAsync(
         ListSegmentsRequest request,

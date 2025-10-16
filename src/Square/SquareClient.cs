@@ -4,6 +4,7 @@ using Square.Bookings;
 using Square.Cards;
 using Square.CashDrawers;
 using Square.Catalog;
+using Square.Channels;
 using Square.Checkout;
 using Square.Core;
 using Square.Customers;
@@ -30,6 +31,7 @@ using Square.Subscriptions;
 using Square.Team;
 using Square.TeamMembers;
 using Square.Terminal;
+using Square.TransferOrders;
 using Square.V1Transactions;
 using Square.Vendors;
 using Square.Webhooks;
@@ -50,11 +52,11 @@ public partial class SquareClient
             new Dictionary<string, string>()
             {
                 { "Authorization", $"Bearer {token}" },
-                { "Square-Version", "2025-09-24" },
+                { "Square-Version", "2025-10-16" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Square" },
                 { "X-Fern-SDK-Version", Version.Current },
-                { "User-Agent", "Square/42.1.0" },
+                { "User-Agent", "Square/42.2.0" },
             }
         );
         clientOptions ??= new ClientOptions();
@@ -78,6 +80,7 @@ public partial class SquareClient
         Bookings = new BookingsClient(_client);
         Cards = new CardsClient(_client);
         Catalog = new CatalogClient(_client);
+        Channels = new ChannelsClient(_client);
         Customers = new CustomersClient(_client);
         Devices = new DevicesClient(_client);
         Disputes = new DisputesClient(_client);
@@ -101,6 +104,7 @@ public partial class SquareClient
         TeamMembers = new TeamMembersClient(_client);
         Team = new TeamClient(_client);
         Terminal = new TerminalClient(_client);
+        TransferOrders = new TransferOrdersClient(_client);
         Vendors = new VendorsClient(_client);
         CashDrawers = new CashDrawersClient(_client);
         Webhooks = new WebhooksClient(_client);
@@ -121,6 +125,8 @@ public partial class SquareClient
     public CardsClient Cards { get; }
 
     public CatalogClient Catalog { get; }
+
+    public ChannelsClient Channels { get; }
 
     public CustomersClient Customers { get; }
 
@@ -167,6 +173,8 @@ public partial class SquareClient
     public TeamClient Team { get; }
 
     public TerminalClient Terminal { get; }
+
+    public TransferOrdersClient TransferOrders { get; }
 
     public VendorsClient Vendors { get; }
 

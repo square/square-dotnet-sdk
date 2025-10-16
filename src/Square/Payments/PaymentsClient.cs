@@ -135,7 +135,26 @@ public partial class PaymentsClient
     /// The maximum results per page is 100.
     /// </summary>
     /// <example><code>
-    /// await client.Payments.ListAsync(new ListPaymentsRequest());
+    /// await client.Payments.ListAsync(
+    ///     new ListPaymentsRequest
+    ///     {
+    ///         BeginTime = "begin_time",
+    ///         EndTime = "end_time",
+    ///         SortOrder = "sort_order",
+    ///         Cursor = "cursor",
+    ///         LocationId = "location_id",
+    ///         Total = 1000000,
+    ///         Last4 = "last_4",
+    ///         CardBrand = "card_brand",
+    ///         Limit = 1,
+    ///         IsOfflinePayment = true,
+    ///         OfflineBeginTime = "offline_begin_time",
+    ///         OfflineEndTime = "offline_end_time",
+    ///         UpdatedAtBeginTime = "updated_at_begin_time",
+    ///         UpdatedAtEndTime = "updated_at_end_time",
+    ///         SortField = ListPaymentsRequestSortField.CreatedAt,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Payment>> ListAsync(
         ListPaymentsRequest request,

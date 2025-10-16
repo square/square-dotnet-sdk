@@ -352,7 +352,14 @@ public partial class CatalogClient
     /// and set the `include_deleted_objects` attribute value to `true`.
     /// </summary>
     /// <example><code>
-    /// await client.Catalog.ListAsync(new ListCatalogRequest());
+    /// await client.Catalog.ListAsync(
+    ///     new ListCatalogRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         Types = "types",
+    ///         CatalogVersion = 1000000,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<CatalogObject>> ListAsync(
         ListCatalogRequest request,

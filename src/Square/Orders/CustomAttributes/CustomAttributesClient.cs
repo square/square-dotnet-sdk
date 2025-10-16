@@ -289,7 +289,14 @@ public partial class CustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributes.ListAsync(
-    ///     new ListCustomAttributesRequest { OrderId = "order_id" }
+    ///     new ListCustomAttributesRequest
+    ///     {
+    ///         OrderId = "order_id",
+    ///         VisibilityFilter = VisibilityFilter.All,
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///         WithDefinitions = true,
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttribute>> ListAsync(
@@ -341,6 +348,8 @@ public partial class CustomAttributesClient
     ///     {
     ///         OrderId = "order_id",
     ///         CustomAttributeKey = "custom_attribute_key",
+    ///         Version = 1,
+    ///         WithDefinition = true,
     ///     }
     /// );
     /// </code></example>

@@ -285,7 +285,14 @@ public partial class CustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Locations.CustomAttributes.ListAsync(
-    ///     new ListCustomAttributesRequest { LocationId = "location_id" }
+    ///     new ListCustomAttributesRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         VisibilityFilter = VisibilityFilter.All,
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///         WithDefinitions = true,
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttribute>> ListAsync(
@@ -330,7 +337,13 @@ public partial class CustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Locations.CustomAttributes.GetAsync(
-    ///     new GetCustomAttributesRequest { LocationId = "location_id", Key = "key" }
+    ///     new GetCustomAttributesRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         Key = "key",
+    ///         WithDefinition = true,
+    ///         Version = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<RetrieveLocationCustomAttributeResponse> GetAsync(
