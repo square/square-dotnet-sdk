@@ -162,7 +162,7 @@ public partial class EventsClient
     /// Lists all event types that you can subscribe to as webhooks or query using the Events API.
     /// </summary>
     /// <example><code>
-    /// await client.Events.ListEventTypesAsync(new ListEventTypesRequest());
+    /// await client.Events.ListEventTypesAsync(new ListEventTypesRequest { ApiVersion = "api_version" });
     /// </code></example>
     public async Task<ListEventTypesResponse> ListEventTypesAsync(
         ListEventTypesRequest request,

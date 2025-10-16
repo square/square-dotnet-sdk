@@ -113,7 +113,16 @@ public partial class CustomersClient
     /// profiles can take closer to one minute or longer, especially during network incidents and outages.
     /// </summary>
     /// <example><code>
-    /// await client.Customers.ListAsync(new ListCustomersRequest());
+    /// await client.Customers.ListAsync(
+    ///     new ListCustomersRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///         SortField = CustomerSortField.Default,
+    ///         SortOrder = SortOrder.Desc,
+    ///         Count = true,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Customer>> ListAsync(
         ListCustomersRequest request,
@@ -737,7 +746,9 @@ public partial class CustomersClient
     /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
     /// </summary>
     /// <example><code>
-    /// await client.Customers.DeleteAsync(new DeleteCustomersRequest { CustomerId = "customer_id" });
+    /// await client.Customers.DeleteAsync(
+    ///     new DeleteCustomersRequest { CustomerId = "customer_id", Version = 1000000 }
+    /// );
     /// </code></example>
     public async Task<DeleteCustomerResponse> DeleteAsync(
         DeleteCustomersRequest request,

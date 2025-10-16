@@ -83,7 +83,13 @@ public partial class PromotionsClient
     /// </summary>
     /// <example><code>
     /// await client.Loyalty.Programs.Promotions.ListAsync(
-    ///     new ListPromotionsRequest { ProgramId = "program_id" }
+    ///     new ListPromotionsRequest
+    ///     {
+    ///         ProgramId = "program_id",
+    ///         Status = LoyaltyPromotionStatus.Active,
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<LoyaltyPromotion>> ListAsync(
@@ -213,7 +219,7 @@ public partial class PromotionsClient
     /// </summary>
     /// <example><code>
     /// await client.Loyalty.Programs.Promotions.GetAsync(
-    ///     new GetPromotionsRequest { PromotionId = "promotion_id", ProgramId = "program_id" }
+    ///     new GetPromotionsRequest { ProgramId = "program_id", PromotionId = "promotion_id" }
     /// );
     /// </code></example>
     public async Task<GetLoyaltyPromotionResponse> GetAsync(
@@ -271,7 +277,7 @@ public partial class PromotionsClient
     /// </summary>
     /// <example><code>
     /// await client.Loyalty.Programs.Promotions.CancelAsync(
-    ///     new CancelPromotionsRequest { PromotionId = "promotion_id", ProgramId = "program_id" }
+    ///     new CancelPromotionsRequest { ProgramId = "program_id", PromotionId = "promotion_id" }
     /// );
     /// </code></example>
     public async Task<CancelLoyaltyPromotionResponse> CancelAsync(

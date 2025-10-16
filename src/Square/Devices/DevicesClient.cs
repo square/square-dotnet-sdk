@@ -87,7 +87,15 @@ public partial class DevicesClient
     /// devices are supported.
     /// </summary>
     /// <example><code>
-    /// await client.Devices.ListAsync(new ListDevicesRequest());
+    /// await client.Devices.ListAsync(
+    ///     new ListDevicesRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         SortOrder = SortOrder.Desc,
+    ///         Limit = 1,
+    ///         LocationId = "location_id",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Device>> ListAsync(
         ListDevicesRequest request,

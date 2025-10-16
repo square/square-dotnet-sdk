@@ -81,7 +81,15 @@ public partial class CodesClient
     /// Lists all DeviceCodes associated with the merchant.
     /// </summary>
     /// <example><code>
-    /// await client.Devices.Codes.ListAsync(new ListCodesRequest());
+    /// await client.Devices.Codes.ListAsync(
+    ///     new ListCodesRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         LocationId = "location_id",
+    ///         ProductType = "TERMINAL_API",
+    ///         Status = DeviceCodeStatus.Unknown,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<DeviceCode>> ListAsync(
         ListCodesRequest request,

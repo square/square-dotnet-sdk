@@ -95,7 +95,7 @@ public partial class MerchantsClient
     /// endpoint to retrieve the merchant information.
     /// </summary>
     /// <example><code>
-    /// await client.Merchants.ListAsync(new ListMerchantsRequest());
+    /// await client.Merchants.ListAsync(new ListMerchantsRequest { Cursor = 1 });
     /// </code></example>
     public async Task<Pager<Merchant>> ListAsync(
         ListMerchantsRequest request,

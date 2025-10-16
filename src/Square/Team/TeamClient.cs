@@ -19,7 +19,7 @@ public partial class TeamClient
     /// Lists jobs in a seller account. Results are sorted by title in ascending order.
     /// </summary>
     /// <example><code>
-    /// await client.Team.ListJobsAsync(new ListJobsRequest());
+    /// await client.Team.ListJobsAsync(new ListJobsRequest { Cursor = "cursor" });
     /// </code></example>
     public async Task<ListJobsResponse> ListJobsAsync(
         ListJobsRequest request,

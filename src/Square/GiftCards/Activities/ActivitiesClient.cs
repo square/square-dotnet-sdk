@@ -103,7 +103,19 @@ public partial class ActivitiesClient
     /// for all gift cards in a specific region, or for activities within a time window.
     /// </summary>
     /// <example><code>
-    /// await client.GiftCards.Activities.ListAsync(new ListActivitiesRequest());
+    /// await client.GiftCards.Activities.ListAsync(
+    ///     new ListActivitiesRequest
+    ///     {
+    ///         GiftCardId = "gift_card_id",
+    ///         Type = "type",
+    ///         LocationId = "location_id",
+    ///         BeginTime = "begin_time",
+    ///         EndTime = "end_time",
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///         SortOrder = "sort_order",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<GiftCardActivity>> ListAsync(
         ListActivitiesRequest request,

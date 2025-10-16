@@ -227,7 +227,13 @@ public partial class CustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributes.ListAsync(
-    ///     new ListCustomAttributesRequest { BookingId = "booking_id" }
+    ///     new ListCustomAttributesRequest
+    ///     {
+    ///         BookingId = "booking_id",
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///         WithDefinitions = true,
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttribute>> ListAsync(
@@ -271,7 +277,13 @@ public partial class CustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributes.GetAsync(
-    ///     new GetCustomAttributesRequest { BookingId = "booking_id", Key = "key" }
+    ///     new GetCustomAttributesRequest
+    ///     {
+    ///         BookingId = "booking_id",
+    ///         Key = "key",
+    ///         WithDefinition = true,
+    ///         Version = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<RetrieveBookingCustomAttributeResponse> GetAsync(

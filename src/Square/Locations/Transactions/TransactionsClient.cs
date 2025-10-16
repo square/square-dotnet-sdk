@@ -25,7 +25,14 @@ public partial class TransactionsClient
     /// </summary>
     /// <example><code>
     /// await client.Locations.Transactions.ListAsync(
-    ///     new ListTransactionsRequest { LocationId = "location_id" }
+    ///     new ListTransactionsRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         BeginTime = "begin_time",
+    ///         EndTime = "end_time",
+    ///         SortOrder = SortOrder.Desc,
+    ///         Cursor = "cursor",
+    ///     }
     /// );
     /// </code></example>
     public async Task<ListTransactionsResponse> ListAsync(

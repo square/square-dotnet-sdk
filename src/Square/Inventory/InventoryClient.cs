@@ -903,7 +903,14 @@ public partial class InventoryClient
     /// For more sophisticated queries, use a batch endpoint.
     /// </summary>
     /// <example><code>
-    /// await client.Inventory.GetAsync(new GetInventoryRequest { CatalogObjectId = "catalog_object_id" });
+    /// await client.Inventory.GetAsync(
+    ///     new GetInventoryRequest
+    ///     {
+    ///         CatalogObjectId = "catalog_object_id",
+    ///         LocationIds = "location_ids",
+    ///         Cursor = "cursor",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<InventoryCount>> GetAsync(
         GetInventoryRequest request,
@@ -955,7 +962,12 @@ public partial class InventoryClient
     /// </summary>
     /// <example><code>
     /// await client.Inventory.ChangesAsync(
-    ///     new ChangesInventoryRequest { CatalogObjectId = "catalog_object_id" }
+    ///     new ChangesInventoryRequest
+    ///     {
+    ///         CatalogObjectId = "catalog_object_id",
+    ///         LocationIds = "location_ids",
+    ///         Cursor = "cursor",
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<InventoryChange>> ChangesAsync(

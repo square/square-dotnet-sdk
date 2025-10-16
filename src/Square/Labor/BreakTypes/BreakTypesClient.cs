@@ -77,7 +77,14 @@ public partial class BreakTypesClient
     /// Returns a paginated list of `BreakType` instances for a business.
     /// </summary>
     /// <example><code>
-    /// await client.Labor.BreakTypes.ListAsync(new ListBreakTypesRequest());
+    /// await client.Labor.BreakTypes.ListAsync(
+    ///     new ListBreakTypesRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<BreakType>> ListAsync(
         ListBreakTypesRequest request,

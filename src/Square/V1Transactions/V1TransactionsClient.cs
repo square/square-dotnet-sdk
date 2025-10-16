@@ -20,7 +20,13 @@ public partial class V1TransactionsClient
     /// </summary>
     /// <example><code>
     /// await client.V1Transactions.V1ListOrdersAsync(
-    ///     new V1ListOrdersRequest { LocationId = "location_id" }
+    ///     new V1ListOrdersRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         Order = SortOrder.Desc,
+    ///         Limit = 1,
+    ///         BatchToken = "batch_token",
+    ///     }
     /// );
     /// </code></example>
     public async Task<IEnumerable<V1Order>> V1ListOrdersAsync(
