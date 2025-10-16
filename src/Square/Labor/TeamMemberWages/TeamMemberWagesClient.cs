@@ -77,7 +77,14 @@ public partial class TeamMemberWagesClient
     /// Returns a paginated list of `TeamMemberWage` instances for a business.
     /// </summary>
     /// <example><code>
-    /// await client.Labor.TeamMemberWages.ListAsync(new ListTeamMemberWagesRequest());
+    /// await client.Labor.TeamMemberWages.ListAsync(
+    ///     new ListTeamMemberWagesRequest
+    ///     {
+    ///         TeamMemberId = "team_member_id",
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<TeamMemberWage>> ListAsync(
         ListTeamMemberWagesRequest request,

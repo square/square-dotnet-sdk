@@ -81,7 +81,15 @@ public partial class TeamMemberProfilesClient
     /// Lists booking profiles for team members.
     /// </summary>
     /// <example><code>
-    /// await client.Bookings.TeamMemberProfiles.ListAsync(new ListTeamMemberProfilesRequest());
+    /// await client.Bookings.TeamMemberProfiles.ListAsync(
+    ///     new ListTeamMemberProfilesRequest
+    ///     {
+    ///         BookableOnly = true,
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///         LocationId = "location_id",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<TeamMemberBookingProfile>> ListAsync(
         ListTeamMemberProfilesRequest request,

@@ -73,7 +73,9 @@ public partial class LocationProfilesClient
     /// Lists location booking profiles of a seller.
     /// </summary>
     /// <example><code>
-    /// await client.Bookings.LocationProfiles.ListAsync(new ListLocationProfilesRequest());
+    /// await client.Bookings.LocationProfiles.ListAsync(
+    ///     new ListLocationProfilesRequest { Limit = 1, Cursor = "cursor" }
+    /// );
     /// </code></example>
     public async Task<Pager<LocationBookingProfile>> ListAsync(
         ListLocationProfilesRequest request,

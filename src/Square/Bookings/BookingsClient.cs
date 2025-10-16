@@ -115,7 +115,18 @@ public partial class BookingsClient
     /// To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.
     /// </summary>
     /// <example><code>
-    /// await client.Bookings.ListAsync(new ListBookingsRequest());
+    /// await client.Bookings.ListAsync(
+    ///     new ListBookingsRequest
+    ///     {
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///         CustomerId = "customer_id",
+    ///         TeamMemberId = "team_member_id",
+    ///         LocationId = "location_id",
+    ///         StartAtMin = "start_at_min",
+    ///         StartAtMax = "start_at_max",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Booking>> ListAsync(
         ListBookingsRequest request,

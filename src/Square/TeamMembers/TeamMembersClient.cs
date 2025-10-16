@@ -20,6 +20,54 @@ public partial class TeamMembersClient
     public WageSettingClient WageSetting { get; }
 
     /// <summary>
+    /// Returns a paginated list of `TeamMember` objects for a business.
+    /// The list can be filtered by location IDs, `ACTIVE` or `INACTIVE` status, or whether
+    /// the team member is the Square account owner.
+    /// </summary>
+    private async Task<SearchTeamMembersResponse> SearchInternalAsync(
+        SearchTeamMembersRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/team-members/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchTeamMembersResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Creates a single `TeamMember` object. The `TeamMember` object is returned on successful creates.
     /// You must provide the following values in your request to this endpoint:
     /// - `given_name`
@@ -336,47 +384,37 @@ public partial class TeamMembersClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchTeamMembersResponse> SearchAsync(
+    public async Task<Pager<TeamMember>> SearchAsync(
         SearchTeamMembersRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchTeamMembersRequest,
+            RequestOptions?,
+            SearchTeamMembersResponse,
+            string?,
+            TeamMember
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/team-members/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.TeamMembers?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchTeamMembersResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>

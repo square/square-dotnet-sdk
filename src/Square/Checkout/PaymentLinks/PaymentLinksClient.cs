@@ -73,7 +73,9 @@ public partial class PaymentLinksClient
     /// Lists all payment links.
     /// </summary>
     /// <example><code>
-    /// await client.Checkout.PaymentLinks.ListAsync(new ListPaymentLinksRequest());
+    /// await client.Checkout.PaymentLinks.ListAsync(
+    ///     new ListPaymentLinksRequest { Cursor = "cursor", Limit = 1 }
+    /// );
     /// </code></example>
     public async Task<Pager<PaymentLink>> ListAsync(
         ListPaymentLinksRequest request,

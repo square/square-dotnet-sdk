@@ -72,7 +72,9 @@ public partial class EvidenceClient
     /// Returns a list of evidence associated with a dispute.
     /// </summary>
     /// <example><code>
-    /// await client.Disputes.Evidence.ListAsync(new ListEvidenceRequest { DisputeId = "dispute_id" });
+    /// await client.Disputes.Evidence.ListAsync(
+    ///     new ListEvidenceRequest { DisputeId = "dispute_id", Cursor = "cursor" }
+    /// );
     /// </code></example>
     public async Task<Pager<DisputeEvidence>> ListAsync(
         ListEvidenceRequest request,

@@ -16,6 +16,52 @@ public partial class VendorsClient
     }
 
     /// <summary>
+    /// Searches for vendors using a filter against supported [Vendor](entity:Vendor) properties and a supported sorter.
+    /// </summary>
+    private async Task<SearchVendorsResponse> SearchInternalAsync(
+        SearchVendorsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/vendors/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchVendorsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Creates one or more [Vendor](entity:Vendor) objects to represent suppliers to a seller.
     /// </summary>
     /// <example><code>
@@ -302,47 +348,37 @@ public partial class VendorsClient
     /// <example><code>
     /// await client.Vendors.SearchAsync(new SearchVendorsRequest());
     /// </code></example>
-    public async Task<SearchVendorsResponse> SearchAsync(
+    public async Task<Pager<Vendor>> SearchAsync(
         SearchVendorsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchVendorsRequest,
+            RequestOptions?,
+            SearchVendorsResponse,
+            string?,
+            Vendor
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/vendors/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Vendors?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchVendorsResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>

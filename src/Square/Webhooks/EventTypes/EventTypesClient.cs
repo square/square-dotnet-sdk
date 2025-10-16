@@ -19,7 +19,9 @@ public partial class EventTypesClient
     /// Lists all webhook event types that can be subscribed to.
     /// </summary>
     /// <example><code>
-    /// await client.Webhooks.EventTypes.ListAsync(new ListEventTypesRequest());
+    /// await client.Webhooks.EventTypes.ListAsync(
+    ///     new ListEventTypesRequest { ApiVersion = "api_version" }
+    /// );
     /// </code></example>
     public async Task<ListWebhookEventTypesResponse> ListAsync(
         ListEventTypesRequest request,

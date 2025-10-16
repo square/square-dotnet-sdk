@@ -90,7 +90,12 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributeDefinitions.ListAsync(
-    ///     new ListCustomAttributeDefinitionsRequest()
+    ///     new ListCustomAttributeDefinitionsRequest
+    ///     {
+    ///         VisibilityFilter = VisibilityFilter.All,
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttributeDefinition>> ListAsync(
@@ -209,7 +214,7 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributeDefinitions.GetAsync(
-    ///     new GetCustomAttributeDefinitionsRequest { Key = "key" }
+    ///     new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
     /// );
     /// </code></example>
     public async Task<RetrieveOrderCustomAttributeDefinitionResponse> GetAsync(

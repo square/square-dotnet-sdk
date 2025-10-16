@@ -16,6 +16,56 @@ public partial class AccountsClient
     }
 
     /// <summary>
+    /// Searches for loyalty accounts in a loyalty program.
+    ///
+    /// You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.
+    ///
+    /// Search results are sorted by `created_at` in ascending order.
+    /// </summary>
+    private async Task<SearchLoyaltyAccountsResponse> SearchInternalAsync(
+        SearchLoyaltyAccountsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/loyalty/accounts/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchLoyaltyAccountsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Creates a loyalty account. To create a loyalty account, you must provide the `program_id` and a `mapping` with the `phone_number` of the buyer.
     /// </summary>
     /// <example><code>
@@ -96,47 +146,37 @@ public partial class AccountsClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchLoyaltyAccountsResponse> SearchAsync(
+    public async Task<Pager<LoyaltyAccount>> SearchAsync(
         SearchLoyaltyAccountsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchLoyaltyAccountsRequest,
+            RequestOptions?,
+            SearchLoyaltyAccountsResponse,
+            string?,
+            LoyaltyAccount
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/loyalty/accounts/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.LoyaltyAccounts?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchLoyaltyAccountsResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>

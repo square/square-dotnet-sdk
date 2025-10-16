@@ -37,25 +37,7 @@ public partial class LoyaltyClient
     ///
     /// Search results are sorted by `created_at` in descending order.
     /// </summary>
-    /// <example><code>
-    /// await client.Loyalty.SearchEventsAsync(
-    ///     new SearchLoyaltyEventsRequest
-    ///     {
-    ///         Query = new LoyaltyEventQuery
-    ///         {
-    ///             Filter = new LoyaltyEventFilter
-    ///             {
-    ///                 OrderFilter = new LoyaltyEventOrderFilter
-    ///                 {
-    ///                     OrderId = "PyATxhYLfsMqpVkcKJITPydgEYfZY",
-    ///                 },
-    ///             },
-    ///         },
-    ///         Limit = 30,
-    ///     }
-    /// );
-    /// </code></example>
-    public async Task<SearchLoyaltyEventsResponse> SearchEventsAsync(
+    private async Task<SearchLoyaltyEventsResponse> SearchEventsInternalAsync(
         SearchLoyaltyEventsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
@@ -96,5 +78,66 @@ public partial class LoyaltyClient
                 responseBody
             );
         }
+    }
+
+    /// <summary>
+    /// Searches for loyalty events.
+    ///
+    /// A Square loyalty program maintains a ledger of events that occur during the lifetime of a
+    /// buyer's loyalty account. Each change in the point balance
+    /// (for example, points earned, points redeemed, and points expired) is
+    /// recorded in the ledger. Using this endpoint, you can search the ledger for events.
+    ///
+    /// Search results are sorted by `created_at` in descending order.
+    /// </summary>
+    /// <example><code>
+    /// await client.Loyalty.SearchEventsAsync(
+    ///     new SearchLoyaltyEventsRequest
+    ///     {
+    ///         Query = new LoyaltyEventQuery
+    ///         {
+    ///             Filter = new LoyaltyEventFilter
+    ///             {
+    ///                 OrderFilter = new LoyaltyEventOrderFilter
+    ///                 {
+    ///                     OrderId = "PyATxhYLfsMqpVkcKJITPydgEYfZY",
+    ///                 },
+    ///             },
+    ///         },
+    ///         Limit = 30,
+    ///     }
+    /// );
+    /// </code></example>
+    public async Task<Pager<LoyaltyEvent>> SearchEventsAsync(
+        SearchLoyaltyEventsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchLoyaltyEventsRequest,
+            RequestOptions?,
+            SearchLoyaltyEventsResponse,
+            string?,
+            LoyaltyEvent
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchEventsInternalAsync,
+                (request, cursor) =>
+                {
+                    request.Cursor = cursor;
+                },
+                response => response?.Cursor,
+                response => response?.Events?.ToList(),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        return pager;
     }
 }

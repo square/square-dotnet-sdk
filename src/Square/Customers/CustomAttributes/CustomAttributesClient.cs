@@ -95,7 +95,13 @@ public partial class CustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributes.ListAsync(
-    ///     new ListCustomAttributesRequest { CustomerId = "customer_id" }
+    ///     new ListCustomAttributesRequest
+    ///     {
+    ///         CustomerId = "customer_id",
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///         WithDefinitions = true,
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttribute>> ListAsync(
@@ -143,7 +149,13 @@ public partial class CustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributes.GetAsync(
-    ///     new GetCustomAttributesRequest { CustomerId = "customer_id", Key = "key" }
+    ///     new GetCustomAttributesRequest
+    ///     {
+    ///         CustomerId = "customer_id",
+    ///         Key = "key",
+    ///         WithDefinition = true,
+    ///         Version = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<GetCustomerCustomAttributeResponse> GetAsync(

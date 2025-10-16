@@ -119,7 +119,22 @@ public partial class RefundsClient
     /// The maximum results per page is 100.
     /// </summary>
     /// <example><code>
-    /// await client.Refunds.ListAsync(new ListRefundsRequest());
+    /// await client.Refunds.ListAsync(
+    ///     new ListRefundsRequest
+    ///     {
+    ///         BeginTime = "begin_time",
+    ///         EndTime = "end_time",
+    ///         SortOrder = "sort_order",
+    ///         Cursor = "cursor",
+    ///         LocationId = "location_id",
+    ///         Status = "status",
+    ///         SourceType = "source_type",
+    ///         Limit = 1,
+    ///         UpdatedAtBeginTime = "updated_at_begin_time",
+    ///         UpdatedAtEndTime = "updated_at_end_time",
+    ///         SortField = ListPaymentRefundsRequestSortField.CreatedAt,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<PaymentRefund>> ListAsync(
         ListRefundsRequest request,

@@ -159,7 +159,18 @@ public partial class PayoutsClient
     /// To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
     /// </summary>
     /// <example><code>
-    /// await client.Payouts.ListAsync(new ListPayoutsRequest());
+    /// await client.Payouts.ListAsync(
+    ///     new ListPayoutsRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         Status = PayoutStatus.Sent,
+    ///         BeginTime = "begin_time",
+    ///         EndTime = "end_time",
+    ///         SortOrder = SortOrder.Desc,
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Payout>> ListAsync(
         ListPayoutsRequest request,
@@ -250,7 +261,15 @@ public partial class PayoutsClient
     /// To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.
     /// </summary>
     /// <example><code>
-    /// await client.Payouts.ListEntriesAsync(new ListEntriesPayoutsRequest { PayoutId = "payout_id" });
+    /// await client.Payouts.ListEntriesAsync(
+    ///     new ListEntriesPayoutsRequest
+    ///     {
+    ///         PayoutId = "payout_id",
+    ///         SortOrder = SortOrder.Desc,
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<PayoutEntry>> ListEntriesAsync(
         ListEntriesPayoutsRequest request,

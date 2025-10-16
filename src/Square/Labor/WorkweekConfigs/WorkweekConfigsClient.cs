@@ -73,7 +73,9 @@ public partial class WorkweekConfigsClient
     /// Returns a list of `WorkweekConfig` instances for a business.
     /// </summary>
     /// <example><code>
-    /// await client.Labor.WorkweekConfigs.ListAsync(new ListWorkweekConfigsRequest());
+    /// await client.Labor.WorkweekConfigs.ListAsync(
+    ///     new ListWorkweekConfigsRequest { Limit = 1, Cursor = "cursor" }
+    /// );
     /// </code></example>
     public async Task<Pager<WorkweekConfig>> ListAsync(
         ListWorkweekConfigsRequest request,

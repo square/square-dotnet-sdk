@@ -87,7 +87,16 @@ public partial class CardsClient
     /// A max of 25 cards will be returned.
     /// </summary>
     /// <example><code>
-    /// await client.Cards.ListAsync(new ListCardsRequest());
+    /// await client.Cards.ListAsync(
+    ///     new ListCardsRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         CustomerId = "customer_id",
+    ///         IncludeDisabled = true,
+    ///         ReferenceId = "reference_id",
+    ///         SortOrder = SortOrder.Desc,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Card>> ListAsync(
         ListCardsRequest request,

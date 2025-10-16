@@ -73,12 +73,71 @@ public partial class InvoicesClient
     }
 
     /// <summary>
+    /// Searches for invoices from a location specified in
+    /// the filter. You can optionally specify customers in the filter for whom to
+    /// retrieve invoices. In the current implementation, you can only specify one location and
+    /// optionally one customer.
+    ///
+    /// The response is paginated. If truncated, the response includes a `cursor`
+    /// that you use in a subsequent request to retrieve the next set of invoices.
+    /// </summary>
+    private async Task<SearchInvoicesResponse> SearchInternalAsync(
+        SearchInvoicesRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/invoices/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchInvoicesResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Returns a list of invoices for a given location. The response
     /// is paginated. If truncated, the response includes a `cursor` that you
     /// use in a subsequent request to retrieve the next set of invoices.
     /// </summary>
     /// <example><code>
-    /// await client.Invoices.ListAsync(new ListInvoicesRequest { LocationId = "location_id" });
+    /// await client.Invoices.ListAsync(
+    ///     new ListInvoicesRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Invoice>> ListAsync(
         ListInvoicesRequest request,
@@ -251,47 +310,37 @@ public partial class InvoicesClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchInvoicesResponse> SearchAsync(
+    public async Task<Pager<Invoice>> SearchAsync(
         SearchInvoicesRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchInvoicesRequest,
+            RequestOptions?,
+            SearchInvoicesResponse,
+            string?,
+            Invoice
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/invoices/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Invoices?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchInvoicesResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>
@@ -423,7 +472,9 @@ public partial class InvoicesClient
     /// invoice (you cannot delete a published invoice, including one that is scheduled for processing).
     /// </summary>
     /// <example><code>
-    /// await client.Invoices.DeleteAsync(new DeleteInvoicesRequest { InvoiceId = "invoice_id" });
+    /// await client.Invoices.DeleteAsync(
+    ///     new DeleteInvoicesRequest { InvoiceId = "invoice_id", Version = 1 }
+    /// );
     /// </code></example>
     public async Task<DeleteInvoiceResponse> DeleteAsync(
         DeleteInvoicesRequest request,

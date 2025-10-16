@@ -16,6 +16,65 @@ public partial class SubscriptionsClient
     }
 
     /// <summary>
+    /// Searches for subscriptions.
+    ///
+    /// Results are ordered chronologically by subscription creation date. If
+    /// the request specifies more than one location ID,
+    /// the endpoint orders the result
+    /// by location ID, and then by creation date within each location. If no locations are given
+    /// in the query, all locations are searched.
+    ///
+    /// You can also optionally specify `customer_ids` to search by customer.
+    /// If left unset, all customers
+    /// associated with the specified locations are returned.
+    /// If the request specifies customer IDs, the endpoint orders results
+    /// first by location, within location by customer ID, and within
+    /// customer by subscription creation date.
+    /// </summary>
+    private async Task<SearchSubscriptionsResponse> SearchInternalAsync(
+        SearchSubscriptionsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/subscriptions/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchSubscriptionsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Lists all [events](https://developer.squareup.com/docs/subscriptions-api/actions-events) for a specific subscription.
     /// </summary>
     private async Task<ListSubscriptionEventsResponse> ListEventsInternalAsync(
@@ -233,47 +292,37 @@ public partial class SubscriptionsClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchSubscriptionsResponse> SearchAsync(
+    public async Task<Pager<Subscription>> SearchAsync(
         SearchSubscriptionsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchSubscriptionsRequest,
+            RequestOptions?,
+            SearchSubscriptionsResponse,
+            string?,
+            Subscription
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/subscriptions/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Subscriptions?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchSubscriptionsResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>
@@ -281,7 +330,7 @@ public partial class SubscriptionsClient
     /// </summary>
     /// <example><code>
     /// await client.Subscriptions.GetAsync(
-    ///     new GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
+    ///     new GetSubscriptionsRequest { SubscriptionId = "subscription_id", Include = "include" }
     /// );
     /// </code></example>
     public async Task<GetSubscriptionResponse> GetAsync(
@@ -568,7 +617,12 @@ public partial class SubscriptionsClient
     /// </summary>
     /// <example><code>
     /// await client.Subscriptions.ListEventsAsync(
-    ///     new ListEventsSubscriptionsRequest { SubscriptionId = "subscription_id" }
+    ///     new ListEventsSubscriptionsRequest
+    ///     {
+    ///         SubscriptionId = "subscription_id",
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<SubscriptionEvent>> ListEventsAsync(

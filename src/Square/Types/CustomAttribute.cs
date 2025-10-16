@@ -26,6 +26,12 @@ public record CustomAttribute
     [JsonPropertyName("key")]
     public string? Key { get; set; }
 
+    /// <summary>
+    /// The value assigned to the custom attribute. It is validated against the custom
+    /// attribute definition's schema on write operations. For more information about custom
+    /// attribute values,
+    /// see [Custom Attributes Overview](https://developer.squareup.com/docs/devtools/customattributes/overview).
+    /// </summary>
     [JsonPropertyName("value")]
     public object? Value { get; set; }
 

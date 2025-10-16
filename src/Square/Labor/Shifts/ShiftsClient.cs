@@ -16,6 +16,65 @@ public partial class ShiftsClient
     }
 
     /// <summary>
+    /// Returns a paginated list of `Shift` records for a business.
+    /// The list to be returned can be filtered by:
+    /// - Location IDs
+    /// - Team member IDs
+    /// - Shift status (`OPEN` or `CLOSED`)
+    /// - Shift start
+    /// - Shift end
+    /// - Workday details
+    ///
+    /// The list can be sorted by:
+    /// - `START_AT`
+    /// - `END_AT`
+    /// - `CREATED_AT`
+    /// - `UPDATED_AT`
+    /// </summary>
+    private async Task<SearchShiftsResponse> SearchInternalAsync(
+        SearchShiftsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/labor/shifts/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchShiftsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Creates a new `Shift`.
     ///
     /// A `Shift` represents a complete workday for a single team member.
@@ -148,47 +207,37 @@ public partial class ShiftsClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchShiftsResponse> SearchAsync(
+    public async Task<Pager<Shift>> SearchAsync(
         SearchShiftsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchShiftsRequest,
+            RequestOptions?,
+            SearchShiftsResponse,
+            string?,
+            Shift
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/labor/shifts/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Shifts?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchShiftsResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>

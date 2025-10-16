@@ -106,6 +106,60 @@ public partial class CustomersClient
     }
 
     /// <summary>
+    /// Searches the customer profiles associated with a Square account using one or more supported query filters.
+    ///
+    /// Calling `SearchCustomers` without any explicit query filter returns all
+    /// customer profiles ordered alphabetically based on `given_name` and
+    /// `family_name`.
+    ///
+    /// Under normal operating conditions, newly created or updated customer profiles become available
+    /// for the search operation in well under 30 seconds. Occasionally, propagation of the new or updated
+    /// profiles can take closer to one minute or longer, especially during network incidents and outages.
+    /// </summary>
+    private async Task<SearchCustomersResponse> SearchInternalAsync(
+        SearchCustomersRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/customers/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchCustomersResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Lists customer profiles associated with a Square account.
     ///
     /// Under normal operating conditions, newly created or updated customer profiles become available
@@ -113,7 +167,16 @@ public partial class CustomersClient
     /// profiles can take closer to one minute or longer, especially during network incidents and outages.
     /// </summary>
     /// <example><code>
-    /// await client.Customers.ListAsync(new ListCustomersRequest());
+    /// await client.Customers.ListAsync(
+    ///     new ListCustomersRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         Limit = 1,
+    ///         SortField = CustomerSortField.Default,
+    ///         SortOrder = SortOrder.Desc,
+    ///         Count = true,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Customer>> ListAsync(
         ListCustomersRequest request,
@@ -575,47 +638,37 @@ public partial class CustomersClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchCustomersResponse> SearchAsync(
+    public async Task<Pager<Customer>> SearchAsync(
         SearchCustomersRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchCustomersRequest,
+            RequestOptions?,
+            SearchCustomersResponse,
+            string?,
+            Customer
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/customers/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Customers?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchCustomersResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>
@@ -737,7 +790,9 @@ public partial class CustomersClient
     /// To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.
     /// </summary>
     /// <example><code>
-    /// await client.Customers.DeleteAsync(new DeleteCustomersRequest { CustomerId = "customer_id" });
+    /// await client.Customers.DeleteAsync(
+    ///     new DeleteCustomersRequest { CustomerId = "customer_id", Version = 1000000 }
+    /// );
     /// </code></example>
     public async Task<DeleteCustomerResponse> DeleteAsync(
         DeleteCustomersRequest request,

@@ -266,7 +266,14 @@ public partial class CustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributes.ListAsync(
-    ///     new ListCustomAttributesRequest { MerchantId = "merchant_id" }
+    ///     new ListCustomAttributesRequest
+    ///     {
+    ///         MerchantId = "merchant_id",
+    ///         VisibilityFilter = VisibilityFilter.All,
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///         WithDefinitions = true,
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttribute>> ListAsync(
@@ -311,7 +318,13 @@ public partial class CustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributes.GetAsync(
-    ///     new GetCustomAttributesRequest { MerchantId = "merchant_id", Key = "key" }
+    ///     new GetCustomAttributesRequest
+    ///     {
+    ///         MerchantId = "merchant_id",
+    ///         Key = "key",
+    ///         WithDefinition = true,
+    ///         Version = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<RetrieveMerchantCustomAttributeResponse> GetAsync(

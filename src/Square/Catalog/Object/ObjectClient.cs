@@ -84,7 +84,15 @@ public partial class ObjectClient
     /// any [CatalogTax](entity:CatalogTax) objects that apply to it.
     /// </summary>
     /// <example><code>
-    /// await client.Catalog.Object.GetAsync(new GetObjectRequest { ObjectId = "object_id" });
+    /// await client.Catalog.Object.GetAsync(
+    ///     new GetObjectRequest
+    ///     {
+    ///         ObjectId = "object_id",
+    ///         IncludeRelatedObjects = true,
+    ///         CatalogVersion = 1000000,
+    ///         IncludeCategoryPathToRoot = true,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<GetCatalogObjectResponse> GetAsync(
         GetObjectRequest request,

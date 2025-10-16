@@ -89,6 +89,116 @@ public partial class CatalogClient
     }
 
     /// <summary>
+    /// Searches for [CatalogObject](entity:CatalogObject) of any type by matching supported search attribute values,
+    /// excluding custom attribute values on items or item variations, against one or more of the specified query filters.
+    ///
+    /// This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems)
+    /// endpoint in the following aspects:
+    ///
+    /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+    /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+    /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+    /// - The both endpoints have different call conventions, including the query filter formats.
+    /// </summary>
+    private async Task<SearchCatalogObjectsResponse> SearchInternalAsync(
+        SearchCatalogObjectsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/catalog/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchCatalogObjectsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
+    /// Searches for catalog items or item variations by matching supported search attribute values, including
+    /// custom attribute values, against one or more of the specified query filters.
+    ///
+    /// This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)
+    /// endpoint in the following aspects:
+    ///
+    /// - `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.
+    /// - `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.
+    /// - `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.
+    /// - The both endpoints use different call conventions, including the query filter formats.
+    /// </summary>
+    private async Task<SearchCatalogItemsResponse> SearchItemsInternalAsync(
+        SearchCatalogItemsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/catalog/search-catalog-items",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchCatalogItemsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Deletes a set of [CatalogItem](entity:CatalogItem)s based on the
     /// provided list of target IDs and returns a set of successfully deleted IDs in
     /// the response. Deletion is a cascading event such that all children of the
@@ -352,7 +462,14 @@ public partial class CatalogClient
     /// and set the `include_deleted_objects` attribute value to `true`.
     /// </summary>
     /// <example><code>
-    /// await client.Catalog.ListAsync(new ListCatalogRequest());
+    /// await client.Catalog.ListAsync(
+    ///     new ListCatalogRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         Types = "types",
+    ///         CatalogVersion = 1000000,
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<CatalogObject>> ListAsync(
         ListCatalogRequest request,
@@ -416,47 +533,37 @@ public partial class CatalogClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchCatalogObjectsResponse> SearchAsync(
+    public async Task<Pager<CatalogObject>> SearchAsync(
         SearchCatalogObjectsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchCatalogObjectsRequest,
+            RequestOptions?,
+            SearchCatalogObjectsResponse,
+            string?,
+            CatalogObject
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/catalog/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Objects?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchCatalogObjectsResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>
@@ -508,47 +615,37 @@ public partial class CatalogClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchCatalogItemsResponse> SearchItemsAsync(
+    public async Task<Pager<CatalogObject>> SearchItemsAsync(
         SearchCatalogItemsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchCatalogItemsRequest,
+            RequestOptions?,
+            SearchCatalogItemsResponse,
+            string?,
+            CatalogObject
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchItemsInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/catalog/search-catalog-items",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Items?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchCatalogItemsResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>

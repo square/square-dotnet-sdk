@@ -16,6 +16,100 @@ public partial class InventoryClient
     }
 
     /// <summary>
+    /// Deprecated version of [BatchRetrieveInventoryChanges](api-endpoint:Inventory-BatchRetrieveInventoryChanges) after the endpoint URL
+    /// is updated to conform to the standard convention.
+    /// </summary>
+    private async Task<BatchGetInventoryChangesResponse> DeprecatedBatchGetChangesInternalAsync(
+        BatchRetrieveInventoryChangesRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/inventory/batch-retrieve-changes",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<BatchGetInventoryChangesResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
+    /// Deprecated version of [BatchRetrieveInventoryCounts](api-endpoint:Inventory-BatchRetrieveInventoryCounts) after the endpoint URL
+    /// is updated to conform to the standard convention.
+    /// </summary>
+    private async Task<BatchGetInventoryCountsResponse> DeprecatedBatchGetCountsInternalAsync(
+        BatchGetInventoryCountsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/inventory/batch-retrieve-counts",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<BatchGetInventoryCountsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Returns historical physical counts and adjustments based on the
     /// provided filter criteria.
     ///
@@ -449,47 +543,37 @@ public partial class InventoryClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<BatchGetInventoryChangesResponse> DeprecatedBatchGetChangesAsync(
+    public async Task<Pager<InventoryChange>> DeprecatedBatchGetChangesAsync(
         BatchRetrieveInventoryChangesRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            BatchRetrieveInventoryChangesRequest,
+            RequestOptions?,
+            BatchGetInventoryChangesResponse,
+            string?,
+            InventoryChange
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                DeprecatedBatchGetChangesInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/inventory/batch-retrieve-changes",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Changes?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<BatchGetInventoryChangesResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>
@@ -506,47 +590,37 @@ public partial class InventoryClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<BatchGetInventoryCountsResponse> DeprecatedBatchGetCountsAsync(
+    public async Task<Pager<InventoryCount>> DeprecatedBatchGetCountsAsync(
         BatchGetInventoryCountsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            BatchGetInventoryCountsRequest,
+            RequestOptions?,
+            BatchGetInventoryCountsResponse,
+            string?,
+            InventoryCount
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                DeprecatedBatchGetCountsInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/inventory/batch-retrieve-counts",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Counts?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<BatchGetInventoryCountsResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>
@@ -903,7 +977,14 @@ public partial class InventoryClient
     /// For more sophisticated queries, use a batch endpoint.
     /// </summary>
     /// <example><code>
-    /// await client.Inventory.GetAsync(new GetInventoryRequest { CatalogObjectId = "catalog_object_id" });
+    /// await client.Inventory.GetAsync(
+    ///     new GetInventoryRequest
+    ///     {
+    ///         CatalogObjectId = "catalog_object_id",
+    ///         LocationIds = "location_ids",
+    ///         Cursor = "cursor",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<InventoryCount>> GetAsync(
         GetInventoryRequest request,
@@ -955,7 +1036,12 @@ public partial class InventoryClient
     /// </summary>
     /// <example><code>
     /// await client.Inventory.ChangesAsync(
-    ///     new ChangesInventoryRequest { CatalogObjectId = "catalog_object_id" }
+    ///     new ChangesInventoryRequest
+    ///     {
+    ///         CatalogObjectId = "catalog_object_id",
+    ///         LocationIds = "location_ids",
+    ///         Cursor = "cursor",
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<InventoryChange>> ChangesAsync(

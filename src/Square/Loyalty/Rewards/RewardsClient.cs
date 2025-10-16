@@ -16,6 +16,58 @@ public partial class RewardsClient
     }
 
     /// <summary>
+    /// Searches for loyalty rewards. This endpoint accepts a request with no query filters and returns results for all loyalty accounts.
+    /// If you include a `query` object, `loyalty_account_id` is required and `status` is  optional.
+    ///
+    /// If you know a reward ID, use the
+    /// [RetrieveLoyaltyReward](api-endpoint:Loyalty-RetrieveLoyaltyReward) endpoint.
+    ///
+    /// Search results are sorted by `updated_at` in descending order.
+    /// </summary>
+    private async Task<SearchLoyaltyRewardsResponse> SearchInternalAsync(
+        SearchLoyaltyRewardsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/loyalty/rewards/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchLoyaltyRewardsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Creates a loyalty reward. In the process, the endpoint does following:
     ///
     /// - Uses the `reward_tier_id` in the request to determine the number of points
@@ -103,47 +155,37 @@ public partial class RewardsClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchLoyaltyRewardsResponse> SearchAsync(
+    public async Task<Pager<LoyaltyReward>> SearchAsync(
         SearchLoyaltyRewardsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchLoyaltyRewardsRequest,
+            RequestOptions?,
+            SearchLoyaltyRewardsResponse,
+            string?,
+            LoyaltyReward
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/loyalty/rewards/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Rewards?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchLoyaltyRewardsResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>

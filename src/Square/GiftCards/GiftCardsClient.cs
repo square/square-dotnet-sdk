@@ -91,7 +91,16 @@ public partial class GiftCardsClient
     /// a subset of the gift cards. Results are sorted by `created_at` in ascending order.
     /// </summary>
     /// <example><code>
-    /// await client.GiftCards.ListAsync(new ListGiftCardsRequest());
+    /// await client.GiftCards.ListAsync(
+    ///     new ListGiftCardsRequest
+    ///     {
+    ///         Type = "type",
+    ///         State = "state",
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///         CustomerId = "customer_id",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<GiftCard>> ListAsync(
         ListGiftCardsRequest request,

@@ -73,7 +73,7 @@ public partial class GroupsClient
     /// Retrieves the list of customer groups of a business.
     /// </summary>
     /// <example><code>
-    /// await client.Customers.Groups.ListAsync(new ListGroupsRequest());
+    /// await client.Customers.Groups.ListAsync(new ListGroupsRequest { Cursor = "cursor", Limit = 1 });
     /// </code></example>
     public async Task<Pager<CustomerGroup>> ListAsync(
         ListGroupsRequest request,

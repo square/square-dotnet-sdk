@@ -75,7 +75,15 @@ public partial class EmployeesClient
     }
 
     /// <example><code>
-    /// await client.Employees.ListAsync(new ListEmployeesRequest());
+    /// await client.Employees.ListAsync(
+    ///     new ListEmployeesRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         Status = EmployeeStatus.Active,
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Employee>> ListAsync(
         ListEmployeesRequest request,

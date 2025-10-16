@@ -24,6 +24,68 @@ public partial class OrdersClient
     public CustomAttributesClient CustomAttributes { get; }
 
     /// <summary>
+    /// Search all orders for one or more locations. Orders include all sales,
+    /// returns, and exchanges regardless of how or when they entered the Square
+    /// ecosystem (such as Point of Sale, Invoices, and Connect APIs).
+    ///
+    /// `SearchOrders` requests need to specify which locations to search and define a
+    /// [SearchOrdersQuery](entity:SearchOrdersQuery) object that controls
+    /// how to sort or filter the results. Your `SearchOrdersQuery` can:
+    ///
+    ///   Set filter criteria.
+    ///   Set the sort order.
+    ///   Determine whether to return results as complete `Order` objects or as
+    /// [OrderEntry](entity:OrderEntry) objects.
+    ///
+    /// Note that details for orders processed with Square Point of Sale while in
+    /// offline mode might not be transmitted to Square for up to 72 hours. Offline
+    /// orders have a `created_at` value that reflects the time the order was created,
+    /// not the time it was subsequently transmitted to Square.
+    /// </summary>
+    private async Task<SearchOrdersResponse> SearchInternalAsync(
+        SearchOrdersRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/orders/search",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<SearchOrdersResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Creates a new [order](entity:Order) that can include information about products for
     /// purchase and settings to apply to the purchase.
     ///
@@ -394,47 +456,37 @@ public partial class OrdersClient
     ///     }
     /// );
     /// </code></example>
-    public async Task<SearchOrdersResponse> SearchAsync(
+    public async Task<Pager<Order>> SearchAsync(
         SearchOrdersRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )
     {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
+        if (request is not null)
+        {
+            request = request with { };
+        }
+        var pager = await CursorPager<
+            SearchOrdersRequest,
+            RequestOptions?,
+            SearchOrdersResponse,
+            string?,
+            Order
+        >
+            .CreateInstanceAsync(
+                request,
+                options,
+                SearchInternalAsync,
+                (request, cursor) =>
                 {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Post,
-                    Path = "v2/orders/search",
-                    Body = request,
-                    ContentType = "application/json",
-                    Options = options,
+                    request.Cursor = cursor;
                 },
+                response => response?.Cursor,
+                response => response?.Orders?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<SearchOrdersResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
+        return pager;
     }
 
     /// <summary>

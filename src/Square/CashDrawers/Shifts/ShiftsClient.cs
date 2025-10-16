@@ -146,7 +146,17 @@ public partial class ShiftsClient
     /// in a date range.
     /// </summary>
     /// <example><code>
-    /// await client.CashDrawers.Shifts.ListAsync(new ListShiftsRequest { LocationId = "location_id" });
+    /// await client.CashDrawers.Shifts.ListAsync(
+    ///     new ListShiftsRequest
+    ///     {
+    ///         LocationId = "location_id",
+    ///         SortOrder = SortOrder.Desc,
+    ///         BeginTime = "begin_time",
+    ///         EndTime = "end_time",
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<CashDrawerShiftSummary>> ListAsync(
         ListShiftsRequest request,
@@ -242,7 +252,13 @@ public partial class ShiftsClient
     /// </summary>
     /// <example><code>
     /// await client.CashDrawers.Shifts.ListEventsAsync(
-    ///     new ListEventsShiftsRequest { ShiftId = "shift_id", LocationId = "location_id" }
+    ///     new ListEventsShiftsRequest
+    ///     {
+    ///         ShiftId = "shift_id",
+    ///         LocationId = "location_id",
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CashDrawerShiftEvent>> ListEventsAsync(

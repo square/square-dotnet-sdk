@@ -81,7 +81,14 @@ public partial class DisputesClient
     /// Returns a list of disputes associated with a particular account.
     /// </summary>
     /// <example><code>
-    /// await client.Disputes.ListAsync(new ListDisputesRequest());
+    /// await client.Disputes.ListAsync(
+    ///     new ListDisputesRequest
+    ///     {
+    ///         Cursor = "cursor",
+    ///         States = DisputeState.InquiryEvidenceRequired,
+    ///         LocationId = "location_id",
+    ///     }
+    /// );
     /// </code></example>
     public async Task<Pager<Dispute>> ListAsync(
         ListDisputesRequest request,
