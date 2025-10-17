@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Cards;
 
+[Serializable]
 public record GetCardsRequest
 {
     /// <summary>

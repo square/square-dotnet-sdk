@@ -1,7 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
-using global::System.Threading.Tasks;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -219,7 +219,7 @@ public partial class OAuthClient
     /// <example><code>
     /// await client.OAuth.AuthorizeAsync();
     /// </code></example>
-    public async global::System.Threading.Tasks.Task AuthorizeAsync(
+    public async Task AuthorizeAsync(
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )

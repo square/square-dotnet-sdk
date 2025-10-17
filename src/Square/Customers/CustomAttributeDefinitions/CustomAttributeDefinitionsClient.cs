@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -86,7 +87,11 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributeDefinitions.ListAsync(
-    ///     new ListCustomAttributeDefinitionsRequest { Limit = 1, Cursor = "cursor" }
+    ///     new Square.Customers.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttributeDefinition>> ListAsync(
@@ -142,7 +147,7 @@ public partial class CustomAttributeDefinitionsClient
     ///         CustomAttributeDefinition = new CustomAttributeDefinition
     ///         {
     ///             Key = "favoritemovie",
-    ///             Schema = new Dictionary&lt;string, object&gt;()
+    ///             Schema = new Dictionary&lt;string, object?&gt;()
     ///             {
     ///                 {
     ///                     "$ref",
@@ -210,7 +215,11 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributeDefinitions.GetAsync(
-    ///     new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    ///     new Square.Customers.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///         Version = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<GetCustomerCustomAttributeDefinitionResponse> GetAsync(
@@ -345,7 +354,10 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributeDefinitions.DeleteAsync(
-    ///     new DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    ///     new Square.Customers.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///     }
     /// );
     /// </code></example>
     public async Task<DeleteCustomerCustomAttributeDefinitionResponse> DeleteAsync(

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Defines an appointment slot that encapsulates the appointment segments, location and starting time available for booking.
 /// </summary>
-public record Availability
+[Serializable]
+public record Availability : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The RFC 3339 timestamp specifying the beginning time of the slot available for booking.
     /// </summary>
@@ -28,15 +33,11 @@ public record Availability
     [JsonPropertyName("appointment_segments")]
     public IEnumerable<AppointmentSegment>? AppointmentSegments { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

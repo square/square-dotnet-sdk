@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<GiftCardActivityAdjustIncrementReason>))]
+[Serializable]
 public readonly record struct GiftCardActivityAdjustIncrementReason : IStringEnum
 {
     public static readonly GiftCardActivityAdjustIncrementReason Complimentary = new(
@@ -64,6 +65,7 @@ public readonly record struct GiftCardActivityAdjustIncrementReason : IStringEnu
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Complimentary = "COMPLIMENTARY";

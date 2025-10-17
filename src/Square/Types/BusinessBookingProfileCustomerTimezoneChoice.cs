@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<BusinessBookingProfileCustomerTimezoneChoice>))]
+[Serializable]
 public readonly record struct BusinessBookingProfileCustomerTimezoneChoice : IStringEnum
 {
     public static readonly BusinessBookingProfileCustomerTimezoneChoice BusinessLocationTimezone =
@@ -63,6 +64,7 @@ public readonly record struct BusinessBookingProfileCustomerTimezoneChoice : ISt
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string BusinessLocationTimezone = "BUSINESS_LOCATION_TIMEZONE";

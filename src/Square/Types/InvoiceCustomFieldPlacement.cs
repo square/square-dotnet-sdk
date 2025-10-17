@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<InvoiceCustomFieldPlacement>))]
+[Serializable]
 public readonly record struct InvoiceCustomFieldPlacement : IStringEnum
 {
     public static readonly InvoiceCustomFieldPlacement AboveLineItems = new(Values.AboveLineItems);
@@ -54,6 +55,7 @@ public readonly record struct InvoiceCustomFieldPlacement : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string AboveLineItems = "ABOVE_LINE_ITEMS";

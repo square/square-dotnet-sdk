@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Filter events by location.
 /// </summary>
-public record LoyaltyEventLocationFilter
+[Serializable]
+public record LoyaltyEventLocationFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The [location](entity:Location) IDs for loyalty events to query.
     /// If multiple values are specified, the endpoint uses
@@ -17,15 +22,11 @@ public record LoyaltyEventLocationFilter
     [JsonPropertyName("location_ids")]
     public IEnumerable<string> LocationIds { get; set; } = new List<string>();
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

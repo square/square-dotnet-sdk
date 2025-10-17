@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Filter based on [order fulfillment](entity:Fulfillment) information.
 /// </summary>
-public record SearchOrdersFulfillmentFilter
+[Serializable]
+public record SearchOrdersFulfillmentFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A list of [fulfillment types](entity:FulfillmentType) to filter
     /// for. The list returns orders if any of its fulfillments match any of the fulfillment types
@@ -27,15 +32,11 @@ public record SearchOrdersFulfillmentFilter
     [JsonPropertyName("fulfillment_states")]
     public IEnumerable<FulfillmentState>? FulfillmentStates { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

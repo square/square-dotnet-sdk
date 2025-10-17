@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Loyalty.Rewards;
 
+[Serializable]
 public record SearchLoyaltyRewardsRequest
 {
     /// <summary>

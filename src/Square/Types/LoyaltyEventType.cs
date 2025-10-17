@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<LoyaltyEventType>))]
+[Serializable]
 public readonly record struct LoyaltyEventType : IStringEnum
 {
     public static readonly LoyaltyEventType AccumulatePoints = new(Values.AccumulatePoints);
@@ -68,6 +69,7 @@ public readonly record struct LoyaltyEventType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string AccumulatePoints = "ACCUMULATE_POINTS";

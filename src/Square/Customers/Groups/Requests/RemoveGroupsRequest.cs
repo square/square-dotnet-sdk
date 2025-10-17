@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Customers.Groups;
 
+[Serializable]
 public record RemoveGroupsRequest
 {
     /// <summary>

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ScheduledShiftFilterAssignmentStatus>))]
+[Serializable]
 public readonly record struct ScheduledShiftFilterAssignmentStatus : IStringEnum
 {
     public static readonly ScheduledShiftFilterAssignmentStatus Assigned = new(Values.Assigned);
@@ -56,6 +57,7 @@ public readonly record struct ScheduledShiftFilterAssignmentStatus : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Assigned = "ASSIGNED";

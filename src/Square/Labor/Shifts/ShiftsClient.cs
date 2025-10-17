@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -195,7 +196,7 @@ public partial class ShiftsClient
     /// Returns a single `Shift` specified by `id`.
     /// </summary>
     /// <example><code>
-    /// await client.Labor.Shifts.GetAsync(new GetShiftsRequest { Id = "id" });
+    /// await client.Labor.Shifts.GetAsync(new Square.Labor.Shifts.GetShiftsRequest { Id = "id" });
     /// </code></example>
     public async Task<GetShiftResponse> GetAsync(
         GetShiftsRequest request,

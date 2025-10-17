@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Checkout;
 
+[Serializable]
 public record RetrieveLocationSettingsRequest
 {
     /// <summary>

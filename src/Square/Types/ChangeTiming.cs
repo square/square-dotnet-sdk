@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ChangeTiming>))]
+[Serializable]
 public readonly record struct ChangeTiming : IStringEnum
 {
     public static readonly ChangeTiming Immediate = new(Values.Immediate);
@@ -54,6 +55,7 @@ public readonly record struct ChangeTiming : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Immediate = "IMMEDIATE";

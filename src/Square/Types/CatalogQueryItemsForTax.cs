@@ -7,23 +7,24 @@ namespace Square;
 /// <summary>
 /// The query filter to return the items containing the specified tax IDs.
 /// </summary>
-public record CatalogQueryItemsForTax
+[Serializable]
+public record CatalogQueryItemsForTax : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A set of `CatalogTax` IDs to be used to find associated `CatalogItem`s.
     /// </summary>
     [JsonPropertyName("tax_ids")]
     public IEnumerable<string> TaxIds { get; set; } = new List<string>();
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

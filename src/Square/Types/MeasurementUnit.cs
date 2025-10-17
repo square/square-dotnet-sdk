@@ -9,8 +9,13 @@ namespace Square;
 /// or inches. Exactly one of the following fields are required: `custom_unit`,
 /// `area_unit`, `length_unit`, `volume_unit`, and `weight_unit`.
 /// </summary>
-public record MeasurementUnit
+[Serializable]
+public record MeasurementUnit : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A custom unit of measurement defined by the seller using the Point of Sale
     /// app or ad-hoc as an order line item.
@@ -67,15 +72,11 @@ public record MeasurementUnit
     [JsonPropertyName("type")]
     public MeasurementUnitUnitType? Type { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

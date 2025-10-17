@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -86,7 +87,7 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Locations.CustomAttributeDefinitions.ListAsync(
-    ///     new ListCustomAttributeDefinitionsRequest
+    ///     new Square.Locations.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
     ///     {
     ///         VisibilityFilter = VisibilityFilter.All,
     ///         Limit = 1,
@@ -143,7 +144,7 @@ public partial class CustomAttributeDefinitionsClient
     ///         CustomAttributeDefinition = new CustomAttributeDefinition
     ///         {
     ///             Key = "bestseller",
-    ///             Schema = new Dictionary&lt;string, object&gt;()
+    ///             Schema = new Dictionary&lt;string, object?&gt;()
     ///             {
     ///                 {
     ///                     "$ref",
@@ -209,7 +210,11 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Locations.CustomAttributeDefinitions.GetAsync(
-    ///     new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    ///     new Square.Locations.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///         Version = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<RetrieveLocationCustomAttributeDefinitionResponse> GetAsync(
@@ -339,7 +344,10 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Locations.CustomAttributeDefinitions.DeleteAsync(
-    ///     new DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    ///     new Square.Locations.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///     }
     /// );
     /// </code></example>
     public async Task<DeleteLocationCustomAttributeDefinitionResponse> DeleteAsync(

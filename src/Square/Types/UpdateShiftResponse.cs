@@ -9,8 +9,13 @@ namespace Square;
 /// the updated `Shift` object and might contain a set of `Error` objects if
 /// the request resulted in errors.
 /// </summary>
-public record UpdateShiftResponse
+[Serializable]
+public record UpdateShiftResponse : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The updated `Shift`.
     /// </summary>
@@ -23,15 +28,11 @@ public record UpdateShiftResponse
     [JsonPropertyName("errors")]
     public IEnumerable<Error>? Errors { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

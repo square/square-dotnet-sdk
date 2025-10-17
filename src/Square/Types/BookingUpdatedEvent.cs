@@ -10,8 +10,13 @@ namespace Square;
 /// To receive this event with buyer-level permissions, you must have `APPOINTMENTS_READ` set for the OAuth scope.
 /// To receive this event with seller-level permissions, you must have `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` set for the OAuth scope.
 /// </summary>
-public record BookingUpdatedEvent
+[Serializable]
+public record BookingUpdatedEvent : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the target seller associated with the event.
     /// </summary>
@@ -43,15 +48,11 @@ public record BookingUpdatedEvent
     [JsonPropertyName("data")]
     public BookingUpdatedEventData? Data { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

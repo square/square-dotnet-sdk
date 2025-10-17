@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CustomerSortField>))]
+[Serializable]
 public readonly record struct CustomerSortField : IStringEnum
 {
     public static readonly CustomerSortField Default = new(Values.Default);
@@ -54,6 +55,7 @@ public readonly record struct CustomerSortField : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Default = "DEFAULT";

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CatalogQuickAmountsSettingsOption>))]
+[Serializable]
 public readonly record struct CatalogQuickAmountsSettingsOption : IStringEnum
 {
     public static readonly CatalogQuickAmountsSettingsOption Disabled = new(Values.Disabled);
@@ -56,6 +57,7 @@ public readonly record struct CatalogQuickAmountsSettingsOption : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Disabled = "DISABLED";

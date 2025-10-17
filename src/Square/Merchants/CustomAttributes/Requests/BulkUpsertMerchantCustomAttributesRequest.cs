@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Merchants.CustomAttributes;
 
+[Serializable]
 public record BulkUpsertMerchantCustomAttributesRequest
 {
     /// <summary>

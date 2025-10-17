@@ -8,8 +8,13 @@ namespace Square;
 /// Published when a [gift card](entity:GiftCard) is updated. This includes
 /// changes to the state, balance, and customer association.
 /// </summary>
-public record GiftCardUpdatedEvent
+[Serializable]
+public record GiftCardUpdatedEvent : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the Square seller associated with the event.
     /// </summary>
@@ -42,15 +47,11 @@ public record GiftCardUpdatedEvent
     [JsonPropertyName("data")]
     public GiftCardUpdatedEventData? Data { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

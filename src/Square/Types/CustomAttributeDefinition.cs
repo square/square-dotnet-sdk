@@ -8,8 +8,13 @@ namespace Square;
 /// Represents a definition for custom attribute values. A custom attribute definition
 /// specifies the key, visibility, schema, and other properties for a custom attribute.
 /// </summary>
-public record CustomAttributeDefinition
+[Serializable]
+public record CustomAttributeDefinition : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The identifier
     /// of the custom attribute definition and its corresponding custom attributes. This value
@@ -35,7 +40,7 @@ public record CustomAttributeDefinition
     /// see [Custom Attributes Overview](https://developer.squareup.com/docs/devtools/customattributes/overview). This field is required when creating a definition.
     /// </summary>
     [JsonPropertyName("schema")]
-    public object? Schema { get; set; }
+    public Dictionary<string, object?>? Schema { get; set; }
 
     /// <summary>
     /// The name of the custom attribute definition for API and seller-facing UI purposes. The name must
@@ -91,15 +96,11 @@ public record CustomAttributeDefinition
     [JsonPropertyName("created_at")]
     public string? CreatedAt { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

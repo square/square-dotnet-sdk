@@ -13,8 +13,13 @@ namespace Square;
 /// ```
 /// returns only active team members assigned to either location "A" or "B".
 /// </summary>
-public record SearchTeamMembersFilter
+[Serializable]
+public record SearchTeamMembersFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// When present, filters by team members assigned to the specified locations.
     /// When empty, includes team members assigned to any location.
@@ -36,15 +41,11 @@ public record SearchTeamMembersFilter
     [JsonPropertyName("is_owner")]
     public bool? IsOwner { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

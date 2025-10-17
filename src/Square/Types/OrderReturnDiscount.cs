@@ -12,8 +12,13 @@ namespace Square;
 /// The amount distributed to each return line item is relative to that item’s contribution to the
 /// order subtotal.
 /// </summary>
-public record OrderReturnDiscount
+[Serializable]
+public record OrderReturnDiscount : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique ID that identifies the returned discount only within this order.
     /// </summary>
@@ -89,15 +94,11 @@ public record OrderReturnDiscount
     [JsonPropertyName("scope")]
     public OrderLineItemDiscountScope? Scope { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

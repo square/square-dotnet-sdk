@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CheckoutLocationSettingsBrandingButtonShape>))]
+[Serializable]
 public readonly record struct CheckoutLocationSettingsBrandingButtonShape : IStringEnum
 {
     public static readonly CheckoutLocationSettingsBrandingButtonShape Squared = new(
@@ -66,6 +67,7 @@ public readonly record struct CheckoutLocationSettingsBrandingButtonShape : IStr
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Squared = "SQUARED";

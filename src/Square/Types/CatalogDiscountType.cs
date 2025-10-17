@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CatalogDiscountType>))]
+[Serializable]
 public readonly record struct CatalogDiscountType : IStringEnum
 {
     public static readonly CatalogDiscountType FixedPercentage = new(Values.FixedPercentage);
@@ -58,6 +59,7 @@ public readonly record struct CatalogDiscountType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string FixedPercentage = "FIXED_PERCENTAGE";

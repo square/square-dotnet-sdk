@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -190,7 +191,7 @@ public partial class SubscriptionsClient
     /// </summary>
     /// <example><code>
     /// await client.Webhooks.Subscriptions.GetAsync(
-    ///     new GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
+    ///     new Square.Webhooks.Subscriptions.GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
     /// );
     /// </code></example>
     public async Task<GetWebhookSubscriptionResponse> GetAsync(

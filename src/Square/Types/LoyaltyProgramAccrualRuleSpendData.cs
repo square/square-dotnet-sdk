@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents additional data for rules with the `SPEND` accrual type.
 /// </summary>
-public record LoyaltyProgramAccrualRuleSpendData
+[Serializable]
+public record LoyaltyProgramAccrualRuleSpendData : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The amount that buyers must spend to earn points.
     /// For example, given an "Earn 1 point for every $10 spent" accrual rule, a buyer who spends $105 earns 10 points.
@@ -41,15 +46,11 @@ public record LoyaltyProgramAccrualRuleSpendData
     [JsonPropertyName("tax_mode")]
     public required LoyaltyProgramAccrualRuleTaxMode TaxMode { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

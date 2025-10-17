@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ComponentComponentType>))]
+[Serializable]
 public readonly record struct ComponentComponentType : IStringEnum
 {
     public static readonly ComponentComponentType Application = new(Values.Application);
@@ -62,6 +63,7 @@ public readonly record struct ComponentComponentType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Application = "APPLICATION";

@@ -9,8 +9,13 @@ namespace Square;
 ///
 /// See [Handling errors](https://developer.squareup.com/docs/build-basics/handling-errors) for more information.
 /// </summary>
-public record Error
+[Serializable]
+public record Error : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The high-level category for the error.
     /// See [ErrorCategory](#type-errorcategory) for possible values
@@ -38,15 +43,11 @@ public record Error
     [JsonPropertyName("field")]
     public string? Field { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CheckoutLocationSettingsBrandingHeaderType>))]
+[Serializable]
 public readonly record struct CheckoutLocationSettingsBrandingHeaderType : IStringEnum
 {
     public static readonly CheckoutLocationSettingsBrandingHeaderType BusinessName = new(
@@ -68,6 +69,7 @@ public readonly record struct CheckoutLocationSettingsBrandingHeaderType : IStri
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string BusinessName = "BUSINESS_NAME";

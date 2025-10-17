@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents an update request for a `TeamMember` object.
 /// </summary>
-public record UpdateTeamMemberRequest
+[Serializable]
+public record UpdateTeamMemberRequest : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The team member fields to add, change, or clear. Fields can be cleared using a null value. To update
     /// `wage_setting.job_assignments`, you must provide the complete list of job assignments. If needed, call
@@ -17,15 +22,11 @@ public record UpdateTeamMemberRequest
     [JsonPropertyName("team_member")]
     public TeamMember? TeamMember { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

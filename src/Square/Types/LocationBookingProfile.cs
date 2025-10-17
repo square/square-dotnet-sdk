@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// The booking profile of a seller's location, including the location's ID and whether the location is enabled for online booking.
 /// </summary>
-public record LocationBookingProfile
+[Serializable]
+public record LocationBookingProfile : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the [location](entity:Location).
     /// </summary>
@@ -27,15 +32,11 @@ public record LocationBookingProfile
     [JsonPropertyName("online_booking_enabled")]
     public bool? OnlineBookingEnabled { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ExcludeStrategy>))]
+[Serializable]
 public readonly record struct ExcludeStrategy : IStringEnum
 {
     public static readonly ExcludeStrategy LeastExpensive = new(Values.LeastExpensive);
@@ -54,6 +55,7 @@ public readonly record struct ExcludeStrategy : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string LeastExpensive = "LEAST_EXPENSIVE";

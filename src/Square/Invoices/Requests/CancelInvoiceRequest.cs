@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Invoices;
 
+[Serializable]
 public record CancelInvoiceRequest
 {
     /// <summary>

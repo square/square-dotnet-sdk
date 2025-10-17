@@ -8,8 +8,13 @@ namespace Square;
 /// Represents a line item in an order. Each line item describes a different
 /// product to purchase, with its own quantity and price details.
 /// </summary>
-public record OrderLineItem
+[Serializable]
+public record OrderLineItem : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique ID that identifies the line item only within this order.
     /// </summary>
@@ -202,15 +207,11 @@ public record OrderLineItem
     [JsonPropertyName("total_service_charge_money")]
     public Money? TotalServiceChargeMoney { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

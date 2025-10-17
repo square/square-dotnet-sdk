@@ -8,8 +8,13 @@ namespace Square;
 /// Represents the unit used to measure a `CatalogItemVariation` and
 /// specifies the precision for decimal quantities.
 /// </summary>
-public record CatalogMeasurementUnit
+[Serializable]
+public record CatalogMeasurementUnit : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Indicates the unit used to measure the quantity of a catalog item variation.
     /// </summary>
@@ -30,15 +35,11 @@ public record CatalogMeasurementUnit
     [JsonPropertyName("precision")]
     public int? Precision { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<LocationType>))]
+[Serializable]
 public readonly record struct LocationType : IStringEnum
 {
     public static readonly LocationType Physical = new(Values.Physical);
@@ -54,6 +55,7 @@ public readonly record struct LocationType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Physical = "PHYSICAL";

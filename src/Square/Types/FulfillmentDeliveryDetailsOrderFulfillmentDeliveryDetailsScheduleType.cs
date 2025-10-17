@@ -6,6 +6,7 @@ namespace Square;
 [JsonConverter(
     typeof(StringEnumSerializer<FulfillmentDeliveryDetailsOrderFulfillmentDeliveryDetailsScheduleType>)
 )]
+[Serializable]
 public readonly record struct FulfillmentDeliveryDetailsOrderFulfillmentDeliveryDetailsScheduleType
     : IStringEnum
 {
@@ -69,6 +70,7 @@ public readonly record struct FulfillmentDeliveryDetailsOrderFulfillmentDelivery
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Scheduled = "SCHEDULED";

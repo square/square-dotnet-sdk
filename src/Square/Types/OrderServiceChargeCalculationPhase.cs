@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<OrderServiceChargeCalculationPhase>))]
+[Serializable]
 public readonly record struct OrderServiceChargeCalculationPhase : IStringEnum
 {
     public static readonly OrderServiceChargeCalculationPhase SubtotalPhase = new(
@@ -64,6 +65,7 @@ public readonly record struct OrderServiceChargeCalculationPhase : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string SubtotalPhase = "SUBTOTAL_PHASE";

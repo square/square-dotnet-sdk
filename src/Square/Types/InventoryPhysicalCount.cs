@@ -10,8 +10,13 @@ namespace Square;
 /// a physical count might come from an employee counting the item variations on
 /// hand or from syncing with an external system.
 /// </summary>
-public record InventoryPhysicalCount
+[Serializable]
+public record InventoryPhysicalCount : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique Square-generated ID for the
     /// [InventoryPhysicalCount](entity:InventoryPhysicalCount).
@@ -102,15 +107,11 @@ public record InventoryPhysicalCount
     [JsonPropertyName("created_at")]
     public string? CreatedAt { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

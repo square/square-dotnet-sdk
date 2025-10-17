@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// A group of variations for a `CatalogItem`.
 /// </summary>
-public record CatalogItemOption
+[Serializable]
+public record CatalogItemOption : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The item option's display name for the seller. Must be unique across
     /// all item options. This is a searchable attribute for use in applicable query filters.
@@ -43,15 +48,11 @@ public record CatalogItemOption
     [JsonPropertyName("values")]
     public IEnumerable<CatalogObject>? Values { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

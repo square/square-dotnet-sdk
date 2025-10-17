@@ -1,5 +1,3 @@
-using System;
-
 namespace Square;
 
 /// <summary>

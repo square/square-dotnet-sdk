@@ -11,8 +11,13 @@ namespace Square;
 /// These redemptions are initially assigned a `PENDING` state, but then change to a `COMPLETED` or `CANCELED` state.
 /// - An update to the `IMPORT` activity for an imported gift card when the balance is later adjusted by Square.
 /// </summary>
-public record GiftCardActivityUpdatedEvent
+[Serializable]
+public record GiftCardActivityUpdatedEvent : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the Square seller associated with the event.
     /// </summary>
@@ -45,15 +50,11 @@ public record GiftCardActivityUpdatedEvent
     [JsonPropertyName("data")]
     public GiftCardActivityUpdatedEventData? Data { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

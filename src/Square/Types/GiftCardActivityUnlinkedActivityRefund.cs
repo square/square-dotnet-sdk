@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents details about an `UNLINKED_ACTIVITY_REFUND` [gift card activity type](entity:GiftCardActivityType).
 /// </summary>
-public record GiftCardActivityUnlinkedActivityRefund
+[Serializable]
+public record GiftCardActivityUnlinkedActivityRefund : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The amount added to the gift card for the refund. This value is a positive integer.
     /// </summary>
@@ -28,15 +33,11 @@ public record GiftCardActivityUnlinkedActivityRefund
     [JsonPropertyName("payment_id")]
     public string? PaymentId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

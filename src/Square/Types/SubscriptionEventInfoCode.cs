@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<SubscriptionEventInfoCode>))]
+[Serializable]
 public readonly record struct SubscriptionEventInfoCode : IStringEnum
 {
     public static readonly SubscriptionEventInfoCode LocationNotActive = new(
@@ -66,6 +67,7 @@ public readonly record struct SubscriptionEventInfoCode : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string LocationNotActive = "LOCATION_NOT_ACTIVE";

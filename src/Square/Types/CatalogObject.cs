@@ -21,6 +21,7 @@ namespace Square;
 /// [Design a Catalog](https://developer.squareup.com/docs/catalog-api/design-a-catalog) guide.
 /// </summary>
 [JsonConverter(typeof(CatalogObject.JsonConverter))]
+[Serializable]
 public record CatalogObject
 {
     internal CatalogObject(string type, object? value)
@@ -313,7 +314,7 @@ public record CatalogObject
     public Square.CatalogObjectItem AsItem() =>
         IsItem
             ? (Square.CatalogObjectItem)Value!
-            : throw new Exception("CatalogObject.Type is not 'ITEM'");
+            : throw new System.Exception("CatalogObject.Type is not 'ITEM'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectImage"/> if <see cref="Type"/> is 'IMAGE', otherwise throws an exception.
@@ -322,7 +323,7 @@ public record CatalogObject
     public Square.CatalogObjectImage AsImage() =>
         IsImage
             ? (Square.CatalogObjectImage)Value!
-            : throw new Exception("CatalogObject.Type is not 'IMAGE'");
+            : throw new System.Exception("CatalogObject.Type is not 'IMAGE'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectCategory"/> if <see cref="Type"/> is 'CATEGORY', otherwise throws an exception.
@@ -331,7 +332,7 @@ public record CatalogObject
     public Square.CatalogObjectCategory AsCategory() =>
         IsCategory
             ? (Square.CatalogObjectCategory)Value!
-            : throw new Exception("CatalogObject.Type is not 'CATEGORY'");
+            : throw new System.Exception("CatalogObject.Type is not 'CATEGORY'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectItemVariation"/> if <see cref="Type"/> is 'ITEM_VARIATION', otherwise throws an exception.
@@ -340,7 +341,7 @@ public record CatalogObject
     public Square.CatalogObjectItemVariation AsItemVariation() =>
         IsItemVariation
             ? (Square.CatalogObjectItemVariation)Value!
-            : throw new Exception("CatalogObject.Type is not 'ITEM_VARIATION'");
+            : throw new System.Exception("CatalogObject.Type is not 'ITEM_VARIATION'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectTax"/> if <see cref="Type"/> is 'TAX', otherwise throws an exception.
@@ -349,7 +350,7 @@ public record CatalogObject
     public Square.CatalogObjectTax AsTax() =>
         IsTax
             ? (Square.CatalogObjectTax)Value!
-            : throw new Exception("CatalogObject.Type is not 'TAX'");
+            : throw new System.Exception("CatalogObject.Type is not 'TAX'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectDiscount"/> if <see cref="Type"/> is 'DISCOUNT', otherwise throws an exception.
@@ -358,7 +359,7 @@ public record CatalogObject
     public Square.CatalogObjectDiscount AsDiscount() =>
         IsDiscount
             ? (Square.CatalogObjectDiscount)Value!
-            : throw new Exception("CatalogObject.Type is not 'DISCOUNT'");
+            : throw new System.Exception("CatalogObject.Type is not 'DISCOUNT'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectModifierList"/> if <see cref="Type"/> is 'MODIFIER_LIST', otherwise throws an exception.
@@ -367,7 +368,7 @@ public record CatalogObject
     public Square.CatalogObjectModifierList AsModifierList() =>
         IsModifierList
             ? (Square.CatalogObjectModifierList)Value!
-            : throw new Exception("CatalogObject.Type is not 'MODIFIER_LIST'");
+            : throw new System.Exception("CatalogObject.Type is not 'MODIFIER_LIST'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectModifier"/> if <see cref="Type"/> is 'MODIFIER', otherwise throws an exception.
@@ -376,7 +377,7 @@ public record CatalogObject
     public Square.CatalogObjectModifier AsModifier() =>
         IsModifier
             ? (Square.CatalogObjectModifier)Value!
-            : throw new Exception("CatalogObject.Type is not 'MODIFIER'");
+            : throw new System.Exception("CatalogObject.Type is not 'MODIFIER'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectPricingRule"/> if <see cref="Type"/> is 'PRICING_RULE', otherwise throws an exception.
@@ -385,7 +386,7 @@ public record CatalogObject
     public Square.CatalogObjectPricingRule AsPricingRule() =>
         IsPricingRule
             ? (Square.CatalogObjectPricingRule)Value!
-            : throw new Exception("CatalogObject.Type is not 'PRICING_RULE'");
+            : throw new System.Exception("CatalogObject.Type is not 'PRICING_RULE'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectProductSet"/> if <see cref="Type"/> is 'PRODUCT_SET', otherwise throws an exception.
@@ -394,7 +395,7 @@ public record CatalogObject
     public Square.CatalogObjectProductSet AsProductSet() =>
         IsProductSet
             ? (Square.CatalogObjectProductSet)Value!
-            : throw new Exception("CatalogObject.Type is not 'PRODUCT_SET'");
+            : throw new System.Exception("CatalogObject.Type is not 'PRODUCT_SET'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectTimePeriod"/> if <see cref="Type"/> is 'TIME_PERIOD', otherwise throws an exception.
@@ -403,7 +404,7 @@ public record CatalogObject
     public Square.CatalogObjectTimePeriod AsTimePeriod() =>
         IsTimePeriod
             ? (Square.CatalogObjectTimePeriod)Value!
-            : throw new Exception("CatalogObject.Type is not 'TIME_PERIOD'");
+            : throw new System.Exception("CatalogObject.Type is not 'TIME_PERIOD'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectMeasurementUnit"/> if <see cref="Type"/> is 'MEASUREMENT_UNIT', otherwise throws an exception.
@@ -412,7 +413,7 @@ public record CatalogObject
     public Square.CatalogObjectMeasurementUnit AsMeasurementUnit() =>
         IsMeasurementUnit
             ? (Square.CatalogObjectMeasurementUnit)Value!
-            : throw new Exception("CatalogObject.Type is not 'MEASUREMENT_UNIT'");
+            : throw new System.Exception("CatalogObject.Type is not 'MEASUREMENT_UNIT'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectSubscriptionPlanVariation"/> if <see cref="Type"/> is 'SUBSCRIPTION_PLAN_VARIATION', otherwise throws an exception.
@@ -421,7 +422,7 @@ public record CatalogObject
     public Square.CatalogObjectSubscriptionPlanVariation AsSubscriptionPlanVariation() =>
         IsSubscriptionPlanVariation
             ? (Square.CatalogObjectSubscriptionPlanVariation)Value!
-            : throw new Exception("CatalogObject.Type is not 'SUBSCRIPTION_PLAN_VARIATION'");
+            : throw new System.Exception("CatalogObject.Type is not 'SUBSCRIPTION_PLAN_VARIATION'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectItemOption"/> if <see cref="Type"/> is 'ITEM_OPTION', otherwise throws an exception.
@@ -430,7 +431,7 @@ public record CatalogObject
     public Square.CatalogObjectItemOption AsItemOption() =>
         IsItemOption
             ? (Square.CatalogObjectItemOption)Value!
-            : throw new Exception("CatalogObject.Type is not 'ITEM_OPTION'");
+            : throw new System.Exception("CatalogObject.Type is not 'ITEM_OPTION'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectItemOptionValue"/> if <see cref="Type"/> is 'ITEM_OPTION_VAL', otherwise throws an exception.
@@ -439,7 +440,7 @@ public record CatalogObject
     public Square.CatalogObjectItemOptionValue AsItemOptionVal() =>
         IsItemOptionVal
             ? (Square.CatalogObjectItemOptionValue)Value!
-            : throw new Exception("CatalogObject.Type is not 'ITEM_OPTION_VAL'");
+            : throw new System.Exception("CatalogObject.Type is not 'ITEM_OPTION_VAL'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectCustomAttributeDefinition"/> if <see cref="Type"/> is 'CUSTOM_ATTRIBUTE_DEFINITION', otherwise throws an exception.
@@ -448,7 +449,7 @@ public record CatalogObject
     public Square.CatalogObjectCustomAttributeDefinition AsCustomAttributeDefinition() =>
         IsCustomAttributeDefinition
             ? (Square.CatalogObjectCustomAttributeDefinition)Value!
-            : throw new Exception("CatalogObject.Type is not 'CUSTOM_ATTRIBUTE_DEFINITION'");
+            : throw new System.Exception("CatalogObject.Type is not 'CUSTOM_ATTRIBUTE_DEFINITION'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectQuickAmountsSettings"/> if <see cref="Type"/> is 'QUICK_AMOUNTS_SETTINGS', otherwise throws an exception.
@@ -457,7 +458,7 @@ public record CatalogObject
     public Square.CatalogObjectQuickAmountsSettings AsQuickAmountsSettings() =>
         IsQuickAmountsSettings
             ? (Square.CatalogObjectQuickAmountsSettings)Value!
-            : throw new Exception("CatalogObject.Type is not 'QUICK_AMOUNTS_SETTINGS'");
+            : throw new System.Exception("CatalogObject.Type is not 'QUICK_AMOUNTS_SETTINGS'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectSubscriptionPlan"/> if <see cref="Type"/> is 'SUBSCRIPTION_PLAN', otherwise throws an exception.
@@ -466,7 +467,7 @@ public record CatalogObject
     public Square.CatalogObjectSubscriptionPlan AsSubscriptionPlan() =>
         IsSubscriptionPlan
             ? (Square.CatalogObjectSubscriptionPlan)Value!
-            : throw new Exception("CatalogObject.Type is not 'SUBSCRIPTION_PLAN'");
+            : throw new System.Exception("CatalogObject.Type is not 'SUBSCRIPTION_PLAN'");
 
     /// <summary>
     /// Returns the value as a <see cref="Square.CatalogObjectAvailabilityPeriod"/> if <see cref="Type"/> is 'AVAILABILITY_PERIOD', otherwise throws an exception.
@@ -475,7 +476,7 @@ public record CatalogObject
     public Square.CatalogObjectAvailabilityPeriod AsAvailabilityPeriod() =>
         IsAvailabilityPeriod
             ? (Square.CatalogObjectAvailabilityPeriod)Value!
-            : throw new Exception("CatalogObject.Type is not 'AVAILABILITY_PERIOD'");
+            : throw new System.Exception("CatalogObject.Type is not 'AVAILABILITY_PERIOD'");
 
     public T Match<T>(
         Func<Square.CatalogObjectItem, T> onItem,
@@ -933,6 +934,7 @@ public record CatalogObject
     public static implicit operator CatalogObject(CatalogObject.AvailabilityPeriod value) =>
         new(value);
 
+    [Serializable]
     internal sealed class JsonConverter : JsonConverter<CatalogObject>
     {
         public override bool CanConvert(global::System.Type typeToConvert) =>
@@ -967,78 +969,80 @@ public record CatalogObject
 
             var value = discriminator switch
             {
-                "ITEM" => json.Deserialize<Square.CatalogObjectItem>(options)
+                "ITEM" => json.Deserialize<Square.CatalogObjectItem?>(options)
                     ?? throw new JsonException("Failed to deserialize Square.CatalogObjectItem"),
-                "IMAGE" => json.Deserialize<Square.CatalogObjectImage>(options)
+                "IMAGE" => json.Deserialize<Square.CatalogObjectImage?>(options)
                     ?? throw new JsonException("Failed to deserialize Square.CatalogObjectImage"),
-                "CATEGORY" => json.Deserialize<Square.CatalogObjectCategory>(options)
+                "CATEGORY" => json.Deserialize<Square.CatalogObjectCategory?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectCategory"
                     ),
-                "ITEM_VARIATION" => json.Deserialize<Square.CatalogObjectItemVariation>(options)
+                "ITEM_VARIATION" => json.Deserialize<Square.CatalogObjectItemVariation?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectItemVariation"
                     ),
-                "TAX" => json.Deserialize<Square.CatalogObjectTax>(options)
+                "TAX" => json.Deserialize<Square.CatalogObjectTax?>(options)
                     ?? throw new JsonException("Failed to deserialize Square.CatalogObjectTax"),
-                "DISCOUNT" => json.Deserialize<Square.CatalogObjectDiscount>(options)
+                "DISCOUNT" => json.Deserialize<Square.CatalogObjectDiscount?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectDiscount"
                     ),
-                "MODIFIER_LIST" => json.Deserialize<Square.CatalogObjectModifierList>(options)
+                "MODIFIER_LIST" => json.Deserialize<Square.CatalogObjectModifierList?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectModifierList"
                     ),
-                "MODIFIER" => json.Deserialize<Square.CatalogObjectModifier>(options)
+                "MODIFIER" => json.Deserialize<Square.CatalogObjectModifier?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectModifier"
                     ),
-                "PRICING_RULE" => json.Deserialize<Square.CatalogObjectPricingRule>(options)
+                "PRICING_RULE" => json.Deserialize<Square.CatalogObjectPricingRule?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectPricingRule"
                     ),
-                "PRODUCT_SET" => json.Deserialize<Square.CatalogObjectProductSet>(options)
+                "PRODUCT_SET" => json.Deserialize<Square.CatalogObjectProductSet?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectProductSet"
                     ),
-                "TIME_PERIOD" => json.Deserialize<Square.CatalogObjectTimePeriod>(options)
+                "TIME_PERIOD" => json.Deserialize<Square.CatalogObjectTimePeriod?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectTimePeriod"
                     ),
-                "MEASUREMENT_UNIT" => json.Deserialize<Square.CatalogObjectMeasurementUnit>(options)
+                "MEASUREMENT_UNIT" => json.Deserialize<Square.CatalogObjectMeasurementUnit?>(
+                    options
+                )
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectMeasurementUnit"
                     ),
                 "SUBSCRIPTION_PLAN_VARIATION" =>
-                    json.Deserialize<Square.CatalogObjectSubscriptionPlanVariation>(options)
+                    json.Deserialize<Square.CatalogObjectSubscriptionPlanVariation?>(options)
                         ?? throw new JsonException(
                             "Failed to deserialize Square.CatalogObjectSubscriptionPlanVariation"
                         ),
-                "ITEM_OPTION" => json.Deserialize<Square.CatalogObjectItemOption>(options)
+                "ITEM_OPTION" => json.Deserialize<Square.CatalogObjectItemOption?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectItemOption"
                     ),
-                "ITEM_OPTION_VAL" => json.Deserialize<Square.CatalogObjectItemOptionValue>(options)
+                "ITEM_OPTION_VAL" => json.Deserialize<Square.CatalogObjectItemOptionValue?>(options)
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectItemOptionValue"
                     ),
                 "CUSTOM_ATTRIBUTE_DEFINITION" =>
-                    json.Deserialize<Square.CatalogObjectCustomAttributeDefinition>(options)
+                    json.Deserialize<Square.CatalogObjectCustomAttributeDefinition?>(options)
                         ?? throw new JsonException(
                             "Failed to deserialize Square.CatalogObjectCustomAttributeDefinition"
                         ),
                 "QUICK_AMOUNTS_SETTINGS" =>
-                    json.Deserialize<Square.CatalogObjectQuickAmountsSettings>(options)
+                    json.Deserialize<Square.CatalogObjectQuickAmountsSettings?>(options)
                         ?? throw new JsonException(
                             "Failed to deserialize Square.CatalogObjectQuickAmountsSettings"
                         ),
-                "SUBSCRIPTION_PLAN" => json.Deserialize<Square.CatalogObjectSubscriptionPlan>(
+                "SUBSCRIPTION_PLAN" => json.Deserialize<Square.CatalogObjectSubscriptionPlan?>(
                     options
                 )
                     ?? throw new JsonException(
                         "Failed to deserialize Square.CatalogObjectSubscriptionPlan"
                     ),
-                "AVAILABILITY_PERIOD" => json.Deserialize<Square.CatalogObjectAvailabilityPeriod>(
+                "AVAILABILITY_PERIOD" => json.Deserialize<Square.CatalogObjectAvailabilityPeriod?>(
                     options
                 )
                     ?? throw new JsonException(
@@ -1096,6 +1100,7 @@ public record CatalogObject
     /// <summary>
     /// Discriminated union type for ITEM
     /// </summary>
+    [Serializable]
     public struct Item
     {
         public Item(Square.CatalogObjectItem value)
@@ -1105,14 +1110,16 @@ public record CatalogObject
 
         internal Square.CatalogObjectItem Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator Item(Square.CatalogObjectItem value) => new(value);
+        public static implicit operator CatalogObject.Item(Square.CatalogObjectItem value) =>
+            new(value);
     }
 
     /// <summary>
     /// Discriminated union type for IMAGE
     /// </summary>
+    [Serializable]
     public struct Image
     {
         public Image(Square.CatalogObjectImage value)
@@ -1122,14 +1129,16 @@ public record CatalogObject
 
         internal Square.CatalogObjectImage Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator Image(Square.CatalogObjectImage value) => new(value);
+        public static implicit operator CatalogObject.Image(Square.CatalogObjectImage value) =>
+            new(value);
     }
 
     /// <summary>
     /// Discriminated union type for CATEGORY
     /// </summary>
+    [Serializable]
     public struct Category
     {
         public Category(Square.CatalogObjectCategory value)
@@ -1139,14 +1148,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectCategory Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator Category(Square.CatalogObjectCategory value) => new(value);
+        public static implicit operator CatalogObject.Category(
+            Square.CatalogObjectCategory value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for ITEM_VARIATION
     /// </summary>
+    [Serializable]
     public struct ItemVariation
     {
         public ItemVariation(Square.CatalogObjectItemVariation value)
@@ -1156,15 +1168,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectItemVariation Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator ItemVariation(Square.CatalogObjectItemVariation value) =>
-            new(value);
+        public static implicit operator CatalogObject.ItemVariation(
+            Square.CatalogObjectItemVariation value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for TAX
     /// </summary>
+    [Serializable]
     public struct Tax
     {
         public Tax(Square.CatalogObjectTax value)
@@ -1174,14 +1188,16 @@ public record CatalogObject
 
         internal Square.CatalogObjectTax Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator Tax(Square.CatalogObjectTax value) => new(value);
+        public static implicit operator CatalogObject.Tax(Square.CatalogObjectTax value) =>
+            new(value);
     }
 
     /// <summary>
     /// Discriminated union type for DISCOUNT
     /// </summary>
+    [Serializable]
     public struct Discount
     {
         public Discount(Square.CatalogObjectDiscount value)
@@ -1191,14 +1207,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectDiscount Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator Discount(Square.CatalogObjectDiscount value) => new(value);
+        public static implicit operator CatalogObject.Discount(
+            Square.CatalogObjectDiscount value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for MODIFIER_LIST
     /// </summary>
+    [Serializable]
     public struct ModifierList
     {
         public ModifierList(Square.CatalogObjectModifierList value)
@@ -1208,15 +1227,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectModifierList Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator ModifierList(Square.CatalogObjectModifierList value) =>
-            new(value);
+        public static implicit operator CatalogObject.ModifierList(
+            Square.CatalogObjectModifierList value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for MODIFIER
     /// </summary>
+    [Serializable]
     public struct Modifier
     {
         public Modifier(Square.CatalogObjectModifier value)
@@ -1226,14 +1247,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectModifier Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator Modifier(Square.CatalogObjectModifier value) => new(value);
+        public static implicit operator CatalogObject.Modifier(
+            Square.CatalogObjectModifier value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for PRICING_RULE
     /// </summary>
+    [Serializable]
     public struct PricingRule
     {
         public PricingRule(Square.CatalogObjectPricingRule value)
@@ -1243,15 +1267,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectPricingRule Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator PricingRule(Square.CatalogObjectPricingRule value) =>
-            new(value);
+        public static implicit operator CatalogObject.PricingRule(
+            Square.CatalogObjectPricingRule value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for PRODUCT_SET
     /// </summary>
+    [Serializable]
     public struct ProductSet
     {
         public ProductSet(Square.CatalogObjectProductSet value)
@@ -1261,15 +1287,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectProductSet Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator ProductSet(Square.CatalogObjectProductSet value) =>
-            new(value);
+        public static implicit operator CatalogObject.ProductSet(
+            Square.CatalogObjectProductSet value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for TIME_PERIOD
     /// </summary>
+    [Serializable]
     public struct TimePeriod
     {
         public TimePeriod(Square.CatalogObjectTimePeriod value)
@@ -1279,15 +1307,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectTimePeriod Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator TimePeriod(Square.CatalogObjectTimePeriod value) =>
-            new(value);
+        public static implicit operator CatalogObject.TimePeriod(
+            Square.CatalogObjectTimePeriod value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for MEASUREMENT_UNIT
     /// </summary>
+    [Serializable]
     public struct MeasurementUnit
     {
         public MeasurementUnit(Square.CatalogObjectMeasurementUnit value)
@@ -1297,9 +1327,9 @@ public record CatalogObject
 
         internal Square.CatalogObjectMeasurementUnit Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator MeasurementUnit(
+        public static implicit operator CatalogObject.MeasurementUnit(
             Square.CatalogObjectMeasurementUnit value
         ) => new(value);
     }
@@ -1307,6 +1337,7 @@ public record CatalogObject
     /// <summary>
     /// Discriminated union type for SUBSCRIPTION_PLAN_VARIATION
     /// </summary>
+    [Serializable]
     public struct SubscriptionPlanVariation
     {
         public SubscriptionPlanVariation(Square.CatalogObjectSubscriptionPlanVariation value)
@@ -1316,9 +1347,9 @@ public record CatalogObject
 
         internal Square.CatalogObjectSubscriptionPlanVariation Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator SubscriptionPlanVariation(
+        public static implicit operator CatalogObject.SubscriptionPlanVariation(
             Square.CatalogObjectSubscriptionPlanVariation value
         ) => new(value);
     }
@@ -1326,6 +1357,7 @@ public record CatalogObject
     /// <summary>
     /// Discriminated union type for ITEM_OPTION
     /// </summary>
+    [Serializable]
     public struct ItemOption
     {
         public ItemOption(Square.CatalogObjectItemOption value)
@@ -1335,15 +1367,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectItemOption Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator ItemOption(Square.CatalogObjectItemOption value) =>
-            new(value);
+        public static implicit operator CatalogObject.ItemOption(
+            Square.CatalogObjectItemOption value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for ITEM_OPTION_VAL
     /// </summary>
+    [Serializable]
     public struct ItemOptionVal
     {
         public ItemOptionVal(Square.CatalogObjectItemOptionValue value)
@@ -1353,15 +1387,17 @@ public record CatalogObject
 
         internal Square.CatalogObjectItemOptionValue Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator ItemOptionVal(Square.CatalogObjectItemOptionValue value) =>
-            new(value);
+        public static implicit operator CatalogObject.ItemOptionVal(
+            Square.CatalogObjectItemOptionValue value
+        ) => new(value);
     }
 
     /// <summary>
     /// Discriminated union type for CUSTOM_ATTRIBUTE_DEFINITION
     /// </summary>
+    [Serializable]
     public struct CustomAttributeDefinition
     {
         public CustomAttributeDefinition(Square.CatalogObjectCustomAttributeDefinition value)
@@ -1371,9 +1407,9 @@ public record CatalogObject
 
         internal Square.CatalogObjectCustomAttributeDefinition Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator CustomAttributeDefinition(
+        public static implicit operator CatalogObject.CustomAttributeDefinition(
             Square.CatalogObjectCustomAttributeDefinition value
         ) => new(value);
     }
@@ -1381,6 +1417,7 @@ public record CatalogObject
     /// <summary>
     /// Discriminated union type for QUICK_AMOUNTS_SETTINGS
     /// </summary>
+    [Serializable]
     public struct QuickAmountsSettings
     {
         public QuickAmountsSettings(Square.CatalogObjectQuickAmountsSettings value)
@@ -1390,9 +1427,9 @@ public record CatalogObject
 
         internal Square.CatalogObjectQuickAmountsSettings Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator QuickAmountsSettings(
+        public static implicit operator CatalogObject.QuickAmountsSettings(
             Square.CatalogObjectQuickAmountsSettings value
         ) => new(value);
     }
@@ -1400,6 +1437,7 @@ public record CatalogObject
     /// <summary>
     /// Discriminated union type for SUBSCRIPTION_PLAN
     /// </summary>
+    [Serializable]
     public struct SubscriptionPlan
     {
         public SubscriptionPlan(Square.CatalogObjectSubscriptionPlan value)
@@ -1409,9 +1447,9 @@ public record CatalogObject
 
         internal Square.CatalogObjectSubscriptionPlan Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator SubscriptionPlan(
+        public static implicit operator CatalogObject.SubscriptionPlan(
             Square.CatalogObjectSubscriptionPlan value
         ) => new(value);
     }
@@ -1419,6 +1457,7 @@ public record CatalogObject
     /// <summary>
     /// Discriminated union type for AVAILABILITY_PERIOD
     /// </summary>
+    [Serializable]
     public struct AvailabilityPeriod
     {
         public AvailabilityPeriod(Square.CatalogObjectAvailabilityPeriod value)
@@ -1428,9 +1467,9 @@ public record CatalogObject
 
         internal Square.CatalogObjectAvailabilityPeriod Value { get; set; }
 
-        public override string ToString() => Value.ToString();
+        public override string ToString() => Value.ToString() ?? "null";
 
-        public static implicit operator AvailabilityPeriod(
+        public static implicit operator CatalogObject.AvailabilityPeriod(
             Square.CatalogObjectAvailabilityPeriod value
         ) => new(value);
     }

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// A simplified line item for goods receipts in transfer orders
 /// </summary>
-public record TransferOrderGoodsReceiptLineItem
+[Serializable]
+public record TransferOrderGoodsReceiptLineItem : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The unique identifier of the Transfer Order line being received
     /// </summary>
@@ -35,15 +40,11 @@ public record TransferOrderGoodsReceiptLineItem
     [JsonPropertyName("quantity_canceled")]
     public string? QuantityCanceled { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

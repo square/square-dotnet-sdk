@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Catalog.Object;
 
+[Serializable]
 public record DeleteObjectRequest
 {
     /// <summary>

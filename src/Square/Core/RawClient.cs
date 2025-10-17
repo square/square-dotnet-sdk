@@ -19,16 +19,16 @@ internal partial class RawClient(ClientOptions clientOptions)
     internal readonly ClientOptions Options = clientOptions;
 
     [Obsolete("Use SendRequestAsync instead.")]
-    internal Task<Square.Core.ApiResponse> MakeRequestAsync(
-        Square.Core.BaseRequest request,
+    internal Task<global::Square.Core.ApiResponse> MakeRequestAsync(
+        global::Square.Core.BaseRequest request,
         CancellationToken cancellationToken = default
     )
     {
         return SendRequestAsync(request, cancellationToken);
     }
 
-    internal async Task<Square.Core.ApiResponse> SendRequestAsync(
-        Square.Core.BaseRequest request,
+    internal async Task<global::Square.Core.ApiResponse> SendRequestAsync(
+        global::Square.Core.BaseRequest request,
         CancellationToken cancellationToken = default
     )
     {
@@ -43,7 +43,7 @@ internal partial class RawClient(ClientOptions clientOptions)
             .ConfigureAwait(false);
     }
 
-    internal async Task<Square.Core.ApiResponse> SendRequestAsync(
+    internal async Task<global::Square.Core.ApiResponse> SendRequestAsync(
         HttpRequestMessage request,
         IRequestOptions? options,
         CancellationToken cancellationToken = default
@@ -109,7 +109,7 @@ internal partial class RawClient(ClientOptions clientOptions)
     /// Sends the request with retries, unless the request content is not retryable,
     /// such as stream requests and multipart form data with stream content.
     /// </summary>
-    private async Task<Square.Core.ApiResponse> SendWithRetriesAsync(
+    private async Task<global::Square.Core.ApiResponse> SendWithRetriesAsync(
         HttpRequestMessage request,
         IRequestOptions? options,
         CancellationToken cancellationToken
@@ -122,7 +122,7 @@ internal partial class RawClient(ClientOptions clientOptions)
 
         if (!isRetryableContent)
         {
-            return new Square.Core.ApiResponse
+            return new global::Square.Core.ApiResponse
             {
                 StatusCode = (int)response.StatusCode,
                 Raw = response,
@@ -144,7 +144,7 @@ internal partial class RawClient(ClientOptions clientOptions)
                 .ConfigureAwait(false);
         }
 
-        return new Square.Core.ApiResponse
+        return new global::Square.Core.ApiResponse
         {
             StatusCode = (int)response.StatusCode,
             Raw = response,
@@ -168,7 +168,7 @@ internal partial class RawClient(ClientOptions clientOptions)
         };
     }
 
-    internal HttpRequestMessage CreateHttpRequest(Square.Core.BaseRequest request)
+    internal HttpRequestMessage CreateHttpRequest(global::Square.Core.BaseRequest request)
     {
         var url = BuildUrl(request);
         var httpRequest = new HttpRequestMessage(request.Method, url);
@@ -184,7 +184,7 @@ internal partial class RawClient(ClientOptions clientOptions)
         return httpRequest;
     }
 
-    private static string BuildUrl(Square.Core.BaseRequest request)
+    private static string BuildUrl(global::Square.Core.BaseRequest request)
     {
         var baseUrl = request.Options?.BaseUrl ?? request.BaseUrl;
         var trimmedBaseUrl = baseUrl.TrimEnd('/');
@@ -208,7 +208,9 @@ internal partial class RawClient(ClientOptions clientOptions)
                 {
                     var items = collection
                         .Cast<object>()
-                        .Select(value => $"{queryItem.Key}={value}")
+                        .Select(value =>
+                            $"{Uri.EscapeDataString(queryItem.Key)}={Uri.EscapeDataString(value?.ToString() ?? "")}"
+                        )
                         .ToList();
                     if (items.Any())
                     {
@@ -217,7 +219,8 @@ internal partial class RawClient(ClientOptions clientOptions)
                 }
                 else
                 {
-                    current += $"{queryItem.Key}={queryItem.Value}&";
+                    current +=
+                        $"{Uri.EscapeDataString(queryItem.Key)}={Uri.EscapeDataString(queryItem.Value)}&";
                 }
 
                 return current;
@@ -228,7 +231,7 @@ internal partial class RawClient(ClientOptions clientOptions)
     }
 
     private static List<KeyValuePair<string, string>> GetQueryParameters(
-        Square.Core.BaseRequest request
+        global::Square.Core.BaseRequest request
     )
     {
         var result = TransformToKeyValuePairs(request.Query);
@@ -384,26 +387,26 @@ internal partial class RawClient(ClientOptions clientOptions)
     }
 
     /// <inheritdoc />
-    [Obsolete("Use Square.Core.ApiResponse instead.")]
-    internal record ApiResponse : Square.Core.ApiResponse;
+    [Obsolete("Use global::Square.Core.ApiResponse instead.")]
+    internal record ApiResponse : global::Square.Core.ApiResponse;
 
     /// <inheritdoc />
-    [Obsolete("Use Square.Core.BaseRequest instead.")]
-    internal abstract record BaseApiRequest : Square.Core.BaseRequest;
+    [Obsolete("Use global::Square.Core.BaseRequest instead.")]
+    internal abstract record BaseApiRequest : global::Square.Core.BaseRequest;
 
     /// <inheritdoc />
-    [Obsolete("Use Square.Core.EmptyRequest instead.")]
-    internal abstract record EmptyApiRequest : Square.Core.EmptyRequest;
+    [Obsolete("Use global::Square.Core.EmptyRequest instead.")]
+    internal abstract record EmptyApiRequest : global::Square.Core.EmptyRequest;
 
     /// <inheritdoc />
-    [Obsolete("Use Square.Core.JsonRequest instead.")]
-    internal abstract record JsonApiRequest : Square.Core.JsonRequest;
+    [Obsolete("Use global::Square.Core.JsonRequest instead.")]
+    internal abstract record JsonApiRequest : global::Square.Core.JsonRequest;
 
     /// <inheritdoc />
-    [Obsolete("Use Square.Core.MultipartFormRequest instead.")]
-    internal abstract record MultipartFormRequest : Square.Core.MultipartFormRequest;
+    [Obsolete("Use global::Square.Core.MultipartFormRequest instead.")]
+    internal abstract record MultipartFormRequest : global::Square.Core.MultipartFormRequest;
 
     /// <inheritdoc />
-    [Obsolete("Use Square.Core.StreamRequest instead.")]
-    internal abstract record StreamApiRequest : Square.Core.StreamRequest;
+    [Obsolete("Use global::Square.Core.StreamRequest instead.")]
+    internal abstract record StreamApiRequest : global::Square.Core.StreamRequest;
 }

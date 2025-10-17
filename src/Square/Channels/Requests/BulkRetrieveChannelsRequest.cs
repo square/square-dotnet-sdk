@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Channels;
 
+[Serializable]
 public record BulkRetrieveChannelsRequest
 {
     [JsonPropertyName("channel_ids")]

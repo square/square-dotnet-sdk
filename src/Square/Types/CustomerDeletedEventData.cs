@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// The data associated with the event.
 /// </summary>
-public record CustomerDeletedEventData
+[Serializable]
+public record CustomerDeletedEventData : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The type of object affected by the event. For this event, the value is `customer`.
     /// </summary>
@@ -27,15 +32,11 @@ public record CustomerDeletedEventData
     [JsonPropertyName("object")]
     public CustomerDeletedEventObject? Object { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

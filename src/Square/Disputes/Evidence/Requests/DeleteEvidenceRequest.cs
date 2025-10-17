@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Disputes.Evidence;
 
+[Serializable]
 public record DeleteEvidenceRequest
 {
     /// <summary>

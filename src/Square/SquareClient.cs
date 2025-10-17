@@ -1,7 +1,6 @@
 using Square.ApplePay;
 using Square.BankAccounts;
 using Square.Bookings;
-using Square.Cards;
 using Square.CashDrawers;
 using Square.Catalog;
 using Square.Channels;
@@ -24,10 +23,8 @@ using Square.OAuth;
 using Square.Orders;
 using Square.Payments;
 using Square.Payouts;
-using Square.Refunds;
 using Square.Sites;
 using Square.Snippets;
-using Square.Subscriptions;
 using Square.Team;
 using Square.TeamMembers;
 using Square.Terminal;
@@ -56,7 +53,7 @@ public partial class SquareClient
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Square" },
                 { "X-Fern-SDK-Version", Version.Current },
-                { "User-Agent", "Square/42.2.0" },
+                { "User-Agent", "Square/42.2.1" },
             }
         );
         clientOptions ??= new ClientOptions();
@@ -78,7 +75,7 @@ public partial class SquareClient
         ApplePay = new ApplePayClient(_client);
         BankAccounts = new BankAccountsClient(_client);
         Bookings = new BookingsClient(_client);
-        Cards = new CardsClient(_client);
+        Cards = new Square.Cards.CardsClient(_client);
         Catalog = new CatalogClient(_client);
         Channels = new ChannelsClient(_client);
         Customers = new CustomersClient(_client);
@@ -97,10 +94,10 @@ public partial class SquareClient
         Orders = new OrdersClient(_client);
         Payments = new PaymentsClient(_client);
         Payouts = new PayoutsClient(_client);
-        Refunds = new RefundsClient(_client);
+        Refunds = new Square.Refunds.RefundsClient(_client);
         Sites = new SitesClient(_client);
         Snippets = new SnippetsClient(_client);
-        Subscriptions = new SubscriptionsClient(_client);
+        Subscriptions = new Square.Subscriptions.SubscriptionsClient(_client);
         TeamMembers = new TeamMembersClient(_client);
         Team = new TeamClient(_client);
         Terminal = new TerminalClient(_client);
@@ -122,7 +119,7 @@ public partial class SquareClient
 
     public BookingsClient Bookings { get; }
 
-    public CardsClient Cards { get; }
+    public Square.Cards.CardsClient Cards { get; }
 
     public CatalogClient Catalog { get; }
 
@@ -160,13 +157,13 @@ public partial class SquareClient
 
     public PayoutsClient Payouts { get; }
 
-    public RefundsClient Refunds { get; }
+    public Square.Refunds.RefundsClient Refunds { get; }
 
     public SitesClient Sites { get; }
 
     public SnippetsClient Snippets { get; }
 
-    public SubscriptionsClient Subscriptions { get; }
+    public Square.Subscriptions.SubscriptionsClient Subscriptions { get; }
 
     public TeamMembersClient TeamMembers { get; }
 

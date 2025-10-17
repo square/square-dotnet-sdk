@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Catalog.Images;
 using Square.Catalog.Object;
@@ -508,7 +509,7 @@ public partial class CatalogClient
     ///             new CustomAttributeFilter
     ///             {
     ///                 Key = "VINTAGE",
-    ///                 NumberFilter = new Range { Min = "min", Max = "max" },
+    ///                 NumberFilter = new Square.Range { Min = "min", Max = "max" },
     ///             },
     ///             new CustomAttributeFilter { CustomAttributeDefinitionId = "VARIETAL_DEFINITION_ID" },
     ///         },

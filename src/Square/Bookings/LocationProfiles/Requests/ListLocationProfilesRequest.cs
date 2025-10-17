@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Bookings.LocationProfiles;
 
+[Serializable]
 public record ListLocationProfilesRequest
 {
     /// <summary>

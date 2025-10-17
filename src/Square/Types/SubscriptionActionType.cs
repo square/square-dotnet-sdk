@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<SubscriptionActionType>))]
+[Serializable]
 public readonly record struct SubscriptionActionType : IStringEnum
 {
     public static readonly SubscriptionActionType Cancel = new(Values.Cancel);
@@ -64,6 +65,7 @@ public readonly record struct SubscriptionActionType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Cancel = "CANCEL";

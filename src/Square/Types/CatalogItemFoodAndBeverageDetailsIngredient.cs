@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Describes the ingredient used in a `FOOD_AND_BEV` item.
 /// </summary>
-public record CatalogItemFoodAndBeverageDetailsIngredient
+[Serializable]
+public record CatalogItemFoodAndBeverageDetailsIngredient : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The dietary preference type of the ingredient. Supported values include `STANDARD` and `CUSTOM` as specified in `FoodAndBeverageDetails.DietaryPreferenceType`.
     /// See [DietaryPreferenceType](#type-dietarypreferencetype) for possible values
@@ -29,15 +34,11 @@ public record CatalogItemFoodAndBeverageDetailsIngredient
     [JsonPropertyName("custom_name")]
     public string? CustomName { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

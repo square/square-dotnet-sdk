@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Configuration associated with `SELECTION`-type custom attribute definitions.
 /// </summary>
-public record CatalogCustomAttributeDefinitionSelectionConfig
+[Serializable]
+public record CatalogCustomAttributeDefinitionSelectionConfig : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The maximum number of selections that can be set. The maximum value for this
     /// attribute is 100. The default value is 1. The value can be modified, but changing the value will not
@@ -25,15 +30,11 @@ public record CatalogCustomAttributeDefinitionSelectionConfig
     [JsonPropertyName("allowed_selections")]
     public IEnumerable<CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection>? AllowedSelections { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

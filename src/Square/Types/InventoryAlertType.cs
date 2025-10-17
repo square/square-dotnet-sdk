@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<InventoryAlertType>))]
+[Serializable]
 public readonly record struct InventoryAlertType : IStringEnum
 {
     public static readonly InventoryAlertType None = new(Values.None);
@@ -54,6 +55,7 @@ public readonly record struct InventoryAlertType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string None = "NONE";

@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Devices.Codes;
 
+[Serializable]
 public record CreateDeviceCodeRequest
 {
     /// <summary>

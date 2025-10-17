@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<MeasurementUnitVolume>))]
+[Serializable]
 public readonly record struct MeasurementUnitVolume : IStringEnum
 {
     public static readonly MeasurementUnitVolume GenericFluidOunce = new(Values.GenericFluidOunce);
@@ -72,6 +73,7 @@ public readonly record struct MeasurementUnitVolume : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string GenericFluidOunce = "GENERIC_FLUID_OUNCE";

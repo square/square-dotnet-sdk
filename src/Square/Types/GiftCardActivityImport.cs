@@ -9,23 +9,24 @@ namespace Square;
 /// This activity type is used when Square imports a third-party gift card, in which case the
 /// `gan_source` of the gift card is set to `OTHER`.
 /// </summary>
-public record GiftCardActivityImport
+[Serializable]
+public record GiftCardActivityImport : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The balance amount on the imported gift card.
     /// </summary>
     [JsonPropertyName("amount_money")]
     public required Money AmountMoney { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

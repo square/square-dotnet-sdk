@@ -9,8 +9,13 @@ namespace Square;
 /// associated with the order. It does not filter based on the
 /// [FulfillmentRecipient](entity:FulfillmentRecipient) `customer_id`.
 /// </summary>
-public record SearchOrdersCustomerFilter
+[Serializable]
+public record SearchOrdersCustomerFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A list of customer IDs to filter by.
     ///
@@ -19,15 +24,11 @@ public record SearchOrdersCustomerFilter
     [JsonPropertyName("customer_ids")]
     public IEnumerable<string>? CustomerIds { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -9,8 +9,13 @@ namespace Square;
 /// job's title and tip eligibility. Compensation is defined in a [job assignment](entity:JobAssignment)
 /// in a team member's wage setting.
 /// </summary>
-public record Job
+[Serializable]
+public record Job : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// **Read only** The unique Square-assigned ID of the job. If you need a job ID for an API request,
     /// call [ListJobs](api-endpoint:Team-ListJobs) or use the ID returned when you created the job.
@@ -54,15 +59,11 @@ public record Job
     [JsonPropertyName("version")]
     public int? Version { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

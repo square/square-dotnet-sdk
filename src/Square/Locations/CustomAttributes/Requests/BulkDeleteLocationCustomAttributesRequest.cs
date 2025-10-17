@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Locations.CustomAttributes;
 
+[Serializable]
 public record BulkDeleteLocationCustomAttributesRequest
 {
     /// <summary>

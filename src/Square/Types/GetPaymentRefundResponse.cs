@@ -10,8 +10,13 @@ namespace Square;
 /// Note: If there are errors processing the request, the refund field might not be
 /// present or it might be present in a FAILED state.
 /// </summary>
-public record GetPaymentRefundResponse
+[Serializable]
+public record GetPaymentRefundResponse : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Information about errors encountered during the request.
     /// </summary>
@@ -24,15 +29,11 @@ public record GetPaymentRefundResponse
     [JsonPropertyName("refund")]
     public PaymentRefund? Refund { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

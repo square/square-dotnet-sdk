@@ -6,6 +6,7 @@ namespace Square;
 [JsonConverter(
     typeof(StringEnumSerializer<CatalogItemFoodAndBeverageDetailsDietaryPreferenceType>)
 )]
+[Serializable]
 public readonly record struct CatalogItemFoodAndBeverageDetailsDietaryPreferenceType : IStringEnum
 {
     public static readonly CatalogItemFoodAndBeverageDetailsDietaryPreferenceType Standard = new(
@@ -68,6 +69,7 @@ public readonly record struct CatalogItemFoodAndBeverageDetailsDietaryPreference
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Standard = "STANDARD";

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ArchivedState>))]
+[Serializable]
 public readonly record struct ArchivedState : IStringEnum
 {
     public static readonly ArchivedState ArchivedStateNotArchived = new(
@@ -58,6 +59,7 @@ public readonly record struct ArchivedState : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string ArchivedStateNotArchived = "ARCHIVED_STATE_NOT_ARCHIVED";

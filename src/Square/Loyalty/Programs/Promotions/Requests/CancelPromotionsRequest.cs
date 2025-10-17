@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Loyalty.Programs.Promotions;
 
+[Serializable]
 public record CancelPromotionsRequest
 {
     /// <summary>

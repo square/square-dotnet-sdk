@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// A seller's business booking profile, including booking policy, appointment settings, etc.
 /// </summary>
-public record BusinessBookingProfile
+[Serializable]
+public record BusinessBookingProfile : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the seller, obtainable using the Merchants API.
     /// </summary>
@@ -62,15 +67,11 @@ public record BusinessBookingProfile
     [JsonPropertyName("support_seller_level_writes")]
     public bool? SupportSellerLevelWrites { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

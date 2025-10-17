@@ -10,8 +10,13 @@ namespace Square;
 /// creates a custom attribute definition or another application creates a custom attribute definition whose
 /// `visibility` is `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 /// </summary>
-public record CustomerCustomAttributeDefinitionVisibleCreatedEvent
+[Serializable]
+public record CustomerCustomAttributeDefinitionVisibleCreatedEvent : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the seller associated with the event that triggered the event notification.
     /// </summary>
@@ -43,15 +48,11 @@ public record CustomerCustomAttributeDefinitionVisibleCreatedEvent
     [JsonPropertyName("data")]
     public CustomAttributeDefinitionEventData? Data { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

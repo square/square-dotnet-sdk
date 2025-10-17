@@ -12,8 +12,13 @@ namespace Square;
 /// the remaining `InvoiceRecipient` fields. You cannot update these fields after the invoice is published.
 /// Square updates the customer ID in response to a merge operation, but does not update other fields.
 /// </summary>
-public record InvoiceRecipient
+[Serializable]
+public record InvoiceRecipient : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the customer. This is the customer profile ID that
     /// you provide when creating a draft invoice.
@@ -69,15 +74,11 @@ public record InvoiceRecipient
     [JsonPropertyName("tax_ids")]
     public InvoiceRecipientTaxIds? TaxIds { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

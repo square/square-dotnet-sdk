@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Events;
 
+[Serializable]
 public record ListEventTypesRequest
 {
     /// <summary>

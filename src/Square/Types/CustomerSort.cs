@@ -8,8 +8,13 @@ namespace Square;
 /// Represents the sorting criteria in a [search query](entity:CustomerQuery) that defines how to sort
 /// customer profiles returned in [SearchCustomers](api-endpoint:Customers-SearchCustomers) results.
 /// </summary>
-public record CustomerSort
+[Serializable]
+public record CustomerSort : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Indicates the fields to use as the sort key, which is either the default set of fields or `created_at`.
     ///
@@ -30,15 +35,11 @@ public record CustomerSort
     [JsonPropertyName("order")]
     public SortOrder? Order { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Devices;
 
+[Serializable]
 public record ListDevicesRequest
 {
     /// <summary>

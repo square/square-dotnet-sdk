@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -86,7 +87,7 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributeDefinitions.ListAsync(
-    ///     new ListCustomAttributeDefinitionsRequest
+    ///     new Square.Merchants.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
     ///     {
     ///         VisibilityFilter = VisibilityFilter.All,
     ///         Limit = 1,
@@ -143,7 +144,7 @@ public partial class CustomAttributeDefinitionsClient
     ///         CustomAttributeDefinition = new CustomAttributeDefinition
     ///         {
     ///             Key = "alternative_seller_name",
-    ///             Schema = new Dictionary&lt;string, object&gt;()
+    ///             Schema = new Dictionary&lt;string, object?&gt;()
     ///             {
     ///                 {
     ///                     "$ref",
@@ -209,7 +210,11 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributeDefinitions.GetAsync(
-    ///     new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    ///     new Square.Merchants.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///         Version = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<RetrieveMerchantCustomAttributeDefinitionResponse> GetAsync(
@@ -339,7 +344,10 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributeDefinitions.DeleteAsync(
-    ///     new DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    ///     new Square.Merchants.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///     }
     /// );
     /// </code></example>
     public async Task<DeleteMerchantCustomAttributeDefinitionResponse> DeleteAsync(

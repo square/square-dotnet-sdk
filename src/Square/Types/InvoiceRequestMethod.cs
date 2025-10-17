@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<InvoiceRequestMethod>))]
+[Serializable]
 public readonly record struct InvoiceRequestMethod : IStringEnum
 {
     public static readonly InvoiceRequestMethod Email = new(Values.Email);
@@ -68,6 +69,7 @@ public readonly record struct InvoiceRequestMethod : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Email = "EMAIL";

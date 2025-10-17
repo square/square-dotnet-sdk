@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<BankAccountType>))]
+[Serializable]
 public readonly record struct BankAccountType : IStringEnum
 {
     public static readonly BankAccountType Checking = new(Values.Checking);
@@ -60,6 +61,7 @@ public readonly record struct BankAccountType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Checking = "CHECKING";

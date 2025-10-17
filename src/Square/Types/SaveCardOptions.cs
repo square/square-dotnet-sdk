@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Describes save-card action fields.
 /// </summary>
-public record SaveCardOptions
+[Serializable]
+public record SaveCardOptions : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The square-assigned ID of the customer linked to the saved card.
     /// </summary>
@@ -30,15 +35,11 @@ public record SaveCardOptions
     [JsonPropertyName("reference_id")]
     public string? ReferenceId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Loyalty.Rewards;
 
+[Serializable]
 public record DeleteRewardsRequest
 {
     /// <summary>

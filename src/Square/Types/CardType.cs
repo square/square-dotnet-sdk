@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CardType>))]
+[Serializable]
 public readonly record struct CardType : IStringEnum
 {
     public static readonly CardType UnknownCardType = new(Values.UnknownCardType);
@@ -54,6 +55,7 @@ public readonly record struct CardType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string UnknownCardType = "UNKNOWN_CARD_TYPE";

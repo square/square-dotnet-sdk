@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ErrorCategory>))]
+[Serializable]
 public readonly record struct ErrorCategory : IStringEnum
 {
     public static readonly ErrorCategory ApiError = new(Values.ApiError);
@@ -68,6 +69,7 @@ public readonly record struct ErrorCategory : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string ApiError = "API_ERROR";

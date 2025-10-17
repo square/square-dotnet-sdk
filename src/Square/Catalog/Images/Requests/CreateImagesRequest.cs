@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Catalog.Images;
 
+[Serializable]
 public record CreateImagesRequest
 {
     public CreateCatalogImageRequest? Request { get; set; }

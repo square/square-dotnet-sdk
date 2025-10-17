@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Cards;
 
+[Serializable]
 public record ListCardsRequest
 {
     /// <summary>

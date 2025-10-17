@@ -8,8 +8,13 @@ namespace Square;
 /// A range defined by two dates. Used for filtering a query for Connect v2
 /// objects that have date properties.
 /// </summary>
-public record DateRange
+[Serializable]
+public record DateRange : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A string in `YYYY-MM-DD` format, such as `2017-10-31`, per the ISO 8601
     /// extended format for calendar dates.
@@ -26,15 +31,11 @@ public record DateRange
     [JsonPropertyName("end_date")]
     public string? EndDate { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<DisputeReason>))]
+[Serializable]
 public readonly record struct DisputeReason : IStringEnum
 {
     public static readonly DisputeReason AmountDiffers = new(Values.AmountDiffers);
@@ -70,6 +71,7 @@ public readonly record struct DisputeReason : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string AmountDiffers = "AMOUNT_DIFFERS";

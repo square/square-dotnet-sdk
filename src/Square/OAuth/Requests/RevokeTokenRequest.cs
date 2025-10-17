@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.OAuth;
 
+[Serializable]
 public record RevokeTokenRequest
 {
     /// <summary>

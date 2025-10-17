@@ -16,8 +16,13 @@ namespace Square;
 /// the `stockable_conversion` property on the variation to specify the conversion. Thus, when two glasses of the wine are sold, the sellable count
 /// decreases by 2, and the stockable count automatically decreases by 0.4 bottle according to the conversion.
 /// </summary>
-public record CatalogItemVariation
+[Serializable]
+public record CatalogItemVariation : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the `CatalogItem` associated with this item variation.
     /// </summary>
@@ -180,15 +185,11 @@ public record CatalogItemVariation
     [JsonPropertyName("stockable_conversion")]
     public CatalogStockConversion? StockableConversion { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

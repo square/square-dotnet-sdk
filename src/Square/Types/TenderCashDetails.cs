@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents the details of a tender with `type` `CASH`.
 /// </summary>
-public record TenderCashDetails
+[Serializable]
+public record TenderCashDetails : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The total amount of cash provided by the buyer, before change is given.
     /// </summary>
@@ -21,15 +26,11 @@ public record TenderCashDetails
     [JsonPropertyName("change_back_money")]
     public Money? ChangeBackMoney { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

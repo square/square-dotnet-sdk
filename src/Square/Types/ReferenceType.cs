@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ReferenceType>))]
+[Serializable]
 public readonly record struct ReferenceType : IStringEnum
 {
     public static readonly ReferenceType UnknownType = new(Values.UnknownType);
@@ -80,6 +81,7 @@ public readonly record struct ReferenceType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string UnknownType = "UNKNOWN_TYPE";

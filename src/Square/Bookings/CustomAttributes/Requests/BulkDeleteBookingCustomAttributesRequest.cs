@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Bookings.CustomAttributes;
 
+[Serializable]
 public record BulkDeleteBookingCustomAttributesRequest
 {
     /// <summary>

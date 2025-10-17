@@ -1,10 +1,9 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
-using Square.Merchants.CustomAttributeDefinitions;
-using Square.Merchants.CustomAttributes;
 
 namespace Square.Merchants;
 
@@ -15,13 +14,16 @@ public partial class MerchantsClient
     internal MerchantsClient(RawClient client)
     {
         _client = client;
-        CustomAttributeDefinitions = new CustomAttributeDefinitionsClient(_client);
-        CustomAttributes = new CustomAttributesClient(_client);
+        CustomAttributeDefinitions =
+            new Square.Merchants.CustomAttributeDefinitions.CustomAttributeDefinitionsClient(
+                _client
+            );
+        CustomAttributes = new Square.Merchants.CustomAttributes.CustomAttributesClient(_client);
     }
 
-    public CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Merchants.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
 
-    public CustomAttributesClient CustomAttributes { get; }
+    public Square.Merchants.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
 
     /// <summary>
     /// Provides details about the merchant associated with a given access token.

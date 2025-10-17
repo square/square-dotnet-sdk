@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Channels;
 
+[Serializable]
 public record ListChannelsRequest
 {
     /// <summary>

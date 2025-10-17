@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.BankAccounts;
 
+[Serializable]
 public record ListBankAccountsRequest
 {
     /// <summary>

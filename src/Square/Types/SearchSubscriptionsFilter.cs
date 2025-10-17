@@ -8,8 +8,13 @@ namespace Square;
 /// Represents a set of query expressions (filters) to narrow the scope of targeted subscriptions returned by
 /// the [SearchSubscriptions](api-endpoint:Subscriptions-SearchSubscriptions) endpoint.
 /// </summary>
-public record SearchSubscriptionsFilter
+[Serializable]
+public record SearchSubscriptionsFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A filter to select subscriptions based on the subscribing customer IDs.
     /// </summary>
@@ -28,15 +33,11 @@ public record SearchSubscriptionsFilter
     [JsonPropertyName("source_names")]
     public IEnumerable<string>? SourceNames { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Bookings;
 
+[Serializable]
 public record UpdateBookingRequest
 {
     /// <summary>

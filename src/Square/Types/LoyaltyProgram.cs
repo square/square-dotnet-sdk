@@ -9,8 +9,13 @@ namespace Square;
 /// Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard.
 /// For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).
 /// </summary>
-public record LoyaltyProgram
+[Serializable]
+public record LoyaltyProgram : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The Square-assigned ID of the loyalty program. Updates to
     /// the loyalty program do not modify the identifier.
@@ -72,15 +77,11 @@ public record LoyaltyProgram
     [JsonPropertyName("accrual_rules")]
     public IEnumerable<LoyaltyProgramAccrualRule>? AccrualRules { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

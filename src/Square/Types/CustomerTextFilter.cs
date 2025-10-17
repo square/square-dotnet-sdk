@@ -9,8 +9,13 @@ namespace Square;
 /// customer attributes against a specified query. Depending on the customer attributes,
 /// the filter can be case-sensitive. This filter can be exact or fuzzy, but it cannot be both.
 /// </summary>
-public record CustomerTextFilter
+[Serializable]
+public record CustomerTextFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Use the exact filter to select customers whose attributes match exactly the specified query.
     /// </summary>
@@ -26,15 +31,11 @@ public record CustomerTextFilter
     [JsonPropertyName("fuzzy")]
     public string? Fuzzy { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

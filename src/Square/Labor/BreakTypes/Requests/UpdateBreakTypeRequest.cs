@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Labor.BreakTypes;
 
+[Serializable]
 public record UpdateBreakTypeRequest
 {
     /// <summary>

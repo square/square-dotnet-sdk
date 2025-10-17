@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// A query filter to search for buyer-accessible availabilities by.
 /// </summary>
-public record SearchAvailabilityFilter
+[Serializable]
+public record SearchAvailabilityFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The query expression to search for buy-accessible availabilities with their starting times falling within the specified time range.
     /// The time range must be at least 24 hours and at most 32 days long.
@@ -41,15 +46,11 @@ public record SearchAvailabilityFilter
     [JsonPropertyName("booking_id")]
     public string? BookingId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

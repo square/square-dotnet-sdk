@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Terminal.Actions;
 
+[Serializable]
 public record GetActionsRequest
 {
     /// <summary>

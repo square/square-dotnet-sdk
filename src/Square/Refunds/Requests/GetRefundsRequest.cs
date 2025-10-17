@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Refunds;
 
+[Serializable]
 public record GetRefundsRequest
 {
     /// <summary>

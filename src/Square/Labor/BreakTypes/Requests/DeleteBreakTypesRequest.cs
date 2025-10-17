@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Labor.BreakTypes;
 
+[Serializable]
 public record DeleteBreakTypesRequest
 {
     /// <summary>

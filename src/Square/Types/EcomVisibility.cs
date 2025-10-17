@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<EcomVisibility>))]
+[Serializable]
 public readonly record struct EcomVisibility : IStringEnum
 {
     public static readonly EcomVisibility Unindexed = new(Values.Unindexed);
@@ -58,6 +59,7 @@ public readonly record struct EcomVisibility : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Unindexed = "UNINDEXED";

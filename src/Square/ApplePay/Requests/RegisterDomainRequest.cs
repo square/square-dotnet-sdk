@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.ApplePay;
 
+[Serializable]
 public record RegisterDomainRequest
 {
     /// <summary>

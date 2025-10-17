@@ -4,8 +4,13 @@ using Square.Core;
 
 namespace Square;
 
-public record PaymentLinkRelatedResources
+[Serializable]
+public record PaymentLinkRelatedResources : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The order associated with the payment link.
     /// </summary>
@@ -18,15 +23,11 @@ public record PaymentLinkRelatedResources
     [JsonPropertyName("subscription_plans")]
     public IEnumerable<CatalogObject>? SubscriptionPlans { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

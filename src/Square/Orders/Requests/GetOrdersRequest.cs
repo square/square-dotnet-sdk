@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Orders;
 
+[Serializable]
 public record GetOrdersRequest
 {
     /// <summary>

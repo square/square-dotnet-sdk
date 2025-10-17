@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CatalogCustomAttributeDefinitionType>))]
+[Serializable]
 public readonly record struct CatalogCustomAttributeDefinitionType : IStringEnum
 {
     public static readonly CatalogCustomAttributeDefinitionType String = new(Values.String);
@@ -60,6 +61,7 @@ public readonly record struct CatalogCustomAttributeDefinitionType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string String = "STRING";

@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Subscriptions;
 
+[Serializable]
 public record UpdateSubscriptionRequest
 {
     /// <summary>

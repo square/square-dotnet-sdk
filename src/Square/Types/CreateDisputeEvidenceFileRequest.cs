@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Defines the parameters for a `CreateDisputeEvidenceFile` request.
 /// </summary>
-public record CreateDisputeEvidenceFileRequest
+[Serializable]
+public record CreateDisputeEvidenceFileRequest : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique key identifying the request. For more information, see [Idempotency](https://developer.squareup.com/docs/working-with-apis/idempotency).
     /// </summary>
@@ -29,15 +34,11 @@ public record CreateDisputeEvidenceFileRequest
     [JsonPropertyName("content_type")]
     public string? ContentType { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

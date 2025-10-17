@@ -6,6 +6,7 @@ namespace Square;
 [JsonConverter(
     typeof(StringEnumSerializer<BusinessAppointmentSettingsMaxAppointmentsPerDayLimitType>)
 )]
+[Serializable]
 public readonly record struct BusinessAppointmentSettingsMaxAppointmentsPerDayLimitType
     : IStringEnum
 {
@@ -67,6 +68,7 @@ public readonly record struct BusinessAppointmentSettingsMaxAppointmentsPerDayLi
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string PerTeamMember = "PER_TEAM_MEMBER";

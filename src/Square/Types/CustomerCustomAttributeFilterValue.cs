@@ -8,8 +8,13 @@ namespace Square;
 /// A type-specific filter used in a [custom attribute filter](entity:CustomerCustomAttributeFilter) to search based on the value
 /// of a customer-related [custom attribute](entity:CustomAttribute).
 /// </summary>
-public record CustomerCustomAttributeFilterValue
+[Serializable]
+public record CustomerCustomAttributeFilterValue : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A filter for a query based on the value of an `Email`-type custom attribute. This filter is case-insensitive and can
     /// include `exact` or `fuzzy`, but not both.
@@ -99,15 +104,11 @@ public record CustomerCustomAttributeFilterValue
     [JsonPropertyName("address")]
     public CustomerAddressFilter? Address { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

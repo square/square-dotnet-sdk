@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.GiftCards;
 
+[Serializable]
 public record LinkCustomerToGiftCardRequest
 {
     /// <summary>

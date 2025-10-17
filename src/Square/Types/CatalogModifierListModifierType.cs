@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CatalogModifierListModifierType>))]
+[Serializable]
 public readonly record struct CatalogModifierListModifierType : IStringEnum
 {
     public static readonly CatalogModifierListModifierType List = new(Values.List);
@@ -54,6 +55,7 @@ public readonly record struct CatalogModifierListModifierType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string List = "LIST";
