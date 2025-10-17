@@ -9,8 +9,13 @@ namespace Square;
 /// linking a bank account to a Square account, see
 /// [Bank Accounts API](https://developer.squareup.com/docs/bank-accounts-api).
 /// </summary>
-public record BankAccount
+[Serializable]
+public record BankAccount : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The unique, Square-issued identifier for the bank account.
     /// </summary>
@@ -128,15 +133,11 @@ public record BankAccount
     [JsonPropertyName("bank_name")]
     public string? BankName { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

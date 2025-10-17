@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<DisputeEvidenceType>))]
+[Serializable]
 public readonly record struct DisputeEvidenceType : IStringEnum
 {
     public static readonly DisputeEvidenceType GenericEvidence = new(Values.GenericEvidence);
@@ -104,6 +105,7 @@ public readonly record struct DisputeEvidenceType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string GenericEvidence = "GENERIC_EVIDENCE";

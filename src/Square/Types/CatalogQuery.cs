@@ -32,8 +32,13 @@ namespace Square;
 /// For example, to search for [CatalogItem](entity:CatalogItem) objects by searchable attributes, you can use
 /// the `"name"`, `"description"`, or `"abbreviation"` attribute in an applicable query filter.
 /// </summary>
-public record CatalogQuery
+[Serializable]
+public record CatalogQuery : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A query expression to sort returned query result by the given attribute.
     /// </summary>
@@ -103,15 +108,11 @@ public record CatalogQuery
     [JsonPropertyName("item_variations_for_item_option_values_query")]
     public CatalogQueryItemVariationsForItemOptionValues? ItemVariationsForItemOptionValuesQuery { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Payments;
 
+[Serializable]
 public record ListPaymentsRequest
 {
     /// <summary>

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents a checkout processed by the Square Terminal.
 /// </summary>
-public record TerminalCheckout
+[Serializable]
+public record TerminalCheckout : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique ID for this `TerminalCheckout`.
     /// </summary>
@@ -169,15 +174,11 @@ public record TerminalCheckout
     [JsonPropertyName("tip_money")]
     public Money? TipMoney { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

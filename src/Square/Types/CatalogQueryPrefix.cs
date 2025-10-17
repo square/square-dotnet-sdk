@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// The query filter to return the search result whose named attribute values are prefixed by the specified attribute value.
 /// </summary>
-public record CatalogQueryPrefix
+[Serializable]
+public record CatalogQueryPrefix : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The name of the attribute to be searched.
     /// </summary>
@@ -21,15 +26,11 @@ public record CatalogQueryPrefix
     [JsonPropertyName("attribute_prefix")]
     public required string AttributePrefix { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

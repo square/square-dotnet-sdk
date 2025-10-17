@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<MeasurementUnitArea>))]
+[Serializable]
 public readonly record struct MeasurementUnitArea : IStringEnum
 {
     public static readonly MeasurementUnitArea ImperialAcre = new(Values.ImperialAcre);
@@ -70,6 +71,7 @@ public readonly record struct MeasurementUnitArea : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string ImperialAcre = "IMPERIAL_ACRE";

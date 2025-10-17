@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// The booking profile of a seller's team member, including the team member's ID, display name, description and whether the team member can be booked as a service provider.
 /// </summary>
-public record TeamMemberBookingProfile
+[Serializable]
+public record TeamMemberBookingProfile : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the [TeamMember](entity:TeamMember) object for the team member associated with the booking profile.
     /// </summary>
@@ -43,15 +48,11 @@ public record TeamMemberBookingProfile
     [JsonPropertyName("profile_image_url")]
     public string? ProfileImageUrl { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

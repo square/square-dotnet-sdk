@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Customers.Segments;
 
+[Serializable]
 public record ListSegmentsRequest
 {
     /// <summary>

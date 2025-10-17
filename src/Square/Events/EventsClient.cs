@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -162,7 +163,9 @@ public partial class EventsClient
     /// Lists all event types that you can subscribe to as webhooks or query using the Events API.
     /// </summary>
     /// <example><code>
-    /// await client.Events.ListEventTypesAsync(new ListEventTypesRequest { ApiVersion = "api_version" });
+    /// await client.Events.ListEventTypesAsync(
+    ///     new Square.Events.ListEventTypesRequest { ApiVersion = "api_version" }
+    /// );
     /// </code></example>
     public async Task<ListEventTypesResponse> ListEventTypesAsync(
         ListEventTypesRequest request,

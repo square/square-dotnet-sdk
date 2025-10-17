@@ -13,8 +13,13 @@ namespace Square;
 /// [customer.custom_attribute.visible.updated](webhook:customer.custom_attribute.visible.updated),
 /// which applies to custom attributes that are visible to the subscribing application.
 /// </summary>
-public record CustomerCustomAttributeUpdatedPublicEvent
+[Serializable]
+public record CustomerCustomAttributeUpdatedPublicEvent : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the seller associated with the event that triggered the event notification.
     /// </summary>
@@ -46,15 +51,11 @@ public record CustomerCustomAttributeUpdatedPublicEvent
     [JsonPropertyName("data")]
     public CustomAttributeEventData? Data { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

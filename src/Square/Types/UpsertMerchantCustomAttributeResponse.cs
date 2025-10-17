@@ -8,8 +8,13 @@ namespace Square;
 /// Represents an [UpsertMerchantCustomAttribute](api-endpoint:MerchantCustomAttributes-UpsertMerchantCustomAttribute) response.
 /// Either `custom_attribute_definition` or `errors` is present in the response.
 /// </summary>
-public record UpsertMerchantCustomAttributeResponse
+[Serializable]
+public record UpsertMerchantCustomAttributeResponse : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The new or updated custom attribute.
     /// </summary>
@@ -22,15 +27,11 @@ public record UpsertMerchantCustomAttributeResponse
     [JsonPropertyName("errors")]
     public IEnumerable<Error>? Errors { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

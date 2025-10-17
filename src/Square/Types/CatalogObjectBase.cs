@@ -4,8 +4,13 @@ using Square.Core;
 
 namespace Square;
 
-public record CatalogObjectBase
+[Serializable]
+public record CatalogObjectBase : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// An identifier to reference this object in the catalog. When a new `CatalogObject`
     /// is inserted, the client should set the id to a temporary identifier starting with
@@ -97,15 +102,11 @@ public record CatalogObjectBase
     [JsonPropertyName("image_id")]
     public string? ImageId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

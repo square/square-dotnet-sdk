@@ -8,8 +8,13 @@ namespace Square;
 /// Controls how a modifier list is applied to a specific item. This object allows for item-specific customization of modifier list behavior
 /// and provides the ability to override global modifier list settings.
 /// </summary>
-public record CatalogItemModifierListInfo
+[Serializable]
+public record CatalogItemModifierListInfo : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the `CatalogModifierList` controlled by this `CatalogModifierListInfo`.
     /// </summary>
@@ -70,15 +75,11 @@ public record CatalogItemModifierListInfo
     [JsonPropertyName("hidden_from_customer_override")]
     public object? HiddenFromCustomerOverride { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

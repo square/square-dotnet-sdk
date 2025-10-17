@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Labor.Shifts;
 
+[Serializable]
 public record SearchShiftsRequest
 {
     /// <summary>

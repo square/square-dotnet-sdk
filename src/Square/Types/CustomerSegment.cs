@@ -10,8 +10,13 @@ namespace Square;
 /// Segments (also known as Smart Groups) are defined and created within the Customer Directory in the
 /// Square Seller Dashboard or Point of Sale.
 /// </summary>
-public record CustomerSegment
+[Serializable]
+public record CustomerSegment : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique Square-generated ID for the segment.
     /// </summary>
@@ -40,15 +45,11 @@ public record CustomerSegment
     [JsonPropertyName("updated_at")]
     public string? UpdatedAt { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

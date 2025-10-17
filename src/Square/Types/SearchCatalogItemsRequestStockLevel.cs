@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<SearchCatalogItemsRequestStockLevel>))]
+[Serializable]
 public readonly record struct SearchCatalogItemsRequestStockLevel : IStringEnum
 {
     public static readonly SearchCatalogItemsRequestStockLevel Out = new(Values.Out);
@@ -55,6 +56,7 @@ public readonly record struct SearchCatalogItemsRequestStockLevel : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Out = "OUT";

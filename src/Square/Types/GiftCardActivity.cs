@@ -9,8 +9,13 @@ namespace Square;
 /// A gift card activity contains information about a specific activity type. For example, a `REDEEM` activity
 /// includes a `redeem_activity_details` field that contains information about the redemption.
 /// </summary>
-public record GiftCardActivity
+[Serializable]
+public record GiftCardActivity : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The Square-assigned ID of the gift card activity.
     /// </summary>
@@ -168,15 +173,11 @@ public record GiftCardActivity
     [JsonPropertyName("transfer_balance_from_activity_details")]
     public GiftCardActivityTransferBalanceFrom? TransferBalanceFromActivityDetails { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

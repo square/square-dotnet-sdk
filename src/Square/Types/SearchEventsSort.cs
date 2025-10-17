@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Criteria to sort events by.
 /// </summary>
-public record SearchEventsSort
+[Serializable]
+public record SearchEventsSort : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Sort events by event types.
     /// See [SearchEventsSortField](#type-searcheventssortfield) for possible values
@@ -23,15 +28,11 @@ public record SearchEventsSort
     [JsonPropertyName("order")]
     public SortOrder? Order { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

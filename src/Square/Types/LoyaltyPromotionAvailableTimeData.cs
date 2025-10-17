@@ -8,8 +8,13 @@ namespace Square;
 /// Represents scheduling information that determines when purchases can qualify to earn points
 /// from a [loyalty promotion](entity:LoyaltyPromotion).
 /// </summary>
-public record LoyaltyPromotionAvailableTimeData
+[Serializable]
+public record LoyaltyPromotionAvailableTimeData : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The date that the promotion starts, in `YYYY-MM-DD` format. Square populates this field
     /// based on the provided `time_periods`.
@@ -43,15 +48,11 @@ public record LoyaltyPromotionAvailableTimeData
     [JsonPropertyName("time_periods")]
     public IEnumerable<string> TimePeriods { get; set; } = new List<string>();
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

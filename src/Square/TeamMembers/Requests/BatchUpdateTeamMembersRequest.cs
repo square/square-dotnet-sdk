@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.TeamMembers;
 
+[Serializable]
 public record BatchUpdateTeamMembersRequest
 {
     /// <summary>

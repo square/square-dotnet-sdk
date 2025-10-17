@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Webhooks.Subscriptions;
 
+[Serializable]
 public record ListSubscriptionsRequest
 {
     /// <summary>

@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Devices.Codes;
 
+[Serializable]
 public record GetCodesRequest
 {
     /// <summary>

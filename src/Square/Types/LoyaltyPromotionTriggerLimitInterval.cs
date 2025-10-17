@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<LoyaltyPromotionTriggerLimitInterval>))]
+[Serializable]
 public readonly record struct LoyaltyPromotionTriggerLimitInterval : IStringEnum
 {
     public static readonly LoyaltyPromotionTriggerLimitInterval AllTime = new(Values.AllTime);
@@ -56,6 +57,7 @@ public readonly record struct LoyaltyPromotionTriggerLimitInterval : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string AllTime = "ALL_TIME";

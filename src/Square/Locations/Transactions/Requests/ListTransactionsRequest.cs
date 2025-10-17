@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Locations.Transactions;
 
+[Serializable]
 public record ListTransactionsRequest
 {
     /// <summary>

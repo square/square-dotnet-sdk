@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.CashDrawers.Shifts;
 
+[Serializable]
 public record ListEventsShiftsRequest
 {
     /// <summary>

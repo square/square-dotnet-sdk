@@ -9,8 +9,13 @@ namespace Square;
 /// particular seller location based on the known history of physical counts and
 /// inventory adjustments.
 /// </summary>
-public record InventoryCount
+[Serializable]
+public record InventoryCount : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The Square-generated ID of the
     /// [CatalogObject](entity:CatalogObject) being tracked.
@@ -68,15 +73,11 @@ public record InventoryCount
     [JsonPropertyName("is_estimated")]
     public bool? IsEstimated { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

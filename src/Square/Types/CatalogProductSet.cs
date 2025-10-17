@@ -11,8 +11,13 @@ namespace Square;
 /// items and associated item variations in the product set. Including an item in
 /// a product set will also include its item variations.
 /// </summary>
-public record CatalogProductSet
+[Serializable]
+public record CatalogProductSet : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// User-defined name for the product set. For example, "Clearance Items"
     /// or "Winter Sale Items".
@@ -77,15 +82,11 @@ public record CatalogProductSet
     [JsonPropertyName("all_products")]
     public bool? AllProducts { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

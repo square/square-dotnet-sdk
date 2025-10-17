@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Channels;
 
+[Serializable]
 public record GetChannelsRequest
 {
     /// <summary>

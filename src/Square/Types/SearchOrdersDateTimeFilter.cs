@@ -20,8 +20,13 @@ namespace Square;
 /// `CLOSED_AT`. Otherwise, `SearchOrders` throws an error.
 /// [Learn more about filtering orders by time range.](https://developer.squareup.com/docs/orders-api/manage-orders/search-orders#important-note-about-filtering-orders-by-time-range)
 /// </summary>
-public record SearchOrdersDateTimeFilter
+[Serializable]
+public record SearchOrdersDateTimeFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The time range for filtering on the `created_at` timestamp. If you use this
     /// value, you must set the `sort_field` in the `OrdersSearchSort` object to
@@ -46,15 +51,11 @@ public record SearchOrdersDateTimeFilter
     [JsonPropertyName("closed_at")]
     public TimeRange? ClosedAt { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

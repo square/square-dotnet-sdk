@@ -8,8 +8,13 @@ namespace Square;
 /// Represents filter and sort criteria for the `query` field in a
 /// [SearchScheduledShifts](api-endpoint:Labor-SearchScheduledShifts) request.
 /// </summary>
-public record ScheduledShiftQuery
+[Serializable]
+public record ScheduledShiftQuery : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Filtering options for the query.
     /// </summary>
@@ -22,15 +27,11 @@ public record ScheduledShiftQuery
     [JsonPropertyName("sort")]
     public ScheduledShiftSort? Sort { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

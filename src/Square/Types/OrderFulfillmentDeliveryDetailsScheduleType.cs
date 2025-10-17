@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<OrderFulfillmentDeliveryDetailsScheduleType>))]
+[Serializable]
 public readonly record struct OrderFulfillmentDeliveryDetailsScheduleType : IStringEnum
 {
     public static readonly OrderFulfillmentDeliveryDetailsScheduleType Scheduled = new(
@@ -62,6 +63,7 @@ public readonly record struct OrderFulfillmentDeliveryDetailsScheduleType : IStr
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Scheduled = "SCHEDULED";

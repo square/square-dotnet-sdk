@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Disputes;
 
+[Serializable]
 public record GetDisputesRequest
 {
     /// <summary>

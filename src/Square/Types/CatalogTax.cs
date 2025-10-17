@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// A tax applicable to an item.
 /// </summary>
-public record CatalogTax
+[Serializable]
+public record CatalogTax : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The tax's name. This is a searchable attribute for use in applicable query filters, and its value length is of Unicode code points.
     /// </summary>
@@ -55,15 +60,11 @@ public record CatalogTax
     [JsonPropertyName("applies_to_product_set_id")]
     public string? AppliesToProductSetId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

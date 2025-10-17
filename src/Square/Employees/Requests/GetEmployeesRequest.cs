@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Employees;
 
+[Serializable]
 public record GetEmployeesRequest
 {
     /// <summary>

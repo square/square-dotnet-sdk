@@ -8,8 +8,13 @@ namespace Square;
 /// An object that contains the gift card and customer ID associated with a
 /// `gift_card.customer_linked` event.
 /// </summary>
-public record GiftCardCustomerLinkedEventObject
+[Serializable]
+public record GiftCardCustomerLinkedEventObject : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The gift card with the updated `customer_ids` field.
     /// </summary>
@@ -22,15 +27,11 @@ public record GiftCardCustomerLinkedEventObject
     [JsonPropertyName("linked_customer_id")]
     public string? LinkedCustomerId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

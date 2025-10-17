@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Checkout;
 
+[Serializable]
 public record UpdateMerchantSettingsRequest
 {
     /// <summary>

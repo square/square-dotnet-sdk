@@ -8,8 +8,13 @@ namespace Square;
 /// A rounding adjustment of the money being returned. Commonly used to apply cash rounding
 /// when the minimum unit of the account is smaller than the lowest physical denomination of the currency.
 /// </summary>
-public record OrderRoundingAdjustment
+[Serializable]
+public record OrderRoundingAdjustment : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique ID that identifies the rounding adjustment only within this order.
     /// </summary>
@@ -28,15 +33,11 @@ public record OrderRoundingAdjustment
     [JsonPropertyName("amount_money")]
     public Money? AmountMoney { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

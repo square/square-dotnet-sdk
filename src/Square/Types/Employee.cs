@@ -9,8 +9,13 @@ namespace Square;
 ///
 /// DEPRECATED at version 2020-08-26. Replaced by [TeamMember](entity:TeamMember).
 /// </summary>
-public record Employee
+[Serializable]
+public record Employee : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// UUID for this object.
     /// </summary>
@@ -76,15 +81,11 @@ public record Employee
     [JsonPropertyName("updated_at")]
     public string? UpdatedAt { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -139,7 +140,7 @@ public partial class RefundsClient
     /// </summary>
     /// <example><code>
     /// await client.Terminal.Refunds.GetAsync(
-    ///     new GetRefundsRequest { TerminalRefundId = "terminal_refund_id" }
+    ///     new Square.Terminal.Refunds.GetRefundsRequest { TerminalRefundId = "terminal_refund_id" }
     /// );
     /// </code></example>
     public async Task<GetTerminalRefundResponse> GetAsync(

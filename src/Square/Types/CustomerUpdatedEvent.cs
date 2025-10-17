@@ -9,8 +9,13 @@ namespace Square;
 ///
 /// Updates to the 'segment_ids' customer field does not invoke a `customer.updated` event. In addition, the `customer` object in the event notification does not include this field.
 /// </summary>
-public record CustomerUpdatedEvent
+[Serializable]
+public record CustomerUpdatedEvent : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the seller associated with the event.
     /// </summary>
@@ -42,15 +47,11 @@ public record CustomerUpdatedEvent
     [JsonPropertyName("data")]
     public CustomerUpdatedEventData? Data { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

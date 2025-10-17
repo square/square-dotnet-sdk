@@ -11,8 +11,13 @@ namespace Square;
 /// Note: If there are errors processing the request, the [Subscription](entity:WebhookSubscription) is not
 /// present.
 /// </summary>
-public record UpdateWebhookSubscriptionSignatureKeyResponse
+[Serializable]
+public record UpdateWebhookSubscriptionSignatureKeyResponse : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Information on errors encountered during the request.
     /// </summary>
@@ -26,15 +31,11 @@ public record UpdateWebhookSubscriptionSignatureKeyResponse
     [JsonPropertyName("signature_key")]
     public string? SignatureKey { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

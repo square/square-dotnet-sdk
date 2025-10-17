@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<SubscriptionCadence>))]
+[Serializable]
 public readonly record struct SubscriptionCadence : IStringEnum
 {
     public static readonly SubscriptionCadence Daily = new(Values.Daily);
@@ -76,6 +77,7 @@ public readonly record struct SubscriptionCadence : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Daily = "DAILY";

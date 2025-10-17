@@ -7,8 +7,14 @@ namespace Square;
 /// <summary>
 /// A named selection for this `SELECTION`-type custom attribute definition.
 /// </summary>
+[Serializable]
 public record CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSelection
+    : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Unique ID set by Square.
     /// </summary>
@@ -21,15 +27,11 @@ public record CatalogCustomAttributeDefinitionSelectionConfigCustomAttributeSele
     [JsonPropertyName("name")]
     public required string Name { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

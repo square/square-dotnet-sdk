@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Merchants.CustomAttributeDefinitions;
 
+[Serializable]
 public record DeleteCustomAttributeDefinitionsRequest
 {
     /// <summary>

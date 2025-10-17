@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Catalog.Images;
 
+[Serializable]
 public record UpdateImagesRequest
 {
     /// <summary>

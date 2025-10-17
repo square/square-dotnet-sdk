@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Payments;
 
+[Serializable]
 public record CompletePaymentRequest
 {
     /// <summary>

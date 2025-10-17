@@ -4,8 +4,13 @@ using Square.Core;
 
 namespace Square;
 
-public record CheckoutMerchantSettingsPaymentMethods
+[Serializable]
+public record CheckoutMerchantSettingsPaymentMethods : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     [JsonPropertyName("apple_pay")]
     public CheckoutMerchantSettingsPaymentMethodsPaymentMethod? ApplePay { get; set; }
 
@@ -18,15 +23,11 @@ public record CheckoutMerchantSettingsPaymentMethods
     [JsonPropertyName("afterpay_clearpay")]
     public CheckoutMerchantSettingsPaymentMethodsAfterpayClearpay? AfterpayClearpay { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

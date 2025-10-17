@@ -4,8 +4,13 @@ using Square.Core;
 
 namespace Square;
 
-public record CreateCatalogImageRequest
+[Serializable]
+public record CreateCatalogImageRequest : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique string that identifies this CreateCatalogImage request.
     /// Keys can be any valid string but must be unique for every CreateCatalogImage request.
@@ -39,15 +44,11 @@ public record CreateCatalogImageRequest
     [JsonPropertyName("is_primary")]
     public bool? IsPrimary { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

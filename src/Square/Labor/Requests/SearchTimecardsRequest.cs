@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Labor;
 
+[Serializable]
 public record SearchTimecardsRequest
 {
     /// <summary>

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents a Square customer profile in the Customer Directory of a Square seller.
 /// </summary>
-public record Customer
+[Serializable]
+public record Customer : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique Square-assigned ID for the customer profile.
     ///
@@ -132,15 +137,11 @@ public record Customer
     [JsonPropertyName("tax_ids")]
     public CustomerTaxIds? TaxIds { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

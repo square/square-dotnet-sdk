@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<LoyaltyProgramAccrualRuleType>))]
+[Serializable]
 public readonly record struct LoyaltyProgramAccrualRuleType : IStringEnum
 {
     public static readonly LoyaltyProgramAccrualRuleType Visit = new(Values.Visit);
@@ -58,6 +59,7 @@ public readonly record struct LoyaltyProgramAccrualRuleType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Visit = "VISIT";

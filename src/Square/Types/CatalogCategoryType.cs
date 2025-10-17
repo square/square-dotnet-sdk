@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CatalogCategoryType>))]
+[Serializable]
 public readonly record struct CatalogCategoryType : IStringEnum
 {
     public static readonly CatalogCategoryType RegularCategory = new(Values.RegularCategory);
@@ -56,6 +57,7 @@ public readonly record struct CatalogCategoryType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string RegularCategory = "REGULAR_CATEGORY";

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Details about the application that took the payment.
 /// </summary>
-public record ApplicationDetails
+[Serializable]
+public record ApplicationDetails : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The Square product, such as Square Point of Sale (POS),
     /// Square Invoices, or Square Virtual Terminal.
@@ -29,15 +34,11 @@ public record ApplicationDetails
     [JsonPropertyName("application_id")]
     public string? ApplicationId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

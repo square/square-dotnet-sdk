@@ -8,8 +8,13 @@ namespace Square;
 /// Defines a filter used in a search for `Timecard` records. `AND` logic is
 /// used by Square's servers to apply each filter property specified.
 /// </summary>
-public record TimecardFilter
+[Serializable]
+public record TimecardFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Fetch timecards for the specified location.
     /// </summary>
@@ -47,15 +52,11 @@ public record TimecardFilter
     [JsonPropertyName("team_member_ids")]
     public IEnumerable<string>? TeamMemberIds { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()
