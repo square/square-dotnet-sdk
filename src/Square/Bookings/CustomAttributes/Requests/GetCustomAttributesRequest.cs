@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Bookings.CustomAttributes;
 
+[Serializable]
 public record GetCustomAttributesRequest
 {
     /// <summary>

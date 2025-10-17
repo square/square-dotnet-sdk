@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Mobile;
 
+[Serializable]
 public record CreateMobileAuthorizationCodeRequest
 {
     /// <summary>

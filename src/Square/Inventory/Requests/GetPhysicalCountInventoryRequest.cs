@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Inventory;
 
+[Serializable]
 public record GetPhysicalCountInventoryRequest
 {
     /// <summary>

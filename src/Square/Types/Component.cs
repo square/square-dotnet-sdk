@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// The wrapper object for the component entries of a given component type.
 /// </summary>
-public record Component
+[Serializable]
+public record Component : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The type of this component. Each component type has expected properties expressed
     /// in a structured format within its corresponding `*_details` field.
@@ -47,15 +52,11 @@ public record Component
     [JsonPropertyName("ethernet_details")]
     public DeviceComponentDetailsEthernetDetails? EthernetDetails { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

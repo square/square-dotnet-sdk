@@ -9,8 +9,13 @@ namespace Square;
 /// to the customer. You configure a reminder relative to the payment request
 /// `due_date`.
 /// </summary>
-public record InvoicePaymentReminder
+[Serializable]
+public record InvoicePaymentReminder : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A Square-assigned ID that uniquely identifies the reminder within the
     /// `InvoicePaymentRequest`.
@@ -47,15 +52,11 @@ public record InvoicePaymentReminder
     [JsonPropertyName("sent_at")]
     public string? SentAt { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

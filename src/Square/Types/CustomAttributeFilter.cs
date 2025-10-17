@@ -9,8 +9,13 @@ namespace Square;
 /// [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems)
 /// endpoint to search for items or item variations.
 /// </summary>
-public record CustomAttributeFilter
+[Serializable]
+public record CustomAttributeFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A query expression to filter items or item variations by matching their custom attributes'
     /// `custom_attribute_definition_id` property value against the the specified id.
@@ -59,15 +64,11 @@ public record CustomAttributeFilter
     [JsonPropertyName("bool_filter")]
     public bool? BoolFilter { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

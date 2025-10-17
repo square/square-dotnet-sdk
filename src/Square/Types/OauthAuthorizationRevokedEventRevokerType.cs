@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<OauthAuthorizationRevokedEventRevokerType>))]
+[Serializable]
 public readonly record struct OauthAuthorizationRevokedEventRevokerType : IStringEnum
 {
     public static readonly OauthAuthorizationRevokedEventRevokerType Application = new(
@@ -66,6 +67,7 @@ public readonly record struct OauthAuthorizationRevokedEventRevokerType : IStrin
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Application = "APPLICATION";

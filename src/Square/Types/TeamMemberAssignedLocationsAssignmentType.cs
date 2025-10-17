@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<TeamMemberAssignedLocationsAssignmentType>))]
+[Serializable]
 public readonly record struct TeamMemberAssignedLocationsAssignmentType : IStringEnum
 {
     public static readonly TeamMemberAssignedLocationsAssignmentType AllCurrentAndFutureLocations =
@@ -63,6 +64,7 @@ public readonly record struct TeamMemberAssignedLocationsAssignmentType : IStrin
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string AllCurrentAndFutureLocations = "ALL_CURRENT_AND_FUTURE_LOCATIONS";

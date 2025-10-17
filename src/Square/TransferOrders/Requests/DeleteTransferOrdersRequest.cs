@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.TransferOrders;
 
+[Serializable]
 public record DeleteTransferOrdersRequest
 {
     /// <summary>

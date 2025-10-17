@@ -8,8 +8,13 @@ namespace Square;
 /// Represents a job assigned to a [team member](entity:TeamMember), including the compensation the team
 /// member earns for the job. Job assignments are listed in the team member's [wage setting](entity:WageSetting).
 /// </summary>
-public record JobAssignment
+[Serializable]
+public record JobAssignment : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The title of the job.
     /// </summary>
@@ -49,15 +54,11 @@ public record JobAssignment
     [JsonPropertyName("job_id")]
     public string? JobId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

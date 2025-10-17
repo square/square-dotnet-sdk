@@ -10,8 +10,13 @@ namespace Square;
 /// If one or more creation sources are set, customer profiles are included in,
 /// or excluded from, the result if they match at least one of the filter criteria.
 /// </summary>
-public record CustomerCreationSourceFilter
+[Serializable]
+public record CustomerCreationSourceFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The list of creation sources used as filtering criteria.
     /// See [CustomerCreationSource](#type-customercreationsource) for possible values
@@ -29,15 +34,11 @@ public record CustomerCreationSourceFilter
     [JsonPropertyName("rule")]
     public CustomerInclusionExclusion? Rule { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

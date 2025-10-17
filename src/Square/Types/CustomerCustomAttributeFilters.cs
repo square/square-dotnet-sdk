@@ -9,8 +9,13 @@ namespace Square;
 /// to search based on [custom attributes](entity:CustomAttribute) that are assigned to customer profiles. For more information, see
 /// [Search by custom attribute](https://developer.squareup.com/docs/customers-api/use-the-api/search-customers#search-by-custom-attribute).
 /// </summary>
-public record CustomerCustomAttributeFilters
+[Serializable]
+public record CustomerCustomAttributeFilters : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The custom attribute filters. Each filter must specify `key` and include the `filter` field with a type-specific filter,
     /// the `updated_at` field, or both. The provided keys must be unique within the list of custom attribute filters.
@@ -18,15 +23,11 @@ public record CustomerCustomAttributeFilters
     [JsonPropertyName("filters")]
     public IEnumerable<CustomerCustomAttributeFilter>? Filters { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<BusinessAppointmentSettingsCancellationPolicy>))]
+[Serializable]
 public readonly record struct BusinessAppointmentSettingsCancellationPolicy : IStringEnum
 {
     public static readonly BusinessAppointmentSettingsCancellationPolicy CancellationTreatedAsNoShow =
@@ -63,6 +64,7 @@ public readonly record struct BusinessAppointmentSettingsCancellationPolicy : IS
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string CancellationTreatedAsNoShow = "CANCELLATION_TREATED_AS_NO_SHOW";

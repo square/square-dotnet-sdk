@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Terminal;
 
+[Serializable]
 public record DismissTerminalCheckoutRequest
 {
     /// <summary>

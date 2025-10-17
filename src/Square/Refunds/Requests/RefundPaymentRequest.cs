@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Refunds;
 
+[Serializable]
 public record RefundPaymentRequest
 {
     /// <summary>

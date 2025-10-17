@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ScheduledShiftWorkdayMatcher>))]
+[Serializable]
 public readonly record struct ScheduledShiftWorkdayMatcher : IStringEnum
 {
     public static readonly ScheduledShiftWorkdayMatcher StartAt = new(Values.StartAt);
@@ -56,6 +57,7 @@ public readonly record struct ScheduledShiftWorkdayMatcher : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string StartAt = "START_AT";

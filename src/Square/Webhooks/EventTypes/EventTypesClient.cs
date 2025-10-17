@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -20,7 +21,7 @@ public partial class EventTypesClient
     /// </summary>
     /// <example><code>
     /// await client.Webhooks.EventTypes.ListAsync(
-    ///     new ListEventTypesRequest { ApiVersion = "api_version" }
+    ///     new Square.Webhooks.EventTypes.ListEventTypesRequest { ApiVersion = "api_version" }
     /// );
     /// </code></example>
     public async Task<ListWebhookEventTypesResponse> ListAsync(

@@ -8,8 +8,13 @@ namespace Square;
 /// Describes a loyalty account in a [loyalty program](entity:LoyaltyProgram). For more information, see
 /// [Create and Retrieve Loyalty Accounts](https://developer.squareup.com/docs/loyalty-api/loyalty-accounts).
 /// </summary>
-public record LoyaltyAccount
+[Serializable]
+public record LoyaltyAccount : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The Square-assigned ID of the loyalty account.
     /// </summary>
@@ -90,15 +95,11 @@ public record LoyaltyAccount
     [JsonPropertyName("expiring_point_deadlines")]
     public IEnumerable<LoyaltyAccountExpiringPointDeadline>? ExpiringPointDeadlines { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

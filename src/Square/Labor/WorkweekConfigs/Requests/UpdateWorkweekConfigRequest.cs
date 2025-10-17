@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Labor.WorkweekConfigs;
 
+[Serializable]
 public record UpdateWorkweekConfigRequest
 {
     /// <summary>

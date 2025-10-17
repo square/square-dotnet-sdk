@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<V1OrderHistoryEntryAction>))]
+[Serializable]
 public readonly record struct V1OrderHistoryEntryAction : IStringEnum
 {
     public static readonly V1OrderHistoryEntryAction OrderPlaced = new(Values.OrderPlaced);
@@ -64,6 +65,7 @@ public readonly record struct V1OrderHistoryEntryAction : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string OrderPlaced = "ORDER_PLACED";

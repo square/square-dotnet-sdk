@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<DeviceComponentDetailsExternalPower>))]
+[Serializable]
 public readonly record struct DeviceComponentDetailsExternalPower : IStringEnum
 {
     public static readonly DeviceComponentDetailsExternalPower AvailableCharging = new(
@@ -67,6 +68,7 @@ public readonly record struct DeviceComponentDetailsExternalPower : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string AvailableCharging = "AVAILABLE_CHARGING";

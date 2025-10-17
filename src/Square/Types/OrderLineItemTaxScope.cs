@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<OrderLineItemTaxScope>))]
+[Serializable]
 public readonly record struct OrderLineItemTaxScope : IStringEnum
 {
     public static readonly OrderLineItemTaxScope OtherTaxScope = new(Values.OtherTaxScope);
@@ -56,6 +57,7 @@ public readonly record struct OrderLineItemTaxScope : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string OtherTaxScope = "OTHER_TAX_SCOPE";

@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Labor.EmployeeWages;
 
+[Serializable]
 public record ListEmployeeWagesRequest
 {
     /// <summary>

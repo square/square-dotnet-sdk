@@ -9,8 +9,13 @@ namespace Square;
 /// lifecycle of a scheduled shift from the draft to published state. A scheduled shift contains
 /// the latest draft shift details and current published shift details.
 /// </summary>
-public record ScheduledShift
+[Serializable]
+public record ScheduledShift : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// **Read only** The Square-issued ID of the scheduled shift.
     /// </summary>
@@ -53,15 +58,11 @@ public record ScheduledShift
     [JsonPropertyName("updated_at")]
     public string? UpdatedAt { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

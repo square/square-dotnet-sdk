@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Locations.CustomAttributeDefinitions;
 
+[Serializable]
 public record GetCustomAttributeDefinitionsRequest
 {
     /// <summary>

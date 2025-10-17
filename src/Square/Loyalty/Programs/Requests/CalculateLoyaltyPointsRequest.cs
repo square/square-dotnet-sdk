@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Loyalty.Programs;
 
+[Serializable]
 public record CalculateLoyaltyPointsRequest
 {
     /// <summary>

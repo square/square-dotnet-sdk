@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.V1Transactions;
 
+[Serializable]
 public record V1UpdateOrderRequest
 {
     /// <summary>

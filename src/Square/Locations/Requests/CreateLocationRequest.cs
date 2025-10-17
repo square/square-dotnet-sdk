@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Locations;
 
+[Serializable]
 public record CreateLocationRequest
 {
     /// <summary>

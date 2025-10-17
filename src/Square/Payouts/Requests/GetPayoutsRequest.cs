@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Payouts;
 
+[Serializable]
 public record GetPayoutsRequest
 {
     /// <summary>

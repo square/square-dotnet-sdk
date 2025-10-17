@@ -24,8 +24,13 @@ namespace Square;
 /// - Adjusts received quantities
 /// - Updates inventory levels at both source and destination [Location](entity:Location)s
 /// </summary>
-public record TransferOrderGoodsReceipt
+[Serializable]
+public record TransferOrderGoodsReceipt : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Line items being received. Each line item specifies:
     /// - The item being received
@@ -42,15 +47,11 @@ public record TransferOrderGoodsReceipt
     [JsonPropertyName("line_items")]
     public IEnumerable<TransferOrderGoodsReceiptLineItem>? LineItems { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

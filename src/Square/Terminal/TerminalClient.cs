@@ -1,11 +1,11 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.Terminal.Actions;
 using Square.Terminal.Checkouts;
-using Square.Terminal.Refunds;
 
 namespace Square.Terminal;
 
@@ -18,14 +18,14 @@ public partial class TerminalClient
         _client = client;
         Actions = new ActionsClient(_client);
         Checkouts = new CheckoutsClient(_client);
-        Refunds = new RefundsClient(_client);
+        Refunds = new Square.Terminal.Refunds.RefundsClient(_client);
     }
 
     public ActionsClient Actions { get; }
 
     public CheckoutsClient Checkouts { get; }
 
-    public RefundsClient Refunds { get; }
+    public Square.Terminal.Refunds.RefundsClient Refunds { get; }
 
     /// <summary>
     /// Dismisses a Terminal action request if the status and type of the request permits it.

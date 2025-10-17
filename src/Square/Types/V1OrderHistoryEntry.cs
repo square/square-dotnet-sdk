@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// V1OrderHistoryEntry
 /// </summary>
-public record V1OrderHistoryEntry
+[Serializable]
+public record V1OrderHistoryEntry : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The type of action performed on the order.
     /// See [V1OrderHistoryEntryAction](#type-v1orderhistoryentryaction) for possible values
@@ -22,15 +27,11 @@ public record V1OrderHistoryEntry
     [JsonPropertyName("created_at")]
     public string? CreatedAt { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -97,7 +97,9 @@ public class QueryStringConverterTests
     [Test]
     public void ToQueryStringCollection_OnString_ThrowsException()
     {
-        var exception = Assert.Throws<Exception>(() => QueryStringConverter.ToForm("invalid"));
+        var exception = Assert.Throws<global::System.Exception>(() =>
+            QueryStringConverter.ToForm("invalid")
+        );
         Assert.That(
             exception.Message,
             Is.EqualTo(
@@ -109,8 +111,8 @@ public class QueryStringConverterTests
     [Test]
     public void ToQueryStringCollection_OnArray_ThrowsException()
     {
-        var exception = Assert.Throws<Exception>(
-            () => QueryStringConverter.ToForm(Array.Empty<object>())
+        var exception = Assert.Throws<global::System.Exception>(() =>
+            QueryStringConverter.ToForm(Array.Empty<object>())
         );
         Assert.That(
             exception.Message,

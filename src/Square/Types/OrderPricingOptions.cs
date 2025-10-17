@@ -9,8 +9,13 @@ namespace Square;
 /// They can be used, for example, to apply automatic price adjustments that are based on preconfigured
 /// [pricing rules](entity:CatalogPricingRule).
 /// </summary>
-public record OrderPricingOptions
+[Serializable]
+public record OrderPricingOptions : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The option to determine whether pricing rule-based
     /// discounts are automatically applied to an order.
@@ -25,15 +30,11 @@ public record OrderPricingOptions
     [JsonPropertyName("auto_apply_taxes")]
     public bool? AutoApplyTaxes { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

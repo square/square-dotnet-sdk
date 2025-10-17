@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -197,7 +198,11 @@ public partial class ShiftsClient
     /// </summary>
     /// <example><code>
     /// await client.CashDrawers.Shifts.GetAsync(
-    ///     new GetShiftsRequest { ShiftId = "shift_id", LocationId = "location_id" }
+    ///     new Square.CashDrawers.Shifts.GetShiftsRequest
+    ///     {
+    ///         ShiftId = "shift_id",
+    ///         LocationId = "location_id",
+    ///     }
     /// );
     /// </code></example>
     public async Task<GetCashDrawerShiftResponse> GetAsync(

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CustomerInclusionExclusion>))]
+[Serializable]
 public readonly record struct CustomerInclusionExclusion : IStringEnum
 {
     public static readonly CustomerInclusionExclusion Include = new(Values.Include);
@@ -54,6 +55,7 @@ public readonly record struct CustomerInclusionExclusion : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Include = "INCLUDE";

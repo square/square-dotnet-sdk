@@ -1,6 +1,5 @@
 using Square.Core;
 using Square.Webhooks.EventTypes;
-using Square.Webhooks.Subscriptions;
 
 namespace Square.Webhooks;
 
@@ -12,10 +11,10 @@ public partial class WebhooksClient
     {
         _client = client;
         EventTypes = new EventTypesClient(_client);
-        Subscriptions = new SubscriptionsClient(_client);
+        Subscriptions = new Square.Webhooks.Subscriptions.SubscriptionsClient(_client);
     }
 
     public EventTypesClient EventTypes { get; }
 
-    public SubscriptionsClient Subscriptions { get; }
+    public Square.Webhooks.Subscriptions.SubscriptionsClient Subscriptions { get; }
 }

@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Terminal.Checkouts;
 
+[Serializable]
 public record CreateTerminalCheckoutRequest
 {
     /// <summary>

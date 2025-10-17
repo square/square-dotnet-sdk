@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Orders.CustomAttributes;
 
+[Serializable]
 public record BulkDeleteOrderCustomAttributesRequest
 {
     /// <summary>

@@ -9,8 +9,13 @@ namespace Square;
 /// whether the corresponding `tax_ids` field is available for the customer. For more information,
 /// see [Invoice recipient tax IDs](https://developer.squareup.com/docs/invoices-api/overview#recipient-tax-ids).
 /// </summary>
-public record InvoiceRecipientTaxIds
+[Serializable]
+public record InvoiceRecipientTaxIds : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The EU VAT identification number for the invoice recipient. For example, `IE3426675K`.
     /// </summary>
@@ -18,15 +23,11 @@ public record InvoiceRecipientTaxIds
     [JsonPropertyName("eu_vat")]
     public string? EuVat { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

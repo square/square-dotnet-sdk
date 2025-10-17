@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<SortOrder>))]
+[Serializable]
 public readonly record struct SortOrder : IStringEnum
 {
     public static readonly SortOrder Desc = new(Values.Desc);
@@ -52,6 +53,7 @@ public readonly record struct SortOrder : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Desc = "DESC";

@@ -12,8 +12,13 @@ namespace Square;
 /// Images on items and variations are displayed through Square Online Store.
 /// Images on other object types are for use by 3rd party application developers.
 /// </summary>
-public record CatalogImage
+[Serializable]
+public record CatalogImage : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The internal name to identify this image in calls to the Square API.
     /// This is a searchable attribute for use in applicable query filters
@@ -45,15 +50,11 @@ public record CatalogImage
     [JsonPropertyName("photo_studio_order_id")]
     public string? PhotoStudioOrderId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

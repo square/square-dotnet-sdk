@@ -8,8 +8,13 @@ namespace Square;
 /// A lightweight description of an [order](entity:Order) that is returned when
 /// `returned_entries` is `true` on a [SearchOrdersRequest](api-endpoint:Orders-SearchOrders).
 /// </summary>
-public record OrderEntry
+[Serializable]
+public record OrderEntry : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the order.
     /// </summary>
@@ -33,15 +38,11 @@ public record OrderEntry
     [JsonPropertyName("location_id")]
     public string? LocationId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// The food and beverage-specific details of a `FOOD_AND_BEV` item.
 /// </summary>
-public record CatalogItemFoodAndBeverageDetails
+[Serializable]
+public record CatalogItemFoodAndBeverageDetails : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The calorie count (in the unit of kcal) for the `FOOD_AND_BEV` type of items.
     /// </summary>
@@ -27,15 +32,11 @@ public record CatalogItemFoodAndBeverageDetails
     [JsonPropertyName("ingredients")]
     public IEnumerable<CatalogItemFoodAndBeverageDetailsIngredient>? Ingredients { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

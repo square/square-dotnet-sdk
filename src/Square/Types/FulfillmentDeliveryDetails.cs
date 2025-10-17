@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Describes delivery details of an order fulfillment.
 /// </summary>
-public record FulfillmentDeliveryDetails
+[Serializable]
+public record FulfillmentDeliveryDetails : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The contact information for the person to receive the fulfillment.
     /// </summary>
@@ -198,15 +203,11 @@ public record FulfillmentDeliveryDetails
     [JsonPropertyName("managed_delivery")]
     public bool? ManagedDelivery { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

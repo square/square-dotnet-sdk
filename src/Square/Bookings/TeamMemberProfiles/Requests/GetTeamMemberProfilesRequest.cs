@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Bookings.TeamMemberProfiles;
 
+[Serializable]
 public record GetTeamMemberProfilesRequest
 {
     /// <summary>

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents a file attached to an [invoice](entity:Invoice).
 /// </summary>
-public record InvoiceAttachment
+[Serializable]
+public record InvoiceAttachment : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The Square-assigned ID of the attachment.
     /// </summary>
@@ -61,15 +66,11 @@ public record InvoiceAttachment
     [JsonPropertyName("uploaded_at")]
     public string? UploadedAt { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

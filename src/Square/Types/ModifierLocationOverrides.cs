@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Location-specific overrides for specified properties of a `CatalogModifier` object.
 /// </summary>
-public record ModifierLocationOverrides
+[Serializable]
+public record ModifierLocationOverrides : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the `Location` object representing the location. This can include a deactivated location.
     /// </summary>
@@ -30,15 +35,11 @@ public record ModifierLocationOverrides
     [JsonPropertyName("sold_out")]
     public bool? SoldOut { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()
