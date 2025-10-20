@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.GiftCards.Activities;
 
+[Serializable]
 public record CreateGiftCardActivityRequest
 {
     /// <summary>

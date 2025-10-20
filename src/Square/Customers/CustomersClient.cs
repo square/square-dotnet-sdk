@@ -1,11 +1,9 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
-using Square.Customers.Cards;
-using Square.Customers.CustomAttributeDefinitions;
-using Square.Customers.CustomAttributes;
 using Square.Customers.Groups;
 using Square.Customers.Segments;
 
@@ -18,22 +16,25 @@ public partial class CustomersClient
     internal CustomersClient(RawClient client)
     {
         _client = client;
-        CustomAttributeDefinitions = new CustomAttributeDefinitionsClient(_client);
+        CustomAttributeDefinitions =
+            new Square.Customers.CustomAttributeDefinitions.CustomAttributeDefinitionsClient(
+                _client
+            );
         Groups = new GroupsClient(_client);
         Segments = new SegmentsClient(_client);
-        Cards = new CardsClient(_client);
-        CustomAttributes = new CustomAttributesClient(_client);
+        Cards = new Square.Customers.Cards.CardsClient(_client);
+        CustomAttributes = new Square.Customers.CustomAttributes.CustomAttributesClient(_client);
     }
 
-    public CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Customers.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
 
     public GroupsClient Groups { get; }
 
     public SegmentsClient Segments { get; }
 
-    public CardsClient Cards { get; }
+    public Square.Customers.Cards.CardsClient Cards { get; }
 
-    public CustomAttributesClient CustomAttributes { get; }
+    public Square.Customers.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
 
     /// <summary>
     /// Lists customer profiles associated with a Square account.

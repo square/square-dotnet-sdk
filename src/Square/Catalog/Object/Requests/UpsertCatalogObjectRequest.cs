@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Catalog.Object;
 
+[Serializable]
 public record UpsertCatalogObjectRequest
 {
     /// <summary>

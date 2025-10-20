@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Labor;
 
+[Serializable]
 public record RetrieveTimecardRequest
 {
     /// <summary>

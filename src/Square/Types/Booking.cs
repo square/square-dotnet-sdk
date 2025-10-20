@@ -8,8 +8,13 @@ namespace Square;
 /// Represents a booking as a time-bound service contract for a seller's staff member to provide a specified service
 /// at a given location to a requesting customer in one or more appointment segments.
 /// </summary>
-public record Booking
+[Serializable]
+public record Booking : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique ID of this object representing a booking.
     /// </summary>
@@ -123,15 +128,11 @@ public record Booking
     [JsonPropertyName("address")]
     public Address? Address { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

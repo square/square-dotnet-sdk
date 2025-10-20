@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<Product>))]
+[Serializable]
 public readonly record struct Product : IStringEnum
 {
     public static readonly Product SquarePos = new(Values.SquarePos);
@@ -68,6 +69,7 @@ public readonly record struct Product : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string SquarePos = "SQUARE_POS";

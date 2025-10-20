@@ -1,10 +1,9 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
-using Square.Locations.CustomAttributeDefinitions;
-using Square.Locations.CustomAttributes;
 using Square.Locations.Transactions;
 
 namespace Square.Locations;
@@ -16,14 +15,17 @@ public partial class LocationsClient
     internal LocationsClient(RawClient client)
     {
         _client = client;
-        CustomAttributeDefinitions = new CustomAttributeDefinitionsClient(_client);
-        CustomAttributes = new CustomAttributesClient(_client);
+        CustomAttributeDefinitions =
+            new Square.Locations.CustomAttributeDefinitions.CustomAttributeDefinitionsClient(
+                _client
+            );
+        CustomAttributes = new Square.Locations.CustomAttributes.CustomAttributesClient(_client);
         Transactions = new TransactionsClient(_client);
     }
 
-    public CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Locations.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
 
-    public CustomAttributesClient CustomAttributes { get; }
+    public Square.Locations.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
 
     public TransactionsClient Transactions { get; }
 
@@ -212,19 +214,19 @@ public partial class LocationsClient
     ///                 {
     ///                     new BusinessHoursPeriod
     ///                     {
-    ///                         DayOfWeek = DayOfWeek.Fri,
+    ///                         DayOfWeek = Square.DayOfWeek.Fri,
     ///                         StartLocalTime = "07:00",
     ///                         EndLocalTime = "18:00",
     ///                     },
     ///                     new BusinessHoursPeriod
     ///                     {
-    ///                         DayOfWeek = DayOfWeek.Sat,
+    ///                         DayOfWeek = Square.DayOfWeek.Sat,
     ///                         StartLocalTime = "07:00",
     ///                         EndLocalTime = "18:00",
     ///                     },
     ///                     new BusinessHoursPeriod
     ///                     {
-    ///                         DayOfWeek = DayOfWeek.Sun,
+    ///                         DayOfWeek = Square.DayOfWeek.Sun,
     ///                         StartLocalTime = "09:00",
     ///                         EndLocalTime = "15:00",
     ///                     },

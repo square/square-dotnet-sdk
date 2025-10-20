@@ -8,8 +8,13 @@ namespace Square;
 /// One or more PayoutEntries that make up a Payout. Each one has a date, amount, and type of activity.
 /// The total amount of the payout will equal the sum of the payout entries for a batch payout
 /// </summary>
-public record PayoutEntry
+[Serializable]
+public record PayoutEntry : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A unique ID for the payout entry.
     /// </summary>
@@ -203,15 +208,11 @@ public record PayoutEntry
     [JsonPropertyName("type_square_payroll_transfer_reversed_details")]
     public PaymentBalanceActivitySquarePayrollTransferReversedDetail? TypeSquarePayrollTransferReversedDetails { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

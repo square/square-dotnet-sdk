@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// A query filter to search for buyer-accessible appointment segments by.
 /// </summary>
-public record SegmentFilter
+[Serializable]
+public record SegmentFilter : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the [CatalogItemVariation](entity:CatalogItemVariation) object representing the service booked in this segment.
     /// </summary>
@@ -26,15 +31,11 @@ public record SegmentFilter
     [JsonPropertyName("team_member_id_filter")]
     public FilterValue? TeamMemberIdFilter { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

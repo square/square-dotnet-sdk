@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// ACH-specific details about `BANK_ACCOUNT` type payments with the `transfer_type` of `ACH`.
 /// </summary>
-public record AchDetails
+[Serializable]
+public record AchDetails : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The routing number for the bank account.
     /// </summary>
@@ -28,15 +33,11 @@ public record AchDetails
     [JsonPropertyName("account_type")]
     public string? AccountType { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

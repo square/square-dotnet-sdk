@@ -11,8 +11,13 @@ namespace Square;
 /// (For example, a list of condiments for a hot dog, or a list of ice cream flavors).
 /// Each element of the modifier list is a `CatalogObject` instance of the `MODIFIER` type.
 /// </summary>
-public record CatalogModifierList
+[Serializable]
+public record CatalogModifierList : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The name of the `CatalogModifierList` instance. This is a searchable attribute for use in applicable query filters, and its value length is of
     /// Unicode code points.
@@ -138,15 +143,11 @@ public record CatalogModifierList
     [JsonPropertyName("hidden_from_customer")]
     public bool? HiddenFromCustomer { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

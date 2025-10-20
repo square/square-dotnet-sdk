@@ -7,23 +7,24 @@ namespace Square;
 /// <summary>
 /// The query filter to return the items containing the specified modifier list IDs.
 /// </summary>
-public record CatalogQueryItemsForModifierList
+[Serializable]
+public record CatalogQueryItemsForModifierList : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// A set of `CatalogModifierList` IDs to be used to find associated `CatalogItem`s.
     /// </summary>
     [JsonPropertyName("modifier_list_ids")]
     public IEnumerable<string> ModifierListIds { get; set; } = new List<string>();
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

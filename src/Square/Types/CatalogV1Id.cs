@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// A Square API V1 identifier of an item, including the object ID and its associated location ID.
 /// </summary>
-public record CatalogV1Id
+[Serializable]
+public record CatalogV1Id : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID for an object used in the Square API V1, if the object ID differs from the Square API V2 object ID.
     /// </summary>
@@ -21,15 +26,11 @@ public record CatalogV1Id
     [JsonPropertyName("location_id")]
     public string? LocationId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -10,8 +10,13 @@ namespace Square;
 /// a size option. An item option value would represent each variation of t-shirt:
 /// For example, "Color:Red, Size:Small" or "Color:Blue, Size:Medium".
 /// </summary>
-public record CatalogItemOptionValueForItemVariation
+[Serializable]
+public record CatalogItemOptionValueForItemVariation : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The unique id of an item option.
     /// </summary>
@@ -24,15 +29,11 @@ public record CatalogItemOptionValueForItemVariation
     [JsonPropertyName("item_option_value_id")]
     public string? ItemOptionValueId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

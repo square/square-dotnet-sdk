@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Catalog;
 
+[Serializable]
 public record SearchCatalogItemsRequest
 {
     /// <summary>

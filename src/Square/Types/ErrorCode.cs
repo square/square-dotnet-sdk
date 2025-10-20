@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ErrorCode>))]
+[Serializable]
 public readonly record struct ErrorCode : IStringEnum
 {
     public static readonly ErrorCode InternalServerError = new(Values.InternalServerError);
@@ -398,6 +399,7 @@ public readonly record struct ErrorCode : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string InternalServerError = "INTERNAL_SERVER_ERROR";

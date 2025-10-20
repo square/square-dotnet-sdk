@@ -8,8 +8,13 @@ namespace Square;
 /// Data for creating a new transfer order line item. Each line item specifies a
 /// [CatalogItemVariation](entity:CatalogItemVariation) and quantity to transfer.
 /// </summary>
-public record CreateTransferOrderLineData
+[Serializable]
+public record CreateTransferOrderLineData : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// ID of the [CatalogItemVariation](entity:CatalogItemVariation) to transfer. Must reference a valid
     /// item variation in the [Catalog](api:Catalog). The item variation must be:
@@ -26,15 +31,11 @@ public record CreateTransferOrderLineData
     [JsonPropertyName("quantity_ordered")]
     public required string QuantityOrdered { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

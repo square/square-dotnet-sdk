@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<ShiftSortField>))]
+[Serializable]
 public readonly record struct ShiftSortField : IStringEnum
 {
     public static readonly ShiftSortField StartAt = new(Values.StartAt);
@@ -58,6 +59,7 @@ public readonly record struct ShiftSortField : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string StartAt = "START_AT";

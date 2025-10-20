@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Subscriptions;
 
+[Serializable]
 public record ListEventsSubscriptionsRequest
 {
     /// <summary>

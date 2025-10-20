@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents details about a `CLEAR_BALANCE` [gift card activity type](entity:GiftCardActivityType).
 /// </summary>
-public record GiftCardActivityClearBalance
+[Serializable]
+public record GiftCardActivityClearBalance : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The reason the gift card balance was cleared.
     /// See [Reason](#type-reason) for possible values
@@ -16,15 +21,11 @@ public record GiftCardActivityClearBalance
     [JsonPropertyName("reason")]
     public required GiftCardActivityClearBalanceReason Reason { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

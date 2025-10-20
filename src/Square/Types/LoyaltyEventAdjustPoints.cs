@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Provides metadata when the event `type` is `ADJUST_POINTS`.
 /// </summary>
-public record LoyaltyEventAdjustPoints
+[Serializable]
+public record LoyaltyEventAdjustPoints : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The Square-assigned ID of the [loyalty program](entity:LoyaltyProgram).
     /// </summary>
@@ -28,15 +33,11 @@ public record LoyaltyEventAdjustPoints
     [JsonPropertyName("reason")]
     public string? Reason { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

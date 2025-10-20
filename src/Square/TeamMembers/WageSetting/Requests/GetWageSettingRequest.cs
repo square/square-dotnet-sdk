@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.TeamMembers.WageSetting;
 
+[Serializable]
 public record GetWageSettingRequest
 {
     /// <summary>

@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Snippets;
 
+[Serializable]
 public record GetSnippetsRequest
 {
     /// <summary>

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Details about a refund's destination.
 /// </summary>
-public record DestinationDetails
+[Serializable]
+public record DestinationDetails : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Details about a card refund. Only populated if the destination_type is `CARD`.
     /// </summary>
@@ -27,15 +32,11 @@ public record DestinationDetails
     [JsonPropertyName("external_details")]
     public DestinationDetailsExternalRefundDetails? ExternalDetails { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

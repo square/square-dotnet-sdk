@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents a Quick Amount in the Catalog.
 /// </summary>
-public record CatalogQuickAmount
+[Serializable]
+public record CatalogQuickAmount : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// Represents the type of the Quick Amount.
     /// See [CatalogQuickAmountType](#type-catalogquickamounttype) for possible values
@@ -35,15 +40,11 @@ public record CatalogQuickAmount
     [JsonPropertyName("ordinal")]
     public long? Ordinal { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Published when an automatic scheduled payment for an [Invoice](entity:Invoice) has failed.
 /// </summary>
-public record InvoiceScheduledChargeFailedEvent
+[Serializable]
+public record InvoiceScheduledChargeFailedEvent : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the target merchant associated with the event.
     /// </summary>
@@ -40,15 +45,11 @@ public record InvoiceScheduledChargeFailedEvent
     [JsonPropertyName("data")]
     public InvoiceScheduledChargeFailedEventData? Data { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

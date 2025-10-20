@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Customers.CustomAttributes;
 
+[Serializable]
 public record UpsertCustomerCustomAttributeRequest
 {
     /// <summary>

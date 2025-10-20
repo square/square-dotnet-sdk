@@ -8,8 +8,13 @@ namespace Square;
 /// Represents a [RetrieveLocationCustomAttribute](api-endpoint:LocationCustomAttributes-RetrieveLocationCustomAttribute) response.
 /// Either `custom_attribute_definition` or `errors` is present in the response.
 /// </summary>
-public record RetrieveLocationCustomAttributeResponse
+[Serializable]
+public record RetrieveLocationCustomAttributeResponse : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The retrieved custom attribute. If `with_definition` was set to `true` in the request,
     /// the custom attribute definition is returned in the `definition` field.
@@ -23,15 +28,11 @@ public record RetrieveLocationCustomAttributeResponse
     [JsonPropertyName("errors")]
     public IEnumerable<Error>? Errors { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

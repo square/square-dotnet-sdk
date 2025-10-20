@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Checkout.PaymentLinks;
 
+[Serializable]
 public record CreatePaymentLinkRequest
 {
     /// <summary>

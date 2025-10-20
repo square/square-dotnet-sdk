@@ -9,8 +9,13 @@ namespace Square;
 /// between [Location](entity:Location)s. Used with the [CreateTransferOrder](api-endpoint:TransferOrders-CreateTransferOrder)
 /// endpoint.
 /// </summary>
-public record CreateTransferOrderData
+[Serializable]
+public record CreateTransferOrderData : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The source [Location](entity:Location) that will send the items. Must be an active location
     /// in your Square account with sufficient inventory of the requested items.
@@ -56,15 +61,11 @@ public record CreateTransferOrderData
     [JsonPropertyName("line_items")]
     public IEnumerable<CreateTransferOrderLineData>? LineItems { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

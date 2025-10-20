@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<DayOfWeek>))]
+[Serializable]
 public readonly record struct DayOfWeek : IStringEnum
 {
     public static readonly DayOfWeek Sun = new(Values.Sun);
@@ -62,6 +63,7 @@ public readonly record struct DayOfWeek : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string Sun = "SUN";

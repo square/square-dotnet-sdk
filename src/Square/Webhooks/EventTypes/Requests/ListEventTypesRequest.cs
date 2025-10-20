@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Webhooks.EventTypes;
 
+[Serializable]
 public record ListEventTypesRequest
 {
     /// <summary>

@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Stores details about a cash refund. Contains only non-confidential information.
 /// </summary>
-public record DestinationDetailsCashRefundDetails
+[Serializable]
+public record DestinationDetailsCashRefundDetails : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The amount and currency of the money supplied by the seller.
     /// </summary>
@@ -23,15 +28,11 @@ public record DestinationDetailsCashRefundDetails
     [JsonPropertyName("change_back_money")]
     public Money? ChangeBackMoney { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

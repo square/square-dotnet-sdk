@@ -1,4 +1,3 @@
-using Square.CashDrawers.Shifts;
 using Square.Core;
 
 namespace Square.CashDrawers;
@@ -10,8 +9,8 @@ public partial class CashDrawersClient
     internal CashDrawersClient(RawClient client)
     {
         _client = client;
-        Shifts = new ShiftsClient(_client);
+        Shifts = new Square.CashDrawers.Shifts.ShiftsClient(_client);
     }
 
-    public ShiftsClient Shifts { get; }
+    public Square.CashDrawers.Shifts.ShiftsClient Shifts { get; }
 }

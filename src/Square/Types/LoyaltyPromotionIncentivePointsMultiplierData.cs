@@ -7,8 +7,13 @@ namespace Square;
 /// <summary>
 /// Represents the metadata for a `POINTS_MULTIPLIER` type of [loyalty promotion incentive](entity:LoyaltyPromotionIncentive).
 /// </summary>
-public record LoyaltyPromotionIncentivePointsMultiplierData
+[Serializable]
+public record LoyaltyPromotionIncentivePointsMultiplierData : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The multiplier used to calculate the number of points earned each time the promotion
     /// is triggered. For example, suppose a purchase qualifies for 5 points from the base loyalty program.
@@ -41,15 +46,11 @@ public record LoyaltyPromotionIncentivePointsMultiplierData
     [JsonPropertyName("multiplier")]
     public string? Multiplier { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

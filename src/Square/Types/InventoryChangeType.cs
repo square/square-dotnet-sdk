@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<InventoryChangeType>))]
+[Serializable]
 public readonly record struct InventoryChangeType : IStringEnum
 {
     public static readonly InventoryChangeType PhysicalCount = new(Values.PhysicalCount);
@@ -56,6 +57,7 @@ public readonly record struct InventoryChangeType : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string PhysicalCount = "PHYSICAL_COUNT";

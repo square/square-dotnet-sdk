@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Merchants;
 
+[Serializable]
 public record GetMerchantsRequest
 {
     /// <summary>

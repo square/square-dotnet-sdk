@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Vendors;
 
+[Serializable]
 public record BatchGetVendorsRequest
 {
     /// <summary>

@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<CatalogCustomAttributeDefinitionSellerVisibility>))]
+[Serializable]
 public readonly record struct CatalogCustomAttributeDefinitionSellerVisibility : IStringEnum
 {
     public static readonly CatalogCustomAttributeDefinitionSellerVisibility SellerVisibilityHidden =
@@ -64,6 +65,7 @@ public readonly record struct CatalogCustomAttributeDefinitionSellerVisibility :
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string SellerVisibilityHidden = "SELLER_VISIBILITY_HIDDEN";

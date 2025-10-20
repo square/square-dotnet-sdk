@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -82,7 +83,11 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributeDefinitions.ListAsync(
-    ///     new ListCustomAttributeDefinitionsRequest { Limit = 1, Cursor = "cursor" }
+    ///     new Square.Bookings.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Limit = 1,
+    ///         Cursor = "cursor",
+    ///     }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttributeDefinition>> ListAsync(
@@ -188,7 +193,11 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributeDefinitions.GetAsync(
-    ///     new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    ///     new Square.Bookings.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///         Version = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<RetrieveBookingCustomAttributeDefinitionResponse> GetAsync(
@@ -320,7 +329,10 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributeDefinitions.DeleteAsync(
-    ///     new DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    ///     new Square.Bookings.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///     }
     /// );
     /// </code></example>
     public async Task<DeleteBookingCustomAttributeDefinitionResponse> DeleteAsync(

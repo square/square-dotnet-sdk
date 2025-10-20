@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Bookings;
 
+[Serializable]
 public record GetBookingsRequest
 {
     /// <summary>

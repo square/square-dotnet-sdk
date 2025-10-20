@@ -1,6 +1,7 @@
 namespace Square;
 
+[Serializable]
 internal class Version
 {
-    public const string Current = "42.2.0";
+    public const string Current = "42.2.1";
 }

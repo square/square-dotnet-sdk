@@ -3,6 +3,7 @@ using Square.Core;
 
 namespace Square.Team;
 
+[Serializable]
 public record ListJobsRequest
 {
     /// <summary>

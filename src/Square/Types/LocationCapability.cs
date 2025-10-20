@@ -4,6 +4,7 @@ using Square.Core;
 namespace Square;
 
 [JsonConverter(typeof(StringEnumSerializer<LocationCapability>))]
+[Serializable]
 public readonly record struct LocationCapability : IStringEnum
 {
     public static readonly LocationCapability CreditCardProcessing = new(
@@ -58,6 +59,7 @@ public readonly record struct LocationCapability : IStringEnum
     /// <summary>
     /// Constant strings for enum values
     /// </summary>
+    [Serializable]
     public static class Values
     {
         public const string CreditCardProcessing = "CREDIT_CARD_PROCESSING";

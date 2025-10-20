@@ -17,8 +17,13 @@ namespace Square;
 /// After the request is submitted and the object created, a permanent server-generated ID is assigned
 /// to the new object. The permanent ID is unique across the Square catalog.
 /// </summary>
-public record CatalogIdMapping
+[Serializable]
+public record CatalogIdMapping : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The client-supplied temporary `#`-prefixed ID for a new `CatalogObject`.
     /// </summary>
@@ -31,15 +36,11 @@ public record CatalogIdMapping
     [JsonPropertyName("object_id")]
     public string? ObjectId { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

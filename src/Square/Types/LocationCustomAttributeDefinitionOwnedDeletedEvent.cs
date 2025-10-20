@@ -9,8 +9,13 @@ namespace Square;
 /// created by the subscribing application is deleted. A custom attribute definition can only be deleted by
 /// the application that created it.
 /// </summary>
-public record LocationCustomAttributeDefinitionOwnedDeletedEvent
+[Serializable]
+public record LocationCustomAttributeDefinitionOwnedDeletedEvent : IJsonOnDeserialized
 {
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
     /// <summary>
     /// The ID of the seller associated with the event that triggered the event notification.
     /// </summary>
@@ -42,15 +47,11 @@ public record LocationCustomAttributeDefinitionOwnedDeletedEvent
     [JsonPropertyName("data")]
     public CustomAttributeDefinitionEventData? Data { get; set; }
 
-    /// <summary>
-    /// Additional properties received from the response, if any.
-    /// </summary>
-    /// <remarks>
-    /// [EXPERIMENTAL] This API is experimental and may change in future releases.
-    /// </remarks>
-    [JsonExtensionData]
-    public IDictionary<string, JsonElement> AdditionalProperties { get; internal set; } =
-        new Dictionary<string, JsonElement>();
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
 
     /// <inheritdoc />
     public override string ToString()

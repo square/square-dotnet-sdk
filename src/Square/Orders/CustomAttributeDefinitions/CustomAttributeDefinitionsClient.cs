@@ -1,6 +1,7 @@
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -90,7 +91,7 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributeDefinitions.ListAsync(
-    ///     new ListCustomAttributeDefinitionsRequest
+    ///     new Square.Orders.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
     ///     {
     ///         VisibilityFilter = VisibilityFilter.All,
     ///         Cursor = "cursor",
@@ -145,7 +146,7 @@ public partial class CustomAttributeDefinitionsClient
     ///         CustomAttributeDefinition = new CustomAttributeDefinition
     ///         {
     ///             Key = "cover-count",
-    ///             Schema = new Dictionary&lt;string, object&gt;()
+    ///             Schema = new Dictionary&lt;string, object?&gt;()
     ///             {
     ///                 {
     ///                     "$ref",
@@ -214,7 +215,11 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributeDefinitions.GetAsync(
-    ///     new GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    ///     new Square.Orders.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///         Version = 1,
+    ///     }
     /// );
     /// </code></example>
     public async Task<RetrieveOrderCustomAttributeDefinitionResponse> GetAsync(
@@ -344,7 +349,10 @@ public partial class CustomAttributeDefinitionsClient
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributeDefinitions.DeleteAsync(
-    ///     new DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    ///     new Square.Orders.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    ///     {
+    ///         Key = "key",
+    ///     }
     /// );
     /// </code></example>
     public async Task<DeleteOrderCustomAttributeDefinitionResponse> DeleteAsync(

@@ -4,6 +4,7 @@ using Square.Core;
 
 namespace Square.Customers;
 
+[Serializable]
 public record BulkUpdateCustomersRequest
 {
     /// <summary>
