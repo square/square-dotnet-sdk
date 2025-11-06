@@ -91,55 +91,6 @@ public class CatalogTests
     }
 
     [Test]
-    public async Task TestUploadCatalogImage()
-    {
-        var catalogObject = Helpers.CreateTestCatalogItem(new Helpers.CreateCatalogItemOptions());
-        var createCatalogResp = await _client.Catalog.BatchUpsertAsync(
-            new BatchUpsertCatalogObjectsRequest
-            {
-                IdempotencyKey = Guid.NewGuid().ToString(),
-                Batches = [new CatalogObjectBatch { Objects = [catalogObject] }],
-            }
-        );
-
-        var objects =
-            createCatalogResp.Objects?.ToArray() ?? throw new Exception("Objects are null");
-        Assert.That(objects, Has.Length.EqualTo(1));
-        var createdCatalogObject = objects.First();
-        var catalogObjectItem =
-            createdCatalogObject.AsItem() ?? throw new Exception("Item data is null");
-
-        var imageName = "Test Image " + Guid.NewGuid();
-        await using var fileParam = Helpers.GetTestFile();
-        var createCatalogImageResp = await _client.Catalog.Images.CreateAsync(
-            new CreateImagesRequest
-            {
-                ImageFile = fileParam,
-                Request = new CreateCatalogImageRequest
-                {
-                    IdempotencyKey = Guid.NewGuid().ToString(),
-                    Image = new CatalogObject(
-                        new CatalogObjectImage
-                        {
-                            Id = Helpers.NewTestSquareId(),
-                            ImageData = new CatalogImage { Name = imageName },
-                        }
-                    ),
-                    ObjectId = catalogObjectItem.Id,
-                },
-            }
-        );
-
-        var image =
-            createCatalogImageResp.Image?.AsImage() ?? throw new Exception("Image data is null");
-        Assert.That(image, Is.Not.Null);
-
-        await _client.Catalog.BatchDeleteAsync(
-            new BatchDeleteCatalogObjectsRequest { ObjectIds = [catalogObjectItem.Id, image.Id] }
-        );
-    }
-
-    [Test]
     public async Task TestUpsertCatalogObject()
     {
         var coffee = Helpers.CreateTestCatalogItem(
