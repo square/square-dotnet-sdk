@@ -47,7 +47,6 @@ jobs:
 
       - name: Run Tests
         run: dotnet test src/Square.sln --no-build --no-restore -c Release /p:ContinuousIntegrationBuild=true
-        continue-on-error: true
         env:
           TEST_SQUARE_TOKEN: ${{ secrets.TEST_SQUARE_TOKEN }}
 
