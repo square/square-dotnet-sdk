@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -143,8 +140,8 @@ public partial class ActivitiesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.GiftCardActivities?.ToList(),
+                response => response.Cursor,
+                response => response.GiftCardActivities?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Test.Unit.MockServer;
@@ -17,7 +16,7 @@ public class ListTest : BaseMockServerTest
                 {
                   "key": "has_seen_tutorial",
                   "schema": {
-                    "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Boolean"
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Boolean"
                   },
                   "name": "NAME",
                   "description": "Whether the merchant has seen the tutorial screen for using the app.",
@@ -29,7 +28,7 @@ public class ListTest : BaseMockServerTest
                 {
                   "key": "alternative_seller_name",
                   "schema": {
-                    "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
                   },
                   "name": "Alternative Merchant Name",
                   "description": "This is the other name this merchant goes by.",

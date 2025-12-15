@@ -28,6 +28,9 @@ public record CatalogObjectCategory : IJsonOnDeserialized
     [JsonPropertyName("ordinal")]
     public long? Ordinal { get; set; }
 
+    [JsonPropertyName("type")]
+    public string? Type { get; set; }
+
     /// <summary>
     /// Structured data for a `CatalogCategory`, set for CatalogObjects of type `CATEGORY`.
     /// </summary>

@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square.BankAccounts;
 using Square.Test.Unit.MockServer;

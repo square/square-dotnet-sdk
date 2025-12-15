@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square.Bookings;
 using Square.Test.Unit.MockServer;
@@ -39,6 +38,7 @@ public class ListTest : BaseMockServerTest
                   "source": "FIRST_PARTY_MERCHANT"
                 }
               ],
+              "cursor": "cursor",
               "errors": [
                 {
                   "category": "API_ERROR",

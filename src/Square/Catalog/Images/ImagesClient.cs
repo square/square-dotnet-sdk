@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -24,6 +21,9 @@ public partial class ImagesClient
     /// This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
     /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
     /// </summary>
+    /// <example><code>
+    /// await client.Catalog.Images.CreateAsync(new CreateImagesRequest());
+    /// </code></example>
     public async Task<CreateCatalogImageResponse> CreateAsync(
         CreateImagesRequest request,
         RequestOptions? options = null,
@@ -75,6 +75,9 @@ public partial class ImagesClient
     /// This `UpdateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
     /// JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
     /// </summary>
+    /// <example><code>
+    /// await client.Catalog.Images.UpdateAsync(new UpdateImagesRequest { ImageId = "image_id" });
+    /// </code></example>
     public async Task<UpdateCatalogImageResponse> UpdateAsync(
         UpdateImagesRequest request,
         RequestOptions? options = null,

@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -29,7 +28,7 @@ public class GetTest : BaseMockServerTest
                   "type": "TERMINAL",
                   "manufacturer": "Square",
                   "model": "T2",
-                  "name": "0995-01-01T00:00:00.000Z",
+                  "name": "Square Terminal 995",
                   "manufacturers_id": "995CS397A6475287",
                   "updated_at": "2023-09-29T13:12:22.365Z",
                   "version": "5.41.0085",

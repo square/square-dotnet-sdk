@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -124,8 +121,8 @@ public partial class MerchantsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Merchant?.ToList(),
+                response => response.Cursor,
+                response => response.Merchant?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -112,8 +109,8 @@ public partial class EmployeeWagesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.EmployeeWages?.ToList(),
+                response => response.Cursor,
+                response => response.EmployeeWages?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

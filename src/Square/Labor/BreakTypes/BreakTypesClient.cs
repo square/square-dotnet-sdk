@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -112,8 +109,8 @@ public partial class BreakTypesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.BreakTypes?.ToList(),
+                response => response.Cursor,
+                response => response.BreakTypes?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.Devices.Codes;
@@ -123,8 +120,8 @@ public partial class DevicesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Devices?.ToList(),
+                response => response.Cursor,
+                response => response.Devices?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

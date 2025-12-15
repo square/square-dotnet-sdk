@@ -1,0 +1,18 @@
+{
+  "cliVersion": "3.20.0",
+  "generatorName": "fernapi/fern-csharp-sdk",
+  "generatorVersion": "2.11.4",
+  "generatorConfig": {
+    "namespace": "Square",
+    "package-id": "Square",
+    "base-api-exception-class-name": "SquareApiException",
+    "base-exception-class-name": "SquareException",
+    "client-class-name": "SquareClient",
+    "environment-class-name": "SquareEnvironment",
+    "experimental-enable-forward-compatible-enums": true,
+    "explicit-namespaces": true,
+    "generate-mock-server-tests": true,
+    "inline-path-parameters": true,
+    "use-discriminated-unions": true
+  }
+}

@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square.Labor.EmployeeWages;
 using Square.Test.Unit.MockServer;

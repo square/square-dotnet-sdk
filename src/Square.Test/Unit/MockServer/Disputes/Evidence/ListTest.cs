@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square.Disputes.Evidence;
 using Square.Test.Unit.MockServer;

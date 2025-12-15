@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -113,8 +110,8 @@ public partial class InvoicesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Invoices?.ToList(),
+                response => response.Cursor,
+                response => response.Invoices?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -495,6 +492,11 @@ public partial class InvoicesClient
     ///
     /// __NOTE:__ When testing in the Sandbox environment, the total file size is limited to 1 KB.
     /// </summary>
+    /// <example><code>
+    /// await client.Invoices.CreateInvoiceAttachmentAsync(
+    ///     new CreateInvoiceAttachmentRequest { InvoiceId = "invoice_id" }
+    /// );
+    /// </code></example>
     public async Task<CreateInvoiceAttachmentResponse> CreateInvoiceAttachmentAsync(
         CreateInvoiceAttachmentRequest request,
         RequestOptions? options = null,

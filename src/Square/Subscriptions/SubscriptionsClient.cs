@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -606,8 +603,8 @@ public partial class SubscriptionsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.SubscriptionEvents?.ToList(),
+                response => response.Cursor,
+                response => response.SubscriptionEvents?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

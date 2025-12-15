@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -111,8 +108,8 @@ public partial class EmployeesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Employees?.ToList(),
+                response => response.Cursor,
+                response => response.Employees?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

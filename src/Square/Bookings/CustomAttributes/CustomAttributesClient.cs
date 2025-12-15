@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
@@ -262,8 +259,8 @@ public partial class CustomAttributesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.CustomAttributes?.ToList(),
+                response => response.Cursor,
+                response => response.CustomAttributes?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
