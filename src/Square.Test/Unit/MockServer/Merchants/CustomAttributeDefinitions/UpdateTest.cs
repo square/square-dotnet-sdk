@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -27,7 +26,7 @@ public class UpdateTest : BaseMockServerTest
               "custom_attribute_definition": {
                 "key": "alternative_seller_name",
                 "schema": {
-                  "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
                 },
                 "name": "Alternative Merchant Name",
                 "description": "Update the description as desired.",

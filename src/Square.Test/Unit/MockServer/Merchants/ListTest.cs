@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square.Merchants;
 using Square.Test.Unit.MockServer;

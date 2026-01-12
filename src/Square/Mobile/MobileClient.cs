@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Mobile;
 
-public partial class MobileClient
+public partial class MobileClient : IMobileClient
 {
     private RawClient _client;
 

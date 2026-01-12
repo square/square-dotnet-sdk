@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Payouts;
 
-public partial class PayoutsClient
+public partial class PayoutsClient : IPayoutsClient
 {
     private RawClient _client;
 
@@ -198,8 +195,8 @@ public partial class PayoutsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Payouts?.ToList(),
+                response => response.Cursor,
+                response => response.Payouts?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -297,8 +294,8 @@ public partial class PayoutsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.PayoutEntries?.ToList(),
+                response => response.Cursor,
+                response => response.PayoutEntries?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

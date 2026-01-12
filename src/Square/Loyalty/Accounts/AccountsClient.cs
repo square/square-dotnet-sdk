@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Loyalty.Accounts;
 
-public partial class AccountsClient
+public partial class AccountsClient : IAccountsClient
 {
     private RawClient _client;
 

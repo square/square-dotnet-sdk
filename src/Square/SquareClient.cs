@@ -35,7 +35,7 @@ using Square.Webhooks;
 
 namespace Square;
 
-public partial class SquareClient
+public partial class SquareClient : ISquareClient
 {
     private readonly RawClient _client;
 
@@ -53,7 +53,7 @@ public partial class SquareClient
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Square" },
                 { "X-Fern-SDK-Version", Version.Current },
-                { "User-Agent", "Square/42.2.1" },
+                { "User-Agent", "Square/42.2.2" },
             }
         );
         clientOptions ??= new ClientOptions();

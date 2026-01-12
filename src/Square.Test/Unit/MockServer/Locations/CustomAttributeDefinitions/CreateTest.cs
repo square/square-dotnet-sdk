@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -18,7 +17,7 @@ public class CreateTest : BaseMockServerTest
               "custom_attribute_definition": {
                 "key": "bestseller",
                 "schema": {
-                  "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
                 },
                 "name": "Bestseller",
                 "description": "Bestselling item at location",
@@ -32,7 +31,7 @@ public class CreateTest : BaseMockServerTest
               "custom_attribute_definition": {
                 "key": "bestseller",
                 "schema": {
-                  "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
                 },
                 "name": "Bestseller",
                 "description": "Bestselling item at location",

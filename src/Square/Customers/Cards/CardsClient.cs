@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Customers.Cards;
 
-public partial class CardsClient
+public partial class CardsClient : ICardsClient
 {
     private RawClient _client;
 

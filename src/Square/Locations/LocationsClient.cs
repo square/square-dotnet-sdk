@@ -1,14 +1,11 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.Locations.Transactions;
 
 namespace Square.Locations;
 
-public partial class LocationsClient
+public partial class LocationsClient : ILocationsClient
 {
     private RawClient _client;
 

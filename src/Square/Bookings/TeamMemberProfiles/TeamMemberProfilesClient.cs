@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Bookings.TeamMemberProfiles;
 
-public partial class TeamMemberProfilesClient
+public partial class TeamMemberProfilesClient : ITeamMemberProfilesClient
 {
     private RawClient _client;
 
@@ -117,8 +114,8 @@ public partial class TeamMemberProfilesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.TeamMemberBookingProfiles?.ToList(),
+                response => response.Cursor,
+                response => response.TeamMemberBookingProfiles?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

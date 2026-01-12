@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Terminal.Checkouts;
 
-public partial class CheckoutsClient
+public partial class CheckoutsClient : ICheckoutsClient
 {
     private RawClient _client;
 

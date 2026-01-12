@@ -34,7 +34,7 @@ public record ScheduledShiftDetails : IJsonOnDeserialized
     public string? JobId { get; set; }
 
     /// <summary>
-    /// The start time of the shift, in RFC 3339 format in the time zone &plus;
+    /// The start time of the shift, in RFC 3339 format in the time zone +
     /// offset of the shift location specified in `location_id`. Precision up to the minute
     /// is respected; seconds are truncated.
     /// </summary>
@@ -42,7 +42,7 @@ public record ScheduledShiftDetails : IJsonOnDeserialized
     public string? StartAt { get; set; }
 
     /// <summary>
-    /// The end time for the shift, in RFC 3339 format in the time zone &plus;
+    /// The end time for the shift, in RFC 3339 format in the time zone +
     /// offset of the shift location specified in `location_id`. Precision up to the minute
     /// is respected; seconds are truncated.
     /// </summary>

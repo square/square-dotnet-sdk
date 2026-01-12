@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.Loyalty.Accounts;
@@ -10,7 +7,7 @@ using Square.Loyalty.Rewards;
 
 namespace Square.Loyalty;
 
-public partial class LoyaltyClient
+public partial class LoyaltyClient : ILoyaltyClient
 {
     private RawClient _client;
 

@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -43,8 +42,8 @@ public class UpdateTest : BaseMockServerTest
                 "notification_url": "https://example-webhook-url.com",
                 "api_version": "2021-12-15",
                 "signature_key": "signature_key",
-                "created_at": "2022-01-10T23:29:48.000Z",
-                "updated_at": "2022-01-10T23:45:51.000Z"
+                "created_at": "2022-01-10 23:29:48 +0000 UTC",
+                "updated_at": "2022-01-10 23:45:51 +0000 UTC"
               }
             }
             """;

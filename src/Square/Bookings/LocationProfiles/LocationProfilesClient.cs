@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Bookings.LocationProfiles;
 
-public partial class LocationProfilesClient
+public partial class LocationProfilesClient : ILocationProfilesClient
 {
     private RawClient _client;
 
@@ -103,8 +100,8 @@ public partial class LocationProfilesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.LocationBookingProfiles?.ToList(),
+                response => response.Cursor,
+                response => response.LocationBookingProfiles?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

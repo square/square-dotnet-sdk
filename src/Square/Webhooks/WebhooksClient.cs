@@ -3,7 +3,7 @@ using Square.Webhooks.EventTypes;
 
 namespace Square.Webhooks;
 
-public partial class WebhooksClient
+public partial class WebhooksClient : IWebhooksClient
 {
     private RawClient _client;
 

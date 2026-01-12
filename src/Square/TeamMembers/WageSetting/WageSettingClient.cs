@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.TeamMembers.WageSetting;
 
-public partial class WageSettingClient
+public partial class WageSettingClient : IWageSettingClient
 {
     private RawClient _client;
 

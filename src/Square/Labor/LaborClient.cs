@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.Labor.BreakTypes;
@@ -11,7 +8,7 @@ using Square.Labor.WorkweekConfigs;
 
 namespace Square.Labor;
 
-public partial class LaborClient
+public partial class LaborClient : ILaborClient
 {
     private RawClient _client;
 

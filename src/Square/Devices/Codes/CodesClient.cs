@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Devices.Codes;
 
-public partial class CodesClient
+public partial class CodesClient : ICodesClient
 {
     private RawClient _client;
 
@@ -117,8 +114,8 @@ public partial class CodesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.DeviceCodes?.ToList(),
+                response => response.Cursor,
+                response => response.DeviceCodes?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

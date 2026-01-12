@@ -5,8 +5,7 @@ using Square.Core;
 namespace Square;
 
 /// <summary>
-/// Represents the details of a webhook subscription, including notification URL,
-/// event types, and signature key.
+/// Represents the result of testing a webhook subscription. Note: The actual API returns these fields at the root level of TestWebhookSubscriptionResponse, not nested under this object.
 /// </summary>
 [Serializable]
 public record SubscriptionTestResult : IJsonOnDeserialized
@@ -23,16 +22,16 @@ public record SubscriptionTestResult : IJsonOnDeserialized
     public string? Id { get; set; }
 
     /// <summary>
-    /// The status code returned by the subscription notification URL.
+    /// The HTTP status code returned by the notification URL.
     /// </summary>
     [JsonPropertyName("status_code")]
     public int? StatusCode { get; set; }
 
     /// <summary>
-    /// An object containing the payload of the test event. For example, a `payment.created` event.
+    /// The payload that was sent in the test notification.
     /// </summary>
     [JsonPropertyName("payload")]
-    public string? Payload { get; set; }
+    public Dictionary<string, object?>? Payload { get; set; }
 
     /// <summary>
     /// The timestamp of when the subscription was created, in RFC 3339 format.
@@ -49,6 +48,18 @@ public record SubscriptionTestResult : IJsonOnDeserialized
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("updated_at")]
     public string? UpdatedAt { get; set; }
+
+    /// <summary>
+    /// The URL that was used for the webhook notification test.
+    /// </summary>
+    [JsonPropertyName("notification_url")]
+    public string? NotificationUrl { get; set; }
+
+    /// <summary>
+    /// Whether the notification passed any configured filters.
+    /// </summary>
+    [JsonPropertyName("passes_filter")]
+    public bool? PassesFilter { get; set; }
 
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();

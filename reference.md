@@ -1,6 +1,6 @@
 # Reference
 ## Mobile
-<details><summary><code>client.Mobile.<a href="/src/Square/Mobile/MobileClient.cs">AuthorizationCodeAsync</a>(Mobile.CreateMobileAuthorizationCodeRequest { ... }) -> CreateMobileAuthorizationCodeResponse</code></summary>
+<details><summary><code>client.Mobile.<a href="/src/Square/Mobile/MobileClient.cs">AuthorizationCodeAsync</a>(CreateMobileAuthorizationCodeRequest { ... }) -> CreateMobileAuthorizationCodeResponse</code></summary>
 <dl>
 <dd>
 
@@ -58,7 +58,7 @@ await client.Mobile.AuthorizationCodeAsync(
 <dl>
 <dd>
 
-**request:** `Mobile.CreateMobileAuthorizationCodeRequest` 
+**request:** `CreateMobileAuthorizationCodeRequest` 
     
 </dd>
 </dl>
@@ -71,7 +71,7 @@ await client.Mobile.AuthorizationCodeAsync(
 </details>
 
 ## OAuth
-<details><summary><code>client.OAuth.<a href="/src/Square/OAuth/OAuthClient.cs">RevokeTokenAsync</a>(OAuth.RevokeTokenRequest { ... }) -> RevokeTokenResponse</code></summary>
+<details><summary><code>client.OAuth.<a href="/src/Square/OAuth/OAuthClient.cs">RevokeTokenAsync</a>(RevokeTokenRequest { ... }) -> RevokeTokenResponse</code></summary>
 <dl>
 <dd>
 
@@ -128,7 +128,7 @@ await client.OAuth.RevokeTokenAsync(
 <dl>
 <dd>
 
-**request:** `OAuth.RevokeTokenRequest` 
+**request:** `RevokeTokenRequest` 
     
 </dd>
 </dl>
@@ -140,7 +140,7 @@ await client.OAuth.RevokeTokenAsync(
 </dl>
 </details>
 
-<details><summary><code>client.OAuth.<a href="/src/Square/OAuth/OAuthClient.cs">ObtainTokenAsync</a>(OAuth.ObtainTokenRequest { ... }) -> ObtainTokenResponse</code></summary>
+<details><summary><code>client.OAuth.<a href="/src/Square/OAuth/OAuthClient.cs">ObtainTokenAsync</a>(ObtainTokenRequest { ... }) -> ObtainTokenResponse</code></summary>
 <dl>
 <dd>
 
@@ -210,7 +210,7 @@ await client.OAuth.ObtainTokenAsync(
 <dl>
 <dd>
 
-**request:** `OAuth.ObtainTokenRequest` 
+**request:** `ObtainTokenRequest` 
     
 </dd>
 </dl>
@@ -300,7 +300,7 @@ await client.OAuth.AuthorizeAsync();
 </details>
 
 ## V1Transactions
-<details><summary><code>client.V1Transactions.<a href="/src/Square/V1Transactions/V1TransactionsClient.cs">V1ListOrdersAsync</a>(V1Transactions.V1ListOrdersRequest { ... }) -> IEnumerable<V1Order></code></summary>
+<details><summary><code>client.V1Transactions.<a href="/src/Square/V1Transactions/V1TransactionsClient.cs">V1ListOrdersAsync</a>(V1ListOrdersRequest { ... }) -> IEnumerable<V1Order></code></summary>
 <dl>
 <dd>
 
@@ -350,7 +350,7 @@ await client.V1Transactions.V1ListOrdersAsync(
 <dl>
 <dd>
 
-**request:** `V1Transactions.V1ListOrdersRequest` 
+**request:** `V1ListOrdersRequest` 
     
 </dd>
 </dl>
@@ -362,7 +362,7 @@ await client.V1Transactions.V1ListOrdersAsync(
 </dl>
 </details>
 
-<details><summary><code>client.V1Transactions.<a href="/src/Square/V1Transactions/V1TransactionsClient.cs">V1RetrieveOrderAsync</a>(V1Transactions.V1RetrieveOrderRequest { ... }) -> V1Order</code></summary>
+<details><summary><code>client.V1Transactions.<a href="/src/Square/V1Transactions/V1TransactionsClient.cs">V1RetrieveOrderAsync</a>(V1RetrieveOrderRequest { ... }) -> V1Order</code></summary>
 <dl>
 <dd>
 
@@ -406,7 +406,7 @@ await client.V1Transactions.V1RetrieveOrderAsync(
 <dl>
 <dd>
 
-**request:** `V1Transactions.V1RetrieveOrderRequest` 
+**request:** `V1RetrieveOrderRequest` 
     
 </dd>
 </dl>
@@ -418,7 +418,7 @@ await client.V1Transactions.V1RetrieveOrderAsync(
 </dl>
 </details>
 
-<details><summary><code>client.V1Transactions.<a href="/src/Square/V1Transactions/V1TransactionsClient.cs">V1UpdateOrderAsync</a>(V1Transactions.V1UpdateOrderRequest { ... }) -> V1Order</code></summary>
+<details><summary><code>client.V1Transactions.<a href="/src/Square/V1Transactions/V1TransactionsClient.cs">V1UpdateOrderAsync</a>(V1UpdateOrderRequest { ... }) -> V1Order</code></summary>
 <dl>
 <dd>
 
@@ -467,7 +467,7 @@ await client.V1Transactions.V1UpdateOrderAsync(
 <dl>
 <dd>
 
-**request:** `V1Transactions.V1UpdateOrderRequest` 
+**request:** `V1UpdateOrderRequest` 
     
 </dd>
 </dl>
@@ -480,7 +480,7 @@ await client.V1Transactions.V1UpdateOrderAsync(
 </details>
 
 ## ApplePay
-<details><summary><code>client.ApplePay.<a href="/src/Square/ApplePay/ApplePayClient.cs">RegisterDomainAsync</a>(ApplePay.RegisterDomainRequest { ... }) -> RegisterDomainResponse</code></summary>
+<details><summary><code>client.ApplePay.<a href="/src/Square/ApplePay/ApplePayClient.cs">RegisterDomainAsync</a>(RegisterDomainRequest { ... }) -> RegisterDomainResponse</code></summary>
 <dl>
 <dd>
 
@@ -535,7 +535,7 @@ await client.ApplePay.RegisterDomainAsync(new RegisterDomainRequest { DomainName
 <dl>
 <dd>
 
-**request:** `ApplePay.RegisterDomainRequest` 
+**request:** `RegisterDomainRequest` 
     
 </dd>
 </dl>
@@ -548,7 +548,7 @@ await client.ApplePay.RegisterDomainAsync(new RegisterDomainRequest { DomainName
 </details>
 
 ## BankAccounts
-<details><summary><code>client.BankAccounts.<a href="/src/Square/BankAccounts/BankAccountsClient.cs">ListAsync</a>(BankAccounts.ListBankAccountsRequest { ... }) -> Core.Pager<BankAccount></code></summary>
+<details><summary><code>client.BankAccounts.<a href="/src/Square/BankAccounts/BankAccountsClient.cs">ListAsync</a>(ListBankAccountsRequest { ... }) -> Pager<BankAccount></code></summary>
 <dl>
 <dd>
 
@@ -597,7 +597,7 @@ await client.BankAccounts.ListAsync(
 <dl>
 <dd>
 
-**request:** `BankAccounts.ListBankAccountsRequest` 
+**request:** `ListBankAccountsRequest` 
     
 </dd>
 </dl>
@@ -609,7 +609,7 @@ await client.BankAccounts.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.BankAccounts.<a href="/src/Square/BankAccounts/BankAccountsClient.cs">GetByV1IdAsync</a>(BankAccounts.GetByV1IdBankAccountsRequest { ... }) -> GetBankAccountByV1IdResponse</code></summary>
+<details><summary><code>client.BankAccounts.<a href="/src/Square/BankAccounts/BankAccountsClient.cs">GetByV1IdAsync</a>(GetByV1IdBankAccountsRequest { ... }) -> GetBankAccountByV1IdResponse</code></summary>
 <dl>
 <dd>
 
@@ -653,7 +653,7 @@ await client.BankAccounts.GetByV1IdAsync(
 <dl>
 <dd>
 
-**request:** `BankAccounts.GetByV1IdBankAccountsRequest` 
+**request:** `GetByV1IdBankAccountsRequest` 
     
 </dd>
 </dl>
@@ -665,7 +665,7 @@ await client.BankAccounts.GetByV1IdAsync(
 </dl>
 </details>
 
-<details><summary><code>client.BankAccounts.<a href="/src/Square/BankAccounts/BankAccountsClient.cs">GetAsync</a>(BankAccounts.GetBankAccountsRequest { ... }) -> GetBankAccountResponse</code></summary>
+<details><summary><code>client.BankAccounts.<a href="/src/Square/BankAccounts/BankAccountsClient.cs">GetAsync</a>(GetBankAccountsRequest { ... }) -> GetBankAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -710,7 +710,7 @@ await client.BankAccounts.GetAsync(
 <dl>
 <dd>
 
-**request:** `BankAccounts.GetBankAccountsRequest` 
+**request:** `GetBankAccountsRequest` 
     
 </dd>
 </dl>
@@ -723,7 +723,7 @@ await client.BankAccounts.GetAsync(
 </details>
 
 ## Bookings
-<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">ListAsync</a>(Square.Bookings.ListBookingsRequest { ... }) -> Core.Pager<Booking></code></summary>
+<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">ListAsync</a>(ListBookingsRequest { ... }) -> Pager<Booking></code></summary>
 <dl>
 <dd>
 
@@ -779,7 +779,7 @@ await client.Bookings.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.ListBookingsRequest` 
+**request:** `ListBookingsRequest` 
     
 </dd>
 </dl>
@@ -791,7 +791,7 @@ await client.Bookings.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">CreateAsync</a>(Square.Bookings.CreateBookingRequest { ... }) -> CreateBookingResponse</code></summary>
+<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">CreateAsync</a>(CreateBookingRequest { ... }) -> CreateBookingResponse</code></summary>
 <dl>
 <dd>
 
@@ -846,7 +846,7 @@ await client.Bookings.CreateAsync(new CreateBookingRequest { Booking = new Booki
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CreateBookingRequest` 
+**request:** `CreateBookingRequest` 
     
 </dd>
 </dl>
@@ -858,7 +858,7 @@ await client.Bookings.CreateAsync(new CreateBookingRequest { Booking = new Booki
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">SearchAvailabilityAsync</a>(Square.Bookings.SearchAvailabilityRequest { ... }) -> SearchAvailabilityResponse</code></summary>
+<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">SearchAvailabilityAsync</a>(SearchAvailabilityRequest { ... }) -> SearchAvailabilityResponse</code></summary>
 <dl>
 <dd>
 
@@ -911,7 +911,7 @@ await client.Bookings.SearchAvailabilityAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.SearchAvailabilityRequest` 
+**request:** `SearchAvailabilityRequest` 
     
 </dd>
 </dl>
@@ -923,7 +923,7 @@ await client.Bookings.SearchAvailabilityAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">BulkRetrieveBookingsAsync</a>(Square.Bookings.BulkRetrieveBookingsRequest { ... }) -> BulkRetrieveBookingsResponse</code></summary>
+<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">BulkRetrieveBookingsAsync</a>(BulkRetrieveBookingsRequest { ... }) -> BulkRetrieveBookingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -970,7 +970,7 @@ await client.Bookings.BulkRetrieveBookingsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.BulkRetrieveBookingsRequest` 
+**request:** `BulkRetrieveBookingsRequest` 
     
 </dd>
 </dl>
@@ -1021,7 +1021,7 @@ await client.Bookings.GetBusinessProfileAsync();
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">RetrieveLocationBookingProfileAsync</a>(Square.Bookings.RetrieveLocationBookingProfileRequest { ... }) -> RetrieveLocationBookingProfileResponse</code></summary>
+<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">RetrieveLocationBookingProfileAsync</a>(RetrieveLocationBookingProfileRequest { ... }) -> RetrieveLocationBookingProfileResponse</code></summary>
 <dl>
 <dd>
 
@@ -1065,7 +1065,7 @@ await client.Bookings.RetrieveLocationBookingProfileAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.RetrieveLocationBookingProfileRequest` 
+**request:** `RetrieveLocationBookingProfileRequest` 
     
 </dd>
 </dl>
@@ -1077,7 +1077,7 @@ await client.Bookings.RetrieveLocationBookingProfileAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">BulkRetrieveTeamMemberBookingProfilesAsync</a>(Square.Bookings.BulkRetrieveTeamMemberBookingProfilesRequest { ... }) -> BulkRetrieveTeamMemberBookingProfilesResponse</code></summary>
+<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">BulkRetrieveTeamMemberBookingProfilesAsync</a>(BulkRetrieveTeamMemberBookingProfilesRequest { ... }) -> BulkRetrieveTeamMemberBookingProfilesResponse</code></summary>
 <dl>
 <dd>
 
@@ -1124,7 +1124,7 @@ await client.Bookings.BulkRetrieveTeamMemberBookingProfilesAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.BulkRetrieveTeamMemberBookingProfilesRequest` 
+**request:** `BulkRetrieveTeamMemberBookingProfilesRequest` 
     
 </dd>
 </dl>
@@ -1136,7 +1136,7 @@ await client.Bookings.BulkRetrieveTeamMemberBookingProfilesAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">GetAsync</a>(Square.Bookings.GetBookingsRequest { ... }) -> GetBookingResponse</code></summary>
+<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">GetAsync</a>(GetBookingsRequest { ... }) -> GetBookingResponse</code></summary>
 <dl>
 <dd>
 
@@ -1181,7 +1181,7 @@ await client.Bookings.GetAsync(new GetBookingsRequest { BookingId = "booking_id"
 <dl>
 <dd>
 
-**request:** `Square.Bookings.GetBookingsRequest` 
+**request:** `GetBookingsRequest` 
     
 </dd>
 </dl>
@@ -1193,7 +1193,7 @@ await client.Bookings.GetAsync(new GetBookingsRequest { BookingId = "booking_id"
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">UpdateAsync</a>(Square.Bookings.UpdateBookingRequest { ... }) -> UpdateBookingResponse</code></summary>
+<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">UpdateAsync</a>(UpdateBookingRequest { ... }) -> UpdateBookingResponse</code></summary>
 <dl>
 <dd>
 
@@ -1243,7 +1243,7 @@ await client.Bookings.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.UpdateBookingRequest` 
+**request:** `UpdateBookingRequest` 
     
 </dd>
 </dl>
@@ -1255,7 +1255,7 @@ await client.Bookings.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">CancelAsync</a>(Square.Bookings.CancelBookingRequest { ... }) -> CancelBookingResponse</code></summary>
+<details><summary><code>client.Bookings.<a href="/src/Square/Bookings/BookingsClient.cs">CancelAsync</a>(CancelBookingRequest { ... }) -> CancelBookingResponse</code></summary>
 <dl>
 <dd>
 
@@ -1303,7 +1303,7 @@ await client.Bookings.CancelAsync(new CancelBookingRequest { BookingId = "bookin
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CancelBookingRequest` 
+**request:** `CancelBookingRequest` 
     
 </dd>
 </dl>
@@ -1316,7 +1316,7 @@ await client.Bookings.CancelAsync(new CancelBookingRequest { BookingId = "bookin
 </details>
 
 ## Cards
-<details><summary><code>client.Cards.<a href="/src/Square/Cards/CardsClient.cs">ListAsync</a>(Cards.ListCardsRequest { ... }) -> Core.Pager<Card></code></summary>
+<details><summary><code>client.Cards.<a href="/src/Square/Cards/CardsClient.cs">ListAsync</a>(ListCardsRequest { ... }) -> Pager<Card></code></summary>
 <dl>
 <dd>
 
@@ -1368,7 +1368,7 @@ await client.Cards.ListAsync(
 <dl>
 <dd>
 
-**request:** `Cards.ListCardsRequest` 
+**request:** `ListCardsRequest` 
     
 </dd>
 </dl>
@@ -1380,7 +1380,7 @@ await client.Cards.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Cards.<a href="/src/Square/Cards/CardsClient.cs">CreateAsync</a>(Cards.CreateCardRequest { ... }) -> CreateCardResponse</code></summary>
+<details><summary><code>client.Cards.<a href="/src/Square/Cards/CardsClient.cs">CreateAsync</a>(CreateCardRequest { ... }) -> CreateCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -1443,7 +1443,7 @@ await client.Cards.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Cards.CreateCardRequest` 
+**request:** `CreateCardRequest` 
     
 </dd>
 </dl>
@@ -1455,7 +1455,7 @@ await client.Cards.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Cards.<a href="/src/Square/Cards/CardsClient.cs">GetAsync</a>(Cards.GetCardsRequest { ... }) -> GetCardResponse</code></summary>
+<details><summary><code>client.Cards.<a href="/src/Square/Cards/CardsClient.cs">GetAsync</a>(GetCardsRequest { ... }) -> GetCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -1497,7 +1497,7 @@ await client.Cards.GetAsync(new GetCardsRequest { CardId = "card_id" });
 <dl>
 <dd>
 
-**request:** `Cards.GetCardsRequest` 
+**request:** `GetCardsRequest` 
     
 </dd>
 </dl>
@@ -1509,7 +1509,7 @@ await client.Cards.GetAsync(new GetCardsRequest { CardId = "card_id" });
 </dl>
 </details>
 
-<details><summary><code>client.Cards.<a href="/src/Square/Cards/CardsClient.cs">DisableAsync</a>(Cards.DisableCardsRequest { ... }) -> DisableCardResponse</code></summary>
+<details><summary><code>client.Cards.<a href="/src/Square/Cards/CardsClient.cs">DisableAsync</a>(DisableCardsRequest { ... }) -> DisableCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -1552,7 +1552,7 @@ await client.Cards.DisableAsync(new DisableCardsRequest { CardId = "card_id" });
 <dl>
 <dd>
 
-**request:** `Cards.DisableCardsRequest` 
+**request:** `DisableCardsRequest` 
     
 </dd>
 </dl>
@@ -1565,7 +1565,7 @@ await client.Cards.DisableAsync(new DisableCardsRequest { CardId = "card_id" });
 </details>
 
 ## Catalog
-<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">BatchDeleteAsync</a>(Square.Catalog.BatchDeleteCatalogObjectsRequest { ... }) -> BatchDeleteCatalogObjectsResponse</code></summary>
+<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">BatchDeleteAsync</a>(BatchDeleteCatalogObjectsRequest { ... }) -> BatchDeleteCatalogObjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1625,7 +1625,7 @@ await client.Catalog.BatchDeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.BatchDeleteCatalogObjectsRequest` 
+**request:** `BatchDeleteCatalogObjectsRequest` 
     
 </dd>
 </dl>
@@ -1637,7 +1637,7 @@ await client.Catalog.BatchDeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">BatchGetAsync</a>(Square.Catalog.BatchGetCatalogObjectsRequest { ... }) -> BatchGetCatalogObjectsResponse</code></summary>
+<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">BatchGetAsync</a>(BatchGetCatalogObjectsRequest { ... }) -> BatchGetCatalogObjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1690,7 +1690,7 @@ await client.Catalog.BatchGetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.BatchGetCatalogObjectsRequest` 
+**request:** `BatchGetCatalogObjectsRequest` 
     
 </dd>
 </dl>
@@ -1702,7 +1702,7 @@ await client.Catalog.BatchGetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">BatchUpsertAsync</a>(Square.Catalog.BatchUpsertCatalogObjectsRequest { ... }) -> BatchUpsertCatalogObjectsResponse</code></summary>
+<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">BatchUpsertAsync</a>(BatchUpsertCatalogObjectsRequest { ... }) -> BatchUpsertCatalogObjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1774,7 +1774,7 @@ await client.Catalog.BatchUpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.BatchUpsertCatalogObjectsRequest` 
+**request:** `BatchUpsertCatalogObjectsRequest` 
     
 </dd>
 </dl>
@@ -1826,7 +1826,7 @@ await client.Catalog.InfoAsync();
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">ListAsync</a>(Square.Catalog.ListCatalogRequest { ... }) -> Core.Pager<CatalogObject></code></summary>
+<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">ListAsync</a>(ListCatalogRequest { ... }) -> Pager<CatalogObject></code></summary>
 <dl>
 <dd>
 
@@ -1882,7 +1882,7 @@ await client.Catalog.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.ListCatalogRequest` 
+**request:** `ListCatalogRequest` 
     
 </dd>
 </dl>
@@ -1894,7 +1894,7 @@ await client.Catalog.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">SearchAsync</a>(Square.Catalog.SearchCatalogObjectsRequest { ... }) -> SearchCatalogObjectsResponse</code></summary>
+<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">SearchAsync</a>(SearchCatalogObjectsRequest { ... }) -> SearchCatalogObjectsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1959,7 +1959,7 @@ await client.Catalog.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.SearchCatalogObjectsRequest` 
+**request:** `SearchCatalogObjectsRequest` 
     
 </dd>
 </dl>
@@ -1971,7 +1971,7 @@ await client.Catalog.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">SearchItemsAsync</a>(Square.Catalog.SearchCatalogItemsRequest { ... }) -> SearchCatalogItemsResponse</code></summary>
+<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">SearchItemsAsync</a>(SearchCatalogItemsRequest { ... }) -> SearchCatalogItemsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2056,7 +2056,7 @@ await client.Catalog.SearchItemsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.SearchCatalogItemsRequest` 
+**request:** `SearchCatalogItemsRequest` 
     
 </dd>
 </dl>
@@ -2068,7 +2068,7 @@ await client.Catalog.SearchItemsAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">UpdateItemModifierListsAsync</a>(Square.Catalog.UpdateItemModifierListsRequest { ... }) -> UpdateItemModifierListsResponse</code></summary>
+<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">UpdateItemModifierListsAsync</a>(UpdateItemModifierListsRequest { ... }) -> UpdateItemModifierListsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2123,7 +2123,7 @@ await client.Catalog.UpdateItemModifierListsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.UpdateItemModifierListsRequest` 
+**request:** `UpdateItemModifierListsRequest` 
     
 </dd>
 </dl>
@@ -2135,7 +2135,7 @@ await client.Catalog.UpdateItemModifierListsAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">UpdateItemTaxesAsync</a>(Square.Catalog.UpdateItemTaxesRequest { ... }) -> UpdateItemTaxesResponse</code></summary>
+<details><summary><code>client.Catalog.<a href="/src/Square/Catalog/CatalogClient.cs">UpdateItemTaxesAsync</a>(UpdateItemTaxesRequest { ... }) -> UpdateItemTaxesResponse</code></summary>
 <dl>
 <dd>
 
@@ -2186,7 +2186,7 @@ await client.Catalog.UpdateItemTaxesAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.UpdateItemTaxesRequest` 
+**request:** `UpdateItemTaxesRequest` 
     
 </dd>
 </dl>
@@ -2199,7 +2199,7 @@ await client.Catalog.UpdateItemTaxesAsync(
 </details>
 
 ## Channels
-<details><summary><code>client.Channels.<a href="/src/Square/Channels/ChannelsClient.cs">ListAsync</a>(Channels.ListChannelsRequest { ... }) -> Core.Pager<Channel></code></summary>
+<details><summary><code>client.Channels.<a href="/src/Square/Channels/ChannelsClient.cs">ListAsync</a>(ListChannelsRequest { ... }) -> Pager<Channel></code></summary>
 <dl>
 <dd>
 
@@ -2250,7 +2250,7 @@ await client.Channels.ListAsync(
 <dl>
 <dd>
 
-**request:** `Channels.ListChannelsRequest` 
+**request:** `ListChannelsRequest` 
     
 </dd>
 </dl>
@@ -2262,7 +2262,7 @@ await client.Channels.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Channels.<a href="/src/Square/Channels/ChannelsClient.cs">BulkRetrieveAsync</a>(Channels.BulkRetrieveChannelsRequest { ... }) -> BulkRetrieveChannelsResponse</code></summary>
+<details><summary><code>client.Channels.<a href="/src/Square/Channels/ChannelsClient.cs">BulkRetrieveAsync</a>(BulkRetrieveChannelsRequest { ... }) -> BulkRetrieveChannelsResponse</code></summary>
 <dl>
 <dd>
 
@@ -2309,7 +2309,7 @@ await client.Channels.BulkRetrieveAsync(
 <dl>
 <dd>
 
-**request:** `Channels.BulkRetrieveChannelsRequest` 
+**request:** `BulkRetrieveChannelsRequest` 
     
 </dd>
 </dl>
@@ -2321,7 +2321,7 @@ await client.Channels.BulkRetrieveAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Channels.<a href="/src/Square/Channels/ChannelsClient.cs">GetAsync</a>(Channels.GetChannelsRequest { ... }) -> RetrieveChannelResponse</code></summary>
+<details><summary><code>client.Channels.<a href="/src/Square/Channels/ChannelsClient.cs">GetAsync</a>(GetChannelsRequest { ... }) -> RetrieveChannelResponse</code></summary>
 <dl>
 <dd>
 
@@ -2363,7 +2363,7 @@ await client.Channels.GetAsync(new GetChannelsRequest { ChannelId = "channel_id"
 <dl>
 <dd>
 
-**request:** `Channels.GetChannelsRequest` 
+**request:** `GetChannelsRequest` 
     
 </dd>
 </dl>
@@ -2376,7 +2376,7 @@ await client.Channels.GetAsync(new GetChannelsRequest { ChannelId = "channel_id"
 </details>
 
 ## Customers
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">ListAsync</a>(Square.Customers.ListCustomersRequest { ... }) -> Core.Pager<Customer></code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">ListAsync</a>(ListCustomersRequest { ... }) -> Pager<Customer></code></summary>
 <dl>
 <dd>
 
@@ -2431,7 +2431,7 @@ await client.Customers.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.ListCustomersRequest` 
+**request:** `ListCustomersRequest` 
     
 </dd>
 </dl>
@@ -2443,7 +2443,7 @@ await client.Customers.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">CreateAsync</a>(Square.Customers.CreateCustomerRequest { ... }) -> CreateCustomerResponse</code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">CreateAsync</a>(CreateCustomerRequest { ... }) -> CreateCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -2513,7 +2513,7 @@ await client.Customers.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CreateCustomerRequest` 
+**request:** `CreateCustomerRequest` 
     
 </dd>
 </dl>
@@ -2525,7 +2525,7 @@ await client.Customers.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">BatchCreateAsync</a>(Square.Customers.BulkCreateCustomersRequest { ... }) -> BulkCreateCustomersResponse</code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">BatchCreateAsync</a>(BulkCreateCustomersRequest { ... }) -> BulkCreateCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2626,7 +2626,7 @@ await client.Customers.BatchCreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.BulkCreateCustomersRequest` 
+**request:** `BulkCreateCustomersRequest` 
     
 </dd>
 </dl>
@@ -2638,7 +2638,7 @@ await client.Customers.BatchCreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">BulkDeleteCustomersAsync</a>(Square.Customers.BulkDeleteCustomersRequest { ... }) -> BulkDeleteCustomersResponse</code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">BulkDeleteCustomersAsync</a>(BulkDeleteCustomersRequest { ... }) -> BulkDeleteCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2692,7 +2692,7 @@ await client.Customers.BulkDeleteCustomersAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.BulkDeleteCustomersRequest` 
+**request:** `BulkDeleteCustomersRequest` 
     
 </dd>
 </dl>
@@ -2704,7 +2704,7 @@ await client.Customers.BulkDeleteCustomersAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">BulkRetrieveCustomersAsync</a>(Square.Customers.BulkRetrieveCustomersRequest { ... }) -> BulkRetrieveCustomersResponse</code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">BulkRetrieveCustomersAsync</a>(BulkRetrieveCustomersRequest { ... }) -> BulkRetrieveCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2758,7 +2758,7 @@ await client.Customers.BulkRetrieveCustomersAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.BulkRetrieveCustomersRequest` 
+**request:** `BulkRetrieveCustomersRequest` 
     
 </dd>
 </dl>
@@ -2770,7 +2770,7 @@ await client.Customers.BulkRetrieveCustomersAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">BulkUpdateCustomersAsync</a>(Square.Customers.BulkUpdateCustomersRequest { ... }) -> BulkUpdateCustomersResponse</code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">BulkUpdateCustomersAsync</a>(BulkUpdateCustomersRequest { ... }) -> BulkUpdateCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2839,7 +2839,7 @@ await client.Customers.BulkUpdateCustomersAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.BulkUpdateCustomersRequest` 
+**request:** `BulkUpdateCustomersRequest` 
     
 </dd>
 </dl>
@@ -2851,7 +2851,7 @@ await client.Customers.BulkUpdateCustomersAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">SearchAsync</a>(Square.Customers.SearchCustomersRequest { ... }) -> SearchCustomersResponse</code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">SearchAsync</a>(SearchCustomersRequest { ... }) -> SearchCustomersResponse</code></summary>
 <dl>
 <dd>
 
@@ -2931,7 +2931,7 @@ await client.Customers.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.SearchCustomersRequest` 
+**request:** `SearchCustomersRequest` 
     
 </dd>
 </dl>
@@ -2943,7 +2943,7 @@ await client.Customers.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">GetAsync</a>(Square.Customers.GetCustomersRequest { ... }) -> GetCustomerResponse</code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">GetAsync</a>(GetCustomersRequest { ... }) -> GetCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -2985,7 +2985,7 @@ await client.Customers.GetAsync(new GetCustomersRequest { CustomerId = "customer
 <dl>
 <dd>
 
-**request:** `Square.Customers.GetCustomersRequest` 
+**request:** `GetCustomersRequest` 
     
 </dd>
 </dl>
@@ -2997,7 +2997,7 @@ await client.Customers.GetAsync(new GetCustomersRequest { CustomerId = "customer
 </dl>
 </details>
 
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">UpdateAsync</a>(Square.Customers.UpdateCustomerRequest { ... }) -> UpdateCustomerResponse</code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">UpdateAsync</a>(UpdateCustomerRequest { ... }) -> UpdateCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -3050,7 +3050,7 @@ await client.Customers.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.UpdateCustomerRequest` 
+**request:** `UpdateCustomerRequest` 
     
 </dd>
 </dl>
@@ -3062,7 +3062,7 @@ await client.Customers.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">DeleteAsync</a>(Square.Customers.DeleteCustomersRequest { ... }) -> DeleteCustomerResponse</code></summary>
+<details><summary><code>client.Customers.<a href="/src/Square/Customers/CustomersClient.cs">DeleteAsync</a>(DeleteCustomersRequest { ... }) -> DeleteCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -3108,7 +3108,7 @@ await client.Customers.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.DeleteCustomersRequest` 
+**request:** `DeleteCustomersRequest` 
     
 </dd>
 </dl>
@@ -3121,7 +3121,7 @@ await client.Customers.DeleteAsync(
 </details>
 
 ## Devices
-<details><summary><code>client.Devices.<a href="/src/Square/Devices/DevicesClient.cs">ListAsync</a>(Square.Devices.ListDevicesRequest { ... }) -> Core.Pager<Device></code></summary>
+<details><summary><code>client.Devices.<a href="/src/Square/Devices/DevicesClient.cs">ListAsync</a>(ListDevicesRequest { ... }) -> Pager<Device></code></summary>
 <dl>
 <dd>
 
@@ -3172,7 +3172,7 @@ await client.Devices.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Devices.ListDevicesRequest` 
+**request:** `ListDevicesRequest` 
     
 </dd>
 </dl>
@@ -3184,7 +3184,7 @@ await client.Devices.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Devices.<a href="/src/Square/Devices/DevicesClient.cs">GetAsync</a>(Square.Devices.GetDevicesRequest { ... }) -> GetDeviceResponse</code></summary>
+<details><summary><code>client.Devices.<a href="/src/Square/Devices/DevicesClient.cs">GetAsync</a>(GetDevicesRequest { ... }) -> GetDeviceResponse</code></summary>
 <dl>
 <dd>
 
@@ -3226,7 +3226,7 @@ await client.Devices.GetAsync(new GetDevicesRequest { DeviceId = "device_id" });
 <dl>
 <dd>
 
-**request:** `Square.Devices.GetDevicesRequest` 
+**request:** `GetDevicesRequest` 
     
 </dd>
 </dl>
@@ -3239,7 +3239,7 @@ await client.Devices.GetAsync(new GetDevicesRequest { DeviceId = "device_id" });
 </details>
 
 ## Disputes
-<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">ListAsync</a>(Square.Disputes.ListDisputesRequest { ... }) -> Core.Pager<Dispute></code></summary>
+<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">ListAsync</a>(ListDisputesRequest { ... }) -> Pager<Dispute></code></summary>
 <dl>
 <dd>
 
@@ -3288,7 +3288,7 @@ await client.Disputes.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Disputes.ListDisputesRequest` 
+**request:** `ListDisputesRequest` 
     
 </dd>
 </dl>
@@ -3300,7 +3300,7 @@ await client.Disputes.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">GetAsync</a>(Square.Disputes.GetDisputesRequest { ... }) -> GetDisputeResponse</code></summary>
+<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">GetAsync</a>(GetDisputesRequest { ... }) -> GetDisputeResponse</code></summary>
 <dl>
 <dd>
 
@@ -3342,7 +3342,7 @@ await client.Disputes.GetAsync(new GetDisputesRequest { DisputeId = "dispute_id"
 <dl>
 <dd>
 
-**request:** `Square.Disputes.GetDisputesRequest` 
+**request:** `GetDisputesRequest` 
     
 </dd>
 </dl>
@@ -3354,7 +3354,7 @@ await client.Disputes.GetAsync(new GetDisputesRequest { DisputeId = "dispute_id"
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">AcceptAsync</a>(Square.Disputes.AcceptDisputesRequest { ... }) -> AcceptDisputeResponse</code></summary>
+<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">AcceptAsync</a>(AcceptDisputesRequest { ... }) -> AcceptDisputeResponse</code></summary>
 <dl>
 <dd>
 
@@ -3400,7 +3400,7 @@ await client.Disputes.AcceptAsync(new AcceptDisputesRequest { DisputeId = "dispu
 <dl>
 <dd>
 
-**request:** `Square.Disputes.AcceptDisputesRequest` 
+**request:** `AcceptDisputesRequest` 
     
 </dd>
 </dl>
@@ -3412,7 +3412,64 @@ await client.Disputes.AcceptAsync(new AcceptDisputesRequest { DisputeId = "dispu
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">CreateEvidenceTextAsync</a>(Square.Disputes.CreateDisputeEvidenceTextRequest { ... }) -> CreateDisputeEvidenceTextResponse</code></summary>
+<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">CreateEvidenceFileAsync</a>(CreateEvidenceFileDisputesRequest { ... }) -> CreateDisputeEvidenceFileResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Uploads a file to use as evidence in a dispute challenge. The endpoint accepts HTTP
+multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Disputes.CreateEvidenceFileAsync(
+    new CreateEvidenceFileDisputesRequest { DisputeId = "dispute_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateEvidenceFileDisputesRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">CreateEvidenceTextAsync</a>(CreateDisputeEvidenceTextRequest { ... }) -> CreateDisputeEvidenceTextResponse</code></summary>
 <dl>
 <dd>
 
@@ -3462,7 +3519,7 @@ await client.Disputes.CreateEvidenceTextAsync(
 <dl>
 <dd>
 
-**request:** `Square.Disputes.CreateDisputeEvidenceTextRequest` 
+**request:** `CreateDisputeEvidenceTextRequest` 
     
 </dd>
 </dl>
@@ -3474,7 +3531,7 @@ await client.Disputes.CreateEvidenceTextAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">SubmitEvidenceAsync</a>(Square.Disputes.SubmitEvidenceDisputesRequest { ... }) -> SubmitEvidenceResponse</code></summary>
+<details><summary><code>client.Disputes.<a href="/src/Square/Disputes/DisputesClient.cs">SubmitEvidenceAsync</a>(SubmitEvidenceDisputesRequest { ... }) -> SubmitEvidenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -3524,7 +3581,7 @@ await client.Disputes.SubmitEvidenceAsync(
 <dl>
 <dd>
 
-**request:** `Square.Disputes.SubmitEvidenceDisputesRequest` 
+**request:** `SubmitEvidenceDisputesRequest` 
     
 </dd>
 </dl>
@@ -3537,7 +3594,7 @@ await client.Disputes.SubmitEvidenceAsync(
 </details>
 
 ## Employees
-<details><summary><code>client.Employees.<a href="/src/Square/Employees/EmployeesClient.cs">ListAsync</a>(Employees.ListEmployeesRequest { ... }) -> Core.Pager<Employee></code></summary>
+<details><summary><code>client.Employees.<a href="/src/Square/Employees/EmployeesClient.cs">ListAsync</a>(ListEmployeesRequest { ... }) -> Pager<Employee></code></summary>
 <dl>
 <dd>
 
@@ -3587,7 +3644,7 @@ await client.Employees.ListAsync(
 <dl>
 <dd>
 
-**request:** `Employees.ListEmployeesRequest` 
+**request:** `ListEmployeesRequest` 
     
 </dd>
 </dl>
@@ -3599,7 +3656,7 @@ await client.Employees.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Employees.<a href="/src/Square/Employees/EmployeesClient.cs">GetAsync</a>(Employees.GetEmployeesRequest { ... }) -> GetEmployeeResponse</code></summary>
+<details><summary><code>client.Employees.<a href="/src/Square/Employees/EmployeesClient.cs">GetAsync</a>(GetEmployeesRequest { ... }) -> GetEmployeeResponse</code></summary>
 <dl>
 <dd>
 
@@ -3641,7 +3698,7 @@ await client.Employees.GetAsync(new GetEmployeesRequest { Id = "id" });
 <dl>
 <dd>
 
-**request:** `Employees.GetEmployeesRequest` 
+**request:** `GetEmployeesRequest` 
     
 </dd>
 </dl>
@@ -3654,7 +3711,7 @@ await client.Employees.GetAsync(new GetEmployeesRequest { Id = "id" });
 </details>
 
 ## Events
-<details><summary><code>client.Events.<a href="/src/Square/Events/EventsClient.cs">SearchEventsAsync</a>(Events.SearchEventsRequest { ... }) -> SearchEventsResponse</code></summary>
+<details><summary><code>client.Events.<a href="/src/Square/Events/EventsClient.cs">SearchEventsAsync</a>(SearchEventsRequest { ... }) -> SearchEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -3696,7 +3753,7 @@ await client.Events.SearchEventsAsync(new SearchEventsRequest());
 <dl>
 <dd>
 
-**request:** `Events.SearchEventsRequest` 
+**request:** `SearchEventsRequest` 
     
 </dd>
 </dl>
@@ -3788,7 +3845,7 @@ await client.Events.EnableEventsAsync();
 </dl>
 </details>
 
-<details><summary><code>client.Events.<a href="/src/Square/Events/EventsClient.cs">ListEventTypesAsync</a>(Events.ListEventTypesRequest { ... }) -> ListEventTypesResponse</code></summary>
+<details><summary><code>client.Events.<a href="/src/Square/Events/EventsClient.cs">ListEventTypesAsync</a>(ListEventTypesRequest { ... }) -> ListEventTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -3832,7 +3889,7 @@ await client.Events.ListEventTypesAsync(
 <dl>
 <dd>
 
-**request:** `Events.ListEventTypesRequest` 
+**request:** `ListEventTypesRequest` 
     
 </dd>
 </dl>
@@ -3845,7 +3902,7 @@ await client.Events.ListEventTypesAsync(
 </details>
 
 ## GiftCards
-<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">ListAsync</a>(Square.GiftCards.ListGiftCardsRequest { ... }) -> Core.Pager<GiftCard></code></summary>
+<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">ListAsync</a>(ListGiftCardsRequest { ... }) -> Pager<GiftCard></code></summary>
 <dl>
 <dd>
 
@@ -3897,7 +3954,7 @@ await client.GiftCards.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.GiftCards.ListGiftCardsRequest` 
+**request:** `ListGiftCardsRequest` 
     
 </dd>
 </dl>
@@ -3909,7 +3966,7 @@ await client.GiftCards.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">CreateAsync</a>(Square.GiftCards.CreateGiftCardRequest { ... }) -> CreateGiftCardResponse</code></summary>
+<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">CreateAsync</a>(CreateGiftCardRequest { ... }) -> CreateGiftCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -3962,7 +4019,7 @@ await client.GiftCards.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.GiftCards.CreateGiftCardRequest` 
+**request:** `CreateGiftCardRequest` 
     
 </dd>
 </dl>
@@ -3974,7 +4031,7 @@ await client.GiftCards.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">GetFromGanAsync</a>(Square.GiftCards.GetGiftCardFromGanRequest { ... }) -> GetGiftCardFromGanResponse</code></summary>
+<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">GetFromGanAsync</a>(GetGiftCardFromGanRequest { ... }) -> GetGiftCardFromGanResponse</code></summary>
 <dl>
 <dd>
 
@@ -4016,7 +4073,7 @@ await client.GiftCards.GetFromGanAsync(new GetGiftCardFromGanRequest { Gan = "77
 <dl>
 <dd>
 
-**request:** `Square.GiftCards.GetGiftCardFromGanRequest` 
+**request:** `GetGiftCardFromGanRequest` 
     
 </dd>
 </dl>
@@ -4028,7 +4085,7 @@ await client.GiftCards.GetFromGanAsync(new GetGiftCardFromGanRequest { Gan = "77
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">GetFromNonceAsync</a>(Square.GiftCards.GetGiftCardFromNonceRequest { ... }) -> GetGiftCardFromNonceResponse</code></summary>
+<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">GetFromNonceAsync</a>(GetGiftCardFromNonceRequest { ... }) -> GetGiftCardFromNonceResponse</code></summary>
 <dl>
 <dd>
 
@@ -4072,7 +4129,7 @@ await client.GiftCards.GetFromNonceAsync(
 <dl>
 <dd>
 
-**request:** `Square.GiftCards.GetGiftCardFromNonceRequest` 
+**request:** `GetGiftCardFromNonceRequest` 
     
 </dd>
 </dl>
@@ -4084,7 +4141,7 @@ await client.GiftCards.GetFromNonceAsync(
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">LinkCustomerAsync</a>(Square.GiftCards.LinkCustomerToGiftCardRequest { ... }) -> LinkCustomerToGiftCardResponse</code></summary>
+<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">LinkCustomerAsync</a>(LinkCustomerToGiftCardRequest { ... }) -> LinkCustomerToGiftCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -4132,7 +4189,7 @@ await client.GiftCards.LinkCustomerAsync(
 <dl>
 <dd>
 
-**request:** `Square.GiftCards.LinkCustomerToGiftCardRequest` 
+**request:** `LinkCustomerToGiftCardRequest` 
     
 </dd>
 </dl>
@@ -4144,7 +4201,7 @@ await client.GiftCards.LinkCustomerAsync(
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">UnlinkCustomerAsync</a>(Square.GiftCards.UnlinkCustomerFromGiftCardRequest { ... }) -> UnlinkCustomerFromGiftCardResponse</code></summary>
+<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">UnlinkCustomerAsync</a>(UnlinkCustomerFromGiftCardRequest { ... }) -> UnlinkCustomerFromGiftCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -4192,7 +4249,7 @@ await client.GiftCards.UnlinkCustomerAsync(
 <dl>
 <dd>
 
-**request:** `Square.GiftCards.UnlinkCustomerFromGiftCardRequest` 
+**request:** `UnlinkCustomerFromGiftCardRequest` 
     
 </dd>
 </dl>
@@ -4204,7 +4261,7 @@ await client.GiftCards.UnlinkCustomerAsync(
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">GetAsync</a>(Square.GiftCards.GetGiftCardsRequest { ... }) -> GetGiftCardResponse</code></summary>
+<details><summary><code>client.GiftCards.<a href="/src/Square/GiftCards/GiftCardsClient.cs">GetAsync</a>(GetGiftCardsRequest { ... }) -> GetGiftCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -4246,7 +4303,7 @@ await client.GiftCards.GetAsync(new GetGiftCardsRequest { Id = "id" });
 <dl>
 <dd>
 
-**request:** `Square.GiftCards.GetGiftCardsRequest` 
+**request:** `GetGiftCardsRequest` 
     
 </dd>
 </dl>
@@ -4259,7 +4316,7 @@ await client.GiftCards.GetAsync(new GetGiftCardsRequest { Id = "id" });
 </details>
 
 ## Inventory
-<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">DeprecatedGetAdjustmentAsync</a>(Inventory.DeprecatedGetAdjustmentInventoryRequest { ... }) -> GetInventoryAdjustmentResponse</code></summary>
+<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">DeprecatedGetAdjustmentAsync</a>(DeprecatedGetAdjustmentInventoryRequest { ... }) -> GetInventoryAdjustmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -4304,7 +4361,7 @@ await client.Inventory.DeprecatedGetAdjustmentAsync(
 <dl>
 <dd>
 
-**request:** `Inventory.DeprecatedGetAdjustmentInventoryRequest` 
+**request:** `DeprecatedGetAdjustmentInventoryRequest` 
     
 </dd>
 </dl>
@@ -4316,7 +4373,7 @@ await client.Inventory.DeprecatedGetAdjustmentAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">GetAdjustmentAsync</a>(Inventory.GetAdjustmentInventoryRequest { ... }) -> GetInventoryAdjustmentResponse</code></summary>
+<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">GetAdjustmentAsync</a>(GetAdjustmentInventoryRequest { ... }) -> GetInventoryAdjustmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -4361,7 +4418,7 @@ await client.Inventory.GetAdjustmentAsync(
 <dl>
 <dd>
 
-**request:** `Inventory.GetAdjustmentInventoryRequest` 
+**request:** `GetAdjustmentInventoryRequest` 
     
 </dd>
 </dl>
@@ -4659,7 +4716,7 @@ await client.Inventory.BatchCreateChangesAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">BatchGetChangesAsync</a>(BatchRetrieveInventoryChangesRequest { ... }) -> Core.Pager<InventoryChange></code></summary>
+<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">BatchGetChangesAsync</a>(BatchRetrieveInventoryChangesRequest { ... }) -> Pager<InventoryChange></code></summary>
 <dl>
 <dd>
 
@@ -4730,7 +4787,7 @@ await client.Inventory.BatchGetChangesAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">BatchGetCountsAsync</a>(BatchGetInventoryCountsRequest { ... }) -> Core.Pager<InventoryCount></code></summary>
+<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">BatchGetCountsAsync</a>(BatchGetInventoryCountsRequest { ... }) -> Pager<InventoryCount></code></summary>
 <dl>
 <dd>
 
@@ -4801,7 +4858,7 @@ await client.Inventory.BatchGetCountsAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">DeprecatedGetPhysicalCountAsync</a>(Inventory.DeprecatedGetPhysicalCountInventoryRequest { ... }) -> GetInventoryPhysicalCountResponse</code></summary>
+<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">DeprecatedGetPhysicalCountAsync</a>(DeprecatedGetPhysicalCountInventoryRequest { ... }) -> GetInventoryPhysicalCountResponse</code></summary>
 <dl>
 <dd>
 
@@ -4846,7 +4903,7 @@ await client.Inventory.DeprecatedGetPhysicalCountAsync(
 <dl>
 <dd>
 
-**request:** `Inventory.DeprecatedGetPhysicalCountInventoryRequest` 
+**request:** `DeprecatedGetPhysicalCountInventoryRequest` 
     
 </dd>
 </dl>
@@ -4858,7 +4915,7 @@ await client.Inventory.DeprecatedGetPhysicalCountAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">GetPhysicalCountAsync</a>(Inventory.GetPhysicalCountInventoryRequest { ... }) -> GetInventoryPhysicalCountResponse</code></summary>
+<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">GetPhysicalCountAsync</a>(GetPhysicalCountInventoryRequest { ... }) -> GetInventoryPhysicalCountResponse</code></summary>
 <dl>
 <dd>
 
@@ -4903,7 +4960,7 @@ await client.Inventory.GetPhysicalCountAsync(
 <dl>
 <dd>
 
-**request:** `Inventory.GetPhysicalCountInventoryRequest` 
+**request:** `GetPhysicalCountInventoryRequest` 
     
 </dd>
 </dl>
@@ -4915,7 +4972,7 @@ await client.Inventory.GetPhysicalCountAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">GetTransferAsync</a>(Inventory.GetTransferInventoryRequest { ... }) -> GetInventoryTransferResponse</code></summary>
+<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">GetTransferAsync</a>(GetTransferInventoryRequest { ... }) -> GetInventoryTransferResponse</code></summary>
 <dl>
 <dd>
 
@@ -4960,7 +5017,7 @@ await client.Inventory.GetTransferAsync(
 <dl>
 <dd>
 
-**request:** `Inventory.GetTransferInventoryRequest` 
+**request:** `GetTransferInventoryRequest` 
     
 </dd>
 </dl>
@@ -4972,7 +5029,7 @@ await client.Inventory.GetTransferAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">GetAsync</a>(Inventory.GetInventoryRequest { ... }) -> Core.Pager<InventoryCount></code></summary>
+<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">GetAsync</a>(GetInventoryRequest { ... }) -> Pager<InventoryCount></code></summary>
 <dl>
 <dd>
 
@@ -5024,7 +5081,7 @@ await client.Inventory.GetAsync(
 <dl>
 <dd>
 
-**request:** `Inventory.GetInventoryRequest` 
+**request:** `GetInventoryRequest` 
     
 </dd>
 </dl>
@@ -5036,7 +5093,7 @@ await client.Inventory.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">ChangesAsync</a>(Inventory.ChangesInventoryRequest { ... }) -> Core.Pager<InventoryChange></code></summary>
+<details><summary><code>client.Inventory.<a href="/src/Square/Inventory/InventoryClient.cs">ChangesAsync</a>(ChangesInventoryRequest { ... }) -> Pager<InventoryChange></code></summary>
 <dl>
 <dd>
 
@@ -5097,7 +5154,7 @@ await client.Inventory.ChangesAsync(
 <dl>
 <dd>
 
-**request:** `Inventory.ChangesInventoryRequest` 
+**request:** `ChangesInventoryRequest` 
     
 </dd>
 </dl>
@@ -5110,7 +5167,7 @@ await client.Inventory.ChangesAsync(
 </details>
 
 ## Invoices
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">ListAsync</a>(Invoices.ListInvoicesRequest { ... }) -> Core.Pager<Invoice></code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">ListAsync</a>(ListInvoicesRequest { ... }) -> Pager<Invoice></code></summary>
 <dl>
 <dd>
 
@@ -5161,7 +5218,7 @@ await client.Invoices.ListAsync(
 <dl>
 <dd>
 
-**request:** `Invoices.ListInvoicesRequest` 
+**request:** `ListInvoicesRequest` 
     
 </dd>
 </dl>
@@ -5173,7 +5230,7 @@ await client.Invoices.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">CreateAsync</a>(Invoices.CreateInvoiceRequest { ... }) -> CreateInvoiceResponse</code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">CreateAsync</a>(CreateInvoiceRequest { ... }) -> CreateInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -5278,7 +5335,7 @@ await client.Invoices.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Invoices.CreateInvoiceRequest` 
+**request:** `CreateInvoiceRequest` 
     
 </dd>
 </dl>
@@ -5290,7 +5347,7 @@ await client.Invoices.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">SearchAsync</a>(Invoices.SearchInvoicesRequest { ... }) -> SearchInvoicesResponse</code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">SearchAsync</a>(SearchInvoicesRequest { ... }) -> SearchInvoicesResponse</code></summary>
 <dl>
 <dd>
 
@@ -5352,7 +5409,7 @@ await client.Invoices.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Invoices.SearchInvoicesRequest` 
+**request:** `SearchInvoicesRequest` 
     
 </dd>
 </dl>
@@ -5364,7 +5421,7 @@ await client.Invoices.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">GetAsync</a>(Invoices.GetInvoicesRequest { ... }) -> GetInvoiceResponse</code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">GetAsync</a>(GetInvoicesRequest { ... }) -> GetInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -5406,7 +5463,7 @@ await client.Invoices.GetAsync(new GetInvoicesRequest { InvoiceId = "invoice_id"
 <dl>
 <dd>
 
-**request:** `Invoices.GetInvoicesRequest` 
+**request:** `GetInvoicesRequest` 
     
 </dd>
 </dl>
@@ -5418,7 +5475,7 @@ await client.Invoices.GetAsync(new GetInvoicesRequest { InvoiceId = "invoice_id"
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">UpdateAsync</a>(Invoices.UpdateInvoiceRequest { ... }) -> UpdateInvoiceResponse</code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">UpdateAsync</a>(UpdateInvoiceRequest { ... }) -> UpdateInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -5481,7 +5538,7 @@ await client.Invoices.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Invoices.UpdateInvoiceRequest` 
+**request:** `UpdateInvoiceRequest` 
     
 </dd>
 </dl>
@@ -5493,7 +5550,7 @@ await client.Invoices.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">DeleteAsync</a>(Invoices.DeleteInvoicesRequest { ... }) -> DeleteInvoiceResponse</code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">DeleteAsync</a>(DeleteInvoicesRequest { ... }) -> DeleteInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -5539,7 +5596,7 @@ await client.Invoices.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Invoices.DeleteInvoicesRequest` 
+**request:** `DeleteInvoicesRequest` 
     
 </dd>
 </dl>
@@ -5551,7 +5608,70 @@ await client.Invoices.DeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">DeleteInvoiceAttachmentAsync</a>(Invoices.DeleteInvoiceAttachmentRequest { ... }) -> DeleteInvoiceAttachmentResponse</code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">CreateInvoiceAttachmentAsync</a>(CreateInvoiceAttachmentRequest { ... }) -> CreateInvoiceAttachmentResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Uploads a file and attaches it to an invoice. This endpoint accepts HTTP multipart/form-data file uploads
+with a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file
+in a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.
+
+Invoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices
+in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.
+
+__NOTE:__ When testing in the Sandbox environment, the total file size is limited to 1 KB.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Invoices.CreateInvoiceAttachmentAsync(
+    new CreateInvoiceAttachmentRequest { InvoiceId = "invoice_id" }
+);
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateInvoiceAttachmentRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">DeleteInvoiceAttachmentAsync</a>(DeleteInvoiceAttachmentRequest { ... }) -> DeleteInvoiceAttachmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -5596,7 +5716,7 @@ await client.Invoices.DeleteInvoiceAttachmentAsync(
 <dl>
 <dd>
 
-**request:** `Invoices.DeleteInvoiceAttachmentRequest` 
+**request:** `DeleteInvoiceAttachmentRequest` 
     
 </dd>
 </dl>
@@ -5608,7 +5728,7 @@ await client.Invoices.DeleteInvoiceAttachmentAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">CancelAsync</a>(Invoices.CancelInvoiceRequest { ... }) -> CancelInvoiceResponse</code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">CancelAsync</a>(CancelInvoiceRequest { ... }) -> CancelInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -5655,7 +5775,7 @@ await client.Invoices.CancelAsync(
 <dl>
 <dd>
 
-**request:** `Invoices.CancelInvoiceRequest` 
+**request:** `CancelInvoiceRequest` 
     
 </dd>
 </dl>
@@ -5667,7 +5787,7 @@ await client.Invoices.CancelAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">PublishAsync</a>(Invoices.PublishInvoiceRequest { ... }) -> PublishInvoiceResponse</code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">PublishAsync</a>(PublishInvoiceRequest { ... }) -> PublishInvoiceResponse</code></summary>
 <dl>
 <dd>
 
@@ -5729,7 +5849,7 @@ await client.Invoices.PublishAsync(
 <dl>
 <dd>
 
-**request:** `Invoices.PublishInvoiceRequest` 
+**request:** `PublishInvoiceRequest` 
     
 </dd>
 </dl>
@@ -5742,7 +5862,7 @@ await client.Invoices.PublishAsync(
 </details>
 
 ## Labor
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">CreateScheduledShiftAsync</a>(Square.Labor.CreateScheduledShiftRequest { ... }) -> CreateScheduledShiftResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">CreateScheduledShiftAsync</a>(CreateScheduledShiftRequest { ... }) -> CreateScheduledShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -5809,7 +5929,7 @@ await client.Labor.CreateScheduledShiftAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.CreateScheduledShiftRequest` 
+**request:** `CreateScheduledShiftRequest` 
     
 </dd>
 </dl>
@@ -5821,7 +5941,7 @@ await client.Labor.CreateScheduledShiftAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">BulkPublishScheduledShiftsAsync</a>(Square.Labor.BulkPublishScheduledShiftsRequest { ... }) -> BulkPublishScheduledShiftsResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">BulkPublishScheduledShiftsAsync</a>(BulkPublishScheduledShiftsRequest { ... }) -> BulkPublishScheduledShiftsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5877,7 +5997,7 @@ await client.Labor.BulkPublishScheduledShiftsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.BulkPublishScheduledShiftsRequest` 
+**request:** `BulkPublishScheduledShiftsRequest` 
     
 </dd>
 </dl>
@@ -5889,7 +6009,7 @@ await client.Labor.BulkPublishScheduledShiftsAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">SearchScheduledShiftsAsync</a>(Square.Labor.SearchScheduledShiftsRequest { ... }) -> SearchScheduledShiftsResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">SearchScheduledShiftsAsync</a>(SearchScheduledShiftsRequest { ... }) -> SearchScheduledShiftsResponse</code></summary>
 <dl>
 <dd>
 
@@ -5950,7 +6070,7 @@ await client.Labor.SearchScheduledShiftsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.SearchScheduledShiftsRequest` 
+**request:** `SearchScheduledShiftsRequest` 
     
 </dd>
 </dl>
@@ -5962,7 +6082,7 @@ await client.Labor.SearchScheduledShiftsAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">RetrieveScheduledShiftAsync</a>(Square.Labor.RetrieveScheduledShiftRequest { ... }) -> RetrieveScheduledShiftResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">RetrieveScheduledShiftAsync</a>(RetrieveScheduledShiftRequest { ... }) -> RetrieveScheduledShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -6004,7 +6124,7 @@ await client.Labor.RetrieveScheduledShiftAsync(new RetrieveScheduledShiftRequest
 <dl>
 <dd>
 
-**request:** `Square.Labor.RetrieveScheduledShiftRequest` 
+**request:** `RetrieveScheduledShiftRequest` 
     
 </dd>
 </dl>
@@ -6016,7 +6136,7 @@ await client.Labor.RetrieveScheduledShiftAsync(new RetrieveScheduledShiftRequest
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">UpdateScheduledShiftAsync</a>(Square.Labor.UpdateScheduledShiftRequest { ... }) -> UpdateScheduledShiftResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">UpdateScheduledShiftAsync</a>(UpdateScheduledShiftRequest { ... }) -> UpdateScheduledShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -6086,7 +6206,7 @@ await client.Labor.UpdateScheduledShiftAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.UpdateScheduledShiftRequest` 
+**request:** `UpdateScheduledShiftRequest` 
     
 </dd>
 </dl>
@@ -6098,7 +6218,7 @@ await client.Labor.UpdateScheduledShiftAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">PublishScheduledShiftAsync</a>(Square.Labor.PublishScheduledShiftRequest { ... }) -> PublishScheduledShiftResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">PublishScheduledShiftAsync</a>(PublishScheduledShiftRequest { ... }) -> PublishScheduledShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -6149,7 +6269,7 @@ await client.Labor.PublishScheduledShiftAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.PublishScheduledShiftRequest` 
+**request:** `PublishScheduledShiftRequest` 
     
 </dd>
 </dl>
@@ -6161,7 +6281,7 @@ await client.Labor.PublishScheduledShiftAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">CreateTimecardAsync</a>(Square.Labor.CreateTimecardRequest { ... }) -> CreateTimecardResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">CreateTimecardAsync</a>(CreateTimecardRequest { ... }) -> CreateTimecardResponse</code></summary>
 <dl>
 <dd>
 
@@ -6251,7 +6371,7 @@ await client.Labor.CreateTimecardAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.CreateTimecardRequest` 
+**request:** `CreateTimecardRequest` 
     
 </dd>
 </dl>
@@ -6263,7 +6383,7 @@ await client.Labor.CreateTimecardAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">SearchTimecardsAsync</a>(Square.Labor.SearchTimecardsRequest { ... }) -> SearchTimecardsResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">SearchTimecardsAsync</a>(SearchTimecardsRequest { ... }) -> SearchTimecardsResponse</code></summary>
 <dl>
 <dd>
 
@@ -6335,7 +6455,7 @@ await client.Labor.SearchTimecardsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.SearchTimecardsRequest` 
+**request:** `SearchTimecardsRequest` 
     
 </dd>
 </dl>
@@ -6347,7 +6467,7 @@ await client.Labor.SearchTimecardsAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">RetrieveTimecardAsync</a>(Square.Labor.RetrieveTimecardRequest { ... }) -> RetrieveTimecardResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">RetrieveTimecardAsync</a>(RetrieveTimecardRequest { ... }) -> RetrieveTimecardResponse</code></summary>
 <dl>
 <dd>
 
@@ -6389,7 +6509,7 @@ await client.Labor.RetrieveTimecardAsync(new RetrieveTimecardRequest { Id = "id"
 <dl>
 <dd>
 
-**request:** `Square.Labor.RetrieveTimecardRequest` 
+**request:** `RetrieveTimecardRequest` 
     
 </dd>
 </dl>
@@ -6401,7 +6521,7 @@ await client.Labor.RetrieveTimecardAsync(new RetrieveTimecardRequest { Id = "id"
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">UpdateTimecardAsync</a>(Square.Labor.UpdateTimecardRequest { ... }) -> UpdateTimecardResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">UpdateTimecardAsync</a>(UpdateTimecardRequest { ... }) -> UpdateTimecardResponse</code></summary>
 <dl>
 <dd>
 
@@ -6483,7 +6603,7 @@ await client.Labor.UpdateTimecardAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.UpdateTimecardRequest` 
+**request:** `UpdateTimecardRequest` 
     
 </dd>
 </dl>
@@ -6495,7 +6615,7 @@ await client.Labor.UpdateTimecardAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">DeleteTimecardAsync</a>(Square.Labor.DeleteTimecardRequest { ... }) -> DeleteTimecardResponse</code></summary>
+<details><summary><code>client.Labor.<a href="/src/Square/Labor/LaborClient.cs">DeleteTimecardAsync</a>(DeleteTimecardRequest { ... }) -> DeleteTimecardResponse</code></summary>
 <dl>
 <dd>
 
@@ -6537,7 +6657,7 @@ await client.Labor.DeleteTimecardAsync(new DeleteTimecardRequest { Id = "id" });
 <dl>
 <dd>
 
-**request:** `Square.Labor.DeleteTimecardRequest` 
+**request:** `DeleteTimecardRequest` 
     
 </dd>
 </dl>
@@ -6590,7 +6710,7 @@ await client.Locations.ListAsync();
 </dl>
 </details>
 
-<details><summary><code>client.Locations.<a href="/src/Square/Locations/LocationsClient.cs">CreateAsync</a>(Square.Locations.CreateLocationRequest { ... }) -> CreateLocationResponse</code></summary>
+<details><summary><code>client.Locations.<a href="/src/Square/Locations/LocationsClient.cs">CreateAsync</a>(CreateLocationRequest { ... }) -> CreateLocationResponse</code></summary>
 <dl>
 <dd>
 
@@ -6654,7 +6774,7 @@ await client.Locations.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CreateLocationRequest` 
+**request:** `CreateLocationRequest` 
     
 </dd>
 </dl>
@@ -6666,7 +6786,7 @@ await client.Locations.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.<a href="/src/Square/Locations/LocationsClient.cs">GetAsync</a>(Square.Locations.GetLocationsRequest { ... }) -> GetLocationResponse</code></summary>
+<details><summary><code>client.Locations.<a href="/src/Square/Locations/LocationsClient.cs">GetAsync</a>(GetLocationsRequest { ... }) -> GetLocationResponse</code></summary>
 <dl>
 <dd>
 
@@ -6709,7 +6829,7 @@ await client.Locations.GetAsync(new GetLocationsRequest { LocationId = "location
 <dl>
 <dd>
 
-**request:** `Square.Locations.GetLocationsRequest` 
+**request:** `GetLocationsRequest` 
     
 </dd>
 </dl>
@@ -6721,7 +6841,7 @@ await client.Locations.GetAsync(new GetLocationsRequest { LocationId = "location
 </dl>
 </details>
 
-<details><summary><code>client.Locations.<a href="/src/Square/Locations/LocationsClient.cs">UpdateAsync</a>(Square.Locations.UpdateLocationRequest { ... }) -> UpdateLocationResponse</code></summary>
+<details><summary><code>client.Locations.<a href="/src/Square/Locations/LocationsClient.cs">UpdateAsync</a>(UpdateLocationRequest { ... }) -> UpdateLocationResponse</code></summary>
 <dl>
 <dd>
 
@@ -6796,7 +6916,7 @@ await client.Locations.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.UpdateLocationRequest` 
+**request:** `UpdateLocationRequest` 
     
 </dd>
 </dl>
@@ -6808,7 +6928,7 @@ await client.Locations.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.<a href="/src/Square/Locations/LocationsClient.cs">CheckoutsAsync</a>(Square.Locations.CreateCheckoutRequest { ... }) -> CreateCheckoutResponse</code></summary>
+<details><summary><code>client.Locations.<a href="/src/Square/Locations/LocationsClient.cs">CheckoutsAsync</a>(CreateCheckoutRequest { ... }) -> CreateCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -6951,7 +7071,7 @@ await client.Locations.CheckoutsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CreateCheckoutRequest` 
+**request:** `CreateCheckoutRequest` 
     
 </dd>
 </dl>
@@ -6964,7 +7084,7 @@ await client.Locations.CheckoutsAsync(
 </details>
 
 ## Loyalty
-<details><summary><code>client.Loyalty.<a href="/src/Square/Loyalty/LoyaltyClient.cs">SearchEventsAsync</a>(Square.Loyalty.SearchLoyaltyEventsRequest { ... }) -> SearchLoyaltyEventsResponse</code></summary>
+<details><summary><code>client.Loyalty.<a href="/src/Square/Loyalty/LoyaltyClient.cs">SearchEventsAsync</a>(SearchLoyaltyEventsRequest { ... }) -> SearchLoyaltyEventsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7028,7 +7148,7 @@ await client.Loyalty.SearchEventsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.SearchLoyaltyEventsRequest` 
+**request:** `SearchLoyaltyEventsRequest` 
     
 </dd>
 </dl>
@@ -7041,7 +7161,7 @@ await client.Loyalty.SearchEventsAsync(
 </details>
 
 ## Merchants
-<details><summary><code>client.Merchants.<a href="/src/Square/Merchants/MerchantsClient.cs">ListAsync</a>(Square.Merchants.ListMerchantsRequest { ... }) -> Core.Pager<Merchant></code></summary>
+<details><summary><code>client.Merchants.<a href="/src/Square/Merchants/MerchantsClient.cs">ListAsync</a>(ListMerchantsRequest { ... }) -> Pager<Merchant></code></summary>
 <dl>
 <dd>
 
@@ -7092,7 +7212,7 @@ await client.Merchants.ListAsync(new ListMerchantsRequest { Cursor = 1 });
 <dl>
 <dd>
 
-**request:** `Square.Merchants.ListMerchantsRequest` 
+**request:** `ListMerchantsRequest` 
     
 </dd>
 </dl>
@@ -7104,7 +7224,7 @@ await client.Merchants.ListAsync(new ListMerchantsRequest { Cursor = 1 });
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.<a href="/src/Square/Merchants/MerchantsClient.cs">GetAsync</a>(Square.Merchants.GetMerchantsRequest { ... }) -> GetMerchantResponse</code></summary>
+<details><summary><code>client.Merchants.<a href="/src/Square/Merchants/MerchantsClient.cs">GetAsync</a>(GetMerchantsRequest { ... }) -> GetMerchantResponse</code></summary>
 <dl>
 <dd>
 
@@ -7146,7 +7266,7 @@ await client.Merchants.GetAsync(new GetMerchantsRequest { MerchantId = "merchant
 <dl>
 <dd>
 
-**request:** `Square.Merchants.GetMerchantsRequest` 
+**request:** `GetMerchantsRequest` 
     
 </dd>
 </dl>
@@ -7159,7 +7279,7 @@ await client.Merchants.GetAsync(new GetMerchantsRequest { MerchantId = "merchant
 </details>
 
 ## Checkout
-<details><summary><code>client.Checkout.<a href="/src/Square/Checkout/CheckoutClient.cs">RetrieveLocationSettingsAsync</a>(Square.Checkout.RetrieveLocationSettingsRequest { ... }) -> RetrieveLocationSettingsResponse</code></summary>
+<details><summary><code>client.Checkout.<a href="/src/Square/Checkout/CheckoutClient.cs">RetrieveLocationSettingsAsync</a>(RetrieveLocationSettingsRequest { ... }) -> RetrieveLocationSettingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7203,7 +7323,7 @@ await client.Checkout.RetrieveLocationSettingsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Checkout.RetrieveLocationSettingsRequest` 
+**request:** `RetrieveLocationSettingsRequest` 
     
 </dd>
 </dl>
@@ -7215,7 +7335,7 @@ await client.Checkout.RetrieveLocationSettingsAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.<a href="/src/Square/Checkout/CheckoutClient.cs">UpdateLocationSettingsAsync</a>(Square.Checkout.UpdateLocationSettingsRequest { ... }) -> UpdateLocationSettingsResponse</code></summary>
+<details><summary><code>client.Checkout.<a href="/src/Square/Checkout/CheckoutClient.cs">UpdateLocationSettingsAsync</a>(UpdateLocationSettingsRequest { ... }) -> UpdateLocationSettingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7263,7 +7383,7 @@ await client.Checkout.UpdateLocationSettingsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Checkout.UpdateLocationSettingsRequest` 
+**request:** `UpdateLocationSettingsRequest` 
     
 </dd>
 </dl>
@@ -7314,7 +7434,7 @@ await client.Checkout.RetrieveMerchantSettingsAsync();
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.<a href="/src/Square/Checkout/CheckoutClient.cs">UpdateMerchantSettingsAsync</a>(Square.Checkout.UpdateMerchantSettingsRequest { ... }) -> UpdateMerchantSettingsResponse</code></summary>
+<details><summary><code>client.Checkout.<a href="/src/Square/Checkout/CheckoutClient.cs">UpdateMerchantSettingsAsync</a>(UpdateMerchantSettingsRequest { ... }) -> UpdateMerchantSettingsResponse</code></summary>
 <dl>
 <dd>
 
@@ -7358,7 +7478,7 @@ await client.Checkout.UpdateMerchantSettingsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Checkout.UpdateMerchantSettingsRequest` 
+**request:** `UpdateMerchantSettingsRequest` 
     
 </dd>
 </dl>
@@ -7496,7 +7616,7 @@ await client.Orders.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">BatchGetAsync</a>(Square.Orders.BatchGetOrdersRequest { ... }) -> BatchGetOrdersResponse</code></summary>
+<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">BatchGetAsync</a>(BatchGetOrdersRequest { ... }) -> BatchGetOrdersResponse</code></summary>
 <dl>
 <dd>
 
@@ -7550,7 +7670,7 @@ await client.Orders.BatchGetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.BatchGetOrdersRequest` 
+**request:** `BatchGetOrdersRequest` 
     
 </dd>
 </dl>
@@ -7562,7 +7682,7 @@ await client.Orders.BatchGetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">CalculateAsync</a>(Square.Orders.CalculateOrderRequest { ... }) -> CalculateOrderResponse</code></summary>
+<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">CalculateAsync</a>(CalculateOrderRequest { ... }) -> CalculateOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -7636,7 +7756,7 @@ await client.Orders.CalculateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CalculateOrderRequest` 
+**request:** `CalculateOrderRequest` 
     
 </dd>
 </dl>
@@ -7648,7 +7768,7 @@ await client.Orders.CalculateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">CloneAsync</a>(Square.Orders.CloneOrderRequest { ... }) -> CloneOrderResponse</code></summary>
+<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">CloneAsync</a>(CloneOrderRequest { ... }) -> CloneOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -7698,7 +7818,7 @@ await client.Orders.CloneAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CloneOrderRequest` 
+**request:** `CloneOrderRequest` 
     
 </dd>
 </dl>
@@ -7710,7 +7830,7 @@ await client.Orders.CloneAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">SearchAsync</a>(Square.Orders.SearchOrdersRequest { ... }) -> SearchOrdersResponse</code></summary>
+<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">SearchAsync</a>(SearchOrdersRequest { ... }) -> SearchOrdersResponse</code></summary>
 <dl>
 <dd>
 
@@ -7798,7 +7918,7 @@ await client.Orders.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.SearchOrdersRequest` 
+**request:** `SearchOrdersRequest` 
     
 </dd>
 </dl>
@@ -7810,7 +7930,7 @@ await client.Orders.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">GetAsync</a>(Square.Orders.GetOrdersRequest { ... }) -> GetOrderResponse</code></summary>
+<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">GetAsync</a>(GetOrdersRequest { ... }) -> GetOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -7852,7 +7972,7 @@ await client.Orders.GetAsync(new GetOrdersRequest { OrderId = "order_id" });
 <dl>
 <dd>
 
-**request:** `Square.Orders.GetOrdersRequest` 
+**request:** `GetOrdersRequest` 
     
 </dd>
 </dl>
@@ -7864,7 +7984,7 @@ await client.Orders.GetAsync(new GetOrdersRequest { OrderId = "order_id" });
 </dl>
 </details>
 
-<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">UpdateAsync</a>(Square.Orders.UpdateOrderRequest { ... }) -> UpdateOrderResponse</code></summary>
+<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">UpdateAsync</a>(UpdateOrderRequest { ... }) -> UpdateOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -7942,7 +8062,7 @@ await client.Orders.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.UpdateOrderRequest` 
+**request:** `UpdateOrderRequest` 
     
 </dd>
 </dl>
@@ -7954,7 +8074,7 @@ await client.Orders.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">PayAsync</a>(Square.Orders.PayOrderRequest { ... }) -> PayOrderResponse</code></summary>
+<details><summary><code>client.Orders.<a href="/src/Square/Orders/OrdersClient.cs">PayAsync</a>(PayOrderRequest { ... }) -> PayOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -8020,7 +8140,7 @@ await client.Orders.PayAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.PayOrderRequest` 
+**request:** `PayOrderRequest` 
     
 </dd>
 </dl>
@@ -8033,7 +8153,7 @@ await client.Orders.PayAsync(
 </details>
 
 ## Payments
-<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">ListAsync</a>(Payments.ListPaymentsRequest { ... }) -> Core.Pager<Payment></code></summary>
+<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">ListAsync</a>(ListPaymentsRequest { ... }) -> Pager<Payment></code></summary>
 <dl>
 <dd>
 
@@ -8099,7 +8219,7 @@ await client.Payments.ListAsync(
 <dl>
 <dd>
 
-**request:** `Payments.ListPaymentsRequest` 
+**request:** `ListPaymentsRequest` 
     
 </dd>
 </dl>
@@ -8111,7 +8231,7 @@ await client.Payments.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">CreateAsync</a>(Payments.CreatePaymentRequest { ... }) -> CreatePaymentResponse</code></summary>
+<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">CreateAsync</a>(CreatePaymentRequest { ... }) -> CreatePaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -8173,7 +8293,7 @@ await client.Payments.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Payments.CreatePaymentRequest` 
+**request:** `CreatePaymentRequest` 
     
 </dd>
 </dl>
@@ -8185,7 +8305,7 @@ await client.Payments.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">CancelByIdempotencyKeyAsync</a>(Payments.CancelPaymentByIdempotencyKeyRequest { ... }) -> CancelPaymentByIdempotencyKeyResponse</code></summary>
+<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">CancelByIdempotencyKeyAsync</a>(CancelPaymentByIdempotencyKeyRequest { ... }) -> CancelPaymentByIdempotencyKeyResponse</code></summary>
 <dl>
 <dd>
 
@@ -8242,7 +8362,7 @@ await client.Payments.CancelByIdempotencyKeyAsync(
 <dl>
 <dd>
 
-**request:** `Payments.CancelPaymentByIdempotencyKeyRequest` 
+**request:** `CancelPaymentByIdempotencyKeyRequest` 
     
 </dd>
 </dl>
@@ -8254,7 +8374,7 @@ await client.Payments.CancelByIdempotencyKeyAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">GetAsync</a>(Payments.GetPaymentsRequest { ... }) -> GetPaymentResponse</code></summary>
+<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">GetAsync</a>(GetPaymentsRequest { ... }) -> GetPaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -8296,7 +8416,7 @@ await client.Payments.GetAsync(new GetPaymentsRequest { PaymentId = "payment_id"
 <dl>
 <dd>
 
-**request:** `Payments.GetPaymentsRequest` 
+**request:** `GetPaymentsRequest` 
     
 </dd>
 </dl>
@@ -8308,7 +8428,7 @@ await client.Payments.GetAsync(new GetPaymentsRequest { PaymentId = "payment_id"
 </dl>
 </details>
 
-<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">UpdateAsync</a>(Payments.UpdatePaymentRequest { ... }) -> UpdatePaymentResponse</code></summary>
+<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">UpdateAsync</a>(UpdatePaymentRequest { ... }) -> UpdatePaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -8363,7 +8483,7 @@ await client.Payments.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Payments.UpdatePaymentRequest` 
+**request:** `UpdatePaymentRequest` 
     
 </dd>
 </dl>
@@ -8375,7 +8495,7 @@ await client.Payments.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">CancelAsync</a>(Payments.CancelPaymentsRequest { ... }) -> CancelPaymentResponse</code></summary>
+<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">CancelAsync</a>(CancelPaymentsRequest { ... }) -> CancelPaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -8418,7 +8538,7 @@ await client.Payments.CancelAsync(new CancelPaymentsRequest { PaymentId = "payme
 <dl>
 <dd>
 
-**request:** `Payments.CancelPaymentsRequest` 
+**request:** `CancelPaymentsRequest` 
     
 </dd>
 </dl>
@@ -8430,7 +8550,7 @@ await client.Payments.CancelAsync(new CancelPaymentsRequest { PaymentId = "payme
 </dl>
 </details>
 
-<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">CompleteAsync</a>(Payments.CompletePaymentRequest { ... }) -> CompletePaymentResponse</code></summary>
+<details><summary><code>client.Payments.<a href="/src/Square/Payments/PaymentsClient.cs">CompleteAsync</a>(CompletePaymentRequest { ... }) -> CompletePaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -8475,7 +8595,7 @@ await client.Payments.CompleteAsync(new CompletePaymentRequest { PaymentId = "pa
 <dl>
 <dd>
 
-**request:** `Payments.CompletePaymentRequest` 
+**request:** `CompletePaymentRequest` 
     
 </dd>
 </dl>
@@ -8488,7 +8608,7 @@ await client.Payments.CompleteAsync(new CompletePaymentRequest { PaymentId = "pa
 </details>
 
 ## Payouts
-<details><summary><code>client.Payouts.<a href="/src/Square/Payouts/PayoutsClient.cs">ListAsync</a>(Payouts.ListPayoutsRequest { ... }) -> Core.Pager<Payout></code></summary>
+<details><summary><code>client.Payouts.<a href="/src/Square/Payouts/PayoutsClient.cs">ListAsync</a>(ListPayoutsRequest { ... }) -> Pager<Payout></code></summary>
 <dl>
 <dd>
 
@@ -8543,7 +8663,7 @@ await client.Payouts.ListAsync(
 <dl>
 <dd>
 
-**request:** `Payouts.ListPayoutsRequest` 
+**request:** `ListPayoutsRequest` 
     
 </dd>
 </dl>
@@ -8555,7 +8675,7 @@ await client.Payouts.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Payouts.<a href="/src/Square/Payouts/PayoutsClient.cs">GetAsync</a>(Payouts.GetPayoutsRequest { ... }) -> GetPayoutResponse</code></summary>
+<details><summary><code>client.Payouts.<a href="/src/Square/Payouts/PayoutsClient.cs">GetAsync</a>(GetPayoutsRequest { ... }) -> GetPayoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -8598,7 +8718,7 @@ await client.Payouts.GetAsync(new GetPayoutsRequest { PayoutId = "payout_id" });
 <dl>
 <dd>
 
-**request:** `Payouts.GetPayoutsRequest` 
+**request:** `GetPayoutsRequest` 
     
 </dd>
 </dl>
@@ -8610,7 +8730,7 @@ await client.Payouts.GetAsync(new GetPayoutsRequest { PayoutId = "payout_id" });
 </dl>
 </details>
 
-<details><summary><code>client.Payouts.<a href="/src/Square/Payouts/PayoutsClient.cs">ListEntriesAsync</a>(Payouts.ListEntriesPayoutsRequest { ... }) -> Core.Pager<PayoutEntry></code></summary>
+<details><summary><code>client.Payouts.<a href="/src/Square/Payouts/PayoutsClient.cs">ListEntriesAsync</a>(ListEntriesPayoutsRequest { ... }) -> Pager<PayoutEntry></code></summary>
 <dl>
 <dd>
 
@@ -8661,7 +8781,7 @@ await client.Payouts.ListEntriesAsync(
 <dl>
 <dd>
 
-**request:** `Payouts.ListEntriesPayoutsRequest` 
+**request:** `ListEntriesPayoutsRequest` 
     
 </dd>
 </dl>
@@ -8674,7 +8794,7 @@ await client.Payouts.ListEntriesAsync(
 </details>
 
 ## Refunds
-<details><summary><code>client.Refunds.<a href="/src/Square/Refunds/RefundsClient.cs">ListAsync</a>(Refunds.ListRefundsRequest { ... }) -> Core.Pager<PaymentRefund></code></summary>
+<details><summary><code>client.Refunds.<a href="/src/Square/Refunds/RefundsClient.cs">ListAsync</a>(ListRefundsRequest { ... }) -> Pager<PaymentRefund></code></summary>
 <dl>
 <dd>
 
@@ -8736,7 +8856,7 @@ await client.Refunds.ListAsync(
 <dl>
 <dd>
 
-**request:** `Refunds.ListRefundsRequest` 
+**request:** `ListRefundsRequest` 
     
 </dd>
 </dl>
@@ -8748,7 +8868,7 @@ await client.Refunds.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Refunds.<a href="/src/Square/Refunds/RefundsClient.cs">RefundPaymentAsync</a>(Refunds.RefundPaymentRequest { ... }) -> RefundPaymentResponse</code></summary>
+<details><summary><code>client.Refunds.<a href="/src/Square/Refunds/RefundsClient.cs">RefundPaymentAsync</a>(RefundPaymentRequest { ... }) -> RefundPaymentResponse</code></summary>
 <dl>
 <dd>
 
@@ -8802,7 +8922,7 @@ await client.Refunds.RefundPaymentAsync(
 <dl>
 <dd>
 
-**request:** `Refunds.RefundPaymentRequest` 
+**request:** `RefundPaymentRequest` 
     
 </dd>
 </dl>
@@ -8814,7 +8934,7 @@ await client.Refunds.RefundPaymentAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Refunds.<a href="/src/Square/Refunds/RefundsClient.cs">GetAsync</a>(Refunds.GetRefundsRequest { ... }) -> GetPaymentRefundResponse</code></summary>
+<details><summary><code>client.Refunds.<a href="/src/Square/Refunds/RefundsClient.cs">GetAsync</a>(GetRefundsRequest { ... }) -> GetPaymentRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -8856,7 +8976,7 @@ await client.Refunds.GetAsync(new Square.Refunds.GetRefundsRequest { RefundId = 
 <dl>
 <dd>
 
-**request:** `Refunds.GetRefundsRequest` 
+**request:** `GetRefundsRequest` 
     
 </dd>
 </dl>
@@ -8912,7 +9032,7 @@ await client.Sites.ListAsync();
 </details>
 
 ## Snippets
-<details><summary><code>client.Snippets.<a href="/src/Square/Snippets/SnippetsClient.cs">GetAsync</a>(Snippets.GetSnippetsRequest { ... }) -> GetSnippetResponse</code></summary>
+<details><summary><code>client.Snippets.<a href="/src/Square/Snippets/SnippetsClient.cs">GetAsync</a>(GetSnippetsRequest { ... }) -> GetSnippetResponse</code></summary>
 <dl>
 <dd>
 
@@ -8959,7 +9079,7 @@ await client.Snippets.GetAsync(new GetSnippetsRequest { SiteId = "site_id" });
 <dl>
 <dd>
 
-**request:** `Snippets.GetSnippetsRequest` 
+**request:** `GetSnippetsRequest` 
     
 </dd>
 </dl>
@@ -8971,7 +9091,7 @@ await client.Snippets.GetAsync(new GetSnippetsRequest { SiteId = "site_id" });
 </dl>
 </details>
 
-<details><summary><code>client.Snippets.<a href="/src/Square/Snippets/SnippetsClient.cs">UpsertAsync</a>(Snippets.UpsertSnippetRequest { ... }) -> UpsertSnippetResponse</code></summary>
+<details><summary><code>client.Snippets.<a href="/src/Square/Snippets/SnippetsClient.cs">UpsertAsync</a>(UpsertSnippetRequest { ... }) -> UpsertSnippetResponse</code></summary>
 <dl>
 <dd>
 
@@ -9025,7 +9145,7 @@ await client.Snippets.UpsertAsync(
 <dl>
 <dd>
 
-**request:** `Snippets.UpsertSnippetRequest` 
+**request:** `UpsertSnippetRequest` 
     
 </dd>
 </dl>
@@ -9037,7 +9157,7 @@ await client.Snippets.UpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Snippets.<a href="/src/Square/Snippets/SnippetsClient.cs">DeleteAsync</a>(Snippets.DeleteSnippetsRequest { ... }) -> DeleteSnippetResponse</code></summary>
+<details><summary><code>client.Snippets.<a href="/src/Square/Snippets/SnippetsClient.cs">DeleteAsync</a>(DeleteSnippetsRequest { ... }) -> DeleteSnippetResponse</code></summary>
 <dl>
 <dd>
 
@@ -9084,7 +9204,7 @@ await client.Snippets.DeleteAsync(new DeleteSnippetsRequest { SiteId = "site_id"
 <dl>
 <dd>
 
-**request:** `Snippets.DeleteSnippetsRequest` 
+**request:** `DeleteSnippetsRequest` 
     
 </dd>
 </dl>
@@ -9097,7 +9217,7 @@ await client.Snippets.DeleteAsync(new DeleteSnippetsRequest { SiteId = "site_id"
 </details>
 
 ## Subscriptions
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">CreateAsync</a>(Subscriptions.CreateSubscriptionRequest { ... }) -> CreateSubscriptionResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">CreateAsync</a>(CreateSubscriptionRequest { ... }) -> CreateSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -9162,7 +9282,7 @@ await client.Subscriptions.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.CreateSubscriptionRequest` 
+**request:** `CreateSubscriptionRequest` 
     
 </dd>
 </dl>
@@ -9174,7 +9294,7 @@ await client.Subscriptions.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">BulkSwapPlanAsync</a>(Subscriptions.BulkSwapPlanRequest { ... }) -> BulkSwapPlanResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">BulkSwapPlanAsync</a>(BulkSwapPlanRequest { ... }) -> BulkSwapPlanResponse</code></summary>
 <dl>
 <dd>
 
@@ -9224,7 +9344,7 @@ await client.Subscriptions.BulkSwapPlanAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.BulkSwapPlanRequest` 
+**request:** `BulkSwapPlanRequest` 
     
 </dd>
 </dl>
@@ -9236,7 +9356,7 @@ await client.Subscriptions.BulkSwapPlanAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">SearchAsync</a>(Subscriptions.SearchSubscriptionsRequest { ... }) -> SearchSubscriptionsResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">SearchAsync</a>(SearchSubscriptionsRequest { ... }) -> SearchSubscriptionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -9304,7 +9424,7 @@ await client.Subscriptions.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.SearchSubscriptionsRequest` 
+**request:** `SearchSubscriptionsRequest` 
     
 </dd>
 </dl>
@@ -9316,7 +9436,7 @@ await client.Subscriptions.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">GetAsync</a>(Subscriptions.GetSubscriptionsRequest { ... }) -> GetSubscriptionResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">GetAsync</a>(GetSubscriptionsRequest { ... }) -> GetSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -9364,7 +9484,7 @@ await client.Subscriptions.GetAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.GetSubscriptionsRequest` 
+**request:** `GetSubscriptionsRequest` 
     
 </dd>
 </dl>
@@ -9376,7 +9496,7 @@ await client.Subscriptions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">UpdateAsync</a>(Subscriptions.UpdateSubscriptionRequest { ... }) -> UpdateSubscriptionResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">UpdateAsync</a>(UpdateSubscriptionRequest { ... }) -> UpdateSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -9425,7 +9545,7 @@ await client.Subscriptions.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.UpdateSubscriptionRequest` 
+**request:** `UpdateSubscriptionRequest` 
     
 </dd>
 </dl>
@@ -9437,7 +9557,7 @@ await client.Subscriptions.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">DeleteActionAsync</a>(Subscriptions.DeleteActionSubscriptionsRequest { ... }) -> DeleteSubscriptionActionResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">DeleteActionAsync</a>(DeleteActionSubscriptionsRequest { ... }) -> DeleteSubscriptionActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -9485,7 +9605,7 @@ await client.Subscriptions.DeleteActionAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.DeleteActionSubscriptionsRequest` 
+**request:** `DeleteActionSubscriptionsRequest` 
     
 </dd>
 </dl>
@@ -9497,7 +9617,7 @@ await client.Subscriptions.DeleteActionAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">ChangeBillingAnchorDateAsync</a>(Subscriptions.ChangeBillingAnchorDateRequest { ... }) -> ChangeBillingAnchorDateResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">ChangeBillingAnchorDateAsync</a>(ChangeBillingAnchorDateRequest { ... }) -> ChangeBillingAnchorDateResponse</code></summary>
 <dl>
 <dd>
 
@@ -9546,7 +9666,7 @@ await client.Subscriptions.ChangeBillingAnchorDateAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.ChangeBillingAnchorDateRequest` 
+**request:** `ChangeBillingAnchorDateRequest` 
     
 </dd>
 </dl>
@@ -9558,7 +9678,7 @@ await client.Subscriptions.ChangeBillingAnchorDateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">CancelAsync</a>(Subscriptions.CancelSubscriptionsRequest { ... }) -> CancelSubscriptionResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">CancelAsync</a>(CancelSubscriptionsRequest { ... }) -> CancelSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -9604,7 +9724,7 @@ await client.Subscriptions.CancelAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.CancelSubscriptionsRequest` 
+**request:** `CancelSubscriptionsRequest` 
     
 </dd>
 </dl>
@@ -9616,7 +9736,7 @@ await client.Subscriptions.CancelAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">ListEventsAsync</a>(Subscriptions.ListEventsSubscriptionsRequest { ... }) -> Core.Pager<SubscriptionEvent></code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">ListEventsAsync</a>(ListEventsSubscriptionsRequest { ... }) -> Pager<SubscriptionEvent></code></summary>
 <dl>
 <dd>
 
@@ -9665,7 +9785,7 @@ await client.Subscriptions.ListEventsAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.ListEventsSubscriptionsRequest` 
+**request:** `ListEventsSubscriptionsRequest` 
     
 </dd>
 </dl>
@@ -9677,7 +9797,7 @@ await client.Subscriptions.ListEventsAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">PauseAsync</a>(Subscriptions.PauseSubscriptionRequest { ... }) -> PauseSubscriptionResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">PauseAsync</a>(PauseSubscriptionRequest { ... }) -> PauseSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -9721,7 +9841,7 @@ await client.Subscriptions.PauseAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.PauseSubscriptionRequest` 
+**request:** `PauseSubscriptionRequest` 
     
 </dd>
 </dl>
@@ -9733,7 +9853,7 @@ await client.Subscriptions.PauseAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">ResumeAsync</a>(Subscriptions.ResumeSubscriptionRequest { ... }) -> ResumeSubscriptionResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">ResumeAsync</a>(ResumeSubscriptionRequest { ... }) -> ResumeSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -9777,7 +9897,7 @@ await client.Subscriptions.ResumeAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.ResumeSubscriptionRequest` 
+**request:** `ResumeSubscriptionRequest` 
     
 </dd>
 </dl>
@@ -9789,7 +9909,7 @@ await client.Subscriptions.ResumeAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">SwapPlanAsync</a>(Subscriptions.SwapPlanRequest { ... }) -> SwapPlanResponse</code></summary>
+<details><summary><code>client.Subscriptions.<a href="/src/Square/Subscriptions/SubscriptionsClient.cs">SwapPlanAsync</a>(SwapPlanRequest { ... }) -> SwapPlanResponse</code></summary>
 <dl>
 <dd>
 
@@ -9842,7 +9962,7 @@ await client.Subscriptions.SwapPlanAsync(
 <dl>
 <dd>
 
-**request:** `Subscriptions.SwapPlanRequest` 
+**request:** `SwapPlanRequest` 
     
 </dd>
 </dl>
@@ -9953,7 +10073,7 @@ await client.TeamMembers.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">BatchCreateAsync</a>(Square.TeamMembers.BatchCreateTeamMembersRequest { ... }) -> BatchCreateTeamMembersResponse</code></summary>
+<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">BatchCreateAsync</a>(BatchCreateTeamMembersRequest { ... }) -> BatchCreateTeamMembersResponse</code></summary>
 <dl>
 <dd>
 
@@ -10046,7 +10166,7 @@ await client.TeamMembers.BatchCreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.TeamMembers.BatchCreateTeamMembersRequest` 
+**request:** `BatchCreateTeamMembersRequest` 
     
 </dd>
 </dl>
@@ -10058,7 +10178,7 @@ await client.TeamMembers.BatchCreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">BatchUpdateAsync</a>(Square.TeamMembers.BatchUpdateTeamMembersRequest { ... }) -> BatchUpdateTeamMembersResponse</code></summary>
+<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">BatchUpdateAsync</a>(BatchUpdateTeamMembersRequest { ... }) -> BatchUpdateTeamMembersResponse</code></summary>
 <dl>
 <dd>
 
@@ -10154,7 +10274,7 @@ await client.TeamMembers.BatchUpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.TeamMembers.BatchUpdateTeamMembersRequest` 
+**request:** `BatchUpdateTeamMembersRequest` 
     
 </dd>
 </dl>
@@ -10166,7 +10286,7 @@ await client.TeamMembers.BatchUpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">SearchAsync</a>(Square.TeamMembers.SearchTeamMembersRequest { ... }) -> SearchTeamMembersResponse</code></summary>
+<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">SearchAsync</a>(SearchTeamMembersRequest { ... }) -> SearchTeamMembersResponse</code></summary>
 <dl>
 <dd>
 
@@ -10223,7 +10343,7 @@ await client.TeamMembers.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.TeamMembers.SearchTeamMembersRequest` 
+**request:** `SearchTeamMembersRequest` 
     
 </dd>
 </dl>
@@ -10235,7 +10355,7 @@ await client.TeamMembers.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">GetAsync</a>(Square.TeamMembers.GetTeamMembersRequest { ... }) -> GetTeamMemberResponse</code></summary>
+<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">GetAsync</a>(GetTeamMembersRequest { ... }) -> GetTeamMemberResponse</code></summary>
 <dl>
 <dd>
 
@@ -10278,7 +10398,7 @@ await client.TeamMembers.GetAsync(new GetTeamMembersRequest { TeamMemberId = "te
 <dl>
 <dd>
 
-**request:** `Square.TeamMembers.GetTeamMembersRequest` 
+**request:** `GetTeamMembersRequest` 
     
 </dd>
 </dl>
@@ -10290,7 +10410,7 @@ await client.TeamMembers.GetAsync(new GetTeamMembersRequest { TeamMemberId = "te
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">UpdateAsync</a>(Square.TeamMembers.UpdateTeamMembersRequest { ... }) -> UpdateTeamMemberResponse</code></summary>
+<details><summary><code>client.TeamMembers.<a href="/src/Square/TeamMembers/TeamMembersClient.cs">UpdateAsync</a>(UpdateTeamMembersRequest { ... }) -> UpdateTeamMemberResponse</code></summary>
 <dl>
 <dd>
 
@@ -10375,7 +10495,7 @@ await client.TeamMembers.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.TeamMembers.UpdateTeamMembersRequest` 
+**request:** `UpdateTeamMembersRequest` 
     
 </dd>
 </dl>
@@ -10388,7 +10508,7 @@ await client.TeamMembers.UpdateAsync(
 </details>
 
 ## Team
-<details><summary><code>client.Team.<a href="/src/Square/Team/TeamClient.cs">ListJobsAsync</a>(Team.ListJobsRequest { ... }) -> ListJobsResponse</code></summary>
+<details><summary><code>client.Team.<a href="/src/Square/Team/TeamClient.cs">ListJobsAsync</a>(ListJobsRequest { ... }) -> ListJobsResponse</code></summary>
 <dl>
 <dd>
 
@@ -10430,7 +10550,7 @@ await client.Team.ListJobsAsync(new ListJobsRequest { Cursor = "cursor" });
 <dl>
 <dd>
 
-**request:** `Team.ListJobsRequest` 
+**request:** `ListJobsRequest` 
     
 </dd>
 </dl>
@@ -10442,7 +10562,7 @@ await client.Team.ListJobsAsync(new ListJobsRequest { Cursor = "cursor" });
 </dl>
 </details>
 
-<details><summary><code>client.Team.<a href="/src/Square/Team/TeamClient.cs">CreateJobAsync</a>(Team.CreateJobRequest { ... }) -> CreateJobResponse</code></summary>
+<details><summary><code>client.Team.<a href="/src/Square/Team/TeamClient.cs">CreateJobAsync</a>(CreateJobRequest { ... }) -> CreateJobResponse</code></summary>
 <dl>
 <dd>
 
@@ -10491,7 +10611,7 @@ await client.Team.CreateJobAsync(
 <dl>
 <dd>
 
-**request:** `Team.CreateJobRequest` 
+**request:** `CreateJobRequest` 
     
 </dd>
 </dl>
@@ -10503,7 +10623,7 @@ await client.Team.CreateJobAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Team.<a href="/src/Square/Team/TeamClient.cs">RetrieveJobAsync</a>(Team.RetrieveJobRequest { ... }) -> RetrieveJobResponse</code></summary>
+<details><summary><code>client.Team.<a href="/src/Square/Team/TeamClient.cs">RetrieveJobAsync</a>(RetrieveJobRequest { ... }) -> RetrieveJobResponse</code></summary>
 <dl>
 <dd>
 
@@ -10545,7 +10665,7 @@ await client.Team.RetrieveJobAsync(new RetrieveJobRequest { JobId = "job_id" });
 <dl>
 <dd>
 
-**request:** `Team.RetrieveJobRequest` 
+**request:** `RetrieveJobRequest` 
     
 </dd>
 </dl>
@@ -10557,7 +10677,7 @@ await client.Team.RetrieveJobAsync(new RetrieveJobRequest { JobId = "job_id" });
 </dl>
 </details>
 
-<details><summary><code>client.Team.<a href="/src/Square/Team/TeamClient.cs">UpdateJobAsync</a>(Team.UpdateJobRequest { ... }) -> UpdateJobResponse</code></summary>
+<details><summary><code>client.Team.<a href="/src/Square/Team/TeamClient.cs">UpdateJobAsync</a>(UpdateJobRequest { ... }) -> UpdateJobResponse</code></summary>
 <dl>
 <dd>
 
@@ -10607,7 +10727,7 @@ await client.Team.UpdateJobAsync(
 <dl>
 <dd>
 
-**request:** `Team.UpdateJobRequest` 
+**request:** `UpdateJobRequest` 
     
 </dd>
 </dl>
@@ -10620,7 +10740,7 @@ await client.Team.UpdateJobAsync(
 </details>
 
 ## Terminal
-<details><summary><code>client.Terminal.<a href="/src/Square/Terminal/TerminalClient.cs">DismissTerminalActionAsync</a>(Square.Terminal.DismissTerminalActionRequest { ... }) -> DismissTerminalActionResponse</code></summary>
+<details><summary><code>client.Terminal.<a href="/src/Square/Terminal/TerminalClient.cs">DismissTerminalActionAsync</a>(DismissTerminalActionRequest { ... }) -> DismissTerminalActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -10666,7 +10786,7 @@ await client.Terminal.DismissTerminalActionAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.DismissTerminalActionRequest` 
+**request:** `DismissTerminalActionRequest` 
     
 </dd>
 </dl>
@@ -10678,7 +10798,7 @@ await client.Terminal.DismissTerminalActionAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.<a href="/src/Square/Terminal/TerminalClient.cs">DismissTerminalCheckoutAsync</a>(Square.Terminal.DismissTerminalCheckoutRequest { ... }) -> DismissTerminalCheckoutResponse</code></summary>
+<details><summary><code>client.Terminal.<a href="/src/Square/Terminal/TerminalClient.cs">DismissTerminalCheckoutAsync</a>(DismissTerminalCheckoutRequest { ... }) -> DismissTerminalCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -10722,7 +10842,7 @@ await client.Terminal.DismissTerminalCheckoutAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.DismissTerminalCheckoutRequest` 
+**request:** `DismissTerminalCheckoutRequest` 
     
 </dd>
 </dl>
@@ -10734,7 +10854,7 @@ await client.Terminal.DismissTerminalCheckoutAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.<a href="/src/Square/Terminal/TerminalClient.cs">DismissTerminalRefundAsync</a>(Square.Terminal.DismissTerminalRefundRequest { ... }) -> DismissTerminalRefundResponse</code></summary>
+<details><summary><code>client.Terminal.<a href="/src/Square/Terminal/TerminalClient.cs">DismissTerminalRefundAsync</a>(DismissTerminalRefundRequest { ... }) -> DismissTerminalRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -10778,7 +10898,7 @@ await client.Terminal.DismissTerminalRefundAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.DismissTerminalRefundRequest` 
+**request:** `DismissTerminalRefundRequest` 
     
 </dd>
 </dl>
@@ -10791,7 +10911,7 @@ await client.Terminal.DismissTerminalRefundAsync(
 </details>
 
 ## TransferOrders
-<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">CreateAsync</a>(TransferOrders.CreateTransferOrderRequest { ... }) -> CreateTransferOrderResponse</code></summary>
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">CreateAsync</a>(CreateTransferOrderRequest { ... }) -> CreateTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -10879,7 +10999,7 @@ await client.TransferOrders.CreateAsync(
 <dl>
 <dd>
 
-**request:** `TransferOrders.CreateTransferOrderRequest` 
+**request:** `CreateTransferOrderRequest` 
     
 </dd>
 </dl>
@@ -10891,7 +11011,7 @@ await client.TransferOrders.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">SearchAsync</a>(TransferOrders.SearchTransferOrdersRequest { ... }) -> Core.Pager<TransferOrder></code></summary>
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">SearchAsync</a>(SearchTransferOrdersRequest { ... }) -> Pager<TransferOrder></code></summary>
 <dl>
 <dd>
 
@@ -10963,7 +11083,7 @@ await client.TransferOrders.SearchAsync(
 <dl>
 <dd>
 
-**request:** `TransferOrders.SearchTransferOrdersRequest` 
+**request:** `SearchTransferOrdersRequest` 
     
 </dd>
 </dl>
@@ -10975,7 +11095,7 @@ await client.TransferOrders.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">GetAsync</a>(TransferOrders.GetTransferOrdersRequest { ... }) -> RetrieveTransferOrderResponse</code></summary>
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">GetAsync</a>(GetTransferOrdersRequest { ... }) -> RetrieveTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -11025,7 +11145,7 @@ await client.TransferOrders.GetAsync(
 <dl>
 <dd>
 
-**request:** `TransferOrders.GetTransferOrdersRequest` 
+**request:** `GetTransferOrdersRequest` 
     
 </dd>
 </dl>
@@ -11037,7 +11157,7 @@ await client.TransferOrders.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">UpdateAsync</a>(TransferOrders.UpdateTransferOrderRequest { ... }) -> UpdateTransferOrderResponse</code></summary>
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">UpdateAsync</a>(UpdateTransferOrderRequest { ... }) -> UpdateTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -11107,7 +11227,7 @@ await client.TransferOrders.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `TransferOrders.UpdateTransferOrderRequest` 
+**request:** `UpdateTransferOrderRequest` 
     
 </dd>
 </dl>
@@ -11119,7 +11239,7 @@ await client.TransferOrders.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">DeleteAsync</a>(TransferOrders.DeleteTransferOrdersRequest { ... }) -> DeleteTransferOrderResponse</code></summary>
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">DeleteAsync</a>(DeleteTransferOrdersRequest { ... }) -> DeleteTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -11167,7 +11287,7 @@ await client.TransferOrders.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `TransferOrders.DeleteTransferOrdersRequest` 
+**request:** `DeleteTransferOrdersRequest` 
     
 </dd>
 </dl>
@@ -11179,7 +11299,7 @@ await client.TransferOrders.DeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">CancelAsync</a>(TransferOrders.CancelTransferOrderRequest { ... }) -> CancelTransferOrderResponse</code></summary>
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">CancelAsync</a>(CancelTransferOrderRequest { ... }) -> CancelTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -11237,7 +11357,7 @@ await client.TransferOrders.CancelAsync(
 <dl>
 <dd>
 
-**request:** `TransferOrders.CancelTransferOrderRequest` 
+**request:** `CancelTransferOrderRequest` 
     
 </dd>
 </dl>
@@ -11249,7 +11369,7 @@ await client.TransferOrders.CancelAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">ReceiveAsync</a>(TransferOrders.ReceiveTransferOrderRequest { ... }) -> ReceiveTransferOrderResponse</code></summary>
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">ReceiveAsync</a>(ReceiveTransferOrderRequest { ... }) -> ReceiveTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -11332,7 +11452,7 @@ await client.TransferOrders.ReceiveAsync(
 <dl>
 <dd>
 
-**request:** `TransferOrders.ReceiveTransferOrderRequest` 
+**request:** `ReceiveTransferOrderRequest` 
     
 </dd>
 </dl>
@@ -11344,7 +11464,7 @@ await client.TransferOrders.ReceiveAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">StartAsync</a>(TransferOrders.StartTransferOrderRequest { ... }) -> StartTransferOrderResponse</code></summary>
+<details><summary><code>client.TransferOrders.<a href="/src/Square/TransferOrders/TransferOrdersClient.cs">StartAsync</a>(StartTransferOrderRequest { ... }) -> StartTransferOrderResponse</code></summary>
 <dl>
 <dd>
 
@@ -11400,7 +11520,7 @@ await client.TransferOrders.StartAsync(
 <dl>
 <dd>
 
-**request:** `TransferOrders.StartTransferOrderRequest` 
+**request:** `StartTransferOrderRequest` 
     
 </dd>
 </dl>
@@ -11413,7 +11533,7 @@ await client.TransferOrders.StartAsync(
 </details>
 
 ## Vendors
-<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">BatchCreateAsync</a>(Vendors.BatchCreateVendorsRequest { ... }) -> BatchCreateVendorsResponse</code></summary>
+<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">BatchCreateAsync</a>(BatchCreateVendorsRequest { ... }) -> BatchCreateVendorsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11490,7 +11610,7 @@ await client.Vendors.BatchCreateAsync(
 <dl>
 <dd>
 
-**request:** `Vendors.BatchCreateVendorsRequest` 
+**request:** `BatchCreateVendorsRequest` 
     
 </dd>
 </dl>
@@ -11502,7 +11622,7 @@ await client.Vendors.BatchCreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">BatchGetAsync</a>(Vendors.BatchGetVendorsRequest { ... }) -> BatchGetVendorsResponse</code></summary>
+<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">BatchGetAsync</a>(BatchGetVendorsRequest { ... }) -> BatchGetVendorsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11549,7 +11669,7 @@ await client.Vendors.BatchGetAsync(
 <dl>
 <dd>
 
-**request:** `Vendors.BatchGetVendorsRequest` 
+**request:** `BatchGetVendorsRequest` 
     
 </dd>
 </dl>
@@ -11561,7 +11681,7 @@ await client.Vendors.BatchGetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">BatchUpdateAsync</a>(Vendors.BatchUpdateVendorsRequest { ... }) -> BatchUpdateVendorsResponse</code></summary>
+<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">BatchUpdateAsync</a>(BatchUpdateVendorsRequest { ... }) -> BatchUpdateVendorsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11618,7 +11738,7 @@ await client.Vendors.BatchUpdateAsync(
 <dl>
 <dd>
 
-**request:** `Vendors.BatchUpdateVendorsRequest` 
+**request:** `BatchUpdateVendorsRequest` 
     
 </dd>
 </dl>
@@ -11630,7 +11750,7 @@ await client.Vendors.BatchUpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">CreateAsync</a>(Vendors.CreateVendorRequest { ... }) -> CreateVendorResponse</code></summary>
+<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">CreateAsync</a>(CreateVendorRequest { ... }) -> CreateVendorResponse</code></summary>
 <dl>
 <dd>
 
@@ -11702,7 +11822,7 @@ await client.Vendors.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Vendors.CreateVendorRequest` 
+**request:** `CreateVendorRequest` 
     
 </dd>
 </dl>
@@ -11714,7 +11834,7 @@ await client.Vendors.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">SearchAsync</a>(Vendors.SearchVendorsRequest { ... }) -> SearchVendorsResponse</code></summary>
+<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">SearchAsync</a>(SearchVendorsRequest { ... }) -> SearchVendorsResponse</code></summary>
 <dl>
 <dd>
 
@@ -11756,7 +11876,7 @@ await client.Vendors.SearchAsync(new SearchVendorsRequest());
 <dl>
 <dd>
 
-**request:** `Vendors.SearchVendorsRequest` 
+**request:** `SearchVendorsRequest` 
     
 </dd>
 </dl>
@@ -11768,7 +11888,7 @@ await client.Vendors.SearchAsync(new SearchVendorsRequest());
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">GetAsync</a>(Vendors.GetVendorsRequest { ... }) -> GetVendorResponse</code></summary>
+<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">GetAsync</a>(GetVendorsRequest { ... }) -> GetVendorResponse</code></summary>
 <dl>
 <dd>
 
@@ -11810,7 +11930,7 @@ await client.Vendors.GetAsync(new GetVendorsRequest { VendorId = "vendor_id" });
 <dl>
 <dd>
 
-**request:** `Vendors.GetVendorsRequest` 
+**request:** `GetVendorsRequest` 
     
 </dd>
 </dl>
@@ -11822,7 +11942,7 @@ await client.Vendors.GetAsync(new GetVendorsRequest { VendorId = "vendor_id" });
 </dl>
 </details>
 
-<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">UpdateAsync</a>(Vendors.UpdateVendorsRequest { ... }) -> UpdateVendorResponse</code></summary>
+<details><summary><code>client.Vendors.<a href="/src/Square/Vendors/VendorsClient.cs">UpdateAsync</a>(UpdateVendorsRequest { ... }) -> UpdateVendorResponse</code></summary>
 <dl>
 <dd>
 
@@ -11880,7 +12000,7 @@ await client.Vendors.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Vendors.UpdateVendorsRequest` 
+**request:** `UpdateVendorsRequest` 
     
 </dd>
 </dl>
@@ -11893,7 +12013,7 @@ await client.Vendors.UpdateAsync(
 </details>
 
 ## Bookings CustomAttributeDefinitions
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(Square.Bookings.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest { ... }) -> Core.Pager<CustomAttributeDefinition></code></summary>
+<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(ListCustomAttributeDefinitionsRequest { ... }) -> Pager<CustomAttributeDefinition></code></summary>
 <dl>
 <dd>
 
@@ -11944,7 +12064,7 @@ await client.Bookings.CustomAttributeDefinitions.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest` 
+**request:** `ListCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -11956,7 +12076,7 @@ await client.Bookings.CustomAttributeDefinitions.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(Square.Bookings.CustomAttributeDefinitions.CreateBookingCustomAttributeDefinitionRequest { ... }) -> CreateBookingCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(CreateBookingCustomAttributeDefinitionRequest { ... }) -> CreateBookingCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12009,7 +12129,7 @@ await client.Bookings.CustomAttributeDefinitions.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributeDefinitions.CreateBookingCustomAttributeDefinitionRequest` 
+**request:** `CreateBookingCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -12021,7 +12141,7 @@ await client.Bookings.CustomAttributeDefinitions.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(Square.Bookings.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest { ... }) -> RetrieveBookingCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(GetCustomAttributeDefinitionsRequest { ... }) -> RetrieveBookingCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12072,7 +12192,7 @@ await client.Bookings.CustomAttributeDefinitions.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest` 
+**request:** `GetCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -12084,7 +12204,7 @@ await client.Bookings.CustomAttributeDefinitions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(Square.Bookings.CustomAttributeDefinitions.UpdateBookingCustomAttributeDefinitionRequest { ... }) -> UpdateBookingCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(UpdateBookingCustomAttributeDefinitionRequest { ... }) -> UpdateBookingCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12138,7 +12258,7 @@ await client.Bookings.CustomAttributeDefinitions.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributeDefinitions.UpdateBookingCustomAttributeDefinitionRequest` 
+**request:** `UpdateBookingCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -12150,7 +12270,7 @@ await client.Bookings.CustomAttributeDefinitions.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(Square.Bookings.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteBookingCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteBookingCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12203,7 +12323,7 @@ await client.Bookings.CustomAttributeDefinitions.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest` 
+**request:** `DeleteCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -12216,7 +12336,7 @@ await client.Bookings.CustomAttributeDefinitions.DeleteAsync(
 </details>
 
 ## Bookings CustomAttributes
-<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">BatchDeleteAsync</a>(Square.Bookings.CustomAttributes.BulkDeleteBookingCustomAttributesRequest { ... }) -> BulkDeleteBookingCustomAttributesResponse</code></summary>
+<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">BatchDeleteAsync</a>(BulkDeleteBookingCustomAttributesRequest { ... }) -> BulkDeleteBookingCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12275,7 +12395,7 @@ await client.Bookings.CustomAttributes.BatchDeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributes.BulkDeleteBookingCustomAttributesRequest` 
+**request:** `BulkDeleteBookingCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -12287,7 +12407,7 @@ await client.Bookings.CustomAttributes.BatchDeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">BatchUpsertAsync</a>(Square.Bookings.CustomAttributes.BulkUpsertBookingCustomAttributesRequest { ... }) -> BulkUpsertBookingCustomAttributesResponse</code></summary>
+<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">BatchUpsertAsync</a>(BulkUpsertBookingCustomAttributesRequest { ... }) -> BulkUpsertBookingCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -12350,7 +12470,7 @@ await client.Bookings.CustomAttributes.BatchUpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributes.BulkUpsertBookingCustomAttributesRequest` 
+**request:** `BulkUpsertBookingCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -12362,7 +12482,7 @@ await client.Bookings.CustomAttributes.BatchUpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(Square.Bookings.CustomAttributes.ListCustomAttributesRequest { ... }) -> Core.Pager<CustomAttribute></code></summary>
+<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(ListCustomAttributesRequest { ... }) -> Pager<CustomAttribute></code></summary>
 <dl>
 <dd>
 
@@ -12415,7 +12535,7 @@ await client.Bookings.CustomAttributes.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributes.ListCustomAttributesRequest` 
+**request:** `ListCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -12427,7 +12547,7 @@ await client.Bookings.CustomAttributes.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(Square.Bookings.CustomAttributes.GetCustomAttributesRequest { ... }) -> RetrieveBookingCustomAttributeResponse</code></summary>
+<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(GetCustomAttributesRequest { ... }) -> RetrieveBookingCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -12480,7 +12600,7 @@ await client.Bookings.CustomAttributes.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributes.GetCustomAttributesRequest` 
+**request:** `GetCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -12492,7 +12612,7 @@ await client.Bookings.CustomAttributes.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(Square.Bookings.CustomAttributes.UpsertBookingCustomAttributeRequest { ... }) -> UpsertBookingCustomAttributeResponse</code></summary>
+<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(UpsertBookingCustomAttributeRequest { ... }) -> UpsertBookingCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -12547,7 +12667,7 @@ await client.Bookings.CustomAttributes.UpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributes.UpsertBookingCustomAttributeRequest` 
+**request:** `UpsertBookingCustomAttributeRequest` 
     
 </dd>
 </dl>
@@ -12559,7 +12679,7 @@ await client.Bookings.CustomAttributes.UpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(Square.Bookings.CustomAttributes.DeleteCustomAttributesRequest { ... }) -> DeleteBookingCustomAttributeResponse</code></summary>
+<details><summary><code>client.Bookings.CustomAttributes.<a href="/src/Square/Bookings/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(DeleteCustomAttributesRequest { ... }) -> DeleteBookingCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -12613,7 +12733,7 @@ await client.Bookings.CustomAttributes.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.CustomAttributes.DeleteCustomAttributesRequest` 
+**request:** `DeleteCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -12626,7 +12746,7 @@ await client.Bookings.CustomAttributes.DeleteAsync(
 </details>
 
 ## Bookings LocationProfiles
-<details><summary><code>client.Bookings.LocationProfiles.<a href="/src/Square/Bookings/LocationProfiles/LocationProfilesClient.cs">ListAsync</a>(Square.Bookings.LocationProfiles.ListLocationProfilesRequest { ... }) -> Core.Pager<LocationBookingProfile></code></summary>
+<details><summary><code>client.Bookings.LocationProfiles.<a href="/src/Square/Bookings/LocationProfiles/LocationProfilesClient.cs">ListAsync</a>(ListLocationProfilesRequest { ... }) -> Pager<LocationBookingProfile></code></summary>
 <dl>
 <dd>
 
@@ -12670,7 +12790,7 @@ await client.Bookings.LocationProfiles.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.LocationProfiles.ListLocationProfilesRequest` 
+**request:** `ListLocationProfilesRequest` 
     
 </dd>
 </dl>
@@ -12683,7 +12803,7 @@ await client.Bookings.LocationProfiles.ListAsync(
 </details>
 
 ## Bookings TeamMemberProfiles
-<details><summary><code>client.Bookings.TeamMemberProfiles.<a href="/src/Square/Bookings/TeamMemberProfiles/TeamMemberProfilesClient.cs">ListAsync</a>(Square.Bookings.TeamMemberProfiles.ListTeamMemberProfilesRequest { ... }) -> Core.Pager<TeamMemberBookingProfile></code></summary>
+<details><summary><code>client.Bookings.TeamMemberProfiles.<a href="/src/Square/Bookings/TeamMemberProfiles/TeamMemberProfilesClient.cs">ListAsync</a>(ListTeamMemberProfilesRequest { ... }) -> Pager<TeamMemberBookingProfile></code></summary>
 <dl>
 <dd>
 
@@ -12733,7 +12853,7 @@ await client.Bookings.TeamMemberProfiles.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.TeamMemberProfiles.ListTeamMemberProfilesRequest` 
+**request:** `ListTeamMemberProfilesRequest` 
     
 </dd>
 </dl>
@@ -12745,7 +12865,7 @@ await client.Bookings.TeamMemberProfiles.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Bookings.TeamMemberProfiles.<a href="/src/Square/Bookings/TeamMemberProfiles/TeamMemberProfilesClient.cs">GetAsync</a>(Square.Bookings.TeamMemberProfiles.GetTeamMemberProfilesRequest { ... }) -> GetTeamMemberBookingProfileResponse</code></summary>
+<details><summary><code>client.Bookings.TeamMemberProfiles.<a href="/src/Square/Bookings/TeamMemberProfiles/TeamMemberProfilesClient.cs">GetAsync</a>(GetTeamMemberProfilesRequest { ... }) -> GetTeamMemberBookingProfileResponse</code></summary>
 <dl>
 <dd>
 
@@ -12789,7 +12909,7 @@ await client.Bookings.TeamMemberProfiles.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Bookings.TeamMemberProfiles.GetTeamMemberProfilesRequest` 
+**request:** `GetTeamMemberProfilesRequest` 
     
 </dd>
 </dl>
@@ -12802,7 +12922,7 @@ await client.Bookings.TeamMemberProfiles.GetAsync(
 </details>
 
 ## CashDrawers Shifts
-<details><summary><code>client.CashDrawers.Shifts.<a href="/src/Square/CashDrawers/Shifts/ShiftsClient.cs">ListAsync</a>(Square.CashDrawers.Shifts.ListShiftsRequest { ... }) -> Core.Pager<CashDrawerShiftSummary></code></summary>
+<details><summary><code>client.CashDrawers.Shifts.<a href="/src/Square/CashDrawers/Shifts/ShiftsClient.cs">ListAsync</a>(ListShiftsRequest { ... }) -> Pager<CashDrawerShiftSummary></code></summary>
 <dl>
 <dd>
 
@@ -12855,7 +12975,7 @@ await client.CashDrawers.Shifts.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.CashDrawers.Shifts.ListShiftsRequest` 
+**request:** `ListShiftsRequest` 
     
 </dd>
 </dl>
@@ -12867,7 +12987,7 @@ await client.CashDrawers.Shifts.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.CashDrawers.Shifts.<a href="/src/Square/CashDrawers/Shifts/ShiftsClient.cs">GetAsync</a>(Square.CashDrawers.Shifts.GetShiftsRequest { ... }) -> GetCashDrawerShiftResponse</code></summary>
+<details><summary><code>client.CashDrawers.Shifts.<a href="/src/Square/CashDrawers/Shifts/ShiftsClient.cs">GetAsync</a>(GetShiftsRequest { ... }) -> GetCashDrawerShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -12916,7 +13036,7 @@ await client.CashDrawers.Shifts.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.CashDrawers.Shifts.GetShiftsRequest` 
+**request:** `GetShiftsRequest` 
     
 </dd>
 </dl>
@@ -12928,7 +13048,7 @@ await client.CashDrawers.Shifts.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.CashDrawers.Shifts.<a href="/src/Square/CashDrawers/Shifts/ShiftsClient.cs">ListEventsAsync</a>(Square.CashDrawers.Shifts.ListEventsShiftsRequest { ... }) -> Core.Pager<CashDrawerShiftEvent></code></summary>
+<details><summary><code>client.CashDrawers.Shifts.<a href="/src/Square/CashDrawers/Shifts/ShiftsClient.cs">ListEventsAsync</a>(ListEventsShiftsRequest { ... }) -> Pager<CashDrawerShiftEvent></code></summary>
 <dl>
 <dd>
 
@@ -12978,7 +13098,7 @@ await client.CashDrawers.Shifts.ListEventsAsync(
 <dl>
 <dd>
 
-**request:** `Square.CashDrawers.Shifts.ListEventsShiftsRequest` 
+**request:** `ListEventsShiftsRequest` 
     
 </dd>
 </dl>
@@ -12991,8 +13111,124 @@ await client.CashDrawers.Shifts.ListEventsAsync(
 </details>
 
 ## Catalog Images
+<details><summary><code>client.Catalog.Images.<a href="/src/Square/Catalog/Images/ImagesClient.cs">CreateAsync</a>(CreateImagesRequest { ... }) -> CreateCatalogImageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Uploads an image file to be represented by a [CatalogImage](entity:CatalogImage) object that can be linked to an existing
+[CatalogObject](entity:CatalogObject) instance. The resulting `CatalogImage` is unattached to any `CatalogObject` if the `object_id`
+is not specified.
+
+This `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Catalog.Images.CreateAsync(new CreateImagesRequest());
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `CreateImagesRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.Catalog.Images.<a href="/src/Square/Catalog/Images/ImagesClient.cs">UpdateAsync</a>(UpdateImagesRequest { ... }) -> UpdateCatalogImageResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Uploads a new image file to replace the existing one in the specified [CatalogImage](entity:CatalogImage) object.
+
+This `UpdateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in
+JPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```csharp
+await client.Catalog.Images.UpdateAsync(new UpdateImagesRequest { ImageId = "image_id" });
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `UpdateImagesRequest` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Catalog Object
-<details><summary><code>client.Catalog.Object.<a href="/src/Square/Catalog/Object/ObjectClient.cs">UpsertAsync</a>(Square.Catalog.Object.UpsertCatalogObjectRequest { ... }) -> UpsertCatalogObjectResponse</code></summary>
+<details><summary><code>client.Catalog.Object.<a href="/src/Square/Catalog/Object/ObjectClient.cs">UpsertAsync</a>(UpsertCatalogObjectRequest { ... }) -> UpsertCatalogObjectResponse</code></summary>
 <dl>
 <dd>
 
@@ -13044,7 +13280,7 @@ await client.Catalog.Object.UpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.Object.UpsertCatalogObjectRequest` 
+**request:** `UpsertCatalogObjectRequest` 
     
 </dd>
 </dl>
@@ -13056,7 +13292,7 @@ await client.Catalog.Object.UpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.Object.<a href="/src/Square/Catalog/Object/ObjectClient.cs">GetAsync</a>(Square.Catalog.Object.GetObjectRequest { ... }) -> GetCatalogObjectResponse</code></summary>
+<details><summary><code>client.Catalog.Object.<a href="/src/Square/Catalog/Object/ObjectClient.cs">GetAsync</a>(GetObjectRequest { ... }) -> GetCatalogObjectResponse</code></summary>
 <dl>
 <dd>
 
@@ -13112,7 +13348,7 @@ await client.Catalog.Object.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Catalog.Object.GetObjectRequest` 
+**request:** `GetObjectRequest` 
     
 </dd>
 </dl>
@@ -13124,7 +13360,7 @@ await client.Catalog.Object.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Catalog.Object.<a href="/src/Square/Catalog/Object/ObjectClient.cs">DeleteAsync</a>(Square.Catalog.Object.DeleteObjectRequest { ... }) -> DeleteCatalogObjectResponse</code></summary>
+<details><summary><code>client.Catalog.Object.<a href="/src/Square/Catalog/Object/ObjectClient.cs">DeleteAsync</a>(DeleteObjectRequest { ... }) -> DeleteCatalogObjectResponse</code></summary>
 <dl>
 <dd>
 
@@ -13175,7 +13411,7 @@ await client.Catalog.Object.DeleteAsync(new DeleteObjectRequest { ObjectId = "ob
 <dl>
 <dd>
 
-**request:** `Square.Catalog.Object.DeleteObjectRequest` 
+**request:** `DeleteObjectRequest` 
     
 </dd>
 </dl>
@@ -13188,7 +13424,7 @@ await client.Catalog.Object.DeleteAsync(new DeleteObjectRequest { ObjectId = "ob
 </details>
 
 ## Checkout PaymentLinks
-<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">ListAsync</a>(Square.Checkout.PaymentLinks.ListPaymentLinksRequest { ... }) -> Core.Pager<PaymentLink></code></summary>
+<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">ListAsync</a>(ListPaymentLinksRequest { ... }) -> Pager<PaymentLink></code></summary>
 <dl>
 <dd>
 
@@ -13232,7 +13468,7 @@ await client.Checkout.PaymentLinks.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Checkout.PaymentLinks.ListPaymentLinksRequest` 
+**request:** `ListPaymentLinksRequest` 
     
 </dd>
 </dl>
@@ -13244,7 +13480,7 @@ await client.Checkout.PaymentLinks.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">CreateAsync</a>(Square.Checkout.PaymentLinks.CreatePaymentLinkRequest { ... }) -> CreatePaymentLinkResponse</code></summary>
+<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">CreateAsync</a>(CreatePaymentLinkRequest { ... }) -> CreatePaymentLinkResponse</code></summary>
 <dl>
 <dd>
 
@@ -13297,7 +13533,7 @@ await client.Checkout.PaymentLinks.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Checkout.PaymentLinks.CreatePaymentLinkRequest` 
+**request:** `CreatePaymentLinkRequest` 
     
 </dd>
 </dl>
@@ -13309,7 +13545,7 @@ await client.Checkout.PaymentLinks.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">GetAsync</a>(Square.Checkout.PaymentLinks.GetPaymentLinksRequest { ... }) -> GetPaymentLinkResponse</code></summary>
+<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">GetAsync</a>(GetPaymentLinksRequest { ... }) -> GetPaymentLinkResponse</code></summary>
 <dl>
 <dd>
 
@@ -13351,7 +13587,7 @@ await client.Checkout.PaymentLinks.GetAsync(new GetPaymentLinksRequest { Id = "i
 <dl>
 <dd>
 
-**request:** `Square.Checkout.PaymentLinks.GetPaymentLinksRequest` 
+**request:** `GetPaymentLinksRequest` 
     
 </dd>
 </dl>
@@ -13363,7 +13599,7 @@ await client.Checkout.PaymentLinks.GetAsync(new GetPaymentLinksRequest { Id = "i
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">UpdateAsync</a>(Square.Checkout.PaymentLinks.UpdatePaymentLinkRequest { ... }) -> UpdatePaymentLinkResponse</code></summary>
+<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">UpdateAsync</a>(UpdatePaymentLinkRequest { ... }) -> UpdatePaymentLinkResponse</code></summary>
 <dl>
 <dd>
 
@@ -13417,7 +13653,7 @@ await client.Checkout.PaymentLinks.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Checkout.PaymentLinks.UpdatePaymentLinkRequest` 
+**request:** `UpdatePaymentLinkRequest` 
     
 </dd>
 </dl>
@@ -13429,7 +13665,7 @@ await client.Checkout.PaymentLinks.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">DeleteAsync</a>(Square.Checkout.PaymentLinks.DeletePaymentLinksRequest { ... }) -> DeletePaymentLinkResponse</code></summary>
+<details><summary><code>client.Checkout.PaymentLinks.<a href="/src/Square/Checkout/PaymentLinks/PaymentLinksClient.cs">DeleteAsync</a>(DeletePaymentLinksRequest { ... }) -> DeletePaymentLinkResponse</code></summary>
 <dl>
 <dd>
 
@@ -13471,7 +13707,7 @@ await client.Checkout.PaymentLinks.DeleteAsync(new DeletePaymentLinksRequest { I
 <dl>
 <dd>
 
-**request:** `Square.Checkout.PaymentLinks.DeletePaymentLinksRequest` 
+**request:** `DeletePaymentLinksRequest` 
     
 </dd>
 </dl>
@@ -13484,7 +13720,7 @@ await client.Checkout.PaymentLinks.DeleteAsync(new DeletePaymentLinksRequest { I
 </details>
 
 ## Customers CustomAttributeDefinitions
-<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(Square.Customers.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest { ... }) -> Core.Pager<CustomAttributeDefinition></code></summary>
+<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(ListCustomAttributeDefinitionsRequest { ... }) -> Pager<CustomAttributeDefinition></code></summary>
 <dl>
 <dd>
 
@@ -13537,7 +13773,7 @@ await client.Customers.CustomAttributeDefinitions.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest` 
+**request:** `ListCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -13549,7 +13785,7 @@ await client.Customers.CustomAttributeDefinitions.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(Square.Customers.CustomAttributeDefinitions.CreateCustomerCustomAttributeDefinitionRequest { ... }) -> CreateCustomerCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(CreateCustomerCustomAttributeDefinitionRequest { ... }) -> CreateCustomerCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -13619,7 +13855,7 @@ await client.Customers.CustomAttributeDefinitions.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributeDefinitions.CreateCustomerCustomAttributeDefinitionRequest` 
+**request:** `CreateCustomerCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -13631,7 +13867,7 @@ await client.Customers.CustomAttributeDefinitions.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(Square.Customers.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest { ... }) -> GetCustomerCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(GetCustomAttributeDefinitionsRequest { ... }) -> GetCustomerCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -13683,7 +13919,7 @@ await client.Customers.CustomAttributeDefinitions.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest` 
+**request:** `GetCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -13695,7 +13931,7 @@ await client.Customers.CustomAttributeDefinitions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(Square.Customers.CustomAttributeDefinitions.UpdateCustomerCustomAttributeDefinitionRequest { ... }) -> UpdateCustomerCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(UpdateCustomerCustomAttributeDefinitionRequest { ... }) -> UpdateCustomerCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -13753,7 +13989,7 @@ await client.Customers.CustomAttributeDefinitions.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributeDefinitions.UpdateCustomerCustomAttributeDefinitionRequest` 
+**request:** `UpdateCustomerCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -13765,7 +14001,7 @@ await client.Customers.CustomAttributeDefinitions.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(Square.Customers.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteCustomerCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteCustomerCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -13817,7 +14053,7 @@ await client.Customers.CustomAttributeDefinitions.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest` 
+**request:** `DeleteCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -13829,7 +14065,7 @@ await client.Customers.CustomAttributeDefinitions.DeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">BatchUpsertAsync</a>(Square.Customers.CustomAttributeDefinitions.BatchUpsertCustomerCustomAttributesRequest { ... }) -> BatchUpsertCustomerCustomAttributesResponse</code></summary>
+<details><summary><code>client.Customers.CustomAttributeDefinitions.<a href="/src/Square/Customers/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">BatchUpsertAsync</a>(BatchUpsertCustomerCustomAttributesRequest { ... }) -> BatchUpsertCustomerCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -13946,7 +14182,7 @@ await client.Customers.CustomAttributeDefinitions.BatchUpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributeDefinitions.BatchUpsertCustomerCustomAttributesRequest` 
+**request:** `BatchUpsertCustomerCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -13959,7 +14195,7 @@ await client.Customers.CustomAttributeDefinitions.BatchUpsertAsync(
 </details>
 
 ## Customers Groups
-<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">ListAsync</a>(Square.Customers.Groups.ListGroupsRequest { ... }) -> Core.Pager<CustomerGroup></code></summary>
+<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">ListAsync</a>(ListGroupsRequest { ... }) -> Pager<CustomerGroup></code></summary>
 <dl>
 <dd>
 
@@ -14001,7 +14237,7 @@ await client.Customers.Groups.ListAsync(new ListGroupsRequest { Cursor = "cursor
 <dl>
 <dd>
 
-**request:** `Square.Customers.Groups.ListGroupsRequest` 
+**request:** `ListGroupsRequest` 
     
 </dd>
 </dl>
@@ -14013,7 +14249,7 @@ await client.Customers.Groups.ListAsync(new ListGroupsRequest { Cursor = "cursor
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">CreateAsync</a>(Square.Customers.Groups.CreateCustomerGroupRequest { ... }) -> CreateCustomerGroupResponse</code></summary>
+<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">CreateAsync</a>(CreateCustomerGroupRequest { ... }) -> CreateCustomerGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -14059,7 +14295,7 @@ await client.Customers.Groups.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.Groups.CreateCustomerGroupRequest` 
+**request:** `CreateCustomerGroupRequest` 
     
 </dd>
 </dl>
@@ -14071,7 +14307,7 @@ await client.Customers.Groups.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">GetAsync</a>(Square.Customers.Groups.GetGroupsRequest { ... }) -> GetCustomerGroupResponse</code></summary>
+<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">GetAsync</a>(GetGroupsRequest { ... }) -> GetCustomerGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -14113,7 +14349,7 @@ await client.Customers.Groups.GetAsync(new GetGroupsRequest { GroupId = "group_i
 <dl>
 <dd>
 
-**request:** `Square.Customers.Groups.GetGroupsRequest` 
+**request:** `GetGroupsRequest` 
     
 </dd>
 </dl>
@@ -14125,7 +14361,7 @@ await client.Customers.Groups.GetAsync(new GetGroupsRequest { GroupId = "group_i
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">UpdateAsync</a>(Square.Customers.Groups.UpdateCustomerGroupRequest { ... }) -> UpdateCustomerGroupResponse</code></summary>
+<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">UpdateAsync</a>(UpdateCustomerGroupRequest { ... }) -> UpdateCustomerGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -14173,7 +14409,7 @@ await client.Customers.Groups.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.Groups.UpdateCustomerGroupRequest` 
+**request:** `UpdateCustomerGroupRequest` 
     
 </dd>
 </dl>
@@ -14185,7 +14421,7 @@ await client.Customers.Groups.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">DeleteAsync</a>(Square.Customers.Groups.DeleteGroupsRequest { ... }) -> DeleteCustomerGroupResponse</code></summary>
+<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">DeleteAsync</a>(DeleteGroupsRequest { ... }) -> DeleteCustomerGroupResponse</code></summary>
 <dl>
 <dd>
 
@@ -14227,7 +14463,7 @@ await client.Customers.Groups.DeleteAsync(new DeleteGroupsRequest { GroupId = "g
 <dl>
 <dd>
 
-**request:** `Square.Customers.Groups.DeleteGroupsRequest` 
+**request:** `DeleteGroupsRequest` 
     
 </dd>
 </dl>
@@ -14239,7 +14475,7 @@ await client.Customers.Groups.DeleteAsync(new DeleteGroupsRequest { GroupId = "g
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">AddAsync</a>(Square.Customers.Groups.AddGroupsRequest { ... }) -> AddGroupToCustomerResponse</code></summary>
+<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">AddAsync</a>(AddGroupsRequest { ... }) -> AddGroupToCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -14286,7 +14522,7 @@ await client.Customers.Groups.AddAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.Groups.AddGroupsRequest` 
+**request:** `AddGroupsRequest` 
     
 </dd>
 </dl>
@@ -14298,7 +14534,7 @@ await client.Customers.Groups.AddAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">RemoveAsync</a>(Square.Customers.Groups.RemoveGroupsRequest { ... }) -> RemoveGroupFromCustomerResponse</code></summary>
+<details><summary><code>client.Customers.Groups.<a href="/src/Square/Customers/Groups/GroupsClient.cs">RemoveAsync</a>(RemoveGroupsRequest { ... }) -> RemoveGroupFromCustomerResponse</code></summary>
 <dl>
 <dd>
 
@@ -14345,7 +14581,7 @@ await client.Customers.Groups.RemoveAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.Groups.RemoveGroupsRequest` 
+**request:** `RemoveGroupsRequest` 
     
 </dd>
 </dl>
@@ -14358,7 +14594,7 @@ await client.Customers.Groups.RemoveAsync(
 </details>
 
 ## Customers Segments
-<details><summary><code>client.Customers.Segments.<a href="/src/Square/Customers/Segments/SegmentsClient.cs">ListAsync</a>(Square.Customers.Segments.ListSegmentsRequest { ... }) -> Core.Pager<CustomerSegment></code></summary>
+<details><summary><code>client.Customers.Segments.<a href="/src/Square/Customers/Segments/SegmentsClient.cs">ListAsync</a>(ListSegmentsRequest { ... }) -> Pager<CustomerSegment></code></summary>
 <dl>
 <dd>
 
@@ -14400,7 +14636,7 @@ await client.Customers.Segments.ListAsync(new ListSegmentsRequest { Cursor = "cu
 <dl>
 <dd>
 
-**request:** `Square.Customers.Segments.ListSegmentsRequest` 
+**request:** `ListSegmentsRequest` 
     
 </dd>
 </dl>
@@ -14412,7 +14648,7 @@ await client.Customers.Segments.ListAsync(new ListSegmentsRequest { Cursor = "cu
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Segments.<a href="/src/Square/Customers/Segments/SegmentsClient.cs">GetAsync</a>(Square.Customers.Segments.GetSegmentsRequest { ... }) -> GetCustomerSegmentResponse</code></summary>
+<details><summary><code>client.Customers.Segments.<a href="/src/Square/Customers/Segments/SegmentsClient.cs">GetAsync</a>(GetSegmentsRequest { ... }) -> GetCustomerSegmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -14454,7 +14690,7 @@ await client.Customers.Segments.GetAsync(new GetSegmentsRequest { SegmentId = "s
 <dl>
 <dd>
 
-**request:** `Square.Customers.Segments.GetSegmentsRequest` 
+**request:** `GetSegmentsRequest` 
     
 </dd>
 </dl>
@@ -14467,7 +14703,7 @@ await client.Customers.Segments.GetAsync(new GetSegmentsRequest { SegmentId = "s
 </details>
 
 ## Customers Cards
-<details><summary><code>client.Customers.Cards.<a href="/src/Square/Customers/Cards/CardsClient.cs">CreateAsync</a>(Square.Customers.Cards.CreateCustomerCardRequest { ... }) -> CreateCustomerCardResponse</code></summary>
+<details><summary><code>client.Customers.Cards.<a href="/src/Square/Customers/Cards/CardsClient.cs">CreateAsync</a>(CreateCustomerCardRequest { ... }) -> CreateCustomerCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -14529,7 +14765,7 @@ await client.Customers.Cards.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.Cards.CreateCustomerCardRequest` 
+**request:** `CreateCustomerCardRequest` 
     
 </dd>
 </dl>
@@ -14541,7 +14777,7 @@ await client.Customers.Cards.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.Cards.<a href="/src/Square/Customers/Cards/CardsClient.cs">DeleteAsync</a>(Square.Customers.Cards.DeleteCardsRequest { ... }) -> DeleteCustomerCardResponse</code></summary>
+<details><summary><code>client.Customers.Cards.<a href="/src/Square/Customers/Cards/CardsClient.cs">DeleteAsync</a>(DeleteCardsRequest { ... }) -> DeleteCustomerCardResponse</code></summary>
 <dl>
 <dd>
 
@@ -14585,7 +14821,7 @@ await client.Customers.Cards.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.Cards.DeleteCardsRequest` 
+**request:** `DeleteCardsRequest` 
     
 </dd>
 </dl>
@@ -14598,7 +14834,7 @@ await client.Customers.Cards.DeleteAsync(
 </details>
 
 ## Customers CustomAttributes
-<details><summary><code>client.Customers.CustomAttributes.<a href="/src/Square/Customers/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(Square.Customers.CustomAttributes.ListCustomAttributesRequest { ... }) -> Core.Pager<CustomAttribute></code></summary>
+<details><summary><code>client.Customers.CustomAttributes.<a href="/src/Square/Customers/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(ListCustomAttributesRequest { ... }) -> Pager<CustomAttribute></code></summary>
 <dl>
 <dd>
 
@@ -14655,7 +14891,7 @@ await client.Customers.CustomAttributes.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributes.ListCustomAttributesRequest` 
+**request:** `ListCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -14667,7 +14903,7 @@ await client.Customers.CustomAttributes.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributes.<a href="/src/Square/Customers/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(Square.Customers.CustomAttributes.GetCustomAttributesRequest { ... }) -> GetCustomerCustomAttributeResponse</code></summary>
+<details><summary><code>client.Customers.CustomAttributes.<a href="/src/Square/Customers/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(GetCustomAttributesRequest { ... }) -> GetCustomerCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -14724,7 +14960,7 @@ await client.Customers.CustomAttributes.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributes.GetCustomAttributesRequest` 
+**request:** `GetCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -14736,7 +14972,7 @@ await client.Customers.CustomAttributes.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributes.<a href="/src/Square/Customers/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(Square.Customers.CustomAttributes.UpsertCustomerCustomAttributeRequest { ... }) -> UpsertCustomerCustomAttributeResponse</code></summary>
+<details><summary><code>client.Customers.CustomAttributes.<a href="/src/Square/Customers/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(UpsertCustomerCustomAttributeRequest { ... }) -> UpsertCustomerCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -14793,7 +15029,7 @@ await client.Customers.CustomAttributes.UpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributes.UpsertCustomerCustomAttributeRequest` 
+**request:** `UpsertCustomerCustomAttributeRequest` 
     
 </dd>
 </dl>
@@ -14805,7 +15041,7 @@ await client.Customers.CustomAttributes.UpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Customers.CustomAttributes.<a href="/src/Square/Customers/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(Square.Customers.CustomAttributes.DeleteCustomAttributesRequest { ... }) -> DeleteCustomerCustomAttributeResponse</code></summary>
+<details><summary><code>client.Customers.CustomAttributes.<a href="/src/Square/Customers/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(DeleteCustomAttributesRequest { ... }) -> DeleteCustomerCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -14857,7 +15093,7 @@ await client.Customers.CustomAttributes.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Customers.CustomAttributes.DeleteCustomAttributesRequest` 
+**request:** `DeleteCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -14870,7 +15106,7 @@ await client.Customers.CustomAttributes.DeleteAsync(
 </details>
 
 ## Devices Codes
-<details><summary><code>client.Devices.Codes.<a href="/src/Square/Devices/Codes/CodesClient.cs">ListAsync</a>(Square.Devices.Codes.ListCodesRequest { ... }) -> Core.Pager<DeviceCode></code></summary>
+<details><summary><code>client.Devices.Codes.<a href="/src/Square/Devices/Codes/CodesClient.cs">ListAsync</a>(ListCodesRequest { ... }) -> Pager<DeviceCode></code></summary>
 <dl>
 <dd>
 
@@ -14920,7 +15156,7 @@ await client.Devices.Codes.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Devices.Codes.ListCodesRequest` 
+**request:** `ListCodesRequest` 
     
 </dd>
 </dl>
@@ -14932,7 +15168,7 @@ await client.Devices.Codes.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Devices.Codes.<a href="/src/Square/Devices/Codes/CodesClient.cs">CreateAsync</a>(Square.Devices.Codes.CreateDeviceCodeRequest { ... }) -> CreateDeviceCodeResponse</code></summary>
+<details><summary><code>client.Devices.Codes.<a href="/src/Square/Devices/Codes/CodesClient.cs">CreateAsync</a>(CreateDeviceCodeRequest { ... }) -> CreateDeviceCodeResponse</code></summary>
 <dl>
 <dd>
 
@@ -14986,7 +15222,7 @@ await client.Devices.Codes.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Devices.Codes.CreateDeviceCodeRequest` 
+**request:** `CreateDeviceCodeRequest` 
     
 </dd>
 </dl>
@@ -14998,7 +15234,7 @@ await client.Devices.Codes.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Devices.Codes.<a href="/src/Square/Devices/Codes/CodesClient.cs">GetAsync</a>(Square.Devices.Codes.GetCodesRequest { ... }) -> GetDeviceCodeResponse</code></summary>
+<details><summary><code>client.Devices.Codes.<a href="/src/Square/Devices/Codes/CodesClient.cs">GetAsync</a>(GetCodesRequest { ... }) -> GetDeviceCodeResponse</code></summary>
 <dl>
 <dd>
 
@@ -15040,7 +15276,7 @@ await client.Devices.Codes.GetAsync(new GetCodesRequest { Id = "id" });
 <dl>
 <dd>
 
-**request:** `Square.Devices.Codes.GetCodesRequest` 
+**request:** `GetCodesRequest` 
     
 </dd>
 </dl>
@@ -15053,7 +15289,7 @@ await client.Devices.Codes.GetAsync(new GetCodesRequest { Id = "id" });
 </details>
 
 ## Disputes Evidence
-<details><summary><code>client.Disputes.Evidence.<a href="/src/Square/Disputes/Evidence/EvidenceClient.cs">ListAsync</a>(Square.Disputes.Evidence.ListEvidenceRequest { ... }) -> Core.Pager<DisputeEvidence></code></summary>
+<details><summary><code>client.Disputes.Evidence.<a href="/src/Square/Disputes/Evidence/EvidenceClient.cs">ListAsync</a>(ListEvidenceRequest { ... }) -> Pager<DisputeEvidence></code></summary>
 <dl>
 <dd>
 
@@ -15097,7 +15333,7 @@ await client.Disputes.Evidence.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Disputes.Evidence.ListEvidenceRequest` 
+**request:** `ListEvidenceRequest` 
     
 </dd>
 </dl>
@@ -15109,7 +15345,7 @@ await client.Disputes.Evidence.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.Evidence.<a href="/src/Square/Disputes/Evidence/EvidenceClient.cs">GetAsync</a>(Square.Disputes.Evidence.GetEvidenceRequest { ... }) -> GetDisputeEvidenceResponse</code></summary>
+<details><summary><code>client.Disputes.Evidence.<a href="/src/Square/Disputes/Evidence/EvidenceClient.cs">GetAsync</a>(GetEvidenceRequest { ... }) -> GetDisputeEvidenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -15155,7 +15391,7 @@ await client.Disputes.Evidence.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Disputes.Evidence.GetEvidenceRequest` 
+**request:** `GetEvidenceRequest` 
     
 </dd>
 </dl>
@@ -15167,7 +15403,7 @@ await client.Disputes.Evidence.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Disputes.Evidence.<a href="/src/Square/Disputes/Evidence/EvidenceClient.cs">DeleteAsync</a>(Square.Disputes.Evidence.DeleteEvidenceRequest { ... }) -> DeleteDisputeEvidenceResponse</code></summary>
+<details><summary><code>client.Disputes.Evidence.<a href="/src/Square/Disputes/Evidence/EvidenceClient.cs">DeleteAsync</a>(DeleteEvidenceRequest { ... }) -> DeleteDisputeEvidenceResponse</code></summary>
 <dl>
 <dd>
 
@@ -15212,7 +15448,7 @@ await client.Disputes.Evidence.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Disputes.Evidence.DeleteEvidenceRequest` 
+**request:** `DeleteEvidenceRequest` 
     
 </dd>
 </dl>
@@ -15225,7 +15461,7 @@ await client.Disputes.Evidence.DeleteAsync(
 </details>
 
 ## GiftCards Activities
-<details><summary><code>client.GiftCards.Activities.<a href="/src/Square/GiftCards/Activities/ActivitiesClient.cs">ListAsync</a>(Square.GiftCards.Activities.ListActivitiesRequest { ... }) -> Core.Pager<GiftCardActivity></code></summary>
+<details><summary><code>client.GiftCards.Activities.<a href="/src/Square/GiftCards/Activities/ActivitiesClient.cs">ListAsync</a>(ListActivitiesRequest { ... }) -> Pager<GiftCardActivity></code></summary>
 <dl>
 <dd>
 
@@ -15282,7 +15518,7 @@ await client.GiftCards.Activities.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.GiftCards.Activities.ListActivitiesRequest` 
+**request:** `ListActivitiesRequest` 
     
 </dd>
 </dl>
@@ -15294,7 +15530,7 @@ await client.GiftCards.Activities.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.GiftCards.Activities.<a href="/src/Square/GiftCards/Activities/ActivitiesClient.cs">CreateAsync</a>(Square.GiftCards.Activities.CreateGiftCardActivityRequest { ... }) -> CreateGiftCardActivityResponse</code></summary>
+<details><summary><code>client.GiftCards.Activities.<a href="/src/Square/GiftCards/Activities/ActivitiesClient.cs">CreateAsync</a>(CreateGiftCardActivityRequest { ... }) -> CreateGiftCardActivityResponse</code></summary>
 <dl>
 <dd>
 
@@ -15353,7 +15589,7 @@ await client.GiftCards.Activities.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.GiftCards.Activities.CreateGiftCardActivityRequest` 
+**request:** `CreateGiftCardActivityRequest` 
     
 </dd>
 </dl>
@@ -15366,7 +15602,7 @@ await client.GiftCards.Activities.CreateAsync(
 </details>
 
 ## Labor BreakTypes
-<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">ListAsync</a>(Square.Labor.BreakTypes.ListBreakTypesRequest { ... }) -> Core.Pager<BreakType></code></summary>
+<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">ListAsync</a>(ListBreakTypesRequest { ... }) -> Pager<BreakType></code></summary>
 <dl>
 <dd>
 
@@ -15415,7 +15651,7 @@ await client.Labor.BreakTypes.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.BreakTypes.ListBreakTypesRequest` 
+**request:** `ListBreakTypesRequest` 
     
 </dd>
 </dl>
@@ -15427,7 +15663,7 @@ await client.Labor.BreakTypes.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">CreateAsync</a>(Square.Labor.BreakTypes.CreateBreakTypeRequest { ... }) -> CreateBreakTypeResponse</code></summary>
+<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">CreateAsync</a>(CreateBreakTypeRequest { ... }) -> CreateBreakTypeResponse</code></summary>
 <dl>
 <dd>
 
@@ -15494,7 +15730,7 @@ await client.Labor.BreakTypes.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.BreakTypes.CreateBreakTypeRequest` 
+**request:** `CreateBreakTypeRequest` 
     
 </dd>
 </dl>
@@ -15506,7 +15742,7 @@ await client.Labor.BreakTypes.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">GetAsync</a>(Square.Labor.BreakTypes.GetBreakTypesRequest { ... }) -> GetBreakTypeResponse</code></summary>
+<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">GetAsync</a>(GetBreakTypesRequest { ... }) -> GetBreakTypeResponse</code></summary>
 <dl>
 <dd>
 
@@ -15548,7 +15784,7 @@ await client.Labor.BreakTypes.GetAsync(new GetBreakTypesRequest { Id = "id" });
 <dl>
 <dd>
 
-**request:** `Square.Labor.BreakTypes.GetBreakTypesRequest` 
+**request:** `GetBreakTypesRequest` 
     
 </dd>
 </dl>
@@ -15560,7 +15796,7 @@ await client.Labor.BreakTypes.GetAsync(new GetBreakTypesRequest { Id = "id" });
 </dl>
 </details>
 
-<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">UpdateAsync</a>(Square.Labor.BreakTypes.UpdateBreakTypeRequest { ... }) -> UpdateBreakTypeResponse</code></summary>
+<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">UpdateAsync</a>(UpdateBreakTypeRequest { ... }) -> UpdateBreakTypeResponse</code></summary>
 <dl>
 <dd>
 
@@ -15615,7 +15851,7 @@ await client.Labor.BreakTypes.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.BreakTypes.UpdateBreakTypeRequest` 
+**request:** `UpdateBreakTypeRequest` 
     
 </dd>
 </dl>
@@ -15627,7 +15863,7 @@ await client.Labor.BreakTypes.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">DeleteAsync</a>(Square.Labor.BreakTypes.DeleteBreakTypesRequest { ... }) -> DeleteBreakTypeResponse</code></summary>
+<details><summary><code>client.Labor.BreakTypes.<a href="/src/Square/Labor/BreakTypes/BreakTypesClient.cs">DeleteAsync</a>(DeleteBreakTypesRequest { ... }) -> DeleteBreakTypeResponse</code></summary>
 <dl>
 <dd>
 
@@ -15671,7 +15907,7 @@ await client.Labor.BreakTypes.DeleteAsync(new DeleteBreakTypesRequest { Id = "id
 <dl>
 <dd>
 
-**request:** `Square.Labor.BreakTypes.DeleteBreakTypesRequest` 
+**request:** `DeleteBreakTypesRequest` 
     
 </dd>
 </dl>
@@ -15684,7 +15920,7 @@ await client.Labor.BreakTypes.DeleteAsync(new DeleteBreakTypesRequest { Id = "id
 </details>
 
 ## Labor EmployeeWages
-<details><summary><code>client.Labor.EmployeeWages.<a href="/src/Square/Labor/EmployeeWages/EmployeeWagesClient.cs">ListAsync</a>(Square.Labor.EmployeeWages.ListEmployeeWagesRequest { ... }) -> Core.Pager<EmployeeWage></code></summary>
+<details><summary><code>client.Labor.EmployeeWages.<a href="/src/Square/Labor/EmployeeWages/EmployeeWagesClient.cs">ListAsync</a>(ListEmployeeWagesRequest { ... }) -> Pager<EmployeeWage></code></summary>
 <dl>
 <dd>
 
@@ -15733,7 +15969,7 @@ await client.Labor.EmployeeWages.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.EmployeeWages.ListEmployeeWagesRequest` 
+**request:** `ListEmployeeWagesRequest` 
     
 </dd>
 </dl>
@@ -15745,7 +15981,7 @@ await client.Labor.EmployeeWages.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.EmployeeWages.<a href="/src/Square/Labor/EmployeeWages/EmployeeWagesClient.cs">GetAsync</a>(Square.Labor.EmployeeWages.GetEmployeeWagesRequest { ... }) -> GetEmployeeWageResponse</code></summary>
+<details><summary><code>client.Labor.EmployeeWages.<a href="/src/Square/Labor/EmployeeWages/EmployeeWagesClient.cs">GetAsync</a>(GetEmployeeWagesRequest { ... }) -> GetEmployeeWageResponse</code></summary>
 <dl>
 <dd>
 
@@ -15787,7 +16023,7 @@ await client.Labor.EmployeeWages.GetAsync(new GetEmployeeWagesRequest { Id = "id
 <dl>
 <dd>
 
-**request:** `Square.Labor.EmployeeWages.GetEmployeeWagesRequest` 
+**request:** `GetEmployeeWagesRequest` 
     
 </dd>
 </dl>
@@ -15800,7 +16036,7 @@ await client.Labor.EmployeeWages.GetAsync(new GetEmployeeWagesRequest { Id = "id
 </details>
 
 ## Labor Shifts
-<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">CreateAsync</a>(Square.Labor.Shifts.CreateShiftRequest { ... }) -> CreateShiftResponse</code></summary>
+<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">CreateAsync</a>(CreateShiftRequest { ... }) -> CreateShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -15890,7 +16126,7 @@ await client.Labor.Shifts.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.Shifts.CreateShiftRequest` 
+**request:** `CreateShiftRequest` 
     
 </dd>
 </dl>
@@ -15902,7 +16138,7 @@ await client.Labor.Shifts.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">SearchAsync</a>(Square.Labor.Shifts.SearchShiftsRequest { ... }) -> SearchShiftsResponse</code></summary>
+<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">SearchAsync</a>(SearchShiftsRequest { ... }) -> SearchShiftsResponse</code></summary>
 <dl>
 <dd>
 
@@ -15974,7 +16210,7 @@ await client.Labor.Shifts.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.Shifts.SearchShiftsRequest` 
+**request:** `SearchShiftsRequest` 
     
 </dd>
 </dl>
@@ -15986,7 +16222,7 @@ await client.Labor.Shifts.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">GetAsync</a>(Square.Labor.Shifts.GetShiftsRequest { ... }) -> GetShiftResponse</code></summary>
+<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">GetAsync</a>(GetShiftsRequest { ... }) -> GetShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -16028,7 +16264,7 @@ await client.Labor.Shifts.GetAsync(new Square.Labor.Shifts.GetShiftsRequest { Id
 <dl>
 <dd>
 
-**request:** `Square.Labor.Shifts.GetShiftsRequest` 
+**request:** `GetShiftsRequest` 
     
 </dd>
 </dl>
@@ -16040,7 +16276,7 @@ await client.Labor.Shifts.GetAsync(new Square.Labor.Shifts.GetShiftsRequest { Id
 </dl>
 </details>
 
-<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">UpdateAsync</a>(Square.Labor.Shifts.UpdateShiftRequest { ... }) -> UpdateShiftResponse</code></summary>
+<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">UpdateAsync</a>(UpdateShiftRequest { ... }) -> UpdateShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -16121,7 +16357,7 @@ await client.Labor.Shifts.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.Shifts.UpdateShiftRequest` 
+**request:** `UpdateShiftRequest` 
     
 </dd>
 </dl>
@@ -16133,7 +16369,7 @@ await client.Labor.Shifts.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">DeleteAsync</a>(Square.Labor.Shifts.DeleteShiftsRequest { ... }) -> DeleteShiftResponse</code></summary>
+<details><summary><code>client.Labor.Shifts.<a href="/src/Square/Labor/Shifts/ShiftsClient.cs">DeleteAsync</a>(DeleteShiftsRequest { ... }) -> DeleteShiftResponse</code></summary>
 <dl>
 <dd>
 
@@ -16175,7 +16411,7 @@ await client.Labor.Shifts.DeleteAsync(new DeleteShiftsRequest { Id = "id" });
 <dl>
 <dd>
 
-**request:** `Square.Labor.Shifts.DeleteShiftsRequest` 
+**request:** `DeleteShiftsRequest` 
     
 </dd>
 </dl>
@@ -16188,7 +16424,7 @@ await client.Labor.Shifts.DeleteAsync(new DeleteShiftsRequest { Id = "id" });
 </details>
 
 ## Labor TeamMemberWages
-<details><summary><code>client.Labor.TeamMemberWages.<a href="/src/Square/Labor/TeamMemberWages/TeamMemberWagesClient.cs">ListAsync</a>(Square.Labor.TeamMemberWages.ListTeamMemberWagesRequest { ... }) -> Core.Pager<TeamMemberWage></code></summary>
+<details><summary><code>client.Labor.TeamMemberWages.<a href="/src/Square/Labor/TeamMemberWages/TeamMemberWagesClient.cs">ListAsync</a>(ListTeamMemberWagesRequest { ... }) -> Pager<TeamMemberWage></code></summary>
 <dl>
 <dd>
 
@@ -16237,7 +16473,7 @@ await client.Labor.TeamMemberWages.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.TeamMemberWages.ListTeamMemberWagesRequest` 
+**request:** `ListTeamMemberWagesRequest` 
     
 </dd>
 </dl>
@@ -16249,7 +16485,7 @@ await client.Labor.TeamMemberWages.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.TeamMemberWages.<a href="/src/Square/Labor/TeamMemberWages/TeamMemberWagesClient.cs">GetAsync</a>(Square.Labor.TeamMemberWages.GetTeamMemberWagesRequest { ... }) -> GetTeamMemberWageResponse</code></summary>
+<details><summary><code>client.Labor.TeamMemberWages.<a href="/src/Square/Labor/TeamMemberWages/TeamMemberWagesClient.cs">GetAsync</a>(GetTeamMemberWagesRequest { ... }) -> GetTeamMemberWageResponse</code></summary>
 <dl>
 <dd>
 
@@ -16291,7 +16527,7 @@ await client.Labor.TeamMemberWages.GetAsync(new GetTeamMemberWagesRequest { Id =
 <dl>
 <dd>
 
-**request:** `Square.Labor.TeamMemberWages.GetTeamMemberWagesRequest` 
+**request:** `GetTeamMemberWagesRequest` 
     
 </dd>
 </dl>
@@ -16304,7 +16540,7 @@ await client.Labor.TeamMemberWages.GetAsync(new GetTeamMemberWagesRequest { Id =
 </details>
 
 ## Labor WorkweekConfigs
-<details><summary><code>client.Labor.WorkweekConfigs.<a href="/src/Square/Labor/WorkweekConfigs/WorkweekConfigsClient.cs">ListAsync</a>(Square.Labor.WorkweekConfigs.ListWorkweekConfigsRequest { ... }) -> Core.Pager<WorkweekConfig></code></summary>
+<details><summary><code>client.Labor.WorkweekConfigs.<a href="/src/Square/Labor/WorkweekConfigs/WorkweekConfigsClient.cs">ListAsync</a>(ListWorkweekConfigsRequest { ... }) -> Pager<WorkweekConfig></code></summary>
 <dl>
 <dd>
 
@@ -16348,7 +16584,7 @@ await client.Labor.WorkweekConfigs.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.WorkweekConfigs.ListWorkweekConfigsRequest` 
+**request:** `ListWorkweekConfigsRequest` 
     
 </dd>
 </dl>
@@ -16360,7 +16596,7 @@ await client.Labor.WorkweekConfigs.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Labor.WorkweekConfigs.<a href="/src/Square/Labor/WorkweekConfigs/WorkweekConfigsClient.cs">GetAsync</a>(Square.Labor.WorkweekConfigs.UpdateWorkweekConfigRequest { ... }) -> UpdateWorkweekConfigResponse</code></summary>
+<details><summary><code>client.Labor.WorkweekConfigs.<a href="/src/Square/Labor/WorkweekConfigs/WorkweekConfigsClient.cs">GetAsync</a>(UpdateWorkweekConfigRequest { ... }) -> UpdateWorkweekConfigResponse</code></summary>
 <dl>
 <dd>
 
@@ -16413,7 +16649,7 @@ await client.Labor.WorkweekConfigs.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Labor.WorkweekConfigs.UpdateWorkweekConfigRequest` 
+**request:** `UpdateWorkweekConfigRequest` 
     
 </dd>
 </dl>
@@ -16426,7 +16662,7 @@ await client.Labor.WorkweekConfigs.GetAsync(
 </details>
 
 ## Locations CustomAttributeDefinitions
-<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(Square.Locations.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest { ... }) -> Core.Pager<CustomAttributeDefinition></code></summary>
+<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(ListCustomAttributeDefinitionsRequest { ... }) -> Pager<CustomAttributeDefinition></code></summary>
 <dl>
 <dd>
 
@@ -16478,7 +16714,7 @@ await client.Locations.CustomAttributeDefinitions.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest` 
+**request:** `ListCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -16490,7 +16726,7 @@ await client.Locations.CustomAttributeDefinitions.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(Square.Locations.CustomAttributeDefinitions.CreateLocationCustomAttributeDefinitionRequest { ... }) -> CreateLocationCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(CreateLocationCustomAttributeDefinitionRequest { ... }) -> CreateLocationCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -16556,7 +16792,7 @@ await client.Locations.CustomAttributeDefinitions.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributeDefinitions.CreateLocationCustomAttributeDefinitionRequest` 
+**request:** `CreateLocationCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -16568,7 +16804,7 @@ await client.Locations.CustomAttributeDefinitions.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(Square.Locations.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest { ... }) -> RetrieveLocationCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(GetCustomAttributeDefinitionsRequest { ... }) -> RetrieveLocationCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -16618,7 +16854,7 @@ await client.Locations.CustomAttributeDefinitions.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest` 
+**request:** `GetCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -16630,7 +16866,7 @@ await client.Locations.CustomAttributeDefinitions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(Square.Locations.CustomAttributeDefinitions.UpdateLocationCustomAttributeDefinitionRequest { ... }) -> UpdateLocationCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(UpdateLocationCustomAttributeDefinitionRequest { ... }) -> UpdateLocationCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -16685,7 +16921,7 @@ await client.Locations.CustomAttributeDefinitions.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributeDefinitions.UpdateLocationCustomAttributeDefinitionRequest` 
+**request:** `UpdateLocationCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -16697,7 +16933,7 @@ await client.Locations.CustomAttributeDefinitions.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(Square.Locations.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteLocationCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Locations.CustomAttributeDefinitions.<a href="/src/Square/Locations/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteLocationCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -16747,7 +16983,7 @@ await client.Locations.CustomAttributeDefinitions.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest` 
+**request:** `DeleteCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -16760,7 +16996,7 @@ await client.Locations.CustomAttributeDefinitions.DeleteAsync(
 </details>
 
 ## Locations CustomAttributes
-<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">BatchDeleteAsync</a>(Square.Locations.CustomAttributes.BulkDeleteLocationCustomAttributesRequest { ... }) -> BulkDeleteLocationCustomAttributesResponse</code></summary>
+<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">BatchDeleteAsync</a>(BulkDeleteLocationCustomAttributesRequest { ... }) -> BulkDeleteLocationCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -16835,7 +17071,7 @@ await client.Locations.CustomAttributes.BatchDeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributes.BulkDeleteLocationCustomAttributesRequest` 
+**request:** `BulkDeleteLocationCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -16847,7 +17083,7 @@ await client.Locations.CustomAttributes.BatchDeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">BatchUpsertAsync</a>(Square.Locations.CustomAttributes.BulkUpsertLocationCustomAttributesRequest { ... }) -> BulkUpsertLocationCustomAttributesResponse</code></summary>
+<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">BatchUpsertAsync</a>(BulkUpsertLocationCustomAttributesRequest { ... }) -> BulkUpsertLocationCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -16944,7 +17180,7 @@ await client.Locations.CustomAttributes.BatchUpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributes.BulkUpsertLocationCustomAttributesRequest` 
+**request:** `BulkUpsertLocationCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -16956,7 +17192,7 @@ await client.Locations.CustomAttributes.BatchUpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(Square.Locations.CustomAttributes.ListCustomAttributesRequest { ... }) -> Core.Pager<CustomAttribute></code></summary>
+<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(ListCustomAttributesRequest { ... }) -> Pager<CustomAttribute></code></summary>
 <dl>
 <dd>
 
@@ -17012,7 +17248,7 @@ await client.Locations.CustomAttributes.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributes.ListCustomAttributesRequest` 
+**request:** `ListCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -17024,7 +17260,7 @@ await client.Locations.CustomAttributes.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(Square.Locations.CustomAttributes.GetCustomAttributesRequest { ... }) -> RetrieveLocationCustomAttributeResponse</code></summary>
+<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(GetCustomAttributesRequest { ... }) -> RetrieveLocationCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -17078,7 +17314,7 @@ await client.Locations.CustomAttributes.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributes.GetCustomAttributesRequest` 
+**request:** `GetCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -17090,7 +17326,7 @@ await client.Locations.CustomAttributes.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(Square.Locations.CustomAttributes.UpsertLocationCustomAttributeRequest { ... }) -> UpsertLocationCustomAttributeResponse</code></summary>
+<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(UpsertLocationCustomAttributeRequest { ... }) -> UpsertLocationCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -17144,7 +17380,7 @@ await client.Locations.CustomAttributes.UpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributes.UpsertLocationCustomAttributeRequest` 
+**request:** `UpsertLocationCustomAttributeRequest` 
     
 </dd>
 </dl>
@@ -17156,7 +17392,7 @@ await client.Locations.CustomAttributes.UpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(Square.Locations.CustomAttributes.DeleteCustomAttributesRequest { ... }) -> DeleteLocationCustomAttributeResponse</code></summary>
+<details><summary><code>client.Locations.CustomAttributes.<a href="/src/Square/Locations/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(DeleteCustomAttributesRequest { ... }) -> DeleteLocationCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -17206,7 +17442,7 @@ await client.Locations.CustomAttributes.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.CustomAttributes.DeleteCustomAttributesRequest` 
+**request:** `DeleteCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -17219,7 +17455,7 @@ await client.Locations.CustomAttributes.DeleteAsync(
 </details>
 
 ## Locations Transactions
-<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">ListAsync</a>(Square.Locations.Transactions.ListTransactionsRequest { ... }) -> ListTransactionsResponse</code></summary>
+<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">ListAsync</a>(ListTransactionsRequest { ... }) -> ListTransactionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17275,7 +17511,7 @@ await client.Locations.Transactions.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.Transactions.ListTransactionsRequest` 
+**request:** `ListTransactionsRequest` 
     
 </dd>
 </dl>
@@ -17287,7 +17523,7 @@ await client.Locations.Transactions.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">GetAsync</a>(Square.Locations.Transactions.GetTransactionsRequest { ... }) -> GetTransactionResponse</code></summary>
+<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">GetAsync</a>(GetTransactionsRequest { ... }) -> GetTransactionResponse</code></summary>
 <dl>
 <dd>
 
@@ -17331,7 +17567,7 @@ await client.Locations.Transactions.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.Transactions.GetTransactionsRequest` 
+**request:** `GetTransactionsRequest` 
     
 </dd>
 </dl>
@@ -17343,7 +17579,7 @@ await client.Locations.Transactions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">CaptureAsync</a>(Square.Locations.Transactions.CaptureTransactionsRequest { ... }) -> CaptureTransactionResponse</code></summary>
+<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">CaptureAsync</a>(CaptureTransactionsRequest { ... }) -> CaptureTransactionResponse</code></summary>
 <dl>
 <dd>
 
@@ -17392,7 +17628,7 @@ await client.Locations.Transactions.CaptureAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.Transactions.CaptureTransactionsRequest` 
+**request:** `CaptureTransactionsRequest` 
     
 </dd>
 </dl>
@@ -17404,7 +17640,7 @@ await client.Locations.Transactions.CaptureAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">VoidAsync</a>(Square.Locations.Transactions.VoidTransactionsRequest { ... }) -> VoidTransactionResponse</code></summary>
+<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">VoidAsync</a>(VoidTransactionsRequest { ... }) -> VoidTransactionResponse</code></summary>
 <dl>
 <dd>
 
@@ -17453,7 +17689,7 @@ await client.Locations.Transactions.VoidAsync(
 <dl>
 <dd>
 
-**request:** `Square.Locations.Transactions.VoidTransactionsRequest` 
+**request:** `VoidTransactionsRequest` 
     
 </dd>
 </dl>
@@ -17466,7 +17702,7 @@ await client.Locations.Transactions.VoidAsync(
 </details>
 
 ## Loyalty Accounts
-<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">CreateAsync</a>(Square.Loyalty.Accounts.CreateLoyaltyAccountRequest { ... }) -> CreateLoyaltyAccountResponse</code></summary>
+<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">CreateAsync</a>(CreateLoyaltyAccountRequest { ... }) -> CreateLoyaltyAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -17518,7 +17754,7 @@ await client.Loyalty.Accounts.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Accounts.CreateLoyaltyAccountRequest` 
+**request:** `CreateLoyaltyAccountRequest` 
     
 </dd>
 </dl>
@@ -17530,7 +17766,7 @@ await client.Loyalty.Accounts.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">SearchAsync</a>(Square.Loyalty.Accounts.SearchLoyaltyAccountsRequest { ... }) -> SearchLoyaltyAccountsResponse</code></summary>
+<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">SearchAsync</a>(SearchLoyaltyAccountsRequest { ... }) -> SearchLoyaltyAccountsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17588,7 +17824,7 @@ await client.Loyalty.Accounts.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Accounts.SearchLoyaltyAccountsRequest` 
+**request:** `SearchLoyaltyAccountsRequest` 
     
 </dd>
 </dl>
@@ -17600,7 +17836,7 @@ await client.Loyalty.Accounts.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">GetAsync</a>(Square.Loyalty.Accounts.GetAccountsRequest { ... }) -> GetLoyaltyAccountResponse</code></summary>
+<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">GetAsync</a>(GetAccountsRequest { ... }) -> GetLoyaltyAccountResponse</code></summary>
 <dl>
 <dd>
 
@@ -17642,7 +17878,7 @@ await client.Loyalty.Accounts.GetAsync(new GetAccountsRequest { AccountId = "acc
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Accounts.GetAccountsRequest` 
+**request:** `GetAccountsRequest` 
     
 </dd>
 </dl>
@@ -17654,7 +17890,7 @@ await client.Loyalty.Accounts.GetAsync(new GetAccountsRequest { AccountId = "acc
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">AccumulatePointsAsync</a>(Square.Loyalty.Accounts.AccumulateLoyaltyPointsRequest { ... }) -> AccumulateLoyaltyPointsResponse</code></summary>
+<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">AccumulatePointsAsync</a>(AccumulateLoyaltyPointsRequest { ... }) -> AccumulateLoyaltyPointsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17720,7 +17956,7 @@ await client.Loyalty.Accounts.AccumulatePointsAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Accounts.AccumulateLoyaltyPointsRequest` 
+**request:** `AccumulateLoyaltyPointsRequest` 
     
 </dd>
 </dl>
@@ -17732,7 +17968,7 @@ await client.Loyalty.Accounts.AccumulatePointsAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">AdjustAsync</a>(Square.Loyalty.Accounts.AdjustLoyaltyPointsRequest { ... }) -> AdjustLoyaltyPointsResponse</code></summary>
+<details><summary><code>client.Loyalty.Accounts.<a href="/src/Square/Loyalty/Accounts/AccountsClient.cs">AdjustAsync</a>(AdjustLoyaltyPointsRequest { ... }) -> AdjustLoyaltyPointsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17789,7 +18025,7 @@ await client.Loyalty.Accounts.AdjustAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Accounts.AdjustLoyaltyPointsRequest` 
+**request:** `AdjustLoyaltyPointsRequest` 
     
 </dd>
 </dl>
@@ -17845,7 +18081,7 @@ await client.Loyalty.Programs.ListAsync();
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.<a href="/src/Square/Loyalty/Programs/ProgramsClient.cs">GetAsync</a>(Square.Loyalty.Programs.GetProgramsRequest { ... }) -> GetLoyaltyProgramResponse</code></summary>
+<details><summary><code>client.Loyalty.Programs.<a href="/src/Square/Loyalty/Programs/ProgramsClient.cs">GetAsync</a>(GetProgramsRequest { ... }) -> GetLoyaltyProgramResponse</code></summary>
 <dl>
 <dd>
 
@@ -17889,7 +18125,7 @@ await client.Loyalty.Programs.GetAsync(new GetProgramsRequest { ProgramId = "pro
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Programs.GetProgramsRequest` 
+**request:** `GetProgramsRequest` 
     
 </dd>
 </dl>
@@ -17901,7 +18137,7 @@ await client.Loyalty.Programs.GetAsync(new GetProgramsRequest { ProgramId = "pro
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.<a href="/src/Square/Loyalty/Programs/ProgramsClient.cs">CalculateAsync</a>(Square.Loyalty.Programs.CalculateLoyaltyPointsRequest { ... }) -> CalculateLoyaltyPointsResponse</code></summary>
+<details><summary><code>client.Loyalty.Programs.<a href="/src/Square/Loyalty/Programs/ProgramsClient.cs">CalculateAsync</a>(CalculateLoyaltyPointsRequest { ... }) -> CalculateLoyaltyPointsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17964,7 +18200,7 @@ await client.Loyalty.Programs.CalculateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Programs.CalculateLoyaltyPointsRequest` 
+**request:** `CalculateLoyaltyPointsRequest` 
     
 </dd>
 </dl>
@@ -17977,7 +18213,7 @@ await client.Loyalty.Programs.CalculateAsync(
 </details>
 
 ## Loyalty Rewards
-<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">CreateAsync</a>(Square.Loyalty.Rewards.CreateLoyaltyRewardRequest { ... }) -> CreateLoyaltyRewardResponse</code></summary>
+<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">CreateAsync</a>(CreateLoyaltyRewardRequest { ... }) -> CreateLoyaltyRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -18037,7 +18273,7 @@ await client.Loyalty.Rewards.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Rewards.CreateLoyaltyRewardRequest` 
+**request:** `CreateLoyaltyRewardRequest` 
     
 </dd>
 </dl>
@@ -18049,7 +18285,7 @@ await client.Loyalty.Rewards.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">SearchAsync</a>(Square.Loyalty.Rewards.SearchLoyaltyRewardsRequest { ... }) -> SearchLoyaltyRewardsResponse</code></summary>
+<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">SearchAsync</a>(SearchLoyaltyRewardsRequest { ... }) -> SearchLoyaltyRewardsResponse</code></summary>
 <dl>
 <dd>
 
@@ -18106,7 +18342,7 @@ await client.Loyalty.Rewards.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Rewards.SearchLoyaltyRewardsRequest` 
+**request:** `SearchLoyaltyRewardsRequest` 
     
 </dd>
 </dl>
@@ -18118,7 +18354,7 @@ await client.Loyalty.Rewards.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">GetAsync</a>(Square.Loyalty.Rewards.GetRewardsRequest { ... }) -> GetLoyaltyRewardResponse</code></summary>
+<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">GetAsync</a>(GetRewardsRequest { ... }) -> GetLoyaltyRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -18160,7 +18396,7 @@ await client.Loyalty.Rewards.GetAsync(new GetRewardsRequest { RewardId = "reward
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Rewards.GetRewardsRequest` 
+**request:** `GetRewardsRequest` 
     
 </dd>
 </dl>
@@ -18172,7 +18408,7 @@ await client.Loyalty.Rewards.GetAsync(new GetRewardsRequest { RewardId = "reward
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">DeleteAsync</a>(Square.Loyalty.Rewards.DeleteRewardsRequest { ... }) -> DeleteLoyaltyRewardResponse</code></summary>
+<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">DeleteAsync</a>(DeleteRewardsRequest { ... }) -> DeleteLoyaltyRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -18222,7 +18458,7 @@ await client.Loyalty.Rewards.DeleteAsync(new DeleteRewardsRequest { RewardId = "
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Rewards.DeleteRewardsRequest` 
+**request:** `DeleteRewardsRequest` 
     
 </dd>
 </dl>
@@ -18234,7 +18470,7 @@ await client.Loyalty.Rewards.DeleteAsync(new DeleteRewardsRequest { RewardId = "
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">RedeemAsync</a>(Square.Loyalty.Rewards.RedeemLoyaltyRewardRequest { ... }) -> RedeemLoyaltyRewardResponse</code></summary>
+<details><summary><code>client.Loyalty.Rewards.<a href="/src/Square/Loyalty/Rewards/RewardsClient.cs">RedeemAsync</a>(RedeemLoyaltyRewardRequest { ... }) -> RedeemLoyaltyRewardResponse</code></summary>
 <dl>
 <dd>
 
@@ -18293,7 +18529,7 @@ await client.Loyalty.Rewards.RedeemAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Rewards.RedeemLoyaltyRewardRequest` 
+**request:** `RedeemLoyaltyRewardRequest` 
     
 </dd>
 </dl>
@@ -18306,7 +18542,7 @@ await client.Loyalty.Rewards.RedeemAsync(
 </details>
 
 ## Loyalty Programs Promotions
-<details><summary><code>client.Loyalty.Programs.Promotions.<a href="/src/Square/Loyalty/Programs/Promotions/PromotionsClient.cs">ListAsync</a>(Square.Loyalty.Programs.Promotions.ListPromotionsRequest { ... }) -> Core.Pager<LoyaltyPromotion></code></summary>
+<details><summary><code>client.Loyalty.Programs.Promotions.<a href="/src/Square/Loyalty/Programs/Promotions/PromotionsClient.cs">ListAsync</a>(ListPromotionsRequest { ... }) -> Pager<LoyaltyPromotion></code></summary>
 <dl>
 <dd>
 
@@ -18357,7 +18593,7 @@ await client.Loyalty.Programs.Promotions.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Programs.Promotions.ListPromotionsRequest` 
+**request:** `ListPromotionsRequest` 
     
 </dd>
 </dl>
@@ -18369,7 +18605,7 @@ await client.Loyalty.Programs.Promotions.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.Promotions.<a href="/src/Square/Loyalty/Programs/Promotions/PromotionsClient.cs">CreateAsync</a>(Square.Loyalty.Programs.Promotions.CreateLoyaltyPromotionRequest { ... }) -> CreateLoyaltyPromotionResponse</code></summary>
+<details><summary><code>client.Loyalty.Programs.Promotions.<a href="/src/Square/Loyalty/Programs/Promotions/PromotionsClient.cs">CreateAsync</a>(CreateLoyaltyPromotionRequest { ... }) -> CreateLoyaltyPromotionResponse</code></summary>
 <dl>
 <dd>
 
@@ -18448,7 +18684,7 @@ await client.Loyalty.Programs.Promotions.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Programs.Promotions.CreateLoyaltyPromotionRequest` 
+**request:** `CreateLoyaltyPromotionRequest` 
     
 </dd>
 </dl>
@@ -18460,7 +18696,7 @@ await client.Loyalty.Programs.Promotions.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.Promotions.<a href="/src/Square/Loyalty/Programs/Promotions/PromotionsClient.cs">GetAsync</a>(Square.Loyalty.Programs.Promotions.GetPromotionsRequest { ... }) -> GetLoyaltyPromotionResponse</code></summary>
+<details><summary><code>client.Loyalty.Programs.Promotions.<a href="/src/Square/Loyalty/Programs/Promotions/PromotionsClient.cs">GetAsync</a>(GetPromotionsRequest { ... }) -> GetLoyaltyPromotionResponse</code></summary>
 <dl>
 <dd>
 
@@ -18504,7 +18740,7 @@ await client.Loyalty.Programs.Promotions.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Programs.Promotions.GetPromotionsRequest` 
+**request:** `GetPromotionsRequest` 
     
 </dd>
 </dl>
@@ -18516,7 +18752,7 @@ await client.Loyalty.Programs.Promotions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Loyalty.Programs.Promotions.<a href="/src/Square/Loyalty/Programs/Promotions/PromotionsClient.cs">CancelAsync</a>(Square.Loyalty.Programs.Promotions.CancelPromotionsRequest { ... }) -> CancelLoyaltyPromotionResponse</code></summary>
+<details><summary><code>client.Loyalty.Programs.Promotions.<a href="/src/Square/Loyalty/Programs/Promotions/PromotionsClient.cs">CancelAsync</a>(CancelPromotionsRequest { ... }) -> CancelLoyaltyPromotionResponse</code></summary>
 <dl>
 <dd>
 
@@ -18565,7 +18801,7 @@ await client.Loyalty.Programs.Promotions.CancelAsync(
 <dl>
 <dd>
 
-**request:** `Square.Loyalty.Programs.Promotions.CancelPromotionsRequest` 
+**request:** `CancelPromotionsRequest` 
     
 </dd>
 </dl>
@@ -18578,7 +18814,7 @@ await client.Loyalty.Programs.Promotions.CancelAsync(
 </details>
 
 ## Merchants CustomAttributeDefinitions
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(Square.Merchants.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest { ... }) -> Core.Pager<CustomAttributeDefinition></code></summary>
+<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(ListCustomAttributeDefinitionsRequest { ... }) -> Pager<CustomAttributeDefinition></code></summary>
 <dl>
 <dd>
 
@@ -18630,7 +18866,7 @@ await client.Merchants.CustomAttributeDefinitions.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest` 
+**request:** `ListCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -18642,7 +18878,7 @@ await client.Merchants.CustomAttributeDefinitions.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(Square.Merchants.CustomAttributeDefinitions.CreateMerchantCustomAttributeDefinitionRequest { ... }) -> CreateMerchantCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(CreateMerchantCustomAttributeDefinitionRequest { ... }) -> CreateMerchantCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -18708,7 +18944,7 @@ await client.Merchants.CustomAttributeDefinitions.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributeDefinitions.CreateMerchantCustomAttributeDefinitionRequest` 
+**request:** `CreateMerchantCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -18720,7 +18956,7 @@ await client.Merchants.CustomAttributeDefinitions.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(Square.Merchants.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest { ... }) -> RetrieveMerchantCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(GetCustomAttributeDefinitionsRequest { ... }) -> RetrieveMerchantCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -18770,7 +19006,7 @@ await client.Merchants.CustomAttributeDefinitions.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest` 
+**request:** `GetCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -18782,7 +19018,7 @@ await client.Merchants.CustomAttributeDefinitions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(Square.Merchants.CustomAttributeDefinitions.UpdateMerchantCustomAttributeDefinitionRequest { ... }) -> UpdateMerchantCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(UpdateMerchantCustomAttributeDefinitionRequest { ... }) -> UpdateMerchantCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -18837,7 +19073,7 @@ await client.Merchants.CustomAttributeDefinitions.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributeDefinitions.UpdateMerchantCustomAttributeDefinitionRequest` 
+**request:** `UpdateMerchantCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -18849,7 +19085,7 @@ await client.Merchants.CustomAttributeDefinitions.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(Square.Merchants.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteMerchantCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Merchants.CustomAttributeDefinitions.<a href="/src/Square/Merchants/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteMerchantCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -18899,7 +19135,7 @@ await client.Merchants.CustomAttributeDefinitions.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest` 
+**request:** `DeleteCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -18912,7 +19148,7 @@ await client.Merchants.CustomAttributeDefinitions.DeleteAsync(
 </details>
 
 ## Merchants CustomAttributes
-<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">BatchDeleteAsync</a>(Square.Merchants.CustomAttributes.BulkDeleteMerchantCustomAttributesRequest { ... }) -> BulkDeleteMerchantCustomAttributesResponse</code></summary>
+<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">BatchDeleteAsync</a>(BulkDeleteMerchantCustomAttributesRequest { ... }) -> BulkDeleteMerchantCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -18980,7 +19216,7 @@ await client.Merchants.CustomAttributes.BatchDeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributes.BulkDeleteMerchantCustomAttributesRequest` 
+**request:** `BulkDeleteMerchantCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -18992,7 +19228,7 @@ await client.Merchants.CustomAttributes.BatchDeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">BatchUpsertAsync</a>(Square.Merchants.CustomAttributes.BulkUpsertMerchantCustomAttributesRequest { ... }) -> BulkUpsertMerchantCustomAttributesResponse</code></summary>
+<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">BatchUpsertAsync</a>(BulkUpsertMerchantCustomAttributesRequest { ... }) -> BulkUpsertMerchantCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -19077,7 +19313,7 @@ await client.Merchants.CustomAttributes.BatchUpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributes.BulkUpsertMerchantCustomAttributesRequest` 
+**request:** `BulkUpsertMerchantCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -19089,7 +19325,7 @@ await client.Merchants.CustomAttributes.BatchUpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(Square.Merchants.CustomAttributes.ListCustomAttributesRequest { ... }) -> Core.Pager<CustomAttribute></code></summary>
+<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(ListCustomAttributesRequest { ... }) -> Pager<CustomAttribute></code></summary>
 <dl>
 <dd>
 
@@ -19145,7 +19381,7 @@ await client.Merchants.CustomAttributes.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributes.ListCustomAttributesRequest` 
+**request:** `ListCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -19157,7 +19393,7 @@ await client.Merchants.CustomAttributes.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(Square.Merchants.CustomAttributes.GetCustomAttributesRequest { ... }) -> RetrieveMerchantCustomAttributeResponse</code></summary>
+<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(GetCustomAttributesRequest { ... }) -> RetrieveMerchantCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -19211,7 +19447,7 @@ await client.Merchants.CustomAttributes.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributes.GetCustomAttributesRequest` 
+**request:** `GetCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -19223,7 +19459,7 @@ await client.Merchants.CustomAttributes.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(Square.Merchants.CustomAttributes.UpsertMerchantCustomAttributeRequest { ... }) -> UpsertMerchantCustomAttributeResponse</code></summary>
+<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(UpsertMerchantCustomAttributeRequest { ... }) -> UpsertMerchantCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -19277,7 +19513,7 @@ await client.Merchants.CustomAttributes.UpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributes.UpsertMerchantCustomAttributeRequest` 
+**request:** `UpsertMerchantCustomAttributeRequest` 
     
 </dd>
 </dl>
@@ -19289,7 +19525,7 @@ await client.Merchants.CustomAttributes.UpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(Square.Merchants.CustomAttributes.DeleteCustomAttributesRequest { ... }) -> DeleteMerchantCustomAttributeResponse</code></summary>
+<details><summary><code>client.Merchants.CustomAttributes.<a href="/src/Square/Merchants/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(DeleteCustomAttributesRequest { ... }) -> DeleteMerchantCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -19339,7 +19575,7 @@ await client.Merchants.CustomAttributes.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Merchants.CustomAttributes.DeleteCustomAttributesRequest` 
+**request:** `DeleteCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -19352,7 +19588,7 @@ await client.Merchants.CustomAttributes.DeleteAsync(
 </details>
 
 ## Orders CustomAttributeDefinitions
-<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(Square.Orders.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest { ... }) -> Core.Pager<CustomAttributeDefinition></code></summary>
+<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(ListCustomAttributeDefinitionsRequest { ... }) -> Pager<CustomAttributeDefinition></code></summary>
 <dl>
 <dd>
 
@@ -19406,7 +19642,7 @@ await client.Orders.CustomAttributeDefinitions.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest` 
+**request:** `ListCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -19418,7 +19654,7 @@ await client.Orders.CustomAttributeDefinitions.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(Square.Orders.CustomAttributeDefinitions.CreateOrderCustomAttributeDefinitionRequest { ... }) -> CreateOrderCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">CreateAsync</a>(CreateOrderCustomAttributeDefinitionRequest { ... }) -> CreateOrderCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -19483,7 +19719,7 @@ await client.Orders.CustomAttributeDefinitions.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributeDefinitions.CreateOrderCustomAttributeDefinitionRequest` 
+**request:** `CreateOrderCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -19495,7 +19731,7 @@ await client.Orders.CustomAttributeDefinitions.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(Square.Orders.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest { ... }) -> RetrieveOrderCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">GetAsync</a>(GetCustomAttributeDefinitionsRequest { ... }) -> RetrieveOrderCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -19547,7 +19783,7 @@ await client.Orders.CustomAttributeDefinitions.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest` 
+**request:** `GetCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -19559,7 +19795,7 @@ await client.Orders.CustomAttributeDefinitions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(Square.Orders.CustomAttributeDefinitions.UpdateOrderCustomAttributeDefinitionRequest { ... }) -> UpdateOrderCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">UpdateAsync</a>(UpdateOrderCustomAttributeDefinitionRequest { ... }) -> UpdateOrderCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -19615,7 +19851,7 @@ await client.Orders.CustomAttributeDefinitions.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributeDefinitions.UpdateOrderCustomAttributeDefinitionRequest` 
+**request:** `UpdateOrderCustomAttributeDefinitionRequest` 
     
 </dd>
 </dl>
@@ -19627,7 +19863,7 @@ await client.Orders.CustomAttributeDefinitions.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(Square.Orders.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteOrderCustomAttributeDefinitionResponse</code></summary>
+<details><summary><code>client.Orders.CustomAttributeDefinitions.<a href="/src/Square/Orders/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">DeleteAsync</a>(DeleteCustomAttributeDefinitionsRequest { ... }) -> DeleteOrderCustomAttributeDefinitionResponse</code></summary>
 <dl>
 <dd>
 
@@ -19676,7 +19912,7 @@ await client.Orders.CustomAttributeDefinitions.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest` 
+**request:** `DeleteCustomAttributeDefinitionsRequest` 
     
 </dd>
 </dl>
@@ -19689,7 +19925,7 @@ await client.Orders.CustomAttributeDefinitions.DeleteAsync(
 </details>
 
 ## Orders CustomAttributes
-<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">BatchDeleteAsync</a>(Square.Orders.CustomAttributes.BulkDeleteOrderCustomAttributesRequest { ... }) -> BulkDeleteOrderCustomAttributesResponse</code></summary>
+<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">BatchDeleteAsync</a>(BulkDeleteOrderCustomAttributesRequest { ... }) -> BulkDeleteOrderCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -19770,7 +20006,7 @@ await client.Orders.CustomAttributes.BatchDeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributes.BulkDeleteOrderCustomAttributesRequest` 
+**request:** `BulkDeleteOrderCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -19782,7 +20018,7 @@ await client.Orders.CustomAttributes.BatchDeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">BatchUpsertAsync</a>(Square.Orders.CustomAttributes.BulkUpsertOrderCustomAttributesRequest { ... }) -> BulkUpsertOrderCustomAttributesResponse</code></summary>
+<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">BatchUpsertAsync</a>(BulkUpsertOrderCustomAttributesRequest { ... }) -> BulkUpsertOrderCustomAttributesResponse</code></summary>
 <dl>
 <dd>
 
@@ -19873,7 +20109,7 @@ await client.Orders.CustomAttributes.BatchUpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributes.BulkUpsertOrderCustomAttributesRequest` 
+**request:** `BulkUpsertOrderCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -19885,7 +20121,7 @@ await client.Orders.CustomAttributes.BatchUpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(Square.Orders.CustomAttributes.ListCustomAttributesRequest { ... }) -> Core.Pager<CustomAttribute></code></summary>
+<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">ListAsync</a>(ListCustomAttributesRequest { ... }) -> Pager<CustomAttribute></code></summary>
 <dl>
 <dd>
 
@@ -19943,7 +20179,7 @@ await client.Orders.CustomAttributes.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributes.ListCustomAttributesRequest` 
+**request:** `ListCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -19955,7 +20191,7 @@ await client.Orders.CustomAttributes.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(Square.Orders.CustomAttributes.GetCustomAttributesRequest { ... }) -> RetrieveOrderCustomAttributeResponse</code></summary>
+<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">GetAsync</a>(GetCustomAttributesRequest { ... }) -> RetrieveOrderCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -20012,7 +20248,7 @@ await client.Orders.CustomAttributes.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributes.GetCustomAttributesRequest` 
+**request:** `GetCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -20024,7 +20260,7 @@ await client.Orders.CustomAttributes.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(Square.Orders.CustomAttributes.UpsertOrderCustomAttributeRequest { ... }) -> UpsertOrderCustomAttributeResponse</code></summary>
+<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">UpsertAsync</a>(UpsertOrderCustomAttributeRequest { ... }) -> UpsertOrderCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -20086,7 +20322,7 @@ await client.Orders.CustomAttributes.UpsertAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributes.UpsertOrderCustomAttributeRequest` 
+**request:** `UpsertOrderCustomAttributeRequest` 
     
 </dd>
 </dl>
@@ -20098,7 +20334,7 @@ await client.Orders.CustomAttributes.UpsertAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(Square.Orders.CustomAttributes.DeleteCustomAttributesRequest { ... }) -> DeleteOrderCustomAttributeResponse</code></summary>
+<details><summary><code>client.Orders.CustomAttributes.<a href="/src/Square/Orders/CustomAttributes/CustomAttributesClient.cs">DeleteAsync</a>(DeleteCustomAttributesRequest { ... }) -> DeleteOrderCustomAttributeResponse</code></summary>
 <dl>
 <dd>
 
@@ -20150,7 +20386,7 @@ await client.Orders.CustomAttributes.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Orders.CustomAttributes.DeleteCustomAttributesRequest` 
+**request:** `DeleteCustomAttributesRequest` 
     
 </dd>
 </dl>
@@ -20163,7 +20399,7 @@ await client.Orders.CustomAttributes.DeleteAsync(
 </details>
 
 ## TeamMembers WageSetting
-<details><summary><code>client.TeamMembers.WageSetting.<a href="/src/Square/TeamMembers/WageSetting/WageSettingClient.cs">GetAsync</a>(Square.TeamMembers.WageSetting.GetWageSettingRequest { ... }) -> GetWageSettingResponse</code></summary>
+<details><summary><code>client.TeamMembers.WageSetting.<a href="/src/Square/TeamMembers/WageSetting/WageSettingClient.cs">GetAsync</a>(GetWageSettingRequest { ... }) -> GetWageSettingResponse</code></summary>
 <dl>
 <dd>
 
@@ -20212,7 +20448,7 @@ await client.TeamMembers.WageSetting.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.TeamMembers.WageSetting.GetWageSettingRequest` 
+**request:** `GetWageSettingRequest` 
     
 </dd>
 </dl>
@@ -20224,7 +20460,7 @@ await client.TeamMembers.WageSetting.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.TeamMembers.WageSetting.<a href="/src/Square/TeamMembers/WageSetting/WageSettingClient.cs">UpdateAsync</a>(Square.TeamMembers.WageSetting.UpdateWageSettingRequest { ... }) -> UpdateWageSettingResponse</code></summary>
+<details><summary><code>client.TeamMembers.WageSetting.<a href="/src/Square/TeamMembers/WageSetting/WageSettingClient.cs">UpdateAsync</a>(UpdateWageSettingRequest { ... }) -> UpdateWageSettingResponse</code></summary>
 <dl>
 <dd>
 
@@ -20298,7 +20534,7 @@ await client.TeamMembers.WageSetting.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.TeamMembers.WageSetting.UpdateWageSettingRequest` 
+**request:** `UpdateWageSettingRequest` 
     
 </dd>
 </dl>
@@ -20311,7 +20547,7 @@ await client.TeamMembers.WageSetting.UpdateAsync(
 </details>
 
 ## Terminal Actions
-<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">CreateAsync</a>(Square.Terminal.Actions.CreateTerminalActionRequest { ... }) -> CreateTerminalActionResponse</code></summary>
+<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">CreateAsync</a>(CreateTerminalActionRequest { ... }) -> CreateTerminalActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -20369,7 +20605,7 @@ await client.Terminal.Actions.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Actions.CreateTerminalActionRequest` 
+**request:** `CreateTerminalActionRequest` 
     
 </dd>
 </dl>
@@ -20381,7 +20617,7 @@ await client.Terminal.Actions.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">SearchAsync</a>(Square.Terminal.Actions.SearchTerminalActionsRequest { ... }) -> SearchTerminalActionsResponse</code></summary>
+<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">SearchAsync</a>(SearchTerminalActionsRequest { ... }) -> SearchTerminalActionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -20436,7 +20672,7 @@ await client.Terminal.Actions.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Actions.SearchTerminalActionsRequest` 
+**request:** `SearchTerminalActionsRequest` 
     
 </dd>
 </dl>
@@ -20448,7 +20684,7 @@ await client.Terminal.Actions.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">GetAsync</a>(Square.Terminal.Actions.GetActionsRequest { ... }) -> GetTerminalActionResponse</code></summary>
+<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">GetAsync</a>(GetActionsRequest { ... }) -> GetTerminalActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -20490,7 +20726,7 @@ await client.Terminal.Actions.GetAsync(new GetActionsRequest { ActionId = "actio
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Actions.GetActionsRequest` 
+**request:** `GetActionsRequest` 
     
 </dd>
 </dl>
@@ -20502,7 +20738,7 @@ await client.Terminal.Actions.GetAsync(new GetActionsRequest { ActionId = "actio
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">CancelAsync</a>(Square.Terminal.Actions.CancelActionsRequest { ... }) -> CancelTerminalActionResponse</code></summary>
+<details><summary><code>client.Terminal.Actions.<a href="/src/Square/Terminal/Actions/ActionsClient.cs">CancelAsync</a>(CancelActionsRequest { ... }) -> CancelTerminalActionResponse</code></summary>
 <dl>
 <dd>
 
@@ -20544,7 +20780,7 @@ await client.Terminal.Actions.CancelAsync(new CancelActionsRequest { ActionId = 
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Actions.CancelActionsRequest` 
+**request:** `CancelActionsRequest` 
     
 </dd>
 </dl>
@@ -20557,7 +20793,7 @@ await client.Terminal.Actions.CancelAsync(new CancelActionsRequest { ActionId = 
 </details>
 
 ## Terminal Checkouts
-<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">CreateAsync</a>(Square.Terminal.Checkouts.CreateTerminalCheckoutRequest { ... }) -> CreateTerminalCheckoutResponse</code></summary>
+<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">CreateAsync</a>(CreateTerminalCheckoutRequest { ... }) -> CreateTerminalCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -20615,7 +20851,7 @@ await client.Terminal.Checkouts.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Checkouts.CreateTerminalCheckoutRequest` 
+**request:** `CreateTerminalCheckoutRequest` 
     
 </dd>
 </dl>
@@ -20627,7 +20863,7 @@ await client.Terminal.Checkouts.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">SearchAsync</a>(Square.Terminal.Checkouts.SearchTerminalCheckoutsRequest { ... }) -> SearchTerminalCheckoutsResponse</code></summary>
+<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">SearchAsync</a>(SearchTerminalCheckoutsRequest { ... }) -> SearchTerminalCheckoutsResponse</code></summary>
 <dl>
 <dd>
 
@@ -20678,7 +20914,7 @@ await client.Terminal.Checkouts.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Checkouts.SearchTerminalCheckoutsRequest` 
+**request:** `SearchTerminalCheckoutsRequest` 
     
 </dd>
 </dl>
@@ -20690,7 +20926,7 @@ await client.Terminal.Checkouts.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">GetAsync</a>(Square.Terminal.Checkouts.GetCheckoutsRequest { ... }) -> GetTerminalCheckoutResponse</code></summary>
+<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">GetAsync</a>(GetCheckoutsRequest { ... }) -> GetTerminalCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -20732,7 +20968,7 @@ await client.Terminal.Checkouts.GetAsync(new GetCheckoutsRequest { CheckoutId = 
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Checkouts.GetCheckoutsRequest` 
+**request:** `GetCheckoutsRequest` 
     
 </dd>
 </dl>
@@ -20744,7 +20980,7 @@ await client.Terminal.Checkouts.GetAsync(new GetCheckoutsRequest { CheckoutId = 
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">CancelAsync</a>(Square.Terminal.Checkouts.CancelCheckoutsRequest { ... }) -> CancelTerminalCheckoutResponse</code></summary>
+<details><summary><code>client.Terminal.Checkouts.<a href="/src/Square/Terminal/Checkouts/CheckoutsClient.cs">CancelAsync</a>(CancelCheckoutsRequest { ... }) -> CancelTerminalCheckoutResponse</code></summary>
 <dl>
 <dd>
 
@@ -20788,7 +21024,7 @@ await client.Terminal.Checkouts.CancelAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Checkouts.CancelCheckoutsRequest` 
+**request:** `CancelCheckoutsRequest` 
     
 </dd>
 </dl>
@@ -20801,7 +21037,7 @@ await client.Terminal.Checkouts.CancelAsync(
 </details>
 
 ## Terminal Refunds
-<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">CreateAsync</a>(Square.Terminal.Refunds.CreateTerminalRefundRequest { ... }) -> CreateTerminalRefundResponse</code></summary>
+<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">CreateAsync</a>(CreateTerminalRefundRequest { ... }) -> CreateTerminalRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -20855,7 +21091,7 @@ await client.Terminal.Refunds.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Refunds.CreateTerminalRefundRequest` 
+**request:** `CreateTerminalRefundRequest` 
     
 </dd>
 </dl>
@@ -20867,7 +21103,7 @@ await client.Terminal.Refunds.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">SearchAsync</a>(Square.Terminal.Refunds.SearchTerminalRefundsRequest { ... }) -> SearchTerminalRefundsResponse</code></summary>
+<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">SearchAsync</a>(SearchTerminalRefundsRequest { ... }) -> SearchTerminalRefundsResponse</code></summary>
 <dl>
 <dd>
 
@@ -20918,7 +21154,7 @@ await client.Terminal.Refunds.SearchAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Refunds.SearchTerminalRefundsRequest` 
+**request:** `SearchTerminalRefundsRequest` 
     
 </dd>
 </dl>
@@ -20930,7 +21166,7 @@ await client.Terminal.Refunds.SearchAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">GetAsync</a>(Square.Terminal.Refunds.GetRefundsRequest { ... }) -> GetTerminalRefundResponse</code></summary>
+<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">GetAsync</a>(GetRefundsRequest { ... }) -> GetTerminalRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -20974,7 +21210,7 @@ await client.Terminal.Refunds.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Refunds.GetRefundsRequest` 
+**request:** `GetRefundsRequest` 
     
 </dd>
 </dl>
@@ -20986,7 +21222,7 @@ await client.Terminal.Refunds.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">CancelAsync</a>(Square.Terminal.Refunds.CancelRefundsRequest { ... }) -> CancelTerminalRefundResponse</code></summary>
+<details><summary><code>client.Terminal.Refunds.<a href="/src/Square/Terminal/Refunds/RefundsClient.cs">CancelAsync</a>(CancelRefundsRequest { ... }) -> CancelTerminalRefundResponse</code></summary>
 <dl>
 <dd>
 
@@ -21030,7 +21266,7 @@ await client.Terminal.Refunds.CancelAsync(
 <dl>
 <dd>
 
-**request:** `Square.Terminal.Refunds.CancelRefundsRequest` 
+**request:** `CancelRefundsRequest` 
     
 </dd>
 </dl>
@@ -21043,7 +21279,7 @@ await client.Terminal.Refunds.CancelAsync(
 </details>
 
 ## Webhooks EventTypes
-<details><summary><code>client.Webhooks.EventTypes.<a href="/src/Square/Webhooks/EventTypes/EventTypesClient.cs">ListAsync</a>(Square.Webhooks.EventTypes.ListEventTypesRequest { ... }) -> ListWebhookEventTypesResponse</code></summary>
+<details><summary><code>client.Webhooks.EventTypes.<a href="/src/Square/Webhooks/EventTypes/EventTypesClient.cs">ListAsync</a>(ListEventTypesRequest { ... }) -> ListWebhookEventTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -21087,7 +21323,7 @@ await client.Webhooks.EventTypes.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Webhooks.EventTypes.ListEventTypesRequest` 
+**request:** `ListEventTypesRequest` 
     
 </dd>
 </dl>
@@ -21100,7 +21336,7 @@ await client.Webhooks.EventTypes.ListAsync(
 </details>
 
 ## Webhooks Subscriptions
-<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">ListAsync</a>(Square.Webhooks.Subscriptions.ListSubscriptionsRequest { ... }) -> Core.Pager<WebhookSubscription></code></summary>
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">ListAsync</a>(ListSubscriptionsRequest { ... }) -> Pager<WebhookSubscription></code></summary>
 <dl>
 <dd>
 
@@ -21150,7 +21386,7 @@ await client.Webhooks.Subscriptions.ListAsync(
 <dl>
 <dd>
 
-**request:** `Square.Webhooks.Subscriptions.ListSubscriptionsRequest` 
+**request:** `ListSubscriptionsRequest` 
     
 </dd>
 </dl>
@@ -21162,7 +21398,7 @@ await client.Webhooks.Subscriptions.ListAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">CreateAsync</a>(Square.Webhooks.Subscriptions.CreateWebhookSubscriptionRequest { ... }) -> CreateWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">CreateAsync</a>(CreateWebhookSubscriptionRequest { ... }) -> CreateWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21216,7 +21452,7 @@ await client.Webhooks.Subscriptions.CreateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Webhooks.Subscriptions.CreateWebhookSubscriptionRequest` 
+**request:** `CreateWebhookSubscriptionRequest` 
     
 </dd>
 </dl>
@@ -21228,7 +21464,7 @@ await client.Webhooks.Subscriptions.CreateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">GetAsync</a>(Square.Webhooks.Subscriptions.GetSubscriptionsRequest { ... }) -> GetWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">GetAsync</a>(GetSubscriptionsRequest { ... }) -> GetWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21272,7 +21508,7 @@ await client.Webhooks.Subscriptions.GetAsync(
 <dl>
 <dd>
 
-**request:** `Square.Webhooks.Subscriptions.GetSubscriptionsRequest` 
+**request:** `GetSubscriptionsRequest` 
     
 </dd>
 </dl>
@@ -21284,7 +21520,7 @@ await client.Webhooks.Subscriptions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">UpdateAsync</a>(Square.Webhooks.Subscriptions.UpdateWebhookSubscriptionRequest { ... }) -> UpdateWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">UpdateAsync</a>(UpdateWebhookSubscriptionRequest { ... }) -> UpdateWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21336,7 +21572,7 @@ await client.Webhooks.Subscriptions.UpdateAsync(
 <dl>
 <dd>
 
-**request:** `Square.Webhooks.Subscriptions.UpdateWebhookSubscriptionRequest` 
+**request:** `UpdateWebhookSubscriptionRequest` 
     
 </dd>
 </dl>
@@ -21348,7 +21584,7 @@ await client.Webhooks.Subscriptions.UpdateAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">DeleteAsync</a>(Square.Webhooks.Subscriptions.DeleteSubscriptionsRequest { ... }) -> DeleteWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">DeleteAsync</a>(DeleteSubscriptionsRequest { ... }) -> DeleteWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21392,7 +21628,7 @@ await client.Webhooks.Subscriptions.DeleteAsync(
 <dl>
 <dd>
 
-**request:** `Square.Webhooks.Subscriptions.DeleteSubscriptionsRequest` 
+**request:** `DeleteSubscriptionsRequest` 
     
 </dd>
 </dl>
@@ -21404,7 +21640,7 @@ await client.Webhooks.Subscriptions.DeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">UpdateSignatureKeyAsync</a>(Square.Webhooks.Subscriptions.UpdateWebhookSubscriptionSignatureKeyRequest { ... }) -> UpdateWebhookSubscriptionSignatureKeyResponse</code></summary>
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">UpdateSignatureKeyAsync</a>(UpdateWebhookSubscriptionSignatureKeyRequest { ... }) -> UpdateWebhookSubscriptionSignatureKeyResponse</code></summary>
 <dl>
 <dd>
 
@@ -21452,7 +21688,7 @@ await client.Webhooks.Subscriptions.UpdateSignatureKeyAsync(
 <dl>
 <dd>
 
-**request:** `Square.Webhooks.Subscriptions.UpdateWebhookSubscriptionSignatureKeyRequest` 
+**request:** `UpdateWebhookSubscriptionSignatureKeyRequest` 
     
 </dd>
 </dl>
@@ -21464,7 +21700,7 @@ await client.Webhooks.Subscriptions.UpdateSignatureKeyAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">TestAsync</a>(Square.Webhooks.Subscriptions.TestWebhookSubscriptionRequest { ... }) -> TestWebhookSubscriptionResponse</code></summary>
+<details><summary><code>client.Webhooks.Subscriptions.<a href="/src/Square/Webhooks/Subscriptions/SubscriptionsClient.cs">TestAsync</a>(TestWebhookSubscriptionRequest { ... }) -> TestWebhookSubscriptionResponse</code></summary>
 <dl>
 <dd>
 
@@ -21512,7 +21748,7 @@ await client.Webhooks.Subscriptions.TestAsync(
 <dl>
 <dd>
 
-**request:** `Square.Webhooks.Subscriptions.TestWebhookSubscriptionRequest` 
+**request:** `TestWebhookSubscriptionRequest` 
     
 </dd>
 </dl>
