@@ -1,0 +1,74 @@
+using System.Text.Json.Serialization;
+using Square.Core;
+
+namespace Square.Default;
+
+[JsonConverter(typeof(StringEnumSerializer<TeamMemberAssignedLocationsAssignmentType>))]
+[Serializable]
+public readonly record struct TeamMemberAssignedLocationsAssignmentType : IStringEnum
+{
+    public static readonly TeamMemberAssignedLocationsAssignmentType AllCurrentAndFutureLocations =
+        new(Values.AllCurrentAndFutureLocations);
+
+    public static readonly TeamMemberAssignedLocationsAssignmentType ExplicitLocations = new(
+        Values.ExplicitLocations
+    );
+
+    public TeamMemberAssignedLocationsAssignmentType(string value)
+    {
+        Value = value;
+    }
+
+    /// <summary>
+    /// The string value of the enum.
+    /// </summary>
+    public string Value { get; }
+
+    /// <summary>
+    /// Create a string enum with the given value.
+    /// </summary>
+    public static TeamMemberAssignedLocationsAssignmentType FromCustom(string value)
+    {
+        return new TeamMemberAssignedLocationsAssignmentType(value);
+    }
+
+    public bool Equals(string? other)
+    {
+        return Value.Equals(other);
+    }
+
+    /// <summary>
+    /// Returns the string value of the enum.
+    /// </summary>
+    public override string ToString()
+    {
+        return Value;
+    }
+
+    public static bool operator ==(
+        TeamMemberAssignedLocationsAssignmentType value1,
+        string value2
+    ) => value1.Value.Equals(value2);
+
+    public static bool operator !=(
+        TeamMemberAssignedLocationsAssignmentType value1,
+        string value2
+    ) => !value1.Value.Equals(value2);
+
+    public static explicit operator string(TeamMemberAssignedLocationsAssignmentType value) =>
+        value.Value;
+
+    public static explicit operator TeamMemberAssignedLocationsAssignmentType(string value) =>
+        new(value);
+
+    /// <summary>
+    /// Constant strings for enum values
+    /// </summary>
+    [Serializable]
+    public static class Values
+    {
+        public const string AllCurrentAndFutureLocations = "ALL_CURRENT_AND_FUTURE_LOCATIONS";
+
+        public const string ExplicitLocations = "EXPLICIT_LOCATIONS";
+    }
+}
