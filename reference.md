@@ -12058,32 +12058,6 @@ await client.Vendors.UpdateAsync(
 </dl>
 </details>
 
-## Mobile
-<details><summary><code>client.Mobile.<a href="/src/Square/Mobile/MobileClient.cs">AuthorizationCodeAsync</a>()</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```csharp
-await client.Mobile.AuthorizationCodeAsync();
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Bookings CustomAttributeDefinitions
 <details><summary><code>client.Bookings.CustomAttributeDefinitions.<a href="/src/Square/Bookings/CustomAttributeDefinitions/CustomAttributeDefinitionsClient.cs">ListAsync</a>(ListCustomAttributeDefinitionsRequest { ... }) -> Pager&lt;CustomAttributeDefinition&gt;</code></summary>
 <dl>

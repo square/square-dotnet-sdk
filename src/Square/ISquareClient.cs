@@ -17,7 +17,6 @@ using Square.Labor;
 using Square.Locations;
 using Square.Loyalty;
 using Square.Merchants;
-using Square.Mobile;
 using Square.OAuth;
 using Square.Orders;
 using Square.Payments;
@@ -69,7 +68,6 @@ public partial interface ISquareClient
     public TerminalClient Terminal { get; }
     public TransferOrdersClient TransferOrders { get; }
     public VendorsClient Vendors { get; }
-    public MobileClient Mobile { get; }
     public CashDrawersClient CashDrawers { get; }
     public WebhooksClient Webhooks { get; }
 }
