@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.Terminal.Actions;
@@ -9,7 +6,7 @@ using Square.Terminal.Checkouts;
 
 namespace Square.Terminal;
 
-public partial class TerminalClient
+public partial class TerminalClient : ITerminalClient
 {
     private RawClient _client;
 

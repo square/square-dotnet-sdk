@@ -23,7 +23,7 @@ public record DigitalWalletDetails : IJsonOnDeserialized
 
     /// <summary>
     /// The brand used for the `WALLET` payment. The brand can be `CASH_APP`, `PAYPAY`, `ALIPAY`,
-    /// `RAKUTEN_PAY`, `AU_PAY`, `D_BARAI`, `MERPAY`, `WECHAT_PAY` or `UNKNOWN`.
+    /// `RAKUTEN_PAY`, `AU_PAY`, `D_BARAI`, `MERPAY`, `WECHAT_PAY`, `LIGHTNING` or `UNKNOWN`.
     /// </summary>
     [JsonPropertyName("brand")]
     public string? Brand { get; set; }
@@ -33,6 +33,13 @@ public record DigitalWalletDetails : IJsonOnDeserialized
     /// </summary>
     [JsonPropertyName("cash_app_details")]
     public CashAppDetails? CashAppDetails { get; set; }
+
+    /// <summary>
+    /// Information about errors encountered during the payment.
+    /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
+    [JsonPropertyName("errors")]
+    public IEnumerable<Error>? Errors { get; set; }
 
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();

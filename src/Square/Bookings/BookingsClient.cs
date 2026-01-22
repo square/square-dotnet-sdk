@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Bookings.LocationProfiles;
 using Square.Bookings.TeamMemberProfiles;
@@ -9,7 +6,7 @@ using Square.Core;
 
 namespace Square.Bookings;
 
-public partial class BookingsClient
+public partial class BookingsClient : IBookingsClient
 {
     private RawClient _client;
 
@@ -155,8 +152,8 @@ public partial class BookingsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Bookings?.ToList(),
+                response => response.Cursor,
+                response => response.Bookings?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

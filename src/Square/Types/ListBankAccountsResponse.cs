@@ -15,16 +15,16 @@ public record ListBankAccountsResponse : IJsonOnDeserialized
         new Dictionary<string, JsonElement>();
 
     /// <summary>
-    /// Information on errors encountered during the request.
-    /// </summary>
-    [JsonPropertyName("errors")]
-    public IEnumerable<Error>? Errors { get; set; }
-
-    /// <summary>
     /// List of BankAccounts associated with this account.
     /// </summary>
     [JsonPropertyName("bank_accounts")]
     public IEnumerable<BankAccount>? BankAccounts { get; set; }
+
+    /// <summary>
+    /// Information on errors encountered during the request.
+    /// </summary>
+    [JsonPropertyName("errors")]
+    public IEnumerable<Error>? Errors { get; set; }
 
     /// <summary>
     /// When a response is truncated, it includes a cursor that you can

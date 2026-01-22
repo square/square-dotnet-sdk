@@ -1,14 +1,11 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Checkout.PaymentLinks;
 using Square.Core;
 
 namespace Square.Checkout;
 
-public partial class CheckoutClient
+public partial class CheckoutClient : ICheckoutClient
 {
     private RawClient _client;
 

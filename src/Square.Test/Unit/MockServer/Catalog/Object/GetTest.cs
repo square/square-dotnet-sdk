@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Catalog.Object;
@@ -49,6 +48,7 @@ public class GetTest : BaseMockServerTest
                   "label_color": "label_color",
                   "is_taxable": true,
                   "category_id": "category_id",
+                  "buyer_facing_name": "buyer_facing_name",
                   "tax_ids": [
                     "tax_ids"
                   ],
@@ -72,6 +72,7 @@ public class GetTest : BaseMockServerTest
                   "sort_name": "sort_name",
                   "description_html": "description_html",
                   "description_plaintext": "description_plaintext",
+                  "kitchen_name": "kitchen_name",
                   "channels": [
                     "channels"
                   ],

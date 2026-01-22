@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Cards;
 
-public partial class CardsClient
+public partial class CardsClient : ICardsClient
 {
     private RawClient _client;
 
@@ -124,8 +121,8 @@ public partial class CardsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Cards?.ToList(),
+                response => response.Cursor,
+                response => response.Cards?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

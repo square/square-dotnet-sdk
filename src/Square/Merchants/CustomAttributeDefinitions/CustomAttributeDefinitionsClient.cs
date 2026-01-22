@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Merchants.CustomAttributeDefinitions;
 
-public partial class CustomAttributeDefinitionsClient
+public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefinitionsClient
 {
     private RawClient _client;
 
@@ -120,8 +117,8 @@ public partial class CustomAttributeDefinitionsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.CustomAttributeDefinitions?.ToList(),
+                response => response.Cursor,
+                response => response.CustomAttributeDefinitions?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

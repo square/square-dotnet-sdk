@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Test.Unit.MockServer;
@@ -17,7 +16,7 @@ public class ListTest : BaseMockServerTest
                 {
                   "key": "cover-count",
                   "schema": {
-                    "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
                   },
                   "name": "Cover count",
                   "description": "The number of people seated at a table",
@@ -29,7 +28,7 @@ public class ListTest : BaseMockServerTest
                 {
                   "key": "seat-number",
                   "schema": {
-                    "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
                   },
                   "name": "Seat number",
                   "description": "The identifier for a particular seat",
@@ -41,7 +40,7 @@ public class ListTest : BaseMockServerTest
                 {
                   "key": "table-number",
                   "schema": {
-                    "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
                   },
                   "name": "Table number",
                   "description": "The identifier for a particular table",

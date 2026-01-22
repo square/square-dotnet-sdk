@@ -133,6 +133,13 @@ public record BankAccount : IJsonOnDeserialized
     [JsonPropertyName("bank_name")]
     public string? BankName { get; set; }
 
+    /// <summary>
+    /// The ID of the customer who owns the bank account
+    /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
+    [JsonPropertyName("customer_id")]
+    public string? CustomerId { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

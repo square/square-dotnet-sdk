@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.ApplePay;
 
-public partial class ApplePayClient
+public partial class ApplePayClient : IApplePayClient
 {
     private RawClient _client;
 

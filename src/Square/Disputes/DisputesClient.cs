@@ -1,14 +1,11 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.Disputes.Evidence;
 
 namespace Square.Disputes;
 
-public partial class DisputesClient
+public partial class DisputesClient : IDisputesClient
 {
     private RawClient _client;
 
@@ -116,8 +113,8 @@ public partial class DisputesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Disputes?.ToList(),
+                response => response.Cursor,
+                response => response.Disputes?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -232,6 +229,11 @@ public partial class DisputesClient
     /// Uploads a file to use as evidence in a dispute challenge. The endpoint accepts HTTP
     /// multipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats.
     /// </summary>
+    /// <example><code>
+    /// await client.Disputes.CreateEvidenceFileAsync(
+    ///     new CreateEvidenceFileDisputesRequest { DisputeId = "dispute_id" }
+    /// );
+    /// </code></example>
     public async Task<CreateDisputeEvidenceFileResponse> CreateEvidenceFileAsync(
         CreateEvidenceFileDisputesRequest request,
         RequestOptions? options = null,

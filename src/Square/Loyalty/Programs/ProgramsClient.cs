@@ -1,14 +1,11 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.Loyalty.Programs.Promotions;
 
 namespace Square.Loyalty.Programs;
 
-public partial class ProgramsClient
+public partial class ProgramsClient : IProgramsClient
 {
     private RawClient _client;
 

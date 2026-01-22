@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -69,6 +68,8 @@ public class CreateTest : BaseMockServerTest
                 "card_type": "UNKNOWN_CARD_TYPE",
                 "prepaid_type": "UNKNOWN_PREPAID_TYPE",
                 "bin": "bin",
+                "created_at": "created_at",
+                "disabled_at": "disabled_at",
                 "version": 1000000,
                 "card_co_brand": "UNKNOWN",
                 "issuer_alert": "ISSUER_ALERT_CARD_CLOSED",

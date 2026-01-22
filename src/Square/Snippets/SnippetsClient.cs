@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Snippets;
 
-public partial class SnippetsClient
+public partial class SnippetsClient : ISnippetsClient
 {
     private RawClient _client;
 

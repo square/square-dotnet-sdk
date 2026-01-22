@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.BankAccounts;
@@ -40,7 +39,8 @@ public class GetByV1IdTest : BaseMockServerTest
                 "debitable": false,
                 "fingerprint": "fingerprint",
                 "version": 5,
-                "bank_name": "Bank Name"
+                "bank_name": "Bank Name",
+                "customer_id": "customer_id"
               }
             }
             """;

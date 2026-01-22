@@ -44,7 +44,6 @@ public record OrderReturn : IJsonOnDeserialized
     /// applied tax amount to be returned. The taxes must reference a top-level tax ID from the source
     /// order.
     /// </summary>
-    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("return_taxes")]
     public IEnumerable<OrderReturnTax>? ReturnTaxes { get; set; }
 
@@ -53,7 +52,6 @@ public record OrderReturn : IJsonOnDeserialized
     /// applied discount amount to be returned. The discounts must reference a top-level discount ID
     /// from the source order.
     /// </summary>
-    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("return_discounts")]
     public IEnumerable<OrderReturnDiscount>? ReturnDiscounts { get; set; }
 

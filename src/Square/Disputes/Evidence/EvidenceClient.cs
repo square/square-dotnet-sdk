@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Disputes.Evidence;
 
-public partial class EvidenceClient
+public partial class EvidenceClient : IEvidenceClient
 {
     private RawClient _client;
 
@@ -102,8 +99,8 @@ public partial class EvidenceClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Evidence?.ToList(),
+                response => response.Cursor,
+                response => response.Evidence?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

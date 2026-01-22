@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Refunds;
 
-public partial class RefundsClient
+public partial class RefundsClient : IRefundsClient
 {
     private RawClient _client;
 
@@ -162,8 +159,8 @@ public partial class RefundsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Refunds?.ToList(),
+                response => response.Cursor,
+                response => response.Refunds?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

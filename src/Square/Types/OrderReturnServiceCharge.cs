@@ -115,7 +115,7 @@ public record OrderReturnServiceCharge : IJsonOnDeserialized
     public IEnumerable<OrderLineItemAppliedTax>? AppliedTaxes { get; set; }
 
     /// <summary>
-    /// The treatment type of the service charge.
+    /// Indicates whether the service charge will be treated as a value-holding line item or apportioned toward a line item.
     /// See [OrderServiceChargeTreatmentType](#type-orderservicechargetreatmenttype) for possible values
     /// </summary>
     [JsonPropertyName("treatment_type")]
@@ -134,6 +134,13 @@ public record OrderReturnServiceCharge : IJsonOnDeserialized
     /// </summary>
     [JsonPropertyName("scope")]
     public OrderServiceChargeScope? Scope { get; set; }
+
+    /// <summary>
+    /// The type of the service charge.
+    /// See [OrderServiceChargeType](#type-orderservicechargetype) for possible values
+    /// </summary>
+    [JsonPropertyName("type")]
+    public OrderServiceChargeType? Type { get; set; }
 
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();

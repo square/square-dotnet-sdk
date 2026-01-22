@@ -104,6 +104,14 @@ public record ObtainTokenRequest
     [JsonPropertyName("code_verifier")]
     public string? CodeVerifier { get; set; }
 
+    /// <summary>
+    /// Indicates whether to use a JWT (JSON Web Token) as the OAuth access token.
+    /// When set to `true`, the OAuth flow returns a JWT to your application, used in the
+    /// same way as a regular token. The default value is `false`.
+    /// </summary>
+    [JsonPropertyName("use_jwt")]
+    public bool? UseJwt { get; set; }
+
     /// <inheritdoc />
     public override string ToString()
     {

@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Customers.Groups;
 
-public partial class GroupsClient
+public partial class GroupsClient : IGroupsClient
 {
     private RawClient _client;
 
@@ -101,8 +98,8 @@ public partial class GroupsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Groups?.ToList(),
+                response => response.Cursor,
+                response => response.Groups?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -52,6 +52,15 @@ public record CatalogModifier : IJsonOnDeserialized
     public IEnumerable<ModifierLocationOverrides>? LocationOverrides { get; set; }
 
     /// <summary>
+    /// (Optional) Name that the restaurant wants to display to their kitchen workers
+    /// instead of the customer-facing name.
+    /// e.g., customer name might be "Double Baconize" and the
+    /// kitchen name is "Add 2x bacon"
+    /// </summary>
+    [JsonPropertyName("kitchen_name")]
+    public string? KitchenName { get; set; }
+
+    /// <summary>
     /// The ID of the image associated with this `CatalogModifier` instance.
     /// Currently this image is not displayed by Square, but is free to be displayed in 3rd party applications.
     /// </summary>

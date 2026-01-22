@@ -58,6 +58,12 @@ public record CatalogItem : IJsonOnDeserialized
     public string? CategoryId { get; set; }
 
     /// <summary>
+    /// The override to a product name to display to users
+    /// </summary>
+    [JsonPropertyName("buyer_facing_name")]
+    public string? BuyerFacingName { get; set; }
+
+    /// <summary>
     /// A set of IDs indicating the taxes enabled for
     /// this item. When updating an item, any taxes listed here will be added to the item.
     /// Taxes may also be added to or deleted from an item using `UpdateItemTaxes`.
@@ -183,6 +189,15 @@ public record CatalogItem : IJsonOnDeserialized
     [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("description_plaintext")]
     public string? DescriptionPlaintext { get; set; }
+
+    /// <summary>
+    /// (Optional) Name that the restaurant wants to display to their kitchen workers
+    /// instead of the customer-facing name.
+    /// e.g., customer name might be "Big John's Mega Burger" and the
+    /// kitchen name is "12oz beef burger"
+    /// </summary>
+    [JsonPropertyName("kitchen_name")]
+    public string? KitchenName { get; set; }
 
     /// <summary>
     /// A list of IDs representing channels, such as a Square Online site, where the item can be made visible or available.

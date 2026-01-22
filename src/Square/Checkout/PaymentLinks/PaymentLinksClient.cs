@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Checkout.PaymentLinks;
 
-public partial class PaymentLinksClient
+public partial class PaymentLinksClient : IPaymentLinksClient
 {
     private RawClient _client;
 
@@ -103,8 +100,8 @@ public partial class PaymentLinksClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.PaymentLinks?.ToList(),
+                response => response.Cursor,
+                response => response.PaymentLinks?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -47,7 +46,8 @@ public class DismissTerminalCheckoutTest : BaseMockServerTest
                     "separate_tip_screen": true,
                     "custom_tip_field": false
                   },
-                  "show_itemized_cart": true
+                  "show_itemized_cart": true,
+                  "allow_auto_card_surcharge": true
                 },
                 "deadline_duration": "PT5M",
                 "status": "COMPLETED",

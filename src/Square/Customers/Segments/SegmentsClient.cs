@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Customers.Segments;
 
-public partial class SegmentsClient
+public partial class SegmentsClient : ISegmentsClient
 {
     private RawClient _client;
 
@@ -101,8 +98,8 @@ public partial class SegmentsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Segments?.ToList(),
+                response => response.Cursor,
+                response => response.Segments?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

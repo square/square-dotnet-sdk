@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square.Test.Unit.MockServer;
 
@@ -16,7 +15,7 @@ public class ListTest : BaseMockServerTest
                 {
                   "key": "favoritemovie",
                   "schema": {
-                    "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
                   },
                   "name": "Favorite Movie",
                   "description": "Update the description as desired.",
@@ -28,7 +27,7 @@ public class ListTest : BaseMockServerTest
                 {
                   "key": "ownsmovie",
                   "schema": {
-                    "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Boolean"
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Boolean"
                   },
                   "name": "Owns Movie",
                   "description": "Customer owns movie.",

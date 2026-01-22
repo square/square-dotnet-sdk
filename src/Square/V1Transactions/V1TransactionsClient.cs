@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.V1Transactions;
 
-public partial class V1TransactionsClient
+public partial class V1TransactionsClient : IV1TransactionsClient
 {
     private RawClient _client;
 

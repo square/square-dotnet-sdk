@@ -66,14 +66,38 @@ public record CatalogItemModifierListInfo : IJsonOnDeserialized
     [JsonPropertyName("ordinal")]
     public int? Ordinal { get; set; }
 
+    /// <summary>
+    /// Controls whether multiple quantities of the same modifier can be selected for this item.
+    /// - `YES` means that every modifier in the `CatalogModifierList` can have multiple quantities
+    /// selected for this item.
+    /// - `NO` means that each modifier in the `CatalogModifierList` can be selected only once for this item.
+    /// - `NOT_SET` means that the `allow_quantities` setting on the `CatalogModifierList` is obeyed.
+    /// See [CatalogModifierToggleOverrideType](#type-catalogmodifiertoggleoverridetype) for possible values
+    /// </summary>
     [JsonPropertyName("allow_quantities")]
-    public object? AllowQuantities { get; set; }
+    public CatalogModifierToggleOverrideType? AllowQuantities { get; set; }
 
+    /// <summary>
+    /// Controls whether conversational mode is enabled for modifiers on this item.
+    ///
+    /// - `YES` means conversational mode is enabled for every modifier in the `CatalogModifierList`.
+    /// - `NO` means that conversational mode is not enabled for any modifier in the `CatalogModifierList`.
+    /// - `NOT_SET` means that conversational mode is not enabled for any modifier in the `CatalogModifierList`.
+    /// See [CatalogModifierToggleOverrideType](#type-catalogmodifiertoggleoverridetype) for possible values
+    /// </summary>
     [JsonPropertyName("is_conversational")]
-    public object? IsConversational { get; set; }
+    public CatalogModifierToggleOverrideType? IsConversational { get; set; }
 
+    /// <summary>
+    /// Controls whether all modifiers for this item are hidden from customer receipts.
+    /// - `YES` means that all modifiers in the `CatalogModifierList` are hidden from customer
+    /// receipts for this item.
+    /// - `NO` means that all modifiers in the `CatalogModifierList` are visible on customer receipts for this item.
+    /// - `NOT_SET` means that the `hidden_from_customer` setting on the `CatalogModifierList` is obeyed.
+    /// See [CatalogModifierToggleOverrideType](#type-catalogmodifiertoggleoverridetype) for possible values
+    /// </summary>
     [JsonPropertyName("hidden_from_customer_override")]
-    public object? HiddenFromCustomerOverride { get; set; }
+    public CatalogModifierToggleOverrideType? HiddenFromCustomerOverride { get; set; }
 
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();

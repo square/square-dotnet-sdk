@@ -23,6 +23,24 @@ public record SearchOrdersSourceFilter : IJsonOnDeserialized
     [JsonPropertyName("source_names")]
     public IEnumerable<string>? SourceNames { get; set; }
 
+    /// <summary>
+    /// Filters by the [Source](entity:OrderSource) `applicationId`. The filter returns any orders
+    /// with a `source.applicationId` that matches any of the listed source applicationIds.
+    ///
+    /// Max: 100 source applicationIds.
+    /// </summary>
+    [JsonPropertyName("source_application_ids")]
+    public IEnumerable<string>? SourceApplicationIds { get; set; }
+
+    /// <summary>
+    /// Filters by the [Source](entity:OrderSource) `clientOu`. The filter returns any orders
+    /// with a `source.clientOu` that matches any of the listed source clientOus.
+    ///
+    /// Max: 100 source clientOus.
+    /// </summary>
+    [JsonPropertyName("source_client_ous")]
+    public IEnumerable<string>? SourceClientOus { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

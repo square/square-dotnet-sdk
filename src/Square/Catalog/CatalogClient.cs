@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Catalog.Images;
 using Square.Catalog.Object;
@@ -9,7 +6,7 @@ using Square.Core;
 
 namespace Square.Catalog;
 
-public partial class CatalogClient
+public partial class CatalogClient : ICatalogClient
 {
     private RawClient _client;
 
@@ -387,8 +384,8 @@ public partial class CatalogClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Objects?.ToList(),
+                response => response.Cursor,
+                response => response.Objects?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
