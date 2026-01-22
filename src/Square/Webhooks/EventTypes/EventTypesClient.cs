@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Webhooks.EventTypes;
 
-public partial class EventTypesClient
+public partial class EventTypesClient : IEventTypesClient
 {
     private RawClient _client;
 

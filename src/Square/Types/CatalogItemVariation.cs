@@ -185,6 +185,15 @@ public record CatalogItemVariation : IJsonOnDeserialized
     [JsonPropertyName("stockable_conversion")]
     public CatalogStockConversion? StockableConversion { get; set; }
 
+    /// <summary>
+    /// (Optional) Name that the restaurant wants to display to their kitchen workers
+    /// instead of the customer-facing name.
+    /// e.g., customer name might be "Mega-Jumbo Triplesized" and the
+    /// kitchen name is "Large container"
+    /// </summary>
+    [JsonPropertyName("kitchen_name")]
+    public string? KitchenName { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

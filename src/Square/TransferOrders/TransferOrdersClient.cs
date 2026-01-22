@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.TransferOrders;
 
-public partial class TransferOrdersClient
+public partial class TransferOrdersClient : ITransferOrdersClient
 {
     private RawClient _client;
 
@@ -224,8 +221,8 @@ public partial class TransferOrdersClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.TransferOrders?.ToList(),
+                response => response.Cursor,
+                response => response.TransferOrders?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -530,14 +527,14 @@ public partial class TransferOrdersClient
     ///             {
     ///                 new TransferOrderGoodsReceiptLineItem
     ///                 {
-    ///                     TransferOrderLineUid = "transfer_order_line_uid",
+    ///                     TransferOrderLineUid = "1",
     ///                     QuantityReceived = "3",
     ///                     QuantityDamaged = "1",
     ///                     QuantityCanceled = "1",
     ///                 },
     ///                 new TransferOrderGoodsReceiptLineItem
     ///                 {
-    ///                     TransferOrderLineUid = "transfer_order_line_uid",
+    ///                     TransferOrderLineUid = "2",
     ///                     QuantityReceived = "2",
     ///                     QuantityCanceled = "1",
     ///                 },

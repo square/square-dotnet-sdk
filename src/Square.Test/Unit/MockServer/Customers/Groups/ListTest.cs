@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square.Customers.Groups;
 using Square.Test.Unit.MockServer;

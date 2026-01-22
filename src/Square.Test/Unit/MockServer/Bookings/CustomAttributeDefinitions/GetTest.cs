@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -17,7 +16,7 @@ public class GetTest : BaseMockServerTest
               "custom_attribute_definition": {
                 "key": "favoriteShampoo",
                 "schema": {
-                  "\\$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
                 },
                 "name": "Favorite shampoo",
                 "description": "The favorite shampoo of the customer.",

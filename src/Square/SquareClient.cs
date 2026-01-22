@@ -35,7 +35,7 @@ using Square.Webhooks;
 
 namespace Square;
 
-public partial class SquareClient
+public partial class SquareClient : ISquareClient
 {
     private readonly RawClient _client;
 
@@ -49,11 +49,11 @@ public partial class SquareClient
             new Dictionary<string, string>()
             {
                 { "Authorization", $"Bearer {token}" },
-                { "Square-Version", "2025-10-16" },
+                { "Square-Version", "2026-01-22" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Square" },
                 { "X-Fern-SDK-Version", Version.Current },
-                { "User-Agent", "Square/42.2.1" },
+                { "User-Agent", "Square/43.0.0" },
             }
         );
         clientOptions ??= new ClientOptions();
@@ -69,7 +69,6 @@ public partial class SquareClient
             }
         }
         _client = new RawClient(clientOptions);
-        Mobile = new MobileClient(_client);
         OAuth = new OAuthClient(_client);
         V1Transactions = new V1TransactionsClient(_client);
         ApplePay = new ApplePayClient(_client);
@@ -103,11 +102,10 @@ public partial class SquareClient
         Terminal = new TerminalClient(_client);
         TransferOrders = new TransferOrdersClient(_client);
         Vendors = new VendorsClient(_client);
+        Mobile = new MobileClient(_client);
         CashDrawers = new CashDrawersClient(_client);
         Webhooks = new WebhooksClient(_client);
     }
-
-    public MobileClient Mobile { get; }
 
     public OAuthClient OAuth { get; }
 
@@ -174,6 +172,8 @@ public partial class SquareClient
     public TransferOrdersClient TransferOrders { get; }
 
     public VendorsClient Vendors { get; }
+
+    public MobileClient Mobile { get; }
 
     public CashDrawersClient CashDrawers { get; }
 

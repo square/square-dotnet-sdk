@@ -35,7 +35,7 @@ public record CatalogProductSet : IJsonOnDeserialized
     ///
     /// Only one of `product_ids_all`, `product_ids_any`, or `all_products` can be set.
     ///
-    /// Max: 500 catalog object IDs.
+    /// Max: 5000 catalog object IDs.
     /// </summary>
     [JsonPropertyName("product_ids_any")]
     public IEnumerable<string>? ProductIdsAny { get; set; }
@@ -46,7 +46,7 @@ public record CatalogProductSet : IJsonOnDeserialized
     ///
     /// Only one of `product_ids_all`, `product_ids_any`, or `all_products` can be set.
     ///
-    /// Max: 500 catalog object IDs.
+    /// Max: 5000 catalog object IDs.
     /// </summary>
     [JsonPropertyName("product_ids_all")]
     public IEnumerable<string>? ProductIdsAll { get; set; }

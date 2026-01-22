@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Payments;
 
-public partial class PaymentsClient
+public partial class PaymentsClient : IPaymentsClient
 {
     private RawClient _client;
 
@@ -182,8 +179,8 @@ public partial class PaymentsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Payments?.ToList(),
+                response => response.Cursor,
+                response => response.Payments?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

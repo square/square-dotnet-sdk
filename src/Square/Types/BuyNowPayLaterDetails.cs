@@ -35,6 +35,13 @@ public record BuyNowPayLaterDetails : IJsonOnDeserialized
     [JsonPropertyName("clearpay_details")]
     public ClearpayDetails? ClearpayDetails { get; set; }
 
+    /// <summary>
+    /// Information about errors encountered during the payment.
+    /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
+    [JsonPropertyName("errors")]
+    public IEnumerable<Error>? Errors { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

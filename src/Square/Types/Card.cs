@@ -123,6 +123,20 @@ public record Card : IJsonOnDeserialized
     public string? Bin { get; set; }
 
     /// <summary>
+    /// Timestamp for when the card object was created on Square’s servers. In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
+    /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
+    [JsonPropertyName("created_at")]
+    public string? CreatedAt { get; set; }
+
+    /// <summary>
+    /// Timestamp for when the card object was disabled on Square’s servers. In RFC 3339 format, e.g., "2016-09-04T23:59:33.123Z".
+    /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
+    [JsonPropertyName("disabled_at")]
+    public string? DisabledAt { get; set; }
+
+    /// <summary>
     /// Current version number of the card. Increments with each card update. Requests to update an
     /// existing Card object will be rejected unless the version in the request matches the current
     /// version for the Card.

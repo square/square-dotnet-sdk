@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Loyalty.Programs.Promotions;
 
-public partial class PromotionsClient
+public partial class PromotionsClient : IPromotionsClient
 {
     private RawClient _client;
 
@@ -118,8 +115,8 @@ public partial class PromotionsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.LoyaltyPromotions?.ToList(),
+                response => response.Cursor,
+                response => response.LoyaltyPromotions?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

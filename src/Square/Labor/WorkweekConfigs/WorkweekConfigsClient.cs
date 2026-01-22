@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Labor.WorkweekConfigs;
 
-public partial class WorkweekConfigsClient
+public partial class WorkweekConfigsClient : IWorkweekConfigsClient
 {
     private RawClient _client;
 
@@ -103,8 +100,8 @@ public partial class WorkweekConfigsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.WorkweekConfigs?.ToList(),
+                response => response.Cursor,
+                response => response.WorkweekConfigs?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

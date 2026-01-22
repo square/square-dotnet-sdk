@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Vendors;
 
-public partial class VendorsClient
+public partial class VendorsClient : IVendorsClient
 {
     private RawClient _client;
 

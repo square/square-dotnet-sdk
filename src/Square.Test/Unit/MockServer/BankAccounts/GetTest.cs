@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.BankAccounts;
@@ -15,6 +14,26 @@ public class GetTest : BaseMockServerTest
     {
         const string mockResponse = """
             {
+              "bank_account": {
+                "id": "bact:OxfBTiXgByaXds1K4GB",
+                "account_number_suffix": "000",
+                "country": "US",
+                "currency": "USD",
+                "account_type": "CHECKING",
+                "holder_name": "Nicola Snow",
+                "primary_bank_identification_number": "011401533",
+                "secondary_bank_identification_number": "secondary_bank_identification_number",
+                "debit_mandate_reference_id": "debit_mandate_reference_id",
+                "reference_id": "reference_id",
+                "location_id": "location_id",
+                "status": "VERIFIED",
+                "creditable": true,
+                "debitable": true,
+                "fingerprint": "sq-1-mO3XNctJpTLL8uYowOWpioS8nQyTc838gcBo90254XonoEJ_c7Uw6yqL6qihFNY8fA",
+                "version": 2,
+                "bank_name": "Citizens Bank",
+                "customer_id": "HM3B2D5JKGZ69359BTEHXM2V8M"
+              },
               "errors": [
                 {
                   "category": "API_ERROR",
@@ -22,26 +41,7 @@ public class GetTest : BaseMockServerTest
                   "detail": "detail",
                   "field": "field"
                 }
-              ],
-              "bank_account": {
-                "id": "w3yRgCGYQnwmdl0R3GB",
-                "account_number_suffix": "971",
-                "country": "US",
-                "currency": "USD",
-                "account_type": "CHECKING",
-                "holder_name": "Jane Doe",
-                "primary_bank_identification_number": "112200303",
-                "secondary_bank_identification_number": "secondary_bank_identification_number",
-                "debit_mandate_reference_id": "debit_mandate_reference_id",
-                "reference_id": "reference_id",
-                "location_id": "S8GWD5example",
-                "status": "VERIFICATION_IN_PROGRESS",
-                "creditable": false,
-                "debitable": false,
-                "fingerprint": "fingerprint",
-                "version": 5,
-                "bank_name": "Bank Name"
-              }
+              ]
             }
             """;
 

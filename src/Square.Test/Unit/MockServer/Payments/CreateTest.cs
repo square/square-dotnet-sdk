@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -137,10 +136,22 @@ public class CreateTest : BaseMockServerTest
                 },
                 "wallet_details": {
                   "status": "status",
-                  "brand": "brand"
+                  "brand": "brand",
+                  "errors": [
+                    {
+                      "category": "API_ERROR",
+                      "code": "INTERNAL_SERVER_ERROR"
+                    }
+                  ]
                 },
                 "buy_now_pay_later_details": {
-                  "brand": "brand"
+                  "brand": "brand",
+                  "errors": [
+                    {
+                      "category": "API_ERROR",
+                      "code": "INTERNAL_SERVER_ERROR"
+                    }
+                  ]
                 },
                 "square_account_details": {
                   "payment_source_token": "payment_source_token",

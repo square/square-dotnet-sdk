@@ -265,6 +265,10 @@ public readonly record struct ErrorCode : IStringEnum
         Values.OrderUnpaidNotReturnable
     );
 
+    public static readonly ErrorCode PartialPaymentDelayCaptureNotSupported = new(
+        Values.PartialPaymentDelayCaptureNotSupported
+    );
+
     public static readonly ErrorCode IdempotencyKeyReused = new(Values.IdempotencyKeyReused);
 
     public static readonly ErrorCode UnexpectedValue = new(Values.UnexpectedValue);
@@ -298,6 +302,10 @@ public readonly record struct ErrorCode : IStringEnum
     );
 
     public static readonly ErrorCode PlaidErrorRateLimit = new(Values.PlaidErrorRateLimit);
+
+    public static readonly ErrorCode PaymentSourceNotEnabledForTarget = new(
+        Values.PaymentSourceNotEnabledForTarget
+    );
 
     public static readonly ErrorCode CardDeclined = new(Values.CardDeclined);
 
@@ -631,6 +639,9 @@ public readonly record struct ErrorCode : IStringEnum
 
         public const string OrderUnpaidNotReturnable = "ORDER_UNPAID_NOT_RETURNABLE";
 
+        public const string PartialPaymentDelayCaptureNotSupported =
+            "PARTIAL_PAYMENT_DELAY_CAPTURE_NOT_SUPPORTED";
+
         public const string IdempotencyKeyReused = "IDEMPOTENCY_KEY_REUSED";
 
         public const string UnexpectedValue = "UNEXPECTED_VALUE";
@@ -660,6 +671,9 @@ public readonly record struct ErrorCode : IStringEnum
         public const string PlaidErrorItemLoginRequired = "PLAID_ERROR_ITEM_LOGIN_REQUIRED";
 
         public const string PlaidErrorRateLimit = "PLAID_ERROR_RATE_LIMIT";
+
+        public const string PaymentSourceNotEnabledForTarget =
+            "PAYMENT_SOURCE_NOT_ENABLED_FOR_TARGET";
 
         public const string CardDeclined = "CARD_DECLINED";
 

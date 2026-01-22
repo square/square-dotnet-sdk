@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.BankAccounts;
 
-public partial class BankAccountsClient
+public partial class BankAccountsClient : IBankAccountsClient
 {
     private RawClient _client;
 
@@ -37,6 +34,10 @@ public partial class BankAccountsClient
         if (request.LocationId != null)
         {
             _query["location_id"] = request.LocationId;
+        }
+        if (request.CustomerId != null)
+        {
+            _query["customer_id"] = request.CustomerId;
         }
         var response = await _client
             .SendRequestAsync(
@@ -84,6 +85,7 @@ public partial class BankAccountsClient
     ///         Cursor = "cursor",
     ///         Limit = 1,
     ///         LocationId = "location_id",
+    ///         CustomerId = "customer_id",
     ///     }
     /// );
     /// </code></example>
@@ -112,12 +114,68 @@ public partial class BankAccountsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.BankAccounts?.ToList(),
+                response => response.Cursor,
+                response => response.BankAccounts?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
         return pager;
+    }
+
+    /// <summary>
+    /// Store a bank account on file for a square account
+    /// </summary>
+    /// <example><code>
+    /// await client.BankAccounts.CreateBankAccountAsync(
+    ///     new CreateBankAccountRequest
+    ///     {
+    ///         IdempotencyKey = "4e43559a-f0fd-47d3-9da2-7ea1f97d94be",
+    ///         SourceId = "bnon:CA4SEHsQwr0rx6DbWLD5BQaqMnoYAQ",
+    ///         CustomerId = "HM3B2D5JKGZ69359BTEHXM2V8M",
+    ///     }
+    /// );
+    /// </code></example>
+    public async Task<CreateBankAccountResponse> CreateBankAccountAsync(
+        CreateBankAccountRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/bank-accounts",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<CreateBankAccountResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
     }
 
     /// <summary>
@@ -173,8 +231,7 @@ public partial class BankAccountsClient
     }
 
     /// <summary>
-    /// Returns details of a [BankAccount](entity:BankAccount)
-    /// linked to a Square account.
+    /// Retrieve details of a [BankAccount](entity:BankAccount) bank account linked to a Square account.
     /// </summary>
     /// <example><code>
     /// await client.BankAccounts.GetAsync(
@@ -208,6 +265,58 @@ public partial class BankAccountsClient
             try
             {
                 return JsonUtils.Deserialize<GetBankAccountResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
+    /// Disable a bank account.
+    /// </summary>
+    /// <example><code>
+    /// await client.BankAccounts.DisableBankAccountAsync(
+    ///     new DisableBankAccountRequest { BankAccountId = "bank_account_id" }
+    /// );
+    /// </code></example>
+    public async Task<DisableBankAccountResponse> DisableBankAccountAsync(
+        DisableBankAccountRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = string.Format(
+                        "v2/bank-accounts/{0}/disable",
+                        ValueConvert.ToPathParameterString(request.BankAccountId)
+                    ),
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<DisableBankAccountResponse>(responseBody)!;
             }
             catch (JsonException e)
             {

@@ -1,7 +1,4 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.Customers.Groups;
@@ -9,7 +6,7 @@ using Square.Customers.Segments;
 
 namespace Square.Customers;
 
-public partial class CustomersClient
+public partial class CustomersClient : ICustomersClient
 {
     private RawClient _client;
 
@@ -150,8 +147,8 @@ public partial class CustomersClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Customers?.ToList(),
+                response => response.Cursor,
+                response => response.Customers?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

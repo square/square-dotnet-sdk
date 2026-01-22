@@ -32,6 +32,15 @@ public record OrderLineItemPricingBlocklists : IJsonOnDeserialized
     [JsonPropertyName("blocked_taxes")]
     public IEnumerable<OrderLineItemPricingBlocklistsBlockedTax>? BlockedTaxes { get; set; }
 
+    /// <summary>
+    /// A list of service charges blocked from applying to the line item.
+    /// Service charges can be blocked by the `service_charge_uid` (for ad hoc
+    /// service charges) or the `service_charge_catalog_object_id` (for catalog
+    /// service charges).
+    /// </summary>
+    [JsonPropertyName("blocked_service_charges")]
+    public IEnumerable<OrderLineItemPricingBlocklistsBlockedServiceCharge>? BlockedServiceCharges { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Labor.Shifts;
 
-public partial class ShiftsClient
+public partial class ShiftsClient : IShiftsClient
 {
     private RawClient _client;
 

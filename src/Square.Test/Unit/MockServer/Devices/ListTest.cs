@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Devices;
@@ -29,7 +28,7 @@ public class ListTest : BaseMockServerTest
                     "type": "TERMINAL",
                     "manufacturer": "Square",
                     "model": "Square Terminal (1st Gen, v2)",
-                    "name": "5287-01-01T00:00:00.000Z",
+                    "name": "Square Terminal 5287",
                     "manufacturers_id": "995CS397A6475287",
                     "updated_at": "2025-08-19T13:04:56.335Z",
                     "version": "5.57.0067",
@@ -86,7 +85,7 @@ public class ListTest : BaseMockServerTest
                     "type": "HANDHELD",
                     "manufacturer": "Square",
                     "model": "Square Handheld (1st Gen, v1)",
-                    "name": "3559-01-01T00:00:00.000Z",
+                    "name": "Square Terminal 3559",
                     "manufacturers_id": "998WS21803L03559",
                     "updated_at": "2025-08-19T12:39:56.335Z",
                     "version": "7.21.0017",

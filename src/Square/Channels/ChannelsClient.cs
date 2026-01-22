@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Channels;
 
-public partial class ChannelsClient
+public partial class ChannelsClient : IChannelsClient
 {
     private RawClient _client;
 
@@ -116,8 +113,8 @@ public partial class ChannelsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Channels?.ToList(),
+                response => response.Cursor,
+                response => response.Channels?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

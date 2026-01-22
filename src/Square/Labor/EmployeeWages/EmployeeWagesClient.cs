@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Labor.EmployeeWages;
 
-public partial class EmployeeWagesClient
+public partial class EmployeeWagesClient : IEmployeeWagesClient
 {
     private RawClient _client;
 
@@ -112,8 +109,8 @@ public partial class EmployeeWagesClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.EmployeeWages?.ToList(),
+                response => response.Cursor,
+                response => response.EmployeeWages?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

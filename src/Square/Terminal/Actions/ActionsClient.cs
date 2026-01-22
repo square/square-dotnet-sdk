@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Terminal.Actions;
 
-public partial class ActionsClient
+public partial class ActionsClient : IActionsClient
 {
     private RawClient _client;
 

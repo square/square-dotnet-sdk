@@ -1,14 +1,11 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 using Square.GiftCards.Activities;
 
 namespace Square.GiftCards;
 
-public partial class GiftCardsClient
+public partial class GiftCardsClient : IGiftCardsClient
 {
     private RawClient _client;
 
@@ -128,8 +125,8 @@ public partial class GiftCardsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.GiftCards?.ToList(),
+                response => response.Cursor,
+                response => response.GiftCards?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

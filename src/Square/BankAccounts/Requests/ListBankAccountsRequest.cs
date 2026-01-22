@@ -31,6 +31,13 @@ public record ListBankAccountsRequest
     [JsonIgnore]
     public string? LocationId { get; set; }
 
+    /// <summary>
+    /// Customer ID. You can specify this optional filter
+    /// to retrieve only the linked bank accounts belonging to a specific customer.
+    /// </summary>
+    [JsonIgnore]
+    public string? CustomerId { get; set; }
+
     /// <inheritdoc />
     public override string ToString()
     {

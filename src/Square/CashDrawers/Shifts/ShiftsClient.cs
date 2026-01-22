@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.CashDrawers.Shifts;
 
-public partial class ShiftsClient
+public partial class ShiftsClient : IShiftsClient
 {
     private RawClient _client;
 
@@ -184,8 +181,8 @@ public partial class ShiftsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.CashDrawerShifts?.ToList(),
+                response => response.Cursor,
+                response => response.CashDrawerShifts?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -291,8 +288,8 @@ public partial class ShiftsClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.CashDrawerShiftEvents?.ToList(),
+                response => response.Cursor,
+                response => response.CashDrawerShiftEvents?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

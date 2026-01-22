@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Events;
 
-public partial class EventsClient
+public partial class EventsClient : IEventsClient
 {
     private RawClient _client;
 

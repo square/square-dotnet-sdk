@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Inventory;
 
-public partial class InventoryClient
+public partial class InventoryClient : IInventoryClient
 {
     private RawClient _client;
 
@@ -674,8 +671,8 @@ public partial class InventoryClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Changes?.ToList(),
+                response => response.Cursor,
+                response => response.Changes?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -730,8 +727,8 @@ public partial class InventoryClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Counts?.ToList(),
+                response => response.Cursor,
+                response => response.Counts?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -938,8 +935,8 @@ public partial class InventoryClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Counts?.ToList(),
+                response => response.Cursor,
+                response => response.Counts?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);
@@ -996,8 +993,8 @@ public partial class InventoryClient
                 {
                     request.Cursor = cursor;
                 },
-                response => response?.Cursor,
-                response => response?.Changes?.ToList(),
+                response => response.Cursor,
+                response => response.Changes?.ToList(),
                 cancellationToken
             )
             .ConfigureAwait(false);

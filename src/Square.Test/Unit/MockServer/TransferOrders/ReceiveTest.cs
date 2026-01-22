@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -19,13 +18,13 @@ public class ReceiveTest : BaseMockServerTest
               "receipt": {
                 "line_items": [
                   {
-                    "transfer_order_line_uid": "transfer_order_line_uid",
+                    "transfer_order_line_uid": "1",
                     "quantity_received": "3",
                     "quantity_damaged": "1",
                     "quantity_canceled": "1"
                   },
                   {
-                    "transfer_order_line_uid": "transfer_order_line_uid",
+                    "transfer_order_line_uid": "2",
                     "quantity_received": "2",
                     "quantity_canceled": "1"
                   }
@@ -109,14 +108,14 @@ public class ReceiveTest : BaseMockServerTest
                     {
                         new TransferOrderGoodsReceiptLineItem
                         {
-                            TransferOrderLineUid = "transfer_order_line_uid",
+                            TransferOrderLineUid = "1",
                             QuantityReceived = "3",
                             QuantityDamaged = "1",
                             QuantityCanceled = "1",
                         },
                         new TransferOrderGoodsReceiptLineItem
                         {
-                            TransferOrderLineUid = "transfer_order_line_uid",
+                            TransferOrderLineUid = "2",
                             QuantityReceived = "2",
                             QuantityCanceled = "1",
                         },

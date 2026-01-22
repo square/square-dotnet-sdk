@@ -15,16 +15,16 @@ public record GetBankAccountResponse : IJsonOnDeserialized
         new Dictionary<string, JsonElement>();
 
     /// <summary>
-    /// Information on errors encountered during the request.
-    /// </summary>
-    [JsonPropertyName("errors")]
-    public IEnumerable<Error>? Errors { get; set; }
-
-    /// <summary>
     /// The requested `BankAccount` object.
     /// </summary>
     [JsonPropertyName("bank_account")]
     public BankAccount? BankAccount { get; set; }
+
+    /// <summary>
+    /// Information on errors encountered during the request.
+    /// </summary>
+    [JsonPropertyName("errors")]
+    public IEnumerable<Error>? Errors { get; set; }
 
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();

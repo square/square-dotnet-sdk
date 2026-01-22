@@ -21,7 +21,7 @@ public record OrderServiceCharge : IJsonOnDeserialized
     public string? Uid { get; set; }
 
     /// <summary>
-    /// The name of the service charge.
+    /// The name of the service charge. This is unused and null for AUTO_GRATUITY to match the behavior on Bills.
     /// </summary>
     [JsonPropertyName("name")]
     public string? Name { get; set; }
@@ -146,7 +146,7 @@ public record OrderServiceCharge : IJsonOnDeserialized
     public OrderServiceChargeType? Type { get; set; }
 
     /// <summary>
-    /// The treatment type of the service charge.
+    /// Indicates whether the service charge will be treated as a value-holding line item or apportioned toward a line item.
     /// See [OrderServiceChargeTreatmentType](#type-orderservicechargetreatmenttype) for possible values
     /// </summary>
     [JsonPropertyName("treatment_type")]

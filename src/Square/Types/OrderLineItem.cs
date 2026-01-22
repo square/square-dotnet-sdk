@@ -153,7 +153,8 @@ public record OrderLineItem : IJsonOnDeserialized
     public IEnumerable<OrderLineItemAppliedServiceCharge>? AppliedServiceCharges { get; set; }
 
     /// <summary>
-    /// The base price for a single unit of the line item.
+    /// The base price for a single unit of the line item. Note - If inclusive tax is set on
+    /// this item it will be included in this value.
     /// </summary>
     [JsonPropertyName("base_price_money")]
     public Money? BasePriceMoney { get; set; }
@@ -161,7 +162,8 @@ public record OrderLineItem : IJsonOnDeserialized
     /// <summary>
     /// The total price of all item variations sold in this line item.
     /// The price is calculated as `base_price_money` multiplied by `quantity`.
-    /// It does not include modifiers.
+    /// It does not include modifiers. Note - If inclusive tax is set on
+    /// this item it will be included in this value.
     /// </summary>
     [JsonPropertyName("variation_total_price_money")]
     public Money? VariationTotalPriceMoney { get; set; }

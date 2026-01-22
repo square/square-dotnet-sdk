@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
@@ -62,7 +61,8 @@ public class CreateTest : BaseMockServerTest
                   "tip_settings": {
                     "allow_tipping": false
                   },
-                  "show_itemized_cart": true
+                  "show_itemized_cart": true,
+                  "allow_auto_card_surcharge": true
                 },
                 "deadline_duration": "PT5M",
                 "status": "PENDING",

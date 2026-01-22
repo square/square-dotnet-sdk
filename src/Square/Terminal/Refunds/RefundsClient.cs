@@ -1,13 +1,10 @@
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using Square;
 using Square.Core;
 
 namespace Square.Terminal.Refunds;
 
-public partial class RefundsClient
+public partial class RefundsClient : IRefundsClient
 {
     private RawClient _client;
 
