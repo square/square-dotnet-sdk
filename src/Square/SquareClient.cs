@@ -18,7 +18,6 @@ using Square.Labor;
 using Square.Locations;
 using Square.Loyalty;
 using Square.Merchants;
-using Square.Mobile;
 using Square.OAuth;
 using Square.Orders;
 using Square.Payments;
@@ -102,7 +101,6 @@ public partial class SquareClient : ISquareClient
         Terminal = new TerminalClient(_client);
         TransferOrders = new TransferOrdersClient(_client);
         Vendors = new VendorsClient(_client);
-        Mobile = new MobileClient(_client);
         CashDrawers = new CashDrawersClient(_client);
         Webhooks = new WebhooksClient(_client);
     }
@@ -172,8 +170,6 @@ public partial class SquareClient : ISquareClient
     public TransferOrdersClient TransferOrders { get; }
 
     public VendorsClient Vendors { get; }
-
-    public MobileClient Mobile { get; }
 
     public CashDrawersClient CashDrawers { get; }
 
