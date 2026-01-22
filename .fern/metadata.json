@@ -1,5 +1,5 @@
 {
-  "cliVersion": "3.38.0",
+  "cliVersion": "3.49.0",
   "generatorName": "fernapi/fern-csharp-sdk",
   "generatorVersion": "2.13.0",
   "generatorConfig": {
@@ -10,10 +10,10 @@
     "client-class-name": "SquareClient",
     "environment-class-name": "SquareEnvironment",
     "experimental-enable-forward-compatible-enums": true,
-    "explicit-namespaces": true,
+    "explicit-namespaces": false,
     "generate-mock-server-tests": true,
     "inline-path-parameters": true,
     "use-discriminated-unions": true
   },
-  "sdkVersion": "43.0.0"
+  "sdkVersion": "43.0.1"
 }

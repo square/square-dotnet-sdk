@@ -1,0 +1,42 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Square;
+using Square.Core;
+
+namespace Square.Default;
+
+/// <summary>
+/// Defines the fields that are included in the response body of
+/// a request to the [CloneOrder](api-endpoint:Orders-CloneOrder) endpoint.
+/// </summary>
+[Serializable]
+public record CloneOrderResponse : IJsonOnDeserialized
+{
+    [JsonExtensionData]
+    private readonly IDictionary<string, JsonElement> _extensionData =
+        new Dictionary<string, JsonElement>();
+
+    /// <summary>
+    /// The cloned order.
+    /// </summary>
+    [JsonPropertyName("order")]
+    public Order? Order { get; set; }
+
+    /// <summary>
+    /// Any errors that occurred during the request.
+    /// </summary>
+    [JsonPropertyName("errors")]
+    public IEnumerable<Error>? Errors { get; set; }
+
+    [JsonIgnore]
+    public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
+
+    void IJsonOnDeserialized.OnDeserialized() =>
+        AdditionalProperties.CopyFromExtensionData(_extensionData);
+
+    /// <inheritdoc />
+    public override string ToString()
+    {
+        return JsonUtils.Serialize(this);
+    }
+}
