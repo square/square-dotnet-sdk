@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Locations.CustomAttributeDefinitions;
+namespace Square.Locations;
 
 public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefinitionsClient
 {
@@ -84,7 +84,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Locations.CustomAttributeDefinitions.ListAsync(
-    ///     new Square.Locations.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
+    ///     new Square.Locations.ListCustomAttributeDefinitionsRequest
     ///     {
     ///         VisibilityFilter = VisibilityFilter.All,
     ///         Limit = 1,
@@ -207,11 +207,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Locations.CustomAttributeDefinitions.GetAsync(
-    ///     new Square.Locations.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///         Version = 1,
-    ///     }
+    ///     new Square.Locations.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
     /// );
     /// </code></example>
     public async Task<RetrieveLocationCustomAttributeDefinitionResponse> GetAsync(
@@ -341,10 +337,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Locations.CustomAttributeDefinitions.DeleteAsync(
-    ///     new Square.Locations.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///     }
+    ///     new Square.Locations.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
     /// );
     /// </code></example>
     public async Task<DeleteLocationCustomAttributeDefinitionResponse> DeleteAsync(

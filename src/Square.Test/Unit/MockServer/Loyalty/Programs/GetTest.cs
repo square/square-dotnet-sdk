@@ -22,53 +22,45 @@ public class GetTest : BaseMockServerTest
                   "field": "field"
                 }
               ],
-              "program": {
-                "id": "d619f755-2d17-41f3-990d-c04ecedd64dd",
+              "loyalty_promotion": {
+                "id": "loypromo_f0f9b849-725e-378d-b810-511237e07b67",
+                "name": "Tuesday Happy Hour Promo",
+                "incentive": {
+                  "type": "POINTS_MULTIPLIER",
+                  "points_multiplier_data": {
+                    "points_multiplier": 3,
+                    "multiplier": "3.000"
+                  },
+                  "points_addition_data": {
+                    "points_addition": 1
+                  }
+                },
+                "available_time": {
+                  "start_date": "2022-08-16",
+                  "end_date": "end_date",
+                  "time_periods": [
+                    "BEGIN:VEVENT\nDTSTART:20220816T160000\nDURATION:PT2H\nRRULE:FREQ=WEEKLY;BYDAY=TU\nEND:VEVENT"
+                  ]
+                },
+                "trigger_limit": {
+                  "times": 1,
+                  "interval": "DAY"
+                },
                 "status": "ACTIVE",
-                "reward_tiers": [
-                  {
-                    "id": "e1b39225-9da5-43d1-a5db-782cdd8ad94f",
-                    "points": 10,
-                    "name": "10% off entire sale",
-                    "created_at": "2020-04-20T16:55:11.000Z",
-                    "pricing_rule_reference": {
-                      "object_id": "74C4JSHESNLTB2A7ITO5HO6F",
-                      "catalog_version": 1000000
-                    }
-                  }
-                ],
-                "expiration_policy": {
-                  "expiration_duration": "expiration_duration"
+                "created_at": "2022-08-16T08:38:54.000Z",
+                "canceled_at": "canceled_at",
+                "updated_at": "2022-08-16T08:38:54.000Z",
+                "loyalty_program_id": "d619f755-2d17-41f3-990d-c04ecedd64dd",
+                "minimum_spend_amount_money": {
+                  "amount": 2000,
+                  "currency": "USD"
                 },
-                "terminology": {
-                  "one": "Point",
-                  "other": "Points"
-                },
-                "location_ids": [
-                  "P034NEENMD09F"
+                "qualifying_item_variation_ids": [
+                  "CJ3RYL56ITAKMD4VRCM7XERS",
+                  "AT3RYLR3TUA9C34VRCB7X5RR"
                 ],
-                "created_at": "2020-04-20T16:55:11.000Z",
-                "updated_at": "2020-05-01T02:00:02.000Z",
-                "accrual_rules": [
-                  {
-                    "accrual_type": "SPEND",
-                    "points": 1,
-                    "spend_data": {
-                      "amount_money": {
-                        "amount": 100,
-                        "currency": "USD"
-                      },
-                      "excluded_category_ids": [
-                        "7ZERJKO5PVYXCVUHV2JCZ2UG",
-                        "FQKAOJE5C4FIMF5A2URMLW6V"
-                      ],
-                      "excluded_item_variation_ids": [
-                        "CBZXBUVVTYUBZGQO44RHMR6B",
-                        "EDILT24Z2NISEXDKGY6HP7XV"
-                      ],
-                      "tax_mode": "BEFORE_TAX"
-                    }
-                  }
+                "qualifying_category_ids": [
+                  "qualifying_category_ids"
                 ]
               }
             }
@@ -78,7 +70,7 @@ public class GetTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/loyalty/programs/program_id")
+                    .WithPath("/v2/loyalty/programs/program_id/promotions/promotion_id")
                     .UsingGet()
             )
             .RespondWith(
@@ -88,12 +80,12 @@ public class GetTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Loyalty.Programs.GetAsync(
-            new GetProgramsRequest { ProgramId = "program_id" }
+        var response = await Client.Loyalty.Programs.Promotions.GetAsync(
+            new GetPromotionsRequest { ProgramId = "program_id", PromotionId = "promotion_id" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<GetLoyaltyProgramResponse>(mockResponse))
+            Is.EqualTo(JsonUtils.Deserialize<GetLoyaltyPromotionResponse>(mockResponse))
                 .UsingDefaults()
         );
     }

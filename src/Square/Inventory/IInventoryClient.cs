@@ -1,7 +1,6 @@
-using Square;
 using Square.Core;
 
-namespace Square.Inventory;
+namespace Square;
 
 public partial interface IInventoryClient
 {

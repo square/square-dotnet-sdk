@@ -1,7 +1,6 @@
-using Square;
 using Square.Core;
 
-namespace Square.Employees;
+namespace Square;
 
 public partial interface IEmployeesClient
 {

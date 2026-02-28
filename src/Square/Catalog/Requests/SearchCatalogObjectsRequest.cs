@@ -1,8 +1,7 @@
 using System.Text.Json.Serialization;
-using Square;
 using Square.Core;
 
-namespace Square.Catalog;
+namespace Square;
 
 [Serializable]
 public record SearchCatalogObjectsRequest

@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.CashDrawers.Shifts;
+namespace Square.CashDrawers;
 
 public partial interface IShiftsClient
 {

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Locations.Transactions;
+namespace Square.Locations;
 
 [Serializable]
 public record CaptureTransactionsRequest

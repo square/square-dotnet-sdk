@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Terminal.Refunds;
+namespace Square.Terminal;
 
 public partial interface IRefundsClient
 {

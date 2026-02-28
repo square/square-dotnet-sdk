@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Orders.CustomAttributeDefinitions;
+namespace Square.Orders;
 
 [Serializable]
 public record GetCustomAttributeDefinitionsRequest

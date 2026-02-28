@@ -1,6 +1,4 @@
-using Square;
-
-namespace Square.Snippets;
+namespace Square;
 
 public partial interface ISnippetsClient
 {

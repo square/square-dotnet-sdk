@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Labor.WorkweekConfigs;
+namespace Square.Labor;
 
 [Serializable]
 public record UpdateWorkweekConfigRequest

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Devices.Codes;
+namespace Square.Devices;
 
 [Serializable]
 public record GetCodesRequest

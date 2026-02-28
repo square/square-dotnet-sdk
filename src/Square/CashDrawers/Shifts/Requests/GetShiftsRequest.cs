@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.CashDrawers.Shifts;
+namespace Square.CashDrawers;
 
 [Serializable]
 public record GetShiftsRequest

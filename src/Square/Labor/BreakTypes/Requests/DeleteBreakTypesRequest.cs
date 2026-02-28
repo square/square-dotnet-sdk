@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Labor.BreakTypes;
+namespace Square.Labor;
 
 [Serializable]
 public record DeleteBreakTypesRequest

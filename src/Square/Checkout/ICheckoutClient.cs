@@ -1,7 +1,6 @@
-using Square;
-using Square.Checkout.PaymentLinks;
+using Square.Checkout_;
 
-namespace Square.Checkout;
+namespace Square;
 
 public partial interface ICheckoutClient
 {

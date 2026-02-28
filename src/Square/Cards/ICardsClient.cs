@@ -1,7 +1,6 @@
-using Square;
 using Square.Core;
 
-namespace Square.Cards;
+namespace Square;
 
 public partial interface ICardsClient
 {
