@@ -1,6 +1,4 @@
-using Square;
-
-namespace Square.Sites;
+namespace Square;
 
 public partial interface ISitesClient
 {

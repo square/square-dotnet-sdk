@@ -14,14 +14,27 @@ public class UpdateTest : BaseMockServerTest
     {
         const string requestJson = """
             {
-              "email_address": "New.Amelia.Earhart@example.com",
-              "note": "updated customer note",
-              "version": 2
+              "custom_attribute_definition": {
+                "description": "Update the description as desired.",
+                "visibility": "VISIBILITY_READ_ONLY"
+              }
             }
             """;
 
         const string mockResponse = """
             {
+              "custom_attribute_definition": {
+                "key": "favoritemovie",
+                "schema": {
+                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                },
+                "name": "Favorite Movie",
+                "description": "Update the description as desired.",
+                "visibility": "VISIBILITY_READ_ONLY",
+                "version": 2,
+                "updated_at": "2022-04-26T15:39:38.000Z",
+                "created_at": "2022-04-26T15:27:30.000Z"
+              },
               "errors": [
                 {
                   "category": "API_ERROR",
@@ -29,51 +42,7 @@ public class UpdateTest : BaseMockServerTest
                   "detail": "detail",
                   "field": "field"
                 }
-              ],
-              "customer": {
-                "id": "JDKYHBWT1D4F8MFH63DBMEN8Y4",
-                "created_at": "2016-03-23T20:21:54.859Z",
-                "updated_at": "2016-05-15T20:21:55.000Z",
-                "given_name": "Amelia",
-                "family_name": "Earhart",
-                "nickname": "nickname",
-                "company_name": "company_name",
-                "email_address": "New.Amelia.Earhart@example.com",
-                "address": {
-                  "address_line_1": "500 Electric Ave",
-                  "address_line_2": "Suite 600",
-                  "address_line_3": "address_line_3",
-                  "locality": "New York",
-                  "sublocality": "sublocality",
-                  "sublocality_2": "sublocality_2",
-                  "sublocality_3": "sublocality_3",
-                  "administrative_district_level_1": "NY",
-                  "administrative_district_level_2": "administrative_district_level_2",
-                  "administrative_district_level_3": "administrative_district_level_3",
-                  "postal_code": "10003",
-                  "country": "US",
-                  "first_name": "first_name",
-                  "last_name": "last_name"
-                },
-                "phone_number": "phone_number",
-                "birthday": "birthday",
-                "reference_id": "YOUR_REFERENCE_ID",
-                "note": "updated customer note",
-                "preferences": {
-                  "email_unsubscribed": false
-                },
-                "creation_source": "THIRD_PARTY",
-                "group_ids": [
-                  "group_ids"
-                ],
-                "segment_ids": [
-                  "segment_ids"
-                ],
-                "version": 3,
-                "tax_ids": {
-                  "eu_vat": "eu_vat"
-                }
-              }
+              ]
             }
             """;
 
@@ -81,7 +50,7 @@ public class UpdateTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/customers/customer_id")
+                    .WithPath("/v2/customers/custom-attribute-definitions/key")
                     .WithHeader("Content-Type", "application/json")
                     .UsingPut()
                     .WithBodyAsJson(requestJson)
@@ -93,18 +62,25 @@ public class UpdateTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Customers.UpdateAsync(
-            new UpdateCustomerRequest
+        var response = await Client.Customers.CustomAttributeDefinitions.UpdateAsync(
+            new UpdateCustomerCustomAttributeDefinitionRequest
             {
-                CustomerId = "customer_id",
-                EmailAddress = "New.Amelia.Earhart@example.com",
-                Note = "updated customer note",
-                Version = 2,
+                Key = "key",
+                CustomAttributeDefinition = new CustomAttributeDefinition
+                {
+                    Description = "Update the description as desired.",
+                    Visibility = CustomAttributeDefinitionVisibility.VisibilityReadOnly,
+                },
             }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<UpdateCustomerResponse>(mockResponse)).UsingDefaults()
+            Is.EqualTo(
+                    JsonUtils.Deserialize<UpdateCustomerCustomAttributeDefinitionResponse>(
+                        mockResponse
+                    )
+                )
+                .UsingDefaults()
         );
     }
 }

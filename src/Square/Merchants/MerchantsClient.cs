@@ -1,8 +1,7 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
 
-namespace Square.Merchants;
+namespace Square;
 
 public partial class MerchantsClient : IMerchantsClient
 {
@@ -11,16 +10,13 @@ public partial class MerchantsClient : IMerchantsClient
     internal MerchantsClient(RawClient client)
     {
         _client = client;
-        CustomAttributeDefinitions =
-            new Square.Merchants.CustomAttributeDefinitions.CustomAttributeDefinitionsClient(
-                _client
-            );
-        CustomAttributes = new Square.Merchants.CustomAttributes.CustomAttributesClient(_client);
+        CustomAttributeDefinitions = new Square.Merchants.CustomAttributeDefinitionsClient(_client);
+        CustomAttributes = new Square.Merchants.CustomAttributesClient(_client);
     }
 
-    public Square.Merchants.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Merchants.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
 
-    public Square.Merchants.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
+    public Square.Merchants.CustomAttributesClient CustomAttributes { get; }
 
     /// <summary>
     /// Provides details about the merchant associated with a given access token.

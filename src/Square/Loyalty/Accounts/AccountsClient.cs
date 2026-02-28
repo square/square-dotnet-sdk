@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Loyalty.Accounts;
+namespace Square.Loyalty;
 
 public partial class AccountsClient : IAccountsClient
 {

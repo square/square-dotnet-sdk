@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Labor.WorkweekConfigs;
+namespace Square.Labor;
 
 public partial interface IWorkweekConfigsClient
 {

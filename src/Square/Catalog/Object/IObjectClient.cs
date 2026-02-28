@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Catalog.Object;
+namespace Square.Catalog;
 
 public partial interface IObjectClient
 {

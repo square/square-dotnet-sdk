@@ -1,8 +1,7 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
 
-namespace Square.TransferOrders;
+namespace Square;
 
 public partial class TransferOrdersClient : ITransferOrdersClient
 {

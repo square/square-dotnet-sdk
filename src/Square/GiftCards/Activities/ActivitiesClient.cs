@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.GiftCards.Activities;
+namespace Square.GiftCards;
 
 public partial class ActivitiesClient : IActivitiesClient
 {

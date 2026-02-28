@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using Square;
-using Square.Core;
+using Square.Loyalty.Programs;
 using Square.Test.Unit.MockServer;
 
 namespace Square.Test.Unit.MockServer.Loyalty.Programs;
@@ -21,57 +21,83 @@ public class ListTest : BaseMockServerTest
                   "field": "field"
                 }
               ],
-              "programs": [
+              "loyalty_promotions": [
                 {
-                  "id": "d619f755-2d17-41f3-990d-c04ecedd64dd",
+                  "id": "loypromo_f0f9b849-725e-378d-b810-511237e07b67",
+                  "name": "Tuesday Happy Hour Promo",
+                  "incentive": {
+                    "type": "POINTS_MULTIPLIER",
+                    "points_multiplier_data": {
+                      "points_multiplier": 3,
+                      "multiplier": "3.000"
+                    }
+                  },
+                  "available_time": {
+                    "start_date": "2022-08-16",
+                    "time_periods": [
+                      "BEGIN:VEVENT\nDTSTART:20220816T160000\nDURATION:PT2H\nRRULE:FREQ=WEEKLY;BYDAY=TU\nEND:VEVENT"
+                    ]
+                  },
+                  "trigger_limit": {
+                    "times": 1,
+                    "interval": "DAY"
+                  },
                   "status": "ACTIVE",
-                  "reward_tiers": [
-                    {
-                      "id": "e1b39225-9da5-43d1-a5db-782cdd8ad94f",
-                      "points": 10,
-                      "name": "10% off entire sale",
-                      "created_at": "2020-04-20T16:55:11.000Z",
-                      "pricing_rule_reference": {
-                        "object_id": "74C4JSHESNLTB2A7ITO5HO6F",
-                        "catalog_version": 1000000
-                      }
-                    }
+                  "created_at": "2022-08-16T08:38:54.000Z",
+                  "canceled_at": "canceled_at",
+                  "updated_at": "2022-08-16T08:38:54.000Z",
+                  "loyalty_program_id": "d619f755-2d17-41f3-990d-c04ecedd64dd",
+                  "qualifying_item_variation_ids": [
+                    "CJ3RYL56ITAKMD4VRCM7XERS",
+                    "AT3RYLR3TUA9C34VRCB7X5RR"
                   ],
-                  "expiration_policy": {
-                    "expiration_duration": "expiration_duration"
-                  },
-                  "terminology": {
-                    "one": "Point",
-                    "other": "Points"
-                  },
-                  "location_ids": [
-                    "P034NEENMD09F"
-                  ],
-                  "created_at": "2020-04-20T16:55:11.000Z",
-                  "updated_at": "2020-05-01T02:00:02.000Z",
-                  "accrual_rules": [
-                    {
-                      "accrual_type": "SPEND",
-                      "points": 1,
-                      "spend_data": {
-                        "amount_money": {
-                          "amount": 100,
-                          "currency": "USD"
-                        },
-                        "excluded_category_ids": [
-                          "7ZERJKO5PVYXCVUHV2JCZ2UG",
-                          "FQKAOJE5C4FIMF5A2URMLW6V"
-                        ],
-                        "excluded_item_variation_ids": [
-                          "CBZXBUVVTYUBZGQO44RHMR6B",
-                          "EDILT24Z2NISEXDKGY6HP7XV"
-                        ],
-                        "tax_mode": "BEFORE_TAX"
-                      }
+                  "qualifying_category_ids": [
+                    "qualifying_category_ids"
+                  ]
+                },
+                {
+                  "id": "loypromo_e696f057-2286-35ff-8108-132241328106",
+                  "name": "July Special",
+                  "incentive": {
+                    "type": "POINTS_MULTIPLIER",
+                    "points_multiplier_data": {
+                      "points_multiplier": 2,
+                      "multiplier": "2.000"
                     }
+                  },
+                  "available_time": {
+                    "start_date": "2022-07-01",
+                    "end_date": "2022-08-01",
+                    "time_periods": [
+                      "BEGIN:VEVENT\nDTSTART:20220704T090000\nDURATION:PT8H\nRRULE:FREQ=WEEKLY;UNTIL=20220801T000000;BYDAY=MO\nEND:VEVENT",
+                      "BEGIN:VEVENT\nDTSTART:20220705T090000\nDURATION:PT8H\nRRULE:FREQ=WEEKLY;UNTIL=20220801T000000;BYDAY=TU\nEND:VEVENT",
+                      "BEGIN:VEVENT\nDTSTART:20220706T090000\nDURATION:PT8H\nRRULE:FREQ=WEEKLY;UNTIL=20220801T000000;BYDAY=WE\nEND:VEVENT",
+                      "BEGIN:VEVENT\nDTSTART:20220707T090000\nDURATION:PT8H\nRRULE:FREQ=WEEKLY;UNTIL=20220801T000000;BYDAY=TH\nEND:VEVENT",
+                      "BEGIN:VEVENT\nDTSTART:20220701T090000\nDURATION:PT8H\nRRULE:FREQ=WEEKLY;UNTIL=20220801T000000;BYDAY=FR\nEND:VEVENT"
+                    ]
+                  },
+                  "trigger_limit": {
+                    "times": 5,
+                    "interval": "ALL_TIME"
+                  },
+                  "status": "ENDED",
+                  "created_at": "2022-06-27T15:37:38.000Z",
+                  "canceled_at": "canceled_at",
+                  "updated_at": "2022-06-27T15:37:38.000Z",
+                  "loyalty_program_id": "d619f755-2d17-41f3-990d-c04ecedd64dd",
+                  "minimum_spend_amount_money": {
+                    "amount": 2000,
+                    "currency": "USD"
+                  },
+                  "qualifying_item_variation_ids": [
+                    "qualifying_item_variation_ids"
+                  ],
+                  "qualifying_category_ids": [
+                    "XTQPYLR3IIU9C44VRCB3XD12"
                   ]
                 }
-              ]
+              ],
+              "cursor": "cursor"
             }
             """;
 
@@ -79,7 +105,10 @@ public class ListTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/loyalty/programs")
+                    .WithPath("/v2/loyalty/programs/program_id/promotions")
+                    .WithParam("status", "ACTIVE")
+                    .WithParam("cursor", "cursor")
+                    .WithParam("limit", "1")
                     .UsingGet()
             )
             .RespondWith(
@@ -89,11 +118,19 @@ public class ListTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Loyalty.Programs.ListAsync();
-        Assert.That(
-            response,
-            Is.EqualTo(JsonUtils.Deserialize<ListLoyaltyProgramsResponse>(mockResponse))
-                .UsingDefaults()
+        var items = await Client.Loyalty.Programs.Promotions.ListAsync(
+            new ListPromotionsRequest
+            {
+                ProgramId = "program_id",
+                Status = LoyaltyPromotionStatus.Active,
+                Cursor = "cursor",
+                Limit = 1,
+            }
         );
+        await foreach (var item in items)
+        {
+            Assert.That(item, Is.Not.Null);
+            break; // Only check the first item
+        }
     }
 }

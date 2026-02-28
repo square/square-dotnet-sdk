@@ -1,12 +1,11 @@
-using Square;
 using Square.Core;
 
-namespace Square.Merchants;
+namespace Square;
 
 public partial interface IMerchantsClient
 {
-    public Square.Merchants.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
-    public Square.Merchants.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
+    public Square.Merchants.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Merchants.CustomAttributesClient CustomAttributes { get; }
 
     /// <summary>
     /// Provides details about the merchant associated with a given access token.

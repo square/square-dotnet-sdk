@@ -21,123 +21,35 @@ public class ListTest : BaseMockServerTest
                   "field": "field"
                 }
               ],
-              "devices": [
+              "device_codes": [
                 {
-                  "id": "device:995CS397A6475287",
-                  "attributes": {
-                    "type": "TERMINAL",
-                    "manufacturer": "Square",
-                    "model": "Square Terminal (1st Gen, v2)",
-                    "name": "Square Terminal 5287",
-                    "manufacturers_id": "995CS397A6475287",
-                    "updated_at": "2025-08-19T13:04:56.335Z",
-                    "version": "5.57.0067",
-                    "merchant_token": "MLCHNZCBWFDZB"
-                  },
-                  "components": [
-                    {
-                      "type": "APPLICATION",
-                      "application_details": {
-                        "application_type": "TERMINAL_API",
-                        "version": "6.77",
-                        "session_location": "LMN2K7S3RTOU3"
-                      }
-                    },
-                    {
-                      "type": "CARD_READER",
-                      "card_reader_details": {
-                        "version": "4.1.51"
-                      }
-                    },
-                    {
-                      "type": "BATTERY",
-                      "battery_details": {
-                        "visible_percent": 77,
-                        "external_power": "AVAILABLE_CHARGING"
-                      }
-                    },
-                    {
-                      "type": "WIFI",
-                      "wifi_details": {
-                        "active": true,
-                        "ssid": "Staff Network",
-                        "ip_address_v4": "10.0.0.7",
-                        "secure_connection": "WPA/WPA2 PSK",
-                        "signal_strength": {
-                          "value": 2
-                        }
-                      }
-                    },
-                    {
-                      "type": "ETHERNET",
-                      "ethernet_details": {
-                        "active": false
-                      }
-                    }
-                  ],
-                  "status": {
-                    "category": "AVAILABLE"
-                  }
+                  "id": "B3Z6NAMYQSMTM",
+                  "name": "Counter 1",
+                  "code": "EBCARJ",
+                  "device_id": "907CS13101300122",
+                  "product_type": "TERMINAL_API",
+                  "location_id": "B5E4484SHHNYH",
+                  "status": "PAIRED",
+                  "pair_by": "2020-02-06T18:49:33.000Z",
+                  "created_at": "2020-02-06T18:44:33.000Z",
+                  "status_changed_at": "2020-02-06T18:47:28.000Z",
+                  "paired_at": "paired_at"
                 },
                 {
-                  "id": "device:998WS21803L03559",
-                  "attributes": {
-                    "type": "HANDHELD",
-                    "manufacturer": "Square",
-                    "model": "Square Handheld (1st Gen, v1)",
-                    "name": "Square Terminal 3559",
-                    "manufacturers_id": "998WS21803L03559",
-                    "updated_at": "2025-08-19T12:39:56.335Z",
-                    "version": "7.21.0017",
-                    "merchant_token": "MLCHXZCBWFGDW"
-                  },
-                  "components": [
-                    {
-                      "type": "APPLICATION",
-                      "application_details": {
-                        "application_type": "TERMINAL_API",
-                        "version": "6.77",
-                        "session_location": "LMN2K7S3RTOU3"
-                      }
-                    },
-                    {
-                      "type": "CARD_READER",
-                      "card_reader_details": {
-                        "version": "4.5.58"
-                      }
-                    },
-                    {
-                      "type": "BATTERY",
-                      "battery_details": {
-                        "visible_percent": 22,
-                        "external_power": "AVAILABLE_CHARGING"
-                      }
-                    },
-                    {
-                      "type": "WIFI",
-                      "wifi_details": {
-                        "active": true,
-                        "ssid": "Staff Network",
-                        "ip_address_v4": "10.0.0.7",
-                        "secure_connection": "WPA/WPA2 PSK",
-                        "signal_strength": {
-                          "value": 2
-                        }
-                      }
-                    },
-                    {
-                      "type": "ETHERNET",
-                      "ethernet_details": {
-                        "active": false
-                      }
-                    }
-                  ],
-                  "status": {
-                    "category": "NEEDS_ATTENTION"
-                  }
+                  "id": "YKGMJMYK8H4PQ",
+                  "name": "Unused device code",
+                  "code": "GVXNYN",
+                  "device_id": "device_id",
+                  "product_type": "TERMINAL_API",
+                  "location_id": "A6SYFRSV4WAFW",
+                  "status": "UNPAIRED",
+                  "pair_by": "2020-02-07T20:00:04.000Z",
+                  "created_at": "2020-02-07T19:55:04.000Z",
+                  "status_changed_at": "2020-02-07T19:55:04.000Z",
+                  "paired_at": "paired_at"
                 }
               ],
-              "cursor": "GcXjlV2iaizH7R0fMT6wUDbw6l4otigjzx8XOOspUKHo9EPLRByM"
+              "cursor": "cursor"
             }
             """;
 
@@ -145,11 +57,11 @@ public class ListTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/devices")
+                    .WithPath("/v2/devices/codes")
                     .WithParam("cursor", "cursor")
-                    .WithParam("sort_order", "DESC")
-                    .WithParam("limit", "1")
                     .WithParam("location_id", "location_id")
+                    .WithParam("product_type", "TERMINAL_API")
+                    .WithParam("status", "UNKNOWN")
                     .UsingGet()
             )
             .RespondWith(
@@ -159,13 +71,13 @@ public class ListTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var items = await Client.Devices.ListAsync(
-            new ListDevicesRequest
+        var items = await Client.Devices.Codes.ListAsync(
+            new ListCodesRequest
             {
                 Cursor = "cursor",
-                SortOrder = SortOrder.Desc,
-                Limit = 1,
                 LocationId = "location_id",
+                ProductType = "TERMINAL_API",
+                Status = DeviceCodeStatus.Unknown,
             }
         );
         await foreach (var item in items)

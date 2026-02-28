@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.CashDrawers.Shifts;
+namespace Square.CashDrawers;
 
 public partial class ShiftsClient : IShiftsClient
 {
@@ -195,11 +195,7 @@ public partial class ShiftsClient : IShiftsClient
     /// </summary>
     /// <example><code>
     /// await client.CashDrawers.Shifts.GetAsync(
-    ///     new Square.CashDrawers.Shifts.GetShiftsRequest
-    ///     {
-    ///         ShiftId = "shift_id",
-    ///         LocationId = "location_id",
-    ///     }
+    ///     new Square.CashDrawers.GetShiftsRequest { ShiftId = "shift_id", LocationId = "location_id" }
     /// );
     /// </code></example>
     public async Task<GetCashDrawerShiftResponse> GetAsync(

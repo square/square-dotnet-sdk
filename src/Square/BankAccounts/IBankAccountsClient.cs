@@ -1,7 +1,6 @@
-using Square;
 using Square.Core;
 
-namespace Square.BankAccounts;
+namespace Square;
 
 public partial interface IBankAccountsClient
 {

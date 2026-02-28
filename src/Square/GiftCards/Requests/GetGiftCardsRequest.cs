@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.GiftCards;
+namespace Square;
 
 [Serializable]
 public record GetGiftCardsRequest

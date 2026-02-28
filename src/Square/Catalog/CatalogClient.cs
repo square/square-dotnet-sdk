@@ -1,10 +1,8 @@
 using System.Text.Json;
-using Square;
-using Square.Catalog.Images;
-using Square.Catalog.Object;
+using Square.Catalog;
 using Square.Core;
 
-namespace Square.Catalog;
+namespace Square;
 
 public partial class CatalogClient : ICatalogClient
 {

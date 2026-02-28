@@ -14,25 +14,32 @@ public class CreateTest : BaseMockServerTest
     {
         const string requestJson = """
             {
-              "given_name": "Amelia",
-              "family_name": "Earhart",
-              "email_address": "Amelia.Earhart@example.com",
-              "address": {
-                "address_line_1": "500 Electric Ave",
-                "address_line_2": "Suite 600",
-                "locality": "New York",
-                "administrative_district_level_1": "NY",
-                "postal_code": "10003",
-                "country": "US"
-              },
-              "phone_number": "+1-212-555-4240",
-              "reference_id": "YOUR_REFERENCE_ID",
-              "note": "a customer"
+              "custom_attribute_definition": {
+                "key": "favoritemovie",
+                "schema": {
+                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                },
+                "name": "Favorite Movie",
+                "description": "The favorite movie of the customer.",
+                "visibility": "VISIBILITY_HIDDEN"
+              }
             }
             """;
 
         const string mockResponse = """
             {
+              "custom_attribute_definition": {
+                "key": "favoritemovie",
+                "schema": {
+                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                },
+                "name": "Favorite Movie",
+                "description": "The favorite movie of the customer.",
+                "visibility": "VISIBILITY_HIDDEN",
+                "version": 1,
+                "updated_at": "2022-04-26T15:27:30.000Z",
+                "created_at": "2022-04-26T15:27:30.000Z"
+              },
               "errors": [
                 {
                   "category": "API_ERROR",
@@ -40,51 +47,7 @@ public class CreateTest : BaseMockServerTest
                   "detail": "detail",
                   "field": "field"
                 }
-              ],
-              "customer": {
-                "id": "JDKYHBWT1D4F8MFH63DBMEN8Y4",
-                "created_at": "2016-03-23T20:21:54.859Z",
-                "updated_at": "2016-03-23T20:21:54.859Z",
-                "given_name": "Amelia",
-                "family_name": "Earhart",
-                "nickname": "nickname",
-                "company_name": "company_name",
-                "email_address": "Amelia.Earhart@example.com",
-                "address": {
-                  "address_line_1": "500 Electric Ave",
-                  "address_line_2": "Suite 600",
-                  "address_line_3": "address_line_3",
-                  "locality": "New York",
-                  "sublocality": "sublocality",
-                  "sublocality_2": "sublocality_2",
-                  "sublocality_3": "sublocality_3",
-                  "administrative_district_level_1": "NY",
-                  "administrative_district_level_2": "administrative_district_level_2",
-                  "administrative_district_level_3": "administrative_district_level_3",
-                  "postal_code": "10003",
-                  "country": "US",
-                  "first_name": "first_name",
-                  "last_name": "last_name"
-                },
-                "phone_number": "+1-212-555-4240",
-                "birthday": "birthday",
-                "reference_id": "YOUR_REFERENCE_ID",
-                "note": "a customer",
-                "preferences": {
-                  "email_unsubscribed": false
-                },
-                "creation_source": "THIRD_PARTY",
-                "group_ids": [
-                  "group_ids"
-                ],
-                "segment_ids": [
-                  "segment_ids"
-                ],
-                "version": 0,
-                "tax_ids": {
-                  "eu_vat": "eu_vat"
-                }
-              }
+              ]
             }
             """;
 
@@ -92,7 +55,7 @@ public class CreateTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/customers")
+                    .WithPath("/v2/customers/custom-attribute-definitions")
                     .WithHeader("Content-Type", "application/json")
                     .UsingPost()
                     .WithBodyAsJson(requestJson)
@@ -104,29 +67,33 @@ public class CreateTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Customers.CreateAsync(
-            new CreateCustomerRequest
+        var response = await Client.Customers.CustomAttributeDefinitions.CreateAsync(
+            new CreateCustomerCustomAttributeDefinitionRequest
             {
-                GivenName = "Amelia",
-                FamilyName = "Earhart",
-                EmailAddress = "Amelia.Earhart@example.com",
-                Address = new Address
+                CustomAttributeDefinition = new CustomAttributeDefinition
                 {
-                    AddressLine1 = "500 Electric Ave",
-                    AddressLine2 = "Suite 600",
-                    Locality = "New York",
-                    AdministrativeDistrictLevel1 = "NY",
-                    PostalCode = "10003",
-                    Country = Country.Us,
+                    Key = "favoritemovie",
+                    Schema = new Dictionary<string, object?>()
+                    {
+                        {
+                            "$ref",
+                            "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                        },
+                    },
+                    Name = "Favorite Movie",
+                    Description = "The favorite movie of the customer.",
+                    Visibility = CustomAttributeDefinitionVisibility.VisibilityHidden,
                 },
-                PhoneNumber = "+1-212-555-4240",
-                ReferenceId = "YOUR_REFERENCE_ID",
-                Note = "a customer",
             }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<CreateCustomerResponse>(mockResponse)).UsingDefaults()
+            Is.EqualTo(
+                    JsonUtils.Deserialize<CreateCustomerCustomAttributeDefinitionResponse>(
+                        mockResponse
+                    )
+                )
+                .UsingDefaults()
         );
     }
 }

@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Webhooks.Subscriptions;
+namespace Square.Webhooks;
 
 public partial class SubscriptionsClient : ISubscriptionsClient
 {
@@ -188,7 +188,7 @@ public partial class SubscriptionsClient : ISubscriptionsClient
     /// </summary>
     /// <example><code>
     /// await client.Webhooks.Subscriptions.GetAsync(
-    ///     new Square.Webhooks.Subscriptions.GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
+    ///     new Square.Webhooks.GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
     /// );
     /// </code></example>
     public async Task<GetWebhookSubscriptionResponse> GetAsync(

@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Square.Bookings;
 using Square.Test.Unit.MockServer;
 
 namespace Square.Test.Unit.MockServer.Bookings;
@@ -12,32 +11,33 @@ public class ListTest : BaseMockServerTest
     {
         const string mockResponse = """
             {
-              "bookings": [
+              "custom_attribute_definitions": [
                 {
-                  "id": "zkras0xv0xwswx",
+                  "key": "favoriteShampoo",
+                  "schema": {
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                  },
+                  "name": "Favorite shampoo",
+                  "description": "Update the description as desired.",
+                  "visibility": "VISIBILITY_READ_ONLY",
+                  "version": 3,
+                  "updated_at": "2022-11-16T15:39:38.000Z",
+                  "created_at": "2022-11-16T15:27:30.000Z"
+                },
+                {
+                  "key": "partySize",
+                  "schema": {
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
+                  },
+                  "name": "Party size",
+                  "description": "Number of people in the party for dine-in",
+                  "visibility": "VISIBILITY_HIDDEN",
                   "version": 1,
-                  "status": "ACCEPTED",
-                  "created_at": "2020-10-28T15:47:41.000Z",
-                  "updated_at": "2020-10-28T15:49:25.000Z",
-                  "start_at": "2020-11-26T13:00:00.000Z",
-                  "location_id": "LEQHH0YY8B42M",
-                  "customer_id": "EX2QSVGTZN4K1E5QE1CBFNVQ8M",
-                  "customer_note": "",
-                  "seller_note": "",
-                  "appointment_segments": [
-                    {
-                      "duration_minutes": 60,
-                      "service_variation_id": "RU3PBTZTK7DXZDQFCJHOK2MC",
-                      "team_member_id": "TMXUrsBWWcHTt79t",
-                      "service_variation_version": 1599775456731
-                    }
-                  ],
-                  "transition_time_minutes": 1,
-                  "all_day": true,
-                  "location_type": "BUSINESS_LOCATION",
-                  "source": "FIRST_PARTY_MERCHANT"
+                  "updated_at": "2022-11-16T15:49:05.000Z",
+                  "created_at": "2022-11-16T15:49:05.000Z"
                 }
               ],
+              "cursor": "YEk4UPbUEsu8MUV0xouO5hCiFcD9T5ztB6UWEJq5vZnqBFmoBEi0j1j6HWYTFGMRre4p7T5wAQBj3Th1NX3XgBFcQVEVsIxUQ2NsbwjRitfoEZDml9uxxQXepowyRvCuSThHPbJSn7M7wInl3x8XypQF9ahVVQXegJ0CxEKc0SBH",
               "errors": [
                 {
                   "category": "API_ERROR",
@@ -53,14 +53,9 @@ public class ListTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/bookings")
+                    .WithPath("/v2/bookings/custom-attribute-definitions")
                     .WithParam("limit", "1")
                     .WithParam("cursor", "cursor")
-                    .WithParam("customer_id", "customer_id")
-                    .WithParam("team_member_id", "team_member_id")
-                    .WithParam("location_id", "location_id")
-                    .WithParam("start_at_min", "start_at_min")
-                    .WithParam("start_at_max", "start_at_max")
                     .UsingGet()
             )
             .RespondWith(
@@ -70,16 +65,11 @@ public class ListTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var items = await Client.Bookings.ListAsync(
-            new ListBookingsRequest
+        var items = await Client.Bookings.CustomAttributeDefinitions.ListAsync(
+            new Square.Bookings.ListCustomAttributeDefinitionsRequest
             {
                 Limit = 1,
                 Cursor = "cursor",
-                CustomerId = "customer_id",
-                TeamMemberId = "team_member_id",
-                LocationId = "location_id",
-                StartAtMin = "start_at_min",
-                StartAtMax = "start_at_max",
             }
         );
         await foreach (var item in items)

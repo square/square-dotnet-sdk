@@ -1,8 +1,7 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
 
-namespace Square.Payments;
+namespace Square;
 
 public partial class PaymentsClient : IPaymentsClient
 {

@@ -1,9 +1,8 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
-using Square.GiftCards.Activities;
+using Square.GiftCards;
 
-namespace Square.GiftCards;
+namespace Square;
 
 public partial class GiftCardsClient : IGiftCardsClient
 {

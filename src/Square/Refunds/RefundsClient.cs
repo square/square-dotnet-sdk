@@ -1,8 +1,7 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
 
-namespace Square.Refunds;
+namespace Square;
 
 public partial class RefundsClient : IRefundsClient
 {
@@ -232,7 +231,7 @@ public partial class RefundsClient : IRefundsClient
     /// Retrieves a specific refund using the `refund_id`.
     /// </summary>
     /// <example><code>
-    /// await client.Refunds.GetAsync(new Square.Refunds.GetRefundsRequest { RefundId = "refund_id" });
+    /// await client.Refunds.GetAsync(new Square.GetRefundsRequest { RefundId = "refund_id" });
     /// </code></example>
     public async Task<GetPaymentRefundResponse> GetAsync(
         GetRefundsRequest request,

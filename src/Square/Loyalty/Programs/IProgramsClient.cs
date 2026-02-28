@@ -1,7 +1,7 @@
 using Square;
-using Square.Loyalty.Programs.Promotions;
+using Square.Loyalty.Programs;
 
-namespace Square.Loyalty.Programs;
+namespace Square.Loyalty;
 
 public partial interface IProgramsClient
 {

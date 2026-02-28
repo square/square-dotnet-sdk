@@ -1,7 +1,6 @@
-using Square;
 using Square.Core;
 
-namespace Square.Subscriptions;
+namespace Square;
 
 public partial interface ISubscriptionsClient
 {

@@ -1,12 +1,11 @@
-using Square;
-using Square.Locations.Transactions;
+using Square.Locations;
 
-namespace Square.Locations;
+namespace Square;
 
 public partial interface ILocationsClient
 {
-    public Square.Locations.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
-    public Square.Locations.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
+    public Square.Locations.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Locations.CustomAttributesClient CustomAttributes { get; }
     public TransactionsClient Transactions { get; }
 
     /// <summary>

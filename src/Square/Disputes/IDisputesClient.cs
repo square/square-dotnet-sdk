@@ -1,8 +1,7 @@
-using Square;
 using Square.Core;
-using Square.Disputes.Evidence;
+using Square.Disputes;
 
-namespace Square.Disputes;
+namespace Square;
 
 public partial interface IDisputesClient
 {

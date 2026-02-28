@@ -1,7 +1,6 @@
-using Square;
 using Square.Core;
 
-namespace Square.TransferOrders;
+namespace Square;
 
 public partial interface ITransferOrdersClient
 {

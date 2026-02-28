@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Labor.BreakTypes;
+namespace Square.Labor;
 
 public partial class BreakTypesClient : IBreakTypesClient
 {

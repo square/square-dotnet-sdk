@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Merchants.CustomAttributes;
+namespace Square.Merchants;
 
 [Serializable]
 public record UpsertMerchantCustomAttributeRequest

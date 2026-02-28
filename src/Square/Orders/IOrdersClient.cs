@@ -1,11 +1,9 @@
-using Square;
-
-namespace Square.Orders;
+namespace Square;
 
 public partial interface IOrdersClient
 {
-    public Square.Orders.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
-    public Square.Orders.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
+    public Square.Orders.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Orders.CustomAttributesClient CustomAttributes { get; }
 
     /// <summary>
     /// Creates a new [order](entity:Order) that can include information about products for

@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Catalog.Images;
+namespace Square.Catalog;
 
 [Serializable]
 public record UpdateImagesRequest

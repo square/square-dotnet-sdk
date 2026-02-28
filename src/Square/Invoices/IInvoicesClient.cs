@@ -1,7 +1,6 @@
-using Square;
 using Square.Core;
 
-namespace Square.Invoices;
+namespace Square;
 
 public partial interface IInvoicesClient
 {

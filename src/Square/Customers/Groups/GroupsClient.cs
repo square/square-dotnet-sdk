@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Customers.Groups;
+namespace Square.Customers;
 
 public partial class GroupsClient : IGroupsClient
 {
