@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Square.Terminal.Checkouts;
+using Square.Terminal;
 
 namespace Square.Test.Integration;
 

@@ -1,10 +1,6 @@
 using System.Text.Json;
 using NUnit.Framework;
 using Square.Customers;
-using Square.Customers.Cards;
-using Square.Customers.CustomAttributeDefinitions;
-using Square.Customers.CustomAttributes;
-using Square.Customers.Groups;
 
 namespace Square.Test.Integration;
 

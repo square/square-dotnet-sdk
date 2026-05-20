@@ -1,7 +1,5 @@
 using NUnit.Framework;
-using Square.Labor.BreakTypes;
-using Square.Labor.Shifts;
-using Square.Labor.WorkweekConfigs;
+using Square.Labor;
 using Square.TeamMembers;
 
 // ReSharper disable NullableWarningSuppressionIsUsed

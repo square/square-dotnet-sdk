@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using Square.Payments;
-using Square.Refunds;
 
 // ReSharper disable NullableWarningSuppressionIsUsed
 

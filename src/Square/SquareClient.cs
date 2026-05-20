@@ -22,7 +22,7 @@ public partial class SquareClient : ISquareClient
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Square" },
                 { "X-Fern-SDK-Version", Version.Current },
-                { "User-Agent", "Square/43.1.0" },
+                { "User-Agent", "Square/44.0.0" },
             }
         );
         clientOptions ??= new ClientOptions();
