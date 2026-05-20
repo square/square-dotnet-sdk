@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Locations.Transactions;
+namespace Square.Locations;
 
 public partial interface ITransactionsClient
 {

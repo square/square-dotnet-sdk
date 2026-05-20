@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Customers.Groups;
+namespace Square.Customers;
 
 [Serializable]
 public record RemoveGroupsRequest

@@ -2,7 +2,7 @@ using global::System.Threading.Tasks;
 using NUnit.Framework;
 using Square;
 using Square.Core;
-using Square.Orders.CustomAttributes;
+using Square.Orders;
 
 namespace Square.Test.Unit.MockServer;
 

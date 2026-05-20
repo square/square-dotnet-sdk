@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using Square.TeamMembers;
-using Square.TeamMembers.WageSetting;
+using Square.TeamMembers;
 
 namespace Square.Test.Integration;
 

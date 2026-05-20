@@ -1,9 +1,9 @@
 using System.Text.Json;
 using Square;
 using Square.Core;
-using Square.Loyalty.Programs.Promotions;
+using Square.Loyalty.Programs;
 
-namespace Square.Loyalty.Programs;
+namespace Square.Loyalty;
 
 public partial class ProgramsClient : IProgramsClient
 {

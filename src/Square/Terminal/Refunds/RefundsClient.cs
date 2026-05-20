@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Terminal.Refunds;
+namespace Square.Terminal;
 
 public partial class RefundsClient : IRefundsClient
 {
@@ -137,7 +137,7 @@ public partial class RefundsClient : IRefundsClient
     /// </summary>
     /// <example><code>
     /// await client.Terminal.Refunds.GetAsync(
-    ///     new Square.Terminal.Refunds.GetRefundsRequest { TerminalRefundId = "terminal_refund_id" }
+    ///     new Square.Terminal.GetRefundsRequest { TerminalRefundId = "terminal_refund_id" }
     /// );
     /// </code></example>
     public async Task<GetTerminalRefundResponse> GetAsync(

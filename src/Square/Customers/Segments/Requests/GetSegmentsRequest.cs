@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Customers.Segments;
+namespace Square.Customers;
 
 [Serializable]
 public record GetSegmentsRequest

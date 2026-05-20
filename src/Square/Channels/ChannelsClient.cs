@@ -1,8 +1,7 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
 
-namespace Square.Channels;
+namespace Square;
 
 public partial class ChannelsClient : IChannelsClient
 {

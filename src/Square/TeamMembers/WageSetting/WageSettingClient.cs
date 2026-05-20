@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.TeamMembers.WageSetting;
+namespace Square.TeamMembers;
 
 public partial class WageSettingClient : IWageSettingClient
 {
@@ -23,7 +23,7 @@ public partial class WageSettingClient : IWageSettingClient
     /// </summary>
     /// <example><code>
     /// await client.TeamMembers.WageSetting.GetAsync(
-    ///     new Square.TeamMembers.WageSetting.GetWageSettingRequest { TeamMemberId = "team_member_id" }
+    ///     new Square.TeamMembers.GetWageSettingRequest { TeamMemberId = "team_member_id" }
     /// );
     /// </code></example>
     public async Task<GetWageSettingResponse> GetAsync(
@@ -85,7 +85,7 @@ public partial class WageSettingClient : IWageSettingClient
     ///     new UpdateWageSettingRequest
     ///     {
     ///         TeamMemberId = "team_member_id",
-    ///         WageSetting = new Square.WageSetting
+    ///         WageSetting = new WageSetting
     ///         {
     ///             JobAssignments = new List&lt;JobAssignment&gt;()
     ///             {

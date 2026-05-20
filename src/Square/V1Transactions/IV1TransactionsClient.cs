@@ -1,6 +1,4 @@
-using Square;
-
-namespace Square.V1Transactions;
+namespace Square;
 
 public partial interface IV1TransactionsClient
 {

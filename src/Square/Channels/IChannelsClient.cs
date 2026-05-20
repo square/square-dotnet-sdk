@@ -1,7 +1,6 @@
-using Square;
 using Square.Core;
 
-namespace Square.Channels;
+namespace Square;
 
 public partial interface IChannelsClient
 {

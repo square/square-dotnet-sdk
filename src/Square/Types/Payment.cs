@@ -81,6 +81,12 @@ public record Payment : IJsonOnDeserialized
     public Money? AppFeeMoney { get; set; }
 
     /// <summary>
+    /// Details pertaining to recipients of the application fee.
+    /// </summary>
+    [JsonPropertyName("app_fee_allocations")]
+    public IEnumerable<object>? AppFeeAllocations { get; set; }
+
+    /// <summary>
     /// The amount of money approved for this payment. This value may change if Square chooses to
     /// obtain reauthorization as part of a call to [UpdatePayment](api-endpoint:Payments-UpdatePayment).
     /// </summary>
@@ -178,6 +184,12 @@ public record Payment : IJsonOnDeserialized
     /// </summary>
     [JsonPropertyName("bank_account_details")]
     public BankAccountPaymentDetails? BankAccountDetails { get; set; }
+
+    /// <summary>
+    /// Details specific to electronic money payments.
+    /// </summary>
+    [JsonPropertyName("electronic_money_details")]
+    public ElectronicMoneyDetails? ElectronicMoneyDetails { get; set; }
 
     /// <summary>
     /// Details about an external payment. The details are only populated
@@ -363,6 +375,9 @@ public record Payment : IJsonOnDeserialized
     /// </summary>
     [JsonPropertyName("application_details")]
     public ApplicationDetails? ApplicationDetails { get; set; }
+
+    [JsonPropertyName("buyer_currency_exchange")]
+    public object? BuyerCurrencyExchange { get; set; }
 
     /// <summary>
     /// Whether or not this payment was taken offline.

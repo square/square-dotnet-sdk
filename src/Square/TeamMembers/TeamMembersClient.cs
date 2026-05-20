@@ -1,9 +1,8 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
-using Square.TeamMembers.WageSetting;
+using Square.TeamMembers;
 
-namespace Square.TeamMembers;
+namespace Square;
 
 public partial class TeamMembersClient : ITeamMembersClient
 {
@@ -43,7 +42,7 @@ public partial class TeamMembersClient : ITeamMembersClient
     ///                 AssignmentType = TeamMemberAssignedLocationsAssignmentType.ExplicitLocations,
     ///                 LocationIds = new List&lt;string&gt;() { "YSGH2WBKG94QZ", "GA2Y9HSJ8KRYT" },
     ///             },
-    ///             WageSetting = new Square.WageSetting
+    ///             WageSetting = new WageSetting
     ///             {
     ///                 JobAssignments = new List&lt;JobAssignment&gt;()
     ///                 {
@@ -452,7 +451,7 @@ public partial class TeamMembersClient : ITeamMembersClient
     ///                     AssignmentType = TeamMemberAssignedLocationsAssignmentType.ExplicitLocations,
     ///                     LocationIds = new List&lt;string&gt;() { "YSGH2WBKG94QZ", "GA2Y9HSJ8KRYT" },
     ///                 },
-    ///                 WageSetting = new Square.WageSetting
+    ///                 WageSetting = new WageSetting
     ///                 {
     ///                     JobAssignments = new List&lt;JobAssignment&gt;()
     ///                     {

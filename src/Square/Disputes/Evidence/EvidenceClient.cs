@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Disputes.Evidence;
+namespace Square.Disputes;
 
 public partial class EvidenceClient : IEvidenceClient
 {

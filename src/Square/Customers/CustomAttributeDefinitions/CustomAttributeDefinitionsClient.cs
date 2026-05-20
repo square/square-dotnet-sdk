@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Customers.CustomAttributeDefinitions;
+namespace Square.Customers;
 
 public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefinitionsClient
 {
@@ -84,11 +84,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributeDefinitions.ListAsync(
-    ///     new Square.Customers.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Limit = 1,
-    ///         Cursor = "cursor",
-    ///     }
+    ///     new Square.Customers.ListCustomAttributeDefinitionsRequest { Limit = 1, Cursor = "cursor" }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttributeDefinition>> ListAsync(
@@ -212,11 +208,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributeDefinitions.GetAsync(
-    ///     new Square.Customers.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///         Version = 1,
-    ///     }
+    ///     new Square.Customers.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
     /// );
     /// </code></example>
     public async Task<GetCustomerCustomAttributeDefinitionResponse> GetAsync(
@@ -351,10 +343,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributeDefinitions.DeleteAsync(
-    ///     new Square.Customers.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///     }
+    ///     new Square.Customers.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
     /// );
     /// </code></example>
     public async Task<DeleteCustomerCustomAttributeDefinitionResponse> DeleteAsync(

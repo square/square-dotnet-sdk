@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Bookings.CustomAttributeDefinitions;
+namespace Square.Bookings;
 
 public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefinitionsClient
 {
@@ -80,11 +80,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributeDefinitions.ListAsync(
-    ///     new Square.Bookings.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Limit = 1,
-    ///         Cursor = "cursor",
-    ///     }
+    ///     new Square.Bookings.ListCustomAttributeDefinitionsRequest { Limit = 1, Cursor = "cursor" }
     /// );
     /// </code></example>
     public async Task<Pager<CustomAttributeDefinition>> ListAsync(
@@ -190,11 +186,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributeDefinitions.GetAsync(
-    ///     new Square.Bookings.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///         Version = 1,
-    ///     }
+    ///     new Square.Bookings.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
     /// );
     /// </code></example>
     public async Task<RetrieveBookingCustomAttributeDefinitionResponse> GetAsync(
@@ -326,10 +318,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributeDefinitions.DeleteAsync(
-    ///     new Square.Bookings.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///     }
+    ///     new Square.Bookings.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
     /// );
     /// </code></example>
     public async Task<DeleteBookingCustomAttributeDefinitionResponse> DeleteAsync(

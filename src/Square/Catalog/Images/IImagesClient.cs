@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Catalog.Images;
+namespace Square.Catalog;
 
 public partial interface IImagesClient
 {

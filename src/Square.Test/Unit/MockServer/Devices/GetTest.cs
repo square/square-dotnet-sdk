@@ -22,62 +22,18 @@ public class GetTest : BaseMockServerTest
                   "field": "field"
                 }
               ],
-              "device": {
-                "id": "device:995CS397A6475287",
-                "attributes": {
-                  "type": "TERMINAL",
-                  "manufacturer": "Square",
-                  "model": "T2",
-                  "name": "Square Terminal 995",
-                  "manufacturers_id": "995CS397A6475287",
-                  "updated_at": "2023-09-29T13:12:22.365Z",
-                  "version": "5.41.0085",
-                  "merchant_token": "MLCHXZCBWFGDW"
-                },
-                "components": [
-                  {
-                    "type": "APPLICATION",
-                    "application_details": {
-                      "application_type": "TERMINAL_API",
-                      "version": "6.25",
-                      "session_location": "LMN2K7S3RTOU3"
-                    }
-                  },
-                  {
-                    "type": "CARD_READER",
-                    "card_reader_details": {
-                      "version": "3.53.70"
-                    }
-                  },
-                  {
-                    "type": "BATTERY",
-                    "battery_details": {
-                      "visible_percent": 5,
-                      "external_power": "AVAILABLE_CHARGING"
-                    }
-                  },
-                  {
-                    "type": "WIFI",
-                    "wifi_details": {
-                      "active": true,
-                      "ssid": "Staff Network",
-                      "ip_address_v4": "10.0.0.7",
-                      "secure_connection": "WPA/WPA2 PSK",
-                      "signal_strength": {
-                        "value": 2
-                      }
-                    }
-                  },
-                  {
-                    "type": "ETHERNET",
-                    "ethernet_details": {
-                      "active": false
-                    }
-                  }
-                ],
-                "status": {
-                  "category": "AVAILABLE"
-                }
+              "device_code": {
+                "id": "B3Z6NAMYQSMTM",
+                "name": "Counter 1",
+                "code": "EBCARJ",
+                "device_id": "907CS13101300122",
+                "product_type": "TERMINAL_API",
+                "location_id": "B5E4484SHHNYH",
+                "status": "PAIRED",
+                "pair_by": "2020-02-06T18:49:33.000Z",
+                "created_at": "2020-02-06T18:44:33.000Z",
+                "status_changed_at": "2020-02-06T18:47:28.000Z",
+                "paired_at": "paired_at"
               }
             }
             """;
@@ -86,7 +42,7 @@ public class GetTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/devices/device_id")
+                    .WithPath("/v2/devices/codes/id")
                     .UsingGet()
             )
             .RespondWith(
@@ -96,12 +52,10 @@ public class GetTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Devices.GetAsync(
-            new GetDevicesRequest { DeviceId = "device_id" }
-        );
+        var response = await Client.Devices.Codes.GetAsync(new GetCodesRequest { Id = "id" });
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<GetDeviceResponse>(mockResponse)).UsingDefaults()
+            Is.EqualTo(JsonUtils.Deserialize<GetDeviceCodeResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

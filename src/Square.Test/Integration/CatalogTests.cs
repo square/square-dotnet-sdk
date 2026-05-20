@@ -1,8 +1,6 @@
 using System.Text.Json;
 using NUnit.Framework;
 using Square.Catalog;
-using Square.Catalog.Images;
-using Square.Catalog.Object;
 using Square.Core;
 
 // ReSharper disable NullableWarningSuppressionIsUsed

@@ -1,6 +1,5 @@
 using NUnit.Framework;
 using Square.Catalog;
-using Square.Catalog.Object;
 
 namespace Square.Test.Integration;
 
@@ -24,7 +23,7 @@ public class PaginationTests
             await Helpers.CreateTestCustomerAsync(client);
         }
 
-        var pager = await client.Customers.ListAsync(new Customers.ListCustomersRequest());
+        var pager = await client.Customers.ListAsync(new ListCustomersRequest());
         int count = 0;
         await foreach (var customer in pager)
         {

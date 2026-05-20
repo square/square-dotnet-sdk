@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using Square;
 using Square.Disputes;
 using Square.Test.Unit.MockServer;
 
@@ -13,6 +12,32 @@ public class ListTest : BaseMockServerTest
     {
         const string mockResponse = """
             {
+              "evidence": [
+                {
+                  "evidence_id": "evidence_id",
+                  "id": "CpfnkwGselCwS8QFvxN6",
+                  "dispute_id": "bVTprrwk0gygTLZ96VX1oB",
+                  "evidence_file": {
+                    "filename": "customer-interaction",
+                    "filetype": "JPG"
+                  },
+                  "evidence_text": "evidence_text",
+                  "uploaded_at": "2022-05-10T15:57:13.802Z",
+                  "evidence_type": "CARDHOLDER_COMMUNICATION"
+                },
+                {
+                  "evidence_id": "evidence_id",
+                  "id": "TOomLInj6iWmP3N8qfCXrB",
+                  "dispute_id": "bVTprrwk0gygTLZ96VX1oB",
+                  "evidence_file": {
+                    "filename": "",
+                    "filetype": ""
+                  },
+                  "evidence_text": "evidence_text",
+                  "uploaded_at": "2022-05-18T16:01:10.000Z",
+                  "evidence_type": "REBUTTAL_EXPLANATION"
+                }
+              ],
               "errors": [
                 {
                   "category": "API_ERROR",
@@ -21,59 +46,7 @@ public class ListTest : BaseMockServerTest
                   "field": "field"
                 }
               ],
-              "disputes": [
-                {
-                  "dispute_id": "dispute_id",
-                  "id": "XDgyFu7yo1E2S5lQGGpYn",
-                  "amount_money": {
-                    "amount": 2500,
-                    "currency": "USD"
-                  },
-                  "reason": "NO_KNOWLEDGE",
-                  "state": "ACCEPTED",
-                  "due_at": "2022-07-13T00:00:00.000Z",
-                  "disputed_payment": {
-                    "payment_id": "zhyh1ch64kRBrrlfVhwjCEjZWzNZY"
-                  },
-                  "evidence_ids": [
-                    "evidence_ids"
-                  ],
-                  "card_brand": "VISA",
-                  "created_at": "2022-06-29T18:45:22.265Z",
-                  "updated_at": "2022-07-07T19:14:42.650Z",
-                  "brand_dispute_id": "100000809947",
-                  "reported_date": "reported_date",
-                  "reported_at": "2022-06-29T00:00:00.000Z",
-                  "version": 2,
-                  "location_id": "L1HN3ZMQK64X9"
-                },
-                {
-                  "dispute_id": "dispute_id",
-                  "id": "jLGg7aXC7lvKPr9PISt0T",
-                  "amount_money": {
-                    "amount": 2209,
-                    "currency": "USD"
-                  },
-                  "reason": "NOT_AS_DESCRIBED",
-                  "state": "EVIDENCE_REQUIRED",
-                  "due_at": "2022-05-13T00:00:00.000Z",
-                  "disputed_payment": {
-                    "payment_id": "zhyh1ch64kRBrrlfVhwjCEjZWzNZY"
-                  },
-                  "evidence_ids": [
-                    "evidence_ids"
-                  ],
-                  "card_brand": "VISA",
-                  "created_at": "2022-04-29T18:45:22.265Z",
-                  "updated_at": "2022-04-29T18:45:22.265Z",
-                  "brand_dispute_id": "r5Of6YaGT7AdeRaVoAGCJw",
-                  "reported_date": "reported_date",
-                  "reported_at": "2022-04-29T00:00:00.000Z",
-                  "version": 1,
-                  "location_id": "18YC4JDH91E1H"
-                }
-              ],
-              "cursor": "G1aSTRm48CLjJsg6Sg3hQN1b1OMaoVuG"
+              "cursor": "cursor"
             }
             """;
 
@@ -81,10 +54,8 @@ public class ListTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/disputes")
+                    .WithPath("/v2/disputes/dispute_id/evidence")
                     .WithParam("cursor", "cursor")
-                    .WithParam("states", "INQUIRY_EVIDENCE_REQUIRED")
-                    .WithParam("location_id", "location_id")
                     .UsingGet()
             )
             .RespondWith(
@@ -94,13 +65,8 @@ public class ListTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var items = await Client.Disputes.ListAsync(
-            new ListDisputesRequest
-            {
-                Cursor = "cursor",
-                States = DisputeState.InquiryEvidenceRequired,
-                LocationId = "location_id",
-            }
+        var items = await Client.Disputes.Evidence.ListAsync(
+            new ListEvidenceRequest { DisputeId = "dispute_id", Cursor = "cursor" }
         );
         await foreach (var item in items)
         {

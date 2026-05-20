@@ -1,9 +1,8 @@
 using System.Text.Json;
-using Square;
-using Square.Checkout.PaymentLinks;
+using Square.Checkout_;
 using Square.Core;
 
-namespace Square.Checkout;
+namespace Square;
 
 public partial class CheckoutClient : ICheckoutClient
 {

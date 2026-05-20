@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Orders.CustomAttributeDefinitions;
+namespace Square.Orders;
 
 public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefinitionsClient
 {
@@ -88,7 +88,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributeDefinitions.ListAsync(
-    ///     new Square.Orders.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
+    ///     new Square.Orders.ListCustomAttributeDefinitionsRequest
     ///     {
     ///         VisibilityFilter = VisibilityFilter.All,
     ///         Cursor = "cursor",
@@ -212,11 +212,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributeDefinitions.GetAsync(
-    ///     new Square.Orders.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///         Version = 1,
-    ///     }
+    ///     new Square.Orders.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
     /// );
     /// </code></example>
     public async Task<RetrieveOrderCustomAttributeDefinitionResponse> GetAsync(
@@ -346,10 +342,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributeDefinitions.DeleteAsync(
-    ///     new Square.Orders.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///     }
+    ///     new Square.Orders.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
     /// );
     /// </code></example>
     public async Task<DeleteOrderCustomAttributeDefinitionResponse> DeleteAsync(

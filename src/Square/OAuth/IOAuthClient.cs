@@ -1,6 +1,4 @@
-using Square;
-
-namespace Square.OAuth;
+namespace Square;
 
 public partial interface IOAuthClient
 {

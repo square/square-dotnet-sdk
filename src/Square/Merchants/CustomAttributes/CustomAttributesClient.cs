@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Merchants.CustomAttributes;
+namespace Square.Merchants;
 
 public partial class CustomAttributesClient : ICustomAttributesClient
 {
@@ -264,7 +264,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributes.ListAsync(
-    ///     new Square.Merchants.CustomAttributes.ListCustomAttributesRequest
+    ///     new Square.Merchants.ListCustomAttributesRequest
     ///     {
     ///         MerchantId = "merchant_id",
     ///         VisibilityFilter = VisibilityFilter.All,
@@ -316,7 +316,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributes.GetAsync(
-    ///     new Square.Merchants.CustomAttributes.GetCustomAttributesRequest
+    ///     new Square.Merchants.GetCustomAttributesRequest
     ///     {
     ///         MerchantId = "merchant_id",
     ///         Key = "key",
@@ -454,11 +454,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributes.DeleteAsync(
-    ///     new Square.Merchants.CustomAttributes.DeleteCustomAttributesRequest
-    ///     {
-    ///         MerchantId = "merchant_id",
-    ///         Key = "key",
-    ///     }
+    ///     new Square.Merchants.DeleteCustomAttributesRequest { MerchantId = "merchant_id", Key = "key" }
     /// );
     /// </code></example>
     public async Task<DeleteMerchantCustomAttributeResponse> DeleteAsync(

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.GiftCards.Activities;
+namespace Square.GiftCards;
 
 [Serializable]
 public record ListActivitiesRequest

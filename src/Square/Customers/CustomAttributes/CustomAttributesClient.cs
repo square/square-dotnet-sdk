@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Customers.CustomAttributes;
+namespace Square.Customers;
 
 public partial class CustomAttributesClient : ICustomAttributesClient
 {
@@ -93,7 +93,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributes.ListAsync(
-    ///     new Square.Customers.CustomAttributes.ListCustomAttributesRequest
+    ///     new Square.Customers.ListCustomAttributesRequest
     ///     {
     ///         CustomerId = "customer_id",
     ///         Limit = 1,
@@ -147,7 +147,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributes.GetAsync(
-    ///     new Square.Customers.CustomAttributes.GetCustomAttributesRequest
+    ///     new Square.Customers.GetCustomAttributesRequest
     ///     {
     ///         CustomerId = "customer_id",
     ///         Key = "key",
@@ -288,11 +288,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Customers.CustomAttributes.DeleteAsync(
-    ///     new Square.Customers.CustomAttributes.DeleteCustomAttributesRequest
-    ///     {
-    ///         CustomerId = "customer_id",
-    ///         Key = "key",
-    ///     }
+    ///     new Square.Customers.DeleteCustomAttributesRequest { CustomerId = "customer_id", Key = "key" }
     /// );
     /// </code></example>
     public async Task<DeleteCustomerCustomAttributeResponse> DeleteAsync(

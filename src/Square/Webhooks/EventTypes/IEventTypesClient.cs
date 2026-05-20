@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Webhooks.EventTypes;
+namespace Square.Webhooks;
 
 public partial interface IEventTypesClient
 {

@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Locations.Transactions;
+namespace Square.Locations;
 
 public partial class TransactionsClient : ITransactionsClient
 {

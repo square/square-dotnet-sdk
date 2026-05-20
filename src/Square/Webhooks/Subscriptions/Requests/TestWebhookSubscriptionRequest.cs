@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Webhooks.Subscriptions;
+namespace Square.Webhooks;
 
 [Serializable]
 public record TestWebhookSubscriptionRequest

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Cards;
+namespace Square;
 
 [Serializable]
 public record DisableCardsRequest

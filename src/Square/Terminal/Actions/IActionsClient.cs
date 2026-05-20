@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Terminal.Actions;
+namespace Square.Terminal;
 
 public partial interface IActionsClient
 {

@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Labor.Shifts;
+namespace Square.Labor;
 
 public partial class ShiftsClient : IShiftsClient
 {
@@ -193,7 +193,7 @@ public partial class ShiftsClient : IShiftsClient
     /// Returns a single `Shift` specified by `id`.
     /// </summary>
     /// <example><code>
-    /// await client.Labor.Shifts.GetAsync(new Square.Labor.Shifts.GetShiftsRequest { Id = "id" });
+    /// await client.Labor.Shifts.GetAsync(new Square.Labor.GetShiftsRequest { Id = "id" });
     /// </code></example>
     public async Task<GetShiftResponse> GetAsync(
         GetShiftsRequest request,

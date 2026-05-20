@@ -14,98 +14,62 @@ public class UpdateTest : BaseMockServerTest
     {
         const string requestJson = """
             {
-              "team_member": {
-                "reference_id": "reference_id_1",
-                "status": "ACTIVE",
-                "given_name": "Joe",
-                "family_name": "Doe",
-                "email_address": "joe_doe@gmail.com",
-                "phone_number": "+14159283333",
-                "assigned_locations": {
-                  "assignment_type": "EXPLICIT_LOCATIONS",
-                  "location_ids": [
-                    "YSGH2WBKG94QZ",
-                    "GA2Y9HSJ8KRYT"
-                  ]
-                },
-                "wage_setting": {
-                  "job_assignments": [
-                    {
-                      "pay_type": "SALARY",
-                      "annual_rate": {
-                        "amount": 3000000,
-                        "currency": "USD"
-                      },
-                      "weekly_hours": 40,
-                      "job_id": "FjS8x95cqHiMenw4f1NAUH4P"
+              "wage_setting": {
+                "job_assignments": [
+                  {
+                    "job_title": "Manager",
+                    "pay_type": "SALARY",
+                    "annual_rate": {
+                      "amount": 3000000,
+                      "currency": "USD"
                     },
-                    {
-                      "pay_type": "HOURLY",
-                      "hourly_rate": {
-                        "amount": 1200,
-                        "currency": "USD"
-                      },
-                      "job_id": "VDNpRv8da51NU8qZFC5zDWpF"
+                    "weekly_hours": 40
+                  },
+                  {
+                    "job_title": "Cashier",
+                    "pay_type": "HOURLY",
+                    "hourly_rate": {
+                      "amount": 2000,
+                      "currency": "USD"
                     }
-                  ],
-                  "is_overtime_exempt": true
-                }
+                  }
+                ],
+                "is_overtime_exempt": true
               }
             }
             """;
 
         const string mockResponse = """
             {
-              "team_member": {
-                "id": "1yJlHapkseYnNPETIU1B",
-                "reference_id": "reference_id_1",
-                "is_owner": false,
-                "status": "ACTIVE",
-                "given_name": "Joe",
-                "family_name": "Doe",
-                "email_address": "joe_doe@example.com",
-                "phone_number": "+14159283333",
-                "created_at": "2021-06-11T22:55:45.000Z",
-                "updated_at": "2021-06-15T17:38:05.000Z",
-                "assigned_locations": {
-                  "assignment_type": "EXPLICIT_LOCATIONS",
-                  "location_ids": [
-                    "GA2Y9HSJ8KRYT",
-                    "YSGH2WBKG94QZ"
-                  ]
-                },
-                "wage_setting": {
-                  "team_member_id": "1yJlHapkseYnNPETIU1B",
-                  "job_assignments": [
-                    {
-                      "job_title": "Manager",
-                      "pay_type": "SALARY",
-                      "hourly_rate": {
-                        "amount": 1443,
-                        "currency": "USD"
-                      },
-                      "annual_rate": {
-                        "amount": 3000000,
-                        "currency": "USD"
-                      },
-                      "weekly_hours": 40,
-                      "job_id": "FjS8x95cqHiMenw4f1NAUH4P"
+              "wage_setting": {
+                "team_member_id": "-3oZQKPKVk6gUXU_V5Qa",
+                "job_assignments": [
+                  {
+                    "job_title": "Manager",
+                    "pay_type": "SALARY",
+                    "hourly_rate": {
+                      "amount": 1443,
+                      "currency": "USD"
                     },
-                    {
-                      "job_title": "Cashier",
-                      "pay_type": "HOURLY",
-                      "hourly_rate": {
-                        "amount": 1200,
-                        "currency": "USD"
-                      },
-                      "job_id": "VDNpRv8da51NU8qZFC5zDWpF"
+                    "annual_rate": {
+                      "amount": 3000000,
+                      "currency": "USD"
+                    },
+                    "weekly_hours": 40
+                  },
+                  {
+                    "job_title": "Cashier",
+                    "pay_type": "HOURLY",
+                    "hourly_rate": {
+                      "amount": 2000,
+                      "currency": "USD"
                     }
-                  ],
-                  "is_overtime_exempt": true,
-                  "version": 1,
-                  "created_at": "2021-06-11T22:55:45.000Z",
-                  "updated_at": "2021-06-11T22:55:45.000Z"
-                }
+                  }
+                ],
+                "is_overtime_exempt": true,
+                "version": 1,
+                "created_at": "2019-07-10T17:26:48.000Z",
+                "updated_at": "2020-06-11T23:12:04.000Z"
               },
               "errors": [
                 {
@@ -122,7 +86,7 @@ public class UpdateTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/team-members/team_member_id")
+                    .WithPath("/v2/team-members/team_member_id/wage-setting")
                     .WithHeader("Content-Type", "application/json")
                     .UsingPut()
                     .WithBodyAsJson(requestJson)
@@ -134,61 +98,35 @@ public class UpdateTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.TeamMembers.UpdateAsync(
-            new UpdateTeamMembersRequest
+        var response = await Client.TeamMembers.WageSetting.UpdateAsync(
+            new UpdateWageSettingRequest
             {
                 TeamMemberId = "team_member_id",
-                Body = new UpdateTeamMemberRequest
+                WageSetting = new WageSetting
                 {
-                    TeamMember = new TeamMember
+                    JobAssignments = new List<JobAssignment>()
                     {
-                        ReferenceId = "reference_id_1",
-                        Status = TeamMemberStatus.Active,
-                        GivenName = "Joe",
-                        FamilyName = "Doe",
-                        EmailAddress = "joe_doe@gmail.com",
-                        PhoneNumber = "+14159283333",
-                        AssignedLocations = new TeamMemberAssignedLocations
+                        new JobAssignment
                         {
-                            AssignmentType =
-                                TeamMemberAssignedLocationsAssignmentType.ExplicitLocations,
-                            LocationIds = new List<string>() { "YSGH2WBKG94QZ", "GA2Y9HSJ8KRYT" },
+                            JobTitle = "Manager",
+                            PayType = JobAssignmentPayType.Salary,
+                            AnnualRate = new Money { Amount = 3000000, Currency = Currency.Usd },
+                            WeeklyHours = 40,
                         },
-                        WageSetting = new Square.WageSetting
+                        new JobAssignment
                         {
-                            JobAssignments = new List<JobAssignment>()
-                            {
-                                new JobAssignment
-                                {
-                                    PayType = JobAssignmentPayType.Salary,
-                                    AnnualRate = new Money
-                                    {
-                                        Amount = 3000000,
-                                        Currency = Currency.Usd,
-                                    },
-                                    WeeklyHours = 40,
-                                    JobId = "FjS8x95cqHiMenw4f1NAUH4P",
-                                },
-                                new JobAssignment
-                                {
-                                    PayType = JobAssignmentPayType.Hourly,
-                                    HourlyRate = new Money
-                                    {
-                                        Amount = 1200,
-                                        Currency = Currency.Usd,
-                                    },
-                                    JobId = "VDNpRv8da51NU8qZFC5zDWpF",
-                                },
-                            },
-                            IsOvertimeExempt = true,
+                            JobTitle = "Cashier",
+                            PayType = JobAssignmentPayType.Hourly,
+                            HourlyRate = new Money { Amount = 2000, Currency = Currency.Usd },
                         },
                     },
+                    IsOvertimeExempt = true,
                 },
             }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<UpdateTeamMemberResponse>(mockResponse))
+            Is.EqualTo(JsonUtils.Deserialize<UpdateWageSettingResponse>(mockResponse))
                 .UsingDefaults()
         );
     }

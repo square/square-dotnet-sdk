@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Loyalty.Programs.Promotions;
+namespace Square.Loyalty.Programs;
 
 [Serializable]
 public record GetPromotionsRequest

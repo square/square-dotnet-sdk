@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Bookings.TeamMemberProfiles;
+namespace Square.Bookings;
 
 [Serializable]
 public record ListTeamMemberProfilesRequest

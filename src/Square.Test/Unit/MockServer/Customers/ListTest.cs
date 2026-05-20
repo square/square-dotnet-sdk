@@ -1,6 +1,4 @@
 using NUnit.Framework;
-using Square;
-using Square.Customers;
 using Square.Test.Unit.MockServer;
 
 namespace Square.Test.Unit.MockServer.Customers;
@@ -13,6 +11,33 @@ public class ListTest : BaseMockServerTest
     {
         const string mockResponse = """
             {
+              "custom_attribute_definitions": [
+                {
+                  "key": "favoritemovie",
+                  "schema": {
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                  },
+                  "name": "Favorite Movie",
+                  "description": "Update the description as desired.",
+                  "visibility": "VISIBILITY_READ_ONLY",
+                  "version": 3,
+                  "updated_at": "2022-04-26T15:39:38.000Z",
+                  "created_at": "2022-04-26T15:27:30.000Z"
+                },
+                {
+                  "key": "ownsmovie",
+                  "schema": {
+                    "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Boolean"
+                  },
+                  "name": "Owns Movie",
+                  "description": "Customer owns movie.",
+                  "visibility": "VISIBILITY_HIDDEN",
+                  "version": 1,
+                  "updated_at": "2022-04-26T15:49:05.000Z",
+                  "created_at": "2022-04-26T15:49:05.000Z"
+                }
+              ],
+              "cursor": "YEk4UPbUEsu8MUV0xouO5hCiFcD9T5ztB6UWEJq5vZnqBFmoBEi0j1j6HWYTFGMRre4p7T5wAQBj3Th1NX3XgBFcQVEVsIxUQ2NsbwjRitfoEZDml9uxxQXepowyRvCuSThHPbJSn7M7wInl3x8XypQF9ahVVQXegJ0CxEKc0SBH",
               "errors": [
                 {
                   "category": "API_ERROR",
@@ -20,44 +45,7 @@ public class ListTest : BaseMockServerTest
                   "detail": "detail",
                   "field": "field"
                 }
-              ],
-              "customers": [
-                {
-                  "id": "JDKYHBWT1D4F8MFH63DBMEN8Y4",
-                  "created_at": "2016-03-23T20:21:54.859Z",
-                  "updated_at": "2016-03-23T20:21:55.000Z",
-                  "given_name": "Amelia",
-                  "family_name": "Earhart",
-                  "nickname": "nickname",
-                  "company_name": "company_name",
-                  "email_address": "Amelia.Earhart@example.com",
-                  "address": {
-                    "address_line_1": "500 Electric Ave",
-                    "address_line_2": "Suite 600",
-                    "locality": "New York",
-                    "administrative_district_level_1": "NY",
-                    "postal_code": "10003",
-                    "country": "US"
-                  },
-                  "phone_number": "+1-212-555-4240",
-                  "birthday": "birthday",
-                  "reference_id": "YOUR_REFERENCE_ID",
-                  "note": "a customer",
-                  "preferences": {
-                    "email_unsubscribed": false
-                  },
-                  "creation_source": "THIRD_PARTY",
-                  "group_ids": [
-                    "545AXB44B4XXWMVQ4W8SBT3HHF"
-                  ],
-                  "segment_ids": [
-                    "1KB9JE5EGJXCW.REACHABLE"
-                  ],
-                  "version": 1
-                }
-              ],
-              "cursor": "cursor",
-              "count": 1000000
+              ]
             }
             """;
 
@@ -65,11 +53,9 @@ public class ListTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/customers")
-                    .WithParam("cursor", "cursor")
+                    .WithPath("/v2/customers/custom-attribute-definitions")
                     .WithParam("limit", "1")
-                    .WithParam("sort_field", "DEFAULT")
-                    .WithParam("sort_order", "DESC")
+                    .WithParam("cursor", "cursor")
                     .UsingGet()
             )
             .RespondWith(
@@ -79,14 +65,11 @@ public class ListTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var items = await Client.Customers.ListAsync(
-            new ListCustomersRequest
+        var items = await Client.Customers.CustomAttributeDefinitions.ListAsync(
+            new Square.Customers.ListCustomAttributeDefinitionsRequest
             {
-                Cursor = "cursor",
                 Limit = 1,
-                SortField = CustomerSortField.Default,
-                SortOrder = SortOrder.Desc,
-                Count = true,
+                Cursor = "cursor",
             }
         );
         await foreach (var item in items)

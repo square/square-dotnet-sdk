@@ -1,7 +1,5 @@
 using NUnit.Framework;
 using Square.Disputes;
-using Square.Disputes.Evidence;
-using Square.Payments;
 
 // ReSharper disable NullableWarningSuppressionIsUsed
 

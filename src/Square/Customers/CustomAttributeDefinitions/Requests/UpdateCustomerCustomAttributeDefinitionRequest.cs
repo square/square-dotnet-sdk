@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Customers.CustomAttributeDefinitions;
+namespace Square.Customers;
 
 [Serializable]
 public record UpdateCustomerCustomAttributeDefinitionRequest

@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Labor.Shifts;
+namespace Square.Labor;
 
 public partial interface IShiftsClient
 {

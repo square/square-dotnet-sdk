@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.TeamMembers.WageSetting;
+namespace Square.TeamMembers;
 
 [Serializable]
 public record GetWageSettingRequest

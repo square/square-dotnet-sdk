@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Loyalty.Accounts;
+namespace Square.Loyalty;
 
 [Serializable]
 public record GetAccountsRequest
