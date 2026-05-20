@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Invoices;
+namespace Square;
 
 [Serializable]
 public record DeleteInvoiceAttachmentRequest

@@ -1,6 +1,4 @@
-using Square;
-
-namespace Square.Events;
+namespace Square;
 
 public partial interface IEventsClient
 {

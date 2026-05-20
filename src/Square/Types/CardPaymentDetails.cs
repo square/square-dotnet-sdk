@@ -136,6 +136,25 @@ public record CardPaymentDetails : IJsonOnDeserialized
     [JsonPropertyName("errors")]
     public IEnumerable<Error>? Errors { get; set; }
 
+    /// <summary>
+    /// Additional information about a card_surcharge on the payment.
+    /// </summary>
+    [JsonPropertyName("applied_card_surcharge_details")]
+    public CardSurchargeDetails? AppliedCardSurchargeDetails { get; set; }
+
+    /// <summary>
+    /// The type of digital wallet used for this card payment, if applicable.
+    /// Currently only populated for in-person Apple Pay payments. Detection has no false
+    /// positives but may have false negatives (some Apple Pay payments may not be detected).
+    ///
+    /// For payments with `source_type` of `WALLET`, see `DigitalWalletDetails` instead.
+    ///
+    /// Values: `APPLE_PAY`
+    /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
+    [JsonPropertyName("wallet_type")]
+    public string? WalletType { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

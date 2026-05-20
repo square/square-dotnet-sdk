@@ -1,11 +1,8 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
-using Square.Loyalty.Accounts;
-using Square.Loyalty.Programs;
-using Square.Loyalty.Rewards;
+using Square.Loyalty;
 
-namespace Square.Loyalty;
+namespace Square;
 
 public partial class LoyaltyClient : ILoyaltyClient
 {

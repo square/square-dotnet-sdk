@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Terminal.Checkouts;
+namespace Square.Terminal;
 
 public partial class CheckoutsClient : ICheckoutsClient
 {

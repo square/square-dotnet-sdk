@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Bookings.TeamMemberProfiles;
+namespace Square.Bookings;
 
 public partial class TeamMemberProfilesClient : ITeamMemberProfilesClient
 {

@@ -1,8 +1,7 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
 
-namespace Square.V1Transactions;
+namespace Square;
 
 public partial class V1TransactionsClient : IV1TransactionsClient
 {

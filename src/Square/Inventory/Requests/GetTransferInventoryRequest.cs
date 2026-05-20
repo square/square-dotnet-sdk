@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Inventory;
+namespace Square;
 
 [Serializable]
 public record GetTransferInventoryRequest

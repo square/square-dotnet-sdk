@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Loyalty.Rewards;
+namespace Square.Loyalty;
 
 [Serializable]
 public record SearchLoyaltyRewardsRequest

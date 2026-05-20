@@ -35,6 +35,12 @@ public record DigitalWalletDetails : IJsonOnDeserialized
     public CashAppDetails? CashAppDetails { get; set; }
 
     /// <summary>
+    /// Brand-specific details for payments with the `brand` of `LIGHTNING`.
+    /// </summary>
+    [JsonPropertyName("lightning_details")]
+    public LightningDetails? LightningDetails { get; set; }
+
+    /// <summary>
     /// Information about errors encountered during the payment.
     /// </summary>
     [JsonAccess(JsonAccessType.ReadOnly)]

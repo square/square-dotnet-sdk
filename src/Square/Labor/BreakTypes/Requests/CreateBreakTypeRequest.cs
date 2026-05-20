@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Labor.BreakTypes;
+namespace Square.Labor;
 
 [Serializable]
 public record CreateBreakTypeRequest

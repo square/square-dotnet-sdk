@@ -1,8 +1,7 @@
 using System.Text.Json.Serialization;
-using Square;
 using Square.Core;
 
-namespace Square.Payments;
+namespace Square;
 
 [Serializable]
 public record CreatePaymentRequest
@@ -81,6 +80,15 @@ public record CreatePaymentRequest
     /// </summary>
     [JsonPropertyName("app_fee_money")]
     public Money? AppFeeMoney { get; set; }
+
+    /// <summary>
+    /// Details pertaining to recipients of the application fee. The sum of the amounts in the
+    /// app_fee_allocations must equal the app_fee_money amount, if present. If populated, an
+    /// allocation must be present for every party that expects to receive a portion of the application
+    /// fee, including the application developer.
+    /// </summary>
+    [JsonPropertyName("app_fee_allocations")]
+    public IEnumerable<object>? AppFeeAllocations { get; set; }
 
     /// <summary>
     /// The duration of time after the payment's creation when Square automatically

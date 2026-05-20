@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Locations.CustomAttributeDefinitions;
+namespace Square.Locations;
 
 public partial interface ICustomAttributeDefinitionsClient
 {

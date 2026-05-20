@@ -22,3 +22,6 @@ src/Square.Test/Unit/MockServer/BatchDeleteTest.cs
 src/Square.Test/Integration
 src/Square.Test/Files
 src/Square.Test/Square.Test.Custom.props
+.fern/replay.lock
+.fern/replay.yml
+.gitattributes

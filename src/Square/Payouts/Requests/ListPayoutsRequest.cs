@@ -1,8 +1,7 @@
 using System.Text.Json.Serialization;
-using Square;
 using Square.Core;
 
-namespace Square.Payouts;
+namespace Square;
 
 [Serializable]
 public record ListPayoutsRequest

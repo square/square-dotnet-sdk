@@ -19,7 +19,7 @@ public record CreateCheckoutResponse : IJsonOnDeserialized
     /// The newly created `checkout` object associated with the provided idempotency key.
     /// </summary>
     [JsonPropertyName("checkout")]
-    public Square.Checkout.Checkout? Checkout { get; set; }
+    public Checkout? Checkout { get; set; }
 
     /// <summary>
     /// Any errors that occurred during the request.

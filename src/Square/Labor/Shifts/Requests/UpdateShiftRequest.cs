@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Labor.Shifts;
+namespace Square.Labor;
 
 [Serializable]
 public record UpdateShiftRequest

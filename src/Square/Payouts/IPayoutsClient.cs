@@ -1,7 +1,6 @@
-using Square;
 using Square.Core;
 
-namespace Square.Payouts;
+namespace Square;
 
 public partial interface IPayoutsClient
 {

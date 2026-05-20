@@ -77,6 +77,13 @@ public record PaymentRefund : IJsonOnDeserialized
     public Money? AppFeeMoney { get; set; }
 
     /// <summary>
+    /// Details pertaining to contributors to the refund of the application fee.
+    /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
+    [JsonPropertyName("app_fee_allocations")]
+    public IEnumerable<object>? AppFeeAllocations { get; set; }
+
+    /// <summary>
     /// Processing fees and fee adjustments assessed by Square for this refund.
     /// </summary>
     [JsonPropertyName("processing_fee")]

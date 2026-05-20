@@ -1,8 +1,7 @@
 using System.Text.Json;
-using Square;
 using Square.Core;
 
-namespace Square.Sites;
+namespace Square;
 
 public partial class SitesClient : ISitesClient
 {

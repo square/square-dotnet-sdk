@@ -1,7 +1,6 @@
 using NUnit.Framework;
 using Square;
 using Square.Core;
-using Square.Customers;
 using Square.Test.Unit.MockServer;
 
 namespace Square.Test.Unit.MockServer.Customers;
@@ -14,6 +13,18 @@ public class GetTest : BaseMockServerTest
     {
         const string mockResponse = """
             {
+              "custom_attribute_definition": {
+                "key": "favoritemovie",
+                "schema": {
+                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
+                },
+                "name": "Favorite Movie",
+                "description": "The favorite movie of the customer.",
+                "visibility": "VISIBILITY_READ_WRITE_VALUES",
+                "version": 1,
+                "updated_at": "2022-04-26T15:27:30.000Z",
+                "created_at": "2022-04-26T15:27:30.000Z"
+              },
               "errors": [
                 {
                   "category": "API_ERROR",
@@ -21,51 +32,7 @@ public class GetTest : BaseMockServerTest
                   "detail": "detail",
                   "field": "field"
                 }
-              ],
-              "customer": {
-                "id": "JDKYHBWT1D4F8MFH63DBMEN8Y4",
-                "created_at": "2016-03-23T20:21:54.859Z",
-                "updated_at": "2016-03-23T20:21:54.859Z",
-                "given_name": "Amelia",
-                "family_name": "Earhart",
-                "nickname": "nickname",
-                "company_name": "company_name",
-                "email_address": "Amelia.Earhart@example.com",
-                "address": {
-                  "address_line_1": "500 Electric Ave",
-                  "address_line_2": "Suite 600",
-                  "address_line_3": "address_line_3",
-                  "locality": "New York",
-                  "sublocality": "sublocality",
-                  "sublocality_2": "sublocality_2",
-                  "sublocality_3": "sublocality_3",
-                  "administrative_district_level_1": "NY",
-                  "administrative_district_level_2": "administrative_district_level_2",
-                  "administrative_district_level_3": "administrative_district_level_3",
-                  "postal_code": "10003",
-                  "country": "US",
-                  "first_name": "first_name",
-                  "last_name": "last_name"
-                },
-                "phone_number": "+1-212-555-4240",
-                "birthday": "birthday",
-                "reference_id": "YOUR_REFERENCE_ID",
-                "note": "a customer",
-                "preferences": {
-                  "email_unsubscribed": false
-                },
-                "creation_source": "THIRD_PARTY",
-                "group_ids": [
-                  "545AXB44B4XXWMVQ4W8SBT3HHF"
-                ],
-                "segment_ids": [
-                  "1KB9JE5EGJXCW.REACHABLE"
-                ],
-                "version": 1,
-                "tax_ids": {
-                  "eu_vat": "eu_vat"
-                }
-              }
+              ]
             }
             """;
 
@@ -73,7 +40,8 @@ public class GetTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/customers/customer_id")
+                    .WithPath("/v2/customers/custom-attribute-definitions/key")
+                    .WithParam("version", "1")
                     .UsingGet()
             )
             .RespondWith(
@@ -83,12 +51,17 @@ public class GetTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Customers.GetAsync(
-            new GetCustomersRequest { CustomerId = "customer_id" }
+        var response = await Client.Customers.CustomAttributeDefinitions.GetAsync(
+            new Square.Customers.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<GetCustomerResponse>(mockResponse)).UsingDefaults()
+            Is.EqualTo(
+                    JsonUtils.Deserialize<GetCustomerCustomAttributeDefinitionResponse>(
+                        mockResponse
+                    )
+                )
+                .UsingDefaults()
         );
     }
 }

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Checkout.PaymentLinks;
+namespace Square.Checkout_;
 
 [Serializable]
 public record DeletePaymentLinksRequest

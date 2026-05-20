@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Webhooks.Subscriptions;
+namespace Square.Webhooks;
 
 public partial interface ISubscriptionsClient
 {

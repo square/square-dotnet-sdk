@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Merchants.CustomAttributeDefinitions;
+namespace Square.Merchants;
 
 public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefinitionsClient
 {
@@ -84,7 +84,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributeDefinitions.ListAsync(
-    ///     new Square.Merchants.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
+    ///     new Square.Merchants.ListCustomAttributeDefinitionsRequest
     ///     {
     ///         VisibilityFilter = VisibilityFilter.All,
     ///         Limit = 1,
@@ -207,11 +207,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributeDefinitions.GetAsync(
-    ///     new Square.Merchants.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///         Version = 1,
-    ///     }
+    ///     new Square.Merchants.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
     /// );
     /// </code></example>
     public async Task<RetrieveMerchantCustomAttributeDefinitionResponse> GetAsync(
@@ -341,10 +337,7 @@ public partial class CustomAttributeDefinitionsClient : ICustomAttributeDefiniti
     /// </summary>
     /// <example><code>
     /// await client.Merchants.CustomAttributeDefinitions.DeleteAsync(
-    ///     new Square.Merchants.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
-    ///     {
-    ///         Key = "key",
-    ///     }
+    ///     new Square.Merchants.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
     /// );
     /// </code></example>
     public async Task<DeleteMerchantCustomAttributeDefinitionResponse> DeleteAsync(

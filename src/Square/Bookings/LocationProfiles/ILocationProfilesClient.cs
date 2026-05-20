@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Bookings.LocationProfiles;
+namespace Square.Bookings;
 
 public partial interface ILocationProfilesClient
 {
