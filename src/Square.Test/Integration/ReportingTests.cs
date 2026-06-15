@@ -6,14 +6,15 @@ namespace Square.Test.Integration;
 
 // The Reporting API is a beta, bespoke offering served ONLY from production
 // (connect.squareup.com/reporting) — it is not routed on sandbox (returns 404 there).
-// Validating it live therefore needs a production, reporting-provisioned TEST_SQUARE_TOKEN.
-// CI's token is sandbox-only (it 401s against prod), so this suite is gated behind
-// TEST_SQUARE_REPORTING and skips by default — keeping CI green. The endpoints are
-// read-only (schema discovery + queries). The polling *logic* is covered without a live
-// account in Unit/ReportingHelperTests.cs.
+// Validating it live therefore needs a production, reporting-provisioned access token,
+// supplied via TEST_SQUARE_REPORTING (distinct from the sandbox TEST_SQUARE_TOKEN used by
+// the rest of the integration suite). This suite is gated behind TEST_SQUARE_REPORTING and
+// skips by default — keeping CI green. The endpoints are read-only (schema discovery +
+// queries). The polling *logic* is covered without a live account in
+// Unit/ReportingHelperTests.cs.
 //
 // Run it against a real prod account:
-//   TEST_SQUARE_REPORTING=1 TEST_SQUARE_TOKEN=<prod-access-token> \
+//   TEST_SQUARE_REPORTING=<prod-reporting-token> \
 //     dotnet test --filter FullyQualifiedName~Integration.ReportingTests
 //   # override the host with TEST_SQUARE_BASE_URL=<url> if reporting moves.
 [TestFixture]
@@ -24,25 +25,20 @@ public class ReportingTests
     [SetUp]
     public void SetUp()
     {
-        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEST_SQUARE_REPORTING")))
+        var token = Environment.GetEnvironmentVariable("TEST_SQUARE_REPORTING");
+        if (string.IsNullOrEmpty(token))
         {
             Assert.Ignore(
-                "Set TEST_SQUARE_REPORTING (with a production TEST_SQUARE_TOKEN) to run the reporting integration suite."
+                "Set TEST_SQUARE_REPORTING to a production, reporting-provisioned access token to run the reporting integration suite."
             );
         }
-
-        var token =
-            Environment.GetEnvironmentVariable("TEST_SQUARE_TOKEN")
-            ?? throw new Exception(
-                "TEST_SQUARE_TOKEN must be set to run the reporting integration suite."
-            );
         // Reporting only exists on production; allow overriding the host via TEST_SQUARE_BASE_URL.
         var baseUrl =
             Environment.GetEnvironmentVariable("TEST_SQUARE_BASE_URL") ?? SquareEnvironment.Production;
         TestContext.Out.WriteLine(
             $"[reporting] base URL: {baseUrl}  ->  {baseUrl}/reporting/v1/{{meta,load}}"
         );
-        _client = new SquareClient(token, new ClientOptions { BaseUrl = baseUrl });
+        _client = new SquareClient(token!, new ClientOptions { BaseUrl = baseUrl });
     }
 
     // Resolves the first queryable measure from the live schema, e.g. "Orders.count".
