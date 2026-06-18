@@ -22,7 +22,7 @@ public partial class SquareClient : ISquareClient
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Square" },
                 { "X-Fern-SDK-Version", Version.Current },
-                { "User-Agent", "Square/44.0.0" },
+                { "User-Agent", "Square/44.1.0-rc.0" },
             }
         );
         clientOptions ??= new ClientOptions();
@@ -71,6 +71,7 @@ public partial class SquareClient : ISquareClient
         Terminal = new TerminalClient(_client);
         TransferOrders = new TransferOrdersClient(_client);
         Vendors = new VendorsClient(_client);
+        Reporting = new ReportingClient(_client);
         CashDrawers = new CashDrawersClient(_client);
         Webhooks = new WebhooksClient(_client);
     }
@@ -140,6 +141,8 @@ public partial class SquareClient : ISquareClient
     public TransferOrdersClient TransferOrders { get; }
 
     public VendorsClient Vendors { get; }
+
+    public ReportingClient Reporting { get; }
 
     public CashDrawersClient CashDrawers { get; }
 
