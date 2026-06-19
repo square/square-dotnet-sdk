@@ -21,6 +21,14 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <!-- AssemblyVersion/FileVersion must be numeric (Major.Minor.Build[.Revision]); the C#
+         compiler rejects a SemVer prerelease suffix (CS7034). The generated csproj sets both
+         to $(Version), which breaks RC builds like 44.1.0-rc.0. Strip the prerelease so the
+         numeric core is used (44.1.0) while <Version>/PackageVersion keeps the full RC tag.
+         This block is imported AFTER the generated PropertyGroup, so it overrides it. Interim
+         workaround — the durable fix belongs in the Fern C# generator (Linear follow-up). -->
+    <AssemblyVersion Condition="$(Version.Contains('-'))">$(Version.Substring(0, $(Version.IndexOf('-'))))</AssemblyVersion>
+    <FileVersion Condition="$(Version.Contains('-'))">$(Version.Substring(0, $(Version.IndexOf('-'))))</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
