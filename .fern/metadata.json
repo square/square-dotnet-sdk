@@ -15,5 +15,5 @@
     "inline-path-parameters": true,
     "use-discriminated-unions": true
   },
-  "sdkVersion": "44.0.0"
+  "sdkVersion": "44.1.0-rc.0"
 }

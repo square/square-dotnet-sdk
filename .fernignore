@@ -14,10 +14,12 @@ SquareWithLegacy.sln
 src/Square.sln
 src/Square/Square.Custom.props
 src/Square/WebhooksHelper.cs
+src/Square/Reporting/ReportingHelper.cs
 src/Square/Core/Public/SquareApiException.cs
 src/Square.Test/WebhooksHelperTests.cs
 src/Square.Test/Unit/SquareErrorTest.cs
 src/Square.Test/Unit/WebhooksHelperTests.cs
+src/Square.Test/Unit/ReportingHelperTests.cs
 src/Square.Test/Unit/MockServer/BatchDeleteTest.cs
 src/Square.Test/Integration
 src/Square.Test/Files

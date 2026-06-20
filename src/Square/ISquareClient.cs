@@ -38,6 +38,7 @@ public partial interface ISquareClient
     public TerminalClient Terminal { get; }
     public TransferOrdersClient TransferOrders { get; }
     public VendorsClient Vendors { get; }
+    public ReportingClient Reporting { get; }
     public CashDrawersClient CashDrawers { get; }
     public WebhooksClient Webhooks { get; }
 }

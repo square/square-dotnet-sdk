@@ -187,6 +187,75 @@ public static async Task CheckWebhooksEvent(
 
 In .NET 6 and above, there are also overloads using spans for allocation free webhook verification.
 
+## Reporting API
+
+The [Square Reporting API](https://developer.squareup.com/docs/reporting-api/overview) (beta)
+exposes a Cube-based analytics layer through two endpoints. Call `GetMetadataAsync` to discover
+the queryable schema (cubes, measures, dimensions, and segments), then `LoadAsync` to run a query:
+
+```csharp
+using Square;
+
+var client = new SquareClient();
+
+// Discover what you can query.
+var metadata = await client.Reporting.GetMetadataAsync();
+
+// Run a query.
+var response = await client.Reporting.LoadAsync(
+    new LoadRequest
+    {
+        Query = new Query { Measures = new List<string> { "Orders.count" } },
+    }
+);
+```
+
+### Polling with `LoadAndWaitAsync`
+
+`/reporting/v1/load` is asynchronous: while a query is still being computed it returns an HTTP 200
+whose body is `{ "error": "Continue wait" }` instead of results. The expected behavior is to re-send
+the identical request, with backoff, until results arrive.
+
+`LoadAndWaitAsync` owns that retry loop for you and returns the resolved `LoadResponse` — it never
+hands back the "Continue wait" sentinel:
+
+```csharp
+using Square;
+
+var response = await client.Reporting.LoadAndWaitAsync(
+    new LoadRequest
+    {
+        Query = new Query { Measures = new List<string> { "Orders.count" } },
+    }
+);
+
+// The resolved payload is exposed on the flat `Data` property.
+var data = response.Data;
+// ...
+```
+
+The backoff is configurable, and the loop honors a `CancellationToken`:
+
+```csharp
+var response = await client.Reporting.LoadAndWaitAsync(
+    request,
+    new LoadAndWaitOptions
+    {
+        MaxAttempts = 20,                          // give up after this many polls
+        InitialDelay = TimeSpan.FromSeconds(2),    // delay before the first retry
+        MaxDelay = TimeSpan.FromSeconds(20),       // upper bound on the backoff
+        BackoffFactor = 2,                         // multiplier applied after each attempt
+    },
+    cancellationToken
+);
+```
+
+If the query does not resolve within `MaxAttempts`, a `SquareException` is thrown. The same logic is
+also available as a static helper, `ReportingHelper.LoadAndWaitAsync(client.Reporting, request, ...)`.
+
+> **Note:** The Reporting API is served only from production (`connect.squareup.com/reporting`); it is
+> not available in the sandbox environment.
+
 ## Legacy SDK
 
 While the new SDK has a lot of improvements, we at Square understand that it takes time to upgrade when there are breaking changes.
