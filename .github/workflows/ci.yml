@@ -99,4 +99,6 @@ jobs:
           user: ${{ secrets.NUGET_USER }}
 
       - name: Publish to nuget.org
-        run: dotnet nuget push dist/*.nupkg --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source "nuget.org" --skip-duplicate
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: dotnet nuget push dist/*.nupkg --api-key "$NUGET_API_KEY" --source "nuget.org" --skip-duplicate
