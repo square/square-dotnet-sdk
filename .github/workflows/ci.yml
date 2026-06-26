@@ -1,3 +1,16 @@
+# Publishing uses nuget.org Trusted Publishing (OIDC) instead of a long-lived
+# API key. This workflow filename (ci.yml) is part of the trust-policy contract
+# on nuget.org -- do not rename it without updating the policy.
+#
+# Setup (one-time, on nuget.org):
+#   1. nuget.org -> user menu -> Trusted Publishing -> create policy.
+#   2. Repository Owner: square, Repository: square-dotnet-sdk,
+#      Workflow File: "ci.yml" (filename only, no path).
+#   3. Add a NUGET_USER repo secret containing your nuget.org profile name
+#      (not your email).
+#   4. After the first successful publish, remove the old NUGET_API_KEY secret
+#      (a stale key can interfere with OIDC login).
+
 name: CI
 
 on:
@@ -42,7 +55,6 @@ jobs:
         run: dotnet restore src/Square.sln
 
       - name: Build release
-        id: build
         run: dotnet build src/Square.sln -c Release /p:ContinuousIntegrationBuild=true
 
       - name: Run Tests
@@ -52,10 +64,41 @@ jobs:
           TEST_SQUARE_TOKEN: ${{ secrets.TEST_SQUARE_TOKEN }}
           TEST_SQUARE_REPORTING: ${{ secrets.TEST_SQUARE_REPORTING }}
 
+  publish:
+    needs: [ci]
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read    # Required for checkout
+      id-token: write   # Required for NuGet Trusted Publishing (OIDC)
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: Install tools
+        run: dotnet tool restore
+
+      - name: Restore dependencies
+        run: dotnet restore src/Square.sln
+
+      - name: Build release
+        run: dotnet build src/Square.sln --no-restore -c Release /p:ContinuousIntegrationBuild=true
+
+      - name: Pack
+        run: dotnet pack src/Square.sln --no-build --no-restore -c Release -o dist
+
+      - name: NuGet login (OIDC -> temp API key)
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        id: login
+        with:
+          user: ${{ secrets.NUGET_USER }}
+
       - name: Publish to nuget.org
-        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/') && steps.build.outcome == 'success'
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-        run: |
-          dotnet pack src/Square.sln --no-build --no-restore -c Release -o dist
-          dotnet nuget push dist/*.nupkg --api-key $NUGET_API_KEY --source "nuget.org"
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: dotnet nuget push dist/*.nupkg --api-key "$NUGET_API_KEY" --source "nuget.org" --skip-duplicate
