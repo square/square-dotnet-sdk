@@ -36,7 +36,6 @@ public partial class InventoryClient : IInventoryClient
                     Method = HttpMethod.Post,
                     Path = "v2/inventory/changes/batch-retrieve",
                     Body = request,
-                    ContentType = "application/json",
                     Options = options,
                 },
                 cancellationToken
@@ -92,7 +91,6 @@ public partial class InventoryClient : IInventoryClient
                     Method = HttpMethod.Post,
                     Path = "v2/inventory/counts/batch-retrieve",
                     Body = request,
-                    ContentType = "application/json",
                     Options = options,
                 },
                 cancellationToken
@@ -251,6 +249,378 @@ public partial class InventoryClient : IInventoryClient
     }
 
     /// <summary>
+    /// Returns the standard and custom inventory adjustment reasons available
+    /// to the seller.
+    /// </summary>
+    /// <example><code>
+    /// await client.Inventory.ListInventoryAdjustmentReasonsAsync(
+    ///     new ListInventoryAdjustmentReasonsRequest { IncludeDeleted = true, IncludeSystemCodes = true }
+    /// );
+    /// </code></example>
+    public async Task<ListInventoryAdjustmentReasonsResponse> ListInventoryAdjustmentReasonsAsync(
+        ListInventoryAdjustmentReasonsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var _query = new Dictionary<string, object>();
+        if (request.IncludeDeleted != null)
+        {
+            _query["include_deleted"] = JsonUtils.Serialize(request.IncludeDeleted.Value);
+        }
+        if (request.IncludeSystemCodes != null)
+        {
+            _query["include_system_codes"] = JsonUtils.Serialize(request.IncludeSystemCodes.Value);
+        }
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Get,
+                    Path = "v2/inventory/adjustment-reasons",
+                    Query = _query,
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<ListInventoryAdjustmentReasonsResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
+    /// Creates a custom inventory adjustment reason.
+    /// </summary>
+    /// <example><code>
+    /// await client.Inventory.CreateInventoryAdjustmentReasonAsync(
+    ///     new CreateInventoryAdjustmentReasonRequest
+    ///     {
+    ///         IdempotencyKey = "27b2f2b1-1c2a-4b9e-8f3a-0d9c3a1e5b47",
+    ///         AdjustmentReason = new InventoryAdjustmentReason
+    ///         {
+    ///             Id = new InventoryAdjustmentReasonId { Type = InventoryAdjustmentReasonIdType.Custom },
+    ///             Name = "Donated to charity",
+    ///             Direction = InventoryAdjustmentReasonDirection.Decrease,
+    ///         },
+    ///     }
+    /// );
+    /// </code></example>
+    public async Task<CreateInventoryAdjustmentReasonResponse> CreateInventoryAdjustmentReasonAsync(
+        CreateInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/inventory/adjustment-reasons/create",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<CreateInventoryAdjustmentReasonResponse>(
+                    responseBody
+                )!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
+    /// Soft deletes a custom inventory adjustment reason.
+    /// </summary>
+    /// <example><code>
+    /// await client.Inventory.DeleteInventoryAdjustmentReasonAsync(
+    ///     new DeleteInventoryAdjustmentReasonRequest
+    ///     {
+    ///         ReasonId = new InventoryAdjustmentReasonId
+    ///         {
+    ///             Type = InventoryAdjustmentReasonIdType.Custom,
+    ///             CustomReasonId = "R5BX3PDCZ6EXAMPLE",
+    ///         },
+    ///     }
+    /// );
+    /// </code></example>
+    public async Task<DeleteInventoryAdjustmentReasonResponse> DeleteInventoryAdjustmentReasonAsync(
+        DeleteInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/inventory/adjustment-reasons/delete",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<DeleteInventoryAdjustmentReasonResponse>(
+                    responseBody
+                )!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
+    /// Restores a soft-deleted custom inventory adjustment reason.
+    /// </summary>
+    /// <example><code>
+    /// await client.Inventory.RestoreInventoryAdjustmentReasonAsync(
+    ///     new RestoreInventoryAdjustmentReasonRequest
+    ///     {
+    ///         ReasonId = new InventoryAdjustmentReasonId
+    ///         {
+    ///             Type = InventoryAdjustmentReasonIdType.Custom,
+    ///             CustomReasonId = "R5BX3PDCZ6EXAMPLE",
+    ///         },
+    ///     }
+    /// );
+    /// </code></example>
+    public async Task<RestoreInventoryAdjustmentReasonResponse> RestoreInventoryAdjustmentReasonAsync(
+        RestoreInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/inventory/adjustment-reasons/restore",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<RestoreInventoryAdjustmentReasonResponse>(
+                    responseBody
+                )!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
+    /// Returns the inventory adjustment reason identified by the provided
+    /// `reason_id`. Deleted custom reasons can be retrieved by ID.
+    /// </summary>
+    /// <example><code>
+    /// await client.Inventory.RetrieveInventoryAdjustmentReasonAsync(
+    ///     new RetrieveInventoryAdjustmentReasonRequest
+    ///     {
+    ///         ReasonId = new InventoryAdjustmentReasonId
+    ///         {
+    ///             Type = InventoryAdjustmentReasonIdType.Custom,
+    ///             CustomReasonId = "R5BX3PDCZ6EXAMPLE",
+    ///         },
+    ///     }
+    /// );
+    /// </code></example>
+    public async Task<RetrieveInventoryAdjustmentReasonResponse> RetrieveInventoryAdjustmentReasonAsync(
+        RetrieveInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Post,
+                    Path = "v2/inventory/adjustment-reasons/retrieve",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<RetrieveInventoryAdjustmentReasonResponse>(
+                    responseBody
+                )!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
+    /// Updates a custom inventory adjustment reason.
+    /// </summary>
+    /// <example><code>
+    /// await client.Inventory.UpdateInventoryAdjustmentReasonAsync(
+    ///     new UpdateInventoryAdjustmentReasonRequest
+    ///     {
+    ///         ReasonId = new InventoryAdjustmentReasonId
+    ///         {
+    ///             Type = InventoryAdjustmentReasonIdType.Custom,
+    ///             CustomReasonId = "R5BX3PDCZ6EXAMPLE",
+    ///         },
+    ///         AdjustmentReason = new InventoryAdjustmentReason
+    ///         {
+    ///             Id = new InventoryAdjustmentReasonId
+    ///             {
+    ///                 Type = InventoryAdjustmentReasonIdType.Custom,
+    ///                 CustomReasonId = "R5BX3PDCZ6EXAMPLE",
+    ///             },
+    ///             Name = "Charitable donation",
+    ///         },
+    ///     }
+    /// );
+    /// </code></example>
+    public async Task<UpdateInventoryAdjustmentReasonResponse> UpdateInventoryAdjustmentReasonAsync(
+        UpdateInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Put,
+                    Path = "v2/inventory/adjustment-reasons/update",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<UpdateInventoryAdjustmentReasonResponse>(
+                    responseBody
+                )!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
     /// Deprecated version of [RetrieveInventoryAdjustment](api-endpoint:Inventory-RetrieveInventoryAdjustment) after the endpoint URL
     /// is updated to conform to the standard convention.
     /// </summary>
@@ -286,6 +656,64 @@ public partial class InventoryClient : IInventoryClient
             try
             {
                 return JsonUtils.Deserialize<GetInventoryAdjustmentResponse>(responseBody)!;
+            }
+            catch (JsonException e)
+            {
+                throw new SquareException("Failed to deserialize response", e);
+            }
+        }
+
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
+    }
+
+    /// <summary>
+    /// Applies an update to the provided adjustment.
+    ///
+    /// On success: returns the newly updated adjustment.
+    /// On failure: returns a list of related errors.
+    /// </summary>
+    /// <example><code>
+    /// await client.Inventory.UpdateInventoryAdjustmentAsync(
+    ///     new UpdateInventoryAdjustmentRequest
+    ///     {
+    ///         IdempotencyKey = "8fc6a5b0-9fe8-4b46-b46b-2ef95793abbe",
+    ///         Adjustment = new InventoryAdjustment(),
+    ///     }
+    /// );
+    /// </code></example>
+    public async Task<UpdateInventoryAdjustmentResponse> UpdateInventoryAdjustmentAsync(
+        UpdateInventoryAdjustmentRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Put,
+                    Path = "v2/inventory/adjustments/update",
+                    Body = request,
+                    ContentType = "application/json",
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                return JsonUtils.Deserialize<UpdateInventoryAdjustmentResponse>(responseBody)!;
             }
             catch (JsonException e)
             {
@@ -400,7 +828,6 @@ public partial class InventoryClient : IInventoryClient
                     Method = HttpMethod.Post,
                     Path = "v2/inventory/batch-change",
                     Body = request,
-                    ContentType = "application/json",
                     Options = options,
                 },
                 cancellationToken
@@ -460,7 +887,6 @@ public partial class InventoryClient : IInventoryClient
                     Method = HttpMethod.Post,
                     Path = "v2/inventory/batch-retrieve-changes",
                     Body = request,
-                    ContentType = "application/json",
                     Options = options,
                 },
                 cancellationToken
@@ -517,7 +943,6 @@ public partial class InventoryClient : IInventoryClient
                     Method = HttpMethod.Post,
                     Path = "v2/inventory/batch-retrieve-counts",
                     Body = request,
-                    ContentType = "application/json",
                     Options = options,
                 },
                 cancellationToken
@@ -593,7 +1018,6 @@ public partial class InventoryClient : IInventoryClient
                     Method = HttpMethod.Post,
                     Path = "v2/inventory/changes/batch-create",
                     Body = request,
-                    ContentType = "application/json",
                     Options = options,
                 },
                 cancellationToken
@@ -841,59 +1265,6 @@ public partial class InventoryClient : IInventoryClient
     }
 
     /// <summary>
-    /// Returns the [InventoryTransfer](entity:InventoryTransfer) object
-    /// with the provided `transfer_id`.
-    /// </summary>
-    /// <example><code>
-    /// await client.Inventory.GetTransferAsync(
-    ///     new GetTransferInventoryRequest { TransferId = "transfer_id" }
-    /// );
-    /// </code></example>
-    public async Task<GetInventoryTransferResponse> GetTransferAsync(
-        GetTransferInventoryRequest request,
-        RequestOptions? options = null,
-        CancellationToken cancellationToken = default
-    )
-    {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
-                {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Get,
-                    Path = string.Format(
-                        "v2/inventory/transfers/{0}",
-                        ValueConvert.ToPathParameterString(request.TransferId)
-                    ),
-                    Options = options,
-                },
-                cancellationToken
-            )
-            .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<GetInventoryTransferResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
-        }
-
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
-    }
-
-    /// <summary>
     /// Retrieves the current calculated stock count for a given
     /// [CatalogObject](entity:CatalogObject) at a given set of
     /// [Location](entity:Location)s. Responses are paginated and unsorted.
@@ -998,5 +1369,45 @@ public partial class InventoryClient : IInventoryClient
             )
             .ConfigureAwait(false);
         return pager;
+    }
+
+    /// <example><code>
+    /// await client.Inventory.GetTransferAsync(
+    ///     new GetTransferInventoryRequest { TransferId = "transfer_id" }
+    /// );
+    /// </code></example>
+    public async Task GetTransferAsync(
+        GetTransferInventoryRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _client
+            .SendRequestAsync(
+                new JsonRequest
+                {
+                    BaseUrl = _client.Options.BaseUrl,
+                    Method = HttpMethod.Get,
+                    Path = string.Format(
+                        "v2/inventory/transfers/{0}",
+                        ValueConvert.ToPathParameterString(request.TransferId)
+                    ),
+                    Options = options,
+                },
+                cancellationToken
+            )
+            .ConfigureAwait(false);
+        if (response.StatusCode is >= 200 and < 400)
+        {
+            return;
+        }
+        {
+            var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            throw new SquareApiException(
+                $"Error with status code {response.StatusCode}",
+                response.StatusCode,
+                responseBody
+            );
+        }
     }
 }

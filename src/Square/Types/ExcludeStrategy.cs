@@ -11,6 +11,10 @@ public readonly record struct ExcludeStrategy : IStringEnum
 
     public static readonly ExcludeStrategy MostExpensive = new(Values.MostExpensive);
 
+    public static readonly ExcludeStrategy MostExpensiveLowestValue = new(
+        Values.MostExpensiveLowestValue
+    );
+
     public ExcludeStrategy(string value)
     {
         Value = value;
@@ -61,5 +65,7 @@ public readonly record struct ExcludeStrategy : IStringEnum
         public const string LeastExpensive = "LEAST_EXPENSIVE";
 
         public const string MostExpensive = "MOST_EXPENSIVE";
+
+        public const string MostExpensiveLowestValue = "MOST_EXPENSIVE_LOWEST_VALUE";
     }
 }

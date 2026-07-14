@@ -165,6 +165,7 @@ public record OrderLineItem : IJsonOnDeserialized
     /// It does not include modifiers. Note - If inclusive tax is set on
     /// this item it will be included in this value.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("variation_total_price_money")]
     public Money? VariationTotalPriceMoney { get; set; }
 
@@ -174,24 +175,28 @@ public record OrderLineItem : IJsonOnDeserialized
     /// For inclusive tax items in the US, Canada, and Japan, tax is deducted from `gross_sales_money`. For Europe and
     /// Australia, inclusive tax remains as part of the gross sale calculation.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("gross_sales_money")]
     public Money? GrossSalesMoney { get; set; }
 
     /// <summary>
     /// The total amount of tax money to collect for the line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_tax_money")]
     public Money? TotalTaxMoney { get; set; }
 
     /// <summary>
     /// The total amount of discount money to collect for the line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_discount_money")]
     public Money? TotalDiscountMoney { get; set; }
 
     /// <summary>
     /// The total amount of money to collect for this line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_money")]
     public Money? TotalMoney { get; set; }
 
@@ -206,6 +211,7 @@ public record OrderLineItem : IJsonOnDeserialized
     /// <summary>
     /// The total amount of apportioned service charge money to collect for the line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_service_charge_money")]
     public Money? TotalServiceChargeMoney { get; set; }
 

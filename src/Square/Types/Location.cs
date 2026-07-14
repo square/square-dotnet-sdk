@@ -79,6 +79,7 @@ public record Location : IJsonOnDeserialized
     /// See [Country](entity:Country) for possible values.
     /// See [Country](#type-country) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("country")]
     public Country? Country { get; set; }
 
@@ -96,6 +97,7 @@ public record Location : IJsonOnDeserialized
     /// See [Currency](entity:Currency) for possible values.
     /// See [Currency](#type-currency) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("currency")]
     public Currency? Currency { get; set; }
 
@@ -202,6 +204,7 @@ public record Location : IJsonOnDeserialized
     /// <summary>
     /// The tax IDs for this location.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("tax_ids")]
     public TaxIds? TaxIds { get; set; }
 

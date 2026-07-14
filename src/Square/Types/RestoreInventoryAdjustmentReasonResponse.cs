@@ -4,24 +4,27 @@ using Square.Core;
 
 namespace Square;
 
+/// <summary>
+/// Represents an output from a call to [RestoreInventoryAdjustmentReason](api-endpoint:Inventory-RestoreInventoryAdjustmentReason).
+/// </summary>
 [Serializable]
-public record GetInventoryTransferResponse : IJsonOnDeserialized
+public record RestoreInventoryAdjustmentReasonResponse : IJsonOnDeserialized
 {
     [JsonExtensionData]
     private readonly IDictionary<string, JsonElement> _extensionData =
         new Dictionary<string, JsonElement>();
 
     /// <summary>
-    /// Any errors that occurred during the request.
+    /// Errors encountered when the request fails.
     /// </summary>
     [JsonPropertyName("errors")]
     public IEnumerable<Error>? Errors { get; set; }
 
     /// <summary>
-    /// The requested [InventoryTransfer](entity:InventoryTransfer).
+    /// The successfully restored inventory adjustment reason.
     /// </summary>
-    [JsonPropertyName("transfer")]
-    public InventoryTransfer? Transfer { get; set; }
+    [JsonPropertyName("adjustment_reason")]
+    public InventoryAdjustmentReason? AdjustmentReason { get; set; }
 
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();

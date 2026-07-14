@@ -81,6 +81,7 @@ public record OrderReturnDiscount : IJsonOnDeserialized
     /// discount is at the order level, this value is different from `amount_money` because the discount
     /// is distributed across the line items.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("applied_money")]
     public Money? AppliedMoney { get; set; }
 

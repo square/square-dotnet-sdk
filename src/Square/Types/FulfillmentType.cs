@@ -13,6 +13,8 @@ public readonly record struct FulfillmentType : IStringEnum
 
     public static readonly FulfillmentType Delivery = new(Values.Delivery);
 
+    public static readonly FulfillmentType InStore = new(Values.InStore);
+
     public FulfillmentType(string value)
     {
         Value = value;
@@ -65,5 +67,7 @@ public readonly record struct FulfillmentType : IStringEnum
         public const string Shipment = "SHIPMENT";
 
         public const string Delivery = "DELIVERY";
+
+        public const string InStore = "IN_STORE";
     }
 }

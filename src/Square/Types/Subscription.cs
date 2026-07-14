@@ -82,6 +82,7 @@ public record Subscription : IJsonOnDeserialized
     /// The current status of the subscription.
     /// See [SubscriptionStatus](#type-subscriptionstatus) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public SubscriptionStatus? Status { get; set; }
 

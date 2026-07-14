@@ -40,7 +40,17 @@ public record Order : IJsonOnDeserialized
     public string? ReferenceId { get; set; }
 
     /// <summary>
-    /// The origination details of the order.
+    /// The latest source details of the order.
+    ///
+    /// This field reflects the most recent source that interacted with or modified the order,
+    /// and may change during the order lifecycle. For example:
+    /// - An order created via API (source.name = "MyPOS") paid with Square Terminal may have
+    /// source updated to reflect the Terminal application (which uses REGISTER, like POS)
+    /// - An order updated or completed by a different application may have source updated
+    /// to reflect that application.
+    ///
+    /// To preserve the original source from order creation regardless of subsequent updates,
+    /// use the `creation_source` field instead.
     /// </summary>
     [JsonPropertyName("source")]
     public OrderSource? Source { get; set; }
@@ -119,12 +129,14 @@ public record Order : IJsonOnDeserialized
     /// <summary>
     /// The rollup of the returned money amounts.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("return_amounts")]
     public OrderMoneyAmounts? ReturnAmounts { get; set; }
 
     /// <summary>
     /// The net money amounts (sale money - return money).
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("net_amounts")]
     public OrderMoneyAmounts? NetAmounts { get; set; }
 
@@ -133,6 +145,7 @@ public record Order : IJsonOnDeserialized
     /// used to apply cash rounding when the minimum unit of account is smaller than the lowest physical
     /// denomination of the currency.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("rounding_adjustment")]
     public OrderRoundingAdjustment? RoundingAdjustment { get; set; }
 
@@ -214,24 +227,28 @@ public record Order : IJsonOnDeserialized
     /// <summary>
     /// The total amount of money to collect for the order.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_money")]
     public Money? TotalMoney { get; set; }
 
     /// <summary>
     /// The total amount of tax money to collect for the order.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_tax_money")]
     public Money? TotalTaxMoney { get; set; }
 
     /// <summary>
     /// The total amount of discount money to collect for the order.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_discount_money")]
     public Money? TotalDiscountMoney { get; set; }
 
     /// <summary>
     /// The total amount of tip money to collect for the order.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_tip_money")]
     public Money? TotalTipMoney { get; set; }
 
@@ -242,6 +259,7 @@ public record Order : IJsonOnDeserialized
     /// service charge. Therefore, `total_service_charge_money` only includes inclusive tax amounts,
     /// not additive tax amounts.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_service_charge_money")]
     public Money? TotalServiceChargeMoney { get; set; }
 
@@ -270,6 +288,7 @@ public record Order : IJsonOnDeserialized
     /// <summary>
     /// The net amount of money due on the order.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("net_amount_due_money")]
     public Money? NetAmountDueMoney { get; set; }
 

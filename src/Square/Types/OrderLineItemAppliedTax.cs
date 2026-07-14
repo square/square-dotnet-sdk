@@ -38,6 +38,7 @@ public record OrderLineItemAppliedTax : IJsonOnDeserialized
     /// <summary>
     /// The amount of money applied by the tax to the line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("applied_money")]
     public Money? AppliedMoney { get; set; }
 

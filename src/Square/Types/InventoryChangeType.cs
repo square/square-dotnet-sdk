@@ -11,8 +11,6 @@ public readonly record struct InventoryChangeType : IStringEnum
 
     public static readonly InventoryChangeType Adjustment = new(Values.Adjustment);
 
-    public static readonly InventoryChangeType Transfer = new(Values.Transfer);
-
     public InventoryChangeType(string value)
     {
         Value = value;
@@ -63,7 +61,5 @@ public readonly record struct InventoryChangeType : IStringEnum
         public const string PhysicalCount = "PHYSICAL_COUNT";
 
         public const string Adjustment = "ADJUSTMENT";
-
-        public const string Transfer = "TRANSFER";
     }
 }

@@ -115,30 +115,35 @@ public record OrderReturnLineItem : IJsonOnDeserialized
     /// The price is calculated as `base_price_money` multiplied by `quantity` and
     /// does not include modifiers.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("variation_total_price_money")]
     public Money? VariationTotalPriceMoney { get; set; }
 
     /// <summary>
     /// The gross return amount of money calculated as (item base price + modifiers price) * quantity.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("gross_return_money")]
     public Money? GrossReturnMoney { get; set; }
 
     /// <summary>
     /// The total amount of tax money to return for the line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_tax_money")]
     public Money? TotalTaxMoney { get; set; }
 
     /// <summary>
     /// The total amount of discount money to return for the line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_discount_money")]
     public Money? TotalDiscountMoney { get; set; }
 
     /// <summary>
     /// The total amount of money to return for this line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_money")]
     public Money? TotalMoney { get; set; }
 
@@ -154,6 +159,7 @@ public record OrderReturnLineItem : IJsonOnDeserialized
     /// <summary>
     /// The total amount of apportioned service charge money to return for the line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_service_charge_money")]
     public Money? TotalServiceChargeMoney { get; set; }
 

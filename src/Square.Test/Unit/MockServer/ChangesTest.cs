@@ -27,7 +27,6 @@ public class ChangesTest : BaseMockServerTest
                     "reference_id": "d8207693-168f-4b44-a2fd-a7ff533ddd26",
                     "from_state": "IN_STOCK",
                     "to_state": "SOLD",
-                    "location_id": "C6W5YS5QM06F5",
                     "catalog_object_id": "W62UWFY35CWMYGVWK6TWJDNI",
                     "catalog_object_type": "ITEM_VARIATION",
                     "quantity": "3",

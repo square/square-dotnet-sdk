@@ -64,6 +64,7 @@ public record OrderLineItemModifier : IJsonOnDeserialized
     /// The total price of the item modifier for its line item.
     /// This is the modifier's `base_price_money` multiplied by the line item's quantity.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_price_money")]
     public Money? TotalPriceMoney { get; set; }
 
@@ -89,6 +90,12 @@ public record OrderLineItemModifier : IJsonOnDeserialized
     /// </summary>
     [JsonPropertyName("metadata")]
     public Dictionary<string, string?>? Metadata { get; set; }
+
+    /// <summary>
+    /// The `uid` of the parent modifier, if this modifier is nested under another modifier.
+    /// </summary>
+    [JsonPropertyName("parent_modifier_uid")]
+    public string? ParentModifierUid { get; set; }
 
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();

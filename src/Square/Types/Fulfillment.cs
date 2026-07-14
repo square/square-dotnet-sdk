@@ -41,6 +41,7 @@ public record Fulfillment : IJsonOnDeserialized
     /// It can be `ALL` or `ENTRY_LIST` with a supplied list of fulfillment entries.
     /// See [FulfillmentFulfillmentLineItemApplication](#type-fulfillmentfulfillmentlineitemapplication) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("line_item_application")]
     public FulfillmentFulfillmentLineItemApplication? LineItemApplication { get; set; }
 
@@ -111,6 +112,13 @@ public record Fulfillment : IJsonOnDeserialized
     /// </summary>
     [JsonPropertyName("delivery_details")]
     public FulfillmentDeliveryDetails? DeliveryDetails { get; set; }
+
+    /// <summary>
+    /// Contains details for an in-store fulfillment. These details are required when the fulfillment
+    /// type is `IN_STORE`.
+    /// </summary>
+    [JsonPropertyName("in_store_details")]
+    public FulfillmentInStoreDetails? InStoreDetails { get; set; }
 
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();

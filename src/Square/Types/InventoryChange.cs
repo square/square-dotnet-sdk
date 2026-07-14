@@ -39,18 +39,9 @@ public record InventoryChange : IJsonOnDeserialized
     public InventoryAdjustment? Adjustment { get; set; }
 
     /// <summary>
-    /// Contains details about the inventory transfer when `type` is
-    /// `TRANSFER`, and is unset for all other change types.
-    ///
-    /// _Note:_ An [InventoryTransfer](entity:InventoryTransfer) object can only be set in the input to the
-    /// [BatchChangeInventory](api-endpoint:Inventory-BatchChangeInventory) endpoint when the seller has an active Retail Plus subscription.
-    /// </summary>
-    [JsonPropertyName("transfer")]
-    public InventoryTransfer? Transfer { get; set; }
-
-    /// <summary>
     /// The [CatalogMeasurementUnit](entity:CatalogMeasurementUnit) object representing the catalog measurement unit associated with the inventory change.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("measurement_unit")]
     public CatalogMeasurementUnit? MeasurementUnit { get; set; }
 

@@ -63,6 +63,7 @@ public record Payment : IJsonOnDeserialized
     /// US dollar amounts are specified in cents). For more information, see
     /// [Working with Monetary Amounts](https://developer.squareup.com/docs/build-basics/working-with-monetary-amounts).
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_money")]
     public Money? TotalMoney { get; set; }
 
@@ -106,6 +107,7 @@ public record Payment : IJsonOnDeserialized
     /// This amount is specified in the smallest denomination of the applicable currency (for example,
     /// US dollar amounts are specified in cents).
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("refunded_money")]
     public Money? RefundedMoney { get; set; }
 
@@ -182,6 +184,7 @@ public record Payment : IJsonOnDeserialized
     /// <summary>
     /// Details about a bank account payment. These details are only populated if the source_type is `BANK_ACCOUNT`.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("bank_account_details")]
     public BankAccountPaymentDetails? BankAccountDetails { get; set; }
 
@@ -195,6 +198,7 @@ public record Payment : IJsonOnDeserialized
     /// Details about an external payment. The details are only populated
     /// if the `source_type` is `EXTERNAL`.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("external_details")]
     public ExternalPaymentDetails? ExternalDetails { get; set; }
 
@@ -202,6 +206,7 @@ public record Payment : IJsonOnDeserialized
     /// Details about an wallet payment. The details are only populated
     /// if the `source_type` is `WALLET`.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("wallet_details")]
     public DigitalWalletDetails? WalletDetails { get; set; }
 
@@ -210,6 +215,7 @@ public record Payment : IJsonOnDeserialized
     /// if the `source_type` is `BUY_NOW_PAY_LATER`. For more information, see
     /// [Afterpay Payments](https://developer.squareup.com/docs/payments-api/take-payments/afterpay-payments).
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("buy_now_pay_later_details")]
     public BuyNowPayLaterDetails? BuyNowPayLaterDetails { get; set; }
 
@@ -217,6 +223,7 @@ public record Payment : IJsonOnDeserialized
     /// Details about a Square Account payment. The details are only populated
     /// if the `source_type` is `SQUARE_ACCOUNT`.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("square_account_details")]
     public SquareAccountDetails? SquareAccountDetails { get; set; }
 
@@ -288,6 +295,7 @@ public record Payment : IJsonOnDeserialized
     /// This field is present for payments to sellers that have opted in to receive risk
     /// evaluations.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("risk_evaluation")]
     public RiskEvaluation? RiskEvaluation { get; set; }
 
@@ -308,12 +316,14 @@ public record Payment : IJsonOnDeserialized
     /// <summary>
     /// The buyer's billing address.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("billing_address")]
     public Address? BillingAddress { get; set; }
 
     /// <summary>
     /// The buyer's shipping address.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("shipping_address")]
     public Address? ShippingAddress { get; set; }
 
@@ -367,15 +377,18 @@ public record Payment : IJsonOnDeserialized
     /// <summary>
     /// Details about the device that took the payment.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("device_details")]
     public DeviceDetails? DeviceDetails { get; set; }
 
     /// <summary>
     /// Details about the application that took the payment.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("application_details")]
     public ApplicationDetails? ApplicationDetails { get; set; }
 
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("buyer_currency_exchange")]
     public object? BuyerCurrencyExchange { get; set; }
 
@@ -389,6 +402,7 @@ public record Payment : IJsonOnDeserialized
     /// <summary>
     /// Additional information about the payment if it was taken offline.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("offline_payment_details")]
     public OfflinePaymentDetails? OfflinePaymentDetails { get; set; }
 

@@ -65,6 +65,7 @@ public record OrderReturnTax : IJsonOnDeserialized
     /// <summary>
     /// The amount of money applied by the tax in an order.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("applied_money")]
     public Money? AppliedMoney { get; set; }
 

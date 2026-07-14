@@ -60,6 +60,7 @@ public record GiftCardActivity : IJsonOnDeserialized
     /// <summary>
     /// The final balance on the gift card after the action is completed.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("gift_card_balance_money")]
     public Money? GiftCardBalanceMoney { get; set; }
 
@@ -137,18 +138,21 @@ public record GiftCardActivity : IJsonOnDeserialized
     /// Additional details about an `IMPORT` activity, which Square uses to import a third-party
     /// gift card with a balance.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("import_activity_details")]
     public GiftCardActivityImport? ImportActivityDetails { get; set; }
 
     /// <summary>
     /// Additional details about a `BLOCK` activity, which Square uses to temporarily block a gift card.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("block_activity_details")]
     public GiftCardActivityBlock? BlockActivityDetails { get; set; }
 
     /// <summary>
     /// Additional details about an `UNBLOCK` activity, which Square uses to unblock a gift card.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("unblock_activity_details")]
     public GiftCardActivityUnblock? UnblockActivityDetails { get; set; }
 
@@ -156,6 +160,7 @@ public record GiftCardActivity : IJsonOnDeserialized
     /// Additional details about an `IMPORT_REVERSAL` activity, which Square uses to reverse the
     /// import of a third-party gift card.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("import_reversal_activity_details")]
     public GiftCardActivityImportReversal? ImportReversalActivityDetails { get; set; }
 
@@ -163,6 +168,7 @@ public record GiftCardActivity : IJsonOnDeserialized
     /// Additional details about a `TRANSFER_BALANCE_TO` activity, which Square uses to add money to
     /// a gift card as the result of a transfer from another gift card.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("transfer_balance_to_activity_details")]
     public GiftCardActivityTransferBalanceTo? TransferBalanceToActivityDetails { get; set; }
 
@@ -170,6 +176,7 @@ public record GiftCardActivity : IJsonOnDeserialized
     /// Additional details about a `TRANSFER_BALANCE_FROM` activity, which Square uses to deduct money from
     /// a gift as the result of a transfer to another gift card.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("transfer_balance_from_activity_details")]
     public GiftCardActivityTransferBalanceFrom? TransferBalanceFromActivityDetails { get; set; }
 

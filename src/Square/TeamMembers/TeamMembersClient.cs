@@ -80,7 +80,6 @@ public partial class TeamMembersClient : ITeamMembersClient
                     Method = HttpMethod.Post,
                     Path = "v2/team-members",
                     Body = request,
-                    ContentType = "application/json",
                     Options = options,
                 },
                 cancellationToken

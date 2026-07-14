@@ -42,6 +42,7 @@ public record InvoicePaymentReminder : IJsonOnDeserialized
     /// The status of the reminder.
     /// See [InvoicePaymentReminderStatus](#type-invoicepaymentreminderstatus) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public InvoicePaymentReminderStatus? Status { get; set; }
 

@@ -36,7 +36,8 @@ public class DeprecatedGetPhysicalCountTest : BaseMockServerTest
                 "employee_id": "employee_id",
                 "team_member_id": "LRK57NSQ5X7PUD05",
                 "occurred_at": "2016-11-16T22:25:24.878Z",
-                "created_at": "2016-11-16T22:25:24.878Z"
+                "created_at": "2016-11-16T22:25:24.878Z",
+                "adjustment_id": "adjustment_id"
               }
             }
             """;

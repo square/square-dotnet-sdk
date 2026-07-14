@@ -39,12 +39,14 @@ public record GiftCard : IJsonOnDeserialized
     /// The current gift card state.
     /// See [Status](#type-status) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("state")]
     public GiftCardStatus? State { get; set; }
 
     /// <summary>
     /// The current gift card balance. This balance is always greater than or equal to zero.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("balance_money")]
     public Money? BalanceMoney { get; set; }
 

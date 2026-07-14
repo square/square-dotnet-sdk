@@ -6,9 +6,6 @@ namespace Square;
 [Serializable]
 public record GetTransferInventoryRequest
 {
-    /// <summary>
-    /// ID of the [InventoryTransfer](entity:InventoryTransfer) to retrieve.
-    /// </summary>
     [JsonIgnore]
     public required string TransferId { get; set; }
 

@@ -38,6 +38,7 @@ public record OrderLineItemAppliedDiscount : IJsonOnDeserialized
     /// <summary>
     /// The amount of money applied by the discount to the line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("applied_money")]
     public Money? AppliedMoney { get; set; }
 

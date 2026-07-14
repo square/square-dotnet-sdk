@@ -26,6 +26,7 @@ public record LoyaltyReward : IJsonOnDeserialized
     /// The status of a loyalty reward.
     /// See [LoyaltyRewardStatus](#type-loyaltyrewardstatus) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public LoyaltyRewardStatus? Status { get; set; }
 

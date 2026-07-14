@@ -50,6 +50,7 @@ public record InvoiceRecipient : IJsonOnDeserialized
     /// <summary>
     /// The recipient's physical address.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("address")]
     public Address? Address { get; set; }
 
@@ -71,6 +72,7 @@ public record InvoiceRecipient : IJsonOnDeserialized
     /// The recipient's tax IDs. The country of the seller account determines whether this field
     /// is available for the customer. For more information, see [Invoice recipient tax IDs](https://developer.squareup.com/docs/invoices-api/overview#recipient-tax-ids).
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("tax_ids")]
     public InvoiceRecipientTaxIds? TaxIds { get; set; }
 

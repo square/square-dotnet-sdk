@@ -35,7 +35,8 @@ public record CatalogCategory : IJsonOnDeserialized
     public CatalogCategoryType? CategoryType { get; set; }
 
     /// <summary>
-    /// The ID of the parent category of this category instance.
+    /// The parent category of this category instance. This includes the parent category ID and an ordinal
+    /// value that determines the category's relative position among sibling categories with the same parent.
     /// </summary>
     [JsonPropertyName("parent_category")]
     public CatalogObjectCategory? ParentCategory { get; set; }

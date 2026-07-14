@@ -74,6 +74,7 @@ public record TransferOrder : IJsonOnDeserialized
     /// endpoints (e.g. [StartPurchaseOrder](api-endpoint:TransferOrders-StartTransferOrder), to change the status.
     /// See [TransferOrderStatus](#type-transferorderstatus) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public TransferOrderStatus? Status { get; set; }
 

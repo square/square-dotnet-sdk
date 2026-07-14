@@ -25,6 +25,7 @@ public record CardPaymentDetails : IJsonOnDeserialized
     /// <summary>
     /// The credit card's non-confidential details.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("card")]
     public Card? Card { get; set; }
 
@@ -118,6 +119,7 @@ public record CardPaymentDetails : IJsonOnDeserialized
     /// <summary>
     /// The timeline for card payments.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("card_payment_timeline")]
     public CardPaymentTimeline? CardPaymentTimeline { get; set; }
 
@@ -139,6 +141,7 @@ public record CardPaymentDetails : IJsonOnDeserialized
     /// <summary>
     /// Additional information about a card_surcharge on the payment.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("applied_card_surcharge_details")]
     public CardSurchargeDetails? AppliedCardSurchargeDetails { get; set; }
 

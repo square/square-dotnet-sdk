@@ -71,7 +71,6 @@ public class DeprecatedBatchGetChangesTest : BaseMockServerTest
                 WireMock
                     .RequestBuilders.Request.Create()
                     .WithPath("/v2/inventory/batch-retrieve-changes")
-                    .WithHeader("Content-Type", "application/json")
                     .UsingPost()
                     .WithBodyAsJson(requestJson)
             )
