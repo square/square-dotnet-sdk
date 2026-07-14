@@ -75,7 +75,8 @@ public class InventoryTests
         {
             FromState = InventoryState.None,
             ToState = InventoryState.InStock,
-            LocationId = _locationId,
+            FromLocationId = _locationId,
+            ToLocationId = _locationId,
             CatalogObjectId = _itemVariationId,
             Quantity = "100",
             OccurredAt = DateTimeOffset.Now.AddHours(-8).ToString("o"),
@@ -146,7 +147,8 @@ public class InventoryTests
         {
             FromState = InventoryState.None,
             ToState = InventoryState.InStock,
-            LocationId = _locationId,
+            FromLocationId = _locationId,
+            ToLocationId = _locationId,
             CatalogObjectId = _itemVariationId,
             Quantity = "50",
             OccurredAt = DateTimeOffset.Now.ToString("o"),
@@ -235,7 +237,8 @@ public class InventoryTests
         {
             FromState = InventoryState.None,
             ToState = InventoryState.InStock,
-            LocationId = _locationId,
+            FromLocationId = _locationId,
+            ToLocationId = _locationId,
             CatalogObjectId = _itemVariationId,
             Quantity = "10",
             OccurredAt = DateTimeOffset.Now.ToString("o"),
