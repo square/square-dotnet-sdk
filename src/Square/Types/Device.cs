@@ -34,6 +34,7 @@ public record Device : IJsonOnDeserialized
     /// <summary>
     /// The current status of the device.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public DeviceStatus? Status { get; set; }
 

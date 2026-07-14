@@ -136,6 +136,7 @@ public record Invoice : IJsonOnDeserialized
     /// The current amount due for the invoice. In addition to the
     /// amount due on the next payment request, this includes any overdue payment amounts.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("next_payment_amount_money")]
     public Money? NextPaymentAmountMoney { get; set; }
 
@@ -143,6 +144,7 @@ public record Invoice : IJsonOnDeserialized
     /// The status of the invoice.
     /// See [InvoiceStatus](#type-invoicestatus) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public InvoiceStatus? Status { get; set; }
 

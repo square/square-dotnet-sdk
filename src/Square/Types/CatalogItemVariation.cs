@@ -86,7 +86,9 @@ public record CatalogItemVariation : IJsonOnDeserialized
     public IEnumerable<ItemVariationLocationOverrides>? LocationOverrides { get; set; }
 
     /// <summary>
-    /// If `true`, inventory tracking is active for the variation.
+    /// If `true`, inventory tracking is active for the variation at all locations by default.
+    /// This value can be overridden for specific locations using `ItemVariationLocationOverrides.track_inventory`.
+    /// If unset at both levels, inventory tracking is disabled.
     /// </summary>
     [JsonPropertyName("track_inventory")]
     public bool? TrackInventory { get; set; }
@@ -94,6 +96,8 @@ public record CatalogItemVariation : IJsonOnDeserialized
     /// <summary>
     /// Indicates whether the item variation displays an alert when its inventory quantity is less than or equal
     /// to its `inventory_alert_threshold`.
+    ///
+    /// Deprecated because this field has never been global.
     /// See [InventoryAlertType](#type-inventoryalerttype) for possible values
     /// </summary>
     [JsonPropertyName("inventory_alert_type")]
@@ -101,9 +105,9 @@ public record CatalogItemVariation : IJsonOnDeserialized
 
     /// <summary>
     /// If the inventory quantity for the variation is less than or equal to this value and `inventory_alert_type`
-    /// is `LOW_QUANTITY`, the variation displays an alert in the merchant dashboard.
+    /// is `LOW_QUANTITY`, the variation displays an alert in the merchant dashboard. This value is always an integer.
     ///
-    /// This value is always an integer.
+    /// Deprecated because this field has never been global.
     /// </summary>
     [JsonPropertyName("inventory_alert_threshold")]
     public long? InventoryAlertThreshold { get; set; }
@@ -193,6 +197,14 @@ public record CatalogItemVariation : IJsonOnDeserialized
     /// </summary>
     [JsonPropertyName("kitchen_name")]
     public string? KitchenName { get; set; }
+
+    /// <summary>
+    /// Details of the vendor this product is purchased from.
+    /// This field can be set only if the seller has an active subscription
+    /// to either Square for Retail Premium or Square for Restaurants Premium.
+    /// </summary>
+    [JsonPropertyName("vendor_information")]
+    public IEnumerable<CatalogItemVariationVendorInformation>? VendorInformation { get; set; }
 
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();

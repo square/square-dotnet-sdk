@@ -117,6 +117,7 @@ public record InvoicePaymentRequest : IJsonOnDeserialized
     /// The amount of the payment request, computed using the order amount and information from the various payment
     /// request fields (`request_type`, `fixed_amount_requested_money`, and `percentage_requested`).
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("computed_amount_money")]
     public Money? ComputedAmountMoney { get; set; }
 
@@ -125,6 +126,7 @@ public record InvoicePaymentRequest : IJsonOnDeserialized
     /// This amount might include a rounding adjustment if the most recent invoice payment
     /// was in cash in a currency that rounds cash payments (such as, `CAD` or `AUD`).
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_completed_amount_money")]
     public Money? TotalCompletedAmountMoney { get; set; }
 
@@ -135,6 +137,7 @@ public record InvoicePaymentRequest : IJsonOnDeserialized
     /// field specifies the rounding adjustment applied. This amount
     /// might be negative.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("rounding_adjustment_included_money")]
     public Money? RoundingAdjustmentIncludedMoney { get; set; }
 

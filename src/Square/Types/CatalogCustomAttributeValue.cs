@@ -39,6 +39,7 @@ public record CatalogCustomAttributeValue : IJsonOnDeserialized
     /// A copy of type from the associated `CatalogCustomAttributeDefinition`.
     /// See [CatalogCustomAttributeDefinitionType](#type-catalogcustomattributedefinitiontype) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("type")]
     public CatalogCustomAttributeDefinitionType? Type { get; set; }
 

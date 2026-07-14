@@ -58,6 +58,7 @@ public record OrderReturnLineItemModifier : IJsonOnDeserialized
     /// The total price of the item modifier for its line item.
     /// This is the modifier's `base_price_money` multiplied by the line item's quantity.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_price_money")]
     public Money? TotalPriceMoney { get; set; }
 

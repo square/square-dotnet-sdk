@@ -18,6 +18,7 @@ public record BookingCreatorDetails : IJsonOnDeserialized
     /// The seller-accessible type of the creator of the booking.
     /// See [BookingCreatorDetailsCreatorType](#type-bookingcreatordetailscreatortype) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("creator_type")]
     public BookingCreatorDetailsCreatorType? CreatorType { get; set; }
 

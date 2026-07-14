@@ -5,11 +5,79 @@ namespace Square;
 public partial interface IInventoryClient
 {
     /// <summary>
+    /// Returns the standard and custom inventory adjustment reasons available
+    /// to the seller.
+    /// </summary>
+    Task<ListInventoryAdjustmentReasonsResponse> ListInventoryAdjustmentReasonsAsync(
+        ListInventoryAdjustmentReasonsRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Creates a custom inventory adjustment reason.
+    /// </summary>
+    Task<CreateInventoryAdjustmentReasonResponse> CreateInventoryAdjustmentReasonAsync(
+        CreateInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Soft deletes a custom inventory adjustment reason.
+    /// </summary>
+    Task<DeleteInventoryAdjustmentReasonResponse> DeleteInventoryAdjustmentReasonAsync(
+        DeleteInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Restores a soft-deleted custom inventory adjustment reason.
+    /// </summary>
+    Task<RestoreInventoryAdjustmentReasonResponse> RestoreInventoryAdjustmentReasonAsync(
+        RestoreInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Returns the inventory adjustment reason identified by the provided
+    /// `reason_id`. Deleted custom reasons can be retrieved by ID.
+    /// </summary>
+    Task<RetrieveInventoryAdjustmentReasonResponse> RetrieveInventoryAdjustmentReasonAsync(
+        RetrieveInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Updates a custom inventory adjustment reason.
+    /// </summary>
+    Task<UpdateInventoryAdjustmentReasonResponse> UpdateInventoryAdjustmentReasonAsync(
+        UpdateInventoryAdjustmentReasonRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
     /// Deprecated version of [RetrieveInventoryAdjustment](api-endpoint:Inventory-RetrieveInventoryAdjustment) after the endpoint URL
     /// is updated to conform to the standard convention.
     /// </summary>
     Task<GetInventoryAdjustmentResponse> DeprecatedGetAdjustmentAsync(
         DeprecatedGetAdjustmentInventoryRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    /// <summary>
+    /// Applies an update to the provided adjustment.
+    ///
+    /// On success: returns the newly updated adjustment.
+    /// On failure: returns a list of related errors.
+    /// </summary>
+    Task<UpdateInventoryAdjustmentResponse> UpdateInventoryAdjustmentAsync(
+        UpdateInventoryAdjustmentRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     );
@@ -123,16 +191,6 @@ public partial interface IInventoryClient
     );
 
     /// <summary>
-    /// Returns the [InventoryTransfer](entity:InventoryTransfer) object
-    /// with the provided `transfer_id`.
-    /// </summary>
-    Task<GetInventoryTransferResponse> GetTransferAsync(
-        GetTransferInventoryRequest request,
-        RequestOptions? options = null,
-        CancellationToken cancellationToken = default
-    );
-
-    /// <summary>
     /// Retrieves the current calculated stock count for a given
     /// [CatalogObject](entity:CatalogObject) at a given set of
     /// [Location](entity:Location)s. Responses are paginated and unsorted.
@@ -161,6 +219,12 @@ public partial interface IInventoryClient
     /// </summary>
     Task<Pager<InventoryChange>> ChangesAsync(
         ChangesInventoryRequest request,
+        RequestOptions? options = null,
+        CancellationToken cancellationToken = default
+    );
+
+    Task GetTransferAsync(
+        GetTransferInventoryRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     );

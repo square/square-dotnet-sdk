@@ -54,6 +54,7 @@ public record DeviceCode : IJsonOnDeserialized
     /// The pairing status of the device code.
     /// See [DeviceCodeStatus](#type-devicecodestatus) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public DeviceCodeStatus? Status { get; set; }
 

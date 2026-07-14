@@ -109,7 +109,6 @@ public partial class OrdersClient : IOrdersClient
                     Method = HttpMethod.Post,
                     Path = "v2/orders",
                     Body = request,
-                    ContentType = "application/json",
                     Options = options,
                 },
                 cancellationToken

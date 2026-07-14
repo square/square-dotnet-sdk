@@ -41,6 +41,8 @@ public readonly record struct InventoryState : IStringEnum
 
     public static readonly InventoryState InTransit = new(Values.InTransit);
 
+    public static readonly InventoryState Untracked = new(Values.Untracked);
+
     public InventoryState(string value)
     {
         Value = value;
@@ -119,5 +121,7 @@ public readonly record struct InventoryState : IStringEnum
         public const string SupportedByNewerVersion = "SUPPORTED_BY_NEWER_VERSION";
 
         public const string InTransit = "IN_TRANSIT";
+
+        public const string Untracked = "UNTRACKED";
     }
 }

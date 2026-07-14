@@ -57,6 +57,7 @@ public record PaymentRefund : IJsonOnDeserialized
     /// Contains information about the refund destination. This field is populated only if
     /// `destination_id` is defined in the `RefundPayment` request.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("destination_details")]
     public DestinationDetails? DestinationDetails { get; set; }
 

@@ -85,6 +85,7 @@ public record TerminalCheckout : IJsonOnDeserialized
     /// The reason why `TerminalCheckout` is canceled. Present if the status is `CANCELED`.
     /// See [ActionCancelReason](#type-actioncancelreason) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("cancel_reason")]
     public ActionCancelReason? CancelReason { get; set; }
 

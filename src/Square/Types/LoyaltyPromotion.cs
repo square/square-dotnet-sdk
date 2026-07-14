@@ -54,6 +54,7 @@ public record LoyaltyPromotion : IJsonOnDeserialized
     /// The current status of the promotion.
     /// See [LoyaltyPromotionStatus](#type-loyaltypromotionstatus) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public LoyaltyPromotionStatus? Status { get; set; }
 

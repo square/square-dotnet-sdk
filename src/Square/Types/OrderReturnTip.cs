@@ -24,6 +24,7 @@ public record OrderReturnTip : IJsonOnDeserialized
     /// The amount of tip being returned
     /// --
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("applied_money")]
     public Money? AppliedMoney { get; set; }
 

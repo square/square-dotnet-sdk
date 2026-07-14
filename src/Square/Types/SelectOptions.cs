@@ -32,6 +32,7 @@ public record SelectOptions : IJsonOnDeserialized
     /// <summary>
     /// The buyer’s selected option.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("selected_option")]
     public SelectOption? SelectedOption { get; set; }
 

@@ -18,6 +18,7 @@ public record TenderBuyNowPayLaterDetails : IJsonOnDeserialized
     /// The Buy Now Pay Later brand.
     /// See [Brand](#type-brand) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("buy_now_pay_later_brand")]
     public TenderBuyNowPayLaterDetailsBrand? BuyNowPayLaterBrand { get; set; }
 

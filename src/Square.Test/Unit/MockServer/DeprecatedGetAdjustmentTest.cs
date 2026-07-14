@@ -25,7 +25,8 @@ public class DeprecatedGetAdjustmentTest : BaseMockServerTest
                 "reference_id": "4a366069-4096-47a2-99a5-0084ac879509",
                 "from_state": "IN_STOCK",
                 "to_state": "SOLD",
-                "location_id": "C6W5YS5QM06F5",
+                "from_location_id": "from_location_id",
+                "to_location_id": "to_location_id",
                 "catalog_object_id": "W62UWFY35CWMYGVWK6TWJDNI",
                 "catalog_object_type": "ITEM_VARIATION",
                 "quantity": "7",
@@ -51,6 +52,16 @@ public class DeprecatedGetAdjustmentTest : BaseMockServerTest
                   "root_adjustment_id": "root_adjustment_id",
                   "from_state": "CUSTOM",
                   "to_state": "CUSTOM"
+                },
+                "cost_money": {
+                  "amount": 1000000,
+                  "currency": "UNKNOWN_CURRENCY"
+                },
+                "vendor_id": "vendor_id",
+                "physical_count_id": "physical_count_id",
+                "reason_id": {
+                  "type": "RECEIVED",
+                  "custom_reason_id": "custom_reason_id"
                 }
               }
             }

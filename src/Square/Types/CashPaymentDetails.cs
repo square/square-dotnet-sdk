@@ -26,6 +26,7 @@ public record CashPaymentDetails : IJsonOnDeserialized
     /// This read-only field is calculated
     /// from the `amount_money` and `buyer_supplied_money` fields.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("change_back_money")]
     public Money? ChangeBackMoney { get; set; }
 

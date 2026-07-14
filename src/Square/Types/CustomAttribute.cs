@@ -55,6 +55,7 @@ public record CustomAttribute : IJsonOnDeserialized
     /// A copy of the `visibility` field value for the associated custom attribute definition.
     /// See [CustomAttributeDefinitionVisibility](#type-customattributedefinitionvisibility) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("visibility")]
     public CustomAttributeDefinitionVisibility? Visibility { get; set; }
 
@@ -62,6 +63,7 @@ public record CustomAttribute : IJsonOnDeserialized
     /// A copy of the associated custom attribute definition object. This field is only set when
     /// the optional field is specified on the request.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("definition")]
     public CustomAttributeDefinition? Definition { get; set; }
 

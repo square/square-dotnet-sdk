@@ -52,6 +52,7 @@ public record TerminalAction : IJsonOnDeserialized
     /// The reason why `TerminalAction` is canceled. Present if the status is `CANCELED`.
     /// See [ActionCancelReason](#type-actioncancelreason) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("cancel_reason")]
     public ActionCancelReason? CancelReason { get; set; }
 
@@ -138,6 +139,7 @@ public record TerminalAction : IJsonOnDeserialized
     ///
     /// Only available for `PING` action type.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("device_metadata")]
     public DeviceMetadata? DeviceMetadata { get; set; }
 

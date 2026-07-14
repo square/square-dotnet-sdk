@@ -34,7 +34,9 @@ public record ItemVariationLocationOverrides : IJsonOnDeserialized
     public CatalogPricingType? PricingType { get; set; }
 
     /// <summary>
-    /// If `true`, inventory tracking is active for the `CatalogItemVariation` at this `Location`.
+    /// Indicates whether inventory tracking is active for the `CatalogItemVariation` at this `Location`.
+    /// When set, this value explicitly overrides the global `track_inventory` setting. When unset, the location
+    /// should use the global value. If both global and location-level values are unset, inventory tracking is disabled.
     /// </summary>
     [JsonPropertyName("track_inventory")]
     public bool? TrackInventory { get; set; }

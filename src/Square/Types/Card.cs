@@ -26,6 +26,7 @@ public record Card : IJsonOnDeserialized
     /// The card's brand.
     /// See [CardBrand](#type-cardbrand) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("card_brand")]
     public CardBrand? CardBrand { get; set; }
 
@@ -104,6 +105,7 @@ public record Card : IJsonOnDeserialized
     /// The Card object includes this field only in response to Payments API calls.
     /// See [CardType](#type-cardtype) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("card_type")]
     public CardType? CardType { get; set; }
 
@@ -111,6 +113,7 @@ public record Card : IJsonOnDeserialized
     /// Indicates whether the card is prepaid or not.
     /// See [CardPrepaidType](#type-cardprepaidtype) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("prepaid_type")]
     public CardPrepaidType? PrepaidType { get; set; }
 
@@ -149,6 +152,7 @@ public record Card : IJsonOnDeserialized
     /// co-brand of AFTERPAY.
     /// See [CardCoBrand](#type-cardcobrand) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("card_co_brand")]
     public CardCoBrand? CardCoBrand { get; set; }
 
@@ -160,6 +164,7 @@ public record Card : IJsonOnDeserialized
     /// This field is present only if there's an active issuer alert.
     /// See [IssuerAlert](#type-issueralert) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("issuer_alert")]
     public string? IssuerAlert { get; set; }
 

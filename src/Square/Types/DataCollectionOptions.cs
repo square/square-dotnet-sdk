@@ -34,6 +34,7 @@ public record DataCollectionOptions : IJsonOnDeserialized
     /// <summary>
     /// The buyer’s input text from the data collection screen.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("collected_data")]
     public CollectedData? CollectedData { get; set; }
 

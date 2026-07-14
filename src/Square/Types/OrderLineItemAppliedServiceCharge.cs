@@ -30,6 +30,7 @@ public record OrderLineItemAppliedServiceCharge : IJsonOnDeserialized
     /// <summary>
     /// The amount of money applied by the service charge to the line item.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("applied_money")]
     public Money? AppliedMoney { get; set; }
 

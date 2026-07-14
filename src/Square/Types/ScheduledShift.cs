@@ -33,6 +33,7 @@ public record ScheduledShift : IJsonOnDeserialized
     /// The current published (public) shift details for the scheduled shift. This field is
     /// present only if the shift was published.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("published_shift_details")]
     public ScheduledShiftDetails? PublishedShiftDetails { get; set; }
 

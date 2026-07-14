@@ -52,7 +52,6 @@ public class DeprecatedBatchGetCountsTest : BaseMockServerTest
                 WireMock
                     .RequestBuilders.Request.Create()
                     .WithPath("/v2/inventory/batch-retrieve-counts")
-                    .WithHeader("Content-Type", "application/json")
                     .UsingPost()
                     .WithBodyAsJson(requestJson)
             )

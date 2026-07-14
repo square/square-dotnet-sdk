@@ -32,6 +32,7 @@ public record Booking : IJsonOnDeserialized
     /// The status of the booking, describing where the booking stands with respect to the booking state machine.
     /// See [BookingStatus](#type-bookingstatus) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public BookingStatus? Status { get; set; }
 
@@ -111,6 +112,7 @@ public record Booking : IJsonOnDeserialized
     /// <summary>
     /// Information about the booking creator.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("creator_details")]
     public BookingCreatorDetails? CreatorDetails { get; set; }
 
@@ -119,6 +121,7 @@ public record Booking : IJsonOnDeserialized
     /// Access to this field requires seller-level permissions.
     /// See [BookingBookingSource](#type-bookingbookingsource) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("source")]
     public BookingBookingSource? Source { get; set; }
 

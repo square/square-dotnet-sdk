@@ -38,6 +38,7 @@ public record ConfirmationOptions : IJsonOnDeserialized
     /// <summary>
     /// The result of the buyer’s actions when presented with the confirmation screen.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("decision")]
     public ConfirmationDecision? Decision { get; set; }
 

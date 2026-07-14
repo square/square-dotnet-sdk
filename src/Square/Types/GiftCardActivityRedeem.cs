@@ -47,6 +47,7 @@ public record GiftCardActivityRedeem : IJsonOnDeserialized
     /// always have a `COMPLETED` status.
     /// See [Status](#type-status) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("status")]
     public GiftCardActivityRedeemStatus? Status { get; set; }
 

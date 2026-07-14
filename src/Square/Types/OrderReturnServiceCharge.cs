@@ -71,6 +71,7 @@ public record OrderReturnServiceCharge : IJsonOnDeserialized
     /// - For fixed-amount service charges, `applied_money` is equal to `amount_money`.
     /// - For percentage-based service charges, `applied_money` is the money calculated using the percentage.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("applied_money")]
     public Money? AppliedMoney { get; set; }
 
@@ -81,12 +82,14 @@ public record OrderReturnServiceCharge : IJsonOnDeserialized
     /// does not equal `applied_money` plus `total_tax_money` because the inclusive
     /// tax amount is already included in both `applied_money` and `total_tax_money`.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_money")]
     public Money? TotalMoney { get; set; }
 
     /// <summary>
     /// The total amount of tax money to collect for the service charge.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("total_tax_money")]
     public Money? TotalTaxMoney { get; set; }
 
@@ -94,6 +97,7 @@ public record OrderReturnServiceCharge : IJsonOnDeserialized
     /// The calculation phase after which to apply the service charge.
     /// See [OrderServiceChargeCalculationPhase](#type-orderservicechargecalculationphase) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("calculation_phase")]
     public OrderServiceChargeCalculationPhase? CalculationPhase { get; set; }
 
@@ -139,6 +143,7 @@ public record OrderReturnServiceCharge : IJsonOnDeserialized
     /// The type of the service charge.
     /// See [OrderServiceChargeType](#type-orderservicechargetype) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("type")]
     public OrderServiceChargeType? Type { get; set; }
 

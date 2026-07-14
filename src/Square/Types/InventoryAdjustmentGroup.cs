@@ -32,6 +32,7 @@ public record InventoryAdjustmentGroup : IJsonOnDeserialized
     /// Here, the representative `from_state` for the `InventoryAdjustmentGroup` is `IN_STOCK`.
     /// See [InventoryState](#type-inventorystate) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("from_state")]
     public InventoryState? FromState { get; set; }
 
@@ -41,6 +42,7 @@ public record InventoryAdjustmentGroup : IJsonOnDeserialized
     /// Here, the representative `to_state` of the `InventoryAdjustmentGroup` is `SOLD`.
     /// See [InventoryState](#type-inventorystate) for possible values
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("to_state")]
     public InventoryState? ToState { get; set; }
 

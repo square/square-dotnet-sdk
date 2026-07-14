@@ -149,7 +149,8 @@ public record CatalogItem : IJsonOnDeserialized
     public string? SortName { get; set; }
 
     /// <summary>
-    /// The list of categories.
+    /// The list of categories to which this item belongs. Each entry includes the category ID and an ordinal
+    /// value that determines the item's relative position within that category.
     /// </summary>
     [JsonPropertyName("categories")]
     public IEnumerable<CatalogObjectCategory>? Categories { get; set; }

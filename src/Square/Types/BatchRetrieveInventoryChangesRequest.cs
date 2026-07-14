@@ -71,6 +71,23 @@ public record BatchRetrieveInventoryChangesRequest : IJsonOnDeserialized
     [JsonPropertyName("limit")]
     public int? Limit { get; set; }
 
+    /// <summary>
+    /// Specification of how returned inventory changes should be ordered.
+    ///
+    /// Currently, inventory changes can only be ordered by the occurred_at field.
+    /// The default sort order for occurred_at is ASC (changes are returned oldest-first by default).
+    /// </summary>
+    [JsonPropertyName("sort")]
+    public BatchRetrieveInventoryChangesSort? Sort { get; set; }
+
+    /// <summary>
+    /// The filter to return `ADJUSTMENT` query results by inventory
+    /// adjustment reason. This filter is only applied when set. The request cannot
+    /// include both `reason_ids` and `states`.
+    /// </summary>
+    [JsonPropertyName("reason_ids")]
+    public IEnumerable<InventoryAdjustmentReasonId>? ReasonIds { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 
