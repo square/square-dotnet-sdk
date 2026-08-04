@@ -3,6 +3,7 @@ using NUnit.Framework;
 using Square;
 using Square.Core;
 using Square.Orders;
+using Square.Orders.CustomAttributes;
 
 namespace Square.Test.Unit.MockServer;
 

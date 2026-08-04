@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Square.Payments;
 
 namespace Square.Test.Integration;
 

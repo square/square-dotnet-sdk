@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using Square.Catalog;
+using Square.Catalog.Object;
+using Square.Inventory;
 
 // ReSharper disable NullableWarningSuppressionIsUsed
 

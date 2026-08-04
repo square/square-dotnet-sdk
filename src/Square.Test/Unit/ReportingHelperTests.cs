@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Square;
 using Square.Core;
+using Square.Reporting;
 
 namespace Square.Test.Unit;
 

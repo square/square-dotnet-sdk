@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using Square.Customers;
+using Square.Customers.Groups;
 
 namespace Square.Test.Integration;
 

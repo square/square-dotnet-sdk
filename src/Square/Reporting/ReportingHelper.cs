@@ -1,6 +1,8 @@
 using System.Text.Json;
+using Square.Reporting;
 
-namespace Square;
+namespace Square
+{
 
 /// <summary>
 /// Polling configuration for <see cref="ReportingHelper.LoadAndWaitAsync"/>.
@@ -136,6 +138,11 @@ public static class ReportingHelper
     }
 }
 
+} // namespace Square
+
+namespace Square.Reporting
+{
+
 public partial class ReportingClient
 {
     /// <summary>
@@ -159,3 +166,5 @@ public partial class ReportingClient
         CancellationToken cancellationToken = default
     ) => ReportingHelper.LoadAndWaitAsync(this, request, options, cancellationToken);
 }
+
+} // namespace Square.Reporting
