@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Labor;
+namespace Square.Labor.EmployeeWages;
 
 public partial interface IEmployeeWagesClient
 {

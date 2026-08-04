@@ -1,6 +1,9 @@
-using Square.Loyalty;
+using Square;
+using Square.Loyalty.Accounts;
+using Square.Loyalty.Programs;
+using Square.Loyalty.Rewards;
 
-namespace Square;
+namespace Square.Loyalty;
 
 public partial interface ILoyaltyClient
 {

@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Checkout_;
+namespace Square.Checkout.PaymentLinks;
 
 [Serializable]
 public record UpdatePaymentLinkRequest

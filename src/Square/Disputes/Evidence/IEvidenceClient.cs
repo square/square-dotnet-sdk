@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Disputes;
+namespace Square.Disputes.Evidence;
 
 public partial interface IEvidenceClient
 {

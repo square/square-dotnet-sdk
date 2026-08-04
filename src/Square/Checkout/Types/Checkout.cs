@@ -1,8 +1,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Square;
 using Square.Core;
 
-namespace Square;
+namespace Square.Checkout;
 
 /// <summary>
 /// Square Checkout lets merchants accept online payments for supported

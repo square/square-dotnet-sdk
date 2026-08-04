@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Bookings;
+namespace Square.Bookings.CustomAttributes;
 
 public partial class CustomAttributesClient : ICustomAttributesClient
 {
@@ -225,7 +225,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributes.ListAsync(
-    ///     new Square.Bookings.ListCustomAttributesRequest
+    ///     new Square.Bookings.CustomAttributes.ListCustomAttributesRequest
     ///     {
     ///         BookingId = "booking_id",
     ///         Limit = 1,
@@ -275,7 +275,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributes.GetAsync(
-    ///     new Square.Bookings.GetCustomAttributesRequest
+    ///     new Square.Bookings.CustomAttributes.GetCustomAttributesRequest
     ///     {
     ///         BookingId = "booking_id",
     ///         Key = "key",
@@ -416,7 +416,11 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Bookings.CustomAttributes.DeleteAsync(
-    ///     new Square.Bookings.DeleteCustomAttributesRequest { BookingId = "booking_id", Key = "key" }
+    ///     new Square.Bookings.CustomAttributes.DeleteCustomAttributesRequest
+    ///     {
+    ///         BookingId = "booking_id",
+    ///         Key = "key",
+    ///     }
     /// );
     /// </code></example>
     public async Task<DeleteBookingCustomAttributeResponse> DeleteAsync(

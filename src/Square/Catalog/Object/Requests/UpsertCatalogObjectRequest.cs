@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Catalog;
+namespace Square.Catalog.Object;
 
 [Serializable]
 public record UpsertCatalogObjectRequest

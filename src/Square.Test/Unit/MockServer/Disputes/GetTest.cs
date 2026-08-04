@@ -22,17 +22,30 @@ public class GetTest : BaseMockServerTest
                   "field": "field"
                 }
               ],
-              "evidence": {
-                "evidence_id": "evidence_id",
-                "id": "TOomLInj6iWmP3N8qfCXrB",
-                "dispute_id": "bVTprrwk0gygTLZ96VX1oB",
-                "evidence_file": {
-                  "filename": "customer-interaction.jpg",
-                  "filetype": "image/jpeg"
+              "dispute": {
+                "dispute_id": "dispute_id",
+                "id": "XDgyFu7yo1E2S5lQGGpYn",
+                "amount_money": {
+                  "amount": 2500,
+                  "currency": "USD"
                 },
-                "evidence_text": "evidence_text",
-                "uploaded_at": "2022-05-18T16:01:10.000Z",
-                "evidence_type": "CARDHOLDER_COMMUNICATION"
+                "reason": "NO_KNOWLEDGE",
+                "state": "ACCEPTED",
+                "due_at": "2022-07-13T00:00:00.000Z",
+                "disputed_payment": {
+                  "payment_id": "zhyh1ch64kRBrrlfVhwjCEjZWzNZY"
+                },
+                "evidence_ids": [
+                  "evidence_ids"
+                ],
+                "card_brand": "VISA",
+                "created_at": "2022-06-29T18:45:22.265Z",
+                "updated_at": "2022-07-07T19:14:42.650Z",
+                "brand_dispute_id": "100000809947",
+                "reported_date": "reported_date",
+                "reported_at": "2022-06-29T00:00:00.000Z",
+                "version": 2,
+                "location_id": "L1HN3ZMQK64X9"
               }
             }
             """;
@@ -41,7 +54,7 @@ public class GetTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/disputes/dispute_id/evidence/evidence_id")
+                    .WithPath("/v2/disputes/dispute_id")
                     .UsingGet()
             )
             .RespondWith(
@@ -51,13 +64,12 @@ public class GetTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Disputes.Evidence.GetAsync(
-            new GetEvidenceRequest { DisputeId = "dispute_id", EvidenceId = "evidence_id" }
+        var response = await Client.Disputes.GetAsync(
+            new GetDisputesRequest { DisputeId = "dispute_id" }
         );
         Assert.That(
             response,
-            Is.EqualTo(JsonUtils.Deserialize<GetDisputeEvidenceResponse>(mockResponse))
-                .UsingDefaults()
+            Is.EqualTo(JsonUtils.Deserialize<GetDisputeResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

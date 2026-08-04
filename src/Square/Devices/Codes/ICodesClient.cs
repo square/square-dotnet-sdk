@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Devices;
+namespace Square.Devices.Codes;
 
 public partial interface ICodesClient
 {

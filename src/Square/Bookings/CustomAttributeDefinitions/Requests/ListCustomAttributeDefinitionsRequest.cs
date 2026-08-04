@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Bookings;
+namespace Square.Bookings.CustomAttributeDefinitions;
 
 [Serializable]
 public record ListCustomAttributeDefinitionsRequest

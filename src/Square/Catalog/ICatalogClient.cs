@@ -1,7 +1,9 @@
-using Square.Catalog;
+using Square;
+using Square.Catalog.Images;
+using Square.Catalog.Object;
 using Square.Core;
 
-namespace Square;
+namespace Square.Catalog;
 
 public partial interface ICatalogClient
 {

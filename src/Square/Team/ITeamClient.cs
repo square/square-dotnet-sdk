@@ -1,4 +1,6 @@
-namespace Square;
+using Square;
+
+namespace Square.Team;
 
 public partial interface ITeamClient
 {

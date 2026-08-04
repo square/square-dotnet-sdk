@@ -1,8 +1,12 @@
 using System.Text.Json;
+using Square;
 using Square.Core;
-using Square.Labor;
+using Square.Labor.BreakTypes;
+using Square.Labor.EmployeeWages;
+using Square.Labor.TeamMemberWages;
+using Square.Labor.WorkweekConfigs;
 
-namespace Square;
+namespace Square.Labor;
 
 public partial class LaborClient : ILaborClient
 {
@@ -13,7 +17,7 @@ public partial class LaborClient : ILaborClient
         _client = client;
         BreakTypes = new BreakTypesClient(_client);
         EmployeeWages = new EmployeeWagesClient(_client);
-        Shifts = new Square.Labor.ShiftsClient(_client);
+        Shifts = new Square.Labor.Shifts.ShiftsClient(_client);
         TeamMemberWages = new TeamMemberWagesClient(_client);
         WorkweekConfigs = new WorkweekConfigsClient(_client);
     }
@@ -22,7 +26,7 @@ public partial class LaborClient : ILaborClient
 
     public EmployeeWagesClient EmployeeWages { get; }
 
-    public Square.Labor.ShiftsClient Shifts { get; }
+    public Square.Labor.Shifts.ShiftsClient Shifts { get; }
 
     public TeamMemberWagesClient TeamMemberWages { get; }
 

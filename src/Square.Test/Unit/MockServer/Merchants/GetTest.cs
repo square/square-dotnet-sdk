@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Square;
 using Square.Core;
+using Square.Merchants;
 using Square.Test.Unit.MockServer;
 
 namespace Square.Test.Unit.MockServer.Merchants;
@@ -13,18 +14,6 @@ public class GetTest : BaseMockServerTest
     {
         const string mockResponse = """
             {
-              "custom_attribute_definition": {
-                "key": "alternative_seller_name",
-                "schema": {
-                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.String"
-                },
-                "name": "Alternative Merchant Name",
-                "description": "This is the other name this merchant goes by.",
-                "visibility": "VISIBILITY_READ_ONLY",
-                "version": 1,
-                "updated_at": "2023-05-05T19:06:36.559Z",
-                "created_at": "2023-05-05T19:06:36.559Z"
-              },
               "errors": [
                 {
                   "category": "API_ERROR",
@@ -32,7 +21,17 @@ public class GetTest : BaseMockServerTest
                   "detail": "detail",
                   "field": "field"
                 }
-              ]
+              ],
+              "merchant": {
+                "id": "DM7VKY8Q63GNP",
+                "business_name": "Apple A Day",
+                "country": "US",
+                "language_code": "en-US",
+                "currency": "USD",
+                "status": "ACTIVE",
+                "main_location_id": "9A65CGC72ZQG1",
+                "created_at": "2021-12-10T19:25:52.484Z"
+              }
             }
             """;
 
@@ -40,8 +39,7 @@ public class GetTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/merchants/custom-attribute-definitions/key")
-                    .WithParam("version", "1")
+                    .WithPath("/v2/merchants/merchant_id")
                     .UsingGet()
             )
             .RespondWith(
@@ -51,17 +49,12 @@ public class GetTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Merchants.CustomAttributeDefinitions.GetAsync(
-            new Square.Merchants.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+        var response = await Client.Merchants.GetAsync(
+            new GetMerchantsRequest { MerchantId = "merchant_id" }
         );
         Assert.That(
             response,
-            Is.EqualTo(
-                    JsonUtils.Deserialize<RetrieveMerchantCustomAttributeDefinitionResponse>(
-                        mockResponse
-                    )
-                )
-                .UsingDefaults()
+            Is.EqualTo(JsonUtils.Deserialize<GetMerchantResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
+using Square;
 using Square.Core;
 
-namespace Square;
+namespace Square.Payments;
 
 [Serializable]
 public record UpdatePaymentRequest

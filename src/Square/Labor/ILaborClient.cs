@@ -1,12 +1,16 @@
-using Square.Labor;
+using Square;
+using Square.Labor.BreakTypes;
+using Square.Labor.EmployeeWages;
+using Square.Labor.TeamMemberWages;
+using Square.Labor.WorkweekConfigs;
 
-namespace Square;
+namespace Square.Labor;
 
 public partial interface ILaborClient
 {
     public BreakTypesClient BreakTypes { get; }
     public EmployeeWagesClient EmployeeWages { get; }
-    public Square.Labor.ShiftsClient Shifts { get; }
+    public Square.Labor.Shifts.ShiftsClient Shifts { get; }
     public TeamMemberWagesClient TeamMemberWages { get; }
     public WorkweekConfigsClient WorkweekConfigs { get; }
 

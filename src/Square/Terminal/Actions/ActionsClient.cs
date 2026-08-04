@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Terminal;
+namespace Square.Terminal.Actions;
 
 public partial class ActionsClient : IActionsClient
 {

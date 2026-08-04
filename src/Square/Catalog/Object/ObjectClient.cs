@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Catalog;
+namespace Square.Catalog.Object;
 
 public partial class ObjectClient : IObjectClient
 {

@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Checkout_;
+namespace Square.Checkout.PaymentLinks;
 
 public partial class PaymentLinksClient : IPaymentLinksClient
 {

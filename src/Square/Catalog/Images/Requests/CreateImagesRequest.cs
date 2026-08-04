@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Catalog;
+namespace Square.Catalog.Images;
 
 [Serializable]
 public record CreateImagesRequest

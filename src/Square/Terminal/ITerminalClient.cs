@@ -1,12 +1,14 @@
-using Square.Terminal;
+using Square;
+using Square.Terminal.Actions;
+using Square.Terminal.Checkouts;
 
-namespace Square;
+namespace Square.Terminal;
 
 public partial interface ITerminalClient
 {
     public ActionsClient Actions { get; }
     public CheckoutsClient Checkouts { get; }
-    public Square.Terminal.RefundsClient Refunds { get; }
+    public Square.Terminal.Refunds.RefundsClient Refunds { get; }
 
     /// <summary>
     /// Dismisses a Terminal action request if the status and type of the request permits it.

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Disputes;
+namespace Square.Disputes.Evidence;
 
 [Serializable]
 public record DeleteEvidenceRequest

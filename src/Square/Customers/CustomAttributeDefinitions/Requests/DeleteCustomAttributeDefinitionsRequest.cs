@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Customers;
+namespace Square.Customers.CustomAttributeDefinitions;
 
 [Serializable]
 public record DeleteCustomAttributeDefinitionsRequest

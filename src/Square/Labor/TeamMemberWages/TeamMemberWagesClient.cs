@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Labor;
+namespace Square.Labor.TeamMemberWages;
 
 public partial class TeamMemberWagesClient : ITeamMemberWagesClient
 {

@@ -1,8 +1,10 @@
 using System.Text.Json;
-using Square.Bookings;
+using Square;
+using Square.Bookings.LocationProfiles;
+using Square.Bookings.TeamMemberProfiles;
 using Square.Core;
 
-namespace Square;
+namespace Square.Bookings;
 
 public partial class BookingsClient : IBookingsClient
 {
@@ -11,15 +13,18 @@ public partial class BookingsClient : IBookingsClient
     internal BookingsClient(RawClient client)
     {
         _client = client;
-        CustomAttributeDefinitions = new Square.Bookings.CustomAttributeDefinitionsClient(_client);
-        CustomAttributes = new Square.Bookings.CustomAttributesClient(_client);
+        CustomAttributeDefinitions =
+            new Square.Bookings.CustomAttributeDefinitions.CustomAttributeDefinitionsClient(
+                _client
+            );
+        CustomAttributes = new Square.Bookings.CustomAttributes.CustomAttributesClient(_client);
         LocationProfiles = new LocationProfilesClient(_client);
         TeamMemberProfiles = new TeamMemberProfilesClient(_client);
     }
 
-    public Square.Bookings.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Bookings.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
 
-    public Square.Bookings.CustomAttributesClient CustomAttributes { get; }
+    public Square.Bookings.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
 
     public LocationProfilesClient LocationProfiles { get; }
 

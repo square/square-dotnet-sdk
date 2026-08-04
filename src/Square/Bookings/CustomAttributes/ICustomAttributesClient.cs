@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Bookings;
+namespace Square.Bookings.CustomAttributes;
 
 public partial interface ICustomAttributesClient
 {

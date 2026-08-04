@@ -1,4 +1,6 @@
-namespace Square;
+using Square;
+
+namespace Square.Vendors;
 
 public partial interface IVendorsClient
 {

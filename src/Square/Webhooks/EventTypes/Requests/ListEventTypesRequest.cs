@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Webhooks;
+namespace Square.Webhooks.EventTypes;
 
 [Serializable]
 public record ListEventTypesRequest

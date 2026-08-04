@@ -1,7 +1,8 @@
 using System.Text.Json;
+using Square;
 using Square.Core;
 
-namespace Square;
+namespace Square.Inventory;
 
 public partial class InventoryClient : IInventoryClient
 {

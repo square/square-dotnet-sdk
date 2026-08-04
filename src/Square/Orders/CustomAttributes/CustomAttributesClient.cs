@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Orders;
+namespace Square.Orders.CustomAttributes;
 
 public partial class CustomAttributesClient : ICustomAttributesClient
 {
@@ -287,7 +287,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributes.ListAsync(
-    ///     new Square.Orders.ListCustomAttributesRequest
+    ///     new Square.Orders.CustomAttributes.ListCustomAttributesRequest
     ///     {
     ///         OrderId = "order_id",
     ///         VisibilityFilter = VisibilityFilter.All,
@@ -342,7 +342,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributes.GetAsync(
-    ///     new Square.Orders.GetCustomAttributesRequest
+    ///     new Square.Orders.CustomAttributes.GetCustomAttributesRequest
     ///     {
     ///         OrderId = "order_id",
     ///         CustomAttributeKey = "custom_attribute_key",
@@ -488,7 +488,7 @@ public partial class CustomAttributesClient : ICustomAttributesClient
     /// </summary>
     /// <example><code>
     /// await client.Orders.CustomAttributes.DeleteAsync(
-    ///     new Square.Orders.DeleteCustomAttributesRequest
+    ///     new Square.Orders.CustomAttributes.DeleteCustomAttributesRequest
     ///     {
     ///         OrderId = "order_id",
     ///         CustomAttributeKey = "custom_attribute_key",

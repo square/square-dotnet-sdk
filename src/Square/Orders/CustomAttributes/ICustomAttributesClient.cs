@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Orders;
+namespace Square.Orders.CustomAttributes;
 
 public partial interface ICustomAttributesClient
 {

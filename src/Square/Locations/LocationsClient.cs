@@ -1,8 +1,9 @@
 using System.Text.Json;
+using Square;
 using Square.Core;
-using Square.Locations;
+using Square.Locations.Transactions;
 
-namespace Square;
+namespace Square.Locations;
 
 public partial class LocationsClient : ILocationsClient
 {
@@ -11,14 +12,17 @@ public partial class LocationsClient : ILocationsClient
     internal LocationsClient(RawClient client)
     {
         _client = client;
-        CustomAttributeDefinitions = new Square.Locations.CustomAttributeDefinitionsClient(_client);
-        CustomAttributes = new Square.Locations.CustomAttributesClient(_client);
+        CustomAttributeDefinitions =
+            new Square.Locations.CustomAttributeDefinitions.CustomAttributeDefinitionsClient(
+                _client
+            );
+        CustomAttributes = new Square.Locations.CustomAttributes.CustomAttributesClient(_client);
         Transactions = new TransactionsClient(_client);
     }
 
-    public Square.Locations.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Locations.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
 
-    public Square.Locations.CustomAttributesClient CustomAttributes { get; }
+    public Square.Locations.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
 
     public TransactionsClient Transactions { get; }
 

@@ -1,12 +1,14 @@
-using Square.Bookings;
+using Square;
+using Square.Bookings.LocationProfiles;
+using Square.Bookings.TeamMemberProfiles;
 using Square.Core;
 
-namespace Square;
+namespace Square.Bookings;
 
 public partial interface IBookingsClient
 {
-    public Square.Bookings.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
-    public Square.Bookings.CustomAttributesClient CustomAttributes { get; }
+    public Square.Bookings.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Bookings.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
     public LocationProfilesClient LocationProfiles { get; }
     public TeamMemberProfilesClient TeamMemberProfiles { get; }
 

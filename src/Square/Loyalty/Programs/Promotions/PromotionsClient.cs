@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Loyalty.Programs;
+namespace Square.Loyalty.Programs.Promotions;
 
 public partial class PromotionsClient : IPromotionsClient
 {

@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.GiftCards;
+namespace Square.GiftCards.Activities;
 
 public partial interface IActivitiesClient
 {

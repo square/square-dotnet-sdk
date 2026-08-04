@@ -1,7 +1,8 @@
 using System.Text.Json;
+using Square;
 using Square.Core;
 
-namespace Square;
+namespace Square.Events;
 
 public partial class EventsClient : IEventsClient
 {
@@ -160,7 +161,7 @@ public partial class EventsClient : IEventsClient
     /// </summary>
     /// <example><code>
     /// await client.Events.ListEventTypesAsync(
-    ///     new Square.ListEventTypesRequest { ApiVersion = "api_version" }
+    ///     new Square.Events.ListEventTypesRequest { ApiVersion = "api_version" }
     /// );
     /// </code></example>
     public async Task<ListEventTypesResponse> ListEventTypesAsync(

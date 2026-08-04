@@ -2,5 +2,5 @@ namespace Square.CashDrawers;
 
 public partial interface ICashDrawersClient
 {
-    public ShiftsClient Shifts { get; }
+    public Square.CashDrawers.Shifts.ShiftsClient Shifts { get; }
 }

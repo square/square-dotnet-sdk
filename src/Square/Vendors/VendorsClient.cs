@@ -1,7 +1,8 @@
 using System.Text.Json;
+using Square;
 using Square.Core;
 
-namespace Square;
+namespace Square.Vendors;
 
 public partial class VendorsClient : IVendorsClient
 {

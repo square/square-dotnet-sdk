@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Webhooks;
+namespace Square.Webhooks.Subscriptions;
 
 [Serializable]
 public record ListSubscriptionsRequest
