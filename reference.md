@@ -3932,7 +3932,7 @@ Lists all event types that you can subscribe to as webhooks or query using the E
 
 ```csharp
 await client.Events.ListEventTypesAsync(
-    new Square.ListEventTypesRequest { ApiVersion = "api_version" }
+    new Square.Events.ListEventTypesRequest { ApiVersion = "api_version" }
 );
 ```
 </dd>
@@ -9452,7 +9452,7 @@ Retrieves a specific refund using the `refund_id`.
 <dd>
 
 ```csharp
-await client.Refunds.GetAsync(new Square.GetRefundsRequest { RefundId = "refund_id" });
+await client.Refunds.GetAsync(new Square.Refunds.GetRefundsRequest { RefundId = "refund_id" });
 ```
 </dd>
 </dl>
@@ -9955,7 +9955,11 @@ Retrieves a specific subscription.
 
 ```csharp
 await client.Subscriptions.GetAsync(
-    new Square.GetSubscriptionsRequest { SubscriptionId = "subscription_id", Include = "include" }
+    new Square.Subscriptions.GetSubscriptionsRequest
+    {
+        SubscriptionId = "subscription_id",
+        Include = "include",
+    }
 );
 ```
 </dd>
@@ -10511,7 +10515,7 @@ await client.TeamMembers.CreateAsync(
                 AssignmentType = TeamMemberAssignedLocationsAssignmentType.ExplicitLocations,
                 LocationIds = new List<string>() { "YSGH2WBKG94QZ", "GA2Y9HSJ8KRYT" },
             },
-            WageSetting = new WageSetting
+            WageSetting = new Square.WageSetting
             {
                 JobAssignments = new List<JobAssignment>()
                 {
@@ -10944,7 +10948,7 @@ await client.TeamMembers.UpdateAsync(
                     AssignmentType = TeamMemberAssignedLocationsAssignmentType.ExplicitLocations,
                     LocationIds = new List<string>() { "YSGH2WBKG94QZ", "GA2Y9HSJ8KRYT" },
                 },
-                WageSetting = new WageSetting
+                WageSetting = new Square.WageSetting
                 {
                     JobAssignments = new List<JobAssignment>()
                     {
@@ -12625,7 +12629,11 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 
 ```csharp
 await client.Bookings.CustomAttributeDefinitions.ListAsync(
-    new Square.Bookings.ListCustomAttributeDefinitionsRequest { Limit = 1, Cursor = "cursor" }
+    new Square.Bookings.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
+    {
+        Limit = 1,
+        Cursor = "cursor",
+    }
 );
 ```
 </dd>
@@ -12749,7 +12757,11 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 
 ```csharp
 await client.Bookings.CustomAttributeDefinitions.GetAsync(
-    new Square.Bookings.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    new Square.Bookings.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+        Version = 1,
+    }
 );
 ```
 </dd>
@@ -12877,7 +12889,10 @@ or *Appointments Premium*.
 
 ```csharp
 await client.Bookings.CustomAttributeDefinitions.DeleteAsync(
-    new Square.Bookings.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    new Square.Bookings.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+    }
 );
 ```
 </dd>
@@ -13083,7 +13098,7 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 
 ```csharp
 await client.Bookings.CustomAttributes.ListAsync(
-    new Square.Bookings.ListCustomAttributesRequest
+    new Square.Bookings.CustomAttributes.ListCustomAttributesRequest
     {
         BookingId = "booking_id",
         Limit = 1,
@@ -13148,7 +13163,7 @@ To call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ`
 
 ```csharp
 await client.Bookings.CustomAttributes.GetAsync(
-    new Square.Bookings.GetCustomAttributesRequest
+    new Square.Bookings.CustomAttributes.GetCustomAttributesRequest
     {
         BookingId = "booking_id",
         Key = "key",
@@ -13283,7 +13298,11 @@ or *Appointments Premium*.
 
 ```csharp
 await client.Bookings.CustomAttributes.DeleteAsync(
-    new Square.Bookings.DeleteCustomAttributesRequest { BookingId = "booking_id", Key = "key" }
+    new Square.Bookings.CustomAttributes.DeleteCustomAttributesRequest
+    {
+        BookingId = "booking_id",
+        Key = "key",
+    }
 );
 ```
 </dd>
@@ -13582,7 +13601,11 @@ Provides the summary details for a single cash drawer shift. See
 
 ```csharp
 await client.CashDrawers.Shifts.GetAsync(
-    new Square.CashDrawers.GetShiftsRequest { ShiftId = "shift_id", LocationId = "location_id" }
+    new Square.CashDrawers.Shifts.GetShiftsRequest
+    {
+        ShiftId = "shift_id",
+        LocationId = "location_id",
+    }
 );
 ```
 </dd>
@@ -14319,7 +14342,11 @@ seller-defined custom attributes (also known as custom fields) are always set to
 
 ```csharp
 await client.Customers.CustomAttributeDefinitions.ListAsync(
-    new Square.Customers.ListCustomAttributeDefinitionsRequest { Limit = 1, Cursor = "cursor" }
+    new Square.Customers.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
+    {
+        Limit = 1,
+        Cursor = "cursor",
+    }
 );
 ```
 </dd>
@@ -14461,7 +14488,11 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note t
 
 ```csharp
 await client.Customers.CustomAttributeDefinitions.GetAsync(
-    new Square.Customers.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    new Square.Customers.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+        Version = 1,
+    }
 );
 ```
 </dd>
@@ -14592,7 +14623,10 @@ Only the definition owner can delete a custom attribute definition.
 
 ```csharp
 await client.Customers.CustomAttributeDefinitions.DeleteAsync(
-    new Square.Customers.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    new Square.Customers.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+    }
 );
 ```
 </dd>
@@ -15424,7 +15458,7 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Customers.CustomAttributes.ListAsync(
-    new Square.Customers.ListCustomAttributesRequest
+    new Square.Customers.CustomAttributes.ListCustomAttributesRequest
     {
         CustomerId = "customer_id",
         Limit = 1,
@@ -15493,7 +15527,7 @@ To retrieve a custom attribute owned by another application, the `visibility` se
 
 ```csharp
 await client.Customers.CustomAttributes.GetAsync(
-    new Square.Customers.GetCustomAttributesRequest
+    new Square.Customers.CustomAttributes.GetCustomAttributesRequest
     {
         CustomerId = "customer_id",
         Key = "key",
@@ -15628,7 +15662,11 @@ To delete a custom attribute owned by another application, the `visibility` sett
 
 ```csharp
 await client.Customers.CustomAttributes.DeleteAsync(
-    new Square.Customers.DeleteCustomAttributesRequest { CustomerId = "customer_id", Key = "key" }
+    new Square.Customers.CustomAttributes.DeleteCustomAttributesRequest
+    {
+        CustomerId = "customer_id",
+        Key = "key",
+    }
 );
 ```
 </dd>
@@ -16800,7 +16838,7 @@ Returns a single `Shift` specified by `id`.
 <dd>
 
 ```csharp
-await client.Labor.Shifts.GetAsync(new Square.Labor.GetShiftsRequest { Id = "id" });
+await client.Labor.Shifts.GetAsync(new Square.Labor.Shifts.GetShiftsRequest { Id = "id" });
 ```
 </dd>
 </dl>
@@ -17244,7 +17282,7 @@ applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`
 
 ```csharp
 await client.Locations.CustomAttributeDefinitions.ListAsync(
-    new Square.Locations.ListCustomAttributeDefinitionsRequest
+    new Square.Locations.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
     {
         VisibilityFilter = VisibilityFilter.All,
         Limit = 1,
@@ -17385,7 +17423,11 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Locations.CustomAttributeDefinitions.GetAsync(
-    new Square.Locations.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    new Square.Locations.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+        Version = 1,
+    }
 );
 ```
 </dd>
@@ -17511,7 +17553,10 @@ Only the definition owner can delete a custom attribute definition.
 
 ```csharp
 await client.Locations.CustomAttributeDefinitions.DeleteAsync(
-    new Square.Locations.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    new Square.Locations.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+    }
 );
 ```
 </dd>
@@ -17769,7 +17814,7 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Locations.CustomAttributes.ListAsync(
-    new Square.Locations.ListCustomAttributesRequest
+    new Square.Locations.CustomAttributes.ListCustomAttributesRequest
     {
         LocationId = "location_id",
         VisibilityFilter = VisibilityFilter.All,
@@ -17836,7 +17881,7 @@ To retrieve a custom attribute owned by another application, the `visibility` se
 
 ```csharp
 await client.Locations.CustomAttributes.GetAsync(
-    new Square.Locations.GetCustomAttributesRequest
+    new Square.Locations.CustomAttributes.GetCustomAttributesRequest
     {
         LocationId = "location_id",
         Key = "key",
@@ -17966,7 +18011,11 @@ To delete a custom attribute owned by another application, the `visibility` sett
 
 ```csharp
 await client.Locations.CustomAttributes.DeleteAsync(
-    new Square.Locations.DeleteCustomAttributesRequest { LocationId = "location_id", Key = "key" }
+    new Square.Locations.CustomAttributes.DeleteCustomAttributesRequest
+    {
+        LocationId = "location_id",
+        Key = "key",
+    }
 );
 ```
 </dd>
@@ -19385,7 +19434,7 @@ applications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`
 
 ```csharp
 await client.Merchants.CustomAttributeDefinitions.ListAsync(
-    new Square.Merchants.ListCustomAttributeDefinitionsRequest
+    new Square.Merchants.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
     {
         VisibilityFilter = VisibilityFilter.All,
         Limit = 1,
@@ -19526,7 +19575,11 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Merchants.CustomAttributeDefinitions.GetAsync(
-    new Square.Merchants.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    new Square.Merchants.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+        Version = 1,
+    }
 );
 ```
 </dd>
@@ -19652,7 +19705,10 @@ Only the definition owner can delete a custom attribute definition.
 
 ```csharp
 await client.Merchants.CustomAttributeDefinitions.DeleteAsync(
-    new Square.Merchants.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    new Square.Merchants.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+    }
 );
 ```
 </dd>
@@ -19891,7 +19947,7 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Merchants.CustomAttributes.ListAsync(
-    new Square.Merchants.ListCustomAttributesRequest
+    new Square.Merchants.CustomAttributes.ListCustomAttributesRequest
     {
         MerchantId = "merchant_id",
         VisibilityFilter = VisibilityFilter.All,
@@ -19958,7 +20014,7 @@ To retrieve a custom attribute owned by another application, the `visibility` se
 
 ```csharp
 await client.Merchants.CustomAttributes.GetAsync(
-    new Square.Merchants.GetCustomAttributesRequest
+    new Square.Merchants.CustomAttributes.GetCustomAttributesRequest
     {
         MerchantId = "merchant_id",
         Key = "key",
@@ -20088,7 +20144,11 @@ To delete a custom attribute owned by another application, the `visibility` sett
 
 ```csharp
 await client.Merchants.CustomAttributes.DeleteAsync(
-    new Square.Merchants.DeleteCustomAttributesRequest { MerchantId = "merchant_id", Key = "key" }
+    new Square.Merchants.CustomAttributes.DeleteCustomAttributesRequest
+    {
+        MerchantId = "merchant_id",
+        Key = "key",
+    }
 );
 ```
 </dd>
@@ -20150,7 +20210,7 @@ seller-defined custom attributes (also known as custom fields) are always set to
 
 ```csharp
 await client.Orders.CustomAttributeDefinitions.ListAsync(
-    new Square.Orders.ListCustomAttributeDefinitionsRequest
+    new Square.Orders.CustomAttributeDefinitions.ListCustomAttributeDefinitionsRequest
     {
         VisibilityFilter = VisibilityFilter.All,
         Cursor = "cursor",
@@ -20292,7 +20352,11 @@ setting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note t
 
 ```csharp
 await client.Orders.CustomAttributeDefinitions.GetAsync(
-    new Square.Orders.GetCustomAttributeDefinitionsRequest { Key = "key", Version = 1 }
+    new Square.Orders.CustomAttributeDefinitions.GetCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+        Version = 1,
+    }
 );
 ```
 </dd>
@@ -20418,7 +20482,10 @@ Only the definition owner can delete a custom attribute definition.
 
 ```csharp
 await client.Orders.CustomAttributeDefinitions.DeleteAsync(
-    new Square.Orders.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+    new Square.Orders.CustomAttributeDefinitions.DeleteCustomAttributeDefinitionsRequest
+    {
+        Key = "key",
+    }
 );
 ```
 </dd>
@@ -20678,7 +20745,7 @@ and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Orders.CustomAttributes.ListAsync(
-    new Square.Orders.ListCustomAttributesRequest
+    new Square.Orders.CustomAttributes.ListCustomAttributesRequest
     {
         OrderId = "order_id",
         VisibilityFilter = VisibilityFilter.All,
@@ -20748,7 +20815,7 @@ also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.
 
 ```csharp
 await client.Orders.CustomAttributes.GetAsync(
-    new Square.Orders.GetCustomAttributesRequest
+    new Square.Orders.CustomAttributes.GetCustomAttributesRequest
     {
         OrderId = "order_id",
         CustomAttributeKey = "custom_attribute_key",
@@ -20888,7 +20955,7 @@ To delete a custom attribute owned by another application, the `visibility` sett
 
 ```csharp
 await client.Orders.CustomAttributes.DeleteAsync(
-    new Square.Orders.DeleteCustomAttributesRequest
+    new Square.Orders.CustomAttributes.DeleteCustomAttributesRequest
     {
         OrderId = "order_id",
         CustomAttributeKey = "custom_attribute_key",
@@ -20954,7 +21021,7 @@ to get this information directly from the `TeamMember.wage_setting` field.
 
 ```csharp
 await client.TeamMembers.WageSetting.GetAsync(
-    new Square.TeamMembers.GetWageSettingRequest { TeamMemberId = "team_member_id" }
+    new Square.TeamMembers.WageSetting.GetWageSettingRequest { TeamMemberId = "team_member_id" }
 );
 ```
 </dd>
@@ -21020,7 +21087,7 @@ await client.TeamMembers.WageSetting.UpdateAsync(
     new UpdateWageSettingRequest
     {
         TeamMemberId = "team_member_id",
-        WageSetting = new WageSetting
+        WageSetting = new Square.WageSetting
         {
             JobAssignments = new List<JobAssignment>()
             {
@@ -21716,7 +21783,7 @@ Retrieves an Interac Terminal refund object by ID. Terminal refund objects are a
 
 ```csharp
 await client.Terminal.Refunds.GetAsync(
-    new Square.Terminal.GetRefundsRequest { TerminalRefundId = "terminal_refund_id" }
+    new Square.Terminal.Refunds.GetRefundsRequest { TerminalRefundId = "terminal_refund_id" }
 );
 ```
 </dd>
@@ -21829,7 +21896,7 @@ Lists all webhook event types that can be subscribed to.
 
 ```csharp
 await client.Webhooks.EventTypes.ListAsync(
-    new Square.Webhooks.ListEventTypesRequest { ApiVersion = "api_version" }
+    new Square.Webhooks.EventTypes.ListEventTypesRequest { ApiVersion = "api_version" }
 );
 ```
 </dd>
@@ -22014,7 +22081,7 @@ Retrieves a webhook subscription identified by its ID.
 
 ```csharp
 await client.Webhooks.Subscriptions.GetAsync(
-    new Square.Webhooks.GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
+    new Square.Webhooks.Subscriptions.GetSubscriptionsRequest { SubscriptionId = "subscription_id" }
 );
 ```
 </dd>

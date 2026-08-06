@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Loyalty;
+namespace Square.Loyalty.Rewards;
 
 public partial interface IRewardsClient
 {

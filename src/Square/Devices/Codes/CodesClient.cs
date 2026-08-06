@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Devices;
+namespace Square.Devices.Codes;
 
 public partial class CodesClient : ICodesClient
 {

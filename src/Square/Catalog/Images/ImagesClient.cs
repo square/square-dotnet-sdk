@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Catalog;
+namespace Square.Catalog.Images;
 
 public partial class ImagesClient : IImagesClient
 {

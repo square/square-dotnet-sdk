@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Labor;
+namespace Square.Labor.WorkweekConfigs;
 
 public partial class WorkweekConfigsClient : IWorkweekConfigsClient
 {

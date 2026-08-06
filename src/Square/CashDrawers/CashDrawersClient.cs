@@ -9,8 +9,8 @@ public partial class CashDrawersClient : ICashDrawersClient
     internal CashDrawersClient(RawClient client)
     {
         _client = client;
-        Shifts = new ShiftsClient(_client);
+        Shifts = new Square.CashDrawers.Shifts.ShiftsClient(_client);
     }
 
-    public ShiftsClient Shifts { get; }
+    public Square.CashDrawers.Shifts.ShiftsClient Shifts { get; }
 }

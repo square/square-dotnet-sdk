@@ -1,7 +1,8 @@
+using Square;
 using Square.Core;
-using Square.GiftCards;
+using Square.GiftCards.Activities;
 
-namespace Square;
+namespace Square.GiftCards;
 
 public partial interface IGiftCardsClient
 {

@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using Square.Devices;
+using Square.Devices.Codes;
 
 // ReSharper disable NullableWarningSuppressionIsUsed
 

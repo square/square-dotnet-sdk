@@ -1,8 +1,9 @@
 using System.Text.Json;
+using Square;
 using Square.Core;
-using Square.Devices;
+using Square.Devices.Codes;
 
-namespace Square;
+namespace Square.Devices;
 
 public partial class DevicesClient : IDevicesClient
 {

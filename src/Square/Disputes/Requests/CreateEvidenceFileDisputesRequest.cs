@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
+using Square;
 using Square.Core;
 
-namespace Square;
+namespace Square.Disputes;
 
 [Serializable]
 public record CreateEvidenceFileDisputesRequest

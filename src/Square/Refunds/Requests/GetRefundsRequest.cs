@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square;
+namespace Square.Refunds;
 
 [Serializable]
 public record GetRefundsRequest

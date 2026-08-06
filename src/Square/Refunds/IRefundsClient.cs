@@ -1,6 +1,7 @@
+using Square;
 using Square.Core;
 
-namespace Square;
+namespace Square.Refunds;
 
 public partial interface IRefundsClient
 {

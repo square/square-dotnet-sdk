@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Terminal;
+namespace Square.Terminal.Refunds;
 
 [Serializable]
 public record SearchTerminalRefundsRequest

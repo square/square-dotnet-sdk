@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using Square;
 using Square.Core;
+using Square.Customers;
 using Square.Test.Unit.MockServer;
 
 namespace Square.Test.Unit.MockServer.Customers;
@@ -28,7 +29,8 @@ public class DeleteTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/customers/custom-attribute-definitions/key")
+                    .WithPath("/v2/customers/customer_id")
+                    .WithParam("version", "1000000")
                     .UsingDelete()
             )
             .RespondWith(
@@ -38,17 +40,12 @@ public class DeleteTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Customers.CustomAttributeDefinitions.DeleteAsync(
-            new Square.Customers.DeleteCustomAttributeDefinitionsRequest { Key = "key" }
+        var response = await Client.Customers.DeleteAsync(
+            new DeleteCustomersRequest { CustomerId = "customer_id", Version = 1000000 }
         );
         Assert.That(
             response,
-            Is.EqualTo(
-                    JsonUtils.Deserialize<DeleteCustomerCustomAttributeDefinitionResponse>(
-                        mockResponse
-                    )
-                )
-                .UsingDefaults()
+            Is.EqualTo(JsonUtils.Deserialize<DeleteCustomerResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

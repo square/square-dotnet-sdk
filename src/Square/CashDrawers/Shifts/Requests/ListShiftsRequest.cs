@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.CashDrawers;
+namespace Square.CashDrawers.Shifts;
 
 [Serializable]
 public record ListShiftsRequest

@@ -1,8 +1,9 @@
 using System.Text.Json;
+using Square;
 using Square.Core;
-using Square.Disputes;
+using Square.Disputes.Evidence;
 
-namespace Square;
+namespace Square.Disputes;
 
 public partial class DisputesClient : IDisputesClient
 {

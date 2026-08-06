@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Loyalty;
+namespace Square.Loyalty.Rewards;
 
 [Serializable]
 public record RedeemLoyaltyRewardRequest

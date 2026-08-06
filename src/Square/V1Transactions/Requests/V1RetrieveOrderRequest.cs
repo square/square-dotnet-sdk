@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square;
+namespace Square.V1Transactions;
 
 [Serializable]
 public record V1RetrieveOrderRequest

@@ -1,15 +1,17 @@
+using Square;
 using Square.Core;
-using Square.Customers;
+using Square.Customers.Groups;
+using Square.Customers.Segments;
 
-namespace Square;
+namespace Square.Customers;
 
 public partial interface ICustomersClient
 {
-    public Square.Customers.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Customers.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
     public GroupsClient Groups { get; }
     public SegmentsClient Segments { get; }
-    public Square.Customers.CardsClient Cards { get; }
-    public Square.Customers.CustomAttributesClient CustomAttributes { get; }
+    public Square.Customers.Cards.CardsClient Cards { get; }
+    public Square.Customers.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
 
     /// <summary>
     /// Lists customer profiles associated with a Square account.

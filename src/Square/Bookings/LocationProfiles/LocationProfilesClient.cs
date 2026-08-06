@@ -2,7 +2,7 @@ using System.Text.Json;
 using Square;
 using Square.Core;
 
-namespace Square.Bookings;
+namespace Square.Bookings.LocationProfiles;
 
 public partial class LocationProfilesClient : ILocationProfilesClient
 {

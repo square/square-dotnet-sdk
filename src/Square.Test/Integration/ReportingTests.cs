@@ -1,6 +1,7 @@
 using System.Text.Json;
 using NUnit.Framework;
 using Square;
+using Square.Reporting;
 
 namespace Square.Test.Integration;
 

@@ -1,6 +1,7 @@
 using System.Globalization;
 using NUnit.Framework;
 using Square.CashDrawers;
+using Square.CashDrawers.Shifts;
 
 namespace Square.Test.Integration;
 

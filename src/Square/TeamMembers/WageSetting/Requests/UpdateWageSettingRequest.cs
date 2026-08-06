@@ -1,8 +1,7 @@
 using System.Text.Json.Serialization;
-using Square;
 using Square.Core;
 
-namespace Square.TeamMembers;
+namespace Square.TeamMembers.WageSetting;
 
 [Serializable]
 public record UpdateWageSettingRequest
@@ -21,7 +20,7 @@ public record UpdateWageSettingRequest
     /// This value is ignored if `job_id` is also provided.
     /// </summary>
     [JsonPropertyName("wage_setting")]
-    public required WageSetting WageSetting { get; set; }
+    public required Square.WageSetting WageSetting { get; set; }
 
     /// <inheritdoc />
     public override string ToString()

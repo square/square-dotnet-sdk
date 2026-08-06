@@ -1,7 +1,8 @@
 using System.Text.Json;
+using Square;
 using Square.Core;
 
-namespace Square;
+namespace Square.Orders;
 
 public partial class OrdersClient : IOrdersClient
 {
@@ -10,13 +11,14 @@ public partial class OrdersClient : IOrdersClient
     internal OrdersClient(RawClient client)
     {
         _client = client;
-        CustomAttributeDefinitions = new Square.Orders.CustomAttributeDefinitionsClient(_client);
-        CustomAttributes = new Square.Orders.CustomAttributesClient(_client);
+        CustomAttributeDefinitions =
+            new Square.Orders.CustomAttributeDefinitions.CustomAttributeDefinitionsClient(_client);
+        CustomAttributes = new Square.Orders.CustomAttributes.CustomAttributesClient(_client);
     }
 
-    public Square.Orders.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
+    public Square.Orders.CustomAttributeDefinitions.CustomAttributeDefinitionsClient CustomAttributeDefinitions { get; }
 
-    public Square.Orders.CustomAttributesClient CustomAttributes { get; }
+    public Square.Orders.CustomAttributes.CustomAttributesClient CustomAttributes { get; }
 
     /// <summary>
     /// Creates a new [order](entity:Order) that can include information about products for

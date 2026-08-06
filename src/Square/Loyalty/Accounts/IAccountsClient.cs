@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Loyalty;
+namespace Square.Loyalty.Accounts;
 
 public partial interface IAccountsClient
 {

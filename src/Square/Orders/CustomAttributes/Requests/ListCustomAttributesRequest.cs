@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using Square;
 using Square.Core;
 
-namespace Square.Orders;
+namespace Square.Orders.CustomAttributes;
 
 [Serializable]
 public record ListCustomAttributesRequest

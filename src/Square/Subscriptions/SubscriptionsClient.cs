@@ -1,7 +1,8 @@
 using System.Text.Json;
+using Square;
 using Square.Core;
 
-namespace Square;
+namespace Square.Subscriptions;
 
 public partial class SubscriptionsClient : ISubscriptionsClient
 {
@@ -278,7 +279,11 @@ public partial class SubscriptionsClient : ISubscriptionsClient
     /// </summary>
     /// <example><code>
     /// await client.Subscriptions.GetAsync(
-    ///     new Square.GetSubscriptionsRequest { SubscriptionId = "subscription_id", Include = "include" }
+    ///     new Square.Subscriptions.GetSubscriptionsRequest
+    ///     {
+    ///         SubscriptionId = "subscription_id",
+    ///         Include = "include",
+    ///     }
     /// );
     /// </code></example>
     public async Task<GetSubscriptionResponse> GetAsync(

@@ -1,6 +1,6 @@
 using Square;
 
-namespace Square.Terminal;
+namespace Square.Terminal.Checkouts;
 
 public partial interface ICheckoutsClient
 {

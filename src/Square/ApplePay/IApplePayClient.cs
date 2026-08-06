@@ -1,4 +1,6 @@
-namespace Square;
+using Square;
+
+namespace Square.ApplePay;
 
 public partial interface IApplePayClient
 {

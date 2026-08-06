@@ -14,28 +14,200 @@ public class UpdateTest : BaseMockServerTest
     {
         const string requestJson = """
             {
-              "custom_attribute_definition": {
-                "key": "cover-count",
-                "visibility": "VISIBILITY_READ_ONLY",
+              "order": {
+                "location_id": "location_id",
+                "line_items": [
+                  {
+                    "uid": "cookie_uid",
+                    "name": "COOKIE",
+                    "quantity": "2",
+                    "base_price_money": {
+                      "amount": 200,
+                      "currency": "USD"
+                    }
+                  }
+                ],
                 "version": 1
               },
-              "idempotency_key": "IDEMPOTENCY_KEY"
+              "fields_to_clear": [
+                "discounts"
+              ],
+              "idempotency_key": "UNIQUE_STRING"
             }
             """;
 
         const string mockResponse = """
             {
-              "custom_attribute_definition": {
-                "key": "cover-count",
-                "schema": {
-                  "$ref": "https://developer-production-s.squarecdn.com/schemas/v1/common.json#squareup.common.Number"
+              "order": {
+                "id": "DREk7wJcyXNHqULq8JJ2iPAsluJZY",
+                "location_id": "MXVQSVNDGN3C8",
+                "reference_id": "reference_id",
+                "source": {
+                  "name": "Cookies"
                 },
-                "name": "Cover count",
-                "description": "The number of people seated at a table",
-                "visibility": "VISIBILITY_READ_ONLY",
+                "customer_id": "customer_id",
+                "line_items": [
+                  {
+                    "uid": "EuYkakhmu3ksHIds5Hiot",
+                    "name": "Small Coffee",
+                    "quantity": "1",
+                    "base_price_money": {
+                      "amount": 500,
+                      "currency": "USD"
+                    },
+                    "variation_total_price_money": {
+                      "amount": 500,
+                      "currency": "USD"
+                    },
+                    "gross_sales_money": {
+                      "amount": 500,
+                      "currency": "USD"
+                    },
+                    "total_tax_money": {
+                      "amount": 0,
+                      "currency": "USD"
+                    },
+                    "total_discount_money": {
+                      "amount": 0,
+                      "currency": "USD"
+                    },
+                    "total_money": {
+                      "amount": 500,
+                      "currency": "USD"
+                    },
+                    "total_service_charge_money": {
+                      "amount": 0,
+                      "currency": "USD"
+                    }
+                  },
+                  {
+                    "uid": "cookie_uid",
+                    "name": "COOKIE",
+                    "quantity": "2",
+                    "base_price_money": {
+                      "amount": 200,
+                      "currency": "USD"
+                    },
+                    "variation_total_price_money": {
+                      "amount": 400,
+                      "currency": "USD"
+                    },
+                    "gross_sales_money": {
+                      "amount": 400,
+                      "currency": "USD"
+                    },
+                    "total_tax_money": {
+                      "amount": 0,
+                      "currency": "USD"
+                    },
+                    "total_discount_money": {
+                      "amount": 0,
+                      "currency": "USD"
+                    },
+                    "total_money": {
+                      "amount": 400,
+                      "currency": "USD"
+                    },
+                    "total_service_charge_money": {
+                      "amount": 0,
+                      "currency": "USD"
+                    }
+                  }
+                ],
+                "taxes": [
+                  {}
+                ],
+                "discounts": [
+                  {}
+                ],
+                "service_charges": [
+                  {}
+                ],
+                "fulfillments": [
+                  {}
+                ],
+                "returns": [
+                  {}
+                ],
+                "net_amounts": {
+                  "total_money": {
+                    "amount": 900,
+                    "currency": "USD"
+                  },
+                  "tax_money": {
+                    "amount": 0,
+                    "currency": "USD"
+                  },
+                  "discount_money": {
+                    "amount": 0,
+                    "currency": "USD"
+                  },
+                  "service_charge_money": {
+                    "amount": 0,
+                    "currency": "USD"
+                  }
+                },
+                "rounding_adjustment": {
+                  "uid": "uid",
+                  "name": "name"
+                },
+                "tenders": [
+                  {
+                    "type": "CARD"
+                  }
+                ],
+                "refunds": [
+                  {
+                    "id": "id",
+                    "location_id": "location_id",
+                    "reason": "reason",
+                    "amount_money": {},
+                    "status": "PENDING"
+                  }
+                ],
+                "metadata": {
+                  "key": "value"
+                },
+                "created_at": "2019-08-23T18:26:18.243Z",
+                "updated_at": "2019-08-23T18:33:47.523Z",
+                "closed_at": "closed_at",
+                "state": "OPEN",
                 "version": 2,
-                "updated_at": "2022-11-16T17:44:11.436Z",
-                "created_at": "2022-11-16T16:53:23.141Z"
+                "total_money": {
+                  "amount": 900,
+                  "currency": "USD"
+                },
+                "total_tax_money": {
+                  "amount": 0,
+                  "currency": "USD"
+                },
+                "total_discount_money": {
+                  "amount": 0,
+                  "currency": "USD"
+                },
+                "total_tip_money": {
+                  "amount": 1000000,
+                  "currency": "UNKNOWN_CURRENCY"
+                },
+                "total_service_charge_money": {
+                  "amount": 0,
+                  "currency": "USD"
+                },
+                "ticket_name": "ticket_name",
+                "pricing_options": {
+                  "auto_apply_discounts": true,
+                  "auto_apply_taxes": true
+                },
+                "rewards": [
+                  {
+                    "id": "id",
+                    "reward_tier_id": "reward_tier_id"
+                  }
+                ],
+                "net_amount_due_money": {
+                  "amount": 1000000,
+                  "currency": "UNKNOWN_CURRENCY"
+                }
               },
               "errors": [
                 {
@@ -52,7 +224,7 @@ public class UpdateTest : BaseMockServerTest
             .Given(
                 WireMock
                     .RequestBuilders.Request.Create()
-                    .WithPath("/v2/orders/custom-attribute-definitions/key")
+                    .WithPath("/v2/orders/order_id")
                     .WithHeader("Content-Type", "application/json")
                     .UsingPut()
                     .WithBodyAsJson(requestJson)
@@ -64,27 +236,32 @@ public class UpdateTest : BaseMockServerTest
                     .WithBody(mockResponse)
             );
 
-        var response = await Client.Orders.CustomAttributeDefinitions.UpdateAsync(
-            new UpdateOrderCustomAttributeDefinitionRequest
+        var response = await Client.Orders.UpdateAsync(
+            new UpdateOrderRequest
             {
-                Key = "key",
-                CustomAttributeDefinition = new CustomAttributeDefinition
+                OrderId = "order_id",
+                Order = new Order
                 {
-                    Key = "cover-count",
-                    Visibility = CustomAttributeDefinitionVisibility.VisibilityReadOnly,
+                    LocationId = "location_id",
+                    LineItems = new List<OrderLineItem>()
+                    {
+                        new OrderLineItem
+                        {
+                            Uid = "cookie_uid",
+                            Name = "COOKIE",
+                            Quantity = "2",
+                            BasePriceMoney = new Money { Amount = 200, Currency = Currency.Usd },
+                        },
+                    },
                     Version = 1,
                 },
-                IdempotencyKey = "IDEMPOTENCY_KEY",
+                FieldsToClear = new List<string>() { "discounts" },
+                IdempotencyKey = "UNIQUE_STRING",
             }
         );
         Assert.That(
             response,
-            Is.EqualTo(
-                    JsonUtils.Deserialize<UpdateOrderCustomAttributeDefinitionResponse>(
-                        mockResponse
-                    )
-                )
-                .UsingDefaults()
+            Is.EqualTo(JsonUtils.Deserialize<UpdateOrderResponse>(mockResponse)).UsingDefaults()
         );
     }
 }

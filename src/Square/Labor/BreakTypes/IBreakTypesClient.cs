@@ -1,7 +1,7 @@
 using Square;
 using Square.Core;
 
-namespace Square.Labor;
+namespace Square.Labor.BreakTypes;
 
 public partial interface IBreakTypesClient
 {

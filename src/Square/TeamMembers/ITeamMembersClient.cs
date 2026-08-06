@@ -1,6 +1,7 @@
-using Square.TeamMembers;
+using Square;
+using Square.TeamMembers.WageSetting;
 
-namespace Square;
+namespace Square.TeamMembers;
 
 public partial interface ITeamMembersClient
 {
