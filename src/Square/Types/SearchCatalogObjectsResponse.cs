@@ -43,6 +43,12 @@ public record SearchCatalogObjectsResponse : IJsonOnDeserialized
     [JsonPropertyName("latest_time")]
     public string? LatestTime { get; set; }
 
+    /// <summary>
+    /// A list of [CatalogObject](entity:CatalogObject)s referenced by the object in the `objects` field and specifically requested.
+    /// </summary>
+    [JsonPropertyName("included_resources")]
+    public IncludedResources? IncludedResources { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

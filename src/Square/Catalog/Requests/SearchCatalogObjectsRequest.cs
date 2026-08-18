@@ -86,6 +86,12 @@ public record SearchCatalogObjectsRequest
     [JsonPropertyName("include_category_path_to_root")]
     public bool? IncludeCategoryPathToRoot { get; set; }
 
+    /// <summary>
+    /// Options to include related resources in the response.
+    /// </summary>
+    [JsonPropertyName("include_options")]
+    public IncludeOptions? IncludeOptions { get; set; }
+
     /// <inheritdoc />
     public override string ToString()
     {

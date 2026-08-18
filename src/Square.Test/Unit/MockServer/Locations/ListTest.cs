@@ -54,7 +54,9 @@ public class ListTest : BaseMockServerTest
                   "logo_url": "logo_url",
                   "pos_background_url": "pos_background_url",
                   "mcc": "mcc",
-                  "full_format_logo_url": "full_format_logo_url"
+                  "full_format_logo_url": "full_format_logo_url",
+                  "custom_receipt_text": "custom_receipt_text",
+                  "return_policy": "return_policy"
                 },
                 {
                   "id": "3Z4V4WHQK64X9",
@@ -91,7 +93,9 @@ public class ListTest : BaseMockServerTest
                   "logo_url": "logo_url",
                   "pos_background_url": "pos_background_url",
                   "mcc": "7299",
-                  "full_format_logo_url": "full_format_logo_url"
+                  "full_format_logo_url": "full_format_logo_url",
+                  "custom_receipt_text": "custom_receipt_text",
+                  "return_policy": "return_policy"
                 }
               ]
             }

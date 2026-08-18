@@ -38,6 +38,12 @@ public record SearchCatalogItemsResponse : IJsonOnDeserialized
     [JsonPropertyName("matched_variation_ids")]
     public IEnumerable<string>? MatchedVariationIds { get; set; }
 
+    /// <summary>
+    /// Related resources included in the response as requested via include_options
+    /// </summary>
+    [JsonPropertyName("included_resources")]
+    public IncludedResources? IncludedResources { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

@@ -225,6 +225,8 @@ public readonly record struct ErrorCode : IStringEnum
 
     public static readonly ErrorCode AmountTooHigh = new(Values.AmountTooHigh);
 
+    public static readonly ErrorCode AmountTooLow = new(Values.AmountTooLow);
+
     public static readonly ErrorCode UnsupportedInstrumentType = new(
         Values.UnsupportedInstrumentType
     );
@@ -303,6 +305,30 @@ public readonly record struct ErrorCode : IStringEnum
 
     public static readonly ErrorCode PlaidErrorRateLimit = new(Values.PlaidErrorRateLimit);
 
+    public static readonly ErrorCode PlaidErrorInvalidAccessToken = new(
+        Values.PlaidErrorInvalidAccessToken
+    );
+
+    public static readonly ErrorCode PlaidErrorInvalidAccountId = new(
+        Values.PlaidErrorInvalidAccountId
+    );
+
+    public static readonly ErrorCode PlaidErrorNoAccounts = new(Values.PlaidErrorNoAccounts);
+
+    public static readonly ErrorCode PlaidErrorItemNotFound = new(Values.PlaidErrorItemNotFound);
+
+    public static readonly ErrorCode PlaidErrorInsufficientCredentials = new(
+        Values.PlaidErrorInsufficientCredentials
+    );
+
+    public static readonly ErrorCode PlaidErrorItemNotSupported = new(
+        Values.PlaidErrorItemNotSupported
+    );
+
+    public static readonly ErrorCode PlaidErrorProductNotReady = new(
+        Values.PlaidErrorProductNotReady
+    );
+
     public static readonly ErrorCode PaymentSourceNotEnabledForTarget = new(
         Values.PaymentSourceNotEnabledForTarget
     );
@@ -330,6 +356,8 @@ public readonly record struct ErrorCode : IStringEnum
     public static readonly ErrorCode ReservationDeclined = new(Values.ReservationDeclined);
 
     public static readonly ErrorCode UnknownBodyParameter = new(Values.UnknownBodyParameter);
+
+    public static readonly ErrorCode CartIneligibleForEbt = new(Values.CartIneligibleForEbt);
 
     public static readonly ErrorCode NotFound = new(Values.NotFound);
 
@@ -608,6 +636,8 @@ public readonly record struct ErrorCode : IStringEnum
 
         public const string AmountTooHigh = "AMOUNT_TOO_HIGH";
 
+        public const string AmountTooLow = "AMOUNT_TOO_LOW";
+
         public const string UnsupportedInstrumentType = "UNSUPPORTED_INSTRUMENT_TYPE";
 
         public const string RefundAmountInvalid = "REFUND_AMOUNT_INVALID";
@@ -672,6 +702,21 @@ public readonly record struct ErrorCode : IStringEnum
 
         public const string PlaidErrorRateLimit = "PLAID_ERROR_RATE_LIMIT";
 
+        public const string PlaidErrorInvalidAccessToken = "PLAID_ERROR_INVALID_ACCESS_TOKEN";
+
+        public const string PlaidErrorInvalidAccountId = "PLAID_ERROR_INVALID_ACCOUNT_ID";
+
+        public const string PlaidErrorNoAccounts = "PLAID_ERROR_NO_ACCOUNTS";
+
+        public const string PlaidErrorItemNotFound = "PLAID_ERROR_ITEM_NOT_FOUND";
+
+        public const string PlaidErrorInsufficientCredentials =
+            "PLAID_ERROR_INSUFFICIENT_CREDENTIALS";
+
+        public const string PlaidErrorItemNotSupported = "PLAID_ERROR_ITEM_NOT_SUPPORTED";
+
+        public const string PlaidErrorProductNotReady = "PLAID_ERROR_PRODUCT_NOT_READY";
+
         public const string PaymentSourceNotEnabledForTarget =
             "PAYMENT_SOURCE_NOT_ENABLED_FOR_TARGET";
 
@@ -695,6 +740,8 @@ public readonly record struct ErrorCode : IStringEnum
         public const string ReservationDeclined = "RESERVATION_DECLINED";
 
         public const string UnknownBodyParameter = "UNKNOWN_BODY_PARAMETER";
+
+        public const string CartIneligibleForEbt = "CART_INELIGIBLE_FOR_EBT";
 
         public const string NotFound = "NOT_FOUND";
 

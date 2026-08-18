@@ -35,6 +35,14 @@ public readonly record struct CardBrand : IStringEnum
 
     public static readonly CardBrand Ebt = new(Values.Ebt);
 
+    public static readonly CardBrand Quicpay = new(Values.Quicpay);
+
+    public static readonly CardBrand Id = new(Values.Id);
+
+    public static readonly CardBrand TransportationIc = new(Values.TransportationIc);
+
+    public static readonly CardBrand Carnet = new(Values.Carnet);
+
     public CardBrand(string value)
     {
         Value = value;
@@ -107,5 +115,13 @@ public readonly record struct CardBrand : IStringEnum
         public const string Felica = "FELICA";
 
         public const string Ebt = "EBT";
+
+        public const string Quicpay = "QUICPAY";
+
+        public const string Id = "ID";
+
+        public const string TransportationIc = "TRANSPORTATION_IC";
+
+        public const string Carnet = "CARNET";
     }
 }

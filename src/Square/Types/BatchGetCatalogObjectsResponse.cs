@@ -29,6 +29,12 @@ public record BatchGetCatalogObjectsResponse : IJsonOnDeserialized
     [JsonPropertyName("related_objects")]
     public IEnumerable<CatalogObject>? RelatedObjects { get; set; }
 
+    /// <summary>
+    /// A list of [CatalogObject](entity:CatalogObject)s referenced by the object in the `objects` field and specifically requested.
+    /// </summary>
+    [JsonPropertyName("included_resources")]
+    public IncludedResources? IncludedResources { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 
