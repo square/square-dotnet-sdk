@@ -68,8 +68,9 @@ public partial interface IOrdersClient
     ///
     /// Note that details for orders processed with Square Point of Sale while in
     /// offline mode might not be transmitted to Square for up to 72 hours. Offline
-    /// orders have a `created_at` value that reflects the time the order was created,
-    /// not the time it was subsequently transmitted to Square.
+    /// orders have a `created_at` value that reflects the time the order was
+    /// transmitted to Square and created server-side, not the time the order was
+    /// created on the Point of Sale device.
     /// </summary>
     Task<SearchOrdersResponse> SearchAsync(
         SearchOrdersRequest request,

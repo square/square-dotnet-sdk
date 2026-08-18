@@ -208,6 +208,20 @@ public record Location : IJsonOnDeserialized
     [JsonPropertyName("tax_ids")]
     public TaxIds? TaxIds { get; set; }
 
+    /// <summary>
+    /// The custom text that appears on receipts issued for this location.
+    /// This text can also be configured in the Seller Dashboard (Receipts section).
+    /// </summary>
+    [JsonPropertyName("custom_receipt_text")]
+    public string? CustomReceiptText { get; set; }
+
+    /// <summary>
+    /// The return policy that appears on receipts issued for this location.
+    /// This text can also be configured in the Seller Dashboard (Receipts section).
+    /// </summary>
+    [JsonPropertyName("return_policy")]
+    public string? ReturnPolicy { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

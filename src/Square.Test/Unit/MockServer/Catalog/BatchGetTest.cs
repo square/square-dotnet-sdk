@@ -120,7 +120,21 @@ public class BatchGetTest : BaseMockServerTest
                   "image_id": "image_id",
                   "type": "TAX"
                 }
-              ]
+              ],
+              "included_resources": {
+                "nested_modifiers": [
+                  {
+                    "id": "id",
+                    "type": "ITEM"
+                  }
+                ],
+                "ancestor_modifiers": [
+                  {
+                    "id": "id",
+                    "type": "ITEM"
+                  }
+                ]
+              }
             }
             """;
 

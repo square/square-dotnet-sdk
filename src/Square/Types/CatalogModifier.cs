@@ -73,6 +73,19 @@ public record CatalogModifier : IJsonOnDeserialized
     [JsonPropertyName("hidden_online")]
     public bool? HiddenOnline { get; set; }
 
+    /// <summary>
+    /// Child `CatalogModifierList`s that this `CatalogModifier` nests for multi-step choices.
+    /// When a customer or staff member selects this modifier, the relevant follow-up modifier list appears.
+    /// For example, selecting "Hummus" reveals a secondary "Choose Hummus Flavor" set, and selecting a flavor
+    /// could reveal a third-level portion size set.
+    ///
+    /// Each entry references a child modifier list. Each modifier can nest up to 5 child modifier list, and
+    /// supports up to 3 levels of nesting depth. The order in `child_modifier_list_ids` determines display order
+    /// during checkout.
+    /// </summary>
+    [JsonPropertyName("child_modifier_list_ids")]
+    public IEnumerable<string>? ChildModifierListIds { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

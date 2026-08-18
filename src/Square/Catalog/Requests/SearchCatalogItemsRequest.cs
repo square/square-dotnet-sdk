@@ -73,6 +73,12 @@ public record SearchCatalogItemsRequest
     [JsonPropertyName("archived_state")]
     public ArchivedState? ArchivedState { get; set; }
 
+    /// <summary>
+    /// Options to include related resources in the response.
+    /// </summary>
+    [JsonPropertyName("include_options")]
+    public IncludeOptions? IncludeOptions { get; set; }
+
     /// <inheritdoc />
     public override string ToString()
     {

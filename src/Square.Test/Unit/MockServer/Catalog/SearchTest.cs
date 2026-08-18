@@ -105,7 +105,21 @@ public class SearchTest : BaseMockServerTest
                   "type": "ITEM"
                 }
               ],
-              "latest_time": "latest_time"
+              "latest_time": "latest_time",
+              "included_resources": {
+                "nested_modifiers": [
+                  {
+                    "id": "id",
+                    "type": "ITEM"
+                  }
+                ],
+                "ancestor_modifiers": [
+                  {
+                    "id": "id",
+                    "type": "ITEM"
+                  }
+                ]
+              }
             }
             """;
 

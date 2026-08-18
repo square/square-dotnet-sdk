@@ -94,7 +94,9 @@ public class CreateTest : BaseMockServerTest
                   "fr_naf": "fr_naf",
                   "es_nif": "es_nif",
                   "jp_qii": "jp_qii"
-                }
+                },
+                "custom_receipt_text": "custom_receipt_text",
+                "return_policy": "return_policy"
               }
             }
             """;

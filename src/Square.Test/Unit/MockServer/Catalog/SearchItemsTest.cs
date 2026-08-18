@@ -89,7 +89,21 @@ public class SearchItemsTest : BaseMockServerTest
               "cursor": "cursor",
               "matched_variation_ids": [
                 "VBJNPHCOKDFECR6VU25WRJUD"
-              ]
+              ],
+              "included_resources": {
+                "nested_modifiers": [
+                  {
+                    "id": "id",
+                    "type": "ITEM"
+                  }
+                ],
+                "ancestor_modifiers": [
+                  {
+                    "id": "id",
+                    "type": "ITEM"
+                  }
+                ]
+              }
             }
             """;
 

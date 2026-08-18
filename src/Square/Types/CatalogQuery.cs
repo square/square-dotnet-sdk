@@ -108,6 +108,12 @@ public record CatalogQuery : IJsonOnDeserialized
     [JsonPropertyName("item_variations_for_item_option_values_query")]
     public CatalogQueryItemVariationsForItemOptionValues? ItemVariationsForItemOptionValuesQuery { get; set; }
 
+    /// <summary>
+    /// A query expression to return `CatalogModifier` objects that nest the specified modifier lists (via `child_modifier_list_ids`)
+    /// </summary>
+    [JsonPropertyName("modifiers_for_child_list_query")]
+    public CatalogQueryModifiersForChildList? ModifiersForChildListQuery { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 
