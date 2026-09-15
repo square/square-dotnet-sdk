@@ -223,10 +223,4 @@ public partial interface IInventoryClient
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     );
-
-    Task GetTransferAsync(
-        GetTransferInventoryRequest request,
-        RequestOptions? options = null,
-        CancellationToken cancellationToken = default
-    );
 }

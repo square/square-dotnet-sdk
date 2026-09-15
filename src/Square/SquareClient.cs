@@ -49,11 +49,11 @@ public partial class SquareClient : ISquareClient
             new Dictionary<string, string>()
             {
                 { "Authorization", $"Bearer {token}" },
-                { "Square-Version", "2026-08-19" },
+                { "Square-Version", "2026-09-16" },
                 { "X-Fern-Language", "C#" },
                 { "X-Fern-SDK-Name", "Square" },
                 { "X-Fern-SDK-Version", Version.Current },
-                { "User-Agent", "Square/46.1.0" },
+                { "User-Agent", "Square/47.0.0" },
             }
         );
         clientOptions ??= new ClientOptions();
