@@ -1371,44 +1371,4 @@ public partial class InventoryClient : IInventoryClient
             .ConfigureAwait(false);
         return pager;
     }
-
-    /// <example><code>
-    /// await client.Inventory.GetTransferAsync(
-    ///     new GetTransferInventoryRequest { TransferId = "transfer_id" }
-    /// );
-    /// </code></example>
-    public async Task GetTransferAsync(
-        GetTransferInventoryRequest request,
-        RequestOptions? options = null,
-        CancellationToken cancellationToken = default
-    )
-    {
-        var response = await _client
-            .SendRequestAsync(
-                new JsonRequest
-                {
-                    BaseUrl = _client.Options.BaseUrl,
-                    Method = HttpMethod.Get,
-                    Path = string.Format(
-                        "v2/inventory/transfers/{0}",
-                        ValueConvert.ToPathParameterString(request.TransferId)
-                    ),
-                    Options = options,
-                },
-                cancellationToken
-            )
-            .ConfigureAwait(false);
-        if (response.StatusCode is >= 200 and < 400)
-        {
-            return;
-        }
-        {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            throw new SquareApiException(
-                $"Error with status code {response.StatusCode}",
-                response.StatusCode,
-                responseBody
-            );
-        }
-    }
 }
