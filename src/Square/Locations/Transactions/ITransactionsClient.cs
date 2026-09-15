@@ -27,29 +27,13 @@ public partial interface ITransactionsClient
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
-    /// endpoint with a `delay_capture` value of `true`.
-    ///
-    ///
-    /// See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
-    /// for more information.
-    /// </summary>
-    Task<CaptureTransactionResponse> CaptureAsync(
+    Task CaptureAsync(
         CaptureTransactionsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     );
 
-    /// <summary>
-    /// Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
-    /// endpoint with a `delay_capture` value of `true`.
-    ///
-    ///
-    /// See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
-    /// for more information.
-    /// </summary>
-    Task<VoidTransactionResponse> VoidAsync(
+    Task VoidAsync(
         VoidTransactionsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default

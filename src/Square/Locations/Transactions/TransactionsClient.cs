@@ -148,20 +148,12 @@ public partial class TransactionsClient : ITransactionsClient
         }
     }
 
-    /// <summary>
-    /// Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
-    /// endpoint with a `delay_capture` value of `true`.
-    ///
-    ///
-    /// See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
-    /// for more information.
-    /// </summary>
     /// <example><code>
     /// await client.Locations.Transactions.CaptureAsync(
     ///     new CaptureTransactionsRequest { LocationId = "location_id", TransactionId = "transaction_id" }
     /// );
     /// </code></example>
-    public async Task<CaptureTransactionResponse> CaptureAsync(
+    public async Task CaptureAsync(
         CaptureTransactionsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
@@ -185,17 +177,8 @@ public partial class TransactionsClient : ITransactionsClient
             .ConfigureAwait(false);
         if (response.StatusCode is >= 200 and < 400)
         {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<CaptureTransactionResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
+            return;
         }
-
         {
             var responseBody = await response.Raw.Content.ReadAsStringAsync();
             throw new SquareApiException(
@@ -206,20 +189,12 @@ public partial class TransactionsClient : ITransactionsClient
         }
     }
 
-    /// <summary>
-    /// Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
-    /// endpoint with a `delay_capture` value of `true`.
-    ///
-    ///
-    /// See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
-    /// for more information.
-    /// </summary>
     /// <example><code>
     /// await client.Locations.Transactions.VoidAsync(
     ///     new VoidTransactionsRequest { LocationId = "location_id", TransactionId = "transaction_id" }
     /// );
     /// </code></example>
-    public async Task<VoidTransactionResponse> VoidAsync(
+    public async Task VoidAsync(
         VoidTransactionsRequest request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
@@ -243,17 +218,8 @@ public partial class TransactionsClient : ITransactionsClient
             .ConfigureAwait(false);
         if (response.StatusCode is >= 200 and < 400)
         {
-            var responseBody = await response.Raw.Content.ReadAsStringAsync();
-            try
-            {
-                return JsonUtils.Deserialize<VoidTransactionResponse>(responseBody)!;
-            }
-            catch (JsonException e)
-            {
-                throw new SquareException("Failed to deserialize response", e);
-            }
+            return;
         }
-
         {
             var responseBody = await response.Raw.Content.ReadAsStringAsync();
             throw new SquareApiException(

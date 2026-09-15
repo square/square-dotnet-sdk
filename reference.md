@@ -18169,28 +18169,9 @@ await client.Locations.Transactions.GetAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">CaptureAsync</a>(CaptureTransactionsRequest { ... }) -> CaptureTransactionResponse</code></summary>
+<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">CaptureAsync</a>(CaptureTransactionsRequest { ... })</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Captures a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
-endpoint with a `delay_capture` value of `true`.
-
-
-See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
-for more information.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -18230,28 +18211,9 @@ await client.Locations.Transactions.CaptureAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">VoidAsync</a>(VoidTransactionsRequest { ... }) -> VoidTransactionResponse</code></summary>
+<details><summary><code>client.Locations.Transactions.<a href="/src/Square/Locations/Transactions/TransactionsClient.cs">VoidAsync</a>(VoidTransactionsRequest { ... })</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Cancels a transaction that was created with the [Charge](api-endpoint:Transactions-Charge)
-endpoint with a `delay_capture` value of `true`.
-
-
-See [Delayed capture transactions](https://developer.squareup.com/docs/payments/transactions/overview#delayed-capture)
-for more information.
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 

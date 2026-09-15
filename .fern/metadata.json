@@ -15,6 +15,6 @@
     "inline-path-parameters": true,
     "use-discriminated-unions": true
   },
-  "originGitCommit": "b05364cda2b85e35d8daa9ff2c24bbabbbd9652a",
-  "sdkVersion": "46.1.0"
+  "originGitCommit": "37b3f34f979590cc8d882c9ab2fe92748bfb0556",
+  "sdkVersion": "47.0.0"
 }
