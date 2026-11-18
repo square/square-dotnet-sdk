@@ -11,6 +11,9 @@ public record DeletePaymentLinkResponse : IJsonOnDeserialized
     private readonly IDictionary<string, JsonElement> _extensionData =
         new Dictionary<string, JsonElement>();
 
+    /// <summary>
+    /// Any errors that occurred during the request.
+    /// </summary>
     [JsonPropertyName("errors")]
     public IEnumerable<Error>? Errors { get; set; }
 

@@ -35,7 +35,7 @@ public partial interface IEventsClient
     /// Lists all event types that you can subscribe to as webhooks or query using the Events API.
     /// </summary>
     Task<ListEventTypesResponse> ListEventTypesAsync(
-        ListEventTypesRequest request,
+        ListEventTypesBody request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     );

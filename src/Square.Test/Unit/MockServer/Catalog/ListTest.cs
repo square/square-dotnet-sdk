@@ -24,6 +24,8 @@ public class ListTest : BaseMockServerTest
               "objects": [
                 {
                   "id": "id",
+                  "ordinal": 1000000,
+                  "type": "CATEGORY",
                   "updated_at": "updated_at",
                   "version": 1000000,
                   "is_deleted": true,
@@ -40,9 +42,7 @@ public class ListTest : BaseMockServerTest
                   "absent_at_location_ids": [
                     "absent_at_location_ids"
                   ],
-                  "image_id": "image_id",
-                  "ordinal": 1000000,
-                  "type": "CATEGORY"
+                  "image_id": "image_id"
                 },
                 {
                   "id": "id",

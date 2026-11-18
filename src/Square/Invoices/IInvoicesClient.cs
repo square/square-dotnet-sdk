@@ -87,7 +87,7 @@ public partial interface IInvoicesClient
     /// __NOTE:__ When testing in the Sandbox environment, the total file size is limited to 1 KB.
     /// </summary>
     Task<CreateInvoiceAttachmentResponse> CreateInvoiceAttachmentAsync(
-        CreateInvoiceAttachmentRequest request,
+        CreateInvoiceAttachmentBody request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     );

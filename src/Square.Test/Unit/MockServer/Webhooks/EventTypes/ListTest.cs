@@ -50,7 +50,7 @@ public class ListTest : BaseMockServerTest
             );
 
         var response = await Client.Webhooks.EventTypes.ListAsync(
-            new Square.Webhooks.EventTypes.ListEventTypesRequest { ApiVersion = "api_version" }
+            new Square.Webhooks.EventTypes.ListEventTypesBody { ApiVersion = "api_version" }
         );
         Assert.That(
             response,

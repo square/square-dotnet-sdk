@@ -53,7 +53,8 @@ public class UpdateTest : BaseMockServerTest
                     "charge": {}
                   },
                   "enable_coupon": true,
-                  "enable_loyalty": true
+                  "enable_loyalty": true,
+                  "phone_collection": "REQUIRED"
                 },
                 "pre_populated_data": {
                   "buyer_email": "buyer_email",

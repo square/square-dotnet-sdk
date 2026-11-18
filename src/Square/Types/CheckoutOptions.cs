@@ -86,6 +86,16 @@ public record CheckoutOptions : IJsonOnDeserialized
     [JsonPropertyName("enable_loyalty")]
     public bool? EnableLoyalty { get; set; }
 
+    /// <summary>
+    /// Indicates how the buyer's phone number is collected on the checkout page.
+    /// When `REQUIRED` (default), the buyer must provide a phone number to complete checkout.
+    /// When `OPTIONAL`, the phone field is shown but not required. When `HIDDEN`, the field
+    /// is not shown. Leaving this field unset preserves the historical behavior (`REQUIRED`).
+    /// See [PhoneCollection](#type-phonecollection) for possible values
+    /// </summary>
+    [JsonPropertyName("phone_collection")]
+    public CheckoutOptionsPhoneCollection? PhoneCollection { get; set; }
+
     [JsonIgnore]
     public ReadOnlyAdditionalProperties AdditionalProperties { get; private set; } = new();
 

@@ -70,6 +70,9 @@ public class GetTest : BaseMockServerTest
                     "image_ids"
                   ],
                   "sort_name": "sort_name",
+                  "categories": [
+                    {}
+                  ],
                   "description_html": "description_html",
                   "description_plaintext": "description_plaintext",
                   "kitchen_name": "kitchen_name",
@@ -84,6 +87,8 @@ public class GetTest : BaseMockServerTest
               "related_objects": [
                 {
                   "id": "id",
+                  "ordinal": 1000000,
+                  "type": "CATEGORY",
                   "updated_at": "updated_at",
                   "version": 1000000,
                   "is_deleted": true,
@@ -100,9 +105,7 @@ public class GetTest : BaseMockServerTest
                   "absent_at_location_ids": [
                     "absent_at_location_ids"
                   ],
-                  "image_id": "image_id",
-                  "ordinal": 1000000,
-                  "type": "CATEGORY"
+                  "image_id": "image_id"
                 },
                 {
                   "id": "id",

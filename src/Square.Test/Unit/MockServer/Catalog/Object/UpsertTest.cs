@@ -80,6 +80,9 @@ public class UpsertTest : BaseMockServerTest
                     "image_ids"
                   ],
                   "sort_name": "sort_name",
+                  "categories": [
+                    {}
+                  ],
                   "description_html": "description_html",
                   "description_plaintext": "description_plaintext",
                   "kitchen_name": "kitchen_name",

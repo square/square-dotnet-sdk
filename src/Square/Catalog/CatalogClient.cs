@@ -249,7 +249,9 @@ public partial class CatalogClient : ICatalogClient
     ///                 {
     ///                     new CatalogObject(new CatalogObject.Item(new CatalogObjectItem { Id = "id" })),
     ///                     new CatalogObject(new CatalogObject.Item(new CatalogObjectItem { Id = "id" })),
-    ///                     new CatalogObject(new CatalogObject.Item(new CatalogObjectItem { Id = "id" })),
+    ///                     new CatalogObject(
+    ///                         new CatalogObject.Category(new CatalogObjectCategory { Type = "CATEGORY" })
+    ///                     ),
     ///                     new CatalogObject(new CatalogObject.Tax(new CatalogObjectTax { Id = "id" })),
     ///                 },
     ///             },

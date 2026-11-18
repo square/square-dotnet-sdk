@@ -52,6 +52,11 @@ public class BatchGetTest : BaseMockServerTest
                     "absent_at_location_ids"
                   ],
                   "image_id": "image_id",
+                  "item_data": {
+                    "categories": [
+                      {}
+                    ]
+                  },
                   "type": "ITEM"
                 },
                 {
@@ -73,12 +78,19 @@ public class BatchGetTest : BaseMockServerTest
                     "absent_at_location_ids"
                   ],
                   "image_id": "image_id",
+                  "item_data": {
+                    "categories": [
+                      {}
+                    ]
+                  },
                   "type": "ITEM"
                 }
               ],
               "related_objects": [
                 {
                   "id": "id",
+                  "ordinal": 1000000,
+                  "type": "CATEGORY",
                   "updated_at": "updated_at",
                   "version": 1000000,
                   "is_deleted": true,
@@ -95,9 +107,7 @@ public class BatchGetTest : BaseMockServerTest
                   "absent_at_location_ids": [
                     "absent_at_location_ids"
                   ],
-                  "image_id": "image_id",
-                  "ordinal": 1000000,
-                  "type": "CATEGORY"
+                  "image_id": "image_id"
                 },
                 {
                   "id": "id",
@@ -125,12 +135,22 @@ public class BatchGetTest : BaseMockServerTest
                 "nested_modifiers": [
                   {
                     "id": "id",
+                    "item_data": {
+                      "categories": [
+                        {}
+                      ]
+                    },
                     "type": "ITEM"
                   }
                 ],
                 "ancestor_modifiers": [
                   {
                     "id": "id",
+                    "item_data": {
+                      "categories": [
+                        {}
+                      ]
+                    },
                     "type": "ITEM"
                   }
                 ]

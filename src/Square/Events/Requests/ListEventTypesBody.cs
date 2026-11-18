@@ -1,10 +1,10 @@
 using System.Text.Json.Serialization;
 using Square.Core;
 
-namespace Square.Webhooks.EventTypes;
+namespace Square.Events;
 
 [Serializable]
-public record ListEventTypesRequest
+public record ListEventTypesBody
 {
     /// <summary>
     /// The API version for which to list event types. Setting this field overrides the default version used by the application.

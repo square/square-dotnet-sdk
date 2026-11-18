@@ -51,6 +51,22 @@ public partial class ReportingClient : IReportingClient
 
         {
             var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 400:
+                        throw new ClientRequestError(
+                            JsonUtils.Deserialize<ReportingError>(responseBody)
+                        );
+                    case 500:
+                        throw new ServerError(JsonUtils.Deserialize<ReportingError>(responseBody));
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
             throw new SquareApiException(
                 $"Error with status code {response.StatusCode}",
                 response.StatusCode,
@@ -100,6 +116,22 @@ public partial class ReportingClient : IReportingClient
 
         {
             var responseBody = await response.Raw.Content.ReadAsStringAsync();
+            try
+            {
+                switch (response.StatusCode)
+                {
+                    case 400:
+                        throw new ClientRequestError(
+                            JsonUtils.Deserialize<ReportingError>(responseBody)
+                        );
+                    case 500:
+                        throw new ServerError(JsonUtils.Deserialize<ReportingError>(responseBody));
+                }
+            }
+            catch (JsonException)
+            {
+                // unable to map error response, throwing generic error
+            }
             throw new SquareApiException(
                 $"Error with status code {response.StatusCode}",
                 response.StatusCode,

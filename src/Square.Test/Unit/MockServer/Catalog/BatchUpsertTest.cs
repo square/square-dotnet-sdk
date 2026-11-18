@@ -27,8 +27,7 @@ public class BatchUpsertTest : BaseMockServerTest
                       "type": "ITEM"
                     },
                     {
-                      "id": "id",
-                      "type": "ITEM"
+                      "type": "CATEGORY"
                     },
                     {
                       "id": "id",
@@ -70,6 +69,11 @@ public class BatchUpsertTest : BaseMockServerTest
                     "absent_at_location_ids"
                   ],
                   "image_id": "image_id",
+                  "item_data": {
+                    "categories": [
+                      {}
+                    ]
+                  },
                   "type": "ITEM"
                 },
                 {
@@ -91,29 +95,34 @@ public class BatchUpsertTest : BaseMockServerTest
                     "absent_at_location_ids"
                   ],
                   "image_id": "image_id",
+                  "item_data": {
+                    "categories": [
+                      {}
+                    ]
+                  },
                   "type": "ITEM"
                 },
                 {
                   "id": "id",
-                  "updated_at": "updated_at",
-                  "version": 1000000,
-                  "is_deleted": true,
-                  "custom_attribute_values": {
-                    "key": {}
-                  },
-                  "catalog_v1_ids": [
-                    {}
-                  ],
-                  "present_at_all_locations": true,
-                  "present_at_location_ids": [
-                    "present_at_location_ids"
-                  ],
-                  "absent_at_location_ids": [
-                    "absent_at_location_ids"
-                  ],
-                  "image_id": "image_id",
                   "ordinal": 1000000,
-                  "type": "CATEGORY"
+                  "type": "CATEGORY",
+                  "updated_at": "updated_at",
+                  "version": 1000000,
+                  "is_deleted": true,
+                  "custom_attribute_values": {
+                    "key": {}
+                  },
+                  "catalog_v1_ids": [
+                    {}
+                  ],
+                  "present_at_all_locations": true,
+                  "present_at_location_ids": [
+                    "present_at_location_ids"
+                  ],
+                  "absent_at_location_ids": [
+                    "absent_at_location_ids"
+                  ],
+                  "image_id": "image_id"
                 },
                 {
                   "id": "id",
@@ -204,7 +213,9 @@ public class BatchUpsertTest : BaseMockServerTest
                                 new CatalogObject.Item(new CatalogObjectItem { Id = "id" })
                             ),
                             new CatalogObject(
-                                new CatalogObject.Item(new CatalogObjectItem { Id = "id" })
+                                new CatalogObject.Category(
+                                    new CatalogObjectCategory { Type = "CATEGORY" }
+                                )
                             ),
                             new CatalogObject(
                                 new CatalogObject.Tax(new CatalogObjectTax { Id = "id" })

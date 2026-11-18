@@ -18,11 +18,11 @@ public partial class EventTypesClient : IEventTypesClient
     /// </summary>
     /// <example><code>
     /// await client.Webhooks.EventTypes.ListAsync(
-    ///     new Square.Webhooks.EventTypes.ListEventTypesRequest { ApiVersion = "api_version" }
+    ///     new Square.Webhooks.EventTypes.ListEventTypesBody { ApiVersion = "api_version" }
     /// );
     /// </code></example>
     public async Task<ListWebhookEventTypesResponse> ListAsync(
-        ListEventTypesRequest request,
+        ListEventTypesBody request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )

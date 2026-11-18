@@ -83,6 +83,11 @@ public class SearchItemsTest : BaseMockServerTest
                     "absent_at_location_ids"
                   ],
                   "image_id": "image_id",
+                  "item_data": {
+                    "categories": [
+                      {}
+                    ]
+                  },
                   "type": "ITEM"
                 }
               ],
@@ -94,12 +99,22 @@ public class SearchItemsTest : BaseMockServerTest
                 "nested_modifiers": [
                   {
                     "id": "id",
+                    "item_data": {
+                      "categories": [
+                        {}
+                      ]
+                    },
                     "type": "ITEM"
                   }
                 ],
                 "ancestor_modifiers": [
                   {
                     "id": "id",
+                    "item_data": {
+                      "categories": [
+                        {}
+                      ]
+                    },
                     "type": "ITEM"
                   }
                 ]

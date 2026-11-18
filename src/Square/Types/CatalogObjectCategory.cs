@@ -43,6 +43,7 @@ public record CatalogObjectCategory : IJsonOnDeserialized
     /// Last modification [timestamp](https://developer.squareup.com/docs/build-basics/working-with-dates) in RFC 3339 format, e.g., `"2016-08-15T23:59:33.123Z"`
     /// would indicate the UTC time (denoted by `Z`) of August 15, 2016 at 23:59:33 and 123 milliseconds.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("updated_at")]
     public string? UpdatedAt { get; set; }
 
