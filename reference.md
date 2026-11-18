@@ -1805,7 +1805,9 @@ await client.Catalog.BatchUpsertAsync(
                 {
                     new CatalogObject(new CatalogObject.Item(new CatalogObjectItem { Id = "id" })),
                     new CatalogObject(new CatalogObject.Item(new CatalogObjectItem { Id = "id" })),
-                    new CatalogObject(new CatalogObject.Item(new CatalogObjectItem { Id = "id" })),
+                    new CatalogObject(
+                        new CatalogObject.Category(new CatalogObjectCategory { Type = "CATEGORY" })
+                    ),
                     new CatalogObject(new CatalogObject.Tax(new CatalogObjectTax { Id = "id" })),
                 },
             },
@@ -3904,7 +3906,7 @@ await client.Events.EnableEventsAsync();
 </dl>
 </details>
 
-<details><summary><code>client.Events.<a href="/src/Square/Events/EventsClient.cs">ListEventTypesAsync</a>(ListEventTypesRequest { ... }) -> ListEventTypesResponse</code></summary>
+<details><summary><code>client.Events.<a href="/src/Square/Events/EventsClient.cs">ListEventTypesAsync</a>(ListEventTypesBody { ... }) -> ListEventTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -3932,7 +3934,7 @@ Lists all event types that you can subscribe to as webhooks or query using the E
 
 ```csharp
 await client.Events.ListEventTypesAsync(
-    new Square.Events.ListEventTypesRequest { ApiVersion = "api_version" }
+    new Square.Events.ListEventTypesBody { ApiVersion = "api_version" }
 );
 ```
 </dd>
@@ -3948,7 +3950,7 @@ await client.Events.ListEventTypesAsync(
 <dl>
 <dd>
 
-**request:** `ListEventTypesRequest` 
+**request:** `ListEventTypesBody` 
     
 </dd>
 </dl>
@@ -6057,7 +6059,7 @@ await client.Invoices.DeleteAsync(
 </dl>
 </details>
 
-<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">CreateInvoiceAttachmentAsync</a>(CreateInvoiceAttachmentRequest { ... }) -> CreateInvoiceAttachmentResponse</code></summary>
+<details><summary><code>client.Invoices.<a href="/src/Square/Invoices/InvoicesClient.cs">CreateInvoiceAttachmentAsync</a>(CreateInvoiceAttachmentBody { ... }) -> CreateInvoiceAttachmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -6092,7 +6094,7 @@ __NOTE:__ When testing in the Sandbox environment, the total file size is limite
 
 ```csharp
 await client.Invoices.CreateInvoiceAttachmentAsync(
-    new CreateInvoiceAttachmentRequest { InvoiceId = "invoice_id" }
+    new CreateInvoiceAttachmentBody { InvoiceId = "invoice_id" }
 );
 ```
 </dd>
@@ -6108,7 +6110,7 @@ await client.Invoices.CreateInvoiceAttachmentAsync(
 <dl>
 <dd>
 
-**request:** `CreateInvoiceAttachmentRequest` 
+**request:** `CreateInvoiceAttachmentBody` 
     
 </dd>
 </dl>
@@ -21705,7 +21707,7 @@ await client.Terminal.Refunds.CancelAsync(
 </details>
 
 ## Webhooks EventTypes
-<details><summary><code>client.Webhooks.EventTypes.<a href="/src/Square/Webhooks/EventTypes/EventTypesClient.cs">ListAsync</a>(ListEventTypesRequest { ... }) -> ListWebhookEventTypesResponse</code></summary>
+<details><summary><code>client.Webhooks.EventTypes.<a href="/src/Square/Webhooks/EventTypes/EventTypesClient.cs">ListAsync</a>(ListEventTypesBody { ... }) -> ListWebhookEventTypesResponse</code></summary>
 <dl>
 <dd>
 
@@ -21733,7 +21735,7 @@ Lists all webhook event types that can be subscribed to.
 
 ```csharp
 await client.Webhooks.EventTypes.ListAsync(
-    new Square.Webhooks.EventTypes.ListEventTypesRequest { ApiVersion = "api_version" }
+    new Square.Webhooks.EventTypes.ListEventTypesBody { ApiVersion = "api_version" }
 );
 ```
 </dd>
@@ -21749,7 +21751,7 @@ await client.Webhooks.EventTypes.ListAsync(
 <dl>
 <dd>
 
-**request:** `ListEventTypesRequest` 
+**request:** `ListEventTypesBody` 
     
 </dd>
 </dl>

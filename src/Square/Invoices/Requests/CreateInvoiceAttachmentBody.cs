@@ -5,7 +5,7 @@ using Square.Core;
 namespace Square.Invoices;
 
 [Serializable]
-public record CreateInvoiceAttachmentRequest
+public record CreateInvoiceAttachmentBody
 {
     /// <summary>
     /// The ID of the [invoice](entity:Invoice) to attach the file to.

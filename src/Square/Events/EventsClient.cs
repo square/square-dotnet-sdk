@@ -161,11 +161,11 @@ public partial class EventsClient : IEventsClient
     /// </summary>
     /// <example><code>
     /// await client.Events.ListEventTypesAsync(
-    ///     new Square.Events.ListEventTypesRequest { ApiVersion = "api_version" }
+    ///     new Square.Events.ListEventTypesBody { ApiVersion = "api_version" }
     /// );
     /// </code></example>
     public async Task<ListEventTypesResponse> ListEventTypesAsync(
-        ListEventTypesRequest request,
+        ListEventTypesBody request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )

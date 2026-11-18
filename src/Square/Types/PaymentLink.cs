@@ -69,18 +69,19 @@ public record PaymentLink : IJsonOnDeserialized
     /// <summary>
     /// The timestamp when the payment link was created, in RFC 3339 format.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("created_at")]
     public string? CreatedAt { get; set; }
 
     /// <summary>
     /// The timestamp when the payment link was last updated, in RFC 3339 format.
     /// </summary>
+    [JsonAccess(JsonAccessType.ReadOnly)]
     [JsonPropertyName("updated_at")]
     public string? UpdatedAt { get; set; }
 
     /// <summary>
-    /// An optional note. After Square processes the payment, this note is added to the
-    /// resulting `Payment`.
+    /// A note for the payment. After processing the payment, Square adds this note to the resulting `Payment` as well as the post payment confirmation email.
     /// </summary>
     [JsonPropertyName("payment_note")]
     public string? PaymentNote { get; set; }

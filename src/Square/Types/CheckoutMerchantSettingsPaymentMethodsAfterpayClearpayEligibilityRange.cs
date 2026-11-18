@@ -15,9 +15,15 @@ public record CheckoutMerchantSettingsPaymentMethodsAfterpayClearpayEligibilityR
     private readonly IDictionary<string, JsonElement> _extensionData =
         new Dictionary<string, JsonElement>();
 
+    /// <summary>
+    /// The lower bound of the range.
+    /// </summary>
     [JsonPropertyName("min")]
     public required Money Min { get; set; }
 
+    /// <summary>
+    /// The upper bound of the range.
+    /// </summary>
     [JsonPropertyName("max")]
     public required Money Max { get; set; }
 

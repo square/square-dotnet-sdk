@@ -494,11 +494,11 @@ public partial class InvoicesClient : IInvoicesClient
     /// </summary>
     /// <example><code>
     /// await client.Invoices.CreateInvoiceAttachmentAsync(
-    ///     new CreateInvoiceAttachmentRequest { InvoiceId = "invoice_id" }
+    ///     new CreateInvoiceAttachmentBody { InvoiceId = "invoice_id" }
     /// );
     /// </code></example>
     public async Task<CreateInvoiceAttachmentResponse> CreateInvoiceAttachmentAsync(
-        CreateInvoiceAttachmentRequest request,
+        CreateInvoiceAttachmentBody request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     )

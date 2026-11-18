@@ -58,6 +58,11 @@ public class SearchTest : BaseMockServerTest
                     "absent_at_location_ids"
                   ],
                   "image_id": "image_id",
+                  "item_data": {
+                    "categories": [
+                      {}
+                    ]
+                  },
                   "type": "ITEM"
                 },
                 {
@@ -79,6 +84,11 @@ public class SearchTest : BaseMockServerTest
                     "absent_at_location_ids"
                   ],
                   "image_id": "image_id",
+                  "item_data": {
+                    "categories": [
+                      {}
+                    ]
+                  },
                   "type": "ITEM"
                 }
               ],
@@ -102,6 +112,11 @@ public class SearchTest : BaseMockServerTest
                     "absent_at_location_ids"
                   ],
                   "image_id": "image_id",
+                  "item_data": {
+                    "categories": [
+                      {}
+                    ]
+                  },
                   "type": "ITEM"
                 }
               ],
@@ -110,12 +125,22 @@ public class SearchTest : BaseMockServerTest
                 "nested_modifiers": [
                   {
                     "id": "id",
+                    "item_data": {
+                      "categories": [
+                        {}
+                      ]
+                    },
                     "type": "ITEM"
                   }
                 ],
                 "ancestor_modifiers": [
                   {
                     "id": "id",
+                    "item_data": {
+                      "categories": [
+                        {}
+                      ]
+                    },
                     "type": "ITEM"
                   }
                 ]

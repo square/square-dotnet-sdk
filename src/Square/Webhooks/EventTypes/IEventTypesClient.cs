@@ -8,7 +8,7 @@ public partial interface IEventTypesClient
     /// Lists all webhook event types that can be subscribed to.
     /// </summary>
     Task<ListWebhookEventTypesResponse> ListAsync(
-        ListEventTypesRequest request,
+        ListEventTypesBody request,
         RequestOptions? options = null,
         CancellationToken cancellationToken = default
     );
